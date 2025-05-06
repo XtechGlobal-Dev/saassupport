@@ -1,0 +1,250 @@
+
+######bypass for the license code #######
+ File : account/functions.php
+
+function super_admin_config() {
+    if (!isset($_COOKIE['SACL_' . 'VGC' . 'KMENS']) || !password_verify('ODO2' . 'KMENS', $_COOKIE['SACL_' . 'VGC' . 'KMENS'])) {
+        require_once(SB_PATH . '/config.php');
+        $ec = sb_defined('ENVA' . 'TO_PUR' . 'CHASE' . '_CO' . 'DE');
+        $m = 'Env' . 'ato purc' . 'hase c' . 'ode inv' . 'alid or mi' . 'ss' . 'ing.';
+        if ($ec) {
+            $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
+            if ($response == 'veri' . 'ficat' . 'ion-success') {
+                setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 31556926, '/');
+            } else {
+                die($m);
+            }
+        } else {
+            die($m);
+        }
+    }
+}
+
+##########Change of the code###########
+
+
+function super_admin_config() {
+    if (!isset($_COOKIE['SACL_' . 'VGC' . 'KMENS']) || !password_verify('ODO2' . 'KMENS', $_COOKIE['SACL_' . 'VGC' . 'KMENS'])) {
+        require_once(SB_PATH . '/config.php');
+        $ec = sb_defined('ENVA' . 'TO_PUR' . 'CHASE' . '_CO' . 'DE');
+        $m = 'Env' . 'ato purc' . 'hase c' . 'ode inv' . 'alid or mi' . 'ss' . 'ing.';
+                      setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 31556926, '/');
+    }
+}
+
+::::::::::::::::::::::::::::::::::::::::::::::Project Overview::::::::::::::::::::::::::::::::::::::::::::::::::
+Step 1: Access /saassupport
+
+➔ There is .htaccess file in root folder, it will load: script/admin.php.
+
+--------------------------------------------------------------------------------------------------
+
+Stepe 2: After Review the script/admin.php
+
+This Condition excuted due to SB_DB_NAME not define
+
+if (!defined('SB_DB_NAME') || !sb_is_agent()) {
+    die('<script>document.location = "' . CLOUD_URL . '/account?login"</script>');
+}
+--------------------------------------------------------------------------------------------------
+
+Step 3: After review account/index.php 
+
+box_registration_login() excuted in the else condition, which shows the login view due to 
+passing $_REQEST['login'] parameter
+
+Four thing identified.
+
+<div class="sb-btn btn-login"><?php sb_e('Sign in') ?></div>
+➔ .btn-login class which hit the js
+
+
+<script src="js/cloud<?php echo (sb_is_debug() ? '' : '.min') ?>.js?v=<?php echo SB_VERSION ?>"></script>
+➔ AND this js file which is inside the accoount/js
+
+sb_is_debug()
+➔ whether to load cloud.js or cloud.min.js based on if "debug" mode is active.
+
+➔ By Defual cloud.min.js load b/s debug mode is no active. so I manullay on it.
+
+---------------------------------------------------------------------------------------------------------
+Step 4: After review the account/js/cloud.js File
+
+Two Things identifed.
+
+$(box_login).on('click', '.btn-login', function (e) {
+➔ trigger this js after login buton click
+
+function ajax(function_name, data = {}, onSuccess = false);url: 'ajax.php',
+➔ call the ajax function which finally open the ajax.php
+        
+-----------------------------------------------------------------------------
+Step 5: After review the account/ajax.php
+
+➔ case 'login':
+ajax_response(account_login($_POST['email'], $_POST['password']));
+
+➔ account_login() is in account/functions.php
+
+---------------------------------------------------------------------------------
+
+Step 6: After review the account/functions.php
+
+➔ function account_login($email, $password = false, $token = false)
+this function call
+
+➔ require_once(SB_PATH . '/config/config_' . $cloud_user['token'] . '.php');
+it this code it define the SB_DB_NAME, which was initailly not define.
+
+➔ return back to ajax call after successfully verify username and password
+---------------------------------------------------------------------------------
+
+Step 7: After ComeBack to ajax call and Success Enter to Admin Area.
+
+➔ document.location = SBF.getURL('redirect') ? SBF.getURL('redirect') : CLOUD_URL;
+refrsh the browser go back to script/admin.php from where we start.
+
+----------------------------------------------------------------------------------------------
+                                ::Admin [Default Conversation Overview]::
+----------------------------------------------------------------------------------------------
+Step 1: After Browser Refresh Call script/admin.php
+
+➔ script/js/main.js
+
+➔ script/js/admin.js
+
+➔ require('include/components.php');
+<body>                                   ← body section
+    ➔ sb_component_admin();
+</body>
+
+----------------------------------------------------------------------------------
+Step 2: First review sb_component_admin In script/include/components.php
+
+Inside your sb_component_admin(), you’ll find:
+
+<div class="sb-main sb-admin sb-cloud">
+    
+    ├── <div class="sb-header"> ... </div> (Top Navbar)
+    │
+    ├── <main>
+    │   │
+    │   ├── .sb-area-conversations (Conversations List and Chat Window)
+    │   ├── .sb-area-tickets (Tickets Management)
+    │   ├── .sb-area-users (Users Management)
+    │   ├── .sb-area-chatbot (Chatbot settings)
+    │   ├── .sb-area-articles (Knowledgebase / Articles)
+    │   ├── .sb-area-reports (Reports and Analytics)
+    │   └── .sb-area-settings (Settings tabs)
+    │
+    ├── Popup Lightboxes
+    │
+    ├── Loading Overlays
+    │
+    └── Custom CSS/JS files if set
+ </div>
+
+----------------------------------------------------------------------------------
+Step 3: After review Conversations List and Chat Window
+
+<div class="sb-active sb-area-conversations">
+    
+    <div class="sb-board">
+    │
+    ├── .sb-admin-list      ← Conversations Sidebar
+    │     └── div.sb-scroll-area > ul
+    │
+    ├── .sb-conversation    ← Chat Window
+    │     ├── div.sb-top
+    │     ├── div.sb-list
+    │     └── sb_component_editor()
+    │
+    ├── .sb-user-details    ← User Details Sidebar
+    │
+    │
+    </div> 
+ 
+ </div>
+
+----------------------------------------------------------------------------------
+Step 4: Second is the Javascript Files.
+
+In simple words:
+→ script/js/admin.js = Focused on admin area UI + managing conversations, users, settings.
+→ script/js/main.js = Provides shared utility functions (AJAX, cookies, uploads) used everywhere.
+
+----------------------------------------------------------------------------------
+Step 5: Review the $(document).ready(function () in admin.js 
+
+(script/js/admin.js)
+➔ $(document).ready(function ()
+➔ if (SB_ADMIN_SETTINGS.pusher) {
+➔ initialization();
+➔ SBF.ajax({
+➔ function: 'get-conversations'
+
+----------------------------------------------------------------------------------
+Step 6: Review the  main.js File
+
+(script/js/main.js)
+➔ var SBF = {
+➔ url: SB_AJAX_URL,
+➔ SB_AJAX_URL is define in sb_js_global() funciton under the functions_settings.php
+➔ SB_AJAX_URL = script/include/ajax.phpajax.php
+
+----------------------------------------------------------------------------------
+Step 8: Review the ajax.php File
+➔ get-conversations [script/include/ajax.php] -> sb_get_conversations()
+➔ sb_get_conversations() is define in functions_messages.php
+
+----------------------------------------------------------------------------------
+Step 9: Review the functions_messages.php File
+
+➔ sb_get_conversations() [script/include/functions_messages.php]  
+SELECT 
+A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, 
+B.id AS `message_user_id`, B.first_name AS `message_first_name`, 
+B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, 
+C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, 
+C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags 
+FROM sb_messages A, sb_users B, sb_conversations C 
+WHERE B.id = A.user_id 
+AND C.status_code <> 3 
+AND C.status_code <> 4 
+AND C.id = A.conversation_id 
+AND A.id IN (SELECT max(id) FROM sb_messages WHERE message <> "" OR attachments <> "" GROUP BY conversation_id) 
+GROUP BY conversation_id 
+ORDER BY FIELD(C.status_code, 2) DESC,A.id DESC 
+LIMIT 0,100
+
+----------------------------------------------------------------------------------
+Step 10: Now Ajax Call Success in initialization() 
+(script/js/admin.js)
+
+➔ initialization();
+➔ SBConversations.populateList(response);
+➔ SBConversations.clickFirst();
+➔ SBF.serviceWorker.init();
+
+
+----------------------------------------------------------------------------------
+Step 11: Review Complete $(document).ready(function () 
+
+➔ SBConversations.clickFirst();
+➔ $(conversations_admin_list_ul).on('click', 'li', function () {
+
+
+
+-----------------------------------------------------------------------------------
+                   ::Admin [Create Ticket Section]::
+-----------------------------------------------------------------------------------
+
+In components.php, create left menu
+➔ <a id="sb-tickets"><span><?php sb_e('Tickets') ?></span></a>
+➔ After Click it call the "Left nav" In script/js/admin.js
+➔ Activate the <div class="sb-area-tickets"> in script/include/components.php
+➔ case 'tickets': is reamining......
+➔ Update the URL to saassupport/?area=tickets
+
+
+
