@@ -167,7 +167,6 @@ function sb_ticket_edit_box() { ?>
         <div class="sb-info"></div>
         <div class="sb-top-bar">
             <div class="sb-ticket">
-                <img src="<?php echo SB_URL ?>/media/user.svg" />
                 <span class="sb-name"></span>
             </div>
             <div>
@@ -180,88 +179,101 @@ function sb_ticket_edit_box() { ?>
                 </a>
             </div>
         </div>
-        <div class="sb-main sb-scroll-area">
-            <div class="sb-details">
-                <div class="sb-title">
-                    <?php sb_e('Edit details') ?>
-                </div>
-                <div class="sb-edit-box">
-                    <div id="profile_image" data-type="image" class="sb-input sb-input-image sb-profile-image">
-                        <span>
-                            <?php sb_e('Profile image') ?>
-                        </span>
-                        <div class="image">
-                            <div class="sb-icon-close"></div>
+        <div class="sb-main sb-scroll-area" >
+            <div class="first-section" style="display: flex;">
+                <div class="sb-details">
+                    <div class="sb-edit-box" style="width: 98%;">
+                        <div id="subject" data-type="text" class="sb-input">
+                            <span><?php sb_e('Subject') ?></span>
+                            <input type="text" name="subject" required />
+                        </div>
+
+                        <div id="without_contact" data-type="checkbox" class="sb-input">
+                            <span><?php sb_e('Guest Ticket') ?></span>
+                            <input type="checkbox" name="without_contact" value="1" />
+                        </div>
+
+                        <div id="contact_id" data-type="select" class="sb-input">
+                            <span><?php sb_e('Contact') ?></span>
+                            <select>
+                                <option value=""><?php sb_e('Select Contact') ?></option>
+                                <option value="1">ABC Traders</option>
+                                <option value="2">XYZ company</option>
+                            </select>
+                        </div>
+
+                        <div id="assigned_to" data-type="select" class="sb-input">
+                            <span><?php sb_e('Assigned To') ?></span>
+                            <select>
+                                <option value="1" selected>System Admin</option>
+                                <option value="1">System Admin</option>
+                            </select>
+                        </div>
+
+                        <div id="priority_id" data-type="select" class="sb-input">
+                            <span><?php sb_e('Priority') ?></span>
+                            <select>
+                                <option value=""><?php sb_e('Select Priority') ?></option>
+                                <option value="1" data-color="danger">Critical</option>
+                                <option value="2" data-color="danger">High</option>
+                                <option value="4" data-color="secondary">Low</option>
+                                <option value="3" data-color="warning">Medium</option>
+                            </select>
+                        </div>
+
+                        <div id="status_id" data-type="select" class="sb-input">
+                            <span><?php sb_e('Status') ?></span>
+                            <select>
+                                <option value="1">Open</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">Hold</option>
+                                <option value="4">Waiting for Customer Response</option>
+                                <option value="5">Resolved</option>
+                                <option value="6">Closed</option>
+                            </select>
                         </div>
                     </div>
-                    <div id="user_type" data-type="select" class="sb-input sb-input-select">
-                        <span>
-                            <?php sb_e('Type') ?>
-                        </span>
-                        <select>
-                            <option value="agent">
-                                <?php sb_e('Agent') ?>
-                            </option>
-                            <option value="admin">
-                                <?php sb_e('Admin') ?>
-                            </option>
-                        </select>
-                    </div>
-                    <?php sb_departments('select') ?>
-                    <div id="first_name" data-type="text" class="sb-input">
-                        <span>
-                            <?php sb_e('First name') ?>
-                        </span>
-                        <input type="text" required />
-                    </div>
-                    <div id="last_name" data-type="text" class="sb-input">
-                        <span>
-                            <?php sb_e('Last name') ?>
-                        </span>
-                        <input type="text" />
-                    </div>
-                    <div id="password" data-type="text" class="sb-input">
-                        <span>
-                            <?php sb_e('Password') ?>
-                        </span>
-                        <input type="password" />
-                    </div>
-                    <div id="email" data-type="email" class="sb-input">
-                        <span>
-                            <?php sb_e('Email') ?>
-                        </span>
-                        <input type="email" />
+                </div>
+                <div class="sb-additional-details">
+                    <div class="sb-edit-box">
+                        <div id="service_id" data-type="select" class="sb-input">
+                            <span><?php sb_e('Service') ?></span>
+                            <select>
+                                <option value=""><?php sb_e('Select Service') ?></option>
+                                <option value="1">Hardware Issue Fixing</option>
+                                <option value="2">Network issue fix</option>
+                                <option value="3">Software Development</option>
+                            </select>
+                        </div>
+
+                        <div id="department_id" data-type="select" class="sb-input">
+                            <span><?php sb_e('Department') ?></span>
+                            <select>
+                                <option value=""><?php sb_e('Select Department') ?></option>
+                                <option value="1">IT Support</option>
+                            </select>
+                        </div>
+
+                        <div id="cc" data-type="select" class="sb-input">
+                            <span><?php sb_e('CC') ?></span>
+                            <select>
+                                <option value="1">System Admin</option>
+                            </select>
+                        </div>
+
+                        
+
+                        <div id="attachments" data-type="file" class="sb-input">
+                            <span><?php sb_e('Attachments') ?></span>
+                            <input type="file" name="attachments[]" multiple />
+                            <div id="file-preview"></div>
+                        </div>
                     </div>
                 </div>
-                <a class="sb-delete sb-btn-text sb-btn-red">
-                    <i class="sb-icon-delete"></i>
-                    <?php sb_e('Delete user') ?>
-                </a>
             </div>
-            <div class="sb-additional-details">
-                <div class="sb-title">
-                    <?php sb_e('Edit additional details') ?>
-                </div>
-                <div class="sb-edit-box">
-                    <?php
-                    $code = '';
-                    $fields = sb_users_get_fields();
-                    foreach ($fields as $field) {
-                        $id = $field['id'];
-                        $type = $id == 'country' || $id == 'language' ? 'select' : ($id == 'birthdate' ? 'date' : 'text');
-                        $code .= '<div id="' . $id . '" data-type="' . $type . '" class="sb-input"><span>' . sb_($field['name']) . '</span>';
-                        if ($type == 'date' || $type == 'text') {
-                            $code .= '<input type="' . $type . '" />';
-                        } else if ($id == 'country') {
-                            $code .= sb_select_html('countries');
-                        } else if ($id == 'language') {
-                            $code .= sb_select_html('languages');
-                        }
-                        $code .= '</div>';
-                    }
-                    echo $code;
-                    ?>
-                </div>
+            <div id="description" data-type="textarea" class="sb-input" style="margin: 20px 0 0 0;">
+                <span><?php sb_e('Description') ?></span>
+                <textarea name="description" rows="4" required></textarea>
             </div>
         </div>
     </div>

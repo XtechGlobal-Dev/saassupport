@@ -5767,7 +5767,7 @@ td.sb-offline:after {
     background-color: rgba(0,0,0,0.6) !important;
 }
 
-.sb-profile-edit-box, .sb-profile-box {
+.sb-profile-edit-box, .sb-profile-box, .sb-ticket-edit-box, .sb-ticket-box {
     height: calc(100% - 50px);
     max-width: 1000px;
 
