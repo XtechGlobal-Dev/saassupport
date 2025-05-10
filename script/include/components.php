@@ -161,6 +161,110 @@ function sb_profile_edit_box() { ?>
             </div>
         </div>
     </div>
+<?php }
+function sb_ticket_edit_box() { ?>
+    <div class="sb-ticket-edit-box sb-lightbox">
+        <div class="sb-info"></div>
+        <div class="sb-top-bar">
+            <div class="sb-ticket">
+                <img src="<?php echo SB_URL ?>/media/user.svg" />
+                <span class="sb-name"></span>
+            </div>
+            <div>
+                <a class="sb-save sb-btn sb-icon">
+                    <i class="sb-icon-check"></i>
+                    <?php sb_e('Save changes') ?>
+                </a>
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                    <i class="sb-icon-close"></i>
+                </a>
+            </div>
+        </div>
+        <div class="sb-main sb-scroll-area">
+            <div class="sb-details">
+                <div class="sb-title">
+                    <?php sb_e('Edit details') ?>
+                </div>
+                <div class="sb-edit-box">
+                    <div id="profile_image" data-type="image" class="sb-input sb-input-image sb-profile-image">
+                        <span>
+                            <?php sb_e('Profile image') ?>
+                        </span>
+                        <div class="image">
+                            <div class="sb-icon-close"></div>
+                        </div>
+                    </div>
+                    <div id="user_type" data-type="select" class="sb-input sb-input-select">
+                        <span>
+                            <?php sb_e('Type') ?>
+                        </span>
+                        <select>
+                            <option value="agent">
+                                <?php sb_e('Agent') ?>
+                            </option>
+                            <option value="admin">
+                                <?php sb_e('Admin') ?>
+                            </option>
+                        </select>
+                    </div>
+                    <?php sb_departments('select') ?>
+                    <div id="first_name" data-type="text" class="sb-input">
+                        <span>
+                            <?php sb_e('First name') ?>
+                        </span>
+                        <input type="text" required />
+                    </div>
+                    <div id="last_name" data-type="text" class="sb-input">
+                        <span>
+                            <?php sb_e('Last name') ?>
+                        </span>
+                        <input type="text" />
+                    </div>
+                    <div id="password" data-type="text" class="sb-input">
+                        <span>
+                            <?php sb_e('Password') ?>
+                        </span>
+                        <input type="password" />
+                    </div>
+                    <div id="email" data-type="email" class="sb-input">
+                        <span>
+                            <?php sb_e('Email') ?>
+                        </span>
+                        <input type="email" />
+                    </div>
+                </div>
+                <a class="sb-delete sb-btn-text sb-btn-red">
+                    <i class="sb-icon-delete"></i>
+                    <?php sb_e('Delete user') ?>
+                </a>
+            </div>
+            <div class="sb-additional-details">
+                <div class="sb-title">
+                    <?php sb_e('Edit additional details') ?>
+                </div>
+                <div class="sb-edit-box">
+                    <?php
+                    $code = '';
+                    $fields = sb_users_get_fields();
+                    foreach ($fields as $field) {
+                        $id = $field['id'];
+                        $type = $id == 'country' || $id == 'language' ? 'select' : ($id == 'birthdate' ? 'date' : 'text');
+                        $code .= '<div id="' . $id . '" data-type="' . $type . '" class="sb-input"><span>' . sb_($field['name']) . '</span>';
+                        if ($type == 'date' || $type == 'text') {
+                            $code .= '<input type="' . $type . '" />';
+                        } else if ($id == 'country') {
+                            $code .= sb_select_html('countries');
+                        } else if ($id == 'language') {
+                            $code .= sb_select_html('languages');
+                        }
+                        $code .= '</div>';
+                    }
+                    echo $code;
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php } ?>
 <?php
 function sb_login_box() { ?>
@@ -881,7 +985,13 @@ function sb_component_admin() {
                 }
                 ?>
                 <?php if ($active_areas['tickets']) { ?>
-
+                    <style>
+                        .sb-table .span-border {
+                            text-align: center;
+                            padding: 3px 7px;
+                            border-radius: 6px;
+                        }
+                    </style>
                     <div class="sb-area-tickets">
                         <div class="sb-top-bar">
                             <div>
@@ -893,9 +1003,54 @@ function sb_component_admin() {
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
                                     </div>
-                                    
+                                    <ul>
+                                        <li data-type="all" class="sb-active">
+                                            <?php sb_e('All') ?>
+                                            <span data-count="0">(0)</span>
+                                        </li>
+                                        <li data-type="open">
+                                            <?php sb_e('Open') ?>
+                                            <span data-count="0">(0)</span>
+                                        </li>
+                                        <li data-type="in-progress">
+                                            <?php sb_e('In Progress') ?>
+                                            <span data-count="0">(0)</span>
+                                        </li>
+                                        <li data-type="answered">
+                                            <?php sb_e('Answered') ?>
+                                            <span data-count="0">(0)</span>
+                                        </li>
+                                        <li data-type="hold">
+                                            <?php sb_e('On Hold') ?>
+                                            <span data-count="0">(0)</span>
+                                        </li>
+                                        <li data-type="closed">
+                                            <?php sb_e('Closed') ?>
+                                            <span data-count="0">(0)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="sb-menu-mobile">
+                                    <i class="sb-icon-menu"></i>
+                                    <ul>
+                                        <?php
+                                        if ($is_admin) {
+                                            echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
+                                        }
+                                        ?>
+                                    </ul>
                                 </div>
                                 
+                            </div>
+                            <div>
+                                <div class="sb-search-btn">
+                                    <i class="sb-icon sb-icon-search"></i>
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
+                                </div>
+                                <a class="sb-btn sb-icon sb-new-ticket">
+                                    <i class="sb-icon-sms"></i>
+                                    <?php sb_e('New Ticket') ?>
+                                </a>
                             </div>
                         </div>
                         <div class="sb-scroll-area">
@@ -909,15 +1064,29 @@ function sb_component_admin() {
                                         <th data-field="subject">
                                             <?php sb_e('Subject') ?>
                                         </th>
-                                        <?php sb_users_table_extra_fields() ?>
-                                        <th data-field="description">
-                                            <?php sb_e('Description') ?>
+                                        <th data-field="tags">
+                                            <?php sb_e('Tags') ?>
                                         </th>
-                                        <th data-field="conversation_id">
-                                            <?php sb_e('Conversation ID') ?>
+                                        <th data-field="department">
+                                            <?php sb_e('Department') ?>
+                                        </th>
+                                        <th data-field="service">
+                                            <?php sb_e('Service') ?>
+                                        </th>
+                                        <th data-field="contact">
+                                            <?php sb_e('Contact') ?>
+                                        </th>
+                                        <th data-field="status">
+                                            <?php sb_e('Status') ?> 
+                                        </th>
+                                        <th data-field="priority">
+                                            <?php sb_e('Priority') ?>   
+                                        </th>
+                                        <th data-field="last_reply">
+                                            <?php sb_e('Last Reply') ?>   
                                         </th>
                                         <th data-field="creation_time">
-                                            <?php sb_e('Creation Time') ?>
+                                            <?php sb_e('Created') ?>
                                         </th>
                                     </tr>
                                 </thead>
@@ -1416,6 +1585,7 @@ function sb_component_admin() {
             <?php
             sb_profile_box();
             sb_profile_edit_box();
+            sb_ticket_edit_box();
             sb_dialog();
             sb_direct_message_box();
             sb_app_box();

@@ -828,15 +828,30 @@ function sb_get_users($sorting = ['creation_time', 'DESC'], $user_types = [], $s
 }
 
 
-function sb_get_tickets($sorting = ['creation_time', 'DESC'], $ticket_types = [], $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
+function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
     $query = '';
     $query_search = '';
-    $count = count($ticket_types);
+    $ticketStatusArr = [];
+    $ticketStatusArr['all'] = '0';
+    $ticketStatusArr['open'] = '1';        
+    $ticketStatusArr['in-progress'] = '2';    
+    $ticketStatusArr['hold'] = '3';
+    $ticketStatusArr['waiting'] = '4';
+    $ticketStatusArr['answered'] = '5';
+    $ticketStatusArr['closed'] = '6';
+    
     $sorting_field = $sorting[0];
     $main_field_sorting = in_array($sorting_field, ['id', 'first_name', 'last_name', 'email', 'profile_image', 'user_type', 'creation_time', 'last_activity', 'department']);
-    /*if ($count) {
+    if($ticket_status && $ticket_status != 'all')
+    {
+        $query = ' WHERE t.status_id = "' . $ticketStatusArr[$ticket_status]. '" ';
+    }
+    
+    /*
+    $count = count($ticket_status);
+    if ($count) {
         for ($i = 0; $i < $count; $i++) {
-            $query .= 'user_type = "' . sb_db_escape($ticket_types[$i]) . '" OR ';
+            $query .= 'user_type = "' . sb_db_escape($ticket_status[$i]) . '" OR ';
         }
         $query = '(' . substr($query, 0, strlen($query) - 4) . ')';
     }
@@ -866,7 +881,7 @@ function sb_get_tickets($sorting = ['creation_time', 'DESC'], $ticket_types = []
     } else {
         $query = ' WHERE user_type <> "bot"';
     }*/
-    $tickets = sb_db_get(SELECT_FROM_TICKETS . ' FROM sb_tickets ' . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
+    $tickets = sb_db_get(SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
     $tickets_count = count($tickets);
     if (!$tickets_count) {
         return [];
@@ -917,6 +932,26 @@ function sb_get_tickets($sorting = ['creation_time', 'DESC'], $ticket_types = []
     } else {
         return sb_error('db-error', 'sb_get_tickets', $tickets);
     }
+}
+
+function sb_count_tickets() {
+    $query = '';
+    /*$query = sb_routing_and_department_db('sb_conversations', true);
+    if ($query) {
+        $users = sb_db_get(substr($query, strpos($query, '(SE') + 1, -2), false);
+        $count = count($users);
+        if (!$count) {
+            return ['all' => 0, 'open' => 0, 'in-progress' => 0, 'hold' => 0, 'waiting' => 0, 'answered' => 0, 'closed' => 0];
+        }
+        $query = '';
+        for ($i = 0; $i < $count; $i++) {
+            $query .= $users[$i]['user_id'] . ',';
+        }
+        if ($query) {
+            $query = 'AND id IN (' . substr($query, 0, -1) . ')';
+        }
+    }*/
+    return sb_db_get('SELECT COUNT(id) AS `all`, SUM(CASE WHEN status_id = "1"' . $query . ' THEN 1 ELSE 0 END) AS `open`, SUM(CASE WHEN status_id = "2"' . $query . ' THEN 1 ELSE 0 END) AS `in-progress`, SUM(CASE WHEN status_id = "3"' . $query . ' THEN 1 ELSE 0 END) AS `hold`, SUM(CASE WHEN status_id = "4"' . $query . ' THEN 1 ELSE 0 END) AS `waiting`, SUM(CASE WHEN status_id = "5"' . $query . ' THEN 1 ELSE 0 END) AS `answered`, SUM(CASE WHEN status_id = "6"' . $query . ' THEN 1 ELSE 0 END) AS `closed` FROM sb_tickets');
 }
 
 function sb_convert_conversion_to_tickets($conversation_id = false)

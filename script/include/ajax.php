@@ -147,9 +147,11 @@ function sb_ajax_execute() {
         case 'update-user-to-lead':
             return sb_json_response(sb_update_user_to_lead($_POST['user_id']));
         case 'get-tickets':
-            return sb_json_response(sb_get_tickets(sb_post('sorting', ['creation_time', 'DESC']), sb_post('ticket_types', []), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('source')));
+            return sb_json_response(sb_get_tickets(sb_post('sorting', ['creation_time', 'DESC']), sb_post('ticket_status'), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('source')));
         case 'convert-converversion-to-ticket':
             return sb_json_response(sb_convert_conversion_to_tickets(sb_post('conversation_id')));
+        case 'count-tickets':
+            return sb_json_response(sb_count_tickets());
         case 'get-conversations':
             return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag')));
         case 'get-new-conversations':
