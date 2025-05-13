@@ -152,6 +152,10 @@ function sb_ajax_execute() {
             return sb_json_response(sb_convert_conversion_to_tickets(sb_post('conversation_id')));
         case 'count-tickets':
             return sb_json_response(sb_count_tickets());
+        case 'add-ticket':
+            return sb_json_response(sb_add_ticket($_POST['data1']));
+        case 'edit-ticket':
+            return sb_json_response(sb_edit_tickets());
         case 'get-conversations':
             return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag')));
         case 'get-new-conversations':

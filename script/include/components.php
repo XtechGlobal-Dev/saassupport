@@ -162,6 +162,32 @@ function sb_profile_edit_box() { ?>
         </div>
     </div>
 <?php }
+function sb_ticket_box() { ?>
+    <div class="sb-profile-box sb-lightbox">
+        <div class="sb-top-bar">
+            
+            <div>
+                
+                <?php
+                if (((sb_is_agent(false, true, true) && !sb_supervisor()) || sb_get_multi_setting('agents', 'agents-edit-user')) || (sb_supervisor() && sb_get_multi_setting('supervisor', 'supervisor-edit-user'))) {
+                    echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' . sb_('Edit user') . '</a>';
+                }
+                ?>
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                    <i class="sb-icon-close"></i>
+                </a>
+            </div>
+        </div>
+        <div class="sb-main sb-scroll-area">
+            <div>
+                <div class="sb-title">
+                    <?php sb_e('Details') ?>
+                </div>
+                <div class="sb-ticket-list"></div>
+            </div>
+        </div>
+    </div>
+<?php }
 function sb_ticket_edit_box() { ?>
     <div class="sb-ticket-edit-box sb-lightbox">
         <div class="sb-info"></div>
@@ -198,7 +224,7 @@ function sb_ticket_edit_box() { ?>
                             <select>
                                 <option value=""><?php sb_e('Select Contact') ?></option>
                                 <option value="1">ABC Traders</option>
-                                <option value="2">XYZ company</option>
+                                <option value="2" selected="selected">XYZ company</option>
                             </select>
                         </div>
 
@@ -206,7 +232,7 @@ function sb_ticket_edit_box() { ?>
                             <span><?php sb_e('Assigned To') ?></span>
                             <select>
                                 <option value="1" selected>System Admin</option>
-                                <option value="1">System Admin</option>
+                                <option value="1" selected="selected">System Admin</option>
                             </select>
                         </div>
 
@@ -216,7 +242,7 @@ function sb_ticket_edit_box() { ?>
                                 <option value=""><?php sb_e('Select Priority') ?></option>
                                 <option value="1" data-color="danger">Critical</option>
                                 <option value="2" data-color="danger">High</option>
-                                <option value="4" data-color="secondary">Low</option>
+                                <option value="4" data-color="secondary" selected="selected">Low</option>
                                 <option value="3" data-color="warning">Medium</option>
                             </select>
                         </div>
@@ -224,7 +250,7 @@ function sb_ticket_edit_box() { ?>
                         <div id="status_id" data-type="select" class="sb-input">
                             <span><?php sb_e('Status') ?></span>
                             <select>
-                                <option value="1">Open</option>
+                                <option value="1" selected="selected">Open</option>
                                 <option value="2">In Progress</option>
                                 <option value="3">Hold</option>
                                 <option value="4">Waiting for Customer Response</option>
@@ -240,7 +266,7 @@ function sb_ticket_edit_box() { ?>
                             <span><?php sb_e('Service') ?></span>
                             <select>
                                 <option value=""><?php sb_e('Select Service') ?></option>
-                                <option value="1">Hardware Issue Fixing</option>
+                                <option value="1" selected="selected">Hardware Issue Fixing</option>
                                 <option value="2">Network issue fix</option>
                                 <option value="3">Software Development</option>
                             </select>
@@ -250,17 +276,23 @@ function sb_ticket_edit_box() { ?>
                             <span><?php sb_e('Department') ?></span>
                             <select>
                                 <option value=""><?php sb_e('Select Department') ?></option>
-                                <option value="1">IT Support</option>
+                                <option value="1" selected="selected">IT Support</option>
                             </select>
                         </div>
 
                         <div id="cc" data-type="select" class="sb-input">
                             <span><?php sb_e('CC') ?></span>
                             <select>
-                                <option value="1">System Admin</option>
+                                <option value="1" selected="selected">System Admin</option>
                             </select>
                         </div>
 
+                        <div id="tags" data-type="select" class="sb-input">
+                            <span><?php sb_e('Tags') ?></span>
+                            <select>
+                                <option value="1" selected="selected">Test tag</option>
+                            </select>
+                        </div>
                         
 
                         <div id="attachments" data-type="file" class="sb-input">
@@ -271,9 +303,11 @@ function sb_ticket_edit_box() { ?>
                     </div>
                 </div>
             </div>
-            <div id="description" data-type="textarea" class="sb-input" style="margin: 20px 0 0 0;">
+            <div id="description" class="description sb-input" data-type="textarea" style="margin: 20px 0 0 0;">
                 <span><?php sb_e('Description') ?></span>
                 <textarea name="description" rows="4" required></textarea>
+                <input id="ticket_id" type="hidden" name="ticket_id" />
+                <input id="conversation_id" type="hidden" name="conversation_id" />
             </div>
         </div>
     </div>
@@ -1597,6 +1631,7 @@ function sb_component_admin() {
             <?php
             sb_profile_box();
             sb_profile_edit_box();
+            sb_ticket_box();
             sb_ticket_edit_box();
             sb_dialog();
             sb_direct_message_box();

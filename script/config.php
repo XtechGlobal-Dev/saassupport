@@ -43,11 +43,11 @@ define('SB_CLOUD', true);
 define('SB_CLOUD_KEY', 'usnxlshchs');
 define('SB_CLOUD_PATH', 'C:/xampp/htdocs/saassupport/');
 //define('SB_CLOUD_PATH', '/home/saassupport.supermaxai.com/public_html');
-define('SB_CLOUD_BRAND_LOGO', 'https://saassupport.supermaxai.com/custom/logo.svg');
-define('SB_CLOUD_BRAND_LOGO_LINK', 'https://saassupport.supermaxai.com');
-define('SB_CLOUD_BRAND_ICON', 'https://saassupport.supermaxai.com/custom/icon.svg');
-define('SB_CLOUD_BRAND_ICON_PNG', 'https://saassupport.supermaxai.com/custom/icon.png');
-define('SB_CLOUD_BRAND_NAME', 'Nexleon Support');
+define('SB_CLOUD_BRAND_LOGO', CLOUD_URL.'logo.svg');
+define('SB_CLOUD_BRAND_LOGO_LINK', CLOUD_URL);
+define('SB_CLOUD_BRAND_ICON', CLOUD_URL.'/script/media/cropped-XTECH-FAVICON-192x192.png');
+define('SB_CLOUD_BRAND_ICON_PNG', CLOUD_URL.'/script/media/cropped-XTECH-FAVICON-192x192.png');
+define('SB_CLOUD_BRAND_NAME', 'XTec Global');
 define('SB_CLOUD_MANIFEST_URL', 'https://saassupport.supermaxai.com/manifest.json');
 define('SB_CLOUD_MEMBERSHIP_TYPE', 'messages-agents'); //messages, users, agents
 
