@@ -954,7 +954,21 @@ function sb_count_tickets() {
     return sb_db_get('SELECT COUNT(id) AS `all`, SUM(CASE WHEN status_id = "1"' . $query . ' THEN 1 ELSE 0 END) AS `open`, SUM(CASE WHEN status_id = "2"' . $query . ' THEN 1 ELSE 0 END) AS `in-progress`, SUM(CASE WHEN status_id = "3"' . $query . ' THEN 1 ELSE 0 END) AS `hold`, SUM(CASE WHEN status_id = "4"' . $query . ' THEN 1 ELSE 0 END) AS `waiting`, SUM(CASE WHEN status_id = "5"' . $query . ' THEN 1 ELSE 0 END) AS `answered`, SUM(CASE WHEN status_id = "6"' . $query . ' THEN 1 ELSE 0 END) AS `closed` FROM sb_tickets');
 }
 
-function sb_edit_tickets($tickets_id = false) {
+function sb_edit_ticket($tickets_id = 0) {
+
+   $tickets_id = sb_db_escape($tickets_id, true);
+   $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+            p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
+            ts.name as status_name, ts.color as status_color
+     FROM sb_tickets t
+     LEFT JOIN contacts c ON t.contact_id = c.id
+     LEFT JOIN sb_users u ON t.assigned_to = u.id
+     LEFT JOIN priorities p ON t.priority_id = p.id
+     LEFT JOIN services s ON t.service_id = s.id
+     LEFT JOIN departments d ON t.department_id = d.id
+     LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
+    
+   return sb_db_get($query);
 
 }
 function sb_convert_conversion_to_tickets($conversation_id = false)
@@ -979,18 +993,18 @@ function sb_convert_conversion_to_tickets($conversation_id = false)
 
 function sb_add_ticket($inputs)
 {
-    $withoutContact = isset($inputs['withoutContact'][0]) ? $inputs['withoutContact'][0] : false;
+    $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
     $data = [
-            'subject' => $inputs['subject'][0],
+            'subject' => sb_db_escape($inputs['subject'][0]),
             'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
-            'assigned_to' => $inputs['assigned_to'][0],
-            'priority_id' => $inputs['priority_id'][0],
-            'status_id' => $inputs['status_id'][0],  // Default to Open status
-            'service_id' => $inputs['service_id'][0],
-            'department_id' => $inputs['department_id'][0],
-            'tags' => $inputs['tags'][0],
-            'description' => $inputs['description'][0],
-            'conversation_id' => $inputs['conversation_id'][0],
+            'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
+            'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
+            'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
+            'service_id' => sb_db_escape($inputs['service_id'][0],true),
+            'department_id' => sb_db_escape($inputs['department_id'][0],true),
+            'tags' => sb_db_escape($inputs['tags'][0]),
+            'description' => sb_db_escape($inputs['description'][0]),
+            'conversation_id' => sb_db_escape($inputs['conversation_id'][0],true),
             
         ];
 
@@ -1011,6 +1025,58 @@ function sb_add_ticket($inputs)
 
        // $ticketId = $db->insert('tickets', $data);
        return $message = "{'suceess': true, 'msg':'Ticket created successfully'}";
+
+}
+
+function sb_update_ticket($inputs,$ticket_id =0)
+{
+    $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
+    $data = [
+            'subject' => sb_db_escape($inputs['subject'][0]),
+            'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
+            'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
+            'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
+            'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
+            'service_id' => sb_db_escape($inputs['service_id'][0],true),
+            'department_id' => sb_db_escape($inputs['department_id'][0],true),
+            'tags' => sb_db_escape($inputs['tags'][0]),
+            'description' => sb_db_escape($inputs['description'][0]),
+            'conversation_id' => sb_db_escape($inputs['conversation_id'][0],true),
+            
+        ];
+
+        // $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['service_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
+        //echo 'INSERT into sb_tickets(subject,description,conversation_id,creation_time) '.$values;
+       sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',assigned_to ='".$data['assigned_to']."',priority_id = '".$data['priority_id']."',service_id='".$data['service_id']."',department_id= '".$data['department_id']."',tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
+
+        // Update CCs
+        if (isset($data['cc'][0]) && $data['cc'][0] != '') {
+            /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
+            foreach ($_POST['cc'] as $userId) {
+                $db->insert('ticket_ccs', [
+                    'ticket_id' => $ticketId,
+                    'user_id' => $userId
+                ]);
+            }*/
+        }
+
+       // $ticketId = $db->insert('tickets', $data);
+       $tickets_id = sb_db_escape($ticket_id, true);
+    $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+                p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
+                ts.name as status_name, ts.color as status_color
+        FROM sb_tickets t
+        LEFT JOIN contacts c ON t.contact_id = c.id
+        LEFT JOIN sb_users u ON t.assigned_to = u.id
+        LEFT JOIN priorities p ON t.priority_id = p.id
+        LEFT JOIN services s ON t.service_id = s.id
+        LEFT JOIN departments d ON t.department_id = d.id
+        LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
+        
+    return sb_db_get($query);
+
+        // $ticketId = $db->insert('tickets', $data);                                                                                                                               
+       //return $message = "{'suceess': true, 'msg':'Ticket updated successfully'}";
 
 }
 

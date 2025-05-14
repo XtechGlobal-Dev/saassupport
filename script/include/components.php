@@ -1427,7 +1427,7 @@ function sb_component_admin() {
                         <div class="sb-top-bar">
                             <div>
                                 <h2>
-                                    <?php sb_e('Settings1s') ?>
+                                    <?php sb_e('Settings') ?>
                                 </h2>
                             </div>
                             <div>
