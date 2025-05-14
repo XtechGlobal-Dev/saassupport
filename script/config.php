@@ -41,7 +41,7 @@ define('CLOUD_URL', 'http://localhost/saassupport');
 
 define('SB_CLOUD', true);
 define('SB_CLOUD_KEY', 'usnxlshchs');
-define('SB_CLOUD_PATH', 'C:/xampp/htdocs/saassupport/');
+define('SB_CLOUD_PATH', 'C:/wamp/www/saassupport/');
 //define('SB_CLOUD_PATH', '/home/saassupport.supermaxai.com/public_html');
 define('SB_CLOUD_BRAND_LOGO', CLOUD_URL.'logo.svg');
 define('SB_CLOUD_BRAND_LOGO_LINK', CLOUD_URL);
