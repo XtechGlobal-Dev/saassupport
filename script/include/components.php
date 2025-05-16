@@ -1827,4 +1827,281 @@ function sb_docs_link($id = '', $class = 'sb-docs') {
     }
 }
 
+function sb_get_ticket_custom_fields() {
+   $query = "SELECT * FROM custom_fields ORDER BY `order`";
+   return sb_db_get($query,false);
+}
+
+function ticket_settings($id = '', $class = 'sb-docs') {
+    // Get all custom fields
+    $customFields = sb_get_ticket_custom_fields();
+    
+    $code = '<div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Custom Fields</h5>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createFieldModal">
+                            Create New Field
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Active</th>
+                                        <th>Order</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($customFields as $field) { ?>
+                                    <tr>
+                                        <td><?= $field["title"] ?></td>
+                                        <td><?= $field["type"] ?></td>
+                                        <td><?= $field["required"] ? "Yes" : "No" ?></td>
+                                        <td><?= $field["is_active"] ? "Yes" : "No" ?></td>
+                                        <td><?= $field["order"] ?></td>
+                                        <td>
+                                            <button onclick="editField(<?php echo $field["id"]; ?>)" class="btn btn-sm btn-primary">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button onclick="deleteField(<?php echo $field["id"]; ?>)" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- Create Field Modal -->
+    <div class="modal fade" id="createFieldModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Custom Field</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="customFieldForm" class="needs-validation">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Type</label>
+                            <select class="form-control" id="type" name="type" required>
+                                <option value="text">Text</option>
+                                <option value="textarea">Textarea</option>
+                                <option value="select">Select</option>
+                                <option value="checkbox">Checkbox</option>
+                            </select>
+                        </div>
+                        <!-- Options input for select and checkbox fields -->
+                        <div class="mb-3" id="optionsContainer" style="display: none;">
+                            <label for="options" class="form-label">Options ( Separated  by a pipe "|" )</label>
+                            <textarea class="form-control" id="options" name="options" rows="3" 
+                                      placeholder="option1|option2|option3"></textarea>
+                            <small class="form-text text-muted">Separte each option by a pipe "|". For example:Option1|Option2|Option3</small>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="required" name="required">
+                                <label class="form-check-label" for="required">Required</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="default_value" class="form-label">Default Value</label>
+                            <input type="text" class="form-control" id="default_value" name="default_value">
+                        </div>
+                        <div class="mb-3">
+                            <label for="order" class="form-label">Order</label>
+                            <input type="number" class="form-control" id="order" name="order" value="0">
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
+                                <label class="form-check-label" for="is_active">
+                                    Active
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+                    <script>
+                    // Show/hide options input based on field type
+                    document.getElementById("type").addEventListener("change", function() {
+                        const optionsContainer = document.getElementById("optionsContainer");
+                        if (this.value === "select" || this.value === "checkbox") {
+                            optionsContainer.style.display = "block";
+                        } else {
+                            optionsContainer.style.display = "none";
+                        }
+                    });
+                </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function editField(id) {
+            // Get field details
+            fetch("api/get-custom-field.php?id=" + id)
+                .then(response => response.json())
+                .then(field => {
+                    // Fill form with field data
+                    document.getElementById("title").value = field.title;
+                    document.getElementById("type").value = field.type;
+                    document.getElementById("required").checked = field.required;
+                    document.getElementById("default_value").value = field.default_value;
+                    document.getElementById("order").value = field.order;
+                    document.getElementById("is_active").checked = field.is_active === 1;
+                    
+                    // Add hidden field ID for editing
+                    const fieldIdInput = document.getElementById("fieldId");
+                    if (!fieldIdInput) {
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.id = "fieldId";
+                        input.name = "id";
+                        input.value = id;
+                        document.getElementById("customFieldForm").appendChild(input);
+                    } else {
+                        fieldIdInput.value = id;
+                    }
+                    
+                    // Handle options for select and checkbox fields
+                    const optionsContainer = document.getElementById("optionsContainer");
+                    if (field.type === "select" || field.type === "checkbox") {
+                        optionsContainer.style.display = "block";
+                        // Split options by comma and join with newlines
+                        document.getElementById("options").value = field.options ? field.options.split(",").join("\n") : "";
+                    } else {
+                        optionsContainer.style.display = "none";
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+
+            // Show the edit modal
+            const modal = new bootstrap.Modal(document.getElementById("createFieldModal"));
+            modal.show();
+        }
+
+        // Delete field
+        function deleteField(id) {
+            if (confirm("Are you sure you want to delete this field?")) {
+                fetch("api/delete-custom-field.php?id=" + id, { method: "DELETE" })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Redirect to custom fields listing page
+                            window.location.href = "custom-fields.php";
+                        } else {
+                            alert(result.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred while deleting the field");
+                    });
+            }
+        }
+
+        // Show/hide options input based on field type
+        document.getElementById("type").addEventListener("change", function() {
+            const optionsContainer = document.getElementById("optionsContainer");
+            if (this.value === "select" || this.value === "checkbox") {
+                optionsContainer.style.display = "block";
+            } else {
+                optionsContainer.style.display = "none";
+            }
+        });
+
+        // Initialize form submission state
+        let isSubmitting = false;
+        const submitButton = document.getElementById("customFieldForm").querySelector("button[type="submit"]");
+        const originalText = submitButton.innerHTML;
+
+        // Handle form submission
+        document.getElementById("customFieldForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            
+            if (isSubmitting) {
+                alert("Please wait... The form is already being submitted.");
+                return;
+            }
+
+            isSubmitting = true;
+            submitButton.disabled = true;
+            submitButton.innerHTML = "<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...";
+
+            try {
+                // Get form data
+                const formData = new FormData(event.target);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+
+                // Get the current field ID if editing
+                const fieldId = document.getElementById("fieldId");
+                if (fieldId) {
+                    formObject.id = fieldId.value;
+                }
+
+                // Determine which endpoint to use based on presence of field ID
+                const endpoint = formObject.id ? "api/edit-custom-field.php" : "api/create-custom-field.php";
+                
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formObject)
+                });
+
+                const result = await response.json();
+                
+                if (response.success) {
+                    alert(result.message);
+                    location.reload();
+                } else {
+                    alert(result.error);
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                    isSubmitting = false;
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while saving the field");
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                isSubmitting = false;
+            }
+        });
+
+    
+    </script>
+    </div>';
+
+    return $code;
+}
 ?>

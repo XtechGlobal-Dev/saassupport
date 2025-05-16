@@ -5,7 +5,7 @@
  * TICKETS APP
  * ==========================================================
  *
- * Tickets app. © 2017-2025 board.support. All rights reserved.
+ * Tickets app. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  * 1. The tickets main block that render the whole tickets panel code.
  * 2. Generate the CSS for the ticketswith values setted in the settings area

@@ -410,7 +410,9 @@ function sb_populate_app_settings($app_name) {
             $settings = sb_cloud_merge_settings($settings);
         }
     }
+     
     return sb_populate_settings($app_name, $settings, false);
+    
 }
 
 function sb_get_setting_code($setting) {
@@ -419,6 +421,8 @@ function sb_get_setting_code($setting) {
         $type = $setting['type'];
         $disable_translations = sb_get_setting('admin-disable-settings-translations');
         $keywords = sb_isset($setting, 'keywords');
+        
+        
         $content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="sb-setting sb-type-' . $type . '"><div class="sb-setting-content"><h2>' . sb_s($setting['title'], $disable_translations) . '</h2><p>' . sb_s($setting['content'], $disable_translations) . sb_get_setting_code_help($setting) . '</p></div><div class="input">';
         switch ($type) {
             case 'color':
@@ -600,7 +604,43 @@ function sb_get_setting_code($setting) {
         if (isset($setting['setting']) && ($type == 'multi-input' || !empty($setting['multilingual']))) {
             $content .= '<div class="sb-language-switcher-cnt"><label>' . sb_('Languages') . '</label></div>';
         }
-        return $content . '</div></div>';
+
+        $content .= '</div></div>';
+
+        if($id != 'tickets-custom-fields'){
+            return $content;
+        }
+        else{
+            return ticket_settings();
+              
+        }
+        
+        /*}
+        else
+        {
+           ?>
+            <div id="tickets-fields" data-type="multi-input" class="sb-setting sb-type-multi-input">
+                <div class="sb-setting-content">
+                    <h2>Ticket fields</h2>
+                    <p>Choose which fields to include in the new ticket form.</p>
+                </div>
+                <div class="input" style="display: block;float: left;">
+                    <div id="tickets-field-departments" data-type="checkbox" class="multi-input-checkbox">
+                        <label>Departments</label><input type="checkbox">
+                    </div>
+                    <div id="tickets-field-priority" data-type="checkbox" class="multi-input-checkbox">
+                        <label>Priority</label>
+                        <input type="checkbox">
+                    </div>
+                    <?php //ticket_settings(); ?>
+                </div>
+            </div>
+
+
+            
+            <?php
+            
+        }*/
     }
     return '';
 }
