@@ -272,25 +272,45 @@ function sb_ticket_edit_box() { ?>
                             </select>
                         </div>
 
+                        <?php
+                        $departments = sb_get_departments();
+                        ?>
                         <div id="department_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Department') ?></span>
+                            <span>Department</span>
                             <select>
-                                <option value=""><?php sb_e('Select Department') ?></option>
-                                <option value="1" selected="selected">IT Support</option>
+                                <option value=""><?php echo sb_('Select Department');?></option>
+                                <?php
+                                $code = '';
+                                foreach ($departments as $key => $value) {
+                                    $code .= '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                }
+                                echo $code;
+                                ?>
                             </select>
                         </div>
-
-                        <div id="cc" data-type="select" class="sb-input">
+                        
+                       <div id="cc" data-type="select" class="sb-input">
                             <span><?php sb_e('CC') ?></span>
                             <select>
                                 <option value="1" selected="selected">System Admin</option>
                             </select>
                         </div>
 
+                        <?php 
+                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                        $tagsHtml = '';
+                        $count = count($tags);
+                        ?>
                         <div id="tags" data-type="select" class="sb-input">
                             <span><?php sb_e('Tags') ?></span>
                             <select>
-                                <option value="1" selected="selected">Test tag</option>
+                                <option value="" selected="selected">Select Tag</option>
+                                <?php
+                                for ($i = 0; $i < $count; $i++) {
+                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
+                                }
+                                echo $tagsHtml;
+                                ?>
                             </select>
                         </div>
                         
