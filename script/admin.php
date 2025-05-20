@@ -69,7 +69,7 @@ require('include/components.php');
     <script src="<?php echo $sb_url . 'js/min/jquery.min.js?v=' . SB_VERSION ?>"></script>
     <script src="<?php echo $sb_url . ((($is_cloud || $minify) && !sb_is_debug()) ? 'js/min/main.min.js?v=' : 'js/main.js?v=') . SB_VERSION ?>"></script>
     <script src="<?php echo $sb_url . ((($is_cloud || $minify) && !sb_is_debug()) ? 'js/min/admin.min.js?v=' : 'js/admin.js?v=') . SB_VERSION ?>"></script>
-    <link rel="stylesheet" href="<?php echo $sb_url . 'css/admin.css?v=' . SB_VERSION ?>" media="all" />
+    <link asasas rel="stylesheet" href="<?php echo $sb_url . 'css/admin.css?v=' . SB_VERSION ?>" media="all" />
     <link rel="stylesheet" href="<?php echo $sb_url . 'css/responsive-admin.css?v=' . SB_VERSION ?>" media="(max-width: 464px)" />
     <?php
     if ($connection_success && (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')))) {

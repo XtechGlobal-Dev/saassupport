@@ -1062,7 +1062,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
 
        // $ticketId = $db->insert('tickets', $data);
        $tickets_id = sb_db_escape($ticket_id, true);
-    $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+        $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
                 p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
                 ts.name as status_name, ts.color as status_color
         FROM sb_tickets t
@@ -1073,11 +1073,113 @@ function sb_update_ticket($inputs,$ticket_id =0)
         LEFT JOIN departments d ON t.department_id = d.id
         LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
         
-    return sb_db_get($query);
+        return sb_db_get($query);
 
         // $ticketId = $db->insert('tickets', $data);                                                                                                                               
        //return $message = "{'suceess': true, 'msg':'Ticket updated successfully'}";
 
+}
+
+
+function sb_add_custom_field($inputs)
+{
+    try {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            throw new Exception('Method not allowed', 405);
+        }
+
+        // Get raw POST data
+        /*$rawData = file_get_contents('php://input');
+        if (empty($rawData)) {
+            throw new Exception('No data received', 400);
+        }
+
+        // Log the raw data for debugging
+        error_log("Received raw data: " . $rawData);
+
+        // Parse JSON data
+        $data = json_decode($rawData, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Invalid JSON data: ' . json_last_error_msg(), 400);
+        }
+
+        // Log the parsed data
+        error_log("Parsed data: " . print_r($data, true));*/
+
+
+        $data = $inputs;
+        // Validate required fields
+        $required_fields = ['title', 'type'];
+        foreach ($required_fields as $field) {
+            if (!isset($data[$field]) || empty($data[$field])) {
+                throw new Exception("Missing required field: $field", 400);
+            }
+        }
+
+        // Handle options for select and checkbox fields
+        $options = '';
+        if (in_array($data['type'], ['select', 'checkbox'])) {
+            if (!isset($data['options'])) {
+                throw new Exception('Options are required for select and checkbox fields', 400);
+            }
+            
+            // Convert options to comma-separated string if not already
+            if (is_array($data['options'])) {
+                $options = implode(',', array_filter($data['options']));
+            } else {
+                $options = trim($data['options']);
+            }
+            
+            // Validate that we have at least one option
+            if (empty($options)) {
+                throw new Exception('At least one option is required for select and checkbox fields', 400);
+            }
+        }
+
+         // Prepare variables for bind_param
+        $title = sb_db_escape($data['title']);
+        $type = sb_db_escape($data['type']);
+        $required = isset($data['required']) ? 1 : 0;
+        $default_value = $data['default_value'] ? sb_db_escape($data['default_value']) :  null;
+        $is_active = isset($data['is_active']) ? 1 : 0;
+        $order = $data['order'] ?? 0;
+
+
+        // Log the SQL query for debugging
+        $sql = "INSERT INTO custom_fields (`title`, `type`, `required`, `default_value`, `options`, `is_active`, `order`) VALUES ('$title', '$type', $required, '$default_value', '$options', $is_active, $order)";
+        error_log("SQL Query: " . $sql);
+
+       error_log("Bound parameters: title=$title, type=$type, required=$required, default_value=$default_value, is_active=$is_active, order=$order");
+
+        sb_db_query($sql);
+        // // Bind parameters by reference
+        // $stmt->bind_param("ssisssi", 
+        //     $title,
+        //     $type,
+        //     $required,
+        //     $default_value,
+        //     $options,
+        //     $is_active,
+        //     $order
+        // );
+
+        // if (!$stmt->execute()) {
+        //     throw new Exception('Error executing statement: ' . $stmt->error, 500);
+        // }
+
+        return $message = "{'suceess': true, 'msg':'Custom field created successfully'}";
+
+    } catch (Exception $e) {
+        // Log the error for debugging
+        error_log("Error: " . $e->getMessage());
+        error_log("Stack trace: " . $e->getTraceAsString());
+        
+        // Send JSON error response
+        http_response_code($e->getCode());
+        echo json_encode([
+            'error' => $e->getMessage()
+        ]);
+    }
 }
 
 function sb_get_new_users($datetime) {
