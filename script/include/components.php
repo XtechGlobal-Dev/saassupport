@@ -660,7 +660,16 @@ function sb_component_admin() {
     $is_admin = $active_user && sb_is_agent($active_user, true, true) && !$supervisor;
     $sms = sb_get_multi_setting('sms', 'sms-user');
     $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
-    $active_areas = ['users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']), 'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')), 'chatbot' => defined('SB_DIALOGFLOW') && ($is_admin || ($supervisor && $supervisor['supervisor-settings-area'])) && (!$is_cloud || in_array('dialogflow', $cloud_active_apps)) ,'tickets' => $is_admin];
+    $active_areas = [
+        'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 
+    'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 
+    'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']), 
+    'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 
+    'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')), 
+    'chatbot' => defined('SB_DIALOGFLOW') && ($is_admin || ($supervisor && $supervisor['supervisor-settings-area'])) && (!$is_cloud || in_array('dialogflow', $cloud_active_apps)) ,
+    'tickets' => $is_admin,
+    'dashboard' => $is_admin,
+];
     
     
     $disable_translations = sb_get_setting('admin-disable-settings-translations');
@@ -697,10 +706,22 @@ function sb_component_admin() {
     ?>
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
-            <div class="sb-header">
+            <div class="sb-header header_sahil">
                 <div class="sb-admin-nav">
-                    <img src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" />
+                    <!-- <div class="logo_sec">
+                        <img width="40" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" />
+                        <div>
+                            <h2>Nexon Helpdesk</h2>
+                            <p>Agent Admin</p>
+                        </div>
+                    </div> -->
                     <div>
+                        <!-- <a id="sb-dashboard" style="display: flex;justify-content: center;align-items: center;">
+                           <svg style="height: 28px;width: 28px;color: #028be5;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm64 64l0 256 160 0 0-256L64 160zm384 0l-160 0 0 256 160 0 0-256z"/></svg>
+                            <span><?php sb_e('Dashboard') ?></span>
+                            dashboard  
+                        </a> -->
+
                         <a id="sb-conversations" class="sb-active">
                             <span>
                                 <?php sb_e('Conversations') ?>
@@ -778,6 +799,28 @@ function sb_component_admin() {
                 </div>
             </div>
             <main>
+
+            <!-- sahil start -->
+              <!-- <div class="sb-active sb-area-dash">
+                        <div class="sb-title">
+                        <h1><?php sb_e('Dashboard') ?></h1>
+                        </div>
+                        <div class="sb-content">
+                <p>Welcome to the admin dashboard!</p>
+                    <div class="sb-stats">
+                    <div class="sb-widget">
+                    <h3>New Tickets</h3>
+                    <p>5</p>
+                    </div>
+                    <div class="sb-widget">
+                    <h3>Active Users</h3>
+                    <p>12</p>
+                    </div>
+                    </div>
+                    </div>
+                </div> -->
+            <!-- sahil end -->
+
                 <div class="sb-active sb-area-conversations">
                     <div class="sb-board">
                         <div class="sb-admin-list<?php echo sb_get_multi_setting('departments-settings', 'departments-show-list') ? ' sb-departments-show' : '' ?>">

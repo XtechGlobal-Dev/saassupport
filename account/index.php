@@ -28,12 +28,16 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
 ?>
 <html lang="en-US">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <title>
-        <?php echo SB_CLOUD_BRAND_NAME ?>
+        <?php echo SB_CLOUD_BRAND_NAME ?> 
     </title>
+    <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
     <script src="../script/js/min/jquery.min.js"></script>
     <script id="sbinit" src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
     <link rel="stylesheet" href="../script/css/admin.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
