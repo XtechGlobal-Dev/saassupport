@@ -8,7 +8,8 @@
 *
 */
 
-@import "shared.scss";
+@use "shared" as *;
+
 
 @font-face {
     font-family: "Support Board Font";
@@ -20,7 +21,7 @@
 @keyframes sb-fade-out {
     0% {
         opacity: 1;
-    }
+    } 
 
     90% {
         opacity: 1;

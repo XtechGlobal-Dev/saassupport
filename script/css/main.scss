@@ -9,13 +9,11 @@
 *
 */
 
-@import "shared.scss";
-
+@use "shared.scss";
 /*
      
 # GLOBAL
 ==========================================================
-
 */
 
 @keyframes sb-chat-open-animation {
@@ -1498,5 +1496,5 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 }
 
-@import "rtl.scss";
-@import "responsive.scss";
+@use "rtl";
+@use "responsive";
