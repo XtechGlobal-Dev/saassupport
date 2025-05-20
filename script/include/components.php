@@ -706,21 +706,56 @@ function sb_component_admin() {
     ?>
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
-            <div class="sb-header header_sahil">
-                <div class="sb-admin-nav">
-                    <!-- <div class="logo_sec">
+            <div class="sb-header header_new">
+                <aside class="sidebar sb-admin-nav">
+                    <div class="logo">
+                        <img width="35" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="Logo" class="logo-icon">
+                        <div class="logo-text">
+                            <h1>Nexon Helpdesk</h1>
+                            <p>Agent Admin</p>
+                        </div>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <nav>
+                        <ul>
+                            <li class="active"><a href="#"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                            <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i> Inbox</a></li>
+                            <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i> Tickets</a></li>
+                            <li><a id="sb-users"><i class="fa-solid fa-users"></i> User</a></li>
+                            <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i> Chatbot</a></li>
+                            <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
+                            <li><a id="sb-reports"><i class="fa-solid fa-flag"></i> Reports</a></li>
+                            <li><a id="sb-settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                            <li><a href="#"><i class="fa-solid fa-circle-info"></i> Help & Support</a></li>
+                        </ul>
+                    </nav>
+                    <div class="powered-by">
+                        <p>POWERED BY</p>
+                        <div class="powered-logo">
+                            <img src="assets/nexon-icon.png" alt="Nexon" class="powered-icon">
+                            <div class="powered-text">
+                                <span>NEXON</span>
+                                <span>HELPDESK</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- <div class="sb-admin-nav">
+                    <div class="logo_sec">
                         <img width="40" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" />
                         <div>
                             <h2>Nexon Helpdesk</h2>
                             <p>Agent Admin</p>
                         </div>
-                    </div> -->
+                    </div>
                     <div>
-                        <!-- <a id="sb-dashboard" style="display: flex;justify-content: center;align-items: center;">
+                        <a id="sb-dashboard" style="display: flex;justify-content: center;align-items: center;">
                            <svg style="height: 28px;width: 28px;color: #028be5;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm64 64l0 256 160 0 0-256L64 160zm384 0l-160 0 0 256 160 0 0-256z"/></svg>
                             <span><?php sb_e('Dashboard') ?></span>
                             dashboard  
-                        </a> -->
+                        </a>
 
                         <a id="sb-conversations" class="sb-active">
                             <span>
@@ -750,8 +785,8 @@ function sb_component_admin() {
                         }
                         ?>
                     </div>
-                </div>
-                <div class="sb-admin-nav-right sb-menu-mobile">
+                </div> -->
+                <!-- <div class="sb-admin-nav-right sb-menu-mobile">
                     <i class="sb-icon-menu"></i>
                     <div class="sb-desktop">
                         <div class="sb-account">
@@ -796,7 +831,7 @@ function sb_component_admin() {
                             <?php sb_e('Logout') ?>
                         </a>
                     </div>
-                </div>
+                </div> -->
             </div>
             <main>
 
