@@ -189,6 +189,9 @@ function sb_ticket_box() { ?>
     </div>
 <?php }
 function sb_ticket_edit_box() { ?>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
     <div class="sb-ticket-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -208,9 +211,9 @@ function sb_ticket_edit_box() { ?>
         <div class="sb-main sb-scroll-area" >
             <div class="first-section" style="display: flex;">
                 <div class="sb-details">
-                    <div class="sb-edit-box" style="width: 98%;">
+                    <div class="sb-edit-box">
                         <div id="subject" data-type="text" class="sb-input">
-                            <span><?php sb_e('Subject') ?></span>
+                            <span class="required-label"><?php sb_e('Subject') ?></span>
                             <input type="text" name="subject" required />
                         </div>
 
@@ -220,9 +223,9 @@ function sb_ticket_edit_box() { ?>
                         </div>
 
                         <div id="contact_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Contact') ?></span>
+                            <span><?php sb_e('Customer') ?></span>
                             <select>
-                                <option value=""><?php sb_e('Select Contact') ?></option>
+                                <option value="" selected><?php sb_e('Select Customer') ?></option>
                                 <option value="1">ABC Traders</option>
                                 <option value="2" selected="selected">XYZ company</option>
                             </select>
@@ -231,15 +234,15 @@ function sb_ticket_edit_box() { ?>
                         <div id="assigned_to" data-type="select" class="sb-input">
                             <span><?php sb_e('Assigned To') ?></span>
                             <select>
-                                <option value="1" selected>System Admin</option>
-                                <option value="1" selected="selected">System Admin</option>
+                                <option value="" selected><?php sb_e('Select Assign To') ?></option>
+                                <option value="1" >System Admin</option>
                             </select>
                         </div>
 
                         <div id="priority_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Priority') ?></span>
-                            <select>
-                                <option value=""><?php sb_e('Select Priority') ?></option>
+                            <span class="required-label"><?php sb_e('Priority') ?></span>
+                            <select required>
+                                <option value="" selected><?php sb_e('Select Priority') ?></option>
                                 <option value="1" data-color="danger">Critical</option>
                                 <option value="2" data-color="danger">High</option>
                                 <option value="4" data-color="secondary" selected="selected">Low</option>
@@ -248,9 +251,10 @@ function sb_ticket_edit_box() { ?>
                         </div>
 
                         <div id="status_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Status') ?></span>
-                            <select>
-                                <option value="1" selected="selected">Open</option>
+                            <span class="required-label"><?php sb_e('Status') ?></span>
+                            <select required>
+                                <option value="" selected>Select Status</option>
+                                <option value="1">Open</option>
                                 <option value="2">In Progress</option>
                                 <option value="3">Hold</option>
                                 <option value="4">Waiting for Customer Response</option>
@@ -262,7 +266,7 @@ function sb_ticket_edit_box() { ?>
                 </div>
                 <div class="sb-additional-details">
                     <div class="sb-edit-box">
-                        <div id="service_id" data-type="select" class="sb-input">
+                        <!--div id="service_id" data-type="select" class="sb-input">
                             <span><?php sb_e('Service') ?></span>
                             <select>
                                 <option value=""><?php sb_e('Select Service') ?></option>
@@ -270,10 +274,11 @@ function sb_ticket_edit_box() { ?>
                                 <option value="2">Network issue fix</option>
                                 <option value="3">Software Development</option>
                             </select>
-                        </div>
+                        </div-->
 
                         <?php
                         $departments = sb_get_departments();
+                        if (!empty($departments)) {
                         ?>
                         <div id="department_id" data-type="select" class="sb-input">
                             <span>Department</span>
@@ -288,6 +293,7 @@ function sb_ticket_edit_box() { ?>
                                 ?>
                             </select>
                         </div>
+                        <?php } ?>
                         
                        <div id="cc" data-type="select" class="sb-input">
                             <span><?php sb_e('CC') ?></span>
@@ -300,6 +306,7 @@ function sb_ticket_edit_box() { ?>
                         $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
                         $tagsHtml = '';
                         $count = count($tags);
+                        if ($count > 0) {
                         ?>
                         <div id="tags" data-type="select" class="sb-input">
                             <span><?php sb_e('Tags') ?></span>
@@ -313,6 +320,7 @@ function sb_ticket_edit_box() { ?>
                                 ?>
                             </select>
                         </div>
+                        <?php } ?>
                         
 
                         <div id="attachments" data-type="file" class="sb-input">
@@ -323,14 +331,44 @@ function sb_ticket_edit_box() { ?>
                     </div>
                 </div>
             </div>
-            <div id="description" class="description sb-input" data-type="textarea" style="margin: 20px 0 0 0;">
-                <span><?php sb_e('Description') ?></span>
-                <textarea name="description" rows="4" required></textarea>
+            <div id="description" class="description sb-input" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                <div style="width:15%;display: inline-block;padding:0 4px 0 0;vertical-align: top;">
+                    <span style="font-weight: 600;font-size: 14px;line-height: 25px;color: #566069;"><?php sb_e('Description') ?></span></div>
+                <div style="width:84%;display: inline-block;padding:0">
+                    <div id="ticketdescription" style="height: 180px;"></div>
+                </div>
                 <input id="ticket_id" type="hidden" name="ticket_id" />
                 <input id="conversation_id" type="hidden" name="conversation_id" />
             </div>
+            <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
         </div>
     </div>
+    <style>
+    #ticketCustomFieldsContainer, .first-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #ticketCustomFieldsContainer > .sb-input, .first-section > div {
+        flex: 0 0 calc(50% - 10px); /* 2 columns with spacing */
+        box-sizing: border-box;
+    }
+    .required-label::after {
+        content: " *";
+        color: red;
+    }
+    </style>
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+               const quill = new Quill('#ticketdescription', {
+                    theme: 'snow',
+                    placeholder: 'Compose something...'
+                });
+            });
+        }(jQuery));
+    </script>
 <?php } ?>
 <?php
 function sb_login_box() { ?>
@@ -1870,10 +1908,10 @@ function ticket_settings($id = '', $class = 'sb-docs') {
                                                         <td>'.($field["is_active"] ? "Yes" : "No") .'</td>
                                                         <td>'.($field["order"]) .'</td>
                                                         <td>
-                                                            <button onclick="editField()" class=\"btn btn-sm btn-primary\">
+                                                            <button data-id="'.$field["id"].'" class="btn btn-sm btn-primary edit-custom-field">
                                                                 <i class="bi bi-pencil">Edit</i>
                                                             </button>
-                                                            <button onclick="deleteField()" class=\"btn btn-sm btn-danger\">
+                                                            <button data-id="'.$field["id"].'" class="btn btn-sm btn-danger delete-custom-field">
                                                                 <i class="bi bi-trash">Delete</i>
                                                             </button>
                                                         </td>
@@ -1917,118 +1955,137 @@ function ticket_settings($id = '', $class = 'sb-docs') {
                         <div class="sb-title">
                             <?php sb_e("Create Custom Field"); ?>
                         </div>
-                        <!--div class="sb-ticket-list">
-                            <div class="#customFieldForm">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="type" class="form-label">Type</label>
-                                    <select class="form-control" id="type" name="type" required>
-                                        <option value="text" selected>Text</option>
-                                        <option value="textarea">Textarea</option>
-                                        <option value="select">Select</option>
-                                        <option value="checkbox">Checkbox</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3" id="optionsContainer" style="display: none;">
-                                    <label for="options" class="form-label">Options</label>
-                                    <textarea class="form-control" id="options" name="options" rows="3" placeholder="option1|option2|option3"></textarea>
-                                    <br>
-                                    <small class="form-text text-muted">Separate each option by a pipe "|". For example: Option1|Option2|Option3</small>
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="required" name="required">
-                                        <label class="form-check-label" for="required">Required</label>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="default_value" class="form-label">Default Value</label>
-                                    <input type="text" class="form-control" id="default_value" name="default_value">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="order" class="form-label">Order</label>
-                                    <input type="number" class="form-control" id="order" name="order" value="0">
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
-                                        <label class="form-check-label" for="is_active">Active</label>
-                                    </div>
-                                </div>
-                                <button type="button" id="save-custom-fields" class="btn btn-primary">Create</button>
-                            </div>
-                        </div-->
                         <div class="sb-edit-box sb-ticket-list" id="customFieldForm">
-    <div id="title" data-type="text" class="sb-input">
-        <span>Title</span>
-        <input type="text" class="form-control" name="title" required>
-    </div>
+                            <div id="title" data-type="text" class="sb-input">
+                                <span>Title</span>
+                                <input type="text" class="form-control" name="title" required>
+                            </div>
 
-    <div id="type" data-type="select" class="sb-input sb-input-select">
-        <span>Type</span>
-        <select class="form-control" name="type" required>
-            <option value="text" selected>Text</option>
-            <option value="textarea">Textarea</option>
-            <option value="select">Select</option>
-            <option value="checkbox">Checkbox</option>
-        </select>
-    </div>
+                            <div id="type" data-type="select" class="sb-input sb-input-select">
+                                <span>Type</span>
+                                <select class="form-control" name="type" required>
+                                    <option value="text" selected>Text</option>
+                                    <option value="textarea">Textarea</option>
+                                    <option value="select">Select</option>
+                                    <option value="checkbox">Checkbox</option>
+                                </select>
+                            </div>
 
-    <div id="optionsContainer" data-type="textarea" class="sb-input" style="display: none;">
-        <span>Options</span>
-        <textarea class="form-control" name="options" rows="3" placeholder="Separate each option by a pipe `|`.  Example: Option1|Option2|Option3"></textarea>
-    </div>
+                            <div id="optionsContainer" data-type="textarea" class="sb-input" style="display: none;">
+                                <span>Options</span>
+                                <textarea class="form-control" name="options" rows="3" placeholder="Separate each option by a pipe `|`.  Example: Option1|Option2|Option3"></textarea>
+                            </div>
 
-    <div id="required" data-type="checkbox" class="sb-input sb-input-checkbox">
-        <span>Required?</span>
-            <input class="form-control" type="checkbox" name="required" value="">
-    </div>
+                            <div id="required" data-type="checkbox" class="sb-input sb-input-checkbox">
+                                <span>Required?</span>
+                                    <input class="form-control" type="checkbox" name="required" value="">
+                            </div>
 
-    <div id="default_value" data-type="text" class="sb-input">
-        <span>Default Value</span>
-        <input type="text" class="form-control" name="default_value">
-    </div>
+                            <div id="default_value" data-type="text" class="sb-input">
+                                <span>Default Value</span>
+                                <input type="text" class="form-control" name="default_value">
+                            </div>
 
-    <div id="order" data-type="number" class="sb-input">
-        <span>Order</span>
-        <input type="number" class="form-control" name="order" value="0">
-    </div>
+                            <div id="order" data-type="number" class="sb-input">
+                                <span>Order</span>
+                                <input type="number" class="form-control" name="order" value="0">
+                            </div>
 
-    <div id="is_active" data-type="checkbox" class="sb-input">
-        <span>Active?</span>
-            <input class="form-control" type="checkbox" name="is_active" value="1" checked>
-    </div>
+                            <div id="is_active" data-type="checkbox" class="sb-input">
+                                <span>Active?</span>
+                                    <input class="form-control" type="checkbox" name="is_active" value="1" checked>
+                            </div>
+                            <div id="customFieldsContainer">
+                            </div>
 
-    <!--div class="sb-input">
-        <button type="button" id="save-custom-fields" class="btn btn-primary">Create</button>
-    </div-->
-</div>
-
+                            <!--div class="sb-input">
+                                <button type="button" id="save-custom-fields" class="btn btn-primary">Create</button>
+                            </div-->
+                        </div>
                     </div>
                 </div>
             </div>
-            
             <!--script>
-                // Show/hide options input based on field type
-                document.getElementById("type").addEventListener("change", function() {
-                const optionsContainer = document.getElementById("optionsContainer");
-                if (this.value === "select" || this.value === "checkbox") {
-                    optionsContainer.style.display = "block";
-                } else {
-                    optionsContainer.style.display = "none";
-                }
-            });
-            </script-->
+            // Initialize custom fields data
+            fetch("api/get-custom-fields.php")
+                .then(response => response.json())
+                .then(data => {
+                    window.customFieldsData = data;
+                    // Load and display custom fields
+                    loadCustomFields();
+                    //console.log(window.customFieldsData);
+                })
+                .catch(error => console.error("Error loading custom fields:", error));
 
+            // Load custom fields data and display them
+            async function loadCustomFields() {
+                try {
+                    const response = await fetch("api/get-custom-fields.php");
+                    const fields = await response.json();
+                    
+                    const container = document.getElementById("customFieldsContainer");
+                    container.innerHTML = ""; // Clear any existing fields
+
+                    fields.forEach(field => {
+                        const fieldHtml = getFieldHtml(field);
+                        container.innerHTML += fieldHtml;
+                    });
+                } catch (error) {
+                    console.error("Error loading custom fields:", error);
+                }
+            }
+
+            // Function to generate HTML for a custom field
+            function getFieldHtml(field) {
+                console.log(field.required);
+                let html = "<div class=\"form-group mb-3\">";
+                html += `<label for="custom_${field.id}" class="${field.required == \"1\" ? "required-field" : ""}">${field.title}</label>`;
+
+                switch(field.type) {
+                    case "text":
+                        html += `<input type="text" class="form-control" id="custom_${field.id}" 
+                                        name="custom_fields[${field.id}]" 
+                                        ${field.required == "1" ? "required" : ""} 
+                                        placeholder="${field.title}">`;
+                        break;
+                    
+                    case "textarea":
+                        html += `<textarea class="form-control" id="custom_${field.id}" 
+                                            name="custom_fields[${field.id}]" 
+                                            rows="3" 
+                                            ${field.required  == "1" ? "required" : ""} 
+                                            placeholder="${field.title}"></textarea>`;
+                        break;
+                    
+                    case "select":
+                        // Split options by comma and trim whitespace
+                        const options = (field.options || "").split("|").map(opt => opt.trim()).filter(opt => opt);
+                        html += `<select class="form-control" id="custom_${field.id}" 
+                                        name="custom_fields[${field.id}]" 
+                                        ${field.required == "1" ? "required" : ""}>`;
+                        html += "<option value="">Select " + field.title + "</option>";
+                        options.forEach(option => {
+                            html += `<option value="${option}">${option}</option>`;
+                        });
+                        html += "</select>";
+                        break;
+                    
+                    case "checkbox":
+                        html += `<div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="custom_${field.id}" 
+                                            name="custom_fields[${field.id}]" 
+                                            value="1" 
+                                            ${field.required == "1" ? "required" : ""}>
+                                    <label class="form-check-label" for="custom_${field.id}">${field.title}</label>
+                                </div>`;
+                        break;
+                }
+                html += "</div>";
+                return html;
+            }
+        </script-->
+            
+            
         <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
         <!--script>
             function editField(id) {

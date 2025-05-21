@@ -158,8 +158,12 @@ function sb_ajax_execute() {
             return sb_json_response(sb_edit_ticket($_POST['ticket_id']));
         case 'update-ticket':
             return sb_json_response(sb_update_ticket($_POST['data1'], $_POST['ticket_id']));
-        case 'add-custom-field':
-        return sb_json_response(sb_add_custom_field($_POST['data1']));
+        case 'add-ticket-custom-field':
+             return sb_json_response(sb_add_custom_field($_POST['data1']));
+        case 'delete-ticket-custom-field':
+             return sb_json_response(sb_delete_ticket_custom_field($_POST['id']));
+        case 'get-tickets-custom-fields':
+             return sb_json_response(sb_get_tickets_custom_fields());
         case 'get-conversations':
             return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag')));
         case 'get-new-conversations':

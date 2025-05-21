@@ -1000,17 +1000,60 @@ function sb_add_ticket($inputs)
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
             'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
-            'service_id' => sb_db_escape($inputs['service_id'][0],true),
+            //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => sb_db_escape($inputs['department_id'][0],true),
             'tags' => sb_db_escape($inputs['tags'][0]),
             'description' => sb_db_escape($inputs['description'][0]),
             'conversation_id' => sb_db_escape($inputs['conversation_id'][0],true),
+            'customField' => sb_db_escape($inputs['customField'][0],true),
             
         ];
 
-         $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['service_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
-        //echo 'INSERT into sb_tickets(subject,description,conversation_id,creation_time) '.$values;
-       sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,service_id,department_id,tags,description,creation_time,updated_at,status_id,conversation_id) '.$values);
+        echo '<pre>';
+        print_r($inputs['customField'][0]);
+
+               // Get active fields from settings
+        /*$sql = "SELECT field_name, is_active FROM default_fields_settings";
+        $result = sb_db_get($sql,false);
+        print_r($result);
+        $activeFields = array();
+        foreach($result as $row) {
+           $activeFields[$row['field_name']] = $row['is_active'];
+        }
+
+        // Get required fields from database schema
+        $required_fields = ['subject', 'description', 'contact_id'];
+        $validation_errors = array();
+
+        // Validate each required field
+        foreach ($required_fields as $field) {
+            // If field is not provided in request
+            if (!isset($data[$field])) {
+                // If field is active in settings, it's an error
+                if ($activeFields[$field]) {
+                    $validation_errors[] = "Required field '$field' is missing";
+                }
+                // If field is not active in settings, set a default empty value
+                $data[$field] = '';
+            }
+            // If field is provided but empty
+            else if (empty($data[$field])) {
+                // If field is active in settings, it's an error
+                if ($activeFields[$field]) {
+                    $validation_errors[] = "Required field '$field' cannot be empty";
+                }
+                // If field is not active in settings, keep the empty value
+            }
+        }
+
+        // If there are any validation errors
+        if (!empty($validation_errors)) {
+            throw new Exception(implode(', ', $validation_errors));
+        }*/
+
+
+        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
+        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,department_id,tags,description,creation_time,updated_at,status_id,conversation_id) '.$values);
 
         // Update CCs
         if (isset($data['cc'][0]) && $data['cc'][0] != '') {
@@ -1023,6 +1066,70 @@ function sb_add_ticket($inputs)
             }*/
         }
 
+
+
+        // Insert custom fields if any
+        if (isset($inputs['custom_fields']) && is_array($inputs['custom_fields'])) {
+            error_log("Custom fields received: " . print_r($inputs['custom_fields'], true));
+            
+            // First get all custom fields definitions
+            $sql2 = "SELECT id, type FROM custom_fields WHERE id IN (" . implode(',', array_keys($inputs['custom_fields'])) . ")";
+            $result = sb_db_get($sql2,false);
+            
+            if (!$result) {
+                throw new Exception('Error fetching custom fields: ');
+            }
+            
+            // Create array of field types
+            $fieldTypes = array();
+            foreach($result as $row) {
+                $fieldTypes[$row['id']] = $row['type'];
+            }
+            
+            // Process each custom field
+            foreach ($inputs['custom_fields'] as $field_id => $value) {
+                // Get field type
+                $fieldType = $fieldTypes[$field_id] ?? 'text';
+                
+                // Handle different field types
+                switch($fieldType) {
+                    case 'text':
+                    case 'textarea':
+                        $value = trim($value ?? '');
+                        break;
+                    case 'select':
+                        $value = trim($value ?? '');
+                        break;
+                    case 'checkbox':
+                        $value = (bool)$value ? '1' : '0';
+                        break;
+                    default:
+                        $value = trim($value ?? '');
+                }
+                
+                $sql3 = "INSERT INTO ticket_custom_fields (ticket_id, custom_field_id, value) VALUES ($ticket_id, $field_id,  $value)";
+                $result3 = sb_db_query($sql3);
+                
+                
+                // For text fields, bind as string
+                /*if (in_array($fieldType, ['text', 'textarea', 'select'])) {
+                    $stmt->bind_param("iss", $ticket_id, $field_id, $value);
+                } else {
+                    // For checkbox, bind as integer
+                    $stmt->bind_param("isi", $ticket_id, $field_id, $value);
+                }
+                
+                if (!$stmt->execute()) {
+                    throw new Exception('Error saving custom field: ' . $stmt->error);
+                }*/
+                
+                error_log("Saved custom field: field_id=$field_id, value=$value");
+            }
+        } 
+        else {
+            error_log("No custom fields received");
+        }
+ 
        // $ticketId = $db->insert('tickets', $data);
        return $message = "{'suceess': true, 'msg':'Ticket created successfully'}";
 
@@ -1088,25 +1195,6 @@ function sb_add_custom_field($inputs)
             throw new Exception('Method not allowed', 405);
         }
 
-        // Get raw POST data
-        /*$rawData = file_get_contents('php://input');
-        if (empty($rawData)) {
-            throw new Exception('No data received', 400);
-        }
-
-        // Log the raw data for debugging
-        error_log("Received raw data: " . $rawData);
-
-        // Parse JSON data
-        $data = json_decode($rawData, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception('Invalid JSON data: ' . json_last_error_msg(), 400);
-        }
-
-        // Log the parsed data
-        error_log("Parsed data: " . print_r($data, true));*/
-
-
         $data = $inputs;
         // Validate required fields
         $required_fields = ['title', 'type'];
@@ -1149,24 +1237,10 @@ function sb_add_custom_field($inputs)
         $sql = "INSERT INTO custom_fields (`title`, `type`, `required`, `default_value`, `options`, `is_active`, `order`) VALUES ('$title', '$type', $required, '$default_value', '$options', $is_active, $order)";
         error_log("SQL Query: " . $sql);
 
-       error_log("Bound parameters: title=$title, type=$type, required=$required, default_value=$default_value, is_active=$is_active, order=$order");
+        error_log("Bound parameters: title=$title, type=$type, required=$required, default_value=$default_value, is_active=$is_active, order=$order");
 
         sb_db_query($sql);
-        // // Bind parameters by reference
-        // $stmt->bind_param("ssisssi", 
-        //     $title,
-        //     $type,
-        //     $required,
-        //     $default_value,
-        //     $options,
-        //     $is_active,
-        //     $order
-        // );
-
-        // if (!$stmt->execute()) {
-        //     throw new Exception('Error executing statement: ' . $stmt->error, 500);
-        // }
-
+       
         return $message = "{'suceess': true, 'msg':'Custom field created successfully'}";
 
     } catch (Exception $e) {
@@ -1181,6 +1255,28 @@ function sb_add_custom_field($inputs)
         ]);
     }
 }
+
+function sb_delete_ticket_custom_field($id)
+{
+    $id = sb_db_escape($id, true);
+    sb_db_query('DELETE FROM custom_fields WHERE id = ' . $id);
+    return true;
+}
+function sb_get_tickets_custom_fields()
+{
+    $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order`";
+    /*$result = $conn->query($sql);
+
+    $fields = array();
+    while($row = $result->fetch_assoc()) {
+        $fields[] = $row;
+    }*/
+
+
+    return sb_db_get($query,false);
+}
+
+
 
 function sb_get_new_users($datetime) {
     $datetime = sb_db_escape($datetime);
