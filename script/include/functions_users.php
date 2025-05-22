@@ -882,12 +882,27 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
         $query = ' WHERE user_type <> "bot"';
     }*/
     $tickets = sb_db_get(SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
+
+    
+    
     $tickets_count = count($tickets);
     if (!$tickets_count) {
         return [];
     }
 
     if (isset($tickets) && is_array($tickets)) {
+
+        $departments = sb_get_departments();
+        $departmentsArr = array();
+        foreach ($departments as $key => $value) {
+            $departmentsArr[$key] = $value['name'];
+        }
+  
+        ////// replace department id with name
+        for ($i = 0; $i < $tickets_count; $i++) {
+            $tickets[$i]['department'] = isset($departmentsArr[$tickets[$i]['department_id']]) ? $departmentsArr[$tickets[$i]['department_id']] :  $tickets[$i]['department_id'];  
+        }
+
         $is_array = is_array($extra);
         if ($extra && (!$is_array || count($extra))) {
             $query = '';
@@ -895,6 +910,7 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
             for ($i = 0; $i < $tickets_count; $i++) {
                 $query .= $users[$i]['id'] . ',';
                 $tickets[$i]['extra'] = [];
+                 
             }
             if ($is_array) {
                 for ($i = 0; $i < count($extra); $i++) {
@@ -958,17 +974,23 @@ function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
    $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
-            p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
+            p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color
      FROM sb_tickets t
      LEFT JOIN contacts c ON t.contact_id = c.id
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN priorities p ON t.priority_id = p.id
-     LEFT JOIN services s ON t.service_id = s.id
-     LEFT JOIN departments d ON t.department_id = d.id
      LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
     
-   return sb_db_get($query);
+    $result = sb_db_get($query);
+    
+    if ($result) {
+        $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
+       return $result;
+    } else {
+        return false;
+    }
+   //return sb_db_get($query);
 
 }
 function sb_convert_conversion_to_tickets($conversation_id = false)
@@ -1005,12 +1027,13 @@ function sb_add_ticket($inputs)
             'tags' => sb_db_escape($inputs['tags'][0]),
             'description' => sb_db_escape($inputs['description'][0]),
             'conversation_id' => sb_db_escape($inputs['conversation_id'][0],true),
-            'customField' => sb_db_escape($inputs['customField'][0],true),
             
         ];
 
-        echo '<pre>';
-        print_r($inputs['customField'][0]);
+        $customFields = array();
+        foreach($inputs['customField'][0] as $key => $value) {
+            $customFields[$key] = sb_db_escape($value);
+        }
 
                // Get active fields from settings
         /*$sql = "SELECT field_name, is_active FROM default_fields_settings";
@@ -1053,7 +1076,7 @@ function sb_add_ticket($inputs)
 
 
         $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
-        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,department_id,tags,description,creation_time,updated_at,status_id,conversation_id) '.$values);
+        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,department_id,tags,description,creation_time,updated_at,status_id,conversation_id) '.$values, true);
 
         // Update CCs
         if (isset($data['cc'][0]) && $data['cc'][0] != '') {
@@ -1066,14 +1089,86 @@ function sb_add_ticket($inputs)
             }*/
         }
 
-
+        ///// Insert ticket custom fields
+        sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'new');
+        return sb_return_saved_ticket_row($ticket_id);
 
         // Insert custom fields if any
-        if (isset($inputs['custom_fields']) && is_array($inputs['custom_fields'])) {
-            error_log("Custom fields received: " . print_r($inputs['custom_fields'], true));
+        // if (isset($customFields) && is_array($customFields)) {
+        //     error_log("Custom fields received: " . print_r($customFields, true));
+            
+        //     // First get all custom fields definitions
+        //     $sql2 = "SELECT `id`, `type` FROM custom_fields WHERE id IN (" . implode(',', array_keys($customFields)) . ")";
+        //     $result = sb_db_get($sql2,false);
+            
+        //     if (!$result) {
+        //         throw new Exception('Error fetching custom fields: ');
+        //     }
+            
+        //     // Create array of field types
+        //     $fieldTypes = array();
+        //     foreach($result as $row) {
+        //         $fieldTypes[$row['id']] = $row['type'];
+        //     }
+            
+        //     // Process each custom field
+        //     foreach ($customFields as $field_id => $value) {
+        //         // Get field type
+        //         $fieldType = $fieldTypes[$field_id] ?? 'text';
+                
+        //         // Handle different field types
+        //         switch($fieldType) {
+        //             case 'text':
+        //             case 'textarea':
+        //                 $value = trim($value ?? '');
+        //                 break;
+        //             case 'select':
+        //                 $value = trim($value ?? '');
+        //                 break;
+        //             case 'checkbox':
+        //                 $value = (bool)$value ? '1' : '0';
+        //                 break;
+        //             default:
+        //                 $value = trim($value ?? '');
+        //         }
+                
+        //         $sql3 = "INSERT INTO ticket_custom_fields (ticket_id, custom_field_id, value) VALUES ($ticket_id, $field_id,  '$value')";
+        //         $result3 = sb_db_query($sql3);
+                
+                
+        //         // For text fields, bind as string
+        //         /*if (in_array($fieldType, ['text', 'textarea', 'select'])) {
+        //             $stmt->bind_param("iss", $ticket_id, $field_id, $value);
+        //         } else {
+        //             // For checkbox, bind as integer
+        //             $stmt->bind_param("isi", $ticket_id, $field_id, $value);
+        //         }
+                
+        //         if (!$stmt->execute()) {
+        //             throw new Exception('Error saving custom field: ' . $stmt->error);
+        //         }*/
+                
+        //         error_log("Saved custom field: field_id=$field_id, value=$value");
+        //     }
+        // } 
+        // else {
+        //     error_log("No custom fields received");
+        // }
+ 
+       // $ticketId = $db->insert('tickets', $data);
+      // return $message = "{'suceess': true, 'msg':'Ticket created successfully'}";
+
+}
+
+function sb_add_edit_ticket_custom_fields($ticket_id = null, $customFields = array(), $action = 'new')
+{
+    if ($ticket_id && $customFields) {
+        // Insert custom fields if any
+        if (isset($customFields) && is_array($customFields)) {
+            error_log("Custom fields received: " . print_r($customFields, true));
             
             // First get all custom fields definitions
-            $sql2 = "SELECT id, type FROM custom_fields WHERE id IN (" . implode(',', array_keys($inputs['custom_fields'])) . ")";
+            $sql2 = "SELECT `id`, `type` FROM custom_fields WHERE id IN (" . implode(',', array_keys($customFields)) . ")";
             $result = sb_db_get($sql2,false);
             
             if (!$result) {
@@ -1087,7 +1182,7 @@ function sb_add_ticket($inputs)
             }
             
             // Process each custom field
-            foreach ($inputs['custom_fields'] as $field_id => $value) {
+            foreach ($customFields as $field_id => $value) {
                 // Get field type
                 $fieldType = $fieldTypes[$field_id] ?? 'text';
                 
@@ -1107,36 +1202,40 @@ function sb_add_ticket($inputs)
                         $value = trim($value ?? '');
                 }
                 
-                $sql3 = "INSERT INTO ticket_custom_fields (ticket_id, custom_field_id, value) VALUES ($ticket_id, $field_id,  $value)";
-                $result3 = sb_db_query($sql3);
-                
-                
-                // For text fields, bind as string
-                /*if (in_array($fieldType, ['text', 'textarea', 'select'])) {
-                    $stmt->bind_param("iss", $ticket_id, $field_id, $value);
-                } else {
-                    // For checkbox, bind as integer
-                    $stmt->bind_param("isi", $ticket_id, $field_id, $value);
+                if($action == 'new')
+                {
+                    $sql3 = "INSERT INTO ticket_custom_fields (ticket_id, custom_field_id, value) VALUES ($ticket_id, $field_id,  '$value')";
                 }
-                
-                if (!$stmt->execute()) {
-                    throw new Exception('Error saving custom field: ' . $stmt->error);
-                }*/
-                
-                error_log("Saved custom field: field_id=$field_id, value=$value");
+                else if($action == 'edit')
+                {
+                    $sql3 = "UPDATE ticket_custom_fields SET value = '$value' WHERE ticket_id = $ticket_id AND custom_field_id = $field_id";
+                }
+                else if($action == 'delete')
+                {
+                    $sql3 = "DELETE FROM ticket_custom_fields WHERE ticket_id = $ticket_id AND custom_field_id = $field_id";
+                }
+                else
+                {
+                    error_log("Invalid action: $action");
+                    return false;
+                }
+                $result3 = sb_db_query($sql3);
             }
         } 
         else {
             error_log("No custom fields received");
+            return false;
         }
- 
-       // $ticketId = $db->insert('tickets', $data);
-       return $message = "{'suceess': true, 'msg':'Ticket created successfully'}";
-
+    }
+    else 
+    {
+        error_log("Ticket ID or custom fields are not provided");
+        return false;
+    }
 }
-
 function sb_update_ticket($inputs,$ticket_id =0)
 {
+    $ticket_id = sb_db_escape($ticket_id, true);
     $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
     $data = [
             'subject' => sb_db_escape($inputs['subject'][0]),
@@ -1144,7 +1243,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
             'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
-            'service_id' => sb_db_escape($inputs['service_id'][0],true),
+            //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => sb_db_escape($inputs['department_id'][0],true),
             'tags' => sb_db_escape($inputs['tags'][0]),
             'description' => sb_db_escape($inputs['description'][0]),
@@ -1152,38 +1251,55 @@ function sb_update_ticket($inputs,$ticket_id =0)
             
         ];
 
-        // $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['service_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
-        //echo 'INSERT into sb_tickets(subject,description,conversation_id,creation_time) '.$values;
-       sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',assigned_to ='".$data['assigned_to']."',priority_id = '".$data['priority_id']."',service_id='".$data['service_id']."',department_id= '".$data['department_id']."',tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
+    $customFields = array();
+    foreach($inputs['customField'][0] as $key => $value) {
+        $customFields[$key] = sb_db_escape($value);
+    }
 
-        // Update CCs
-        if (isset($data['cc'][0]) && $data['cc'][0] != '') {
-            /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
-            foreach ($_POST['cc'] as $userId) {
-                $db->insert('ticket_ccs', [
-                    'ticket_id' => $ticketId,
-                    'user_id' => $userId
-                ]);
-            }*/
-        }
+    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',assigned_to ='".$data['assigned_to']."',priority_id = '".$data['priority_id']."',department_id= '".$data['department_id']."',tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
 
-       // $ticketId = $db->insert('tickets', $data);
-       $tickets_id = sb_db_escape($ticket_id, true);
-        $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
-                p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
-                ts.name as status_name, ts.color as status_color
-        FROM sb_tickets t
-        LEFT JOIN contacts c ON t.contact_id = c.id
-        LEFT JOIN sb_users u ON t.assigned_to = u.id
-        LEFT JOIN priorities p ON t.priority_id = p.id
-        LEFT JOIN services s ON t.service_id = s.id
-        LEFT JOIN departments d ON t.department_id = d.id
-        LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
-        
-        return sb_db_get($query);
+    // Update CCs
+    if (isset($data['cc'][0]) && $data['cc'][0] != '') {
+        /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
+        foreach ($_POST['cc'] as $userId) {
+            $db->insert('ticket_ccs', [
+                'ticket_id' => $ticketId,
+                'user_id' => $userId
+            ]);
+        }*/
+    }
 
-        // $ticketId = $db->insert('tickets', $data);                                                                                                                               
-       //return $message = "{'suceess': true, 'msg':'Ticket updated successfully'}";
+    ///// Update ticket custom fields
+    sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
+
+    return sb_return_saved_ticket_row($ticket_id);
+    // $ticketId = $db->insert('tickets', $data);                                                                                                                               
+    //return $message = "{'suceess': true, 'msg':'Ticket updated successfully'}";
+}
+
+function sb_return_saved_ticket_row($ticket_id) {
+    $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+            p.name as priority_name, p.color as priority_color,
+            ts.name as status_name, ts.color as status_color
+    FROM sb_tickets t
+    LEFT JOIN contacts c ON t.contact_id = c.id
+    LEFT JOIN sb_users u ON t.assigned_to = u.id
+    LEFT JOIN priorities p ON t.priority_id = p.id
+    LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$ticket_id;
+
+    $result = sb_db_get($query);
+    $departments = sb_get_departments();
+    $departmentsArr = array();
+    foreach ($departments as $key => $value) {
+        $departmentsArr[$key] = $value['name'];
+    }
+
+    if ($result) {
+        $result['department'] = $departmentsArr[$result['department_id']];
+    return $result;
+    } else {
+        return false;
+    }
 
 }
 
@@ -1256,24 +1372,45 @@ function sb_add_custom_field($inputs)
     }
 }
 
+function sb_edit_ticket_custom_field($custom_field_id = 0)
+{
+    $custom_field_id = sb_db_escape($custom_field_id, true);
+    $query = 'SELECT * FROM custom_fields WHERE id = ' . $custom_field_id;
+    $result = sb_db_get($query);
+    if ($result) {
+        return $result;
+    } else {
+        return false;
+    }   
+}
+
 function sb_delete_ticket_custom_field($id)
 {
     $id = sb_db_escape($id, true);
     sb_db_query('DELETE FROM custom_fields WHERE id = ' . $id);
     return true;
 }
-function sb_get_tickets_custom_fields()
+function sb_get_tickets_custom_active_fields()
 {
     $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order`";
-    /*$result = $conn->query($sql);
-
-    $fields = array();
-    while($row = $result->fetch_assoc()) {
-        $fields[] = $row;
-    }*/
-
-
     return sb_db_get($query,false);
+}
+
+
+function sb_fetch_ticket_custom_fields_data($ticket_id = null)
+{
+    if ($ticket_id) {
+        $ticket_id = sb_db_escape($ticket_id, true);
+        $query = 'SELECT custom_field_id, value FROM ticket_custom_fields WHERE ticket_id = ' . $ticket_id;
+        $result = sb_db_get($query, false);
+        $data = [];
+        if (isset($result) && is_array($result)) {
+            foreach ($result as $row) {
+                $data[$row['custom_field_id']] = $row['value'];
+            }   
+            return $data;
+        }
+    }   
 }
 
 

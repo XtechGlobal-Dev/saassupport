@@ -225,16 +225,16 @@ function sb_ticket_edit_box() { ?>
                         <div id="contact_id" data-type="select" class="sb-input">
                             <span><?php sb_e('Customer') ?></span>
                             <select>
-                                <option value="" selected><?php sb_e('Select Customer') ?></option>
+                                <option value=""><?php sb_e('Select Customer') ?></option>
                                 <option value="1">ABC Traders</option>
-                                <option value="2" selected="selected">XYZ company</option>
+                                <option value="2">XYZ company</option>
                             </select>
                         </div>
 
                         <div id="assigned_to" data-type="select" class="sb-input">
                             <span><?php sb_e('Assigned To') ?></span>
                             <select>
-                                <option value="" selected><?php sb_e('Select Assign To') ?></option>
+                                <option value=""><?php sb_e('Select Assign To') ?></option>
                                 <option value="1" >System Admin</option>
                             </select>
                         </div>
@@ -242,10 +242,10 @@ function sb_ticket_edit_box() { ?>
                         <div id="priority_id" data-type="select" class="sb-input">
                             <span class="required-label"><?php sb_e('Priority') ?></span>
                             <select required>
-                                <option value="" selected><?php sb_e('Select Priority') ?></option>
+                                <option value=""><?php sb_e('Select Priority') ?></option>
                                 <option value="1" data-color="danger">Critical</option>
                                 <option value="2" data-color="danger">High</option>
-                                <option value="4" data-color="secondary" selected="selected">Low</option>
+                                <option value="4" data-color="secondary">Low</option>
                                 <option value="3" data-color="warning">Medium</option>
                             </select>
                         </div>
@@ -253,7 +253,7 @@ function sb_ticket_edit_box() { ?>
                         <div id="status_id" data-type="select" class="sb-input">
                             <span class="required-label"><?php sb_e('Status') ?></span>
                             <select required>
-                                <option value="" selected>Select Status</option>
+                                <option value="">Select Status</option>
                                 <option value="1">Open</option>
                                 <option value="2">In Progress</option>
                                 <option value="3">Hold</option>
@@ -298,7 +298,7 @@ function sb_ticket_edit_box() { ?>
                        <div id="cc" data-type="select" class="sb-input">
                             <span><?php sb_e('CC') ?></span>
                             <select>
-                                <option value="1" selected="selected">System Admin</option>
+                                <option value="1">System Admin</option>
                             </select>
                         </div>
 
@@ -311,7 +311,7 @@ function sb_ticket_edit_box() { ?>
                         <div id="tags" data-type="select" class="sb-input">
                             <span><?php sb_e('Tags') ?></span>
                             <select>
-                                <option value="" selected="selected">Select Tag</option>
+                                <option value="" >Select Tag</option>
                                 <?php
                                 for ($i = 0; $i < $count; $i++) {
                                     $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
@@ -358,15 +358,29 @@ function sb_ticket_edit_box() { ?>
         content: " *";
         color: red;
     }
+    #tickets-custom-fields .custom-fields-table {
+        color: #566069;
+        font-size: 14px;
+        margin: 10px 0 0 0;
+        text-align: center;
+    }
+    #tickets-custom-fields .custom-fields-table th,
+    #tickets-custom-fields .custom-fields-table td {
+        padding: 6px 12px; /* Increase horizontal padding */
+        text-align: center;
+    }
+
+    #tickets-custom-fields .sb-new-ticket-custom-field{
+        height: 30px;
+        line-height: 30px;
+        padding: 0 8px 0 25px;
+        margin-left: 13px;
+    }
+    .sb-table-tickets tr {line-height: 25px;}
     </style>
     <script>
         (function ($) {
-            $(document).ready(function () {
-               const quill = new Quill('#ticketdescription', {
-                    theme: 'snow',
-                    placeholder: 'Compose something...'
-                });
-            });
+            
         }(jQuery));
     </script>
 <?php } ?>
@@ -1162,7 +1176,7 @@ function sb_component_admin() {
                                 <thead>
                                     <tr>
                                         <th data-field="id">
-                                            <input type="checkbox" />
+                                            <!--input type="checkbox" /-->
                                             <?php sb_e('ID') ?>
                                         </th>
                                         <th data-field="subject">
@@ -1174,9 +1188,9 @@ function sb_component_admin() {
                                         <th data-field="department">
                                             <?php sb_e('Department') ?>
                                         </th>
-                                        <th data-field="service">
-                                            <?php sb_e('Service') ?>
-                                        </th>
+                                        <!--th data-field="service">
+                                            <?php //sb_e('Service') ?>
+                                        </th-->
                                         <th data-field="contact">
                                             <?php sb_e('Contact') ?>
                                         </th>
@@ -1881,14 +1895,13 @@ function ticket_settings($id = '', $class = 'sb-docs') {
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0">Custom Fields</h5>
                                         <a class="sb-btn sb-icon sb-new-ticket-custom-field">
                                             <i class="sb-icon-sms"></i> Add New Field
                                         </a>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped custom-fields-table">
                                                 <thead>
                                                     <tr>
                                                         <th>Title</th>
@@ -1901,9 +1914,9 @@ function ticket_settings($id = '', $class = 'sb-docs') {
                                                 </thead>
                                                 <tbody>';
                                                     foreach($customFields as $field) {
-                                                    $code .= '<tr>
+                                                    $code .= '<tr data-id="custom_field_row_'.$field["id"].'">
                                                         <td>'.$field["title"].'</td>
-                                                        <td>'.$field["type"].'</td>
+                                                        <td>'.strtoupper($field["type"]).'</td>
                                                         <td>'.($field["required"] ? "Yes" : "No") .'</td>
                                                         <td>'.($field["is_active"] ? "Yes" : "No") .'</td>
                                                         <td>'.($field["order"]) .'</td>
@@ -1936,7 +1949,7 @@ function ticket_settings($id = '', $class = 'sb-docs') {
                 <div class="sb-info"></div>
                 <div class="sb-top-bar">
                     <div>
-                        <h2>
+                        <h2 style="margin-bottom: 0;">
                             Create Custom Field
                         </h2>   
                     </div>
