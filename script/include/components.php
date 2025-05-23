@@ -704,6 +704,9 @@ function sb_component_admin() {
         echo '<style>' . $css . '</style>';
     }
     ?>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
             <div class="sb-header header_new">
@@ -720,43 +723,52 @@ function sb_component_admin() {
                     </div>
                     <nav>
                         <ul>
-                            <li class="active"><a href="#"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
-                            <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i> Inbox</a></li>
-                            <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i> Tickets</a></li>
-                            <li><a id="sb-users"><i class="fa-solid fa-users"></i> User</a></li>
-                            <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i> Chatbot</a></li>
-                            <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
-                            <li><a id="sb-reports"><i class="fa-solid fa-flag"></i> Reports</a></li>
-                            <li><a id="sb-settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
-                            <li><a href="#"><i class="fa-solid fa-circle-info"></i> Help & Support</a></li>
+                            <li class="sb-active"><a id="sb-dashboard"><i class="fa-solid fa-gauge"></i><span> Dashboard</span></a></li>
+                            <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i><span> Inbox</span></a></li>
+                            <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
+                            <li><a id="sb-users"><i class="fa-solid fa-users"></i><span> Customers</span></a></li>
+                            <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li>
+                            <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i><span> Articles</span></a></li>
+                            <li><a id="sb-reports"><i class="fa-solid fa-flag"></i><span> Reports</span></a></li>
+                            <li><a id="sb-settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
+                            <li><a href="#"><i class="fa-solid fa-circle-info"></i><span> Help & Support</span></a></li>
                         </ul>
                     </nav>
                     <div class="powered-by">
                         <p>POWERED BY</p>
                         <div class="powered-logo">
-                            <img src="assets/nexon-icon.png" alt="Nexon" class="powered-icon">
-                            <div class="powered-text">
-                                <span>NEXON</span>
-                                <span>HELPDESK</span>
-                            </div>
+                           <svg width="108" height="32" viewBox="0 0 108 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.9784 6.60156V17.3942L16.9277 24.9963V14.2037L23.9784 6.61469V6.60156Z" fill="url(#paint0_linear_55_2458)"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M39.981 5.959L39.1539 6.82556L37.749 6.35289L38.5762 5.48633L39.981 5.959ZM36.9087 6.91747L36.0815 7.78403L34.6766 7.31136L35.5038 6.4448L36.9087 6.91747ZM41.0314 8.65059L39.8891 9.8454L37.9459 9.20204L39.0882 8.00724L41.0314 8.65059ZM37.9459 9.20204L36.3441 10.8695L33.6394 9.9767L32.1951 11.4866L34.913 12.3926L36.3572 10.8826L38.7337 11.6704L21.9802 29.6975L16.9121 24.9971L31.5255 9.26769L33.6131 9.96357L35.215 8.29609L37.9328 9.20204H37.9459Z" fill="url(#paint1_linear_55_2458)"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.62849 26.2964L2.4294 25.4036L1.85169 24.0381L1.05078 24.9309L1.62849 26.2964ZM2.36375 23.1584L3.16467 22.2656L2.58696 20.9001L1.78605 21.7929L2.36375 23.1584ZM4.38573 27.1498L5.48863 25.9288L4.70085 24.0381L3.59795 25.2592L4.38573 27.1498ZM4.70085 24.0381L6.25015 22.3181L5.14726 19.6922L6.53901 18.1428L7.64191 20.795L6.25015 22.3444L7.20862 24.6552L23.9753 6.60181L18.9072 1.90137L4.29382 17.6308L5.14726 19.6659L3.59795 21.3859L4.70085 24.0381Z" fill="url(#paint2_linear_55_2458)"/>
+                                <path d="M50.382 8.46521V17.9473H49.2709L44.1039 10.5024H44.0113V17.9473H42.8631V8.46521H43.9742L49.1597 15.9286H49.2523V8.46521H50.382ZM52.6796 17.9473V8.46521H58.4022V9.48379H53.8278V12.6877H58.1059V13.7063H53.8278V16.9287H58.4763V17.9473H52.6796ZM61.0274 8.46521L63.4719 12.4099H63.546L65.9906 8.46521H67.3425L64.3609 13.2062L67.3425 17.9473H65.9906L63.546 14.0767H63.4719L61.0274 17.9473H59.6754L62.7312 13.2062L59.6754 8.46521H61.0274ZM76.6845 13.2062C76.6845 14.2063 76.504 15.0705 76.1428 15.799C75.7817 16.5274 75.2863 17.0892 74.6566 17.4843C74.027 17.8794 73.3078 18.0769 72.4991 18.0769C71.6904 18.0769 70.9712 17.8794 70.3416 17.4843C69.7119 17.0892 69.2165 16.5274 68.8554 15.799C68.4942 15.0705 68.3137 14.2063 68.3137 13.2062C68.3137 12.2062 68.4942 11.3419 68.8554 10.6135C69.2165 9.88505 69.7119 9.32329 70.3416 8.9282C70.9712 8.53312 71.6904 8.33557 72.4991 8.33557C73.3078 8.33557 74.027 8.53312 74.6566 8.9282C75.2863 9.32329 75.7817 9.88505 76.1428 10.6135C76.504 11.3419 76.6845 12.2062 76.6845 13.2062ZM75.5734 13.2062C75.5734 12.3852 75.436 11.6923 75.1613 11.1274C74.8897 10.5626 74.5208 10.1351 74.0548 9.84493C73.5918 9.55478 73.0732 9.40971 72.4991 9.40971C71.925 9.40971 71.4049 9.55478 70.9388 9.84493C70.4758 10.1351 70.107 10.5626 69.8323 11.1274C69.5607 11.6923 69.4248 12.3852 69.4248 13.2062C69.4248 14.0273 69.5607 14.7202 69.8323 15.2851C70.107 15.8499 70.4758 16.2774 70.9388 16.5676C71.4049 16.8577 71.925 17.0028 72.4991 17.0028C73.0732 17.0028 73.5918 16.8577 74.0548 16.5676C74.5208 16.2774 74.8897 15.8499 75.1613 15.2851C75.436 14.7202 75.5734 14.0273 75.5734 13.2062ZM86.1342 8.46521V17.9473H85.023L79.856 10.5024H79.7634V17.9473H78.6152V8.46521H79.7264L84.9119 15.9286H85.0045V8.46521H86.1342Z" fill="#111111"/>
+                                <path d="M65.8856 23.0769V19.2955H66.3435V20.9794H68.3598V19.2955H68.8177V23.0769H68.3598V21.3856H66.3435V23.0769H65.8856ZM69.7344 23.0769V19.2955H72.0165V19.7017H70.1923V20.9794H71.8983V21.3856H70.1923V22.6707H72.046V23.0769H69.7344ZM72.8418 23.0769V19.2955H73.2997V22.6707H75.0575V23.0769H72.8418ZM75.7665 23.0769V19.2955H77.0442C77.3408 19.2955 77.5833 19.3491 77.7716 19.4562C77.9612 19.562 78.1015 19.7054 78.1926 19.8864C78.2837 20.0673 78.3292 20.2692 78.3292 20.492C78.3292 20.7148 78.2837 20.9173 78.1926 21.0994C78.1027 21.2816 77.9637 21.4269 77.7753 21.5352C77.587 21.6423 77.3457 21.6958 77.0515 21.6958H76.1357V21.2896H77.0368C77.2399 21.2896 77.403 21.2545 77.5261 21.1844C77.6492 21.1142 77.7384 21.0194 77.7938 20.9C77.8504 20.7794 77.8787 20.6434 77.8787 20.492C77.8787 20.3406 77.8504 20.2052 77.7938 20.0858C77.7384 19.9664 77.6485 19.8728 77.5242 19.8051C77.3999 19.7362 77.235 19.7017 77.0294 19.7017H76.2244V23.0769H75.7665ZM80.2338 23.0769H79.0669V19.2955H80.2855C80.6523 19.2955 80.9662 19.3712 81.2271 19.5226C81.4881 19.6728 81.6881 19.8888 81.8272 20.1707C81.9663 20.4514 82.0358 20.7874 82.0358 21.1788C82.0358 21.5727 81.9657 21.9118 81.8253 22.1962C81.685 22.4793 81.4807 22.6972 81.2123 22.8498C80.944 23.0012 80.6178 23.0769 80.2338 23.0769ZM79.5248 22.6707H80.2042C80.5169 22.6707 80.776 22.6104 80.9815 22.4898C81.1871 22.3691 81.3404 22.1974 81.4413 21.9746C81.5422 21.7518 81.5927 21.4866 81.5927 21.1788C81.5927 20.8736 81.5428 20.6108 81.4431 20.3904C81.3434 20.1689 81.1945 19.999 80.9963 19.8808C80.7981 19.7614 80.5513 19.7017 80.2559 19.7017H79.5248V22.6707ZM82.8039 23.0769V19.2955H85.086V19.7017H83.2618V20.9794H84.9679V21.3856H83.2618V22.6707H85.1156V23.0769H82.8039ZM87.9793 20.2409C87.9571 20.0538 87.8673 19.9085 87.7097 19.8051C87.5522 19.7017 87.3589 19.65 87.1299 19.65C86.9625 19.65 86.8161 19.6771 86.6905 19.7313C86.5662 19.7854 86.4689 19.8599 86.3988 19.9547C86.3299 20.0495 86.2954 20.1572 86.2954 20.2778C86.2954 20.3787 86.3194 20.4655 86.3674 20.5381C86.4166 20.6095 86.4794 20.6692 86.5557 20.7172C86.632 20.764 86.7121 20.8028 86.7958 20.8336C86.8795 20.8631 86.9564 20.8871 87.0266 20.9056L87.4106 21.009C87.5091 21.0348 87.6186 21.0705 87.7392 21.1161C87.8611 21.1616 87.9774 21.2238 88.0882 21.3025C88.2002 21.3801 88.2925 21.4798 88.3652 21.6017C88.4378 21.7235 88.4741 21.8731 88.4741 22.0503C88.4741 22.2547 88.4206 22.4393 88.3135 22.6042C88.2076 22.7692 88.0525 22.9003 87.8482 22.9975C87.6451 23.0948 87.3983 23.1434 87.1078 23.1434C86.837 23.1434 86.6025 23.0997 86.4043 23.0123C86.2074 22.9249 86.0523 22.803 85.939 22.6467C85.827 22.4904 85.7636 22.3088 85.7489 22.102H86.2215C86.2338 22.2448 86.2818 22.363 86.3656 22.4565C86.4505 22.5488 86.5576 22.6178 86.6868 22.6633C86.8173 22.7076 86.9576 22.7298 87.1078 22.7298C87.2826 22.7298 87.4395 22.7015 87.5786 22.6449C87.7177 22.587 87.8279 22.507 87.9091 22.4048C87.9904 22.3014 88.031 22.1808 88.031 22.0429C88.031 21.9174 87.9959 21.8152 87.9257 21.7364C87.8556 21.6577 87.7633 21.5937 87.6488 21.5444C87.5343 21.4952 87.4106 21.4521 87.2777 21.4152L86.8124 21.2822C86.517 21.1973 86.2831 21.0761 86.1108 20.9185C85.9384 20.7609 85.8523 20.5548 85.8523 20.3C85.8523 20.0882 85.9095 19.9036 86.024 19.7461C86.1397 19.5873 86.2948 19.4642 86.4893 19.3768C86.685 19.2882 86.9035 19.2438 87.1447 19.2438C87.3884 19.2438 87.6051 19.2875 87.7946 19.3749C87.9842 19.4611 88.1344 19.5793 88.2452 19.7294C88.3572 19.8796 88.4163 20.0501 88.4224 20.2409H87.9793ZM89.227 23.0769V19.2955H89.6849V21.1715H89.7292L91.4278 19.2955H92.0261L90.4382 21.0016L92.0261 23.0769H91.4721L90.1575 21.3192L89.6849 21.8509V23.0769H89.227Z" fill="#121212"/>
+                                <defs>
+                                <linearGradient id="paint0_linear_55_2458" x1="26.753" y1="21.7536" x2="11.8257" y2="7.88237" gradientUnits="userSpaceOnUse">
+                                <stop offset="0.3" stop-color="#08CCF7"/>
+                                <stop offset="0.4" stop-color="#0CA5F8"/>
+                                <stop offset="0.7" stop-color="#1653FD"/>
+                                </linearGradient>
+                                <linearGradient id="paint1_linear_55_2458" x1="40.3163" y1="0.99443" x2="13.3333" y2="38.8232" gradientUnits="userSpaceOnUse">
+                                <stop offset="0.4" stop-color="#08C8F7"/>
+                                <stop offset="0.5" stop-color="#09BCF7"/>
+                                <stop offset="0.6" stop-color="#0BA9F8"/>
+                                <stop offset="0.7" stop-color="#136CFB"/>
+                                <stop offset="0.8" stop-color="#1653FD"/>
+                                </linearGradient>
+                                <linearGradient id="paint2_linear_55_2458" x1="35.4801" y1="-4.9724" x2="0.507163" y2="23.8571" gradientUnits="userSpaceOnUse">
+                                <stop offset="0.4" stop-color="#08C8F7"/>
+                                <stop offset="0.5" stop-color="#09BCF7"/>
+                                <stop offset="0.6" stop-color="#0BA9F8"/>
+                                <stop offset="0.7" stop-color="#136CFB"/>
+                                <stop offset="0.8" stop-color="#1653FD"/>
+                                </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
                     </div>
                 </aside>
                 <!-- <div class="sb-admin-nav">
-                    <div class="logo_sec">
-                        <img width="40" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" />
-                        <div>
-                            <h2>Nexon Helpdesk</h2>
-                            <p>Agent Admin</p>
-                        </div>
-                    </div>
-                    <div>
-                        <a id="sb-dashboard" style="display: flex;justify-content: center;align-items: center;">
-                           <svg style="height: 28px;width: 28px;color: #028be5;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm64 64l0 256 160 0 0-256L64 160zm384 0l-160 0 0 256 160 0 0-256z"/></svg>
-                            <span><?php sb_e('Dashboard') ?></span>
-                            dashboard  
-                        </a>
-
                         <a id="sb-conversations" class="sb-active">
                             <span>
                                 <?php sb_e('Conversations') ?>
@@ -784,7 +796,6 @@ function sb_component_admin() {
                             echo '<a id="sb-settings"><span>' . sb_('Settings') . '</span></a>';
                         }
                         ?>
-                    </div>
                 </div> -->
                 <!-- <div class="sb-admin-nav-right sb-menu-mobile">
                     <i class="sb-icon-menu"></i>
@@ -836,26 +847,862 @@ function sb_component_admin() {
             <main>
 
             <!-- sahil start -->
-              <!-- <div class="sb-active sb-area-dash">
-                        <div class="sb-title">
-                        <h1><?php sb_e('Dashboard') ?></h1>
-                        </div>
-                        <div class="sb-content">
-                <p>Welcome to the admin dashboard!</p>
-                    <div class="sb-stats">
-                    <div class="sb-widget">
-                    <h3>New Tickets</h3>
-                    <p>5</p>
-                    </div>
-                    <div class="sb-widget">
-                    <h3>Active Users</h3>
-                    <p>12</p>
-                    </div>
-                    </div>
-                    </div>
-                </div> -->
-            <!-- sahil end -->
+              <div class="sb-active sb-dashboard">
+                    <main>
+                        <header>
+                                <div class="header-left">
+                                    <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                        <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                        <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                    </svg>
+                                    <h2>Dashboard</h2>
+                                </div>
+                                <div class="header-right">
+                                    <div class="notification">
+                                        <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                        <span class="badge">6</span>
+                                    </div>
+                                    <div class="notification">
+                                        <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                        <span class="badge">4</span>
+                                    </div>
+                                    <div class="user-profile">
+                                        <img src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                        <div class="user-info">
+                                            <p>Peter Parker</p>
+                                            <span>Super Admin</span>
+                                        </div>
+                                    </div>
+                                    <div class="logout"  data-toggle="tooltip" data-placement="right" title="Log Out">
+                                        <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                    </div>
+                                </div>
+                        </header>
+                        <div class="container new_container">
+                            <div class="row">
+                                <div class="col-md-8 p-0">
+                                    <section class="dashboard-metrics">
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #487fff;">
+                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>New Users</h3>
+                                                            <p>15,000</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="new_users_chart">
+                                                            <canvas class="mt-0" id="new_users_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const new_usersCtx = document.getElementById('new_users_chart').getContext('2d');
+                                                            const gradient1 = new_usersCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient1.addColorStop(0, 'rgba(72, 127, 255, 0.2)');
+                                                            gradient1.addColorStop(1, 'rgba(72, 127, 255, 0)');
+                                                            new Chart(new_usersCtx, {
+                                                            type: 'line',
+                                                            data: {
+                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                datasets: [{
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#487FFF',
+                                                                backgroundColor: gradient1,
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointRadius: 0,
+                                                                pointHoverRadius: 0,
+                                                                borderWidth: 2
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: { enabled: false }
+                                                                },
+                                                                scales: {
+                                                                x: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                },
+                                                                y: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                }}
+                                                            }});
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #45b369;">
+                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Active Users</h3>
+                                                            <p>8,000</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="active_users_chart">
+                                                            <canvas class="mt-0" id="active_users_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
+                                                            const gradient2 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient2.addColorStop(0, 'rgba(72, 255, 112, 0.2)');
+                                                            gradient2.addColorStop(1, 'rgba(72, 255, 112, 0)');
+                                                            new Chart(active_usersCtx, {
+                                                            type: 'line',
+                                                            data: {
+                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                datasets: [{
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#45B369',
+                                                                backgroundColor:gradient2,
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointRadius: 0,
+                                                                pointHoverRadius: 0,
+                                                                borderWidth: 2
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: { enabled: false }
+                                                                },
+                                                                scales: {
+                                                                x: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                },
+                                                                y: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                }}
+                                                            }});
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #f4941e;">
+                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Tickets Created</h3>
+                                                            <p>3,200</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_created_chart">
+                                                            <canvas class="mt-0" id="ticket_created_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
+                                                            const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
+                                                            gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
+                                                            new Chart(ticket_createdCtx, {
+                                                            type: 'line',
+                                                            data: {
+                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                datasets: [{
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#f4941e',
+                                                                backgroundColor: gradient3,
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointRadius: 0,
+                                                                pointHoverRadius: 0,
+                                                                borderWidth: 2
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: { enabled: false }
+                                                                },
+                                                                scales: {
+                                                                x: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                },
+                                                                y: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                }}
+                                                            }});
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Increase by <span>18%</span> this week</div>
+                                            </div>
+                                    </section>
+                                    <section class="dashboard-metrics">
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;">
+                                                        <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Ticket Resolved</h3>
+                                                            <p>2,700</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
+                                                            const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient4.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
+                                                            gradient4.addColorStop(1, 'rgba(231, 110, 241, 0)');
+                                                            new Chart(ticket_resolvedCtx, {
+                                                            type: 'line',
+                                                            data: {
+                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                datasets: [{
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#8252E9',
+                                                                backgroundColor: gradient4,
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointRadius: 0,
+                                                                pointHoverRadius: 0,
+                                                                borderWidth: 2
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: { enabled: false }
+                                                                },
+                                                                scales: {
+                                                                x: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                },
+                                                                y: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                }}
+                                                            }});
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
+                                                            <i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3> Avg. Response Time</h3>
+                                                            <p>4m 30s</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="avg_response_chart">
+                                                            <canvas class="mt-0" id="avg_response_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const avg_responseCtx = document.getElementById('avg_response_chart').getContext('2d');
+                                                            const gradient5 = avg_responseCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient5.addColorStop(0, 'rgba(220, 61, 235, 0.2)');
+                                                            gradient5.addColorStop(1, 'rgba(220, 61, 235, 0)');
+                                                            new Chart(avg_responseCtx, {
+                                                            type: 'line',
+                                                            data: {
+                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                datasets: [{
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#DE3ACE',
+                                                                backgroundColor: gradient5,
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointRadius: 0,
+                                                                pointHoverRadius: 0,
+                                                                borderWidth: 2
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: { enabled: false }
+                                                                },
+                                                                scales: {
+                                                                x: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                },
+                                                                y: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                }}
+                                                            }});
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Improved by <span>12%</span> this week</div>
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #00B8F2;">
+                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Agent Satisfaction</h3>
+                                                            <p>92%</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="agent_chart">
+                                                            <canvas class="mt-0" id="agent_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const agentCtx = document.getElementById('agent_chart').getContext('2d');
+                                                            const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
+                                                            gradient6.addColorStop(1, 'rgba(61, 186, 235, 0)');
+                                                            new Chart(agentCtx, {
+                                                            type: 'line',
+                                                            data: {
+                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                datasets: [{
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#00B8F2',
+                                                                backgroundColor: gradient6,
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointRadius: 0,
+                                                                pointHoverRadius: 0,
+                                                                borderWidth: 2
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                responsive: true,
+                                                                plugins: {
+                                                                legend: { display: false },
+                                                                tooltip: { enabled: false }
+                                                                },
+                                                                scales: {
+                                                                x: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                },
+                                                                y: {
+                                                                    grid: { display: false },
+                                                                    ticks: { display: false },
+                                                                    border: { display: false }
+                                                                }}
+                                                            }});
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Consistent this week</div>
+                                            </div>
+                                    </section>
+                                    <section class="main-charts">
+                                        <div class="card p-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <h6 class="head mb-1">Ticket Support Board</h6>
+                                                    <p class="sub_head">Monthly overview of support ticket activity</p>
+                                                </div>
+                                                <select class="form-select form-select-sm w-auto">
+                                                <option>Yearly</option>
+                                                <option>Monthly</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-center gap-3 mb-3">
+                                                     <div class="button_ext">
+                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <div>
+                                                            <div><strong>Created</strong></div>
+                                                            <div>1,200</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button_ext">
+                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <div>
+                                                            <div><strong>Resolved</strong></div>
+                                                            <div>9,50</div>
+                                                        </div>
+                                                    </div>
+                                                     <div class="button_ext">
+                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <div>
+                                                            <div><strong>Pending</strong></div>
+                                                            <div>1,500</div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div>
+                                        </div>
+                                    </section>
+                                </div>
 
+                                <div class="col-md-4 p-0">
+                                    <section class="main-charts mb-0" style="padding: 15px 25px 0 0;">
+                                        <div class="card p-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <h6 class="head mb-1">Ticket Activity</h6>
+                                                    <p class="sub_head">Week support summary</p>
+                                                </div>
+                                                <div class="d-flex flex-column align-items-end">
+                                                    <h6 class="head mb-1">120 Tickets</h6>
+                                                    <p class="green_badge">+25 new</p>
+                                                </div>
+                                            </div>
+                                            <div class="ticket_activity_chart">
+                                                <canvas id="ticket_activity_chart"></canvas>
+                                            </div>
+                                            <script>
+                                                const ticket_activityCtx = document.getElementById('ticket_activity_chart').getContext('2d');
+                                                new Chart(ticket_activityCtx, {
+                                                    type: 'line',
+                                                    data: {
+                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                    datasets: [{
+                                                        label: 'Weekly Activity',
+                                                        data: [0, 5, 12, 3, 5, 7],
+                                                        borderColor: '#487FFF',
+                                                        backgroundColor: '#E4ECFF',
+                                                        pointRadius: 4,
+                                                        // borderWidth: 0, // hides the line
+                                                        // pointRadius: 0, // hides the dots
+                                                        fill: true,
+                                                        tension: 0.4,
+                                                        pointBackgroundColor: '#487FFF'
+                                                    }]
+                                                    },
+                                                    options: {
+                                                    responsive: true,
+                                                    plugins: {
+                                                        legend: { display: false }
+                                                    },
+                                                    scales: {
+                                                        x: {
+                                                            grid: {
+                                                                display: false
+                                                            }
+                                                        },
+                                                        y: {
+                                                            beginAtZero: true,
+                                                            grid: {
+                                                                display: false
+                                                            }
+                                                        }
+                                                    }
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </section>
+                                    <section class="main-charts" style="padding: 15px 25px 0 0;">
+                                        <div class="card p-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6 class="fw-bold">Campaigns</h6>
+                                                <select class="form-select form-select-sm w-auto">
+                                                <option>Yearly</option>
+                                                <option>Monthly</option>
+                                                </select>
+                                            </div>
+                                            <div class="progress-item chat">
+                                                <div class="left">
+                                                   <i class="fa-brands fa-rocketchat"></i>
+                                                    <div class="label">Live Chat</div>
+                                                </div>
+                                                <div class="right">
+                                                    <div class="progress-bar">
+                                                    <div class="progress-fill" style="width: 80%;"></div>
+                                                    </div>
+                                                    <div class="percentage">80%</div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-item email">
+                                                <div class="left">
+                                                    <i class="fa-solid fa-envelope"></i>
+                                                    <div class="label">Email Support</div>
+                                                </div>
+                                                <div class="right">
+                                                    <div class="progress-bar">
+                                                    <div class="progress-fill" style="width: 60%;"></div>
+                                                    </div>
+                                                    <div class="percentage">60%</div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-item fb">
+                                                <div class="left">
+                                                    <i class="fa-brands fa-square-facebook"></i>
+                                                    <div class="label">Facebook</div>
+                                                </div>
+                                                <div class="right">
+                                                    <div class="progress-bar">
+                                                    <div class="progress-fill" style="width: 40%;"></div>
+                                                    </div>
+                                                    <div class="percentage">40%</div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-item wa">
+                                                <div class="left">
+                                                    <i class="fa-brands fa-whatsapp"></i>
+                                                    <div class="label">WhatsApp</div>
+                                                </div>
+                                                <div class="right">
+                                                    <div class="progress-bar">
+                                                    <div class="progress-fill" style="width: 70%;"></div>
+                                                    </div>
+                                                    <div class="percentage">70%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section class="main-charts" style="padding: 15px 25px 0 0;">
+                                        <div class="card p-3 mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6 class="fw-bold">Customer Overview</h6>
+                                                <select class="form-select form-select-sm w-auto">
+                                                <option>Yearly</option>
+                                                <!-- <option>Monthly</option> -->
+                                                </select>
+                                            </div>
+                                            <!-- Donut Chart Block -->
+                                            <div class="overview_chart">
+                                                <ul class="legend" style="list-style: none; padding: 0;">
+                                                    <li><span class="total"></span> Total: 500</li>
+                                                    <li><span class="new"></span> New: 500</li>
+                                                    <li><span class="active"></span> Active: 1500</li>
+                                                </ul>
+                                                <div id="chart-container">
+                                                    <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
+                                                    <div class="chart-center">
+                                                        <p class="mb-1"><strong>Customer Report</strong></p>
+                                                        <pre>1500</pre>
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                        const ctx = document.getElementById('donutChart').getContext('2d');
+                                                        new Chart(ctx, {
+                                                            type: 'doughnut',
+                                                            data: {
+                                                                labels: ['Total', 'New', 'Active'],
+                                                                datasets: [{
+                                                                    data: [500, 500, 1500],
+                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
+                                                                    borderWidth: 0
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                cutout: '70%',
+                                                                rotation: -90,
+                                                                circumference: 180,
+                                                                plugins: {
+                                                                    legend: { display: false },
+                                                                    tooltip: { enabled: true }
+                                                                }
+                                                            }
+                                                        });
+                                                </script> 
+                                              </div>
+                                            </div>
+                                    </section>
+                                </div>
+                            </div>               
+                            <div class="row">
+                                <div class="col-md-5 p-0">
+                                    <div class="pl-3 pr-3 pt-0 main-charts">
+                                        <div class="bg-white d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="head mb-1">Recent Messages</h6>
+                                            </div>
+                                            <button class="reply-btn">+ New Message</button>
+                                        </div>
+                                        <div class="seprator"></div>
+                                        <div class="recent card p-3">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex g-3 mb-6">
+                                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Chandara" class="avatar" />
+                                                <div>
+                                                    <div class="head2 mb-2">Chandara Kiev</div>
+                                                    <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
+                                                    <small class="text-muted">5m ago</small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <button class="reply-btn">Reply</button>
+                                                </div>
+                                                </li>
+                                                <li class="d-flex g-3 mb-6">
+                                                <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Samuel" class="avatar" />
+                                                <div>
+                                                    <div class="head2 mb-2">Samuel Queueee</div>
+                                                    <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
+                                                    <small class="text-muted">41m ago</small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <button class="reply-btn">Reply</button>
+                                                </div>
+                                                </li>
+                                                <li class="d-flex g-3 mb-6">
+                                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laurenz" class="avatar" />
+                                                <div>
+                                                    <div class="head2 mb-2">Laurenz Jumowa</div>
+                                                    <div class="sub_head2 mb-3">Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum....</div>
+                                                    <small class="text-muted">2h ago</small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <button class="reply-btn">Reply</button>
+                                                </div>
+                                                </li>
+                                                <li class="d-flex g-3">
+                                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Chandara" class="avatar" />
+                                                <div>
+                                                    <div class="head2 mb-2">Chandara Kiev</div>
+                                                    <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
+                                                    <small class="text-muted">5m ago</small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <button class="reply-btn">Reply</button>
+                                                </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="div"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-0">
+                                    <div class="pl-3 pr-3 pt-0 main-charts">
+                                        <div class="p-3 card">
+                                            <div class="mb-5 d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <h6 class="head mb-1">Chat Volume</h6>
+                                                    <p class="sub_head">Weekly Report</p>
+                                                </div>
+                                            </div>
+                                            <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-0">
+                                    <div class="pt-0 main-charts" style="padding: 0 25px 0 0 !important;">
+                                        <div class="p-3 card">
+                                            <div class="mb-3 d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="head mb-1">Top Agents</h6>
+                                                    <p class="sub_head">Weekly Report</p>
+                                                </div>
+                                            </div>
+                                            <div class="agents">
+                                                <li class="li d-flex align-items-center mb-2 pr-2">
+                                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="small-avatar" />
+                                                    <div class="head2 flex-grow-1">John Smith</div>
+                                                    <div class="sub_head2">34 Chats</div>
+                                                </li>
+                                                <li class="li d-flex align-items-center mb-2 pr-2">
+                                                   <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
+                                                    <div class="head2 flex-grow-1">John Smith</div>
+                                                    <div class="sub_head2">25 Chats</div>
+                                                </li>
+                                                <li class="li d-flex align-items-center mb-2 pr-2">
+                                                   <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
+                                                    <div class="head2 flex-grow-1">John Smith</div>
+                                                    <div class="sub_head2">15 Chats</div>
+                                                </li>
+                                                 <li class="li d-flex align-items-center mb-2 pr-2">
+                                                   <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
+                                                    <div class="head2 flex-grow-1">John Smith</div>
+                                                    <div class="sub_head2">15 Chats</div>
+                                                </li>
+                                                 <li class="li d-flex align-items-center mb-2 pr-2">
+                                                   <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
+                                                    <div class="head2 flex-grow-1">John Smith</div>
+                                                    <div class="sub_head2">15 Chats</div>
+                                                </li>
+                                                <li class="li d-flex align-items-center mb-2 pr-2">
+                                                   <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
+                                                    <div class="head2 flex-grow-1">John Smith</div>
+                                                    <div class="sub_head2">11 Chats</div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-0">
+                                    <div class="pl-3 pr-3 pt-0 main-charts tables">
+                                        <div class="bg-white d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="head mb-1">All Tickets</h6>
+                                            </div>
+                                            <p class="label_blue">View All</p>
+                                        </div>
+                                        <div class="seprator"></div>
+                                        <div class="new_table">
+                                            <div class="sb-scroll-area">
+                                                <table class="sb-table sb_table_new sb-table-tickets">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="title">
+                                                                Ticket Title
+                                                            </th>
+                                                            <th data-field="assigned-to">
+                                                                Assigned To
+                                                            </th>
+                                                            <th data-field="due-date">
+                                                                Due Date   
+                                                            </th>
+                                                            <th data-field="status">
+                                                                <?php sb_e('Status') ?> 
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-0">
+                                    <div class="pl-3 pr-3 pt-0 main-charts tables" style="padding: 0 25px 0 0 !important;">
+                                        <div class="bg-white d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="head mb-1">Ticket Support</h6>
+                                            </div>
+                                            <p class="label_blue">View All</p>
+                                        </div>
+                                        <div class="seprator"></div>
+                                        <div class="new_table">
+                                            <div class="sb-scroll-area">
+                                                <table class="sb-table sb_table_new sb-table-tickets">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="id">
+                                                                Ticket ID
+                                                            </th>
+                                                            <th data-field="subject">
+                                                                Date
+                                                            </th>
+                                                            <th data-field="status">
+                                                                <?php sb_e('Status') ?> 
+                                                            </th>
+                                                            <th data-field="priority">
+                                                                <?php sb_e('Priority') ?>   
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">TCKT-59861244</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">TCKT-59861244</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">TCKT-59861244</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">TCKT-59861244</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
+                                                        </tr>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">TCKT-59861244</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-40">
+                        </div>
+                    </main>
+                </div>
+            <!-- sahil end -->
+                
                 <div class="sb-active sb-area-conversations">
                     <div class="sb-board">
                         <div class="sb-admin-list<?php echo sb_get_multi_setting('departments-settings', 'departments-show-list') ? ' sb-departments-show' : '' ?>">

@@ -76,8 +76,9 @@ require('include/components.php');
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-   
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+   <!-- new link boot -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
    <?php
     if ($connection_success && (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')))) {
         echo '<link rel="stylesheet" href="' . $sb_url . 'css/rtl-admin.css?v=' . SB_VERSION . '" />';
