@@ -223,20 +223,17 @@ function sb_ticket_edit_box() { ?>
                         </div>
 
                         <div id="contact_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Customer') ?></span>
-                            <select>
-                                <option value=""><?php sb_e('Select Customer') ?></option>
-                                <option value="1">ABC Traders</option>
-                                <option value="2">XYZ company</option>
-                            </select>
+                            <span class="left-sec"><?php sb_e('Customer') ?></span>
+                            <div class="right-sec">
+                                <select id="select-customer" style="width:100%;"></select>
+                            </div>
                         </div>
 
                         <div id="assigned_to" data-type="select" class="sb-input">
-                            <span><?php sb_e('Assigned To') ?></span>
-                            <select>
-                                <option value=""><?php sb_e('Select Assign To') ?></option>
-                                <option value="1" >System Admin</option>
-                            </select>
+                            <span class="left-sec"><?php sb_e('Assigned To') ?></span>
+                            <div class="right-sec">
+                                <select id="select-user" style="width:100%;"></select>
+                            </div>
                         </div>
 
                         <div id="priority_id" data-type="select" class="sb-input">
@@ -323,7 +320,7 @@ function sb_ticket_edit_box() { ?>
                         <?php } ?>
                         
 
-                        <div id="attachments" data-type="file" class="sb-input">
+                        <div data-type="file" class="sb-input">
                             <span><?php sb_e('Attachments') ?></span>
                             <input type="file" name="attachments[]" multiple />
                             <div id="file-preview"></div>
@@ -341,6 +338,27 @@ function sb_ticket_edit_box() { ?>
                 <input id="conversation_id" type="hidden" name="conversation_id" />
             </div>
             <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
+            <!-- File Attachments Section -->
+            <div class="form-group mb-3">
+                <label for="attachments">Attachments</label>
+                <div class="custom-file">
+                    <input type="file" class="form-control" id="ticket-attachments" multiple>
+                    <small class="form-text text-muted">You can select multiple files. Maximum file size: 10MB</small>
+                </div>
+                
+                <!-- Upload Progress -->
+                <div class="progress mt-2 d-none" id="upload-progress-container">
+                    <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                
+                <!-- File Preview Container -->
+                <div class="mt-3" id="file-preview-container">
+                    <div class="row" id="file-preview-list"></div>
+                </div>
+                
+                <!-- Hidden input to store uploaded file data -->
+                <input type="hidden" id="uploaded-files" name="uploaded_files" value="">
+            </div>
         </div>
     </div>
     <style>
@@ -377,11 +395,322 @@ function sb_ticket_edit_box() { ?>
         margin-left: 13px;
     }
     .sb-table-tickets tr {line-height: 25px;}
+    span.left-sec {width: 15%;}
+    div.right-sec {width: 84%;padding: 0;}
     </style>
     <script>
-        (function ($) {
+        $('#select-customer').select2({
+            placeholder: 'Type and search...',
+            ajax: {
+            url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
+            method: 'POST',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                    return {
+                        function: 'ajax_calls',
+                        'calls[0][function]': 'search-get-users',
+                        'login-cookie': SBF.loginCookie(),
+                        'q': params.term,   // ✅ Pass search term
+                        'type': 'lead'
+                    };
+                },
+                processResults: function (response) {
+                //response = JSON.parse(response);
+                if (response[0][0] == 'success') {
+                    const users = response[0][1];
+                    console.log("Processed users:", response[0][1]);
+                     return {
+                        results: users.map(user => ({
+                        id: user.id,
+                        text: user.first_name + ' ' + user.last_name
+                        }))
+                    };
+                }
+            },
+            cache: true
+            },
+            minimumInputLength: 1
+        });
+        
+        $('#select-user').select2({
+            placeholder: 'Type and search...',
+            ajax: {
+            url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
+            method: 'POST',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                    return {
+                        function: 'ajax_calls',
+                        'calls[0][function]': 'search-get-users',
+                        'login-cookie': SBF.loginCookie(),
+                        'q': params.term,   // ✅ Pass search term
+                        'type': 'user'
+                    };
+                },
+                processResults: function (response) {
+                //response = JSON.parse(response);
+                if (response[0][0] == 'success') {
+                    const users = response[0][1];
+                    console.log("Processed users:", response[0][1]);
+                     return {
+                        results: users.map(user => ({
+                        id: user.id,
+                        text: user.first_name + ' ' + user.last_name
+                        }))
+                    };
+                }
+            },
+            cache: true
+            },
+            minimumInputLength: 1
+        });
+    </script>
+    <!-- Include Bootstrap JS and dependencies -->
+    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- File Upload Handling -->
+    <script>
+        jQuery(document).ready(function($) {
+       
+        // Array to store uploaded files
+        let uploadedFiles = [];
+        
+        // File upload handling
+        document.getElementById('ticket-attachments').addEventListener('change', function(event) {
+            const files = event.target.files;
+            if (files.length === 0) return;
             
-        }(jQuery));
+            // Create FormData object
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files[]', files[i]);
+            }
+
+            formData.append('function', 'ajax_calls');
+            formData.append('calls[0][function]', 'upload-ticket-attachments');
+            formData.append('login-cookie', SBF.loginCookie());
+            formData.append('ticket_id', 1); // Replace with actual ticket ID
+
+
+            console.log('Files to upload:', files);
+            
+            // Show progress container
+            const progressContainer = document.getElementById('upload-progress-container');
+            const progressBar = document.getElementById('upload-progress');
+            progressContainer.classList.remove('d-none');
+            progressBar.style.width = '0%';
+            progressBar.setAttribute('aria-valuenow', 0);
+            progressBar.textContent = '0%';
+            
+            //Create and configure XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+            
+            // Track upload progress
+            xhr.upload.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    const percentComplete = Math.round((e.loaded / e.total) * 100);
+                    progressBar.style.width = percentComplete + '%';
+                    progressBar.setAttribute('aria-valuenow', percentComplete);
+                    progressBar.textContent = percentComplete + '%';
+                }
+            });
+            
+            // Handle response
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Add uploaded files to the array
+                        uploadedFiles = uploadedFiles.concat(response.files);
+                        
+                        // Update hidden input with file data
+                        document.getElementById('uploaded-files').value = JSON.stringify(uploadedFiles);
+                        
+                        // Display file previews
+                        displayFilePreviews(response.files);
+                        
+                        // Reset file input
+                        document.getElementById('attachments').value = '';
+                    } else {
+                        alert('Error: ' + response.error);
+                    }
+                } else {
+                    alert('Error uploading files. Please try again.');
+                }
+                
+                // Hide progress container after a delay
+                setTimeout(() => {
+                    progressContainer.classList.add('d-none');
+                }, 1000);
+            };
+            
+            // Handle errors
+            xhr.onerror = function() {
+                alert('Error uploading files. Please try again.');
+                progressContainer.classList.add('d-none');
+            };
+            
+            //Send the request
+            xhr.send(formData);
+
+
+        //     const formData = new FormData();
+        //     const files = document.getElementById('attachments').files;
+
+        //     Append selected files to FormData
+        //     for (let i = 0; i < files.length; i++) {
+        //        formData.append('attachments[]', files[i]);
+        //    }
+
+        //     Show progress bar container (if it's hidden)
+        //     progressContainer.classList.remove('d-none');
+
+            
+        //     // Perform Ajax request
+        //     $.ajax({
+        //         url: 'http://localhost/saassupport/script/include/ajax.php',
+        //         type: 'POST',
+        //         data: formData,
+        //         contentType: false,  // Important for FormData
+        //         processData: false,  // Important for FormData
+        //         xhr: function () {
+        //             let xhr = new window.XMLHttpRequest();
+        //             xhr.upload.addEventListener('progress', function (e) {
+        //                 if (e.lengthComputable) {
+        //                     const percentComplete = Math.round((e.loaded / e.total) * 100);
+        //                     progressBar.style.width = percentComplete + '%';
+        //                     progressBar.setAttribute('aria-valuenow', percentComplete);
+        //                     progressBar.textContent = percentComplete + '%';
+        //                 }
+        //             }, false);
+        //             return xhr;
+        //         },
+        //         success: function (response) {
+        //             try {
+        //                 const data = typeof response === 'string' ? JSON.parse(response) : response;
+        //                 if (data.success) {
+        //                     // Update uploaded files array
+        //                     uploadedFiles = uploadedFiles.concat(data.files);
+        //                     document.getElementById('uploaded-files').value = JSON.stringify(uploadedFiles);
+        //                     displayFilePreviews(data.files);
+        //                     document.getElementById('attachments').value = '';
+        //                 } else {
+        //                     alert('Error: ' + data.error);
+        //                 }
+        //             } catch (e) {
+        //                 alert('Error parsing response.');
+        //             }
+        //         },
+        //         error: function () {
+        //             alert('Error uploading files. Please try again.');
+        //         },
+        //         complete: function () {
+        //             setTimeout(() => {
+        //                 progressContainer.classList.add('d-none');
+        //             }, 1000);
+        //         }
+        //     });
+
+
+        });
+         });
+        
+        // Function to display file previews
+        function displayFilePreviews(files) {
+            const previewList = document.getElementById('file-preview-list');
+            
+            files.forEach(file => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-2';
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body p-2';
+                
+                // Determine file type icon
+                let fileIcon = 'bi-file-earmark';
+                const fileType = file.file_type.split('/')[0];
+                if (fileType === 'image') {
+                    fileIcon = 'bi-file-earmark-image';
+                } else if (fileType === 'application') {
+                    fileIcon = 'bi-file-earmark-pdf';
+                } else if (fileType === 'text') {
+                    fileIcon = 'bi-file-earmark-text';
+                }
+                
+                // Create preview content
+                let previewContent = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi ${fileIcon} me-2" style="font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1 text-truncate">
+                            <div class="text-truncate">${file.original_filename}</div>
+                            <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `;
+                
+                // For images, add a thumbnail preview
+                if (fileType === 'image') {
+                    previewContent = `
+                        <div class="text-center mb-2">
+                            <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 text-truncate">
+                                <div class="text-truncate">${file.original_filename}</div>
+                                <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                cardBody.innerHTML = previewContent;
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                previewList.appendChild(col);
+                
+                // Add event listener to remove button
+                const removeBtn = cardBody.querySelector('.remove-file');
+                removeBtn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeFile(index);
+                });
+            });
+        }
+        
+        // Function to remove a file
+        function removeFile(index) {
+            if (index >= 0 && index < uploadedFiles.length) {
+                uploadedFiles.splice(index, 1);
+                document.getElementById('uploaded-files').value = JSON.stringify(uploadedFiles);
+                
+                // Refresh all previews
+                const previewList = document.getElementById('file-preview-list');
+                previewList.innerHTML = '';
+                displayFilePreviews(uploadedFiles);
+            }
+        }
+        
+        // Function to format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
     </script>
 <?php } ?>
 <?php

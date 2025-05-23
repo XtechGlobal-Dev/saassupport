@@ -827,6 +827,24 @@ function sb_get_users($sorting = ['creation_time', 'DESC'], $user_types = [], $s
     }
 }
 
+function sb_search_get_users($input = null,$type = null) {
+
+    $input = sb_db_escape($input);
+    if (empty($input) || empty($type)) {
+        return [];
+    }
+
+    $where = '';
+    if ($type == 'user') {
+        $where = '(user_type = "user" OR user_type = "admin")';
+    } else if ($type == 'lead') {
+        $where = '(user_type = "lead" OR user_type = "visitor")';
+    } 
+
+    $query = 'SELECT id, first_name, last_name,email FROM sb_users where '.$where.' AND (email LIKE "%'.$input.'%" OR first_name LIKE "%'.$input.'%" OR last_name LIKE "%'.$input.'%" OR CONCAT(first_name, " ", last_name) LIKE "%'.$input.'%")  ORDER BY first_name LIMIT 20';
+    $users = sb_db_get($query, false);
+    return $users;
+}
 
 function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
     $query = '';
@@ -973,12 +991,13 @@ function sb_count_tickets() {
 function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
-   $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+   $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
+            CONCAT_WS(" ", c.first_name, c.last_name) as contact_name,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color
-     FROM sb_tickets t
-     LEFT JOIN contacts c ON t.contact_id = c.id
+     FROM sb_tickets t 
      LEFT JOIN sb_users u ON t.assigned_to = u.id
+     LEFT JOIN sb_users c ON t.contact_id = c.id
      LEFT JOIN priorities p ON t.priority_id = p.id
      LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
     
@@ -992,6 +1011,12 @@ function sb_edit_ticket($tickets_id = 0) {
     }
    //return sb_db_get($query);
 
+}
+
+function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
+    $tickets_id = sb_db_escape($tickets_id, true);
+    $files = sb_db_escape($files);    
+    return ['success' => true, 'message' => 'File uploaded successfully.'];
 }
 function sb_convert_conversion_to_tickets($conversation_id = false)
 {
