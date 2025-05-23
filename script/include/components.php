@@ -661,8 +661,7 @@ function sb_component_admin() {
     $sms = sb_get_multi_setting('sms', 'sms-user');
     $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
     $active_areas = [
-        'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 
-    'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 
+    'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents','agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 
     'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']), 
     'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 
     'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')), 
@@ -777,14 +776,12 @@ function sb_component_admin() {
                         <?php
                         if ($active_areas['users']) {
                             echo '<a id="sb-users"><span>' . sb_('Users') . '</span></a>';
-                           
                         }
                         if ($active_areas['tickets']) {
                             echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
                         }
                         if ($active_areas['chatbot']) {
-                            echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>';
-                           
+                            echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>'; 
                         }
                         if ($active_areas['articles']) {
                             echo '<a id="sb-articles"><span>' . sb_('Articles') . '</span></a>';
