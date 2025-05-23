@@ -1246,7 +1246,7 @@ function sb_component_admin() {
                                                 </div>
                                                 <select class="form-select form-select-sm w-auto">
                                                 <option>Yearly</option>
-                                                <option>Monthly</option>
+                                                <!-- <option>Monthly</option> -->
                                                 </select>
                                             </div>
                                             <div class="d-flex justify-content-center gap-3 mb-3">
@@ -1273,6 +1273,59 @@ function sb_component_admin() {
                                                     </div>
                                             </div>
                                             <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div>
+                                            <!-- <div class="monthlyBarChart">
+                                                <canvas  id="monthlyBarChart"></canvas>
+                                            </div>
+                                            <script>
+                                                const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
+                                                new Chart(barCtx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                                    datasets: [{
+                                                        label: 'Users',
+                                                        data: [85000, 68000, 39000, 47000, 59000, 49000, 41000, 47000, 42000, 60000, 29000, 51000],
+                                                        backgroundColor: '#4285F4',
+                                                        borderRadius: 6,
+                                                        barThickness: 10
+                                                    }]
+                                                    },
+                                                    options: {
+                                                    responsive: true,
+                                                    plugins: {
+                                                        legend: { display: false },
+                                                        tooltip: {
+                                                        callbacks: {
+                                                            label: function(context) {
+                                                            return `${context.raw.toLocaleString()} users`;
+                                                            }
+                                                        }
+                                                        }
+                                                    },
+                                                    scales: {
+                                                        x: {
+                                                        grid: { display: false },
+                                                        ticks: {
+                                                            color: '#888',
+                                                            font: { size: 12 }
+                                                        }
+                                                        },
+                                                        y: {
+                                                        grid: {
+                                                            drawBorder: false,
+                                                            color: '#eee',
+                                                            lineWidth: 1
+                                                        },
+                                                        ticks: {
+                                                            callback: value => value / 1000 + 'k',
+                                                            color: '#aaa'
+                                                        },
+                                                        beginAtZero: true
+                                                        }
+                                                    }
+                                                    }
+                                                });
+                                            </script> -->
                                         </div>
                                     </section>
                                 </div>

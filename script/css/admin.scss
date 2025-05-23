@@ -3428,6 +3428,17 @@ td.sb-offline:after {
             .main-charts {
                 padding: 15px;
 
+                .monthlyBarChart {
+                    max-width: 1000px;
+                    display: flex;
+                    justify-content: center;
+
+                    #monthlyBarChart {
+                        height: 370px !important;
+                        width: 900px;
+                    }
+                }
+
                 .ticket_activity_chart {
                     max-width: 450px;
                     margin: 10px auto;

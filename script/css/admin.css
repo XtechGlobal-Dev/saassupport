@@ -8483,6 +8483,15 @@ td.sb-offline:after {
 .sb-dashboard main .new_container .main-charts {
   padding: 15px;
 }
+.sb-dashboard main .new_container .main-charts .monthlyBarChart {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+}
+.sb-dashboard main .new_container .main-charts .monthlyBarChart #monthlyBarChart {
+  height: 370px !important;
+  width: 900px;
+}
 .sb-dashboard main .new_container .main-charts .ticket_activity_chart {
   max-width: 450px;
   margin: 10px auto;
