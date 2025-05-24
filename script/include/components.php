@@ -246,19 +246,6 @@ function sb_ticket_edit_box() { ?>
                                 <option value="3" data-color="warning">Medium</option>
                             </select>
                         </div>
-
-                        <div id="status_id" data-type="select" class="sb-input">
-                            <span class="required-label"><?php sb_e('Status') ?></span>
-                            <select required>
-                                <option value="">Select Status</option>
-                                <option value="1">Open</option>
-                                <option value="2">In Progress</option>
-                                <option value="3">Hold</option>
-                                <option value="4">Waiting for Customer Response</option>
-                                <option value="5">Resolved</option>
-                                <option value="6">Closed</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div class="sb-additional-details">
@@ -319,12 +306,23 @@ function sb_ticket_edit_box() { ?>
                         </div>
                         <?php } ?>
                         
-
-                        <div data-type="file" class="sb-input">
+                        <div id="status_id" data-type="select" class="sb-input">
+                            <span class="required-label"><?php sb_e('Status') ?></span>
+                            <select required>
+                                <option value="">Select Status</option>
+                                <option value="1">Open</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">Hold</option>
+                                <option value="4">Waiting for Customer Response</option>
+                                <option value="5">Resolved</option>
+                                <option value="6">Closed</option>
+                            </select>
+                        </div>
+                        <!--div data-type="file" class="sb-input">
                             <span><?php sb_e('Attachments') ?></span>
                             <input type="file" name="attachments[]" multiple />
                             <div id="file-preview"></div>
-                        </div>
+                        </div-->
                     </div>
                 </div>
             </div>
@@ -336,42 +334,53 @@ function sb_ticket_edit_box() { ?>
                 </div>
                 <input id="ticket_id" type="hidden" name="ticket_id" />
                 <input id="conversation_id" type="hidden" name="conversation_id" />
+                <!-- Hidden input to store uploaded file data -->
+                <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
             </div>
             <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
-            <div class="form-group mb-3">
-                <label for="attachments">Attachments</label>
-                <div class="custom-file">
-                    <input type="file" class="form-control" id="ticket-attachments" multiple>
-                    <small class="form-text text-muted">You can select multiple files. Maximum file size: 10MB</small>
+            <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
+                <div class="sb-input">
+                    <span >Attachments</span>
+                    <div class="custom-file">
+                        <input type="file" class="form-control" id="ticket-attachments" multiple>
+                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                    </div>
                 </div>
-                
+            </div>
+            <div class="form-group mb-3">
                 <!-- Upload Progress -->
                 <div class="progress mt-2 d-none" id="upload-progress-container">
                     <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 
+                <!-- Existing File Preview Container -->
+                <div class="mt-2 d-none" id="existing-file-preview-container">
+                    <span>Current Attachments</span>
+                    <div class="row" id="current-attachments"></div>
+                </div>
+
                 <!-- File Preview Container -->
                 <div class="mt-3" id="file-preview-container">
                     <div class="row" id="file-preview-list"></div>
                 </div>
                 
-                <!-- Hidden input to store uploaded file data -->
-                <input type="hidden" id="uploaded-files" name="uploaded_files" value="">
+                
             </div>
         </div>
     </div>
     <style>
-    #ticketCustomFieldsContainer, .first-section {
+    #ticketCustomFieldsContainer, #ticketFileAttachments, .first-section {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
     }
 
-    #ticketCustomFieldsContainer > .sb-input, .first-section > div {
+    #ticketCustomFieldsContainer > .sb-input, #ticketFileAttachments > div, .first-section > div {
         flex: 0 0 calc(50% - 10px); /* 2 columns with spacing */
         box-sizing: border-box;
     }
+    #ticketCustomFieldsContainer .sb-input{margin-top:0}
     .required-label::after {
         content: " *";
         color: red;
@@ -397,6 +406,17 @@ function sb_ticket_edit_box() { ?>
     .sb-table-tickets tr {line-height: 25px;}
     span.left-sec {width: 15%;}
     div.right-sec {width: 84%;padding: 0;}
+    
+    #file-preview-list .col-md-2 {padding:0}
+    #file-preview-list .card {margin: 6px;height: 100%;}
+    #file-preview-list .card-body {display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    height: 100%;
+    }
+
+    .custom-file #ticket-attachments {font-size: 12px;}
     </style>
     <script>
         $('#select-customer').select2({
@@ -479,12 +499,13 @@ function sb_ticket_edit_box() { ?>
         let uploadedFiles = [];
         
         // File upload handling
-        document.getElementById('ticket-attachments').addEventListener('change', function(event) {
+            document.getElementById('ticket-attachments').addEventListener('change', function(event) {
             const files = event.target.files;
             if (files.length === 0) return;
             
             // Create FormData object
             const formData = new FormData();
+            uploadedFiles = [];
             for (let i = 0; i < files.length; i++) {
                 formData.append('files[]', files[i]);
             }
@@ -492,7 +513,7 @@ function sb_ticket_edit_box() { ?>
             formData.append('function', 'ajax_calls');
             formData.append('calls[0][function]', 'upload-ticket-attachments');
             formData.append('login-cookie', SBF.loginCookie());
-            formData.append('ticket_id', 1); // Replace with actual ticket ID
+            formData.append('ticket_id', 0); // Replace with actual ticket ID
 
 
             console.log('Files to upload:', files);
@@ -522,21 +543,24 @@ function sb_ticket_edit_box() { ?>
             // Handle response
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.success) {
+                    let response = JSON.parse(xhr.responseText);
+                    let res2 = typeof response[0][1] === 'string' ? JSON.parse(response[0][1]) : response[0][1];
+
+                    if (res2.success) {
                         // Add uploaded files to the array
-                        uploadedFiles = uploadedFiles.concat(response.files);
+                        uploadedFiles = uploadedFiles.concat(res2.files);
                         
                         // Update hidden input with file data
-                        document.getElementById('uploaded-files').value = JSON.stringify(uploadedFiles);
+                        console.log('Uploaded files:', uploadedFiles);
+                        document.getElementById('uploaded_files').value = JSON.stringify(uploadedFiles);
                         
                         // Display file previews
-                        displayFilePreviews(response.files);
+                        displayFilePreviews(res2.files);
                         
                         // Reset file input
-                        document.getElementById('attachments').value = '';
+                        document.getElementById('ticket-attachments').value = '';
                     } else {
-                        alert('Error: ' + response.error);
+                        alert('Error: ' + res2.error);
                     }
                 } else {
                     alert('Error uploading files. Please try again.');
@@ -595,7 +619,7 @@ function sb_ticket_edit_box() { ?>
         //                 if (data.success) {
         //                     // Update uploaded files array
         //                     uploadedFiles = uploadedFiles.concat(data.files);
-        //                     document.getElementById('uploaded-files').value = JSON.stringify(uploadedFiles);
+        //                     document.getElementById('uploaded_files').value = JSON.stringify(uploadedFiles);
         //                     displayFilePreviews(data.files);
         //                     document.getElementById('attachments').value = '';
         //                 } else {
@@ -617,7 +641,7 @@ function sb_ticket_edit_box() { ?>
 
 
         });
-         });
+ 
         
         // Function to display file previews
         function displayFilePreviews(files) {
@@ -625,7 +649,7 @@ function sb_ticket_edit_box() { ?>
             
             files.forEach(file => {
                 const col = document.createElement('div');
-                col.className = 'col-md-4 mb-2';
+                col.className = 'col-md-2 mb-2';
                 
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -694,7 +718,7 @@ function sb_ticket_edit_box() { ?>
         function removeFile(index) {
             if (index >= 0 && index < uploadedFiles.length) {
                 uploadedFiles.splice(index, 1);
-                document.getElementById('uploaded-files').value = JSON.stringify(uploadedFiles);
+                document.getElementById('uploaded_files').value = JSON.stringify(uploadedFiles);
                 
                 // Refresh all previews
                 const previewList = document.getElementById('file-preview-list');
@@ -711,6 +735,7 @@ function sb_ticket_edit_box() { ?>
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
+    });
     </script>
 <?php } ?>
 <?php

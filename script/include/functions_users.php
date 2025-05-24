@@ -1005,6 +1005,7 @@ function sb_edit_ticket($tickets_id = 0) {
     
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
+        $result['attachments'] = sb_fetch_ticket_attachments($tickets_id);
        return $result;
     } else {
         return false;
@@ -1014,9 +1015,101 @@ function sb_edit_ticket($tickets_id = 0) {
 }
 
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
+
+    // Create uploads directory if it doesn't exist
+    $uploadsDir = '../../uploads/ticket_attachments/';
+    if (!is_dir($uploadsDir)) {
+        mkdir($uploadsDir, 0755, true);
+    }
+
     $tickets_id = sb_db_escape($tickets_id, true);
-    $files = sb_db_escape($files);    
-    return ['success' => true, 'message' => 'File uploaded successfully.'];
+
+    // Validate ticket ID if provided
+    if ($tickets_id > 0) {
+        $ticket = sb_db_get("SELECT id FROM sb_tickets WHERE id =  $tickets_id");
+       if (!$ticket) {
+         return ['success' => false, 'message' => 'Invalid ticket ID.'];
+       }
+    }
+
+    if(empty($files)) {
+        return ['success' => false, 'message' => 'No files uploaded.'];
+    }
+
+    //$files = $_FILES['files'];
+    $fileCount = count($files['name']);
+    $uploadedFiles = [];
+
+    // Process each uploaded file
+    for ($i = 0; $i < $fileCount; $i++) {
+        if ($files['error'][$i] !== UPLOAD_ERR_OK) {
+            continue; // Skip failed uploads
+        }
+
+        $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+        if (!in_array($files['type'][$i], $allowedTypes)) {
+            //return ['success' => false, 'message' => 'Invalid file type.'];
+             continue; // Skip failed uploads
+        }
+
+        $maxFileSize = 5 * 1024 * 1024; // 5 MB
+        if ($files['size'][$i] > $maxFileSize) {
+            //return ['success' => false, 'message' => 'File is too large.'];
+             continue; // Skip failed uploads
+        }
+
+
+        $originalFilename = $files['name'][$i];
+        $fileType = $files['type'][$i];
+        $fileSize = $files['size'][$i];
+        $tmpName = $files['tmp_name'][$i];
+
+        // Generate unique filename
+        $extension = pathinfo($originalFilename, PATHINFO_EXTENSION);
+        $filename = uniqid() . '_' . time() . '.' . $extension;
+        $filePath = $uploadsDir . $filename;
+
+        // Move uploaded file to destination
+        if (move_uploaded_file($tmpName, $filePath)) {
+            // If ticket ID is provided, save to database
+            if ($tickets_id > 0) {
+                $filename = sb_db_escape($filename);
+                $originalFilename = sb_db_escape($originalFilename);   
+                $filePath = 'uploads/ticket_attachments/' . $filename;
+                $fileType = sb_db_escape($fileType);
+                $fileSize = sb_db_escape($fileSize,true);
+                
+               // echo $query = 'INSERT INTO ticket_attachments (ticket_id, filename, original_filename, file_path, file_type, file_size) VALUES ($tickets_id,$filename, $originalFilename, $filePath, $fileType,$fileSize)';
+                //$fileId = sb_db_query($query,true);
+                $fileId = 0; //replace with actual insert query
+                
+                $uploadedFiles[] = [
+                    'id' => $fileId,
+                    'ticket_id' => $tickets_id,
+                    'filename' => $filename,
+                    'original_filename' => $originalFilename,
+                    'file_path' => $filePath,
+                    'file_type' => $fileType,
+                    'file_size' => $fileSize
+                ];
+            } else {
+                // For temporary uploads (before ticket creation)
+                $uploadedFiles[] = [
+                    'filename' => $filename,
+                    'original_filename' => $originalFilename,
+                    'file_path' => 'uploads/ticket_attachments/' . $filename,
+                    'file_type' => $fileType,
+                    'file_size' => $fileSize
+                ];
+            }
+        }
+    }
+
+return json_encode([
+        'success' => true,
+        'message' => 'Files uploaded successfully',
+        'files' => $uploadedFiles
+    ]);
 }
 function sb_convert_conversion_to_tickets($conversation_id = false)
 {
@@ -1060,7 +1153,8 @@ function sb_add_ticket($inputs)
             $customFields[$key] = sb_db_escape($value);
         }
 
-               // Get active fields from settings
+
+        // Get active fields from settings
         /*$sql = "SELECT field_name, is_active FROM default_fields_settings";
         $result = sb_db_get($sql,false);
         print_r($result);
@@ -1116,73 +1210,37 @@ function sb_add_ticket($inputs)
 
         ///// Insert ticket custom fields
         sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'new');
+        
+        ////// Process file attachments if any
+        sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
+
         return sb_return_saved_ticket_row($ticket_id);
+}
 
-        // Insert custom fields if any
-        // if (isset($customFields) && is_array($customFields)) {
-        //     error_log("Custom fields received: " . print_r($customFields, true));
+function sb_save_ticket_attachments($ticket_id, $attachments) {
+    
+       if (isset($attachments) && !empty($attachments)) {
+            $uploadedFiles = json_decode($attachments, true);
             
-        //     // First get all custom fields definitions
-        //     $sql2 = "SELECT `id`, `type` FROM custom_fields WHERE id IN (" . implode(',', array_keys($customFields)) . ")";
-        //     $result = sb_db_get($sql2,false);
-            
-        //     if (!$result) {
-        //         throw new Exception('Error fetching custom fields: ');
-        //     }
-            
-        //     // Create array of field types
-        //     $fieldTypes = array();
-        //     foreach($result as $row) {
-        //         $fieldTypes[$row['id']] = $row['type'];
-        //     }
-            
-        //     // Process each custom field
-        //     foreach ($customFields as $field_id => $value) {
-        //         // Get field type
-        //         $fieldType = $fieldTypes[$field_id] ?? 'text';
-                
-        //         // Handle different field types
-        //         switch($fieldType) {
-        //             case 'text':
-        //             case 'textarea':
-        //                 $value = trim($value ?? '');
-        //                 break;
-        //             case 'select':
-        //                 $value = trim($value ?? '');
-        //                 break;
-        //             case 'checkbox':
-        //                 $value = (bool)$value ? '1' : '0';
-        //                 break;
-        //             default:
-        //                 $value = trim($value ?? '');
-        //         }
-                
-        //         $sql3 = "INSERT INTO ticket_custom_fields (ticket_id, custom_field_id, value) VALUES ($ticket_id, $field_id,  '$value')";
-        //         $result3 = sb_db_query($sql3);
-                
-                
-        //         // For text fields, bind as string
-        //         /*if (in_array($fieldType, ['text', 'textarea', 'select'])) {
-        //             $stmt->bind_param("iss", $ticket_id, $field_id, $value);
-        //         } else {
-        //             // For checkbox, bind as integer
-        //             $stmt->bind_param("isi", $ticket_id, $field_id, $value);
-        //         }
-                
-        //         if (!$stmt->execute()) {
-        //             throw new Exception('Error saving custom field: ' . $stmt->error);
-        //         }*/
-                
-        //         error_log("Saved custom field: field_id=$field_id, value=$value");
-        //     }
-        // } 
-        // else {
-        //     error_log("No custom fields received");
-        // }
- 
-       // $ticketId = $db->insert('tickets', $data);
-      // return $message = "{'suceess': true, 'msg':'Ticket created successfully'}";
-
+            if (json_last_error() === JSON_ERROR_NONE && is_array($uploadedFiles)) {
+                foreach ($uploadedFiles as $file) {
+                    // Verify the file exists
+                    $filePath = '../../' . $file['file_path'];
+                    if (file_exists($filePath)) {
+                        $fileName = sb_db_escape($file['filename']);
+                        $originalFileName = sb_db_escape($file['original_filename']);
+                        $originalFileName = sb_db_escape($file['original_filename']);
+                        $filePath = sb_db_escape($file['file_path']);
+                        $fileType = sb_db_escape($file['file_type']);
+                        $fileSize = sb_db_escape($file['file_size']);
+                        // Insert attachment record
+                        $sql = "INSERT INTO ticket_attachments (ticket_id, filename, original_filename, file_path, file_type, file_size) 
+                        VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath', '$fileType', $fileSize)";
+                        $result = sb_db_query($sql,false);
+                    }
+                }
+            }
+        }
 }
 
 function sb_add_edit_ticket_custom_fields($ticket_id = null, $customFields = array(), $action = 'new')
@@ -1296,6 +1354,9 @@ function sb_update_ticket($inputs,$ticket_id =0)
 
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
+
+    ////// Process file attachments if any
+    sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
 
     return sb_return_saved_ticket_row($ticket_id);
     // $ticketId = $db->insert('tickets', $data);                                                                                                                               
@@ -1438,6 +1499,27 @@ function sb_fetch_ticket_custom_fields_data($ticket_id = null)
     }   
 }
 
+function sb_fetch_ticket_attachments($ticket_id = null)
+{
+    if ($ticket_id) {
+        $ticket_id = sb_db_escape($ticket_id, true);
+        $query = 'SELECT * FROM ticket_attachments WHERE ticket_id = '.$ticket_id.' ORDER BY uploaded_at DESC';
+        $result = sb_db_get($query, false);
+        $attachments = [];
+        if (isset($result) && is_array($result)) {
+            $counter = 0;
+            foreach ($result as $row) {
+                    $attachments[ $counter]['id'] = $row['id'];
+                    $attachments[ $counter]['filename'] = $row['filename'];
+                    $attachments[ $counter]['original_filename'] = $row['original_filename'];
+                    $attachments[ $counter]['file_path'] = $row['file_path'];
+                    $attachments[ $counter]['file_size'] = $row['file_size'];
+                    $counter++;
+            }
+            return $attachments;
+        }
+    }
+}
 
 
 function sb_get_new_users($datetime) {

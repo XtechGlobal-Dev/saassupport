@@ -169,7 +169,7 @@ function sb_ajax_execute() {
         case 'search-get-users':
              return sb_json_response(sb_search_get_users($_POST['q'],$_POST['type']));
         case 'upload-ticket-attachments':
-             return sb_json_response(sb_upload_ticket_attachments($_POST['ticket_id'],$_POST['files']));
+             return sb_json_response(sb_upload_ticket_attachments($_POST['ticket_id'],$_FILES['files']));
         case 'get-conversations':
             return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag')));
         case 'get-new-conversations':
