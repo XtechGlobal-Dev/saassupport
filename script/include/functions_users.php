@@ -846,6 +846,10 @@ function sb_search_get_users($input = null,$type = null) {
     return $users;
 }
 
+function sb_get_dashboad_data()
+{
+    return ['sucess'=>true,'msg'=>'Dashboard data fecthed sucessfully'];
+}
 function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
     $query = '';
     $query_search = '';

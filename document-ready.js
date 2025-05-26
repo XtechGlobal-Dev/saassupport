@@ -69,20 +69,15 @@
         window.onpopstate = function () {
             admin.sbHideLightbox();
             if (responsive && conversations_area.sbActive() && conversation_area.sbActive()) {
-                 console.log("conversations_area");
-                 debugger
                 SBConversations.mobileCloseConversation();
             }
-             if (SBF.getURL('dashboard')) {
-                console.log("dashboard");
-                 debugger
-                if (!dash_area.sbActive()) {
-                    header.find('.sb-admin-nav #sb-dashboard').click();
-                }
-                SBProfile.show(SBF.getURL('user'));
-            } else if (SBF.getURL('user')) {
-                console.log("user");
-                 debugger
+            // if (SBF.getURL('dashboard')) {
+            //     if (!dash_area.sbActive()) {
+            //         header.find('.sb-admin-nav #sb-dashboard').click();
+            //     }
+            //     SBProfile.show(SBF.getURL('user'));
+            // } else
+             if (SBF.getURL('user')) {
                 if (!users_area.sbActive()) {
                     header.find('.sb-admin-nav #sb-users').click();
                 }

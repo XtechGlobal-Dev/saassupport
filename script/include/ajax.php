@@ -146,6 +146,8 @@ function sb_ajax_execute() {
             return sb_json_response(sb_get_users_with_details($_POST['details'], sb_post('user_ids')));
         case 'update-user-to-lead':
             return sb_json_response(sb_update_user_to_lead($_POST['user_id']));
+        case 'get-dashboard-data':
+            return sb_json_response(sb_get_dashboad_data());
         case 'get-tickets':
             return sb_json_response(sb_get_tickets(sb_post('sorting', ['creation_time', 'DESC']), sb_post('ticket_status'), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('source')));
         case 'convert-converversion-to-ticket':
