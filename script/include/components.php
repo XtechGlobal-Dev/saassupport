@@ -242,7 +242,7 @@ function sb_ticket_edit_box() { ?>
                         <div id="assigned_to" data-type="select" class="sb-input">
                             <span class="left-sec"><?php sb_e('Assigned To') ?></span>
                             <div class="right-sec">
-                                <select id="select-user" style="width:100%;"></select>
+                                <select id="select-agent" style="width:100%;"></select>
                             </div>
                         </div>
 
@@ -371,10 +371,12 @@ function sb_ticket_edit_box() { ?>
                 </div>
 
                 <!-- File Preview Container -->
-                <div class="mt-3" id="file-preview-container">
-                    <div class="row" id="file-preview-list"></div>
-                </div>
-                
+                 <div class="mt-2">
+                    <span>New Attachments</span>
+                    <div class="mt-2" id="file-preview-container">
+                        <div class="row" id="file-preview-list"></div>
+                    </div>
+                 </div>
                 
             </div>
         </div>
@@ -417,9 +419,9 @@ function sb_ticket_edit_box() { ?>
     span.left-sec {width: 15%;}
     div.right-sec {width: 84%;padding: 0;}
     
-    #file-preview-list .col-md-2 {padding:0}
-    #file-preview-list .card {margin: 6px;height: 100%;}
-    #file-preview-list .card-body {display: flex;
+    #file-preview-list .col-md-2,#current-attachments .col-md-2  {padding:0}
+    #file-preview-list .card, #current-attachments .card{margin: 6px;height: 100%;}
+    #file-preview-list .card-body, #current-attachments .card-body{display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
@@ -442,7 +444,7 @@ function sb_ticket_edit_box() { ?>
                         'calls[0][function]': 'search-get-users',
                         'login-cookie': SBF.loginCookie(),
                         'q': params.term,   // ✅ Pass search term
-                        'type': 'lead'
+                        'type': 'user'
                     };
                 },
                 processResults: function (response) {
@@ -477,7 +479,7 @@ function sb_ticket_edit_box() { ?>
             //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
         });
         
-        $('#select-user').select2({
+        $('#select-agent').select2({
             placeholder: 'Type and search...',
             ajax: {
             url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
@@ -490,7 +492,7 @@ function sb_ticket_edit_box() { ?>
                         'calls[0][function]': 'search-get-users',
                         'login-cookie': SBF.loginCookie(),
                         'q': params.term,   // ✅ Pass search term
-                        'type': 'user'
+                        'type': 'agent'
                     };
                 },
                 processResults: function (response) {
@@ -518,6 +520,21 @@ function sb_ticket_edit_box() { ?>
     <!-- File Upload Handling -->
     <script>
         jQuery(document).ready(function($) {
+
+        $('#without_contact input').on('click',function() {
+            const isChecked = $(this).is(':checked');
+            $('#cust_name input, #cust_email input').prop('disabled', !isChecked);
+            if (isChecked) {
+                $('#contact_id').hide();
+                $('#select-customer').removeAttr('required');
+            } else {
+                 $('#contact_id').show();
+                $('#select-customer').attr('required');
+                // Optionally, you can set focus back to the name field
+                $('#cust_name input').focus();
+            }
+        });
+
        
         // Array to store uploaded files
         let uploadedFiles = [];
