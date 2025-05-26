@@ -1294,7 +1294,7 @@ function sb_component_admin() {
             <main>
 
             <!-- sahil start -->
-              <div class="sb-active sb-dashboard">
+              <div class="sb-active sb-area-dashboard">
                     <main>
                         <header>
                                 <div class="header-left">

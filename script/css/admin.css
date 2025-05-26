@@ -8341,10 +8341,10 @@ td.sb-offline:after {
   max-width: unset !important;
 }
 
-.sb-dashboard main {
+.sb-area-dashboard main {
   width: 100%;
 }
-.sb-dashboard main header {
+.sb-area-dashboard main header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8352,18 +8352,18 @@ td.sb-offline:after {
   border-bottom: 1px solid #eaedf4;
   background: #fff;
 }
-.sb-dashboard main header .header-left,
-.sb-dashboard main header .header-right {
+.sb-area-dashboard main header .header-left,
+.sb-area-dashboard main header .header-right {
   display: flex;
   align-items: center;
   gap: 28px;
 }
-.sb-dashboard main header .notification {
+.sb-area-dashboard main header .notification {
   margin-right: 20px;
   position: relative;
   cursor: pointer;
 }
-.sb-dashboard main header .notification .badge {
+.sb-area-dashboard main header .notification .badge {
   position: absolute;
   top: -10px;
   right: -8px;
@@ -8374,41 +8374,41 @@ td.sb-offline:after {
   font-weight: 400;
   font-size: 11px;
 }
-.sb-dashboard main header .user-profile {
+.sb-area-dashboard main header .user-profile {
   display: flex;
   align-items: center;
   border-left: 1px solid #EEEEEE;
   padding-left: 30px;
 }
-.sb-dashboard main header .user-profile img {
+.sb-area-dashboard main header .user-profile img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 10px;
 }
-.sb-dashboard main header .user-profile .user-info p {
+.sb-area-dashboard main header .user-profile .user-info p {
   font-weight: 600;
   margin-bottom: 3px;
   font-size: 16px;
   color: #000;
 }
-.sb-dashboard main header .user-profile .user-info span {
+.sb-area-dashboard main header .user-profile .user-info span {
   font-family: Inter;
   font-weight: 400;
   font-size: 12px;
   color: #5d6165;
 }
-.sb-dashboard main header .logout {
+.sb-area-dashboard main header .logout {
   margin-left: 20px;
   cursor: pointer;
 }
-.sb-dashboard main .new_container {
+.sb-area-dashboard main .new_container {
   overflow: scroll;
   background: rgba(243, 245, 249, 0.5019607843);
   padding-top: 50px;
   height: 100%;
 }
-.sb-dashboard main .new_container .chart-placeholder {
+.sb-area-dashboard main .new_container .chart-placeholder {
   height: 200px;
   background: #e9ecef;
   display: flex;
@@ -8418,37 +8418,37 @@ td.sb-offline:after {
   font-weight: 600;
   font-size: 1.1rem;
 }
-.sb-dashboard main .new_container .dashboard-metrics {
+.sb-area-dashboard main .new_container .dashboard-metrics {
   padding: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card {
   border-radius: 10px;
   padding: 25px 17px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
   display: flex;
   gap: 10px;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart,
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
   height: 60px;
   display: flex;
   justify-content: end;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper {
   display: flex;
   gap: 10px;
   margin-bottom: 16px;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-icon {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-icon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -8456,119 +8456,119 @@ td.sb-offline:after {
   align-items: center;
   justify-content: center;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-info h3 {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-info h3 {
   font-size: 14px;
   color: #666;
   margin-bottom: 5px;
   min-width: 120px;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-info p {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-info p {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 0;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-chart {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-chart {
   height: 50px;
   margin: 10px 0;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-chart img {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-chart img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.sb-dashboard main .new_container .dashboard-metrics .metric-card .metric-increase {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-increase {
   font-size: 12px;
   color: #45b369;
 }
-.sb-dashboard main .new_container .main-charts {
+.sb-area-dashboard main .new_container .main-charts {
   padding: 15px;
 }
-.sb-dashboard main .new_container .main-charts .monthlyBarChart {
+.sb-area-dashboard main .new_container .main-charts .monthlyBarChart {
   max-width: 1000px;
   display: flex;
   justify-content: center;
 }
-.sb-dashboard main .new_container .main-charts .monthlyBarChart #monthlyBarChart {
+.sb-area-dashboard main .new_container .main-charts .monthlyBarChart #monthlyBarChart {
   height: 370px !important;
   width: 900px;
 }
-.sb-dashboard main .new_container .main-charts .ticket_activity_chart {
+.sb-area-dashboard main .new_container .main-charts .ticket_activity_chart {
   max-width: 450px;
   margin: 10px auto;
 }
-.sb-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
+.sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
   height: 200px;
   width: 440px;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart {
+.sb-area-dashboard main .new_container .main-charts .overview_chart {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart .legend {
+.sb-area-dashboard main .new_container .main-charts .overview_chart .legend {
   gap: 24px;
   display: flex;
   flex-direction: column;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart .legend li {
+.sb-area-dashboard main .new_container .main-charts .overview_chart .legend li {
   color: #4B5563;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart .legend li span {
+.sb-area-dashboard main .new_container .main-charts .overview_chart .legend li span {
   width: 15px;
   height: 15px;
   display: inline-block;
   border-radius: 50%;
   margin-right: 8px;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart .legend li span.total {
+.sb-area-dashboard main .new_container .main-charts .overview_chart .legend li span.total {
   background: #4CAF50;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart .legend li span.new {
+.sb-area-dashboard main .new_container .main-charts .overview_chart .legend li span.new {
   background: #FFA726;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart .legend li span.active {
+.sb-area-dashboard main .new_container .main-charts .overview_chart .legend li span.active {
   background: #4285F4;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart #chart-container {
+.sb-area-dashboard main .new_container .main-charts .overview_chart #chart-container {
   position: relative;
   width: 300px;
 }
-.sb-dashboard main .new_container .main-charts .overview_chart #chart-container .chart-center {
+.sb-area-dashboard main .new_container .main-charts .overview_chart #chart-container .chart-center {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, 100%);
   text-align: center;
 }
-.sb-dashboard main .new_container .main-charts .card {
+.sb-area-dashboard main .new_container .main-charts .card {
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
   background: #fff;
   border: none;
   border-radius: 8px;
 }
-.sb-dashboard main .new_container .main-charts .head, .sb-dashboard main .new_container .main-charts .sub_head {
+.sb-area-dashboard main .new_container .main-charts .head, .sb-area-dashboard main .new_container .main-charts .sub_head {
   font-family: Inter;
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 0;
   color: #111827;
 }
-.sb-dashboard main .new_container .main-charts .sub_head {
+.sb-area-dashboard main .new_container .main-charts .sub_head {
   font-weight: 500;
   font-size: 14px;
   color: #4B5563;
 }
-.sb-dashboard main .new_container .main-charts .head2 {
+.sb-area-dashboard main .new_container .main-charts .head2 {
   font-weight: 600;
   font-size: 14px;
   color: #000;
 }
-.sb-dashboard main .new_container .main-charts .sub_head2 {
+.sb-area-dashboard main .new_container .main-charts .sub_head2 {
   font-weight: 400;
   font-size: 12px;
   color: #3A3A3A;
 }
-.sb-dashboard main .new_container .main-charts .button_ext {
+.sb-area-dashboard main .new_container .main-charts .button_ext {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8577,13 +8577,13 @@ td.sb-offline:after {
   border-radius: 8px;
   padding: 2px 15px 2px 2px;
 }
-.sb-dashboard main .new_container .main-charts .button_ext > i {
+.sb-area-dashboard main .new_container .main-charts .button_ext > i {
   color: #000;
   background: #F3F4F6;
   padding: 15px;
   border-radius: 8px;
 }
-.sb-dashboard main .new_container .main-charts .green_badge {
+.sb-area-dashboard main .new_container .main-charts .green_badge {
   background: rgba(69, 179, 105, 0.1490196078);
   border-radius: 6px;
   font-weight: 500;
@@ -8591,59 +8591,59 @@ td.sb-offline:after {
   color: #45B369;
   padding: 8px;
 }
-.sb-dashboard main .new_container .main-charts .progress-item {
+.sb-area-dashboard main .new_container .main-charts .progress-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.chat .progress-fill {
+.sb-area-dashboard main .new_container .main-charts .progress-item.chat .progress-fill {
   background-color: #F86624;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.chat i {
+.sb-area-dashboard main .new_container .main-charts .progress-item.chat i {
   color: #F86624;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.email .progress-fill {
+.sb-area-dashboard main .new_container .main-charts .progress-item.email .progress-fill {
   background-color: #23B7E5;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.email i {
+.sb-area-dashboard main .new_container .main-charts .progress-item.email i {
   color: #23B7E5;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.fb .progress-fill {
+.sb-area-dashboard main .new_container .main-charts .progress-item.fb .progress-fill {
   background-color: #144BD6;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.fb i {
+.sb-area-dashboard main .new_container .main-charts .progress-item.fb i {
   color: #144BD6;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.wa .progress-fill {
+.sb-area-dashboard main .new_container .main-charts .progress-item.wa .progress-fill {
   background-color: #1FAF38;
 }
-.sb-dashboard main .new_container .main-charts .progress-item.wa i {
+.sb-area-dashboard main .new_container .main-charts .progress-item.wa i {
   color: #1FAF38;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .left {
+.sb-area-dashboard main .new_container .main-charts .progress-item .left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .left i {
+.sb-area-dashboard main .new_container .main-charts .progress-item .left i {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .left .label {
+.sb-area-dashboard main .new_container .main-charts .progress-item .left .label {
   font-size: 14px;
   color: #000;
   font-weight: 500;
   user-select: none;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .right {
+.sb-area-dashboard main .new_container .main-charts .progress-item .right {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .right .progress-bar {
+.sb-area-dashboard main .new_container .main-charts .progress-item .right .progress-bar {
   position: relative;
   width: 140px;
   height: 10px;
@@ -8651,12 +8651,12 @@ td.sb-offline:after {
   border-radius: 10px;
   overflow: hidden;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .right .progress-fill {
+.sb-area-dashboard main .new_container .main-charts .progress-item .right .progress-fill {
   height: 100%;
   border-radius: 10px 0 0 10px;
   transition: width 0.5s ease;
 }
-.sb-dashboard main .new_container .main-charts .progress-item .right .percentage {
+.sb-area-dashboard main .new_container .main-charts .progress-item .right .percentage {
   font-size: 14px;
   font-weight: 600;
   color: #6c6c6c;
@@ -8664,13 +8664,13 @@ td.sb-offline:after {
   min-width: 30px;
   text-align: right;
 }
-.sb-dashboard main .new_container .main-charts .bg-white {
+.sb-area-dashboard main .new_container .main-charts .bg-white {
   background-color: #fff !important;
   padding: 15px;
   border-radius: 8px 8px 0 0;
   box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
 }
-.sb-dashboard main .new_container .main-charts .bg-white .reply-btn {
+.sb-area-dashboard main .new_container .main-charts .bg-white .reply-btn {
   color: #FFFFFF;
   font-family: Inter;
   font-weight: 500;
@@ -8680,28 +8680,28 @@ td.sb-offline:after {
   padding: 10px 20px;
   border-radius: 8px;
 }
-.sb-dashboard main .new_container .main-charts .seprator {
+.sb-area-dashboard main .new_container .main-charts .seprator {
   box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
   border-bottom: 0.9px solid #F0F1F5;
 }
-.sb-dashboard main .new_container .main-charts .div {
+.sb-area-dashboard main .new_container .main-charts .div {
   height: 20px;
   background: #fff;
   border-radius: 0 0 8px 8px !important;
 }
-.sb-dashboard main .new_container .main-charts .recent.card {
+.sb-area-dashboard main .new_container .main-charts .recent.card {
   box-shadow: unset;
   border-radius: 0;
   max-height: 260px;
   overflow-y: scroll;
 }
-.sb-dashboard main .new_container .main-charts .recent.card .avatar {
+.sb-area-dashboard main .new_container .main-charts .recent.card .avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
-.sb-dashboard main .new_container .main-charts .recent.card .reply-btn {
+.sb-area-dashboard main .new_container .main-charts .recent.card .reply-btn {
   background: rgba(41, 83, 232, 0.1019607843);
   color: #2953E8;
   padding: 10px 22px;
@@ -8709,19 +8709,19 @@ td.sb-offline:after {
   border-radius: 8px;
   max-height: 20;
 }
-.sb-dashboard main .new_container .main-charts .agents {
+.sb-area-dashboard main .new_container .main-charts .agents {
   display: flex;
   flex-direction: column;
   max-height: 280px;
   overflow-y: scroll;
 }
-.sb-dashboard main .new_container .main-charts .agents .li {
+.sb-area-dashboard main .new_container .main-charts .agents .li {
   padding: 12px 0;
 }
-.sb-dashboard main .new_container .main-charts .agents .li:not(:last-child) {
+.sb-area-dashboard main .new_container .main-charts .agents .li:not(:last-child) {
   border-bottom: 1px dotted #ccc;
 }
-.sb-dashboard main .new_container .main-charts .agents .li .small-avatar {
+.sb-area-dashboard main .new_container .main-charts .agents .li .small-avatar {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -8729,7 +8729,7 @@ td.sb-offline:after {
   margin-right: 8px;
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
 }
-.sb-dashboard main .new_container .tables .label_blue {
+.sb-area-dashboard main .new_container .tables .label_blue {
   color: #487FFF;
   font-family: Inter;
   font-weight: 400;
