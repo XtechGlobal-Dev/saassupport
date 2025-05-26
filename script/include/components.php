@@ -1293,8 +1293,8 @@ function sb_component_admin() {
             </div>
             <main>
 
-            <!-- sahil start -->
-              <div class="sb-active sb-area-dashboard">
+                <!-- sahil start -->
+                <div class="sb-active sb-area-dashboard">
                     <main>
                         <header>
                                 <div class="header-left">
@@ -1314,14 +1314,14 @@ function sb_component_admin() {
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">4</span>
                                     </div>
-                                    <div class="user-profile">
-                                        <img src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-profile sb-account">
+                                        <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
                                         <div class="user-info">
-                                            <p>Peter Parker</p>
+                                            <p class="sb-name"></p>
                                             <span>Super Admin</span>
                                         </div>
                                     </div>
-                                    <div class="logout"  data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
                                         <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
                                     </div>
                                 </div>
@@ -2018,82 +2018,82 @@ function sb_component_admin() {
                                                     <p class="sub_head">Weekly Report</p>
                                                 </div>
                                             </div>
-                                            <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div>
-                                            <!-- <div class="chatVolChart">
+                                            <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
+                                            <div class="chatVolChart">
                                                 <canvas id="chatVolChart"></canvas>
                                             </div>
                                             <script>
-                                            const chatVolCtx = document.getElementById('chatVolChart').getContext('2d');
-                                            new Chart(chatVolCtx, {
-                                                type: 'bar',
-                                                data: {
-                                                labels: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                datasets: [
-                                                    {
-                                                    label: 'Reply Done: 100',
-                                                    data: [30, 60, 40, 50, 30, 45, 40],
-                                                    backgroundColor: '#4CAF50',
-                                                    borderRadius: 4,
-                                                    barThickness: 5
+                                                const chatVolCtx = document.getElementById('chatVolChart').getContext('2d');
+                                                new Chart(chatVolCtx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                    labels: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                                    datasets: [
+                                                        {
+                                                        label: 'Reply Done: 100',
+                                                        data: [30, 60, 40, 50, 30, 45, 40],
+                                                        backgroundColor: '#4CAF50',
+                                                        borderRadius: 4,
+                                                        barThickness: 5
+                                                        },
+                                                        {
+                                                        label: 'Pending: 500',
+                                                        data: [70, 140, 80, 120, 70, 135, 110],
+                                                        backgroundColor: '#4285F4',
+                                                        borderRadius: 4,
+                                                        barThickness: 5
+                                                        },
+                                                        {
+                                                        label: 'Overdue: 1500',
+                                                        data: [50, 120, 60, 90, 80, 95, 85],
+                                                        backgroundColor: '#FFA726',
+                                                        borderRadius: 4,
+                                                        barThickness: 5
+                                                        }
+                                                    ]
                                                     },
-                                                    {
-                                                    label: 'Pending: 500',
-                                                    data: [70, 140, 80, 120, 70, 135, 110],
-                                                    backgroundColor: '#4285F4',
-                                                    borderRadius: 4,
-                                                    barThickness: 5
+                                                    options: {
+                                                    responsive: true,
+                                                    plugins: {
+                                                        legend: {
+                                                        position: 'top',
+                                                        labels: {
+                                                            usePointStyle: true,
+                                                            pointStyle: 'rectRounded',
+                                                            padding: 20
+                                                        }
+                                                        },
+                                                        tooltip: {
+                                                        callbacks: {
+                                                            label: function(context) {
+                                                            return context.dataset.label.split(':')[0] + ': ' + context.raw;
+                                                            }
+                                                        }
+                                                        }
                                                     },
-                                                    {
-                                                    label: 'Overdue: 1500',
-                                                    data: [50, 120, 60, 90, 80, 95, 85],
-                                                    backgroundColor: '#FFA726',
-                                                    borderRadius: 4,
-                                                    barThickness: 5
-                                                    }
-                                                ]
-                                                },
-                                                options: {
-                                                responsive: true,
-                                                plugins: {
-                                                    legend: {
-                                                    position: 'top',
-                                                    labels: {
-                                                        usePointStyle: true,
-                                                        pointStyle: 'rectRounded',
-                                                        padding: 20
-                                                    }
-                                                    },
-                                                    tooltip: {
-                                                    callbacks: {
-                                                        label: function(context) {
-                                                        return context.dataset.label.split(':')[0] + ': ' + context.raw;
+                                                    scales: {
+                                                        x: {
+                                                        stacked: false,
+                                                        grid: { display: false },
+                                                        ticks: {
+                                                            color: '#555',
+                                                            font: { size: 12 }
+                                                        }
+                                                        },
+                                                        y: {
+                                                        beginAtZero: true,
+                                                        grid: {
+                                                            drawBorder: false,
+                                                            color: '#eee'
+                                                        },
+                                                        ticks: {
+                                                            color: '#aaa'
+                                                        }
                                                         }
                                                     }
                                                     }
-                                                },
-                                                scales: {
-                                                    x: {
-                                                    stacked: false,
-                                                    grid: { display: false },
-                                                    ticks: {
-                                                        color: '#555',
-                                                        font: { size: 12 }
-                                                    }
-                                                    },
-                                                    y: {
-                                                    beginAtZero: true,
-                                                    grid: {
-                                                        drawBorder: false,
-                                                        color: '#eee'
-                                                    },
-                                                    ticks: {
-                                                        color: '#aaa'
-                                                    }
-                                                    }
-                                                }
-                                                }
-                                            });
-                                            </script> -->
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -2141,7 +2141,7 @@ function sb_component_admin() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 p-0">
+                                <div class="col-md-6 p-0 ">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -2149,10 +2149,12 @@ function sb_component_admin() {
                                             </div>
                                             <p class="label_blue">View All</p>
                                         </div>
+                                        <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
                                         <div class="seprator"></div>
-                                        <div class="new_table">
+                                        <div class="new_table sb-area-tickets-dash">
                                             <div class="sb-scroll-area">
-                                                <table class="sb-table sb_table_new sb-table-tickets">
+                                                <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
                                                     <thead>
                                                         <tr>
                                                             <th data-field="title">
@@ -2276,7 +2278,7 @@ function sb_component_admin() {
                         </div>
                     </main>
                 </div>
-            <!-- sahil end -->
+                <!-- sahil end -->
                 
                 <div class="sb-area-conversations">
                     <div class="sb-board">
