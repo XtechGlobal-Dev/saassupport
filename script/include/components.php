@@ -1272,9 +1272,9 @@ function sb_component_admin() {
                                                         </div>
                                                     </div>
                                             </div>
-                                            <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div>
-                                            <!-- <div class="monthlyBarChart">
-                                                <canvas  id="monthlyBarChart"></canvas>
+                                            <!-- <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div> -->
+                                            <div class="monthlyBarChart">
+                                                <canvas id="monthlyBarChart"></canvas>
                                             </div>
                                             <script>
                                                 const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
@@ -1325,7 +1325,7 @@ function sb_component_admin() {
                                                     }
                                                     }
                                                 });
-                                            </script> -->
+                                            </script>
                                         </div>
                                     </section>
                                 </div>
@@ -1569,6 +1569,81 @@ function sb_component_admin() {
                                                 </div>
                                             </div>
                                             <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div>
+                                            <!-- <div class="chatVolChart">
+                                                <canvas id="chatVolChart"></canvas>
+                                            </div>
+                                            <script>
+                                            const chatVolCtx = document.getElementById('chatVolChart').getContext('2d');
+                                            new Chart(chatVolCtx, {
+                                                type: 'bar',
+                                                data: {
+                                                labels: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                                datasets: [
+                                                    {
+                                                    label: 'Reply Done: 100',
+                                                    data: [30, 60, 40, 50, 30, 45, 40],
+                                                    backgroundColor: '#4CAF50',
+                                                    borderRadius: 4,
+                                                    barThickness: 5
+                                                    },
+                                                    {
+                                                    label: 'Pending: 500',
+                                                    data: [70, 140, 80, 120, 70, 135, 110],
+                                                    backgroundColor: '#4285F4',
+                                                    borderRadius: 4,
+                                                    barThickness: 5
+                                                    },
+                                                    {
+                                                    label: 'Overdue: 1500',
+                                                    data: [50, 120, 60, 90, 80, 95, 85],
+                                                    backgroundColor: '#FFA726',
+                                                    borderRadius: 4,
+                                                    barThickness: 5
+                                                    }
+                                                ]
+                                                },
+                                                options: {
+                                                responsive: true,
+                                                plugins: {
+                                                    legend: {
+                                                    position: 'top',
+                                                    labels: {
+                                                        usePointStyle: true,
+                                                        pointStyle: 'rectRounded',
+                                                        padding: 20
+                                                    }
+                                                    },
+                                                    tooltip: {
+                                                    callbacks: {
+                                                        label: function(context) {
+                                                        return context.dataset.label.split(':')[0] + ': ' + context.raw;
+                                                        }
+                                                    }
+                                                    }
+                                                },
+                                                scales: {
+                                                    x: {
+                                                    stacked: false,
+                                                    grid: { display: false },
+                                                    ticks: {
+                                                        color: '#555',
+                                                        font: { size: 12 }
+                                                    }
+                                                    },
+                                                    y: {
+                                                    beginAtZero: true,
+                                                    grid: {
+                                                        drawBorder: false,
+                                                        color: '#eee'
+                                                    },
+                                                    ticks: {
+                                                        color: '#aaa'
+                                                    }
+                                                    }
+                                                }
+                                                }
+                                            });
+                                            </script> -->
                                         </div>
                                     </div>
                                 </div>
@@ -1753,7 +1828,7 @@ function sb_component_admin() {
                 </div>
             <!-- sahil end -->
                 
-                <div class="sb-active sb-area-conversations">
+                <div class="sb-area-conversations">
                     <div class="sb-board">
                         <div class="sb-admin-list<?php echo sb_get_multi_setting('departments-settings', 'departments-show-list') ? ' sb-departments-show' : '' ?>">
                             <div class="sb-top">
