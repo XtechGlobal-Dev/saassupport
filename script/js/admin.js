@@ -116,6 +116,18 @@
     var select_departments;
     var active_admin_area;
 
+    console.log(
+        "conversations >>", conversations,
+        "conversation_area >>", conversation_area,
+        "conversations_area >>", conversations_area,
+        "conversations_area_list >>", conversations_area_list,
+        "conversations_user_details >>", conversations_user_details,
+        "conversations_admin_list >>", conversations_admin_list,
+        "conversations_admin_list_ul >>", conversations_admin_list_ul,
+        "conversations_filters >>", conversations_filters,
+        "conversations_qea >>", conversations_qea
+    );
+
     /*
     * ----------------------------------------------------------
     * External plugins
@@ -404,6 +416,7 @@
     function cloudURL() {
         return SB_ADMIN_SETTINGS.cloud ? ('&cloud=' + SB_ADMIN_SETTINGS.cloud.token) : '';
     }
+    console.log("cloudURL()", cloudURL());
 
     function urlStrip(url) {
         return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/$/, '');

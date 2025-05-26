@@ -12,6 +12,13 @@
         conversations_filters = conversations_admin_list.find('.sb-select');
         conversations_user_details = conversations_area.find('.sb-user-details');
 
+        // Dashboard
+        dash_area = admin.find('.sb-dashboard');
+        // users_table = users_area.find('.sb-table-users');
+        // users_table_menu = users_area.find('.sb-menu-users');
+        // users_filters = users_area.find('.sb-filter-btn .sb-select');
+
+
         /*Users*/
         users_area = admin.find('.sb-area-users');
         users_table = users_area.find('.sb-table-users');
@@ -62,9 +69,20 @@
         window.onpopstate = function () {
             admin.sbHideLightbox();
             if (responsive && conversations_area.sbActive() && conversation_area.sbActive()) {
+                 console.log("conversations_area");
+                 debugger
                 SBConversations.mobileCloseConversation();
             }
-            if (SBF.getURL('user')) {
+             if (SBF.getURL('dashboard')) {
+                console.log("dashboard");
+                 debugger
+                if (!dash_area.sbActive()) {
+                    header.find('.sb-admin-nav #sb-dashboard').click();
+                }
+                SBProfile.show(SBF.getURL('user'));
+            } else if (SBF.getURL('user')) {
+                console.log("user");
+                 debugger
                 if (!users_area.sbActive()) {
                     header.find('.sb-admin-nav #sb-users').click();
                 }
