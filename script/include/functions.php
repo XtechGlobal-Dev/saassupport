@@ -36,14 +36,12 @@ global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
 const SELECT_FROM_TICKETS = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
-            p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
+            p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color
      FROM sb_tickets t
      LEFT JOIN contacts c ON t.contact_id = c.id
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN priorities p ON t.priority_id = p.id
-     LEFT JOIN services s ON t.service_id = s.id
-     LEFT JOIN departments d ON t.department_id = d.id
      LEFT JOIN ticket_status ts ON t.status_id = ts.id';
 
 

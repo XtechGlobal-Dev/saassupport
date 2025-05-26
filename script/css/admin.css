@@ -11143,24 +11143,27 @@ a.sb-btn-white.sb-loading:hover:before,
 
 .sb-profile-edit-box,
 .sb-profile-box,
-.sb-ticket-edit-box,
 .sb-ticket-box {
   height: calc(100% - 50px);
   max-width: 1000px;
 }
 .sb-profile-edit-box .sb-main,
 .sb-profile-box .sb-main,
-.sb-ticket-edit-box .sb-main,
 .sb-ticket-box .sb-main {
   display: flex;
   padding: 0 20px;
 }
 .sb-profile-edit-box .sb-main > div,
 .sb-profile-box .sb-main > div,
-.sb-ticket-edit-box .sb-main > div,
 .sb-ticket-box .sb-main > div {
   height: 100%;
   width: 50%;
+}
+
+.sb-ticket-edit-box,
+.sb-ticket-custom-fields-edit-box {
+  height: calc(100% - 50px);
+  max-width: 1000px;
 }
 
 .sb-direct-message-box,

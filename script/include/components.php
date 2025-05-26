@@ -163,7 +163,7 @@ function sb_profile_edit_box() { ?>
     </div>
 <?php }
 function sb_ticket_box() { ?>
-    <div class="sb-profile-box sb-lightbox">
+    <div class="sb-lightbox">
         <div class="sb-top-bar">
             
             <div>
@@ -189,6 +189,9 @@ function sb_ticket_box() { ?>
     </div>
 <?php }
 function sb_ticket_edit_box() { ?>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
     <div class="sb-ticket-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -208,9 +211,9 @@ function sb_ticket_edit_box() { ?>
         <div class="sb-main sb-scroll-area" >
             <div class="first-section" style="display: flex;">
                 <div class="sb-details">
-                    <div class="sb-edit-box" style="width: 98%;">
+                    <div class="sb-edit-box">
                         <div id="subject" data-type="text" class="sb-input">
-                            <span><?php sb_e('Subject') ?></span>
+                            <span class="required-label"><?php sb_e('Subject') ?></span>
                             <input type="text" name="subject" required />
                         </div>
 
@@ -220,49 +223,44 @@ function sb_ticket_edit_box() { ?>
                         </div>
 
                         <div id="contact_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Contact') ?></span>
-                            <select>
-                                <option value=""><?php sb_e('Select Contact') ?></option>
-                                <option value="1">ABC Traders</option>
-                                <option value="2" selected="selected">XYZ company</option>
-                            </select>
+                            <span class="left-sec"><?php sb_e('Customer') ?></span>
+                            <div class="right-sec">
+                                <select id="select-customer" style="width:100%;" ></select>
+                            </div>
+                        </div>
+
+                        <div id="cust_name" data-type="text" class="sb-input" >
+                            <span class="required-label"><?php sb_e('Name') ?></span>
+                            <input type="text" name="name" required value="" disabled />
+                        </div>
+
+                        <div id="cust_email" data-type="text" class="sb-input" >
+                            <span class="required-label"><?php sb_e('Email') ?></span>
+                            <input type="email" name="email" required value="" disabled />
                         </div>
 
                         <div id="assigned_to" data-type="select" class="sb-input">
-                            <span><?php sb_e('Assigned To') ?></span>
-                            <select>
-                                <option value="1" selected>System Admin</option>
-                                <option value="1" selected="selected">System Admin</option>
-                            </select>
+                            <span class="left-sec"><?php sb_e('Assigned To') ?></span>
+                            <div class="right-sec">
+                                <select id="select-user" style="width:100%;"></select>
+                            </div>
                         </div>
 
                         <div id="priority_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Priority') ?></span>
-                            <select>
+                            <span class="required-label"><?php sb_e('Priority') ?></span>
+                            <select required>
                                 <option value=""><?php sb_e('Select Priority') ?></option>
                                 <option value="1" data-color="danger">Critical</option>
                                 <option value="2" data-color="danger">High</option>
-                                <option value="4" data-color="secondary" selected="selected">Low</option>
+                                <option value="4" data-color="secondary">Low</option>
                                 <option value="3" data-color="warning">Medium</option>
-                            </select>
-                        </div>
-
-                        <div id="status_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Status') ?></span>
-                            <select>
-                                <option value="1" selected="selected">Open</option>
-                                <option value="2">In Progress</option>
-                                <option value="3">Hold</option>
-                                <option value="4">Waiting for Customer Response</option>
-                                <option value="5">Resolved</option>
-                                <option value="6">Closed</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="sb-additional-details">
                     <div class="sb-edit-box">
-                        <div id="service_id" data-type="select" class="sb-input">
+                        <!--div id="service_id" data-type="select" class="sb-input">
                             <span><?php sb_e('Service') ?></span>
                             <select>
                                 <option value=""><?php sb_e('Select Service') ?></option>
@@ -270,47 +268,499 @@ function sb_ticket_edit_box() { ?>
                                 <option value="2">Network issue fix</option>
                                 <option value="3">Software Development</option>
                             </select>
-                        </div>
+                        </div-->
 
+                        <?php
+                        $departments = sb_get_departments();
+                        if (!empty($departments)) {
+                        ?>
                         <div id="department_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Department') ?></span>
+                            <span>Department</span>
                             <select>
-                                <option value=""><?php sb_e('Select Department') ?></option>
-                                <option value="1" selected="selected">IT Support</option>
+                                <option value=""><?php echo sb_('Select Department');?></option>
+                                <?php
+                                $code = '';
+                                foreach ($departments as $key => $value) {
+                                    $code .= '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                }
+                                echo $code;
+                                ?>
                             </select>
                         </div>
-
-                        <div id="cc" data-type="select" class="sb-input">
+                        <?php } ?>
+                        
+                       <div id="cc" data-type="select" class="sb-input">
                             <span><?php sb_e('CC') ?></span>
                             <select>
-                                <option value="1" selected="selected">System Admin</option>
+                                <option value="1">System Admin</option>
                             </select>
                         </div>
 
+                        <?php 
+                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                        $tagsHtml = '';
+                        $count = count($tags);
+                        if ($count > 0) {
+                        ?>
                         <div id="tags" data-type="select" class="sb-input">
                             <span><?php sb_e('Tags') ?></span>
                             <select>
-                                <option value="1" selected="selected">Test tag</option>
+                                <option value="" >Select Tag</option>
+                                <?php
+                                for ($i = 0; $i < $count; $i++) {
+                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
+                                }
+                                echo $tagsHtml;
+                                ?>
                             </select>
                         </div>
+                        <?php } ?>
                         
-
-                        <div id="attachments" data-type="file" class="sb-input">
+                        <div id="status_id" data-type="select" class="sb-input">
+                            <span class="required-label"><?php sb_e('Status') ?></span>
+                            <select required>
+                                <option value="">Select Status</option>
+                                <option value="1">Open</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">Hold</option>
+                                <option value="4">Waiting for Customer Response</option>
+                                <option value="5">Resolved</option>
+                                <option value="6">Closed</option>
+                            </select>
+                        </div>
+                        <!--div data-type="file" class="sb-input">
                             <span><?php sb_e('Attachments') ?></span>
                             <input type="file" name="attachments[]" multiple />
                             <div id="file-preview"></div>
-                        </div>
+                        </div-->
                     </div>
                 </div>
             </div>
-            <div id="description" class="description sb-input" data-type="textarea" style="margin: 20px 0 0 0;">
-                <span><?php sb_e('Description') ?></span>
-                <textarea name="description" rows="4" required></textarea>
+            <div id="description" class="description sb-input" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                <div style="width:15%;display: inline-block;padding:0 4px 0 0;vertical-align: top;">
+                    <span style="font-weight: 600;font-size: 14px;line-height: 25px;color: #566069;"><?php sb_e('Description') ?></span></div>
+                <div style="width:84%;display: inline-block;padding:0">
+                    <div id="ticketdescription" style="height: 180px;"></div>
+                </div>
                 <input id="ticket_id" type="hidden" name="ticket_id" />
                 <input id="conversation_id" type="hidden" name="conversation_id" />
+                <!-- Hidden input to store uploaded file data -->
+                <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+            </div>
+            <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
+            <!-- File Attachments Section -->
+            <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
+                <div class="sb-input">
+                    <span >Attachments</span>
+                    <div class="custom-file">
+                        <input type="file" class="form-control" id="ticket-attachments" multiple>
+                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <!-- Upload Progress -->
+                <div class="progress mt-2 d-none" id="upload-progress-container">
+                    <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                
+                <!-- Existing File Preview Container -->
+                <div class="mt-2 d-none" id="existing-file-preview-container">
+                    <span>Current Attachments</span>
+                    <div class="row" id="current-attachments"></div>
+                </div>
+
+                <!-- File Preview Container -->
+                <div class="mt-3" id="file-preview-container">
+                    <div class="row" id="file-preview-list"></div>
+                </div>
+                
+                
             </div>
         </div>
     </div>
+    <style>
+    #ticketCustomFieldsContainer, #ticketFileAttachments, .first-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #ticketCustomFieldsContainer > .sb-input, #ticketFileAttachments > div, .first-section > div {
+        flex: 0 0 calc(50% - 10px); /* 2 columns with spacing */
+        box-sizing: border-box;
+    }
+    #ticketCustomFieldsContainer .sb-input{margin-top:0}
+    .required-label::after {
+        content: " *";
+        color: red;
+    }
+    #tickets-custom-fields .custom-fields-table {
+        color: #566069;
+        font-size: 14px;
+        margin: 10px 0 0 0;
+        text-align: center;
+    }
+    #tickets-custom-fields .custom-fields-table th,
+    #tickets-custom-fields .custom-fields-table td {
+        padding: 6px 12px; /* Increase horizontal padding */
+        text-align: center;
+    }
+
+    #tickets-custom-fields .sb-new-ticket-custom-field{
+        height: 30px;
+        line-height: 30px;
+        padding: 0 8px 0 25px;
+        margin-left: 13px;
+    }
+    .sb-table-tickets tr {line-height: 25px;}
+    span.left-sec {width: 15%;}
+    div.right-sec {width: 84%;padding: 0;}
+    
+    #file-preview-list .col-md-2 {padding:0}
+    #file-preview-list .card {margin: 6px;height: 100%;}
+    #file-preview-list .card-body {display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    height: 100%;
+    }
+
+    .custom-file #ticket-attachments {font-size: 12px;}
+    </style>
+    <script>
+        $('#select-customer').select2({
+            placeholder: 'Type and search...',
+            ajax: {
+            url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
+            method: 'POST',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                    return {
+                        function: 'ajax_calls',
+                        'calls[0][function]': 'search-get-users',
+                        'login-cookie': SBF.loginCookie(),
+                        'q': params.term,   // ✅ Pass search term
+                        'type': 'lead'
+                    };
+                },
+                processResults: function (response) {
+                //response = JSON.parse(response);
+                if (response[0][0] == 'success') {
+                    const users = response[0][1];
+                    console.log("Processed users:", response[0][1]);
+                   // document.querySelector('#name select').value = response.priority_id;
+                     return {
+                        results: users.map(user => ({
+                        id: user.id,
+                        text: user.first_name + ' ' + user.last_name,
+                        email: user.email,
+                        name: user.first_name + ' ' + user.last_name
+                        }))
+                    };
+                }
+            },
+            cache: true
+            },
+            minimumInputLength: 1
+        });
+
+        
+        $('#select-customer').on('select2:select', function (e) {
+            const selectedCustomer = e.params.data;
+
+            console.log(selectedCustomer);
+            // Now fill other input fields
+            document.querySelector('#cust_name input').value = selectedCustomer.name;
+            document.querySelector('#cust_email input').value = selectedCustomer.email;
+            //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
+        });
+        
+        $('#select-user').select2({
+            placeholder: 'Type and search...',
+            ajax: {
+            url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
+            method: 'POST',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                    return {
+                        function: 'ajax_calls',
+                        'calls[0][function]': 'search-get-users',
+                        'login-cookie': SBF.loginCookie(),
+                        'q': params.term,   // ✅ Pass search term
+                        'type': 'user'
+                    };
+                },
+                processResults: function (response) {
+                //response = JSON.parse(response);
+                if (response[0][0] == 'success') {
+                    const users = response[0][1];
+                    console.log("Processed users:", response[0][1]);
+                     return {
+                        results: users.map(user => ({
+                        id: user.id,
+                        text: user.first_name + ' ' + user.last_name,
+                        }))
+                    };
+                }
+            },
+            cache: true
+            },
+            minimumInputLength: 1
+        });
+    </script>
+    <!-- Include Bootstrap JS and dependencies -->
+    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- File Upload Handling -->
+    <script>
+        jQuery(document).ready(function($) {
+       
+        // Array to store uploaded files
+        let uploadedFiles = [];
+        
+        // File upload handling
+            document.getElementById('ticket-attachments').addEventListener('change', function(event) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+            
+            // Create FormData object
+            const formData = new FormData();
+            uploadedFiles = [];
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files[]', files[i]);
+            }
+
+            formData.append('function', 'ajax_calls');
+            formData.append('calls[0][function]', 'upload-ticket-attachments');
+            formData.append('login-cookie', SBF.loginCookie());
+            formData.append('ticket_id', 0); // Replace with actual ticket ID
+
+
+            console.log('Files to upload:', files);
+            
+            // Show progress container
+            const progressContainer = document.getElementById('upload-progress-container');
+            const progressBar = document.getElementById('upload-progress');
+            progressContainer.classList.remove('d-none');
+            progressBar.style.width = '0%';
+            progressBar.setAttribute('aria-valuenow', 0);
+            progressBar.textContent = '0%';
+            
+            //Create and configure XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+            
+            // Track upload progress
+            xhr.upload.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    const percentComplete = Math.round((e.loaded / e.total) * 100);
+                    progressBar.style.width = percentComplete + '%';
+                    progressBar.setAttribute('aria-valuenow', percentComplete);
+                    progressBar.textContent = percentComplete + '%';
+                }
+            });
+            
+            // Handle response
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    let res2 = typeof response[0][1] === 'string' ? JSON.parse(response[0][1]) : response[0][1];
+
+                    if (res2.success) {
+                        // Add uploaded files to the array
+                        uploadedFiles = uploadedFiles.concat(res2.files);
+                        
+                        // Update hidden input with file data
+                        console.log('Uploaded files:', uploadedFiles);
+                        document.getElementById('uploaded_files').value = JSON.stringify(uploadedFiles);
+                        
+                        // Display file previews
+                        displayFilePreviews(res2.files);
+                        
+                        // Reset file input
+                        document.getElementById('ticket-attachments').value = '';
+                    } else {
+                        alert('Error: ' + res2.error);
+                    }
+                } else {
+                    alert('Error uploading files. Please try again.');
+                }
+                
+                // Hide progress container after a delay
+                setTimeout(() => {
+                    progressContainer.classList.add('d-none');
+                }, 1000);
+            };
+            
+            // Handle errors
+            xhr.onerror = function() {
+                alert('Error uploading files. Please try again.');
+                progressContainer.classList.add('d-none');
+            };
+            
+            //Send the request
+            xhr.send(formData);
+
+
+        //     const formData = new FormData();
+        //     const files = document.getElementById('attachments').files;
+
+        //     Append selected files to FormData
+        //     for (let i = 0; i < files.length; i++) {
+        //        formData.append('attachments[]', files[i]);
+        //    }
+
+        //     Show progress bar container (if it's hidden)
+        //     progressContainer.classList.remove('d-none');
+
+            
+        //     // Perform Ajax request
+        //     $.ajax({
+        //         url: 'http://localhost/saassupport/script/include/ajax.php',
+        //         type: 'POST',
+        //         data: formData,
+        //         contentType: false,  // Important for FormData
+        //         processData: false,  // Important for FormData
+        //         xhr: function () {
+        //             let xhr = new window.XMLHttpRequest();
+        //             xhr.upload.addEventListener('progress', function (e) {
+        //                 if (e.lengthComputable) {
+        //                     const percentComplete = Math.round((e.loaded / e.total) * 100);
+        //                     progressBar.style.width = percentComplete + '%';
+        //                     progressBar.setAttribute('aria-valuenow', percentComplete);
+        //                     progressBar.textContent = percentComplete + '%';
+        //                 }
+        //             }, false);
+        //             return xhr;
+        //         },
+        //         success: function (response) {
+        //             try {
+        //                 const data = typeof response === 'string' ? JSON.parse(response) : response;
+        //                 if (data.success) {
+        //                     // Update uploaded files array
+        //                     uploadedFiles = uploadedFiles.concat(data.files);
+        //                     document.getElementById('uploaded_files').value = JSON.stringify(uploadedFiles);
+        //                     displayFilePreviews(data.files);
+        //                     document.getElementById('attachments').value = '';
+        //                 } else {
+        //                     alert('Error: ' + data.error);
+        //                 }
+        //             } catch (e) {
+        //                 alert('Error parsing response.');
+        //             }
+        //         },
+        //         error: function () {
+        //             alert('Error uploading files. Please try again.');
+        //         },
+        //         complete: function () {
+        //             setTimeout(() => {
+        //                 progressContainer.classList.add('d-none');
+        //             }, 1000);
+        //         }
+        //     });
+
+
+        });
+ 
+        
+        // Function to display file previews
+        function displayFilePreviews(files) {
+            const previewList = document.getElementById('file-preview-list');
+            
+            files.forEach(file => {
+                const col = document.createElement('div');
+                col.className = 'col-md-2 mb-2';
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body p-2';
+                
+                // Determine file type icon
+                let fileIcon = 'bi-file-earmark';
+                const fileType = file.file_type.split('/')[0];
+                if (fileType === 'image') {
+                    fileIcon = 'bi-file-earmark-image';
+                } else if (fileType === 'application') {
+                    fileIcon = 'bi-file-earmark-pdf';
+                } else if (fileType === 'text') {
+                    fileIcon = 'bi-file-earmark-text';
+                }
+                
+                // Create preview content
+                let previewContent = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi ${fileIcon} me-2" style="font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1 text-truncate">
+                            <div class="text-truncate">${file.original_filename}</div>
+                            <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `;
+                
+                // For images, add a thumbnail preview
+                if (fileType === 'image') {
+                    previewContent = `
+                        <div class="text-center mb-2">
+                            <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 text-truncate">
+                                <div class="text-truncate">${file.original_filename}</div>
+                                <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                cardBody.innerHTML = previewContent;
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                previewList.appendChild(col);
+                
+                // Add event listener to remove button
+                const removeBtn = cardBody.querySelector('.remove-file');
+                removeBtn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeFile(index);
+                });
+            });
+        }
+        
+        // Function to remove a file
+        function removeFile(index) {
+            if (index >= 0 && index < uploadedFiles.length) {
+                uploadedFiles.splice(index, 1);
+                document.getElementById('uploaded_files').value = JSON.stringify(uploadedFiles);
+                
+                // Refresh all previews
+                const previewList = document.getElementById('file-preview-list');
+                previewList.innerHTML = '';
+                displayFilePreviews(uploadedFiles);
+            }
+        }
+        
+        // Function to format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+    });
+    </script>
 <?php } ?>
 <?php
 function sb_login_box() { ?>
@@ -2154,7 +2604,7 @@ function sb_component_admin() {
                                 <thead>
                                     <tr>
                                         <th data-field="id">
-                                            <input type="checkbox" />
+                                            <!--input type="checkbox" /-->
                                             <?php sb_e('ID') ?>
                                         </th>
                                         <th data-field="subject">
@@ -2166,9 +2616,9 @@ function sb_component_admin() {
                                         <th data-field="department">
                                             <?php sb_e('Department') ?>
                                         </th>
-                                        <th data-field="service">
-                                            <?php sb_e('Service') ?>
-                                        </th>
+                                        <!--th data-field="service">
+                                            <?php //sb_e('Service') ?>
+                                        </th-->
                                         <th data-field="contact">
                                             <?php sb_e('Contact') ?>
                                         </th>
@@ -2857,4 +3307,377 @@ function sb_docs_link($id = '', $class = 'sb-docs') {
     }
 }
 
+function sb_get_ticket_custom_fields() {
+   $query = "SELECT * FROM custom_fields ORDER BY `order`";
+   return sb_db_get($query,false);
+}
+
+function ticket_settings($id = '', $class = 'sb-docs') {
+    // Get all custom fields
+    $customFields = sb_get_ticket_custom_fields();
+    $code = '<div id="tickets-custom-fields" data-type="multi-input" class="sb-setting sb-type-multi-input">
+                <div class="sb-setting-content"><h2>Ticket Custom fields</h2><p>Choose which custom fields to include in the new ticket form.</p></div>
+                <div class="input">
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <a class="sb-btn sb-icon sb-new-ticket-custom-field">
+                                            <i class="sb-icon-sms"></i> Add New Field
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped custom-fields-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Type</th>
+                                                        <th>Required</th>
+                                                        <th>Active</th>
+                                                        <th>Order</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>';
+                                                    foreach($customFields as $field) {
+                                                    $code .= '<tr data-id="custom_field_row_'.$field["id"].'">
+                                                        <td>'.$field["title"].'</td>
+                                                        <td>'.strtoupper($field["type"]).'</td>
+                                                        <td>'.($field["required"] ? "Yes" : "No") .'</td>
+                                                        <td>'.($field["is_active"] ? "Yes" : "No") .'</td>
+                                                        <td>'.($field["order"]) .'</td>
+                                                        <td>
+                                                            <button data-id="'.$field["id"].'" class="btn btn-sm btn-primary edit-custom-field">
+                                                                <i class="bi bi-pencil">Edit</i>
+                                                            </button>
+                                                            <button data-id="'.$field["id"].'" class="btn btn-sm btn-danger delete-custom-field">
+                                                                <i class="bi bi-trash">Delete</i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>';
+                                                    }
+                                                    
+                                                    
+                                            $code .= '
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Field Modal -->
+            <div class="sb-ticket-custom-fields-edit-box sb-lightbox">
+                <div class="sb-info"></div>
+                <div class="sb-top-bar">
+                    <div>
+                        <h2 style="margin-bottom: 0;">
+                            Create Custom Field
+                        </h2>   
+                    </div>
+                    <div>
+                        <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-custom-fields" data-hide="sb-profile-area" data-show="sb-edit-area">
+                            <i class="sb-icon-sms"></i> Save Changes
+                        </a>
+                        <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                            <i class="sb-icon-close"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sb-main sb-scroll-area">
+                    <div class="sb-details">
+                        <div class="sb-title">
+                            <?php sb_e("Create Custom Field"); ?>
+                        </div>
+                        <div class="sb-edit-box sb-ticket-list" id="customFieldForm">
+                            <div id="title" data-type="text" class="sb-input">
+                                <span>Title</span>
+                                <input type="text" class="form-control" name="title" required>
+                            </div>
+
+                            <div id="type" data-type="select" class="sb-input sb-input-select">
+                                <span>Type</span>
+                                <select class="form-control" name="type" required>
+                                    <option value="text" selected>Text</option>
+                                    <option value="textarea">Textarea</option>
+                                    <option value="select">Select</option>
+                                    <option value="checkbox">Checkbox</option>
+                                </select>
+                            </div>
+
+                            <div id="optionsContainer" data-type="textarea" class="sb-input" style="display: none;">
+                                <span>Options</span>
+                                <textarea class="form-control" name="options" rows="3" placeholder="Separate each option by a pipe `|`.  Example: Option1|Option2|Option3"></textarea>
+                            </div>
+
+                            <div id="required" data-type="checkbox" class="sb-input sb-input-checkbox">
+                                <span>Required?</span>
+                                    <input class="form-control" type="checkbox" name="required" value="">
+                            </div>
+
+                            <div id="default_value" data-type="text" class="sb-input">
+                                <span>Default Value</span>
+                                <input type="text" class="form-control" name="default_value">
+                            </div>
+
+                            <div id="order" data-type="number" class="sb-input">
+                                <span>Order</span>
+                                <input type="number" class="form-control" name="order" value="0">
+                            </div>
+
+                            <div id="is_active" data-type="checkbox" class="sb-input">
+                                <span>Active?</span>
+                                    <input class="form-control" type="checkbox" name="is_active" value="1" checked>
+                            </div>
+                            <div id="customFieldsContainer">
+                            </div>
+
+                            <!--div class="sb-input">
+                                <button type="button" id="save-custom-fields" class="btn btn-primary">Create</button>
+                            </div-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--script>
+            // Initialize custom fields data
+            fetch("api/get-custom-fields.php")
+                .then(response => response.json())
+                .then(data => {
+                    window.customFieldsData = data;
+                    // Load and display custom fields
+                    loadCustomFields();
+                    //console.log(window.customFieldsData);
+                })
+                .catch(error => console.error("Error loading custom fields:", error));
+
+            // Load custom fields data and display them
+            async function loadCustomFields() {
+                try {
+                    const response = await fetch("api/get-custom-fields.php");
+                    const fields = await response.json();
+                    
+                    const container = document.getElementById("customFieldsContainer");
+                    container.innerHTML = ""; // Clear any existing fields
+
+                    fields.forEach(field => {
+                        const fieldHtml = getFieldHtml(field);
+                        container.innerHTML += fieldHtml;
+                    });
+                } catch (error) {
+                    console.error("Error loading custom fields:", error);
+                }
+            }
+
+            // Function to generate HTML for a custom field
+            function getFieldHtml(field) {
+                console.log(field.required);
+                let html = "<div class=\"form-group mb-3\">";
+                html += `<label for="custom_${field.id}" class="${field.required == \"1\" ? "required-field" : ""}">${field.title}</label>`;
+
+                switch(field.type) {
+                    case "text":
+                        html += `<input type="text" class="form-control" id="custom_${field.id}" 
+                                        name="custom_fields[${field.id}]" 
+                                        ${field.required == "1" ? "required" : ""} 
+                                        placeholder="${field.title}">`;
+                        break;
+                    
+                    case "textarea":
+                        html += `<textarea class="form-control" id="custom_${field.id}" 
+                                            name="custom_fields[${field.id}]" 
+                                            rows="3" 
+                                            ${field.required  == "1" ? "required" : ""} 
+                                            placeholder="${field.title}"></textarea>`;
+                        break;
+                    
+                    case "select":
+                        // Split options by comma and trim whitespace
+                        const options = (field.options || "").split("|").map(opt => opt.trim()).filter(opt => opt);
+                        html += `<select class="form-control" id="custom_${field.id}" 
+                                        name="custom_fields[${field.id}]" 
+                                        ${field.required == "1" ? "required" : ""}>`;
+                        html += "<option value="">Select " + field.title + "</option>";
+                        options.forEach(option => {
+                            html += `<option value="${option}">${option}</option>`;
+                        });
+                        html += "</select>";
+                        break;
+                    
+                    case "checkbox":
+                        html += `<div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="custom_${field.id}" 
+                                            name="custom_fields[${field.id}]" 
+                                            value="1" 
+                                            ${field.required == "1" ? "required" : ""}>
+                                    <label class="form-check-label" for="custom_${field.id}">${field.title}</label>
+                                </div>`;
+                        break;
+                }
+                html += "</div>";
+                return html;
+            }
+        </script-->
+            
+            
+        <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
+        <!--script>
+            function editField(id) {
+                // Get field details
+                fetch("api/get-custom-field.php?id=" + id)
+                    .then(response => response.json())
+                    .then(field => {
+                        // Fill form with field data
+                        document.getElementById("title").value = field.title;
+                        document.getElementById("type").value = field.type;
+                        document.getElementById("required").checked = field.required;
+                        document.getElementById("default_value").value = field.default_value;
+                        document.getElementById("order").value = field.order;
+                        document.getElementById("is_active").checked = field.is_active === 1;
+                        
+                        // Add hidden field ID for editing
+                        const fieldIdInput = document.getElementById("fieldId");
+                        if (!fieldIdInput) {
+                            const input = document.createElement("input");
+                            input.type = "hidden";
+                            input.id = "fieldId";
+                            input.name = "id";
+                            input.value = id;
+                            document.getElementById("customFieldForm").appendChild(input);
+                        } else {
+                            fieldIdInput.value = id;
+                        }
+                        
+                        // Handle options for select and checkbox fields
+                        const optionsContainer = document.getElementById("optionsContainer");
+                        if (field.type === "select" || field.type === "checkbox") {
+                            optionsContainer.style.display = "block";
+                            // Split options by comma and join with newlines
+                            document.getElementById("options").value = field.options ? field.options.split(",").join("\n") : "";
+                        } else {
+                            optionsContainer.style.display = "none";
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+
+                // Show the edit modal
+                const modal = new bootstrap.Modal(document.getElementById("createFieldModal"));
+                modal.show();
+            }
+
+            // Delete field
+            function deleteField(id) {
+                if (confirm("Are you sure you want to delete this field?")) {
+                    fetch("api/delete-custom-field.php?id=" + id, { method: "DELETE" })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.success) {
+                                // Redirect to custom fields listing page
+                                window.location.href = "custom-fields.php";
+                            } else {
+                                alert(result.error);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            alert("An error occurred while deleting the field");
+                        });
+                }
+            }
+
+            // Show/hide options input based on field type
+            document.getElementById("type").addEventListener("change", function() {
+                const optionsContainer = document.getElementById("optionsContainer");
+                if (this.value === "select" || this.value === "checkbox") {
+                    optionsContainer.style.display = "block";
+                } else {
+                    optionsContainer.style.display = "none";
+                }
+            });
+
+            // Initialize form submission state
+            let isSubmitting = false;
+            const submitButton = document.getElementById("customFieldForm").querySelector("button[type=\"submit\"]");
+            const originalText = submitButton.innerHTML;
+
+            // Handle form submission
+            document.getElementById("customFieldForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                
+                if (isSubmitting) {
+                    alert("Please wait... The form is already being submitted.");
+                    return;
+                }
+
+                isSubmitting = true;
+                submitButton.disabled = true;
+                submitButton.innerHTML = "<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span> Saving...";
+
+                try {
+                    // Get form data
+                    const formData = new FormData(event.target);
+                    let formObject = [];
+                    formObject["function"] = "ajax_calls";
+                    formObject["calls[0][function]"] = "add-custom-field";
+                    formData.forEach((value, key) => {
+                        var innerObj = {};
+                        innerObj["calls[0]"][key] = value;
+                        formObject.push(innerObj)
+                    });
+                    
+
+                
+
+                    // Get the current field ID if editing
+                    const fieldId = document.getElementById("fieldId");
+                    if (fieldId) {
+                    //  formObject.id = fieldId.value;
+                    }
+
+                    // Determine which endpoint to use based on presence of field ID
+                    const endpoint = formObject.id ? "api/edit-custom-field.php" : "script/include/ajax.php";
+                    
+                    const response = await fetch(endpoint, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formObject)
+                    });
+
+                    const result = await response.json();
+
+                    console.log("oooooo",response);
+                    if (response.success) {
+                    console.log(response);
+                    // alert(result.message);
+                    // location.reload();
+                    } else {
+                        alert(result.error);
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        isSubmitting = false;
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred while saving the field");
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                    isSubmitting = false;
+                }
+            });
+
+        
+        </script-->
+        ';
+
+    return $code;
+}
 ?>

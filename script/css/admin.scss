@@ -6644,7 +6644,6 @@ a.sb-btn-white,
 
 .sb-profile-edit-box,
 .sb-profile-box,
-.sb-ticket-edit-box,
 .sb-ticket-box {
     height: calc(100% - 50px);
     max-width: 1000px;
@@ -6659,6 +6658,13 @@ a.sb-btn-white,
         }
     }
 }
+
+.sb-ticket-edit-box,
+.sb-ticket-custom-fields-edit-box {
+    height: calc(100% - 50px);
+    max-width: 1000px;
+}
+
 
 .sb-direct-message-box,
 #sb-whatsapp-send-template-box {
