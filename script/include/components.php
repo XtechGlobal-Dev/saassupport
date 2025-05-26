@@ -163,7 +163,7 @@ function sb_profile_edit_box() { ?>
     </div>
 <?php }
 function sb_ticket_box() { ?>
-    <div class="sb-profile-box sb-lightbox">
+    <div class="sb-lightbox">
         <div class="sb-top-bar">
             
             <div>
@@ -225,8 +225,18 @@ function sb_ticket_edit_box() { ?>
                         <div id="contact_id" data-type="select" class="sb-input">
                             <span class="left-sec"><?php sb_e('Customer') ?></span>
                             <div class="right-sec">
-                                <select id="select-customer" style="width:100%;"></select>
+                                <select id="select-customer" style="width:100%;" ></select>
                             </div>
+                        </div>
+
+                        <div id="cust_name" data-type="text" class="sb-input" >
+                            <span class="required-label"><?php sb_e('Name') ?></span>
+                            <input type="text" name="name" required value="" disabled />
+                        </div>
+
+                        <div id="cust_email" data-type="text" class="sb-input" >
+                            <span class="required-label"><?php sb_e('Email') ?></span>
+                            <input type="email" name="email" required value="" disabled />
                         </div>
 
                         <div id="assigned_to" data-type="select" class="sb-input">
@@ -440,10 +450,13 @@ function sb_ticket_edit_box() { ?>
                 if (response[0][0] == 'success') {
                     const users = response[0][1];
                     console.log("Processed users:", response[0][1]);
+                   // document.querySelector('#name select').value = response.priority_id;
                      return {
                         results: users.map(user => ({
                         id: user.id,
-                        text: user.first_name + ' ' + user.last_name
+                        text: user.first_name + ' ' + user.last_name,
+                        email: user.email,
+                        name: user.first_name + ' ' + user.last_name
                         }))
                     };
                 }
@@ -451,6 +464,17 @@ function sb_ticket_edit_box() { ?>
             cache: true
             },
             minimumInputLength: 1
+        });
+
+        
+        $('#select-customer').on('select2:select', function (e) {
+            const selectedCustomer = e.params.data;
+
+            console.log(selectedCustomer);
+            // Now fill other input fields
+            document.querySelector('#cust_name input').value = selectedCustomer.name;
+            document.querySelector('#cust_email input').value = selectedCustomer.email;
+            //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
         });
         
         $('#select-user').select2({
@@ -477,7 +501,7 @@ function sb_ticket_edit_box() { ?>
                      return {
                         results: users.map(user => ({
                         id: user.id,
-                        text: user.first_name + ' ' + user.last_name
+                        text: user.first_name + ' ' + user.last_name,
                         }))
                     };
                 }
