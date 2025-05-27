@@ -835,10 +835,10 @@ function sb_search_get_users($input = null,$type = null) {
     }
 
     $where = '';
-    if ($type == 'user') {
-        $where = '(user_type = "user" OR user_type = "admin")';
-    } else if ($type == 'lead') {
-        $where = '(user_type = "lead" OR user_type = "visitor")';
+    if ($type == 'agent') {
+        $where = '(user_type = "agent" OR user_type = "admin")';
+    } else if ($type == 'user') {
+        $where = '(user_type = "user" OR user_type = "lead" OR user_type = "visitor")';
     } 
 
     $query = 'SELECT id, first_name, last_name,email FROM sb_users where '.$where.' AND (email LIKE "%'.$input.'%" OR first_name LIKE "%'.$input.'%" OR last_name LIKE "%'.$input.'%" OR CONCAT(first_name, " ", last_name) LIKE "%'.$input.'%")  ORDER BY first_name LIMIT 20';
