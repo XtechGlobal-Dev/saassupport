@@ -6256,6 +6256,12 @@ td.sb-offline:after {
   background: #fff;
   border-radius: 0 0 8px 8px;
 }
+.new_table .sb-td-status .span-border {
+  font-weight: 500;
+  font-size: 14px;
+  padding: 9px 23px;
+  border-radius: 800px;
+}
 .new_table .sb-scroll-area {
   border: 1px solid #EBECEF;
   border-radius: 8px;

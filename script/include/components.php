@@ -2195,30 +2195,6 @@ function sb_component_admin() {
                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
                                                             <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
                                                         </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
