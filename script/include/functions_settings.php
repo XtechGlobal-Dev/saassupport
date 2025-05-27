@@ -607,12 +607,16 @@ function sb_get_setting_code($setting) {
 
         $content .= '</div></div>';
 
-        if($id != 'tickets-custom-fields'){
-            return $content;
+        if($id == 'tickets-custom-fields'){
+            return ticket_custom_field_settings();
         }
-        else{
-            return ticket_settings();
-              
+        else if($id == 'tickets-statuses')
+        {
+            return ticket_statuses_settings();
+        }
+        else 
+        {
+            return $content;
         }
         
         /*}

@@ -160,18 +160,26 @@ function sb_ajax_execute() {
             return sb_json_response(sb_edit_ticket($_POST['ticket_id']));
         case 'edit-ticket-custom-field':
             return sb_json_response(sb_edit_ticket_custom_field($_POST['custom_field_id']));
+        case 'edit-ticket-status':
+            return sb_json_response(sb_edit_ticket_status($_POST['custom_field_id']));
         case 'update-ticket':
             return sb_json_response(sb_update_ticket($_POST['data1'], $_POST['ticket_id']));
         case 'add-ticket-custom-field':
              return sb_json_response(sb_add_custom_field($_POST['data1']));
+        case 'add-ticket-status':
+             return sb_json_response(sb_add_ticket_status($_POST['data1']));
         case 'delete-ticket-custom-field':
              return sb_json_response(sb_delete_ticket_custom_field($_POST['id']));
         case 'get-tickets-custom-fields':
              return sb_json_response(sb_get_tickets_custom_active_fields());
+        // case 'get-ticket-statuses':
+        //      return sb_json_response(sb_get_tickets_statuses());
         case 'search-get-users':
              return sb_json_response(sb_search_get_users($_POST['q'],$_POST['type']));
         case 'upload-ticket-attachments':
              return sb_json_response(sb_upload_ticket_attachments($_POST['ticket_id'],$_FILES['files']));
+        case 'remove-ticket-attachment':
+             return sb_json_response(sb_remove_ticket_attachment($_POST['attachment_id'],$_POST['ticket_id']));
         case 'get-conversations':
             return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag')));
         case 'get-new-conversations':

@@ -190,7 +190,8 @@ function sb_ticket_box() { ?>
 <?php }
 function sb_ticket_edit_box() { ?>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<!--script src="https://cdn.quilljs.com/1.3.6/quill.js"></script-->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <div class="sb-ticket-edit-box sb-lightbox">
         <div class="sb-info"></div>
@@ -776,6 +777,54 @@ function sb_ticket_edit_box() { ?>
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
+
+        // Delete existing attachment
+        //document.querySelectorAll('.delete-attachment').forEach(button => {
+            $(document).on('click','.delete-attachment', function() {
+                const attachmentId = this.getAttribute('data-id');
+                const ticketId = this.getAttribute('data-ticket-id');
+                const self = this; // 🔒 Save reference to `this`
+                if (confirm('Are you sure you want to delete this attachment?')) {
+                    // Create FormData object
+                    const formData = new FormData();
+                    formData.append('attachment_id', attachmentId);
+                    formData.append('ticket_id', ticketId);
+                    formData.append('function', 'ajax_calls');
+                    formData.append('calls[0][function]', 'remove-ticket-attachment');
+                    formData.append('login-cookie', SBF.loginCookie());
+                    
+                    // Create and configure XMLHttpRequest
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+                    
+                    // Handle response
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            console.log('Delete response:', response);
+                            if (response[0][1].success) {
+                                // Remove the attachment from the DOM
+                                const card = self.closest('.col-md-2');
+                                card.remove();
+
+                                // Hide Current Attachments section if no attachments left
+                                if($('#current-attachments').children().length === 0) {
+                                    $('#existing-file-preview-container').addClass('d-none');
+                                }
+                            } else {
+                                alert('Error: ' + response.error);
+                            }
+                        } else {
+                            alert('Error deleting attachment. Please try again.');
+                        }
+                    };
+                    
+                    // Send the request
+                    xhr.send(formData);
+                }
+            });
+       // });
+
     });
     </script>
 <?php } ?>
@@ -3329,7 +3378,13 @@ function sb_get_ticket_custom_fields() {
    return sb_db_get($query,false);
 }
 
-function ticket_settings($id = '', $class = 'sb-docs') {
+function sb_get_ticket_statuses() {
+   $query = "SELECT * FROM ticket_status ORDER BY `name`";
+   return sb_db_get($query,false);
+}
+
+
+function ticket_custom_field_settings($id = '', $class = 'sb-docs') {
     // Get all custom fields
     $customFields = sb_get_ticket_custom_fields();
     $code = '<div id="tickets-custom-fields" data-type="multi-input" class="sb-setting sb-type-multi-input">
@@ -3694,6 +3749,104 @@ function ticket_settings($id = '', $class = 'sb-docs') {
         
         </script-->
         ';
+
+    return $code;
+}
+
+function ticket_statuses_settings($id = '', $class = 'sb-docs') {
+    // Get all custom fields
+    $ticketStatuses = sb_get_ticket_statuses();
+    $code = '<div id="tickets-statuses-fields" data-type="multi-input" class="sb-setting sb-type-multi-input">
+                <div class="sb-setting-content">
+                    <h2>Ticket Status</h2>
+                    <p>Choose which custom fields to include in the new ticket form.</p>
+                </div>
+                <div class="input">
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <a class="sb-btn sb-icon sb-ticket-add-new-status">
+                                            <i class="sb-icon-sms"></i> Add New Status
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped ticket-status-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Color</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>';
+                                                    foreach($ticketStatuses as $status) {
+                                                    $code .= '<tr data-id="ticket_status_row_'.$status["id"].'">
+                                                        <td>'.$status["name"].'</td>
+                                                        <td>'.$status["color"].'</td>
+                                                        <td>
+                                                            <button data-id="'.$status["id"].'" class="btn btn-sm btn-primary edit-ticket-status">
+                                                                <i class="bi bi-pencil">Edit</i>
+                                                            </button>
+                                                            <button data-id="'.$status["id"].'" class="btn btn-sm btn-danger delete-ticket-status">
+                                                                <i class="bi bi-trash">Delete</i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>';
+                                                    }
+                                                    
+                                                    
+                                            $code .= '
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sb-ticket-statuses-edit-box sb-lightbox">
+                <div class="sb-info"></div>
+                <div class="sb-top-bar">
+                    <div>
+                        <h2 style="margin-bottom: 0;">
+                            Create Custom Field
+                        </h2>   
+                    </div>
+                    <div>
+                        <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-status" data-hide="sb-profile-area" data-show="sb-edit-area">
+                            <i class="sb-icon-sms"></i> Save Changes
+                        </a>
+                        <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                            <i class="sb-icon-close"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sb-main sb-scroll-area">
+                    <div class="sb-details">
+                        <div class="sb-title">
+                            <?php sb_e("Add New Status"); ?>
+                        </div>
+                        <div class="sb-edit-box sb-ticket-list" id="ticketStatusesForm">
+                            <div id="status_title" data-type="text" class="sb-input">
+                                <span>Title</span>
+                                <input type="text" class="form-control" name="title" required>
+                            </div>
+
+                            <div id="status_color" data-type="text" class="sb-input">
+                                <span>Choose Color</span>
+                                <input type="color" value="#000000" name="statuscolor" id="statuscolor" class="form-control form-control-color" style="height: auto;" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>';
 
     return $code;
 }

@@ -972,6 +972,26 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
     }
 }
 
+
+function sb_remove_ticket_attachment($attachment_id = 0, $ticket_id = 0) {
+    $attachment_id = sb_db_escape($attachment_id, true);
+    $ticket_id = sb_db_escape($ticket_id, true);  
+
+    $attachment = sb_db_get('SELECT filename FROM ticket_attachments WHERE id = ' . $attachment_id . ' AND ticket_id = ' . $ticket_id);
+    sb_db_query('DELETE FROM ticket_attachments WHERE id = ' . $attachment_id . ' AND ticket_id = ' . $ticket_id);
+    if ($attachment) {
+        
+            $file_path = '../../uploads/ticket_attachments/' . $attachment['filename'];
+            // Check if the file exists and delete it
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+        return ['success' => true, 'message' => 'Attachment removed successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Attachment not found or already removed.'];
+    }
+}
+
 function sb_count_tickets() {
     $query = '';
     /*$query = sb_routing_and_department_db('sb_conversations', true);
@@ -1462,10 +1482,29 @@ function sb_add_custom_field($inputs)
     }
 }
 
+function sb_add_ticket_status($inputs)
+{
+    echo $title = sb_db_escape($inputs['title']);
+    echo $type = sb_db_escape($inputs['statuscolor']);
+
+    
+}
 function sb_edit_ticket_custom_field($custom_field_id = 0)
 {
     $custom_field_id = sb_db_escape($custom_field_id, true);
     $query = 'SELECT * FROM custom_fields WHERE id = ' . $custom_field_id;
+    $result = sb_db_get($query);
+    if ($result) {
+        return $result;
+    } else {
+        return false;
+    }   
+}
+
+function sb_edit_ticket_status($custom_field_id = 0)
+{
+    $custom_field_id = sb_db_escape($custom_field_id, true);
+    $query = 'SELECT * FROM ticket_status WHERE id = ' . $custom_field_id;
     $result = sb_db_get($query);
     if ($result) {
         return $result;
@@ -1483,6 +1522,11 @@ function sb_delete_ticket_custom_field($id)
 function sb_get_tickets_custom_active_fields()
 {
     $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order`";
+    return sb_db_get($query,false);
+}
+function sb_get_tickets_statuses()
+{
+    $query = "SELECT * FROM ticket_status ORDER BY `name`";
     return sb_db_get($query,false);
 }
 

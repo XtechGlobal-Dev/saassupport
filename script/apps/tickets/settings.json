@@ -134,6 +134,12 @@
     ]
   },
   {
+    "type": "text",
+    "id": "tickets-statuses",
+    "title": "Ticket statuses",
+    "content": "Manage the ticket statuses. The first status is the default one."
+  },
+  {
     "type": "multi-input",
     "id": "tickets-disable-features",
     "title": "Disable features",
