@@ -290,12 +290,12 @@ function sb_ticket_edit_box() { ?>
                         </div>
                         <?php } ?>
                         
-                       <div id="cc" data-type="select" class="sb-input">
+                       <!--div id="cc" data-type="select" class="sb-input">
                             <span><?php sb_e('CC') ?></span>
                             <select>
                                 <option value="1">System Admin</option>
                             </select>
-                        </div>
+                        </div-->
 
                         <?php 
                         $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
@@ -3480,13 +3480,12 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs') {
                                     <option value="text" selected>Text</option>
                                     <option value="textarea">Textarea</option>
                                     <option value="select">Select</option>
-                                    <option value="checkbox">Checkbox</option>
                                 </select>
                             </div>
 
                             <div id="optionsContainer" data-type="textarea" class="sb-input" style="display: none;">
                                 <span>Options</span>
-                                <textarea class="form-control" name="options" rows="3" placeholder="Separate each option by a pipe `|`.  Example: Option1|Option2|Option3"></textarea>
+                                <textarea class="form-control" name="options" rows="4" placeholder="Separate each option by a pipe `|`.  Example: Option1|Option2|Option3"></textarea>
                             </div>
 
                             <div id="required" data-type="checkbox" class="sb-input sb-input-checkbox">
@@ -3789,10 +3788,16 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs') {
                                                         <td>
                                                             <button data-id="'.$status["id"].'" class="btn btn-sm btn-primary edit-ticket-status">
                                                                 <i class="bi bi-pencil">Edit</i>
-                                                            </button>
+                                                            </button>';
+
+                                                        if($status['id'] > 5) {
+                                                        $code .='
                                                             <button data-id="'.$status["id"].'" class="btn btn-sm btn-danger delete-ticket-status">
                                                                 <i class="bi bi-trash">Delete</i>
-                                                            </button>
+                                                            </button>';
+                                                            }
+
+                                                    $code .='
                                                         </td>
                                                     </tr>';
                                                     }
@@ -3841,7 +3846,8 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs') {
 
                             <div id="status_color" data-type="text" class="sb-input">
                                 <span>Choose Color</span>
-                                <input type="color" value="#000000" name="statuscolor" id="statuscolor" class="form-control form-control-color" style="height: auto;" required>
+                                <input type="color" value="#000000" name="status_color" id="statuscolor" class="form-control form-control-color" style="height: auto;" required>
+                                <input type="hidden" name="status_id" id="status_id">
                             </div>
                         </div>
                     </div>

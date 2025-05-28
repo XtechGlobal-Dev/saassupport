@@ -167,7 +167,7 @@ function sb_ajax_execute() {
         case 'add-ticket-custom-field':
              return sb_json_response(sb_add_custom_field($_POST['data1']));
         case 'add-ticket-status':
-             return sb_json_response(sb_add_ticket_status($_POST['data1']));
+             return sb_json_response(sb_add_edit_ticket_status($_POST['data1']));
         case 'delete-ticket-custom-field':
              return sb_json_response(sb_delete_ticket_custom_field($_POST['id']));
         case 'get-tickets-custom-fields':

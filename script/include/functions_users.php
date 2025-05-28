@@ -1482,24 +1482,59 @@ function sb_add_custom_field($inputs)
     }
 }
 
-function sb_add_ticket_status($inputs)
+function sb_add_edit_ticket_status($inputs)
 {
-    echo $title = sb_db_escape($inputs['title']);
-    echo $type = sb_db_escape($inputs['statuscolor']);
+    try {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            throw new Exception('Method not allowed', 405);
+        }
 
-    
+        // Validate required fields
+        $required_fields = ['title', 'status_color'];
+        foreach ($required_fields as $field) {
+            if (!isset($inputs[$field]) || empty($inputs[$field])) {
+                throw new Exception("Missing required field: $field", 400);
+            }
+        }
+
+
+         // Prepare variables for bind_param
+        $title = sb_db_escape($inputs['title']);
+        $statusColor = sb_db_escape($inputs['status_color']);
+        $statusId = sb_db_escape($inputs['status_id'],true);
+
+        $sql = '';
+        if($statusId == 0 || $statusId == "")
+        {
+            $sql = "INSERT INTO ticket_status (`name`, `color`, `created_at`) VALUES ('$title', '$statusColor',NOW())";
+        }
+        else if(isset($inputs['status_id']) && $inputs['status_id'] > 5)  // don't allow update function for first 5 default statuses
+        {
+            $sql = "Update ticket_status set name = '$title', color = '$statusColor'";
+        }
+
+        // Log the SQL query for debugging
+        error_log("SQL Query: " . $sql);
+
+        if($sql != '')
+            sb_db_query($sql);
+       
+        return $message = "{'suceess': true, 'msg':'New Status created successfully'}";
+
+    } catch (Exception $e) {
+        // Log the error for debugging
+        error_log("Error: " . $e->getMessage());
+        error_log("Stack trace: " . $e->getTraceAsString());
+        
+        // Send JSON error response
+        http_response_code($e->getCode());
+        echo json_encode([
+            'error' => $e->getMessage()
+        ]);
+    }
+
 }
-function sb_edit_ticket_custom_field($custom_field_id = 0)
-{
-    $custom_field_id = sb_db_escape($custom_field_id, true);
-    $query = 'SELECT * FROM custom_fields WHERE id = ' . $custom_field_id;
-    $result = sb_db_get($query);
-    if ($result) {
-        return $result;
-    } else {
-        return false;
-    }   
-}
+
 
 function sb_edit_ticket_status($custom_field_id = 0)
 {
@@ -1513,11 +1548,32 @@ function sb_edit_ticket_status($custom_field_id = 0)
     }   
 }
 
+
+
+function sb_edit_ticket_custom_field($custom_field_id = 0)
+{
+    $custom_field_id = sb_db_escape($custom_field_id, true);
+    $query = 'SELECT * FROM custom_fields WHERE id = ' . $custom_field_id;
+    $result = sb_db_get($query);
+    if ($result) {
+        return $result;
+    } else {
+        return false;
+    }   
+}
+
+
 function sb_delete_ticket_custom_field($id)
 {
     $id = sb_db_escape($id, true);
-    sb_db_query('DELETE FROM custom_fields WHERE id = ' . $id);
-    return true;
+    $count = sb_db_get('Select count(id) as tickets_count from ticket_custom_fields where custom_field_id ='.$id);
+    if(isset($count['tickets_count']) &&  $count['tickets_count'] == 0) {
+        sb_db_query('DELETE FROM custom_fields WHERE id = ' . $id);
+    }
+    else {
+        return ['success' => false, 'message' => 'This field is already used in tickets.'];
+    }
+    return ['success' => true, 'message' => 'Custom field deleted successfully.'];;
 }
 function sb_get_tickets_custom_active_fields()
 {
