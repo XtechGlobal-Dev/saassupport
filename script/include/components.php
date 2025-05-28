@@ -1193,7 +1193,7 @@ function sb_component_admin() {
                             <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i><span> Inbox</span></a></li>
                             <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
                             <li><a id="sb-users"><i class="fa-solid fa-users"></i><span> Customers</span></a></li>
-                            <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li>
+                            <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i><span> Articles</span></a></li>
                             <li><a id="sb-reports"><i class="fa-solid fa-flag"></i><span> Reports</span></a></li>
                             <li><a id="sb-settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
@@ -1363,7 +1363,7 @@ function sb_component_admin() {
                                                         <div class="new_users_chart">
                                                             <canvas class="mt-0" id="new_users_chart"></canvas>
                                                         </div>
-                                                        <script>
+                                                        <!-- <script>
                                                             const new_usersCtx = document.getElementById('new_users_chart').getContext('2d');
                                                             const gradient1 = new_usersCtx.createLinearGradient(0, 0, 0, 200);
                                                             gradient1.addColorStop(0, 'rgba(72, 127, 255, 0.2)');
@@ -1401,7 +1401,7 @@ function sb_component_admin() {
                                                                     border: { display: false }
                                                                 }}
                                                             }});
-                                                        </script>
+                                                        </script> -->
                                                     </div>
                                                 </div>
                                                 <div class="metric-increase">Increase by <span>+200</span> this week</div>
@@ -2158,7 +2158,7 @@ function sb_component_admin() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 p-0 ">
+                                <div class="col-md-12 p-0 ">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -2201,7 +2201,7 @@ function sb_component_admin() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 p-0">
+                                <!-- <div class="col-md-6 p-0">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables" style="padding: 0 25px 0 0 !important;">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -2265,7 +2265,7 @@ function sb_component_admin() {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row mt-40">
                         </div>
@@ -2490,7 +2490,7 @@ function sb_component_admin() {
                             </div>
                         </div>
                         <div class="sb-scroll-area">
-                            <table class="sb-table sb-table-users">
+                            <table class="sb-table sb_table_new sb-table-users">
                                 <thead>
                                     <tr>
                                         <th>
@@ -2595,7 +2595,7 @@ function sb_component_admin() {
                             </div>
                         </div>
                         <div class="sb-scroll-area">
-                            <table class="sb-table sb-table-tickets">
+                            <table class="sb-table sb_table_new sb-table-tickets">
                                 <thead>
                                     <tr>
                                         <th data-field="id">
