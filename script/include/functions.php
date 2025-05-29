@@ -970,10 +970,27 @@ function sb_installation($details, $force = false) {
         $db_respones['custom_fields'] = $connection->query('CREATE TABLE IF NOT EXISTS `custom_fields` (`id` int(11) NOT NULL AUTO_INCREMENT,`title` varchar(100) NOT NULL,`type` enum("text","textarea","select","checkbox") NOT NULL DEFAULT "text",`required` tinyint(1) NOT NULL DEFAULT 0,`default_value` varchar(255) DEFAULT NULL,`is_active` tinyint(1) NOT NULL DEFAULT 1, `order` int(11) NOT NULL DEFAULT 0,`options` text DEFAULT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
         $db_respones['default_fields_settings'] = $connection->query('CREATE TABLE IF NOT EXISTS `default_fields_settings` (`field_name` varchar(50) NOT NULL,`is_active` tinyint(1) NOT NULL DEFAULT 1 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
         $db_respones['priorities'] = $connection->query('CREATE TABLE IF NOT EXISTS `priorities` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL,`description` text DEFAULT NULL, `color` varchar(20) DEFAULT "warning",`created_at` timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
-        $db_respones['sb_tickets'] = $connection->query('CREATE TABLE IF NOT EXISTS `sb_tickets` (`id` int(11) NOT NULL AUTO_INCREMENT,`subject` varchar(255) NOT NULL,`contact_id` int(11) DEFAULT NULL,`contact_name` varchar(100) DEFAULT NULL,`contact_email` varchar(100) DEFAULT NULL,`assigned_to` int(11) DEFAULT NULL,`priority_id` int(11) NOT NULL,`service_id` int(11) NOT NULL,`department_id` int(11) NOT NULL,`tags` varchar(255) DEFAULT NULL, `description` text DEFAULT NULL,`creation_time` timestamp NOT NULL DEFAULT current_timestamp(),`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),`status_id` int(11) NOT NULL DEFAULT 1,`conversation_id` int(11) DEFAULT NULL,`last_reply` timestamp NULL DEFAULT NULL,FOREIGN KEY (conversation_id) REFERENCES sb_conversations(id) ON DELETE CASCADE, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+        $db_respones['sb_tickets'] = $connection->query('CREATE TABLE IF NOT EXISTS `sb_tickets` (`id` int(11) NOT NULL AUTO_INCREMENT,`subject` varchar(255) NOT NULL,`contact_id` int(11) DEFAULT NULL,`contact_name` varchar(100) DEFAULT NULL,`contact_email` varchar(100) DEFAULT NULL,`assigned_to` int(11) DEFAULT NULL,`priority_id` int(11) NOT NULL,`service_id` int(11) NOT NULL,`department_id` int(11) DEFAULT NULL,`tags` varchar(255) DEFAULT NULL, `description` text DEFAULT NULL,`creation_time` timestamp NOT NULL DEFAULT current_timestamp(),`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),`status_id` int(11) NOT NULL DEFAULT 1,`conversation_id` int(11) DEFAULT NULL,`last_reply` timestamp NULL DEFAULT NULL,FOREIGN KEY (conversation_id) REFERENCES sb_conversations(id) ON DELETE CASCADE, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
         $db_respones['ticket_attachments'] = $connection->query('CREATE TABLE IF NOT EXISTS `ticket_attachments` (`id` int(11) NOT NULL AUTO_INCREMENT, `ticket_id` int(11) NOT NULL,`filename` varchar(255) NOT NULL,`original_filename` varchar(255) NOT NULL,`file_path` varchar(255) NOT NULL,`file_type` varchar(100) NOT NULL,`file_size` int(11) NOT NULL,`uploaded_at` datetime DEFAULT current_timestamp(), PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;');
         $db_respones['ticket_custom_fields'] = $connection->query('CREATE TABLE IF NOT EXISTS `ticket_custom_fields` (`id` int(11) NOT NULL AUTO_INCREMENT,`ticket_id` int(11) NOT NULL,`custom_field_id` int(11) NOT NULL,`value` text NOT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
         $db_respones['ticket_status'] = $connection->query('CREATE TABLE IF NOT EXISTS `ticket_status` (`id` int(11) NOT NULL AUTO_INCREMENT,`name` varchar(50) NOT NULL,`color` varchar(20) NOT NULL,`created_at` timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+
+        /// Insert Default Ticket Statues
+
+        $connection->query("INSERT INTO `ticket_status` (`id`, `name`, `color`, `created_at`) VALUES
+                        (1, 'Open', '#FF0000', '2025-05-09 09:39:19'),
+                        (2, 'In Progress', '#FFA500', '2025-05-09 09:39:19'),
+                        (3, 'Hold', '#FF4500', '2025-05-09 09:39:19'),
+                        (4, 'Answered', '#00FF00', '2025-05-09 09:39:19'),
+                        (5, 'Closed', '#808080', '2025-05-09 09:39:19')");
+
+        /// Insert Default Ticket priorities
+
+        $connection->query("INSERT INTO `priorities` (`id`, `name`, `description`, `color`, `created_at`) VALUES
+                        (1, 'Critical', 'Critical', '#FF0000', '2025-05-08 10:57:03'),
+                        (2, 'High', 'High', '#FF0000', '2025-05-08 10:57:29'),
+                        (3, 'Medium', 'Medium', '#FF4500', '2025-05-08 10:57:55'),
+                        (4, 'Low', 'Low', '#808080', '2025-05-08 10:58:17')");
         
         // Create the admin user
         if (isset($details['first-name']) && isset($details['last-name']) && isset($details['email']) && isset($details['password'])) {

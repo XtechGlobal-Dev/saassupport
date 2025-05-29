@@ -8,7 +8,6 @@
  * Library of static html components for the admin area. This file must not be executed directly. � 2017-2025 board.support. All rights reserved.
  *
  */
-
 function sb_profile_box() { ?>
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
@@ -273,7 +272,8 @@ function sb_ticket_edit_box() { ?>
 
                         <?php
                         $departments = sb_get_departments();
-                        if (!empty($departments)) {
+                        $department_settings = sb_get_setting('departments-settings');
+                        if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == 1 && !empty($departments)) {
                         ?>
                         <div id="department_id" data-type="select" class="sb-input">
                             <span>Department</span>
@@ -2657,9 +2657,15 @@ function sb_component_admin() {
                                         <th data-field="tags">
                                             <?php sb_e('Tags') ?>
                                         </th>
+                                        <?php 
+                                        $department_settings = sb_get_setting('departments-settings');
+                                        if(isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1')
+                                        {
+                                        ?>
                                         <th data-field="department">
                                             <?php sb_e('Department') ?>
                                         </th>
+                                        <?php } ?>
                                         <!--th data-field="service">
                                             <?php //sb_e('Service') ?>
                                         </th-->

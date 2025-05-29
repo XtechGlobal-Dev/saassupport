@@ -1018,9 +1018,8 @@ function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
    $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
-            CONCAT_WS(" ", c.first_name, c.last_name) as contact_name,
             p.name as priority_name, p.color as priority_color,
-            ts.name as status_name, ts.color as status_color
+            ts.name as status_name, ts.color as status_color 
      FROM sb_tickets t 
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN sb_users c ON t.contact_id = c.id
@@ -1164,14 +1163,15 @@ function sb_add_ticket($inputs)
             'subject' => sb_db_escape($inputs['subject'][0]),
             'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
+            'contact_name' => sb_db_escape($inputs['cust_name'][0]),
+            'contact_email' => sb_db_escape($inputs['cust_email'][0]),
             'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
-            'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 'NULL',
-            'tags' => isset($inputs['tags'][0]) ? sb_db_escape($inputs['tags'][0]) : 'NULL',
+            'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
+            'tags' => isset($inputs['tags'][0]) ? sb_db_escape($inputs['tags'][0]) : '',
             'description' => sb_db_escape($inputs['description'][0]),
-            'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 'NULL',
-            
+            'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0,
         ];
 
         
@@ -1226,10 +1226,28 @@ function sb_add_ticket($inputs)
         }*/
 
 
-        echo $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
-        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,department_id,tags,description,creation_time,updated_at,status_id,conversation_id) '.$values, true);
+        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
+        if($data['department_id'] == 0)
+        {
+             $values .=",NULL";
+        }
+        else
+        {
+            $values .= "','".$data['department_id']."'";
+        }
+        if($data['conversation_id'] == 0)
+        {
+             $values .=",NULL";
+        }
+        else
+        {
+            $values .= "','".$data['conversation_id']."'";
+        }
+        $values .=")";
 
-        print_r($data);
+        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values, true);
+
+       // print_r($data);
         // Update CCs
         if (isset($data['cc'][0]) && $data['cc'][0] != '') {
             /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
@@ -1357,22 +1375,26 @@ function sb_update_ticket($inputs,$ticket_id =0)
             'subject' => sb_db_escape($inputs['subject'][0]),
             'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
+            'contact_name' => sb_db_escape($inputs['cust_name'][0]),
+            'contact_email' => sb_db_escape($inputs['cust_email'][0]),
             'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
-            'department_id' => sb_db_escape($inputs['department_id'][0],true),
-            'tags' => sb_db_escape($inputs['tags'][0]),
+            'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
+            'tags' => isset($inputs['tags'][0]) ? sb_db_escape($inputs['tags'][0]) : '',
             'description' => sb_db_escape($inputs['description'][0]),
-            'conversation_id' => sb_db_escape($inputs['conversation_id'][0],true),
-            
+            'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0   
         ];
 
     $customFields = array();
-    foreach($inputs['customField'][0] as $key => $value) {
-        $customFields[$key] = sb_db_escape($value);
+    if(isset($inputs['customField'][0]) && is_array($inputs['customField'][0]))
+    {
+        foreach($inputs['customField'][0] as $key => $value) {
+            $customFields[$key] = sb_db_escape($value);
+        }
     }
 
-    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',assigned_to ='".$data['assigned_to']."',priority_id = '".$data['priority_id']."',department_id= '".$data['department_id']."',tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
+    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to ='".$data['assigned_to']."',priority_id = '".$data['priority_id']."',department_id= '".$data['department_id']."',tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
 
     // Update CCs
     if (isset($data['cc'][0]) && $data['cc'][0] != '') {
@@ -1397,11 +1419,10 @@ function sb_update_ticket($inputs,$ticket_id =0)
 }
 
 function sb_return_saved_ticket_row($ticket_id) {
-    $query = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+    $query = 'SELECT t.*, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color
-    FROM sb_tickets t
-    LEFT JOIN contacts c ON t.contact_id = c.id
+    FROM sb_tickets t 
     LEFT JOIN sb_users u ON t.assigned_to = u.id
     LEFT JOIN priorities p ON t.priority_id = p.id
     LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$ticket_id;
@@ -1414,7 +1435,7 @@ function sb_return_saved_ticket_row($ticket_id) {
     }
 
     if ($result) {
-        $result['department'] = $departmentsArr[$result['department_id']];
+        $result['department'] = isset($departmentsArr[$result['department_id']]) ? $departmentsArr[$result['department_id']] : 'Null';
     return $result;
     } else {
         return false;
