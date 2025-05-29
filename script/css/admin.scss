@@ -12,7 +12,8 @@
 
 
 @font-face {
-    font-family: "Support Board Font";
+    // font-family: "Support Board Font";
+    font-family: Manrope;
     src: url("../media/fonts/bold.woff2") format("woff2"), url("../media/fonts/bold.woff") format("woff");
     font-weight: 600;
     font-style: normal;
@@ -163,7 +164,8 @@ html {
 .sb-title,
 .daterangepicker,
 .ct__content {
-    font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+    // font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+    font-family: Manrope;
     color: $color-black;
 }
 
@@ -276,6 +278,8 @@ td.sb-offline:after {
     }
 }
 
+
+
 .sb-menu-wide ul,
 .sb-tab>.sb-nav>ul {
     display: flex;
@@ -349,6 +353,40 @@ td.sb-offline:after {
     &:hover ul {
         display: block;
         animation: sb-fade-animation 0.4s;
+    }
+}
+
+.sb-menu-wide_new {
+    ul {
+        font-weight: 400;
+        font-size: 12.8px;
+
+        li {
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            padding: 0 10px;
+            font-weight: 400;
+            font-size: 12.8px;
+            line-height: 30px;
+
+            span {
+                font-weight: 600;
+                font-size: 12.8px;
+                color: #4B5563;
+                opacity: 1;
+                display: inline;
+            }
+        }
+
+        li.sb-active,
+        li:hover {
+            color: #1F2937;
+        }
+
+        li.sb-active {
+            border-bottom: 2px solid #1F2937;
+            transition: none;
+        }
     }
 }
 
@@ -681,7 +719,9 @@ td.sb-offline:after {
     .sb-no-results {
         position: absolute;
         white-space: nowrap;
-        margin: 30px 15px;
+        margin: 30px 0px;
+        width: 100%;
+        text-align: center;
     }
 
     tr+p {
@@ -724,7 +764,6 @@ td.sb-offline:after {
         background: #F5F6FA;
 
         th {
-            font-family: Inter;
             font-weight: 600;
             font-size: 15px;
             color: #111827;
@@ -735,7 +774,6 @@ td.sb-offline:after {
 
     tbody {
         td {
-            font-family: Inter;
             font-weight: 400;
             font-size: 14px;
             padding-top: 16px;
@@ -1616,7 +1654,8 @@ td.sb-offline:after {
     top: 0;
     left: 0;
     z-index: 9999995;
-    font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+    // font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+    font-family: Manrope;
     display: none;
 
     &:before {
@@ -2196,7 +2235,7 @@ td.sb-offline:after {
                 padding: 15px 20px;
                 align-items: center;
                 display: flex;
-                justify-content: space-between;
+                // justify-content: space-between;
                 border-bottom: 1px solid $border-color;
 
                 h2 {
@@ -2321,7 +2360,7 @@ td.sb-offline:after {
 .sb-board {
     display: flex;
     justify-content: space-between;
-    height: 100%;
+    height: calc(100% - 91px);
 
     >div>.sb-top {
         border-bottom: 1px solid $border-color;
@@ -3268,78 +3307,92 @@ td.sb-offline:after {
     max-width: unset !important;
 }
 
+
+.sb-area-dashboard,
+.sb-area-conversations,
+.sb-area-users,
+.sb-area-articles,
+.sb-area-reports,
+.sb-area-settings,
+.sb-area-tickets {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+        border-bottom: 1px solid #eaedf4;
+        background: #fff;
+
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .notification {
+            margin-right: 20px;
+            position: relative;
+            cursor: pointer;
+
+            .badge {
+                position: absolute;
+                top: -10px;
+                right: -8px;
+                background-color: #155cfd;
+                color: white;
+                border-radius: 50%;
+                padding: 4px 6px;
+                font-weight: 400;
+                font-size: 11px;
+            }
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            border-left: 1px solid #EEEEEE;
+            padding-left: 30px;
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 10px;
+                cursor: pointer;
+            }
+
+            .user-info {
+                p {
+                    font-weight: 600;
+                    margin-bottom: 3px;
+                    font-size: 16px;
+                    color: #000;
+                }
+
+                span {
+                    font-weight: 400;
+                    font-size: 12px;
+                    color: #5d6165;
+                }
+            }
+        }
+
+        .logout {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+    }
+}
+
 .sb-area-dashboard {
     main {
         width: 100%;
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            border-bottom: 1px solid #eaedf4;
-            background: #fff;
-
-            .header-left,
-            .header-right {
-                display: flex;
-                align-items: center;
-                gap: 28px;
-            }
-
-            .notification {
-                margin-right: 20px;
-                position: relative;
-                cursor: pointer;
-
-                .badge {
-                    position: absolute;
-                    top: -10px;
-                    right: -8px;
-                    background-color: #155cfd;
-                    color: white;
-                    border-radius: 50%;
-                    padding: 4px 6px;
-                    font-weight: 400;
-                    font-size: 11px;
-                }
-            }
-
-            .user-profile {
-                display: flex;
-                align-items: center;
-                border-left: 1px solid #EEEEEE;
-                padding-left: 30px;
-
-                img {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    margin-right: 10px;
-                }
-
-                .user-info {
-                    p {
-                        font-weight: 600;
-                        margin-bottom: 3px;
-                        font-size: 16px;
-                        color: #000;
-                    }
-
-                    span {
-                        font-family: Inter;
-                        font-weight: 400;
-                        font-size: 12px;
-                        color: #5d6165;
-                    }
-                }
-            }
-
-            .logout {
-                margin-left: 20px;
-                cursor: pointer;
-            }
-        }
 
         .new_container {
             overflow: scroll;
@@ -3515,7 +3568,6 @@ td.sb-offline:after {
                 }
 
                 .head {
-                    font-family: Inter;
                     font-weight: 700;
                     font-size: 18px;
                     margin-bottom: 0;
@@ -3673,7 +3725,6 @@ td.sb-offline:after {
 
                     .reply-btn {
                         color: #FFFFFF;
-                        font-family: Inter;
                         font-weight: 500;
                         font-size: 14px;
                         border: 1px solid #2953E8;
@@ -3745,7 +3796,6 @@ td.sb-offline:after {
             .tables {
                 .label_blue {
                     color: #487FFF;
-                    font-family: Inter;
                     font-weight: 400;
                     font-size: 16px;
                     cursor: pointer;
@@ -6783,7 +6833,8 @@ a.sb-btn-white,
     }
 
     pre {
-        font-family: monospace;
+        // font-family: monospace;
+        font-family: Manrope;
         margin: 10px 0 0 0;
         overflow-x: scroll;
         padding: 5px 5px 7px 5px;

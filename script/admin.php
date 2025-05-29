@@ -76,6 +76,8 @@ require('include/components.php');
     <link rel="stylesheet" href="<?php echo $sb_url . 'css/responsive-admin.css?v=' . SB_VERSION ?>" media="(max-width: 464px)" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
+    rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
