@@ -6256,6 +6256,12 @@ td.sb-offline:after {
   background: #fff;
   border-radius: 0 0 8px 8px;
 }
+.new_table .sb-td-status .span-border {
+  font-weight: 500;
+  font-size: 14px;
+  padding: 9px 23px;
+  border-radius: 800px;
+}
 .new_table .sb-scroll-area {
   border: 1px solid #EBECEF;
   border-radius: 8px;
@@ -6267,17 +6273,17 @@ td.sb-offline:after {
 .sb_table_new thead th {
   font-family: Inter;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   color: #111827;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 13px;
+  padding-bottom: 13px;
 }
 .sb_table_new tbody td {
   font-family: Inter;
   font-weight: 400;
-  font-size: 16px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  font-size: 14px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   background-color: #fff;
 }
 

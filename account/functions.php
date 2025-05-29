@@ -214,9 +214,12 @@ function account_login($email, $password = false, $token = false) {
                     return false;
                 }
             }
+            //echo 'IIIIIIIIIIIIIIIII';
+            //print_r($sb_login);
             if ($sb_login === 'ip-ban') {
                 return $sb_login;
             }
+            
             return [sb_encryption(json_encode($cloud_user)), $sb_login[1], $sb_login[0]['id']];
         }
     }

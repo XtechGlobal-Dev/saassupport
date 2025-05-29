@@ -44,6 +44,7 @@ function sb_login($email = '', $password = '', $user_id = '', $user_token = '') 
 
         // Login for registered users and agents
         $result = sb_db_get($query . 'WHERE email = "' . sb_db_escape($email) . '" LIMIT 1');
+        
         if (sb_is_error($result)) {
             return $result;
         }
@@ -905,14 +906,13 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
     }*/
     $tickets = sb_db_get(SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
 
-    
-    
     $tickets_count = count($tickets);
     if (!$tickets_count) {
         return [];
     }
 
-    if (isset($tickets) && is_array($tickets)) {
+    if (isset($tickets) && is_array($tickets)) 
+    {
 
         $departments = sb_get_departments();
         $departmentsArr = array();
@@ -925,7 +925,7 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
             $tickets[$i]['department'] = isset($departmentsArr[$tickets[$i]['department_id']]) ? $departmentsArr[$tickets[$i]['department_id']] :  $tickets[$i]['department_id'];  
         }
 
-        $is_array = is_array($extra);
+        /*$is_array = is_array($extra);
         if ($extra && (!$is_array || count($extra))) {
             $query = '';
             $query_extra = '';
@@ -942,7 +942,7 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
                     $query_extra = ' AND (' . substr($query_extra, 0, -4) . ')';
                 }
             }
-            /*$users_extra = sb_db_get('SELECT user_id, slug, value FROM sb_users_data WHERE user_id IN (' . substr($query, 0, -1) . ')' . $query_extra . ' ORDER BY user_id', false);
+            $users_extra = sb_db_get('SELECT user_id, slug, value FROM sb_users_data WHERE user_id IN (' . substr($query, 0, -1) . ')' . $query_extra . ' ORDER BY user_id', false);
             for ($i = 0; $i < count($users_extra); $i++) {
                 $user_id = $users_extra[$i]['user_id'];
                 $slug = $users_extra[$i]['slug'];
@@ -953,8 +953,8 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
                         break;
                     }
                 }
-            }*/
-        }
+            }
+        }*/
         /*if (!$main_field_sorting) {
             if ($sorting[1] == 'ASC') {
                 usort($users, function ($a, $b) use ($sorting_field) {
@@ -967,7 +967,9 @@ function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, 
             }
         }*/
         return $tickets;
-    } else {
+    } 
+    else 
+    {
         return sb_error('db-error', 'sb_get_tickets', $tickets);
     }
 }
@@ -1165,17 +1167,23 @@ function sb_add_ticket($inputs)
             'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
-            'department_id' => sb_db_escape($inputs['department_id'][0],true),
-            'tags' => sb_db_escape($inputs['tags'][0]),
+            'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 'NULL',
+            'tags' => isset($inputs['tags'][0]) ? sb_db_escape($inputs['tags'][0]) : 'NULL',
             'description' => sb_db_escape($inputs['description'][0]),
-            'conversation_id' => sb_db_escape($inputs['conversation_id'][0],true),
+            'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 'NULL',
             
         ];
 
+        
+
         $customFields = array();
-        foreach($inputs['customField'][0] as $key => $value) {
-            $customFields[$key] = sb_db_escape($value);
-        }
+        if(isset($inputs['customField'][0]) && is_array($inputs['customField'][0]))
+        {
+            foreach($inputs['customField'][0] as $key => $value) {
+                $customFields[$key] = sb_db_escape($value);
+            }
+        }   
+        
 
 
         // Get active fields from settings
@@ -1218,9 +1226,10 @@ function sb_add_ticket($inputs)
         }*/
 
 
-        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
+        echo $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['department_id']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."', '".$data['conversation_id']."')";
         $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,department_id,tags,description,creation_time,updated_at,status_id,conversation_id) '.$values, true);
 
+        print_r($data);
         // Update CCs
         if (isset($data['cc'][0]) && $data['cc'][0] != '') {
             /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);

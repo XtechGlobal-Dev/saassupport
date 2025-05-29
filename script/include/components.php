@@ -1242,7 +1242,7 @@ function sb_component_admin() {
                             <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i><span> Inbox</span></a></li>
                             <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
                             <li><a id="sb-users"><i class="fa-solid fa-users"></i><span> Customers</span></a></li>
-                            <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li>
+                            <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i><span> Articles</span></a></li>
                             <li><a id="sb-reports"><i class="fa-solid fa-flag"></i><span> Reports</span></a></li>
                             <li><a id="sb-settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
@@ -1359,8 +1359,8 @@ function sb_component_admin() {
             </div>
             <main>
 
-            <!-- sahil start -->
-              <div class="sb-active sb-area-dashboard">
+                <!-- sahil start -->
+                <div class="sb-active sb-area-dashboard">
                     <main>
                         <header>
                                 <div class="header-left">
@@ -1380,14 +1380,14 @@ function sb_component_admin() {
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">4</span>
                                     </div>
-                                    <div class="user-profile">
-                                        <img src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-profile sb-account">
+                                        <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
                                         <div class="user-info">
-                                            <p>Peter Parker</p>
+                                            <p class="sb-name"></p>
                                             <span>Super Admin</span>
                                         </div>
                                     </div>
-                                    <div class="logout"  data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
                                         <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
                                     </div>
                                 </div>
@@ -1412,7 +1412,7 @@ function sb_component_admin() {
                                                         <div class="new_users_chart">
                                                             <canvas class="mt-0" id="new_users_chart"></canvas>
                                                         </div>
-                                                        <script>
+                                                        <!-- <script>
                                                             const new_usersCtx = document.getElementById('new_users_chart').getContext('2d');
                                                             const gradient1 = new_usersCtx.createLinearGradient(0, 0, 0, 200);
                                                             gradient1.addColorStop(0, 'rgba(72, 127, 255, 0.2)');
@@ -1450,7 +1450,7 @@ function sb_component_admin() {
                                                                     border: { display: false }
                                                                 }}
                                                             }});
-                                                        </script>
+                                                        </script> -->
                                                     </div>
                                                 </div>
                                                 <div class="metric-increase">Increase by <span>+200</span> this week</div>
@@ -2084,82 +2084,82 @@ function sb_component_admin() {
                                                     <p class="sub_head">Weekly Report</p>
                                                 </div>
                                             </div>
-                                            <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div>
-                                            <!-- <div class="chatVolChart">
+                                            <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
+                                            <div class="chatVolChart">
                                                 <canvas id="chatVolChart"></canvas>
                                             </div>
                                             <script>
-                                            const chatVolCtx = document.getElementById('chatVolChart').getContext('2d');
-                                            new Chart(chatVolCtx, {
-                                                type: 'bar',
-                                                data: {
-                                                labels: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                datasets: [
-                                                    {
-                                                    label: 'Reply Done: 100',
-                                                    data: [30, 60, 40, 50, 30, 45, 40],
-                                                    backgroundColor: '#4CAF50',
-                                                    borderRadius: 4,
-                                                    barThickness: 5
+                                                const chatVolCtx = document.getElementById('chatVolChart').getContext('2d');
+                                                new Chart(chatVolCtx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                    labels: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                                    datasets: [
+                                                        {
+                                                        label: 'Reply Done: 100',
+                                                        data: [30, 60, 40, 50, 30, 45, 40],
+                                                        backgroundColor: '#4CAF50',
+                                                        borderRadius: 4,
+                                                        barThickness: 5
+                                                        },
+                                                        {
+                                                        label: 'Pending: 500',
+                                                        data: [70, 140, 80, 120, 70, 135, 110],
+                                                        backgroundColor: '#4285F4',
+                                                        borderRadius: 4,
+                                                        barThickness: 5
+                                                        },
+                                                        {
+                                                        label: 'Overdue: 1500',
+                                                        data: [50, 120, 60, 90, 80, 95, 85],
+                                                        backgroundColor: '#FFA726',
+                                                        borderRadius: 4,
+                                                        barThickness: 5
+                                                        }
+                                                    ]
                                                     },
-                                                    {
-                                                    label: 'Pending: 500',
-                                                    data: [70, 140, 80, 120, 70, 135, 110],
-                                                    backgroundColor: '#4285F4',
-                                                    borderRadius: 4,
-                                                    barThickness: 5
+                                                    options: {
+                                                    responsive: true,
+                                                    plugins: {
+                                                        legend: {
+                                                        position: 'top',
+                                                        labels: {
+                                                            usePointStyle: true,
+                                                            pointStyle: 'rectRounded',
+                                                            padding: 20
+                                                        }
+                                                        },
+                                                        tooltip: {
+                                                        callbacks: {
+                                                            label: function(context) {
+                                                            return context.dataset.label.split(':')[0] + ': ' + context.raw;
+                                                            }
+                                                        }
+                                                        }
                                                     },
-                                                    {
-                                                    label: 'Overdue: 1500',
-                                                    data: [50, 120, 60, 90, 80, 95, 85],
-                                                    backgroundColor: '#FFA726',
-                                                    borderRadius: 4,
-                                                    barThickness: 5
-                                                    }
-                                                ]
-                                                },
-                                                options: {
-                                                responsive: true,
-                                                plugins: {
-                                                    legend: {
-                                                    position: 'top',
-                                                    labels: {
-                                                        usePointStyle: true,
-                                                        pointStyle: 'rectRounded',
-                                                        padding: 20
-                                                    }
-                                                    },
-                                                    tooltip: {
-                                                    callbacks: {
-                                                        label: function(context) {
-                                                        return context.dataset.label.split(':')[0] + ': ' + context.raw;
+                                                    scales: {
+                                                        x: {
+                                                        stacked: false,
+                                                        grid: { display: false },
+                                                        ticks: {
+                                                            color: '#555',
+                                                            font: { size: 12 }
+                                                        }
+                                                        },
+                                                        y: {
+                                                        beginAtZero: true,
+                                                        grid: {
+                                                            drawBorder: false,
+                                                            color: '#eee'
+                                                        },
+                                                        ticks: {
+                                                            color: '#aaa'
+                                                        }
                                                         }
                                                     }
                                                     }
-                                                },
-                                                scales: {
-                                                    x: {
-                                                    stacked: false,
-                                                    grid: { display: false },
-                                                    ticks: {
-                                                        color: '#555',
-                                                        font: { size: 12 }
-                                                    }
-                                                    },
-                                                    y: {
-                                                    beginAtZero: true,
-                                                    grid: {
-                                                        drawBorder: false,
-                                                        color: '#eee'
-                                                    },
-                                                    ticks: {
-                                                        color: '#aaa'
-                                                    }
-                                                    }
-                                                }
-                                                }
-                                            });
-                                            </script> -->
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -2207,7 +2207,7 @@ function sb_component_admin() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 p-0">
+                                <div class="col-md-12 p-0 ">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -2215,10 +2215,12 @@ function sb_component_admin() {
                                             </div>
                                             <p class="label_blue">View All</p>
                                         </div>
+                                        <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
                                         <div class="seprator"></div>
-                                        <div class="new_table">
+                                        <div class="new_table sb-area-tickets-dash">
                                             <div class="sb-scroll-area">
-                                                <table class="sb-table sb_table_new sb-table-tickets">
+                                                <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
                                                     <thead>
                                                         <tr>
                                                             <th data-field="title">
@@ -2242,37 +2244,13 @@ function sb_component_admin() {
                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
                                                             <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
                                                         </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 p-0">
+                                <!-- <div class="col-md-6 p-0">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables" style="padding: 0 25px 0 0 !important;">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -2336,13 +2314,13 @@ function sb_component_admin() {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row mt-40">
                         </div>
                     </main>
                 </div>
-            <!-- sahil end -->
+                <!-- sahil end -->
                 
                 <div class="sb-area-conversations">
                     <div class="sb-board">
@@ -2561,7 +2539,7 @@ function sb_component_admin() {
                             </div>
                         </div>
                         <div class="sb-scroll-area">
-                            <table class="sb-table sb-table-users">
+                            <table class="sb-table sb_table_new sb-table-users">
                                 <thead>
                                     <tr>
                                         <th>
@@ -2666,7 +2644,7 @@ function sb_component_admin() {
                             </div>
                         </div>
                         <div class="sb-scroll-area">
-                            <table class="sb-table sb-table-tickets">
+                            <table class="sb-table sb_table_new sb-table-tickets">
                                 <thead>
                                     <tr>
                                         <th data-field="id">
@@ -3506,6 +3484,7 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs') {
                             <div id="is_active" data-type="checkbox" class="sb-input">
                                 <span>Active?</span>
                                     <input class="form-control" type="checkbox" name="is_active" value="1" checked>
+                                    <input type="hidden" id="custom_field_id" name="field_id" value="">
                             </div>
                             <div id="customFieldsContainer">
                             </div>

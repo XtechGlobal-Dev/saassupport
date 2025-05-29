@@ -13,10 +13,7 @@
         conversations_user_details = conversations_area.find('.sb-user-details');
 
         // Dashboard
-        dash_area = admin.find('.sb-dashboard');
-        // users_table = users_area.find('.sb-table-users');
-        // users_table_menu = users_area.find('.sb-menu-users');
-        // users_filters = users_area.find('.sb-filter-btn .sb-select');
+        dash_area = admin.find('.sb-area-dashboard');
 
 
         /*Users*/
