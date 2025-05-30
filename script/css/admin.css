@@ -6163,9 +6163,6 @@ td.sb-offline:after {
 .sb-tab > .sb-nav > ul li {
   margin-right: 0;
 }
-.sb-tab > .sb-nav > ul li.sb-active {
-  border-bottom: none;
-}
 .sb-tab > .sb-nav.sb-scroll-area {
   border-right: none;
 }
@@ -6372,7 +6369,6 @@ td.sb-offline:after {
   line-height: 0;
   outline: 0;
   padding: 0;
-  margin: 8px 0;
   text-align: center;
   vertical-align: middle;
   width: 20px;
@@ -6453,9 +6449,16 @@ td.sb-offline:after {
 .sb_table_new tbody td {
   font-weight: 400;
   font-size: 14px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   background-color: #fff;
+}
+.sb_table_new tbody .sb-td-status .span-border,
+.sb_table_new tbody .sb-td-priority .span-border {
+  font-weight: 500;
+  font-size: 14px;
+  padding: 9px 23px;
+  border-radius: 800px;
 }
 
 .sb-profile {
@@ -7283,7 +7286,7 @@ td.sb-offline:after {
   position: absolute;
   right: -17px;
   top: 5px;
-  background: rgb(202, 52, 52);
+  background: #155cfd;
   color: #fff;
   font-size: 10px;
   line-height: 15px;
@@ -7640,6 +7643,7 @@ td.sb-offline:after {
   padding: 15px 20px;
   align-items: center;
   display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid rgb(212, 212, 212);
 }
 .sb-admin > main > div > .sb-top-bar h2 {
@@ -11193,6 +11197,43 @@ a.sb-btn-white.sb-loading:hover:before,
 
 .sb-content-articles:not([data-id]) .sb-language-switcher {
   display: none;
+}
+
+.sb-content-articles {
+  background: rgb(245, 247, 250);
+}
+.sb-content-articles .sb-top-bar .topbar_menu {
+  background: #fff;
+  padding: 0 20px;
+  border-radius: 8px;
+}
+.sb-content-articles .content_article {
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1019607843);
+  border: 0.5px solid #D1D5DB;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 10px;
+}
+.sb-content-articles .articleHEad {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.sb-content-articles .articleHEad .head, .sb-content-articles .articleHEad .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .sb-content-articles .articleHEad .sub_head {
+  font-weight: 700;
+  font-size: 25px;
+}
+.sb-content-articles .articleHEad .des {
+  font-weight: 300;
+  font-size: 16px;
+  color: #475367;
+}
+.sb-content-articles .articles_bg {
+  border: 0.5px solid #D1D5DB;
+  border-radius: 10px;
+  padding: 20px 15px;
+  background: #fff;
 }
 
 .sb-article-categories .sb-setting > div {

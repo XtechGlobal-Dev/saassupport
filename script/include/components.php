@@ -2480,30 +2480,31 @@ function sb_component_admin() {
                         </header>
                         <div class="sb-top-bar">
                             <div>
-                                <h2>
-                                    <?php sb_e('Users list') ?>
-                                </h2>
-                                <div class="sb-menu-wide sb-menu-users">
+                                <a class="sb-btn sb-icon sb-new-user sb_btn_new mr-7">
+                                    <i class="fa-solid fa-user-plus pr-1"></i>
+                                    <?php sb_e('New Customer') ?>
+                                </a>
+                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
                                     </div>
                                     <ul>
                                         <li data-type="all" class="sb-active">
-                                            <?php sb_e('All') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('All') ?>
                                         </li>
                                         <li data-type="user">
-                                            <?php sb_e('Users') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('Users') ?>
                                         </li>
                                         <li data-type="lead">
-                                            <?php sb_e('Leads') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('Leads') ?>
                                         </li>
                                         <li data-type="visitor">
-                                            <?php sb_e('Visitors') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('Visitors') ?>
                                         </li>
                                         <li data-type="online">
                                             <?php sb_e('Online') ?>
@@ -2547,16 +2548,10 @@ function sb_component_admin() {
                                     </ul>
                                 </div>
                                 <?php sb_conversations_filter($cloud_active_apps) ?>
-                            </div>
-                            <div>
-                                <div class="sb-search-btn">
+                                <!-- <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e('Search users ...') ?>" />
-                                </div>
-                                <a class="sb-btn sb-icon sb-new-user">
-                                    <i class="sb-icon-user"></i>
-                                    <?php sb_e('Add new user') ?>
-                                </a>
+                                </div> -->
                             </div>
                         </div>
                         <div class="sb-scroll-area">
@@ -2636,16 +2631,10 @@ function sb_component_admin() {
                         </header>
                         <div class="sb-top-bar">
                             <div>
-                                <!-- <div class="sb-search-btn">
-                                    <i class="sb-icon sb-icon-search"></i>
-                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
-                                </div> -->
-                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
-                                    <i class="fa-solid fa-plus"></i>
+                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new mr-7">
+                                    <i class="fa-solid fa-plus pr-1"></i>
                                     <?php sb_e('New Ticket') ?>
                                 </a>
-                            </div>
-                            <div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
@@ -2688,6 +2677,10 @@ function sb_component_admin() {
                                         ?>
                                     </ul>
                                 </div>
+                                <!-- <div class="sb-search-btn">
+                                    <i class="sb-icon sb-icon-search"></i>
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
+                                </div> -->
                             </div>
                         </div>
                         <div class="sb-scroll-area">
@@ -2770,7 +2763,7 @@ function sb_component_admin() {
                                 </div>
                             </div>
                         </header>
-                        <div class="sb-top-bar">
+                        <!-- <div class="sb-top-bar">
                             <div>
                                 <h2>
                                     <?php sb_e('Articles') ?>
@@ -2799,15 +2792,15 @@ function sb_component_admin() {
                                 </div>
                             </div>
                             <div>
-                                <a class="sb-btn-icon sb-view-article" href="" target="_blank">
-                                    <i class="sb-icon-next"></i>
-                                </a>
                                 <a class="sb-btn sb-save-articles sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
                                 </a>
+                                <a class="sb-btn-icon sb-view-article" href="" target="_blank">
+                                    <i class="sb-icon-next"></i>
+                                </a>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
@@ -2822,53 +2815,86 @@ function sb_component_admin() {
                                 </div>
                             </div>
                             <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Title') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-title">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Content') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea sb-article-content">
-                                    <div>
-                                        <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('External link') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-link">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div class="sb-article-categories sb-grid">
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Parent category') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-select">
-                                            <div>
-                                                <select id="article-parent-categories"></select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Categories') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-select">
-                                            <div>
-                                                <select id="article-categories"></select>
-                                            </div>
+                                <div class="sb-top-bar">
+                                    <div class="topbar_menu">
+                                        <div class="sb-menu-wide sb-menu-articles">
+                                            <ul class="mb-4">
+                                                <li data-type="articles" class="sb-active">
+                                                    <?php sb_e('Articles') ?>
+                                                </li>
+                                                <li data-type="categories">
+                                                    <?php sb_e('Categories') ?>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <h2 id="sb-article-id"></h2>
+                                <div class="content_article">
+                                <div class="articleHEad">
+                                    <div class="">
+                                        <p class="head mb-4">Articles Settings</p>
+                                        <p class="des mb-0">Manage preferences and options for your articles.</p>
+                                    </div>
+                                    <div>
+                                        <a class="sb-btn sb-save-articles sb-icon">
+                                            <i class="sb-icon-check"></i>
+                                            <?php sb_e('Save changes') ?>
+                                        </a>
+                                        <a class="sb-btn-icon sb-view-article" href="" target="_blank">
+                                            <i class="sb-icon-next"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="articles_bg">
+                                    <h2 class="sb-language-switcher-cnt">
+                                        <?php sb_e('Title') ?>
+                                    </h2>
+                                    <div class="sb-setting sb-type-text sb-article-title">
+                                        <div>
+                                            <input type="text" />
+                                        </div>
+                                    </div>
+                                    <h2>
+                                        <?php sb_e('Content') ?>
+                                    </h2>
+                                    <div class="sb-setting sb-type-textarea sb-article-content">
+                                        <div>
+                                            <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
+                                        </div>
+                                    </div>
+                                    <h2>
+                                        <?php sb_e('External link') ?>
+                                    </h2>
+                                    <div class="sb-setting sb-type-text sb-article-link">
+                                        <div>
+                                            <input type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="sb-article-categories sb-grid">
+                                        <div>
+                                            <h2>
+                                                <?php sb_e('Parent category') ?>
+                                            </h2>
+                                            <div class="sb-setting sb-type-select">
+                                                <div>
+                                                    <select id="article-parent-categories"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2>
+                                                <?php sb_e('Categories') ?>
+                                            </h2>
+                                            <div class="sb-setting sb-type-select">
+                                                <div>
+                                                    <select id="article-categories"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 id="sb-article-id"></h2>
+                                </div>
+                                </div>
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
                                 <h2 class="sb-language-switcher-cnt">
