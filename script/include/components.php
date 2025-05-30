@@ -209,7 +209,7 @@ function sb_ticket_edit_box() { ?>
             </div>
         </div>
         <div class="sb-main sb-scroll-area" >
-            <div class="first-section" style="display: flex;">
+            <div class="first-section" >
                 <div class="sb-details">
                     <div class="sb-edit-box">
                         <div id="subject" data-type="text" class="sb-input">
@@ -223,13 +223,22 @@ function sb_ticket_edit_box() { ?>
                         </div>
 
                         <div id="contact_id" data-type="select" class="sb-input">
-                            <span class="left-sec"><?php sb_e('Customer') ?></span>
-                            <div class="right-sec">
-                                <select id="select-customer" style="width:100%;" ></select>
+                            <span class="required-label pb-2" ><?php sb_e('Customer') ?></span>
+                            <select id="select-customer" style="width:100%;" ></select>
+                        </div>
+
+                        <div class="sb-input two-divs d-flex">
+                            <div id="cust_name" data-type="text" class="sb-input">
+                                <span class="required-label"><?php sb_e('Name') ?></span>
+                                <input type="text" name="name" value="" disabled="">
+                            </div>
+                            <div id="cust_email" data-type="text" class="sb-input">
+                                <span class="required-label"><?php sb_e('Email') ?></span>
+                                <input type="email" name="email" value="" disabled="">
                             </div>
                         </div>
 
-                        <div id="cust_name" data-type="text" class="sb-input" >
+                        <!--div id="cust_name" data-type="text" class="sb-input" >
                             <span class="required-label"><?php sb_e('Name') ?></span>
                             <input type="text" name="name" required value="" disabled />
                         </div>
@@ -237,24 +246,13 @@ function sb_ticket_edit_box() { ?>
                         <div id="cust_email" data-type="text" class="sb-input" >
                             <span class="required-label"><?php sb_e('Email') ?></span>
                             <input type="email" name="email" required value="" disabled />
-                        </div>
+                        </div-->
 
-                        <div id="assigned_to" data-type="select" class="sb-input">
+                        <div id="assigned_to pb-2" data-type="select" class="sb-input">
                             <span class="left-sec"><?php sb_e('Assigned To') ?></span>
                             <div class="right-sec">
                                 <select id="select-agent" style="width:100%;"></select>
                             </div>
-                        </div>
-
-                        <div id="priority_id" data-type="select" class="sb-input">
-                            <span class="required-label"><?php sb_e('Priority') ?></span>
-                            <select required>
-                                <option value=""><?php sb_e('Select Priority') ?></option>
-                                <option value="1" data-color="danger">Critical</option>
-                                <option value="2" data-color="danger">High</option>
-                                <option value="4" data-color="secondary">Low</option>
-                                <option value="3" data-color="warning">Medium</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -269,6 +267,25 @@ function sb_ticket_edit_box() { ?>
                                 <option value="3">Software Development</option>
                             </select>
                         </div-->
+
+                        <?php 
+                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                        $tagsHtml = '';
+                        $count = count($tags);
+                        if ($count > 0) {
+                        ?>
+                        <div id="tags" data-type="select" class="sb-input">
+                            <span><?php sb_e('Tags') ?></span>
+                            <select>
+                                <?php
+                                for ($i = 0; $i < $count; $i++) {
+                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
+                                }
+                                echo $tagsHtml;
+                                ?>
+                            </select>
+                        </div>
+                        <?php } ?>
 
                         <?php
                         $departments = sb_get_departments();
@@ -297,37 +314,46 @@ function sb_ticket_edit_box() { ?>
                             </select>
                         </div-->
 
-                        <?php 
-                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                        $tagsHtml = '';
-                        $count = count($tags);
-                        if ($count > 0) {
-                        ?>
-                        <div id="tags" data-type="select" class="sb-input">
-                            <span><?php sb_e('Tags') ?></span>
-                            <select>
-                                <option value="" >Select Tag</option>
-                                <?php
-                                for ($i = 0; $i < $count; $i++) {
-                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
-                                }
-                                echo $tagsHtml;
-                                ?>
-                            </select>
-                        </div>
-                        <?php } ?>
                         
-                        <div id="status_id" data-type="select" class="sb-input">
-                            <span class="required-label"><?php sb_e('Status') ?></span>
-                            <select required>
-                                <option value="">Select Status</option>
-                                <option value="1">Open</option>
-                                <option value="2">In Progress</option>
-                                <option value="3">Hold</option>
-                                <option value="4">Waiting for Customer Response</option>
-                                <option value="5">Resolved</option>
-                                <option value="6">Closed</option>
-                            </select>
+                        <?php 
+                        
+                        function sb_get_priorities() {
+                            $priorities = sb_db_get('SELECT * FROM priorities', false);
+                            return $priorities;
+                        }
+
+                        function sb_get_statues() {
+                            $status = sb_db_get('SELECT * FROM ticket_status', false);
+                            return $status;
+                        }
+                        $statues = sb_get_statues();
+                        $priorities = sb_get_priorities();
+                        
+                        
+                        ?>
+                        <div class="sb-input two-divs d-flex">
+                            <div id="status_id" data-type="select" class="sb-input">
+                                <span class="required-label"><?php sb_e('Status') ?></span>
+                                <select required>
+                                    <option value="">Select Status</option>
+                                    <?php 
+                                    foreach ($statues as $key => $value) {
+                                        echo '<option value="'. $value['id'] .'">'. $value['name'].'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div id="priority_id" data-type="select" class="sb-input">
+                                <span class="required-label"><?php sb_e('Priority') ?></span>
+                                <select required>
+                                    <option value=""><?php sb_e('Select Priority') ?></option>
+                                    <?php 
+                                        foreach ($priorities as $key => $value) {
+                                            echo '<option value="'. $value['id'] .'">'. $value['name'].'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <!--div data-type="file" class="sb-input">
                             <span><?php sb_e('Attachments') ?></span>
@@ -418,7 +444,7 @@ function sb_ticket_edit_box() { ?>
     }
     .sb-table-tickets tr {line-height: 25px;}
     span.left-sec {width: 15%;}
-    div.right-sec {width: 84%;padding: 0;}
+    div.right-sec {width: 100%;padding: 0;}
     
     #file-preview-list .col-md-2,#current-attachments .col-md-2  {padding:0}
     #file-preview-list .card, #current-attachments .card{margin: 6px;height: 100%;}
@@ -428,8 +454,55 @@ function sb_ticket_edit_box() { ?>
     /* align-items: center; */
     height: 100%;
     }
+    .two-divs > div {
+        width: 48% !important;
+        display: inline-block;
+        padding: 0 0 0 0;
+        margin: 0 !important;
+    }
 
     .custom-file #ticket-attachments {font-size: 12px;}
+    .first-section .sb-input, #ticketCustomFieldsContainer .sb-input {display: block;}
+
+    select[multiple] {
+    width: 100%;
+    height: auto;
+    max-height: 78px;
+    padding: 4px 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: border 0.3s, box-shadow 0.3s;
+    appearance: none; /* Remove default arrow in some browsers */
+    }
+
+    select[multiple]:focus {
+    border-color: #5b9bd5;
+    box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.3);
+    }
+
+    select[multiple] option {
+    padding: 5px 10px;
+    margin: 1px 0;
+    border-radius: 4px;
+    transition: background 0.2s;
+    }
+
+    select[multiple] option:hover {
+    background-color: #e6f0ff;
+    }
+
+    select[multiple] option:checked {
+    background-color: #cce0ff;
+    color: #003366;
+    font-weight: 600;
+    }
+
     </style>
     <script>
         $('#select-customer').select2({
@@ -521,21 +594,31 @@ function sb_ticket_edit_box() { ?>
     <!-- File Upload Handling -->
     <script>
         jQuery(document).ready(function($) {
+        // This listens for change events on any current or future select inside #parent-container
+        // Trigger change
 
-        $('#without_contact input').on('click',function() {
+        $('#without_contact input').on('change',function() {
+            
             const isChecked = $(this).is(':checked');
+            console.log(isChecked);
             $('#cust_name input, #cust_email input').prop('disabled', !isChecked);
+            $('#cust_name input, #cust_email input').prop('required', isChecked);
+           
             if (isChecked) {
                 $('#contact_id').hide();
-                $('#select-customer').removeAttr('required');
+                $('#contact_id #select-customer').removeAttr('required');
+                $('#cust_name span, #cust_email span').addClass('required-label');
+                
             } else {
-                 $('#contact_id').show();
-                $('#select-customer').attr('required');
+                $('#contact_id').show();
+                $('#contact_id select').attr('required', true);
+                $('#cust_name span, #cust_email span').removeClass('required-label');
                 // Optionally, you can set focus back to the name field
                 $('#cust_name input').focus();
             }
         });
 
+        $('#without_contact input').trigger('change');
        
         // Array to store uploaded files
         let uploadedFiles = [];
@@ -1238,7 +1321,7 @@ function sb_component_admin() {
                     </div>
                     <nav>
                         <ul>
-                            <li class="sb-active"><a id="sb-dashboard"><i class="fa-solid fa-gauge"></i><span> Dashboard</span></a></li>
+                            <li><a id="sb-dashboard"><i class="fa-solid fa-gauge"></i><span> Dashboard</span></a></li>
                             <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i><span> Inbox</span></a></li>
                             <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
                             <li><a id="sb-users"><i class="fa-solid fa-users"></i><span> Customers</span></a></li>

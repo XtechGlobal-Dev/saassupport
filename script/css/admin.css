@@ -1814,7 +1814,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
   padding: 0 10px;
   transition: all 0.4s;
   width: 100%;
-  margin: 0 !important;
+  margin: 9px 0 0 0 !important;
   box-sizing: border-box;
   box-shadow: none;
 }
@@ -7542,7 +7542,7 @@ td.sb-offline:after {
 .sb-admin .header_new .sidebar nav ul li {
   margin-bottom: 15px;
 }
-.sb-admin .header_new .sidebar nav ul li.sb-active a, .sb-admin .header_new .sidebar nav ul li:hover a {
+.sb-admin .header_new .sidebar nav ul li:hover a {
   color: #212528;
   background-color: #e5eaf0;
 }
@@ -7559,6 +7559,10 @@ td.sb-offline:after {
 }
 .sb-admin .header_new .sidebar nav ul li a i {
   margin-right: 10px;
+}
+.sb-admin .header_new .sidebar nav ul li a.sb-active {
+  color: #212528;
+  background-color: #e5eaf0;
 }
 .sb-admin .header_new .sidebar .powered-by {
   margin-top: auto;

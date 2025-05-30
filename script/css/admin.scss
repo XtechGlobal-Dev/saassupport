@@ -2084,7 +2084,6 @@ td.sb-offline:after {
                     li {
                         margin-bottom: 15px;
 
-                        &.sb-active a,
                         &:hover a {
                             color: #212528;
                             background-color: #e5eaf0;
@@ -2103,6 +2102,11 @@ td.sb-offline:after {
 
                             i {
                                 margin-right: 10px;
+                            }
+                            
+                            &.sb-active {
+                            color: #212528;
+                            background-color: #e5eaf0;
                             }
                         }
                     }
