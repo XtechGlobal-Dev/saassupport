@@ -1246,7 +1246,7 @@ function sb_component_admin() {
                             <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i><span> Articles</span></a></li>
                             <li><a id="sb-reports"><i class="fa-solid fa-flag"></i><span> Reports</span></a></li>
                             <li><a id="sb-settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
-                            <li><a href="#"><i class="fa-solid fa-circle-info"></i><span> Help & Support</span></a></li>
+                            <!-- <li><a href="#"><i class="fa-solid fa-circle-info"></i><span> Help & Support</span></a></li> -->
                         </ul>
                     </nav>
                     <div class="powered-by">
@@ -1369,16 +1369,16 @@ function sb_component_admin() {
                                         <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
                                         <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
                                     </svg>
-                                    <h2>Dashboard</h2>
+                                    <h2 class="title">Dashboard</h2>
                                 </div>
                                 <div class="header-right">
                                     <div class="notification">
                                         <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                        <span class="badge">6</span>
+                                        <span class="badge">0</span>
                                     </div>
                                     <div class="notification">
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                        <span class="badge">4</span>
+                                        <span class="badge">0</span>
                                     </div>
                                     <div class="user-profile sb-account">
                                         <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
@@ -1405,55 +1405,16 @@ function sb_component_admin() {
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>New Users</h3>
-                                                            <p>15,000</p>
+                                                            <p>0</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
                                                         <div class="new_users_chart">
                                                             <canvas class="mt-0" id="new_users_chart"></canvas>
                                                         </div>
-                                                        <!-- <script>
-                                                            const new_usersCtx = document.getElementById('new_users_chart').getContext('2d');
-                                                            const gradient1 = new_usersCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient1.addColorStop(0, 'rgba(72, 127, 255, 0.2)');
-                                                            gradient1.addColorStop(1, 'rgba(72, 127, 255, 0)');
-                                                            new Chart(new_usersCtx, {
-                                                            type: 'line',
-                                                            data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                datasets: [{
-                                                                data: [0, 5, 12, 3, 5, 7],
-                                                                borderColor: '#487FFF',
-                                                                backgroundColor: gradient1,
-                                                                fill: true,
-                                                                tension: 0.4,
-                                                                pointRadius: 0,
-                                                                pointHoverRadius: 0,
-                                                                borderWidth: 2
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                responsive: true,
-                                                                plugins: {
-                                                                legend: { display: false },
-                                                                tooltip: { enabled: false }
-                                                                },
-                                                                scales: {
-                                                                x: {
-                                                                    grid: { display: false },
-                                                                    ticks: { display: false },
-                                                                    border: { display: false }
-                                                                },
-                                                                y: {
-                                                                    grid: { display: false },
-                                                                    ticks: { display: false },
-                                                                    border: { display: false }
-                                                                }}
-                                                            }});
-                                                        </script> -->
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                                <div class="metric-increase">Increase by <span>0</span> this week</div>
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
@@ -2323,6 +2284,36 @@ function sb_component_admin() {
                 <!-- sahil end -->
                 
                 <div class="sb-area-conversations">
+                    <header>
+                        <div class="header-left">
+                            <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                            </svg>
+                            <h2 class="title">Inbox</h2>
+                        </div>
+                        <div class="header-right">
+                            <div class="notification">
+                                <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                <span class="badge">0</span>
+                            </div>
+                            <div class="notification">
+                                <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                <span class="badge">0</span>
+                            </div>
+                            <div class="user-profile sb-account">
+                                <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                <div class="user-info">
+                                    <p class="sb-name"></p>
+                                    <span>Super Admin</span>
+                                </div>
+                            </div>
+                            <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                            </div>
+                        </div>
+                    </header>
                     <div class="sb-board">
                         <div class="sb-admin-list<?php echo sb_get_multi_setting('departments-settings', 'departments-show-list') ? ' sb-departments-show' : '' ?>">
                             <div class="sb-top">
@@ -2457,6 +2448,36 @@ function sb_component_admin() {
                 </div>
                 <?php if ($active_areas['users']) { ?>
                     <div class="sb-area-users">
+                        <header>
+                            <div class="header-left">
+                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                </svg>
+                                <h2 class="title">Customers</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="notification">
+                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="user-profile sb-account">
+                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-info">
+                                        <p class="sb-name"></p>
+                                        <span>Super Admin</span>
+                                    </div>
+                                </div>
+                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </header>
                         <div class="sb-top-bar">
                             <div>
                                 <h2>
@@ -2583,40 +2604,77 @@ function sb_component_admin() {
                         }
                     </style>
                     <div class="sb-area-tickets">
+                        <header>
+                            <div class="header-left">
+                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                </svg>
+                                <h2 class="title">Tickets</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="notification">
+                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="user-profile sb-account">
+                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-info">
+                                        <p class="sb-name"></p>
+                                        <span>Super Admin</span>
+                                    </div>
+                                </div>
+                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </header>
                         <div class="sb-top-bar">
                             <div>
-                                <h2>
-                                    <?php sb_e('Tickets list') ?>
-                                </h2>
-                                <div class="sb-menu-wide sb-menu-tickets">
+                                <!-- <div class="sb-search-btn">
+                                    <i class="sb-icon sb-icon-search"></i>
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
+                                </div> -->
+                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <?php sb_e('New Ticket') ?>
+                                </a>
+                            </div>
+                            <div>
+                                <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
                                     </div>
                                     <ul>
                                         <li data-type="all" class="sb-active">
+                                            <span data-count="0">0</span>
                                             <?php sb_e('All') ?>
-                                            <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="open">
+                                            <span data-count="0">0</span>
                                             <?php sb_e('Open') ?>
-                                            <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="in-progress">
+                                            <span data-count="0">0</span>
                                             <?php sb_e('In Progress') ?>
-                                            <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="answered">
+                                            <span data-count="0">0</span>
                                             <?php sb_e('Answered') ?>
-                                            <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="hold">
+                                            <span data-count="0">0</span>
                                             <?php sb_e('On Hold') ?>
-                                            <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="closed">
+                                            <span data-count="0">0</span>
                                             <?php sb_e('Closed') ?>
-                                            <span data-count="0">(0)</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -2630,17 +2688,6 @@ function sb_component_admin() {
                                         ?>
                                     </ul>
                                 </div>
-                                
-                            </div>
-                            <div>
-                                <div class="sb-search-btn">
-                                    <i class="sb-icon sb-icon-search"></i>
-                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
-                                </div>
-                                <a class="sb-btn sb-icon sb-new-ticket">
-                                    <i class="sb-icon-sms"></i>
-                                    <?php sb_e('New Ticket') ?>
-                                </a>
                             </div>
                         </div>
                         <div class="sb-scroll-area">
@@ -2693,6 +2740,36 @@ function sb_component_admin() {
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
+                        <header>
+                            <div class="header-left">
+                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                </svg>
+                                <h2 class="title">Articles</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="notification">
+                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="user-profile sb-account">
+                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-info">
+                                        <p class="sb-name"></p>
+                                        <span>Super Admin</span>
+                                    </div>
+                                </div>
+                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </header>
                         <div class="sb-top-bar">
                             <div>
                                 <h2>
@@ -2832,6 +2909,36 @@ function sb_component_admin() {
                 <?php } ?>
                 <?php if ($active_areas['reports']) { ?>
                     <div class="sb-area-reports sb-loading">
+                        <header>
+                            <div class="header-left">
+                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                </svg>
+                                <h2 class="title">Reports</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="notification">
+                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="user-profile sb-account">
+                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-info">
+                                        <p class="sb-name"></p>
+                                        <span>Super Admin</span>
+                                    </div>
+                                </div>
+                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </header>
                         <div class="sb-top-bar">
                             <div>
                                 <h2>
@@ -2974,6 +3081,36 @@ function sb_component_admin() {
                 <?php } ?>
                 <?php if ($active_areas['settings']) { ?>
                     <div class="sb-area-settings">
+                        <header>
+                            <div class="header-left">
+                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                </svg>
+                                <h2 class="title">Settings</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="notification">
+                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="user-profile sb-account">
+                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-info">
+                                        <p class="sb-name"></p>
+                                        <span>Super Admin</span>
+                                    </div>
+                                </div>
+                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </header>
                         <div class="sb-top-bar">
                             <div>
                                 <h2>
