@@ -223,7 +223,7 @@ function sb_ticket_edit_box() { ?>
             </div>
         </div>
         <div class="sb-main sb-scroll-area" >
-            <div class="first-section" >
+            <div class="first-section" style="display: flex;">
                 <div class="sb-details">
                     <div class="sb-edit-box">
                         <div id="subject" data-type="text" class="sb-input">
@@ -237,22 +237,13 @@ function sb_ticket_edit_box() { ?>
                         </div-->
 
                         <div id="contact_id" data-type="select" class="sb-input">
-                            <span class="required-label pb-2" ><?php sb_e('Customer') ?></span>
-                            <select id="select-customer" style="width:100%;" ></select>
-                        </div>
-
-                        <div class="sb-input two-divs d-flex">
-                            <div id="cust_name" data-type="text" class="sb-input">
-                                <span class="required-label"><?php sb_e('Name') ?></span>
-                                <input type="text" name="name" value="" disabled="">
-                            </div>
-                            <div id="cust_email" data-type="text" class="sb-input">
-                                <span class="required-label"><?php sb_e('Email') ?></span>
-                                <input type="email" name="email" value="" disabled="">
+                            <span class="left-sec"><?php sb_e('Customer') ?></span>
+                            <div class="right-sec">
+                                <select id="select-customer" style="width:100%;" ></select>
                             </div>
                         </div>
 
-                        <!--div id="cust_name" data-type="text" class="sb-input" >
+                        <div id="cust_name" data-type="text" class="sb-input" >
                             <span class="required-label"><?php sb_e('Name') ?></span>
                             <input type="text" name="name" required value="" disabled />
                         </div>
@@ -260,13 +251,24 @@ function sb_ticket_edit_box() { ?>
                         <div id="cust_email" data-type="text" class="sb-input" >
                             <span class="required-label"><?php sb_e('Email') ?></span>
                             <input type="email" name="email" required value="" disabled />
-                        </div-->
+                        </div>
 
                         <div id="assigned_to" data-type="select" class="sb-input">
                             <span class="mb-2"><?php sb_e('Assigned To') ?></span>
                             <div class="">
                                 <select id="select-agent" style="width:100%;"></select>
                             </div>
+                        </div>
+
+                        <div id="priority_id" data-type="select" class="sb-input">
+                            <span class="required-label"><?php sb_e('Priority') ?></span>
+                            <select required>
+                                <option value=""><?php sb_e('Select Priority') ?></option>
+                                <option value="1" data-color="danger">Critical</option>
+                                <option value="2" data-color="danger">High</option>
+                                <option value="4" data-color="secondary">Low</option>
+                                <option value="3" data-color="warning">Medium</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -281,25 +283,6 @@ function sb_ticket_edit_box() { ?>
                                 <option value="3">Software Development</option>
                             </select>
                         </div-->
-
-                        <?php 
-                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                        $tagsHtml = '';
-                        $count = count($tags);
-                        if ($count > 0) {
-                        ?>
-                        <div id="tags" data-type="select" class="sb-input">
-                            <span><?php sb_e('Tags') ?></span>
-                            <select>
-                                <?php
-                                for ($i = 0; $i < $count; $i++) {
-                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
-                                }
-                                echo $tagsHtml;
-                                ?>
-                            </select>
-                        </div>
-                        <?php } ?>
 
                         <?php
                         $departments = sb_get_departments();
@@ -328,46 +311,37 @@ function sb_ticket_edit_box() { ?>
                             </select>
                         </div-->
 
-                        
                         <?php 
-                        
-                        function sb_get_priorities() {
-                            $priorities = sb_db_get('SELECT * FROM priorities', false);
-                            return $priorities;
-                        }
-
-                        function sb_get_statues() {
-                            $status = sb_db_get('SELECT * FROM ticket_status', false);
-                            return $status;
-                        }
-                        $statues = sb_get_statues();
-                        $priorities = sb_get_priorities();
-                        
-                        
+                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                        $tagsHtml = '';
+                        $count = count($tags);
+                        if ($count > 0) {
                         ?>
-                        <div class="sb-input two-divs d-flex">
-                            <div id="status_id" data-type="select" class="sb-input">
-                                <span class="required-label"><?php sb_e('Status') ?></span>
-                                <select required>
-                                    <option value="">Select Status</option>
-                                    <?php 
-                                    foreach ($statues as $key => $value) {
-                                        echo '<option value="'. $value['id'] .'">'. $value['name'].'</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div id="priority_id" data-type="select" class="sb-input">
-                                <span class="required-label"><?php sb_e('Priority') ?></span>
-                                <select required>
-                                    <option value=""><?php sb_e('Select Priority') ?></option>
-                                    <?php 
-                                        foreach ($priorities as $key => $value) {
-                                            echo '<option value="'. $value['id'] .'">'. $value['name'].'</option>';
-                                        }
-                                    ?>
-                                </select>
-                            </div>
+                        <div id="tags" data-type="select" class="sb-input">
+                            <span><?php sb_e('Tags') ?></span>
+                            <select>
+                                <option value="" >Select Tag</option>
+                                <?php
+                                for ($i = 0; $i < $count; $i++) {
+                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
+                                }
+                                echo $tagsHtml;
+                                ?>
+                            </select>
+                        </div>
+                        <?php } ?>
+                        
+                        <div id="status_id" data-type="select" class="sb-input">
+                            <span class="required-label"><?php sb_e('Status') ?></span>
+                            <select required>
+                                <option value="">Select Status</option>
+                                <option value="1">Open</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">Hold</option>
+                                <option value="4">Waiting for Customer Response</option>
+                                <option value="5">Resolved</option>
+                                <option value="6">Closed</option>
+                            </select>
                         </div>
                         <!--div data-type="file" class="sb-input">
                             <span><?php sb_e('Attachments') ?></span>
@@ -457,7 +431,7 @@ function sb_ticket_edit_box() { ?>
     }
     .sb-table-tickets tr {line-height: 25px;}
     span.left-sec {width: 15%;}
-    div.right-sec {width: 100%;padding: 0;}
+    div.right-sec {width: 84%;padding: 0;}
     
     #file-preview-list .col-md-2,#current-attachments .col-md-2  {padding:0}
     #file-preview-list .card, #current-attachments .card{margin: 6px;height: 100%;}
@@ -466,12 +440,6 @@ function sb_ticket_edit_box() { ?>
     justify-content: center;
     /* align-items: center; */
     height: 100%;
-    }
-    .two-divs > div {
-        width: 48% !important;
-        display: inline-block;
-        padding: 0 0 0 0;
-        margin: 0 !important;
     }
 
     .custom-file #ticket-attachments {font-size: 12px;}
@@ -609,31 +577,21 @@ function sb_ticket_edit_box() { ?>
     <!-- File Upload Handling -->
     <script>
         jQuery(document).ready(function($) {
-        // This listens for change events on any current or future select inside #parent-container
-        // Trigger change
 
-        $('#without_contact input').on('change',function() {
-            
+        $('#without_contact input').on('click',function() {
             const isChecked = $(this).is(':checked');
-            console.log(isChecked);
             $('#cust_name input, #cust_email input').prop('disabled', !isChecked);
-            $('#cust_name input, #cust_email input').prop('required', isChecked);
-           
             if (isChecked) {
                 $('#contact_id').hide();
-                $('#contact_id #select-customer').removeAttr('required');
-                $('#cust_name span, #cust_email span').addClass('required-label');
-                
+                $('#select-customer').removeAttr('required');
             } else {
-                $('#contact_id').show();
-                $('#contact_id select').attr('required', true);
-                $('#cust_name span, #cust_email span').removeClass('required-label');
+                 $('#contact_id').show();
+                $('#select-customer').attr('required');
                 // Optionally, you can set focus back to the name field
                 $('#cust_name input').focus();
             }
         });
 
-        $('#without_contact input').trigger('change');
        
         // Array to store uploaded files
         let uploadedFiles = [];
@@ -1336,7 +1294,7 @@ function sb_component_admin() {
                     </div>
                     <nav>
                         <ul>
-                            <li><a id="sb-dashboard"><i class="fa-solid fa-gauge"></i><span> Dashboard</span></a></li>
+                            <li class="sb-active"><a id="sb-dashboard"><i class="fa-solid fa-gauge"></i><span> Dashboard</span></a></li>
                             <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i><span> Inbox</span></a></li>
                             <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
                             <li><a id="sb-users"><i class="fa-solid fa-users"></i><span> Customers</span></a></li>
@@ -2584,30 +2542,31 @@ function sb_component_admin() {
                         </header>
                         <div class="sb-top-bar">
                             <div>
-                                <h2>
-                                    <?php sb_e('Users list') ?>
-                                </h2>
-                                <div class="sb-menu-wide sb-menu-users">
+                                <a class="sb-btn sb-icon sb-new-user sb_btn_new mr-7">
+                                    <i class="fa-solid fa-user-plus pr-1"></i>
+                                    <?php sb_e('New Customer') ?>
+                                </a>
+                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
                                     </div>
                                     <ul>
                                         <li data-type="all" class="sb-active">
-                                            <?php sb_e('All') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('All') ?>
                                         </li>
                                         <li data-type="user">
-                                            <?php sb_e('Users') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('Users') ?>
                                         </li>
                                         <li data-type="lead">
-                                            <?php sb_e('Leads') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('Leads') ?>
                                         </li>
                                         <li data-type="visitor">
-                                            <?php sb_e('Visitors') ?>
                                             <span data-count="0">(0)</span>
+                                            <?php sb_e('Visitors') ?>
                                         </li>
                                         <li data-type="online">
                                             <?php sb_e('Online') ?>
@@ -2651,16 +2610,10 @@ function sb_component_admin() {
                                     </ul>
                                 </div>
                                 <?php sb_conversations_filter($cloud_active_apps) ?>
-                            </div>
-                            <div>
-                                <div class="sb-search-btn">
+                                <!-- <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e('Search users ...') ?>" />
-                                </div>
-                                <a class="sb-btn sb-icon sb-new-user">
-                                    <i class="sb-icon-user"></i>
-                                    <?php sb_e('Add new user') ?>
-                                </a>
+                                </div> -->
                             </div>
                         </div>
                         <div class="sb-scroll-area">
@@ -2740,16 +2693,10 @@ function sb_component_admin() {
                         </header>
                         <div class="sb-top-bar">
                             <div>
-                                <!-- <div class="sb-search-btn">
-                                    <i class="sb-icon sb-icon-search"></i>
-                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
-                                </div> -->
-                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
-                                    <i class="fa-solid fa-plus"></i>
+                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new mr-7">
+                                    <i class="fa-solid fa-plus pr-1"></i>
                                     <?php sb_e('New Ticket') ?>
                                 </a>
-                            </div>
-                            <div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
@@ -2876,13 +2823,13 @@ function sb_component_admin() {
                         </header>
                         <div class="sb-top-bar">
                             <div>
-                                <h2>
+                                <!-- <h2>
                                     <?php sb_e('Articles') ?>
-                                </h2>
+                                </h2> -->
                                 <div class="sb-menu-wide sb-menu-articles">
-                                    <div>
+                                    <!-- <div>
                                         <?php sb_e('Articles') ?>
-                                    </div>
+                                    </div> -->
                                     <ul>
                                         <li data-type="articles" class="sb-active">
                                             <?php sb_e('Articles') ?>
@@ -2890,7 +2837,7 @@ function sb_component_admin() {
                                         <li data-type="categories">
                                             <?php sb_e('Categories') ?>
                                         </li>
-                                        <li data-type="settings">
+                                        <!-- <li data-type="settings">
                                             <?php sb_e('Settings') ?>
                                         </li>
                                         <?php
@@ -2898,113 +2845,163 @@ function sb_component_admin() {
                                             echo '<li data-type="reports">' . sb_('Reports') . '</li>';
                                         }
                                         sb_docs_link('#articles');
-                                        ?>
+                                        ?> -->
                                     </ul>
                                 </div>
                             </div>
                             <div>
-                                <a class="sb-btn-icon sb-view-article" href="" target="_blank">
-                                    <i class="sb-icon-next"></i>
-                                </a>
                                 <a class="sb-btn sb-save-articles sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
+                                </a>
+                                <a class="sb-btn-icon sb-view-article" href="" target="_blank">
+                                    <i class="sb-icon-next"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
+                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                    <i class="sb-icon-plus"></i>
+                                    <?php sb_e('Add new article') ?>
+                                </div>
                                 <ul class="ul-categories"></ul>
                                 <div class="sb-add-category sb-btn sb-icon sb-btn-white">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e('Add new category') ?>
                                 </div>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
-                                    <i class="sb-icon-plus"></i>
-                                    <?php sb_e('Add new article') ?>
-                                </div>
                             </div>
                             <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Title') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-title">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Content') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea sb-article-content">
-                                    <div>
-                                        <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('External link') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-link">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div class="sb-article-categories sb-grid">
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Parent category') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-select">
-                                            <div>
-                                                <select id="article-parent-categories"></select>
-                                            </div>
+                                <!-- tabs -->
+                                <!-- <div class="sb-top-bar">
+                                    <div class="topbar_menu">
+                                        <div class="sb-menu-wide sb-menu-articles">
+                                            <ul class="mb-4">
+                                                <li data-type="articles" class="sb-active">
+                                                    <?php sb_e('Articles') ?>
+                                                </li>
+                                                <li data-type="categories">
+                                                    <?php sb_e('Categories') ?>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Categories') ?>
+                                </div> -->
+                                <div class="content_article">
+                                    <div class="articleHEad">
+                                        <div class="">
+                                            <p class="head mb-4">Articles Settings</p>
+                                            <p class="des mb-0">Manage preferences and options for your articles.</p>
+                                        </div>
+                                        <!-- <div>
+                                            <a class="sb-btn sb-save-articles sb-icon">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                            <a class="sb-btn-icon sb-view-article" href="" target="_blank">
+                                                <i class="sb-icon-next"></i>
+                                            </a>
+                                        </div> -->
+                                    </div>
+                                    <div class="articles_bg">
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Title') ?>
                                         </h2>
-                                        <div class="sb-setting sb-type-select">
+                                        <div class="sb-setting sb-type-text sb-article-title">
                                             <div>
-                                                <select id="article-categories"></select>
+                                                <input type="text" />
                                             </div>
                                         </div>
+                                        <h2>
+                                            <?php sb_e('Content') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-textarea sb-article-content">
+                                            <div>
+                                                <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('External link') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text sb-article-link">
+                                            <div>
+                                                <input type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="sb-article-categories sb-grid">
+                                            <div>
+                                                <h2>
+                                                    <?php sb_e('Parent category') ?>
+                                                </h2>
+                                                <div class="sb-setting sb-type-select">
+                                                    <div>
+                                                        <select id="article-parent-categories"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h2>
+                                                    <?php sb_e('Categories') ?>
+                                                </h2>
+                                                <div class="sb-setting sb-type-select">
+                                                    <div>
+                                                        <select id="article-categories"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h2 id="sb-article-id"></h2>
                                     </div>
                                 </div>
-                                <h2 id="sb-article-id"></h2>
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Name') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text">
-                                    <div>
-                                        <input id="category-title" type="text" />
+                                <div class="content_article">
+                                    <div class="articleHEad">
+                                        <div class="">
+                                            <p class="head mb-4">Categories Settings</p>
+                                            <p class="des mb-0">Manage article display, categories, and publishing options.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Description') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea">
-                                    <div>
-                                        <textarea id="category-description"></textarea>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Image') ?>
-                                </h2>
-                                <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                    <div id="category-image" class="image">
-                                        <div class="sb-icon-close"></div>
-                                    </div>
-                                </div>
-                                <h2 class="category-parent">
-                                    <?php sb_e('Parent category') ?>
-                                </h2>
-                                <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                    <div class="input">
-                                        <input id="category-parent" type="checkbox" />
+                                    <div class="articles_bg">
+                                        <h2 class="fw-semibold fs-6 m-0 mb-2">
+                                            Categories Settings
+                                        </h2>
+                                        <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
+                                            Manage and organize content types.
+                                        </h2>
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Name') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text">
+                                            <div>
+                                                <input id="category-title" type="text" />
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Description') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-textarea">
+                                            <div>
+                                                <textarea id="category-description"></textarea>
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Image') ?>
+                                        </h2>
+                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                            <div id="category-image" class="image">
+                                                <div class="sb-icon-close"></div>
+                                            </div>
+                                        </div>
+                                        <h2 class="category-parent">
+                                            <?php sb_e('Parent category') ?>
+                                        </h2>
+                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                            <div class="input">
+                                                <input id="category-parent" type="checkbox" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
