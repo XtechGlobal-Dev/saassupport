@@ -2901,11 +2901,17 @@ function sb_component_admin() {
                                 <div class="content_article">
                                     <div class="articleHEad">
                                         <div class="">
-                                            <p class="head mb-4">Articles Settings</p>
-                                            <p class="des mb-0">Manage preferences and options for your categories.</p>
+                                            <p class="head mb-4">Categories Settings</p>
+                                            <p class="des mb-0">Manage article display, categories, and publishing options.</p>
                                         </div>
                                     </div>
                                     <div class="articles_bg">
+                                        <h2 class="fw-semibold fs-6 m-0 mb-2">
+                                            Categories Settings
+                                        </h2>
+                                        <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
+                                            Manage and organize content types.
+                                        </h2>
                                         <h2 class="sb-language-switcher-cnt">
                                             <?php sb_e('Name') ?>
                                         </h2>
