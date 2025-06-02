@@ -197,8 +197,22 @@ function sb_ticket_edit_box() { ?>
         <div class="sb-top-bar">
             <div class="sb-ticket">
                 <span class="sb-name"></span>
+                
+                
+            <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;">
+				<label class="ml-4" >Guest Ticket</label>
+				<div class="form-check form-switch mb-0 ml-2">
+					<input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
+				</div>
+			</div>
+
+
+
             </div>
             <div>
+                <div id="conversation_id_div" data-type="checkbox" class="sb-input mr-4 d-none" style="font-size: 13px;">
+                    <label class="ml-4">Coversation ID <span>#45</span></label>
+				</div>
                 <a class="sb-save sb-btn sb-icon">
                     <i class="sb-icon-check"></i>
                     <?php sb_e('Save changes') ?>
@@ -217,10 +231,10 @@ function sb_ticket_edit_box() { ?>
                             <input type="text" name="subject" required />
                         </div>
 
-                        <div id="without_contact" data-type="checkbox" class="sb-input">
-                            <span><?php sb_e('Guest Ticket') ?></span>
+                        <!--div id="without_contact" data-type="checkbox" class="sb-input">
+                            <span><?php // sb_e('Guest Ticket') ?></span>
                             <input type="checkbox" name="without_contact" value="1" />
-                        </div>
+                        </div-->
 
                         <div id="contact_id" data-type="select" class="sb-input">
                             <span class="required-label pb-2" ><?php sb_e('Customer') ?></span>
@@ -248,9 +262,9 @@ function sb_ticket_edit_box() { ?>
                             <input type="email" name="email" required value="" disabled />
                         </div-->
 
-                        <div id="assigned_to pb-2" data-type="select" class="sb-input">
-                            <span class="left-sec"><?php sb_e('Assigned To') ?></span>
-                            <div class="right-sec">
+                        <div id="assigned_to" data-type="select" class="sb-input">
+                            <span class="mb-2"><?php sb_e('Assigned To') ?></span>
+                            <div class="">
                                 <select id="select-agent" style="width:100%;"></select>
                             </div>
                         </div>
@@ -363,10 +377,9 @@ function sb_ticket_edit_box() { ?>
                     </div>
                 </div>
             </div>
-            <div id="description" class="description sb-input" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
-                <div style="width:15%;display: inline-block;padding:0 4px 0 0;vertical-align: top;">
-                    <span style="font-weight: 600;font-size: 14px;line-height: 25px;color: #566069;"><?php sb_e('Description') ?></span></div>
-                <div style="width:84%;display: inline-block;padding:0">
+            <div id="description" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                
+                <div style="display: inline-block;padding:0;width:100%;">
                     <div id="ticketdescription" style="height: 180px;"></div>
                 </div>
                 <input id="ticket_id" type="hidden" name="ticket_id" />
@@ -376,11 +389,11 @@ function sb_ticket_edit_box() { ?>
             </div>
             <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
-            <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
-                <div class="sb-input">
-                    <span >Attachments</span>
+            <div id="ticketFileAttachments d-block" style="margin: 10px 0 0 0;">
+                <div>
+                    <span class="d-block mb-2">Attachments</span>
                     <div class="custom-file">
-                        <input type="file" class="form-control" id="ticket-attachments" multiple>
+                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
                         <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
                     </div>
                 </div>
@@ -399,7 +412,7 @@ function sb_ticket_edit_box() { ?>
 
                 <!-- File Preview Container -->
                  <div class="mt-2">
-                    <span>New Attachments</span>
+                    <span class="mb-2 d-block">New Attachments</span>
                     <div class="mt-2" id="file-preview-container">
                         <div class="row" id="file-preview-list"></div>
                     </div>
@@ -502,6 +515,8 @@ function sb_ticket_edit_box() { ?>
     color: #003366;
     font-weight: 600;
     }
+
+    span.select2-selection.select2-selection--single {height: 42px;}
 
     </style>
     <script>
@@ -1443,7 +1458,7 @@ function sb_component_admin() {
             <main>
 
                 <!-- sahil start -->
-                <div class="sb-active sb-area-dashboard">
+                <div class="sb-area-dashboard">
                     <main>
                         <header>
                                 <div class="header-left">
@@ -2437,9 +2452,15 @@ function sb_component_admin() {
                                 <div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
                                     <ul>
-                                        <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
+                                        <!-- <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Convert to a ticket') ?>">
                                                 <i id="sb-icon-refresh" class="sb-icon-refresh"></i>
+                                            </a>
+                                        </li> -->
+                                        <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
+                                            <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon" data-sb-tooltip="Convert to a ticket">
+                                            <i id="sb-icon-ticket" class="fa-solid fa-repeat text-white" style></i>    
+                                                Convert to ticket
                                             </a>
                                         </li>
                                         <li>
@@ -2761,16 +2782,16 @@ function sb_component_admin() {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="sb-menu-mobile">
+                                <!--div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
                                     <ul>
                                         <?php
                                         if ($is_admin) {
-                                            echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
+                                           // echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
                                         }
                                         ?>
                                     </ul>
-                                </div>
+                                </div-->
                             </div>
                         </div>
                         <div class="sb-scroll-area">

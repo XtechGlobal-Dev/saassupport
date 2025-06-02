@@ -1540,6 +1540,8 @@ function sb_download_file($url, $file_name = false, $mime = false, $header = [],
         }
         $file_name = sb_string_slug($file_name);
         $path_2 = $path . '/' . $file_name;
+        
+        
         rename($path . '/' . basename($url), $path_2);
         if (!file_exists($path_2) && $recursion < 3) {
             return sb_download_file($url, $file_name, $mime, $header, $recursion + 1);
