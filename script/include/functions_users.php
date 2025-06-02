@@ -1226,7 +1226,7 @@ function sb_add_ticket($inputs)
         }*/
 
 
-        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
+        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id'];
         if($data['department_id'] == 0)
         {
              $values .=",NULL";
@@ -1245,6 +1245,7 @@ function sb_add_ticket($inputs)
         }
         $values .=")";
 
+       // echo 'INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values;
         $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values, true);
 
        // print_r($data);

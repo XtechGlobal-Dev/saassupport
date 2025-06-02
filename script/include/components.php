@@ -2667,7 +2667,7 @@ function sb_component_admin() {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="sb-menu-mobile">
+                                <!-- <div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
                                     <ul>
                                         <?php
@@ -2677,7 +2677,7 @@ function sb_component_admin() {
                                         ?>
                                     </ul>
                                 </div>
-                                <!-- <div class="sb-search-btn">
+                                <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
                                 </div> -->
@@ -2763,15 +2763,15 @@ function sb_component_admin() {
                                 </div>
                             </div>
                         </header>
-                        <!-- <div class="sb-top-bar">
+                        <div class="sb-top-bar">
                             <div>
-                                <h2>
+                                <!-- <h2>
                                     <?php sb_e('Articles') ?>
-                                </h2>
+                                </h2> -->
                                 <div class="sb-menu-wide sb-menu-articles">
-                                    <div>
+                                    <!-- <div>
                                         <?php sb_e('Articles') ?>
-                                    </div>
+                                    </div> -->
                                     <ul>
                                         <li data-type="articles" class="sb-active">
                                             <?php sb_e('Articles') ?>
@@ -2779,7 +2779,7 @@ function sb_component_admin() {
                                         <li data-type="categories">
                                             <?php sb_e('Categories') ?>
                                         </li>
-                                        <li data-type="settings">
+                                        <!-- <li data-type="settings">
                                             <?php sb_e('Settings') ?>
                                         </li>
                                         <?php
@@ -2787,7 +2787,7 @@ function sb_component_admin() {
                                             echo '<li data-type="reports">' . sb_('Reports') . '</li>';
                                         }
                                         sb_docs_link('#articles');
-                                        ?>
+                                        ?> -->
                                     </ul>
                                 </div>
                             </div>
@@ -2800,22 +2800,23 @@ function sb_component_admin() {
                                     <i class="sb-icon-next"></i>
                                 </a>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
+                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                    <i class="sb-icon-plus"></i>
+                                    <?php sb_e('Add new article') ?>
+                                </div>
                                 <ul class="ul-categories"></ul>
                                 <div class="sb-add-category sb-btn sb-icon sb-btn-white">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e('Add new category') ?>
                                 </div>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
-                                    <i class="sb-icon-plus"></i>
-                                    <?php sb_e('Add new article') ?>
-                                </div>
                             </div>
                             <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
-                                <div class="sb-top-bar">
+                                <!-- tabs -->
+                                <!-- <div class="sb-top-bar">
                                     <div class="topbar_menu">
                                         <div class="sb-menu-wide sb-menu-articles">
                                             <ul class="mb-4">
@@ -2828,14 +2829,14 @@ function sb_component_admin() {
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="content_article">
                                     <div class="articleHEad">
                                         <div class="">
                                             <p class="head mb-4">Articles Settings</p>
                                             <p class="des mb-0">Manage preferences and options for your articles.</p>
                                         </div>
-                                        <div>
+                                        <!-- <div>
                                             <a class="sb-btn sb-save-articles sb-icon">
                                                 <i class="sb-icon-check"></i>
                                                 <?php sb_e('Save changes') ?>
@@ -2843,7 +2844,7 @@ function sb_component_admin() {
                                             <a class="sb-btn-icon sb-view-article" href="" target="_blank">
                                                 <i class="sb-icon-next"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="articles_bg">
                                         <h2 class="sb-language-switcher-cnt">
@@ -2897,50 +2898,46 @@ function sb_component_admin() {
                                 </div>
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
-                                <div class="sb-top-bar">
-                                    <div class="topbar_menu">
-                                        <div class="sb-menu-wide sb-menu-articles">
-                                            <ul class="mb-4">
-                                                <li data-type="articles">
-                                                    <?php sb_e('Articles') ?>
-                                                </li>
-                                                <li data-type="categories" class="sb-active">
-                                                    <?php sb_e('Categories') ?>
-                                                </li>
-                                            </ul>
+                                <div class="content_article">
+                                    <div class="articleHEad">
+                                        <div class="">
+                                            <p class="head mb-4">Articles Settings</p>
+                                            <p class="des mb-0">Manage preferences and options for your categories.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Name') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text">
-                                    <div>
-                                        <input id="category-title" type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Description') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea">
-                                    <div>
-                                        <textarea id="category-description"></textarea>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Image') ?>
-                                </h2>
-                                <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                    <div id="category-image" class="image">
-                                        <div class="sb-icon-close"></div>
-                                    </div>
-                                </div>
-                                <h2 class="category-parent">
-                                    <?php sb_e('Parent category') ?>
-                                </h2>
-                                <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                    <div class="input">
-                                        <input id="category-parent" type="checkbox" />
+                                    <div class="articles_bg">
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Name') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text">
+                                            <div>
+                                                <input id="category-title" type="text" />
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Description') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-textarea">
+                                            <div>
+                                                <textarea id="category-description"></textarea>
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Image') ?>
+                                        </h2>
+                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                            <div id="category-image" class="image">
+                                                <div class="sb-icon-close"></div>
+                                            </div>
+                                        </div>
+                                        <h2 class="category-parent">
+                                            <?php sb_e('Parent category') ?>
+                                        </h2>
+                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                            <div class="input">
+                                                <input id="category-parent" type="checkbox" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
