@@ -2584,10 +2584,16 @@ function sb_component_admin() {
                         </header>
                         <div class="sb-top-bar">
                             <div>
-                                <h2>
+                                <a class="sb-btn sb-icon sb-new-user sb_btn_new">
+                                    <i class="fa-solid fa-user-plus mr-1"></i>
+                                    <?php sb_e('Add Customer') ?>
+                                </a>
+                            </div>
+                            <div>
+                                <!-- <h2>
                                     <?php sb_e('Users list') ?>
-                                </h2>
-                                <div class="sb-menu-wide sb-menu-users">
+                                </h2> -->
+                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
@@ -2652,7 +2658,7 @@ function sb_component_admin() {
                                 </div>
                                 <?php sb_conversations_filter($cloud_active_apps) ?>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e('Search users ...') ?>" />
@@ -2661,7 +2667,7 @@ function sb_component_admin() {
                                     <i class="sb-icon-user"></i>
                                     <?php sb_e('Add new user') ?>
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="sb-scroll-area">
                             <table class="sb-table sb_table_new sb-table-users">
@@ -2745,7 +2751,7 @@ function sb_component_admin() {
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
                                 </div> -->
                                 <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
-                                    <i class="fa-solid fa-plus"></i>
+                                    <i class="fa-solid fa-plus mr-1"></i>
                                     <?php sb_e('New Ticket') ?>
                                 </a>
                             </div>
