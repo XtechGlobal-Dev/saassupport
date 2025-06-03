@@ -386,6 +386,11 @@ td.sb-offline:after {
         li.sb-active {
             border-bottom: 2px solid #1F2937;
             transition: none;
+            // border: 1px solid #1F2937;
+            // transition: none;
+            // box-shadow: 0px 4px 4px 0px #00000040;
+            // background: #E5EAF0;
+            // font-weight: 500;
         }
     }
 }
@@ -2111,10 +2116,10 @@ td.sb-offline:after {
                             i {
                                 margin-right: 10px;
                             }
-                            
+
                             &.sb-active {
-                            color: #212528;
-                            background-color: #e5eaf0;
+                                color: #212528;
+                                background-color: #e5eaf0;
                             }
                         }
                     }
@@ -6496,7 +6501,8 @@ a.sb-btn-white,
     display: none;
 }
 
-.sb-content-articles,.sb-content-categories {
+.sb-content-articles,
+.sb-content-categories {
     background: $background-gray;
 
     .sb-top-bar {

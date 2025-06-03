@@ -11202,37 +11202,46 @@ a.sb-btn-white.sb-loading:hover:before,
   display: none;
 }
 
-.sb-content-articles, .sb-content-categories {
+.sb-content-articles,
+.sb-content-categories {
   background: rgb(245, 247, 250);
 }
-.sb-content-articles .sb-top-bar .topbar_menu, .sb-content-categories .sb-top-bar .topbar_menu {
+.sb-content-articles .sb-top-bar .topbar_menu,
+.sb-content-categories .sb-top-bar .topbar_menu {
   background: #fff;
   padding: 0 20px;
   border-radius: 8px;
 }
-.sb-content-articles .content_article, .sb-content-categories .content_article {
+.sb-content-articles .content_article,
+.sb-content-categories .content_article {
   box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1019607843);
   background: #fff;
   border-radius: 8px;
   padding: 20px 10px;
   display: block;
 }
-.sb-content-articles .articleHEad, .sb-content-categories .articleHEad {
+.sb-content-articles .articleHEad,
+.sb-content-categories .articleHEad {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center;
   margin-bottom: 30px;
 }
-.sb-content-articles .articleHEad .head, .sb-content-articles .articleHEad .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .sb-content-articles .articleHEad .sub_head, .sb-content-categories .articleHEad .head, .sb-content-categories .articleHEad .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .sb-content-categories .articleHEad .sub_head {
+.sb-content-articles .articleHEad .head, .sb-content-articles .articleHEad .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .sb-content-articles .articleHEad .sub_head,
+.sb-content-categories .articleHEad .head,
+.sb-content-categories .articleHEad .sb-area-dashboard main .new_container .main-charts .sub_head,
+.sb-area-dashboard main .new_container .main-charts .sb-content-categories .articleHEad .sub_head {
   font-weight: 700;
   font-size: 25px;
 }
-.sb-content-articles .articleHEad .des, .sb-content-categories .articleHEad .des {
+.sb-content-articles .articleHEad .des,
+.sb-content-categories .articleHEad .des {
   font-weight: 300;
   font-size: 16px;
   color: #475367;
 }
-.sb-content-articles .articles_bg, .sb-content-categories .articles_bg {
+.sb-content-articles .articles_bg,
+.sb-content-categories .articles_bg {
   border: 0.5px solid #D1D5DB;
   border-radius: 10px;
   padding: 20px 15px;
