@@ -2460,7 +2460,7 @@ function sb_component_admin() {
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon" data-sb-tooltip="Convert to a ticket">
                                             <i id="sb-icon-ticket" class="fa-solid fa-repeat text-white" style></i>    
-                                                Convert to ticket
+                                                <span>Convert to ticket</span>
                                             </a>
                                         </li>
                                         <li>
