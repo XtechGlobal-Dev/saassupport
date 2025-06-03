@@ -7684,7 +7684,7 @@ td.sb-offline:after {
   margin-left: 15px;
 }
 .sb-admin > main > div > .sb-tab {
-  height: calc(100% - 70px);
+  height: calc(100% - 161px);
 }
 
 .sb-search-dropdown {
