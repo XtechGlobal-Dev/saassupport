@@ -147,6 +147,7 @@ function sb_db_get($query, $single = true) {
     global $SB_CONNECTION;
     $status = sb_db_connect();
     $value = ($single ? '' : []);
+    
     if ($status) {
         $result = $SB_CONNECTION->query($query);
         if ($result) {

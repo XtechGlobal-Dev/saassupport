@@ -523,7 +523,7 @@ function sb_ticket_edit_box() { ?>
         $('#select-customer').select2({
             placeholder: 'Type and search...',
             ajax: {
-            url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
+            url: '<?php echo SB_URL; ?>/include/ajax.php',  // Your endpoint
             method: 'POST',
             dataType: 'json',
             delay: 250,
@@ -571,7 +571,7 @@ function sb_ticket_edit_box() { ?>
         $('#select-agent').select2({
             placeholder: 'Type and search...',
             ajax: {
-            url: 'http://localhost/saassupport/script/include/ajax.php',  // Your endpoint
+            url: '<?php echo SB_URL; ?>/include/ajax.php',  // Your endpoint
             method: 'POST',
             dataType: 'json',
             delay: 250,
@@ -668,7 +668,7 @@ function sb_ticket_edit_box() { ?>
             
             //Create and configure XMLHttpRequest
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+            xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
             
             // Track upload progress
             xhr.upload.addEventListener('progress', function(e) {
@@ -893,7 +893,7 @@ function sb_ticket_edit_box() { ?>
                     
                     // Create and configure XMLHttpRequest
                     const xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+                    xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
                     
                     // Handle response
                     xhr.onload = function() {
