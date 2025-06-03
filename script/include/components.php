@@ -3407,17 +3407,17 @@ function sb_component_admin() {
                         <div class="sb-top-bar">
                             <div>
                                 <h2>
-                                    <?php sb_e('Settings') ?>
+                                    Admin Settings
                                 </h2>
                             </div>
                             <div>
-                                <div class="sb-search-dropdown">
+                                <!-- <div class="sb-search-dropdown">
                                     <div class="sb-search-btn">
                                         <i class="sb-icon sb-icon-search"></i>
                                         <input id="sb-search-settings" type="text" autocomplete="false" placeholder="<?php sb_e('Search ...') ?>" />
                                     </div>
                                     <div class="sb-search-dropdown-items"></div>
-                                </div>
+                                </div> -->
                                 <a class="sb-btn sb-save-changes sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
