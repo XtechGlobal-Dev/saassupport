@@ -2586,7 +2586,7 @@ function sb_component_admin() {
                             <div>
                                 <a class="sb-btn sb-icon sb-new-user sb_btn_new">
                                     <i class="fa-solid fa-user-plus mr-1"></i>
-                                    <?php sb_e('Add Customer') ?>
+                                    <?php sb_e('New Customer') ?>
                                 </a>
                             </div>
                             <div>
@@ -3379,7 +3379,7 @@ function sb_component_admin() {
                     </div>
                 <?php } ?>
                 <?php if ($active_areas['settings']) { ?>
-                    <div class="sb-area-settings">
+                    <div class="sb-area-settings settings_new">
                         <header>
                             <div class="header-left">
                                 <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3410,32 +3410,32 @@ function sb_component_admin() {
                                 </div>
                             </div>
                         </header>
-                        <div class="sb-top-bar">
+                        <!-- <div class="sb-top-bar">
                             <div>
                                 <h2>
                                     Admin Settings
                                 </h2>
                             </div>
                             <div>
-                                <!-- <div class="sb-search-dropdown">
+                                <div class="sb-search-dropdown">
                                     <div class="sb-search-btn">
                                         <i class="sb-icon sb-icon-search"></i>
                                         <input id="sb-search-settings" type="text" autocomplete="false" placeholder="<?php sb_e('Search ...') ?>" />
                                     </div>
                                     <div class="sb-search-dropdown-items"></div>
-                                </div> -->
+                                </div>
                                 <a class="sb-btn sb-save-changes sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="sb-tab">
                             <div class="sb-nav sb-scroll-area">
                                 <div>
                                     <?php sb_e('Settings') ?>
                                 </div>
-                                <ul>
+                                <ul class="setting_sidebar">
                                     <li id="tab-chat" class="sb-active">
                                         <?php echo $disable_translations ? 'Chat' : sb_('Chat') ?>
                                     </li>
@@ -3467,7 +3467,7 @@ function sb_component_admin() {
                                     <li id="tab-apps">
                                         <?php echo $disable_translations ? 'Apps' : sb_('Apps') ?>
                                     </li>
-                                    <li id="tab-articles">
+                                    <!-- <li id="tab-articles">
                                         <?php echo $disable_translations ? 'Articles' : sb_('Articles') ?>
                                     </li>
                                     <li id="tab-automations">
@@ -3475,29 +3475,114 @@ function sb_component_admin() {
                                     </li>
                                     <li id="tab-translations">
                                         <?php echo $disable_translations ? 'Translations' : sb_('Translations') ?>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
-                            <div class="sb-content sb-scroll-area">
+                            <div class="sb-content sb-scroll-area pt-4" 
+                                style="height: calc(100% - 40px);">
                                 <div class="sb-active">
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Chat Settings</p>
+                                            <p class="des mb-0">Configure your chat settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('chat', $sb_settings) ?>
                                 </div>
                                 <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Admin Settings</p>
+                                            <p class="des mb-0">Configure your admin settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('admin', $sb_settings) ?>
                                 </div>
                                 <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Notification Settings</p>
+                                            <p class="des mb-0">Configure your notification settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('notifications', $sb_settings) ?>
                                 </div>
                                 <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Users Settings</p>
+                                            <p class="des mb-0">Configure your users settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('users', $sb_settings) ?>
                                 </div>
                                 <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Design Settings</p>
+                                            <p class="des mb-0">Configure your design settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('design', $sb_settings) ?>
                                 </div>
                                 <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Messages Settings</p>
+                                            <p class="des mb-0">Configure your message settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('messages', $sb_settings) ?>
                                 </div>
                                 <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Miscellaneous Settings</p>
+                                            <p class="des mb-0">Configure additional options and preferences.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
                                 </div>
                                 <?php sb_apps_area($apps, $cloud_active_apps) ?>
@@ -3691,7 +3776,21 @@ function sb_apps_area($apps, $cloud_active_apps) {
     $is_cloud = sb_is_cloud();
     for ($i = 0; $i < count($apps); $i++) {
         if (defined($apps[$i][0]) && (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))) {
-            $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
+            // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
+            $code .= '<div>
+            <div class="sb-top-bar save_settings">
+                <div class="">
+                    <p class="head mb-4"></p>
+                    <p class="des mb-0"></p>
+                </div>
+                <div>
+                    <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                        <i class="sb-icon-check"></i>
+                        Save changes
+                    </a>
+                </div>
+            </div>
+            ' . sb_populate_app_settings($apps[$i][1]) . '</div>';
         }
     }
     $code .= '<div><div class="sb-apps">';

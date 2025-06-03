@@ -6133,6 +6133,47 @@ td.sb-offline:after {
   transition: none;
 }
 
+.settings_new .sb-scroll-area .setting_sidebar li {
+  margin-bottom: 20px;
+  padding-left: 10px;
+  max-width: 150px;
+}
+.settings_new .sb-scroll-area .setting_sidebar li.sb-active,
+.settings_new .sb-scroll-area .setting_sidebar li:hover {
+  background: #E5EAF0;
+  border-radius: 6px;
+  width: 150px;
+  padding: 0 10px;
+}
+.settings_new .sb-scroll-area .setting_sidebar li.sb-active {
+  background: #E5EAF0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  border-radius: 6px;
+  padding: 0 10px;
+  border-bottom: none;
+  width: 150px;
+}
+.settings_new .sb-content {
+  height: calc(100% - 40px);
+}
+.settings_new .sb-content .save_settings {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 0.5px solid #D1D5DB;
+  border-radius: 10px;
+  padding: 20px 10px;
+}
+.settings_new .sb-content .save_settings .head, .settings_new .sb-content .save_settings .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .settings_new .sb-content .save_settings .sub_head {
+  font-weight: 700;
+  font-size: 25px;
+}
+.settings_new .sb-content .save_settings .des {
+  font-weight: 300;
+  font-size: 16px;
+  color: #475367;
+}
+
 .sb-tab {
   display: flex;
 }
@@ -7684,7 +7725,7 @@ td.sb-offline:after {
   margin-left: 15px;
 }
 .sb-admin > main > div > .sb-tab {
-  height: calc(100% - 161px);
+  height: calc(100% - 80px);
 }
 
 .sb-search-dropdown {
@@ -11267,6 +11308,41 @@ a.sb-btn-white.sb-loading:hover:before,
   color: rgb(86, 96, 105);
   line-height: 42px;
   opacity: 0.8;
+}
+
+.sb-area-articles .sb-menu-articles > ul li {
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-weight: 400;
+  font-size: 12.8px;
+}
+.sb-area-articles .sb-menu-articles > ul li.sb-active {
+  border-bottom: 2px solid #1F2937;
+}
+.sb-area-articles .sb-inner-tab .sb-content-categories {
+  height: calc(100% - 91px);
+}
+.sb-area-articles .sb-inner-tab .ul-articles li,
+.sb-area-articles .sb-inner-tab .ul-categories li {
+  padding: 0 10px;
+  margin-bottom: 8px;
+}
+.sb-area-articles .sb-inner-tab .ul-articles li:hover i,
+.sb-area-articles .sb-inner-tab .ul-categories li:hover i {
+  top: 12px;
+}
+.sb-area-articles .sb-inner-tab .ul-articles li.sb-active,
+.sb-area-articles .sb-inner-tab .ul-categories li.sb-active {
+  background: #E5EAF0;
+  border-radius: 6px;
+  padding: 0 10px;
+  border-bottom: none;
+}
+.sb-area-articles .sb-inner-tab .ul-articles li.sb-active i,
+.sb-area-articles .sb-inner-tab .ul-categories li.sb-active i {
+  top: 12;
+  background: unset;
 }
 
 /*
