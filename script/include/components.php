@@ -2842,7 +2842,7 @@ function sb_component_admin() {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if ($active_areas['articles']) { ?>
+                <!-- <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
                         <header>
                             <div class="header-left">
@@ -3005,6 +3005,195 @@ function sb_component_admin() {
                                 <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
                                     <div class="input">
                                         <input id="category-parent" type="checkbox" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?> -->
+                <?php if ($active_areas['articles']) { ?>
+                    <div class="sb-area-articles sb-loading">
+                        <header>
+                            <div class="header-left">
+                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                </svg>
+                                <h2 class="title">Articles</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="notification">
+                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                    <span class="badge">0</span>
+                                </div>
+                                <div class="user-profile sb-account">
+                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <div class="user-info">
+                                        <p class="sb-name"></p>
+                                        <span>Super Admin</span>
+                                    </div>
+                                </div>
+                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="sb-top-bar">
+                            <div>
+                                <div class="sb-menu-wide sb-menu-articles">
+                                    <ul>
+                                        <li data-type="articles" class="sb-active">
+                                            <?php sb_e('Articles') ?>
+                                        </li>
+                                        <li data-type="categories">
+                                            <?php sb_e('Categories') ?>
+                                        </li>
+                                        <!-- <li data-type="settings">
+                                            <?php sb_e('Settings') ?>
+                                        </li>
+                                        <?php
+                                        if ($active_areas['reports']) {
+                                            echo '<li data-type="reports">' . sb_('Reports') . '</li>';
+                                        }
+                                        sb_docs_link('#articles');
+                                        ?> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <a class="sb-btn sb-save-articles sb-icon">
+                                    <i class="sb-icon-check"></i>
+                                    <?php sb_e('Save changes') ?>
+                                </a>
+                                <a class="sb-btn-icon sb-view-article" href="" target="_blank">
+                                    <i class="sb-icon-next"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="sb-tab sb-inner-tab">
+                            <div class="sb-nav sb-nav-only sb-scroll-area">
+                                <ul class="ul-articles"></ul>
+                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                    <i class="sb-icon-plus"></i>
+                                    <?php sb_e('Add new article') ?>
+                                </div>
+                                <ul class="ul-categories"></ul>
+                                <div class="sb-add-category sb-btn sb-icon sb-btn-white">
+                                    <i class="sb-icon-plus"></i>
+                                    <?php sb_e('Add new category') ?>
+                                </div>
+                            </div>
+                            <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
+                                <div class="content_article">
+                                    <div class="articleHEad">
+                                        <div class="">
+                                            <p class="head mb-4">Articles Settings</p>
+                                            <p class="des mb-0">Manage preferences and options for your articles.</p>
+                                        </div>
+                                    </div>
+                                    <div class="articles_bg">
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Title') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text sb-article-title">
+                                            <div>
+                                                <input type="text" />
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Content') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-textarea sb-article-content">
+                                            <div>
+                                                <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('External link') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text sb-article-link">
+                                            <div>
+                                                <input type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="sb-article-categories sb-grid">
+                                            <div>
+                                                <h2>
+                                                    <?php sb_e('Parent category') ?>
+                                                </h2>
+                                                <div class="sb-setting sb-type-select">
+                                                    <div>
+                                                        <select id="article-parent-categories"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h2>
+                                                    <?php sb_e('Categories') ?>
+                                                </h2>
+                                                <div class="sb-setting sb-type-select">
+                                                    <div>
+                                                        <select id="article-categories"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h2 id="sb-article-id"></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
+                                <div class="content_article">
+                                    <div class="articleHEad">
+                                        <div class="">
+                                            <p class="head mb-4">Categories Settings</p>
+                                            <p class="des mb-0">Manage article display, categories, and publishing options.</p>
+                                        </div>
+                                    </div>
+                                    <div class="articles_bg">
+                                        <h2 class="fw-semibold fs-6 m-0 mb-2">
+                                            Categories Settings
+                                        </h2>
+                                        <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
+                                            Manage and organize content types.
+                                        </h2>
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Name') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text">
+                                            <div>
+                                                <input id="category-title" type="text" />
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Description') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-textarea">
+                                            <div>
+                                                <textarea id="category-description"></textarea>
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Image') ?>
+                                        </h2>
+                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                            <div id="category-image" class="image">
+                                                <div class="sb-icon-close"></div>
+                                            </div>
+                                        </div>
+                                        <h2 class="category-parent">
+                                            <?php sb_e('Parent category') ?>
+                                        </h2>
+                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                            <div class="input">
+                                                <input id="category-parent" type="checkbox" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
