@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 /*
  * ==========================================================
  * AJAX.PHP
@@ -8,7 +10,6 @@
  * AJAX functions. This file must be executed only via AJAX. © 2017-2025 board.support. All rights reserved.
  *
  */
-
 header('Access-Control-Allow-Headers: *');
 
 if (file_exists('../config.php')) {
@@ -149,7 +150,7 @@ function sb_ajax_execute() {
         case 'get-dashboard-data':
             return sb_json_response(sb_get_dashboad_data());
         case 'get-tickets':
-            return sb_json_response(sb_get_tickets(sb_post('sorting', ['creation_time', 'DESC']), sb_post('ticket_status'), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('source')));
+            return sb_json_response(sb_get_tickets( sb_post('ticket_status'),sb_post('sorting', ['creation_time', 'DESC']), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('source')));
         case 'convert-converversion-to-ticket':
             return sb_json_response(sb_convert_conversion_to_tickets(sb_post('conversation_id')));
         case 'count-tickets':
@@ -165,11 +166,13 @@ function sb_ajax_execute() {
         case 'update-ticket':
             return sb_json_response(sb_update_ticket($_POST['data1'], $_POST['ticket_id']));
         case 'add-ticket-custom-field':
-             return sb_json_response(sb_add_custom_field($_POST['data1']));
+             return sb_json_response(sb_add_edit_custom_field($_POST['data1']));
         case 'add-ticket-status':
              return sb_json_response(sb_add_edit_ticket_status($_POST['data1']));
         case 'delete-ticket-custom-field':
              return sb_json_response(sb_delete_ticket_custom_field($_POST['id']));
+        case 'delete-ticket-status':
+             return sb_json_response(sb_delete_ticket_status($_POST['id']));
         case 'get-tickets-custom-fields':
              return sb_json_response(sb_get_tickets_custom_active_fields());
         // case 'get-ticket-statuses':

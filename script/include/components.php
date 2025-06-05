@@ -572,7 +572,7 @@ function sb_ticket_edit_box()
         $('#select-customer').select2({
             placeholder: 'Type and search...',
             ajax: {
-                url: 'http://localhost/saassupport/script/include/ajax.php', // Your endpoint
+                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
                 method: 'POST',
                 dataType: 'json',
                 delay: 250,
@@ -620,7 +620,7 @@ function sb_ticket_edit_box()
         $('#select-agent').select2({
             placeholder: 'Type and search...',
             ajax: {
-                url: 'http://localhost/saassupport/script/include/ajax.php', // Your endpoint
+                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
                 method: 'POST',
                 dataType: 'json',
                 delay: 250,
@@ -716,7 +716,7 @@ function sb_ticket_edit_box()
 
                 //Create and configure XMLHttpRequest
                 const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+                xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
 
                 // Track upload progress
                 xhr.upload.addEventListener('progress', function(e) {
@@ -941,7 +941,7 @@ function sb_ticket_edit_box()
 
                     // Create and configure XMLHttpRequest
                     const xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'http://localhost/saassupport/script/include/ajax.php', true);
+                    xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
 
                     // Handle response
                     xhr.onload = function() {
@@ -2621,7 +2621,7 @@ function sb_component_admin()
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon" data-sb-tooltip="Convert to a ticket">
                                                 <i id="sb-icon-ticket" class="fa-solid fa-repeat text-white" style></i>
-                                                Convert to ticket
+                                                <span>Convert to ticket</span>
                                             </a>
                                         </li>
                                         <li>
@@ -4067,7 +4067,7 @@ function sb_docs_link($id = '', $class = 'sb-docs')
 
 function sb_get_ticket_custom_fields()
 {
-    $query = "SELECT * FROM custom_fields ORDER BY `order`";
+    $query = "SELECT * FROM custom_fields ORDER BY `order_no`";
     return sb_db_get($query, false);
 }
 
@@ -4114,7 +4114,7 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                                                         <td>' . strtoupper($field["type"]) . '</td>
                                                         <td>' . ($field["required"] ? "Yes" : "No") . '</td>
                                                         <td>' . ($field["is_active"] ? "Yes" : "No") . '</td>
-                                                        <td>' . ($field["order"]) . '</td>
+                                                        <td>' . ($field["order_no"]) . '</td>
                                                         <td>
                                                             <button data-id="' . $field["id"] . '" class="btn btn-sm btn-primary edit-custom-field">
                                                                 <i class="bi bi-pencil">Edit</i>

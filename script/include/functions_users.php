@@ -851,7 +851,7 @@ function sb_get_dashboad_data()
 {
     return ['sucess'=>true,'msg'=>'Dashboard data fecthed sucessfully'];
 }
-function sb_get_tickets($sorting = ['t.creation_time', 'DESC'], $ticket_status, $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
+function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
     $query = '';
     $query_search = '';
     $ticketStatusArr = [];
@@ -1161,7 +1161,7 @@ function sb_add_ticket($inputs)
     $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
     $data = [
             'subject' => sb_db_escape($inputs['subject'][0]),
-            'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
+            'contact_id' => $withoutContact ? 0 : sb_db_escape($inputs['contact_id'][0],true),
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
@@ -1247,6 +1247,12 @@ function sb_add_ticket($inputs)
 
        //echo 'INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values;
         $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values, true);
+
+        if($data['conversation_id'] != 0)  ///// updated sb_conversationstable to mark conversation as converted
+        {
+            sb_db_query('UPDATE sb_conversations SET converted_to_ticket = 1 WHERE id = ' . $data['conversation_id']);
+        }
+        
 
        // print_r($data);
         // Update CCs
@@ -1374,7 +1380,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
     $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
     $data = [
             'subject' => sb_db_escape($inputs['subject'][0]),
-            'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
+            'contact_id' => $withoutContact ? 0 : $inputs['contact_id'][0],
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
@@ -1445,7 +1451,7 @@ function sb_return_saved_ticket_row($ticket_id) {
 }
 
 
-function sb_add_custom_field($inputs)
+function sb_add_edit_custom_field($inputs)
 {
     try {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -1488,10 +1494,19 @@ function sb_add_custom_field($inputs)
         $default_value = $data['default_value'] ? sb_db_escape($data['default_value']) :  null;
         $is_active = isset($data['is_active']) ? 1 : 0;
         $order = $data['order'] ?? 0;
+        $fieldId = sb_db_escape($inputs['field_id'],true);
 
-
-        // Log the SQL query for debugging
-        $sql = "INSERT INTO custom_fields (`title`, `type`, `required`, `default_value`, `options`, `is_active`, `order`) VALUES ('$title', '$type', $required, '$default_value', '$options', $is_active, $order)";
+        $sql = '';
+        if($fieldId == 0 || $fieldId == "")
+        {
+            $sql = "INSERT INTO custom_fields (`title`, `type`, `required`, `default_value`, `options`, `is_active`, `order_no`) VALUES ('$title', '$type', $required, '$default_value', '$options', $is_active, $order)";
+        }
+        else
+        {
+           $sql = "Update custom_fields set title = '$title', type = '$type', required = $required, default_value =  '$default_value', options = '$options', is_active = $is_active, order_no = '$order' where id = '$fieldId'";
+        }
+        
+        
         error_log("SQL Query: " . $sql);
 
         error_log("Bound parameters: title=$title, type=$type, required=$required, default_value=$default_value, is_active=$is_active, order=$order");
@@ -1538,10 +1553,12 @@ function sb_add_edit_ticket_status($inputs)
         if($statusId == 0 || $statusId == "")
         {
             $sql = "INSERT INTO ticket_status (`name`, `color`, `created_at`) VALUES ('$title', '$statusColor',NOW())";
+            $msg = "Status created successfully";
         }
-        else if(isset($inputs['status_id']) && $inputs['status_id'] > 5)  // don't allow update function for first 5 default statuses
+        else // don't allow update function for first 5 default statuses
         {
-            $sql = "Update ticket_status set name = '$title', color = '$statusColor'";
+            $sql = "Update ticket_status set name = '$title', color = '$statusColor' where id = $statusId";
+            $msg = "Status updated successfully";
         }
 
         // Log the SQL query for debugging
@@ -1550,7 +1567,7 @@ function sb_add_edit_ticket_status($inputs)
         if($sql != '')
             sb_db_query($sql);
        
-        return $message = "{'suceess': true, 'msg':'New Status created successfully'}";
+        return $message = "{'suceess': true, 'msg':$msg}";
 
     } catch (Exception $e) {
         // Log the error for debugging
@@ -1593,7 +1610,6 @@ function sb_edit_ticket_custom_field($custom_field_id = 0)
     }   
 }
 
-
 function sb_delete_ticket_custom_field($id)
 {
     $id = sb_db_escape($id, true);
@@ -1602,13 +1618,32 @@ function sb_delete_ticket_custom_field($id)
         sb_db_query('DELETE FROM custom_fields WHERE id = ' . $id);
     }
     else {
-        return ['success' => false, 'message' => 'This field is already used in tickets.'];
+        return ['success' => false, 'message' => 'This field is used in tickets.'];
     }
     return ['success' => true, 'message' => 'Custom field deleted successfully.'];;
 }
+
+function sb_delete_ticket_status($id)
+{
+    $id = sb_db_escape($id, true);
+    $count = sb_db_get('Select count(id) as tickets_count from sb_tickets where status_id ='.$id);
+    if($id > 0 && $id <= 5)
+    {
+        return ['success' => false, 'message' => "Default status cann't be deleted."];
+    }
+
+    if(isset($count['tickets_count']) &&  $count['tickets_count'] == 0) {
+        sb_db_query('DELETE FROM ticket_status WHERE id = ' . $id);
+    }
+    else {
+        return ['success' => false, 'message' => 'This status is used in tickets.'];
+    }
+    return ['success' => true, 'message' => 'Ticket status deleted successfully.'];;
+}
+
 function sb_get_tickets_custom_active_fields()
 {
-    $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order`";
+    $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order_no`";
     return sb_db_get($query,false);
 }
 function sb_get_tickets_statuses()
