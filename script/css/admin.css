@@ -6492,6 +6492,7 @@ td.sb-offline:after {
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #fff;
+  white-space: normal;
 }
 .sb_table_new tbody .sb-td-status .span-border,
 .sb_table_new tbody .sb-td-priority .span-border {
