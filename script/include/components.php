@@ -1513,10 +1513,9 @@ function sb_component_admin()
             </div>
             <main>
 
-                <!-- sahil start -->
-                <div class="sb-area-dashboard">
-                    <main>
-                        <header>
+            <?php
+            $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+            $header = '<header>
                             <div class="header-left">
                                 <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
@@ -1535,7 +1534,8 @@ function sb_component_admin()
                                     <span class="badge">0</span>
                                 </div>
                                 <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                                    <img data-value="edit-profile" src="'.$imgSrc.'" alt="User">
+                                    <span class="initials" style="display:none;"></span>
                                     <div class="user-info">
                                         <p class="sb-name"></p>
                                         <span>Super Admin</span>
@@ -1545,7 +1545,13 @@ function sb_component_admin()
                                     <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
                                 </div>
                             </div>
-                        </header>
+                        </header>';
+                ?>
+
+                <!-- sahil start -->
+                <div class="sb-area-dashboard">
+                    <main>
+                        <?php echo $header; ?>
                         <div class="container new_container">
                             <div class="row">
                                 <div class="col-md-8 p-0">
@@ -2543,36 +2549,7 @@ function sb_component_admin()
                 <!-- sahil end -->
 
                 <div class="sb-area-conversations">
-                    <header>
-                        <div class="header-left">
-                            <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                            </svg>
-                            <h2 class="title">Inbox</h2>
-                        </div>
-                        <div class="header-right">
-                            <div class="notification">
-                                <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                <span class="badge">0</span>
-                            </div>
-                            <div class="notification">
-                                <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                <span class="badge">0</span>
-                            </div>
-                            <div class="user-profile sb-account">
-                                <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                <div class="user-info">
-                                    <p class="sb-name"></p>
-                                    <span>Super Admin</span>
-                                </div>
-                            </div>
-                            <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                            </div>
-                        </div>
-                    </header>
+                    <?php echo $header; ?>
                     <div class="sb-board">
                         <div class="sb-admin-list<?php echo sb_get_multi_setting('departments-settings', 'departments-show-list') ? ' sb-departments-show' : '' ?>">
                             <div class="sb-top">
@@ -2715,36 +2692,7 @@ function sb_component_admin()
                 </div>
                 <?php if ($active_areas['users']) { ?>
                     <div class="sb-area-users">
-                        <header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Customers</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
-                                    </div>
-                                </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>
+                        <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
                                 <a class="sb-btn sb-icon sb-new-user sb_btn_new">
@@ -2876,36 +2824,7 @@ function sb_component_admin()
                         }
                     </style>
                     <div class="sb-area-tickets">
-                        <header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Tickets</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
-                                    </div>
-                                </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>
+                        <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
                                 <!-- <div class="sb-search-btn">
@@ -3010,207 +2929,9 @@ function sb_component_admin()
                         </div>
                     </div>
                 <?php } ?>
-                <!-- <?php if ($active_areas['articles']) { ?>
-                    <div class="sb-area-articles sb-loading">
-                        <header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Articles</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
-                                    </div>
-                                </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>
-                        <div class="sb-top-bar">
-                            <div>
-                                <h2>
-                                    <?php sb_e('Articles') ?>
-                                </h2>
-                                <div class="sb-menu-wide sb-menu-articles">
-                                    <div>
-                                        <?php sb_e('Articles') ?>
-                                    </div>
-                                    <ul>
-                                        <li data-type="articles" class="sb-active">
-                                            <?php sb_e('Articles') ?>
-                                        </li>
-                                        <li data-type="categories">
-                                            <?php sb_e('Categories') ?>
-                                        </li>
-                                        <li data-type="settings">
-                                            <?php sb_e('Settings') ?>
-                                        </li>
-                                        <?php
-                                        if ($active_areas['reports']) {
-                                            echo '<li data-type="reports">' . sb_('Reports') . '</li>';
-                                        }
-                                        sb_docs_link('#articles');
-                                        ?>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div>
-                                <a class="sb-btn-icon sb-view-article" href="" target="_blank">
-                                    <i class="sb-icon-next"></i>
-                                </a>
-                                <a class="sb-btn sb-save-articles sb-icon">
-                                    <i class="sb-icon-check"></i>
-                                    <?php sb_e('Save changes') ?>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="sb-tab sb-inner-tab">
-                            <div class="sb-nav sb-nav-only sb-scroll-area">
-                                <ul class="ul-articles"></ul>
-                                <ul class="ul-categories"></ul>
-                                <div class="sb-add-category sb-btn sb-icon sb-btn-white">
-                                    <i class="sb-icon-plus"></i>
-                                    <?php sb_e('Add new category') ?>
-                                </div>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
-                                    <i class="sb-icon-plus"></i>
-                                    <?php sb_e('Add new article') ?>
-                                </div>
-                            </div>
-                            <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Title') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-title">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Content') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea sb-article-content">
-                                    <div>
-                                        <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('External link') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-link">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div class="sb-article-categories sb-grid">
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Parent category') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-select">
-                                            <div>
-                                                <select id="article-parent-categories"></select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Categories') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-select">
-                                            <div>
-                                                <select id="article-categories"></select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h2 id="sb-article-id"></h2>
-                            </div>
-                            <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Name') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text">
-                                    <div>
-                                        <input id="category-title" type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Description') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea">
-                                    <div>
-                                        <textarea id="category-description"></textarea>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Image') ?>
-                                </h2>
-                                <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                    <div id="category-image" class="image">
-                                        <div class="sb-icon-close"></div>
-                                    </div>
-                                </div>
-                                <h2 class="category-parent">
-                                    <?php sb_e('Parent category') ?>
-                                </h2>
-                                <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                    <div class="input">
-                                        <input id="category-parent" type="checkbox" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?> -->
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
-                        <header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Articles</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
-                                    </div>
-                                </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>
+                        <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
                                 <div class="sb-menu-wide sb-menu-articles">
@@ -3370,36 +3091,7 @@ function sb_component_admin()
                 <?php } ?>
                 <?php if ($active_areas['reports']) { ?>
                     <div class="sb-area-reports sb-area-reports_new  sb-loading">
-                        <header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Reports</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
-                                    </div>
-                                </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>
+                        <?php echo $header; ?>
                         <div class="sb-top-bar p-3">
                             <div>
                                 <!-- <h2>
@@ -3547,36 +3239,7 @@ function sb_component_admin()
                 <?php } ?>
                 <?php if ($active_areas['settings']) { ?>
                     <div class="sb-area-settings settings_new">
-                        <header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Settings</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
-                                    </div>
-                                </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>
+                        <?php echo $header; ?>
                         <!-- <div class="sb-top-bar">
                             <div>
                                 <h2>

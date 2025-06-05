@@ -214,8 +214,6 @@ function account_login($email, $password = false, $token = false) {
                     return false;
                 }
             }
-            //echo 'IIIIIIIIIIIIIIIII';
-            //print_r($sb_login);
             if ($sb_login === 'ip-ban') {
                 return $sb_login;
             }

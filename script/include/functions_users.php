@@ -1162,7 +1162,7 @@ function sb_add_ticket($inputs)
     $data = [
             'subject' => sb_db_escape($inputs['subject'][0]),
             'contact_id' => $withoutContact ? 0 : sb_db_escape($inputs['contact_id'][0],true),
-            'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
+            'assigned_to' => isset($inputs['assigned_to'][0]) ? sb_db_escape($inputs['assigned_to'][0],true) : 0,
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
             'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
@@ -1174,6 +1174,7 @@ function sb_add_ticket($inputs)
             'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0,
         ];
 
+        //print_r($data);
         
 
         $customFields = array();
@@ -1226,7 +1227,15 @@ function sb_add_ticket($inputs)
         }*/
 
 
-        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['assigned_to']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
+        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
+        if($data['assigned_to'] == 0)
+        {
+             $values .=",NULL";
+        }
+        else
+        {
+            $values .= ",'".$data['assigned_to']."'";
+        }
         if($data['department_id'] == 0)
         {
              $values .=",NULL";
@@ -1246,7 +1255,7 @@ function sb_add_ticket($inputs)
         $values .=")";
 
        //echo 'INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values;
-        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values, true);
+        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,assigned_to,department_id,conversation_id) '.$values, true);
 
         if($data['conversation_id'] != 0)  ///// updated sb_conversationstable to mark conversation as converted
         {
