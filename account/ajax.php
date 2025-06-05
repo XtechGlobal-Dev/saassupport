@@ -1,12 +1,14 @@
 <?php
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 /*
  *
  * ===================================================================
  * CLOUD AJAX PHP FILE
  * ===================================================================
  *
- * © 2017-2025 board.support. All rights reserved.
+ * ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 

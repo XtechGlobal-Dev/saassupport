@@ -1161,7 +1161,7 @@ function sb_add_ticket($inputs)
     $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
     $data = [
             'subject' => sb_db_escape($inputs['subject'][0]),
-            'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
+            'contact_id' => $withoutContact ? 0 : sb_db_escape($inputs['contact_id'][0],true),
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
@@ -1247,6 +1247,12 @@ function sb_add_ticket($inputs)
 
        //echo 'INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values;
         $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values, true);
+
+        if($data['conversation_id'] != 0)  ///// updated sb_conversationstable to mark conversation as converted
+        {
+            sb_db_query('UPDATE sb_conversations SET converted_to_ticket = 1 WHERE id = ' . $data['conversation_id']);
+        }
+        
 
        // print_r($data);
         // Update CCs
@@ -1374,7 +1380,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
     $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
     $data = [
             'subject' => sb_db_escape($inputs['subject'][0]),
-            'contact_id' => $withoutContact ? null : $inputs['contact_id'][0],
+            'contact_id' => $withoutContact ? 0 : $inputs['contact_id'][0],
             'assigned_to' => sb_db_escape($inputs['assigned_to'][0],true),
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
@@ -1593,6 +1599,18 @@ function sb_edit_ticket_custom_field($custom_field_id = 0)
     }   
 }
 
+
+function sb_update_ticket_custom_field($inputs,$custom_field_id = 0)
+{
+    $custom_field_id = sb_db_escape($custom_field_id, true);
+     // Prepare variables for bind_param
+    $title = sb_db_escape($inputs['title']);
+    $type = sb_db_escape($inputs['type']);
+    $required = isset($inputs['required']) ? 1 : 0;
+    $default_value = $inputs['default_value'] ? sb_db_escape($inputs['default_value']) :  null;
+    $is_active = isset($inputs['is_active']) ? 1 : 0;
+    $order = $inputs['order'] ?? 0;
+}
 
 function sb_delete_ticket_custom_field($id)
 {
