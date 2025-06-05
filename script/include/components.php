@@ -615,7 +615,6 @@ function sb_ticket_edit_box() { ?>
         $('#without_contact input').on('change',function() {
             
             const isChecked = $(this).is(':checked');
-            console.log(isChecked);
             $('#cust_name input, #cust_email input').prop('disabled', !isChecked);
             $('#cust_name input, #cust_email input').prop('required', isChecked);
            
@@ -3207,7 +3206,7 @@ function sb_component_admin() {
                     </div>
                 <?php } ?>
                 <?php if ($active_areas['reports']) { ?>
-                    <div class="sb-area-reports sb-loading">
+                    <div class="sb-area-reports sb-area-reports_new  sb-loading">
                         <header>
                             <div class="header-left">
                                 <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3238,11 +3237,11 @@ function sb_component_admin() {
                                 </div>
                             </div>
                         </header>
-                        <div class="sb-top-bar">
+                        <div class="sb-top-bar p-3">
                             <div>
-                                <h2>
+                                <!-- <h2>
                                     <?php sb_e('Reports') ?>
-                                </h2>
+                                </h2> -->
                             </div>
                             <div>
                                 <div class="sb-setting sb-type-text">
@@ -3260,109 +3259,114 @@ function sb_component_admin() {
                                 </div>
                                 <ul>
                                     <li class="sb-tab-nav-title">
+                                        <img src="<?php echo SB_URL ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
                                         <?php sb_e('Conversations') ?>
                                     </li>
-                                    <li id="conversations" class="sb-active">
+                                    <li class="li" id="conversations" class="sb-active">
                                         <?php sb_e('Conversations') ?>
                                     </li>
-                                    <li id="missed-conversations">
+                                    <li class="li" id="missed-conversations">
                                         <?php sb_e('Missed conversations') ?>
                                     </li>
-                                    <li id="conversations-time">
+                                    <li class="li" id="conversations-time">
                                         <?php sb_e('Conversations time') ?>
                                     </li>
                                     <li class="sb-tab-nav-title">
+                                        <img src="<?php echo SB_URL ?>/media/msg_icon.svg" alt="icon" class="mr-1" />
                                         <?php sb_e('Direct messages') ?>
                                     </li>
-                                    <li id="direct-messages">
+                                    <li class="li" id="direct-messages">
                                         <?php sb_e('Chat messages') ?>
                                     </li>
-                                    <li id="direct-emails">
+                                    <li class="li" id="direct-emails">
                                         <?php sb_e('Emails') ?>
                                     </li>
-                                    <li id="direct-sms">
+                                    <li class="li" id="direct-sms">
                                         <?php sb_e('Text messages') ?>
                                     </li>
                                     <li class="sb-tab-nav-title">
+                                        <img src="<?php echo SB_URL ?>/media/agents_icon.svg" alt="icon" class="mr-1" />
                                         <?php sb_e('Users and agents') ?>
                                     </li>
-                                    <li id="visitors">
+                                    <li class="li" id="visitors">
                                         <?php sb_e('Visitors') ?>
                                     </li>
-                                    <li id="leads">
+                                    <li class="li" id="leads">
                                         <?php sb_e('Leads') ?>
                                     </li>
-                                    <li id="users">
+                                    <li class="li" id="users">
                                         <?php sb_e('Users') ?>
                                     </li>
-                                    <li id="registrations">
+                                    <li class="li" id="registrations">
                                         <?php sb_e('Registrations') ?>
                                     </li>
-                                    <li id="agents-response-time">
+                                    <li class="li" id="agents-response-time">
                                         <?php sb_e('Agent response time') ?>
                                     </li>
-                                    <li id="agents-conversations">
+                                    <li class="li" id="agents-conversations">
                                         <?php sb_e('Agent conversations') ?>
                                     </li>
-                                    <li id="agents-conversations-time">
+                                    <li class="li" id="agents-conversations-time">
                                         <?php sb_e('Agent conversations time') ?>
                                     </li>
-                                    <li id="agents-ratings">
+                                    <li class="li" id="agents-ratings">
                                         <?php sb_e('Agent ratings') ?>
                                     </li>
-                                    <li id="countries">
+                                    <li class="li" id="countries">
                                         <?php sb_e('Countries') ?>
                                     </li>
-                                    <li id="languages">
+                                    <li class="li" id="languages">
                                         <?php sb_e('Languages') ?>
                                     </li>
-                                    <li id="browsers">
+                                    <li class="li" id="browsers">
                                         <?php sb_e('Browsers') ?>
                                     </li>
-                                    <li id="os">
+                                    <li class="li" id="os">
                                         <?php sb_e('Operating systems') ?>
                                     </li>
                                     <li class="sb-tab-nav-title">
+                                        <img src="<?php echo SB_URL ?>/media/automation_icon.svg" alt="icon" class="mr-1" />
                                         <?php sb_e('Automation') ?>
                                     </li>
-                                    <li id="follow-up">
+                                    <li class="li" id="follow-up">
                                         <?php sb_e('Follow up') ?>
                                     </li>
-                                    <li id="message-automations">
+                                    <li class="li" id="message-automations">
                                         <?php sb_e('Message automations') ?>
                                     </li>
-                                    <li id="email-automations">
+                                    <li class="li" id="email-automations">
                                         <?php sb_e('Email automations') ?>
                                     </li>
                                     <?php
                                     if ($sms) {
-                                        echo '<li id="sms-automations">' . sb_('Text message automations') . '</li>';
+                                        echo '<li class="li" id="sms-automations">' . sb_('Text message automations') . '</li>';
                                     }
                                     ?>
                                     <li class="sb-tab-nav-title">
+                                        <img src="<?php echo SB_URL ?>/media/article_icon.svg" alt="icon" class="mr-1" />
                                         <?php sb_e('Articles') ?>
                                     </li>
-                                    <li id="articles-searches">
+                                    <li class="li" id="articles-searches">
                                         <?php sb_e('Searches') ?>
                                     </li>
-                                    <li id="articles-views">
+                                    <li class="li" id="articles-views">
                                         <?php sb_e('Article views') ?>
                                     </li>
-                                    <li id="articles-views-single">
+                                    <li class="li" id="articles-views-single">
                                         <?php sb_e('Article views by article') ?>
                                     </li>
-                                    <li id="articles-ratings">
+                                    <li class="li" id="articles-ratings">
                                         <?php sb_e('Article ratings') ?>
                                     </li>
                                 </ul>
                             </div>
                             <div class="sb-content sb-scroll-area">
                                 <div class="sb-reports-chart">
-                                    <div class="chart-cnt">
-                                        <canvas></canvas>
+                                    <div class="chart-cnt mt-3">
+                                        <canvas id="canvas"></canvas>
                                     </div>
                                 </div>
-                                <div class="sb-reports-sidebar">
+                                <div class="sb-reports-sidebar mt-3">
                                     <div class="sb-title sb-reports-title"></div>
                                     <p class="sb-reports-text"></p>
                                     <div class="sb-collapse">
@@ -3893,7 +3897,7 @@ function sb_docs_link($id = '', $class = 'sb-docs') {
 }
 
 function sb_get_ticket_custom_fields() {
-   $query = "SELECT * FROM custom_fields ORDER BY `order`";
+   $query = "SELECT * FROM custom_fields ORDER BY `order_no`";
    return sb_db_get($query,false);
 }
 
@@ -3938,7 +3942,7 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs') {
                                                         <td>'.strtoupper($field["type"]).'</td>
                                                         <td>'.($field["required"] ? "Yes" : "No") .'</td>
                                                         <td>'.($field["is_active"] ? "Yes" : "No") .'</td>
-                                                        <td>'.($field["order"]) .'</td>
+                                                        <td>'.($field["order_no"]) .'</td>
                                                         <td>
                                                             <button data-id="'.$field["id"].'" class="btn btn-sm btn-primary edit-custom-field">
                                                                 <i class="bi bi-pencil">Edit</i>

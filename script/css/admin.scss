@@ -845,6 +845,7 @@ td.sb-offline:after {
             padding-top: 15px;
             padding-bottom: 15px;
             background-color: #fff;
+            white-space: normal;
         }
 
         .sb-td-status .span-border,
@@ -6677,6 +6678,52 @@ a.sb-btn-white,
                     background: unset;
                 }
             }
+        }
+    }
+}
+
+.sb-area-reports_new {
+    .sb-tab {
+        height: calc(100% - 170px) !important;
+    }
+
+    .sb-nav-only {
+        .sb-tab-nav-title {
+            border-bottom: none !important;
+            padding: 0 10px;
+            margin-bottom: 4px;
+        }
+
+        .li {
+            padding: 0 10px;
+            border-bottom: none;
+            margin-bottom: 8px;
+
+            &.sb-active {
+                background: #E5EAF0;
+                border-radius: 6px;
+                padding: 0 10px;
+                border-bottom: none;
+            }
+        }
+    }
+
+    .chart-cnt {
+        border: 0.5px solid #D1D5DB;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .sb-reports-sidebar {
+        .sb-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .sb-reports-text {
+            margin: 5px 0;
+            //     font-size: 12px;
+            //     color: #4C4C4C;
         }
     }
 }
