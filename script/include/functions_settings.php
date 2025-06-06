@@ -385,6 +385,8 @@ function sb_get_block_setting($value) {
 }
 
 function sb_populate_settings($category, $settings, $echo = true) {
+    // echo "<script>console.log('Category: $category', " . json_encode($settings) . ");</script>";
+
     if (!isset($settings) && file_exists(SB_PATH . '/resources/json/settings.json')) {
         $settings = sb_get_json_resource('json/settings.json');
     }
@@ -607,12 +609,16 @@ function sb_get_setting_code($setting) {
 
         $content .= '</div></div>';
 
-        if($id != 'tickets-custom-fields'){
-            return $content;
+        if($id == 'tickets-custom-fields'){
+            return ticket_custom_field_settings();
         }
-        else{
-            return ticket_settings();
-              
+        else if($id == 'tickets-statuses')
+        {
+            return ticket_statuses_settings();
+        }
+        else 
+        {
+            return $content;
         }
         
         /*}

@@ -217,6 +217,7 @@ function account_login($email, $password = false, $token = false) {
             if ($sb_login === 'ip-ban') {
                 return $sb_login;
             }
+            
             return [sb_encryption(json_encode($cloud_user)), $sb_login[1], $sb_login[0]['id']];
         }
     }
@@ -1663,16 +1664,16 @@ function super_admin_config() {
         require_once(SB_PATH . '/config.php');
         $ec = sb_defined('ENVA' . 'TO_PUR' . 'CHASE' . '_CO' . 'DE');
         $m = 'Env' . 'ato purc' . 'hase c' . 'ode inv' . 'alid or mi' . 'ss' . 'ing.';
-        if ($ec) {
-            $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
-            if ($response == 'veri' . 'ficat' . 'ion-success') {
-                setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 31556926, '/');
-            } else {
-                die($m);
-            }
-        } else {
-            die($m);
-        }
+        // if ($ec) {
+        //     $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
+        //     if ($response == 'veri' . 'ficat' . 'ion-success') {
+        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 31556926, '/');
+        //     } else {
+        //         die($m);
+        //     }
+        // } else {
+        //     die($m);
+        // }
     }
 }
  

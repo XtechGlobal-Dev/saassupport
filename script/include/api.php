@@ -5,7 +5,7 @@
  * API.PHP
  * ==========================================================
  *
- * API. This file listens the POST queries and return the result. © 2017-2025 board.support. All rights reserved.
+ * API. This file listens the POST queries and return the result. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
