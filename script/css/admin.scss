@@ -1384,6 +1384,10 @@ td.sb-offline:after {
     cursor: pointer;
     display: none;
     z-index: 9999995;
+    // new css for shorter and center 
+    // max-width: 500px;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
 
     &.sb-active {
         display: block;
@@ -3585,8 +3589,8 @@ td.sb-offline:after {
                     margin: 10px auto;
 
                     #ticket_activity_chart {
-                        height: 200px;
-                        width: 440px;
+                        height: 200px !important;
+                        width: 440px !important;
                     }
                 }
 

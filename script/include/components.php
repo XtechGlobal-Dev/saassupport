@@ -1373,9 +1373,6 @@ function sb_component_admin()
         echo '<style>' . $css . '</style>';
     }
 ?>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
             <div class="sb-header header_new">
@@ -1512,11 +1509,9 @@ function sb_component_admin()
                 </div> -->
             </div>
             <main>
-
-                <!-- sahil start -->
                 <div class="sb-area-dashboard">
                     <main>
-                        <header>
+                        <header class="sb-header2">
                             <div class="header-left">
                                 <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
@@ -1534,7 +1529,36 @@ function sb_component_admin()
                                     <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                     <span class="badge">0</span>
                                 </div>
-                                <div class="user-profile sb-account">
+
+                                <!-- <div class="sb-admin-nav-right sb-menu-mobile">
+                                    <i class="sb-icon-menu"></i>
+                                    <div class="sb-desktop">
+                                        <div class="sb-account">
+                                            <img src="<?php echo SB_URL ?>/media/user.svg" />
+                                            <div>
+                                                <a class="sb-profile">
+                                                    <img src="<?php echo SB_URL ?>/media/user.svg" />
+                                                    <span class="sb-name"></span>
+                                                </a>
+                                                <ul class="sb-menu">
+                                                    <li data-value="status" class="sb-online">
+                                                        <?php sb_e('Online') ?>
+                                                    </li>
+                                                    <?php
+                                                    if ($is_admin) {
+                                                        echo '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>' . ($is_cloud ? sb_cloud_account_menu() : '');
+                                                    }
+                                                    ?>
+                                                    <li data-value="logout">
+                                                        <?php sb_e('Logout') ?>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="user-profile sb-account">
                                     <img data-value="edit-profile" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
                                     <div class="user-info">
                                         <p class="sb-name"></p>
@@ -1543,7 +1567,7 @@ function sb_component_admin()
                                 </div>
                                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
                                     <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
+                                </div> -->
                             </div>
                         </header>
                         <div class="container new_container">
@@ -1812,10 +1836,11 @@ function sb_component_admin()
                                                     </div>
                                                     <div class="metric-info">
                                                         <h3> Avg. Response Time</h3>
-                                                        <p>4m 30s</p>
+                                                        <!-- <p id="avg_response_time">0h 0m 0s</p> -->
+                                                        <div id="avg_response_time_container"></div>
                                                     </div>
                                                 </div>
-                                                <div class="w-100">
+                                                <!-- <div class="w-100">
                                                     <div class="avg_response_chart">
                                                         <canvas class="mt-0" id="avg_response_chart"></canvas>
                                                     </div>
@@ -1876,7 +1901,7 @@ function sb_component_admin()
                                                             }
                                                         });
                                                     </script>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="metric-increase">Improved by <span>12%</span> this week</div>
                                         </div>
@@ -2102,13 +2127,13 @@ function sb_component_admin()
                                                         scales: {
                                                             x: {
                                                                 grid: {
-                                                                    display: false
+                                                                    display: true
                                                                 }
                                                             },
                                                             y: {
                                                                 beginAtZero: true,
                                                                 grid: {
-                                                                    display: false
+                                                                    display: true
                                                                 }
                                                             }
                                                         }
@@ -2540,8 +2565,6 @@ function sb_component_admin()
                             </div>
                     </main>
                 </div>
-                <!-- sahil end -->
-
                 <div class="sb-area-conversations">
                     <header>
                         <div class="header-left">
