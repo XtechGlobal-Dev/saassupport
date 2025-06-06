@@ -35,15 +35,12 @@ global $SB_LOGIN;
 global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
-const SELECT_FROM_TICKETS = 'SELECT t.*, c.name as contact_name, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
-            p.name as priority_name, p.color as priority_color, s.name as service_name, d.name as department_name,
+const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
+            p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color
-     FROM sb_tickets t
-     LEFT JOIN contacts c ON t.contact_id = c.id
+     FROM sb_tickets t 
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN priorities p ON t.priority_id = p.id
-     LEFT JOIN services s ON t.service_id = s.id
-     LEFT JOIN departments d ON t.department_id = d.id
      LEFT JOIN ticket_status ts ON t.status_id = ts.id';
 
 
@@ -150,6 +147,7 @@ function sb_db_get($query, $single = true) {
     global $SB_CONNECTION;
     $status = sb_db_connect();
     $value = ($single ? '' : []);
+    
     if ($status) {
         $result = $SB_CONNECTION->query($query);
         if ($result) {
@@ -965,12 +963,36 @@ function sb_installation($details, $force = false) {
         }
         $db_respones['users'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_users (id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(100) NOT NULL, last_name VARCHAR(100) NOT NULL, password VARCHAR(100), email VARCHAR(191) UNIQUE, profile_image VARCHAR(191), user_type VARCHAR(10) NOT NULL, creation_time DATETIME NOT NULL, token VARCHAR(50) NOT NULL UNIQUE, last_activity DATETIME, typing INT DEFAULT -1, department TINYINT, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         $db_respones['users_data'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_users_data (id INT NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, slug VARCHAR(191) NOT NULL, name VARCHAR(191) NOT NULL, value TEXT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE, UNIQUE INDEX sb_users_data_index (user_id, slug)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
-        $db_respones['conversations'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_conversations (id int NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, title VARCHAR(191), creation_time DATETIME NOT NULL, status_code TINYINT DEFAULT 0, department TINYINT, agent_id INT, source VARCHAR(2), extra VARCHAR(191), extra_2 VARCHAR(191), extra_3 VARCHAR(191), tags VARCHAR(191), PRIMARY KEY (id), FOREIGN KEY (agent_id) REFERENCES sb_users(id) ON DELETE CASCADE, FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+        $db_respones['conversations'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_conversations (id int NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, title VARCHAR(191), creation_time DATETIME NOT NULL, status_code TINYINT DEFAULT 0, department TINYINT, agent_id INT, source VARCHAR(2), extra VARCHAR(191), extra_2 VARCHAR(191), extra_3 VARCHAR(191), tags VARCHAR(191),`converted_to_ticket` tinyint(4) DEFAULT NULL, PRIMARY KEY (id), FOREIGN KEY (agent_id) REFERENCES sb_users(id) ON DELETE CASCADE, FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         $db_respones['messages'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_messages (id int NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, message TEXT NOT NULL, creation_time DATETIME NOT NULL, status_code TINYINT DEFAULT 0, attachments TEXT, payload TEXT, conversation_id INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE, FOREIGN KEY (conversation_id) REFERENCES sb_conversations(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin');
         $db_respones['settings'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_settings (name VARCHAR(191) NOT NULL, value LONGTEXT, PRIMARY KEY (name)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         $db_respones['reports'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_reports (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(191) NOT NULL, value TEXT NOT NULL, creation_time DATE NOT NULL, external_id INT, extra VARCHAR(191), PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         $db_respones['articles'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_articles (id INT NOT NULL AUTO_INCREMENT, title VARCHAR(191) NOT NULL, content TEXT NOT NULL, editor_js TEXT NOT NULL, nav TEXT, link VARCHAR(191), category VARCHAR(191), parent_category VARCHAR(191), language VARCHAR(2), parent_id INT, slug VARCHAR(191), update_time DATE NOT NULL, PRIMARY KEY (id), FOREIGN KEY (parent_id) REFERENCES sb_articles(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
+        $db_respones['custom_fields'] = $connection->query('CREATE TABLE IF NOT EXISTS `custom_fields` (`id` int(11) NOT NULL AUTO_INCREMENT,`title` varchar(100) NOT NULL,`type` enum("text","textarea","select","checkbox") NOT NULL DEFAULT "text",`required` tinyint(1) NOT NULL DEFAULT 0,`default_value` varchar(255) DEFAULT NULL,`is_active` tinyint(1) NOT NULL DEFAULT 1, `order_no` int(11) NOT NULL DEFAULT 0,`options` text DEFAULT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+        $db_respones['default_fields_settings'] = $connection->query('CREATE TABLE IF NOT EXISTS `default_fields_settings` (`field_name` varchar(50) NOT NULL,`is_active` tinyint(1) NOT NULL DEFAULT 1 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+        $db_respones['priorities'] = $connection->query('CREATE TABLE IF NOT EXISTS `priorities` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL,`description` text DEFAULT NULL, `color` varchar(20) DEFAULT "warning",`created_at` timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+        $db_respones['sb_tickets'] = $connection->query('CREATE TABLE IF NOT EXISTS `sb_tickets` (`id` int(11) NOT NULL AUTO_INCREMENT,`subject` varchar(255) NOT NULL,`contact_id` int(11) DEFAULT NULL,`contact_name` varchar(100) DEFAULT NULL,`contact_email` varchar(100) DEFAULT NULL,`assigned_to` int(11) DEFAULT NULL,`priority_id` int(11) NOT NULL,`service_id` int(11) DEFAULT NULL,`department_id` int(11) DEFAULT NULL,`tags` varchar(255) DEFAULT NULL, `description` text DEFAULT NULL,`creation_time` timestamp NOT NULL DEFAULT current_timestamp(),`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),`status_id` int(11) NOT NULL DEFAULT 1,`conversation_id` int(11) DEFAULT NULL,`last_reply` timestamp NULL DEFAULT NULL,FOREIGN KEY (conversation_id) REFERENCES sb_conversations(id) ON DELETE CASCADE, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+        $db_respones['ticket_attachments'] = $connection->query('CREATE TABLE IF NOT EXISTS `ticket_attachments` (`id` int(11) NOT NULL AUTO_INCREMENT, `ticket_id` int(11) NOT NULL,`filename` varchar(255) NOT NULL,`original_filename` varchar(255) NOT NULL,`file_path` varchar(255) NOT NULL,`file_type` varchar(100) NOT NULL,`file_size` int(11) NOT NULL,`uploaded_at` datetime DEFAULT current_timestamp(), PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;');
+        $db_respones['ticket_custom_fields'] = $connection->query('CREATE TABLE IF NOT EXISTS `ticket_custom_fields` (`id` int(11) NOT NULL AUTO_INCREMENT,`ticket_id` int(11) NOT NULL,`custom_field_id` int(11) NOT NULL,`value` text NOT NULL, PRIMARY KEY (id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
+        $db_respones['ticket_status'] = $connection->query('CREATE TABLE IF NOT EXISTS `ticket_status` (`id` int(11) NOT NULL AUTO_INCREMENT,`name` varchar(50) NOT NULL,`color` varchar(20) NOT NULL,`created_at` timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci');
 
+        /// Insert Default Ticket Statues
+
+        $connection->query("INSERT INTO `ticket_status` (`id`, `name`, `color`, `created_at`) VALUES
+                        (1, 'Open', '#FF0000', '2025-05-09 09:39:19'),
+                        (2, 'In Progress', '#FFA500', '2025-05-09 09:39:19'),
+                        (3, 'Hold', '#FF4500', '2025-05-09 09:39:19'),
+                        (4, 'Answered', '#00FF00', '2025-05-09 09:39:19'),
+                        (5, 'Closed', '#808080', '2025-05-09 09:39:19')");
+
+        /// Insert Default Ticket priorities
+
+        $connection->query("INSERT INTO `priorities` (`id`, `name`, `description`, `color`, `created_at`) VALUES
+                        (1, 'Critical', 'Critical', '#FF0000', '2025-05-08 10:57:03'),
+                        (2, 'High', 'High', '#FF0000', '2025-05-08 10:57:29'),
+                        (3, 'Medium', 'Medium', '#FF4500', '2025-05-08 10:57:55'),
+                        (4, 'Low', 'Low', '#808080', '2025-05-08 10:58:17')");
+        
         // Create the admin user
         if (isset($details['first-name']) && isset($details['last-name']) && isset($details['email']) && isset($details['password'])) {
             $now = sb_gmt_now();
@@ -1519,6 +1541,8 @@ function sb_download_file($url, $file_name = false, $mime = false, $header = [],
         }
         $file_name = sb_string_slug($file_name);
         $path_2 = $path . '/' . $file_name;
+        
+        
         rename($path . '/' . basename($url), $path_2);
         if (!file_exists($path_2) && $recursion < 3) {
             return sb_download_file($url, $file_name, $mime, $header, $recursion + 1);
@@ -2286,7 +2310,11 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
                     $skip = true;
                 }
             }
-            $rows = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE id IN (' . substr($agents_ids, 0, -1) . ')', false);
+
+            $rows = [];
+            if($agents_ids != '') {    ///// fixed bug in substr($agents_ids, 0, -1) when $agents_ids is empty
+                $rows = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE id IN (' . substr($agents_ids, 0, -1) . ')', false);
+            }
             $agent_names = [];
             for ($i = 0; $i < count($rows); $i++) {
                 $agent_names[$rows[$i]['id']] = sb_get_user_name($rows[$i]);

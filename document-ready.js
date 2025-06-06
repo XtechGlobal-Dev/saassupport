@@ -12,6 +12,10 @@
         conversations_filters = conversations_admin_list.find('.sb-select');
         conversations_user_details = conversations_area.find('.sb-user-details');
 
+        // Dashboard
+        dash_area = admin.find('.sb-area-dashboard');
+
+
         /*Users*/
         users_area = admin.find('.sb-area-users');
         users_table = users_area.find('.sb-table-users');
@@ -64,7 +68,13 @@
             if (responsive && conversations_area.sbActive() && conversation_area.sbActive()) {
                 SBConversations.mobileCloseConversation();
             }
-            if (SBF.getURL('user')) {
+            // if (SBF.getURL('dashboard')) {
+            //     if (!dash_area.sbActive()) {
+            //         header.find('.sb-admin-nav #sb-dashboard').click();
+            //     }
+            //     SBProfile.show(SBF.getURL('user'));
+            // } else
+             if (SBF.getURL('user')) {
                 if (!users_area.sbActive()) {
                     header.find('.sb-admin-nav #sb-users').click();
                 }
