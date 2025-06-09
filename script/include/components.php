@@ -2696,6 +2696,9 @@ function sb_component_admin()
                             <div class="sb-top">
                                 <div class="sb-profile">
                                     <img src="<?php echo SB_URL ?>/media/user.svg" />
+                                    <div class="user-initials" style="display: none;">
+                                        <span class="initials"></span>
+                                    </div>
                                     <span class="sb-name"></span>
                                 </div>
                             </div>

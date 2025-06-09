@@ -1410,7 +1410,32 @@ function sb_update_ticket($inputs,$ticket_id =0)
         }
     }
 
-    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to ='".$data['assigned_to']."',priority_id = '".$data['priority_id']."',department_id= '".$data['department_id']."',tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
+    if($data['assigned_to'] == 0)
+    {
+            $data['assigned_to'] ="NULL";
+    }
+    else
+    {
+        $data['assigned_to'] = "'".$data['assigned_to']."'";
+    }
+    if($data['department_id'] == 0)
+    {
+            $data['department_id'] ="NULL";
+    }
+    else
+    {
+        $data['department_id'] = "'".$data['department_id']."'";
+    }
+    if($data['conversation_id'] == 0)
+    {
+            $data['conversation_id'] = "NULL";
+    }
+    else
+    {
+        $data['conversation_id'] = "'".$data['conversation_id']."'";
+    }
+
+    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to =".$data['assigned_to'].",priority_id = '".$data['priority_id']."',department_id= ".$data['department_id'].",tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
 
     // Update CCs
     if (isset($data['cc'][0]) && $data['cc'][0] != '') {
