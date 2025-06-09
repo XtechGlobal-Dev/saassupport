@@ -8793,8 +8793,8 @@ td.sb-offline:after {
   margin: 10px auto;
 }
 .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-  height: 200px;
-  width: 440px;
+  height: 200px !important;
+  width: 440px !important;
 }
 .sb-area-dashboard main .new_container .main-charts .overview_chart {
   display: flex;

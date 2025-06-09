@@ -1416,9 +1416,6 @@ function sb_component_admin()
         echo '<style>' . $css . '</style>';
     }
 ?>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
             <div class="sb-header header_new">
@@ -1588,7 +1585,7 @@ function sb_component_admin()
                                 </div>
                                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
                                     <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
+                                </div> -->
                             </div>
                         </header>';
                 ?>
@@ -1863,10 +1860,11 @@ function sb_component_admin()
                                                     </div>
                                                     <div class="metric-info">
                                                         <h3> Avg. Response Time</h3>
-                                                        <p>4m 30s</p>
+                                                        <!-- <p id="avg_response_time">0h 0m 0s</p> -->
+                                                        <div id="avg_response_time_container"></div>
                                                     </div>
                                                 </div>
-                                                <div class="w-100">
+                                                <!-- <div class="w-100">
                                                     <div class="avg_response_chart">
                                                         <canvas class="mt-0" id="avg_response_chart"></canvas>
                                                     </div>
@@ -1927,7 +1925,7 @@ function sb_component_admin()
                                                             }
                                                         });
                                                     </script>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="metric-increase">Improved by <span>12%</span> this week</div>
                                         </div>
@@ -2153,13 +2151,13 @@ function sb_component_admin()
                                                         scales: {
                                                             x: {
                                                                 grid: {
-                                                                    display: false
+                                                                    display: true
                                                                 }
                                                             },
                                                             y: {
                                                                 beginAtZero: true,
                                                                 grid: {
-                                                                    display: false
+                                                                    display: true
                                                                 }
                                                             }
                                                         }
@@ -2591,8 +2589,6 @@ function sb_component_admin()
                             </div>
                     </main>
                 </div>
-                <!-- sahil end -->
-
                 <div class="sb-area-conversations">
                     <?php echo $header; ?>
                     <div class="sb-board">
