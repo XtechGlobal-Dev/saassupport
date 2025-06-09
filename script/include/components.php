@@ -567,6 +567,49 @@ function sb_ticket_edit_box()
         span.select2-selection.select2-selection--single {
             height: 42px;
         }
+
+
+        .user-initials {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ccc;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            line-height: 50px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 10px 0 0;
+            cursor: pointer;
+        }
+
+        .initials {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        }
+
+        .sb-scroll-area .user-initials
+        {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #ccc;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            line-height: 45px;
+            overflow: hidden;
+            position: absolute;
+            margin: 0 10px 0 0;
+            cursor: pointer;
+            left: 0;
+        }
     </style>
     <script>
         $('#select-customer').select2({
@@ -1535,7 +1578,9 @@ function sb_component_admin()
                                 </div>
                                 <div class="user-profile sb-account">
                                     <img data-value="edit-profile" src="'.$imgSrc.'" alt="User">
-                                    <span class="initials" style="display:none;"></span>
+                                    <div class="user-initials" data-value="edit-profile" style="display:none;">
+                                        <span class="initials" ></span>
+                                    </div>
                                     <div class="user-info">
                                         <p class="sb-name"></p>
                                         <span>Super Admin</span>
