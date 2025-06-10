@@ -87,7 +87,7 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 .sb-main textarea,
 .sb-main select {
     // font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
-font-family: Manrope;
+    font-family: Manrope;
 }
 
 .sb-main *,
@@ -1552,8 +1552,9 @@ div ul.sb-menu,
     border: 1px solid #1F2937 !important;
     font-weight: 500 !important;
     padding: 0 8px !important;
-    >i{
-        position: unset !important ;
+
+    >i {
+        position: unset !important;
     }
 }
 
@@ -2623,6 +2624,8 @@ div ul.sb-menu,
     position: absolute;
     margin: 0;
     z-index: 5;
+    right: 50px;
+    top: 55px;
 
     &.sb-active {
         display: block;
@@ -2635,7 +2638,13 @@ div ul.sb-menu,
         overflow-y: scroll;
     }
 
-    li {
+    .li {
+        display: block;
+        width: calc(100% - 37px);
+    }
+
+    li,
+    .li {
         cursor: pointer;
         padding: 6px 25px 6px 12px;
         margin: 0;
@@ -2647,6 +2656,8 @@ div ul.sb-menu,
         list-style: none;
         user-select: none;
         transition: all 0.1s;
+        text-decoration: none;
+        color: rgb(36, 39, 42);
 
         &.sb-active {
             color: $color-blue;

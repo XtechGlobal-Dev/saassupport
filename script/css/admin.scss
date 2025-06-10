@@ -445,6 +445,7 @@ td.sb-offline:after {
             .head {
                 font-weight: 700;
                 font-size: 25px;
+                line-height: 40px
             }
 
             .des {
@@ -862,15 +863,15 @@ td.sb-offline:after {
     position: relative;
     color: $color-black;
     line-height: 30px;
-    padding-left: 45px;
+    padding-left: 50px;
     text-decoration: none;
     display: flex;
     align-items: center;
 
     img {
         position: absolute;
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         left: 0;
         top: 50%;
@@ -883,6 +884,20 @@ td.sb-offline:after {
         letter-spacing: 0.3px;
     }
 }
+
+.sb-td-profile, .sb-user-details {
+
+    .sb-profile {
+    line-height: 30px;
+
+        img {
+            width: 40px;
+            height: 40px;
+        }
+
+    }
+}
+
 
 .sb-profile-list>ul>li>span,
 .sb-panel-details .sb-title {
@@ -3412,7 +3427,7 @@ td.sb-offline:after {
         .header-right {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 35px;
         }
 
         .title {
@@ -3421,7 +3436,7 @@ td.sb-offline:after {
         }
 
         .notification {
-            margin-right: 20px;
+            // margin-right: 20px;
             position: relative;
             cursor: pointer;
 
@@ -3438,13 +3453,91 @@ td.sb-offline:after {
             }
         }
 
+        .user_menu {
+            .sb-menu {
+                display: none;
+
+                .menu_head {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 15px 10px;
+                    border-bottom: 1px solid #d7d7d7;
+
+                    >img {
+                        height: 50px;
+                        width: 50px;
+                        border-radius: 50%;
+                    }
+                }
+
+                li[data-value="status"],
+                li.sb-online,
+                li.sb-offline {
+                    position: relative;
+                    margin-top: 8px;
+
+                    &::before {
+                        content: "";
+                        width: 8px;
+                        height: 8px;
+                        position: absolute;
+                        border-radius: 50%;
+                        top: 50%;
+                        right: 6px;
+                        transform: translateY(-50%);
+                        background: rgb(19, 202, 126);
+                    }
+
+                    &::after {
+                        content: "";
+                        width: 14px;
+                        height: 14px;
+                        position: absolute;
+                        border-radius: 50%;
+                        top: 50%;
+                        right: 3px;
+                        transform: translateY(-50%);
+                        background: rgba(19, 202, 126, 0.2);
+                    }
+
+                    &.sb-offline::before {
+                        background: #d6d6d6 !important;
+                    }
+
+                    &.sb-offline::after {
+                        display: none !important;
+                    }
+                }
+            }
+
+            &:hover .sb-menu {
+                display: block;
+            }
+        }
+
         .user-profile {
             display: flex;
             align-items: center;
-            border-left: 1px solid #EEEEEE;
-            padding-left: 30px;
+            // border-left: 1px solid #EEEEEE;
+            min-width: 50px;
+            // padding-left: 30px;
 
-            img {
+            // .sb-menu {
+            //     .top_divider {
+            //         align-items: center;
+            //         display: flex;
+            //         gap: 10px;
+
+            //         .uImg {
+            //             width: 25px;
+            //             height: 25px;
+            //             border-radius: 50%;
+            //         }
+            //     }
+            // }
+
+            .uImg {
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
@@ -3466,6 +3559,7 @@ td.sb-offline:after {
                     color: #5d6165;
                 }
             }
+
         }
 
         .logout {
@@ -4160,7 +4254,6 @@ td.sb-offline:after {
             }
 
             span {
-                margin-left: 20px;
                 font-size: 20px;
                 line-height: 45px;
                 white-space: nowrap;

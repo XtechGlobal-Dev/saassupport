@@ -196,7 +196,6 @@ function sb_ticket_box()
 function sb_ticket_edit_box()
 { ?>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <!--script src="https://cdn.quilljs.com/1.3.6/quill.js"></script-->
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <div class="sb-ticket-edit-box sb-lightbox">
@@ -584,16 +583,15 @@ function sb_ticket_edit_box()
             line-height: 50px;
             overflow: hidden;
             position: relative;
-            margin: 0 10px 0 0;
             cursor: pointer;
         }
 
         .initials {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .sb-scroll-area .user-initials, .sb-top-bar .user-initials
@@ -606,11 +604,11 @@ function sb_ticket_edit_box()
         }
 
         .sb-user-details .user-initials {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             font-size: 13px;
-            line-height: 30px;
+            line-height: 40px;
             position: absolute;
             margin: 0 10px 0 0;
             left: 0;
@@ -1563,42 +1561,51 @@ function sb_component_admin()
                 </div> -->
             </div>
             <main>
-
-            <?php
-            $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-            $header = '<header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Dashboard</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
+                <?php
+                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                $header = '<header>
+                                <div class="header-left">
+                                    <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
+                                        <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
+                                        <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
+                                    </svg>
+                                    <h2 class="title">Setting</h2>
                                 </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="'.$imgSrc.'" alt="User">
-                                    <div class="user-initials" data-value="edit-profile" style="display:none;">
-                                        <span class="initials" ></span>
+                                <div class="header-right">
+                                    <div class="notification">
+                                        <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                        <span class="badge">0</span>
                                     </div>
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
+                                    <div class="notification">
+                                        <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                        <span class="badge">0</span>
+                                    </div>
+                                    <div class="user_menu user-profile">
+                                        <a class="sb-profile">
+                                            <img src="' . $imgSrc . '" data-name="'.$imgSrc.'" />
+                                            <span class="user-initials" style="display:none;">
+                                                <span class="initials"></span>
+                                            </span>
+                                        </a>
+                                        <ul class="sb-menu">
+                                            <li class="menu_head">
+                                                <img src="' . $imgSrc . '"  data-name="" />
+                                                <span class="user-initials" style="display:none;">
+                                                    <span class="initials"></span>
+                                                </span>
+                                                <span class="sb-name"></span>
+                                            </li>
+                                            <li data-value="status" class="sb-online">Online</li>';
+                if ($is_admin) {
+                    $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
+                        . ($is_cloud ? sb_cloud_account_menu() : '');
+                }
+                $header .= '<li data-value="logout">Logout</li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div> -->
-                            </div>
-                        </header>';
+                            </header>';
                 ?>
 
                 <!-- sahil start -->
@@ -3402,6 +3409,7 @@ function sb_component_admin()
                 <?php if ($active_areas['settings']) { ?>
                     <div class="sb-area-settings settings_new">
                         <?php echo $header; ?>
+
                         <!-- <div class="sb-top-bar">
                             <div>
                                 <h2>

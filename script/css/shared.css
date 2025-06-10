@@ -2541,6 +2541,8 @@ div ul.sb-menu,
   position: absolute;
   margin: 0;
   z-index: 5;
+  right: 50px;
+  top: 55px;
 }
 div ul.sb-menu.sb-active,
 .sb-select ul.sb-active {
@@ -2553,8 +2555,15 @@ div ul.sb-menu.sb-scroll-area,
   max-height: 300px;
   overflow-y: scroll;
 }
+div ul.sb-menu .li,
+.sb-select ul .li {
+  display: block;
+  width: calc(100% - 37px);
+}
 div ul.sb-menu li,
-.sb-select ul li {
+div ul.sb-menu .li,
+.sb-select ul li,
+.sb-select ul .li {
   cursor: pointer;
   padding: 6px 25px 6px 12px;
   margin: 0;
@@ -2566,13 +2575,19 @@ div ul.sb-menu li,
   list-style: none;
   user-select: none;
   transition: all 0.1s;
+  text-decoration: none;
+  color: rgb(36, 39, 42);
 }
 div ul.sb-menu li.sb-active,
-.sb-select ul li.sb-active {
+div ul.sb-menu .li.sb-active,
+.sb-select ul li.sb-active,
+.sb-select ul .li.sb-active {
   color: #1F2937;
 }
 div ul.sb-menu li:hover,
-.sb-select ul li:hover {
+div ul.sb-menu .li:hover,
+.sb-select ul li:hover,
+.sb-select ul .li:hover {
   background-color: #1F2937;
   color: #fff;
 }
