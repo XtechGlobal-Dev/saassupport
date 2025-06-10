@@ -8572,7 +8572,8 @@ td.sb-offline:after {
 .sb-area-articles header,
 .sb-area-reports header,
 .sb-area-settings header,
-.sb-area-tickets header {
+.sb-area-tickets header,
+.sb-area-ticket-detail header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8593,7 +8594,9 @@ td.sb-offline:after {
 .sb-area-settings header .header-left,
 .sb-area-settings header .header-right,
 .sb-area-tickets header .header-left,
-.sb-area-tickets header .header-right {
+.sb-area-tickets header .header-right,
+.sb-area-ticket-detail header .header-left,
+.sb-area-ticket-detail header .header-right {
   display: flex;
   align-items: center;
   gap: 28px;
@@ -8604,7 +8607,8 @@ td.sb-offline:after {
 .sb-area-articles header .title,
 .sb-area-reports header .title,
 .sb-area-settings header .title,
-.sb-area-tickets header .title {
+.sb-area-tickets header .title,
+.sb-area-ticket-detail header .title {
   font-weight: 600;
   font-size: 28px;
 }
@@ -8614,7 +8618,8 @@ td.sb-offline:after {
 .sb-area-articles header .notification,
 .sb-area-reports header .notification,
 .sb-area-settings header .notification,
-.sb-area-tickets header .notification {
+.sb-area-tickets header .notification,
+.sb-area-ticket-detail header .notification {
   margin-right: 20px;
   position: relative;
   cursor: pointer;
@@ -8625,7 +8630,8 @@ td.sb-offline:after {
 .sb-area-articles header .notification .badge,
 .sb-area-reports header .notification .badge,
 .sb-area-settings header .notification .badge,
-.sb-area-tickets header .notification .badge {
+.sb-area-tickets header .notification .badge,
+.sb-area-ticket-detail header .notification .badge {
   position: absolute;
   top: -10px;
   right: -8px;
@@ -8642,7 +8648,8 @@ td.sb-offline:after {
 .sb-area-articles header .user-profile,
 .sb-area-reports header .user-profile,
 .sb-area-settings header .user-profile,
-.sb-area-tickets header .user-profile {
+.sb-area-tickets header .user-profile,
+.sb-area-ticket-detail header .user-profile {
   display: flex;
   align-items: center;
   border-left: 1px solid #EEEEEE;
@@ -8654,7 +8661,8 @@ td.sb-offline:after {
 .sb-area-articles header .user-profile img,
 .sb-area-reports header .user-profile img,
 .sb-area-settings header .user-profile img,
-.sb-area-tickets header .user-profile img {
+.sb-area-tickets header .user-profile img,
+.sb-area-ticket-detail header .user-profile img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -8667,7 +8675,8 @@ td.sb-offline:after {
 .sb-area-articles header .user-profile .user-info p,
 .sb-area-reports header .user-profile .user-info p,
 .sb-area-settings header .user-profile .user-info p,
-.sb-area-tickets header .user-profile .user-info p {
+.sb-area-tickets header .user-profile .user-info p,
+.sb-area-ticket-detail header .user-profile .user-info p {
   font-weight: 600;
   margin-bottom: 3px;
   font-size: 16px;
@@ -8679,7 +8688,8 @@ td.sb-offline:after {
 .sb-area-articles header .user-profile .user-info span,
 .sb-area-reports header .user-profile .user-info span,
 .sb-area-settings header .user-profile .user-info span,
-.sb-area-tickets header .user-profile .user-info span {
+.sb-area-tickets header .user-profile .user-info span,
+.sb-area-ticket-detail header .user-profile .user-info span {
   font-weight: 400;
   font-size: 12px;
   color: #5d6165;
@@ -8690,7 +8700,8 @@ td.sb-offline:after {
 .sb-area-articles header .logout,
 .sb-area-reports header .logout,
 .sb-area-settings header .logout,
-.sb-area-tickets header .logout {
+.sb-area-tickets header .logout,
+.sb-area-ticket-detail header .logout {
   margin-left: 20px;
   cursor: pointer;
 }

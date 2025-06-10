@@ -13,7 +13,10 @@ function sb_profile_box()
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
             <div class="sb-profile">
-                <img src="<?php echo SB_URL ?>/media/user.svg" />
+                <img src="<?php echo SB_URL ?>/media/user.svg" data-name=""/>
+                <div class="user-initials" data-value="edit-profile" style="display: none">
+                                        <span class="initials"></span>
+                                    </div>
                 <span class="sb-name"></span>
             </div>
             <div>
@@ -593,22 +596,30 @@ function sb_ticket_edit_box()
         height: 100%;
         }
 
-        .sb-scroll-area .user-initials
+        .sb-scroll-area .user-initials, .sb-top-bar .user-initials
         {
             width: 45px;
             height: 45px;
-            border-radius: 50%;
-            background: #ccc;
-            color: #fff;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
             line-height: 45px;
-            overflow: hidden;
+            position: absolute;
+            left: 0;
+        }
+
+        .sb-user-details .user-initials {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 13px;
+            line-height: 30px;
             position: absolute;
             margin: 0 10px 0 0;
-            cursor: pointer;
             left: 0;
+        }
+
+        .sb-profile-box .sb-top-bar .sb-profile .initials {
+            margin-left: 0px;
+            font-size: 16px;
+            line-height: 45px;
         }
     </style>
     <script>
@@ -2972,6 +2983,113 @@ function sb_component_admin()
                             </table>
                         </div>
                     </div>
+                    <div class="sb-area-ticket-detail">
+                        <?php echo $header; ?>
+                        <div class="sb-top-bar">
+                            <div>
+                                <!-- <div class="sb-search-btn">
+                                    <i class="sb-icon sb-icon-search"></i>
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
+                                </div> -->
+                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
+                                    <i class="fa-solid fa-plus mr-1"></i>
+                                    <?php sb_e('New Ticket') ?>
+                                </a>
+                            </div>
+                            <div>
+                                <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
+                                    <div>
+                                        <?php sb_e('All') ?>
+                                        <span data-count="0"></span>
+                                    </div>
+                                    <ul>
+                                        <li data-type="all" class="sb-active">
+                                            <span data-count="0">0</span>
+                                            <?php sb_e('All') ?>
+                                        </li>
+                                        <li data-type="open">
+                                            <span data-count="0">0</span>
+                                            <?php sb_e('Open') ?>
+                                        </li>
+                                        <li data-type="in-progress">
+                                            <span data-count="0">0</span>
+                                            <?php sb_e('In Progress') ?>
+                                        </li>
+                                        <li data-type="answered">
+                                            <span data-count="0">0</span>
+                                            <?php sb_e('Answered') ?>
+                                        </li>
+                                        <li data-type="hold">
+                                            <span data-count="0">0</span>
+                                            <?php sb_e('On Hold') ?>
+                                        </li>
+                                        <li data-type="closed">
+                                            <span data-count="0">0</span>
+                                            <?php sb_e('Closed') ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--div class="sb-menu-mobile">
+                                    <i class="sb-icon-menu"></i>
+                                    <ul>
+                                        <?php
+                                        if ($is_admin) {
+                                            // echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div-->
+                            </div>
+                        </div>
+                        <div class="sb-scroll-area">
+                            <table class="sb-table sb_table_new sb-table-tickets">
+                                <thead>
+                                    <tr>
+                                        <th data-field="id">
+                                            <!--input type="checkbox" /-->
+                                            <?php sb_e('ID') ?>
+                                        </th>
+                                        <th data-field="subject">
+                                            <?php sb_e('Subject') ?>
+                                        </th>
+                                        <th data-field="tags">
+                                            <?php sb_e('Tags') ?>
+                                        </th>
+                                        <?php
+                                        $department_settings = sb_get_setting('departments-settings');
+                                        if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') {
+                                        ?>
+                                            <th data-field="department">
+                                                <?php sb_e('Department') ?>
+                                            </th>
+                                        <?php } ?>
+                                        <!--th data-field="service">
+                                            <?php //sb_e('Service') 
+                                            ?>
+                                        </th-->
+                                        <th data-field="contact">
+                                            <?php sb_e('Contact') ?>
+                                        </th>
+                                        <th data-field="status">
+                                            <?php sb_e('Status') ?>
+                                        </th>
+                                        <th data-field="priority">
+                                            <?php sb_e('Priority') ?>
+                                        </th>
+                                        <th data-field="last_reply">
+                                            <?php sb_e('Last Reply') ?>
+                                        </th>
+                                        <th data-field="creation_time">
+                                            <?php sb_e('Created') ?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">

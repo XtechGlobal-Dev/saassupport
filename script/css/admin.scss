@@ -3397,7 +3397,9 @@ td.sb-offline:after {
 .sb-area-articles,
 .sb-area-reports,
 .sb-area-settings,
-.sb-area-tickets {
+.sb-area-tickets,
+.sb-area-ticket-detail
+{
     header {
         display: flex;
         justify-content: space-between;
