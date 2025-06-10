@@ -2550,6 +2550,8 @@ div ul.sb-menu,
   position: absolute;
   margin: 0;
   z-index: 5;
+  right: 50px;
+  top: 55px;
 }
 div ul.sb-menu.sb-active,
 .sb-select ul.sb-active {
@@ -2562,8 +2564,15 @@ div ul.sb-menu.sb-scroll-area,
   max-height: 300px;
   overflow-y: scroll;
 }
+div ul.sb-menu .li,
+.sb-select ul .li {
+  display: block;
+  width: calc(100% - 37px);
+}
 div ul.sb-menu li,
-.sb-select ul li {
+div ul.sb-menu .li,
+.sb-select ul li,
+.sb-select ul .li {
   cursor: pointer;
   padding: 6px 25px 6px 12px;
   margin: 0;
@@ -2575,13 +2584,19 @@ div ul.sb-menu li,
   list-style: none;
   user-select: none;
   transition: all 0.1s;
+  text-decoration: none;
+  color: rgb(36, 39, 42);
 }
 div ul.sb-menu li.sb-active,
-.sb-select ul li.sb-active {
+div ul.sb-menu .li.sb-active,
+.sb-select ul li.sb-active,
+.sb-select ul .li.sb-active {
   color: #1F2937;
 }
 div ul.sb-menu li:hover,
-.sb-select ul li:hover {
+div ul.sb-menu .li:hover,
+.sb-select ul li:hover,
+.sb-select ul .li:hover {
   background-color: #1F2937;
   color: #fff;
 }
@@ -6167,6 +6182,7 @@ td.sb-offline:after {
 .settings_new .sb-content .save_settings .head, .settings_new .sb-content .save_settings .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .settings_new .sb-content .save_settings .sub_head {
   font-weight: 700;
   font-size: 25px;
+  line-height: 40px;
 }
 .settings_new .sb-content .save_settings .des {
   font-weight: 300;
@@ -6506,15 +6522,14 @@ td.sb-offline:after {
   position: relative;
   color: rgb(36, 39, 42);
   line-height: 30px;
-  padding-left: 45px;
   text-decoration: none;
   display: flex;
   align-items: center;
 }
 .sb-profile img {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   left: 0;
   top: 50%;
@@ -8596,7 +8611,7 @@ td.sb-offline:after {
 .sb-area-tickets header .header-right {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 35px;
 }
 .sb-area-dashboard header .title,
 .sb-area-conversations header .title,
@@ -8615,7 +8630,6 @@ td.sb-offline:after {
 .sb-area-reports header .notification,
 .sb-area-settings header .notification,
 .sb-area-tickets header .notification {
-  margin-right: 20px;
   position: relative;
   cursor: pointer;
 }
@@ -8636,6 +8650,180 @@ td.sb-offline:after {
   font-weight: 400;
   font-size: 11px;
 }
+.sb-area-dashboard header .user_menu .sb-menu,
+.sb-area-conversations header .user_menu .sb-menu,
+.sb-area-users header .user_menu .sb-menu,
+.sb-area-articles header .user_menu .sb-menu,
+.sb-area-reports header .user_menu .sb-menu,
+.sb-area-settings header .user_menu .sb-menu,
+.sb-area-tickets header .user_menu .sb-menu {
+  display: none;
+}
+.sb-area-dashboard header .user_menu .sb-menu .menu_head,
+.sb-area-conversations header .user_menu .sb-menu .menu_head,
+.sb-area-users header .user_menu .sb-menu .menu_head,
+.sb-area-articles header .user_menu .sb-menu .menu_head,
+.sb-area-reports header .user_menu .sb-menu .menu_head,
+.sb-area-settings header .user_menu .sb-menu .menu_head,
+.sb-area-tickets header .user_menu .sb-menu .menu_head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 10px;
+  border-bottom: 1px solid #d7d7d7;
+}
+.sb-area-dashboard header .user_menu .sb-menu .menu_head > img,
+.sb-area-conversations header .user_menu .sb-menu .menu_head > img,
+.sb-area-users header .user_menu .sb-menu .menu_head > img,
+.sb-area-articles header .user_menu .sb-menu .menu_head > img,
+.sb-area-reports header .user_menu .sb-menu .menu_head > img,
+.sb-area-settings header .user_menu .sb-menu .menu_head > img,
+.sb-area-tickets header .user_menu .sb-menu .menu_head > img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.sb-area-dashboard header .user_menu .sb-menu li[data-value=status],
+.sb-area-dashboard header .user_menu .sb-menu li.sb-online,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-offline,
+.sb-area-conversations header .user_menu .sb-menu li[data-value=status],
+.sb-area-conversations header .user_menu .sb-menu li.sb-online,
+.sb-area-conversations header .user_menu .sb-menu li.sb-offline,
+.sb-area-users header .user_menu .sb-menu li[data-value=status],
+.sb-area-users header .user_menu .sb-menu li.sb-online,
+.sb-area-users header .user_menu .sb-menu li.sb-offline,
+.sb-area-articles header .user_menu .sb-menu li[data-value=status],
+.sb-area-articles header .user_menu .sb-menu li.sb-online,
+.sb-area-articles header .user_menu .sb-menu li.sb-offline,
+.sb-area-reports header .user_menu .sb-menu li[data-value=status],
+.sb-area-reports header .user_menu .sb-menu li.sb-online,
+.sb-area-reports header .user_menu .sb-menu li.sb-offline,
+.sb-area-settings header .user_menu .sb-menu li[data-value=status],
+.sb-area-settings header .user_menu .sb-menu li.sb-online,
+.sb-area-settings header .user_menu .sb-menu li.sb-offline,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status],
+.sb-area-tickets header .user_menu .sb-menu li.sb-online,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline {
+  position: relative;
+  margin-top: 8px;
+}
+.sb-area-dashboard header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-online::before,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-conversations header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-conversations header .user_menu .sb-menu li.sb-online::before,
+.sb-area-conversations header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-users header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-users header .user_menu .sb-menu li.sb-online::before,
+.sb-area-users header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-articles header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-articles header .user_menu .sb-menu li.sb-online::before,
+.sb-area-articles header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-reports header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-reports header .user_menu .sb-menu li.sb-online::before,
+.sb-area-reports header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-settings header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-settings header .user_menu .sb-menu li.sb-online::before,
+.sb-area-settings header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  background: rgb(19, 202, 126);
+}
+.sb-area-dashboard header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-online::after,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-conversations header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-conversations header .user_menu .sb-menu li.sb-online::after,
+.sb-area-conversations header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-users header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-users header .user_menu .sb-menu li.sb-online::after,
+.sb-area-users header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-articles header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-articles header .user_menu .sb-menu li.sb-online::after,
+.sb-area-articles header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-reports header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-reports header .user_menu .sb-menu li.sb-online::after,
+.sb-area-reports header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-settings header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-settings header .user_menu .sb-menu li.sb-online::after,
+.sb-area-settings header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  right: 3px;
+  transform: translateY(-50%);
+  background: rgba(19, 202, 126, 0.2);
+}
+.sb-area-dashboard header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-conversations header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-conversations header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-conversations header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-users header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-users header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-users header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-articles header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-articles header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-articles header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-reports header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-reports header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-reports header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-settings header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-settings header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-settings header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline.sb-offline::before {
+  background: #d6d6d6 !important;
+}
+.sb-area-dashboard header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-dashboard header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-conversations header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-conversations header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-conversations header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-users header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-users header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-users header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-articles header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-articles header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-articles header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-reports header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-reports header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-reports header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-settings header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-settings header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-settings header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline.sb-offline::after {
+  display: none !important;
+}
+.sb-area-dashboard header .user_menu:hover .sb-menu,
+.sb-area-conversations header .user_menu:hover .sb-menu,
+.sb-area-users header .user_menu:hover .sb-menu,
+.sb-area-articles header .user_menu:hover .sb-menu,
+.sb-area-reports header .user_menu:hover .sb-menu,
+.sb-area-settings header .user_menu:hover .sb-menu,
+.sb-area-tickets header .user_menu:hover .sb-menu {
+  display: block;
+}
 .sb-area-dashboard header .user-profile,
 .sb-area-conversations header .user-profile,
 .sb-area-users header .user-profile,
@@ -8645,16 +8833,15 @@ td.sb-offline:after {
 .sb-area-tickets header .user-profile {
   display: flex;
   align-items: center;
-  border-left: 1px solid #EEEEEE;
-  padding-left: 30px;
+  min-width: 50px;
 }
-.sb-area-dashboard header .user-profile img,
-.sb-area-conversations header .user-profile img,
-.sb-area-users header .user-profile img,
-.sb-area-articles header .user-profile img,
-.sb-area-reports header .user-profile img,
-.sb-area-settings header .user-profile img,
-.sb-area-tickets header .user-profile img {
+.sb-area-dashboard header .user-profile .uImg,
+.sb-area-conversations header .user-profile .uImg,
+.sb-area-users header .user-profile .uImg,
+.sb-area-articles header .user-profile .uImg,
+.sb-area-reports header .user-profile .uImg,
+.sb-area-settings header .user-profile .uImg,
+.sb-area-tickets header .user-profile .uImg {
   width: 50px;
   height: 50px;
   border-radius: 50%;
