@@ -197,6 +197,7 @@ function sb_ticket_edit_box()
 { ?>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
     <div class="sb-ticket-edit-box sb-lightbox">
         <div class="sb-info"></div>
@@ -295,15 +296,23 @@ function sb_ticket_edit_box()
                         $count = count($tags);
                         if ($count > 0) {
                         ?>
-                            <div id="tags" data-type="select" class="sb-input">
+                            <div id="tags-div" data-type="select" class="sb-input">
                                 <span><?php sb_e('Tags') ?></span>
-                                <select>
+                                <!--select>
                                     <?php
                                     for ($i = 0; $i < $count; $i++) {
                                         $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
                                     }
                                     echo $tagsHtml;
                                     ?>
+                                </select-->
+                                <select id="ticket-tags" name="tags[]" multiple>
+                                    <option value="1" class="tag-option" data-color="#1976d2" data-custom-properties='{"color":"#1976d2"}'>Feature Request</option>
+                                    <option value="2" class="tag-option" data-color="#c62828" data-custom-properties='{"color":"#c62828"}'>Bug</option>
+                                    <option value="3" class="tag-option" data-color="#fbc02d" data-custom-properties='{"color":"#fbc02d"}'>High Priority</option>
+                                    <option value="4" class="tag-option" data-color="#0288d1" data-custom-properties='{"color":"#0288d1"}'>Documentation</option>
+                                    <option value="5" class="tag-option" data-color="#8e24aa" data-custom-properties='{"color":"#8e24aa"}'>UI/UX</option>
+                                    <option value="6" class="tag-option" data-color="#388e3c" data-custom-properties='{"color":"#388e3c"}'>Question</option>
                                 </select>
                             </div>
                         <?php } ?>
@@ -619,7 +628,174 @@ function sb_ticket_edit_box()
             font-size: 16px;
             line-height: 45px;
         }
+
+        /******** Ticket Multi -select Tags ***********************/
+        .tag-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .choices__list--dropdown .choices__item--selectable::before {
+            display: none !important;
+        }
+        .choices__list--multiple {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 6px 6px !important;
+            align-items: flex-start !important;
+            padding: 4px 0 0 4px !important;
+        }
+        .choices__list--multiple .choices__item {
+            display: inline-flex !important;
+            align-items: center !important;
+            width: auto !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            padding: 4px 26px 4px 12px !important;
+            border-radius: 16px !important;
+            background: #f8f9fa !important;
+            color: #222 !important;
+            font-size: 0.95em !important;
+            position: relative;
+            box-shadow: none !important;
+            border: 1px solid #d1d5db !important;
+            white-space: nowrap;
+            overflow: visible !important;
+        }
+        .choices__list--multiple .choices__item::before {
+            display: none !important;
+        }
+        .choices__button,
+        .choices__button--remove {
+            position: unset !important;
+            color: #d32f2f !important;
+            background: none !important;
+            border: none !important;
+            font-size: 1.2em !important;
+            cursor: pointer !important;
+            z-index: 10 !important;
+            padding: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+            line-height: 1 !important;
+            opacity: 1 !important;
+            box-shadow: none !important;
+            text-indent: 0 !important;
+        }
+        .choices__button:hover,
+        .choices__button--remove:hover {
+            color: #b71c1c !important;
+        }
+        /*.choices__button--remove::before {
+            content: '×' !important;
+            font-size: 12px !important;
+            line-height: 1 !important;
+        }*/
+        .choices__list.choices__list--multiple > div { border: 1px solid red;padding: 2px 5px;border-radius: 30px;display: flex;align-items: center;justify-content: center;}
+        .choices__list.choices__list--multiple > div button { border: none;color: red;}
     </style>
+    <script>
+        // document.addEventListener('mousedown', function(e) {
+        //     if (
+        //         e.target.classList.contains('choices__button--remove') ||
+        //         e.target.classList.contains('choices__item')
+        //     ) {
+        //         e.stopPropagation();
+        //     }
+        // }, true);
+
+        // document.addEventListener('click', function(e) {
+        //     if (
+        //         e.target.classList.contains('choices__button--remove') ||
+        //         e.target.classList.contains('choices__item')
+        //     ) {
+        //         e.stopPropagation();
+        //     }
+        // }, true);
+
+        // // Only stop click event on the remove button, not mousedown, and not on .choices__item
+        // document.addEventListener('click', function(e) {
+        //     if (e.target.classList.contains('choices__button--remove')) {
+        //         e.stopPropagation();
+        //     }
+        // }, true);
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagSelect = document.getElementById('ticket-tags');
+            window.choices = new Choices(tagSelect, {
+                removeItemButton: true,
+                searchResultLimit: 10,
+                searchFields: ['label', 'value'],
+                shouldSort: false,
+                classNames: { containerOuter: 'choices' }, // Removed to avoid error
+                callbackOnCreateTemplates: function(template) {
+                    return {
+                        item: (classNames, data) => {
+                            const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                            return template(`
+                                <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color="${color}">
+                                    <span class="tag-dot" style="background-color:${color}"></span>
+                                    ${data.label}
+                                    <button type="button" class="choices__button choices__button--remove" data-button aria-label="Remove item">X</button>
+                                </div>
+                            `);
+                        },
+                        choice: (classNames, data) => {
+                            const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                            return template(`
+                                <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="Press to select" data-choice data-id="${data.id}" data-value="${data.value}" ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-color="${color}">
+                                    <span class="tag-dot" style="background-color:${color}"></span>
+                                    ${data.label}
+                                </div>
+                            `);
+                        }
+                    };
+                }
+            });
+
+            // Propagate tag color to Choices.js DOM on changes
+            function refreshTagDots() {
+                document.querySelectorAll('.choices__list--multiple .choices__item').forEach(item => {
+                    const color = item.getAttribute('data-color');
+                    let dot = item.querySelector('.tag-dot');
+                    if (!dot && color) {
+                        dot = document.createElement('span');
+                        dot.className = 'tag-dot';
+                        dot.style.backgroundColor = color;
+                        item.insertBefore(dot, item.firstChild);
+                    } else if (dot && color) {
+                        dot.style.backgroundColor = color;
+                    }
+                });
+                document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(item => {
+                    const color = item.getAttribute('data-color');
+                    let dot = item.querySelector('.tag-dot');
+                    if (!dot && color) {
+                        dot = document.createElement('span');
+                        dot.className = 'tag-dot';
+                        dot.style.backgroundColor = color;
+                        item.insertBefore(dot, item.firstChild);
+                    } else if (dot && color) {
+                        dot.style.backgroundColor = color;
+                    }
+                });
+            }
+            // Observe changes to Choices.js lists
+            const observer = new MutationObserver(refreshTagDots);
+            document.querySelectorAll('.choices__list').forEach(list => {
+                observer.observe(list, { childList: true, subtree: true });
+            });
+            // Also refresh on click (for keyboard nav)
+            document.querySelector('.choices').addEventListener('click', function() {
+                setTimeout(refreshTagDots, 10);
+            });
+            refreshTagDots();
+        });
+    </script>
     <script>
         $('#select-customer').select2({
             placeholder: 'Type and search...',
@@ -706,6 +882,7 @@ function sb_ticket_edit_box()
     <!-- Include Bootstrap JS and dependencies -->
     <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
 
     <!-- File Upload Handling -->
     <script>
