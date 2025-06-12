@@ -1169,8 +1169,8 @@ function sb_add_ticket($inputs)
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
-            'tags' => isset($inputs['tags'][0]) ? sb_db_escape($inputs['tags'][0]) : '',
             'description' => sb_db_escape($inputs['description'][0]),
+            'tags' => '',
             'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0,
         ];
 
@@ -1184,6 +1184,15 @@ function sb_add_ticket($inputs)
                 $customFields[$key] = sb_db_escape($value);
             }
         }   
+
+        $tags = array();
+        if(isset($inputs['tags-div'][0]) && is_array($inputs['tags-div'][0]))
+        {
+            foreach($inputs['tags-div'][0] as $key => $value) {
+                $tags[$key] = sb_db_escape($value);
+            }
+        }   
+        
         
 
 
@@ -1277,6 +1286,9 @@ function sb_add_ticket($inputs)
 
         ///// Insert ticket custom fields
         sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'new');
+
+        ///// Insert ticket tags
+        sb_add_edit_ticket_tags($ticket_id, $tags, $action = 'new');
         
         ////// Process file attachments if any
         sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
@@ -1381,6 +1393,32 @@ function sb_add_edit_ticket_custom_fields($ticket_id = null, $customFields = arr
     {
         error_log("Ticket ID or custom fields are not provided");
         return false;
+    }
+}
+
+function sb_add_edit_ticket_tags($ticket_id = null, $tags = array(), $action = 'new')
+{
+    $ticket_id = sb_db_escape($ticket_id, true);
+    if ($ticket_id && $tags) 
+    {
+
+        if ($action == 'new') {
+            // Insert new tags
+            foreach ($tags as $tag) {
+                $tag = sb_db_escape($tag);
+                sb_db_query("INSERT INTO ticket_tags (ticket_id, tag) VALUES ($ticket_id, '$tag')");
+            }
+        } elseif ($action == 'edit') {
+            // Update existing tags
+            sb_db_query("DELETE FROM ticket_tags WHERE ticket_id = $ticket_id");
+            foreach ($tags as $tag) {
+                $tag = sb_db_escape($tag);
+                sb_db_query("INSERT INTO ticket_tags (ticket_id, tag) VALUES ($ticket_id, '$tag')");
+            }
+        } elseif ($action == 'delete') {
+            // Delete tags
+            sb_db_query("DELETE FROM ticket_tags WHERE ticket_id = $ticket_id");
+        }
     }
 }
 function sb_update_ticket($inputs,$ticket_id =0)
