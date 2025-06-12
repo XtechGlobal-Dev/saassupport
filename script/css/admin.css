@@ -6510,6 +6510,11 @@ td.sb-offline:after {
   background-color: #fff;
   white-space: normal;
 }
+.sb_table_new tbody td:not(:first-child) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .sb_table_new tbody .sb-td-status .span-border,
 .sb_table_new tbody .sb-td-priority .span-border {
   font-weight: 500;
@@ -6542,10 +6547,12 @@ td.sb-offline:after {
   letter-spacing: 0.3px;
 }
 
-.sb-td-profile .sb-profile, .sb-user-details .sb-profile {
+.sb-td-profile .sb-profile,
+.sb-user-details .sb-profile {
   line-height: 30px;
 }
-.sb-td-profile .sb-profile img, .sb-user-details .sb-profile img {
+.sb-td-profile .sb-profile img,
+.sb-user-details .sb-profile img {
   width: 40px;
   height: 40px;
 }

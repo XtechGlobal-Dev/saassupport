@@ -13,10 +13,10 @@ function sb_profile_box()
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
             <div class="sb-profile">
-                <img src="<?php echo SB_URL ?>/media/user.svg" data-name=""/>
+                <img src="<?php echo SB_URL ?>/media/user.svg" data-name="" />
                 <div class="user-initials" data-value="edit-profile" style="display: none">
-                                        <span class="initials"></span>
-                                    </div>
+                    <span class="initials"></span>
+                </div>
                 <span class="sb-name"></span>
             </div>
             <div>
@@ -603,8 +603,8 @@ function sb_ticket_edit_box()
             height: 100%;
         }
 
-        .sb-scroll-area .user-initials, .sb-top-bar .user-initials
-        {
+        .sb-scroll-area .user-initials,
+        .sb-top-bar .user-initials {
             width: 45px;
             height: 45px;
             line-height: 45px;
@@ -1758,18 +1758,18 @@ function sb_component_admin()
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
-                                    <div class="user_menu user-profile">
+                                    <div class="user_menu user-profile user_avatar">
                                         <a class="sb-profile">
-                                            <img src="' . $imgSrc . '" data-name="'.$imgSrc.'" />
-                                            <span class="user-initials" style="display:none;">
-                                                <span class="initials"></span>
+                                            <img class="avatar_img" src="" data-name="" />
+                                            <span class="user-initials avatar_initials" style="display:none;">
+                                                <span class="initials avatar_name"></span>
                                             </span>
                                         </a>
                                         <ul class="sb-menu">
                                             <li class="menu_head">
-                                                <img src="' . $imgSrc . '"  data-name="" />
-                                                <span class="user-initials" style="display:none;">
-                                                    <span class="initials"></span>
+                                                <img class="avatar_img" src=""  data-name="" />
+                                                <span class="user-initials avatar_initials" style="display:none;">
+                                                    <span class="initials avatar_name"></span>
                                                 </span>
                                                 <span class="sb-name"></span>
                                             </li>
@@ -3586,27 +3586,6 @@ function sb_component_admin()
                 <?php if ($active_areas['settings']) { ?>
                     <div class="sb-area-settings settings_new">
                         <?php echo $header; ?>
-
-                        <!-- <div class="sb-top-bar">
-                            <div>
-                                <h2>
-                                    Admin Settings
-                                </h2>
-                            </div>
-                            <div>
-                                <div class="sb-search-dropdown">
-                                    <div class="sb-search-btn">
-                                        <i class="sb-icon sb-icon-search"></i>
-                                        <input id="sb-search-settings" type="text" autocomplete="false" placeholder="<?php sb_e('Search ...') ?>" />
-                                    </div>
-                                    <div class="sb-search-dropdown-items"></div>
-                                </div>
-                                <a class="sb-btn sb-save-changes sb-icon">
-                                    <i class="sb-icon-check"></i>
-                                    <?php sb_e('Save changes') ?>
-                                </a>
-                            </div>
-                        </div> -->
                         <div class="sb-tab">
                             <div class="sb-nav sb-scroll-area">
                                 <div>
@@ -3625,9 +3604,9 @@ function sb_component_admin()
                                     <li id="tab-users">
                                         <?php echo $disable_translations ? 'Users' : sb_('Users') ?>
                                     </li>
-                                    <li id="tab-design">
+                                    <!-- <li id="tab-design">
                                         <?php echo $disable_translations ? 'Design' : sb_('Design') ?>
-                                    </li>
+                                    </li> -->
                                     <li id="tab-messages">
                                         <?php echo $disable_translations ? 'Messages & Forms' : sb_('Messages & Forms') ?>
                                     </li>
@@ -3717,7 +3696,7 @@ function sb_component_admin()
                                     </div>
                                     <?php sb_populate_settings('users', $sb_settings) ?>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Design Settings</p>
@@ -3731,7 +3710,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <?php sb_populate_settings('design', $sb_settings) ?>
-                                </div>
+                                </div> -->
                                 <div>
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
@@ -3763,9 +3742,10 @@ function sb_component_admin()
                                     <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
                                 </div>
                                 <?php sb_apps_area($apps, $cloud_active_apps) ?>
-                                <div>
+                                                               <!-- <div>
                                     <?php sb_populate_settings('articles', $sb_settings) ?>
-                                </div>
+                                </div> -->
+
                                 <div>
                                     <div class="sb-automations-area">
                                         <div class="sb-select">

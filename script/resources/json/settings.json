@@ -4,44 +4,44 @@
       "type": "checkbox",
       "id": "chat-login-init",
       "title": "Login initialization",
-      "content": "Initialize and display the chat widget only when the user is logged in.",
+      "content": "Initializes and displays the chat widget only after the user has logged in.",
       "keywords": ""
     },
     {
       "type": "checkbox",
       "id": "init-dashboard",
       "title": "Dashboard display",
-      "content": "Display the dashboard instead of the chat area on initialization."
+      "content": "Display the dashboard in place of the chat area during initialization."
     },
     {
       "type": "checkbox",
       "id": "disable-dashboard",
       "title": "Disable dashboard",
-      "content": "Disable the dashboard, and allow only one conversation per user."
+      "content": "Disables the dashboard and restricts the user to only one conversation at a time."
     },
     {
       "type": "checkbox",
       "id": "force-one-conversation",
-      "title": "Allow only one conversation",
-      "content": "Allow only one conversation per user."
+      "title": "Allow Only One Conversation",
+      "content": "Restrict each user to a single conversation at a time."
     },
     {
       "type": "checkbox",
       "id": "chat-timetable-disable",
-      "title": "Hide chat outside of office hours",
-      "content": "Disable and hide the chat widget outside of scheduled office hours."
+      "title": "Hide Chat Outside of Office Hours",
+      "content": "Disable and hide the chat widget when it’s outside of the scheduled office hours."
     },
     {
       "type": "checkbox",
       "id": "chat-offline-disable",
-      "title": "Hide chat if no agents online",
-      "content": "Disable and hide the chat widget if all agents are offline."
+      "title": "Hide Chat if No Agents Online",
+      "content": "Disable and hide the chat widget when no agents are online."
     },
     {
       "type": "select",
       "id": "front-auto-translations",
       "title": "Language",
-      "content": "Set the chat language or translate it automatically to match the user language. Default is English.",
+      "content": "Set the chat language or automatically translate it to match the user's language. The default language is English.",
       "value": [
         [ "", "Default" ],
         [ "auto", "Multilingual" ],
@@ -99,7 +99,7 @@
       "type": "checkbox",
       "id": "rtl",
       "title": "RTL",
-      "content": "Activate the Right-To-Left (RTL) reading layout."
+      "content": "Enable the Right-To-Left (RTL) reading layout for languages that require it."
     },
     {
       "type": "checkbox",
@@ -111,31 +111,25 @@
       "type": "checkbox",
       "id": "disable-uploads",
       "title": "Disable uploads",
-      "content": "Disable file uploading capabilities within the chat."
+      "content": "Disable the ability to upload files within the chat."
     },
     {
       "type": "checkbox",
       "id": "disable-voice-messages",
       "title": "Disable voice messages",
-      "content": "Disable voice message capabilities within the chat."
+      "content": "Disable the ability to send voice messages within the chat."
     },
     {
       "type": "checkbox",
       "id": "close-chat",
       "title": "Close chat",
-      "content": "Allow the user to archive a conversation and hide archived conversations."
-    },
-    {
-      "type": "checkbox",
-      "id": "chat-manual-init",
-      "title": "Manual initialization",
-      "content": "Disable auto-initialization of the chat widget. When this setting is active you must initialize the chat widget with a custom JavaScript API code written by you. If the chat doesn't appear and this setting is enabled, disable it."
+      "content": "Allow users to archive a conversation and hide archived conversations from the chat interface."
     },
     {
       "type": "multi-input",
       "id": "agents-menu",
       "title": "Agents menu",
-      "content": "Show the agents menu in the dashboard and force the user to choose an agent to start a conversation.",
+      "content": "Display the agents menu in the dashboard, requiring the user to choose an agent to start a conversation.",
       "value": [
         {
           "type": "checkbox",
@@ -163,7 +157,7 @@
       "type": "multi-input",
       "id": "messaging-channels",
       "title": "Messaging channels",
-      "content": "Allow users to contact you via their favorite messaging apps.",
+      "content": "Allow users to contact you through their preferred messaging apps, including WhatsApp, Facebook Messenger, Instagram, etc.",
       "value": [
         {
           "type": "checkbox",
@@ -238,7 +232,7 @@
       "type": "multi-input",
       "id": "welcome-message",
       "title": "Welcome message",
-      "content": "Send a message to new users when they visit the website for the first time.",
+      "content": "Send a message to new users when they first visit the website.",
       "help": "https://board.support/docs/#welcome-message",
       "value": [
         {
@@ -286,7 +280,7 @@
       "type": "multi-input",
       "id": "follow-message",
       "title": "Follow up message",
-      "content": "If no agents respond within the specified time interval, a message will be sent to request the user's details, such as their email.",
+      "content": "Send a message asking for the user's details if no agents respond within a specified time frame.",
       "help": "https://board.support/docs/#follow-up-message",
       "value": [
         {
@@ -361,7 +355,7 @@
       "setting": "emails",
       "id": "email-subscribe",
       "title": "Follow up email",
-      "content": "Email template for the email sent to the user after submitting their email through the follow-up message form. You can use text, HTML, and the following merge fields: {user_name}, {user_email}.",
+      "content": "Email template sent to the user after submitting their email through the follow-up message form. Use the following merge fields: {user_name}, {user_email}.",
       "value": [
         {
           "type": "text",
@@ -378,8 +372,8 @@
     {
       "type": "multi-input",
       "id": "rating-message",
-      "title": "Rating",
-      "content": "Display the feedback form to rate the conversation when it is archived.",
+      "title": "Rating Feedback",
+      "content": "Display a feedback form to rate the conversation when it is archived.",
       "help": "https://board.support/docs/#rating",
       "value": [
         {
@@ -397,8 +391,8 @@
     {
       "type": "multi-input",
       "id": "chat-timetable",
-      "title": "Offline message",
-      "content": "Notify the user when their message is sent outside of the scheduled office hours or all agents are offline.",
+      "title": "Offline Message",
+      "content": "Notify users when their message is sent outside of office hours or when all agents are offline.",
       "help": "https://board.support/docs/#offline-message",
       "value": [
         {
@@ -442,7 +436,7 @@
       "type": "multi-input",
       "id": "close-message",
       "title": "Close message",
-      "content": "Send a message to the user when the agent archive the conversation.",
+      "content": "Send a message to the user when the agent archives the conversation.",
       "keywords": "transcript",
       "value": [
         {
@@ -500,7 +494,7 @@
       "type": "multi-input",
       "id": "privacy",
       "title": "Privacy message",
-      "content": "Before initiating the chat, the user must accept a privacy message in order to gain access.",
+      "content": "Require the user to accept a privacy message before starting a chat.",
       "help": "https://board.support/docs/#privacy-message",
       "value": [
         {
@@ -555,106 +549,106 @@
     {
       "type": "checkbox",
       "id": "collapse",
-      "title": "Collapse panels",
-      "content": "Automatically collapse the conversation details panel, and other panels, of the admin area."
+      "title": "Collapse Panels",
+      "content": "Automatically collapse the conversation details panel, along with other panels in the admin area."
     },
     {
       "type": "checkbox",
       "id": "hide-conversation-details",
-      "title": "Hide conversation details panel",
-      "content": "Automatically hide the conversation details panel."
+      "title": "Hide Conversation Details Panel",
+      "content": "Automatically hide the conversation details panel in the admin area."
     },
     {
       "type": "text",
       "id": "admin-title",
-      "title": "Admin title",
-      "content": "Set the title of the administration area."
+      "title": "Admin Title",
+      "content": "Set the title for the administration area."
     },
     {
       "type": "upload-image",
       "id": "login-icon",
-      "title": "Admin login logo",
+      "title": "Admin Login Logo",
       "content": "Replace the brand logo on the admin login page.",
       "background-size": "auto 64px"
     },
     {
       "type": "upload-image",
       "id": "admin-icon",
-      "title": "Admin icon",
+      "title": "Admin Icon",
       "content": "Replace the top-left brand icon on the admin area and the browser favicon.",
       "background-size": "auto 64px"
     },
     {
       "type": "text",
       "id": "login-message",
-      "title": "Admin login message",
-      "content": "Replace the admin login page message."
+      "title": "Admin Login Message",
+      "content": "Replace the message displayed on the admin login page."
     },
     {
       "type": "checkbox",
       "id": "admin-auto-translations",
-      "title": "Automatically translate admin area",
+      "title": "Automatically Translate Admin Area",
       "content": "Automatically translate the admin area to match the agent profile language or browser language.",
       "help": "https://board.support/docs/#multilingual-admin"
     },
     {
       "type": "checkbox",
       "id": "admin-disable-settings-translations",
-      "title": "Do not translate settings area",
-      "content": "Activate this option if you don't want to translate the settings area."
+      "title": "Do Not Translate Settings Area",
+      "content": "Enable this option if you do not want to translate the settings area."
     },
     {
       "type": "checkbox",
       "id": "admin-auto-archive",
-      "title": "Automatically archive conversations",
-      "content": "Archive automatically the conversations marked as read every 24h."
+      "title": "Automatically Archive Conversations",
+      "content": "Automatically archive conversations marked as read every 24 hours."
     },
     {
       "type": "checkbox",
       "id": "order-by-date",
-      "title": "Sort conversations by date",
+      "title": "Sort Conversations by Date",
       "content": "Always sort conversations by date in the admin area."
     },
     {
       "type": "multi-input",
       "id": "agents",
-      "title": "Agent privileges",
-      "content": "Set which actions to allow agents.",
+      "title": "Agent Privileges",
+      "content": "Define the actions that agents are permitted to perform within the system.",
       "value": [
         {
           "type": "checkbox",
           "id": "agents-users-area",
-          "title": "Users area"
+          "title": "Users Area"
         },
         {
           "type": "checkbox",
           "id": "agents-articles-area",
-          "title": "Articles area"
+          "title": "Articles Area"
         },
         {
           "type": "checkbox",
           "id": "agents-edit-user",
-          "title": "Edit user"
+          "title": "Edit User"
         },
         {
           "type": "checkbox",
           "id": "agents-tab",
-          "title": "Agents and admins tab"
+          "title": "Agents and Admins Tab"
         },
         {
           "type": "checkbox",
           "id": "agents-delete-conversation",
-          "title": "Delete conversation"
+          "title": "Delete Conversation"
         },
         {
           "type": "checkbox",
           "id": "agents-delete-message",
-          "title": "Delete message"
+          "title": "Delete Message"
         },
         {
           "type": "checkbox",
           "id": "agents-update-department",
-          "title": "Update conversation department"
+          "title": "Update Conversation Department"
         }
       ]
     },
@@ -662,7 +656,7 @@
       "type": "repeater",
       "id": "supervisors",
       "title": "Supervisors",
-      "content": "Set which actions to allow supervisors.",
+      "content": "Define the actions that supervisors are allowed to perform within the system.",
       "help": "https://board.support/docs/#agents",
       "items": [
         {
@@ -721,19 +715,19 @@
       "type": "checkbox",
       "id": "rtl-admin",
       "title": "RTL",
-      "content": "Activate the Right-To-Left (RTL) reading layout for the admin area."
+      "content": "Enable the Right-To-Left (RTL) reading layout for the admin area, suitable for languages like Arabic and Hebrew."
     },
     {
       "type": "checkbox",
       "id": "show-profile-images-admin",
       "title": "Show profile images",
-      "content": "Show the profile image of agents and users within the conversation."
+      "content": "Display profile images of agents and users within the conversation view for a more personalized experience."
     },
     {
       "type": "multi-input",
       "id": "disable",
       "title": "Disable features",
-      "content": "Disable any features that you don't need.",
+      "content": "Turn off any features that are not necessary for your setup to streamline the interface and optimize the system.",
       "value": [
         {
           "type": "checkbox",
@@ -766,7 +760,7 @@
       "type": "multi-input",
       "id": "notes-settings",
       "title": "Notes settings",
-      "content": "Manage the notes settings.",
+      "content": "Manage the settings for notes, including visibility and configuration options.",
       "help": "https://board.support/docs/#notes",
       "value": [
         {
@@ -780,7 +774,7 @@
       "type": "multi-input",
       "id": "tags-settings",
       "title": "Tags settings",
-      "content": "Manage the tags settings.",
+      "content": "Configure and manage the settings related to tags within the system.",
       "help": "https://board.support/docs/#tags",
       "value": [
         {
@@ -799,7 +793,7 @@
       "type": "repeater",
       "id": "tags",
       "title": "Tags",
-      "content": "Add and manage tags.",
+      "content": "Create and manage tags that can be used to categorize and label items across the system.",
       "help": "https://board.support/docs/#tags",
       "items": [
         {
@@ -818,7 +812,7 @@
       "type": "multi-input",
       "id": "transcript",
       "title": "Transcript",
-      "content": "Transcript settings.",
+      "content": "Configure the settings related to chat transcripts, including formatting and display options.",
       "help": "https://board.support/docs/#transcript",
       "value": [
         {
@@ -846,25 +840,12 @@
         }
       ]
     },
-    {
-      "type": "repeater",
-      "id": "user-table-extra-columns",
-      "title": "Users table additional columns",
-      "content": "Displays additional columns in the user table. Enter the name of the fields to add.",
-      "help": "https://board.support/docs/#user-table-extra-columns",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "user-table-extra-slug"
-        }
-      ]
-    },
+   
     {
       "type": "repeater",
       "id": "saved-replies",
       "title": "Saved replies",
-      "content": "Add and manage saved replies that can be used by agents in the chat editor. Saved replies can be printed by typing # followed by the reply name plus space. Use \u005cn to do a line break.",
+      "content": "Manage and create saved replies that agents can use in the chat editor. These replies can be inserted by typing # followed by the reply name and using \u005cn for line breaks.",
       "help": "https://board.support/docs/#saved-replies",
       "items": [
         {
@@ -879,36 +860,18 @@
         }
       ]
     },
-    {
-      "type": "text",
-      "id": "custom-js",
-      "title": "Custom JS",
-      "content": "Enter the URL of a .js file, to load it automatically in the admin area."
-    },
-    {
-      "type": "text",
-      "id": "custom-css",
-      "title": "Custom CSS",
-      "content": "Enter the URL of a .css file, to load it automatically in the admin area."
-    },
-    {
-      "type": "text",
-      "id": "manifest-url",
-      "title": "Manifest file URL",
-      "content": "Use this option to change the PWA icon. See the docs for more details.",
-      "help": "https://board.support/docs/#pwa"
-    },
+   
     {
       "type": "color",
       "id": "color-admin-1",
       "title": "Primary color",
-      "content": "Set the primary color of the admin area."
+      "content": "Set the primary color for the admin area to align with your brand’s visual identity."
     },
     {
       "type": "color",
       "id": "color-admin-2",
       "title": "Secondary color",
-      "content": "Set the secondary color of the admin area."
+      "content": "Set the secondary color for the admin area to complement your primary color."
     }
   ],
   "notifications": [
@@ -916,7 +879,7 @@
       "type": "multi-input",
       "id": "sound-settings",
       "title": "Sound settings",
-      "content": "Play a sound for new messages and conversations.",
+      "content": "Configure the sound settings for new messages and conversations.",
       "help": "https://board.support/docs/#sound",
       "value": [
         {
@@ -1012,20 +975,20 @@
       "type": "checkbox",
       "id": "online-users-notification",
       "title": "Online users notification",
-      "content": "Show a notification and play a sound when a new user is online.",
+      "content": "Notify and play a sound when a new user becomes online.",
       "help": "https://board.support/docs/#users-info"
     },
     {
       "type": "checkbox",
       "id": "away-mode",
       "title": "Away mode",
-      "content": "Set the offline status automatically when the agent or admin remains inactive in the admin area for at least 10 minutes."
+      "content": "Set the offline status automatically after 10 minutes of inactivity in the admin area."
     },
     {
       "type": "select",
       "id": "desktop-notifications",
       "title": "Desktop notifications",
-      "content": "Show a desktop notification when a new message is received.",
+      "content": "Enable desktop notifications for new messages.",
       "value": [
         [ "", "Disabled" ],
         [ "all", "Users and agents" ],
@@ -1037,7 +1000,7 @@
       "type": "select",
       "id": "flash-notifications",
       "title": "Flash notifications",
-      "content": "Show a browser tab notification when a new message is received.",
+      "content": "Enable browser tab notifications for new messages.",
       "value": [
         [ "", "Disabled" ],
         [ "all", "Users and agents" ],
@@ -1049,7 +1012,7 @@
       "type": "multi-input",
       "id": "push-notifications",
       "title": "Push notifications",
-      "content": "Push notifications settings.",
+      "content": "Configure push notification settings.",
       "help": "https://board.support/docs/#push",
       "value": [
         {
@@ -1116,27 +1079,27 @@
       "type": "checkbox",
       "id": "notify-agent-email",
       "title": "Agent email notifications",
-      "content": "Send an email to an agent when a user replies and the agent is offline. An email is automatically sent to all agents for new conversations.",
+      "content": "Send an email notification to agents when a user replies and the agent is offline. Email notifications are automatically sent for new conversations.",
       "help": "https://board.support/docs/#email"
     },
     {
       "type": "checkbox",
       "id": "notify-user-email",
       "title": "User email notifications",
-      "content": "Send an email to the user when an agent replies and the user is offline.",
+      "content": "Send an email to users when an agent replies and the user is offline.",
       "help": "https://board.support/docs/#email"
     },
     {
       "type": "checkbox",
       "id": "stop-notify-admins",
-      "title": "Do not send email notifications to admins",
-      "content": "Prevent admins from receiving email notifications."
+      "title": "Do Not Send Email Notifications to Admins",
+      "content": "Prevent email notifications from being sent to admins."
     },
     {
       "type": "checkbox",
       "id": "notify-email-cron",
-      "title": "Email notifications via cron job",
-      "content": "Enable this option if email notifications are sent via cron job.",
+      "title": "Email Notifications via Cron Job",
+      "content": "Enable email notifications through a cron job.",
       "help": "https://board.support/docs/#email-cron"
     },
     {
@@ -1144,7 +1107,7 @@
       "setting": "emails",
       "id": "email-user",
       "title": "User notification email",
-      "content": "Email template for the email sent to a user when an agent replies. You can use text, HTML, and the following merge fields: {conversation_url_parameter}, {recipient_name}, {sender_name}, {sender_profile_image}, {message}, {attachments}.",
+      "content": "Email template for notifications sent to users when agents reply. Includes text, HTML, and merge fields like {conversation_url_parameter}, {recipient_name}, {sender_name}, {sender_profile_image}, {message}, {attachments}.",
       "value": [
         {
           "type": "text",
@@ -1163,7 +1126,7 @@
       "setting": "emails",
       "id": "email-agent",
       "title": "Agent notification email",
-      "content": "Email template for the email sent to an agent when a user sends a new message. You can use text, HTML, and the following merge fields: {conversation_link}, {recipient_name}, {sender_name}, {sender_profile_image}, {message}, {attachments}.",
+      "content": "Email template for notifications sent to agents when users send new messages. Includes text, HTML, and merge fields like {conversation_link}, {recipient_name}, {sender_name}, {sender_profile_image}, {message}, {attachments}.",
       "value": [
         {
           "type": "text",
@@ -1180,129 +1143,18 @@
     {
       "type": "input-button",
       "id": "test-email-user",
-      "title": "Send a user email notification",
-      "content": "Send an email notification to the provided email address.",
+      "title": "Send a User Email Notification",
+      "content": "Send an email notification to a provided email address.",
       "button-text": "Send email"
     },
     {
       "type": "input-button",
       "id": "test-email-agent",
-      "title": "Send an agent email notification",
-      "content": "Send an email notification to the provided email address.",
+      "title": "Send an Agent Email Notification",
+      "content": "Send an email notification to a provided email address.",
       "button-text": "Send email"
     },
-    {
-      "type": "multi-input",
-      "id": "email-server",
-      "title": "SMTP",
-      "content": "Outgoing SMTP server information.",
-      "value": [
-        {
-          "type": "text",
-          "id": "email-server-host",
-          "title": "Host"
-        },
-        {
-          "type": "text",
-          "id": "email-server-user",
-          "title": "Username"
-        },
-        {
-          "type": "password",
-          "id": "email-server-password",
-          "title": "Password"
-        },
-        {
-          "type": "number",
-          "id": "email-server-port",
-          "title": "Port"
-        },
-        {
-          "type": "text",
-          "id": "email-server-from",
-          "title": "Sender email"
-        },
-        {
-          "type": "text",
-          "id": "email-sender-name",
-          "title": "Sender name"
-        },
-        {
-          "type": "button",
-          "id": "email-server-troubleshoot",
-          "title": "Troubleshoot",
-          "button-url": "#",
-          "button-text": "Troubleshoot problems"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "email-piping",
-      "title": "Email piping",
-      "content": "Email piping server information and more settings.",
-      "help": "https://board.support/docs/#email-piping",
-      "items": [
-        {
-          "type": "checkbox",
-          "id": "email-piping-active",
-          "name": "Active"
-        },
-        {
-          "type": "text",
-          "id": "email-piping-host",
-          "name": "Host"
-        },
-        {
-          "type": "text",
-          "id": "email-piping-user",
-          "name": "Username"
-        },
-        {
-          "type": "password",
-          "id": "email-piping-password",
-          "name": "Password"
-        },
-        {
-          "type": "select",
-          "id": "email-piping-port",
-          "name": "Port",
-          "value": [
-            [ 993, 993 ],
-            [ 995, 995 ],
-            [ 110, 110 ],
-            [ 143, 143 ]
-          ]
-        },
-        {
-          "type": "checkbox",
-          "id": "email-piping-delimiter",
-          "name": "Delimiter"
-        },
-        {
-          "type": "checkbox",
-          "id": "email-piping-all",
-          "name": "Convert all emails"
-        },
-        {
-          "type": "checkbox",
-          "id": "email-piping-disable-cron",
-          "name": "Disable cron job"
-        },
-        {
-          "type": "number",
-          "id": "email-piping-department",
-          "name": "Department ID"
-        },
-        {
-          "type": "button",
-          "id": "email-piping-sync",
-          "name": "Synchronize emails",
-          "button-url": "#",
-          "button-text": "Synchronize now"
-        }
-      ]
-    },
+
     {
       "type": "textarea",
       "setting": "emails",
@@ -1316,14 +1168,14 @@
       "setting": "emails",
       "id": "email-header",
       "title": "Email header",
-      "content": "Set the default email header that will be prepended to automated emails and direct emails.",
+       "content": "Set the default email header that will be prepended to automated emails and direct emails.",
       "multilingual": true
     },
     {
       "type": "multi-input",
       "id": "sms",
       "title": "Text message notifications",
-      "content": "Enter your Twilio account details. You can use text and the following merge fields: {message}, {recipient_name}, {sender_name}, {recipient_email}, {sender_email}, {conversation_url_parameter}.",
+      "content": "Enter your Twilio account details to enable text message notifications.",
       "help": "https://board.support/docs/#sms",
       "value": [
         {
@@ -1373,22 +1225,22 @@
     {
       "type": "input-button",
       "id": "test-sms-user",
-      "title": "Send a user text message notification",
+      "title": "Send a User SMS Notification",
       "content": "Send a text message to the provided phone number.",
       "button-text": "Send text message"
     },
     {
       "type": "input-button",
       "id": "test-sms-agent",
-      "title": "Send an agent text message notification",
+      "title": "Send an Agent SMS Notification",
       "content": "Send a text message to the provided phone number.",
       "button-text": "Send text message"
     },
     {
       "type": "upload-image",
       "id": "notifications-icon",
-      "title": "Notifications icon",
-      "content": "Set the default notifications icon. The icon will be used as a profile image if the user doesn't have one.",
+      "title": "Notifications Icon",
+      "content": "Set the default notifications icon. The icon will be used as the profile image if the user does not have one.",
       "background-size": "auto 64px"
     }
   ],
@@ -1396,10 +1248,9 @@
     {
       "type": "select",
       "id": "registration-required",
-      "title": "Require registration",
-      "content": "Require the user registration or login before start a chat. To enable the login area the password field must be included.",
+      "title": "Require Registration",
+      "content": "Require the user to register or log in before starting a chat. Ensure the password field is included if enabling login functionality.",
       "value": [
-        [ "", "Disabled" ],
         [ "registration-login", "Registration and login form" ],
         [ "registration", "Registration form" ],
         [ "login", "Login form" ]
@@ -1409,33 +1260,33 @@
     {
       "type": "checkbox",
       "id": "registration-timetable",
-      "title": "Disable registration during office hours",
-      "content": "Enable the registration outside of scheduled office hours only."
+      "title": "Disable Registration During Office Hours",
+      "content": "Allow registration only outside of scheduled office hours."
     },
     {
       "type": "checkbox",
       "id": "registration-offline",
-      "title": "Disable registration if agents online",
-      "content": "Enable the registration only if all agents are offline."
+      "title": "Disable Registration if Agents Are Online",
+      "content": "Allow registration only when all agents are offline."
     },
     {
       "type": "text",
       "id": "registration-link",
-      "title": "Registration link",
-      "content": "Redirect the user to the registration link instead of showing the registration form."
+      "title": "Registration Link",
+      "content": "Redirect users to a custom registration link instead of showing the registration form."
     },
     {
       "type": "text",
       "id": "login-verification-url",
-      "title": "Login verification URL",
-      "content": "Send login details to the specified URL and allow access only if the response is positive.",
+      "title": "Login Verification URL",
+      "content": "Send login details to a specified URL and allow access only if the response is positive.",
       "help": "https://board.support/docs/#login-verification-url"
     },
     {
       "type": "multi-input",
       "id": "registration",
-      "title": "Registration form",
-      "content": "User registration form information.",
+      "title": "Registration Form",
+      "content": "User registration form details.",
       "value": [
         {
           "type": "text",
@@ -1473,7 +1324,7 @@
       "type": "multi-input",
       "id": "login",
       "title": "Login form",
-      "content": "User login form information.",
+      "content": "User login form details.",
       "value": [
         {
           "type": "text",
@@ -1491,7 +1342,7 @@
       "type": "multi-input",
       "id": "registration-fields",
       "title": "Registration fields",
-      "content": "Choose which fields to include in the registration form. The name field is included by default.",
+      "content": "Select which fields to include in the registration form. The 'name' field is included by default.",
       "value": [
         {
           "type": "checkbox",
@@ -1618,30 +1469,30 @@
         }
       ]
     },
-    {
+   {
       "type": "checkbox",
       "id": "registration-extra",
-      "title": "Include custom fields",
+      "title": "Include Custom Fields",
       "content": "Include custom fields in the registration form."
     },
     {
       "type": "checkbox",
       "id": "registration-user-details-success",
-      "title": "User details in success message",
-      "content": "Append the registration user details to the success message."
+      "title": "User Details in Success Message",
+      "content": "Include the user's details in the success message after registration."
     },
     {
       "type": "checkbox",
       "id": "registration-otp",
-      "title": "Email verification",
-      "content": "Enable email verification with OTP."
+      "title": "Email Verification (OTP)",
+      "content": "Enable email verification with OTP (One-Time Password)."
     },
     {
       "type": "multi-input",
       "setting": "email-otp",
       "id": "email-otp",
-      "title": "Email verification email",
-      "content": "Email template for the email sent to the user to verify their email address. Include the {code} merge field within your content, it will be replaced with the one-time code.",
+      "title": "Email Verification Email",
+      "content": "Email template for the verification email. Include the {code} merge field for the OTP code.",
       "value": [
         {
           "type": "text",
@@ -1658,14 +1509,14 @@
     {
       "type": "checkbox",
       "id": "visitors-registration",
-      "title": "Register all visitors",
-      "content": "Register all visitors automatically. When this option is not active, only the visitors that start a chat will be registered."
+      "title": "Register All Visitors",
+      "content": "Automatically register all visitors. If disabled, only visitors who start a chat will be registered."
     },
     {
       "type": "multi-input",
       "id": "envato-validation",
-      "title": "Envato purchase code validation",
-      "content": "Request a valid Envato purchase code for registration.",
+      "title": "Envato Purchase Code Validation",
+      "content": "Validate Envato purchase codes for registration.",
       "help": "https://board.support/docs/#envato-validation",
       "value": [
         {
@@ -1694,7 +1545,7 @@
       "type": "select",
       "id": "phone-code",
       "title": "Single phone country code",
-      "content": "Force users to use only one phone country code.",
+      "content": "Enforce the use of a single phone country code for registration.",
       "value": [
         [ "", "" ],
         [ "+1", "+1" ],
@@ -1930,72 +1781,72 @@
         [ "+358-18", "+358-18" ]
       ]
     },
-    {
+     {
       "type": "text",
       "id": "visitor-prefix",
-      "title": "Visitor name prefix",
-      "content": "Rename the visitor name prefix. Default is 'User'."
+      "title": "Visitor Name Prefix",
+      "content": "Change the prefix for the visitor's name. Default is 'User'."
     },
     {
       "type": "text",
       "id": "visitor-default-name",
-      "title": "Visitor default name",
-      "content": "Set the default username to use in bot messages and emails when the user doesn't have a name."
+      "title": "Visitor Default Name",
+      "content": "Set the default username to use in bot messages and emails when no name is provided."
     },
     {
       "type": "checkbox",
       "id": "visitor-autodata",
-      "title": "Full visitor details",
-      "content": "Save useful information like user country and language also for visitors."
+      "title": "Full Visitor Details",
+      "content": "Save additional information such as the user's country and language for visitors."
     },
     {
       "type": "checkbox",
       "id": "display-users-thumb",
-      "title": "Display user's profile image",
-      "content": "Display the user's profile image within the chat."
+      "title": "Display User's Profile Image",
+      "content": "Show the user's profile image within the chat."
     },
     {
       "type": "checkbox",
       "id": "hide-agents-thumb",
-      "title": "Hide agent's profile image",
+      "title": "Hide Agent's Profile Image",
       "content": "Hide the agent's profile image within the chat."
     },
     {
       "type": "select",
       "id": "sender-name",
-      "title": "Show sender's name",
-      "content": "Show the sender's name in every message.",
+      "title": "Show Sender's Name",
+      "content": "Show the sender's name in each message.",
       "value": [
         [ "", "Disabled" ],
         [ "chat", "Chat" ],
-        [ "chat-admin", "Chat and admin" ]
+        [ "chat-admin", "Chat and Admin" ]
       ]
     },
     {
       "type": "text",
       "id": "bot-name",
-      "title": "Bot name",
-      "content": "Rename the chat bot. Default is 'Bot'."
+      "title": "Bot Name",
+      "content": "Change the default chat bot name. Default is 'Bot'."
     },
     {
       "type": "upload-image",
       "id": "bot-image",
-      "title": "Bot profile image",
+      "title": "Bot Profile Image",
       "content": "Set a profile image for the chat bot.",
       "background-size": "auto 64px"
     },
     {
       "type": "button",
       "id": "delete-leads",
-      "title": "Delete leads",
-      "content": "Delete all leads and all messages and conversations linked to them.",
-      "button-text": "Delete leads",
+      "title": "Delete Leads",
+      "content": "Delete all leads and associated messages and conversations.",
+      "button-text": "Delete Leads",
       "button-url": "#"
     },
     {
       "type": "button",
       "id": "sb-import-users",
-      "title": "Import users",
+      "title": "Import Users",
       "content": "Import users from a CSV file.",
       "button-text": "Import users",
       "button-url": "#",

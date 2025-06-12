@@ -849,6 +849,13 @@ td.sb-offline:after {
             white-space: normal;
         }
 
+        td:not(:first-child) {
+            // for three dots
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .sb-td-status .span-border,
         .sb-td-priority .span-border {
             font-weight: 500;
@@ -885,10 +892,11 @@ td.sb-offline:after {
     }
 }
 
-.sb-td-profile, .sb-user-details {
+.sb-td-profile,
+.sb-user-details {
 
     .sb-profile {
-    line-height: 30px;
+        line-height: 30px;
 
         img {
             width: 40px;
@@ -3413,8 +3421,7 @@ td.sb-offline:after {
 .sb-area-reports,
 .sb-area-settings,
 .sb-area-tickets,
-.sb-area-ticket-detail
-{
+.sb-area-ticket-detail {
     header {
         display: flex;
         justify-content: space-between;
