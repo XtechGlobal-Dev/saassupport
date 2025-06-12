@@ -7575,7 +7575,7 @@ td.sb-offline:after {
   margin-top: 10px;
 }
 .sb-admin .header_new {
-  background: rgba(243, 245, 249, 0.5019607843);
+  background: rgb(245, 247, 250);
   width: 280px;
 }
 .sb-admin .header_new .sidebar {
@@ -7680,13 +7680,11 @@ td.sb-offline:after {
 }
 
 .sb-admin {
+  width: 100%;
   height: 100%;
-  width: calc(100% - 280px);
-  padding-left: 280px;
   position: fixed;
   font-size: 14px;
   line-height: 17px;
-  background: rgb(245, 247, 250);
   top: 0;
   z-index: 9;
 }
@@ -7699,10 +7697,7 @@ td.sb-offline:after {
   position: static;
 }
 .sb-admin > main {
-  padding: 0;
-  background: #fff;
-  height: 100%;
-  overflow: hidden;
+  width: 100%;
 }
 .sb-admin > main > div:not(.sb-active) {
   display: none;
@@ -8594,16 +8589,33 @@ td.sb-offline:after {
 }
 
 .container {
+  padding: 0 !important;
+  margin: 0 !important;
   max-width: unset !important;
 }
+.container .row {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 
+.sb-area-dashboard,
+.sb-area-conversations,
+.sb-area-tickets,
+.sb-area-users,
+.sb-area-articles,
+.sb-area-reports,
+.sb-area-settings,
+.sb-area-ticket-detail {
+  padding-left: 280px;
+}
 .sb-area-dashboard header,
 .sb-area-conversations header,
+.sb-area-tickets header,
 .sb-area-users header,
 .sb-area-articles header,
 .sb-area-reports header,
 .sb-area-settings header,
-.sb-area-tickets header,
 .sb-area-ticket-detail header {
   display: flex;
   justify-content: space-between;
@@ -8616,6 +8628,8 @@ td.sb-offline:after {
 .sb-area-dashboard header .header-right,
 .sb-area-conversations header .header-left,
 .sb-area-conversations header .header-right,
+.sb-area-tickets header .header-left,
+.sb-area-tickets header .header-right,
 .sb-area-users header .header-left,
 .sb-area-users header .header-right,
 .sb-area-articles header .header-left,
@@ -8624,8 +8638,6 @@ td.sb-offline:after {
 .sb-area-reports header .header-right,
 .sb-area-settings header .header-left,
 .sb-area-settings header .header-right,
-.sb-area-tickets header .header-left,
-.sb-area-tickets header .header-right,
 .sb-area-ticket-detail header .header-left,
 .sb-area-ticket-detail header .header-right {
   display: flex;
@@ -8634,33 +8646,33 @@ td.sb-offline:after {
 }
 .sb-area-dashboard header .title,
 .sb-area-conversations header .title,
+.sb-area-tickets header .title,
 .sb-area-users header .title,
 .sb-area-articles header .title,
 .sb-area-reports header .title,
 .sb-area-settings header .title,
-.sb-area-tickets header .title,
 .sb-area-ticket-detail header .title {
   font-weight: 600;
   font-size: 28px;
 }
 .sb-area-dashboard header .notification,
 .sb-area-conversations header .notification,
+.sb-area-tickets header .notification,
 .sb-area-users header .notification,
 .sb-area-articles header .notification,
 .sb-area-reports header .notification,
 .sb-area-settings header .notification,
-.sb-area-tickets header .notification,
 .sb-area-ticket-detail header .notification {
   position: relative;
   cursor: pointer;
 }
 .sb-area-dashboard header .notification .badge,
 .sb-area-conversations header .notification .badge,
+.sb-area-tickets header .notification .badge,
 .sb-area-users header .notification .badge,
 .sb-area-articles header .notification .badge,
 .sb-area-reports header .notification .badge,
 .sb-area-settings header .notification .badge,
-.sb-area-tickets header .notification .badge,
 .sb-area-ticket-detail header .notification .badge {
   position: absolute;
   top: -10px;
@@ -8674,21 +8686,21 @@ td.sb-offline:after {
 }
 .sb-area-dashboard header .user_menu .sb-menu,
 .sb-area-conversations header .user_menu .sb-menu,
+.sb-area-tickets header .user_menu .sb-menu,
 .sb-area-users header .user_menu .sb-menu,
 .sb-area-articles header .user_menu .sb-menu,
 .sb-area-reports header .user_menu .sb-menu,
 .sb-area-settings header .user_menu .sb-menu,
-.sb-area-tickets header .user_menu .sb-menu,
 .sb-area-ticket-detail header .user_menu .sb-menu {
   display: none;
 }
 .sb-area-dashboard header .user_menu .sb-menu .menu_head,
 .sb-area-conversations header .user_menu .sb-menu .menu_head,
+.sb-area-tickets header .user_menu .sb-menu .menu_head,
 .sb-area-users header .user_menu .sb-menu .menu_head,
 .sb-area-articles header .user_menu .sb-menu .menu_head,
 .sb-area-reports header .user_menu .sb-menu .menu_head,
 .sb-area-settings header .user_menu .sb-menu .menu_head,
-.sb-area-tickets header .user_menu .sb-menu .menu_head,
 .sb-area-ticket-detail header .user_menu .sb-menu .menu_head {
   display: flex;
   align-items: center;
@@ -8698,11 +8710,11 @@ td.sb-offline:after {
 }
 .sb-area-dashboard header .user_menu .sb-menu .menu_head > img,
 .sb-area-conversations header .user_menu .sb-menu .menu_head > img,
+.sb-area-tickets header .user_menu .sb-menu .menu_head > img,
 .sb-area-users header .user_menu .sb-menu .menu_head > img,
 .sb-area-articles header .user_menu .sb-menu .menu_head > img,
 .sb-area-reports header .user_menu .sb-menu .menu_head > img,
 .sb-area-settings header .user_menu .sb-menu .menu_head > img,
-.sb-area-tickets header .user_menu .sb-menu .menu_head > img,
 .sb-area-ticket-detail header .user_menu .sb-menu .menu_head > img {
   height: 50px;
   width: 50px;
@@ -8714,6 +8726,9 @@ td.sb-offline:after {
 .sb-area-conversations header .user_menu .sb-menu li[data-value=status],
 .sb-area-conversations header .user_menu .sb-menu li.sb-online,
 .sb-area-conversations header .user_menu .sb-menu li.sb-offline,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status],
+.sb-area-tickets header .user_menu .sb-menu li.sb-online,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline,
 .sb-area-users header .user_menu .sb-menu li[data-value=status],
 .sb-area-users header .user_menu .sb-menu li.sb-online,
 .sb-area-users header .user_menu .sb-menu li.sb-offline,
@@ -8726,9 +8741,6 @@ td.sb-offline:after {
 .sb-area-settings header .user_menu .sb-menu li[data-value=status],
 .sb-area-settings header .user_menu .sb-menu li.sb-online,
 .sb-area-settings header .user_menu .sb-menu li.sb-offline,
-.sb-area-tickets header .user_menu .sb-menu li[data-value=status],
-.sb-area-tickets header .user_menu .sb-menu li.sb-online,
-.sb-area-tickets header .user_menu .sb-menu li.sb-offline,
 .sb-area-ticket-detail header .user_menu .sb-menu li[data-value=status],
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-online,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-offline {
@@ -8741,6 +8753,9 @@ td.sb-offline:after {
 .sb-area-conversations header .user_menu .sb-menu li[data-value=status]::before,
 .sb-area-conversations header .user_menu .sb-menu li.sb-online::before,
 .sb-area-conversations header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline::before,
 .sb-area-users header .user_menu .sb-menu li[data-value=status]::before,
 .sb-area-users header .user_menu .sb-menu li.sb-online::before,
 .sb-area-users header .user_menu .sb-menu li.sb-offline::before,
@@ -8753,9 +8768,6 @@ td.sb-offline:after {
 .sb-area-settings header .user_menu .sb-menu li[data-value=status]::before,
 .sb-area-settings header .user_menu .sb-menu li.sb-online::before,
 .sb-area-settings header .user_menu .sb-menu li.sb-offline::before,
-.sb-area-tickets header .user_menu .sb-menu li[data-value=status]::before,
-.sb-area-tickets header .user_menu .sb-menu li.sb-online::before,
-.sb-area-tickets header .user_menu .sb-menu li.sb-offline::before,
 .sb-area-ticket-detail header .user_menu .sb-menu li[data-value=status]::before,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-online::before,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-offline::before {
@@ -8775,6 +8787,9 @@ td.sb-offline:after {
 .sb-area-conversations header .user_menu .sb-menu li[data-value=status]::after,
 .sb-area-conversations header .user_menu .sb-menu li.sb-online::after,
 .sb-area-conversations header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline::after,
 .sb-area-users header .user_menu .sb-menu li[data-value=status]::after,
 .sb-area-users header .user_menu .sb-menu li.sb-online::after,
 .sb-area-users header .user_menu .sb-menu li.sb-offline::after,
@@ -8787,9 +8802,6 @@ td.sb-offline:after {
 .sb-area-settings header .user_menu .sb-menu li[data-value=status]::after,
 .sb-area-settings header .user_menu .sb-menu li.sb-online::after,
 .sb-area-settings header .user_menu .sb-menu li.sb-offline::after,
-.sb-area-tickets header .user_menu .sb-menu li[data-value=status]::after,
-.sb-area-tickets header .user_menu .sb-menu li.sb-online::after,
-.sb-area-tickets header .user_menu .sb-menu li.sb-offline::after,
 .sb-area-ticket-detail header .user_menu .sb-menu li[data-value=status]::after,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-online::after,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-offline::after {
@@ -8809,6 +8821,9 @@ td.sb-offline:after {
 .sb-area-conversations header .user_menu .sb-menu li[data-value=status].sb-offline::before,
 .sb-area-conversations header .user_menu .sb-menu li.sb-online.sb-offline::before,
 .sb-area-conversations header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline.sb-offline::before,
 .sb-area-users header .user_menu .sb-menu li[data-value=status].sb-offline::before,
 .sb-area-users header .user_menu .sb-menu li.sb-online.sb-offline::before,
 .sb-area-users header .user_menu .sb-menu li.sb-offline.sb-offline::before,
@@ -8821,9 +8836,6 @@ td.sb-offline:after {
 .sb-area-settings header .user_menu .sb-menu li[data-value=status].sb-offline::before,
 .sb-area-settings header .user_menu .sb-menu li.sb-online.sb-offline::before,
 .sb-area-settings header .user_menu .sb-menu li.sb-offline.sb-offline::before,
-.sb-area-tickets header .user_menu .sb-menu li[data-value=status].sb-offline::before,
-.sb-area-tickets header .user_menu .sb-menu li.sb-online.sb-offline::before,
-.sb-area-tickets header .user_menu .sb-menu li.sb-offline.sb-offline::before,
 .sb-area-ticket-detail header .user_menu .sb-menu li[data-value=status].sb-offline::before,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-online.sb-offline::before,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-offline.sb-offline::before {
@@ -8835,6 +8847,9 @@ td.sb-offline:after {
 .sb-area-conversations header .user_menu .sb-menu li[data-value=status].sb-offline::after,
 .sb-area-conversations header .user_menu .sb-menu li.sb-online.sb-offline::after,
 .sb-area-conversations header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-tickets header .user_menu .sb-menu li.sb-offline.sb-offline::after,
 .sb-area-users header .user_menu .sb-menu li[data-value=status].sb-offline::after,
 .sb-area-users header .user_menu .sb-menu li.sb-online.sb-offline::after,
 .sb-area-users header .user_menu .sb-menu li.sb-offline.sb-offline::after,
@@ -8847,9 +8862,6 @@ td.sb-offline:after {
 .sb-area-settings header .user_menu .sb-menu li[data-value=status].sb-offline::after,
 .sb-area-settings header .user_menu .sb-menu li.sb-online.sb-offline::after,
 .sb-area-settings header .user_menu .sb-menu li.sb-offline.sb-offline::after,
-.sb-area-tickets header .user_menu .sb-menu li[data-value=status].sb-offline::after,
-.sb-area-tickets header .user_menu .sb-menu li.sb-online.sb-offline::after,
-.sb-area-tickets header .user_menu .sb-menu li.sb-offline.sb-offline::after,
 .sb-area-ticket-detail header .user_menu .sb-menu li[data-value=status].sb-offline::after,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-online.sb-offline::after,
 .sb-area-ticket-detail header .user_menu .sb-menu li.sb-offline.sb-offline::after {
@@ -8857,85 +8869,22 @@ td.sb-offline:after {
 }
 .sb-area-dashboard header .user_menu:hover .sb-menu,
 .sb-area-conversations header .user_menu:hover .sb-menu,
+.sb-area-tickets header .user_menu:hover .sb-menu,
 .sb-area-users header .user_menu:hover .sb-menu,
 .sb-area-articles header .user_menu:hover .sb-menu,
 .sb-area-reports header .user_menu:hover .sb-menu,
 .sb-area-settings header .user_menu:hover .sb-menu,
-.sb-area-tickets header .user_menu:hover .sb-menu,
 .sb-area-ticket-detail header .user_menu:hover .sb-menu {
   display: block;
-}
-.sb-area-dashboard header .user-profile,
-.sb-area-conversations header .user-profile,
-.sb-area-users header .user-profile,
-.sb-area-articles header .user-profile,
-.sb-area-reports header .user-profile,
-.sb-area-settings header .user-profile,
-.sb-area-tickets header .user-profile,
-.sb-area-ticket-detail header .user-profile {
-  display: flex;
-  align-items: center;
-  min-width: 50px;
-}
-.sb-area-dashboard header .user-profile .uImg,
-.sb-area-conversations header .user-profile .uImg,
-.sb-area-users header .user-profile .uImg,
-.sb-area-articles header .user-profile .uImg,
-.sb-area-reports header .user-profile .uImg,
-.sb-area-settings header .user-profile .uImg,
-.sb-area-tickets header .user-profile .uImg,
-.sb-area-ticket-detail header .user-profile .uImg {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer;
-}
-.sb-area-dashboard header .user-profile .user-info p,
-.sb-area-conversations header .user-profile .user-info p,
-.sb-area-users header .user-profile .user-info p,
-.sb-area-articles header .user-profile .user-info p,
-.sb-area-reports header .user-profile .user-info p,
-.sb-area-settings header .user-profile .user-info p,
-.sb-area-tickets header .user-profile .user-info p,
-.sb-area-ticket-detail header .user-profile .user-info p {
-  font-weight: 600;
-  margin-bottom: 3px;
-  font-size: 16px;
-  color: #000;
-}
-.sb-area-dashboard header .user-profile .user-info span,
-.sb-area-conversations header .user-profile .user-info span,
-.sb-area-users header .user-profile .user-info span,
-.sb-area-articles header .user-profile .user-info span,
-.sb-area-reports header .user-profile .user-info span,
-.sb-area-settings header .user-profile .user-info span,
-.sb-area-tickets header .user-profile .user-info span,
-.sb-area-ticket-detail header .user-profile .user-info span {
-  font-weight: 400;
-  font-size: 12px;
-  color: #5d6165;
-}
-.sb-area-dashboard header .logout,
-.sb-area-conversations header .logout,
-.sb-area-users header .logout,
-.sb-area-articles header .logout,
-.sb-area-reports header .logout,
-.sb-area-settings header .logout,
-.sb-area-tickets header .logout,
-.sb-area-ticket-detail header .logout {
-  margin-left: 20px;
-  cursor: pointer;
 }
 
 .sb-area-dashboard main {
   width: 100%;
 }
 .sb-area-dashboard main .new_container {
-  overflow: scroll;
-  background: rgba(243, 245, 249, 0.5019607843);
-  padding-top: 50px;
-  height: 100%;
+  overflow-y: scroll;
+  height: calc(100% - 82px);
+  background: rgb(245, 247, 250);
 }
 .sb-area-dashboard main .new_container .chart-placeholder {
   height: 200px;
@@ -8948,10 +8897,10 @@ td.sb-offline:after {
   font-size: 1.1rem;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics {
-  padding: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
+  margin-bottom: 15px;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card {
   border-radius: 10px;
@@ -9008,9 +8957,6 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-increase {
   font-size: 12px;
   color: #45b369;
-}
-.sb-area-dashboard main .new_container .main-charts {
-  padding: 15px;
 }
 .sb-area-dashboard main .new_container .main-charts .monthlyBarChart {
   max-width: 1000px;
@@ -9193,19 +9139,8 @@ td.sb-offline:after {
   text-align: right;
 }
 .sb-area-dashboard main .new_container .main-charts .bg-white {
-  background-color: #fff !important;
   padding: 15px;
   border-radius: 8px 8px 0 0;
-  box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
-}
-.sb-area-dashboard main .new_container .main-charts .bg-white .reply-btn {
-  color: #FFFFFF;
-  font-weight: 500;
-  font-size: 14px;
-  border: 1px solid #2953E8;
-  background: #2953E8;
-  padding: 10px 20px;
-  border-radius: 8px;
 }
 .sb-area-dashboard main .new_container .main-charts .seprator {
   box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
@@ -9261,6 +9196,120 @@ td.sb-offline:after {
   font-weight: 400;
   font-size: 16px;
   cursor: pointer;
+}
+
+.sb-area-ticket-detail {
+  background-color: rgb(245, 247, 250);
+}
+.sb-area-ticket-detail .tc_bg {
+  padding: 40px;
+}
+.sb-area-ticket-detail .tc_bg .tc_back {
+  background-color: #fff;
+  padding: 16px 22px;
+  border-radius: 8px;
+}
+.sb-area-ticket-detail .status-open {
+  background-color: #45b369;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.sb-area-ticket-detail .priority-high {
+  background-color: #fff;
+  border: 1px solid #d3dced;
+  color: #d75a33;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.sb-area-ticket-detail .priority-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #d75a33;
+  border-radius: 50%;
+}
+.sb-area-ticket-detail .tag-badge {
+  background-color: #fff;
+  border: 1px solid #6f6f6f;
+  color: #3d3d3d;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 11px;
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sb-area-ticket-detail .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.sb-area-ticket-detail .comment-avatar {
+  width: 36px;
+  height: 36px;
+}
+.sb-area-ticket-detail .comment-card {
+  background-color: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.sb-area-ticket-detail .chat-input {
+  background-color: #fff;
+  border: 1px solid #a5a7aa;
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px rgba(16, 24, 40, 0.08);
+}
+.sb-area-ticket-detail .send-btn {
+  background-color: #1653fd;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: white;
+  font-weight: 600;
+}
+.sb-area-ticket-detail .icon-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+.sb-area-ticket-detail .section-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 16px;
+}
+.sb-area-ticket-detail .field-label {
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 4px;
+}
+.sb-area-ticket-detail .divider {
+  border-top: 1px solid #e0e0e0;
+  margin: 24px 0;
+}
+.sb-area-ticket-detail .assign-link {
+  color: #1653fd;
+  text-decoration: none;
+  font-size: 14px;
+}
+.sb-area-ticket-detail .assign-link:hover {
+  text-decoration: underline;
 }
 
 .sb-area-conversations > .sb-btn-collapse {
@@ -9386,8 +9435,6 @@ td.sb-offline:after {
 .sb-area-users .sb-scroll-area {
   overflow: hidden;
   overflow-y: scroll;
-  margin: 15px 0 0 15px;
-  padding-right: 15px;
   height: calc(100% - 85px);
 }
 .sb-area-users .sb-scroll-area:hover + .sb-scroll-bar {
