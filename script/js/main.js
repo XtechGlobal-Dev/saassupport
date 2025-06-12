@@ -1306,7 +1306,7 @@
         $(this).value = '';
     }
 
-    $.fn.setProfile = function (name = false, profile_image = false) {
+    $.fn.setProfile = async function (name = false, profile_image = false) {
         if (SBF.null(name)) {
             name = activeUser() ? activeUser().name : '';
         }
