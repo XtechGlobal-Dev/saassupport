@@ -9209,6 +9209,13 @@ td.sb-offline:after {
   padding: 16px 22px;
   border-radius: 8px;
 }
+.sb-area-ticket-detail .tc_bg .tc_back .status-open {
+  background-color: rgb(26, 146, 96);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
 .sb-area-ticket-detail .tc_bg .tc_back .title {
   font-weight: 700;
   font-size: 25px;
@@ -9222,6 +9229,11 @@ td.sb-offline:after {
   font-weight: 500;
   font-size: 16px;
 }
+.sb-area-ticket-detail .tc_bg .tc_back .field-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
 .sb-area-ticket-detail .tc_bg .tc_back .msg {
   max-height: 300px;
   overflow-y: auto;
@@ -9229,12 +9241,12 @@ td.sb-offline:after {
 .sb-area-ticket-detail .tc_bg .tc_back .msg .mright,
 .sb-area-ticket-detail .tc_bg .tc_back .msg .mleft {
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .msg .mright .avatar,
 .sb-area-ticket-detail .tc_bg .tc_back .msg .mleft .avatar {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -9244,21 +9256,39 @@ td.sb-offline:after {
   background-color: #f8f8f8;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 12px;
+  padding: 6px;
   margin-bottom: 8px;
+  font-size: 13px;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .msg .mleft {
   justify-content: end;
 }
-.sb-area-ticket-detail .status-open {
-  background-color: #45b369;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+.sb-area-ticket-detail .tc_bg .tc_back .chat-input {
+  border: 1px solid #a5a7aa;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(16, 24, 40, 0.08);
 }
-.sb-area-ticket-detail .priority-high {
+.sb-area-ticket-detail .tc_bg .tc_back .chat-input .input-no-border {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  width: 100%;
+}
+.sb-area-ticket-detail .tc_bg .tc_back .sidepanel {
+  border: 1px solid #a5a7aa;
+  border-radius: 10px;
+  padding: 15px;
+}
+.sb-area-ticket-detail .tc_bg .tc_back .sidepanel .assign-link {
+  color: #155CFD;
+  font-size: 14px;
+  cursor: pointer;
+}
+.sb-area-ticket-detail .tc_bg .tc_back .sidepanel .reporter {
+  height: 35px;
+  border-radius: 50%;
+}
+.sb-area-ticket-detail .tc_bg .tc_back .sidepanel .priority-high {
   background-color: #fff;
   border: 1px solid #d3dced;
   color: #d75a33;
@@ -9266,74 +9296,10 @@ td.sb-offline:after {
   border-radius: 20px;
   font-size: 12px;
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
-.sb-area-ticket-detail .priority-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #d75a33;
-  border-radius: 50%;
-}
-.sb-area-ticket-detail .tag-badge {
-  background-color: #fff;
-  border: 1px solid #6f6f6f;
-  color: #3d3d3d;
-  padding: 4px 8px;
-  border-radius: 16px;
-  font-size: 11px;
-  margin-right: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.sb-area-ticket-detail .chat-input {
-  background-color: #fff;
-  border: 1px solid #a5a7aa;
-  border-radius: 20px;
-  box-shadow: 0px 4px 12px rgba(16, 24, 40, 0.08);
-}
-.sb-area-ticket-detail .send-btn {
-  background-color: #1653fd;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  color: white;
-  font-weight: 600;
-}
-.sb-area-ticket-detail .icon-btn {
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-}
-.sb-area-ticket-detail .section-title {
-  font-weight: 600;
-  font-size: 18px;
-  color: #000;
-  margin-bottom: 16px;
-}
-.sb-area-ticket-detail .field-label {
-  font-weight: 500;
-  color: #000;
-  margin-bottom: 4px;
-}
-.sb-area-ticket-detail .divider {
+.sb-area-ticket-detail .tc_bg .tc_back .divider {
   border-top: 1px solid #e0e0e0;
-  margin: 24px 0;
-}
-.sb-area-ticket-detail .assign-link {
-  color: #1653fd;
-  text-decoration: none;
-  font-size: 14px;
-}
-.sb-area-ticket-detail .assign-link:hover {
-  text-decoration: underline;
+  margin: 16px 0;
 }
 
 .sb-area-conversations > .sb-btn-collapse {

@@ -301,7 +301,7 @@ function sb_ticket_edit_box()
                                 <select id="ticket-tags" name="tags[]" multiple>
                                     <?php
                                     for ($i = 0; $i < $count; $i++) {
-                                       $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
                                     }
                                     echo $tagsHtml;
                                     ?>
@@ -494,7 +494,9 @@ function sb_ticket_edit_box()
             padding: 0;
         }
 
-        table.table-striped tr {vertical-align: middle;}
+        table.table-striped tr {
+            vertical-align: middle;
+        }
 
         #file-preview-list .col-md-2,
         #current-attachments .col-md-2 {
@@ -626,8 +628,17 @@ function sb_ticket_edit_box()
             line-height: 45px;
         }
 
-        td.sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
-        .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
+        td.sb-td-tags span {
+            margin: 3px 5px 0 0;
+            padding: .45em .75em;
+            font-size: 13px
+        }
+
+        .sb_table_new tbody td.sb-td-tags {
+            white-space: unset;
+            text-overflow: unset;
+        }
+
         /******** Ticket Multi -select Tags ***********************/
         /* .tag-dot {
             display: inline-block;
@@ -700,7 +711,7 @@ function sb_ticket_edit_box()
             font-size: 12px !important;
             line-height: 1 !important;
         }*/
-       /* .choices__list.choices__list--multiple > div { border: 1px solid red;padding: 2px 5px;border-radius: 30px;display: flex;align-items: center;justify-content: center;}
+        /* .choices__list.choices__list--multiple > div { border: 1px solid red;padding: 2px 5px;border-radius: 30px;display: flex;align-items: center;justify-content: center;}
         .choices__list.choices__list--multiple > div button { border: none;color: red;}
         .choices__list--dropdown .choices__item .card{padding: 8px 12px !important;
     border-radius: 4px !important;
@@ -713,400 +724,416 @@ function sb_ticket_edit_box()
 
 
         /* Colored dot for tags */
-.tag-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-}
+        .tag-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
 
-/* 1. Remove Choices.js default selection indicator (blue dot) in dropdown */
-.choices__list--dropdown .choices__item--selectable::before {
-    display: none !important;
-}
+        /* 1. Remove Choices.js default selection indicator (blue dot) in dropdown */
+        .choices__list--dropdown .choices__item--selectable::before {
+            display: none !important;
+        }
 
-/* 2. Selected tags as compact badges, allow wrapping */
-.choices__list--multiple {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px 6px !important;
-    align-items: flex-start !important;
-    padding: 4px 0 0 4px !important;
-}
-.choices__list--multiple .choices__item {
-    display: inline-flex !important;
-    align-items: center !important;
-    width: auto !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 4px 26px 4px 12px !important;
-    border-radius: 16px !important;
-    background: #f8f9fa !important;
-    color: #222 !important;
-    font-size: 0.95em !important;
-    position: relative;
-    box-shadow: none !important;
-    border: 1px solid #d1d5db !important;
-    white-space: nowrap;
-}
-/* Remove Choices.js default blue dot from selected items */
-.choices__list--multiple .choices__item::before {
-    display: none !important;
-}
+        /* 2. Selected tags as compact badges, allow wrapping */
+        .choices__list--multiple {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 6px 6px !important;
+            align-items: flex-start !important;
+            padding: 4px 0 0 4px !important;
+        }
+
+        .choices__list--multiple .choices__item {
+            display: inline-flex !important;
+            align-items: center !important;
+            width: auto !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+            padding: 4px 26px 4px 12px !important;
+            border-radius: 16px !important;
+            background: #f8f9fa !important;
+            color: #222 !important;
+            font-size: 0.95em !important;
+            position: relative;
+            box-shadow: none !important;
+            border: 1px solid #d1d5db !important;
+            white-space: nowrap;
+        }
+
+        /* Remove Choices.js default blue dot from selected items */
+        .choices__list--multiple .choices__item::before {
+            display: none !important;
+        }
 
 
-/* 3. Remove button always visible and styled */
-.choices__button,
-.choices__button--remove {
-    /*display: block !important;
+        /* 3. Remove button always visible and styled */
+        .choices__button,
+        .choices__button--remove {
+            /*display: block !important;
     position: absolute !important;
     right: 6px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;*/
-    color: #d32f2f !important;
-    background: none !important;
-    border: none !important;
-    font-size: 1.2em !important;
-    cursor: pointer !important;
-    z-index: 10 !important;
-    padding: 0 !important;
-    width: 20px !important;
-    height: 20px !important;
-    line-height: 1 !important;
-    opacity: 1 !important;
-    box-shadow: none !important;
-    text-indent: 0 !important;
-}
-.choices__button:hover,
-.choices__button--remove:hover {
-    color: #b71c1c !important;
-}
+            color: #d32f2f !important;
+            background: none !important;
+            border: none !important;
+            font-size: 1.2em !important;
+            cursor: pointer !important;
+            z-index: 10 !important;
+            padding: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+            line-height: 1 !important;
+            opacity: 1 !important;
+            box-shadow: none !important;
+            text-indent: 0 !important;
+        }
 
-/* Ensure remove button is above badge background */
-.choices__list--multiple .choices__item {
-    overflow: visible !important;
-}
+        .choices__button:hover,
+        .choices__button--remove:hover {
+            color: #b71c1c !important;
+        }
+
+        /* Ensure remove button is above badge background */
+        .choices__list--multiple .choices__item {
+            overflow: visible !important;
+        }
 
 
 
-/* Tag styling for both filter and create ticket pages */
-.tag-option {
-    padding: 8px 12px;
-    border-radius: 4px;
-    margin: 2px 0;
-    transition: all 0.2s ease;
-    background-color: #fff !important;
-    color: #222 !important;
-    font-weight: 500;
-    min-height: 32px;
-    display: flex;
-    align-items: center;
-}
+        /* Tag styling for both filter and create ticket pages */
+        .tag-option {
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 2px 0;
+            transition: all 0.2s ease;
+            background-color: #fff !important;
+            color: #222 !important;
+            font-weight: 500;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+        }
 
-/* Ensure text is always visible */
-.tag-option {
-    color: var(--bs-dark) !important;
-}
+        /* Ensure text is always visible */
+        .tag-option {
+            color: var(--bs-dark) !important;
+        }
 
-/* Ensure color circles are visible */
-.tag-option[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: attr(data-color);
-    background-color: var(--bs-primary, #888);
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
-    vertical-align: middle;
-    opacity: 1 !important;
-}
+        /* Ensure color circles are visible */
+        .tag-option[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: attr(data-color);
+            background-color: var(--bs-primary, #888);
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+            vertical-align: middle;
+            opacity: 1 !important;
+        }
 
-/* Ensure text is visible in dropdown */
-.choices__list--dropdown .choices__item {
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: #fff !important;
-    color: #222 !important;
-    font-weight: 500 !important;
-    min-height: 32px !important;
-    display: flex !important;
-    align-items: center !important;
-}
+        /* Ensure text is visible in dropdown */
+        .choices__list--dropdown .choices__item {
+            padding: 8px 12px !important;
+            border-radius: 4px !important;
+            margin: 2px 0 !important;
+            transition: all 0.2s ease !important;
+            background-color: #fff !important;
+            color: #222 !important;
+            font-weight: 500 !important;
+            min-height: 32px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
 
-.choices__list--dropdown .choices__item::before {
-    opacity: 1 !important;
-}
+        .choices__list--dropdown .choices__item::before {
+            opacity: 1 !important;
+        }
 
-/* Ensure text is visible in selected items */
-.choices__list--multiple .choices__item {
-    padding: 4px 32px 4px 12px !important;
-    border-radius: 12px !important;
-    margin: 4px !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-    border: 1px solid var(--bs-primary) !important;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-height: 24px !important;
-    display: flex !important;
-    align-items: center !important;
-}
+        /* Ensure text is visible in selected items */
+        .choices__list--multiple .choices__item {
+            padding: 4px 32px 4px 12px !important;
+            border-radius: 12px !important;
+            margin: 4px !important;
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+            font-weight: 500 !important;
+            border: 1px solid var(--bs-primary) !important;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 24px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
 
-/* Ensure color circle is visible in selected items */
-.choices__list--multiple .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background-color: var(--bs-primary);
-    border: 2px solid var(--bs-light);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    opacity: 1 !important;
-}
+        /* Ensure color circle is visible in selected items */
+        .choices__list--multiple .choices__item[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            background-color: var(--bs-primary);
+            border: 2px solid var(--bs-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            opacity: 1 !important;
+        }
 
-/* Color styling for tag options */
-.tag-option[data-color] {
-    --color: attr(data-color);
-    --bs-primary: var(--color);
-    background-color: #fff !important; /* Prevent tag color as background */
-}
+        /* Color styling for tag options */
+        .tag-option[data-color] {
+            --color: attr(data-color);
+            --bs-primary: var(--color);
+            background-color: #fff !important;
+            /* Prevent tag color as background */
+        }
 
-.tag-option[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: var(--bs-primary);
-    border: 1px solid var(--bs-primary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .tag-option[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: var(--bs-primary);
+            border: 1px solid var(--bs-primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-/* Hover state for tag options */
-.tag-option:hover {
-    background-color: var(--bs-light);
-    color: var(--bs-dark);
-}
+        /* Hover state for tag options */
+        .tag-option:hover {
+            background-color: var(--bs-light);
+            color: var(--bs-dark);
+        }
 
-.tag-option:hover::before {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
-}
+        .tag-option:hover::before {
+            transform: scale(1.1);
+            transition: transform 0.2s ease;
+        }
 
-/* Selected state styling */
-.tag-option.selected {
-    background-color: var(--bs-light);
-    color: var(--bs-dark);
-    font-weight: 600;
-}
+        /* Selected state styling */
+        .tag-option.selected {
+            background-color: var(--bs-light);
+            color: var(--bs-dark);
+            font-weight: 600;
+        }
 
-.tag-option.selected::before {
-    background-color: var(--bs-primary);
-    border: 2px solid var(--bs-light);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .tag-option.selected::before {
+            background-color: var(--bs-primary);
+            border: 2px solid var(--bs-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-/* Choices.js dropdown item styling */
-.choices__list--dropdown .choices__item {
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-}
+        /* Choices.js dropdown item styling */
+        .choices__list--dropdown .choices__item {
+            padding: 8px 12px !important;
+            border-radius: 4px !important;
+            margin: 2px 0 !important;
+            transition: all 0.2s ease !important;
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+            font-weight: 500 !important;
+        }
 
-.choices__list--dropdown .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: attr(data-color);
-    background-color: var(--bs-primary, #888);
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
-    vertical-align: middle;
-    opacity: 1 !important;
-}
+        .choices__list--dropdown .choices__item[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: attr(data-color);
+            background-color: var(--bs-primary, #888);
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+            vertical-align: middle;
+            opacity: 1 !important;
+        }
 
-/* Hover state for dropdown items */
-.choices__list--dropdown .choices__item:hover {
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-}
+        /* Hover state for dropdown items */
+        .choices__list--dropdown .choices__item:hover {
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+        }
 
-.choices__list--dropdown .choices__item:hover::before {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
-}
+        .choices__list--dropdown .choices__item:hover::before {
+            transform: scale(1.1);
+            transition: transform 0.2s ease;
+        }
 
-/* Selected item styling */
-.choices__list--multiple .choices__item {
-    padding: 4px 32px 4px 12px !important;
-    border-radius: 12px !important;
-    margin: 4px !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-    border: 1px solid var(--bs-primary) !important;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        /* Selected item styling */
+        .choices__list--multiple .choices__item {
+            padding: 4px 32px 4px 12px !important;
+            border-radius: 12px !important;
+            margin: 4px !important;
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+            font-weight: 500 !important;
+            border: 1px solid var(--bs-primary) !important;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-.choices__list--multiple .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background-color: var(--bs-primary);
-    border: 2px solid var(--bs-light);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .choices__list--multiple .choices__item[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            background-color: var(--bs-primary);
+            border: 2px solid var(--bs-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-/* Remove button styling */
-.choices__button--remove {
-    /*position: absolute !important;
+        /* Remove button styling */
+        .choices__button--remove {
+            /*position: absolute !important;
     right: 8px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;*/
-    background-color: transparent !important;
-    border: none !important;
-    color: var(--bs-dark) !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    width: 20px !important;
-    height: 20px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transition: color 0.2s ease !important;
-}
+            background-color: transparent !important;
+            border: none !important;
+            color: var(--bs-dark) !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            width: 20px !important;
+            height: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: color 0.2s ease !important;
+        }
 
-.choices__button--remove::before {
-    content: 'Ã—' !important;
-    font-size: 12px !important;
-    line-height: 1 !important;
-}
+        .choices__button--remove::before {
+            content: 'Ã—' !important;
+            font-size: 12px !important;
+            line-height: 1 !important;
+        }
 
-.choices__button--remove:hover {
-    color: var(--bs-primary) !important;
-}
+        .choices__button--remove:hover {
+            color: var(--bs-primary) !important;
+        }
 
-.choices__button--remove--active {
-    color: var(--bs-primary) !important;
-}
+        .choices__button--remove--active {
+            color: var(--bs-primary) !important;
+        }
 
-/* Choices.js dropdown item styling */
-.choices__list--dropdown .choices__item {
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-}
+        /* Choices.js dropdown item styling */
+        .choices__list--dropdown .choices__item {
+            padding: 8px 12px !important;
+            border-radius: 4px !important;
+            margin: 2px 0 !important;
+            transition: all 0.2s ease !important;
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+            font-weight: 500 !important;
+        }
 
-.choices__list--dropdown .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: var(--bs-primary);
-}
+        .choices__list--dropdown .choices__item[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: var(--bs-primary);
+        }
 
-/* Choices.js selected item styling */
-.choices__list--multiple .choices__item {
-    padding: 4px 32px 4px 12px !important;
-    border-radius: 12px !important;
-    margin: 4px !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-    border: 1px solid var(--bs-primary) !important;
-    position: relative;
-}
+        /* Choices.js selected item styling */
+        .choices__list--multiple .choices__item {
+            padding: 4px 32px 4px 12px !important;
+            border-radius: 12px !important;
+            margin: 4px !important;
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+            font-weight: 500 !important;
+            border: 1px solid var(--bs-primary) !important;
+            position: relative;
+        }
 
-.choices__list--multiple .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background-color: var(--bs-primary);
-}
+        .choices__list--multiple .choices__item[data-color]::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+            background-color: var(--bs-primary);
+        }
 
-/* Remove button styling */
-.choices__button--remove {
-    /*position: absolute !important;
+        /* Remove button styling */
+        .choices__button--remove {
+            /*position: absolute !important;
     right: 8px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;*/
-    background-color: transparent !important;
-    border: none !important;
-    color: var(--bs-dark) !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    width: 16px !important;
-    height: 16px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
+            background-color: transparent !important;
+            border: none !important;
+            color: var(--bs-dark) !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            width: 16px !important;
+            height: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
 
-.choices__button--remove::before {
-    content: 'Ã—' !important;
-    font-size: 12px !important;
-    line-height: 1 !important;
-}
+        .choices__button--remove::before {
+            content: 'Ã—' !important;
+            font-size: 12px !important;
+            line-height: 1 !important;
+        }
 
-.choices__button--remove:hover {
-    color: var(--bs-primary) !important;
-}
+        .choices__button--remove:hover {
+            color: var(--bs-primary) !important;
+        }
 
-.choices__button--remove--active {
-    color: var(--bs-primary) !important;
-}
+        .choices__button--remove--active {
+            color: var(--bs-primary) !important;
+        }
 
-.choices__button i {font-size: 14px;}
+        .choices__button i {
+            font-size: 14px;
+        }
 
-/* Improve visibility of selected items */
-.choices__list--multiple .choices__item {
-    opacity: 1 !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-}
+        /* Improve visibility of selected items */
+        .choices__list--multiple .choices__item {
+            opacity: 1 !important;
+            background-color: var(--bs-light) !important;
+            color: var(--bs-dark) !important;
+        }
 
-.choices__list--multiple .choices__item[data-color] {
-    border: 1px solid var(--bs-primary) !important;
-}
+        .choices__list--multiple .choices__item[data-color] {
+            border: 1px solid var(--bs-primary) !important;
+        }
 
-.choices[data-type*=select-multiple] .choices__inner .choices__button, .choices[data-type*=text] .choices__button {
-    margin-left: 2px;
-}
+        .choices[data-type*=select-multiple] .choices__inner .choices__button,
+        .choices[data-type*=text] .choices__button {
+            margin-left: 2px;
+        }
 
-.choices__list.choices__list--multiple > div {padding: 2px 8px;border-radius: 11px;display: flex;align-items: center;justify-content: center;}
-.choices__list.choices__list--multiple > div button { border: none;color: red;}
-    
+        .choices__list.choices__list--multiple>div {
+            padding: 2px 8px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .choices__list.choices__list--multiple>div button {
+            border: none;
+            color: red;
+        }
     </style>
     <script>
         // document.addEventListener('mousedown', function(e) {
@@ -1170,7 +1197,7 @@ function sb_ticket_edit_box()
         //             noResults: 'has-no-results',
         //             noChoices: 'has-no-choices'
         //         },
-        
+
         //         callbackOnCreateTemplates: function(template) {
         //             return {
         //                 item: (classNames, data) => {
@@ -1259,6 +1286,7 @@ function sb_ticket_edit_box()
                 }
             });
         }
+
         function updateTagDots() {
             // Dropdown items
             document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
@@ -1306,6 +1334,7 @@ function sb_ticket_edit_box()
                         };
                     }
                 });
+
                 function refreshTagDots() {
                     propagateTagColors();
                     updateTagDots();
@@ -1318,14 +1347,16 @@ function sb_ticket_edit_box()
                     const observer = new MutationObserver(() => {
                         refreshTagDots();
                     });
-                    observer.observe(choicesList, { childList: true, subtree: true });
+                    observer.observe(choicesList, {
+                        childList: true,
+                        subtree: true
+                    });
                 }
                 document.querySelector('.choices').addEventListener('click', function() {
                     setTimeout(refreshTagDots, 10);
                 });
             }
         });
-
     </script>
     <script>
         $('#select-customer').select2({
@@ -3703,19 +3734,19 @@ function sb_component_admin()
                         <div class="tc_bg">
                             <div class="tc_back">
                                 <div class="container">
-                                    <!-- Header -->
                                     <div class="row">
                                         <div class="col-md-12 p-0">
                                             <div class="row">
-                                                <div class="col-md-9 p-0">
+                                                <div class="col-md-8 p-0">
                                                     <h2 class="title mb-0"># TR-51 / Email Subject</h2>
                                                 </div>
-                                                <div class="col-md-3 p-0">
-                                                    <div class="d-flex align-items-center justify-content-between">
+                                                <div class="col-md-4 p-0">
+                                                    <div class="d-flex align-items-center justify-content-between pl-5">
                                                         <span class="status-open">Open <i class="fas fa-chevron-down ms-1"></i></span>
-                                                        <button class="btn btn-primary">
-                                                            <i class="fas fa-check me-2"></i>Save Changes
-                                                        </button>
+                                                        <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
+                                                            <i class="fa-solid fa-check mr-1"></i>
+                                                            Save changes
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 p-0 mt-3 d-flex align-items-center">
@@ -3738,7 +3769,7 @@ function sb_component_admin()
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
-                                                                <small class="text-muted">Admin</small>
+                                                                <!-- <small class="text-muted">Admin</small> -->
                                                             </div>
                                                             <div class="comment-card">
                                                                 <p class="mb-0">Hello my dear sir</p>
@@ -3747,7 +3778,6 @@ function sb_component_admin()
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
-                                                                <small class="text-muted">Admin</small>
                                                             </div>
                                                             <div class="comment-card">
                                                                 <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
@@ -3759,7 +3789,6 @@ function sb_component_admin()
                                                             </div>
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
-                                                                <small class="text-muted">You</small>
                                                             </div>
                                                         </div>
                                                         <div class="mleft">
@@ -3768,13 +3797,11 @@ function sb_component_admin()
                                                             </div>
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
-                                                                <small class="text-muted">You</small>
                                                             </div>
                                                         </div>
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
-                                                                <small class="text-muted">Admin</small>
                                                             </div>
                                                             <div class="comment-card">
                                                                 <p class="mb-0">Hello my dear sir</p>
@@ -3783,7 +3810,6 @@ function sb_component_admin()
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
-                                                                <small class="text-muted">Admin</small>
                                                             </div>
                                                             <div class="comment-card">
                                                                 <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
@@ -3795,7 +3821,6 @@ function sb_component_admin()
                                                             </div>
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
-                                                                <small class="text-muted">You</small>
                                                             </div>
                                                         </div>
                                                         <div class="mleft">
@@ -3804,82 +3829,75 @@ function sb_component_admin()
                                                             </div>
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
-                                                                <small class="text-muted">You</small>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="chat-input mt-3 p-3">
-                                                        <div class="d-flex align-items-center gap-2 mb-3">
-                                                            <i class="fas fa-paperclip text-muted"></i>
-                                                            <input type="text" class="form-control border-0" placeholder="Send a message..." style="background: transparent;">
-                                                        </div>
-                                                        <div class="d-flex justify-content-end gap-2">
-                                                            <button class="icon-btn">
-                                                                <i class="fas fa-plus"></i>
-                                                            </button>
-                                                            <button class="icon-btn">
-                                                                <i class="fas fa-plus"></i>
-                                                            </button>
-                                                            <button class="send-btn d-flex align-items-center gap-2">
+                                                    <div class="chat-input mt-3 p-2">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <i class="fas fa-paperclip text-muted"></i>
+                                                                <input type="text" class="form-control input-no-border" placeholder="Send a message..." style="background: transparent;">
+                                                            </div>
+                                                            <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
                                                                 Send <i class="fas fa-paper-plane"></i>
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1 p-0"></div>
-                                                <div class="col-md-3 p-0">
-                                                    <h4 class="section-title">Details</h4>
-                                                    <div class="mb-4">
-                                                        <div class="field-label">Assignee</div>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center gap-2">
-                                                                <i class="fas fa-user-circle fs-4 text-muted"></i>
-                                                                <span>Unassigned</span>
+                                                <div class="col-md-4 p-0">
+                                                    <div class="pl-5">
+                                                        <div class="sidepanel">
+                                                            <h4 class="sub_title mb-5">Details</h4>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Assignee</div>
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <div class="d-flex align-items-center gap-2">
+                                                                        <i class="fas fa-user-circle fs-4 text-muted"></i>
+                                                                        <span>Unassigned</span>
+                                                                    </div>
+                                                                    <p class="assign-link m-0 p-0">Assign to me</p>
+                                                                </div>
                                                             </div>
-                                                            <a href="#" class="assign-link">Assign to me</a>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Reporter</div>
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <img class="reporter" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter">
+                                                                    <span>McKinsey Vermillion</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Tags</div>
+                                                                <div class="mb-2">
+                                                                    <input type="text" style="max-width: 220px;" class="form-control form-control-sm" placeholder="Add a tag...">
+                                                                </div>
+                                                                <div>
+                                                                    <span class="tag-badge">
+                                                                        <i class="fas fa-check text-muted"></i>
+                                                                        Business
+                                                                    </span>
+                                                                    <span class="tag-badge">
+                                                                        <i class="fas fa-check text-muted"></i>
+                                                                        Urgent
+                                                                    </span>
+                                                                    <span class="tag-badge">
+                                                                        <i class="fas fa-check text-muted"></i>
+                                                                        Priority
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Labels</div>
+                                                                <span class="text-muted">None</span>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Priority</div>
+                                                                <div class="priority-high">
+                                                                    High
+                                                                </div>
+                                                            </div>
+                                                            <div class="divider"></div>
+                                                            <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
                                                         </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <div class="field-label">Reporter</div>
-                                                        <div class="d-flex align-items-center gap-2">
-                                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter" class="avatar">
-                                                            <span>McKinsey Vermillion</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <div class="field-label">Tags</div>
-                                                        <div class="mb-2">
-                                                            <input type="text" class="form-control form-control-sm" placeholder="Add a tag...">
-                                                        </div>
-                                                        <div>
-                                                            <span class="tag-badge">
-                                                                <i class="fas fa-check text-muted"></i>
-                                                                Business
-                                                            </span>
-                                                            <span class="tag-badge">
-                                                                <i class="fas fa-check text-muted"></i>
-                                                                Urgent
-                                                            </span>
-                                                            <span class="tag-badge">
-                                                                <i class="fas fa-check text-muted"></i>
-                                                                Priority
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <div class="field-label">Labels</div>
-                                                        <span class="text-muted">None</span>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <div class="field-label">Priority</div>
-                                                        <div class="priority-high">
-                                                            High
-                                                            <div class="priority-dot"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="divider"></div>
-                                                    <div class="mb-4">
-                                                        <h5 class="section-title">More Fields <i class="fas fa-chevron-down"></i></h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -5084,8 +5102,8 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs')
                                                     </tr>
                                                 </thead>
                                                 <tbody>';
-                                            foreach ($ticketStatuses as $status) {
-                                                $code .= '<tr data-id="ticket_status_row_' . $status["id"] . '">
+    foreach ($ticketStatuses as $status) {
+        $code .= '<tr data-id="ticket_status_row_' . $status["id"] . '">
                                                         <td>' . $status["name"] . '</td>
                                                         <td class="sb-color-palette">
                                                             <span style="background-color:' . $status["color"] . '"></span>
@@ -5095,17 +5113,17 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs')
                                                                 <i class="sb-icon-edit"></i>
                                                             </a>';
 
-                                                    if ($status['id'] > 5) {
-                                                        $code .= '<a class="sb-btn-icon sb-btn-red delete-ticket-status" data-sb-tooltip="Delete Ticket Status" data-id="' . $status["id"] . '">
+        if ($status['id'] > 5) {
+            $code .= '<a class="sb-btn-icon sb-btn-red delete-ticket-status" data-sb-tooltip="Delete Ticket Status" data-id="' . $status["id"] . '">
                                                                         <i class="sb-icon-delete"></i>
                                                                 </a>';
-                                                    }
+        }
 
-                                                    $code .= '
+        $code .= '
                                                         </td>
                                                     </tr>';
-                                                }
-                                            $code .= '
+    }
+    $code .= '
                                                 </tbody>
                                             </table>
                                         </div>

@@ -3921,13 +3921,21 @@ td.sb-offline:after {
     background-color: $background-gray;
 
     .tc_bg {
-            padding: 20px 40px;
+        padding: 20px 40px;
 
         .tc_back {
             background-color: #fff;
             box-shadow: 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 4px 6px -1px #0000001A, 0px 2px 4px -2px #0000001A;
             padding: 16px 22px;
             border-radius: 8px;
+
+            .status-open {
+                background-color: $color-green;
+                color: white;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+            }
 
             .title {
                 font-weight: 700;
@@ -3945,6 +3953,12 @@ td.sb-offline:after {
                 font-size: 16px;
             }
 
+            .field-label {
+                font-weight: 600;
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+
             .msg {
                 max-height: 300px;
                 overflow-y: auto;
@@ -3952,11 +3966,11 @@ td.sb-offline:after {
                 .mright,
                 .mleft {
                     display: flex;
-                    gap: 12px;
+                    gap: 8px;
 
                     .avatar {
-                        width: 32px;
-                        height: 32px;
+                        width: 25px;
+                        height: 25px;
                         border-radius: 50%;
                         object-fit: cover;
                     }
@@ -3966,121 +3980,63 @@ td.sb-offline:after {
                         background-color: #f8f8f8;
                         border: 1px solid #e0e0e0;
                         border-radius: 8px;
-                        padding: 12px;
+                        padding: 6px;
                         margin-bottom: 8px;
+                        font-size: 13px;
                     }
                 }
 
                 .mleft {
                     justify-content: end;
                 }
+            }
 
-                // . {}
+            .chat-input {
+                border: 1px solid #a5a7aa;
+                border-radius: 10px;
+                box-shadow: 0px 4px 12px rgba(16, 24, 40, 0.08);
+
+                .input-no-border {
+                    border: none;
+                    background: transparent;
+                    box-shadow: none;
+                    width: 100%;
+                }
+            }
+
+            .sidepanel {
+                border: 1px solid #a5a7aa;
+                border-radius: 10px;
+                padding: 15px;
+
+                .assign-link {
+                    color: $color-blue;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+
+                .reporter {
+                    height: 35px;
+                    border-radius: 50%;
+                }
+
+                .priority-high {
+                    background-color: #fff;
+                    border: 1px solid #d3dced;
+                    color: #d75a33;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    display: inline-flex;
+                }
+            }
+
+            .divider {
+                border-top: 1px solid #e0e0e0;
+                margin: 16px 0;
             }
         }
     }
-
-    .status-open {
-        background-color: #45b369;
-        color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .priority-high {
-        background-color: #fff;
-        border: 1px solid #d3dced;
-        color: #d75a33;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 12px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .priority-dot {
-        width: 6px;
-        height: 6px;
-        background-color: #d75a33;
-        border-radius: 50%;
-    }
-
-    .tag-badge {
-        background-color: #fff;
-        border: 1px solid #6f6f6f;
-        color: #3d3d3d;
-        padding: 4px 8px;
-        border-radius: 16px;
-        font-size: 11px;
-        margin-right: 8px;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-    }
-
-
-
-
-
-    .chat-input {
-        background-color: #fff;
-        border: 1px solid #a5a7aa;
-        border-radius: 20px;
-        box-shadow: 0px 4px 12px rgba(16, 24, 40, 0.08);
-    }
-
-    .send-btn {
-        background-color: #1653fd;
-        border: none;
-        border-radius: 20px;
-        padding: 8px 16px;
-        color: white;
-        font-weight: 600;
-    }
-
-    .icon-btn {
-        background: none;
-        border: 1px solid #ccc;
-        border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #666;
-    }
-
-    .section-title {
-        font-weight: 600;
-        font-size: 18px;
-        color: #000;
-        margin-bottom: 16px;
-    }
-
-    .field-label {
-        font-weight: 500;
-        color: #000;
-        margin-bottom: 4px;
-    }
-
-    .divider {
-        border-top: 1px solid #e0e0e0;
-        margin: 24px 0;
-    }
-
-    .assign-link {
-        color: #1653fd;
-        text-decoration: none;
-        font-size: 14px;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
 }
 
 .sb-area-conversations>.sb-btn-collapse {
