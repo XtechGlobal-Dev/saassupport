@@ -626,8 +626,8 @@ function sb_ticket_edit_box()
             line-height: 45px;
         }
 
-        td.sb-td-tags span{margin:2px 5px 0 0}
-        td.sb-td-tags {white-space: unset;overflow:unset;}
+        td.sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
+        .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
         /******** Ticket Multi -select Tags ***********************/
         /* .tag-dot {
             display: inline-block;
@@ -3648,14 +3648,14 @@ function sb_component_admin()
                             <table class="sb-table sb_table_new sb-table-tickets">
                                 <thead>
                                     <tr>
-                                        <th data-field="id">
+                                        <th data-field="id" width="5%">
                                             <!--input type="checkbox" /-->
                                             <?php sb_e('ID') ?>
                                         </th>
                                         <th data-field="subject">
                                             <?php sb_e('Subject') ?>
                                         </th>
-                                        <th data-field="tags">
+                                        <th data-field="tags" width="20%">
                                             <?php sb_e('Tags') ?>
                                         </th>
                                         <?php

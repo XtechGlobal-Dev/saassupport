@@ -37,11 +37,13 @@ global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
 const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
             p.name as priority_name, p.color as priority_color,
-            ts.name as status_name, ts.color as status_color
+            ts.name as status_name, ts.color as status_color,
+            GROUP_CONCAT(DISTINCT tt.tag SEPARATOR "||") as tag_names
      FROM sb_tickets t 
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN priorities p ON t.priority_id = p.id
-     LEFT JOIN ticket_status ts ON t.status_id = ts.id';
+     LEFT JOIN ticket_status ts ON t.status_id = ts.id
+     LEFT JOIN ticket_tags tt ON t.id = tt.ticket_id';
 
 
 class SBError {

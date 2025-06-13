@@ -925,6 +925,23 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
             $tickets[$i]['department'] = isset($departmentsArr[$tickets[$i]['department_id']]) ? $departmentsArr[$tickets[$i]['department_id']] :  $tickets[$i]['department_id'];  
         }
 
+        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+        $tagsArr = array();
+        foreach ($tags as $key => $value) {
+            $tagsArr[$value['tag-name']] = $value['tag-color'];
+        }
+        ////// replace department id with name
+        for ($i = 0; $i < $tickets_count; $i++) {
+            $tickets[$i]['department'] = isset($departmentsArr[$tickets[$i]['department_id']]) ? $departmentsArr[$tickets[$i]['department_id']] :  $tickets[$i]['department_id'];  
+            $ticketTags = isset($tickets[$i]['tag_names']) ? explode('||',$tickets[$i]['tag_names']) : [];
+            $ticketTagsWithColor = [];
+            foreach ($ticketTags as $tag) {
+                if (isset($tagsArr[$tag])) {
+                    $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
+                }
+            }
+            $tickets[$i]['ticket_tags'] = $ticketTagsWithColor;  
+        }
         /*$is_array = is_array($extra);
         if ($extra && (!$is_array || count($extra))) {
             $query = '';
