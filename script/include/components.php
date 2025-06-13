@@ -1765,8 +1765,8 @@ function sb_component_admin()
             </div>
             <main>
                 <?php
-                    $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-                    $header='<header>
+                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                $header = '<header>
                                 <div class="header-left">
                                     <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
@@ -1800,11 +1800,11 @@ function sb_component_admin()
                                                 <span class="sb-name"></span>
                                             </li>
                                             <li data-value="status" class="sb-online">Online</li>';
-                                            if ($is_admin) {
-                                                $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
-                                                    . ($is_cloud ? sb_cloud_account_menu() : '');
-                                            }
-                                            $header .= '<li data-value="logout">Logout</li>
+                if ($is_admin) {
+                    $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
+                        . ($is_cloud ? sb_cloud_account_menu() : '');
+                }
+                $header .= '<li data-value="logout">Logout</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -3193,161 +3193,192 @@ function sb_component_admin()
                     <div class="sb-area-ticket-detail">
                         <?php echo $header; ?>
                         <div class="tc_bg">
-                        <div class="tc_back">
-                            <div class="container">
-                                <!-- Header -->
-                                <div class="row">
-                                    <div class="col-md-8 p-0">
-                                        <div class="d-flex align-items-center gap-3 mb-3">
-                                            <h2 class="mb-0"># TR-51 / Email Subject</h2>
-                                            <span class="status-open">Open <i class="fas fa-chevron-down ms-1"></i></span>
-                                        </div>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <i class="fas fa-paperclip"></i>
-                                            <span>Attachments (02)</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 p-0 text-end">
-                                        <button class="btn btn-primary">
-                                            <i class="fas fa-check me-2"></i>Save Changes
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <!-- Main Content -->
-                                    <div class="col-md-8">
-                                        <!-- Description Section -->
-                                        <div class="mb-4">
-                                            <h4 class="section-title">Description</h4>
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <label class="field-label">Feature:</label>
+                            <div class="tc_back">
+                                <div class="container">
+                                    <!-- Header -->
+                                    <div class="row">
+                                        <div class="col-md-12 p-0">
+                                            <div class="row">
+                                                <div class="col-md-9 p-0">
+                                                    <h2 class="title mb-0"># TR-51 / Email Subject</h2>
+                                                </div>
+                                                <div class="col-md-3 p-0">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <span class="status-open">Open <i class="fas fa-chevron-down ms-1"></i></span>
+                                                        <button class="btn btn-primary">
+                                                            <i class="fas fa-check me-2"></i>Save Changes
+                                                        </button>
                                                     </div>
-                                                    <div class="col-10">
+                                                </div>
+                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center">
+                                                    <i class="fas fa-paperclip fs-4 mr-2"></i>
+                                                    <span class="label">Attachments (02)</span>
+                                                </div>
+                                                <div class="col-md-8 p-0">
+                                                    <h2 class="sub_title my-4">Description</h2>
+                                                    <div class="label mb-3 mr-3">Feature :
                                                         <span>[Feature name]</span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <label class="field-label">As:</label>
-                                                    </div>
-                                                    <div class="col-10">
+                                                    <div class="label mb-3 mr-3">As :
                                                         <span>[As - user type | Admin Private user | Commercial user]</span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <label class="field-label">I want to:</label>
-                                                    </div>
-                                                    <div class="col-10">
+                                                    <div class="label mr-3">I want to :
                                                         <span>[Action to perform]</span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Comments Section -->
-                                        <div class="mb-4">
-                                            <h4 class="section-title">Comments</h4>
-                                            <div class="d-flex gap-3 mb-3">
-                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
-                                                <div class="comment-card flex-grow-1">
-                                                    <p class="mb-0">Hello my dear sir, I'm here to deliver the design requirement document for our next projects.</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex gap-3 mb-3 justify-content-end">
-                                                <div class="comment-card" style="max-width: 60%;">
-                                                    <p class="mb-0">Hello my dear sir, I'm here to deliver the design requirement document for our next projects.</p>
-                                                    <small class="text-muted">Admin</small>
-                                                </div>
-                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
-                                            </div>
-                                        </div>
-                                        <div class="chat-input p-3">
-                                            <div class="d-flex align-items-center gap-2 mb-3">
-                                                <i class="fas fa-paperclip text-muted"></i>
-                                                <input type="text" class="form-control border-0" placeholder="Send a message..." style="background: transparent;">
-                                            </div>
-                                            <div class="d-flex justify-content-end gap-2">
-                                                <button class="icon-btn">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                                <button class="icon-btn">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                                <button class="send-btn d-flex align-items-center gap-2">
-                                                    Send <i class="fas fa-paper-plane"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Sidebar -->
-                                    <div class="col-md-4">
-                                        <div class="ps-4">
-                                            <h4 class="section-title">Details</h4>
-                                            <div class="mb-4">
-                                                <div class="field-label">Assignee</div>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <i class="fas fa-user-circle fs-4 text-muted"></i>
-                                                        <span>Unassigned</span>
+                                                    <h2 class="sub_title my-4">Comments</h2>
+                                                    <div class="msg">
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                                <small class="text-muted">Admin</small>
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                                <small class="text-muted">Admin</small>
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                                <small class="text-muted">You</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                                <small class="text-muted">You</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                                <small class="text-muted">Admin</small>
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                                <small class="text-muted">Admin</small>
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                                <small class="text-muted">You</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                                <small class="text-muted">You</small>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <a href="#" class="assign-link">Assign to me</a>
+                                                    <div class="chat-input mt-3 p-3">
+                                                        <div class="d-flex align-items-center gap-2 mb-3">
+                                                            <i class="fas fa-paperclip text-muted"></i>
+                                                            <input type="text" class="form-control border-0" placeholder="Send a message..." style="background: transparent;">
+                                                        </div>
+                                                        <div class="d-flex justify-content-end gap-2">
+                                                            <button class="icon-btn">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                            <button class="icon-btn">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                            <button class="send-btn d-flex align-items-center gap-2">
+                                                                Send <i class="fas fa-paper-plane"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-4">
-                                                <div class="field-label">Reporter</div>
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter" class="avatar">
-                                                    <span>McKinsey Vermillion</span>
+                                                <div class="col-md-1 p-0"></div>
+                                                <div class="col-md-3 p-0">
+                                                    <h4 class="section-title">Details</h4>
+                                                    <div class="mb-4">
+                                                        <div class="field-label">Assignee</div>
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <i class="fas fa-user-circle fs-4 text-muted"></i>
+                                                                <span>Unassigned</span>
+                                                            </div>
+                                                            <a href="#" class="assign-link">Assign to me</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="field-label">Reporter</div>
+                                                        <div class="d-flex align-items-center gap-2">
+                                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter" class="avatar">
+                                                            <span>McKinsey Vermillion</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="field-label">Tags</div>
+                                                        <div class="mb-2">
+                                                            <input type="text" class="form-control form-control-sm" placeholder="Add a tag...">
+                                                        </div>
+                                                        <div>
+                                                            <span class="tag-badge">
+                                                                <i class="fas fa-check text-muted"></i>
+                                                                Business
+                                                            </span>
+                                                            <span class="tag-badge">
+                                                                <i class="fas fa-check text-muted"></i>
+                                                                Urgent
+                                                            </span>
+                                                            <span class="tag-badge">
+                                                                <i class="fas fa-check text-muted"></i>
+                                                                Priority
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="field-label">Labels</div>
+                                                        <span class="text-muted">None</span>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="field-label">Priority</div>
+                                                        <div class="priority-high">
+                                                            High
+                                                            <div class="priority-dot"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="divider"></div>
+                                                    <div class="mb-4">
+                                                        <h5 class="section-title">More Fields <i class="fas fa-chevron-down"></i></h5>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-4">
-                                                <div class="field-label">Tags</div>
-                                                <div class="mb-2">
-                                                    <input type="text" class="form-control form-control-sm" placeholder="Add a tag...">
-                                                </div>
-                                                <div>
-                                                    <span class="tag-badge">
-                                                        <i class="fas fa-check text-muted"></i>
-                                                        Business
-                                                    </span>
-                                                    <span class="tag-badge">
-                                                        <i class="fas fa-check text-muted"></i>
-                                                        Urgent
-                                                    </span>
-                                                    <span class="tag-badge">
-                                                        <i class="fas fa-check text-muted"></i>
-                                                        Priority
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="mb-4">
-                                                <div class="field-label">Labels</div>
-                                                <span class="text-muted">None</span>
-                                            </div>
-                                            <div class="mb-4">
-                                                <div class="field-label">Priority</div>
-                                                <div class="priority-high">
-                                                    High
-                                                    <div class="priority-dot"></div>
-                                                </div>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="mb-4">
-                                                <h5 class="section-title">More Fields <i class="fas fa-chevron-down"></i></h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 <?php } ?>
