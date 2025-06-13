@@ -867,9 +867,10 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     $main_field_sorting = in_array($sorting_field, ['id', 'first_name', 'last_name', 'email', 'profile_image', 'user_type', 'creation_time', 'last_activity', 'department']);
     if($ticket_status && $ticket_status != 'all')
     {
-        $query = ' WHERE t.status_id = "' . $ticketStatusArr[$ticket_status]. '" ';
+        $query = ' WHERE t.status_id = "' . $ticketStatusArr[$ticket_status]. '"';
     }
     
+    $query .= ' GROUP BY t.id ';
     /*
     $count = count($ticket_status);
     if ($count) {
@@ -905,7 +906,6 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
         $query = ' WHERE user_type <> "bot"';
     }*/
     $tickets = sb_db_get(SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
-
     $tickets_count = count($tickets);
     if (!$tickets_count) {
         return [];
