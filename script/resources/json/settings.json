@@ -771,6 +771,25 @@
       ]
     },
     {
+      "type": "repeater",
+      "id": "tags",
+      "title": "Tags",
+      "content": "Create and manage tags that can be used to categorize and label items across the system.",
+      "help": "https://board.support/docs/#tags",
+      "items": [
+        {
+          "type": "text",
+          "name": "Name",
+          "id": "tag-name"
+        },
+        {
+          "type": "color-palette",
+          "name": "Color",
+          "id": "tag-color"
+        }
+      ]
+    },
+    {
       "type": "multi-input",
       "id": "tags-settings",
       "title": "Tags settings",
@@ -791,20 +810,72 @@
     },
     {
       "type": "repeater",
-      "id": "tags",
-      "title": "Tags",
-      "content": "Create and manage tags that can be used to categorize and label items across the system.",
-      "help": "https://board.support/docs/#tags",
+      "id": "departments",
+      "title": "Add and Manage Departments",
+      "content": "Add and manage additional support departments for better organization.",
       "items": [
         {
           "type": "text",
           "name": "Name",
-          "id": "tag-name"
+          "id": "department-name"
         },
         {
           "type": "color-palette",
           "name": "Color",
-          "id": "tag-color"
+          "id": "department-color"
+        },
+        {
+          "type": "upload-image",
+          "name": "Image",
+          "id": "department-image"
+        },
+        {
+          "type": "auto-id",
+          "id": "department-id"
+        }
+      ]
+    },
+    {
+      "type": "multi-input",
+      "id": "departments-settings",
+      "title": "Department Settings",
+      "content": "Manage settings for each department.",
+      "help": "https://board.support/docs/#departments",
+      "value": [
+        {
+          "type": "checkbox",
+          "id": "departments-dashboard",
+          "title": "Display in dashboard"
+        },
+        {
+          "type": "checkbox",
+          "id": "departments-images",
+          "title": "Display images"
+        },
+        {
+          "type": "checkbox",
+          "id": "departments-show-list",
+          "title": "Display in conversation & ticket list"
+        },
+        {
+          "type": "checkbox",
+          "id": "departments-force-one",
+          "title": "One conversation per department"
+        },
+        {
+          "type": "text",
+          "id": "departments-label",
+          "title": "Label"
+        },
+        {
+          "type": "text",
+          "id": "departments-single-label",
+          "title": "Single label"
+        },
+        {
+          "type": "text",
+          "id": "departments-title",
+          "title": "Dashboard title"
         }
       ]
     },
@@ -1989,7 +2060,7 @@
       "type": "multi-input",
       "id": "webhooks",
       "title": "Webhooks",
-      "content": "Webhooks are information sent in background to a unique URL defined by you when something happens.",
+      "content": "Webhooks send information in the background to a URL you define when certain events occur.",
       "help": "https://board.support/docs/api/web#Webhooks",
       "value": [
         {
@@ -2018,20 +2089,20 @@
       "type": "password",
       "id": "envato-purchase-code",
       "title": "Envato Purchase Code",
-      "content": "Enter your Envato Purchase Code to activate automatic updates and unlock all the features.",
+      "content": "Enter your Envato Purchase Code to enable automatic updates and unlock additional features.",
       "help": "https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-"
     },
     {
       "type": "checkbox",
       "id": "auto-updates",
-      "title": "Automatic updates",
-      "content": "Automatically check and install new updates. A valid Envato Purchase Code and valid apps's license keys are required."
+      "title": "Enable Automatic Updates",
+      "content": "Automatically check and install updates. Requires a valid Envato Purchase Code and app license keys."
     },
     {
       "type": "multi-input",
       "id": "pusher",
-      "title": "Pusher",
-      "content": "Improve chat performance with Pusher and WebSockets. This setting stops all AJAX/HTTP real-time requests that slow down your server and use instead the WebSockets.",
+      "title": "Pusher Integration",
+      "content": "Enhance chat performance using Pusher and WebSockets to eliminate slow AJAX/HTTP real-time requests.",
       "help": "https://board.support/docs/#pusher",
       "value": [
         {
@@ -2064,8 +2135,8 @@
     {
       "type": "multi-input",
       "id": "newsletter",
-      "title": "Newsletter",
-      "content": "Subscribe users to your preferred newsletter service when they provide an email.",
+      "title": "Newsletter Integration",
+      "content": "Automatically subscribe users to your chosen newsletter service when they provide their email address.",
       "help": "https://board.support/docs/#newsletter",
       "value": [
         {
@@ -2109,92 +2180,22 @@
     {
       "type": "timetable",
       "id": "timetable",
-      "title": "Scheduled office hours",
-      "content": "Set the default office hours for when agents are shown as available. These settings are also used for all other settings that rely on office hours.",
+      "title": "Office Hours Schedule",
+      "content": "Define the office hours for when agents are shown as available. These hours are also used in other settings relying on office availability.",
       "help": "https://board.support/docs/#office-hours"
     },
     {
       "type": "number",
       "id": "timetable-utc",
-      "title": "UTC offset",
-      "content": "Set the UTC offset of the office hours timetable. The correct value can be negative, and it's generated automatically once you click this input field, if it's empty."
+      "title": "UTC Offset",
+      "content": "Set the UTC offset for your office hours. This will automatically be calculated when you click the input field if left empty."
     },
-    {
-      "type": "multi-input",
-      "id": "departments-settings",
-      "title": "Departments settings",
-      "content": "Manage here the departments settings.",
-      "help": "https://board.support/docs/#departments",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "departments-dashboard",
-          "title": "Display in dashboard"
-        },
-        {
-          "type": "checkbox",
-          "id": "departments-images",
-          "title": "Display images"
-        },
-        {
-          "type": "checkbox",
-          "id": "departments-show-list",
-          "title": "Display in conversation & ticket list"
-        },
-        {
-          "type": "checkbox",
-          "id": "departments-force-one",
-          "title": "One conversation per department"
-        },
-        {
-          "type": "text",
-          "id": "departments-label",
-          "title": "Label"
-        },
-        {
-          "type": "text",
-          "id": "departments-single-label",
-          "title": "Single label"
-        },
-        {
-          "type": "text",
-          "id": "departments-title",
-          "title": "Dashboard title"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "departments",
-      "title": "Departments",
-      "content": "Add and manage additional support departments.",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "department-name"
-        },
-        {
-          "type": "color-palette",
-          "name": "Color",
-          "id": "department-color"
-        },
-        {
-          "type": "upload-image",
-          "name": "Image",
-          "id": "department-image"
-        },
-        {
-          "type": "auto-id",
-          "id": "department-id"
-        }
-      ]
-    },
+
     {
       "type": "multi-input",
       "id": "queue",
-      "title": "Queue",
-      "content": "Distribute conversations proportionately between agents and notify visitors of their position within the queue.",
+      "title": "Queue Management",
+      "content": "Distribute conversations among agents proportionally and notify users of their position in the queue.",
       "help": "https://board.support/docs/#queue-routing",
       "value": [
         {
@@ -2232,8 +2233,8 @@
     {
       "type": "multi-input",
       "id": "routing",
-      "title": "Routing",
-      "content": "Distribute conversations proportionately between agents, and block an agent from viewing the conversations of the other agents.",
+      "title": "Routing Settings",
+      "content": "Distribute conversations between agents and prevent agents from viewing other agents' conversations.",
       "help": "https://board.support/docs/#queue-routing",
       "value": [
         {
@@ -2251,8 +2252,8 @@
     {
       "type": "multi-input",
       "id": "agent-hide-conversations",
-      "title": "Hide conversations of other agents",
-      "content": "Prevent agents from viewing conversations assigned to other agents. This setting is automatically enabled if routing or queue is active.",
+      "title": "Hide Other Agents' Conversations",
+      "content": "Prevent agents from viewing conversations assigned to other agents. This setting is enabled if routing or queue management is active.",
       "help": "https://board.support/docs/#manual-routing",
       "value": [
         {
@@ -2281,8 +2282,8 @@
       "type": "repeater",
       "setting": "rich-messages",
       "id": "rich-messages",
-      "title": "Rich messages",
-      "content": "Rich messages are code snippets that can be utilized within a chat message. They can contain HTML code and are automatically rendered in the chat. Rich messages can be used with the following syntax: [rich-message-name]. There are a tonne of built-in rich messages to choose from.",
+      "title": "Rich Messages",
+      "content": "Create rich messages with HTML code to be used in chat conversations. These messages are rendered automatically in the chat.",
       "help": "https://board.support/docs/#rich-messages",
       "items": [
         {
@@ -2300,14 +2301,14 @@
     {
       "type": "text",
       "id": "cookie-domain",
-      "title": "Cookie domain",
-      "content": "Leave it blank if you don't know what this setting is! Entering an incorrect value will break the chat. Sets the main domain where chat is used to enable login and conversations sharing between the main domain and sub domains."
+      "title": "Cookie Domain",
+      "content": "Set the main domain for chat sharing between subdomains. Leave blank if unsure, as entering an incorrect value will break the chat functionality."
     },
     {
       "type": "multi-input",
       "id": "performance",
-      "title": "Performance optimization",
-      "content": "Disable features you don't use and improve the chat performance.",
+      "title": "Performance Optimization",
+      "content": "Disable unnecessary features to improve chat performance.",
       "value": [
         {
           "type": "checkbox",
@@ -2329,8 +2330,8 @@
     {
       "type": "multi-input",
       "id": "amazon-s3",
-      "title": "Amazon S3",
-      "content": "Upload attachments to Amazon S3.",
+      "title": "Amazon S3 Integration",
+      "content": "Upload attachments directly to Amazon S3 for better storage management.",
       "help": "https://board.support/docs/#aws",
       "value": [
         {
@@ -2363,15 +2364,15 @@
     {
       "type": "checkbox",
       "id": "logs",
-      "title": "Enable logs",
-      "content": "Enable logging of agent activity.",
+      "title": "Enable Logs",
+      "content": "Enable logging of agent activity for auditing purposes.",
       "help": "https://board.support/docs/#logs"
     },
     {
       "type": "button",
       "id": "system-requirements",
-      "title": "System requirements",
-      "content": "Check the server configurations and make sure it has all the requirements.",
+      "title": "System Requirements",
+      "content": "Check if your server meets all necessary requirements for optimal performance.",
       "help": "https://board.support/docs/#requirements",
       "button-text": "Check Requirements",
       "button-url": "#"
@@ -2379,14 +2380,14 @@
     {
       "type": "text",
       "id": "ip-ban",
-      "title": "IP banning",
-      "content": "Restrict chat access by blocking IPs. List IPs with commas."
+      "title": "IP Blocking",
+      "content": "Block chat access by listing IPs that are not allowed to access the chat system."
     },
     {
       "type": "button",
       "id": "sb-path",
       "title": "Support Board Path",
-      "content": "This returns the Support Board path of your server.",
+      "content": "Get the Support Board path for your server.",
       "button-text": "Get Path",
       "button-url": "#"
     },
@@ -2394,23 +2395,23 @@
       "type": "button",
       "id": "sb-url",
       "title": "Installation URL",
-      "content": "This returns your installation URL.",
+      "content": "Retrieve your Support Board installation URL.",
       "button-text": "Get URL",
       "button-url": "#"
     },
     {
       "type": "button",
       "id": "sb-export-settings",
-      "title": "Export settings",
-      "content": "Export all settings.",
+      "title": "Export Settings",
+      "content": "Export all current settings to a file.",
       "button-text": "Export settings",
       "button-url": "#"
     },
     {
       "type": "button",
       "id": "sb-import-settings",
-      "title": "Import settings",
-      "content": "Import all settings.",
+      "title": "Import Settings",
+      "content": "Import settings from a previously exported file.",
       "button-text": "Import settings",
       "button-url": "#"
     }
