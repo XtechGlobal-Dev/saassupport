@@ -628,614 +628,429 @@ function sb_ticket_edit_box()
 
         td.sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
         .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
-        /******** Ticket Multi -select Tags ***********************/
-        /* .tag-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-
-        .choices__list--dropdown .choices__item--selectable::before {
-            display: none !important;
-        }
-
-        .choices__list--multiple {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 6px 6px !important;
-            align-items: flex-start !important;
-            padding: 4px 0 0 4px !important;
-        }
-
-        .choices__list--multiple .choices__item {
-            display: inline-flex !important;
-            align-items: center !important;
-            width: auto !important;
-            min-width: 0 !important;
-            margin: 0 !important;
-            padding: 4px 26px 4px 12px !important;
-            border-radius: 16px !important;
-            background: #f8f9fa !important;
-            color: #222 !important;
-            font-size: 0.95em !important;
-            position: relative;
-            box-shadow: none !important;
-            border: 1px solid #d1d5db !important;
-            white-space: nowrap;
-            overflow: visible !important;
-        }
-
-        .choices__list--multiple .choices__item::before {
-            display: none !important;
-        }
-
-        .choices__button,
-        .choices__button--remove {
-            position: unset !important;
-            color: #d32f2f !important;
-            background: none !important;
-            border: none !important;
-            font-size: 1.2em !important;
-            cursor: pointer !important;
-            z-index: 10 !important;
-            padding: 0 !important;
-            width: 20px !important;
-            height: 20px !important;
-            line-height: 1 !important;
-            opacity: 1 !important;
-            box-shadow: none !important;
-            text-indent: 0 !important;
-        }
-
-        .choices__button:hover,
-        .choices__button--remove:hover {
-            color: #b71c1c !important;
-        }
-
-        /*.choices__button--remove::before {
-            content: '×' !important;
-            font-size: 12px !important;
-            line-height: 1 !important;
-        }*/
-       /* .choices__list.choices__list--multiple > div { border: 1px solid red;padding: 2px 5px;border-radius: 30px;display: flex;align-items: center;justify-content: center;}
-        .choices__list.choices__list--multiple > div button { border: none;color: red;}
-        .choices__list--dropdown .choices__item .card{padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-        } */
+        
 
 
         /* Colored dot for tags */
-.tag-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-}
+    .tag-dot {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
 
-/* 1. Remove Choices.js default selection indicator (blue dot) in dropdown */
-.choices__list--dropdown .choices__item--selectable::before {
-    display: none !important;
-}
+    /* 1. Remove Choices.js default selection indicator (blue dot) in dropdown */
+    .choices__list--dropdown .choices__item--selectable::before {
+        display: none !important;
+    }
 
-/* 2. Selected tags as compact badges, allow wrapping */
-.choices__list--multiple {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px 6px !important;
-    align-items: flex-start !important;
-    padding: 4px 0 0 4px !important;
-}
-.choices__list--multiple .choices__item {
-    display: inline-flex !important;
-    align-items: center !important;
-    width: auto !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 4px 26px 4px 12px !important;
-    border-radius: 16px !important;
-    background: #f8f9fa !important;
-    color: #222 !important;
-    font-size: 0.95em !important;
-    position: relative;
-    box-shadow: none !important;
-    border: 1px solid #d1d5db !important;
-    white-space: nowrap;
-}
-/* Remove Choices.js default blue dot from selected items */
-.choices__list--multiple .choices__item::before {
-    display: none !important;
-}
-
-
-/* 3. Remove button always visible and styled */
-.choices__button,
-.choices__button--remove {
-    /*display: block !important;
-    position: absolute !important;
-    right: 6px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;*/
-    color: #d32f2f !important;
-    background: none !important;
-    border: none !important;
-    font-size: 1.2em !important;
-    cursor: pointer !important;
-    z-index: 10 !important;
-    padding: 0 !important;
-    width: 20px !important;
-    height: 20px !important;
-    line-height: 1 !important;
-    opacity: 1 !important;
-    box-shadow: none !important;
-    text-indent: 0 !important;
-}
-.choices__button:hover,
-.choices__button--remove:hover {
-    color: #b71c1c !important;
-}
-
-/* Ensure remove button is above badge background */
-.choices__list--multiple .choices__item {
-    overflow: visible !important;
-}
+    /* 2. Selected tags as compact badges, allow wrapping */
+    .choices__list--multiple {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px 6px !important;
+        align-items: flex-start !important;
+        padding: 4px 0 0 4px !important;
+    }
+    .choices__list--multiple .choices__item {
+        display: inline-flex !important;
+        align-items: center !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 4px 26px 4px 12px !important;
+        border-radius: 16px !important;
+        background: #f8f9fa !important;
+        color: #222 !important;
+        font-size: 0.95em !important;
+        position: relative;
+        box-shadow: none !important;
+        border: 1px solid #d1d5db !important;
+        white-space: nowrap;
+    }
+    /* Remove Choices.js default blue dot from selected items */
+    .choices__list--multiple .choices__item::before {
+        display: none !important;
+    }
 
 
+    /* 3. Remove button always visible and styled */
+    .choices__button,
+    .choices__button--remove {
+        /*display: block !important;
+        position: absolute !important;
+        right: 6px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;*/
+        color: #d32f2f !important;
+        background: none !important;
+        border: none !important;
+        font-size: 1.2em !important;
+        cursor: pointer !important;
+        z-index: 10 !important;
+        padding: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+        line-height: 1 !important;
+        opacity: 1 !important;
+        box-shadow: none !important;
+        text-indent: 0 !important;
+    }
+    .choices__button:hover,
+    .choices__button--remove:hover {
+        color: #b71c1c !important;
+    }
 
-/* Tag styling for both filter and create ticket pages */
-.tag-option {
-    padding: 8px 12px;
-    border-radius: 4px;
-    margin: 2px 0;
-    transition: all 0.2s ease;
-    background-color: #fff !important;
-    color: #222 !important;
-    font-weight: 500;
-    min-height: 32px;
+    /* Ensure remove button is above badge background */
+    .choices__list--multiple .choices__item {
+        overflow: visible !important;
+    }
+
+
+
+    /* Tag styling for both filter and create ticket pages */
+    .tag-option {
+        padding: 8px 12px;
+        border-radius: 4px;
+        margin: 2px 0;
+        transition: all 0.2s ease;
+        background-color: #fff !important;
+        color: #222 !important;
+        font-weight: 500;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Ensure text is always visible */
+    .tag-option {
+        color: var(--bs-dark) !important;
+    }
+
+    /* Ensure color circles are visible */
+    .tag-option[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-color: attr(data-color);
+        background-color: var(--bs-primary, #888);
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+        vertical-align: middle;
+        opacity: 1 !important;
+    }
+
+    /* Ensure text is visible in dropdown */
+    .choices__list--dropdown .choices__item {
+        padding: 8px 12px !important;
+        border-radius: 4px !important;
+        margin: 2px 0 !important;
+        transition: all 0.2s ease !important;
+        background-color: #fff !important;
+        color: #222 !important;
+        font-weight: 500 !important;
+        min-height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .choices__list--dropdown .choices__item::before {
+        opacity: 1 !important;
+    }
+
+    /* Ensure text is visible in selected items */
+    .choices__list--multiple .choices__item {
+        padding: 4px 32px 4px 12px !important;
+        border-radius: 12px !important;
+        margin: 4px !important;
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+        font-weight: 500 !important;
+        border: 1px solid var(--bs-primary) !important;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        min-height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Ensure color circle is visible in selected items */
+    .choices__list--multiple .choices__item[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background-color: var(--bs-primary);
+        border: 2px solid var(--bs-light);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        opacity: 1 !important;
+    }
+
+    /* Color styling for tag options */
+    .tag-option[data-color] {
+        --color: attr(data-color);
+        --bs-primary: var(--color);
+        background-color: #fff !important; /* Prevent tag color as background */
+    }
+
+    .tag-option[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-color: var(--bs-primary);
+        border: 1px solid var(--bs-primary);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hover state for tag options */
+    .tag-option:hover {
+        background-color: var(--bs-light);
+        color: var(--bs-dark);
+    }
+
+    .tag-option:hover::before {
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+
+    /* Selected state styling */
+    .tag-option.selected {
+        background-color: var(--bs-light);
+        color: var(--bs-dark);
+        font-weight: 600;
+    }
+
+    .tag-option.selected::before {
+        background-color: var(--bs-primary);
+        border: 2px solid var(--bs-light);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Choices.js dropdown item styling */
+    .choices__list--dropdown .choices__item {
+        padding: 8px 12px !important;
+        border-radius: 4px !important;
+        margin: 2px 0 !important;
+        transition: all 0.2s ease !important;
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+        font-weight: 500 !important;
+    }
+
+    .choices__list--dropdown .choices__item[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-color: attr(data-color);
+        background-color: var(--bs-primary, #888);
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+        vertical-align: middle;
+        opacity: 1 !important;
+    }
+
+    /* Hover state for dropdown items */
+    .choices__list--dropdown .choices__item:hover {
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+    }
+
+    .choices__list--dropdown .choices__item:hover::before {
+        transform: scale(1.1);
+        transition: transform 0.2s ease;
+    }
+
+    /* Selected item styling */
+    .choices__list--multiple .choices__item {
+        padding: 4px 32px 4px 12px !important;
+        border-radius: 12px !important;
+        margin: 4px !important;
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+        font-weight: 500 !important;
+        border: 1px solid var(--bs-primary) !important;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .choices__list--multiple .choices__item[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background-color: var(--bs-primary);
+        border: 2px solid var(--bs-light);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Remove button styling */
+    .choices__button--remove {
+        /*position: absolute !important;
+        right: 8px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;*/
+        background-color: transparent !important;
+        border: none !important;
+        color: var(--bs-dark) !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: color 0.2s ease !important;
+    }
+
+    .choices__button--remove::before {
+        content: 'Ã—' !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+    }
+
+    .choices__button--remove:hover {
+        color: var(--bs-primary) !important;
+    }
+
+    .choices__button--remove--active {
+        color: var(--bs-primary) !important;
+    }
+
+    /* Choices.js dropdown item styling */
+    .choices__list--dropdown .choices__item {
+        padding: 8px 12px !important;
+        border-radius: 4px !important;
+        margin: 2px 0 !important;
+        transition: all 0.2s ease !important;
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+        font-weight: 500 !important;
+    }
+
+    .choices__list--dropdown .choices__item[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-color: var(--bs-primary);
+    }
+
+    /* Choices.js selected item styling */
+    .choices__list--multiple .choices__item {
+        padding: 4px 32px 4px 12px !important;
+        border-radius: 12px !important;
+        margin: 4px !important;
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+        font-weight: 500 !important;
+        border: 1px solid var(--bs-primary) !important;
+        position: relative;
+    }
+
+    .choices__list--multiple .choices__item[data-color]::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background-color: var(--bs-primary);
+    }
+
+    /* Remove button styling */
+    .choices__button--remove {
+        /*position: absolute !important;
+        right: 8px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;*/
+        background-color: transparent !important;
+        border: none !important;
+        color: var(--bs-dark) !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        width: 16px !important;
+        height: 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .choices__button--remove::before {
+        content: 'Ã—' !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+    }
+
+    .choices__button--remove:hover {
+        color: var(--bs-primary) !important;
+    }
+
+    .choices__button--remove--active {
+        color: var(--bs-primary) !important;
+    }
+
+    .choices__button i {font-size: 14px;}
+
+    /* Improve visibility of selected items */
+    .choices__list--multiple .choices__item {
+        opacity: 1 !important;
+        background-color: var(--bs-light) !important;
+        color: var(--bs-dark) !important;
+    }
+
+    .choices__list--multiple .choices__item[data-color] {
+        border: 1px solid var(--bs-primary) !important;
+    }
+
+    .choices[data-type*=select-multiple] .choices__inner .choices__button, .choices[data-type*=text] .choices__button {
+        margin-left: 2px;
+    }
+
+    .choices__list.choices__list--multiple > div {padding: 2px 8px;border-radius: 11px;display: flex;align-items: center;justify-content: center;}
+    .choices__list.choices__list--multiple > div button { border: none;color: red;}
+        
+    .sb-area-tickets .tags-filter{min-height: 34px;padding: 0px 7.5px;width: 205px;}
+    .tag-palette {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 5px;
 }
 
-/* Ensure text is always visible */
-.tag-option {
-    color: var(--bs-dark) !important;
-}
-
-/* Ensure color circles are visible */
-.tag-option[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
+.tag-circle {
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    margin-right: 8px;
-    background-color: attr(data-color);
-    background-color: var(--bs-primary, #888);
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
-    vertical-align: middle;
-    opacity: 1 !important;
+    border: 2px solid #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-/* Ensure text is visible in dropdown */
-.choices__list--dropdown .choices__item {
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: #fff !important;
-    color: #222 !important;
-    font-weight: 500 !important;
-    min-height: 32px !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-.choices__list--dropdown .choices__item::before {
-    opacity: 1 !important;
-}
-
-/* Ensure text is visible in selected items */
-.choices__list--multiple .choices__item {
-    padding: 4px 32px 4px 12px !important;
-    border-radius: 12px !important;
-    margin: 4px !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-    border: 1px solid var(--bs-primary) !important;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-height: 24px !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-/* Ensure color circle is visible in selected items */
-.choices__list--multiple .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background-color: var(--bs-primary);
-    border: 2px solid var(--bs-light);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    opacity: 1 !important;
-}
-
-/* Color styling for tag options */
-.tag-option[data-color] {
-    --color: attr(data-color);
-    --bs-primary: var(--color);
-    background-color: #fff !important; /* Prevent tag color as background */
-}
-
-.tag-option[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: var(--bs-primary);
-    border: 1px solid var(--bs-primary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Hover state for tag options */
-.tag-option:hover {
-    background-color: var(--bs-light);
-    color: var(--bs-dark);
-}
-
-.tag-option:hover::before {
+.tag-circle:hover {
     transform: scale(1.1);
-    transition: transform 0.2s ease;
 }
 
-/* Selected state styling */
-.tag-option.selected {
-    background-color: var(--bs-light);
-    color: var(--bs-dark);
-    font-weight: 600;
-}
-
-.tag-option.selected::before {
-    background-color: var(--bs-primary);
-    border: 2px solid var(--bs-light);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Choices.js dropdown item styling */
-.choices__list--dropdown .choices__item {
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-}
-
-.choices__list--dropdown .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: attr(data-color);
-    background-color: var(--bs-primary, #888);
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
-    vertical-align: middle;
-    opacity: 1 !important;
-}
-
-/* Hover state for dropdown items */
-.choices__list--dropdown .choices__item:hover {
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-}
-
-.choices__list--dropdown .choices__item:hover::before {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
-}
-
-/* Selected item styling */
-.choices__list--multiple .choices__item {
-    padding: 4px 32px 4px 12px !important;
-    border-radius: 12px !important;
-    margin: 4px !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-    border: 1px solid var(--bs-primary) !important;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.choices__list--multiple .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background-color: var(--bs-primary);
-    border: 2px solid var(--bs-light);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Remove button styling */
-.choices__button--remove {
-    /*position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;*/
-    background-color: transparent !important;
-    border: none !important;
-    color: var(--bs-dark) !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    width: 20px !important;
-    height: 20px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transition: color 0.2s ease !important;
-}
-
-.choices__button--remove::before {
-    content: 'Ã—' !important;
-    font-size: 12px !important;
-    line-height: 1 !important;
-}
-
-.choices__button--remove:hover {
-    color: var(--bs-primary) !important;
-}
-
-.choices__button--remove--active {
-    color: var(--bs-primary) !important;
-}
-
-/* Choices.js dropdown item styling */
-.choices__list--dropdown .choices__item {
-    padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-}
-
-.choices__list--dropdown .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background-color: var(--bs-primary);
-}
-
-/* Choices.js selected item styling */
-.choices__list--multiple .choices__item {
-    padding: 4px 32px 4px 12px !important;
-    border-radius: 12px !important;
-    margin: 4px !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-    border: 1px solid var(--bs-primary) !important;
-    position: relative;
-}
-
-.choices__list--multiple .choices__item[data-color]::before {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background-color: var(--bs-primary);
-}
-
-/* Remove button styling */
-.choices__button--remove {
-    /*position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;*/
-    background-color: transparent !important;
-    border: none !important;
-    color: var(--bs-dark) !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    width: 16px !important;
-    height: 16px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.choices__button--remove::before {
-    content: 'Ã—' !important;
-    font-size: 12px !important;
-    line-height: 1 !important;
-}
-
-.choices__button--remove:hover {
-    color: var(--bs-primary) !important;
-}
-
-.choices__button--remove--active {
-    color: var(--bs-primary) !important;
-}
-
-.choices__button i {font-size: 14px;}
-
-/* Improve visibility of selected items */
-.choices__list--multiple .choices__item {
-    opacity: 1 !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-}
-
-.choices__list--multiple .choices__item[data-color] {
-    border: 1px solid var(--bs-primary) !important;
-}
-
-.choices[data-type*=select-multiple] .choices__inner .choices__button, .choices[data-type*=text] .choices__button {
-    margin-left: 2px;
-}
-
-.choices__list.choices__list--multiple > div {padding: 2px 8px;border-radius: 11px;display: flex;align-items: center;justify-content: center;}
-.choices__list.choices__list--multiple > div button { border: none;color: red;}
-    
+.tags-filter .choices__inner {padding: 0 0 0 3px;width: 200px;}
     </style>
     <script>
-        // document.addEventListener('mousedown', function(e) {
-        //     if (
-        //         e.target.classList.contains('choices__button--remove') ||
-        //         e.target.classList.contains('choices__item')
-        //     ) {
-        //         e.stopPropagation();
-        //     }
-        // }, true);
-
-        // document.addEventListener('click', function(e) {
-        //     if (
-        //         e.target.classList.contains('choices__button--remove') ||
-        //         e.target.classList.contains('choices__item')
-        //     ) {
-        //         e.stopPropagation();
-        //     }
-        // }, true);
-
-        // // Only stop click event on the remove button, not mousedown, and not on .choices__item
-        // document.addEventListener('click', function(e) {
-        //     if (e.target.classList.contains('choices__button--remove')) {
-        //         e.stopPropagation();
-        //     }
-        // }, true);
-
-
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const tagSelect = document.getElementById('ticket-tags');
-        //     window.choices = new Choices(tagSelect, {
-        //         removeItemButton: true,
-        //         searchResultLimit: 10,
-        //         searchFields: ['label', 'value'],
-        //         shouldSort: false,
-        //         classNames: {
-        //             containerOuter: 'choices',
-        //             containerInner: 'choices__inner',
-        //             input: 'choices__input',
-        //             inputCloned: 'choices__input--cloned',
-        //             list: 'choices__list',
-        //             listItems: 'choices__list--multiple',
-        //             listSingle: 'choices__list--single',
-        //             listDropdown: 'choices__list--dropdown',
-        //             item: 'choices__item',
-        //             itemSelectable: 'choices__item--selectable',
-        //             itemDisabled: 'choices__item--disabled',
-        //             itemChoice: 'choices__item--choice',
-        //             placeholder: 'choices__placeholder',
-        //             group: 'choices__group',
-        //             groupHeading: 'choices__heading',
-        //             button: 'choices__button',
-        //             activeState: 'is-active',
-        //             focusState: 'is-focused',
-        //             openState: 'is-open',
-        //             disabledState: 'is-disabled',
-        //             highlightedState: 'is-highlighted',
-        //             selectedState: 'is-selected',
-        //             flippedState: 'is-flipped',
-        //             loadingState: 'is-loading',
-        //             noResults: 'has-no-results',
-        //             noChoices: 'has-no-choices'
-        //         },
-        
-        //         callbackOnCreateTemplates: function(template) {
-        //             return {
-        //                 item: (classNames, data) => {
-        //                     const color = data.customProperties?.color || '';
-        //                     return template(`
-        //                         <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color="${color}">
-        //                             <span class="tag-dot" style="background-color:${color}"></span>
-        //                             ${data.label}
-        //                             <button type="button" class="${classNames.button} choices__button--remove" data-button aria-label="Remove item">X</button>
-        //                         </div>
-        //                     `);
-        //                 },
-        //                 choice: (classNames, data) => {
-        //                     const color = data.customProperties?.color || '';
-        //                     return template(`
-        //                         <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="Press to select" data-choice data-id="${data.id}" data-value="${data.value}" ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-color="${color}">
-        //                             <span class="tag-dot" style="background-color:${color}"></span>
-        //                             ${data.label}
-        //                         </div>
-        //                     `);
-        //                 }
-        //             };
-        //         }
-        //     });
-
-        //     // Propagate tag color to Choices.js DOM on changes
-        //     function refreshTagDots() {
-        //         document.querySelectorAll('.choices__list--multiple .choices__item').forEach(item => {
-        //             const color = item.getAttribute('data-color');
-        //             let dot = item.querySelector('.tag-dot');
-        //             if (!dot && color) {
-        //                 dot = document.createElement('span');
-        //                 dot.className = 'tag-dot';
-        //                 dot.style.backgroundColor = color;
-        //                 item.insertBefore(dot, item.firstChild);
-        //             } else if (dot && color) {
-        //                 dot.style.backgroundColor = color;
-        //             }
-        //         });
-        //         document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(item => {
-        //             const color = item.getAttribute('data-color');
-        //             let dot = item.querySelector('.tag-dot');
-        //             if (!dot && color) {
-        //                 dot = document.createElement('span');
-        //                 dot.className = 'tag-dot';
-        //                 dot.style.backgroundColor = color;
-        //                 item.insertBefore(dot, item.firstChild);
-        //             } else if (dot && color) {
-        //                 dot.style.backgroundColor = color;
-        //             }
-        //         });
-        //     }
-        //     // Observe changes to Choices.js lists
-        //     const observer = new MutationObserver(refreshTagDots);
-        //     document.querySelectorAll('.choices__list').forEach(list => {
-        //         observer.observe(list, { childList: true, subtree: true });
-        //     });
-        //     // Also refresh on click (for keyboard nav)
-        //     document.querySelector('.choices').addEventListener('click', function() {
-        //         setTimeout(refreshTagDots, 10);
-        //     });
-        //     refreshTagDots();
-        // });
-
-
         function propagateTagColors() {
             // Map value to color from original select
             const select = document.getElementById('ticket-tags');
@@ -1324,10 +1139,93 @@ function sb_ticket_edit_box()
                     setTimeout(refreshTagDots, 10);
                 });
             }
+
+            const tagsFilter = document.getElementById('tags-filter');
+            if (tagsFilter) {
+                window.tagsFilterChoices = new Choices(tagsFilter, {
+                    removeItemButton: true,
+                    placeholder: true,
+                    placeholderValue: 'Select tags...',
+                    allowHTML: true,
+                    itemSelectText: '',
+                    callbackOnCreateTemplates: function(template) {
+                        return {
+                            item: (classNames, data) => {
+                                const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                return template(`
+                                    <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
+                                        data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                        <span class="tag-dot" style="background-color:${color}"></span>
+                                        ${data.label}
+                                        <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
+                                    </div>
+                                `);
+                            }
+                       };
+                   }
+                });
+                function refreshTagDots() {
+                    propagateTagColors();
+                    updateTagDots();
+                }
+                refreshTagDots();
+                tagsFilter.addEventListener('change', refreshTagDots);
+                // Listen for any DOM changes in the choices list (item removed/added)
+                const choicesList = document.querySelector('.choices__list--dropdown');
+                if (choicesList) {
+                    const observer = new MutationObserver(() => {
+                        refreshTagDots();
+                    });
+                    observer.observe(choicesList, { childList: true, subtree: true });
+                }
+                document.querySelector('.choices').addEventListener('click', function() {
+                    setTimeout(refreshTagDots, 10);
+                });
+            }
+
+            
+            // Code to display applied tags in a palette
+            // const paletteContainer = document.getElementById('selected-tags-palette');
+            // document.getElementById('tags-filter').addEventListener('change', function () {
+            // const selected = tagsFilterChoices.getValue();
+            //     const selectedValues = $(this).val(); // Gets array of selected values
+            //     paletteContainer.innerHTML = ''; // clear old circles
+            //     selected.forEach(item => {
+            //         const color = item.customProperties?.color || '#ccc';
+            //         const li = document.createElement('div');
+            //         li.className = 'is-selected';
+            //         li.setAttribute('data-item', '');
+            //         li.setAttribute('data-id', item.id);
+            //         li.setAttribute('data-value', item.value);
+            //         li.setAttribute('aria-selected', 'true');
+            //         li.setAttribute('data-color1', color);
+            //         li.style.border = `1px solid ${color}`;
+
+            //         const span = document.createElement('span');
+            //         span.className = 'tag-dot';
+            //         span.style.backgroundColor = color;
+
+            //         const text = document.createTextNode(item.label);
+
+            //         const button = document.createElement('button');
+            //         button.type = 'button';
+            //         button.className = 'choices__button';
+            //         button.setAttribute('aria-label', `Remove item: ${item.value}`);
+            //         button.dataset.button = '';
+
+            //         const icon = document.createElement('i');
+            //         icon.className = 'fa-solid fa-xmark choice-remove';
+            //         icon.setAttribute('aria-hidden', 'true');
+
+            //         button.appendChild(icon);
+            //         li.appendChild(span);
+            //         li.appendChild(text);
+            //         li.appendChild(button);
+            //         paletteContainer.appendChild(li);
+            //     });
+            // });
         });
 
-    </script>
-    <script>
         $('#select-customer').select2({
             placeholder: 'Type and search...',
             ajax: {
@@ -3607,6 +3505,32 @@ function sb_component_admin()
                                 </a>
                             </div>
                             <div>
+                                <!-- <div  class="color-palette tag-palette">
+                                    <span class="sb-active"></span>
+                                    <ul id="selected-tags-palette">
+                                    </ul>
+                                </div> -->
+                                <div class="mr-5 tags-filter" style="">
+                                    <?php
+                                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                        $tagsHtml = '';
+                                        $count = count($tags);
+                                        if ($count > 0) 
+                                        {
+                                            ?>
+                                            <select id="tags-filter" name="tags[]" multiple>
+                                                <?php
+                                                for ($i = 0; $i < $count; $i++) {
+                                                $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                }
+                                                echo $tagsHtml;
+                                                ?>
+                                            </select>
+                                            <?php 
+                                        } 
+                                    ?>
+                                    
+                                </div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
