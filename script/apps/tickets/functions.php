@@ -15,7 +15,8 @@
 
 define('SB_TICKETS', '1.2.5');
 
-function sb_component_tickets() {
+function sb_component_tickets()
+{
     sb_js_global();
     sb_css();
     sb_tickets_css();
@@ -31,8 +32,28 @@ function sb_component_tickets() {
     if (sb_get_setting('rtl') || in_array(sb_get_user_language(), ['ar', 'he', 'ku', 'fa', 'ur'])) {
         $css .= ' sb-rtl';
     }
-    ?>
-    <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
+?>
+
+
+    <div class="aaaaaa sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
+        <header class="user_header">
+            <div class="header_left">
+                <h2 class="tab sb-active">Ticket</h2>
+                <h2 class="tab">conversation</h2>
+            </div>
+            <div class="header_right">
+                <div class="user_profile">
+                    <img class="avatar" style="max-height: 40px;" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                    <div class="user_info">
+                        <p class="sb_name">jimmy 007</p>
+                        <span>User</span>
+                    </div>
+                </div>
+                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
+                </div>
+            </div>
+        </header>
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
                 <div class="sb-panel-left">
@@ -109,7 +130,7 @@ function sb_component_tickets() {
                                     </ul>
                                 </div>
                             </div>
-                            <?php
+                        <?php
                         } else {
                             echo '<div class="sb-title">' . sb_('Details') . '</div>';
                         }
@@ -135,7 +156,7 @@ function sb_component_tickets() {
                     </div>
                     <div class="sb-no-conversation-message"></div>
                 </div>
-                <?php
+            <?php
             }
             if (!sb_isset($disable_fields, 'tickets-left-panel') && !$disable_arrows) {
                 echo '<i class="sb-btn-collapse sb-left sb-icon-arrow-left"></i>';
@@ -190,7 +211,8 @@ function sb_component_tickets() {
     </div>
 <?php }
 
-function sb_tickets_css() {
+function sb_tickets_css()
+{
     $css = '';
     $color_1 = sb_get_setting('color-1');
     if ($color_1 != '') {
@@ -205,7 +227,8 @@ function sb_tickets_css() {
     }
 }
 
-function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false) {
+function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false)
+{
     if (empty($message) && empty($attachments)) {
         return false;
     }
@@ -221,7 +244,8 @@ function sb_tickets_email($user, $message = false, $attachments = false, $conver
     return false;
 }
 
-function sb_tickets_recaptcha($token) {
+function sb_tickets_recaptcha($token)
+{
     return sb_isset(sb_curl('https://www.google.com/recaptcha/api/siteverify', ['response' => $token, 'secret' => sb_get_multi_setting('tickets-recaptcha', 'tickets-recaptcha-secret')]), 'success');
 }
 
