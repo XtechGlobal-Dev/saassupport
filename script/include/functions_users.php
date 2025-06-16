@@ -1056,7 +1056,12 @@ function sb_edit_ticket($tickets_id = 0) {
    $tickets_id = sb_db_escape($tickets_id, true);
    $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
             p.name as priority_name, p.color as priority_color,
-            ts.name as status_name, ts.color as status_color 
+            ts.name as status_name, ts.color as status_color,
+            (
+                SELECT GROUP_CONCAT(DISTINCT tt2.tag SEPARATOR "||") 
+                FROM ticket_tags tt2 
+                WHERE tt2.ticket_id = t.id
+            ) AS tag_names
      FROM sb_tickets t 
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN sb_users c ON t.contact_id = c.id
@@ -1064,6 +1069,24 @@ function sb_edit_ticket($tickets_id = 0) {
      LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
     
     $result = sb_db_get($query);
+
+
+    $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+    $tagsArr = array();
+    foreach ($tags as $key => $value) {
+        $tagsArr[$value['tag-name']] = $value['tag-color'];
+    }
+    
+    //for ($i = 0; $i < $tickets_count; $i++) {
+        $ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
+        $ticketTagsWithColor = [];
+        foreach ($ticketTags as $tag) {
+            if (isset($tagsArr[$tag])) {
+                $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
+            }
+        }
+        $result['ticket_tags'] = $ticketTagsWithColor;  
+    //}
     
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
