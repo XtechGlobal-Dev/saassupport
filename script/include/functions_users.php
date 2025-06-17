@@ -1078,14 +1078,14 @@ function sb_edit_ticket($tickets_id = 0) {
     }
     
     //for ($i = 0; $i < $tickets_count; $i++) {
-        $ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
+        /*$ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
         $ticketTagsWithColor = [];
         foreach ($ticketTags as $tag) {
             if (isset($tagsArr[$tag])) {
                 $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
             }
         }
-        $result['ticket_tags'] = $ticketTagsWithColor;  
+       $result['ticket_tags'] = $ticketTagsWithColor; */
     //}
     
     if ($result) {

@@ -4018,10 +4018,9 @@ td.sb-offline:after {
                     border-radius: 50%;
                 }
 
-                .priority-high {
+                .ticket-priority {
                     background-color: #fff;
                     border: 1px solid #d3dced;
-                    color: #d75a33;
                     padding: 8px 16px;
                     border-radius: 20px;
                     font-size: 12px;
@@ -8666,6 +8665,14 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
 }
+
+.choices {
+    .choices__inner,.choices__input {
+        background-color: #fff;
+    }
+
+}
+
 
 // Color picker for tag color selection
 .tag-palette {

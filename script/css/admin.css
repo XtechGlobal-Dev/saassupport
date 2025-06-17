@@ -9287,10 +9287,9 @@ td.sb-offline:after {
   height: 35px;
   border-radius: 50%;
 }
-.sb-area-ticket-detail .tc_bg .tc_back .sidepanel .priority-high {
+.sb-area-ticket-detail .tc_bg .tc_back .sidepanel .ticket-priority {
   background-color: #fff;
   border: 1px solid #d3dced;
-  color: #d75a33;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 12px;
@@ -13239,6 +13238,10 @@ a.sb-btn-white.sb-loading:hover:before,
   padding: 0 0 0 3px;
   width: 200px;
   min-height: 34px;
+}
+
+.choices .choices__inner, .choices .choices__input {
+  background-color: #fff;
 }
 
 .tag-palette {

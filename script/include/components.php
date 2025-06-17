@@ -341,11 +341,11 @@ function sb_ticket_edit_box()
 
                         <?php
 
-                        function sb_get_priorities()
-                        {
-                            $priorities = sb_db_get('SELECT * FROM priorities', false);
-                            return $priorities;
-                        }
+                        // function sb_get_priorities()
+                        // {
+                        //     $priorities = sb_db_get('SELECT * FROM priorities', false);
+                        //     return $priorities;
+                        // }
 
                         // function sb_get_statues()
                         // {
@@ -540,7 +540,7 @@ function sb_ticket_edit_box()
             padding: 4px 10px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            background-color: #fdfdfd;
+            background-color: #fff;
             font-family: 'Segoe UI', sans-serif;
             font-size: 16px;
             color: #333;
@@ -3184,12 +3184,18 @@ function sb_component_admin()
                                                 </div>
                                                 <div class="col-md-4 p-0">
                                                     <?php
+                                                    function sb_get_priorities()
+                                                    {
+                                                        $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                                        return $priorities;
+                                                    }
                                                     function sb_get_statues()
                                                     {
                                                         $status = sb_db_get('SELECT * FROM ticket_status', false);
                                                         return $status;
                                                     }
                                                     $statues = sb_get_statues();
+                                                    $priorities = sb_get_priorities();    
                                                     ?>
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
                                                         <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
@@ -3319,13 +3325,13 @@ function sb_component_admin()
                                                                 <div class="d-flex align-items-center justify-content-between">
                                                                     <div class="d-flex align-items-center gap-2 ticket-assignee">
                                                                         <i class="fas fa-user-circle fs-4 text-muted"></i>
-                                                                        <span></span>
+                                                                        <div id="assigned_to" data-type="select" class="sb-input">
+                                                                            <select id="select-ticket-agent" style="width:100%;">
+                                                                                
+                                                                            </select>
+                                                                        </div>  
                                                                     </div>
-                                                                    <div id="assigned_to" data-type="select" class="sb-input">
-                                                                        <select id="select-ticket-agent" style="width:100%;">
-                                                                            
-                                                                        </select>
-                                                                    </div>  
+                                                                    
                                                                     <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
                                                                 </div>
                                                             </div>
@@ -3339,7 +3345,7 @@ function sb_component_admin()
                                                             <div class="mb-3">
                                                                 <div class="field-label">Tags</div>
                                                                 <div class="mb-2">
-                                                                    <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag...">
+                                                                    <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
                                                                     <div class="mr-5 tags-filter" style="">
                                                                         <?php
                                                                             $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
@@ -3377,15 +3383,21 @@ function sb_component_admin()
                                                                     </span> -->
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <div class="field-label">Labels</div>
-                                                                <span class="text-muted">None</span>
-                                                            </div>
-                                                            <div class="mb-3">
+                                                            <div class="mb-3 sb-input d-block">
                                                                 <div class="field-label">Priority</div>
-                                                                <div class="priority-high">
+                                                                <!-- <div class="ticket-priority">
                                                                     High
                                                                 </div>
+                                                                <div id="priority_id" data-type="select" class="sb-input">
+                                                                    <span class="required-label"><?php sb_e('Priority') ?></span> -->
+                                                                    <select id="ticket-priority" required>
+                                                                        <?php
+                                                                        foreach ($priorities as $key => $value) {
+                                                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                <!-- </div> -->
                                                             </div>
                                                             <div class="divider"></div>
                                                             <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
@@ -3494,7 +3506,7 @@ function sb_component_admin()
 
                     const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
                     if (ticketDetailTagsFilter) {
-                        window.tagsFilterChoices = new Choices(ticketDetailTagsFilter, {
+                        window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
                             removeItemButton: true,
                             placeholder: true,
                             placeholderValue: 'Select tags...',
