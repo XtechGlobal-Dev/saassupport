@@ -36,7 +36,7 @@ function sb_component_tickets()
 
 
     <div class="aaaaaa sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
-        <header class="user_header">
+        <!-- <header class="user_header">
             <div class="header_left">
                 <h2 class="tab sb-active">Ticket</h2>
                 <h2 class="tab">conversation</h2>
@@ -53,7 +53,7 @@ function sb_component_tickets()
                     <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
                 </div>
             </div>
-        </header>
+        </header> -->
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
                 <div class="sb-panel-left">
