@@ -57,8 +57,8 @@ if (file_exists('config.php')) {
 require('include/components.php');
 
 ?>
+<!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -67,7 +67,7 @@ require('include/components.php');
     <title>
         <?php echo !$is_cloud && $connection_success && sb_get_setting('admin-title') ? sb_get_setting('admin-title') : ($is_cloud ? SB_CLOUD_BRAND_NAME : 'Support Board') ?>
     </title>
-    <script src="<?php echo $sb_url . 'js/min/jquery.min.js?v=' . SB_VERSION ?>"></script>
+    <script src="<?php echo $sb_url . 'js/min/jquery.min.js?v=' . SB_VERSION ?>"></script>    
     <!-- Include jQuery Select2 CSS and JS -->
     <link rel="stylesheet" href="<?php echo $sb_url . 'css/select2.min.css?v=' . SB_VERSION ?>" media="all" />
     <script src="<?php echo $sb_url . ((($is_cloud || $minify) && !sb_is_debug()) ? 'js/min/select2.min.js?v=' : 'js/select2.min.js?v=') . SB_VERSION ?>"></script>
@@ -85,9 +85,9 @@ require('include/components.php');
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
     <?php
-    if ($connection_success && (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')))) {
+    if ($connection_success && (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl())) {
         echo '<link rel="stylesheet" href="' . $sb_url . 'css/rtl-admin.css?v=' . SB_VERSION . '" />';
     }
     ?>
@@ -107,7 +107,6 @@ require('include/components.php');
     }
     ?>
 </head>
-
 <body>
     <?php
     if (!$connection_success) {
@@ -117,5 +116,4 @@ require('include/components.php');
     sb_component_admin();
     ?>
 </body>
-
 </html>

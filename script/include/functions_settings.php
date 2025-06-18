@@ -1,5 +1,4 @@
 <?php
-
 use UI\Draw\Color;
 
 /*
@@ -43,8 +42,7 @@ use UI\Draw\Color;
  *
  */
 
-function sb_get_front_settings()
-{
+function sb_get_front_settings() {
     global $SB_LANGUAGE;
     sb_updates_validation();
     $active_user = sb_get_active_user();
@@ -115,7 +113,6 @@ function sb_get_front_settings()
         'language_detection' => false,
         'cloud' => sb_is_cloud() ? ['cloud_user_id' => json_decode(sb_encryption($_POST['cloud'], false), true)['user_id']] : false,
         'automations' => sb_automations_run_all(),
-        'rtl' => sb_get_setting('rtl'),
         'close_chat' => sb_get_setting('close-chat'),
         'sender_name' => sb_get_setting('sender-name'),
         'tickets' => defined('SB_TICKETS') && !empty($_POST['tickets']) && $_POST['tickets'] != 'false',
@@ -224,19 +221,18 @@ function sb_get_front_settings()
     return $return;
 }
 
-function sb_js_admin()
-{
+function sb_js_admin() {
     $is_cloud = sb_is_cloud();
     $active_user = sb_get_active_user();
     $active_user_type = sb_isset($active_user, 'user_type');
     $is_agent = sb_is_agent($active_user_type, true, false, true);
     $language = sb_get_admin_language();
+    $routing_type = sb_get_multi_setting('queue', 'queue-active') ? 'queue' : (sb_get_multi_setting('routing', 'routing-active') ? 'routing' : (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') ? 'hide-conversations' : false));
     $settings = [
         'bot_id' => sb_get_bot_id(),
         'close_message' => sb_get_multi_setting('close-message', 'close-active'),
         'close_message_transcript' => sb_get_multi_setting('close-message', 'close-transcript'),
-        'routing_only' => sb_get_multi_setting('routing', 'routing-active'),
-        'routing' => (!$active_user || $is_agent) && (sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') || sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active')),
+        'routing' => (!$active_user || $is_agent) && $routing_type ? $routing_type : false,
         'desktop_notifications' => sb_get_setting('desktop-notifications'),
         'push_notifications' => sb_get_multi_setting('push-notifications', 'push-notifications-active'),
         'push_notifications_users' => sb_get_multi_setting('push-notifications', 'push-notifications-users-active'),
@@ -276,7 +272,7 @@ function sb_js_admin()
         'tags_show' => sb_get_multi_setting('tags-settings', 'tags-show'),
         'departments' => sb_get_setting('departments'),
         'departments_show' => sb_get_multi_setting('departments-settings', 'departments-show-list'),
-        'notes_hide_name' => sb_get_multi_setting('notes-settings', 'notes-hide-name'),
+        'notes_hide_information' => sb_get_multi_setting('notes-settings', 'notes-hide-name'),
         'visitor_default_name' => sb_get_setting('visitor-default-name'),
         'hide_conversation_details' => sb_get_setting('hide-conversation-details'),
         'visitors_registration' => sb_get_setting('visitors-registration') || sb_get_setting('online-users-notification')
@@ -329,8 +325,8 @@ function sb_js_admin()
     } else {
         $code .= 'var SB_ACTIVE_AGENT = { id: "", full_name: "", user_type: "", profile_image: "", email: "" };';
     }
-    if ($active_user && $is_agent && $settings['routing_only']) {
-        sb_routing_assign_conversations_active_agent();
+    if ($active_user && $is_agent && ($routing_type == 'queue' || $routing_type == 'routing')) {
+        sb_routing_assign_conversations_active_agent($routing_type == 'queue');
     }
     if (defined('SB_WP')) {
         $code .= 'var SB_WP = true;';
@@ -355,8 +351,7 @@ function sb_js_admin()
     echo $code;
 }
 
-function sb_js_global()
-{
+function sb_js_global() {
     global $SB_LANGUAGE;
     if (!isset($SB_LANGUAGE)) {
         sb_init_translations();
@@ -370,8 +365,7 @@ function sb_js_global()
     echo $code;
 }
 
-function sb_get_block_setting($value)
-{
+function sb_get_block_setting($value) {
     switch ($value) {
         case 'privacy':
             $settings = sb_get_setting('privacy');
@@ -389,15 +383,9 @@ function sb_get_block_setting($value)
     return false;
 }
 
-function sb_populate_settings($category, $settings, $echo = true)
-{
-    // echo "<script>console.log('Category: $category', " . json_encode($settings) . ");</script>";
-
+function sb_populate_settings($category, $settings, $echo = true) {
     if (!isset($settings) && file_exists(SB_PATH . '/resources/json/settings.json')) {
         $settings = sb_get_json_resource('json/settings.json');
-    }
-    if (!isset($settings[$category]) || empty($settings[$category])) {
-        return false;
     }
     $settings = $settings[$category];
     $code = '';
@@ -412,8 +400,7 @@ function sb_populate_settings($category, $settings, $echo = true)
     }
 }
 
-function sb_populate_app_settings($app_name)
-{
+function sb_populate_app_settings($app_name) {
     $file = SB_PATH . '/apps/' . $app_name . '/settings.json';
     $settings = [$app_name => []];
     if (file_exists($file)) {
@@ -422,19 +409,15 @@ function sb_populate_app_settings($app_name)
             $settings = sb_cloud_merge_settings($settings);
         }
     }
-
     return sb_populate_settings($app_name, $settings, false);
 }
 
-function sb_get_setting_code($setting)
-{
+function sb_get_setting_code($setting) {
     if (isset($setting)) {
         $id = $setting['id'];
         $type = $setting['type'];
         $disable_translations = sb_get_setting('admin-disable-settings-translations');
         $keywords = sb_isset($setting, 'keywords');
-
-
         $content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="sb-setting sb-type-' . $type . '"><div class="sb-setting-content"><h2>' . sb_s($setting['title'], $disable_translations) . '</h2><p>' . sb_s($setting['content'], $disable_translations) . sb_get_setting_code_help($setting) . '</p></div><div class="input">';
         switch ($type) {
             case 'color':
@@ -616,8 +599,8 @@ function sb_get_setting_code($setting)
         if (isset($setting['setting']) && ($type == 'multi-input' || !empty($setting['multilingual']))) {
             $content .= '<div class="sb-language-switcher-cnt"><label>' . sb_('Languages') . '</label></div>';
         }
-
-        $content .= '</div></div>';
+        
+         $content .= '</div></div>';
 
         if ($id == 'tickets-custom-fields') {
             return ticket_custom_field_settings();
@@ -657,13 +640,11 @@ function sb_get_setting_code($setting)
     return '';
 }
 
-function sb_get_setting_code_help($setting)
-{
+function sb_get_setting_code_help($setting) {
     return isset($setting['help']) && (!sb_is_cloud() || defined('SB_CLOUD_DOCS')) ? '<a href="' . (defined('SB_CLOUD_DOCS') ? (SB_CLOUD_DOCS . substr($setting['help'], strpos($setting['help'], '#'))) : $setting['help']) . '" target="_blank" class="sb-icon-help"></a>' : '';
 }
 
-function sb_save_settings($settings, $external_settings = [], $external_settings_translations = [])
-{
+function sb_save_settings($settings, $external_settings = [], $external_settings_translations = []) {
     if (isset($settings)) {
         global $SB_SETTINGS;
         if (is_string($settings)) {
@@ -714,14 +695,12 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
     }
 }
 
-function sb_save_external_setting($name, $value)
-{
+function sb_save_external_setting($name, $value) {
     $settings_encoded = sb_db_json_escape($value);
     return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : sb_db_query('INSERT INTO sb_settings(name, value) VALUES (\'' . sb_db_escape($name) . '\', \'' . $settings_encoded . '\') ON DUPLICATE KEY UPDATE value = \'' . $settings_encoded . '\'');
 }
 
-function sb_get_settings()
-{
+function sb_get_settings() {
     global $SB_SETTINGS;
     if (!isset($SB_SETTINGS)) {
         $SB_SETTINGS = sb_get_external_setting('settings', []);
@@ -732,8 +711,7 @@ function sb_get_settings()
     return $SB_SETTINGS;
 }
 
-function sb_get_all_settings()
-{
+function sb_get_all_settings() {
     $translations = [];
     $settings = [];
     $rows = sb_db_get('SELECT value FROM sb_settings WHERE name="emails" || name="rich-messages" || name="wc-emails"', false);
@@ -747,8 +725,7 @@ function sb_get_all_settings()
     return array_merge(sb_get_settings(), $settings, ['external-settings-translations' => $translations]);
 }
 
-function sb_get_setting($id, $default = false)
-{
+function sb_get_setting($id, $default = false) {
     $settings = sb_get_settings();
     if (!sb_is_error($settings)) {
         if (isset($settings[$id]) && !empty($settings[$id][0])) {
@@ -770,8 +747,7 @@ function sb_get_setting($id, $default = false)
     }
 }
 
-function sb_get_multi_setting($id, $sub_id, $default = false)
-{
+function sb_get_multi_setting($id, $sub_id, $default = false) {
     $setting = sb_get_setting($id);
     if ($setting && !empty($setting[$sub_id])) {
         return $setting[$sub_id];
@@ -779,8 +755,7 @@ function sb_get_multi_setting($id, $sub_id, $default = false)
     return $default;
 }
 
-function sb_get_external_setting($name, $default = false)
-{
+function sb_get_external_setting($name, $default = false) {
     $result = sb_db_get('SELECT value FROM sb_settings WHERE name = "' . sb_db_escape($name) . '"', false);
     $settings = [];
     if (empty($result)) {
@@ -802,8 +777,7 @@ function sb_get_external_setting($name, $default = false)
     return $settings;
 }
 
-function sb_get_multilingual_setting($name, $sub_name, $language = false)
-{
+function sb_get_multilingual_setting($name, $sub_name, $language = false) {
     $language = $language ? $language : sb_get_user_language();
     $value = $language && $language != 'en' ? sb_isset(sb_get_external_setting('external-settings-translations-' . $language), $sub_name) : false;
     if ($value)
@@ -820,13 +794,11 @@ function sb_get_multilingual_setting($name, $sub_name, $language = false)
     return $value;
 }
 
-function sb_color_palette($id = '')
-{
+function sb_color_palette($id = '') {
     return '<div data-type="color-palette" data-value="" data-id="' . $id . '" class="sb-color-palette"><span></span><ul><li data-value=""></li><li data-value="red"></li><li data-value="yellow"></li><li data-value="green"></li><li data-value="pink"></li><li data-value="gray"></li><li data-value="blue"></li></ul></div>';
 }
 
-function sb_export_settings()
-{
+function sb_export_settings() {
     $setting_keys = ['automations', 'emails', 'rich-messages', 'settings', 'app-keys', 'articles', 'articles-categories', 'dialogflow-knowledge', 'open-ai-intents-history', 'slack-channels'];
     $settings = [];
     for ($i = 0; $i < count($setting_keys); $i++) {
@@ -846,8 +818,7 @@ function sb_export_settings()
     return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : false;
 }
 
-function sb_import_settings($file_url)
-{
+function sb_import_settings($file_url) {
     $settings = json_decode(sb_download($file_url), true);
     if ($settings) {
         foreach ($settings as $key => $setting) {
@@ -859,8 +830,7 @@ function sb_import_settings($file_url)
     return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : false;
 }
 
-function sb_get_departments()
-{
+function sb_get_departments() {
     $items = sb_get_setting('departments');
     $count = is_array($items) ? count($items) : 0;
     $departments = [];
@@ -870,8 +840,7 @@ function sb_get_departments()
     return $departments;
 }
 
-function sb_departments($type)
-{
+function sb_departments($type) {
     $items = sb_get_setting('departments');
     $count = is_array($items) ? count($items) : 0;
     if ($count) {
@@ -906,8 +875,7 @@ function sb_departments($type)
     }
 }
 
-function sb_office_hours()
-{
+function sb_office_hours() {
     $settings = sb_get_settings();
     $timetable = sb_isset($settings, 'timetable', [[]])[0];
     $now = time();
@@ -934,8 +902,7 @@ function sb_office_hours()
     return true;
 }
 
-function sb_css($color_1 = false, $color_2 = false, $color_3 = false, $return = false)
-{
+function sb_css($color_1 = false, $color_2 = false, $color_3 = false, $return = false) {
     $css = '';
     $color_1 = $color_1 ? $color_1 : sb_get_setting('color-1');
     $color_2 = $color_2 ? $color_2 : sb_get_setting('color-2');
@@ -987,8 +954,7 @@ function sb_css($color_1 = false, $color_2 = false, $color_3 = false, $return = 
     return false;
 }
 
-function sb_system_requirements()
-{
+function sb_system_requirements() {
     $checks = [];
 
     // PHP version
@@ -1020,8 +986,7 @@ function sb_system_requirements()
     return $checks;
 }
 
-function sb_select_html($type)
-{
+function sb_select_html($type) {
     $code = '<select><option value=""></option>';
     $is_countries = $type == 'countries';
     $items = sb_get_json_resource($is_countries ? 'json/countries.json' : 'languages/language-codes.json');
@@ -1031,8 +996,7 @@ function sb_select_html($type)
     return $code . '</select>';
 }
 
-function sb_select_phone()
-{
+function sb_select_phone() {
     $single = sb_get_setting('phone-code');
     if ($single) {
         return $single;
@@ -1049,8 +1013,7 @@ function sb_select_phone()
     }
 }
 
-function sb_get_config_details($path)
-{
+function sb_get_config_details($path) {
     $details = [];
     $slugs = ['SB_URL', 'SB_DB_NAME', 'SB_DB_USER', 'SB_DB_PASSWORD', 'SB_DB_HOST', 'SB_DB_PORT'];
     $lines = preg_split("/\r\n|\n|\r/", file_get_contents($path));
@@ -1065,8 +1028,7 @@ function sb_get_config_details($path)
     return $details;
 }
 
-function sb_update_sw($url)
-{
+function sb_update_sw($url) {
     $path = SB_PATH . '/sw.js';
     if (!file_exists($path)) {
         copy(SB_PATH . '/resources/sw.js', $path);
@@ -1105,8 +1067,7 @@ function sb_update_sw($url)
  */
 
 // Deprecated
-function sb_temp_deprecated_articles_migration()
-{
+function sb_temp_deprecated_articles_migration() {
     $articles = sb_get_external_setting('articles');
     $articles_translations = sb_db_get('SELECT name, value FROM sb_settings WHERE name LIKE "articles-translations-%"', false);
     $now = date('Y-m-d H:i:s');
@@ -1144,8 +1105,7 @@ function sb_temp_deprecated_articles_migration()
 }
 // Deprecated
 
-function sb_save_article($article)
-{
+function sb_save_article($article) {
     if (is_string($article)) {
         $article = json_decode($article, true);
     }
@@ -1192,8 +1152,7 @@ function sb_save_article($article)
     return $response;
 }
 
-function sb_save_articles_categories($categories)
-{
+function sb_save_articles_categories($categories) {
     if (is_string($categories)) {
         $categories = json_decode($categories, true);
     }
@@ -1215,8 +1174,7 @@ function sb_save_articles_categories($categories)
     return $response;
 }
 
-function sb_get_articles($article_id = false, $count = false, $full = false, $categories = false, $language = false, $skip_language = false)
-{
+function sb_get_articles($article_id = false, $count = false, $full = false, $categories = false, $language = false, $skip_language = false) {
     $query_part = '';
     if (is_array($language)) {
         $language = $language[0];
@@ -1275,8 +1233,7 @@ function sb_get_articles($article_id = false, $count = false, $full = false, $ca
     return $articles;
 }
 
-function sb_get_articles_categories($category_type = false)
-{
+function sb_get_articles_categories($category_type = false) {
     $categories = sb_isset($GLOBALS, 'SB_ARTICLES_CATEGORIES');
     if (!$categories) {
         $categories = sb_get_external_setting('articles-categories', []);
@@ -1295,8 +1252,7 @@ function sb_get_articles_categories($category_type = false)
     return $categories;
 }
 
-function sb_get_article_category($category_id)
-{
+function sb_get_article_category($category_id) {
     $categories = sb_get_articles_categories();
     for ($i = 0; $i < count($categories); $i++) {
         if ($categories[$i]['id'] == $category_id) {
@@ -1306,8 +1262,7 @@ function sb_get_article_category($category_id)
     return false;
 }
 
-function sb_search_articles($search, $language = false)
-{
+function sb_search_articles($search, $language = false) {
     $search = sb_db_escape($search);
     if (empty($search)) {
         return [];
@@ -1327,8 +1282,7 @@ function sb_search_articles($search, $language = false)
     return $articles;
 }
 
-function sb_article_ratings($article_id, $rating = false)
-{
+function sb_article_ratings($article_id, $rating = false) {
     $article_id = sb_db_escape($article_id);
     $rating = $rating ? sb_db_escape($rating) : false;
     $now = gmdate('Y-m-d');
@@ -1345,8 +1299,7 @@ function sb_article_ratings($article_id, $rating = false)
     return $ratings;
 }
 
-function sb_init_articles_admin()
-{
+function sb_init_articles_admin() {
     $articles = sb_get_external_setting('articles'); // Deprecated
     if ($articles) { // Deprecated
         sb_temp_deprecated_articles_migration(); // Deprecated
@@ -1369,11 +1322,10 @@ function sb_init_articles_admin()
         require_once(SB_CLOUD_PATH . '/account/functions.php');
         $cloud_chat_id = account_chat_id(get_active_account_id());
     }
-    return [$articles, sb_get_articles_categories(), $articles_translations, sb_get_articles_page_url(), sb_is_articles_url_rewrite(), $cloud_chat_id];
+    return [$articles, sb_get_articles_categories(), $articles_translations, sb_get_articles_page_url(), sb_is_articles_url_rewrite(false), $cloud_chat_id];
 }
 
-function sb_articles_excerpt($articles)
-{
+function sb_articles_excerpt($articles) {
     for ($i = 0; $i < count($articles); $i++) {
         $content = strip_tags(sb_isset($articles[$i], 'content', ''));
         $articles[$i]['editor_js'] = '';
@@ -1382,13 +1334,11 @@ function sb_articles_excerpt($articles)
     return $articles;
 }
 
-function sb_get_articles_page()
-{
+function sb_get_articles_page() {
     require_once(SB_PATH . '/include/articles.php');
 }
 
-function sb_get_article_url($article)
-{
+function sb_get_article_url($article) {
     if (is_numeric($article)) {
         $article = sb_db_get('SELECT slug, id FROM sb_articles WHERE id = ' . sb_db_escape($article, true));
     }
@@ -1401,12 +1351,12 @@ function sb_get_article_url($article)
     return $url_rewrite ? $articles_page_url_slash . sb_isset($article, 'slug', $article['id']) : $articles_page_url . '?article_id=' . $article['id'];
 }
 
-function sb_get_articles_page_url()
-{
+function sb_get_articles_page_url() {
     return trim(sb_get_setting('articles-page-url', sb_defined('ARTICLES_URL')));
 }
 
-function sb_is_articles_url_rewrite()
-{
-    return sb_get_setting('articles-url-rewrite') || (defined('ARTICLES_URL') && (empty($_SERVER['HTTP_REFERER']) || strpos(ARTICLES_URL, $_SERVER['HTTP_REFERER'])) && (!sb_get_setting('articles-page-url') || strpos(ARTICLES_URL, parse_url(sb_get_setting('articles-page-url'), PHP_URL_HOST))));
+function sb_is_articles_url_rewrite($check_referrer = true) {
+    return sb_get_setting('articles-url-rewrite') || (defined('ARTICLES_URL') && (!$check_referrer || empty($_SERVER['HTTP_REFERER']) || strpos(ARTICLES_URL, $_SERVER['HTTP_REFERER'])) && (!sb_get_setting('articles-page-url') || strpos(ARTICLES_URL, parse_url(sb_get_setting('articles-page-url'), PHP_URL_HOST))));
 }
+
+?>

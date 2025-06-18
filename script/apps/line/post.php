@@ -68,7 +68,7 @@ if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNA
         }
         $GLOBALS['SB_LOGIN'] = $user;
         if (!$conversation_id) {
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, -1, 'ln', $line_id, $token, $tags), 'details', [])['id'];
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'ln', $line_id, $token, $tags), 'details', [])['id'];
         }
 
         // Attachments
@@ -102,11 +102,6 @@ if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNA
 
         // Dialogflow, Notifications, Bot messages
         $response_external = sb_messaging_platforms_functions($conversation_id, $message_text, $attachments, $user, ['source' => 'ln', 'line_id' => $line_id]);
-
-        // Queue
-        if (sb_get_multi_setting('queue', 'queue-active')) {
-            sb_queue($conversation_id, $department);
-        }
 
         // Online status
         sb_update_users_last_activity($user_id);

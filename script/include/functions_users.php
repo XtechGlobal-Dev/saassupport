@@ -44,7 +44,6 @@ function sb_login($email = '', $password = '', $user_id = '', $user_token = '') 
 
         // Login for registered users and agents
         $result = sb_db_get($query . 'WHERE email = "' . sb_db_escape($email) . '" LIMIT 1');
-        
         if (sb_is_error($result)) {
             return $result;
         }
@@ -564,6 +563,7 @@ function sb_update_user($user_id, $settings, $settings_extra = [], $hash_passwor
     $user_type = sb_isset($settings, 'user_type');
     $email = sb_isset($settings, 'email');
     $active_user = sb_get_active_user();
+    $is_active_user_agent = sb_is_agent($active_user);
     $query = '';
     if ($user_type && sb_is_agent($user_type) && !sb_is_agent(false, true, true)) {
         return sb_error('security-error', 'sb_update_user');
@@ -596,10 +596,10 @@ function sb_update_user($user_id, $settings, $settings_extra = [], $hash_passwor
     if (!empty($settings_extra['phone']) && intval(sb_db_get('SELECT COUNT(*) as count FROM sb_users_data WHERE slug = "phone" AND (value = "' . $settings_extra['phone'][0] . '"' . (strpos($settings_extra['phone'][0], '+') !== false ? (' OR value = "' . str_replace('+', '00', $settings_extra['phone'][0]) . '"') : '') . ') AND user_id <> ' . sb_db_escape($user_id, true))['count']) > 0) {
         return new SBValidationError('duplicate-phone');
     }
-    if (!$skip_otp && $email && sb_get_setting('registration-otp') && sb_otp($email, sb_isset($settings, 'otp')) !== true) {
+    if (!$is_active_user_agent && !$skip_otp && $email && sb_otp($email, sb_isset($settings, 'otp')) !== true && sb_get_setting('registration-otp')) {
         return new SBValidationError('invalid-otp');
     }
-    if (!sb_is_agent() && (!$user_type || !sb_is_agent($user_type))) {
+    if (!$is_active_user_agent && (!$user_type || !sb_is_agent($user_type))) {
         $user_type = $email || $active_user['email'] ? 'user' : (intval(sb_db_get('SELECT COUNT(*) AS count FROM sb_conversations WHERE user_id = ' . $user_id)['count']) > 0 ? 'lead' : 'visitor');
     }
     if ($user_type) {
@@ -660,7 +660,7 @@ function sb_update_user($user_id, $settings, $settings_extra = [], $hash_passwor
     }
 
     // More
-    if (sb_is_agent() && sb_get_setting('logs')) {
+    if ($is_active_user_agent && sb_get_setting('logs')) {
         sb_logs('updated the user details of the user #' . $user_id);
     }
     return $result;
@@ -693,8 +693,8 @@ function sb_update_user_to_lead($user_id) {
     return sb_update_user_value($user_id, 'user_type', 'lead');
 }
 
-function sb_update_user_and_message($user_id, $settings, $settings_extra = [], $message_id = false, $message = false, $payload = false) {
-    $result = sb_update_user($user_id, $settings, $settings_extra);
+function sb_update_user_and_message($user_id, $settings, $settings_extra = [], $message_id = false, $message = false, $payload = false, $skip_otp = false) {
+    $result = sb_update_user($user_id, $settings, $settings_extra, true, $skip_otp);
     $rich_message = sb_isset($payload, 'rich-messages');
     if (sb_is_validation_error($result) && $result->code() == 'duplicate-email') {
         return $result;
@@ -851,7 +851,7 @@ function sb_get_dashboad_data()
 {
     return ['sucess'=>true,'msg'=>'Dashboard data fecthed sucessfully'];
 }
-function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $source = false) {
+function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $tags = false, $source = false) {
     $query = '';
     $query_search = '';
     $ticketStatusArr = [];
@@ -867,9 +867,29 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     $main_field_sorting = in_array($sorting_field, ['id', 'first_name', 'last_name', 'email', 'profile_image', 'user_type', 'creation_time', 'last_activity', 'department']);
     if($ticket_status && $ticket_status != 'all')
     {
-        $query = ' WHERE t.status_id = "' . $ticketStatusArr[$ticket_status]. '" ';
+        $query = ' WHERE t.status_id = "' . $ticketStatusArr[$ticket_status]. '"';
+    }
+
+    if($tags)
+    {
+        $tags = array_map(function($tag) {
+            $tag = sb_db_escape($tag);
+            return $tag ? $tag : '';
+        }, $tags);
+
+        $tags = implode("','", $tags);
+
+        if($query != '')
+        {
+            $query .= " AND tt_filter.tag IN ('$tags')";
+        }
+        else
+        {
+            $query .= " WHERE tt_filter.tag IN ('$tags')";
+        }
     }
     
+    $query .= ' GROUP BY t.id ';
     /*
     $count = count($ticket_status);
     if ($count) {
@@ -904,8 +924,8 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     } else {
         $query = ' WHERE user_type <> "bot"';
     }*/
+   //echo SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100';
     $tickets = sb_db_get(SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
-
     $tickets_count = count($tickets);
     if (!$tickets_count) {
         return [];
@@ -1036,7 +1056,12 @@ function sb_edit_ticket($tickets_id = 0) {
    $tickets_id = sb_db_escape($tickets_id, true);
    $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
             p.name as priority_name, p.color as priority_color,
-            ts.name as status_name, ts.color as status_color 
+            ts.name as status_name, ts.color as status_color,
+            (
+                SELECT GROUP_CONCAT(DISTINCT tt2.tag SEPARATOR "||") 
+                FROM ticket_tags tt2 
+                WHERE tt2.ticket_id = t.id
+            ) AS tag_names
      FROM sb_tickets t 
      LEFT JOIN sb_users u ON t.assigned_to = u.id
      LEFT JOIN sb_users c ON t.contact_id = c.id
@@ -1044,6 +1069,24 @@ function sb_edit_ticket($tickets_id = 0) {
      LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$tickets_id;
     
     $result = sb_db_get($query);
+
+
+    $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+    $tagsArr = array();
+    foreach ($tags as $key => $value) {
+        $tagsArr[$value['tag-name']] = $value['tag-color'];
+    }
+    
+    //for ($i = 0; $i < $tickets_count; $i++) {
+        /*$ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
+        $ticketTagsWithColor = [];
+        foreach ($ticketTags as $tag) {
+            if (isset($tagsArr[$tag])) {
+                $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
+            }
+        }
+       $result['ticket_tags'] = $ticketTagsWithColor; */
+    //}
     
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
@@ -1781,6 +1824,7 @@ function sb_fetch_ticket_attachments($ticket_id = null)
 }
 
 
+
 function sb_get_new_users($datetime) {
     $datetime = sb_db_escape($datetime);
     $users = sb_db_get(SELECT_FROM_USERS . ' FROM sb_users WHERE user_type <> "bot" AND ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . sb_routing_and_department_db('sb_conversations', true) . ' ORDER BY id DESC', false);
@@ -2071,10 +2115,11 @@ function sb_get_agents_ids($admins = true) {
 
 function sb_get_avatar($first_name, $last_name = '') {
     $picture_url = SB_URL . '/media/user.svg';
-    $first_char_last_name = substr($last_name, 0, 1);
-    if (!empty($first_name) && $first_char_last_name != '#' && (ctype_digit($first_name[0]) || ctype_alpha($first_name[0])) && (!$first_char_last_name || ctype_digit($first_char_last_name) || ctype_alpha($first_char_last_name))) {
+    $first_char_last_name = mb_substr($last_name, 0, 1);
+    if (!empty($first_name) && $first_char_last_name != '#') {
         $file_name = rand(99, 9999999) . '.png';
-        $picture_url = sb_download_file('https://ui-avatars.com/api/?background=random&size=512&font-size=0.35&name=' . $first_name . '+' . $last_name, $file_name);
+        $t = 'https://ui-avatars.com/api/?background=random&size=512&font-size=0.35&name=' . urlencode($first_name) . '+' . urlencode($last_name);
+        $picture_url = sb_download_file('https://ui-avatars.com/api/?background=random&size=512&font-size=0.35&name=' . urlencode($first_name) . '+' . urlencode($last_name), $file_name);
         if (!sb_get_multi_setting('amazon-s3', 'amazon-s3-active') && !defined('SB_CLOUD_AWS_S3')) {
             $path = sb_upload_path(false, true) . '/' . $file_name;
             if (!file_exists($path) || filesize($path) < 1000) {
@@ -2323,28 +2368,17 @@ function sb_get_user_by($by, $value) {
 }
 
 function sb_import_users($url) {
-    $keys = false;
-    if (($handle = fopen($url, 'r')) !== false) {
-        while (($data = fgetcsv($handle, 0, ',')) !== false) {
-            $row = [];
-            for ($i = 0; $i < count($data); $i++) {
-                array_push($row, $data[$i]);
+    $rows = sb_csv_read($url);
+    foreach ($rows as $row) {
+        $user_data = [];
+        foreach ($row as $key => $value) {
+            $slug_key = sb_string_slug($key);
+            if (in_array($slug_key, ['first-name', 'last-name', 'profile-image'])) {
+                $slug_key = str_replace('-', '_', $slug_key);
             }
-            if ($keys) {
-                $user_data = [];
-                for ($i = 0; $i < count($keys); $i++) {
-                    $key = sb_string_slug($keys[$i]);
-                    if (in_array($key, ['first-name', 'last-name', 'profile-image'])) {
-                        $key = str_replace('-', '_', $key);
-                    }
-                    $user_data[$key] = $row[$i];
-                }
-                sb_add_user($user_data, $user_data);
-            } else {
-                $keys = $row;
-            }
+            $user_data[$slug_key] = $value;
         }
-        fclose($handle);
+        sb_add_user($user_data, $user_data);
     }
     return true;
 }
@@ -2372,7 +2406,6 @@ function sb_queue($conversation_id, $department = false) {
     $unix_now = time();
     $unix_min = strtotime('-1 minutes');
     $conversation = sb_db_get('SELECT user_id, agent_id, source FROM sb_conversations WHERE id = ' . sb_db_escape($conversation_id, true));
-    $messaging_platform = !empty($conversation['source']) && $conversation['source'] != 'tk';
     $show_progress = !sb_execute_bot_message('offline', 'check');
     if (!empty(sb_isset($conversation, 'agent_id'))) {
         return 0;
@@ -2394,18 +2427,15 @@ function sb_queue($conversation_id, $department = false) {
         }
     }
     if (count($queue) == 0 || $position == 1) {
-        $agent_id = sb_routing_find_best_agent($department, intval(sb_isset($settings, 'queue-concurrent-chats', 5)));
+        $agent_id = sb_routing_find_best_agent($department, sb_isset($settings, 'queue-concurrent-chats', 5), false);
         if ($agent_id !== false) {
             sb_routing_assign_conversation($agent_id, $conversation_id);
             array_shift($queue);
             $position = 0;
             $user_id = $conversation['user_id'];
             $message = sb_t(sb_isset($settings, 'queue-message-success', 'It\'s your turn! An agent will reply to you shortly.'));
-            $message_id = sb_send_message(sb_get_bot_id(), $conversation_id, $message, [], 2)['id'];
+            sb_send_message(sb_get_bot_id(), $conversation_id, $message, [], 2)['id'];
             sb_send_agents_notifications(sb_isset(sb_get_last_message($conversation_id, false, $user_id), 'message'), false, $conversation_id);
-            if ($messaging_platform) {
-                sb_messaging_platforms_send_message($message, $conversation_id, $message_id);
-            }
         } else if ($position == 0) {
             array_push($queue, [$conversation_id, $unix_now, $department]);
             $position = $index + 1;
@@ -2415,16 +2445,6 @@ function sb_queue($conversation_id, $department = false) {
         $position = $index + 1;
     }
     sb_save_external_setting('queue', $queue);
-    if ($messaging_platform && $position != 0) {
-        sb_routing($conversation_id, $department);
-        $message = sb_t($settings['queue-message']);
-        if ($message && $show_progress) {
-            $time = intval(sb_isset($settings, 'queue-response-time', 5)) * $position;
-            $message = str_replace(['{position}', '{minutes}'], [$position, $time], $message);
-            $message_id = sb_send_message(sb_get_bot_id(), $conversation_id, $message)['id'];
-            sb_messaging_platforms_send_message($message, $conversation_id, $message_id);
-        }
-    }
     return [$position, $show_progress];
 }
 
@@ -2441,11 +2461,11 @@ function sb_routing_assign_conversation($agent_id, $conversation_id = false) {
     return sb_db_query('UPDATE sb_conversations SET agent_id = ' . (is_null($agent_id) ? 'NULL' : sb_db_escape($agent_id, true)) . ' WHERE id = ' . sb_db_escape($conversation_id, true));
 }
 
-function sb_routing_assign_conversations_active_agent() {
+function sb_routing_assign_conversations_active_agent($is_queue = false) {
     $active_user = sb_get_active_user();
     if ($active_user && sb_is_agent($active_user, true, false, true)) {
         $department = sb_get_agent_department();
-        return sb_db_query('UPDATE sb_conversations SET agent_id = "' . $active_user['id'] . '" WHERE (agent_id = 0 OR agent_id IS NULL)' . ($department !== false && $department !== '' ? ' AND department = ' . $department : ''));
+        return sb_db_query('UPDATE sb_conversations SET agent_id = "' . $active_user['id'] . '" WHERE (agent_id = 0 OR agent_id IS NULL)' . ($department !== false && $department !== '' ? ' AND department = ' . $department : '') . ($is_queue ? ' AND source <> "" AND source IS NOT NULL' : ''));
     }
     return false;
 }
@@ -2460,33 +2480,18 @@ function sb_routing($conversation_id = false, $department = false, $unassigned =
     return false;
 }
 
-function sb_routing_find_best_agent($department = false, $cuncurrent_chats = 9999) {
+function sb_routing_find_best_agent($department = false, $is_ignore_count = false) {
     $department = sb_db_escape($department);
     $online_agents_ids = sb_get_multi_setting('routing', 'routing-disable-status-check') ? sb_get_agents_ids(false) : sb_get_online_user_ids('agent');
-    $smaller = false;
+    $is_queue = sb_get_multi_setting('queue', 'queue-active');
+    $concurrent_chats = $is_queue && !$is_ignore_count ? sb_get_multi_setting('queue', 'queue-concurrent-chats') : 9999;
     if (!empty($online_agents_ids)) {
-        $online_agents_query = ' IN (' . implode(', ', $online_agents_ids) . ')';
-        $counts = sb_db_get('SELECT id AS `agent_id` FROM sb_users WHERE id NOT IN (SELECT agent_id FROM sb_conversations WHERE agent_id IS NOT NULL ' . ($department ? ' AND department = ' . $department : '') . ') AND id' . $online_agents_query, false);
-        if (empty($counts)) {
-            $counts = sb_db_get('SELECT COUNT(*) AS `count`, agent_id FROM sb_conversations WHERE (status_code = 0 OR status_code = 1 OR status_code = 2) AND agent_id IS NOT NULL' . ($department ? ' AND department = ' . $department : '') . ' AND agent_id' . $online_agents_query . ' GROUP BY agent_id', false);
-        }
-        for ($i = 0; $i < count($counts); $i++) {
-            $count = intval(sb_isset($counts[$i], 'count', 0));
-            if ($count < $cuncurrent_chats && ($smaller === false || $count < $smaller['count'])) {
-                $smaller = $counts[$i];
-            }
-        }
-        if ($smaller === false) {
-            $query = '';
-            for ($i = 0; $i < count($counts); $i++) {
-                $query .= $counts[$i]['agent_id'] . ',';
-            }
-            $smaller = sb_isset(sb_db_get('SELECT id FROM sb_users WHERE user_type = "agent"' . ($query ? ' AND id NOT IN (' . substr($query, 0, -1) . ')' : '') . ' AND id' . $online_agents_query . ($department ? ' AND department = ' . $department : '') . ' LIMIT 1'), 'id');
-        } else {
-            $smaller = $smaller['agent_id'];
+        $best_online_agent = sb_db_get('SELECT u.id, COUNT(c.id) AS count FROM sb_users u LEFT JOIN sb_conversations c ON c.agent_id = u.id  AND c.status_code IN (0, 1, 2)' . ($department ? ' AND c.department = ' . intval($department) : '') . ' WHERE u.id IN (' . implode(', ', $online_agents_ids) . ') GROUP BY u.id ORDER BY count LIMIT 1');
+        if (!empty($best_online_agent) && $best_online_agent['count'] < $concurrent_chats) {
+            return $best_online_agent['id'];
         }
     }
-    return $smaller;
+    return false;
 }
 
 ?>

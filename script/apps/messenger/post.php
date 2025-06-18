@@ -108,7 +108,7 @@ if ($raw) {
             }
 
             if (!$conversation_id) {
-                $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, -1, $platform_code, $page_id, false, false, sb_isset($page_settings, 'messenger-page-tags')), 'details', [])['id'];
+                $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, $platform_code, $page_id, false, false, sb_isset($page_settings, 'messenger-page-tags')), 'details', [])['id'];
             } else if ($is_echo && $page_sender && $response_message) {
                 if (empty($message) || (isset($response_message['metadata']) && !empty(sb_db_get('SELECT id FROM sb_messages WHERE id = ' . explode('|', $response_message['metadata'])[0])))) {
                     $GLOBALS['SB_FORCE_ADMIN'] = false;
@@ -119,6 +119,9 @@ if ($raw) {
                 $message_previous_count = count(json_decode(sb_isset($previous_message, 'attachments', '[]'), true));
                 $rich_message = trim(sb_isset(sb_messenger_rich_messages($message), 0));
                 $message_previous_rich_message = trim(sb_isset(sb_messenger_rich_messages($message_previous_text), 0));
+                if ($instagram) {
+                    $message_previous_text = sb_clear_text_formatting($message);
+                }
                 if ($message_previous && ($message_previous_text == $message || $rich_message == $message_previous_text || $message_previous_rich_message == $rich_message || ($count_attachments && ($count_attachments == $message_previous_count || $message_previous_count > 1) && strtotime($previous_message['creation_time']) > sb_gmt_now(60, true)))) {
                     $GLOBALS['SB_FORCE_ADMIN'] = false;
                     return false;
@@ -140,7 +143,7 @@ if ($raw) {
                             $file_name .= '.mp3';
                             $mime = false;
                         }
-                        $file_name = rand(99999, 999999999) . '_' . (strpos($url, 'audio_clip') || strpos($url, 'audioclip') ? 'voice_message_' : '') . strtolower($file_name);
+                        $file_name = rand(99999, 999999999) . '_' . (strpos($url, 'audio_clip') || strpos($url, 'audioclip') || $type == 'audio' ? 'voice_message_' : '') . strtolower($file_name);
                         $url = sb_download_file($url, $file_name, $mime, [], 0);
                         array_push($attachments_2, [basename($url), $url]);
                     } else if ($type == 'fallback') {

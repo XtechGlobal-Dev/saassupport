@@ -8,8 +8,8 @@
  * Library of static html components for the admin area. This file must not be executed directly. � 2017-2025 board.support. All rights reserved.
  *
  */
-function sb_profile_box()
-{ ?>
+
+function sb_profile_box() { ?>
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
             <div class="sb-profile">
@@ -61,8 +61,7 @@ function sb_profile_box()
     </div>
 <?php } ?>
 <?php
-function sb_profile_edit_box()
-{ ?>
+function sb_profile_edit_box() { ?>
     <div class="sb-profile-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -165,7 +164,8 @@ function sb_profile_edit_box()
             </div>
         </div>
     </div>
-<?php }
+<?php } ?>
+<?php
 function sb_ticket_box()
 { ?>
     <div class="sb-lightbox">
@@ -192,12 +192,11 @@ function sb_ticket_box()
             </div>
         </div>
     </div>
-<?php }
+<?php } 
 function sb_ticket_edit_box()
 { ?>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
     <div class="sb-ticket-edit-box sb-lightbox">
         <div class="sb-info"></div>
@@ -342,17 +341,17 @@ function sb_ticket_edit_box()
 
                         <?php
 
-                        function sb_get_priorities()
-                        {
-                            $priorities = sb_db_get('SELECT * FROM priorities', false);
-                            return $priorities;
-                        }
+                        // function sb_get_priorities()
+                        // {
+                        //     $priorities = sb_db_get('SELECT * FROM priorities', false);
+                        //     return $priorities;
+                        // }
 
-                        function sb_get_statues()
-                        {
-                            $status = sb_db_get('SELECT * FROM ticket_status', false);
-                            return $status;
-                        }
+                        // function sb_get_statues()
+                        // {
+                        //     $status = sb_db_get('SELECT * FROM ticket_status', false);
+                        //     return $status;
+                        // }
                         $statues = sb_get_statues();
                         $priorities = sb_get_priorities();
 
@@ -541,7 +540,7 @@ function sb_ticket_edit_box()
             padding: 4px 10px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            background-color: #fdfdfd;
+            background-color: #fff;
             font-family: 'Segoe UI', sans-serif;
             font-size: 16px;
             color: #333;
@@ -628,687 +627,11 @@ function sb_ticket_edit_box()
             line-height: 45px;
         }
 
-        td.sb-td-tags span {
-            margin: 3px 5px 0 0;
-            padding: .45em .75em;
-            font-size: 13px
-        }
-
-        .sb_table_new tbody td.sb-td-tags {
-            white-space: unset;
-            text-overflow: unset;
-        }
-
-        /******** Ticket Multi -select Tags ***********************/
-        /* .tag-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-
-        .choices__list--dropdown .choices__item--selectable::before {
-            display: none !important;
-        }
-
-        .choices__list--multiple {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 6px 6px !important;
-            align-items: flex-start !important;
-            padding: 4px 0 0 4px !important;
-        }
-
-        .choices__list--multiple .choices__item {
-            display: inline-flex !important;
-            align-items: center !important;
-            width: auto !important;
-            min-width: 0 !important;
-            margin: 0 !important;
-            padding: 4px 26px 4px 12px !important;
-            border-radius: 16px !important;
-            background: #f8f9fa !important;
-            color: #222 !important;
-            font-size: 0.95em !important;
-            position: relative;
-            box-shadow: none !important;
-            border: 1px solid #d1d5db !important;
-            white-space: nowrap;
-            overflow: visible !important;
-        }
-
-        .choices__list--multiple .choices__item::before {
-            display: none !important;
-        }
-
-        .choices__button,
-        .choices__button--remove {
-            position: unset !important;
-            color: #d32f2f !important;
-            background: none !important;
-            border: none !important;
-            font-size: 1.2em !important;
-            cursor: pointer !important;
-            z-index: 10 !important;
-            padding: 0 !important;
-            width: 20px !important;
-            height: 20px !important;
-            line-height: 1 !important;
-            opacity: 1 !important;
-            box-shadow: none !important;
-            text-indent: 0 !important;
-        }
-
-        .choices__button:hover,
-        .choices__button--remove:hover {
-            color: #b71c1c !important;
-        }
-
-        /*.choices__button--remove::before {
-            content: '×' !important;
-            font-size: 12px !important;
-            line-height: 1 !important;
-        }*/
-        /* .choices__list.choices__list--multiple > div { border: 1px solid red;padding: 2px 5px;border-radius: 30px;display: flex;align-items: center;justify-content: center;}
-        .choices__list.choices__list--multiple > div button { border: none;color: red;}
-        .choices__list--dropdown .choices__item .card{padding: 8px 12px !important;
-    border-radius: 4px !important;
-    margin: 2px 0 !important;
-    transition: all 0.2s ease !important;
-    background-color: var(--bs-light) !important;
-    color: var(--bs-dark) !important;
-    font-weight: 500 !important;
-        } */
-
-
-        /* Colored dot for tags */
-        .tag-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-
-        /* 1. Remove Choices.js default selection indicator (blue dot) in dropdown */
-        .choices__list--dropdown .choices__item--selectable::before {
-            display: none !important;
-        }
-
-        /* 2. Selected tags as compact badges, allow wrapping */
-        .choices__list--multiple {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 6px 6px !important;
-            align-items: flex-start !important;
-            padding: 4px 0 0 4px !important;
-        }
-
-        .choices__list--multiple .choices__item {
-            display: inline-flex !important;
-            align-items: center !important;
-            width: auto !important;
-            min-width: 0 !important;
-            margin: 0 !important;
-            padding: 4px 26px 4px 12px !important;
-            border-radius: 16px !important;
-            background: #f8f9fa !important;
-            color: #222 !important;
-            font-size: 0.95em !important;
-            position: relative;
-            box-shadow: none !important;
-            border: 1px solid #d1d5db !important;
-            white-space: nowrap;
-        }
-
-        /* Remove Choices.js default blue dot from selected items */
-        .choices__list--multiple .choices__item::before {
-            display: none !important;
-        }
-
-
-        /* 3. Remove button always visible and styled */
-        .choices__button,
-        .choices__button--remove {
-            /*display: block !important;
-    position: absolute !important;
-    right: 6px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;*/
-            color: #d32f2f !important;
-            background: none !important;
-            border: none !important;
-            font-size: 1.2em !important;
-            cursor: pointer !important;
-            z-index: 10 !important;
-            padding: 0 !important;
-            width: 20px !important;
-            height: 20px !important;
-            line-height: 1 !important;
-            opacity: 1 !important;
-            box-shadow: none !important;
-            text-indent: 0 !important;
-        }
-
-        .choices__button:hover,
-        .choices__button--remove:hover {
-            color: #b71c1c !important;
-        }
-
-        /* Ensure remove button is above badge background */
-        .choices__list--multiple .choices__item {
-            overflow: visible !important;
-        }
-
-
-
-        /* Tag styling for both filter and create ticket pages */
-        .tag-option {
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin: 2px 0;
-            transition: all 0.2s ease;
-            background-color: #fff !important;
-            color: #222 !important;
-            font-weight: 500;
-            min-height: 32px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Ensure text is always visible */
-        .tag-option {
-            color: var(--bs-dark) !important;
-        }
-
-        /* Ensure color circles are visible */
-        .tag-option[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            margin-right: 8px;
-            background-color: attr(data-color);
-            background-color: var(--bs-primary, #888);
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
-            vertical-align: middle;
-            opacity: 1 !important;
-        }
-
-        /* Ensure text is visible in dropdown */
-        .choices__list--dropdown .choices__item {
-            padding: 8px 12px !important;
-            border-radius: 4px !important;
-            margin: 2px 0 !important;
-            transition: all 0.2s ease !important;
-            background-color: #fff !important;
-            color: #222 !important;
-            font-weight: 500 !important;
-            min-height: 32px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-
-        .choices__list--dropdown .choices__item::before {
-            opacity: 1 !important;
-        }
-
-        /* Ensure text is visible in selected items */
-        .choices__list--multiple .choices__item {
-            padding: 4px 32px 4px 12px !important;
-            border-radius: 12px !important;
-            margin: 4px !important;
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-            font-weight: 500 !important;
-            border: 1px solid var(--bs-primary) !important;
-            position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            min-height: 24px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-
-        /* Ensure color circle is visible in selected items */
-        .choices__list--multiple .choices__item[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-            background-color: var(--bs-primary);
-            border: 2px solid var(--bs-light);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            opacity: 1 !important;
-        }
-
-        /* Color styling for tag options */
-        .tag-option[data-color] {
-            --color: attr(data-color);
-            --bs-primary: var(--color);
-            background-color: #fff !important;
-            /* Prevent tag color as background */
-        }
-
-        .tag-option[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            margin-right: 8px;
-            background-color: var(--bs-primary);
-            border: 1px solid var(--bs-primary);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Hover state for tag options */
-        .tag-option:hover {
-            background-color: var(--bs-light);
-            color: var(--bs-dark);
-        }
-
-        .tag-option:hover::before {
-            transform: scale(1.1);
-            transition: transform 0.2s ease;
-        }
-
-        /* Selected state styling */
-        .tag-option.selected {
-            background-color: var(--bs-light);
-            color: var(--bs-dark);
-            font-weight: 600;
-        }
-
-        .tag-option.selected::before {
-            background-color: var(--bs-primary);
-            border: 2px solid var(--bs-light);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Choices.js dropdown item styling */
-        .choices__list--dropdown .choices__item {
-            padding: 8px 12px !important;
-            border-radius: 4px !important;
-            margin: 2px 0 !important;
-            transition: all 0.2s ease !important;
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-            font-weight: 500 !important;
-        }
-
-        .choices__list--dropdown .choices__item[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            margin-right: 8px;
-            background-color: attr(data-color);
-            background-color: var(--bs-primary, #888);
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
-            vertical-align: middle;
-            opacity: 1 !important;
-        }
-
-        /* Hover state for dropdown items */
-        .choices__list--dropdown .choices__item:hover {
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-        }
-
-        .choices__list--dropdown .choices__item:hover::before {
-            transform: scale(1.1);
-            transition: transform 0.2s ease;
-        }
-
-        /* Selected item styling */
-        .choices__list--multiple .choices__item {
-            padding: 4px 32px 4px 12px !important;
-            border-radius: 12px !important;
-            margin: 4px !important;
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-            font-weight: 500 !important;
-            border: 1px solid var(--bs-primary) !important;
-            position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .choices__list--multiple .choices__item[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 6px;
-            background-color: var(--bs-primary);
-            border: 2px solid var(--bs-light);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Remove button styling */
-        .choices__button--remove {
-            /*position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;*/
-            background-color: transparent !important;
-            border: none !important;
-            color: var(--bs-dark) !important;
-            cursor: pointer !important;
-            padding: 0 !important;
-            width: 20px !important;
-            height: 20px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: color 0.2s ease !important;
-        }
-
-        .choices__button--remove::before {
-            content: 'Ã—' !important;
-            font-size: 12px !important;
-            line-height: 1 !important;
-        }
-
-        .choices__button--remove:hover {
-            color: var(--bs-primary) !important;
-        }
-
-        .choices__button--remove--active {
-            color: var(--bs-primary) !important;
-        }
-
-        /* Choices.js dropdown item styling */
-        .choices__list--dropdown .choices__item {
-            padding: 8px 12px !important;
-            border-radius: 4px !important;
-            margin: 2px 0 !important;
-            transition: all 0.2s ease !important;
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-            font-weight: 500 !important;
-        }
-
-        .choices__list--dropdown .choices__item[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-            background-color: var(--bs-primary);
-        }
-
-        /* Choices.js selected item styling */
-        .choices__list--multiple .choices__item {
-            padding: 4px 32px 4px 12px !important;
-            border-radius: 12px !important;
-            margin: 4px !important;
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-            font-weight: 500 !important;
-            border: 1px solid var(--bs-primary) !important;
-            position: relative;
-        }
-
-        .choices__list--multiple .choices__item[data-color]::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 6px;
-            background-color: var(--bs-primary);
-        }
-
-        /* Remove button styling */
-        .choices__button--remove {
-            /*position: absolute !important;
-    right: 8px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;*/
-            background-color: transparent !important;
-            border: none !important;
-            color: var(--bs-dark) !important;
-            cursor: pointer !important;
-            padding: 0 !important;
-            width: 16px !important;
-            height: 16px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        .choices__button--remove::before {
-            content: 'Ã—' !important;
-            font-size: 12px !important;
-            line-height: 1 !important;
-        }
-
-        .choices__button--remove:hover {
-            color: var(--bs-primary) !important;
-        }
-
-        .choices__button--remove--active {
-            color: var(--bs-primary) !important;
-        }
-
-        .choices__button i {
-            font-size: 14px;
-        }
-
-        /* Improve visibility of selected items */
-        .choices__list--multiple .choices__item {
-            opacity: 1 !important;
-            background-color: var(--bs-light) !important;
-            color: var(--bs-dark) !important;
-        }
-
-        .choices__list--multiple .choices__item[data-color] {
-            border: 1px solid var(--bs-primary) !important;
-        }
-
-        .choices[data-type*=select-multiple] .choices__inner .choices__button,
-        .choices[data-type*=text] .choices__button {
-            margin-left: 2px;
-        }
-
-        .choices__list.choices__list--multiple>div {
-            padding: 2px 8px;
-            border-radius: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .choices__list.choices__list--multiple>div button {
-            border: none;
-            color: red;
-        }
+        .sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
+        .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
+        
     </style>
     <script>
-        // document.addEventListener('mousedown', function(e) {
-        //     if (
-        //         e.target.classList.contains('choices__button--remove') ||
-        //         e.target.classList.contains('choices__item')
-        //     ) {
-        //         e.stopPropagation();
-        //     }
-        // }, true);
-
-        // document.addEventListener('click', function(e) {
-        //     if (
-        //         e.target.classList.contains('choices__button--remove') ||
-        //         e.target.classList.contains('choices__item')
-        //     ) {
-        //         e.stopPropagation();
-        //     }
-        // }, true);
-
-        // // Only stop click event on the remove button, not mousedown, and not on .choices__item
-        // document.addEventListener('click', function(e) {
-        //     if (e.target.classList.contains('choices__button--remove')) {
-        //         e.stopPropagation();
-        //     }
-        // }, true);
-
-
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const tagSelect = document.getElementById('ticket-tags');
-        //     window.choices = new Choices(tagSelect, {
-        //         removeItemButton: true,
-        //         searchResultLimit: 10,
-        //         searchFields: ['label', 'value'],
-        //         shouldSort: false,
-        //         classNames: {
-        //             containerOuter: 'choices',
-        //             containerInner: 'choices__inner',
-        //             input: 'choices__input',
-        //             inputCloned: 'choices__input--cloned',
-        //             list: 'choices__list',
-        //             listItems: 'choices__list--multiple',
-        //             listSingle: 'choices__list--single',
-        //             listDropdown: 'choices__list--dropdown',
-        //             item: 'choices__item',
-        //             itemSelectable: 'choices__item--selectable',
-        //             itemDisabled: 'choices__item--disabled',
-        //             itemChoice: 'choices__item--choice',
-        //             placeholder: 'choices__placeholder',
-        //             group: 'choices__group',
-        //             groupHeading: 'choices__heading',
-        //             button: 'choices__button',
-        //             activeState: 'is-active',
-        //             focusState: 'is-focused',
-        //             openState: 'is-open',
-        //             disabledState: 'is-disabled',
-        //             highlightedState: 'is-highlighted',
-        //             selectedState: 'is-selected',
-        //             flippedState: 'is-flipped',
-        //             loadingState: 'is-loading',
-        //             noResults: 'has-no-results',
-        //             noChoices: 'has-no-choices'
-        //         },
-
-        //         callbackOnCreateTemplates: function(template) {
-        //             return {
-        //                 item: (classNames, data) => {
-        //                     const color = data.customProperties?.color || '';
-        //                     return template(`
-        //                         <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable}" data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color="${color}">
-        //                             <span class="tag-dot" style="background-color:${color}"></span>
-        //                             ${data.label}
-        //                             <button type="button" class="${classNames.button} choices__button--remove" data-button aria-label="Remove item">X</button>
-        //                         </div>
-        //                     `);
-        //                 },
-        //                 choice: (classNames, data) => {
-        //                     const color = data.customProperties?.color || '';
-        //                     return template(`
-        //                         <div class="${classNames.item} ${classNames.itemChoice} ${data.disabled ? classNames.itemDisabled : classNames.itemSelectable}" data-select-text="Press to select" data-choice data-id="${data.id}" data-value="${data.value}" ${data.disabled ? 'data-choice-disabled aria-disabled="true"' : 'data-choice-selectable'} data-color="${color}">
-        //                             <span class="tag-dot" style="background-color:${color}"></span>
-        //                             ${data.label}
-        //                         </div>
-        //                     `);
-        //                 }
-        //             };
-        //         }
-        //     });
-
-        //     // Propagate tag color to Choices.js DOM on changes
-        //     function refreshTagDots() {
-        //         document.querySelectorAll('.choices__list--multiple .choices__item').forEach(item => {
-        //             const color = item.getAttribute('data-color');
-        //             let dot = item.querySelector('.tag-dot');
-        //             if (!dot && color) {
-        //                 dot = document.createElement('span');
-        //                 dot.className = 'tag-dot';
-        //                 dot.style.backgroundColor = color;
-        //                 item.insertBefore(dot, item.firstChild);
-        //             } else if (dot && color) {
-        //                 dot.style.backgroundColor = color;
-        //             }
-        //         });
-        //         document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(item => {
-        //             const color = item.getAttribute('data-color');
-        //             let dot = item.querySelector('.tag-dot');
-        //             if (!dot && color) {
-        //                 dot = document.createElement('span');
-        //                 dot.className = 'tag-dot';
-        //                 dot.style.backgroundColor = color;
-        //                 item.insertBefore(dot, item.firstChild);
-        //             } else if (dot && color) {
-        //                 dot.style.backgroundColor = color;
-        //             }
-        //         });
-        //     }
-        //     // Observe changes to Choices.js lists
-        //     const observer = new MutationObserver(refreshTagDots);
-        //     document.querySelectorAll('.choices__list').forEach(list => {
-        //         observer.observe(list, { childList: true, subtree: true });
-        //     });
-        //     // Also refresh on click (for keyboard nav)
-        //     document.querySelector('.choices').addEventListener('click', function() {
-        //         setTimeout(refreshTagDots, 10);
-        //     });
-        //     refreshTagDots();
-        // });
-
-
-        function propagateTagColors() {
-            // Map value to color from original select
-            const select = document.getElementById('ticket-tags');
-            if (!select) return;
-            const valueToColor = {};
-            Array.from(select.options).forEach(opt => {
-                if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
-            });
-            // Dropdown items
-            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
-                const value = item.getAttribute('data-value');
-                if (valueToColor[value]) {
-                    item.setAttribute('data-color', valueToColor[value]);
-                }
-            });
-            // Selected items
-            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
-                const value = item.getAttribute('data-value');
-                if (valueToColor[value]) {
-                    item.setAttribute('data-color', valueToColor[value]);
-                }
-            });
-        }
-
-        function updateTagDots() {
-            // Dropdown items
-            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
-                if (!item.querySelector('.tag-dot')) {
-                    let color = item.getAttribute('data-color');
-                    let dot = document.createElement('span');
-                    dot.className = 'tag-dot';
-                    dot.style.backgroundColor = color;
-                    item.prepend(dot);
-                }
-            });
-            // Selected items
-            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
-                if (!item.querySelector('.tag-dot')) {
-                    let color = item.getAttribute('data-color');
-                    let dot = document.createElement('span');
-                    dot.className = 'tag-dot';
-                    dot.style.backgroundColor = color;
-                    item.prepend(dot);
-                }
-            });
-        }
         document.addEventListener('DOMContentLoaded', function() {
             const tagsElement = document.getElementById('ticket-tags');
             if (tagsElement) {
@@ -1335,10 +658,7 @@ function sb_ticket_edit_box()
                     }
                 });
 
-                function refreshTagDots() {
-                    propagateTagColors();
-                    updateTagDots();
-                }
+
                 refreshTagDots();
                 tagsElement.addEventListener('change', refreshTagDots);
                 // Listen for any DOM changes in the choices list (item removed/added)
@@ -1356,9 +676,50 @@ function sb_ticket_edit_box()
                     setTimeout(refreshTagDots, 10);
                 });
             }
+
+
+            
+            // Code to display applied tags in a palette
+            // const paletteContainer = document.getElementById('selected-tags-palette');
+            // document.getElementById('tags-filter').addEventListener('change', function () {
+            // const selected = tagsFilterChoices.getValue();
+            //     const selectedValues = $(this).val(); // Gets array of selected values
+            //     paletteContainer.innerHTML = ''; // clear old circles
+            //     selected.forEach(item => {
+            //         const color = item.customProperties?.color || '#ccc';
+            //         const li = document.createElement('div');
+            //         li.className = 'is-selected';
+            //         li.setAttribute('data-item', '');
+            //         li.setAttribute('data-id', item.id);
+            //         li.setAttribute('data-value', item.value);
+            //         li.setAttribute('aria-selected', 'true');
+            //         li.setAttribute('data-color1', color);
+            //         li.style.border = `1px solid ${color}`;
+
+            //         const span = document.createElement('span');
+            //         span.className = 'tag-dot';
+            //         span.style.backgroundColor = color;
+
+            //         const text = document.createTextNode(item.label);
+
+            //         const button = document.createElement('button');
+            //         button.type = 'button';
+            //         button.className = 'choices__button';
+            //         button.setAttribute('aria-label', `Remove item: ${item.value}`);
+            //         button.dataset.button = '';
+
+            //         const icon = document.createElement('i');
+            //         icon.className = 'fa-solid fa-xmark choice-remove';
+            //         icon.setAttribute('aria-hidden', 'true');
+
+            //         button.appendChild(icon);
+            //         li.appendChild(span);
+            //         li.appendChild(text);
+            //         li.appendChild(button);
+            //         paletteContainer.appendChild(li);
+            //     });
+            // });
         });
-    </script>
-    <script>
         $('#select-customer').select2({
             placeholder: 'Type and search...',
             ajax: {
@@ -1448,6 +809,60 @@ function sb_ticket_edit_box()
 
     <!-- File Upload Handling -->
     <script>
+
+        function propagateTagColors() {
+            // Map value to color from original select
+            const select = document.getElementById('ticket-tags');
+            if (!select) return;
+            const valueToColor = {};
+            Array.from(select.options).forEach(opt => {
+                if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
+            });
+            // Dropdown items
+            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
+                const value = item.getAttribute('data-value');
+                if (valueToColor[value]) {
+                    item.setAttribute('data-color', valueToColor[value]);
+                }
+            });
+            // Selected items
+            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
+                const value = item.getAttribute('data-value');
+                if (valueToColor[value]) {
+                    item.setAttribute('data-color', valueToColor[value]);
+                }
+            });
+        }
+
+        function updateTagDots() {
+            // Dropdown items
+            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
+                if (!item.querySelector('.tag-dot')) {
+                    let color = item.getAttribute('data-color');
+                    let dot = document.createElement('span');
+                    dot.className = 'tag-dot';
+                    dot.style.backgroundColor = color;
+                    item.prepend(dot);
+                }
+            });
+            // Selected items
+            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
+                if (!item.querySelector('.tag-dot')) {
+                    let color = item.getAttribute('data-color');
+                    let dot = document.createElement('span');
+                    dot.className = 'tag-dot';
+                    dot.style.backgroundColor = color;
+                    item.prepend(dot);
+                }
+            });
+        }
+
+                    function refreshTagDots() {
+                        propagateTagColors();
+                        updateTagDots();
+                    }
+
+
         jQuery(document).ready(function($) {
             // This listens for change events on any current or future select inside #parent-container
             // Trigger change
@@ -1766,8 +1181,7 @@ function sb_ticket_edit_box()
     </script>
 <?php } ?>
 <?php
-function sb_login_box()
-{ ?>
+function sb_login_box() { ?>
     <form class="sb sb-rich-login sb-admin-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1801,20 +1215,20 @@ function sb_login_box()
     </form>
     <img id="sb-error-check" style="display:none" src="<?php echo SB_URL . '/media/logo.svg' ?>" />
     <script>
-        (function($) {
-            $(document).ready(function() {
+        (function ($) {
+            $(document).ready(function () {
                 $('.sb-admin-start').removeAttr('style');
-                $('.sb-submit-login').on('click', function() {
-                    SBF.loginForm(this, false, function() {
+                $('.sb-submit-login').on('click', function () {
+                    SBF.loginForm(this, false, function () {
                         location.reload();
                     });
                 });
-                $('#sb-error-check').one('error', function() {
+                $('#sb-error-check').one('error', function () {
                     $('.sb-info').html('It looks like the chat URL has changed. Edit the config.php file(it\'s in the Support Board folder) and update the SB_URL constant with the new URL.').addClass('sb-active');
                 });
                 SBF.serviceWorker.init();
             });
-            $(window).keydown(function(e) {
+            $(window).keydown(function (e) {
                 if (e.which == 13) {
                     $('.sb-submit-login').click();
                 }
@@ -1830,8 +1244,7 @@ function sb_login_box()
     </script>
 <?php } ?>
 <?php
-function sb_dialog()
-{ ?>
+function sb_dialog() { ?>
     <div class="sb-dialog-box sb-lightbox">
         <div class="sb-title"></div>
         <p></p>
@@ -1849,8 +1262,7 @@ function sb_dialog()
     </div>
 <?php } ?>
 <?php
-function sb_updates_box()
-{ ?>
+function sb_updates_box() { ?>
     <div class="sb-lightbox sb-updates-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1878,8 +1290,7 @@ function sb_updates_box()
     </div>
 <?php } ?>
 <?php
-function sb_app_box()
-{ ?>
+function sb_app_box() { ?>
     <div class="sb-lightbox sb-app-box" data-app="">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1924,8 +1335,7 @@ function sb_app_box()
     </div>
 <?php } ?>
 <?php
-function sb_direct_message_box()
-{ ?>
+function sb_direct_message_box() { ?>
     <div class="sb-lightbox sb-direct-message-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1967,8 +1377,7 @@ function sb_direct_message_box()
     </div>
 <?php } ?>
 <?php
-function sb_routing_select($exclude_id = false)
-{
+function sb_routing_select($exclude_id = false) {
     $agents = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE (user_type = "agent" OR user_type = "admin")' . ($exclude_id ? (' AND id <> ' . sb_db_escape($exclude_id)) : ''), false);
     $code = '<div class="sb-inline sb-inline-agents"><h3>' . sb_('Agent') . '</h3><div id="conversation-agent" class="sb-select"><p>' . sb_('None') . '</p><ul><li data-id="" data-value="">' . sb_('None') . '</li>';
     for ($i = 0; $i < count($agents); $i++) {
@@ -1978,11 +1387,10 @@ function sb_routing_select($exclude_id = false)
 }
 ?>
 <?php
-function sb_installation_box($error = false)
-{
+function sb_installation_box($error = false) {
     global $SB_LANGUAGE;
     $SB_LANGUAGE = isset($_GET['lang']) ? $_GET['lang'] : strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-?>
+    ?>
     <div class="sb-main sb-admin sb-admin-start">
         <form class="sb-intall sb-admin-box">
             <?php if ($error === false || $error == 'installation')
@@ -2083,8 +1491,7 @@ function sb_installation_box($error = false)
  *
  */
 
-function sb_component_admin()
-{
+function sb_component_admin() {
     $is_cloud = sb_is_cloud();
     $cloud_active_apps = $is_cloud ? sb_get_external_setting('active_apps', []) : [];
     $sb_settings = sb_get_json_resource('json/settings.json');
@@ -2113,13 +1520,12 @@ function sb_component_admin()
         ['SB_ARMEMBER', 'armember', 'ARMember', 'Synchronize customers, enable ticket and chat support for subscribers only, view subscription plans in the admin area.'],
         ['SB_MARTFURY', 'martfury', 'Martfury', 'Increase sales and connect you and sellers with customers in real-time by integrating Martfury with {R}.'],
     ];
-
     $logged = $active_user && sb_is_agent($active_user) && (!defined('SB_WP') || !sb_get_setting('wp-force-logout') || sb_wp_verify_admin_login());
     $supervisor = sb_supervisor();
     $is_admin = $active_user && sb_is_agent($active_user, true, true) && !$supervisor;
     $sms = sb_get_multi_setting('sms', 'sms-user');
-    $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
-    $active_areas = [
+    $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl() ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
+     $active_areas = [
         'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']),
         'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
         'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']),
@@ -2128,9 +1534,7 @@ function sb_component_admin()
         'tickets' => $is_admin,
         'dashboard' => $is_admin,
     ];
-
     $disable_translations = sb_get_setting('admin-disable-settings-translations');
-
     $admin_colors = [sb_get_setting('color-admin-1'), sb_get_setting('color-admin-2')];
     if ($supervisor && !$supervisor['supervisor-send-message']) {
         echo '<style>.sb-board .sb-conversation .sb-editor,#sb-start-conversation,.sb-top-bar [data-value="sms"],.sb-top-bar [data-value="email"],.sb-menu-users [data-value="message"],.sb-menu-users [data-value="sms"],.sb-menu-users [data-value="email"] { display: none !important; }</style>';
@@ -2160,7 +1564,8 @@ function sb_component_admin()
         }
         echo '<style>' . $css . '</style>';
     }
-?>
+    ?>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
             <div class="sb-header header_new">
@@ -2234,27 +1639,27 @@ function sb_component_admin()
                         <?php sb_e('Conversations') ?>
                     </span>
                 </a>
-            <?php
-            if ($active_areas['users']) {
-                echo '<a id="sb-users"><span>' . sb_('Users') . '</span></a>';
-            }
-            if ($active_areas['tickets']) {
-                echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
-            }
-            if ($active_areas['chatbot']) {
-                echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>';
-            }
-            if ($active_areas['articles']) {
-                echo '<a id="sb-articles"><span>' . sb_('Articles') . '</span></a>';
-            }
-            if ($active_areas['reports']) {
-                echo '<a id="sb-reports"><span>' . sb_('Reports') . '</span></a>';
-            }
-            if ($active_areas['settings']) {
-                echo '<a id="sb-settings"><span>' . sb_('Settings') . '</span></a>';
-            }
-            ?>
-                </div> -->
+                        <?php
+                        if ($active_areas['users']) {
+                            echo '<a id="sb-users"><span>' . sb_('Users') . '</span></a>';
+                        }
+                        if ($active_areas['tickets']) {
+                            echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
+                        }
+                        if ($active_areas['chatbot']) {
+                            echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>';
+                        }
+                        if ($active_areas['articles']) {
+                            echo '<a id="sb-articles"><span>' . sb_('Articles') . '</span></a>';
+                        }
+                        if ($active_areas['reports']) {
+                            echo '<a id="sb-reports"><span>' . sb_('Reports') . '</span></a>';
+                        }
+                        if ($active_areas['settings']) {
+                            echo '<a id="sb-settings"><span>' . sb_('Settings') . '</span></a>';
+                        }
+                        ?>
+                    </div> -->
                 <!-- <div class="sb-admin-nav-right sb-menu-mobile">
                     <i class="sb-icon-menu"></i>
                     <div class="sb-desktop">
@@ -3467,7 +2872,7 @@ function sb_component_admin()
                                 <?php
                                 sb_apps_panel();
                                 sb_departments('custom-select');
-                                if (sb_get_multi_setting('routing', 'routing-active') || (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') && sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-menu'))) {
+                                if (sb_get_multi_setting('routing', 'routing-active') || (sb_is_agent(false, true, true) && sb_get_multi_setting('queue', 'queue-active')) || (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') && sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-menu'))) {
                                     sb_routing_select();
                                 }
                                 if (!sb_get_multi_setting('disable', 'disable-notes')) {
@@ -3505,7 +2910,7 @@ function sb_component_admin()
                                 <!-- <h2>
                                     <?php sb_e('Users list') ?>
                                 </h2> -->
-                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
+                                <div class="sb-menu-wide sb-menu-users">
                                     <div>
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
@@ -3615,7 +3020,8 @@ function sb_component_admin()
                 if ($active_areas['chatbot']) {
                     require_once(SB_PATH . '/apps/dialogflow/components.php');
                     sb_dialogflow_chatbot_area();
-                } ?>
+                }
+                ?>
                 <?php if ($active_areas['tickets']) { ?>
                     <style>
                         .sb-table .span-border {
@@ -3638,6 +3044,32 @@ function sb_component_admin()
                                 </a>
                             </div>
                             <div>
+                                <!-- <div  class="color-palette tag-palette">
+                                    <span class="sb-active"></span>
+                                    <ul id="selected-tags-palette">
+                                    </ul>
+                                </div> -->
+                                <div class="mr-5 tags-filter" style="">
+                                    <?php
+                                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                        $tagsHtml = '';
+                                        $count = count($tags);
+                                        if ($count > 0) 
+                                        {
+                                            ?>
+                                            <select id="tags-filter" name="tags[]" multiple>
+                                                <?php
+                                                for ($i = 0; $i < $count; $i++) {
+                                                $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                }
+                                                echo $tagsHtml;
+                                                ?>
+                                            </select>
+                                            <?php 
+                                        } 
+                                    ?>
+                                    
+                                </div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
@@ -3738,11 +3170,32 @@ function sb_component_admin()
                                         <div class="col-md-12 p-0">
                                             <div class="row">
                                                 <div class="col-md-8 p-0">
-                                                    <h2 class="title mb-0"># TR-51 / Email Subject</h2>
+                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject">Email Subject</span></h2>
                                                 </div>
                                                 <div class="col-md-4 p-0">
+                                                    <?php
+                                                    function sb_get_priorities()
+                                                    {
+                                                        $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                                        return $priorities;
+                                                    }
+                                                    function sb_get_statues()
+                                                    {
+                                                        $status = sb_db_get('SELECT * FROM ticket_status', false);
+                                                        return $status;
+                                                    }
+                                                    $statues = sb_get_statues();
+                                                    $priorities = sb_get_priorities();    
+                                                    ?>
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
-                                                        <span class="status-open">Open <i class="fas fa-chevron-down ms-1"></i></span>
+                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
+                                                            <?php
+                                                            foreach ($statues as $key => $value) {
+                                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+
                                                         <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
                                                             <i class="fa-solid fa-check mr-1"></i>
                                                             Save changes
@@ -3753,9 +3206,18 @@ function sb_component_admin()
                                                     <i class="fas fa-paperclip fs-4 mr-2"></i>
                                                     <span class="label">Attachments (02)</span>
                                                 </div>
-                                                <div class="col-md-8 p-0">
+                                                <div class="col-md-9 p-0">
                                                     <h2 class="sub_title my-4">Description</h2>
-                                                    <div class="label mb-3 mr-3">Feature :
+                                                    <div id="description" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                                                        <div style="display: inline-block;padding:0;width:100%;">
+                                                            <div id="ticketdescription" style="height: 180px;"></div>
+                                                        </div>
+                                                        <input id="ticket_id" type="hidden" name="ticket_id" />
+                                                        <input id="conversation_id" type="hidden" name="conversation_id" />
+                                                        <!-- Hidden input to store uploaded file data -->
+                                                        <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+                                                    </div>
+                                                    <!-- <div id="tdescription" class="label mb-3 mr-3">Feature :
                                                         <span>[Feature name]</span>
                                                     </div>
                                                     <div class="label mb-3 mr-3">As :
@@ -3763,7 +3225,7 @@ function sb_component_admin()
                                                     </div>
                                                     <div class="label mr-3">I want to :
                                                         <span>[Action to perform]</span>
-                                                    </div>
+                                                    </div> -->
                                                     <h2 class="sub_title my-4">Comments</h2>
                                                     <div class="msg">
                                                         <div class="mright">
@@ -3844,34 +3306,60 @@ function sb_component_admin()
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 p-0">
+                                                <div class="col-md-3 p-0">
                                                     <div class="pl-5">
                                                         <div class="sidepanel">
                                                             <h4 class="sub_title mb-5">Details</h4>
                                                             <div class="mb-3">
                                                                 <div class="field-label">Assignee</div>
                                                                 <div class="d-flex align-items-center justify-content-between">
-                                                                    <div class="d-flex align-items-center gap-2">
+                                                                    <div class="d-flex align-items-center gap-2 ticket-assignee">
                                                                         <i class="fas fa-user-circle fs-4 text-muted"></i>
-                                                                        <span>Unassigned</span>
+                                                                        <div id="assigned_to" data-type="select" class="sb-input">
+                                                                            <select id="select-ticket-agent" style="width:100%;">
+                                                                                
+                                                                            </select>
+                                                                        </div>  
                                                                     </div>
-                                                                    <p class="assign-link m-0 p-0">Assign to me</p>
+                                                                    
+                                                                    <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <div class="field-label">Reporter</div>
-                                                                <div class="d-flex align-items-center gap-2">
+                                                                <div class="d-flex align-items-center gap-2 ticket-reporter">
                                                                     <img class="reporter" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter">
-                                                                    <span>McKinsey Vermillion</span>
+                                                                    <span></span>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <div class="field-label">Tags</div>
                                                                 <div class="mb-2">
-                                                                    <input type="text" style="max-width: 220px;" class="form-control form-control-sm" placeholder="Add a tag...">
+                                                                    <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                    <div class="mr-5 tags-filter" style="">
+                                                                        <?php
+                                                                            $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                                                            $tagsHtml = '';
+                                                                            $count = count($tags);
+                                                                            if ($count > 0) 
+                                                                            {
+                                                                                ?>
+                                                                                <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                    <?php
+                                                                                    for ($i = 0; $i < $count; $i++) {
+                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                    }
+                                                                                    echo $tagsHtml;
+                                                                                    ?>
+                                                                                </select>
+                                                                                <?php 
+                                                                            } 
+                                                                        ?>
+                                                                        
+                                                                    </div>
                                                                 </div>
-                                                                <div>
-                                                                    <span class="tag-badge">
+                                                                <div class="sb-td-tags tag-badges">
+                                                                    <!-- <span class="tag-badge">
                                                                         <i class="fas fa-check text-muted"></i>
                                                                         Business
                                                                     </span>
@@ -3882,18 +3370,24 @@ function sb_component_admin()
                                                                     <span class="tag-badge">
                                                                         <i class="fas fa-check text-muted"></i>
                                                                         Priority
-                                                                    </span>
+                                                                    </span> -->
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <div class="field-label">Labels</div>
-                                                                <span class="text-muted">None</span>
-                                                            </div>
-                                                            <div class="mb-3">
+                                                            <div class="mb-3 sb-input d-block">
                                                                 <div class="field-label">Priority</div>
-                                                                <div class="priority-high">
+                                                                <!-- <div class="ticket-priority">
                                                                     High
                                                                 </div>
+                                                                <div id="priority_id" data-type="select" class="sb-input">
+                                                                    <span class="required-label"><?php sb_e('Priority') ?></span> -->
+                                                                    <select id="ticket-priority" required>
+                                                                        <?php
+                                                                        foreach ($priorities as $key => $value) {
+                                                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                <!-- </div> -->
                                                             </div>
                                                             <div class="divider"></div>
                                                             <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
@@ -3907,13 +3401,184 @@ function sb_component_admin()
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function propagateTagColors() {
+                        // Map value to color from original select
+                        const select = document.getElementById('ticket-tags');
+                        if (!select) return;
+                        const valueToColor = {};
+                        Array.from(select.options).forEach(opt => {
+                            if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
+                        });
+                        // Dropdown items
+                        document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
+                            const value = item.getAttribute('data-value');
+                            if (valueToColor[value]) {
+                                item.setAttribute('data-color', valueToColor[value]);
+                            }
+                        });
+                        // Selected items
+                        document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
+                            const value = item.getAttribute('data-value');
+                            if (valueToColor[value]) {
+                                item.setAttribute('data-color', valueToColor[value]);
+                            }
+                        });
+                    }
+
+                    function updateTagDots() {
+                        // Dropdown items
+                        document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
+                            if (!item.querySelector('.tag-dot')) {
+                                let color = item.getAttribute('data-color');
+                                let dot = document.createElement('span');
+                                dot.className = 'tag-dot';
+                                dot.style.backgroundColor = color;
+                                item.prepend(dot);
+                            }
+                        });
+                        // Selected items
+                        document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
+                            if (!item.querySelector('.tag-dot')) {
+                                let color = item.getAttribute('data-color');
+                                let dot = document.createElement('span');
+                                dot.className = 'tag-dot';
+                                dot.style.backgroundColor = color;
+                                item.prepend(dot);
+                            }
+                        });
+                    }
+		
+                    function refreshTagDots() {
+                        propagateTagColors();
+                        updateTagDots();
+                    }
+
+                    const tagsFilter = document.getElementById('tags-filter');
+                    if (tagsFilter) {
+                        window.tagsFilterChoices = new Choices(tagsFilter, {
+                            removeItemButton: true,
+                            placeholder: true,
+                            placeholderValue: 'Select tags...',
+                            allowHTML: true,
+                            itemSelectText: '',
+                            callbackOnCreateTemplates: function(template) {
+                                return {
+                                    item: (classNames, data) => {
+                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                        return template(`
+                                            <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                <span class="tag-dot" style="background-color:${color}"></span>
+                                                ${data.label}
+                                                <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
+                                            </div>
+                                        `);
+                                    }
+                            };
+                        }
+                        });
+                        
+                        refreshTagDots();
+                        tagsFilter.addEventListener('change', refreshTagDots);
+                        // Listen for any DOM changes in the choices list (item removed/added)
+                        const choicesList = document.querySelector('.choices__list--dropdown');
+                        if (choicesList) {
+                            const observer = new MutationObserver(() => {
+                                refreshTagDots();
+                            });
+                            observer.observe(choicesList, { childList: true, subtree: true });
+                        }
+                        document.querySelector('.choices').addEventListener('click', function() {
+                            setTimeout(refreshTagDots, 10);
+                        });
+                    }
+
+                    const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
+                    if (ticketDetailTagsFilter) {
+                        window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
+                            removeItemButton: true,
+                            placeholder: true,
+                            placeholderValue: 'Select tags...',
+                            allowHTML: true,
+                            itemSelectText: '',
+                            callbackOnCreateTemplates: function(template) {
+                                return {
+                                    item: (classNames, data) => {
+                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                        return template(`
+                                            <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                <span class="tag-dot" style="background-color:${color}"></span>
+                                                ${data.label}
+                                                <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
+                                            </div>
+                                        `);
+                                    }
+                            };
+                        }
+                        });
+                        
+                        refreshTagDots();
+                        ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
+                        // Listen for any DOM changes in the choices list (item removed/added)
+                        const choicesList = document.querySelector('.choices__list--dropdown');
+                        if (choicesList) {
+                            const observer = new MutationObserver(() => {
+                                refreshTagDots();
+                            });
+                            observer.observe(choicesList, { childList: true, subtree: true });
+                        }
+                        document.querySelector('.choices').addEventListener('click', function() {
+                            setTimeout(refreshTagDots, 10);
+                        });
+                    }
+
+                    
+
+                    $('#select-ticket-agent').select2({
+                    placeholder: 'Type and search...',
+                    ajax: {
+                        url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                        method: 'POST',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                function: 'ajax_calls',
+                                'calls[0][function]': 'search-get-users',
+                                'login-cookie': SBF.loginCookie(),
+                                'q': params.term, // ✅ Pass search term
+                                'type': 'agent'
+                            };
+                        },
+                        processResults: function(response) {
+                            //response = JSON.parse(response);
+                            if (response[0][0] == 'success') {
+                                const users = response[0][1];
+                                console.log("Processed users:", response[0][1]);
+                                return {
+                                    results: users.map(user => ({
+                                        id: user.id,
+                                        text: user.first_name + ' ' + user.last_name,
+                                    }))
+                                };
+                            }
+                        },
+                        cache: true
+                    },
+                    minimumInputLength: 1
+                });
+                </script>
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
                         <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
+                                
                                 <div class="sb-menu-wide sb-menu-articles">
+                                    
                                     <ul>
                                         <li data-type="articles" class="sb-active">
                                             <?php sb_e('Articles') ?>
@@ -3934,6 +3599,7 @@ function sb_component_admin()
                                 </div>
                             </div>
                             <div>
+                                
                                 <a class="sb-btn sb-save-articles sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
@@ -3946,7 +3612,7 @@ function sb_component_admin()
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                 <div class="sb-add-article sb-btn sb-icon sb-btn-white">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e('Add new article') ?>
                                 </div>
@@ -3965,54 +3631,54 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <div class="articles_bg">
-                                        <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e('Title') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text sb-article-title">
-                                            <div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('Content') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-textarea sb-article-content">
-                                            <div>
-                                                <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('External link') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text sb-article-link">
-                                            <div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="sb-article-categories sb-grid">
-                                            <div>
-                                                <h2>
-                                                    <?php sb_e('Parent category') ?>
-                                                </h2>
-                                                <div class="sb-setting sb-type-select">
-                                                    <div>
-                                                        <select id="article-parent-categories"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <h2>
-                                                    <?php sb_e('Categories') ?>
-                                                </h2>
-                                                <div class="sb-setting sb-type-select">
-                                                    <div>
-                                                        <select id="article-categories"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 id="sb-article-id"></h2>
+                                <h2 class="sb-language-switcher-cnt">
+                                    <?php sb_e('Title') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text sb-article-title">
+                                    <div>
+                                        <input type="text" />
                                     </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('Content') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-textarea sb-article-content">
+                                    <div>
+                                        <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('External link') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text sb-article-link">
+                                    <div>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                                <div class="sb-article-categories sb-grid">
+                                    <div>
+                                        <h2>
+                                            <?php sb_e('Parent category') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-select">
+                                            <div>
+                                                <select id="article-parent-categories"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h2>
+                                            <?php sb_e('Categories') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-select">
+                                            <div>
+                                                <select id="article-categories"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 id="sb-article-id"></h2>
+                                 </div>
                                 </div>
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
@@ -4030,37 +3696,37 @@ function sb_component_admin()
                                         <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
                                             Manage and organize content types.
                                         </h2>
-                                        <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e('Name') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text">
-                                            <div>
-                                                <input id="category-title" type="text" />
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('Description') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-textarea">
-                                            <div>
-                                                <textarea id="category-description"></textarea>
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('Image') ?>
-                                        </h2>
-                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                            <div id="category-image" class="image">
-                                                <div class="sb-icon-close"></div>
-                                            </div>
-                                        </div>
-                                        <h2 class="category-parent">
-                                            <?php sb_e('Parent category') ?>
-                                        </h2>
-                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                            <div class="input">
-                                                <input id="category-parent" type="checkbox" />
-                                            </div>
+                                <h2 class="sb-language-switcher-cnt">
+                                    <?php sb_e('Name') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text">
+                                    <div>
+                                        <input id="category-title" type="text" />
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('Description') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-textarea">
+                                    <div>
+                                        <textarea id="category-description"></textarea>
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('Image') ?>
+                                </h2>
+                                <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                    <div id="category-image" class="image">
+                                        <div class="sb-icon-close"></div>
+                                    </div>
+                                </div>
+                                <h2 class="category-parent">
+                                    <?php sb_e('Parent category') ?>
+                                </h2>
+                                <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                    <div class="input">
+                                        <input id="category-parent" type="checkbox" />
+                                         </div>
                                         </div>
                                     </div>
                                 </div>
@@ -4069,7 +3735,7 @@ function sb_component_admin()
                     </div>
                 <?php } ?>
                 <?php if ($active_areas['reports']) { ?>
-                    <div class="sb-area-reports sb-area-reports_new  sb-loading">
+                    <div class="sb-area-reports sb-area-reports_new sb-loading">
                         <?php echo $header; ?>
                         <div class="sb-top-bar p-3">
                             <div>
@@ -4094,6 +3760,7 @@ function sb_component_admin()
                                 <ul>
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
+                                        
                                         <?php sb_e('Conversations') ?>
                                     </li>
                                     <li class="li" id="conversations" class="sb-active">
@@ -4267,8 +3934,7 @@ function sb_component_admin()
                                     </li> -->
                                 </ul>
                             </div>
-                            <div class="sb-content sb-scroll-area pt-4"
-                                style="height: calc(100% - 40px);">
+                            <div class="sb-content sb-scroll-area pt-4" style="height: calc(100% - 40px);">
                                 <div class="sb-active">
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
@@ -4358,6 +4024,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <?php sb_populate_settings('messages', $sb_settings) ?>
+
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -4371,14 +4038,13 @@ function sb_component_admin()
                                                 <?php sb_e('Save changes') ?>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
                                 </div>
                                 <?php sb_apps_area($apps, $cloud_active_apps) ?>
                                 <!-- <div>
                                     <?php sb_populate_settings('articles', $sb_settings) ?>
                                 </div> -->
-
                                 <div>
                                     <div class="sb-automations-area">
                                         <div class="sb-select">
@@ -4394,7 +4060,7 @@ function sb_component_admin()
                                                 </li>
                                                 <?php if ($sms)
                                                     echo '<li data-value="sms">' . sb_('Text messages') . '</li>' ?>
-                                                <li data-value="popups">
+                                                    <li data-value="popups">
                                                     <?php sb_e('Pop-ups') ?>
                                                 </li>
                                                 <li data-value="design">
@@ -4512,7 +4178,7 @@ function sb_component_admin()
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
-        <?php
+            <?php
         } else {
             if ($is_cloud) {
                 sb_cloud_reset_login();
@@ -4530,7 +4196,7 @@ function sb_component_admin()
         <input type="email" name="email" style="display:none" autocomplete="email" />
         <input type="password" name="hidden" style="display:none" autocomplete="new-password" />
     </div>
-<?php
+    <?php
     if (!empty(sb_get_setting('custom-js')) && !$is_cloud) {
         echo '<script id="sb-custom-js" src="' . sb_get_setting('custom-js') . '"></script>';
     }
@@ -4556,8 +4222,7 @@ function sb_component_admin()
  *
  */
 
-function sb_apps_area($apps, $cloud_active_apps)
-{
+function sb_apps_area($apps, $cloud_active_apps) {
     $apps_wp = ['SB_WP', 'SB_WOOCOMMERCE', 'SB_UMP', 'SB_ARMEMBER'];
     $apps_php = [];
     $apps_cloud_excluded = ['whmcs', 'martfury', 'aecommerce', 'perfex', 'opencart'];
@@ -4592,8 +4257,7 @@ function sb_apps_area($apps, $cloud_active_apps)
     echo $code . '</div></div>';
 }
 
-function sb_apps_panel()
-{
+function sb_apps_panel() {
     $code = '';
     $collapse = sb_get_setting('collapse') ? ' sb-collapse' : '';
     $panels = [['SB_UMP', 'ump'], ['SB_WOOCOMMERCE', 'woocommerce'], ['SB_PERFEX', 'perfex'], ['SB_WHMCS', 'whmcs'], ['SB_AECOMMERCE', 'aecommerce'], ['SB_ARMEMBER', 'armember'], ['SB_ZENDESK', 'zendesk'], ['SB_MARTFURY', 'martfury'], ['SB_OPENCART', 'opencart']];
@@ -4608,8 +4272,7 @@ function sb_apps_panel()
     echo $code;
 }
 
-function sb_box_ve()
-{
+function sb_box_ve() {
     if ((!isset($_COOKIE['SA_' . 'VGC' . 'KMENS']) && !isset($_COOKIE['_ga_' . 'VGC' . 'KMENS'])) || !password_verify('VGC' . 'KMENS', isset($_COOKIE['_ga_' . 'VGC' . 'KMENS']) ? $_COOKIE['_ga_' . 'VGC' . 'KMENS'] : $_COOKIE['SA_' . 'VGC' . 'KMENS'])) { // Deprecated. _ga will be removed
         echo file_get_contents(SB_PATH . '/resources/sb.html');
         return false;
@@ -4617,8 +4280,7 @@ function sb_box_ve()
     return true;
 }
 
-function sb_users_table_extra_fields()
-{
+function sb_users_table_extra_fields() {
     $extra_fields = sb_get_setting('user-table-extra-columns');
     $count = $extra_fields && !is_string($extra_fields) ? count($extra_fields) : false;
     if ($count) {
@@ -4631,8 +4293,7 @@ function sb_users_table_extra_fields()
     }
 }
 
-function sb_dialogflow_languages_list()
-{
+function sb_dialogflow_languages_list() {
     $languages = json_decode(file_get_contents(SB_PATH . '/apps/dialogflow/dialogflow_languages.json'), true);
     $code = '<div data-type="select" class="sb-setting sb-type-select sb-dialogflow-languages"><div class="input"><select><option value="">' . sb_('Default') . '</option>';
     for ($i = 0; $i < count($languages); $i++) {
@@ -4641,8 +4302,7 @@ function sb_dialogflow_languages_list()
     return $code . '</select></div></div>';
 }
 
-function sb_conversations_filter($cloud_active_apps)
-{
+function sb_conversations_filter($cloud_active_apps) {
     if (sb_get_multi_setting('disable', 'disable-filters')) {
         return;
     }
@@ -4681,8 +4341,7 @@ function sb_conversations_filter($cloud_active_apps)
     echo $code .= '</div></div>';
 }
 
-function sb_docs_link($id = '', $class = 'sb-docs')
-{
+function sb_docs_link($id = '', $class = 'sb-docs') {
     if (!sb_is_cloud() || defined('SB_CLOUD_DOCS')) {
         echo '<a href="' . (sb_is_cloud() ? SB_CLOUD_DOCS : 'https://board.support/docs') . $id . '" class="' . $class . '" target="_blank"><i class="sb-icon-help"></i></a>';
     }
