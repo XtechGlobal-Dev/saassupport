@@ -37,6 +37,10 @@
         "title": "Model",
         "value": [
           [ "", "Default" ],
+          [ "gpt-4.1-nano", "gpt-4.1-nano" ],
+          [ "gpt-4.1-mini", "gpt-4.1-mini" ],
+          [ "gpt-4.1", "gpt-4.1" ],
+          [ "o4-mini", "o4-mini" ],
           [ "o3-mini", "o3-mini" ],
           [ "o1", "o1" ],
           [ "gpt-4o-mini", "gpt-4o-mini" ],
@@ -44,8 +48,7 @@
           [ "gpt-4-turbo", "gpt-4-turbo" ],
           [ "gpt-4", "gpt-4" ],
           [ "gpt-3.5-turbo", "gpt-3.5-turbo" ],
-          [ "gpt-3.5-turbo-instruct", "gpt-3.5-turbo-instruct" ],
-          [ "gpt-3.5-turbo-1106", "gpt-3.5-turbo-1106" ]
+          [ "gpt-3.5-turbo-instruct", "gpt-3.5-turbo-instruct" ]
         ]
       },
       {
@@ -188,6 +191,11 @@
         "type": "checkbox",
         "id": "open-ai-speech-recognition",
         "title": "Speech recognition"
+      },
+      {
+        "type": "checkbox",
+        "id": "open-ai-vision",
+        "title": "Image recognition"
       },
       {
         "type": "checkbox",

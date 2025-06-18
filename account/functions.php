@@ -1,6 +1,9 @@
 <?php
 
 use parallel\Events\Event\Type;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 /*
  *
@@ -26,8 +29,7 @@ global $ACTIVE_ACCOUNT;
  *
  */
 
-function db_connect()
-{
+function db_connect() {
     global $CLOUD_CONNECTION;
     if ($CLOUD_CONNECTION) {
         return true;
@@ -40,8 +42,7 @@ function db_connect()
     return true;
 }
 
-function db_customer_connect($token)
-{
+function db_customer_connect($token) {
     global $CUSTOMER_CONNECTION;
     $database = get_config($token);
     $CUSTOMER_CONNECTION = new mysqli($database['SB_DB_HOST'], $database['SB_DB_USER'], $database['SB_DB_PASSWORD'], $database['SB_DB_NAME']);
@@ -51,8 +52,7 @@ function db_customer_connect($token)
     return true;
 }
 
-function db_get($query, $single = true, $customer_token = false)
-{
+function db_get($query, $single = true, $customer_token = false) {
     $status = $customer_token ? db_customer_connect($customer_token) : db_connect();
     $connection = $GLOBALS[$customer_token ? 'CUSTOMER_CONNECTION' : 'CLOUD_CONNECTION'];
     $value = $single ? '' : [];
@@ -75,8 +75,7 @@ function db_get($query, $single = true, $customer_token = false)
     return $value;
 }
 
-function db_query($query, $return = false, $customer_token = false)
-{
+function db_query($query, $return = false, $customer_token = false) {
     $status = $customer_token ? db_customer_connect($customer_token) : db_connect();
     $connection = $GLOBALS[$customer_token ? 'CUSTOMER_CONNECTION' : 'CLOUD_CONNECTION'];
     if ($status) {
@@ -98,8 +97,7 @@ function db_query($query, $return = false, $customer_token = false)
     }
 }
 
-function db_escape($value, $numeric = -1)
-{
+function db_escape($value, $numeric = -1) {
     if (is_numeric($value)) {
         return $value;
     } else if ($numeric === true) {
@@ -120,8 +118,7 @@ function db_escape($value, $numeric = -1)
  *
  */
 
-function account_registration($details)
-{
+function account_registration($details) {
     $now = gmdate('Y-m-d H:i:s');
     $token = bin2hex(openssl_random_pseudo_bytes(20));
     $response = false;
@@ -193,8 +190,7 @@ function account_registration($details)
     return $response;
 }
 
-function account_login($email, $password = false, $token = false)
-{
+function account_login($email, $password = false, $token = false) {
     $sb_login = false;
     $email = db_escape($email);
     $cloud_user = db_get('SELECT id AS `user_id`, first_name, last_name, email, phone, password, token, email_confirmed, phone_confirmed, customer_id, extra FROM users WHERE email = "' . $email . '" LIMIT 1');
@@ -225,15 +221,13 @@ function account_login($email, $password = false, $token = false)
             if ($sb_login === 'ip-ban') {
                 return $sb_login;
             }
-
             return [sb_encryption(json_encode($cloud_user)), $sb_login[1], $sb_login[0]['id']];
         }
     }
     return false;
 }
 
-function account_login_get_user($email, $password)
-{
+function account_login_get_user($email, $password) {
     $login = account_login($email, $password);
     if ($login && is_array($login)) {
         $user = sb_get_user($login[2], true);
@@ -247,8 +241,7 @@ function account_login_get_user($email, $password)
     return false;
 }
 
-function account()
-{
+function account() {
     global $ACTIVE_ACCOUNT;
     if ($ACTIVE_ACCOUNT) {
         return $ACTIVE_ACCOUNT;
@@ -262,19 +255,16 @@ function account()
     return $cookie;
 }
 
-function account_chat_id($user_id)
-{
+function account_chat_id($user_id) {
     return intval($user_id) * 95675 - 153;
 }
 
-function get_active_account_id($escape = true)
-{
+function get_active_account_id($escape = true) {
     $id = sb_isset(account(), 'user_id');
     return $escape ? db_escape($id, true) : $id;
 }
 
-function account_save($details)
-{
+function account_save($details) {
     $account = account();
     require_once(SB_PATH . '/config/config_' . $account['token'] . '.php');
     $user_id = $account['user_id'];
@@ -328,8 +318,7 @@ function account_save($details)
     return $response;
 }
 
-function account_reset_password($email = false, $token = false, $password = false)
-{
+function account_reset_password($email = false, $token = false, $password = false) {
     if ($email && !$password) {
         $email = db_escape($email);
         $token = db_get('SELECT token FROM users WHERE email = "' . $email . '" LIMIT 1');
@@ -350,24 +339,21 @@ function account_reset_password($email = false, $token = false, $password = fals
     return true;
 }
 
-function account_welcome()
-{
+function account_welcome() {
     $account = account();
     if ($account) {
         send_email($account['email'], super_get_setting('email_subject_welcome'), cloud_merge_field_username(super_get_setting('email_template_welcome'), $account['first_name'] . ' ' . $account['last_name']));
     }
 }
 
-function account_delete()
-{
+function account_delete() {
     $cloud_user_id = get_active_account_id(false);
     if ($cloud_user_id) {
         super_delete_customer($cloud_user_id);
     }
 }
 
-function account_get_user_details()
-{
+function account_get_user_details() {
     $account = account();
     if ($account) {
         $account['company_details'] = sb_isset(db_get('SELECT value FROM users_data WHERE slug = "company_details" AND user_id = ' . db_escape($account['user_id'], true)), 'value', '');
@@ -375,8 +361,7 @@ function account_get_user_details()
     return $account;
 }
 
-function account_delete_agents_quota()
-{
+function account_delete_agents_quota() {
     $account = account();
     if ($account) {
         $membership = membership_get_active();
@@ -393,8 +378,7 @@ function account_delete_agents_quota()
     }
 }
 
-function account_get_payment_id()
-{
+function account_get_payment_id() {
     global $ACTIVE_PAYMENT_ID;
     if ($ACTIVE_PAYMENT_ID) {
         return $ACTIVE_PAYMENT_ID;
@@ -403,14 +387,12 @@ function account_get_payment_id()
     return $ACTIVE_PAYMENT_ID;
 }
 
-function account_magic_link($email)
-{
+function account_magic_link($email) {
     $token = sb_isset(db_get('SELECT token FROM users WHERE email = "' . db_escape($email) . '"'), 'token');
     return $token ? CLOUD_URL . '?magic=' . sb_encryption($token . '|' . $email) : false;
 }
 
-function account_magic_link_login($magic)
-{
+function account_magic_link_login($magic) {
     $magic = explode('|', sb_encryption($_GET['magic'], false));
     if ($magic && count($magic) > 1) {
         $login = account_login($magic[1], false, $magic[0]);
@@ -426,8 +408,7 @@ function account_magic_link_login($magic)
     return false;
 }
 
-function account_save_referral_payment_information($method, $details)
-{
+function account_save_referral_payment_information($method, $details) {
     super_delete_user_data(get_active_account_id(), 'referral_payment_info', true);
     return super_insert_user_data('(' . get_active_account_id() . ', "referral_payment_info", "' . db_escape($method . '|' . $details) . '")');
 }
@@ -439,8 +420,7 @@ function account_save_referral_payment_information($method, $details)
  *
  */
 
-function memberships()
-{
+function memberships() {
     global $SB_CLOUD_MEMBERSHIPS;
     if (isset($SB_CLOUD_MEMBERSHIPS)) {
         return $SB_CLOUD_MEMBERSHIPS;
@@ -450,8 +430,7 @@ function memberships()
     return $SB_CLOUD_MEMBERSHIPS;
 }
 
-function membership_get_active($cache = true)
-{
+function membership_get_active($cache = true) {
     global $SB_CLOUD_ACTIVE_MEMBERSHIP;
     if (isset($SB_CLOUD_ACTIVE_MEMBERSHIP)) {
         return $SB_CLOUD_ACTIVE_MEMBERSHIP;
@@ -495,8 +474,7 @@ function membership_get_active($cache = true)
     return $membership;
 }
 
-function membership_get($membership_id)
-{
+function membership_get($membership_id) {
     $memberships = memberships();
     if (!$membership_id) {
         return $memberships[0];
@@ -509,8 +487,7 @@ function membership_get($membership_id)
     return false;
 }
 
-function membership_update($membership_id, $membership_period, $customer_id, $payment_id = false, $referral = false)
-{
+function membership_update($membership_id, $membership_period, $customer_id, $payment_id = false, $referral = false) {
     membership_add_reseller_sale($membership_id);
     $customer_id = db_escape($customer_id);
     $response = db_query('UPDATE users SET membership = "' . db_escape($membership_id) . '", membership_expiration = "' . membership_calculate_expiration($membership_period) . '"' . ($payment_id ? ', customer_id = "' . sb_db_escape($payment_id) . '"' : '') . ' WHERE id = "' . $customer_id . '"');
@@ -533,8 +510,7 @@ function membership_update($membership_id, $membership_period, $customer_id, $pa
     return $response;
 }
 
-function membership_volume()
-{
+function membership_volume() {
     $account = account();
     $year = date('y');
     $counts = 0;
@@ -551,13 +527,11 @@ function membership_volume()
     return $response;
 }
 
-function membership_get_payments()
-{
+function membership_get_payments() {
     return db_get('SELECT * from users_data WHERE user_id = ' . get_active_account_id() . ' AND slug = "payment" ORDER BY id DESC', false);
 }
 
-function membership_get_invoice($payment_id)
-{
+function membership_get_invoice($payment_id) {
     $user_id = get_active_account_id();
     $payment = db_get('SELECT * from users_data WHERE user_id = ' . $user_id . ' AND id = ' . db_escape($payment_id, true));
     if ($payment) {
@@ -567,8 +541,7 @@ function membership_get_invoice($payment_id)
     return false;
 }
 
-function membership_invoices_payment_provider()
-{
+function membership_invoices_payment_provider() {
     switch (PAYMENT_PROVIDER) {
         case 'stripe':
             $stripe_id = account_get_payment_id();
@@ -594,8 +567,7 @@ function membership_invoices_payment_provider()
     return [];
 }
 
-function membership_calculate_expiration($period)
-{
+function membership_calculate_expiration($period) {
     $seconds = 0;
     switch ($period) {
         case 'day':
@@ -626,8 +598,7 @@ function membership_calculate_expiration($period)
     return gmdate('d-m-y', time() + $seconds);
 }
 
-function membership_get_period_string($plan_period)
-{
+function membership_get_period_string($plan_period) {
     switch ($plan_period) {
         case 'day':
             return sb_('a day');
@@ -649,13 +620,11 @@ function membership_get_period_string($plan_period)
     return '';
 }
 
-function membership_count_agents_users($token)
-{
+function membership_count_agents_users($token) {
     return db_get('SELECT COUNT(*) AS `count` FROM sb_users WHERE ' . (sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages') == 'users' ? 'user_type <> "admin" AND user_type <> "agent" AND user_type <> "bot"' : 'user_type = "admin" OR user_type = "agent"'), true, $token)['count'];
 }
 
-function membership_add_reseller_sale($membership_id = false, $extra = false, $amount = false)
-{
+function membership_add_reseller_sale($membership_id = false, $extra = false, $amount = false) {
     $url_part = 'https://cloud.board.support/account/resellers/api.php?cloud_url=' . CLOUD_URL . '&cloud_email=' . SUPER_EMAIL . ($extra ? '&extra=' . $extra : '') . '&price=';
     if ($amount) {
         return sb_get($url_part . $amount . '&currency=' . membership_currency());
@@ -665,20 +634,17 @@ function membership_add_reseller_sale($membership_id = false, $extra = false, $a
     return empty($amount) || $amount == '0' ? false : sb_get($url_part . $amount . '&currency=' . $membership['currency']);
 }
 
-function membership_save_white_label($cloud_user_id)
-{
+function membership_save_white_label($cloud_user_id) {
     super_delete_user_data($cloud_user_id, 'white-label');
     return super_insert_user_data('(' . $cloud_user_id . ', "white-label", "' . gmdate('d-m-y', time() + 31536000) . '")');
 }
 
-function membership_is_white_label($cloud_user_id)
-{
+function membership_is_white_label($cloud_user_id) {
     $white_label = super_get_user_data('white-label', $cloud_user_id);
     return $white_label ? sb_gmt_now(0, true) < cloud_gmt_time($white_label) : false;
 }
 
-function membership_purchase_white_label($external_integration = false)
-{
+function membership_purchase_white_label($external_integration = false) {
     $cloud_user_id = get_active_account_id(false);
     $price = super_get_white_label();
     if ($price) {
@@ -709,22 +675,20 @@ function membership_purchase_white_label($external_integration = false)
                 $confirmation = sb_isset($response, 'confirmation');
                 return $confirmation ? ['url' => $confirmation['confirmation_url']] : $response;
             case 'manual':
-                return ['url' => PAYMENT_PROVIDER_MANUAL_LINK];
+                return ['url' => PAYMENT_MANUAL_LINK];
         }
     }
     return false;
 }
 
-function membership_purchase_credits($amount, $external_integration = false)
-{
+function membership_purchase_credits($amount, $external_integration = false) {
     if ($external_integration == 'shopify') {
         return shopify_one_time_purchase('Add credits - ' . $amount . ' USD', $amount, CLOUD_URL . '/account/?tab=membership&reload=true#credits');
     }
     return membership_custom_payment($amount, 'credits');
 }
 
-function membership_custom_payment($amount, $metadata_id)
-{
+function membership_custom_payment($amount, $metadata_id) {
     $cloud_user_id = get_active_account_id();
     if ($amount && $cloud_user_id) {
         $payment_id = account_get_payment_id();
@@ -733,7 +697,8 @@ function membership_custom_payment($amount, $metadata_id)
             case 'stripe':
                 if (!$payment_id) {
                     $account = account();
-                    $payment_id = sb_isset(stripe_curl('customers?email=' . $account['email'] . '&name=' . $account['first_name'] . '%20' . $account['last_name']), 'id');
+                    $response = stripe_curl('customers?email=' . $account['email'] . str_replace(' ', '%20', '&name=' . $account['first_name'] . ' ' . $account['last_name']));
+                    $payment_id = sb_isset($response, 'id');
                     if ($payment_id) {
                         db_query('UPDATE users SET customer_id = "' . $payment_id . '" WHERE id = ' . $cloud_user_id);
                     }
@@ -763,14 +728,13 @@ function membership_custom_payment($amount, $metadata_id)
                 $confirmation = sb_isset($response, 'confirmation');
                 return $confirmation ? ['url' => $confirmation['confirmation_url']] : $response;
             case 'manual':
-                return ['url' => PAYMENT_PROVIDER_MANUAL_LINK];
+                return ['url' => PAYMENT_MANUAL_LINK];
         }
     }
     return false;
 }
 
-function membership_use_credits($spending_source, $extra = false)
-{
+function membership_use_credits($spending_source, $extra = false) {
     // $spending_sources cost based on the highest cost between the input and the output / 1.000.000
     $spending_sources = [
         'es' => 0.002,
@@ -787,9 +751,13 @@ function membership_use_credits($spending_source, $extra = false)
         'gpt-4-turbo' => 0.00003,
         'gpt-4o' => 0.000015,
         'gpt-4o-mini' => 0.00000015,
+        'gpt-4.1-nano' => 0.0000004,
+        'gpt-4.1-mini' => 0.0000016,
+        'gpt-4.1' => 0.000008,
         'o1' => 0.00006,
         'o1-mini' => 0.000012,
         'o3-mini' => 0.0000044,
+        'o4-mini' => 0.0000044,
         'ada' => 0.0000001,
         'text-embedding-3-small' => 0.00000002,
         'whisper' => 0.0001
@@ -811,11 +779,15 @@ function membership_use_credits($spending_source, $extra = false)
             break;
         case 'text-embedding-3-small':
         case 'ada':
-        case 'o3-mini':
         case 'o1':
         case 'o1-mini':
+        case 'o3-mini':
+        case 'o4-mini':
         case 'gpt-4-turbo':
         case 'gpt-4o':
+        case 'gpt-4.1-nano':
+        case 'gpt-4.1-mini':
+        case 'gpt-4.1':
         case 'gpt-4o-mini':
         case 'gpt-4-32k':
         case 'gpt-4':
@@ -830,15 +802,13 @@ function membership_use_credits($spending_source, $extra = false)
     return $amount ? db_query('UPDATE users SET credits = credits - ' . $amount . ' WHERE id = ' . get_active_account_id()) : false;
 }
 
-function membership_set_auto_recharge($enabled)
-{
+function membership_set_auto_recharge($enabled) {
     $user_id = db_escape(sb_isset(account(), 'user_id'), true);
     super_delete_user_data($user_id, 'auto_recharge', true);
     return $enabled && $enabled != 'false' ? super_insert_user_data('(' . $user_id . ', "auto_recharge", "1")') : true;
 }
 
-function membership_auto_recharge()
-{
+function membership_auto_recharge() {
     $account = account();
     $user_id = db_escape(sb_isset($account, 'user_id'), true);
     if ($user_id) {
@@ -883,8 +853,7 @@ function membership_auto_recharge()
     return false;
 }
 
-function membership_set_purchased_credits($amount, $currency_code, $user_id, $payment_history_id = false, $extra = '')
-{
+function membership_set_purchased_credits($amount, $currency_code, $user_id, $payment_history_id = false, $extra = '') {
     $credits = intval($amount * (strtolower($currency_code) == 'usd' ? 1 : (1 / sb_usd_rates($currency_code))));
     db_query('UPDATE users SET credits = credits + ' . db_escape($credits, true) . ' WHERE id = ' . $user_id);
     super_delete_user_data($user_id, 'notifications_credits_count', true);
@@ -892,8 +861,7 @@ function membership_set_purchased_credits($amount, $currency_code, $user_id, $pa
     return $payment_history_id ? cloud_add_to_payment_history($user_id, $amount, 'credits', $payment_history_id, $extra) : true;
 }
 
-function membership_currency()
-{
+function membership_currency() {
     if (PAYMENT_PROVIDER == 'stripe' && defined('STRIPE_CURRENCY')) { // Deprecated. Remove  && defined('STRIPE_CURRENCY')
         return STRIPE_CURRENCY;
     }
@@ -914,8 +882,7 @@ function membership_currency()
     }
 }
 
-function membership_delete_cache($cloud_user_id)
-{
+function membership_delete_cache($cloud_user_id) {
     return super_delete_user_data($cloud_user_id, 'active_membership_cache', true);
 }
 
@@ -926,8 +893,7 @@ function membership_delete_cache($cloud_user_id)
  *
  */
 
-function stripe_create_session($price_id, $cloud_user_id, $client_reference_id = false, $subscription = true, $extra = false)
-{
+function stripe_create_session($price_id, $cloud_user_id, $client_reference_id = false, $subscription = true, $extra = false) {
     $membership = $price_id ? membership_get($price_id) : false;
     if (!$client_reference_id) {
         $client_reference_id = $price_id . '|' . $cloud_user_id . '|' . $membership['period'] . (isset($_COOKIE['sb-referral']) ? '|' . $_COOKIE['sb-referral'] : '') . '|sb';
@@ -939,8 +905,7 @@ function stripe_create_session($price_id, $cloud_user_id, $client_reference_id =
     return $response;
 }
 
-function stripe_cancel_subscription()
-{
+function stripe_cancel_subscription() {
     $stripe_id = account_get_payment_id();
     if ($stripe_id) {
         $subscription_id = stripe_curl('subscriptions?customer=' . $stripe_id, 'GET');
@@ -958,14 +923,12 @@ function stripe_cancel_subscription()
     return false;
 }
 
-function stripe_curl($url_part, $type = 'POST')
-{
+function stripe_curl($url_part, $type = 'POST') {
     $response = sb_curl('https://api.stripe.com/v1/' . $url_part, '', ['Authorization: Basic ' . base64_encode(STRIPE_SECRET_KEY)], $type);
     return $type == 'POST' || $type == 'PATCH' ? $response : json_decode($response, true);
 }
 
-function stripe_get_price($price_amount, $product_id, $currency_code)
-{
+function stripe_get_price($price_amount, $product_id, $currency_code) {
     $price_amount = intval($price_amount);
     $prices = stripe_curl('prices?product=' . $product_id . '&limit=100&type=one_time', 'GET');
     $currency_code = strtolower($currency_code);
@@ -988,34 +951,29 @@ function stripe_get_price($price_amount, $product_id, $currency_code)
  *
  */
 
-function razorpay_curl($url_part, $body = [], $type = 'POST')
-{
+function razorpay_curl($url_part, $body = [], $type = 'POST') {
     $response = sb_curl('https://api.razorpay.com/v1/' . $url_part, json_encode($body, JSON_INVALID_UTF8_IGNORE, JSON_UNESCAPED_UNICODE), ['Content-Type: application/json', 'Authorization: Basic ' . base64_encode(RAZORPAY_KEY_ID . ':' . RAZORPAY_KEY_SECRET)], $type);
     return $type == 'POST' ? $response : json_decode($response, true);
 }
 
-function razorpay_get_plans($plan_id = false)
-{
+function razorpay_get_plans($plan_id = false) {
     $plans = razorpay_curl('plans' . ($plan_id ? '/' . $plan_id : ''), '', 'GET');
     return $plan_id ? $plans : sb_isset($plans, 'items', []);
 }
 
-function razorpay_create_subscription($plan_id, $cloud_user_id)
-{
+function razorpay_create_subscription($plan_id, $cloud_user_id) {
     $membership = $plan_id ? membership_get($plan_id) : false;
     $response = razorpay_curl('subscriptions', ['plan_id' => $plan_id, 'total_count' => $membership['period'] == 'month' ? 1200 : 100, 'quantity' => 1, 'notes' => ['customer_id' => $cloud_user_id, 'referral' => sb_isset($_COOKIE, 'sb-referral', ''), 'period' => $membership['period']]]);
     return isset($response['short_url']) ? ['url' => $response['short_url']] : $response['short_url'];
 }
 
-function razorpay_create_payment_link($amount, $notes = [])
-{
+function razorpay_create_payment_link($amount, $notes = []) {
     $notes['customer_id'] = get_active_account_id();
     $response = razorpay_curl('payment_links', ['amount' => $amount, 'callback_url' => CLOUD_URL . '/account?tab=membership', 'callback_method' => 'get', 'notes' => $notes]);
     return sb_isset($response, 'short_url', $response);
 }
 
-function razorpay_cancel_subscription($cloud_user_id = false)
-{
+function razorpay_cancel_subscription($cloud_user_id = false) {
     $payment_id = sb_isset(db_get('SELECT customer_id FROM users WHERE id = ' . db_escape($cloud_user_id ? $cloud_user_id : get_active_account_id(), true)), 'customer_id');
     if ($payment_id) {
         $response = razorpay_curl('subscriptions/' . $payment_id . '/cancel');
@@ -1034,8 +992,7 @@ function razorpay_cancel_subscription($cloud_user_id = false)
  *
  */
 
-function rapyd_curl($url_path, $raw = '', $type = 'POST', $default = false)
-{
+function rapyd_curl($url_path, $raw = '', $type = 'POST', $default = false) {
     $salt = mt_rand(10000000, 99999999);
     $timestamp = time();
     if (!is_string($raw)) {
@@ -1047,14 +1004,12 @@ function rapyd_curl($url_path, $raw = '', $type = 'POST', $default = false)
     return isset($response['status']) && sb_isset($response['status'], 'status') == 'SUCCESS' ? $response['data'] : $response;
 }
 
-function rapyd_curl_checkout($amount, $customer_id, $cloud_user_id, $metadata = [])
-{
+function rapyd_curl_checkout($amount, $customer_id, $cloud_user_id, $metadata = []) {
     $metadata = array_merge($metadata, ['cloud_user_id' => $cloud_user_id, 'rapyd_secret_key' => RAPYD_SECRET_KEY, 'referral' => sb_isset($_COOKIE, 'sb-referral')]);
     return rapyd_curl('checkout', ['amount' => $amount, 'country' => RAPYD_COUNTRY, 'currency' => RAPYD_CURRENCY, 'customer' => $customer_id, 'custom_elements' => ['billing_address_collect' => true], 'metadata' => $metadata]);
 }
 
-function rapyd_create_customer()
-{
+function rapyd_create_customer() {
     $account = account();
     $customer_id = rapyd_curl('customers', ['name' => $account['first_name'] . ' ' . $account['last_name'], 'email' => $account['email']]);
     if (isset($customer_id['id'])) {
@@ -1064,8 +1019,7 @@ function rapyd_create_customer()
     return $customer_id;
 }
 
-function rapyd_create_checkout($membership_id, $cloud_user_id)
-{
+function rapyd_create_checkout($membership_id, $cloud_user_id) {
     $customer_id = account_get_payment_id();
     $membership = membership_get($membership_id);
     if (!$customer_id) {
@@ -1082,8 +1036,7 @@ function rapyd_create_checkout($membership_id, $cloud_user_id)
  *
  */
 
-function verifone_create_checkout($membership_id, $cloud_user_id)
-{
+function verifone_create_checkout($membership_id, $cloud_user_id) {
     $customer_id = account_get_payment_id();
     $membership = membership_get($membership_id);
     $period = $membership['period'];
@@ -1127,8 +1080,7 @@ function verifone_create_checkout($membership_id, $cloud_user_id)
     return ['url' => $url . '&signature=' . verifone_get_signature($url)];
 }
 
-function verifone_get_signature($url)
-{
+function verifone_get_signature($url) {
     parse_str(substr($url, strpos($url, '?') + 1), $values);
     $serialized = '';
     foreach ($values as $key => $value) {
@@ -1139,8 +1091,7 @@ function verifone_get_signature($url)
     return hash_hmac('sha256', $serialized, VERIFONE_SECRET_WORD);
 }
 
-function verifone_curl($url_part, $type = 'POST')
-{
+function verifone_curl($url_part, $type = 'POST') {
     $date = gmdate('Y-m-d H:i:s');
     $string = strlen(VERIFONE_MERCHANT_ID) . VERIFONE_MERCHANT_ID . strlen($date) . $date;
     $hash = hash_hmac('md5', $string, VERIFONE_SECRET_KEY);
@@ -1148,8 +1099,7 @@ function verifone_curl($url_part, $type = 'POST')
     return is_string($response) ? json_decode($response, true) : $response;
 }
 
-function verifone_cancel_subscription()
-{
+function verifone_cancel_subscription() {
     $verifone_id = account_get_payment_id();
     if ($verifone_id) {
         $subscriptions = sb_isset(verifone_curl('subscriptions?CustomerEmail=' . $verifone_id . '&SubscriptionEnabled=true&Limit=99', 'GET'), 'Items', []);
@@ -1166,8 +1116,7 @@ function verifone_cancel_subscription()
     return false;
 }
 
-function verifone_get_orders($customer_id)
-{
+function verifone_get_orders($customer_id) {
     $page = 1;
     $customer_orders = [];
     while ($page) {
@@ -1192,14 +1141,12 @@ function verifone_get_orders($customer_id)
  *
  */
 
-function yoomoney_curl($url_part, $body = false, $type = 'POST')
-{
+function yoomoney_curl($url_part, $body = false, $type = 'POST') {
     $response = sb_curl('https://api.yookassa.ru/v3/' . $url_part, $body ? json_encode($body, JSON_INVALID_UTF8_IGNORE, JSON_UNESCAPED_UNICODE) : '', ['Authorization: Basic ' . base64_encode(YOOMONEY_SHOP_ID . ':' . YOOMONEY_KEY_SECRET), 'Idempotence-Key: ' . rand(99999, 9999999), 'Content-Type: application/json', 'Accept: application/json'], $type);
     return $type == 'POST' ? $response : json_decode($response, true);
 }
 
-function yoomoney_create_payment($amount, $currency_code, $return_url, $description = false, $metadata = false, $recurring = true)
-{
+function yoomoney_create_payment($amount, $currency_code, $return_url, $description = false, $metadata = false, $recurring = true) {
     $query = ['amount' => ['value' => $amount, 'currency' => strtoupper($currency_code)], 'capture' => true, 'confirmation' => ['type' => 'redirect', 'return_url' => $return_url]];
     if ($description) {
         $query['description'] = $description;
@@ -1213,8 +1160,7 @@ function yoomoney_create_payment($amount, $currency_code, $return_url, $descript
     return yoomoney_curl('payments', $query);
 }
 
-function yoomoney_create_subscription($price_id)
-{
+function yoomoney_create_subscription($price_id) {
     $membership = membership_get($price_id);
     if ($membership) {
         $response = yoomoney_create_payment($membership['price'], YOOMONEY_CURRENCY, CLOUD_URL . '/account?tab=membership', $membership['name'], ['sb_user_id' => get_active_account_id(), 'membership_id' => $price_id, 'referral' => sb_isset($_COOKIE, 'sb-referral')]);
@@ -1224,8 +1170,7 @@ function yoomoney_create_subscription($price_id)
     return false;
 }
 
-function yoomoney_cancel_subscription()
-{
+function yoomoney_cancel_subscription() {
     $payment_id = account_get_payment_id();
     if ($payment_id) {
         db_query('UPDATE users SET customer_id = "" WHERE id = ' . get_active_account_id());
@@ -1235,15 +1180,13 @@ function yoomoney_cancel_subscription()
     return false;
 }
 
-function yoomoney_recurring_payment($amount, $payment_id, $description = '')
-{
+function yoomoney_recurring_payment($amount, $payment_id, $description = '') {
     $query = ['amount' => ['value' => $amount, 'currency' => strtoupper(YOOMONEY_CURRENCY)], 'capture' => true, 'payment_method_id' => $payment_id, 'description' => $description];
     $response = yoomoney_curl('payments', $query);
     return sb_isset($response, 'status') == 'succeeded' ? true : $response;
 }
 
-function yoomoney_cron()
-{
+function yoomoney_cron() {
     $users = db_get('SELECT id, membership, membership_expiration, customer_id FROM users WHERE membership <> "free" AND membership <> "0" AND customer_id <> ""', false);
     $white_labels = array_column(db_get('SELECT user_id, value FROM users_data WHERE slug = "white-label"', false), 'value', 'user_id');
     $now_plus_24 = sb_gmt_now(-86400, true);
@@ -1289,8 +1232,7 @@ function yoomoney_cron()
  *
  */
 
-function super_admin()
-{
+function super_admin() {
     global $SUPER_ACTIVE_ACCOUNT;
     if ($SUPER_ACTIVE_ACCOUNT) {
         return $SUPER_ACTIVE_ACCOUNT;
@@ -1306,18 +1248,15 @@ function super_admin()
     return true;
 }
 
-function super_login($email, $password)
-{
+function super_login($email, $password) {
     return password_verify($password, SUPER_PASSWORD) && $email == SUPER_EMAIL ? sb_encryption($email) : false;
 }
 
-function super_get_customers($price_id = false)
-{
+function super_get_customers($price_id = false) {
     return db_get('SELECT * FROM users' . ($price_id ? (' WHERE membership = ' . $price_id) : '') . ' ORDER BY creation_time ASC', false);
 }
 
-function super_get_customer($customer_id)
-{
+function super_get_customer($customer_id) {
     $customer_id = db_escape($customer_id);
     $stripe = PAYMENT_PROVIDER == 'stripe';
     $verifone = !$stripe && PAYMENT_PROVIDER == 'verifone';
@@ -1369,8 +1308,7 @@ function super_get_customer($customer_id)
     return $customer;
 }
 
-function super_save_customer($customer_id, $details, $extra_details = false)
-{
+function super_save_customer($customer_id, $details, $extra_details = false) {
     $query = '';
     $customer_id = db_escape($customer_id);
     $cloud_user = db_get('SELECT * FROM users WHERE id = ' . $customer_id);
@@ -1430,8 +1368,7 @@ function super_save_customer($customer_id, $details, $extra_details = false)
     return db_query('UPDATE users SET ' . substr($query, 0, -1) . ' WHERE id = ' . $customer_id);
 }
 
-function super_get_active_customers()
-{
+function super_get_active_customers() {
     $active_customers = [];
     $now_less_5_days = sb_gmt_now(432000);
 
@@ -1447,8 +1384,7 @@ function super_get_active_customers()
     return $active_customers;
 }
 
-function super_delete_customer($customer_id)
-{
+function super_delete_customer($customer_id) {
     $customer_id = db_escape($customer_id);
     $token = sb_isset(db_get('SELECT token FROM users WHERE id = "' . $customer_id . '"'), 'token');
     if ($token) {
@@ -1555,8 +1491,7 @@ function super_delete_customer($customer_id)
     return false;
 }
 
-function super_save_emails($settings)
-{
+function super_save_emails($settings) {
     foreach ($settings as $key => $value) {
         $value = str_replace('"', '\"', $value);
         db_query('INSERT INTO settings(name, value) VALUES ("' . db_escape($key) . '", "' . $value . '") ON DUPLICATE KEY UPDATE value = "' . $value . '"');
@@ -1564,8 +1499,7 @@ function super_save_emails($settings)
     return true;
 }
 
-function super_get_emails()
-{
+function super_get_emails() {
     $rows = db_get('SELECT name, value FROM settings', false);
     $emails = [];
     for ($i = 0; $i < count($rows); $i++) {
@@ -1577,28 +1511,23 @@ function super_get_emails()
     return $emails;
 }
 
-function super_get_user_data($slug, $cloud_user_id, $default = false)
-{
+function super_get_user_data($slug, $cloud_user_id, $default = false) {
     return $cloud_user_id ? sb_isset(db_get('SELECT value FROM users_data WHERE slug = "' . $slug . '" AND user_id = ' . db_escape($cloud_user_id, true) . ' LIMIT 1'), 'value', $default) : false;
 }
 
-function super_insert_user_data($values)
-{
+function super_insert_user_data($values) {
     return db_query('INSERT INTO users_data(user_id, slug, value) VALUES ' . $values);
 }
 
-function super_delete_user_data($cloud_user_id = false, $slug = false, $limit = false)
-{
+function super_delete_user_data($cloud_user_id = false, $slug = false, $limit = false) {
     return empty($cloud_user_id) && empty($slug) ? false : db_query('DELETE FROM users_data WHERE ' . ($cloud_user_id ? 'user_id = ' . db_escape($cloud_user_id, true) : '') . ($slug ? ($cloud_user_id ? ' AND ' : '') . 'slug = "' . db_escape($slug) . '"' : '') . ($limit ? ' LIMIT 1' : ''));
 }
 
-function super_get_setting($name, $default = false)
-{
+function super_get_setting($name, $default = false) {
     return sb_isset(db_get('SELECT value FROM settings WHERE name = "' . $name . '"'), 'value', $default);
 }
 
-function super_get_settings()
-{
+function super_get_settings() {
     global $CLOUD_SETTINGS;
     if ($CLOUD_SETTINGS) {
         return $CLOUD_SETTINGS;
@@ -1610,20 +1539,17 @@ function super_get_settings()
     return $CLOUD_SETTINGS;
 }
 
-function super_save_setting($name, $value)
-{
+function super_save_setting($name, $value) {
     $value = db_escape(is_string($value) ? $value : json_encode($value, JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE));
     return db_query('INSERT INTO settings(name, value) VALUES ("' . db_escape($name) . '", "' . $value . '") ON DUPLICATE KEY UPDATE value = "' . $value . '"');
 }
 
-function super_save_settings($settings)
-{
+function super_save_settings($settings) {
     $settings = str_replace(['&lt;', '&gt;'], ['<', '>'], db_escape(json_encode($settings, JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE)));
     return db_query('INSERT INTO settings(name, value) VALUES ("user-settings", "' . $settings . '") ON DUPLICATE KEY UPDATE value = "' . $settings . '"');
 }
 
-function super_membership_plans()
-{
+function super_membership_plans() {
     $free_plan = memberships()[0];
     $membership_type_ma = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages') == 'messages-agents';
     $code = '<div data-id="free" data-price="' . $free_plan['price'] . '" data-period="" data-currency="" class="free-plan"><div class="sb-input"><h5>Name</h5><input type="text" class="name" value="' . $free_plan['name'] . '" placeholder="Insert plan name..." /><h5>Quota</h5><input type="number" class="quota" value="' . $free_plan['quota'] . '" placeholder="0" />' . ($membership_type_ma ? '<h5>Quota agents</h5><input type="number" class="quota-agents" placeholder="0" value="' . sb_isset($free_plan, 'quota_agents', '') . '" />' : '');
@@ -1673,8 +1599,7 @@ function super_membership_plans()
     return $code;
 }
 
-function super_save_membership_plans($plans)
-{
+function super_save_membership_plans($plans) {
     $count = count($plans);
     $currency_code = membership_currency();
     $minimum_price = sb_usd_get_amount(5, $currency_code);
@@ -1726,33 +1651,27 @@ function super_save_membership_plans($plans)
     return empty($plans_final) ? 'error' : db_query('INSERT INTO settings(name, value) VALUES ("memberships", "' . $plans_final . '") ON DUPLICATE KEY UPDATE value = "' . $plans_final . '"');
 }
 
-function super_save_white_label($price)
-{
+function super_save_white_label($price) {
     return db_query('INSERT INTO settings(name, value) VALUES ("white-label", "' . $price . '") ON DUPLICATE KEY UPDATE value = "' . $price . '"');
 }
 
-function super_get_white_label()
-{
+function super_get_white_label() {
     return super_get_setting('white-label', '');
 }
 
-function super_get_affiliates()
-{
+function super_get_affiliates() {
     return db_get('SELECT A.id, A.first_name, A.last_name, A.email, B.value FROM users A, users_data B WHERE A.id = B.user_id AND B.slug = "referral"', false);
 }
 
-function super_get_affiliate_details($affiliate_id)
-{
+function super_get_affiliate_details($affiliate_id) {
     return explode('|', sb_isset(db_get('SELECT value FROM users_data WHERE user_id = "' . db_escape($affiliate_id, true) . '" AND slug = "referral_payment_info"'), 'value', ''));
 }
 
-function super_reset_affiliate($affiliate_id)
-{
+function super_reset_affiliate($affiliate_id) {
     return super_delete_user_data($affiliate_id, 'referral', true);
 }
 
-function super_admin_config()
-{
+function super_admin_config() {
     if (!isset($_COOKIE['SACL_' . 'VGC' . 'KMENS']) || !password_verify('ODO2' . 'KMENS', $_COOKIE['SACL_' . 'VGC' . 'KMENS'])) {
         require_once(SB_PATH . '/config.php');
         $ec = sb_defined('ENVA' . 'TO_PUR' . 'CHASE' . '_CO' . 'DE');
@@ -1760,7 +1679,7 @@ function super_admin_config()
         // if ($ec) {
         //     $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
         //     if ($response == 'veri' . 'ficat' . 'ion-success') {
-        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 31556926, '/');
+        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 2592000, '/');
         //     } else {
         //         die($m);
         //     }
@@ -1770,8 +1689,7 @@ function super_admin_config()
     }
 }
 
-function super_update_saas()
-{
+function super_update_saas() {
     if (!defined('ENVATO_PURCHASE_CODE')) {
         return 'missing-purchase-code';
     }
@@ -1814,8 +1732,7 @@ function super_update_saas()
  *
  */
 
-function shopify_curl($url_part, $post_fields = '', $header = [], $method = 'POST', $cloud_user_id = false)
-{
+function shopify_curl($url_part, $post_fields = '', $header = [], $method = 'POST', $cloud_user_id = false) {
     global $shopify_token;
     global $shopify_shop;
     $cloud_user_id = $cloud_user_id ? $cloud_user_id : get_active_account_id();
@@ -1833,14 +1750,12 @@ function shopify_curl($url_part, $post_fields = '', $header = [], $method = 'POS
     return false;
 }
 
-function shopify_graphql($body)
-{
+function shopify_graphql($body) {
     $response = shopify_curl('api/2024-10/graphql.json', is_string($body) ? $body : json_encode($body), ['Content-Type: application/json']);
     return sb_isset($response, 'data', $response);
 }
 
-function shopify_get_shop_name($cloud_user_id = false)
-{
+function shopify_get_shop_name($cloud_user_id = false) {
     global $shopify_shop;
     if ($shopify_shop) {
         return $shopify_shop;
@@ -1849,8 +1764,7 @@ function shopify_get_shop_name($cloud_user_id = false)
     return $shopify_shop;
 }
 
-function shopify_one_time_purchase($name, $amount, $url)
-{
+function shopify_one_time_purchase($name, $amount, $url) {
     $response = shopify_graphql([
         'query' => 'mutation AppPurchaseOneTimeCreate($test: Boolean!, $name: String!, $price: MoneyInput!, $returnUrl: URL!) { appPurchaseOneTimeCreate(test: $test, name: $name, returnUrl: $returnUrl, price: $price) { userErrors { field message } appPurchaseOneTime { createdAt id } confirmationUrl } }',
         'variables' => [
@@ -1867,8 +1781,7 @@ function shopify_one_time_purchase($name, $amount, $url)
     return $url ? ['url' => $url] : ['error' => $response];
 }
 
-function shopify_subscription_purchase($name, $amount, $url, $is_monthly = true)
-{
+function shopify_subscription_purchase($name, $amount, $url, $is_monthly = true) {
     $response = shopify_graphql([
         'query' => 'mutation AppSubscriptionCreate($test: Boolean!, $name: String!, $lineItems: [AppSubscriptionLineItemInput!]!, $returnUrl: URL!) { appSubscriptionCreate(test: $test, name: $name, returnUrl: $returnUrl, lineItems: $lineItems) { userErrors { field message } appSubscription { id } confirmationUrl }}',
         'variables' => [
@@ -1884,8 +1797,7 @@ function shopify_subscription_purchase($name, $amount, $url, $is_monthly = true)
     return $url ? ['url' => $url] : ['error' => $response];
 }
 
-function shopify_cancel_subscription()
-{
+function shopify_cancel_subscription() {
     $response = shopify_curl('api/2024-10/recurring_application_charges.json', '', [], 'GET');
     $subscription_id = sb_isset($response, 'recurring_application_charges');
     if (!empty($subscription_id)) {
@@ -1899,8 +1811,7 @@ function shopify_cancel_subscription()
     return $response;
 }
 
-function shopify_subscription($price_id)
-{
+function shopify_subscription($price_id) {
     $memberships = memberships();
     for ($i = 0; $i < count($memberships); $i++) {
         if ($memberships[$i]['id'] == $price_id) {
@@ -1910,8 +1821,7 @@ function shopify_subscription($price_id)
     return false;
 }
 
-function shopify_get_customer($shopify_id)
-{
+function shopify_get_customer($shopify_id) {
     $response = shopify_curl('api/2023-10/customers/' . $shopify_id . '.json', '', [], 'GET');
     $customer = sb_isset($response, 'customer');
     if ($customer) {
@@ -1921,8 +1831,7 @@ function shopify_get_customer($shopify_id)
     return false;
 }
 
-function shopify_get_orders($shopify_id)
-{
+function shopify_get_orders($shopify_id) {
     $response = shopify_curl('api/2023-10/orders.json?customer_id=' . $shopify_id . '&status=any', '', [], 'GET');
     $orders = sb_isset($response, 'orders');
     if ($orders) {
@@ -1932,8 +1841,7 @@ function shopify_get_orders($shopify_id)
     return [];
 }
 
-function shopify_get_products($product_ids = false, $key = false, $collection = false, $search = false, $pagination = false, $variant = false)
-{
+function shopify_get_products($product_ids = false, $key = false, $collection = false, $search = false, $pagination = false, $variant = false) {
     $query_part = 'id title description handle variants(first: 250) { edges { node { price selectedOptions { name value } } } } images(first: 1) { edges { node { src } } }';
     if ($product_ids) {
         $product_ids = strpos($product_ids, ',') === false ? [$product_ids] : explode(',', $product_ids);
@@ -2013,14 +1921,12 @@ function shopify_get_products($product_ids = false, $key = false, $collection = 
     return $pagination || $collection || $search ? [$products, $next] : [$products, shopify_get_data('collections'), $next, shopify_get_currency()];
 }
 
-function shopify_get_product_link($product_id)
-{
+function shopify_get_product_link($product_id) {
     $product = shopify_get_products($product_id, 'handle');
     return $product ? 'https://' . shopify_get_shop_name() . '/products/' . $product[0] : false;
 }
 
-function shopify_get_data($data_name = false)
-{
+function shopify_get_data($data_name = false) {
     global $shopify_data;
     if (isset($shopify_data)) {
         return $data_name ? $shopify_data[$data_name] : $shopify_data;
@@ -2080,8 +1986,7 @@ function shopify_get_data($data_name = false)
     return $data_name ? $shopify_data[$data_name] : $shopify_data;
 }
 
-function shopify_get_active_user($shopify_id)
-{
+function shopify_get_active_user($shopify_id) {
     $shopify_customer = shopify_get_customer($shopify_id);
     if ($shopify_customer) {
         $query = 'SELECT A.id, A.token FROM sb_users A, sb_users_data B WHERE A.email = "' . sb_db_escape($shopify_customer['email']) . '" AND A.id = B.user_id AND B.slug = "shopify_id" AND B.value = "' . sb_db_escape($shopify_id) . '" LIMIT 1';
@@ -2102,7 +2007,7 @@ function shopify_get_active_user($shopify_id)
                     $settings_extra['country_code'] = [$address['country_code'], 'Country code'];
                 }
                 if ($active_user && ($active_user['user_type'] == 'lead' || $active_user['user_type'] == 'visitor')) {
-                    sb_update_user($active_user['id'], $user, $settings_extra);
+                    sb_update_user($active_user['id'], $user, $settings_extra, true, true);
                 } else {
                     sb_add_user($user, $settings_extra);
                 }
@@ -2113,8 +2018,7 @@ function shopify_get_active_user($shopify_id)
     }
 }
 
-function shopify_get_conversation_details($shopify_id, $user_id)
-{
+function shopify_get_conversation_details($shopify_id, $user_id) {
     $response = ['cart' => ['items' => []], 'orders' => [], 'orders_count' => 0, 'total' => 0];
     if ($shopify_id) {
         $shopify_customer = shopify_get_customer($shopify_id);
@@ -2168,8 +2072,7 @@ function shopify_get_conversation_details($shopify_id, $user_id)
     return $response;
 }
 
-function shopify_merge_fields($message)
-{
+function shopify_merge_fields($message) {
     $shortcode = sb_get_shortcode($message, 'shopify', true);
     $replace = false;
     if ($shortcode && shopify_get_shop_name()) {
@@ -2184,8 +2087,7 @@ function shopify_merge_fields($message)
     return $replace ? str_replace($shortcode['shortcode'], trim($replace), $message) : $message;
 }
 
-function shopify_generate_rich_message_products($products, $link_text = false)
-{
+function shopify_generate_rich_message_products($products, $link_text = false) {
     $url = 'https://' . shopify_get_shop_name() . '/products/';
     $currency = shopify_get_currency();
     $link_text = sb_rich_value($link_text ? $link_text : 'More details', false);
@@ -2208,8 +2110,7 @@ function shopify_generate_rich_message_products($products, $link_text = false)
     return trim($response);
 }
 
-function shopify_open_ai_message($title = false, $collection = false, $tag = false, $variant = false, $single_product_information = false, $vendor = false)
-{
+function shopify_open_ai_message($title = false, $collection = false, $tag = false, $variant = false, $single_product_information = false, $vendor = false) {
     $search = false;
     if ($title || $tag || $variant || $vendor) {
         $search = ['title' => $title, 'tag' => $tag, 'vendor' => $vendor];
@@ -2241,8 +2142,7 @@ function shopify_open_ai_message($title = false, $collection = false, $tag = fal
     return false;
 }
 
-function shopify_get_currency()
-{
+function shopify_get_currency() {
     global $shopify_currency;
     if ($shopify_currency) {
         return $shopify_currency;
@@ -2251,12 +2151,9 @@ function shopify_get_currency()
     return $shopify_currency;
 }
 
-function shopify_open_ai_function()
-{
+function shopify_open_ai_function() {
     return [
-        [
-            'type' => 'function',
-            'function' => ['name' => 'sb-shopify-single', 'description' => 'Retrieve a specific information about a specific product in our store. For example: "What is the price of the PlayStation?", "Do you have the Nike Air Force in XL size?".', 'parameters' => ['type' => 'object', 'properties' =>
+        ['type' => 'function', 'function' => ['name' => 'sb-shopify-single', 'description' => 'Retrieve a specific information about a specific product in our store. For example: "What is the price of the PlayStation?", "Do you have the Nike Air Force in XL size?".', 'parameters' => ['type' => 'object', 'properties' =>
             [
                 'product_name' => [
                     'type' => 'string',
@@ -2269,9 +2166,7 @@ function shopify_open_ai_function()
                 ]
             ], 'required' => ['product_name', 'information']]]
         ],
-        [
-            'type' => 'function',
-            'function' => ['name' => 'sb-shopify', 'description' => 'Search for products in our store that meet the user\'s criteria. For example: "Do you sell monitors for less than 100 USD?", "I want to see some red t-shirt".', 'parameters' => ['type' => 'object', 'properties' =>
+        ['type' => 'function', 'function' => ['name' => 'sb-shopify', 'description' => 'Search for products in our store that meet the user\'s criteria. For example: "Do you sell monitors for less than 100 USD?", "I want to see some red t-shirt".', 'parameters' => ['type' => 'object', 'properties' =>
             [
                 'product_name' => [
                     'type' => 'string',
@@ -2302,8 +2197,7 @@ function shopify_open_ai_function()
     ];
 }
 
-function shopify_ai_function_calling($function_name, $id, $arguments, $query_tools)
-{
+function shopify_ai_function_calling($function_name, $id, $arguments, $query_tools) {
     $tag = sb_isset($arguments, 'tag');
     $variant = sb_isset($arguments, 'variant');
     if ($query_tools) {
@@ -2336,8 +2230,7 @@ function shopify_ai_function_calling($function_name, $id, $arguments, $query_too
  *
  */
 
-function cloud_get_max_quotas()
-{
+function cloud_get_max_quotas() {
     $max_quotas = [
         [
             'price' => ['month' => 0, 'year' => 0],
@@ -2403,12 +2296,13 @@ function cloud_get_max_quotas()
     return $max_quotas;
 }
 
-function send_email($to, $subject, $message)
-{
+function send_email($to, $subject, $message) {
     if (empty($to)) {
         return false;
     }
-    require_once SB_PATH . '/vendor/phpmailer/PHPMailerAutoload.php';
+    require_once SB_PATH . '/vendor/phpmailer/Exception.php';
+    require_once SB_PATH . '/vendor/phpmailer/PHPMailer.php';
+    require_once SB_PATH . '/vendor/phpmailer/SMTP.php';
     $port = CLOUD_SMTP_PORT;
     $mail = new PHPMailer;
     $mail->CharSet = 'UTF-8';
@@ -2437,8 +2331,7 @@ function send_email($to, $subject, $message)
     return $mail->send() ? true : $mail->ErrorInfo;
 }
 
-function send_sms($message, $to)
-{
+function send_sms($message, $to) {
     if (strpos($to, '+') === false && substr($to, 0, 2) == '00') {
         $to = '+' . substr($to, 2);
     }
@@ -2446,8 +2339,7 @@ function send_sms($message, $to)
     return sb_curl('https://api.twilio.com/2010-04-01/Accounts/' . CLOUD_TWILIO_SID . '/Messages.json', $query, ['Authorization: Basic ' . base64_encode(CLOUD_TWILIO_SID . ':' . CLOUD_TWILIO_TOKEN)]);
 }
 
-function verify($email = false, $phone = false, $code_pairs = false)
-{
+function verify($email = false, $phone = false, $code_pairs = false) {
     $code = rand(99999, 999999);
     $code_prefix = '';
     if ($email) {
@@ -2475,10 +2367,9 @@ function verify($email = false, $phone = false, $code_pairs = false)
     return sb_encryption(json_encode([$code_prefix . $code, $email ? $email : $phone]));
 }
 
-function cloud_cron($backup = true)
-{
+function cloud_cron($backup = true) {
     ignore_user_abort(true);
-    set_time_limit(1000);
+    set_time_limit(3540);
     $now_time = sb_gmt_now(0, true);
     $last_cron = super_get_setting('last_cron', 1);
     $free_customers_query_part = 'membership = "0" OR membership = "" OR membership = "free" OR membership IS NULL';
@@ -2595,6 +2486,7 @@ function cloud_cron($backup = true)
                             }
                         }
                         $index++;
+
                     }
                 } catch (Exception $e) {
                 }
@@ -2735,8 +2627,7 @@ function cloud_cron($backup = true)
     }
 }
 
-function cloud_suspended_notifications_counter($user_id, $increase = false, $is_credits = false)
-{
+function cloud_suspended_notifications_counter($user_id, $increase = false, $is_credits = false) {
     $slug = $is_credits ? 'notifications_credits_count' : 'notifications_count';
     $count = super_get_user_data($slug, $user_id);
     if ($increase) {
@@ -2745,13 +2636,11 @@ function cloud_suspended_notifications_counter($user_id, $increase = false, $is_
     return $count ? intval($count) : 0;
 }
 
-function cloud_get_token_by_id($cloud_user_id)
-{
+function cloud_get_token_by_id($cloud_user_id) {
     return sb_isset(db_get('SELECT token FROM users WHERE id = ' . db_escape($cloud_user_id)), 'token');
 }
 
-function cloud_api()
-{
+function cloud_api() {
     $path = SB_CLOUD_PATH . '/script/config/config_' . $_POST['token'] . '.php';
     if (!file_exists($path)) {
         header('HTTP/1.1 401 Unauthorized');
@@ -2769,8 +2658,7 @@ function cloud_api()
     return true;
 }
 
-function cloud_embeddings_chars_limit($membership = false)
-{
+function cloud_embeddings_chars_limit($membership = false) {
     $membership = $membership ? $membership : membership_get_active();
     $price = $membership['price'];
     $period = sb_isset($membership, 'period', 'month');
@@ -2787,8 +2675,7 @@ function cloud_embeddings_chars_limit($membership = false)
     return $max_quota;
 }
 
-function sb_cloud_debug($value)
-{
+function sb_cloud_debug($value) {
     $value = is_string($value) ? $value : json_encode($value);
     if (file_exists('debug.txt')) {
         $value = file_get_contents('debug.txt') . PHP_EOL . $value;
@@ -2796,8 +2683,7 @@ function sb_cloud_debug($value)
     sb_file('debug.txt', $value);
 }
 
-function sb_usd_rates($currency_code = false)
-{
+function sb_usd_rates($currency_code = false) {
     global $SB_USD_RATES;
     if (!$SB_USD_RATES) {
         $SB_USD_RATES = json_decode(super_get_setting('fiat_rates'), true);
@@ -2817,18 +2703,18 @@ function sb_usd_rates($currency_code = false)
     return $currency_code ? $SB_USD_RATES[strtoupper($currency_code)] : $SB_USD_RATES;
 }
 
-function sb_usd_get_amount($amount, $currency_code)
-{
+function sb_usd_get_amount($amount, $currency_code) {
+    if (!$currency_code) {
+        $currency_code = membership_currency();
+    }
     return strtolower($currency_code) == 'usd' ? $amount : $amount * sb_usd_rates($currency_code);
 }
 
-function currency_get_divider($currency_code)
-{
+function currency_get_divider($currency_code) {
     return in_array(strtoupper($currency_code), ['BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF']) ? 1 : 100;
 }
 
-function cloud_meta_whatsapp_sync($code)
-{
+function cloud_meta_whatsapp_sync($code) {
     $auth = ['Authorization: Bearer ' . WHATSAPP_APP_TOKEN];
     $fb_url = 'https://graph.facebook.com/v18.0/';
     $response = sb_curl($fb_url . 'oauth/access_token?client_id=' . WHATSAPP_APP_ID . '&client_secret=' . WHATSAPP_APP_SECRET . '&code=' . $code, '', $auth, 'POST');
@@ -2871,8 +2757,7 @@ function cloud_meta_whatsapp_sync($code)
     return $response;
 }
 
-function cloud_meta_messenger_sync($access_token)
-{
+function cloud_meta_messenger_sync($access_token) {
     $fb_url = 'https://graph.facebook.com/';
     $response = file_get_contents($fb_url . 'oauth/access_token?grant_type=fb_exchange_token&client_id=' . MESSENGER_APP_ID . '&client_secret=' . MESSENGER_APP_SECRET . '&fb_exchange_token=' . $access_token);
     $extended_access_token = sb_isset(json_decode($response, true), 'access_token');
@@ -2911,8 +2796,7 @@ function cloud_meta_messenger_sync($access_token)
     return $response;
 }
 
-function cloud_messenger_unsubscribe()
-{
+function cloud_messenger_unsubscribe() {
     $access_token = db_get('SELECT page_id, page_token FROM messenger WHERE token = "' . account()['token'] . '"');
     if ($access_token) {
         $scoped_uid = json_decode(sb_curl('https://graph.facebook.com/debug_token?access_token=' . MESSENGER_APP_TOKEN . '&input_token=' . $access_token['page_token'], '', [], 'GET'), true);
@@ -2926,13 +2810,11 @@ function cloud_messenger_unsubscribe()
     return false;
 }
 
-function cloud_addon_purchase($index)
-{
+function cloud_addon_purchase($index) {
     return membership_custom_payment(CLOUD_ADDONS[$index]['price'], sb_string_slug(CLOUD_ADDONS[$index]['title']));
 }
 
-function get_config($token)
-{
+function get_config($token) {
     $path = SB_CLOUD_PATH . '/script/config/config_' . $token . '.php';
     $raw = file_get_contents($path);
     $raw = explode('define', $raw);
@@ -2947,8 +2829,7 @@ function get_config($token)
     return $details;
 }
 
-function cloud_webhook($webhook_name, $parameters)
-{
+function cloud_webhook($webhook_name, $parameters) {
     $webhook_url = sb_isset(super_get_settings(), 'webhook-url');
     if ($webhook_url) {
         $query = json_encode(['function' => $webhook_name, 'key' => SB_CLOUD_KEY, 'data' => $parameters, 'sender-url' => (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '')], JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE);
@@ -2957,19 +2838,16 @@ function cloud_webhook($webhook_name, $parameters)
     return false;
 }
 
-function cloud_gmt_time($date_string)
-{
+function cloud_gmt_time($date_string) {
     $date_string = DateTime::createFromFormat('d-m-y', $date_string, new DateTimeZone('UTC'));
     return $date_string->getTimestamp();
 }
 
-function cloud_merge_field_username($message, $username)
-{
+function cloud_merge_field_username($message, $username) {
     return str_replace('{user_name}', $username, $message);
 }
 
-function cloud_email_limit()
-{
+function cloud_email_limit() {
     $account_id = get_active_account_id();
     if ($account_id) {
         $today = date('d-m-y');
@@ -2994,8 +2872,7 @@ function cloud_email_limit()
  *
  */
 
-function cloud_css_js()
-{
+function cloud_css_js() {
     $cloud_settings = super_get_settings();
     if (!$cloud_settings) {
         return;
@@ -3029,16 +2906,14 @@ function cloud_css_js()
     }
 }
 
-function cloud_js_admin()
-{
+function cloud_js_admin() {
     $cloud_settings = super_get_settings();
     $membership = db_get('SELECT membership FROM users WHERE id = ' . get_active_account_id());
     echo '<script>var WEBSITE_URL = "' . sb_defined('WEBSITE_URL', '#') . '"; var SB_CLOUD_ACTIVE_APPS = ' . json_encode(sb_get_external_setting('active_apps', [])) . '; var SB_CLOUD_MEMBERSHIP = "' . $membership['membership'] . '"; var DISABLE_APPS = "' . sb_isset($cloud_settings, 'disable-apps') . '"; var SB_CLOUD_WHATSAPP = { app_id: "' . sb_defined('WHATSAPP_APP_ID') . '", configuration_id: "' . sb_defined('WHATSAPP_CONFIGURATION_ID') . '" }; var SB_CLOUD_MESSENGER = { app_id: "' . sb_defined('MESSENGER_APP_ID') . '", configuration_id: "' . sb_defined('MESSENGER_CONFIGURATION_ID') . '" }; var SB_AUTO_SYNC =  { "whatsapp-cloud": ' . (defined('WHATSAPP_APP_ID') ? 'true' : 'false') . ', "messenger": ' . (defined('MESSENGER_APP_ID') ? 'true' : 'false') . ', "open-ai": ' . (defined('OPEN_AI_KEY') ? 'true' : 'false') . ', google: ' . (defined('GOOGLE_CLIENT_ID') ? 'true' : 'false') . ' }</script>';
     echo '<script src="' . CLOUD_URL . '/account/js/admin' . (sb_is_debug() ? '' : '.min') . '.js?v=' . SB_VERSION . '"></script>';
 }
 
-function cloud_css_js_front()
-{
+function cloud_css_js_front() {
     $cloud_settings = super_get_settings();
     $css = sb_isset($cloud_settings, 'css-front');
     $js = sb_isset($cloud_settings, 'js-front');
@@ -3050,8 +2925,7 @@ function cloud_css_js_front()
     }
 }
 
-function cloud_increase_count()
-{
+function cloud_increase_count() {
     global $CLOUD_CONNECTION;
     if (!isset($_POST['cloud'])) {
         sb_error('cloud-not-found', 'cloud_increase_count', 'Cloud data not found', true);
@@ -3063,23 +2937,20 @@ function cloud_increase_count()
     }
 }
 
-function cloud_custom_code()
-{
+function cloud_custom_code() {
     $code = super_get_setting('custom-code-admin');
     if ($code) {
         echo $code;
     }
 }
 
-function cloud_add_to_payment_history($cloud_user_id, $amount, $type, $id, $extra_1 = '', $extra_2 = '')
-{
+function cloud_add_to_payment_history($cloud_user_id, $amount, $type, $id, $extra_1 = '', $extra_2 = '') {
     super_insert_user_data('(' . $cloud_user_id . ', "payment", "' . db_escape(json_encode([$amount, $type, $id, $extra_1, $extra_2, time()])) . '")');
     membership_delete_cache($cloud_user_id);
     return true;
 }
 
-function cloud_invoice($cloud_user_id, $amount, $type, $unix_time)
-{
+function cloud_invoice($cloud_user_id, $amount, $type, $unix_time) {
     require_once SB_CLOUD_PATH . '/account/vendor/fpdf/fpdf.php';
     require_once SB_CLOUD_PATH . '/account/vendor/fpdf/autoload.php';
     require_once SB_CLOUD_PATH . '/account/vendor/fpdf/Fpdi.php';
@@ -3140,8 +3011,7 @@ function cloud_invoice($cloud_user_id, $amount, $type, $unix_time)
     return $file_name;
 }
 
-function sb_cloud_merge_settings($settings)
-{
+function sb_cloud_merge_settings($settings) {
     if (file_exists(SB_CLOUD_PATH . '/account/settings.json')) {
         $settings_cloud = json_decode(file_get_contents(SB_CLOUD_PATH . '/account/settings.json'), true);
         foreach ($settings_cloud as $key => $value) {
@@ -3153,19 +3023,18 @@ function sb_cloud_merge_settings($settings)
     return $settings;
 }
 
-function sb_cloud_account_menu($tag = 'li')
-{
+function sb_cloud_account_menu($tag = 'li') {
     $code = '';
     $switch_account = sb_get_setting('cloud-switch');
     $account = account();
     $credits = isset($_GET['credit']) && $_GET['credit'] === '1' ? '#credits' : '';
-    
+
     if (sb_isset($account, 'owner')) {
-        // $code = '<' . $tag . ' data-value="account">' . sb_('Account') . '</' . $tag . '>';
-       $code = '<a href="' . CLOUD_URL . '/account?tab=membership' . $credits . '" data-value="account" class="li">' . sb_('Account') . '</a>';
+        $code = '<' . $tag . ' data-value="account">' . sb_('Account') . '</' . $tag . '>';
     }
     if (defined('SB_CLOUD_DOCS')) {
-        $code .= ($tag == 'a' ? '' : '<li data-value="help">') . '<a href="' . SB_CLOUD_DOCS . '" target="_blank">' . sb_('Help') . '</a>' . ($tag == 'a' ? '' : '</li>');
+        //$code .= ($tag == 'a' ? '' : '<li data-value="help">') . '<a href="' . SB_CLOUD_DOCS . '" target="_blank">' . sb_('Help') . '</a>' . ($tag == 'a' ? '' : '</li>');
+        $code = '<a href="' . CLOUD_URL . '/account?tab=membership' . $credits . '" data-value="account" class="li">' . sb_('Account') . '</a>';
     }
     if ($switch_account) {
         $count = count($switch_account);
@@ -3182,8 +3051,7 @@ function sb_cloud_account_menu($tag = 'li')
     return $code;
 }
 
-function sb_cloud_save_settings($settings, $cloud_user_id = false)
-{
+function sb_cloud_save_settings($settings, $cloud_user_id = false) {
     if (!$cloud_user_id) {
         $cloud_user_id = get_active_account_id();
     }
@@ -3205,3 +3073,5 @@ function sb_cloud_save_settings($settings, $cloud_user_id = false)
     }
     super_save_setting('customer-settings', $customer_settings);
 }
+
+?>

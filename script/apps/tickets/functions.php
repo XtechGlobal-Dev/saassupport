@@ -28,7 +28,7 @@ function sb_component_tickets() {
     if ($disable_arrows) {
         $css .= ' sb-no-arrows';
     }
-    if (sb_get_setting('rtl') || in_array(sb_get_user_language(), ['ar', 'he', 'ku', 'fa', 'ur'])) {
+    if (sb_is_rtl()) {
         $css .= ' sb-rtl';
     }
     ?>

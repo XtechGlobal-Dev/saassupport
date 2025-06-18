@@ -9,7 +9,7 @@
 *
 */
 
-@use "shared.scss";
+@use "shared.scss" as *;
 
 @keyframes sb-collapse-btn-right {
     0% {
@@ -1447,4 +1447,4 @@
     }
 }
 
-@use "rtl.scss";
+@use "rtl.scss" as *;

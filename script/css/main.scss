@@ -9,11 +9,15 @@
 *
 */
 
-@use "shared.scss";
+@use "shared.scss" as *;
+@use "rtl.scss" as *;
+@use "responsive.scss" as *;
+
 /*
      
 # GLOBAL
 ==========================================================
+
 */
 
 @keyframes sb-chat-open-animation {
@@ -1495,6 +1499,3 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         min-height: 50px;
     }
 }
-
-@use "rtl";
-@use "responsive";

@@ -16,6 +16,6 @@ if (isset($_GET['id'])) {
         die(json_encode([sb_encryption(json_encode(['user_id' => $cloud_user_id, 'token' => $token])), SB_VERSION]));
     }
 }
-die(); 
+die();
 
 ?>
