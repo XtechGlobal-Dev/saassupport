@@ -1723,7 +1723,7 @@ function sb_component_admin() {
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
-                                    <div class="user_menu user-profile user_avatar">
+                                    <div class="sb-admin-nav-right user_menu user-profile user_avatar">
                                         <a class="sb-profile">
                                             <img class="avatar_img" src="" data-name="" />
                                             <span class="user-initials avatar_initials" style="display:none;">
@@ -3222,11 +3222,11 @@ function sb_component_admin() {
                                                         <span>[Action to perform]</span>
                                                     </div> -->
                                                     <h2 class="sub_title my-4">Comments</h2>
-                                                    <div class="msg">
+                                                    <!-- <div class="msg">
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
-                                                                <!-- <small class="text-muted">Admin</small> -->
+                                                                
                                                             </div>
                                                             <div class="comment-card">
                                                                 <p class="mb-0">Hello my dear sir</p>
@@ -3288,8 +3288,8 @@ function sb_component_admin() {
                                                                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="chat-input mt-3 p-2">
+                                                    </div> -->
+                                                    <!-- <div class="chat-input mt-3 p-2">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="d-flex align-items-center gap-2">
                                                                 <i class="fas fa-paperclip text-muted"></i>
@@ -3299,7 +3299,318 @@ function sb_component_admin() {
                                                                 Send <i class="fas fa-paper-plane"></i>
                                                             </a>
                                                         </div>
+                                                    </div> -->
+                                                    <!-- Comments/Chat Section -->
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-12">
+                                                            <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                                                <!-- Comments will be loaded here by JS -->
+                                                            </div>
+                                                            
+                                                            <form id="addCommentForm" class="d-flex align-items-center gap-2">
+                                                                <input type="hidden" id="currentUserId" value="<?php echo $_SESSION['user_id'] ?? 0; ?>">
+                                                                <input type="hidden" id="currentUserRole" value="<?php echo $_SESSION['role'] ?? 'agent'; ?>">
+                                                                <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
+                                                                <textarea class="form-control me-2 d-none" data-id="" id="oldComment" ></textarea>
+                                                                
+                                                                <button type="submit" class="btn btn-primary">Send</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
+                                                    <style>
+                                                        /* Timeline chat style for comments */
+                                                        .comment-row {
+                                                            display: flex;
+                                                            align-items: flex-end;
+                                                        }
+                                                        .comment-row.customer + .comment-row.customer {
+                                                            margin-top: 2px;
+                                                        }
+                                                        .comment-row.agent + .comment-row.agent {
+                                                            margin-top: 2px;
+                                                        }
+                                                        .comment-row.customer + .comment-row.agent {
+                                                            margin-top: 5px;
+                                                        }
+                                                        .comment-row.agent + .comment-row.customer {
+                                                            margin-top: 5px;
+                                                        }
+                                                        .comment-row.agent {
+                                                            flex-direction: row-reverse;
+                                                        }
+                                                        .comment-avatar {
+                                                            width: 36px;
+                                                            height: 36px;
+                                                            border-radius: 50%;
+                                                            background: #e0e0e0;
+                                                            object-fit: cover;
+                                                            margin: 0 8px;
+                                                        }
+                                                        .comment-bubble {
+                                                            max-width: 70%;
+                                                            padding: 5px 10px;
+                                                            border-radius: 18px;
+                                                            position: relative;
+                                                            font-size: 15px;
+                                                            word-break: break-word;
+                                                            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+                                                        }
+                                                        .comment-row.agent .comment-bubble {
+                                                            background: #f8f8f8;
+                                                            color: #222;
+                                                            border-bottom-right-radius: 6px;
+                                                            border-bottom-left-radius: 18px;
+                                                            margin-left: 10px;
+                                                            border: 1px solid #e0e0e0;
+                                                        }
+                                                        .comment-row.customer .comment-bubble {
+                                                            background: #f8f8f8;
+                                                            color: #222;
+                                                            border-bottom-left-radius: 6px;
+                                                            border-bottom-right-radius: 18px;
+                                                            margin-right: 10px;
+                                                            border: 1px solid #e0e0e0;
+                                                        }
+                                                        .comment-meta {
+                                                            position: relative;
+                                                            font-size: 9px;
+                                                            color: #222;
+                                                            display: flex;
+                                                            justify-content: flex-end;
+                                                            align-items: center;
+                                                            gap: 6px;
+                                                            width: 100%;
+                                                        }
+
+                                                        .edited-label {
+                                                            font-size: 10px;
+                                                            color: #b0b0b0;
+                                                            margin-left: 4px;
+                                                            vertical-align: middle;
+                                                            opacity: 0.7;
+                                                        }
+                                                            
+
+                                                        .edit-comment-btn, .delete-comment-btn {
+                                                            font-size: 12px;
+                                                            color: #ffc107;
+                                                            background: none;
+                                                            border: none;
+                                                            cursor: pointer;
+                                                            padding: 0;
+                                                        }
+                                                        .comment-text {padding-right: 30px;line-height: 18px;font-size: 13px;}
+                                                        </style>
+                                                        <script>
+                                                        // --- Comments/Chat Section Logic ---
+                                                        // document.addEventListener('DOMContentLoaded', function () {
+                                                        //     const ticketId = SBF.getURL('ticket')   || document.getElementById('ticket_id').value;
+                                                        //     const currentUserId = document.getElementById('currentUserId').value;   
+                                                        //     const currentUserRole = document.getElementById('currentUserRole').value;
+                                                        //     const commentsSection = document.getElementById('comments-section');
+                                                        //     const addCommentForm = document.getElementById('addCommentForm');
+                                                        //     const newCommentInput = document.getElementById('newComment');
+
+                                                        //     // Placeholder avatar
+                                                        //     function getAvatar(user) {
+                                                        //         // If you have user.avatar, use it; else fallback
+                                                        //         return user && user.avatar ? user.avatar : 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user && user.user_name ? user.user_name : user.user_role) + '&size=64&background=2563eb&color=fff';
+                                                        //     }
+
+                                                        //     function formatTimeTo12Hour(dateString) {
+                                                        //         const date = new Date(dateString.replace(' ', 'T'));
+                                                        //         let hours = date.getHours();
+                                                        //         let minutes = date.getMinutes();
+                                                        //         const ampm = hours >= 12 ? 'pm' : 'am';
+                                                        //         hours = hours % 12;
+                                                        //         hours = hours ? hours : 12; // 0 => 12
+                                                        //         minutes = minutes < 10 ? '0' + minutes : minutes;
+                                                        //         return hours + ':' + minutes + ' ' + ampm;
+                                                        //     }
+
+                                                        //     function formatDateLabel(dateString) {
+                                                        //         const date = new Date(dateString.replace(' ', 'T'));
+                                                        //         const today = new Date();
+                                                        //         const yesterday = new Date();
+                                                        //         yesterday.setDate(today.getDate() - 1);
+                                                        //         const isToday = date.toDateString() === today.toDateString();
+                                                        //         const isYesterday = date.toDateString() === yesterday.toDateString();
+                                                        //         if (isToday) return 'Today';
+                                                        //         if (isYesterday) return 'Yesterday';
+                                                        //         return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                                                        //     }
+
+                                                        //     function renderComment(comment) {
+                                                        //         const isAgent = comment.user_role === 'agent';
+                                                        //         const isOwn = comment.user_id == currentUserId;
+                                                        //         const rowClass = isAgent ? 'agent' : 'customer';
+                                                        //         // Avatar
+                                                        //         const avatarUrl = getAvatar(comment);
+                                                        //         // Bubble
+                                                        //         let html = `<div class="comment-row ${rowClass}">
+                                                        //             <img src="${avatarUrl}" class="comment-avatar" alt="avatar">
+                                                        //             <div class="comment-bubble">
+                                                        //                 <div class="comment-text" data-id="${comment.id}">${escapeHtml(comment.comment)}</div>
+                                                        //                 <div class="comment-meta">
+                                                        //                     <span>${formatTimeTo12Hour(comment.created_at)}</span>`;
+                                                        //         if (comment.is_edited == 1 || comment.is_edited === "1") {
+                                                        //             html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
+                                                        //         }
+                                                        //         // Show Edit button only if own comment and within 10 minutes
+                                                        //         if (isOwn && canEditComment(comment.created_at)) {
+                                                        //             html += `<button class="edit-comment-btn" data-id="${comment.id}">Edit</button>`;
+                                                        //         }
+                                                        //         if (isOwn) {
+                                                        //             html += `<button class="delete-comment-btn" data-id="${comment.id}">Delete</button>`;
+                                                        //         }
+                                                        //         html += `</div>
+                                                        //             </div>
+                                                        //         </div>`;
+                                                        //         return html;
+                                                        //     }
+
+                                                        //     function canEditComment(createdAt) {
+                                                        //         // Use server time injected by PHP for accuracy
+                                                        //         const serverNow = window.SERVER_NOW ? new Date(window.SERVER_NOW) : new Date();
+                                                        //         const commentTime = new Date(createdAt.replace(' ', 'T'));
+                                                        //         const diffMs = serverNow - commentTime;
+                                                        //         const diffMin = diffMs / (1000 * 60);
+                                                        //         return diffMin >= 0 && diffMin <= 10;
+                                                        //     }
+
+                                                        //     function escapeHtml(text) {
+                                                        //         var map = {
+                                                        //             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+                                                        //         };
+                                                        //         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+                                                        //     }
+
+                                                            
+
+                                                        //     function scrollToBottom() {
+                                                        //         commentsSection.scrollTop = commentsSection.scrollHeight;
+                                                        //     }
+
+                                                        //     addCommentForm.addEventListener('submit', function(e) {
+                                                        //         e.preventDefault();
+                                                        //         const comment = newCommentInput.value.trim();
+                                                        //         if (!comment) return;
+                                                        //         fetch('api/add-comment.php', {
+                                                        //             method: 'POST',
+                                                        //             headers: { 'Content-Type': 'application/json' },
+                                                        //             body: JSON.stringify({
+                                                        //                 ticket_id: ticketId,
+                                                        //                 user_id: currentUserId,
+                                                        //                 user_role: currentUserRole,
+                                                        //                 comment: comment
+                                                        //             })
+                                                        //         })
+                                                        //         .then(res => res.json())
+                                                        //         .then(data => {
+                                                        //             if (data.success) {
+                                                        //                 newCommentInput.value = '';
+                                                        //                 loadComments();
+                                                        //             } else {
+                                                        //                 alert(data.error || 'Failed to add comment');
+                                                        //             }
+                                                        //         });
+                                                        //     });
+
+                                                        //     function attachEditListeners() {
+                                                        //         commentsSection.querySelectorAll('.edit-comment-btn').forEach(btn => {
+                                                        //             btn.onclick = function() {
+                                                        //                 const commentId = this.getAttribute('data-id');
+                                                        //                 const commentDiv = commentsSection.querySelector(`.comment-text[data-id='${commentId}']`);
+                                                        //                 if (!commentDiv) return;
+                                                        //                 const oldText = commentDiv.innerText;
+                                                        //                 // Replace with textarea
+                                                        //                 // commentDiv.innerHTML = `<textarea class='form-control form-control-sm edit-comment-textarea' rows='2'>${oldText}</textarea>`;
+                                                        //                 // this.style.display = 'none';
+                                                        //                 // const textarea = commentDiv.querySelector('textarea');
+                                                        //                 const textarea = document.getElementById('oldComment'); 
+                                                        //                 textarea.value = oldText;
+                                                        //                 textarea.classList.remove('d-none');
+                                                        //                 textarea.classList.add('edit-comment-textarea');
+                                                        //                 this.style.display = 'none';
+                                                        //                 textarea.focus();
+                                                        //                 document.getElementById('newComment').classList.add('d-none'); 
+                                                        //                 textarea.onblur = function() {
+                                                        //                     saveEdit(commentId, textarea.value, commentDiv, btn);
+                                                        //                 };
+                                                        //                 textarea.onkeydown = function(e) {
+                                                        //                     if (e.key === 'Enter' && !e.shiftKey) {
+                                                        //                         e.preventDefault();
+                                                        //                         textarea.blur();
+                                                        //                     }
+                                                        //                 };
+                                                        //             };
+                                                        //         });
+
+                                                        //         commentsSection.querySelectorAll('.delete-comment-btn').forEach(btn => {
+                                                        //             btn.onclick = function() {
+                                                        //                 const commentId = this.getAttribute('data-id');
+                                                        //                 deleteComment(commentId);
+                                                        //             };
+                                                        //         });
+                                                        //     }
+
+                                                        //     function deleteComment(commentId) {
+                                                        //         fetch('api/delete-ticket-comment.php', {
+                                                        //             method: 'POST',
+                                                        //             headers: { 'Content-Type': 'application/json' },
+                                                        //             body: JSON.stringify({ comment_id: commentId })
+                                                        //         })
+                                                        //         .then(res => res.json())
+                                                        //         .then(data => {
+                                                        //             if (data.success) {
+                                                        //                 loadComments();
+                                                        //             } else {
+                                                        //                 alert(data.error || 'Failed to delete comment');
+                                                        //             }
+                                                        //         });
+                                                        //     }
+
+                                                        //     function saveEdit(commentId, newText, commentDiv, editBtn) {
+                                                        //         newText = newText.trim();
+                                                        //         if (!newText) {
+                                                        //             commentDiv.innerHTML = '<span class="text-danger small">Comment cannot be empty</span>';
+                                                        //             setTimeout(() => { loadComments(); }, 1200);
+                                                        //             return;
+                                                        //         }
+                                                        //         fetch('api/edit-comment.php', {
+                                                        //             method: 'POST',
+                                                        //             headers: { 'Content-Type': 'application/json' },
+                                                        //             body: JSON.stringify({
+                                                        //                 comment_id: commentId,
+                                                        //                 user_id: currentUserId,
+                                                        //                 comment: newText
+                                                        //             })
+                                                        //         })
+                                                        //         .then(res => res.json())
+                                                        //         .then(data => {
+                                                        //             if (data.success) {
+                                                        //                 const textarea = document.getElementById('oldComment'); 
+                                                        //                 textarea.classList.remove('edit-comment-textarea');
+                                                        //                 textarea.classList.add('d-none');
+                                                        //                 editBtn.style.display = 'block';
+                                                        //                 document.getElementById('newComment').classList.remove('d-none');
+                                                        //                 loadComments();
+                                                        //             } else {
+                                                        //                 commentDiv.innerHTML = `<span class='text-danger small'>${data.error || 'Failed to edit comment'}</span>`;
+                                                        //                 setTimeout(() => { loadComments(); }, 1200);
+                                                        //             }
+                                                        //         });
+                                                        //     }
+
+                                                            // Initial load
+                                                            //loadComments();
+                                                            // Optional: Poll for new comments every 30s
+                                                            //setInterval(loadComments, 30000);
+                                                        //});
+                                                        </script>
+                                                    <script>
+                                                        window.SERVER_NOW = "<?php echo date('Y-m-d\TH:i:sP'); ?>";
+                                                    </script>
                                                 </div>
                                                 <div class="col-md-3 p-0">
                                                     <div class="pl-5">

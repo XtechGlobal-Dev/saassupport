@@ -413,7 +413,8 @@
         });
 
         // Miscellaneous
-        $(admin).on('click', '.sb-admin-nav-right [data-value="account"], #sb-buy-credits', function () {
+        $(admin).on('click', '.user_menu .sb-menu li[data-value="account"], #sb-buy-credits', function () {
+            alert("dsdsds")
             document.location = CLOUD_URL + '/account?tab=membership' + ($(this).attr('id') == 'sb-buy-credits' ? '#credits' : '');
         });
 

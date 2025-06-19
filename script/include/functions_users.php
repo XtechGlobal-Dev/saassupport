@@ -1091,6 +1091,7 @@ function sb_edit_ticket($tickets_id = 0) {
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
         $result['attachments'] = sb_fetch_ticket_attachments($tickets_id);
+        $result['comments'] = sb_fetch_ticket_comments($tickets_id);
        return $result;
     } else {
         return false;
@@ -1823,6 +1824,27 @@ function sb_fetch_ticket_attachments($ticket_id = null)
     }
 }
 
+function sb_fetch_ticket_comments($ticket_id = null)
+{
+    if (!$ticket_id) {
+        return [];
+    }
+    
+    $ticket_id = sb_db_escape($ticket_id, true);
+
+
+    $sql = "SELECT c.*, CONCAT(u.first_name, ' ', u.last_name) as user_name FROM comments c LEFT JOIN sb_users u ON c.user_id = u.id WHERE c.ticket_id = $ticket_id ORDER BY c.created_at ASC";
+    $result = sb_db_get($sql, false);
+    $comments = [];
+
+    if (isset($result) && is_array($result)) {
+        foreach ($result as $row) {
+                $comments[] = $row;
+        } 
+    }
+
+    return $comments;
+}
 
 
 function sb_get_new_users($datetime) {
