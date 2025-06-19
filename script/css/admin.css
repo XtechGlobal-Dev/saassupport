@@ -9787,16 +9787,14 @@ a.sb-btn-white.sb-loading:hover:before,
   padding: 0 10px;
   margin-bottom: 8px;
 }
-.sb-area-articles .sb-inner-tab .ul-articles li.sb-active,
-.sb-area-articles .sb-inner-tab .ul-articles li:hover,
+.sb-area-articles .sb-inner-tab .ul-articles li.sb-active, .sb-area-articles .sb-inner-tab .ul-articles li:hover,
 .sb-area-articles .sb-inner-tab .ul-categories li.sb-active,
 .sb-area-articles .sb-inner-tab .ul-categories li:hover {
   background: #E5EAF0;
   border-radius: 6px;
   border-bottom: none;
 }
-.sb-area-articles .sb-inner-tab .ul-articles li.sb-active i,
-.sb-area-articles .sb-inner-tab .ul-articles li:hover i,
+.sb-area-articles .sb-inner-tab .ul-articles li.sb-active i, .sb-area-articles .sb-inner-tab .ul-articles li:hover i,
 .sb-area-articles .sb-inner-tab .ul-categories li.sb-active i,
 .sb-area-articles .sb-inner-tab .ul-categories li:hover i {
   top: 3px;

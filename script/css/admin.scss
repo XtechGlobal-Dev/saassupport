@@ -6845,23 +6845,16 @@ a.sb-btn-white,
                 padding: 0 10px;
                 margin-bottom: 8px;
 
-                // &:hover {
-                //     i {
-                //         top: 3px;
-                //         background: unset;
-                //     }
-                // }
-            }
+                &.sb-active,
+                &:hover {
+                    background: #E5EAF0;
+                    border-radius: 6px;
+                    border-bottom: none;
 
-            li.sb-active,
-            li:hover {
-                background: #E5EAF0;
-                border-radius: 6px;
-                border-bottom: none;
-
-                i {
-                    top: 3px;
-                    background: unset;
+                    i {
+                        top: 3px;
+                        background: unset;
+                    }
                 }
             }
         }
