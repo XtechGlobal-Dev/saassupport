@@ -1723,7 +1723,7 @@ function sb_component_admin() {
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
-                                    <div class="user_menu user-profile user_avatar">
+                                    <div class="sb-admin-nav-right user_menu user-profile user_avatar">
                                         <a class="sb-profile">
                                             <img class="avatar_img" src="" data-name="" />
                                             <span class="user-initials avatar_initials" style="display:none;">
