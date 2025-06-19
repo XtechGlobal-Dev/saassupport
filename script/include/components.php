@@ -1712,11 +1712,6 @@ function sb_component_admin() {
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
                 $header = '<header>
                                 <div class="header-left">
-                                    <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                        <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                        <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                    </svg>
                                     <h2 class="title">Setting</h2>
                                 </div>
                                 <div class="header-right">
@@ -2910,7 +2905,7 @@ function sb_component_admin() {
                                 <!-- <h2>
                                     <?php sb_e('Users list') ?>
                                 </h2> -->
-                                <div class="sb-menu-wide sb-menu-users">
+                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
                                         <span data-count="0"></span>
