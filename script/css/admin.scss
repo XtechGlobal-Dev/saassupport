@@ -59,80 +59,6 @@
     }
 }
 
-@for $i from 1 through 10 {
-    .p-#{$i} {
-        padding: #{4 * $i}px !important;
-    }
-
-    .pr-#{$i} {
-        padding-right: #{4 * $i}px !important;
-    }
-
-    .pl-#{$i} {
-        padding-left: #{4 * $i}px !important;
-    }
-
-    .pt-#{$i} {
-        padding-top: #{4 * $i}px !important;
-    }
-
-    .pb-#{$i} {
-        padding-bottom: #{4 * $i}px !important;
-    }
-
-    .px-#{$i} {
-        padding-left: #{4 * $i}px !important;
-        padding-right: #{4 * $i}px !important;
-    }
-
-    .py-#{$i} {
-        padding-top: #{4 * $i}px !important;
-        padding-bottom: #{4 * $i}px !important;
-    }
-
-    .m-#{$i} {
-        margin: #{4 * $i}px !important;
-    }
-
-    .mr-#{$i} {
-        margin-right: #{4 * $i}px !important;
-    }
-
-    .ml-#{$i} {
-        margin-left: #{4 * $i}px !important;
-    }
-
-    .mt-#{$i} {
-        margin-top: #{4 * $i}px !important;
-    }
-
-    .mb-#{$i} {
-        margin-bottom: #{4 * $i}px !important;
-    }
-
-    .mx-#{$i} {
-        margin-left: #{4 * $i}px !important;
-        margin-right: #{4 * $i}px !important;
-    }
-
-    .my-#{$i} {
-        margin-top: #{4 * $i}px !important;
-        margin-bottom: #{4 * $i}px !important;
-    }
-
-    .g-#{$i} {
-        gap: #{4 * $i}px !important;
-    }
-}
-
-.w-100 {
-    width: 100%;
-}
-
-.w-50 {
-    width: 50%;
-}
-
 .sb-fade-out {
     opacity: 0;
     animation: sb-fade-out .5s;
@@ -3304,7 +3230,8 @@ td.sb-offline:after {
         background: $white;
         padding: 15px;
         display: none;
-        z-index: 9;
+        // z-index: 9;
+        z-index: 4;
 
         >div {
             max-width: 650px;
@@ -3521,8 +3448,9 @@ td.sb-offline:after {
                         height: 8px;
                         position: absolute;
                         border-radius: 50%;
+                        margin-top: 0;
                         top: 50%;
-                        right: 6px;
+                        right: 13px;
                         transform: translateY(-50%);
                         background: rgb(19, 202, 126);
                     }
@@ -3533,8 +3461,9 @@ td.sb-offline:after {
                         height: 14px;
                         position: absolute;
                         border-radius: 50%;
+                        margin-top: 0;
                         top: 50%;
-                        right: 3px;
+                        right: 10px;
                         transform: translateY(-50%);
                         background: rgba(19, 202, 126, 0.2);
                     }
