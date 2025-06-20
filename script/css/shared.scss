@@ -30,6 +30,80 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 
 @use "../media/icons/icons.scss" as *;
 
+@for $i from 1 through 10 {
+  .p-#{$i} {
+    padding: #{4 * $i}px !important;
+  }
+
+  .pr-#{$i} {
+    padding-right: #{4 * $i}px !important;
+  }
+
+  .pl-#{$i} {
+    padding-left: #{4 * $i}px !important;
+  }
+
+  .pt-#{$i} {
+    padding-top: #{4 * $i}px !important;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{4 * $i}px !important;
+  }
+
+  .px-#{$i} {
+    padding-left: #{4 * $i}px !important;
+    padding-right: #{4 * $i}px !important;
+  }
+
+  .py-#{$i} {
+    padding-top: #{4 * $i}px !important;
+    padding-bottom: #{4 * $i}px !important;
+  }
+
+  .m-#{$i} {
+    margin: #{4 * $i}px !important;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{4 * $i}px !important;
+  }
+
+  .ml-#{$i} {
+    margin-left: #{4 * $i}px !important;
+  }
+
+  .mt-#{$i} {
+    margin-top: #{4 * $i}px !important;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{4 * $i}px !important;
+  }
+
+  .mx-#{$i} {
+    margin-left: #{4 * $i}px !important;
+    margin-right: #{4 * $i}px !important;
+  }
+
+  .my-#{$i} {
+    margin-top: #{4 * $i}px !important;
+    margin-bottom: #{4 * $i}px !important;
+  }
+
+  .g-#{$i} {
+    gap: #{4 * $i}px !important;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
 @font-face {
     //font-family: "Support Board Font";
     font-family: Manrope;
