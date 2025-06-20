@@ -1144,7 +1144,7 @@ function update_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
     }
 
     // Update the comment in the database
-    $query = "UPDATE comments SET comment = '$comment', updated_at = NOW() WHERE id = $commentId AND ticket_id = $ticketId";
+    $query = "UPDATE comments SET comment = '$comment', is_edited = 1, updated_at = NOW() WHERE id = $commentId AND ticket_id = $ticketId";
     $result = sb_db_query($query);
 
     if ($result) {
@@ -1638,13 +1638,20 @@ function sb_update_ticket($inputs,$ticket_id =0)
 }
 
 function sb_return_saved_ticket_row($ticket_id) {
-    $query = 'SELECT t.*, CONCAT_WS(" ", "u.first_name", "u.last_name") as assigned_to_name,
+    $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
             p.name as priority_name, p.color as priority_color,
-            ts.name as status_name, ts.color as status_color
-    FROM sb_tickets t 
-    LEFT JOIN sb_users u ON t.assigned_to = u.id
-    LEFT JOIN priorities p ON t.priority_id = p.id
-    LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$ticket_id;
+            ts.name as status_name, ts.color as status_color,
+            (
+                SELECT GROUP_CONCAT(DISTINCT tt2.tag SEPARATOR "||") 
+                FROM ticket_tags tt2 
+                WHERE tt2.ticket_id = t.id
+            ) AS tag_names
+            FROM sb_tickets t 
+            LEFT JOIN sb_users u ON t.assigned_to = u.id
+            LEFT JOIN sb_users c ON t.contact_id = c.id
+            LEFT JOIN priorities p ON t.priority_id = p.id
+            LEFT JOIN ticket_status ts ON t.status_id = ts.id where t.id = ' .$ticket_id;
+
 
     $result = sb_db_get($query);
     $departments = sb_get_departments();
@@ -1653,10 +1660,29 @@ function sb_return_saved_ticket_row($ticket_id) {
         $departmentsArr[$key] = $value['name'];
     }
 
+
+    $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+    $tagsArr = array();
+    foreach ($tags as $key => $value) {
+        $tagsArr[$value['tag-name']] = $value['tag-color'];
+    }
+        ////// replace department id with name
+
+    $ticketTags = isset($tickets['tag_names']) ? explode('||',$tickets['tag_names']) : [];
+    $ticketTagsWithColor = [];
+    foreach ($ticketTags as $tag) {
+        if (isset($tagsArr[$tag])) {
+            $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
+        }
+    }
+    $result['ticket_tags'] = $ticketTagsWithColor;  
+
+
     if ($result) {
         $result['department'] = isset($departmentsArr[$result['department_id']]) ? $departmentsArr[$result['department_id']] : 'Null';
-    return $result;
-    } else {
+        return $result;
+    } 
+    else {
         return false;
     }
 

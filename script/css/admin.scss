@@ -6942,7 +6942,7 @@ a.sb-btn-white,
         display: block;
         padding: 0 20px 30px 20px;
         justify-content: space-between;
-        height: calc(100vh - 145px);
+        height: calc(100% - 145px);
 
         >div {
             height: auto;
@@ -7043,7 +7043,7 @@ a.sb-btn-white,
 
 .sb-profile-edit-box,
 .sb-profile-box {
-    height: calc(100vh - 50px);
+    height: calc(100% - 50px);
     max-width: 1000px;
 
     .sb-main {
@@ -7059,7 +7059,7 @@ a.sb-btn-white,
 
 .sb-ticket-edit-box,
 .sb-ticket-custom-fields-edit-box {
-    height: calc(100vh - 50px);
+    height: calc(100% - 50px);
     max-width: 1000px;
 }
 

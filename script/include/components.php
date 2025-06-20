@@ -312,8 +312,8 @@ function sb_ticket_edit_box()
                         <?php } ?>
 
                         <?php
-                        $departments = sb_get_departments();
                         $department_settings = sb_get_setting('departments-settings');
+                        $departments = sb_get_departments();
                         if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == 1 && !empty($departments)) {
                         ?>
                             <div id="department_id" data-type="select" class="sb-input">
@@ -3166,7 +3166,7 @@ function sb_component_admin() {
                     </div>
                     <div class="sb-area-ticket-detail">
                         <?php echo $header; ?>
-                        <div class="tc_bg">
+                        <div class="tc_bg" style="max-height: calc(100vh - 93px);overflow-y: auto;">
                             <div class="tc_back">
                                 <div class="container">
                                     <div class="row">
@@ -3213,7 +3213,7 @@ function sb_component_admin() {
                                                     <h2 class="sub_title my-4">Description</h2>
                                                     <div id="description" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
                                                         <div style="display: inline-block;padding:0;width:100%;">
-                                                            <div id="ticketdescription" style="height: 180px;"></div>
+                                                            <div id="ticketDescriptionTicketDetail" style="height: 180px;"></div>
                                                         </div>
                                                         <input id="ticket_id" type="hidden" name="ticket_id" />
                                                         <input id="conversation_id" type="hidden" name="conversation_id" />
@@ -3645,6 +3645,20 @@ function sb_component_admin() {
                                                                     <span></span>
                                                                 </div>
                                                             </div>
+                                                            <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
+                                                            <div class="mb-3 sb-input d-block">
+                                                                <div class="field-label">Department</div>
+                                                                <select id="ticket-department" required>
+                                                                    <option value=""><?php echo sb_('Select Department'); ?></option>
+                                                                    <?php
+                                                                    $departments = sb_get_departments();
+                                                                    foreach ($departments as $key => $value) {
+                                                                        echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <?php } ?>
                                                             <div class="mb-3">
                                                                 <div class="field-label">Tags</div>
                                                                 <div class="mb-2">
@@ -3704,6 +3718,12 @@ function sb_component_admin() {
                                                             </div>
                                                             <div class="divider"></div>
                                                             <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
+                                                            <div id="custom-fields" class="sb-input d-block">
+                                                                <?php
+                                                                
+                                                                ?>
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
