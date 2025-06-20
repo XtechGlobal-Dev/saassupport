@@ -181,6 +181,14 @@ function sb_ajax_execute() {
              return sb_json_response(sb_delete_ticket_status($_POST['id']));
         case 'get-tickets-custom-fields':
              return sb_json_response(sb_get_tickets_custom_active_fields());
+        case 'add-ticket-comment':
+             return sb_json_response(add_ticket_comment($_POST['ticket_id'], $_POST['comment_id'], $_POST['comment']));
+        case 'update-ticket-comment':
+             return sb_json_response(update_ticket_comment($_POST['ticket_id'], $_POST['comment_id'], $_POST['comment']));
+        case 'delete-ticket-comment':
+             return sb_json_response(delete_ticket_comment($_POST['ticket_id'], $_POST['comment_id']));
+        case 'get-ticket-comments':
+             return sb_json_response(sb_fetch_ticket_comments($_POST['ticket_id']));
         // case 'get-ticket-statuses':
         //      return sb_json_response(sb_get_tickets_statuses());
         case 'search-get-users':

@@ -1091,7 +1091,7 @@ function sb_edit_ticket($tickets_id = 0) {
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
         $result['attachments'] = sb_fetch_ticket_attachments($tickets_id);
-        $result['comments'] = sb_fetch_ticket_comments($tickets_id);
+        //$result['comments'] = sb_fetch_ticket_comments($tickets_id)['comments'];
        return $result;
     } else {
         return false;
@@ -1099,6 +1099,85 @@ function sb_edit_ticket($tickets_id = 0) {
    //return sb_db_get($query);
 
 }
+
+function add_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
+    $ticketId = sb_db_escape($ticketId, true);
+    $comment = sb_db_escape($comment);
+    $active_user = sb_get_active_user();
+    $userId = sb_db_escape($active_user['id'], true);
+    $userRole = sb_is_agent() ? 'agent' : 'customer';
+
+    if ($ticketId <= 0 || empty($comment)) {
+        return ['success' => false, 'message' => 'Invalid ticket ID or comment.'];
+    }
+
+    // Check if the ticket exists
+    $ticket = sb_db_get("SELECT id FROM sb_tickets WHERE id = $ticketId");
+    if (!$ticket) {
+        return ['success' => false, 'message' => 'Ticket not found.'];
+    }
+
+    // Insert the comment into the database
+    $query = "INSERT INTO comments (ticket_id, user_id, user_role, comment, created_at) VALUES ($ticketId, $userId,'$userRole', '$comment', NOW())";
+    $result = sb_db_query($query);
+
+    if ($result) {
+        return ['success' => true, 'message' => 'Comment added successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Failed to add comment.'];
+    }
+}
+
+function update_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
+    $ticketId = sb_db_escape($ticketId, true);
+    $commentId = sb_db_escape($commentId, true);
+    $comment = sb_db_escape($comment);
+
+    if ($ticketId <= 0 || $commentId <= 0 || empty($comment)) {
+        return ['success' => false, 'message' => 'Invalid ticket ID, comment ID or comment.'];
+    }
+
+    // Check if the ticket exists
+    $ticket = sb_db_get("SELECT id FROM sb_tickets WHERE id = $ticketId");
+    if (!$ticket) {
+        return ['success' => false, 'message' => 'Ticket not found.'];
+    }
+
+    // Update the comment in the database
+    $query = "UPDATE comments SET comment = '$comment', updated_at = NOW() WHERE id = $commentId AND ticket_id = $ticketId";
+    $result = sb_db_query($query);
+
+    if ($result) {
+        return ['success' => true, 'message' => 'Comment updated successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Failed to update comment.'];
+    }
+}
+
+function delete_ticket_comment($ticketId = 0, $commentId = 0) {
+    $ticketId = sb_db_escape($ticketId, true);
+    $commentId = sb_db_escape($commentId, true);
+
+    if ($ticketId <= 0 || $commentId <= 0) {
+        return ['success' => false, 'message' => 'Invalid ticket ID or comment ID.'];
+    }
+
+    // Check if the ticket exists
+    $ticket = sb_db_get("SELECT id FROM sb_tickets WHERE id = $ticketId");
+    if (!$ticket) {
+        return ['success' => false, 'message' => 'Ticket not found.'];
+    }
+
+    // Delete the comment from the database
+    $query = "DELETE FROM comments WHERE id = $commentId AND ticket_id = $ticketId";
+    $result = sb_db_query($query);
+
+    if ($result) {
+        return ['success' => true, 'message' => 'Comment deleted successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Failed to delete comment.'];
+    }
+}   
 
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
 
@@ -1832,8 +1911,7 @@ function sb_fetch_ticket_comments($ticket_id = null)
     
     $ticket_id = sb_db_escape($ticket_id, true);
 
-
-    $sql = "SELECT c.*, CONCAT(u.first_name, ' ', u.last_name) as user_name FROM comments c LEFT JOIN sb_users u ON c.user_id = u.id WHERE c.ticket_id = $ticket_id ORDER BY c.created_at ASC";
+    $sql = "SELECT c.*, CONCAT(u.first_name, ' ', u.last_name) as user_name, u.profile_image FROM comments c LEFT JOIN sb_users u ON c.user_id = u.id WHERE c.ticket_id = $ticket_id ORDER BY c.created_at ASC";
     $result = sb_db_get($sql, false);
     $comments = [];
 
@@ -1843,7 +1921,7 @@ function sb_fetch_ticket_comments($ticket_id = null)
         } 
     }
 
-    return $comments;
+    return ['comments' => $comments, 'server_now' => date('Y-m-d\TH:i:sP')];
 }
 
 

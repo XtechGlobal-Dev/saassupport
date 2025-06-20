@@ -593,6 +593,14 @@ function sb_ticket_edit_box()
             cursor: pointer;
         }
 
+        .comment-row .user-initials{
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            margin: 0 8px;
+        }
+
         .initials {
             position: absolute;
             top: 0;
@@ -3307,14 +3315,13 @@ function sb_component_admin() {
                                                                 <!-- Comments will be loaded here by JS -->
                                                             </div>
                                                             
-                                                            <form id="addCommentForm" class="d-flex align-items-center gap-2">
-                                                                <input type="hidden" id="currentUserId" value="<?php echo $_SESSION['user_id'] ?? 0; ?>">
-                                                                <input type="hidden" id="currentUserRole" value="<?php echo $_SESSION['role'] ?? 'agent'; ?>">
+                                                            <div  class="d-flex align-items-center gap-2 mt-4">
+                                                                <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
                                                                 <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
-                                                                <textarea class="form-control me-2 d-none" data-id="" id="oldComment" ></textarea>
+                                                                <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
                                                                 
-                                                                <button type="submit" class="btn btn-primary">Send</button>
-                                                            </form>
+                                                                <button id="addComment" class="btn btn-primary">Send</button>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                     <style>
