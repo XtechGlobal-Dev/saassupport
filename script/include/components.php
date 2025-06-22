@@ -3208,6 +3208,40 @@ function sb_component_admin() {
                                                 <div class="col-md-12 p-0 mt-3 d-flex align-items-center">
                                                     <i class="fas fa-paperclip fs-4 mr-2"></i>
                                                     <span class="label">Attachments (02)</span>
+
+
+                                                    <!-- File Attachments Section -->
+                                                    <div id="ticketFileAttachments d-block" style="margin: 10px 0 0 0;">
+                                                        <div>
+                                                            <span class="d-block mb-2">Attachments</span>
+                                                            <div class="custom-file">
+                                                                <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
+                                                                <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                            <!-- Upload Progress -->
+                                                            <div class="progress mt-2 d-none" id="upload-progress-container">
+                                                                <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+
+                                                            <!-- Existing File Preview Container -->
+                                                            <div class="mt-2 d-none" id="existing-file-preview-container">
+                                                                <span>Current Attachments</span>
+                                                                <div class="row" id="current-attachments"></div>
+                                                            </div>
+
+                                                            <!-- File Preview Container -->
+                                                            <div class="mt-2">
+                                                                <span class="mb-2 d-block">New Attachments</span>
+                                                                <div class="mt-2" id="file-preview-container">
+                                                                    <div class="row" id="file-preview-list"></div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+
+
                                                 </div>
                                                 <div class="col-md-9 p-0">
                                                     <h2 class="sub_title my-4">Description</h2>
@@ -3718,12 +3752,7 @@ function sb_component_admin() {
                                                             </div>
                                                             <div class="divider"></div>
                                                             <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
-                                                            <div id="custom-fields" class="sb-input d-block">
-                                                                <?php
-                                                                
-                                                                ?>
-
-                                                            </div>
+                                                            <div id="custom-fields" class="sb-input d-block"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3734,6 +3763,45 @@ function sb_component_admin() {
                             </div>
                         </div>
                     </div>
+                    <div class="ticket-attachments sb-lightbox">
+                        <div class="sb-info"></div>
+                        <div class="sb-top-bar">
+                            <div>
+                                <h2 style="margin-bottom: 0;">
+                                    Create Custom Field
+                                </h2>   
+                            </div>
+                            <div>
+                                <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-status" data-hide="sb-profile-area" data-show="sb-edit-area">
+                                    <i class="sb-icon-sms"></i> Save Changes
+                                </a>
+                                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                                    <i class="sb-icon-close"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="sb-main sb-scroll-area">
+                            <div class="sb-details">
+                                <div class="sb-title">
+                                    <?php sb_e("Add New Status"); ?>
+                                </div>
+                                <div class="sb-edit-box sb-ticket-list" id="ticketStatusesForm">
+                                    <div id="status_title" data-type="text" class="sb-input">
+                                        <span>Title</span>
+                                        <input type="text" class="form-control" name="title" required>
+                                    </div>
+
+                                    <div id="status_color" data-type="text" class="sb-input">
+                                        <span>Choose Color</span>
+                                        <input type="color" value="#000000" name="status_color" id="statuscolor" class="form-control form-control-color" style="height: auto;" required>
+                                        <input type="hidden" name="status_id" id="status_id">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+
                     <script>
                         function propagateTagColors() {
                         // Map value to color from original select
