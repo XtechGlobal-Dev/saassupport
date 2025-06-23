@@ -10035,6 +10035,15 @@ a.sb-btn-white.sb-loading:hover:before,
   max-width: 1000px;
 }
 
+.ticket-attachments {
+  height: calc(80% - 50px);
+  max-width: 1000px;
+}
+
+#view-ticket-attachments {
+  cursor: pointer;
+}
+
 .sb-direct-message-box,
 #sb-whatsapp-send-template-box {
   height: calc(100vh - 50px);

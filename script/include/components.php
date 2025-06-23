@@ -397,36 +397,36 @@ function sb_ticket_edit_box()
                 <input id="ticket_id" type="hidden" name="ticket_id" />
                 <input id="conversation_id" type="hidden" name="conversation_id" />
                 <!-- Hidden input to store uploaded file data -->
-                <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+                <input type="hidden" id="uploaded_files1" name="uploaded_files" value="">
             </div>
             <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
-            <div id="ticketFileAttachments d-block" style="margin: 10px 0 0 0;">
+            <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
                 <div>
                     <span class="d-block mb-2">Attachments</span>
                     <div class="custom-file">
-                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
+                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments1" multiple>
                         <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
                 <!-- Upload Progress -->
-                <div class="progress mt-2 d-none" id="upload-progress-container">
-                    <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress mt-2 d-none" id="upload-progress-container1">
+                    <div class="progress-bar" id="upload-progress1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
 
                 <!-- Existing File Preview Container -->
-                <div class="mt-2 d-none" id="existing-file-preview-container">
+                <div class="mt-2 d-none" id="existing-file-preview-container1">
                     <span>Current Attachments</span>
-                    <div class="row" id="current-attachments"></div>
+                    <div class="row" id="current-attachments1"></div>
                 </div>
 
                 <!-- File Preview Container -->
                 <div class="mt-2">
                     <span class="mb-2 d-block">New Attachments</span>
-                    <div class="mt-2" id="file-preview-container">
-                        <div class="row" id="file-preview-list"></div>
+                    <div class="mt-2" id="file-preview-container1">
+                        <div class="row" id="file-preview-list1"></div>
                     </div>
                 </div>
 
@@ -435,7 +435,7 @@ function sb_ticket_edit_box()
     </div>
     <style>
         #ticketCustomFieldsContainer,
-        #ticketFileAttachments,
+        #ticketFileAttachments-detail,
         .first-section {
             display: flex;
             flex-wrap: wrap;
@@ -443,7 +443,7 @@ function sb_ticket_edit_box()
         }
 
         #ticketCustomFieldsContainer>.sb-input,
-        #ticketFileAttachments>div,
+        #ticketFileAttachments-detail>div,
         .first-section>div {
             flex: 0 0 calc(50% - 10px);
             /* 2 columns with spacing */
@@ -497,19 +497,19 @@ function sb_ticket_edit_box()
             vertical-align: middle;
         }
 
-        #file-preview-list .col-md-2,
-        #current-attachments .col-md-2 {
+        #file-preview-list .col-md-2, #file-preview-list1 .col-md-2,
+        #current-attachments .col-md-2, #current-attachments1 .col-md-2 {
             padding: 0
         }
 
-        #file-preview-list .card,
-        #current-attachments .card {
+        #file-preview-list .card, #file-preview-list1 .card,
+        #current-attachments .card, #current-attachments1 .card{
             margin: 6px;
             height: 100%;
         }
 
-        #file-preview-list .card-body,
-        #current-attachments .card-body {
+        #file-preview-list .card-body, #file-preview-list1 .card-body,
+        #current-attachments .card-body, #current-attachments1 .card-body {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1044,8 +1044,6 @@ function sb_ticket_edit_box()
 
             });
 
-
-            // Function to display file previews
             function displayFilePreviews(files) {
                 const previewList = document.getElementById('file-preview-list');
 
@@ -1129,6 +1127,176 @@ function sb_ticket_edit_box()
                 }
             }
 
+            document.getElementById('ticket-attachments1').addEventListener('change', function(event) {
+                const files = event.target.files;
+                if (files.length === 0) return;
+
+                // Create FormData object
+                const formData = new FormData();
+                uploadedFiles = [];
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('files[]', files[i]);
+                }
+
+                formData.append('function', 'ajax_calls');
+                formData.append('calls[0][function]', 'upload-ticket-attachments');
+                formData.append('login-cookie', SBF.loginCookie());
+                formData.append('ticket_id', 0); // Replace with actual ticket ID
+
+
+                console.log('Files to upload:', files);
+
+                // Show progress container
+                const progressContainer = document.getElementById('upload-progress-container1');
+                const progressBar = document.getElementById('upload-progress1');
+                progressContainer.classList.remove('d-none');
+                progressBar.style.width = '0%';
+                progressBar.setAttribute('aria-valuenow', 0);
+                progressBar.textContent = '0%';
+
+                //Create and configure XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
+
+                // Track upload progress
+                xhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        const percentComplete = Math.round((e.loaded / e.total) * 100);
+                        progressBar.style.width = percentComplete + '%';
+                        progressBar.setAttribute('aria-valuenow', percentComplete);
+                        progressBar.textContent = percentComplete + '%';
+                    }
+                });
+
+                // Handle response
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        let response = JSON.parse(xhr.responseText);
+                        let res2 = typeof response[0][1] === 'string' ? JSON.parse(response[0][1]) : response[0][1];
+
+                        if (res2.success) {
+                            // Add uploaded files to the array
+                            uploadedFiles = uploadedFiles.concat(res2.files);
+
+                            // Update hidden input with file data
+                            console.log('Uploaded files:', uploadedFiles);
+                            document.getElementById('uploaded_files1').value = JSON.stringify(uploadedFiles);
+
+                            // Display file previews
+                            displayFilePreviews1(res2.files);
+
+                            // Reset file input
+                            document.getElementById('ticket-attachments1').value = '';
+                        } else {
+                            alert('Error: ' + res2.error);
+                        }
+                    } else {
+                        alert('Error uploading files. Please try again.');
+                    }
+
+                    // Hide progress container after a delay
+                    setTimeout(() => {
+                        progressContainer.classList.add('d-none');
+                    }, 1000);
+                };
+
+                // Handle errors
+                xhr.onerror = function() {
+                    alert('Error uploading files. Please try again.');
+                    progressContainer.classList.add('d-none');
+                };
+
+                //Send the request
+                xhr.send(formData);
+
+            });
+
+            
+
+            // Function to display file previews
+            function displayFilePreviews1(files) {
+                const previewList = document.getElementById('file-preview-list1');
+
+                files.forEach(file => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-2 mb-2';
+
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body p-2';
+
+                    // Determine file type icon
+                    let fileIcon = 'bi-file-earmark';
+                    const fileType = file.file_type.split('/')[0];
+                    if (fileType === 'image') {
+                        fileIcon = 'bi-file-earmark-image';
+                    } else if (fileType === 'application') {
+                        fileIcon = 'bi-file-earmark-pdf';
+                    } else if (fileType === 'text') {
+                        fileIcon = 'bi-file-earmark-text';
+                    }
+
+                    // Create preview content
+                    let previewContent = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi ${fileIcon} me-2" style="font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1 text-truncate">
+                            <div class="text-truncate">${file.original_filename}</div>
+                            <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `;
+
+                    // For images, add a thumbnail preview
+                    if (fileType === 'image') {
+                        previewContent = `
+                        <div class="text-center mb-2">
+                            <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 text-truncate">
+                                <div class="text-truncate">${file.original_filename}</div>
+                                <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    `;
+                    }
+
+                    cardBody.innerHTML = previewContent;
+                    card.appendChild(cardBody);
+                    col.appendChild(card);
+                    previewList.appendChild(col);
+
+                    // Add event listener to remove button
+                    const removeBtn = cardBody.querySelector('.remove-file');
+                    removeBtn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        removeFile1(index);
+                    });
+                });
+            }
+
+            // Function to remove a file
+            function removeFile1(index) {
+                if (index >= 0 && index < uploadedFiles.length) {
+                    uploadedFiles.splice(index, 1);
+                    document.getElementById('uploaded_files1').value = JSON.stringify(uploadedFiles);
+
+                    // Refresh all previews
+                    const previewList = document.getElementById('file-preview-list1');
+                    previewList.innerHTML = '';
+                    displayFilePreviews1(uploadedFiles);
+                }
+            }
+
             // Function to format file size
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';
@@ -1169,7 +1337,7 @@ function sb_ticket_edit_box()
 
                                 // Hide Current Attachments section if no attachments left
                                 if ($('#current-attachments').children().length === 0) {
-                                    $('#existing-file-preview-container').addClass('d-none');
+                                    $('#existing-file-preview-container1').addClass('d-none');
                                 }
                             } else {
                                 alert('Error: ' + response.error);
@@ -1718,8 +1886,13 @@ function sb_component_admin() {
             <main>
                 <?php
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                $ticketUrl = dirname(SB_URL).'?area=tickets';
                 $header = '<header>
-                                <div class="header-left">
+                                 <div class="header-left">
+                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="'.$ticketUrl.'" >
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                        Back to Tickets
+                                    </a>
                                     <h2 class="title">Setting</h2>
                                 </div>
                                 <div class="header-right">
@@ -3199,49 +3372,15 @@ function sb_component_admin() {
                                                             ?>
                                                         </select>
 
-                                                        <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
+                                                        <a class="sb-btn sb-icon sb-save-ticket sb_btn_new">
                                                             <i class="fa-solid fa-check mr-1"></i>
                                                             Save changes
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center">
+                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center"  id="view-ticket-attachments">
                                                     <i class="fas fa-paperclip fs-4 mr-2"></i>
-                                                    <span class="label">Attachments (02)</span>
-
-
-                                                    <!-- File Attachments Section -->
-                                                    <div id="ticketFileAttachments d-block" style="margin: 10px 0 0 0;">
-                                                        <div>
-                                                            <span class="d-block mb-2">Attachments</span>
-                                                            <div class="custom-file">
-                                                                <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
-                                                                <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group mb-3">
-                                                            <!-- Upload Progress -->
-                                                            <div class="progress mt-2 d-none" id="upload-progress-container">
-                                                                <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                            </div>
-
-                                                            <!-- Existing File Preview Container -->
-                                                            <div class="mt-2 d-none" id="existing-file-preview-container">
-                                                                <span>Current Attachments</span>
-                                                                <div class="row" id="current-attachments"></div>
-                                                            </div>
-
-                                                            <!-- File Preview Container -->
-                                                            <div class="mt-2">
-                                                                <span class="mb-2 d-block">New Attachments</span>
-                                                                <div class="mt-2" id="file-preview-container">
-                                                                    <div class="row" id="file-preview-list"></div>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-
-
+                                                    <span class="label">Attachments (<span class="attachments-count">0</span>)</span>
                                                 </div>
                                                 <div class="col-md-9 p-0">
                                                     <h2 class="sub_title my-4">Description</h2>
@@ -3343,7 +3482,7 @@ function sb_component_admin() {
                                                         </div>
                                                     </div> -->
                                                     <!-- Comments/Chat Section -->
-                                                    <div class="row mt-4">
+                                                    <div id="ticket-comments" class="row mt-4">
                                                         <div class="col-md-12">
                                                             <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
                                                                 <!-- Comments will be loaded here by JS -->
@@ -3768,7 +3907,7 @@ function sb_component_admin() {
                         <div class="sb-top-bar">
                             <div>
                                 <h2 style="margin-bottom: 0;">
-                                    Create Custom Field
+                                    Ticket Attachments
                                 </h2>   
                             </div>
                             <div>
@@ -3783,23 +3922,39 @@ function sb_component_admin() {
 
                         <div class="sb-main sb-scroll-area">
                             <div class="sb-details">
-                                <div class="sb-title">
-                                    <?php sb_e("Add New Status"); ?>
+                                <div class="mt-5">
+                                    <span class="d-block mb-2">Attachments</span>
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
+                                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                                    </div>
                                 </div>
-                                <div class="sb-edit-box sb-ticket-list" id="ticketStatusesForm">
-                                    <div id="status_title" data-type="text" class="sb-input">
-                                        <span>Title</span>
-                                        <input type="text" class="form-control" name="title" required>
+                                <div class="form-group mb-3">
+                                    
+                                    <div class="progress mt-2 d-none" id="upload-progress-container">
+                                        <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
 
-                                    <div id="status_color" data-type="text" class="sb-input">
-                                        <span>Choose Color</span>
-                                        <input type="color" value="#000000" name="status_color" id="statuscolor" class="form-control form-control-color" style="height: auto;" required>
-                                        <input type="hidden" name="status_id" id="status_id">
+                                    <div class="mt-2" id="existing-file-preview-container">
+                                        <span>Current Attachments</span>
+                                        <div class="row" id="current-attachments"></div>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <span class="mb-2 d-block">New Attachments</span>
+                                        <div class="mt-2" id="file-preview-container">
+                                            <div class="row" id="file-preview-list"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                     <!-- File Attachments Section -->
+                        <!-- <div id="ticketFileAttachments-detail" class="ticket-attachments-box sb-lightbox">
+                            
+                        </div> -->
                     
 
                     <script>
@@ -3893,6 +4048,16 @@ function sb_component_admin() {
                         document.querySelector('.choices').addEventListener('click', function() {
                             setTimeout(refreshTagDots, 10);
                         });
+
+
+                        // // Listen for removeItem from Choices instance
+                        // if(tagsFilterChoices)
+                        // {
+                        //     tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                        //         getTicketsFilteredByTag();
+                        //     });
+                        // }
+
                     }
 
                     const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
@@ -3933,6 +4098,13 @@ function sb_component_admin() {
                         document.querySelector('.choices').addEventListener('click', function() {
                             setTimeout(refreshTagDots, 10);
                         });
+                        
+                        // if(ticketTagsFilterChoices)
+                        // {
+                        //     ticketTagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                        //         getTicketsFilteredByTag();
+                        //     });
+                        // }
                     }
 
                     
