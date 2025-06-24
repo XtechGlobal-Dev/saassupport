@@ -76,7 +76,7 @@ if ($response) {
                     }
                 }
             }
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, false, 'tg', $chat_id, false, $token, $tags), 'details', [])['id'];
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'tg', $chat_id, false, $token, $tags), 'details', [])['id'];
         } else if ($telegram_message_id && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages A, sb_conversations B WHERE A.conversation_id =  ' . $conversation_id . ' AND A.payload LIKE "%' . sb_db_escape($telegram_message_id) . '%" AND B.id = A.conversation_id AND (B.extra_2 = "' . $token . '" OR B.extra_3 = "' . $token . '")'), 'count') != 0) { // Deprecated. Use only extra_3 = "' . $token . '"
             die();
         }

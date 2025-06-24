@@ -45,61 +45,57 @@
       "value": [
         [ "", "Default" ],
         [ "auto", "Multilingual" ],
+        [ "sq", "Albanian" ],
         [ "am", "Amharic" ],
         [ "ar", "Arabic" ],
+        [ "bn", "Bengali" ],
         [ "bg", "Bulgarian" ],
         [ "br", "Portuguese - Brasilian" ],
+        [ "my", "Burmese" ],
+        [ "zh", "Chinese" ],
+        [ "zt", "Chinese - Traditional" ],
+        [ "hr", "Croatian" ],
         [ "cs", "Czech" ],
         [ "da", "Danish" ],
-        [ "de", "German" ],
-        [ "el", "Greek" ],
-        [ "es", "Spanish" ],
+        [ "nl", "Dutch" ],
+        [ "en", "English" ],
         [ "et", "Estonian" ],
-        [ "fa", "Persian" ],
+        [ "tl", "Filipino" ],
         [ "fi", "Finnish" ],
         [ "fr", "French" ],
+        [ "ka", "Georgian" ],
+        [ "de", "German" ],
+        [ "el", "Greek" ],
         [ "he", "Hebrew" ],
         [ "hi", "Hindi" ],
-        [ "hr", "Croatian" ],
         [ "hu", "Hungarian" ],
-        [ "id", "Indonesian" ],
         [ "is", "Icelandic" ],
+        [ "id", "Indonesian" ],
         [ "it", "Italian" ],
         [ "ja", "Japanese" ],
-        [ "ka", "Georgian" ],
         [ "ko", "Korean" ],
         [ "lt", "Lithuanian" ],
         [ "mk", "Macedonian" ],
-        [ "mn", "Mongolian" ],
         [ "ms", "Malay" ],
-        [ "my", "Burmese" ],
-        [ "nl", "Dutch" ],
+        [ "mn", "Mongolian" ],
         [ "no", "Norwegian" ],
         [ "pa", "Punjabi - Gurmurkhi" ],
+        [ "fa", "Persian" ],
         [ "pl", "Polish" ],
         [ "pt", "Portuguese" ],
         [ "ro", "Romanian" ],
         [ "ru", "Russian" ],
+        [ "sr", "Serbian" ],
         [ "sk", "Slovak" ],
         [ "sl", "Slovenian" ],
-        [ "sq", "Albanian" ],
-        [ "sr", "Serbian" ],
+        [ "es", "Spanish" ],
         [ "su", "Sundanese" ],
         [ "sv", "Swedish" ],
         [ "th", "Thai" ],
-        [ "tl", "Filipino" ],
         [ "tr", "Turkish" ],
         [ "uk", "Ukrainian" ],
-        [ "vi", "Vietnamese" ],
-        [ "zh", "Chinese" ],
-        [ "zt", "Chinese - Traditional" ]
+        [ "vi", "Vietnamese" ]
       ]
-    },
-    {
-      "type": "checkbox",
-      "id": "rtl",
-      "title": "RTL",
-      "content": "Activate the Right-To-Left (RTL) reading layout."
     },
     {
       "type": "checkbox",
@@ -719,12 +715,6 @@
     },
     {
       "type": "checkbox",
-      "id": "rtl-admin",
-      "title": "RTL",
-      "content": "Activate the Right-To-Left (RTL) reading layout for the admin area."
-    },
-    {
-      "type": "checkbox",
       "id": "show-profile-images-admin",
       "title": "Show profile images",
       "content": "Show the profile image of agents and users within the conversation."
@@ -772,7 +762,7 @@
         {
           "type": "checkbox",
           "id": "notes-hide-name",
-          "title": "Hide username"
+          "title": "Hide note information"
         }
       ]
     },
@@ -1286,6 +1276,11 @@
         },
         {
           "type": "checkbox",
+          "id": "email-piping-one-conversation",
+          "name": "One conversation per user"
+        },
+        {
+          "type": "checkbox",
           "id": "email-piping-disable-cron",
           "name": "Disable cron job"
         },
@@ -1293,6 +1288,11 @@
           "type": "number",
           "id": "email-piping-department",
           "name": "Department ID"
+        },
+        {
+          "type": "text",
+          "id": "email-piping-filters",
+          "name": "Filters"
         },
         {
           "type": "button",
@@ -2288,7 +2288,7 @@
         {
           "type": "checkbox",
           "id": "departments-show-list",
-          "title": "Display in conversation & ticket list"
+          "title": "Display in conversation list"
         },
         {
           "type": "checkbox",
@@ -2512,7 +2512,7 @@
     {
       "type": "checkbox",
       "id": "logs",
-      "title": "Enable logs",
+      "title": "Logs",
       "content": "Enable logging of agent activity.",
       "help": "https://board.support/docs/#logs"
     },

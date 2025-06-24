@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+
 /*
  *
  * ===================================================================
@@ -121,7 +119,7 @@ if (isset($_POST['function'])) {
 }
 
 function ajax_response($response) {
-    die($response === true ? true : json_encode($response, JSON_INVALID_UTF8_IGNORE));
+    die($response === true ? '1' : (is_numeric($response) ? $response : json_encode($response, JSON_INVALID_UTF8_IGNORE)));
 }
 
 ?>

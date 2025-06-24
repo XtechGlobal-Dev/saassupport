@@ -41,7 +41,8 @@ if ($response) {
             }
             if (!empty($sender['language'])) {
                 $extra['language'] = [sb_language_code($sender['language']), 'Language'];
-            } else if ($message_text && defined('SB_DIALOGFLOW')) $extra['language'] = sb_google_language_detection_get_user_extra($message_text);
+            } else if ($message_text && defined('SB_DIALOGFLOW'))
+                $extra['language'] = sb_google_language_detection_get_user_extra($message_text);
             $user_id = sb_add_user(['first_name' => $sender['name'], 'last_name' => '', 'profile_image' => empty($sender['avatar']) ? '' : sb_download_file($sender['avatar']), 'user_type' => 'lead'], $extra);
             $user = sb_get_user($user_id);
         } else {
@@ -50,21 +51,22 @@ if ($response) {
         }
         $GLOBALS['SB_LOGIN'] = $user;
         if (!$conversation_id) {
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', sb_get_setting('viber-department'), -1, 'vb', $chat_id), 'details', [])['id'];
+            $department = sb_get_setting('viber-department');
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'vb', $chat_id), 'details', [])['id'];
         }
 
         // Attachments
         switch ($message['type']) {
             case 'file':
             case 'video':
-        	case 'picture':
+            case 'picture':
                 array_push($attachments, [$message['file_name'], sb_download_file($message['media'], $message['file_name'])]);
                 break;
             case 'sticker':
                 array_push($attachments, ['', $message['media']]);
                 break;
             case 'location':
-                $message_text .= ($message_text ? PHP_EOL  : '') . 'https://www.google.com/maps/search/?api=1&query=' . $message['location']['lat'] . ',' . $message['location']['lon'];
+                $message_text .= ($message_text ? PHP_EOL : '') . 'https://www.google.com/maps/search/?api=1&query=' . $message['location']['lat'] . ',' . $message['location']['lon'];
                 break;
         }
 

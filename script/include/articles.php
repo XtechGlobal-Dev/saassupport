@@ -6,7 +6,7 @@
  * ==========================================================
  *
  * Articles page.
- * © 2017-2025 board.support. All rights reserved.
+ * ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
@@ -15,17 +15,17 @@ if (defined('SB_CROSS_DOMAIN') && SB_CROSS_DOMAIN) {
 }
 require_once('functions.php');
 sb_cloud_load();
-$query_category_id = sb_sanatize_string(sb_isset($_GET, 'category'));
-$query_article_id = sb_sanatize_string(sb_isset($_GET, 'article_id'));
-$query_search = sb_sanatize_string(sb_isset($_GET, 'search'));
-$language = sb_sanatize_string(sb_isset($_GET, 'lang', sb_get_user_language()));
+$query_category_id = sb_sanatize_string(sb_isset($_GET, 'category'), true);
+$query_article_id = sb_sanatize_string(sb_isset($_GET, 'article_id'), true);
+$query_search = sb_sanatize_string(sb_isset($_GET, 'search'), true);
+$language = sb_sanatize_string(sb_isset($_GET, 'lang', sb_get_user_language()), true);
 $code = '<div class="' . ($query_category_id ? 'sb-subcategories' : ($query_search ? 'sb-articles-search' : 'sb-grid sb-grid-3')) . '">';
 $code_script = '';
 $css = 'sb-articles-parent-categories-cnt';
 $articles_page_url = sb_get_articles_page_url();
 $articles_page_url_slash = $articles_page_url . (substr($articles_page_url, -1) == '/' ? '' : '/');
 $url_rewrite = $articles_page_url && sb_is_articles_url_rewrite();
-$cloud_url_part = defined('ARTICLES_URL') && isset($_GET['chat_id']) ? sb_sanatize_string($_GET['chat_id']) . '/' : '';
+$cloud_url_part = defined('ARTICLES_URL') && isset($_GET['chat_id']) ? sb_sanatize_string($_GET['chat_id'], true) . '/' : '';
 $code_breadcrumbs = $articles_page_url ? '<div class="sb-breadcrumbs"><a href="' . $articles_page_url . ($cloud_url_part ? '/' : '') . substr($cloud_url_part, 0, -1) . '">' . sb_t('All categories', $language) . '</a>' : '';
 if ($query_category_id) {
     $category = sb_get_article_category($query_category_id);
@@ -115,7 +115,7 @@ if ($query_category_id) {
         $code .= '<p>' . sb_t('No results found.', $language) . '</p>';
     }
 }
-if (sb_get_setting('rtl') || in_array(sb_get_user_language(), ['ar', 'he', 'ku', 'fa', 'ur'])) {
+if (sb_is_rtl()) {
     $css .= ' sb-rtl';
 }
 $code .= '</div>';

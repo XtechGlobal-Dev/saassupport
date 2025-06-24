@@ -58,7 +58,7 @@
                     response = JSON.parse(response);
                 }
                 if (response[1][0]) {
-                    SBF.cookie('SA_' + 'VGCKMENS', response[1][1], 60, 'set');
+                    SBF.cookie('SA_' + 'VGCKMENS', response[1][1], 30, 'set');
                     location.reload();
                 } else {
                     if (response[1][1]) {

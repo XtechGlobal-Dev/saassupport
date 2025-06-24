@@ -35,7 +35,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
     </main>
     <footer>
         <script>
-            var MEMBERSHIPS = [<?php echo substr(json_encode(memberships()), 1, -1) ?>]; var SB_TRANSLATIONS = false; var PAYMENT_PROVIDER = "<?php echo PAYMENT_PROVIDER ?>"; var CURRENCY = "<?php echo defined('RAPYD_CURRENCY') ? RAPYD_CURRENCY : (defined('VERIFONE_CURRENCY') ? VERIFONE_CURRENCY : (defined('YOOMONEY_CURRENCY') ? YOOMONEY_CURRENCY : (defined('PAYMENT_MANUAL_CURRENCY') ? PAYMENT_MANUAL_CURRENCY : ''))) ?>"; var MEMBERSHIP_TYPE = "<?php echo defined('SB_CLOUD_MEMBERSHIP_TYPE') ? SB_CLOUD_MEMBERSHIP_TYPE : '' ?>"
+            var MEMBERSHIPS = [<?php echo substr(json_encode(memberships()), 1, -1) ?>]; var SB_TRANSLATIONS = false; var PAYMENT_PROVIDER = "<?php echo PAYMENT_PROVIDER ?>"; var CURRENCY = "<?php echo membership_currency() ?>"; var MEMBERSHIP_TYPE = "<?php echo defined('SB_CLOUD_MEMBERSHIP_TYPE') ? SB_CLOUD_MEMBERSHIP_TYPE : '' ?>"
         </script>
         <script src="../script/js/min/jquery.min.js"></script>
         <script src="js/cloud<?php echo sb_is_debug() ? '.min' : '' ?>.js?v=<?php echo SB_VERSION ?>"></script>

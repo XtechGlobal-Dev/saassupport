@@ -9,7 +9,7 @@
  *
  */
 
-define('SB_WHATSAPP', '1.2.8');
+define('SB_WHATSAPP', '1.2.9');
 
 function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_number_id = false) {
     if (empty($message) && empty($attachments)) {
@@ -543,10 +543,12 @@ function sb_whatsapp_cloud_get_templates($business_account_id = false) {
             for ($i = 0; $i < count($response); $i++) {
                 $template = $response[$i];
                 $is_new = true;
+                $department = sb_isset($phone_numbers[$y], 'whatsapp-cloud-numbers-department');
                 for ($j = 0; $j < count($templates); $j++) {
                     if ($templates[$j]['name'] == $template['name']) {
                         array_push($templates[$j]['languages'], $template['language']);
                         array_push($templates[$j]['ids'], $template['id']);
+                        array_push($templates[$j]['department'], $department);
                         $is_new = false;
                         break;
                     }
@@ -556,7 +558,7 @@ function sb_whatsapp_cloud_get_templates($business_account_id = false) {
                     $template['ids'] = [$template['id']];
                     $template['phone_number_id'] = $phone_number_id;
                     $template['label'] = sb_isset($phone_numbers[$y], 'whatsapp-cloud-numbers-label', $phone_number_id);
-                    $template['department'] = sb_isset($phone_numbers[$y], 'whatsapp-cloud-numbers-department');
+                    $template['department'] = $department ? [$department] : [];
                     unset($template['language']);
                     unset($template['id']);
                     array_push($templates, $template);

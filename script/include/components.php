@@ -8,12 +8,15 @@
  * Library of static html components for the admin area. This file must not be executed directly. � 2017-2025 board.support. All rights reserved.
  *
  */
-function sb_profile_box()
-{ ?>
+
+function sb_profile_box() { ?>
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
             <div class="sb-profile">
-                <img src="<?php echo SB_URL ?>/media/user.svg" />
+                <img src="<?php echo SB_URL ?>/media/user.svg" data-name="" />
+                <div class="user-initials" data-value="edit-profile" style="display: none">
+                    <span class="initials"></span>
+                </div>
                 <span class="sb-name"></span>
             </div>
             <div>
@@ -58,8 +61,7 @@ function sb_profile_box()
     </div>
 <?php } ?>
 <?php
-function sb_profile_edit_box()
-{ ?>
+function sb_profile_edit_box() { ?>
     <div class="sb-profile-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -162,7 +164,8 @@ function sb_profile_edit_box()
             </div>
         </div>
     </div>
-<?php }
+<?php } ?>
+<?php
 function sb_ticket_box()
 { ?>
     <div class="sb-lightbox">
@@ -189,11 +192,10 @@ function sb_ticket_box()
             </div>
         </div>
     </div>
-<?php }
+<?php } 
 function sb_ticket_edit_box()
 { ?>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <!--script src="https://cdn.quilljs.com/1.3.6/quill.js"></script-->
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <div class="sb-ticket-edit-box sb-lightbox">
@@ -293,22 +295,25 @@ function sb_ticket_edit_box()
                         $count = count($tags);
                         if ($count > 0) {
                         ?>
-                            <div id="tags" data-type="select" class="sb-input">
+                            <div id="tags-div" data-type="select" class="sb-input">
                                 <span><?php sb_e('Tags') ?></span>
-                                <select>
+                                <select id="ticket-tags" name="tags[]" multiple>
                                     <?php
                                     for ($i = 0; $i < $count; $i++) {
-                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</option>';
+                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
                                     }
                                     echo $tagsHtml;
                                     ?>
                                 </select>
+                                <!--select id="ticket-tags" name="tags[]" multiple>
+                                    <option value="1" class="tag-option" data-color="#1976d2" data-custom-properties='{"color":"#1976d2"}'>Feature Request</option>
+                                </select-->
                             </div>
                         <?php } ?>
 
                         <?php
-                        $departments = sb_get_departments();
                         $department_settings = sb_get_setting('departments-settings');
+                        $departments = sb_get_departments();
                         if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == 1 && !empty($departments)) {
                         ?>
                             <div id="department_id" data-type="select" class="sb-input">
@@ -336,17 +341,17 @@ function sb_ticket_edit_box()
 
                         <?php
 
-                        function sb_get_priorities()
-                        {
-                            $priorities = sb_db_get('SELECT * FROM priorities', false);
-                            return $priorities;
-                        }
+                        // function sb_get_priorities()
+                        // {
+                        //     $priorities = sb_db_get('SELECT * FROM priorities', false);
+                        //     return $priorities;
+                        // }
 
-                        function sb_get_statues()
-                        {
-                            $status = sb_db_get('SELECT * FROM ticket_status', false);
-                            return $status;
-                        }
+                        // function sb_get_statues()
+                        // {
+                        //     $status = sb_db_get('SELECT * FROM ticket_status', false);
+                        //     return $status;
+                        // }
                         $statues = sb_get_statues();
                         $priorities = sb_get_priorities();
 
@@ -392,36 +397,36 @@ function sb_ticket_edit_box()
                 <input id="ticket_id" type="hidden" name="ticket_id" />
                 <input id="conversation_id" type="hidden" name="conversation_id" />
                 <!-- Hidden input to store uploaded file data -->
-                <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+                <input type="hidden" id="uploaded_files1" name="uploaded_files" value="">
             </div>
             <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
-            <div id="ticketFileAttachments d-block" style="margin: 10px 0 0 0;">
+            <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
                 <div>
                     <span class="d-block mb-2">Attachments</span>
                     <div class="custom-file">
-                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
+                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments1" multiple>
                         <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
                 <!-- Upload Progress -->
-                <div class="progress mt-2 d-none" id="upload-progress-container">
-                    <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress mt-2 d-none" id="upload-progress-container1">
+                    <div class="progress-bar" id="upload-progress1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
 
                 <!-- Existing File Preview Container -->
-                <div class="mt-2 d-none" id="existing-file-preview-container">
+                <div class="mt-2 d-none" id="existing-file-preview-container1">
                     <span>Current Attachments</span>
-                    <div class="row" id="current-attachments"></div>
+                    <div class="row" id="current-attachments1"></div>
                 </div>
 
                 <!-- File Preview Container -->
                 <div class="mt-2">
                     <span class="mb-2 d-block">New Attachments</span>
-                    <div class="mt-2" id="file-preview-container">
-                        <div class="row" id="file-preview-list"></div>
+                    <div class="mt-2" id="file-preview-container1">
+                        <div class="row" id="file-preview-list1"></div>
                     </div>
                 </div>
 
@@ -430,7 +435,7 @@ function sb_ticket_edit_box()
     </div>
     <style>
         #ticketCustomFieldsContainer,
-        #ticketFileAttachments,
+        #ticketFileAttachments-detail,
         .first-section {
             display: flex;
             flex-wrap: wrap;
@@ -438,7 +443,7 @@ function sb_ticket_edit_box()
         }
 
         #ticketCustomFieldsContainer>.sb-input,
-        #ticketFileAttachments>div,
+        #ticketFileAttachments-detail>div,
         .first-section>div {
             flex: 0 0 calc(50% - 10px);
             /* 2 columns with spacing */
@@ -488,19 +493,23 @@ function sb_ticket_edit_box()
             padding: 0;
         }
 
-        #file-preview-list .col-md-2,
-        #current-attachments .col-md-2 {
+        table.table-striped tr {
+            vertical-align: middle;
+        }
+
+        #file-preview-list .col-md-2, #file-preview-list1 .col-md-2,
+        #current-attachments .col-md-2, #current-attachments1 .col-md-2 {
             padding: 0
         }
 
-        #file-preview-list .card,
-        #current-attachments .card {
+        #file-preview-list .card, #file-preview-list1 .card,
+        #current-attachments .card, #current-attachments1 .card{
             margin: 6px;
             height: 100%;
         }
 
-        #file-preview-list .card-body,
-        #current-attachments .card-body {
+        #file-preview-list .card-body, #file-preview-list1 .card-body,
+        #current-attachments .card-body, #current-attachments1 .card-body {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -531,7 +540,7 @@ function sb_ticket_edit_box()
             padding: 4px 10px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            background-color: #fdfdfd;
+            background-color: #fff;
             font-family: 'Segoe UI', sans-serif;
             font-size: 16px;
             color: #333;
@@ -567,8 +576,158 @@ function sb_ticket_edit_box()
         span.select2-selection.select2-selection--single {
             height: 42px;
         }
+
+
+        .user-initials {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ccc;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            line-height: 50px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .comment-row .user-initials{
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            margin: 0 8px;
+        }
+
+        .initials {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sb-scroll-area .user-initials,
+        .sb-top-bar .user-initials {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            position: absolute;
+            left: 0;
+        }
+
+        .sb-user-details .user-initials {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 13px;
+            line-height: 40px;
+            position: absolute;
+            margin: 0 10px 0 0;
+            left: 0;
+        }
+
+        .sb-profile-box .sb-top-bar .sb-profile .initials {
+            margin-left: 0px;
+            font-size: 16px;
+            line-height: 45px;
+        }
+
+        .sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
+        .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
+        
     </style>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagsElement = document.getElementById('ticket-tags');
+            if (tagsElement) {
+                const choices = new Choices(tagsElement, {
+                    removeItemButton: true,
+                    placeholder: true,
+                    placeholderValue: 'Select tags...',
+                    allowHTML: true,
+                    itemSelectText: '',
+                    callbackOnCreateTemplates: function(template) {
+                        return {
+                            item: (classNames, data) => {
+                                const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                return template(`
+                                    <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
+                                         data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                        <span class="tag-dot" style="background-color:${color}"></span>
+                                        ${data.label}
+                                        <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
+                                    </div>
+                                `);
+                            }
+                        };
+                    }
+                });
+
+
+                refreshTagDots();
+                tagsElement.addEventListener('change', refreshTagDots);
+                // Listen for any DOM changes in the choices list (item removed/added)
+                const choicesList = document.querySelector('.choices__list--dropdown');
+                if (choicesList) {
+                    const observer = new MutationObserver(() => {
+                        refreshTagDots();
+                    });
+                    observer.observe(choicesList, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
+                document.querySelector('.choices').addEventListener('click', function() {
+                    setTimeout(refreshTagDots, 10);
+                });
+            }
+
+
+            
+            // Code to display applied tags in a palette
+            // const paletteContainer = document.getElementById('selected-tags-palette');
+            // document.getElementById('tags-filter').addEventListener('change', function () {
+            // const selected = tagsFilterChoices.getValue();
+            //     const selectedValues = $(this).val(); // Gets array of selected values
+            //     paletteContainer.innerHTML = ''; // clear old circles
+            //     selected.forEach(item => {
+            //         const color = item.customProperties?.color || '#ccc';
+            //         const li = document.createElement('div');
+            //         li.className = 'is-selected';
+            //         li.setAttribute('data-item', '');
+            //         li.setAttribute('data-id', item.id);
+            //         li.setAttribute('data-value', item.value);
+            //         li.setAttribute('aria-selected', 'true');
+            //         li.setAttribute('data-color1', color);
+            //         li.style.border = `1px solid ${color}`;
+
+            //         const span = document.createElement('span');
+            //         span.className = 'tag-dot';
+            //         span.style.backgroundColor = color;
+
+            //         const text = document.createTextNode(item.label);
+
+            //         const button = document.createElement('button');
+            //         button.type = 'button';
+            //         button.className = 'choices__button';
+            //         button.setAttribute('aria-label', `Remove item: ${item.value}`);
+            //         button.dataset.button = '';
+
+            //         const icon = document.createElement('i');
+            //         icon.className = 'fa-solid fa-xmark choice-remove';
+            //         icon.setAttribute('aria-hidden', 'true');
+
+            //         button.appendChild(icon);
+            //         li.appendChild(span);
+            //         li.appendChild(text);
+            //         li.appendChild(button);
+            //         paletteContainer.appendChild(li);
+            //     });
+            // });
+        });
         $('#select-customer').select2({
             placeholder: 'Type and search...',
             ajax: {
@@ -654,9 +813,64 @@ function sb_ticket_edit_box()
     <!-- Include Bootstrap JS and dependencies -->
     <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
     <!-- File Upload Handling -->
     <script>
+
+        function propagateTagColors() {
+            // Map value to color from original select
+            const select = document.getElementById('ticket-tags');
+            if (!select) return;
+            const valueToColor = {};
+            Array.from(select.options).forEach(opt => {
+                if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
+            });
+            // Dropdown items
+            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
+                const value = item.getAttribute('data-value');
+                if (valueToColor[value]) {
+                    item.setAttribute('data-color', valueToColor[value]);
+                }
+            });
+            // Selected items
+            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
+                const value = item.getAttribute('data-value');
+                if (valueToColor[value]) {
+                    item.setAttribute('data-color', valueToColor[value]);
+                }
+            });
+        }
+
+        function updateTagDots() {
+            // Dropdown items
+            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
+                if (!item.querySelector('.tag-dot')) {
+                    let color = item.getAttribute('data-color');
+                    let dot = document.createElement('span');
+                    dot.className = 'tag-dot';
+                    dot.style.backgroundColor = color;
+                    item.prepend(dot);
+                }
+            });
+            // Selected items
+            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
+                if (!item.querySelector('.tag-dot')) {
+                    let color = item.getAttribute('data-color');
+                    let dot = document.createElement('span');
+                    dot.className = 'tag-dot';
+                    dot.style.backgroundColor = color;
+                    item.prepend(dot);
+                }
+            });
+        }
+
+                    function refreshTagDots() {
+                        propagateTagColors();
+                        updateTagDots();
+                    }
+
+
         jQuery(document).ready(function($) {
             // This listens for change events on any current or future select inside #parent-container
             // Trigger change
@@ -830,8 +1044,6 @@ function sb_ticket_edit_box()
 
             });
 
-
-            // Function to display file previews
             function displayFilePreviews(files) {
                 const previewList = document.getElementById('file-preview-list');
 
@@ -915,6 +1127,176 @@ function sb_ticket_edit_box()
                 }
             }
 
+            document.getElementById('ticket-attachments1').addEventListener('change', function(event) {
+                const files = event.target.files;
+                if (files.length === 0) return;
+
+                // Create FormData object
+                const formData = new FormData();
+                uploadedFiles = [];
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('files[]', files[i]);
+                }
+
+                formData.append('function', 'ajax_calls');
+                formData.append('calls[0][function]', 'upload-ticket-attachments');
+                formData.append('login-cookie', SBF.loginCookie());
+                formData.append('ticket_id', 0); // Replace with actual ticket ID
+
+
+                console.log('Files to upload:', files);
+
+                // Show progress container
+                const progressContainer = document.getElementById('upload-progress-container1');
+                const progressBar = document.getElementById('upload-progress1');
+                progressContainer.classList.remove('d-none');
+                progressBar.style.width = '0%';
+                progressBar.setAttribute('aria-valuenow', 0);
+                progressBar.textContent = '0%';
+
+                //Create and configure XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
+
+                // Track upload progress
+                xhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        const percentComplete = Math.round((e.loaded / e.total) * 100);
+                        progressBar.style.width = percentComplete + '%';
+                        progressBar.setAttribute('aria-valuenow', percentComplete);
+                        progressBar.textContent = percentComplete + '%';
+                    }
+                });
+
+                // Handle response
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        let response = JSON.parse(xhr.responseText);
+                        let res2 = typeof response[0][1] === 'string' ? JSON.parse(response[0][1]) : response[0][1];
+
+                        if (res2.success) {
+                            // Add uploaded files to the array
+                            uploadedFiles = uploadedFiles.concat(res2.files);
+
+                            // Update hidden input with file data
+                            console.log('Uploaded files:', uploadedFiles);
+                            document.getElementById('uploaded_files1').value = JSON.stringify(uploadedFiles);
+
+                            // Display file previews
+                            displayFilePreviews1(res2.files);
+
+                            // Reset file input
+                            document.getElementById('ticket-attachments1').value = '';
+                        } else {
+                            alert('Error: ' + res2.error);
+                        }
+                    } else {
+                        alert('Error uploading files. Please try again.');
+                    }
+
+                    // Hide progress container after a delay
+                    setTimeout(() => {
+                        progressContainer.classList.add('d-none');
+                    }, 1000);
+                };
+
+                // Handle errors
+                xhr.onerror = function() {
+                    alert('Error uploading files. Please try again.');
+                    progressContainer.classList.add('d-none');
+                };
+
+                //Send the request
+                xhr.send(formData);
+
+            });
+
+            
+
+            // Function to display file previews
+            function displayFilePreviews1(files) {
+                const previewList = document.getElementById('file-preview-list1');
+
+                files.forEach(file => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-2 mb-2';
+
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body p-2';
+
+                    // Determine file type icon
+                    let fileIcon = 'bi-file-earmark';
+                    const fileType = file.file_type.split('/')[0];
+                    if (fileType === 'image') {
+                        fileIcon = 'bi-file-earmark-image';
+                    } else if (fileType === 'application') {
+                        fileIcon = 'bi-file-earmark-pdf';
+                    } else if (fileType === 'text') {
+                        fileIcon = 'bi-file-earmark-text';
+                    }
+
+                    // Create preview content
+                    let previewContent = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi ${fileIcon} me-2" style="font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1 text-truncate">
+                            <div class="text-truncate">${file.original_filename}</div>
+                            <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `;
+
+                    // For images, add a thumbnail preview
+                    if (fileType === 'image') {
+                        previewContent = `
+                        <div class="text-center mb-2">
+                            <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 text-truncate">
+                                <div class="text-truncate">${file.original_filename}</div>
+                                <small class="text-muted">${formatFileSize(file.file_size)}</small>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    `;
+                    }
+
+                    cardBody.innerHTML = previewContent;
+                    card.appendChild(cardBody);
+                    col.appendChild(card);
+                    previewList.appendChild(col);
+
+                    // Add event listener to remove button
+                    const removeBtn = cardBody.querySelector('.remove-file');
+                    removeBtn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        removeFile1(index);
+                    });
+                });
+            }
+
+            // Function to remove a file
+            function removeFile1(index) {
+                if (index >= 0 && index < uploadedFiles.length) {
+                    uploadedFiles.splice(index, 1);
+                    document.getElementById('uploaded_files1').value = JSON.stringify(uploadedFiles);
+
+                    // Refresh all previews
+                    const previewList = document.getElementById('file-preview-list1');
+                    previewList.innerHTML = '';
+                    displayFilePreviews1(uploadedFiles);
+                }
+            }
+
             // Function to format file size
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';
@@ -955,7 +1337,7 @@ function sb_ticket_edit_box()
 
                                 // Hide Current Attachments section if no attachments left
                                 if ($('#current-attachments').children().length === 0) {
-                                    $('#existing-file-preview-container').addClass('d-none');
+                                    $('#existing-file-preview-container1').addClass('d-none');
                                 }
                             } else {
                                 alert('Error: ' + response.error);
@@ -975,8 +1357,7 @@ function sb_ticket_edit_box()
     </script>
 <?php } ?>
 <?php
-function sb_login_box()
-{ ?>
+function sb_login_box() { ?>
     <form class="sb sb-rich-login sb-admin-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1010,20 +1391,20 @@ function sb_login_box()
     </form>
     <img id="sb-error-check" style="display:none" src="<?php echo SB_URL . '/media/logo.svg' ?>" />
     <script>
-        (function($) {
-            $(document).ready(function() {
+        (function ($) {
+            $(document).ready(function () {
                 $('.sb-admin-start').removeAttr('style');
-                $('.sb-submit-login').on('click', function() {
-                    SBF.loginForm(this, false, function() {
+                $('.sb-submit-login').on('click', function () {
+                    SBF.loginForm(this, false, function () {
                         location.reload();
                     });
                 });
-                $('#sb-error-check').one('error', function() {
+                $('#sb-error-check').one('error', function () {
                     $('.sb-info').html('It looks like the chat URL has changed. Edit the config.php file(it\'s in the Support Board folder) and update the SB_URL constant with the new URL.').addClass('sb-active');
                 });
                 SBF.serviceWorker.init();
             });
-            $(window).keydown(function(e) {
+            $(window).keydown(function (e) {
                 if (e.which == 13) {
                     $('.sb-submit-login').click();
                 }
@@ -1039,8 +1420,7 @@ function sb_login_box()
     </script>
 <?php } ?>
 <?php
-function sb_dialog()
-{ ?>
+function sb_dialog() { ?>
     <div class="sb-dialog-box sb-lightbox">
         <div class="sb-title"></div>
         <p></p>
@@ -1058,8 +1438,7 @@ function sb_dialog()
     </div>
 <?php } ?>
 <?php
-function sb_updates_box()
-{ ?>
+function sb_updates_box() { ?>
     <div class="sb-lightbox sb-updates-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1087,8 +1466,7 @@ function sb_updates_box()
     </div>
 <?php } ?>
 <?php
-function sb_app_box()
-{ ?>
+function sb_app_box() { ?>
     <div class="sb-lightbox sb-app-box" data-app="">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1133,8 +1511,7 @@ function sb_app_box()
     </div>
 <?php } ?>
 <?php
-function sb_direct_message_box()
-{ ?>
+function sb_direct_message_box() { ?>
     <div class="sb-lightbox sb-direct-message-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1176,8 +1553,7 @@ function sb_direct_message_box()
     </div>
 <?php } ?>
 <?php
-function sb_routing_select($exclude_id = false)
-{
+function sb_routing_select($exclude_id = false) {
     $agents = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE (user_type = "agent" OR user_type = "admin")' . ($exclude_id ? (' AND id <> ' . sb_db_escape($exclude_id)) : ''), false);
     $code = '<div class="sb-inline sb-inline-agents"><h3>' . sb_('Agent') . '</h3><div id="conversation-agent" class="sb-select"><p>' . sb_('None') . '</p><ul><li data-id="" data-value="">' . sb_('None') . '</li>';
     for ($i = 0; $i < count($agents); $i++) {
@@ -1187,11 +1563,10 @@ function sb_routing_select($exclude_id = false)
 }
 ?>
 <?php
-function sb_installation_box($error = false)
-{
+function sb_installation_box($error = false) {
     global $SB_LANGUAGE;
     $SB_LANGUAGE = isset($_GET['lang']) ? $_GET['lang'] : strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-?>
+    ?>
     <div class="sb-main sb-admin sb-admin-start">
         <form class="sb-intall sb-admin-box">
             <?php if ($error === false || $error == 'installation')
@@ -1292,8 +1667,7 @@ function sb_installation_box($error = false)
  *
  */
 
-function sb_component_admin()
-{
+function sb_component_admin() {
     $is_cloud = sb_is_cloud();
     $cloud_active_apps = $is_cloud ? sb_get_external_setting('active_apps', []) : [];
     $sb_settings = sb_get_json_resource('json/settings.json');
@@ -1322,15 +1696,12 @@ function sb_component_admin()
         ['SB_ARMEMBER', 'armember', 'ARMember', 'Synchronize customers, enable ticket and chat support for subscribers only, view subscription plans in the admin area.'],
         ['SB_MARTFURY', 'martfury', 'Martfury', 'Increase sales and connect you and sellers with customers in real-time by integrating Martfury with {R}.'],
     ];
-
-
-
     $logged = $active_user && sb_is_agent($active_user) && (!defined('SB_WP') || !sb_get_setting('wp-force-logout') || sb_wp_verify_admin_login());
     $supervisor = sb_supervisor();
     $is_admin = $active_user && sb_is_agent($active_user, true, true) && !$supervisor;
     $sms = sb_get_multi_setting('sms', 'sms-user');
-    $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (sb_get_setting('rtl-admin') || ($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
-    $active_areas = [
+    $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl() ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
+     $active_areas = [
         'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']),
         'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
         'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']),
@@ -1339,10 +1710,7 @@ function sb_component_admin()
         'tickets' => $is_admin,
         'dashboard' => $is_admin,
     ];
-
-
     $disable_translations = sb_get_setting('admin-disable-settings-translations');
-
     $admin_colors = [sb_get_setting('color-admin-1'), sb_get_setting('color-admin-2')];
     if ($supervisor && !$supervisor['supervisor-send-message']) {
         echo '<style>.sb-board .sb-conversation .sb-editor,#sb-start-conversation,.sb-top-bar [data-value="sms"],.sb-top-bar [data-value="email"],.sb-menu-users [data-value="message"],.sb-menu-users [data-value="sms"],.sb-menu-users [data-value="email"] { display: none !important; }</style>';
@@ -1372,10 +1740,8 @@ function sb_component_admin()
         }
         echo '<style>' . $css . '</style>';
     }
-?>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    ?>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
             <div class="sb-header header_new">
@@ -1394,11 +1760,17 @@ function sb_component_admin()
                         <ul>
                             <li><a id="sb-dashboard"><i class="fa-solid fa-gauge"></i><span> Dashboard</span></a></li>
                             <li><a id="sb-conversations"><i class="fa-solid fa-inbox"></i><span> Inbox</span></a></li>
-                            <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
+                            <?php if ($active_areas['tickets']) { ?>
+                                <li><a id="sb-tickets"><i class="fa-solid fa-ticket"></i><span> Tickets</span></a></li>
+                            <?php } ?>
                             <li><a id="sb-users"><i class="fa-solid fa-users"></i><span> Customers</span></a></li>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
-                            <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i><span> Articles</span></a></li>
-                            <li><a id="sb-reports"><i class="fa-solid fa-flag"></i><span> Reports</span></a></li>
+                            <?php if ($active_areas['articles']) { ?>
+                                <li><a id="sb-articles"><i class="fa-solid fa-newspaper"></i><span> Articles</span></a></li>
+                            <?php } ?>
+                            <?php if ($active_areas['reports']) { ?>
+                                <li><a id="sb-reports"><i class="fa-solid fa-flag"></i><span> Reports</span></a></li>
+                            <?php } ?>
                             <li><a id="sb-settings"><i class="fa-solid fa-gear"></i><span> Settings</span></a></li>
                             <!-- <li><a href="#"><i class="fa-solid fa-circle-info"></i><span> Help & Support</span></a></li> -->
                         </ul>
@@ -1438,11 +1810,11 @@ function sb_component_admin()
                     </div>
                 </aside>
                 <!-- <div class="sb-admin-nav">
-                        <a id="sb-conversations" class="sb-active">
-                            <span>
-                                <?php sb_e('Conversations') ?>
-                            </span>
-                        </a>
+                <a id="sb-conversations" class="sb-active">
+                    <span>
+                        <?php sb_e('Conversations') ?>
+                    </span>
+                </a>
                         <?php
                         if ($active_areas['users']) {
                             echo '<a id="sb-users"><span>' . sb_('Users') . '</span></a>';
@@ -1463,7 +1835,7 @@ function sb_component_admin()
                             echo '<a id="sb-settings"><span>' . sb_('Settings') . '</span></a>';
                         }
                         ?>
-                </div> -->
+                    </div> -->
                 <!-- <div class="sb-admin-nav-right sb-menu-mobile">
                     <i class="sb-icon-menu"></i>
                     <div class="sb-desktop">
@@ -1512,316 +1884,328 @@ function sb_component_admin()
                 </div> -->
             </div>
             <main>
-
-            <?php
-            $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-            $header = '<header>
-                            <div class="header-left">
-                                <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="20" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect y="15" width="26" height="3" rx="1.5" fill="#155CFD" />
-                                    <rect x="4" y="24" width="22" height="3" rx="1.5" fill="#155CFD" />
-                                </svg>
-                                <h2 class="title">Dashboard</h2>
-                            </div>
-                            <div class="header-right">
-                                <div class="notification">
-                                    <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
+                <?php
+                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                $ticketUrl = dirname(SB_URL).'?area=tickets';
+                $header = '<header>
+                                 <div class="header-left">
+                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="'.$ticketUrl.'" >
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                        Back to Tickets
+                                    </a>
+                                    <h2 class="title">Setting</h2>
                                 </div>
-                                <div class="notification">
-                                    <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                    <span class="badge">0</span>
-                                </div>
-                                <div class="user-profile sb-account">
-                                    <img data-value="edit-profile" src="'.$imgSrc.'" alt="User">
-                                    <span class="initials" style="display:none;"></span>
-                                    <div class="user-info">
-                                        <p class="sb-name"></p>
-                                        <span>Super Admin</span>
+                                <div class="header-right">
+                                    <div class="notification">
+                                        <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                        <span class="badge">0</span>
+                                    </div>
+                                    <div class="notification">
+                                        <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                        <span class="badge">0</span>
+                                    </div>
+                                    <div class="sb-admin-nav-right user_menu user-profile user_avatar">
+                                        <a class="sb-profile">
+                                            <img class="avatar_img" src="" data-name="" />
+                                            <span class="user-initials avatar_initials" style="display:none;">
+                                                <span class="initials avatar_name"></span>
+                                            </span>
+                                        </a>
+                                        <ul class="sb-menu">
+                                            <li class="menu_head">
+                                                <img class="avatar_img" src=""  data-name="" />
+                                                <span class="user-initials avatar_initials" style="display:none;">
+                                                    <span class="initials avatar_name"></span>
+                                                </span>
+                                                <span class="sb-name"></span>
+                                            </li>
+                                            <li data-value="status" class="sb-online">Online</li>';
+                if ($is_admin) {
+                    $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
+                        . ($is_cloud ? sb_cloud_account_menu() : '');
+                }
+                $header .= '<li data-value="logout">Logout</li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
-                                    <i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 25px;"></i>
-                                </div>
-                            </div>
-                        </header>';
+                            </header>';
                 ?>
 
-                <!-- sahil start -->
                 <div class="sb-area-dashboard">
                     <main>
                         <?php echo $header; ?>
                         <div class="container new_container">
                             <div class="row">
                                 <div class="col-md-8 p-0">
-                                    <section class="dashboard-metrics">
-                                        <div class="metric-card"
-                                            style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
-                                            <div class="graph_tabs">
-                                                <div class="metric-card-upper">
-                                                    <div class="metric-icon" style="background-color: #487fff;">
-                                                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                    <div class="px-3 mt-3">
+                                        <section class="dashboard-metrics">
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #487fff;">
+                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>New Users</h3>
+                                                            <p>0</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="metric-info">
-                                                        <h3>New Users</h3>
-                                                        <p>0</p>
+                                                    <div class="w-100">
+                                                        <div class="new_users_chart">
+                                                            <canvas class="mt-0" id="new_users_chart"></canvas>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="w-100">
-                                                    <div class="new_users_chart">
-                                                        <canvas class="mt-0" id="new_users_chart"></canvas>
-                                                    </div>
-                                                </div>
+                                                <div class="metric-increase">Increase by <span>0</span> this week</div>
                                             </div>
-                                            <div class="metric-increase">Increase by <span>0</span> this week</div>
-                                        </div>
-                                        <div class="metric-card"
-                                            style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
-                                            <div class="graph_tabs">
-                                                <div class="metric-card-upper">
-                                                    <div class="metric-icon" style="background-color: #45b369;">
-                                                        <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #45b369;">
+                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Active Users</h3>
+                                                            <p>8,000</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="metric-info">
-                                                        <h3>Active Users</h3>
-                                                        <p>8,000</p>
-                                                    </div>
-                                                </div>
-                                                <div class="w-100">
-                                                    <div class="active_users_chart">
-                                                        <canvas class="mt-0" id="active_users_chart"></canvas>
-                                                    </div>
-                                                    <script>
-                                                        const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
-                                                        const gradient2 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
-                                                        gradient2.addColorStop(0, 'rgba(72, 255, 112, 0.2)');
-                                                        gradient2.addColorStop(1, 'rgba(72, 255, 112, 0)');
-                                                        new Chart(active_usersCtx, {
-                                                            type: 'line',
-                                                            data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                datasets: [{
-                                                                    data: [0, 5, 12, 3, 5, 7],
-                                                                    borderColor: '#45B369',
-                                                                    backgroundColor: gradient2,
-                                                                    fill: true,
-                                                                    tension: 0.4,
-                                                                    pointRadius: 0,
-                                                                    pointHoverRadius: 0,
-                                                                    borderWidth: 2
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                responsive: true,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: false
-                                                                    }
+                                                    <div class="w-100">
+                                                        <div class="active_users_chart">
+                                                            <canvas class="mt-0" id="active_users_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
+                                                            const gradient2 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient2.addColorStop(0, 'rgba(72, 255, 112, 0.2)');
+                                                            gradient2.addColorStop(1, 'rgba(72, 255, 112, 0)');
+                                                            new Chart(active_usersCtx, {
+                                                                type: 'line',
+                                                                data: {
+                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                    datasets: [{
+                                                                        data: [0, 5, 12, 3, 5, 7],
+                                                                        borderColor: '#45B369',
+                                                                        backgroundColor: gradient2,
+                                                                        fill: true,
+                                                                        tension: 0.4,
+                                                                        pointRadius: 0,
+                                                                        pointHoverRadius: 0,
+                                                                        borderWidth: 2
+                                                                    }]
                                                                 },
-                                                                scales: {
-                                                                    x: {
-                                                                        grid: {
+                                                                options: {
+                                                                    responsive: true,
+                                                                    plugins: {
+                                                                        legend: {
                                                                             display: false
                                                                         },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
+                                                                        tooltip: {
+                                                                            enabled: false
                                                                         }
                                                                     },
-                                                                    y: {
-                                                                        grid: {
-                                                                            display: false
+                                                                    scales: {
+                                                                        x: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
                                                                         },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
+                                                                        y: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
-                                                            }
-                                                        });
-                                                    </script>
+                                                            });
+                                                        </script>
+                                                    </div>
                                                 </div>
+                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
                                             </div>
-                                            <div class="metric-increase">Increase by <span>+200</span> this week</div>
-                                        </div>
-                                        <div class="metric-card"
-                                            style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
-                                            <div class="graph_tabs">
-                                                <div class="metric-card-upper">
-                                                    <div class="metric-icon" style="background-color: #f4941e;">
-                                                        <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #f4941e;">
+                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Tickets Created</h3>
+                                                            <p>3,200</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="metric-info">
-                                                        <h3>Tickets Created</h3>
-                                                        <p>3,200</p>
-                                                    </div>
-                                                </div>
-                                                <div class="w-100">
-                                                    <div class="ticket_created_chart">
-                                                        <canvas class="mt-0" id="ticket_created_chart"></canvas>
-                                                    </div>
-                                                    <script>
-                                                        const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
-                                                        const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
-                                                        gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
-                                                        gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
-                                                        new Chart(ticket_createdCtx, {
-                                                            type: 'line',
-                                                            data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                datasets: [{
-                                                                    data: [0, 5, 12, 3, 5, 7],
-                                                                    borderColor: '#f4941e',
-                                                                    backgroundColor: gradient3,
-                                                                    fill: true,
-                                                                    tension: 0.4,
-                                                                    pointRadius: 0,
-                                                                    pointHoverRadius: 0,
-                                                                    borderWidth: 2
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                responsive: true,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: false
-                                                                    }
+                                                    <div class="w-100">
+                                                        <div class="ticket_created_chart">
+                                                            <canvas class="mt-0" id="ticket_created_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
+                                                            const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
+                                                            gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
+                                                            new Chart(ticket_createdCtx, {
+                                                                type: 'line',
+                                                                data: {
+                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                    datasets: [{
+                                                                        data: [0, 5, 12, 3, 5, 7],
+                                                                        borderColor: '#f4941e',
+                                                                        backgroundColor: gradient3,
+                                                                        fill: true,
+                                                                        tension: 0.4,
+                                                                        pointRadius: 0,
+                                                                        pointHoverRadius: 0,
+                                                                        borderWidth: 2
+                                                                    }]
                                                                 },
-                                                                scales: {
-                                                                    x: {
-                                                                        grid: {
+                                                                options: {
+                                                                    responsive: true,
+                                                                    plugins: {
+                                                                        legend: {
                                                                             display: false
                                                                         },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
+                                                                        tooltip: {
+                                                                            enabled: false
                                                                         }
                                                                     },
-                                                                    y: {
-                                                                        grid: {
-                                                                            display: false
+                                                                    scales: {
+                                                                        x: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
                                                                         },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
+                                                                        y: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
-                                                            }
-                                                        });
-                                                    </script>
+                                                            });
+                                                        </script>
+                                                    </div>
                                                 </div>
+                                                <div class="metric-increase">Increase by <span>18%</span> this week</div>
                                             </div>
-                                            <div class="metric-increase">Increase by <span>18%</span> this week</div>
-                                        </div>
-                                    </section>
-                                    <section class="dashboard-metrics">
-                                        <div class="metric-card"
-                                            style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
-                                            <div class="graph_tabs">
-                                                <div class="metric-card-upper">
-                                                    <div class="metric-icon" style="background-color: #8252E9;">
-                                                        <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                        </section>
+                                        <section class="dashboard-metrics">
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;">
+                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Ticket Resolved</h3>
+                                                            <p>2,700</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="metric-info">
-                                                        <h3>Ticket Resolved</h3>
-                                                        <p>2,700</p>
-                                                    </div>
-                                                </div>
-                                                <div class="w-100">
-                                                    <div class="ticket_resolved_chart">
-                                                        <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
-                                                    </div>
-                                                    <script>
-                                                        const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
-                                                        const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
-                                                        gradient4.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
-                                                        gradient4.addColorStop(1, 'rgba(231, 110, 241, 0)');
-                                                        new Chart(ticket_resolvedCtx, {
-                                                            type: 'line',
-                                                            data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                datasets: [{
-                                                                    data: [0, 5, 12, 3, 5, 7],
-                                                                    borderColor: '#8252E9',
-                                                                    backgroundColor: gradient4,
-                                                                    fill: true,
-                                                                    tension: 0.4,
-                                                                    pointRadius: 0,
-                                                                    pointHoverRadius: 0,
-                                                                    borderWidth: 2
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                responsive: true,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: false
-                                                                    }
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
+                                                            const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient4.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
+                                                            gradient4.addColorStop(1, 'rgba(231, 110, 241, 0)');
+                                                            new Chart(ticket_resolvedCtx, {
+                                                                type: 'line',
+                                                                data: {
+                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                    datasets: [{
+                                                                        data: [0, 5, 12, 3, 5, 7],
+                                                                        borderColor: '#8252E9',
+                                                                        backgroundColor: gradient4,
+                                                                        fill: true,
+                                                                        tension: 0.4,
+                                                                        pointRadius: 0,
+                                                                        pointHoverRadius: 0,
+                                                                        borderWidth: 2
+                                                                    }]
                                                                 },
-                                                                scales: {
-                                                                    x: {
-                                                                        grid: {
+                                                                options: {
+                                                                    responsive: true,
+                                                                    plugins: {
+                                                                        legend: {
                                                                             display: false
                                                                         },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
+                                                                        tooltip: {
+                                                                            enabled: false
                                                                         }
                                                                     },
-                                                                    y: {
-                                                                        grid: {
-                                                                            display: false
+                                                                    scales: {
+                                                                        x: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
                                                                         },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
+                                                                        y: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
-                                                            }
-                                                        });
-                                                    </script>
+                                                            });
+                                                        </script>
+                                                    </div>
                                                 </div>
+                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
                                             </div>
-                                            <div class="metric-increase">Increase by <span>+200</span> this week</div>
-                                        </div>
-                                        <div class="metric-card"
-                                            style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
-                                            <div class="graph_tabs">
-                                                <div class="metric-card-upper">
-                                                    <div class="metric-icon" style="background-color: #DE3ACE;">
-                                                        <i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
+                                                            <i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3> Avg. Response Time</h3>
+                                                            <!-- <p id="avg_response_time">0h 0m 0s</p> -->
+                                                            <div id="avg_response_time_container"></div>
+                                                        </div>
                                                     </div>
-                                                    <div class="metric-info">
-                                                        <h3> Avg. Response Time</h3>
-                                                        <p>4m 30s</p>
-                                                    </div>
-                                                </div>
-                                                <div class="w-100">
+                                                    <!-- <div class="w-100">
                                                     <div class="avg_response_chart">
                                                         <canvas class="mt-0" id="avg_response_chart"></canvas>
                                                     </div>
@@ -1882,78 +2266,352 @@ function sb_component_admin()
                                                             }
                                                         });
                                                     </script>
+                                                </div> -->
+                                                </div>
+                                                <div class="metric-increase">Improved by <span>12%</span> this week</div>
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #00B8F2;">
+                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Agent Satisfaction</h3>
+                                                            <p>92%</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="agent_chart">
+                                                            <canvas class="mt-0" id="agent_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                            const agentCtx = document.getElementById('agent_chart').getContext('2d');
+                                                            const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
+                                                            gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
+                                                            gradient6.addColorStop(1, 'rgba(61, 186, 235, 0)');
+                                                            new Chart(agentCtx, {
+                                                                type: 'line',
+                                                                data: {
+                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                    datasets: [{
+                                                                        data: [0, 5, 12, 3, 5, 7],
+                                                                        borderColor: '#00B8F2',
+                                                                        backgroundColor: gradient6,
+                                                                        fill: true,
+                                                                        tension: 0.4,
+                                                                        pointRadius: 0,
+                                                                        pointHoverRadius: 0,
+                                                                        borderWidth: 2
+                                                                    }]
+                                                                },
+                                                                options: {
+                                                                    responsive: true,
+                                                                    plugins: {
+                                                                        legend: {
+                                                                            display: false
+                                                                        },
+                                                                        tooltip: {
+                                                                            enabled: false
+                                                                        }
+                                                                    },
+                                                                    scales: {
+                                                                        x: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
+                                                                        },
+                                                                        y: {
+                                                                            grid: {
+                                                                                display: false
+                                                                            },
+                                                                            ticks: {
+                                                                                display: false
+                                                                            },
+                                                                            border: {
+                                                                                display: false
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Consistent this week</div>
+                                            </div>
+                                        </section>
+                                        <section class="main-charts">
+                                            <div class="card p-3">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <div>
+                                                        <h6 class="head mb-1">Ticket Support Board</h6>
+                                                        <p class="sub_head">Monthly overview of support ticket activity</p>
+                                                    </div>
+                                                    <select class="form-select form-select-sm w-auto">
+                                                        <option>Yearly</option>
+                                                        <!-- <option>Monthly</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="d-flex justify-content-center gap-3 mb-3">
+                                                    <div class="button_ext">
+                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <div>
+                                                            <div><strong>Created</strong></div>
+                                                            <div>1,200</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button_ext">
+                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <div>
+                                                            <div><strong>Resolved</strong></div>
+                                                            <div>9,50</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button_ext">
+                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <div>
+                                                            <div><strong>Pending</strong></div>
+                                                            <div>1,500</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div> -->
+                                                <div class="monthlyBarChart">
+                                                    <canvas id="monthlyBarChart"></canvas>
+                                                </div>
+                                                <script>
+                                                    const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
+                                                    new Chart(barCtx, {
+                                                        type: 'bar',
+                                                        data: {
+                                                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                                            datasets: [{
+                                                                label: 'Users',
+                                                                data: [85000, 68000, 39000, 47000, 59000, 49000, 41000, 47000, 42000, 60000, 29000, 51000],
+                                                                backgroundColor: '#4285F4',
+                                                                borderRadius: 6,
+                                                                barThickness: 10
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            plugins: {
+                                                                legend: {
+                                                                    display: false
+                                                                },
+                                                                tooltip: {
+                                                                    callbacks: {
+                                                                        label: function(context) {
+                                                                            return `${context.raw.toLocaleString()} users`;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            scales: {
+                                                                x: {
+                                                                    grid: {
+                                                                        display: false
+                                                                    },
+                                                                    ticks: {
+                                                                        color: '#888',
+                                                                        font: {
+                                                                            size: 12
+                                                                        }
+                                                                    }
+                                                                },
+                                                                y: {
+                                                                    grid: {
+                                                                        drawBorder: false,
+                                                                        color: '#eee',
+                                                                        lineWidth: 1
+                                                                    },
+                                                                    ticks: {
+                                                                        callback: value => value / 1000 + 'k',
+                                                                        color: '#aaa'
+                                                                    },
+                                                                    beginAtZero: true
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 p-0">
+                                    <div class="px-3 mt-3">
+                                        <section class="main-charts mb-3">
+                                            <div class="card p-3">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <div>
+                                                        <h6 class="head mb-1">Ticket Activity</h6>
+                                                        <p class="sub_head">Week support summary</p>
+                                                    </div>
+                                                    <div class="d-flex flex-column align-items-end">
+                                                        <h6 class="head mb-1">120 Tickets</h6>
+                                                        <p class="green_badge">+25 new</p>
+                                                    </div>
+                                                </div>
+                                                <div class="ticket_activity_chart">
+                                                    <canvas id="ticket_activity_chart"></canvas>
+                                                </div>
+                                                <script>
+                                                    const ticket_activityCtx = document.getElementById('ticket_activity_chart').getContext('2d');
+                                                    new Chart(ticket_activityCtx, {
+                                                        type: 'line',
+                                                        data: {
+                                                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                            datasets: [{
+                                                                label: 'Weekly Activity',
+                                                                data: [0, 5, 12, 3, 5, 7],
+                                                                borderColor: '#487FFF',
+                                                                backgroundColor: '#E4ECFF',
+                                                                pointRadius: 4,
+                                                                // borderWidth: 0, // hides the line
+                                                                // pointRadius: 0, // hides the dots
+                                                                fill: true,
+                                                                tension: 0.4,
+                                                                pointBackgroundColor: '#487FFF'
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            plugins: {
+                                                                legend: {
+                                                                    display: false
+                                                                }
+                                                            },
+                                                            scales: {
+                                                                x: {
+                                                                    grid: {
+                                                                        display: true
+                                                                    }
+                                                                },
+                                                                y: {
+                                                                    beginAtZero: true,
+                                                                    grid: {
+                                                                        display: true
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+                                        </section>
+                                        <section class="main-charts mb-3">
+                                            <div class="card p-3">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h6 class="fw-bold">Campaigns</h6>
+                                                    <select class="form-select form-select-sm w-auto">
+                                                        <option>Yearly</option>
+                                                        <option>Monthly</option>
+                                                    </select>
+                                                </div>
+                                                <div class="progress-item chat">
+                                                    <div class="left">
+                                                        <i class="fa-brands fa-rocketchat"></i>
+                                                        <div class="label">Live Chat</div>
+                                                    </div>
+                                                    <div class="right">
+                                                        <div class="progress-bar">
+                                                            <div class="progress-fill" style="width: 80%;"></div>
+                                                        </div>
+                                                        <div class="percentage">80%</div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress-item email">
+                                                    <div class="left">
+                                                        <i class="fa-solid fa-envelope"></i>
+                                                        <div class="label">Email Support</div>
+                                                    </div>
+                                                    <div class="right">
+                                                        <div class="progress-bar">
+                                                            <div class="progress-fill" style="width: 60%;"></div>
+                                                        </div>
+                                                        <div class="percentage">60%</div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress-item fb">
+                                                    <div class="left">
+                                                        <i class="fa-brands fa-square-facebook"></i>
+                                                        <div class="label">Facebook</div>
+                                                    </div>
+                                                    <div class="right">
+                                                        <div class="progress-bar">
+                                                            <div class="progress-fill" style="width: 40%;"></div>
+                                                        </div>
+                                                        <div class="percentage">40%</div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress-item wa">
+                                                    <div class="left">
+                                                        <i class="fa-brands fa-whatsapp"></i>
+                                                        <div class="label">WhatsApp</div>
+                                                    </div>
+                                                    <div class="right">
+                                                        <div class="progress-bar">
+                                                            <div class="progress-fill" style="width: 70%;"></div>
+                                                        </div>
+                                                        <div class="percentage">70%</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="metric-increase">Improved by <span>12%</span> this week</div>
-                                        </div>
-                                        <div class="metric-card"
-                                            style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
-                                            <div class="graph_tabs">
-                                                <div class="metric-card-upper">
-                                                    <div class="metric-icon" style="background-color: #00B8F2;">
-                                                        <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
-                                                    </div>
-                                                    <div class="metric-info">
-                                                        <h3>Agent Satisfaction</h3>
-                                                        <p>92%</p>
-                                                    </div>
+                                        </section>
+                                        <section class="main-charts">
+                                            <div class="card p-3">
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h6 class="fw-bold">Customer Overview</h6>
+                                                    <select class="form-select form-select-sm w-auto">
+                                                        <option>Yearly</option>
+                                                        <!-- <option>Monthly</option> -->
+                                                    </select>
                                                 </div>
-                                                <div class="w-100">
-                                                    <div class="agent_chart">
-                                                        <canvas class="mt-0" id="agent_chart"></canvas>
+                                                <!-- Donut Chart Block -->
+                                                <div class="overview_chart">
+                                                    <ul class="legend" style="list-style: none; padding: 0;">
+                                                        <li><span class="total"></span> Total: 500</li>
+                                                        <li><span class="new"></span> New: 500</li>
+                                                        <li><span class="active"></span> Active: 1500</li>
+                                                    </ul>
+                                                    <div id="chart-container">
+                                                        <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
+                                                        <div class="chart-center">
+                                                            <p class="mb-1"><strong>Customer Report</strong></p>
+                                                            <pre>1500</pre>
+                                                        </div>
                                                     </div>
                                                     <script>
-                                                        const agentCtx = document.getElementById('agent_chart').getContext('2d');
-                                                        const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
-                                                        gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
-                                                        gradient6.addColorStop(1, 'rgba(61, 186, 235, 0)');
-                                                        new Chart(agentCtx, {
-                                                            type: 'line',
+                                                        const ctx = document.getElementById('donutChart').getContext('2d');
+                                                        new Chart(ctx, {
+                                                            type: 'doughnut',
                                                             data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                                                                labels: ['Total', 'New', 'Active'],
                                                                 datasets: [{
-                                                                    data: [0, 5, 12, 3, 5, 7],
-                                                                    borderColor: '#00B8F2',
-                                                                    backgroundColor: gradient6,
-                                                                    fill: true,
-                                                                    tension: 0.4,
-                                                                    pointRadius: 0,
-                                                                    pointHoverRadius: 0,
-                                                                    borderWidth: 2
+                                                                    data: [500, 500, 1500],
+                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
+                                                                    borderWidth: 0
                                                                 }]
                                                             },
                                                             options: {
-                                                                responsive: true,
+                                                                cutout: '70%',
+                                                                rotation: -90,
+                                                                circumference: 180,
                                                                 plugins: {
                                                                     legend: {
                                                                         display: false
                                                                     },
                                                                     tooltip: {
-                                                                        enabled: false
-                                                                    }
-                                                                },
-                                                                scales: {
-                                                                    x: {
-                                                                        grid: {
-                                                                            display: false
-                                                                        },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
-                                                                        }
-                                                                    },
-                                                                    y: {
-                                                                        grid: {
-                                                                            display: false
-                                                                        },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
-                                                                        }
+                                                                        enabled: true
                                                                     }
                                                                 }
                                                             }
@@ -1961,290 +2619,15 @@ function sb_component_admin()
                                                     </script>
                                                 </div>
                                             </div>
-                                            <div class="metric-increase">Consistent this week</div>
-                                        </div>
-                                    </section>
-                                    <section class="main-charts">
-                                        <div class="card p-3">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <div>
-                                                    <h6 class="head mb-1">Ticket Support Board</h6>
-                                                    <p class="sub_head">Monthly overview of support ticket activity</p>
-                                                </div>
-                                                <select class="form-select form-select-sm w-auto">
-                                                    <option>Yearly</option>
-                                                    <!-- <option>Monthly</option> -->
-                                                </select>
-                                            </div>
-                                            <div class="d-flex justify-content-center gap-3 mb-3">
-                                                <div class="button_ext">
-                                                    <i class="fa-solid fa-ticket" style="color: #000;"></i>
-                                                    <div>
-                                                        <div><strong>Created</strong></div>
-                                                        <div>1,200</div>
-                                                    </div>
-                                                </div>
-                                                <div class="button_ext">
-                                                    <i class="fa-solid fa-ticket" style="color: #000;"></i>
-                                                    <div>
-                                                        <div><strong>Resolved</strong></div>
-                                                        <div>9,50</div>
-                                                    </div>
-                                                </div>
-                                                <div class="button_ext">
-                                                    <i class="fa-solid fa-ticket" style="color: #000;"></i>
-                                                    <div>
-                                                        <div><strong>Pending</strong></div>
-                                                        <div>1,500</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div> -->
-                                            <div class="monthlyBarChart">
-                                                <canvas id="monthlyBarChart"></canvas>
-                                            </div>
-                                            <script>
-                                                const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
-                                                new Chart(barCtx, {
-                                                    type: 'bar',
-                                                    data: {
-                                                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                        datasets: [{
-                                                            label: 'Users',
-                                                            data: [85000, 68000, 39000, 47000, 59000, 49000, 41000, 47000, 42000, 60000, 29000, 51000],
-                                                            backgroundColor: '#4285F4',
-                                                            borderRadius: 6,
-                                                            barThickness: 10
-                                                        }]
-                                                    },
-                                                    options: {
-                                                        responsive: true,
-                                                        plugins: {
-                                                            legend: {
-                                                                display: false
-                                                            },
-                                                            tooltip: {
-                                                                callbacks: {
-                                                                    label: function(context) {
-                                                                        return `${context.raw.toLocaleString()} users`;
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        scales: {
-                                                            x: {
-                                                                grid: {
-                                                                    display: false
-                                                                },
-                                                                ticks: {
-                                                                    color: '#888',
-                                                                    font: {
-                                                                        size: 12
-                                                                    }
-                                                                }
-                                                            },
-                                                            y: {
-                                                                grid: {
-                                                                    drawBorder: false,
-                                                                    color: '#eee',
-                                                                    lineWidth: 1
-                                                                },
-                                                                ticks: {
-                                                                    callback: value => value / 1000 + 'k',
-                                                                    color: '#aaa'
-                                                                },
-                                                                beginAtZero: true
-                                                            }
-                                                        }
-                                                    }
-                                                });
-                                            </script>
-                                        </div>
-                                    </section>
-                                </div>
-
-                                <div class="col-md-4 p-0">
-                                    <section class="main-charts mb-0" style="padding: 15px 25px 0 0;">
-                                        <div class="card p-3">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <div>
-                                                    <h6 class="head mb-1">Ticket Activity</h6>
-                                                    <p class="sub_head">Week support summary</p>
-                                                </div>
-                                                <div class="d-flex flex-column align-items-end">
-                                                    <h6 class="head mb-1">120 Tickets</h6>
-                                                    <p class="green_badge">+25 new</p>
-                                                </div>
-                                            </div>
-                                            <div class="ticket_activity_chart">
-                                                <canvas id="ticket_activity_chart"></canvas>
-                                            </div>
-                                            <script>
-                                                const ticket_activityCtx = document.getElementById('ticket_activity_chart').getContext('2d');
-                                                new Chart(ticket_activityCtx, {
-                                                    type: 'line',
-                                                    data: {
-                                                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                        datasets: [{
-                                                            label: 'Weekly Activity',
-                                                            data: [0, 5, 12, 3, 5, 7],
-                                                            borderColor: '#487FFF',
-                                                            backgroundColor: '#E4ECFF',
-                                                            pointRadius: 4,
-                                                            // borderWidth: 0, // hides the line
-                                                            // pointRadius: 0, // hides the dots
-                                                            fill: true,
-                                                            tension: 0.4,
-                                                            pointBackgroundColor: '#487FFF'
-                                                        }]
-                                                    },
-                                                    options: {
-                                                        responsive: true,
-                                                        plugins: {
-                                                            legend: {
-                                                                display: false
-                                                            }
-                                                        },
-                                                        scales: {
-                                                            x: {
-                                                                grid: {
-                                                                    display: false
-                                                                }
-                                                            },
-                                                            y: {
-                                                                beginAtZero: true,
-                                                                grid: {
-                                                                    display: false
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                });
-                                            </script>
-                                        </div>
-                                    </section>
-                                    <section class="main-charts" style="padding: 15px 25px 0 0;">
-                                        <div class="card p-3">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h6 class="fw-bold">Campaigns</h6>
-                                                <select class="form-select form-select-sm w-auto">
-                                                    <option>Yearly</option>
-                                                    <option>Monthly</option>
-                                                </select>
-                                            </div>
-                                            <div class="progress-item chat">
-                                                <div class="left">
-                                                    <i class="fa-brands fa-rocketchat"></i>
-                                                    <div class="label">Live Chat</div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="progress-bar">
-                                                        <div class="progress-fill" style="width: 80%;"></div>
-                                                    </div>
-                                                    <div class="percentage">80%</div>
-                                                </div>
-                                            </div>
-                                            <div class="progress-item email">
-                                                <div class="left">
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                    <div class="label">Email Support</div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="progress-bar">
-                                                        <div class="progress-fill" style="width: 60%;"></div>
-                                                    </div>
-                                                    <div class="percentage">60%</div>
-                                                </div>
-                                            </div>
-                                            <div class="progress-item fb">
-                                                <div class="left">
-                                                    <i class="fa-brands fa-square-facebook"></i>
-                                                    <div class="label">Facebook</div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="progress-bar">
-                                                        <div class="progress-fill" style="width: 40%;"></div>
-                                                    </div>
-                                                    <div class="percentage">40%</div>
-                                                </div>
-                                            </div>
-                                            <div class="progress-item wa">
-                                                <div class="left">
-                                                    <i class="fa-brands fa-whatsapp"></i>
-                                                    <div class="label">WhatsApp</div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="progress-bar">
-                                                        <div class="progress-fill" style="width: 70%;"></div>
-                                                    </div>
-                                                    <div class="percentage">70%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <section class="main-charts" style="padding: 15px 25px 0 0;">
-                                        <div class="card p-3 mb-3">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h6 class="fw-bold">Customer Overview</h6>
-                                                <select class="form-select form-select-sm w-auto">
-                                                    <option>Yearly</option>
-                                                    <!-- <option>Monthly</option> -->
-                                                </select>
-                                            </div>
-                                            <!-- Donut Chart Block -->
-                                            <div class="overview_chart">
-                                                <ul class="legend" style="list-style: none; padding: 0;">
-                                                    <li><span class="total"></span> Total: 500</li>
-                                                    <li><span class="new"></span> New: 500</li>
-                                                    <li><span class="active"></span> Active: 1500</li>
-                                                </ul>
-                                                <div id="chart-container">
-                                                    <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
-                                                    <div class="chart-center">
-                                                        <p class="mb-1"><strong>Customer Report</strong></p>
-                                                        <pre>1500</pre>
-                                                    </div>
-                                                </div>
-                                                <script>
-                                                    const ctx = document.getElementById('donutChart').getContext('2d');
-                                                    new Chart(ctx, {
-                                                        type: 'doughnut',
-                                                        data: {
-                                                            labels: ['Total', 'New', 'Active'],
-                                                            datasets: [{
-                                                                data: [500, 500, 1500],
-                                                                backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
-                                                                borderWidth: 0
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            cutout: '70%',
-                                                            rotation: -90,
-                                                            circumference: 180,
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false
-                                                                },
-                                                                tooltip: {
-                                                                    enabled: true
-                                                                }
-                                                            }
-                                                        }
-                                                    });
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </section>
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-md-5 p-0">
-                                    <div class="pl-3 pr-3 pt-0 main-charts">
-                                        <div class="bg-white d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="head mb-1">Recent Messages</h6>
-                                            </div>
-                                            <button class="reply-btn">+ New Message</button>
+                                    <div class="px-3 main-charts">
+                                        <div class="bg-white">
+                                            <h6 class="head mb-1">Recent Messages</h6>
                                         </div>
                                         <div class="seprator"></div>
                                         <div class="recent card p-3">
@@ -2299,7 +2682,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="pl-3 pr-3 pt-0 main-charts">
+                                    <div class="px-3 main-charts">
                                         <div class="p-3 card">
                                             <div class="mb-5 d-flex justify-content-between align-items-center mb-3">
                                                 <div>
@@ -2390,7 +2773,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div class="col-md-3 p-0">
-                                    <div class="pt-0 main-charts" style="padding: 0 25px 0 0 !important;">
+                                    <div class="px-3 main-charts">
                                         <div class="p-3 card">
                                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                                 <div>
@@ -2433,8 +2816,8 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 p-0 ">
-                                    <div class="pl-3 pr-3 pt-0 main-charts tables">
+                                <div class="col-md-12 p-0 my-3">
+                                    <div class="px-3 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">All Tickets</h6>
@@ -2477,7 +2860,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-6 p-0">
-                                    <div class="pl-3 pr-3 pt-0 main-charts tables" style="padding: 0 25px 0 0 !important;">
+                                    <div class="pl-3 pr-3 pt-0 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">Ticket Support</h6>
@@ -2542,12 +2925,8 @@ function sb_component_admin()
                                     </div>
                                 </div> -->
                             </div>
-                            <div class="row mt-40">
-                            </div>
                     </main>
                 </div>
-                <!-- sahil end -->
-
                 <div class="sb-area-conversations">
                     <?php echo $header; ?>
                     <div class="sb-board">
@@ -2655,6 +3034,9 @@ function sb_component_admin()
                             <div class="sb-top">
                                 <div class="sb-profile">
                                     <img src="<?php echo SB_URL ?>/media/user.svg" />
+                                    <div class="user-initials" style="display: none;">
+                                        <span class="initials"></span>
+                                    </div>
                                     <span class="sb-name"></span>
                                 </div>
                             </div>
@@ -2666,7 +3048,7 @@ function sb_component_admin()
                                 <?php
                                 sb_apps_panel();
                                 sb_departments('custom-select');
-                                if (sb_get_multi_setting('routing', 'routing-active') || (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') && sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-menu'))) {
+                                if (sb_get_multi_setting('routing', 'routing-active') || (sb_is_agent(false, true, true) && sb_get_multi_setting('queue', 'queue-active')) || (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') && sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-menu'))) {
                                     sb_routing_select();
                                 }
                                 if (!sb_get_multi_setting('disable', 'disable-notes')) {
@@ -2814,7 +3196,8 @@ function sb_component_admin()
                 if ($active_areas['chatbot']) {
                     require_once(SB_PATH . '/apps/dialogflow/components.php');
                     sb_dialogflow_chatbot_area();
-                } ?>
+                }
+                ?>
                 <?php if ($active_areas['tickets']) { ?>
                     <style>
                         .sb-table .span-border {
@@ -2837,6 +3220,32 @@ function sb_component_admin()
                                 </a>
                             </div>
                             <div>
+                                <!-- <div  class="color-palette tag-palette">
+                                    <span class="sb-active"></span>
+                                    <ul id="selected-tags-palette">
+                                    </ul>
+                                </div> -->
+                                <div class="mr-5 tags-filter" style="">
+                                    <?php
+                                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                        $tagsHtml = '';
+                                        $count = count($tags);
+                                        if ($count > 0) 
+                                        {
+                                            ?>
+                                            <select id="tags-filter" name="tags[]" multiple>
+                                                <?php
+                                                for ($i = 0; $i < $count; $i++) {
+                                                $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                }
+                                                echo $tagsHtml;
+                                                ?>
+                                            </select>
+                                            <?php 
+                                        } 
+                                    ?>
+                                    
+                                </div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
                                         <?php sb_e('All') ?>
@@ -2885,14 +3294,14 @@ function sb_component_admin()
                             <table class="sb-table sb_table_new sb-table-tickets">
                                 <thead>
                                     <tr>
-                                        <th data-field="id">
+                                        <th data-field="id" width="5%">
                                             <!--input type="checkbox" /-->
                                             <?php sb_e('ID') ?>
                                         </th>
                                         <th data-field="subject">
                                             <?php sb_e('Subject') ?>
                                         </th>
-                                        <th data-field="tags">
+                                        <th data-field="tags" width="20%">
                                             <?php sb_e('Tags') ?>
                                         </th>
                                         <?php
@@ -2928,13 +3337,821 @@ function sb_component_admin()
                             </table>
                         </div>
                     </div>
+                    <div class="sb-area-ticket-detail">
+                        <?php echo $header; ?>
+                        <div class="tc_bg" style="max-height: calc(100vh - 93px);overflow-y: auto;">
+                            <div class="tc_back">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 p-0">
+                                            <div class="row">
+                                                <div class="col-md-8 p-0">
+                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject">Email Subject</span></h2>
+                                                </div>
+                                                <div class="col-md-4 p-0">
+                                                    <?php
+                                                    function sb_get_priorities()
+                                                    {
+                                                        $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                                        return $priorities;
+                                                    }
+                                                    function sb_get_statues()
+                                                    {
+                                                        $status = sb_db_get('SELECT * FROM ticket_status', false);
+                                                        return $status;
+                                                    }
+                                                    $statues = sb_get_statues();
+                                                    $priorities = sb_get_priorities();    
+                                                    ?>
+                                                    <div class="d-flex align-items-center justify-content-between pl-5">
+                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
+                                                            <?php
+                                                            foreach ($statues as $key => $value) {
+                                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+
+                                                        <a class="sb-btn sb-icon sb-save-ticket sb_btn_new">
+                                                            <i class="fa-solid fa-check mr-1"></i>
+                                                            Save changes
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center"  id="view-ticket-attachments">
+                                                    <i class="fas fa-paperclip fs-4 mr-2"></i>
+                                                    <span class="label">Attachments (<span class="attachments-count">0</span>)</span>
+                                                </div>
+                                                <div class="col-md-9 p-0">
+                                                    <h2 class="sub_title my-4">Description</h2>
+                                                    <div id="description" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                                                        <div style="display: inline-block;padding:0;width:100%;">
+                                                            <div id="ticketDescriptionTicketDetail" style="height: 180px;"></div>
+                                                        </div>
+                                                        <input id="ticket_id" type="hidden" name="ticket_id" />
+                                                        <input id="conversation_id" type="hidden" name="conversation_id" />
+                                                        <!-- Hidden input to store uploaded file data -->
+                                                        <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+                                                    </div>
+                                                    <!-- <div id="tdescription" class="label mb-3 mr-3">Feature :
+                                                        <span>[Feature name]</span>
+                                                    </div>
+                                                    <div class="label mb-3 mr-3">As :
+                                                        <span>[As - user type | Admin Private user | Commercial user]</span>
+                                                    </div>
+                                                    <div class="label mr-3">I want to :
+                                                        <span>[Action to perform]</span>
+                                                    </div> -->
+                                                    <h2 class="sub_title my-4">Comments</h2>
+                                                    <!-- <div class="msg">
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                                
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mright">
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
+                                                            </div>
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">Hello my dear sir</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mleft">
+                                                            <div class="comment-card">
+                                                                <p class="mb-0">I'm here to deliver the design requirement document for our next projects.</p>
+                                                            </div>
+                                                            <div class="avatar">
+                                                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Admin" class="avatar comment-avatar">
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="chat-input mt-3 p-2">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex align-items-center gap-2">
+                                                                <i class="fas fa-paperclip text-muted"></i>
+                                                                <input type="text" class="form-control input-no-border" placeholder="Send a message..." style="background: transparent;">
+                                                            </div>
+                                                            <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
+                                                                Send <i class="fas fa-paper-plane"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- Comments/Chat Section -->
+                                                    <div id="ticket-comments" class="row mt-4">
+                                                        <div class="col-md-12">
+                                                            <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                                                <!-- Comments will be loaded here by JS -->
+                                                            </div>
+                                                            
+                                                            <div  class="d-flex align-items-center gap-2 mt-4">
+                                                                <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                                                <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
+                                                                <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
+                                                                
+                                                                <button id="addComment" class="btn btn-primary">Send</button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <style>
+                                                        /* Timeline chat style for comments */
+                                                        .comment-row {
+                                                            display: flex;
+                                                            align-items: flex-end;
+                                                        }
+                                                        .comment-row.customer + .comment-row.customer {
+                                                            margin-top: 2px;
+                                                        }
+                                                        .comment-row.agent + .comment-row.agent {
+                                                            margin-top: 2px;
+                                                        }
+                                                        .comment-row.customer + .comment-row.agent {
+                                                            margin-top: 5px;
+                                                        }
+                                                        .comment-row.agent + .comment-row.customer {
+                                                            margin-top: 5px;
+                                                        }
+                                                        .comment-row.agent {
+                                                            flex-direction: row-reverse;
+                                                        }
+                                                        .comment-avatar {
+                                                            width: 36px;
+                                                            height: 36px;
+                                                            border-radius: 50%;
+                                                            background: #e0e0e0;
+                                                            object-fit: cover;
+                                                            margin: 0 8px;
+                                                        }
+                                                        .comment-bubble {
+                                                            max-width: 70%;
+                                                            padding: 5px 10px;
+                                                            border-radius: 18px;
+                                                            position: relative;
+                                                            font-size: 15px;
+                                                            word-break: break-word;
+                                                            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+                                                        }
+                                                        .comment-row.agent .comment-bubble {
+                                                            background: #f8f8f8;
+                                                            color: #222;
+                                                            border-bottom-right-radius: 6px;
+                                                            border-bottom-left-radius: 18px;
+                                                            margin-left: 10px;
+                                                            border: 1px solid #e0e0e0;
+                                                        }
+                                                        .comment-row.customer .comment-bubble {
+                                                            background: #f8f8f8;
+                                                            color: #222;
+                                                            border-bottom-left-radius: 6px;
+                                                            border-bottom-right-radius: 18px;
+                                                            margin-right: 10px;
+                                                            border: 1px solid #e0e0e0;
+                                                        }
+                                                        .comment-meta {
+                                                            position: relative;
+                                                            font-size: 9px;
+                                                            color: #222;
+                                                            display: flex;
+                                                            justify-content: flex-end;
+                                                            align-items: center;
+                                                            gap: 6px;
+                                                            width: 100%;
+                                                        }
+
+                                                        .edited-label {
+                                                            font-size: 10px;
+                                                            color: #b0b0b0;
+                                                            margin-left: 4px;
+                                                            vertical-align: middle;
+                                                            opacity: 0.7;
+                                                        }
+                                                            
+
+                                                        .edit-comment-btn, .delete-comment-btn {
+                                                            font-size: 12px;
+                                                            color: #ffc107;
+                                                            background: none;
+                                                            border: none;
+                                                            cursor: pointer;
+                                                            padding: 0;
+                                                        }
+                                                        .comment-text {padding-right: 30px;line-height: 18px;font-size: 13px;}
+                                                        </style>
+                                                        <script>
+                                                        // --- Comments/Chat Section Logic ---
+                                                        // document.addEventListener('DOMContentLoaded', function () {
+                                                        //     const ticketId = SBF.getURL('ticket')   || document.getElementById('ticket_id').value;
+                                                        //     const currentUserId = document.getElementById('currentUserId').value;   
+                                                        //     const currentUserRole = document.getElementById('currentUserRole').value;
+                                                        //     const commentsSection = document.getElementById('comments-section');
+                                                        //     const addCommentForm = document.getElementById('addCommentForm');
+                                                        //     const newCommentInput = document.getElementById('newComment');
+
+                                                        //     // Placeholder avatar
+                                                        //     function getAvatar(user) {
+                                                        //         // If you have user.avatar, use it; else fallback
+                                                        //         return user && user.avatar ? user.avatar : 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user && user.user_name ? user.user_name : user.user_role) + '&size=64&background=2563eb&color=fff';
+                                                        //     }
+
+                                                        //     function formatTimeTo12Hour(dateString) {
+                                                        //         const date = new Date(dateString.replace(' ', 'T'));
+                                                        //         let hours = date.getHours();
+                                                        //         let minutes = date.getMinutes();
+                                                        //         const ampm = hours >= 12 ? 'pm' : 'am';
+                                                        //         hours = hours % 12;
+                                                        //         hours = hours ? hours : 12; // 0 => 12
+                                                        //         minutes = minutes < 10 ? '0' + minutes : minutes;
+                                                        //         return hours + ':' + minutes + ' ' + ampm;
+                                                        //     }
+
+                                                        //     function formatDateLabel(dateString) {
+                                                        //         const date = new Date(dateString.replace(' ', 'T'));
+                                                        //         const today = new Date();
+                                                        //         const yesterday = new Date();
+                                                        //         yesterday.setDate(today.getDate() - 1);
+                                                        //         const isToday = date.toDateString() === today.toDateString();
+                                                        //         const isYesterday = date.toDateString() === yesterday.toDateString();
+                                                        //         if (isToday) return 'Today';
+                                                        //         if (isYesterday) return 'Yesterday';
+                                                        //         return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                                                        //     }
+
+                                                        //     function renderComment(comment) {
+                                                        //         const isAgent = comment.user_role === 'agent';
+                                                        //         const isOwn = comment.user_id == currentUserId;
+                                                        //         const rowClass = isAgent ? 'agent' : 'customer';
+                                                        //         // Avatar
+                                                        //         const avatarUrl = getAvatar(comment);
+                                                        //         // Bubble
+                                                        //         let html = `<div class="comment-row ${rowClass}">
+                                                        //             <img src="${avatarUrl}" class="comment-avatar" alt="avatar">
+                                                        //             <div class="comment-bubble">
+                                                        //                 <div class="comment-text" data-id="${comment.id}">${escapeHtml(comment.comment)}</div>
+                                                        //                 <div class="comment-meta">
+                                                        //                     <span>${formatTimeTo12Hour(comment.created_at)}</span>`;
+                                                        //         if (comment.is_edited == 1 || comment.is_edited === "1") {
+                                                        //             html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
+                                                        //         }
+                                                        //         // Show Edit button only if own comment and within 10 minutes
+                                                        //         if (isOwn && canEditComment(comment.created_at)) {
+                                                        //             html += `<button class="edit-comment-btn" data-id="${comment.id}">Edit</button>`;
+                                                        //         }
+                                                        //         if (isOwn) {
+                                                        //             html += `<button class="delete-comment-btn" data-id="${comment.id}">Delete</button>`;
+                                                        //         }
+                                                        //         html += `</div>
+                                                        //             </div>
+                                                        //         </div>`;
+                                                        //         return html;
+                                                        //     }
+
+                                                        //     function canEditComment(createdAt) {
+                                                        //         // Use server time injected by PHP for accuracy
+                                                        //         const serverNow = window.SERVER_NOW ? new Date(window.SERVER_NOW) : new Date();
+                                                        //         const commentTime = new Date(createdAt.replace(' ', 'T'));
+                                                        //         const diffMs = serverNow - commentTime;
+                                                        //         const diffMin = diffMs / (1000 * 60);
+                                                        //         return diffMin >= 0 && diffMin <= 10;
+                                                        //     }
+
+                                                        //     function escapeHtml(text) {
+                                                        //         var map = {
+                                                        //             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+                                                        //         };
+                                                        //         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+                                                        //     }
+
+                                                            
+
+                                                        //     function scrollToBottom() {
+                                                        //         commentsSection.scrollTop = commentsSection.scrollHeight;
+                                                        //     }
+
+                                                        //     addCommentForm.addEventListener('submit', function(e) {
+                                                        //         e.preventDefault();
+                                                        //         const comment = newCommentInput.value.trim();
+                                                        //         if (!comment) return;
+                                                        //         fetch('api/add-comment.php', {
+                                                        //             method: 'POST',
+                                                        //             headers: { 'Content-Type': 'application/json' },
+                                                        //             body: JSON.stringify({
+                                                        //                 ticket_id: ticketId,
+                                                        //                 user_id: currentUserId,
+                                                        //                 user_role: currentUserRole,
+                                                        //                 comment: comment
+                                                        //             })
+                                                        //         })
+                                                        //         .then(res => res.json())
+                                                        //         .then(data => {
+                                                        //             if (data.success) {
+                                                        //                 newCommentInput.value = '';
+                                                        //                 loadComments();
+                                                        //             } else {
+                                                        //                 alert(data.error || 'Failed to add comment');
+                                                        //             }
+                                                        //         });
+                                                        //     });
+
+                                                        //     function attachEditListeners() {
+                                                        //         commentsSection.querySelectorAll('.edit-comment-btn').forEach(btn => {
+                                                        //             btn.onclick = function() {
+                                                        //                 const commentId = this.getAttribute('data-id');
+                                                        //                 const commentDiv = commentsSection.querySelector(`.comment-text[data-id='${commentId}']`);
+                                                        //                 if (!commentDiv) return;
+                                                        //                 const oldText = commentDiv.innerText;
+                                                        //                 // Replace with textarea
+                                                        //                 // commentDiv.innerHTML = `<textarea class='form-control form-control-sm edit-comment-textarea' rows='2'>${oldText}</textarea>`;
+                                                        //                 // this.style.display = 'none';
+                                                        //                 // const textarea = commentDiv.querySelector('textarea');
+                                                        //                 const textarea = document.getElementById('oldComment'); 
+                                                        //                 textarea.value = oldText;
+                                                        //                 textarea.classList.remove('d-none');
+                                                        //                 textarea.classList.add('edit-comment-textarea');
+                                                        //                 this.style.display = 'none';
+                                                        //                 textarea.focus();
+                                                        //                 document.getElementById('newComment').classList.add('d-none'); 
+                                                        //                 textarea.onblur = function() {
+                                                        //                     saveEdit(commentId, textarea.value, commentDiv, btn);
+                                                        //                 };
+                                                        //                 textarea.onkeydown = function(e) {
+                                                        //                     if (e.key === 'Enter' && !e.shiftKey) {
+                                                        //                         e.preventDefault();
+                                                        //                         textarea.blur();
+                                                        //                     }
+                                                        //                 };
+                                                        //             };
+                                                        //         });
+
+                                                        //         commentsSection.querySelectorAll('.delete-comment-btn').forEach(btn => {
+                                                        //             btn.onclick = function() {
+                                                        //                 const commentId = this.getAttribute('data-id');
+                                                        //                 deleteComment(commentId);
+                                                        //             };
+                                                        //         });
+                                                        //     }
+
+                                                        //     function deleteComment(commentId) {
+                                                        //         fetch('api/delete-ticket-comment.php', {
+                                                        //             method: 'POST',
+                                                        //             headers: { 'Content-Type': 'application/json' },
+                                                        //             body: JSON.stringify({ comment_id: commentId })
+                                                        //         })
+                                                        //         .then(res => res.json())
+                                                        //         .then(data => {
+                                                        //             if (data.success) {
+                                                        //                 loadComments();
+                                                        //             } else {
+                                                        //                 alert(data.error || 'Failed to delete comment');
+                                                        //             }
+                                                        //         });
+                                                        //     }
+
+                                                        //     function saveEdit(commentId, newText, commentDiv, editBtn) {
+                                                        //         newText = newText.trim();
+                                                        //         if (!newText) {
+                                                        //             commentDiv.innerHTML = '<span class="text-danger small">Comment cannot be empty</span>';
+                                                        //             setTimeout(() => { loadComments(); }, 1200);
+                                                        //             return;
+                                                        //         }
+                                                        //         fetch('api/edit-comment.php', {
+                                                        //             method: 'POST',
+                                                        //             headers: { 'Content-Type': 'application/json' },
+                                                        //             body: JSON.stringify({
+                                                        //                 comment_id: commentId,
+                                                        //                 user_id: currentUserId,
+                                                        //                 comment: newText
+                                                        //             })
+                                                        //         })
+                                                        //         .then(res => res.json())
+                                                        //         .then(data => {
+                                                        //             if (data.success) {
+                                                        //                 const textarea = document.getElementById('oldComment'); 
+                                                        //                 textarea.classList.remove('edit-comment-textarea');
+                                                        //                 textarea.classList.add('d-none');
+                                                        //                 editBtn.style.display = 'block';
+                                                        //                 document.getElementById('newComment').classList.remove('d-none');
+                                                        //                 loadComments();
+                                                        //             } else {
+                                                        //                 commentDiv.innerHTML = `<span class='text-danger small'>${data.error || 'Failed to edit comment'}</span>`;
+                                                        //                 setTimeout(() => { loadComments(); }, 1200);
+                                                        //             }
+                                                        //         });
+                                                        //     }
+
+                                                            // Initial load
+                                                            //loadComments();
+                                                            // Optional: Poll for new comments every 30s
+                                                            //setInterval(loadComments, 30000);
+                                                        //});
+                                                        </script>
+                                                    <script>
+                                                        window.SERVER_NOW = "<?php echo date('Y-m-d\TH:i:sP'); ?>";
+                                                    </script>
+                                                </div>
+                                                <div class="col-md-3 p-0">
+                                                    <div class="pl-5">
+                                                        <div class="sidepanel">
+                                                            <h4 class="sub_title mb-5">Details</h4>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Assignee</div>
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <div class="d-flex align-items-center gap-2 ticket-assignee">
+                                                                        <i class="fas fa-user-circle fs-4 text-muted"></i>
+                                                                        <div id="assigned_to" data-type="select" class="sb-input">
+                                                                            <select id="select-ticket-agent" style="width:100%;">
+                                                                                
+                                                                            </select>
+                                                                        </div>  
+                                                                    </div>
+                                                                    
+                                                                    <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Reporter</div>
+                                                                <div class="d-flex align-items-center gap-2 ticket-reporter">
+                                                                    <img class="reporter" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter">
+                                                                    <span></span>
+                                                                </div>
+                                                            </div>
+                                                            <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
+                                                            <div class="mb-3 sb-input d-block">
+                                                                <div class="field-label">Department</div>
+                                                                <select id="ticket-department" required>
+                                                                    <option value=""><?php echo sb_('Select Department'); ?></option>
+                                                                    <?php
+                                                                    $departments = sb_get_departments();
+                                                                    foreach ($departments as $key => $value) {
+                                                                        echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <?php } ?>
+                                                            <div class="mb-3">
+                                                                <div class="field-label">Tags</div>
+                                                                <div class="mb-2">
+                                                                    <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                    <div class="mr-5 tags-filter" style="">
+                                                                        <?php
+                                                                            $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                                                            $tagsHtml = '';
+                                                                            $count = count($tags);
+                                                                            if ($count > 0) 
+                                                                            {
+                                                                                ?>
+                                                                                <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                    <?php
+                                                                                    for ($i = 0; $i < $count; $i++) {
+                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                    }
+                                                                                    echo $tagsHtml;
+                                                                                    ?>
+                                                                                </select>
+                                                                                <?php 
+                                                                            } 
+                                                                        ?>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="sb-td-tags tag-badges">
+                                                                    <!-- <span class="tag-badge">
+                                                                        <i class="fas fa-check text-muted"></i>
+                                                                        Business
+                                                                    </span>
+                                                                    <span class="tag-badge">
+                                                                        <i class="fas fa-check text-muted"></i>
+                                                                        Urgent
+                                                                    </span>
+                                                                    <span class="tag-badge">
+                                                                        <i class="fas fa-check text-muted"></i>
+                                                                        Priority
+                                                                    </span> -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 sb-input d-block">
+                                                                <div class="field-label">Priority</div>
+                                                                <!-- <div class="ticket-priority">
+                                                                    High
+                                                                </div>
+                                                                <div id="priority_id" data-type="select" class="sb-input">
+                                                                    <span class="required-label"><?php sb_e('Priority') ?></span> -->
+                                                                    <select id="ticket-priority" required>
+                                                                        <?php
+                                                                        foreach ($priorities as $key => $value) {
+                                                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                <!-- </div> -->
+                                                            </div>
+                                                            <div class="divider"></div>
+                                                            <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
+                                                            <div id="custom-fields" class="sb-input d-block"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ticket-attachments sb-lightbox">
+                        <div class="sb-info"></div>
+                        <div class="sb-top-bar">
+                            <div>
+                                <h2 style="margin-bottom: 0;">
+                                    Ticket Attachments
+                                </h2>   
+                            </div>
+                            <div>
+                                <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-status" data-hide="sb-profile-area" data-show="sb-edit-area">
+                                    <i class="sb-icon-sms"></i> Save Changes
+                                </a>
+                                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                                    <i class="sb-icon-close"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="sb-main sb-scroll-area">
+                            <div class="sb-details">
+                                <div class="mt-5">
+                                    <span class="d-block mb-2">Attachments</span>
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
+                                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    
+                                    <div class="progress mt-2 d-none" id="upload-progress-container">
+                                        <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+
+                                    <div class="mt-2" id="existing-file-preview-container">
+                                        <span>Current Attachments</span>
+                                        <div class="row" id="current-attachments"></div>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <span class="mb-2 d-block">New Attachments</span>
+                                        <div class="mt-2" id="file-preview-container">
+                                            <div class="row" id="file-preview-list"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- File Attachments Section -->
+                        <!-- <div id="ticketFileAttachments-detail" class="ticket-attachments-box sb-lightbox">
+                            
+                        </div> -->
+                    
+
+                    <script>
+                        function propagateTagColors() {
+                        // Map value to color from original select
+                        const select = document.getElementById('ticket-tags');
+                        if (!select) return;
+                        const valueToColor = {};
+                        Array.from(select.options).forEach(opt => {
+                            if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
+                        });
+                        // Dropdown items
+                        document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
+                            const value = item.getAttribute('data-value');
+                            if (valueToColor[value]) {
+                                item.setAttribute('data-color', valueToColor[value]);
+                            }
+                        });
+                        // Selected items
+                        document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
+                            const value = item.getAttribute('data-value');
+                            if (valueToColor[value]) {
+                                item.setAttribute('data-color', valueToColor[value]);
+                            }
+                        });
+                    }
+
+                    function updateTagDots() {
+                        // Dropdown items
+                        document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
+                            if (!item.querySelector('.tag-dot')) {
+                                let color = item.getAttribute('data-color');
+                                let dot = document.createElement('span');
+                                dot.className = 'tag-dot';
+                                dot.style.backgroundColor = color;
+                                item.prepend(dot);
+                            }
+                        });
+                        // Selected items
+                        document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
+                            if (!item.querySelector('.tag-dot')) {
+                                let color = item.getAttribute('data-color');
+                                let dot = document.createElement('span');
+                                dot.className = 'tag-dot';
+                                dot.style.backgroundColor = color;
+                                item.prepend(dot);
+                            }
+                        });
+                    }
+		
+                    function refreshTagDots() {
+                        propagateTagColors();
+                        updateTagDots();
+                    }
+
+                    const tagsFilter = document.getElementById('tags-filter');
+                    if (tagsFilter) {
+                        window.tagsFilterChoices = new Choices(tagsFilter, {
+                            removeItemButton: true,
+                            placeholder: true,
+                            placeholderValue: 'Select tags...',
+                            allowHTML: true,
+                            itemSelectText: '',
+                            callbackOnCreateTemplates: function(template) {
+                                return {
+                                    item: (classNames, data) => {
+                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                        return template(`
+                                            <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                <span class="tag-dot" style="background-color:${color}"></span>
+                                                ${data.label}
+                                                <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
+                                            </div>
+                                        `);
+                                    }
+                            };
+                        }
+                        });
+                        
+                        refreshTagDots();
+                        tagsFilter.addEventListener('change', refreshTagDots);
+                        // Listen for any DOM changes in the choices list (item removed/added)
+                        const choicesList = document.querySelector('.choices__list--dropdown');
+                        if (choicesList) {
+                            const observer = new MutationObserver(() => {
+                                refreshTagDots();
+                            });
+                            observer.observe(choicesList, { childList: true, subtree: true });
+                        }
+                        document.querySelector('.choices').addEventListener('click', function() {
+                            setTimeout(refreshTagDots, 10);
+                        });
+
+
+                        // // Listen for removeItem from Choices instance
+                        // if(tagsFilterChoices)
+                        // {
+                        //     tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                        //         getTicketsFilteredByTag();
+                        //     });
+                        // }
+
+                    }
+
+                    const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
+                    if (ticketDetailTagsFilter) {
+                        window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
+                            removeItemButton: true,
+                            placeholder: true,
+                            placeholderValue: 'Select tags...',
+                            allowHTML: true,
+                            itemSelectText: '',
+                            callbackOnCreateTemplates: function(template) {
+                                return {
+                                    item: (classNames, data) => {
+                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                        return template(`
+                                            <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                <span class="tag-dot" style="background-color:${color}"></span>
+                                                ${data.label}
+                                                <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
+                                            </div>
+                                        `);
+                                    }
+                            };
+                        }
+                        });
+                        
+                        refreshTagDots();
+                        ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
+                        // Listen for any DOM changes in the choices list (item removed/added)
+                        const choicesList = document.querySelector('.choices__list--dropdown');
+                        if (choicesList) {
+                            const observer = new MutationObserver(() => {
+                                refreshTagDots();
+                            });
+                            observer.observe(choicesList, { childList: true, subtree: true });
+                        }
+                        document.querySelector('.choices').addEventListener('click', function() {
+                            setTimeout(refreshTagDots, 10);
+                        });
+                        
+                        // if(ticketTagsFilterChoices)
+                        // {
+                        //     ticketTagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                        //         getTicketsFilteredByTag();
+                        //     });
+                        // }
+                    }
+
+                    
+
+                    $('#select-ticket-agent').select2({
+                    placeholder: 'Type and search...',
+                    ajax: {
+                        url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                        method: 'POST',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                function: 'ajax_calls',
+                                'calls[0][function]': 'search-get-users',
+                                'login-cookie': SBF.loginCookie(),
+                                'q': params.term, // ✅ Pass search term
+                                'type': 'agent'
+                            };
+                        },
+                        processResults: function(response) {
+                            //response = JSON.parse(response);
+                            if (response[0][0] == 'success') {
+                                const users = response[0][1];
+                                console.log("Processed users:", response[0][1]);
+                                return {
+                                    results: users.map(user => ({
+                                        id: user.id,
+                                        text: user.first_name + ' ' + user.last_name,
+                                    }))
+                                };
+                            }
+                        },
+                        cache: true
+                    },
+                    minimumInputLength: 1
+                });
+                </script>
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
                         <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
+                                
                                 <div class="sb-menu-wide sb-menu-articles">
+                                    
                                     <ul>
                                         <li data-type="articles" class="sb-active">
                                             <?php sb_e('Articles') ?>
@@ -2955,6 +4172,7 @@ function sb_component_admin()
                                 </div>
                             </div>
                             <div>
+                                
                                 <a class="sb-btn sb-save-articles sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
@@ -2967,7 +4185,7 @@ function sb_component_admin()
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                 <div class="sb-add-article sb-btn sb-icon sb-btn-white">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e('Add new article') ?>
                                 </div>
@@ -2986,54 +4204,54 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <div class="articles_bg">
-                                        <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e('Title') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text sb-article-title">
-                                            <div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('Content') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-textarea sb-article-content">
-                                            <div>
-                                                <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('External link') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text sb-article-link">
-                                            <div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="sb-article-categories sb-grid">
-                                            <div>
-                                                <h2>
-                                                    <?php sb_e('Parent category') ?>
-                                                </h2>
-                                                <div class="sb-setting sb-type-select">
-                                                    <div>
-                                                        <select id="article-parent-categories"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <h2>
-                                                    <?php sb_e('Categories') ?>
-                                                </h2>
-                                                <div class="sb-setting sb-type-select">
-                                                    <div>
-                                                        <select id="article-categories"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 id="sb-article-id"></h2>
+                                <h2 class="sb-language-switcher-cnt">
+                                    <?php sb_e('Title') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text sb-article-title">
+                                    <div>
+                                        <input type="text" />
                                     </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('Content') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-textarea sb-article-content">
+                                    <div>
+                                        <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('External link') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text sb-article-link">
+                                    <div>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                                <div class="sb-article-categories sb-grid">
+                                    <div>
+                                        <h2>
+                                            <?php sb_e('Parent category') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-select">
+                                            <div>
+                                                <select id="article-parent-categories"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h2>
+                                            <?php sb_e('Categories') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-select">
+                                            <div>
+                                                <select id="article-categories"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 id="sb-article-id"></h2>
+                                 </div>
                                 </div>
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
@@ -3051,37 +4269,37 @@ function sb_component_admin()
                                         <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
                                             Manage and organize content types.
                                         </h2>
-                                        <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e('Name') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text">
-                                            <div>
-                                                <input id="category-title" type="text" />
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('Description') ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-textarea">
-                                            <div>
-                                                <textarea id="category-description"></textarea>
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e('Image') ?>
-                                        </h2>
-                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                            <div id="category-image" class="image">
-                                                <div class="sb-icon-close"></div>
-                                            </div>
-                                        </div>
-                                        <h2 class="category-parent">
-                                            <?php sb_e('Parent category') ?>
-                                        </h2>
-                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                            <div class="input">
-                                                <input id="category-parent" type="checkbox" />
-                                            </div>
+                                <h2 class="sb-language-switcher-cnt">
+                                    <?php sb_e('Name') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text">
+                                    <div>
+                                        <input id="category-title" type="text" />
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('Description') ?>
+                                </h2>
+                                <div class="sb-setting sb-type-textarea">
+                                    <div>
+                                        <textarea id="category-description"></textarea>
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e('Image') ?>
+                                </h2>
+                                <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                    <div id="category-image" class="image">
+                                        <div class="sb-icon-close"></div>
+                                    </div>
+                                </div>
+                                <h2 class="category-parent">
+                                    <?php sb_e('Parent category') ?>
+                                </h2>
+                                <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                    <div class="input">
+                                        <input id="category-parent" type="checkbox" />
+                                         </div>
                                         </div>
                                     </div>
                                 </div>
@@ -3090,7 +4308,7 @@ function sb_component_admin()
                     </div>
                 <?php } ?>
                 <?php if ($active_areas['reports']) { ?>
-                    <div class="sb-area-reports sb-area-reports_new  sb-loading">
+                    <div class="sb-area-reports sb-area-reports_new sb-loading">
                         <?php echo $header; ?>
                         <div class="sb-top-bar p-3">
                             <div>
@@ -3115,6 +4333,7 @@ function sb_component_admin()
                                 <ul>
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
+                                        
                                         <?php sb_e('Conversations') ?>
                                     </li>
                                     <li class="li" id="conversations" class="sb-active">
@@ -3240,26 +4459,6 @@ function sb_component_admin()
                 <?php if ($active_areas['settings']) { ?>
                     <div class="sb-area-settings settings_new">
                         <?php echo $header; ?>
-                        <!-- <div class="sb-top-bar">
-                            <div>
-                                <h2>
-                                    Admin Settings
-                                </h2>
-                            </div>
-                            <div>
-                                <div class="sb-search-dropdown">
-                                    <div class="sb-search-btn">
-                                        <i class="sb-icon sb-icon-search"></i>
-                                        <input id="sb-search-settings" type="text" autocomplete="false" placeholder="<?php sb_e('Search ...') ?>" />
-                                    </div>
-                                    <div class="sb-search-dropdown-items"></div>
-                                </div>
-                                <a class="sb-btn sb-save-changes sb-icon">
-                                    <i class="sb-icon-check"></i>
-                                    <?php sb_e('Save changes') ?>
-                                </a>
-                            </div>
-                        </div> -->
                         <div class="sb-tab">
                             <div class="sb-nav sb-scroll-area">
                                 <div>
@@ -3278,9 +4477,9 @@ function sb_component_admin()
                                     <li id="tab-users">
                                         <?php echo $disable_translations ? 'Users' : sb_('Users') ?>
                                     </li>
-                                    <li id="tab-design">
+                                    <!-- <li id="tab-design">
                                         <?php echo $disable_translations ? 'Design' : sb_('Design') ?>
-                                    </li>
+                                    </li> -->
                                     <li id="tab-messages">
                                         <?php echo $disable_translations ? 'Messages & Forms' : sb_('Messages & Forms') ?>
                                     </li>
@@ -3308,8 +4507,7 @@ function sb_component_admin()
                                     </li> -->
                                 </ul>
                             </div>
-                            <div class="sb-content sb-scroll-area pt-4"
-                                style="height: calc(100% - 40px);">
+                            <div class="sb-content sb-scroll-area pt-4" style="height: calc(100% - 40px);">
                                 <div class="sb-active">
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
@@ -3370,7 +4568,7 @@ function sb_component_admin()
                                     </div>
                                     <?php sb_populate_settings('users', $sb_settings) ?>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Design Settings</p>
@@ -3384,7 +4582,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <?php sb_populate_settings('design', $sb_settings) ?>
-                                </div>
+                                </div> -->
                                 <div>
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
@@ -3399,6 +4597,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <?php sb_populate_settings('messages', $sb_settings) ?>
+
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -3412,13 +4611,13 @@ function sb_component_admin()
                                                 <?php sb_e('Save changes') ?>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
                                 </div>
                                 <?php sb_apps_area($apps, $cloud_active_apps) ?>
-                                <div>
+                                <!-- <div>
                                     <?php sb_populate_settings('articles', $sb_settings) ?>
-                                </div>
+                                </div> -->
                                 <div>
                                     <div class="sb-automations-area">
                                         <div class="sb-select">
@@ -3434,7 +4633,7 @@ function sb_component_admin()
                                                 </li>
                                                 <?php if ($sms)
                                                     echo '<li data-value="sms">' . sb_('Text messages') . '</li>' ?>
-                                                <li data-value="popups">
+                                                    <li data-value="popups">
                                                     <?php sb_e('Pop-ups') ?>
                                                 </li>
                                                 <li data-value="design">
@@ -3552,7 +4751,7 @@ function sb_component_admin()
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
-        <?php
+            <?php
         } else {
             if ($is_cloud) {
                 sb_cloud_reset_login();
@@ -3570,7 +4769,7 @@ function sb_component_admin()
         <input type="email" name="email" style="display:none" autocomplete="email" />
         <input type="password" name="hidden" style="display:none" autocomplete="new-password" />
     </div>
-<?php
+    <?php
     if (!empty(sb_get_setting('custom-js')) && !$is_cloud) {
         echo '<script id="sb-custom-js" src="' . sb_get_setting('custom-js') . '"></script>';
     }
@@ -3596,8 +4795,7 @@ function sb_component_admin()
  *
  */
 
-function sb_apps_area($apps, $cloud_active_apps)
-{
+function sb_apps_area($apps, $cloud_active_apps) {
     $apps_wp = ['SB_WP', 'SB_WOOCOMMERCE', 'SB_UMP', 'SB_ARMEMBER'];
     $apps_php = [];
     $apps_cloud_excluded = ['whmcs', 'martfury', 'aecommerce', 'perfex', 'opencart'];
@@ -3632,8 +4830,7 @@ function sb_apps_area($apps, $cloud_active_apps)
     echo $code . '</div></div>';
 }
 
-function sb_apps_panel()
-{
+function sb_apps_panel() {
     $code = '';
     $collapse = sb_get_setting('collapse') ? ' sb-collapse' : '';
     $panels = [['SB_UMP', 'ump'], ['SB_WOOCOMMERCE', 'woocommerce'], ['SB_PERFEX', 'perfex'], ['SB_WHMCS', 'whmcs'], ['SB_AECOMMERCE', 'aecommerce'], ['SB_ARMEMBER', 'armember'], ['SB_ZENDESK', 'zendesk'], ['SB_MARTFURY', 'martfury'], ['SB_OPENCART', 'opencart']];
@@ -3648,8 +4845,7 @@ function sb_apps_panel()
     echo $code;
 }
 
-function sb_box_ve()
-{
+function sb_box_ve() {
     if ((!isset($_COOKIE['SA_' . 'VGC' . 'KMENS']) && !isset($_COOKIE['_ga_' . 'VGC' . 'KMENS'])) || !password_verify('VGC' . 'KMENS', isset($_COOKIE['_ga_' . 'VGC' . 'KMENS']) ? $_COOKIE['_ga_' . 'VGC' . 'KMENS'] : $_COOKIE['SA_' . 'VGC' . 'KMENS'])) { // Deprecated. _ga will be removed
         echo file_get_contents(SB_PATH . '/resources/sb.html');
         return false;
@@ -3657,8 +4853,7 @@ function sb_box_ve()
     return true;
 }
 
-function sb_users_table_extra_fields()
-{
+function sb_users_table_extra_fields() {
     $extra_fields = sb_get_setting('user-table-extra-columns');
     $count = $extra_fields && !is_string($extra_fields) ? count($extra_fields) : false;
     if ($count) {
@@ -3671,8 +4866,7 @@ function sb_users_table_extra_fields()
     }
 }
 
-function sb_dialogflow_languages_list()
-{
+function sb_dialogflow_languages_list() {
     $languages = json_decode(file_get_contents(SB_PATH . '/apps/dialogflow/dialogflow_languages.json'), true);
     $code = '<div data-type="select" class="sb-setting sb-type-select sb-dialogflow-languages"><div class="input"><select><option value="">' . sb_('Default') . '</option>';
     for ($i = 0; $i < count($languages); $i++) {
@@ -3681,8 +4875,7 @@ function sb_dialogflow_languages_list()
     return $code . '</select></div></div>';
 }
 
-function sb_conversations_filter($cloud_active_apps)
-{
+function sb_conversations_filter($cloud_active_apps) {
     if (sb_get_multi_setting('disable', 'disable-filters')) {
         return;
     }
@@ -3721,8 +4914,7 @@ function sb_conversations_filter($cloud_active_apps)
     echo $code .= '</div></div>';
 }
 
-function sb_docs_link($id = '', $class = 'sb-docs')
-{
+function sb_docs_link($id = '', $class = 'sb-docs') {
     if (!sb_is_cloud() || defined('SB_CLOUD_DOCS')) {
         echo '<a href="' . (sb_is_cloud() ? SB_CLOUD_DOCS : 'https://board.support/docs') . $id . '" class="' . $class . '" target="_blank"><i class="sb-icon-help"></i></a>';
     }
@@ -3779,12 +4971,13 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                                                         <td>' . ($field["is_active"] ? "Yes" : "No") . '</td>
                                                         <td>' . ($field["order_no"]) . '</td>
                                                         <td>
-                                                            <button data-id="' . $field["id"] . '" class="btn btn-sm btn-primary edit-custom-field">
-                                                                <i class="bi bi-pencil">Edit</i>
-                                                            </button>
-                                                            <button data-id="' . $field["id"] . '" class="btn btn-sm btn-danger delete-custom-field">
-                                                                <i class="bi bi-trash">Delete</i>
-                                                            </button>
+                                                        <a class="sb-btn-icon sb-btn-red edit-custom-field" data-sb-tooltip="Edit custom field" data-id="' . $field["id"] . '">
+                                                                <i class="sb-icon-edit"></i>
+                                                            </a>
+
+                                                            <a class="sb-btn-icon sb-btn-red delete-custom-field" data-sb-tooltip="Delete custom field" data-id="' . $field["id"] . '">
+                                                                <i class="sb-icon-delete"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>';
     }
@@ -4144,25 +5337,24 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs')
     foreach ($ticketStatuses as $status) {
         $code .= '<tr data-id="ticket_status_row_' . $status["id"] . '">
                                                         <td>' . $status["name"] . '</td>
-                                                        <td>' . $status["color"] . '</td>
+                                                        <td class="sb-color-palette">
+                                                            <span style="background-color:' . $status["color"] . '"></span>
+                                                        </td>
                                                         <td>
-                                                            <button data-id="' . $status["id"] . '" class="btn btn-sm btn-primary edit-ticket-status">
-                                                                <i class="bi bi-pencil">Edit</i>
-                                                            </button>';
+                                                            <a class="sb-btn-icon sb-btn-red edit-ticket-status" data-sb-tooltip="Edit Ticket Status" data-id="' . $status["id"] . '">
+                                                                <i class="sb-icon-edit"></i>
+                                                            </a>';
 
         if ($status['id'] > 5) {
-            $code .= '
-                                                            <button data-id="' . $status["id"] . '" class="btn btn-sm btn-danger delete-ticket-status">
-                                                                <i class="bi bi-trash">Delete</i>
-                                                            </button>';
+            $code .= '<a class="sb-btn-icon sb-btn-red delete-ticket-status" data-sb-tooltip="Delete Ticket Status" data-id="' . $status["id"] . '">
+                                                                        <i class="sb-icon-delete"></i>
+                                                                </a>';
         }
 
         $code .= '
                                                         </td>
                                                     </tr>';
     }
-
-
     $code .= '
                                                 </tbody>
                                             </table>

@@ -5,7 +5,7 @@
   "description": "",
   "icons": [
     {
-      "src": "cropped-XTECH-FAVICON-192x192.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
