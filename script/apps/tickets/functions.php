@@ -15,7 +15,8 @@
 
 define('SB_TICKETS', '1.2.5');
 
-function sb_component_tickets() {
+function sb_component_tickets()
+{
     sb_js_global();
     sb_css();
     sb_tickets_css();
@@ -28,11 +29,33 @@ function sb_component_tickets() {
     if ($disable_arrows) {
         $css .= ' sb-no-arrows';
     }
-    if (sb_get_setting('rtl') || in_array(sb_get_user_language(), ['ar', 'he', 'ku', 'fa', 'ur'])) {
+    if (sb_is_rtl()) {
         $css .= ' sb-rtl';
     }
-    ?>
+?>
+
+
     <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
+        <header class="user_header">
+            <div class="header_left">
+                <h2 class="tab sb-active">Ticket</h2>
+                <h2 class="tab">conversation</h2>
+            </div>
+            <div class="header_right">
+                <div class="user_profile">
+                    <img class="avatar" style="max-height: 40px;" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                    <div class="user_info">
+                        <p class="sb_name">User007</p>
+                        <span>User</span>
+                    </div>
+                </div>
+                <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.83333 24.5C4.19167 24.5 3.64256 24.2717 3.186 23.8152C2.72944 23.3586 2.50078 22.8091 2.5 22.1667V5.83333C2.5 5.19167 2.72867 4.64256 3.186 4.186C3.64333 3.72944 4.19244 3.50078 4.83333 3.5H11.8333C12.1639 3.5 12.4412 3.612 12.6652 3.836C12.8892 4.06 13.0008 4.33689 13 4.66667C12.9992 4.99644 12.8872 5.27372 12.664 5.4985C12.4408 5.72328 12.1639 5.83489 11.8333 5.83333H4.83333V22.1667H11.8333C12.1639 22.1667 12.4412 22.2787 12.6652 22.5027C12.8892 22.7267 13.0008 23.0036 13 23.3333C12.9992 23.6631 12.8872 23.9404 12.664 24.1652C12.4408 24.3899 12.1639 24.5016 11.8333 24.5H4.83333ZM19.0375 15.1667H10.6667C10.3361 15.1667 10.0592 15.0547 9.836 14.8307C9.61278 14.6067 9.50078 14.3298 9.5 14C9.49922 13.6702 9.61122 13.3933 9.836 13.1693C10.0608 12.9453 10.3377 12.8333 10.6667 12.8333H19.0375L16.85 10.6458C16.6361 10.4319 16.5292 10.1694 16.5292 9.85833C16.5292 9.54722 16.6361 9.275 16.85 9.04167C17.0639 8.80833 17.3361 8.68661 17.6667 8.6765C17.9972 8.66639 18.2792 8.77839 18.5125 9.0125L22.6833 13.1833C22.9167 13.4167 23.0333 13.6889 23.0333 14C23.0333 14.3111 22.9167 14.5833 22.6833 14.8167L18.5125 18.9875C18.2792 19.2208 18.0023 19.3328 17.6818 19.3235C17.3614 19.3142 17.0841 19.1924 16.85 18.9583C16.6361 18.725 16.5342 18.4481 16.5443 18.1277C16.5544 17.8072 16.6661 17.5397 16.8792 17.325L19.0375 15.1667Z" fill="#67636D" />
+                    </svg>
+                </div>
+            </div>
+        </header>
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
                 <div class="sb-panel-left">
@@ -109,7 +132,7 @@ function sb_component_tickets() {
                                     </ul>
                                 </div>
                             </div>
-                            <?php
+                        <?php
                         } else {
                             echo '<div class="sb-title">' . sb_('Details') . '</div>';
                         }
@@ -135,7 +158,7 @@ function sb_component_tickets() {
                     </div>
                     <div class="sb-no-conversation-message"></div>
                 </div>
-                <?php
+            <?php
             }
             if (!sb_isset($disable_fields, 'tickets-left-panel') && !$disable_arrows) {
                 echo '<i class="sb-btn-collapse sb-left sb-icon-arrow-left"></i>';
@@ -190,7 +213,8 @@ function sb_component_tickets() {
     </div>
 <?php }
 
-function sb_tickets_css() {
+function sb_tickets_css()
+{
     $css = '';
     $color_1 = sb_get_setting('color-1');
     if ($color_1 != '') {
@@ -205,7 +229,8 @@ function sb_tickets_css() {
     }
 }
 
-function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false) {
+function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false)
+{
     if (empty($message) && empty($attachments)) {
         return false;
     }
@@ -221,7 +246,8 @@ function sb_tickets_email($user, $message = false, $attachments = false, $conver
     return false;
 }
 
-function sb_tickets_recaptcha($token) {
+function sb_tickets_recaptcha($token)
+{
     return sb_isset(sb_curl('https://www.google.com/recaptcha/api/siteverify', ['response' => $token, 'secret' => sb_get_multi_setting('tickets-recaptcha', 'tickets-recaptcha-secret')]), 'success');
 }
 

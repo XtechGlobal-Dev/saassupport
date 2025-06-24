@@ -6,7 +6,7 @@ require_once('functions.php');
 sb_cloud_load();
 $account = account();
 $cloud_settings = super_get_settings();
-$rtl = sb_get_setting('rtl-admin') || defined('SB_CLOUD_DEFAULT_RTL');
+$rtl = defined('SB_CLOUD_DEFAULT_RTL') || sb_is_rtl();
 $custom_code = db_get('SELECT value FROM settings WHERE name = "custom-code-admin"');
 if (!function_exists('sup' . 'er_adm' . 'in_con' . 'fig')) {
     die();
@@ -32,7 +32,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <title>
-        <?php echo SB_CLOUD_BRAND_NAME ?> 
+        <?php echo SB_CLOUD_BRAND_NAME ?>
     </title>
     <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
     <script src="../script/js/min/jquery.min.js"></script>

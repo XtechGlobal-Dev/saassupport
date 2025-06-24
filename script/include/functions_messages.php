@@ -43,7 +43,7 @@
  *
  */
 
-const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags, C.converted_to_ticket FROM sb_messages A, sb_users B, sb_conversations C ';
+const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags FROM sb_messages A, sb_users B, sb_conversations C ';
 
 function sb_get_conversations_users($conversations) {
     if (count($conversations) > 0) {
@@ -52,7 +52,7 @@ function sb_get_conversations_users($conversations) {
             $code .= sb_db_escape($conversations[$i]['conversation_id']) . ',';
         }
         $code = substr($code, 0, -1) . ')';
-        $result = sb_db_get('SELECT sb_users.id, sb_users.first_name, sb_users.last_name, sb_users.profile_image, sb_users.user_type, sb_conversations.id AS `conversation_id`, sb_conversations.converted_to_ticket FROM sb_users, sb_conversations WHERE sb_users.id = sb_conversations.user_id AND sb_conversations.id IN ' . $code, false);
+        $result = sb_db_get('SELECT sb_users.id, sb_users.first_name, sb_users.last_name, sb_users.profile_image, sb_users.user_type, sb_conversations.id AS `conversation_id` FROM sb_users, sb_conversations WHERE sb_users.id = sb_conversations.user_id AND sb_conversations.id IN ' . $code, false);
         for ($i = 0; $i < count($conversations); $i++) {
             $conversation_id = $conversations[$i]['conversation_id'];
             for ($j = 0; $j < count($result); $j++) {
@@ -62,7 +62,6 @@ function sb_get_conversations_users($conversations) {
                     $conversations[$i]['conversation_last_name'] = $result[$j]['last_name'];
                     $conversations[$i]['conversation_profile_image'] = $result[$j]['profile_image'];
                     $conversations[$i]['conversation_user_type'] = $result[$j]['user_type'];
-                    $conversations[$i]['converted_to_ticket'] = $result[$j]['converted_to_ticket'];
                     break;
                 }
             }
@@ -409,7 +408,7 @@ function sb_get_notes($conversation_id) {
 function sb_add_note($conversation_id, $user_id, $name, $message) {
     $notes = sb_get_notes($conversation_id);
     $id = rand(0, 99999);
-    array_push($notes, ['id' => $id, 'user_id' => $user_id, 'name' => $name, 'message' => sb_sanatize_string($message)]);
+    array_push($notes, ['id' => $id, 'user_id' => $user_id, 'name' => $name, 'message' => sb_sanatize_string($message), 'date' => sb_gmt_now()]);
     $response = sb_save_external_setting('notes-' . $conversation_id, $notes);
     return $response ? $id : $response;
 }
@@ -420,6 +419,7 @@ function sb_update_note($conversation_id, $user_id, $note_id, $message) {
         if ($notes[$i]['id'] == $note_id) {
             $notes[$i]['message'] = sb_sanatize_string($message);
             $notes[$i]['user_id'] = $user_id;
+            $notes[$i]['date'] = sb_gmt_now();
             return sb_save_external_setting('notes-' . $conversation_id, $notes);
         }
     }
@@ -1398,7 +1398,7 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
                 $messages = sb_isset($response, 'messages', []);
                 $human_takeover = isset($response['human_takeover']);
             } else {
-                $response_open_ai = sb_open_ai_message($message, false, false, $conversation_id, 'messaging-app', $voice_message, $attachments);
+                $response_open_ai = sb_open_ai_message($message, false, false, $conversation_id, ['messaging-app' => $source_name], $voice_message, $attachments);
                 if ($response_open_ai[0]) {
                     $messages = is_string($response_open_ai[1]) ? [['message' => $response_open_ai[1], 'attachments' => sb_isset($response_open_ai, 6)]] : (isset($response_open_ai[1]['message']) ? [$response_open_ai[1]] : sb_isset($response_open_ai[1], 'messages', is_array($response_open_ai[1]) ? $response_open_ai[1] : []));
                     $human_takeover = !empty($response_open_ai[3]);
@@ -1447,8 +1447,10 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
         if (!sb_get_multi_setting('privacy', 'privacy-disable-channels')) {
             array_push($bot_messages, 'privacy');
         }
-        for ($i = 0; $i < count($bot_messages); $i++) {
-            $bot_message = $i == 0 || empty($user['email']) ? sb_execute_bot_message($bot_messages[$i], $conversation_id, $last_message) : false;
+        $count = count($bot_messages);
+        $last_user_message = $count ? sb_isset(sb_get_last_message($conversation_id, $message, $user_id), 'message') : false;
+        for ($i = 0; $i < $count; $i++) {
+            $bot_message = $i == 0 || empty($user['email']) ? sb_execute_bot_message($bot_messages[$i], $conversation_id, $last_user_message) : false;
             $message_2 = false;
             if ($i == 3 && $is_new_conversation && sb_get_multi_setting('welcome-message', 'welcome-active') && (!sb_get_multi_setting('welcome-message', 'welcome-disable-office-hours') || sb_office_hours())) {
                 $message_2 = sb_get_multi_setting('welcome-message', 'welcome-msg');
@@ -1610,6 +1612,7 @@ function sb_send_sms($message, $to, $template = true, $conversation_id = true, $
     // Send the SMS
     $message = sb_clear_text_formatting(strip_tags($message));
     $query = ['Body' => $message, 'From' => $settings['sms-sender'], 'To' => $to];
+    $query_curl = $query;
     if ($attachments) {
         $mime_types = ['jpeg', 'jpg', 'png', 'gif'];
         for ($i = 0; $i < count($attachments); $i++) {
@@ -1621,12 +1624,12 @@ function sb_send_sms($message, $to, $template = true, $conversation_id = true, $
             }
         }
         $query['Body'] = $message;
-        $query = http_build_query($query);
-        if (strpos($query, 'MediaUrl')) {
-            $query = str_replace(['MediaUrl0', 'MediaUrl1', 'MediaUrl2', 'MediaUrl3', 'MediaUrl4', 'MediaUrl5', 'MediaUrl6', 'MediaUrl7', 'MediaUrl8', 'MediaUrl9'], 'MediaUrl', $query);
+        $query_curl = http_build_query($query);
+        if (strpos($query_curl, 'MediaUrl')) {
+            $query_curl = str_replace(['MediaUrl0', 'MediaUrl1', 'MediaUrl2', 'MediaUrl3', 'MediaUrl4', 'MediaUrl5', 'MediaUrl6', 'MediaUrl7', 'MediaUrl8', 'MediaUrl9'], 'MediaUrl', $query_curl);
         }
     }
-    $response = sb_curl('https://api.twilio.com/2010-04-01/Accounts/' . $settings['sms-user'] . '/Messages.json', $query, ['Authorization: Basic  ' . base64_encode($settings['sms-user'] . ':' . $settings['sms-token'])]);
+    $response = sb_curl('https://api.twilio.com/2010-04-01/Accounts/' . $settings['sms-user'] . '/Messages.json', $query_curl, ['Authorization: Basic  ' . base64_encode($settings['sms-user'] . ':' . $settings['sms-token'])]);
     sb_webhooks('SBSMSSent', array_merge($query, $response));
     return $response;
 }

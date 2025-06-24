@@ -5,7 +5,7 @@
  * WECHAT APP POST FILE
  * ==========================================================
  *
- * WeChat app post file to receive messages sent by WeChat. © 2017-2025 board.support. All rights reserved.
+ * WeChat app post file to receive messages sent by WeChat. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
@@ -68,7 +68,8 @@ if (!$user) {
 }
 $GLOBALS['SB_LOGIN'] = $user;
 if (!$conversation_id) {
-    $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', sb_get_setting('wechat-department'), -1, 'wc'), 'details', [])['id'];
+    $department = sb_get_setting('wechat-department');
+    $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'wc'), 'details', [])['id'];
 }
 
 // Emoji

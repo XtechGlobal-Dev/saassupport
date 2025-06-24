@@ -1,5 +1,9 @@
 <?php
+
 use parallel\Events\Event\Type;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 /*
  *
@@ -217,7 +221,6 @@ function account_login($email, $password = false, $token = false) {
             if ($sb_login === 'ip-ban') {
                 return $sb_login;
             }
-            
             return [sb_encryption(json_encode($cloud_user)), $sb_login[1], $sb_login[0]['id']];
         }
     }
@@ -672,7 +675,7 @@ function membership_purchase_white_label($external_integration = false) {
                 $confirmation = sb_isset($response, 'confirmation');
                 return $confirmation ? ['url' => $confirmation['confirmation_url']] : $response;
             case 'manual':
-                return ['url' => PAYMENT_PROVIDER_MANUAL_LINK];
+                return ['url' => PAYMENT_MANUAL_LINK];
         }
     }
     return false;
@@ -694,7 +697,8 @@ function membership_custom_payment($amount, $metadata_id) {
             case 'stripe':
                 if (!$payment_id) {
                     $account = account();
-                    $payment_id = sb_isset(stripe_curl('customers?email=' . $account['email'] . '&name=' . $account['first_name'] . '%20' . $account['last_name']), 'id');
+                    $response = stripe_curl('customers?email=' . $account['email'] . str_replace(' ', '%20', '&name=' . $account['first_name'] . ' ' . $account['last_name']));
+                    $payment_id = sb_isset($response, 'id');
                     if ($payment_id) {
                         db_query('UPDATE users SET customer_id = "' . $payment_id . '" WHERE id = ' . $cloud_user_id);
                     }
@@ -724,7 +728,7 @@ function membership_custom_payment($amount, $metadata_id) {
                 $confirmation = sb_isset($response, 'confirmation');
                 return $confirmation ? ['url' => $confirmation['confirmation_url']] : $response;
             case 'manual':
-                return ['url' => PAYMENT_PROVIDER_MANUAL_LINK];
+                return ['url' => PAYMENT_MANUAL_LINK];
         }
     }
     return false;
@@ -747,9 +751,13 @@ function membership_use_credits($spending_source, $extra = false) {
         'gpt-4-turbo' => 0.00003,
         'gpt-4o' => 0.000015,
         'gpt-4o-mini' => 0.00000015,
+        'gpt-4.1-nano' => 0.0000004,
+        'gpt-4.1-mini' => 0.0000016,
+        'gpt-4.1' => 0.000008,
         'o1' => 0.00006,
         'o1-mini' => 0.000012,
         'o3-mini' => 0.0000044,
+        'o4-mini' => 0.0000044,
         'ada' => 0.0000001,
         'text-embedding-3-small' => 0.00000002,
         'whisper' => 0.0001
@@ -771,11 +779,15 @@ function membership_use_credits($spending_source, $extra = false) {
             break;
         case 'text-embedding-3-small':
         case 'ada':
-        case 'o3-mini':
         case 'o1':
         case 'o1-mini':
+        case 'o3-mini':
+        case 'o4-mini':
         case 'gpt-4-turbo':
         case 'gpt-4o':
+        case 'gpt-4.1-nano':
+        case 'gpt-4.1-mini':
+        case 'gpt-4.1':
         case 'gpt-4o-mini':
         case 'gpt-4-32k':
         case 'gpt-4':
@@ -1667,7 +1679,7 @@ function super_admin_config() {
         // if ($ec) {
         //     $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
         //     if ($response == 'veri' . 'ficat' . 'ion-success') {
-        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 31556926, '/');
+        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 2592000, '/');
         //     } else {
         //         die($m);
         //     }
@@ -1676,7 +1688,7 @@ function super_admin_config() {
         // }
     }
 }
- 
+
 function super_update_saas() {
     if (!defined('ENVATO_PURCHASE_CODE')) {
         return 'missing-purchase-code';
@@ -1995,7 +2007,7 @@ function shopify_get_active_user($shopify_id) {
                     $settings_extra['country_code'] = [$address['country_code'], 'Country code'];
                 }
                 if ($active_user && ($active_user['user_type'] == 'lead' || $active_user['user_type'] == 'visitor')) {
-                    sb_update_user($active_user['id'], $user, $settings_extra);
+                    sb_update_user($active_user['id'], $user, $settings_extra, true, true);
                 } else {
                     sb_add_user($user, $settings_extra);
                 }
@@ -2288,7 +2300,9 @@ function send_email($to, $subject, $message) {
     if (empty($to)) {
         return false;
     }
-    require_once SB_PATH . '/vendor/phpmailer/PHPMailerAutoload.php';
+    require_once SB_PATH . '/vendor/phpmailer/Exception.php';
+    require_once SB_PATH . '/vendor/phpmailer/PHPMailer.php';
+    require_once SB_PATH . '/vendor/phpmailer/SMTP.php';
     $port = CLOUD_SMTP_PORT;
     $mail = new PHPMailer;
     $mail->CharSet = 'UTF-8';
@@ -2355,7 +2369,7 @@ function verify($email = false, $phone = false, $code_pairs = false) {
 
 function cloud_cron($backup = true) {
     ignore_user_abort(true);
-    set_time_limit(1000);
+    set_time_limit(3540);
     $now_time = sb_gmt_now(0, true);
     $last_cron = super_get_setting('last_cron', 1);
     $free_customers_query_part = 'membership = "0" OR membership = "" OR membership = "free" OR membership IS NULL';
@@ -2690,6 +2704,9 @@ function sb_usd_rates($currency_code = false) {
 }
 
 function sb_usd_get_amount($amount, $currency_code) {
+    if (!$currency_code) {
+        $currency_code = membership_currency();
+    }
     return strtolower($currency_code) == 'usd' ? $amount : $amount * sb_usd_rates($currency_code);
 }
 
@@ -3010,11 +3027,14 @@ function sb_cloud_account_menu($tag = 'li') {
     $code = '';
     $switch_account = sb_get_setting('cloud-switch');
     $account = account();
+    $credits = isset($_GET['credit']) && $_GET['credit'] === '1' ? '#credits' : '';
+
     if (sb_isset($account, 'owner')) {
         $code = '<' . $tag . ' data-value="account">' . sb_('Account') . '</' . $tag . '>';
     }
     if (defined('SB_CLOUD_DOCS')) {
-        $code .= ($tag == 'a' ? '' : '<li data-value="help">') . '<a href="' . SB_CLOUD_DOCS . '" target="_blank">' . sb_('Help') . '</a>' . ($tag == 'a' ? '' : '</li>');
+        //$code .= ($tag == 'a' ? '' : '<li data-value="help">') . '<a href="' . SB_CLOUD_DOCS . '" target="_blank">' . sb_('Help') . '</a>' . ($tag == 'a' ? '' : '</li>');
+        $code = '<a href="' . CLOUD_URL . '/account?tab=membership' . $credits . '" data-value="account" class="li">' . sb_('Account') . '</a>';
     }
     if ($switch_account) {
         $count = count($switch_account);

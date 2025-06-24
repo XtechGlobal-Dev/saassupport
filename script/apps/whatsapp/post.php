@@ -107,7 +107,7 @@ if ($raw) {
         }
         $GLOBALS['SB_LOGIN'] = $user;
         if (!$conversation_id) {
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, -1, 'wa', $phone_number_id, false, false, $tags), 'details', [])['id'];
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'wa', $phone_number_id, false, false, $tags), 'details', [])['id'];
             $new_conversation = true;
             if (empty($user['email']) && in_array(sb_get_setting('registration-required'), ['registration', 'registration-login'])) {
                 $response_wa = sb_whatsapp_cloud_flow_send_builtin($phone, $phone_number_id, 'registration');

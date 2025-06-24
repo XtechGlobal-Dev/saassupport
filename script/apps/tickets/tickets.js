@@ -314,7 +314,7 @@
                 main.addClass('sb-1300');
             }
             setUserProfile();
-            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset}px`);
+            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px`);
             setTimeout(function () {
                 main.removeClass('sb-load');
             }, 300);

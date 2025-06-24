@@ -17,7 +17,7 @@
  *
  */
 
-define('SB_MESSENGER', '1.1.9');
+define('SB_MESSENGER', '1.2.0');
 
 function sb_messenger_send_message($psid, $facebook_page_id, $message = '', $attachments = [], $metadata = false, $message_id = false) {
     if (empty($message) && empty($attachments)) {
