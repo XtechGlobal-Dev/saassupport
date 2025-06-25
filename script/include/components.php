@@ -638,7 +638,7 @@ function sb_ticket_edit_box()
         .sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
         .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
 
-        .tsubject input {border: none;padding: 6px 0 6px 6px;font-size: 16px;width: 91%;cursor: pointer;font-weight: 600;} 
+        .tsubject input {border: none;padding: 7px 0 6px 7px;font-size: 16px;width: 91%;cursor: pointer;font-weight: 600;border-radius: .25rem} 
         .tsubject input:hover, .tsubject input.active
         {   
             background-color: rgb(233 233 234);
@@ -3422,9 +3422,9 @@ function sb_component_admin() {
                                                     </div>
                                                     <div class="label mr-3">I want to :
                                                         <span>[Action to perform]</span>
-                                                    </div> -->
+                                                    </div>
                                                     <h2 class="sub_title my-4">Comments</h2>
-                                                    <!-- <div class="msg">
+                                                    <div class="msg">
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
@@ -3502,22 +3502,70 @@ function sb_component_admin() {
                                                             </a>
                                                         </div>
                                                     </div> -->
-                                                    <!-- Comments/Chat Section -->
-                                                    <div id="ticket-comments" class="row mt-4">
-                                                        <div class="col-md-12">
-                                                            <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
-                                                                <!-- Comments will be loaded here by JS -->
+                                                    
+
+                                                     <!-- Nav tabs -->
+                                                    <ul class="nav nav-tabs" id="myTab">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" data-target="#tab1" href="javascript:void(0)">Comments</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-target="#tab2" href="javascript:void(0)">Internal Note</a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <!-- Tab content -->
+                                                    <div class="tab-content pt-3">
+                                                        <!-- Tab 1 -->
+                                                        <div class="tab-pane active" id="tab1">
+                                                            <div id="blankDiv">
+                                                                <!-- Comments/Chat Section -->
+                                                                <div id="ticket-comments" class="row mt-4">
+                                                                    <div class="col-md-12">
+                                                                        <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                                                            <!-- Comments will be loaded here by JS -->
+                                                                        </div>
+                                                                        
+                                                                        <div  class="d-flex align-items-center gap-2 mt-4">
+                                                                            <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                                                            <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
+                                                                            <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
+                                                                            
+                                                                            <button id="addComment" class="btn btn-primary">Send</button>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            
-                                                            <div  class="d-flex align-items-center gap-2 mt-4">
-                                                                <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
-                                                                <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
-                                                                <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
-                                                                
-                                                                <button id="addComment" class="btn btn-primary">Send</button>
                                                         </div>
+
+                                                        <!-- Tab 2 -->
+                                                        <div class="tab-pane" id="tab2">
+                                                            <div class="mb-3">
+                                                                <label for="textareaInput" class="form-label">Enter Text</label>
+                                                                <textarea class="form-control" id="textareaInput" rows="4" style="width:98%"></textarea>
+                                                            </div>
+                                                            <button class="btn btn-primary" type="button">Save</button>
                                                         </div>
                                                     </div>
+
+                                                    <script>
+                                                        $(document).ready(function() {
+                                                            $('#myTab .nav-link').click(function() {
+                                                                // Remove active class from all tabs
+                                                                $('#myTab .nav-link').removeClass('active');
+                                                                $('.tab-pane').removeClass('active');
+
+                                                                // Add active class to clicked tab
+                                                                $(this).addClass('active');
+
+                                                                // Show corresponding tab pane
+                                                                const target = $(this).data('target');
+                                                                $(target).addClass('active');
+                                                            });
+                                                        });
+                                                    </script>
+
+
                                                     <style>
                                                         /* Timeline chat style for comments */
                                                         .comment-row {
