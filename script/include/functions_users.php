@@ -1055,6 +1055,7 @@ function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
    $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
+            u.profile_image,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color,
             (
@@ -1310,7 +1311,7 @@ function sb_add_ticket($inputs)
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
             'description' => sb_db_escape($inputs['description'][0]),
-            'tags' => '',
+            'tags' => '',   //// leave default tags column empty
             'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0,
         ];
 
@@ -1331,9 +1332,7 @@ function sb_add_ticket($inputs)
             foreach($inputs['tags-div'][0] as $key => $value) {
                 $tags[$key] = sb_db_escape($value);
             }
-        }   
-        
-        
+        }        
 
 
         // Get active fields from settings
@@ -1437,29 +1436,27 @@ function sb_add_ticket($inputs)
 }
 
 function sb_save_ticket_attachments($ticket_id, $attachments) {
-    
-       if (isset($attachments) && !empty($attachments)) {
-            $uploadedFiles = json_decode($attachments, true);
-            
-            if (json_last_error() === JSON_ERROR_NONE && is_array($uploadedFiles)) {
-                foreach ($uploadedFiles as $file) {
-                    // Verify the file exists
-                    $filePath = '../../' . $file['file_path'];
-                    if (file_exists($filePath)) {
-                        $fileName = sb_db_escape($file['filename']);
-                        $originalFileName = sb_db_escape($file['original_filename']);
-                        $originalFileName = sb_db_escape($file['original_filename']);
-                        $filePath = sb_db_escape($file['file_path']);
-                        $fileType = sb_db_escape($file['file_type']);
-                        $fileSize = sb_db_escape($file['file_size']);
-                        // Insert attachment record
-                        $sql = "INSERT INTO ticket_attachments (ticket_id, filename, original_filename, file_path, file_type, file_size) 
-                        VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath', '$fileType', $fileSize)";
-                        $result = sb_db_query($sql,false);
-                    }
+    if (isset($attachments) && !empty($attachments)) {
+        $uploadedFiles = json_decode($attachments, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($uploadedFiles)) {
+            foreach ($uploadedFiles as $file) {
+                // Verify the file exists
+                $filePath = '../../' . $file['file_path'];
+                if (file_exists($filePath)) {
+                    $fileName = sb_db_escape($file['filename']);
+                    $originalFileName = sb_db_escape($file['original_filename']);
+                    $originalFileName = sb_db_escape($file['original_filename']);
+                    $filePath = sb_db_escape($file['file_path']);
+                    $fileType = sb_db_escape($file['file_type']);
+                    $fileSize = sb_db_escape($file['file_size']);
+                    // Insert attachment record
+                    $sql = "INSERT INTO ticket_attachments (ticket_id, filename, original_filename, file_path, file_type, file_size) 
+                    VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath', '$fileType', $fileSize)";
+                    $result = sb_db_query($sql,false);
                 }
             }
         }
+    }
 }
 
 function sb_add_edit_ticket_custom_fields($ticket_id = null, $customFields = array(), $action = 'new')
@@ -1590,7 +1587,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
 
     if($data['assigned_to'] == 0)
     {
-            $data['assigned_to'] ="NULL";
+        $data['assigned_to'] ="NULL";
     }
     else
     {
@@ -1598,7 +1595,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
     }
     if($data['department_id'] == 0)
     {
-            $data['department_id'] ="NULL";
+        $data['department_id'] ="NULL";
     }
     else
     {
@@ -1615,17 +1612,6 @@ function sb_update_ticket($inputs,$ticket_id =0)
 
     sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to =".$data['assigned_to'].",priority_id = '".$data['priority_id']."',department_id= ".$data['department_id'].",tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
 
-    // Update CCs
-    if (isset($data['cc'][0]) && $data['cc'][0] != '') {
-        /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
-        foreach ($_POST['cc'] as $userId) {
-            $db->insert('ticket_ccs', [
-                'ticket_id' => $ticketId,
-                'user_id' => $userId
-            ]);
-        }*/
-    }
-
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
 
@@ -1635,6 +1621,82 @@ function sb_update_ticket($inputs,$ticket_id =0)
     return sb_return_saved_ticket_row($ticket_id);
     // $ticketId = $db->insert('tickets', $data);                                                                                                                               
     //return $message = "{'suceess': true, 'msg':'Ticket updated successfully'}";
+}
+function update_ticket_detail($inputs,$ticket_id =0){
+    $ticket_id = sb_db_escape($ticket_id, true);
+    $withoutContact = isset($inputs['withoutContact'][0]) ? sb_db_escape($inputs['withoutContact'][0],true) : false;
+    $data = [
+            //'contact_id' => $withoutContact ? 0 : $inputs['contact_id'][0],
+            'assigned_to' => sb_db_escape($inputs['assignee'],true),
+            //'contact_name' => sb_db_escape($inputs['cust_name'][0]),
+            //'contact_email' => sb_db_escape($inputs['cust_email'][0]),
+            'priority_id' => sb_db_escape($inputs['priority'],true),
+            //'service_id' => sb_db_escape($inputs['service_id'][0],true),
+            'department_id' => isset($inputs['department']) ?  sb_db_escape($inputs['department'],true) : 0,
+            'description' => sb_db_escape($inputs['description']),
+        ];
+
+    $customFields = array();
+    if(isset($inputs['customField']) && is_array($inputs['customField']))
+    {
+        foreach($inputs['customField'] as $key => $value) {
+            $customFields[$key] = sb_db_escape($value);
+        }
+    }
+
+
+    if($data['assigned_to'] == 0)
+    {
+        $assigned_to ="NULL";
+    }
+    else    
+    {
+        $assigned_to = "'".$data['assigned_to']."'";
+    }
+    if($data['department_id'] == 0)
+    {
+        $department_id ="NULL";
+    }
+    else
+    {
+        $department_id = "'".$data['department_id']."'";
+    }
+    // if($data['conversation_id'] == 0)
+    // {
+    //         $data['conversation_id'] = "NULL";
+    // }
+    // else
+    // {
+    //     $data['conversation_id'] = "'".$data['conversation_id']."'";
+    // }
+
+    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
+    sb_db_query($sql);
+
+    ///// Update ticket custom fields
+    sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
+
+    sb_add_edit_ticket_tags($ticket_id, $inputs['tags'], $action = 'edit');
+
+    ////// Process file attachments if any
+   // sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
+
+    return ['success'=>true];
+}
+
+function update_ticket_subject($subject,$ticket_id)
+{
+    $subject = sb_db_escape($subject);
+    $ticket_id = sb_db_escape($ticket_id);
+    sb_db_query('update sb_tickets set subject = \''.$subject."' where id = '".$ticket_id."'");
+}
+
+function update_ticket_note($note,$ticket_id)
+{
+    $note = sb_db_escape($note);
+    $ticket_id = sb_db_escape($ticket_id);
+    sb_db_query('update sb_tickets set notes = \''.$note."' where id = '".$ticket_id."'");
+    return ['success'=>true];
 }
 
 function sb_return_saved_ticket_row($ticket_id) {
@@ -1948,6 +2010,29 @@ function sb_fetch_ticket_comments($ticket_id = null)
     }
 
     return ['comments' => $comments, 'server_now' => date('Y-m-d\TH:i:sP')];
+}
+
+function update_ticket_attachments($ticket_id = null, $attachments = null)
+{
+    $ticket_id = sb_db_escape($ticket_id, true);
+    sb_save_ticket_attachments($ticket_id, $attachments);
+}
+
+function update_ticket_status($ticket_id = null, $status = null)
+{
+    $ticket_id = sb_db_escape($ticket_id, true);
+    $status = sb_db_escape($status, true);
+
+    // Update the comment in the database
+    $query = "UPDATE sb_tickets SET status_id = $status WHERE id = $ticket_id";
+    $result = sb_db_query($query);
+
+    if ($result) {
+        return ['success' => true, 'message' => 'Ticket Status updated successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Failed to update ticket status.'];
+    }
+    
 }
 
 
