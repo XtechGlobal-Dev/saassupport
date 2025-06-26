@@ -203,17 +203,12 @@ function sb_ticket_edit_box()
         <div class="sb-top-bar">
             <div class="sb-ticket">
                 <span class="sb-name"></span>
-
-
                 <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;">
                     <label class="ml-4">Guest Ticket</label>
                     <div class="form-check form-switch mb-0 ml-2">
                         <input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
                     </div>
                 </div>
-
-
-
             </div>
             <div>
                 <div id="conversation_id_div" data-type="checkbox" class="sb-input mr-4 d-none" style="font-size: 13px;">
@@ -578,7 +573,7 @@ function sb_ticket_edit_box()
         }
 
 
-        .user-initials {
+        .user-initials, .assignee-img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -593,13 +588,15 @@ function sb_ticket_edit_box()
             cursor: pointer;
         }
 
-        .comment-row .user-initials{
+        .comment-row .user-initials, .sidepanel .user-initials, .sidepanel .assignee-img{
             width: 36px;
             height: 36px;
             line-height: 36px;
             font-size: 15px;
             margin: 0 8px;
         }
+
+        .sidepanel .user-initials,.sidepanel .assignee-img{margin: 0}
 
         .initials {
             position: absolute;
@@ -3869,14 +3866,21 @@ function sb_component_admin() {
                                                 <div class="col-md-3 p-0">
                                                     <div class="pl-5">
                                                         <div class="sidepanel">
-                                                            <h4 class="sub_title mb-5 col-4 d-inline-block">Details</h4>
-                                                            <span class="conversation-id">Conversation ID : <span></span></span>
+                                                            <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
+                                                            <span class="conversation-id d-none">Conversation ID : <span></span></span>
                                                             <div class="ticket-fields">
+                                                                <div class="mb-3 without-contact">
+                                                                    <div class="field-label">Guest Ticket</div>
+                                                                    <div class="d-flex align-items-center gap-2"></div>
+                                                                    <div class="form-check form-switch mb-0 ml-2">
+                                                                        <input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="mb-3">
                                                                     <div class="field-label">Assignee</div>
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div class="d-flex align-items-center gap-2 ticket-assignee">
-                                                                            <img class="assignee-img" src="" alt="Assignee" style="width: 40px;">
+                                                                            <img class="assignee-img" src="" alt="Assignee">
                                                                             <span class="user-initials avatar_initials" style="display:none;">
                                                                                 <span class="initials avatar_name"></span>
                                                                             </span>
@@ -3898,6 +3902,10 @@ function sb_component_admin() {
                                                                             <span class="initials avatar_name"></span>
                                                                         </span>
                                                                         <span class="name"></span>
+                                                                        <div id="reporter" data-type="select" class="sb-input d-none">
+                                                                            <select id="select-ticket-reporter" style="width:100%;">
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
@@ -4191,41 +4199,78 @@ function sb_component_admin() {
                         // }
                     }
 
-                    
 
                     $('#select-ticket-agent').select2({
-                    placeholder: 'Type and search...',
-                    ajax: {
-                        url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                        method: 'POST',
-                        dataType: 'json',
-                        delay: 250,
-                        data: function(params) {
-                            return {
-                                function: 'ajax_calls',
-                                'calls[0][function]': 'search-get-users',
-                                'login-cookie': SBF.loginCookie(),
-                                'q': params.term, // ✅ Pass search term
-                                'type': 'agent'
-                            };
-                        },
-                        processResults: function(response) {
-                            //response = JSON.parse(response);
-                            if (response[0][0] == 'success') {
-                                const users = response[0][1];
-                                console.log("Processed users:", response[0][1]);
+                        placeholder: 'Type and search...',
+                        ajax: 
+                        {
+                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                            method: 'POST',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function(params) {
                                 return {
-                                    results: users.map(user => ({
-                                        id: user.id,
-                                        text: user.first_name + ' ' + user.last_name,
-                                    }))
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-users',
+                                    'login-cookie': SBF.loginCookie(),
+                                    'q': params.term, // ✅ Pass search term
+                                    'type': 'agent'
                                 };
-                            }
+                            },
+                            processResults: function(response) {
+                                //response = JSON.parse(response);
+                                if (response[0][0] == 'success') {
+                                    const users = response[0][1];
+                                    console.log("Processed users:", response[0][1]);
+                                    return {
+                                        results: users.map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                        }))
+                                    };
+                                }
+                            },
+                            cache: true
                         },
-                        cache: true
-                    },
-                    minimumInputLength: 1
-                });
+                        minimumInputLength: 1
+                    });
+
+                    $('#select-ticket-reporter').select2({
+                        placeholder: 'Type and search...',
+                        ajax: {
+                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                            method: 'POST',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function(params) {
+                                return {
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-users',
+                                    'login-cookie': SBF.loginCookie(),
+                                    'q': params.term, // ✅ Pass search term
+                                    'type': 'user'
+                                };
+                            },
+                            processResults: function(response) {
+                                //response = JSON.parse(response);
+                                if (response[0][0] == 'success') {
+                                    const users = response[0][1];
+                                    console.log("Processed users:", response[0][1]);
+                                    // document.querySelector('#name select').value = response.priority_id;
+                                    return {
+                                        results: users.map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                            email: user.email,
+                                            name: user.first_name + ' ' + user.last_name
+                                        }))
+                                    };
+                                }
+                            },
+                            cache: true
+                        },
+                        minimumInputLength: 1
+                    });
                 </script>
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>

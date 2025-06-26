@@ -179,6 +179,8 @@ function sb_ajax_execute() {
             return sb_json_response(update_ticket_subject($_POST['subject'], $_POST['ticket_id']));
         case 'update-ticket-note':
             return sb_json_response(update_ticket_note($_POST['note'], $_POST['ticket_id']));
+        case 'get-users-registrations-count':
+            return sb_json_response(get_users_registrations_count($_POST['date_start'], $_POST['date_end']));
         case 'add-ticket-custom-field':
              return sb_json_response(sb_add_edit_custom_field($_POST['data1']));
         case 'add-ticket-status':

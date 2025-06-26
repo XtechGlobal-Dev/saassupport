@@ -1054,8 +1054,8 @@ function sb_count_tickets() {
 function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
-   $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
-            u.profile_image,
+   $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name, CONCAT_WS(" ", c.first_name, c.last_name) as reporter_name,
+            u.profile_image,c.profile_image as c_profile_image,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color,
             (
@@ -1179,6 +1179,60 @@ function delete_ticket_comment($ticketId = 0, $commentId = 0) {
         return ['success' => false, 'message' => 'Failed to delete comment.'];
     }
 }   
+
+function get_users_registrations_count($start_date = null,$end_date = null)
+{
+    // Get start and end date from GET or POST
+    $start_date = sb_db_escape($start_date);
+    $end_date = sb_db_escape($end_date);
+
+    // Validate date format (YYYY-MM-DD)
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $start_date) || !preg_match('/\d{4}-\d{2}-\d{2}/', $end_date)) {
+         return ['error' => false, 'message' => 'Invalid date format. Use YYYY-MM-DD'];
+    }
+
+    // Create date range array
+    $period = new DatePeriod(
+        new DateTime($start_date),
+        new DateInterval('P1D'),
+        (new DateTime($end_date))->modify('+1 day') // Include end date
+    );
+
+    $date_labels = [];
+    foreach ($period as $date) {
+        $date_labels[$date->format('d/m/Y')] = 0;
+    }
+
+    // Query to get count of users per day
+    $query = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_users
+        WHERE DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(creation_time)
+    ";
+    $result = sb_db_query($query);
+
+    // Fill result into date_labels
+    foreach ($result as $row) {
+        $date_key = date('d/m/Y', strtotime($row['date']));
+        if (array_key_exists($date_key, $date_labels)) {
+            $date_labels[$date_key] = (int)$row['count'];
+        }
+    }
+
+    // Prepare final response
+    return $response = [
+        "success",
+        [
+            "title" => "User registrations count",
+            "description" => "Users count. Users are registered with an email address.",
+            "data" => $date_labels,
+            "table" => ["Date", "Count"],
+            "table_inverse" => true,
+            "label_type" => 1,
+            "chart_type" => "line"
+        ]
+    ];
+}
 
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
 
