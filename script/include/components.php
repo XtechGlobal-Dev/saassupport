@@ -3541,10 +3541,15 @@ function sb_component_admin() {
                                                         <!-- Tab 2 -->
                                                         <div class="tab-pane" id="tab2">
                                                             <div class="mb-3">
-                                                                <label for="textareaInput" class="form-label">Enter Text</label>
-                                                                <textarea class="form-control" id="textareaInput" rows="4" style="width:98%"></textarea>
+                                                                <div id="internal-note" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                                                                    <div style="display: inline-block;padding:0;width:100%;">
+                                                                        <div id="internal-note-t" style="height: 180px;"></div>
+                                                                    </div>
+                                                                    <!-- Hidden input to store uploaded file data -->
+                                                                    <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+                                                                </div>
                                                             </div>
-                                                            <button class="btn btn-primary" type="button">Save</button>
+                                                            <button class="btn btn-primary float-end" type="button" id="save-note">Save</button>
                                                         </div>
                                                     </div>
 
@@ -3864,13 +3869,17 @@ function sb_component_admin() {
                                                 <div class="col-md-3 p-0">
                                                     <div class="pl-5">
                                                         <div class="sidepanel">
-                                                            <h4 class="sub_title mb-5">Details</h4>
+                                                            <h4 class="sub_title mb-5 col-4 d-inline-block">Details</h4>
+                                                            <span class="conversation-id">Conversation ID : <span></span></span>
                                                             <div class="ticket-fields">
                                                                 <div class="mb-3">
                                                                     <div class="field-label">Assignee</div>
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div class="d-flex align-items-center gap-2 ticket-assignee">
-                                                                            <i class="fas fa-user-circle fs-4 text-muted"></i>
+                                                                            <img class="assignee-img" src="" alt="Assignee" style="width: 40px;">
+                                                                            <span class="user-initials avatar_initials" style="display:none;">
+                                                                                <span class="initials avatar_name"></span>
+                                                                            </span>
                                                                             <div id="assigned_to" data-type="select" class="sb-input">
                                                                                 <select id="select-ticket-agent" style="width:100%;">
                                                                                     
@@ -3884,8 +3893,11 @@ function sb_component_admin() {
                                                                 <div class="mb-3">
                                                                     <div class="field-label">Reporter</div>
                                                                     <div class="d-flex align-items-center gap-2 ticket-reporter">
-                                                                        <img class="reporter" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter">
-                                                                        <span></span>
+                                                                        <img class="reporter-img" src="" alt="Reporter" style="width: 40px;">
+                                                                        <span class="user-initials avatar_initials" style="display:none;">
+                                                                            <span class="initials avatar_name"></span>
+                                                                        </span>
+                                                                        <span class="name"></span>
                                                                     </div>
                                                                 </div>
                                                                 <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>

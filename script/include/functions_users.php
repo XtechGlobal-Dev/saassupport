@@ -1055,6 +1055,7 @@ function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
    $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
+            u.profile_image,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color,
             (
@@ -1648,7 +1649,7 @@ function update_ticket_detail($inputs,$ticket_id =0){
     {
         $assigned_to ="NULL";
     }
-    else
+    else    
     {
         $assigned_to = "'".$data['assigned_to']."'";
     }
@@ -1688,6 +1689,14 @@ function update_ticket_subject($subject,$ticket_id)
     $subject = sb_db_escape($subject);
     $ticket_id = sb_db_escape($ticket_id);
     sb_db_query('update sb_tickets set subject = \''.$subject."' where id = '".$ticket_id."'");
+}
+
+function update_ticket_note($note,$ticket_id)
+{
+    $note = sb_db_escape($note);
+    $ticket_id = sb_db_escape($ticket_id);
+    sb_db_query('update sb_tickets set notes = \''.$note."' where id = '".$ticket_id."'");
+    return ['success'=>true];
 }
 
 function sb_return_saved_ticket_row($ticket_id) {
