@@ -169,8 +169,16 @@ function sb_ajax_execute() {
             return sb_json_response(sb_edit_ticket_custom_field($_POST['custom_field_id']));
         case 'edit-ticket-status':
             return sb_json_response(sb_edit_ticket_status($_POST['custom_field_id']));
+        case 'fecth-ticket-attachments':
+            return sb_json_response(sb_fetch_ticket_attachments($_POST['ticket_id']));
         case 'update-ticket':
             return sb_json_response(sb_update_ticket($_POST['data1'], $_POST['ticket_id']));
+        case 'update-ticket-details':
+            return sb_json_response(update_ticket_detail($_POST['data'], $_POST['ticket_id']));
+        case 'update-ticket-subject':
+            return sb_json_response(update_ticket_subject($_POST['subject'], $_POST['ticket_id']));
+        case 'update-ticket-note':
+            return sb_json_response(update_ticket_note($_POST['note'], $_POST['ticket_id']));
         case 'add-ticket-custom-field':
              return sb_json_response(sb_add_edit_custom_field($_POST['data1']));
         case 'add-ticket-status':
@@ -195,6 +203,10 @@ function sb_ajax_execute() {
              return sb_json_response(sb_search_get_users($_POST['q'],$_POST['type']));
         case 'upload-ticket-attachments':
              return sb_json_response(sb_upload_ticket_attachments($_POST['ticket_id'],$_FILES['files']));
+        case 'update-ticket-attachments':
+             return sb_json_response(update_ticket_attachments($_POST['ticket_id'],$_POST['attachments']));
+        case 'update-ticket-status':
+             return sb_json_response(update_ticket_status($_POST['ticket_id'],$_POST['ticketStatus']));
         case 'remove-ticket-attachment':
              return sb_json_response(sb_remove_ticket_attachment($_POST['attachment_id'],$_POST['ticket_id']));
         case 'get-conversations':

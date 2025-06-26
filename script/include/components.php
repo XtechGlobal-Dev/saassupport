@@ -637,6 +637,17 @@ function sb_ticket_edit_box()
 
         .sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
         .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
+
+        .tsubject input {border: none;padding: 7px 0 6px 7px;font-size: 16px;width: 91%;cursor: pointer;font-weight: 600;border-radius: .25rem} 
+        .tsubject input:hover, .tsubject input.active
+        {   
+            background-color: rgb(233 233 234);
+        }
+
+        .tsubject input.active{
+            border: 1px solid rgb(212, 212, 212);;
+            background-color: rgb(248, 248, 249);
+        }
         
     </style>
     <script>
@@ -907,7 +918,15 @@ function sb_ticket_edit_box()
 
                 // Create FormData object
                 const formData = new FormData();
-                uploadedFiles = [];
+
+                let reopendTicketAttachmentsPopup = $('#reopendTicketAttachmentsPopup').val();
+
+                if(reopendTicketAttachmentsPopup == '1')
+                {
+                    uploadedFiles = [];
+                    $('#reopendTicketAttachmentsPopup').val(0);
+                }
+
                 for (let i = 0; i < files.length; i++) {
                     formData.append('files[]', files[i]);
                 }
@@ -1334,6 +1353,8 @@ function sb_ticket_edit_box()
                                 // Remove the attachment from the DOM
                                 const card = self.closest('.col-md-2');
                                 card.remove();
+
+                                $('#view-ticket-attachments .attachments-count').html($('.attachments .col-md-2').length);
 
                                 // Hide Current Attachments section if no attachments left
                                 if ($('#current-attachments').children().length === 0) {
@@ -3346,7 +3367,7 @@ function sb_component_admin() {
                                         <div class="col-md-12 p-0">
                                             <div class="row">
                                                 <div class="col-md-8 p-0">
-                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject">Email Subject</span></h2>
+                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value=""/></span></h2>
                                                 </div>
                                                 <div class="col-md-4 p-0">
                                                     <?php
@@ -3384,12 +3405,12 @@ function sb_component_admin() {
                                                 </div>
                                                 <div class="col-md-9 p-0">
                                                     <h2 class="sub_title my-4">Description</h2>
-                                                    <div id="description" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                                                    <div id="description-d" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
                                                         <div style="display: inline-block;padding:0;width:100%;">
                                                             <div id="ticketDescriptionTicketDetail" style="height: 180px;"></div>
                                                         </div>
-                                                        <input id="ticket_id" type="hidden" name="ticket_id" />
-                                                        <input id="conversation_id" type="hidden" name="conversation_id" />
+                                                        <input id="ticket_id_d" type="hidden" name="ticket_id" />
+                                                        <input id="conversation_id_d" type="hidden" name="conversation_id" />
                                                         <!-- Hidden input to store uploaded file data -->
                                                         <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
                                                     </div>
@@ -3401,9 +3422,9 @@ function sb_component_admin() {
                                                     </div>
                                                     <div class="label mr-3">I want to :
                                                         <span>[Action to perform]</span>
-                                                    </div> -->
+                                                    </div>
                                                     <h2 class="sub_title my-4">Comments</h2>
-                                                    <!-- <div class="msg">
+                                                    <div class="msg">
                                                         <div class="mright">
                                                             <div class="avatar">
                                                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="User" class="avatar comment-avatar">
@@ -3481,22 +3502,75 @@ function sb_component_admin() {
                                                             </a>
                                                         </div>
                                                     </div> -->
-                                                    <!-- Comments/Chat Section -->
-                                                    <div id="ticket-comments" class="row mt-4">
-                                                        <div class="col-md-12">
-                                                            <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
-                                                                <!-- Comments will be loaded here by JS -->
+                                                    
+
+                                                     <!-- Nav tabs -->
+                                                    <ul class="nav nav-tabs" id="myTab">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" data-target="#tab1" href="javascript:void(0)">Comments</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-target="#tab2" href="javascript:void(0)">Internal Note</a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <!-- Tab content -->
+                                                    <div class="tab-content pt-3">
+                                                        <!-- Tab 1 -->
+                                                        <div class="tab-pane active" id="tab1">
+                                                            <div id="blankDiv">
+                                                                <!-- Comments/Chat Section -->
+                                                                <div id="ticket-comments" class="row mt-4">
+                                                                    <div class="col-md-12">
+                                                                        <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                                                            <!-- Comments will be loaded here by JS -->
+                                                                        </div>
+                                                                        
+                                                                        <div  class="d-flex align-items-center gap-2 mt-4">
+                                                                            <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                                                            <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
+                                                                            <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
+                                                                            
+                                                                            <button id="addComment" class="btn btn-primary">Send</button>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            
-                                                            <div  class="d-flex align-items-center gap-2 mt-4">
-                                                                <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
-                                                                <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
-                                                                <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
-                                                                
-                                                                <button id="addComment" class="btn btn-primary">Send</button>
                                                         </div>
+
+                                                        <!-- Tab 2 -->
+                                                        <div class="tab-pane" id="tab2">
+                                                            <div class="mb-3">
+                                                                <div id="internal-note" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
+                                                                    <div style="display: inline-block;padding:0;width:100%;">
+                                                                        <div id="internal-note-t" style="height: 180px;"></div>
+                                                                    </div>
+                                                                    <!-- Hidden input to store uploaded file data -->
+                                                                    <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-primary float-end" type="button" id="save-note">Save</button>
                                                         </div>
                                                     </div>
+
+                                                    <script>
+                                                        $(document).ready(function() {
+                                                            $('#myTab .nav-link').click(function() {
+                                                                // Remove active class from all tabs
+                                                                $('#myTab .nav-link').removeClass('active');
+                                                                $('.tab-pane').removeClass('active');
+
+                                                                // Add active class to clicked tab
+                                                                $(this).addClass('active');
+
+                                                                // Show corresponding tab pane
+                                                                const target = $(this).data('target');
+                                                                $(target).addClass('active');
+                                                            });
+                                                        });
+                                                    </script>
+
+
                                                     <style>
                                                         /* Timeline chat style for comments */
                                                         .comment-row {
@@ -3795,99 +3869,108 @@ function sb_component_admin() {
                                                 <div class="col-md-3 p-0">
                                                     <div class="pl-5">
                                                         <div class="sidepanel">
-                                                            <h4 class="sub_title mb-5">Details</h4>
-                                                            <div class="mb-3">
-                                                                <div class="field-label">Assignee</div>
-                                                                <div class="d-flex align-items-center justify-content-between">
-                                                                    <div class="d-flex align-items-center gap-2 ticket-assignee">
-                                                                        <i class="fas fa-user-circle fs-4 text-muted"></i>
-                                                                        <div id="assigned_to" data-type="select" class="sb-input">
-                                                                            <select id="select-ticket-agent" style="width:100%;">
-                                                                                
-                                                                            </select>
-                                                                        </div>  
-                                                                    </div>
-                                                                    
-                                                                    <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <div class="field-label">Reporter</div>
-                                                                <div class="d-flex align-items-center gap-2 ticket-reporter">
-                                                                    <img class="reporter" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Reporter">
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                            <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
-                                                            <div class="mb-3 sb-input d-block">
-                                                                <div class="field-label">Department</div>
-                                                                <select id="ticket-department" required>
-                                                                    <option value=""><?php echo sb_('Select Department'); ?></option>
-                                                                    <?php
-                                                                    $departments = sb_get_departments();
-                                                                    foreach ($departments as $key => $value) {
-                                                                        echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                            </div>
-                                                            <?php } ?>
-                                                            <div class="mb-3">
-                                                                <div class="field-label">Tags</div>
-                                                                <div class="mb-2">
-                                                                    <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
-                                                                    <div class="mr-5 tags-filter" style="">
-                                                                        <?php
-                                                                            $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                                                            $tagsHtml = '';
-                                                                            $count = count($tags);
-                                                                            if ($count > 0) 
-                                                                            {
-                                                                                ?>
-                                                                                <select id="ticket-detail-tags-filter" name="tags[]" multiple>
-                                                                                    <?php
-                                                                                    for ($i = 0; $i < $count; $i++) {
-                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
-                                                                                    }
-                                                                                    echo $tagsHtml;
-                                                                                    ?>
+                                                            <h4 class="sub_title mb-5 col-4 d-inline-block">Details</h4>
+                                                            <span class="conversation-id">Conversation ID : <span></span></span>
+                                                            <div class="ticket-fields">
+                                                                <div class="mb-3">
+                                                                    <div class="field-label">Assignee</div>
+                                                                    <div class="d-flex align-items-center justify-content-between">
+                                                                        <div class="d-flex align-items-center gap-2 ticket-assignee">
+                                                                            <img class="assignee-img" src="" alt="Assignee" style="width: 40px;">
+                                                                            <span class="user-initials avatar_initials" style="display:none;">
+                                                                                <span class="initials avatar_name"></span>
+                                                                            </span>
+                                                                            <div id="assigned_to" data-type="select" class="sb-input">
+                                                                                <select id="select-ticket-agent" style="width:100%;">
+                                                                                    
                                                                                 </select>
-                                                                                <?php 
-                                                                            } 
-                                                                        ?>
+                                                                            </div>  
+                                                                        </div>
                                                                         
+                                                                        <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
                                                                     </div>
                                                                 </div>
-                                                                <div class="sb-td-tags tag-badges">
-                                                                    <!-- <span class="tag-badge">
-                                                                        <i class="fas fa-check text-muted"></i>
-                                                                        Business
-                                                                    </span>
-                                                                    <span class="tag-badge">
-                                                                        <i class="fas fa-check text-muted"></i>
-                                                                        Urgent
-                                                                    </span>
-                                                                    <span class="tag-badge">
-                                                                        <i class="fas fa-check text-muted"></i>
-                                                                        Priority
-                                                                    </span> -->
+                                                                <div class="mb-3">
+                                                                    <div class="field-label">Reporter</div>
+                                                                    <div class="d-flex align-items-center gap-2 ticket-reporter">
+                                                                        <img class="reporter-img" src="" alt="Reporter" style="width: 40px;">
+                                                                        <span class="user-initials avatar_initials" style="display:none;">
+                                                                            <span class="initials avatar_name"></span>
+                                                                        </span>
+                                                                        <span class="name"></span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="mb-3 sb-input d-block">
-                                                                <div class="field-label">Priority</div>
-                                                                <!-- <div class="ticket-priority">
-                                                                    High
-                                                                </div>
-                                                                <div id="priority_id" data-type="select" class="sb-input">
-                                                                    <span class="required-label"><?php sb_e('Priority') ?></span> -->
-                                                                    <select id="ticket-priority" required>
+                                                                <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
+                                                                <div class="mb-3 sb-input d-block">
+                                                                    <div class="field-label">Department</div>
+                                                                    <select id="ticket-department" required>
+                                                                        <option value=""><?php echo sb_('Select Department'); ?></option>
                                                                         <?php
-                                                                        foreach ($priorities as $key => $value) {
-                                                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                                        $departments = sb_get_departments();
+                                                                        foreach ($departments as $key => $value) {
+                                                                            echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
                                                                         }
                                                                         ?>
                                                                     </select>
-                                                                <!-- </div> -->
+                                                                </div>
+                                                                <?php } ?>
+                                                                <div class="mb-3">
+                                                                    <div class="field-label">Tags</div>
+                                                                    <div class="mb-2">
+                                                                        <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                        <div class="mr-5 tags-filter" style="">
+                                                                            <?php
+                                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                                                                $tagsHtml = '';
+                                                                                $count = count($tags);
+                                                                                if ($count > 0) 
+                                                                                {
+                                                                                    ?>
+                                                                                    <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                        <?php
+                                                                                        for ($i = 0; $i < $count; $i++) {
+                                                                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                        }
+                                                                                        echo $tagsHtml;
+                                                                                        ?>
+                                                                                    </select>
+                                                                                    <?php 
+                                                                                } 
+                                                                            ?>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sb-td-tags tag-badges">
+                                                                        <!-- <span class="tag-badge">
+                                                                            <i class="fas fa-check text-muted"></i>
+                                                                            Business
+                                                                        </span>
+                                                                        <span class="tag-badge">
+                                                                            <i class="fas fa-check text-muted"></i>
+                                                                            Urgent
+                                                                        </span>
+                                                                        <span class="tag-badge">
+                                                                            <i class="fas fa-check text-muted"></i>
+                                                                            Priority
+                                                                        </span> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3 sb-input d-block">
+                                                                    <div class="field-label">Priority</div>
+                                                                    <!-- <div class="ticket-priority">
+                                                                        High
+                                                                    </div>
+                                                                    <div id="priority_id" data-type="select" class="sb-input">
+                                                                        <span class="required-label"><?php sb_e('Priority') ?></span> -->
+                                                                        <select id="ticket-priority" required>
+                                                                            <?php
+                                                                            foreach ($priorities as $key => $value) {
+                                                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+                                                                    <!-- </div> -->
+                                                                </div>
                                                             </div>
                                                             <div class="divider"></div>
                                                             <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
@@ -3911,7 +3994,7 @@ function sb_component_admin() {
                                 </h2>   
                             </div>
                             <div>
-                                <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-status" data-hide="sb-profile-area" data-show="sb-edit-area">
+                                <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-attachments" data-hide="sb-profile-area" data-show="sb-edit-area">
                                     <i class="sb-icon-sms"></i> Save Changes
                                 </a>
                                 <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
@@ -3926,6 +4009,7 @@ function sb_component_admin() {
                                     <span class="d-block mb-2">Attachments</span>
                                     <div class="custom-file">
                                         <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
+                                        <input type="hidden" id="reopendTicketAttachmentsPopup" value="0">
                                         <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
                                     </div>
                                 </div>
@@ -3935,12 +4019,12 @@ function sb_component_admin() {
                                         <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
 
-                                    <div class="mt-2" id="existing-file-preview-container">
+                                    <div class="mt-2 attachments" id="existing-file-preview-container">
                                         <span>Current Attachments</span>
                                         <div class="row" id="current-attachments"></div>
                                     </div>
 
-                                    <div class="mt-2">
+                                    <div class="mt-2 attachments">
                                         <span class="mb-2 d-block">New Attachments</span>
                                         <div class="mt-2" id="file-preview-container">
                                             <div class="row" id="file-preview-list"></div>
