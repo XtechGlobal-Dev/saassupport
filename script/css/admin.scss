@@ -8825,35 +8825,6 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
 
-    // .auth-options {
-    //     display: flex;
-    //     justify-content: space-between;
-    //     align-items: center;
-    //     margin: 24px 0;
-    // }
-
-    // .remember-me {
-    //     display: flex;
-    //     align-items: center;
-    // }
-
-    // .checkbox {
-    //     width: 21px;
-    //     height: 21px;
-    //     background-color: white;
-    //     border: 1.5px solid #dcdcdc;
-    //     border-radius: 4px;
-    //     margin-right: 8px;
-    //     cursor: pointer;
-    // }
-
-    // .remember-text {
-    //     text-transform: capitalize;
-    //     font-weight: 500;
-    //     font-size: 16px;
-    //     color: #666666;
-    //     font-family: Manrope;
-    // }
     .auth-options {
         display: flex;
         justify-content: space-between;
@@ -8910,15 +8881,21 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         text-transform: capitalize;
         font-weight: 500;
         font-size: 16px;
-        color: #194bc1;
+        color: #194bc1 !important;
         cursor: pointer;
         font-family: Manrope;
+    }
+    .btn-cancel-reset-password{
+        font-size: 13px;
+        text-align: end;
+        margin: 4px 0 24px 0;
     }
 
     .login-button {
         background-color: #1d4ec3;
         height: 45px;
-        width: 100%;
+        // width: 100%;
+        width: -webkit-fill-available;
         border-radius: 10px;
         color: white;
         font-weight: 600;

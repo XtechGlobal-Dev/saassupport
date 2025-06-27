@@ -673,8 +673,8 @@ function box_chart()
             </div>
         </div>
     </div>
-    <div class="sb-reset-password-box sb-cloud-box sb-admin-box">
-        <div class="sb-info"></div>
+    <div class="sb-reset-password-box sb-cloud-box sb-admin-box sb-admin-box_new">
+        <!-- <div class="sb-info"></div>
         <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
@@ -697,6 +697,47 @@ function box_chart()
                 </div>
                 <div class="sb-text btn-cancel-reset-password">
                     <?php sb_e('Cancel') ?>
+                </div>
+            </div>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 top_left">
+                    <div class="left_section">
+                        <div class="logo-container">
+                            <img src="../account/media/logo.svg" alt="logo">
+                            <div class="logo-text">Nexon Helpdesk</div>
+                        </div>
+                        <div class="laptop-image">
+                            <img src="../account/media/dashboard.svg" alt="dash">
+                        </div>
+                        <div class="welcome-title">Welcome to Nexon Support Desk</div>
+                        <div class="welcome-description">
+                            No worries — reset it here to regain access to your tickets, track progress, and reconnect with our support team.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 top_right">
+                    <div class="right_section">
+                        <div class="login-form sb-main">
+                            <h1 class="login-title">Reset password</h1>
+                            <p class="login-description">
+                                Enter your email below, you will receive an email with instructions on how to reset your password
+                            </p>
+                            <div class="form-fields">
+                                <div class="field-container">
+                                    <div class="field-label">email address</div>
+                                    <div id="email" class="input-wrapper sb-input">
+                                        <input type="email" placeholder="Enter your email address" class="form-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forgot-password btn-cancel-reset-password">
+                                Cancel
+                            </div>
+                            <button class="login-button sb-btn btn-reset-password">Reset password</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

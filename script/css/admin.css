@@ -11639,14 +11639,19 @@ a.sb-btn-white.sb-loading:hover:before,
   text-transform: capitalize;
   font-weight: 500;
   font-size: 16px;
-  color: #194bc1;
+  color: #194bc1 !important;
   cursor: pointer;
   font-family: Manrope;
+}
+.sb-admin-box_new .btn-cancel-reset-password {
+  font-size: 13px;
+  text-align: end;
+  margin: 4px 0 24px 0;
 }
 .sb-admin-box_new .login-button {
   background-color: #1d4ec3;
   height: 45px;
-  width: 100%;
+  width: -webkit-fill-available;
   border-radius: 10px;
   color: white;
   font-weight: 600;
