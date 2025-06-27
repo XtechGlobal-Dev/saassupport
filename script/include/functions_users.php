@@ -933,7 +933,6 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
 
     if (isset($tickets) && is_array($tickets)) 
     {
-
         $departments = sb_get_departments();
         $departmentsArr = array();
         foreach ($departments as $key => $value) {
@@ -1230,6 +1229,180 @@ function get_users_registrations_count($start_date = null,$end_date = null)
             "table_inverse" => true,
             "label_type" => 1,
             "chart_type" => "line"
+        ]
+    ];
+}
+
+function get_tickets_count($start_date = null,$end_date = null)
+{
+    $start_date = sb_db_escape($start_date);
+    $end_date = sb_db_escape($end_date);
+
+    // Validate dd/mm/yyyy format
+    if (!preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $start_date) || !preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $end_date)) {
+    return ['error' => false, 'message' => 'Invalid date format. Use YYYY-MM-DD'];
+    }
+
+
+    // Convert dd/mm/yyyy to yyyy-mm-dd
+    $start_date = DateTime::createFromFormat('d/m/Y', $start_date)->format('Y-m-d');
+    $end_date = DateTime::createFromFormat('d/m/Y', $end_date)->format('Y-m-d');
+
+    // Create date range array
+    $period = new DatePeriod(
+        new DateTime($start_date),
+        new DateInterval('P1D'),
+        (new DateTime($end_date))->modify('+1 day') // Include end date
+    );
+
+    $date_labels = [];
+    $date_labels2 = [];
+    foreach ($period as $date) {
+        $date_labels[$date->format('d/m/Y')] = 0;
+        $date_labels2[$date->format('d/m/Y')] = 0;
+    }
+
+    // Query to get count of tickets per day
+    $query = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_tickets
+        WHERE DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(creation_time)
+    ";
+    $result = sb_db_get($query,false);
+
+    // Fill result into date_labels
+    foreach ($result as $key => $val) {
+        $date_key = date('d/m/Y', strtotime($val['date']));
+        if (array_key_exists($date_key, $date_labels)) {
+            $date_labels[$date_key] = (int)$val['count'];
+        }
+    }
+    // Query to get count of tickets resolved/closed per day
+    $query2 = "SELECT DATE(updated_at) as date, COUNT(*) as count
+        FROM sb_tickets
+        WHERE status_id = 5 AND DATE(updated_at) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(updated_at)
+    ";
+    $result2 = sb_db_get($query2,false);
+
+    // Fill result into date_labels2
+    foreach ($result2 as $key => $val) {
+        $date_key = date('d/m/Y', strtotime($val['date']));
+        if (array_key_exists($date_key, $date_labels2)) {
+            $date_labels2[$date_key] = (int)$val['count'];
+        }
+    }
+
+    // Prepare final response
+    return $response = [
+        "success",
+        [
+            "title" => "Tickets count",
+            "description" => "Count of ticket created and tickets resolved in given time span.",
+            "tickets_data" => $date_labels,
+             "resolved_ticket_data" => $date_labels2,
+            "table" => ["Date", "Count"],
+            "table_inverse" => true,
+        ]
+    ];
+}
+
+function get_tickets_yearly_count()
+{
+    // Get last 12 months from today
+    // Generate last 12 months
+    $months = [];
+    $currentDate = new DateTime();
+    for ($i = 11; $i >= 0; $i--) {
+        $date = (new DateTime())->modify("-{$i} months");
+        $monthName = $date->format('M');
+        $yearMonth = $date->format('Y-m');
+        $months[$yearMonth] = [
+            'label' => $monthName,
+            'count' => 0
+        ];
+    }
+
+    // Fetch data from DB
+    $query = "
+        SELECT 
+            DATE_FORMAT(creation_time, '%b') AS month_name,
+            DATE_FORMAT(creation_time, '%Y-%m') AS y_month,
+            COUNT(*) AS count
+        FROM 
+            sb_tickets
+        WHERE 
+            creation_time >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+        GROUP BY 
+            DATE_FORMAT(creation_time, '%Y-%m')
+        ORDER BY 
+            DATE_FORMAT(creation_time, '%Y-%m');
+    ";
+    $result = sb_db_get($query,false);
+
+    foreach ($result as $key => $val) {
+        $ym = $val['y_month'];
+        if (isset($months[$ym])) {
+            $months[$ym]['count'] = (int)$val['count'];
+        }
+    }
+
+    // Format data for output
+    $data = [];
+    foreach ($months as $info) {
+        $data[$info['label']] = $info['count'];
+    }
+
+    // Get total Created tickets
+    $res_created = sb_db_get("SELECT COUNT(*) AS total FROM sb_tickets");
+    $total_created = (int)$res_created['total'];
+
+    // Mock Resolved and Pending
+    $total_resolved = round($total_created * 0.4);
+    $total_pending = $total_created - $total_resolved;
+
+    // Final response
+   return $response = [
+        "success",
+        [
+            "title" => "Ticket Support Board",
+            "description" => "Ticket Support Board widget counts.",
+            "data" => $data,
+            "Created" => $total_created,
+            "Resolved" => $total_resolved,
+            "Pending" => $total_pending
+        ]
+    ];
+}
+
+function get_recent_messages()
+{
+    // Fetch data from DB
+    $query = "
+        SELECT m.message, m.creation_time, m.conversation_id, u.id AS user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS user_name, u.profile_image
+        FROM  sb_messages AS m
+        INNER JOIN  sb_users AS u ON m.user_id = u.id
+        INNER JOIN 
+        (
+            SELECT 
+                conversation_id, 
+                MAX(creation_time) AS latest_time
+            FROM 
+                sb_messages
+            GROUP BY 
+                conversation_id
+        ) AS latest
+    ON  m.conversation_id = latest.conversation_id  AND m.creation_time = latest.latest_time
+    ORDER BY m.creation_time DESC LIMIT 5;
+    ";
+    $result = sb_db_get($query,false);
+     // Final response
+   return $response = [
+        "success",
+        [
+            "title" => "Recent Messages",
+            "description" => "Get last 5 messages.",
+            "data" => $result
         ]
     ];
 }

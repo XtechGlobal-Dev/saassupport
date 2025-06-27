@@ -1914,14 +1914,14 @@ function sb_component_admin() {
                                     <h2 class="title">Setting</h2>
                                 </div>
                                 <div class="header-right">
-                                    <div class="notification">
+                                    <!--div class="notification">
                                         <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
                                     <div class="notification">
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
-                                    </div>
+                                    </div-->
                                     <div class="sb-admin-nav-right user_menu user-profile user_avatar">
                                         <a class="sb-profile">
                                             <img class="avatar_img" src="" data-name="" />
@@ -2526,7 +2526,7 @@ function sb_component_admin() {
                                                 </script>
                                             </div>
                                         </section>
-                                        <section class="main-charts mb-3">
+                                        <section class="main-charts mb-3 d-none">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Campaigns</h6>
@@ -2649,51 +2649,7 @@ function sb_component_admin() {
                                         </div>
                                         <div class="seprator"></div>
                                         <div class="recent card p-3">
-                                            <ul class="list-unstyled">
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Chandara" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Chandara Kiev</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">5m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Samuel" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Samuel Queueee</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">41m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laurenz" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Laurenz Jumowa</div>
-                                                        <div class="sub_head2 mb-3">Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum....</div>
-                                                        <small class="text-muted">2h ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3">
-                                                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Chandara" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Chandara Kiev</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">5m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
+                                            <ul class="recent-messages list-unstyled">
                                             </ul>
                                         </div>
                                         <div class="div"></div>
@@ -3922,47 +3878,48 @@ function sb_component_admin() {
                                                                     </select>
                                                                 </div>
                                                                 <?php } ?>
-                                                                <div class="mb-3">
-                                                                    <div class="field-label">Tags</div>
-                                                                    <div class="mb-2">
-                                                                        <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
-                                                                        <div class="mr-5 tags-filter" style="">
-                                                                            <?php
-                                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                                                                $tagsHtml = '';
-                                                                                $count = count($tags);
-                                                                                if ($count > 0) 
-                                                                                {
+                                                                 <?php
+                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                                                $tagsHtml = '';
+                                                                $count = count($tags);
+                                                            
+                                                                if ($count > 0) 
+                                                                {
+                                                                    ?>
+                                                                    <div class="mb-3">
+                                                                        <div class="field-label">Tags</div>
+                                                                        <div class="mb-2">
+                                                                            <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                            <div class="mr-5 tags-filter" style="">
+                                                                            <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                    <?php
+                                                                                    for ($i = 0; $i < $count; $i++) {
+                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                    }
+                                                                                    echo $tagsHtml;
                                                                                     ?>
-                                                                                    <select id="ticket-detail-tags-filter" name="tags[]" multiple>
-                                                                                        <?php
-                                                                                        for ($i = 0; $i < $count; $i++) {
-                                                                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
-                                                                                        }
-                                                                                        echo $tagsHtml;
-                                                                                        ?>
-                                                                                    </select>
-                                                                                    <?php 
-                                                                                } 
-                                                                            ?>
-                                                                            
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="sb-td-tags tag-badges">
+                                                                            <!-- <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Business
+                                                                            </span>
+                                                                            <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Urgent
+                                                                            </span>
+                                                                            <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Priority
+                                                                            </span> -->
                                                                         </div>
                                                                     </div>
-                                                                    <div class="sb-td-tags tag-badges">
-                                                                        <!-- <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Business
-                                                                        </span>
-                                                                        <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Urgent
-                                                                        </span>
-                                                                        <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Priority
-                                                                        </span> -->
-                                                                    </div>
-                                                                </div>
+                                                                    <?php
+                                                                } 
+                                                                ?>
+                                                                            
                                                                 <div class="mb-3 sb-input d-block">
                                                                     <div class="field-label">Priority</div>
                                                                     <!-- <div class="ticket-priority">
