@@ -1407,6 +1407,65 @@ function get_recent_messages()
     ];
 }
 
+function get_dashboad_customer_overview($filter = 'month')
+{
+    $filter = sb_db_escape($filter);
+
+    // Calculate date range
+    if ($filter === 'month') {
+        $start_date = date('Y-m-01', strtotime('first day of last month'));
+        $end_date = date('Y-m-t', strtotime('last day of last month'));
+    } elseif ($filter === 'year') {
+        $start_date = date('Y-m-01', strtotime('first day of -1 year this month'));
+        $end_date = date('Y-m-t', strtotime('last day of last month'));
+    } else {
+        $start_date = date('Y-m-01', strtotime('first day of last month'));
+        $end_date = date('Y-m-t', strtotime('last day of last month'));
+    }
+
+    $sql = "
+        SELECT 
+            COUNT(*) AS total_customer, 
+            (
+                SELECT COUNT(*) 
+                FROM sb_users 
+                WHERE user_type = 'user' 
+                AND DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+            ) AS recent_customers
+        FROM 
+            sb_users 
+        WHERE 
+            user_type = 'user'
+    ";
+
+    $result = sb_db_get($sql);
+
+    if($result)
+    {
+        return $response = [
+            "success",
+            [
+                "title" => "Customer Overview",
+                "description" => "Get customer count based on filter",
+                "filter" => $filter,
+                "start_date" => $start_date,
+                "end_date" => $end_date,
+                "total_customers" => (int)$result['total_customer'],
+                "recent_customers" => (int)$result['recent_customers']
+            ]
+        ];
+    }
+    else
+    {
+        return $response = [
+            "error",
+            [
+                "message" => "Got error while fecting records",
+            ]
+        ];
+    }
+}
+
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
 
     // Create uploads directory if it doesn't exist
@@ -1903,7 +1962,10 @@ function update_ticket_detail($inputs,$ticket_id =0){
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
 
-    sb_add_edit_ticket_tags($ticket_id, $inputs['tags'], $action = 'edit');
+    if(isset($inputs['tags']))
+    {
+        sb_add_edit_ticket_tags($ticket_id, $inputs['tags'], $action = 'edit');
+    }
 
     ////// Process file attachments if any
    // sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
@@ -2258,6 +2320,23 @@ function update_ticket_status($ticket_id = null, $status = null)
         return ['success' => true, 'message' => 'Ticket Status updated successfully.'];
     } else {
         return ['success' => false, 'message' => 'Failed to update ticket status.'];
+    }
+    
+}
+
+function update_ticket_priority($ticket_id = null, $priority = null)
+{
+    $ticket_id = sb_db_escape($ticket_id, true);
+    $priority = sb_db_escape($priority, true);
+
+    // Update the comment in the database
+    $query = "UPDATE sb_tickets SET priority_id = $priority WHERE id = $ticket_id";
+    $result = sb_db_query($query);
+
+    if ($result) {
+        return ['success' => true, 'message' => 'Ticket priority updated successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Failed to update ticket priority.'];
     }
     
 }

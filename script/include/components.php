@@ -607,12 +607,20 @@ function sb_ticket_edit_box()
         }
 
         .sb-scroll-area .user-initials,
-        .sb-top-bar .user-initials {
+        .sb-top-bar .user-initials
+        {
             width: 45px;
             height: 45px;
             line-height: 45px;
             position: absolute;
             left: 0;
+        }
+
+        .recent-messages .user-initials
+        {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
         }
 
         .sb-user-details .user-initials {
@@ -645,7 +653,66 @@ function sb_ticket_edit_box()
             border: 1px solid rgb(212, 212, 212);;
             background-color: rgb(248, 248, 249);
         }
-        
+
+
+        /*********  Statuses list CSS ***********/
+        .status-dropdown {
+        position: relative;
+        overflow: visible !important; /* allow dropdown to overflow */
+        }
+
+        .status-btn {
+        border: none;
+        border-radius: 20px;
+        padding: 3px 12px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        }
+
+        .arrow {
+        font-size: 12px;
+        }
+
+        .status-list, .priority-list {
+        display: none;
+        position: absolute;
+        top: 75%;
+        left: 0;
+        min-width: 170px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        z-index: 9999;
+        padding: 6px 0;
+        margin: 0;
+        list-style: none;
+        }
+
+        .status-list li, .priority-list li {
+        padding: 8px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 15px;
+        transition: background 0.15s;
+        }
+
+        .status-list li:hover, .priority-list li:hover {
+        background: #f5f5f5;
+        }
+
+        .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -2589,17 +2656,19 @@ function sb_component_admin() {
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Customer Overview</h6>
-                                                    <select class="form-select form-select-sm w-auto">
-                                                        <option>Yearly</option>
+                                                    <select id="customer-overview" class="form-select form-select-sm w-auto">
+                                                        <option value="month" selected>Last Month</option>
+                                                        <option value="year">Last Year</option>
                                                         <!-- <option>Monthly</option> -->
                                                     </select>
                                                 </div>
                                                 <!-- Donut Chart Block -->
                                                 <div class="overview_chart">
                                                     <ul class="legend" style="list-style: none; padding: 0;">
-                                                        <li><span class="total"></span> Total: 500</li>
-                                                        <li><span class="new"></span> New: 500</li>
-                                                        <li><span class="active"></span> Active: 1500</li>
+                                                        <span class="filter-range"></span>
+                                                        <li><span class="total"></span><label></label></li>
+                                                        <li><span class="new"></span><label></label></li>
+                                                        <li><span class="active"></span><label>Active: 4</label></li>
                                                     </ul>
                                                     <div id="chart-container">
                                                         <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
@@ -2801,6 +2870,44 @@ function sb_component_admin() {
                                         <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
                                         <div class="seprator"></div>
+                                        <?php
+                                        function sb_get_priorities()
+                                        {
+                                            $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                            return $priorities;
+                                        }
+                                        function sb_get_statues()
+                                        {
+                                            $status = sb_db_get('SELECT * FROM ticket_status', false);
+                                            return $status;
+                                        }
+                                        $statues = sb_get_statues();
+                                        $priorities = sb_get_priorities();    
+                                        ?>
+                                        <div id="ticket_statues">
+                                             <ul class="status-list">
+                                            <?php 
+                                            foreach($statues as $status)
+                                            {
+                                                echo '<li data-status="'.$status['name'].'" class="" data-color="'.$status['color'].'" value="'.$status['id'].'">
+                                                    <span class="status-dot"></span> '.$status['name'].'
+                                                </li>';
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
+                                        <div id="ticket_priorities">
+                                             <ul class="priority-list">
+                                            <?php 
+                                            foreach($priorities as $priority)
+                                            {
+                                                echo '<li data-status="'.$priority['name'].'" class="" data-color="'.$priority['color'].'" value="'.$priority['id'].'">
+                                                    <span class="status-dot"></span> '.$priority['name'].'
+                                                </li>';
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
                                         <div class="new_table sb-area-tickets-dash">
                                             <div class="sb-scroll-area">
                                                 <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
@@ -2812,8 +2919,8 @@ function sb_component_admin() {
                                                             <th data-field="assigned-to">
                                                                 Assigned To
                                                             </th>
-                                                            <th data-field="due-date">
-                                                                Due Date
+                                                            <th data-field="creation-date">
+                                                                Creation Date
                                                             </th>
                                                             <th data-field="status">
                                                                 <?php sb_e('Status') ?>
@@ -3323,20 +3430,6 @@ function sb_component_admin() {
                                                     <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value=""/></span></h2>
                                                 </div>
                                                 <div class="col-md-4 p-0">
-                                                    <?php
-                                                    function sb_get_priorities()
-                                                    {
-                                                        $priorities = sb_db_get('SELECT * FROM priorities', false);
-                                                        return $priorities;
-                                                    }
-                                                    function sb_get_statues()
-                                                    {
-                                                        $status = sb_db_get('SELECT * FROM ticket_status', false);
-                                                        return $status;
-                                                    }
-                                                    $statues = sb_get_statues();
-                                                    $priorities = sb_get_priorities();    
-                                                    ?>
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
                                                         <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
                                                             <?php
