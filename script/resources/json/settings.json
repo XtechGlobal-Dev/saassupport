@@ -1399,7 +1399,6 @@
       "title": "Require registration",
       "content": "Require the user registration or login before start a chat. To enable the login area the password field must be included.",
       "value": [
-        [ "", "Disabled" ],
         [ "registration-login", "Registration and login form" ],
         [ "registration", "Registration form" ],
         [ "login", "Login form" ]

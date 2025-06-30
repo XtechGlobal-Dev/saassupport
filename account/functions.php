@@ -2233,8 +2233,8 @@ function shopify_ai_function_calling($function_name, $id, $arguments, $query_too
 function cloud_get_max_quotas() {
     $max_quotas = [
         [
-            'price' => ['month' => 0, 'year' => 0],
-            'quota' => ['month' => ['messages' => 100, 'agents' => 1, 'users' => 10], 'year' => ['messages' => 100, 'agents' => 1, 'users' => 10], 'embeddings' => 100000]
+            'price' => ['month' => 1, 'year' => 1],
+            'quota' => ['month' => ['messages' => 100, 'agents' => 1, 'users' => 10], 'year' => ['messages' => 1000, 'agents' => 5, 'users' => 20], 'embeddings' => 100000]
         ],
         [
             'price' => ['month' => 5, 'year' => 50],

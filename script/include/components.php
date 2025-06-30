@@ -203,17 +203,12 @@ function sb_ticket_edit_box()
         <div class="sb-top-bar">
             <div class="sb-ticket">
                 <span class="sb-name"></span>
-
-
                 <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;">
                     <label class="ml-4">Guest Ticket</label>
                     <div class="form-check form-switch mb-0 ml-2">
                         <input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
                     </div>
                 </div>
-
-
-
             </div>
             <div>
                 <div id="conversation_id_div" data-type="checkbox" class="sb-input mr-4 d-none" style="font-size: 13px;">
@@ -578,7 +573,7 @@ function sb_ticket_edit_box()
         }
 
 
-        .user-initials {
+        .user-initials, .assignee-img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -593,13 +588,15 @@ function sb_ticket_edit_box()
             cursor: pointer;
         }
 
-        .comment-row .user-initials{
+        .comment-row .user-initials, .sidepanel .user-initials, .sidepanel .assignee-img{
             width: 36px;
             height: 36px;
             line-height: 36px;
             font-size: 15px;
             margin: 0 8px;
         }
+
+        .sidepanel .user-initials,.sidepanel .assignee-img{margin: 0}
 
         .initials {
             position: absolute;
@@ -610,12 +607,20 @@ function sb_ticket_edit_box()
         }
 
         .sb-scroll-area .user-initials,
-        .sb-top-bar .user-initials {
+        .sb-top-bar .user-initials
+        {
             width: 45px;
             height: 45px;
             line-height: 45px;
             position: absolute;
             left: 0;
+        }
+
+        .recent-messages .user-initials
+        {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
         }
 
         .sb-user-details .user-initials {
@@ -648,7 +653,66 @@ function sb_ticket_edit_box()
             border: 1px solid rgb(212, 212, 212);;
             background-color: rgb(248, 248, 249);
         }
-        
+
+
+        /*********  Statuses list CSS ***********/
+        .status-dropdown {
+        position: relative;
+        overflow: visible !important; /* allow dropdown to overflow */
+        }
+
+        .status-btn {
+        border: none;
+        border-radius: 20px;
+        padding: 3px 12px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        }
+
+        .arrow {
+        font-size: 12px;
+        }
+
+        .status-list, .priority-list {
+        display: none;
+        position: absolute;
+        top: 75%;
+        left: 0;
+        min-width: 170px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        z-index: 9999;
+        padding: 6px 0;
+        margin: 0;
+        list-style: none;
+        }
+
+        .status-list li, .priority-list li {
+        padding: 8px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 15px;
+        transition: background 0.15s;
+        }
+
+        .status-list li:hover, .priority-list li:hover {
+        background: #f5f5f5;
+        }
+
+        .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1917,14 +1981,14 @@ function sb_component_admin() {
                                     <h2 class="title">Setting</h2>
                                 </div>
                                 <div class="header-right">
-                                    <div class="notification">
+                                    <!--div class="notification">
                                         <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
                                     <div class="notification">
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
-                                    </div>
+                                    </div-->
                                     <div class="sb-admin-nav-right user_menu user-profile user_avatar">
                                         <a class="sb-profile">
                                             <img class="avatar_img" src="" data-name="" />
@@ -2529,7 +2593,7 @@ function sb_component_admin() {
                                                 </script>
                                             </div>
                                         </section>
-                                        <section class="main-charts mb-3">
+                                        <section class="main-charts mb-3 d-none">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Campaigns</h6>
@@ -2592,17 +2656,19 @@ function sb_component_admin() {
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Customer Overview</h6>
-                                                    <select class="form-select form-select-sm w-auto">
-                                                        <option>Yearly</option>
+                                                    <select id="customer-overview" class="form-select form-select-sm w-auto">
+                                                        <option value="month" selected>Last Month</option>
+                                                        <option value="year">Last Year</option>
                                                         <!-- <option>Monthly</option> -->
                                                     </select>
                                                 </div>
                                                 <!-- Donut Chart Block -->
                                                 <div class="overview_chart">
                                                     <ul class="legend" style="list-style: none; padding: 0;">
-                                                        <li><span class="total"></span> Total: 500</li>
-                                                        <li><span class="new"></span> New: 500</li>
-                                                        <li><span class="active"></span> Active: 1500</li>
+                                                        <span class="filter-range"></span>
+                                                        <li><span class="total"></span><label></label></li>
+                                                        <li><span class="new"></span><label></label></li>
+                                                        <li><span class="active"></span><label>Active: 4</label></li>
                                                     </ul>
                                                     <div id="chart-container">
                                                         <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
@@ -2652,51 +2718,7 @@ function sb_component_admin() {
                                         </div>
                                         <div class="seprator"></div>
                                         <div class="recent card p-3">
-                                            <ul class="list-unstyled">
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Chandara" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Chandara Kiev</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">5m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Samuel" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Samuel Queueee</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">41m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laurenz" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Laurenz Jumowa</div>
-                                                        <div class="sub_head2 mb-3">Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum....</div>
-                                                        <small class="text-muted">2h ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3">
-                                                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Chandara" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Chandara Kiev</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">5m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
+                                            <ul class="recent-messages list-unstyled">
                                             </ul>
                                         </div>
                                         <div class="div"></div>
@@ -2848,6 +2870,44 @@ function sb_component_admin() {
                                         <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
                                         <div class="seprator"></div>
+                                        <?php
+                                        function sb_get_priorities()
+                                        {
+                                            $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                            return $priorities;
+                                        }
+                                        function sb_get_statues()
+                                        {
+                                            $status = sb_db_get('SELECT * FROM ticket_status', false);
+                                            return $status;
+                                        }
+                                        $statues = sb_get_statues();
+                                        $priorities = sb_get_priorities();    
+                                        ?>
+                                        <div id="ticket_statues">
+                                             <ul class="status-list">
+                                            <?php 
+                                            foreach($statues as $status)
+                                            {
+                                                echo '<li data-status="'.$status['name'].'" class="" data-color="'.$status['color'].'" value="'.$status['id'].'">
+                                                    <span class="status-dot"></span> '.$status['name'].'
+                                                </li>';
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
+                                        <div id="ticket_priorities">
+                                             <ul class="priority-list">
+                                            <?php 
+                                            foreach($priorities as $priority)
+                                            {
+                                                echo '<li data-status="'.$priority['name'].'" class="" data-color="'.$priority['color'].'" value="'.$priority['id'].'">
+                                                    <span class="status-dot"></span> '.$priority['name'].'
+                                                </li>';
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
                                         <div class="new_table sb-area-tickets-dash">
                                             <div class="sb-scroll-area">
                                                 <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
@@ -2859,8 +2919,8 @@ function sb_component_admin() {
                                                             <th data-field="assigned-to">
                                                                 Assigned To
                                                             </th>
-                                                            <th data-field="due-date">
-                                                                Due Date
+                                                            <th data-field="creation-date">
+                                                                Creation Date
                                                             </th>
                                                             <th data-field="status">
                                                                 <?php sb_e('Status') ?>
@@ -3370,20 +3430,6 @@ function sb_component_admin() {
                                                     <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value=""/></span></h2>
                                                 </div>
                                                 <div class="col-md-4 p-0">
-                                                    <?php
-                                                    function sb_get_priorities()
-                                                    {
-                                                        $priorities = sb_db_get('SELECT * FROM priorities', false);
-                                                        return $priorities;
-                                                    }
-                                                    function sb_get_statues()
-                                                    {
-                                                        $status = sb_db_get('SELECT * FROM ticket_status', false);
-                                                        return $status;
-                                                    }
-                                                    $statues = sb_get_statues();
-                                                    $priorities = sb_get_priorities();    
-                                                    ?>
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
                                                         <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
                                                             <?php
@@ -3869,14 +3915,21 @@ function sb_component_admin() {
                                                 <div class="col-md-3 p-0">
                                                     <div class="pl-5">
                                                         <div class="sidepanel">
-                                                            <h4 class="sub_title mb-5 col-4 d-inline-block">Details</h4>
-                                                            <span class="conversation-id">Conversation ID : <span></span></span>
+                                                            <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
+                                                            <span class="conversation-id d-none">Conversation ID : <span></span></span>
                                                             <div class="ticket-fields">
+                                                                <div class="mb-3 without-contact">
+                                                                    <div class="field-label">Guest Ticket</div>
+                                                                    <div class="d-flex align-items-center gap-2"></div>
+                                                                    <div class="form-check form-switch mb-0 ml-2">
+                                                                        <input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="mb-3">
                                                                     <div class="field-label">Assignee</div>
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div class="d-flex align-items-center gap-2 ticket-assignee">
-                                                                            <img class="assignee-img" src="" alt="Assignee" style="width: 40px;">
+                                                                            <img class="assignee-img" src="" alt="Assignee">
                                                                             <span class="user-initials avatar_initials" style="display:none;">
                                                                                 <span class="initials avatar_name"></span>
                                                                             </span>
@@ -3898,6 +3951,10 @@ function sb_component_admin() {
                                                                             <span class="initials avatar_name"></span>
                                                                         </span>
                                                                         <span class="name"></span>
+                                                                        <div id="reporter" data-type="select" class="sb-input d-none">
+                                                                            <select id="select-ticket-reporter" style="width:100%;">
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
@@ -3914,47 +3971,48 @@ function sb_component_admin() {
                                                                     </select>
                                                                 </div>
                                                                 <?php } ?>
-                                                                <div class="mb-3">
-                                                                    <div class="field-label">Tags</div>
-                                                                    <div class="mb-2">
-                                                                        <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
-                                                                        <div class="mr-5 tags-filter" style="">
-                                                                            <?php
-                                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                                                                $tagsHtml = '';
-                                                                                $count = count($tags);
-                                                                                if ($count > 0) 
-                                                                                {
+                                                                 <?php
+                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                                                $tagsHtml = '';
+                                                                $count = count($tags);
+                                                            
+                                                                if ($count > 0) 
+                                                                {
+                                                                    ?>
+                                                                    <div class="mb-3">
+                                                                        <div class="field-label">Tags</div>
+                                                                        <div class="mb-2">
+                                                                            <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                            <div class="mr-5 tags-filter" style="">
+                                                                            <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                    <?php
+                                                                                    for ($i = 0; $i < $count; $i++) {
+                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                    }
+                                                                                    echo $tagsHtml;
                                                                                     ?>
-                                                                                    <select id="ticket-detail-tags-filter" name="tags[]" multiple>
-                                                                                        <?php
-                                                                                        for ($i = 0; $i < $count; $i++) {
-                                                                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
-                                                                                        }
-                                                                                        echo $tagsHtml;
-                                                                                        ?>
-                                                                                    </select>
-                                                                                    <?php 
-                                                                                } 
-                                                                            ?>
-                                                                            
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="sb-td-tags tag-badges">
+                                                                            <!-- <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Business
+                                                                            </span>
+                                                                            <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Urgent
+                                                                            </span>
+                                                                            <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Priority
+                                                                            </span> -->
                                                                         </div>
                                                                     </div>
-                                                                    <div class="sb-td-tags tag-badges">
-                                                                        <!-- <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Business
-                                                                        </span>
-                                                                        <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Urgent
-                                                                        </span>
-                                                                        <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Priority
-                                                                        </span> -->
-                                                                    </div>
-                                                                </div>
+                                                                    <?php
+                                                                } 
+                                                                ?>
+                                                                            
                                                                 <div class="mb-3 sb-input d-block">
                                                                     <div class="field-label">Priority</div>
                                                                     <!-- <div class="ticket-priority">
@@ -4191,41 +4249,78 @@ function sb_component_admin() {
                         // }
                     }
 
-                    
 
                     $('#select-ticket-agent').select2({
-                    placeholder: 'Type and search...',
-                    ajax: {
-                        url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                        method: 'POST',
-                        dataType: 'json',
-                        delay: 250,
-                        data: function(params) {
-                            return {
-                                function: 'ajax_calls',
-                                'calls[0][function]': 'search-get-users',
-                                'login-cookie': SBF.loginCookie(),
-                                'q': params.term, // ✅ Pass search term
-                                'type': 'agent'
-                            };
-                        },
-                        processResults: function(response) {
-                            //response = JSON.parse(response);
-                            if (response[0][0] == 'success') {
-                                const users = response[0][1];
-                                console.log("Processed users:", response[0][1]);
+                        placeholder: 'Type and search...',
+                        ajax: 
+                        {
+                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                            method: 'POST',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function(params) {
                                 return {
-                                    results: users.map(user => ({
-                                        id: user.id,
-                                        text: user.first_name + ' ' + user.last_name,
-                                    }))
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-users',
+                                    'login-cookie': SBF.loginCookie(),
+                                    'q': params.term, // ✅ Pass search term
+                                    'type': 'agent'
                                 };
-                            }
+                            },
+                            processResults: function(response) {
+                                //response = JSON.parse(response);
+                                if (response[0][0] == 'success') {
+                                    const users = response[0][1];
+                                    console.log("Processed users:", response[0][1]);
+                                    return {
+                                        results: users.map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                        }))
+                                    };
+                                }
+                            },
+                            cache: true
                         },
-                        cache: true
-                    },
-                    minimumInputLength: 1
-                });
+                        minimumInputLength: 1
+                    });
+
+                    $('#select-ticket-reporter').select2({
+                        placeholder: 'Type and search...',
+                        ajax: {
+                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                            method: 'POST',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function(params) {
+                                return {
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-users',
+                                    'login-cookie': SBF.loginCookie(),
+                                    'q': params.term, // ✅ Pass search term
+                                    'type': 'user'
+                                };
+                            },
+                            processResults: function(response) {
+                                //response = JSON.parse(response);
+                                if (response[0][0] == 'success') {
+                                    const users = response[0][1];
+                                    console.log("Processed users:", response[0][1]);
+                                    // document.querySelector('#name select').value = response.priority_id;
+                                    return {
+                                        results: users.map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                            email: user.email,
+                                            name: user.first_name + ' ' + user.last_name
+                                        }))
+                                    };
+                                }
+                            },
+                            cache: true
+                        },
+                        minimumInputLength: 1
+                    });
                 </script>
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>

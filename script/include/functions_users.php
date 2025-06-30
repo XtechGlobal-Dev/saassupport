@@ -933,7 +933,6 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
 
     if (isset($tickets) && is_array($tickets)) 
     {
-
         $departments = sb_get_departments();
         $departmentsArr = array();
         foreach ($departments as $key => $value) {
@@ -1054,8 +1053,8 @@ function sb_count_tickets() {
 function sb_edit_ticket($tickets_id = 0) {
 
    $tickets_id = sb_db_escape($tickets_id, true);
-   $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
-            u.profile_image,
+   $query = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name, CONCAT_WS(" ", c.first_name, c.last_name) as reporter_name,
+            u.profile_image,c.profile_image as c_profile_image,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color,
             (
@@ -1179,6 +1178,293 @@ function delete_ticket_comment($ticketId = 0, $commentId = 0) {
         return ['success' => false, 'message' => 'Failed to delete comment.'];
     }
 }   
+
+function get_users_registrations_count($start_date = null,$end_date = null)
+{
+    // Get start and end date from GET or POST
+    $start_date = sb_db_escape($start_date);
+    $end_date = sb_db_escape($end_date);
+
+    // Validate date format (YYYY-MM-DD)
+    if (!preg_match('/\d{4}-\d{2}-\d{2}/', $start_date) || !preg_match('/\d{4}-\d{2}-\d{2}/', $end_date)) {
+         return ['error' => false, 'message' => 'Invalid date format. Use YYYY-MM-DD'];
+    }
+
+    // Create date range array
+    $period = new DatePeriod(
+        new DateTime($start_date),
+        new DateInterval('P1D'),
+        (new DateTime($end_date))->modify('+1 day') // Include end date
+    );
+
+    $date_labels = [];
+    foreach ($period as $date) {
+        $date_labels[$date->format('d/m/Y')] = 0;
+    }
+
+    // Query to get count of users per day
+    $query = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_users
+        WHERE DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(creation_time)
+    ";
+    $result = sb_db_query($query);
+
+    // Fill result into date_labels
+    foreach ($result as $row) {
+        $date_key = date('d/m/Y', strtotime($row['date']));
+        if (array_key_exists($date_key, $date_labels)) {
+            $date_labels[$date_key] = (int)$row['count'];
+        }
+    }
+
+    // Prepare final response
+    return $response = [
+        "success",
+        [
+            "title" => "User registrations count",
+            "description" => "Users count. Users are registered with an email address.",
+            "data" => $date_labels,
+            "table" => ["Date", "Count"],
+            "table_inverse" => true,
+            "label_type" => 1,
+            "chart_type" => "line"
+        ]
+    ];
+}
+
+function get_tickets_count($start_date = null,$end_date = null)
+{
+    $start_date = sb_db_escape($start_date);
+    $end_date = sb_db_escape($end_date);
+
+    // Validate dd/mm/yyyy format
+    if (!preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $start_date) || !preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $end_date)) {
+    return ['error' => false, 'message' => 'Invalid date format. Use YYYY-MM-DD'];
+    }
+
+
+    // Convert dd/mm/yyyy to yyyy-mm-dd
+    $start_date = DateTime::createFromFormat('d/m/Y', $start_date)->format('Y-m-d');
+    $end_date = DateTime::createFromFormat('d/m/Y', $end_date)->format('Y-m-d');
+
+    // Create date range array
+    $period = new DatePeriod(
+        new DateTime($start_date),
+        new DateInterval('P1D'),
+        (new DateTime($end_date))->modify('+1 day') // Include end date
+    );
+
+    $date_labels = [];
+    $date_labels2 = [];
+    foreach ($period as $date) {
+        $date_labels[$date->format('d/m/Y')] = 0;
+        $date_labels2[$date->format('d/m/Y')] = 0;
+    }
+
+    // Query to get count of tickets per day
+    $query = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_tickets
+        WHERE DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(creation_time)
+    ";
+    $result = sb_db_get($query,false);
+
+    // Fill result into date_labels
+    foreach ($result as $key => $val) {
+        $date_key = date('d/m/Y', strtotime($val['date']));
+        if (array_key_exists($date_key, $date_labels)) {
+            $date_labels[$date_key] = (int)$val['count'];
+        }
+    }
+    // Query to get count of tickets resolved/closed per day
+    $query2 = "SELECT DATE(updated_at) as date, COUNT(*) as count
+        FROM sb_tickets
+        WHERE status_id = 5 AND DATE(updated_at) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(updated_at)
+    ";
+    $result2 = sb_db_get($query2,false);
+
+    // Fill result into date_labels2
+    foreach ($result2 as $key => $val) {
+        $date_key = date('d/m/Y', strtotime($val['date']));
+        if (array_key_exists($date_key, $date_labels2)) {
+            $date_labels2[$date_key] = (int)$val['count'];
+        }
+    }
+
+    // Prepare final response
+    return $response = [
+        "success",
+        [
+            "title" => "Tickets count",
+            "description" => "Count of ticket created and tickets resolved in given time span.",
+            "tickets_data" => $date_labels,
+             "resolved_ticket_data" => $date_labels2,
+            "table" => ["Date", "Count"],
+            "table_inverse" => true,
+        ]
+    ];
+}
+
+function get_tickets_yearly_count()
+{
+    // Get last 12 months from today
+    // Generate last 12 months
+    $months = [];
+    $currentDate = new DateTime();
+    for ($i = 11; $i >= 0; $i--) {
+        $date = (new DateTime())->modify("-{$i} months");
+        $monthName = $date->format('M');
+        $yearMonth = $date->format('Y-m');
+        $months[$yearMonth] = [
+            'label' => $monthName,
+            'count' => 0
+        ];
+    }
+
+    // Fetch data from DB
+    $query = "
+        SELECT 
+            DATE_FORMAT(creation_time, '%b') AS month_name,
+            DATE_FORMAT(creation_time, '%Y-%m') AS y_month,
+            COUNT(*) AS count
+        FROM 
+            sb_tickets
+        WHERE 
+            creation_time >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+        GROUP BY 
+            DATE_FORMAT(creation_time, '%Y-%m')
+        ORDER BY 
+            DATE_FORMAT(creation_time, '%Y-%m');
+    ";
+    $result = sb_db_get($query,false);
+
+    foreach ($result as $key => $val) {
+        $ym = $val['y_month'];
+        if (isset($months[$ym])) {
+            $months[$ym]['count'] = (int)$val['count'];
+        }
+    }
+
+    // Format data for output
+    $data = [];
+    foreach ($months as $info) {
+        $data[$info['label']] = $info['count'];
+    }
+
+    // Get total Created tickets
+    $res_created = sb_db_get("SELECT COUNT(*) AS total FROM sb_tickets");
+    $total_created = (int)$res_created['total'];
+
+    // Mock Resolved and Pending
+    $total_resolved = round($total_created * 0.4);
+    $total_pending = $total_created - $total_resolved;
+
+    // Final response
+   return $response = [
+        "success",
+        [
+            "title" => "Ticket Support Board",
+            "description" => "Ticket Support Board widget counts.",
+            "data" => $data,
+            "Created" => $total_created,
+            "Resolved" => $total_resolved,
+            "Pending" => $total_pending
+        ]
+    ];
+}
+
+function get_recent_messages()
+{
+    // Fetch data from DB
+    $query = "
+        SELECT m.message, m.creation_time, m.conversation_id, u.id AS user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS user_name, u.profile_image
+        FROM  sb_messages AS m
+        INNER JOIN  sb_users AS u ON m.user_id = u.id
+        INNER JOIN 
+        (
+            SELECT 
+                conversation_id, 
+                MAX(creation_time) AS latest_time
+            FROM 
+                sb_messages
+            GROUP BY 
+                conversation_id
+        ) AS latest
+    ON  m.conversation_id = latest.conversation_id  AND m.creation_time = latest.latest_time
+    ORDER BY m.creation_time DESC LIMIT 5;
+    ";
+    $result = sb_db_get($query,false);
+     // Final response
+   return $response = [
+        "success",
+        [
+            "title" => "Recent Messages",
+            "description" => "Get last 5 messages.",
+            "data" => $result
+        ]
+    ];
+}
+
+function get_dashboad_customer_overview($filter = 'month')
+{
+    $filter = sb_db_escape($filter);
+
+    // Calculate date range
+    if ($filter === 'month') {
+        $start_date = date('Y-m-01', strtotime('first day of last month'));
+        $end_date = date('Y-m-t', strtotime('last day of last month'));
+    } elseif ($filter === 'year') {
+        $start_date = date('Y-m-01', strtotime('first day of -1 year this month'));
+        $end_date = date('Y-m-t', strtotime('last day of last month'));
+    } else {
+        $start_date = date('Y-m-01', strtotime('first day of last month'));
+        $end_date = date('Y-m-t', strtotime('last day of last month'));
+    }
+
+    $sql = "
+        SELECT 
+            COUNT(*) AS total_customer, 
+            (
+                SELECT COUNT(*) 
+                FROM sb_users 
+                WHERE user_type = 'user' 
+                AND DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+            ) AS recent_customers
+        FROM 
+            sb_users 
+        WHERE 
+            user_type = 'user'
+    ";
+
+    $result = sb_db_get($sql);
+
+    if($result)
+    {
+        return $response = [
+            "success",
+            [
+                "title" => "Customer Overview",
+                "description" => "Get customer count based on filter",
+                "filter" => $filter,
+                "start_date" => $start_date,
+                "end_date" => $end_date,
+                "total_customers" => (int)$result['total_customer'],
+                "recent_customers" => (int)$result['recent_customers']
+            ]
+        ];
+    }
+    else
+    {
+        return $response = [
+            "error",
+            [
+                "message" => "Got error while fecting records",
+            ]
+        ];
+    }
+}
 
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
 
@@ -1676,7 +1962,10 @@ function update_ticket_detail($inputs,$ticket_id =0){
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
 
-    sb_add_edit_ticket_tags($ticket_id, $inputs['tags'], $action = 'edit');
+    if(isset($inputs['tags']))
+    {
+        sb_add_edit_ticket_tags($ticket_id, $inputs['tags'], $action = 'edit');
+    }
 
     ////// Process file attachments if any
    // sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
@@ -2031,6 +2320,23 @@ function update_ticket_status($ticket_id = null, $status = null)
         return ['success' => true, 'message' => 'Ticket Status updated successfully.'];
     } else {
         return ['success' => false, 'message' => 'Failed to update ticket status.'];
+    }
+    
+}
+
+function update_ticket_priority($ticket_id = null, $priority = null)
+{
+    $ticket_id = sb_db_escape($ticket_id, true);
+    $priority = sb_db_escape($priority, true);
+
+    // Update the comment in the database
+    $query = "UPDATE sb_tickets SET priority_id = $priority WHERE id = $ticket_id";
+    $result = sb_db_query($query);
+
+    if ($result) {
+        return ['success' => true, 'message' => 'Ticket priority updated successfully.'];
+    } else {
+        return ['success' => false, 'message' => 'Failed to update ticket priority.'];
     }
     
 }
