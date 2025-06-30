@@ -1,4 +1,5 @@
 <?php
+
 use Componere\Value;
 
 global $cloud_settings;
@@ -27,6 +28,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
 }
 ?>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -39,6 +41,11 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <script id="sbinit" src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
     <link rel="stylesheet" href="../script/css/admin.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
     <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>" media="(max-width: 464px)" />
+    <!-- Manrope font cdn link  -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap cdn link  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <?php
     if ($rtl) {
         echo '<link rel="stylesheet" href="../script/css/rtl-admin.css?v=' . SB_VERSION . '" />';
@@ -50,6 +57,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <link rel="manifest" href="<?php echo SB_CLOUD_MANIFEST_URL ?>" />
     <?php account_js() ?>
 </head>
+
 <body class="on-load<?php echo $rtl ? ' sb-rtl' : '' ?>">
     <div id="preloader"></div>
     <?php
@@ -70,9 +78,11 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         <?php sb_cloud_css_js() ?>
     </footer>
 </body>
+
 </html>
 
-<?php function box_account() {
+<?php function box_account()
+{
     global $cloud_settings;
     $membership = membership_get_active(false);
     $expiration = DateTime::createFromFormat('d-m-y', $membership['expiration']);
@@ -253,7 +263,8 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
 
 <?php
 
-function box_membership($membership) {
+function box_membership($membership)
+{
     $membership_type = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages');
     $membership_type_ma = $membership_type == 'messages-agents';
     $name = $membership_type_ma ? 'messages' : $membership_type;
@@ -262,7 +273,8 @@ function box_membership($membership) {
     echo '<div class="box-maso box-membership"><div class="box-black"><h2>' . sb_(date('F')) . ', ' . date('Y') . '</h2><div><div><span>' . $membership['count'] . ' / <span class="membership-quota">' . $membership['quota'] . '</span></span> <span>' . sb_($name) . '</span></div>' . $box_two . '</div></div><div class="box-black"><h2>' . sb_('Active Membership') . '</h2><div><div><span class="membership-name">' . sb_($membership['name']) . '</span> <span class="membership-price" data-currency="' . $membership['currency'] . '">' . $price_string . '</span></div></div></div></div>';
 }
 
-function box_membership_plans($active_membership_id, $expired = false) {
+function box_membership_plans($active_membership_id, $expired = false)
+{
     $plans = memberships();
     $code = '<div id="plans" class="plans-box">';
     $menu_items = [];
@@ -294,7 +306,8 @@ function box_membership_plans($active_membership_id, $expired = false) {
     echo $code;
 }
 
-function box_credits($auto_recharge = true) {
+function box_credits($auto_recharge = true)
+{
     if (!sb_defined('GOOGLE_CLIENT_ID') && !sb_defined('OPEN_AI_KEY') && !sb_defined('WHATSAPP_APP_ID')) {
         return false;
     }
@@ -312,7 +325,8 @@ function box_credits($auto_recharge = true) {
     echo '<h2 id="credits" class="addons-title">' . sb_('Credits') . '</h2><p>' . str_replace('{R}', '<a href="' . (defined('SB_CLOUD_DOCS') ? SB_CLOUD_DOCS : '') . '#cloud-credits" target="_blank" class="sb-link-text">' . sb_('here') . '</a>', sb_('Credits are required to use some features in automatic sync mode. If you don\'t want to buy credits, switch to manual sync mode and use your own API key. For more details click {R}.')) . '</p><div class="box-maso maso-box-credits"><div class="box-black"><h2>' . sb_('Active credits') . '</h2><div>' . ($credits ? $credits : '0') . '</div></div><div><h2>' . sb_('Add credits') . '</h2><div><div id="add-credits" data-type="text" class="sb-input"><select><option></option>' . $code_prices . '</select></div></div></div>' . (in_array(PAYMENT_PROVIDER, ['stripe', 'yoomoney']) && $auto_recharge ? '<div><h2>' . sb_('Auto recharge') . '</h2><div><div id="credits-recharge" data-type="checkbox" class="sb-input"><input type="checkbox"' . $checked . '></div></div></div>' : '') . '</div>';
 }
 
-function box_addons() {
+function box_addons()
+{
     $white_label_price = super_get_white_label();
     $addons = sb_defined('CLOUD_ADDONS');
     if ($white_label_price || $addons) {
@@ -331,7 +345,8 @@ function box_addons() {
     }
 }
 
-function button_cancel_membership($membership) {
+function button_cancel_membership($membership)
+{
     if ($membership['price'] != 0) {
         if (super_get_user_data('subscription_cancelation', get_active_account_id())) {
             echo '<p>' . sb_('Your membership renewal has been canceled. Your membership is set to expire on') . ' ' . membership_get_active()['expiration'] . '.</p>';
@@ -341,7 +356,8 @@ function button_cancel_membership($membership) {
     }
 }
 
-function account_js() {
+function account_js()
+{
     global $cloud_settings;
     $account = account();
     $reset_code = '<script>document.cookie="sb-login=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";document.cookie="sb-cloud=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";location.reload();</script>';
@@ -369,7 +385,8 @@ function account_js() {
     echo '<script>var CLOUD_URL = "' . CLOUD_URL . '"; var BRAND_NAME = "' . SB_CLOUD_BRAND_NAME . '"; var PUSHER_KEY = "' . sb_pusher_get_details()[0] . '"; var LANGUAGE = "' . sb_get_admin_language() . '"; var SETTINGS = ' . ($cloud_settings ? json_encode($cloud_settings, JSON_INVALID_UTF8_IGNORE) : '{}') . '; var SB_TRANSLATIONS = ' . ($translations ? $translations : '[]') . '; var PAYMENT_PROVIDER = "' . PAYMENT_PROVIDER . '"; var MEMBERSHIP_TYPE = "' . sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages') . '";' . (defined('PAYMENT_MANUAL_LINK') ? 'var PAYMENT_MANUAL_LINK = "' . PAYMENT_MANUAL_LINK . '"' : '') . '</script>';
 }
 
-function box_chart() {
+function box_chart()
+{
     if (in_array(sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages'), ['messages', 'messages-agents'])) {
         echo '<div class="chart-box"><div><h2 class="addons-title">' . sb_('Monthly usage in') . ' ' . date('Y') . '</h2><p>' . sb_('The number of messages sent monthly, all messages are counted, including messages from agents, administrators and chatbot.') . '</p></div></div><canvas id="chart-usage" class="sb-loading" height="100"></canvas>';
     }
@@ -377,11 +394,12 @@ function box_chart() {
 
 ?>
 
-<?php function box_registration_login() {
+<?php function box_registration_login()
+{
     $appsumo = base64_decode(sb_isset($_GET, 'appsumo'));
     global $cloud_settings; ?>
-    <div class="sb-registration-box sb-cloud-box sb-admin-box<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
-        <div class="sb-info"></div>
+    <div class="sb-registration-box sb-cloud-box sb-admin-box sb-admin-box_new<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
+        <!-- <div class="sb-info"></div>
         <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
@@ -450,13 +468,107 @@ function box_chart() {
             <p>
                 <?php sb_e('We are creating your account...') ?>
             </p>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 top_left">
+                    <div class="left_section">
+                        <div class="logo-container">
+                            <img src="../account/media/logo.svg" alt="logo">
+                            <div class="logo-text">Nexon Helpdesk</div>
+                        </div>
+                        <div class="laptop-image">
+                            <img src="../account/media/dashboard.svg" alt="dash">
+                        </div>
+                        <div class="welcome-title">Welcome to Nexon Support Desk</div>
+                        <div class="welcome-description">
+                            Access your tickets, track progress, and connect with our support team — all in one place. Log in to get
+                            started.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 top_right">
+                    <div class="right_section">
+                        <div class="login-form sb-main">
+                            <h1 class="login-title">Create Account</h1>
+                            <p class="login-description mb-4">
+                                Enter your details to create a new account
+                            </p>
+                            <div class="form-fields">
+                                <div class="field-container mb-3">
+                                    <div class="field-label">First Name</div>
+                                    <div id="first_name" class="input-wrapper sb-input">
+                                        <input type="text" placeholder="Enter first name" class="form-input" />
+                                    </div>
+                                </div>
+                                <div class="field-container mb-3">
+                                    <div class="field-label">Last Name</div>
+                                    <div id="last_name" class="input-wrapper sb-input">
+                                        <input type="text" placeholder="Enter last name" class="form-input" />
+                                    </div>
+                                </div>
+                                <div class="field-container mb-3">
+                                    <div class="field-label">Email Address</div>
+                                    <div id="email" class="input-wrapper sb-input">
+                                        <input type="email" placeholder="Enter email address" class="form-input" />
+                                    </div>
+                                </div>
+                                <div class="field-container mb-3">
+                                    <div class="field-label">Password</div>
+                                    <div id="password" class="input-wrapper sb-input">
+                                        <input type="password" placeholder="Enter your password" class="form-input" id="password-field" />
+                                        <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
+                                            <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M10 0C12.787 0 15.263 1.257 17.026 2.813C17.911 3.594 18.64 4.471 19.154 5.344C19.659 6.201 20 7.13 20 8C20 8.87 19.66 9.799 19.154 10.656C18.64 11.529 17.911 12.406 17.026 13.187C15.263 14.743 12.786 16 10 16C7.213 16 4.737 14.743 2.974 13.187C2.089 12.406 1.36 11.529 0.846 10.656C0.34 9.799 0 8.87 0 8C0 7.13 0.34 6.201 0.846 5.344C1.36 4.471 2.089 3.594 2.974 2.813C4.737 1.257 7.214 0 10 0ZM10 2C7.816 2 5.792 2.993 4.298 4.312C3.554 4.968 2.966 5.685 2.569 6.359C2.163 7.049 2 7.62 2 8C2 8.38 2.163 8.951 2.569 9.641C2.966 10.315 3.554 11.031 4.298 11.688C5.792 13.007 7.816 14 10 14C12.184 14 14.208 13.007 15.702 11.688C16.446 11.031 17.034 10.315 17.431 9.641C17.837 8.951 18 8.38 18 8C18 7.62 17.837 7.049 17.431 6.359C17.034 5.685 16.446 4.969 15.702 4.312C14.208 2.993 12.184 2 10 2ZM10 5C10.088 5 10.175 5.00367 10.261 5.011C10.0439 5.39185 9.95792 5.8335 10.0163 6.26798C10.0747 6.70246 10.2743 7.10572 10.5843 7.41571C10.8943 7.7257 11.2975 7.92525 11.732 7.98366C12.1665 8.04208 12.6081 7.95611 12.989 7.739C13.0416 8.34117 12.911 8.94518 12.6145 9.47189C12.3179 9.9986 11.8692 10.4234 11.327 10.6907C10.7849 10.958 10.1746 11.0553 9.57622 10.9699C8.97784 10.8844 8.41922 10.6202 7.97357 10.2118C7.52792 9.80343 7.21603 9.26995 7.07876 8.68129C6.94149 8.09262 6.98524 7.47621 7.20429 6.91284C7.42334 6.34946 7.80746 5.8654 8.30633 5.52407C8.8052 5.18275 9.39554 5.00008 10 5Z"
+                                                    fill="#194BC1" />
+                                            </svg>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="field-container">
+                                    <div class="field-label">Confirm Password</div>
+                                    <div id="password_2" class="input-wrapper sb-input">
+                                        <input type="password" placeholder="Enter confirm password" class="form-input" id="password-field" />
+                                        <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
+                                            <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M10 0C12.787 0 15.263 1.257 17.026 2.813C17.911 3.594 18.64 4.471 19.154 5.344C19.659 6.201 20 7.13 20 8C20 8.87 19.66 9.799 19.154 10.656C18.64 11.529 17.911 12.406 17.026 13.187C15.263 14.743 12.786 16 10 16C7.213 16 4.737 14.743 2.974 13.187C2.089 12.406 1.36 11.529 0.846 10.656C0.34 9.799 0 8.87 0 8C0 7.13 0.34 6.201 0.846 5.344C1.36 4.471 2.089 3.594 2.974 2.813C4.737 1.257 7.214 0 10 0ZM10 2C7.816 2 5.792 2.993 4.298 4.312C3.554 4.968 2.966 5.685 2.569 6.359C2.163 7.049 2 7.62 2 8C2 8.38 2.163 8.951 2.569 9.641C2.966 10.315 3.554 11.031 4.298 11.688C5.792 13.007 7.816 14 10 14C12.184 14 14.208 13.007 15.702 11.688C16.446 11.031 17.034 10.315 17.431 9.641C17.837 8.951 18 8.38 18 8C18 7.62 17.837 7.049 17.431 6.359C17.034 5.685 16.446 4.969 15.702 4.312C14.208 2.993 12.184 2 10 2ZM10 5C10.088 5 10.175 5.00367 10.261 5.011C10.0439 5.39185 9.95792 5.8335 10.0163 6.26798C10.0747 6.70246 10.2743 7.10572 10.5843 7.41571C10.8943 7.7257 11.2975 7.92525 11.732 7.98366C12.1665 8.04208 12.6081 7.95611 12.989 7.739C13.0416 8.34117 12.911 8.94518 12.6145 9.47189C12.3179 9.9986 11.8692 10.4234 11.327 10.6907C10.7849 10.958 10.1746 11.0553 9.57622 10.9699C8.97784 10.8844 8.41922 10.6202 7.97357 10.2118C7.52792 9.80343 7.21603 9.26995 7.07876 8.68129C6.94149 8.09262 6.98524 7.47621 7.20429 6.91284C7.42334 6.34946 7.80746 5.8654 8.30633 5.52407C8.8052 5.18275 9.39554 5.00008 10 5Z"
+                                                    fill="#194BC1" />
+                                            </svg>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sb-errors-area m-0 text-end"></div>
+                            <div class="auth-options">
+                                <label class="remember-me">
+                                    <input type="checkbox" class="checkbox" checked />
+                                    <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And Privacy Policy</span>
+                                </label>
+                            </div>
+                            <button class="login-button btn-register">Create Account</button>
+                            <div class="register-prompt">
+                                <div class="no-account">Already have an account?</div>
+                                <div class="register-link sb-btn-login-box">Login</div>
+                            </div>
+                        </div>
+                        <div class="loading-screen">
+                            <i class="sb-loading"></i>
+                            <p>
+                                <?php sb_e('We are creating your account...') ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="sb-login-box sb-cloud-box sb-admin-box<?php if (isset($_GET['login']))
-        echo ' active' ?>">
-            <div class="sb-info"></div>
-            <div class="sb-top-bar">
-                <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
+    <div class="sb-login-box sb-cloud-box sb-admin-box sb-admin-box_new<?php if (isset($_GET['login']))
+                                                                            echo ' active' ?>">
+        <!-- <div class="sb-info"></div>
+        <div class="sb-top-bar">
+            <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
                 <?php sb_e('Sign in to your account') ?>
             </div>
@@ -492,6 +604,73 @@ function box_chart() {
                 </div>
             </div>
             <div class="sb-errors-area"></div>
+        </div> -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 top_left">
+                    <div class="left_section">
+                        <div class="logo-container">
+                            <img src="../account/media/logo.svg" alt="logo">
+                            <div class="logo-text">Nexon Helpdesk</div>
+                        </div>
+                        <div class="laptop-image">
+                            <img src="../account/media/dashboard.svg" alt="dash">
+                        </div>
+                        <div class="welcome-title">Welcome to Nexon Support Desk</div>
+                        <div class="welcome-description">
+                            Access your tickets, track progress, and connect with our support team — all in one place. Log in to get
+                            started.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 top_right">
+                    <div class="right_section">
+                        <div class="login-form sb-main">
+                            <h1 class="login-title">Login</h1>
+                            <p class="login-description">
+                                Enter the email address and password to log in to your account
+                            </p>
+                            <div class="form-fields">
+                                <div class="field-container mb-4">
+                                    <div class="field-label">email address</div>
+                                    <div id="email" class="input-wrapper sb-input">
+                                        <input type="email" placeholder="Enter your email address" class="form-input" />
+                                    </div>
+                                </div>
+                                <div class="field-container">
+                                    <div class="field-label">password</div>
+                                    <div id="password" class="input-wrapper sb-input">
+                                        <input type="password" placeholder="Enter your password" class="form-input" id="password-field" />
+                                        <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
+                                            <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M10 0C12.787 0 15.263 1.257 17.026 2.813C17.911 3.594 18.64 4.471 19.154 5.344C19.659 6.201 20 7.13 20 8C20 8.87 19.66 9.799 19.154 10.656C18.64 11.529 17.911 12.406 17.026 13.187C15.263 14.743 12.786 16 10 16C7.213 16 4.737 14.743 2.974 13.187C2.089 12.406 1.36 11.529 0.846 10.656C0.34 9.799 0 8.87 0 8C0 7.13 0.34 6.201 0.846 5.344C1.36 4.471 2.089 3.594 2.974 2.813C4.737 1.257 7.214 0 10 0ZM10 2C7.816 2 5.792 2.993 4.298 4.312C3.554 4.968 2.966 5.685 2.569 6.359C2.163 7.049 2 7.62 2 8C2 8.38 2.163 8.951 2.569 9.641C2.966 10.315 3.554 11.031 4.298 11.688C5.792 13.007 7.816 14 10 14C12.184 14 14.208 13.007 15.702 11.688C16.446 11.031 17.034 10.315 17.431 9.641C17.837 8.951 18 8.38 18 8C18 7.62 17.837 7.049 17.431 6.359C17.034 5.685 16.446 4.969 15.702 4.312C14.208 2.993 12.184 2 10 2ZM10 5C10.088 5 10.175 5.00367 10.261 5.011C10.0439 5.39185 9.95792 5.8335 10.0163 6.26798C10.0747 6.70246 10.2743 7.10572 10.5843 7.41571C10.8943 7.7257 11.2975 7.92525 11.732 7.98366C12.1665 8.04208 12.6081 7.95611 12.989 7.739C13.0416 8.34117 12.911 8.94518 12.6145 9.47189C12.3179 9.9986 11.8692 10.4234 11.327 10.6907C10.7849 10.958 10.1746 11.0553 9.57622 10.9699C8.97784 10.8844 8.41922 10.6202 7.97357 10.2118C7.52792 9.80343 7.21603 9.26995 7.07876 8.68129C6.94149 8.09262 6.98524 7.47621 7.20429 6.91284C7.42334 6.34946 7.80746 5.8654 8.30633 5.52407C8.8052 5.18275 9.39554 5.00008 10 5Z"
+                                                    fill="#194BC1" />
+                                            </svg>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="sb-errors-area m-0 text-end"></div>
+                            </div>
+                            <div class="auth-options">
+                                <label class="remember-me">
+                                    <input type="checkbox" class="checkbox" checked />
+                                    <span class="remember-text">Remember Me</span>
+                                </label>
+                                <div class="forgot-password btn-forgot-password">
+                                    Forgot Password?
+                                </div>
+                            </div>
+                            <button class="login-button btn-login">Login</button>
+                            <div class="register-prompt">
+                                <div class="no-account">Don't have an account?</div>
+                                <div class="register-link btn-registration-box">Register</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="sb-reset-password-box sb-cloud-box sb-admin-box">
@@ -523,10 +702,10 @@ function box_chart() {
         </div>
     </div>
     <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset']))
-        echo ' active' ?>">
-            <div class="sb-info"></div>
-            <div class="sb-top-bar">
-                <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
+                                                                        echo ' active' ?>">
+        <div class="sb-info"></div>
+        <div class="sb-top-bar">
+            <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
                 <?php sb_e('Reset password') ?>
             </div>
@@ -559,7 +738,8 @@ function box_chart() {
     </p>
 <?php } ?>
 
-<?php function box_referral() {
+<?php function box_referral()
+{
     global $cloud_settings;
     if (isset($cloud_settings['referral-commission'])) { ?>
         <div id="tab-referral">
@@ -600,5 +780,5 @@ function box_chart() {
                 <i class="sb-icon-check"></i><?php sb_e('Save changes') ?>
             </a>
         </div>
-    <?php }
+<?php }
 } ?>

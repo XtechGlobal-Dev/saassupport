@@ -11469,6 +11469,215 @@ a.sb-btn-white.sb-loading:hover:before,
   transform: scale(1.1);
 }
 
+.sb-admin-box_new {
+  max-width: unset;
+  padding: unset;
+  margin: unset;
+}
+.sb-admin-box_new .container {
+  max-width: unset !important;
+  height: 100%;
+}
+.sb-admin-box_new .row {
+  height: 100%;
+}
+.sb-admin-box_new .top_left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(136.241deg, rgb(120, 161, 255) 1.0251%, rgb(4, 39, 121) 99.583%);
+}
+.sb-admin-box_new .left_section {
+  max-width: 500px;
+  max-height: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sb-admin-box_new .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+.sb-admin-box_new .logo-text {
+  font-family: Inter;
+  font-size: 36px;
+  color: #fff;
+}
+.sb-admin-box_new .laptop-image {
+  margin-bottom: 30px;
+}
+.sb-admin-box_new .welcome-title {
+  font-family: Manrope;
+  max-width: 420px;
+  font-weight: 600;
+  font-size: 42px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #fff;
+}
+.sb-admin-box_new .welcome-description {
+  margin-top: 30px;
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #fff;
+}
+.sb-admin-box_new .top_right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+}
+.sb-admin-box_new .right_section {
+  max-width: 520px;
+  max-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sb-admin-box_new .login-title {
+  font-size: 36px;
+  font-weight: 500;
+  color: #111111;
+  margin-bottom: 8px;
+  font-family: Manrope;
+}
+.sb-admin-box_new .login-description {
+  font-size: 18px;
+  font-weight: 400;
+  color: #666666;
+  margin-bottom: 35px;
+  font-family: Manrope;
+}
+.sb-admin-box_new .form-fields {
+  display: flex;
+  flex-direction: column;
+}
+.sb-admin-box_new .sb-errors-area {
+  font-size: 12px;
+  line-height: unset;
+}
+.sb-admin-box_new .field-label {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 16px;
+  color: #111111;
+  font-family: Manrope;
+  margin-bottom: 8px;
+}
+.sb-admin-box_new .sb-input .form-input {
+  padding: 10px 20px;
+  width: 100%;
+  min-height: 55px;
+  border-radius: 10px !important;
+  background-color: white;
+}
+.sb-admin-box_new .sb-input .form-input::placeholder {
+  color: #666666;
+}
+.sb-admin-box_new .eye-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.sb-admin-box_new .auth-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0;
+}
+.sb-admin-box_new .remember-me {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.sb-admin-box_new .checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 21px;
+  height: 21px;
+  background-color: #fff;
+  border: 2px solid #dcdcdc;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.sb-admin-box_new .checkbox:checked {
+  border-color: #1d4ed8;
+  background-color: #1d4ed8;
+}
+.sb-admin-box_new .checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.sb-admin-box_new .remember-text {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 16px;
+  color: #666666;
+  font-family: Manrope, sans-serif;
+}
+.sb-admin-box_new .forgot-password {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 16px;
+  color: #194bc1;
+  cursor: pointer;
+  font-family: Manrope;
+}
+.sb-admin-box_new .login-button {
+  background-color: #1d4ec3;
+  height: 45px;
+  width: 100%;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+.sb-admin-box_new .register-prompt {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+.sb-admin-box_new .no-account {
+  font-weight: 400;
+  font-size: 16px;
+  color: #828282;
+  white-space: pre;
+  font-family: Manrope;
+}
+.sb-admin-box_new .register-link {
+  font-weight: 600;
+  font-size: 16px;
+  color: #194bc1;
+  cursor: pointer;
+  white-space: pre;
+  font-family: Manrope;
+}
+
 /*
  *
  * -----------------------------------------------------------

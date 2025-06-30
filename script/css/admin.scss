@@ -7068,8 +7068,7 @@ a.sb-btn-white,
     max-width: 1000px;
 }
 
-#view-ticket-attachments 
-{
+#view-ticket-attachments {
     cursor: pointer;
 }
 
@@ -8684,6 +8683,277 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     }
 }
+
+.sb-admin-box_new {
+    max-width: unset;
+    padding: unset;
+    margin: unset;
+
+    .container {
+        max-width: unset !important;
+        height: 100%;
+    }
+
+    .row {
+        height: 100%;
+    }
+
+    .top_left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(136.241deg, rgb(120, 161, 255) 1.0251%, rgb(4, 39, 121) 99.583%);
+    }
+
+    .left_section {
+        max-width: 500px;
+        max-height: 720px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 50px;
+    }
+
+    .logo-text {
+        font-family: Inter;
+        font-size: 36px;
+        color: #fff;
+    }
+
+    .laptop-image {
+        margin-bottom: 30px;
+    }
+
+    .welcome-title {
+        font-family: Manrope;
+        max-width: 420px;
+        font-weight: 600;
+        font-size: 42px;
+        text-align: center;
+        text-transform: capitalize;
+        color: #fff;
+    }
+
+    .welcome-description {
+        margin-top: 30px;
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        text-transform: capitalize;
+        color: #fff;
+    }
+
+    .top_right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fafafa;
+    }
+
+    .right_section {
+        max-width: 520px;
+        max-height: 450px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-title {
+        font-size: 36px;
+        font-weight: 500;
+        color: #111111;
+        margin-bottom: 8px;
+        font-family: Manrope;
+    }
+
+    .login-description {
+        font-size: 18px;
+        font-weight: 400;
+        color: #666666;
+        margin-bottom: 35px;
+        font-family: Manrope;
+    }
+
+    .form-fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sb-errors-area {
+        font-size: 12px;
+        line-height: unset;
+    }
+
+    .field-label {
+        text-transform: capitalize;
+        font-weight: 600;
+        font-size: 16px;
+        color: #111111;
+        font-family: Manrope;
+        margin-bottom: 8px;
+    }
+
+    .sb-input {
+        .form-input {
+            padding: 10px 20px;
+            width: 100%;
+            min-height: 55px;
+            border-radius: 10px !important;
+            background-color: white;
+        }
+
+        .form-input::placeholder {
+            color: #666666;
+        }
+    }
+
+    .eye-icon {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    // .auth-options {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+    //     margin: 24px 0;
+    // }
+
+    // .remember-me {
+    //     display: flex;
+    //     align-items: center;
+    // }
+
+    // .checkbox {
+    //     width: 21px;
+    //     height: 21px;
+    //     background-color: white;
+    //     border: 1.5px solid #dcdcdc;
+    //     border-radius: 4px;
+    //     margin-right: 8px;
+    //     cursor: pointer;
+    // }
+
+    // .remember-text {
+    //     text-transform: capitalize;
+    //     font-weight: 500;
+    //     font-size: 16px;
+    //     color: #666666;
+    //     font-family: Manrope;
+    // }
+    .auth-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 24px 0;
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 21px;
+        height: 21px;
+        background-color: #fff;
+        border: 2px solid #dcdcdc;
+        border-radius: 4px;
+        margin-right: 10px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .checkbox:checked {
+        border-color: #1d4ed8;
+        background-color: #1d4ed8;
+    }
+
+    .checkbox:checked::after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 4px;
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    .remember-text {
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 16px;
+        color: #666666;
+        font-family: Manrope, sans-serif;
+    }
+
+    .forgot-password {
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 16px;
+        color: #194bc1;
+        cursor: pointer;
+        font-family: Manrope;
+    }
+
+    .login-button {
+        background-color: #1d4ec3;
+        height: 45px;
+        width: 100%;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        text-transform: capitalize;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 24px;
+    }
+
+    .register-prompt {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .no-account {
+        font-weight: 400;
+        font-size: 16px;
+        color: #828282;
+        white-space: pre;
+        font-family: Manrope;
+    }
+
+    .register-link {
+        font-weight: 600;
+        font-size: 16px;
+        color: #194bc1;
+        cursor: pointer;
+        white-space: pre;
+        font-family: Manrope;
+    }
+}
+
 
 /*
  *
