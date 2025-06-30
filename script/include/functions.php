@@ -1004,6 +1004,10 @@ function sb_installation($details, $force = false) {
                         (3, 'Medium', 'Medium', '#FF4500', '2025-05-08 10:57:55'),
                         (4, 'Low', 'Low', '#808080', '2025-05-08 10:58:17')");
 
+    /// Insert Default Settings
+        $settingsStr = '{"registration-required":["registration-login","select"]}';
+        $connection->query("INSERT INTO `sb_settings` (`name`, `value`) VALUES ('settings', '$settingsStr')");
+
         // Create the admin user
         if (isset($details['first-name']) && isset($details['last-name']) && isset($details['email']) && isset($details['password'])) {
             $now = sb_gmt_now();

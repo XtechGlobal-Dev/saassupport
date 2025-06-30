@@ -997,7 +997,7 @@
     function slugToString(string) {
         string = string.replace(/_/g, ' ').replace(/-/g, ' ');
         return string.charAt(0).toUpperCase() + string.slice(1);
-    } 
+    }
 
     function random() {
         let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
