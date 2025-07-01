@@ -1793,7 +1793,10 @@ function sb_add_edit_ticket_custom_fields($ticket_id = null, $customFields = arr
                 }
                 else if($action == 'edit')
                 {
-                    $sql3 = "UPDATE ticket_custom_fields SET value = '$value' WHERE ticket_id = $ticket_id AND custom_field_id = $field_id";
+                    //$sql3 = "UPDATE ticket_custom_fields SET value = '$value' WHERE ticket_id = $ticket_id AND custom_field_id = $field_id";
+                    $sql3 = "INSERT INTO ticket_custom_fields (ticket_id, custom_field_id, value) 
+                                VALUES ($ticket_id, $field_id, '$value')
+                                ON DUPLICATE KEY UPDATE value = '$value'";
                 }
                 else if($action == 'delete')
                 {
@@ -1929,7 +1932,6 @@ function update_ticket_detail($inputs,$ticket_id =0){
             $customFields[$key] = sb_db_escape($value);
         }
     }
-
 
     if($data['assigned_to'] == 0)
     {
