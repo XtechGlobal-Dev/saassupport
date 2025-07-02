@@ -2024,7 +2024,7 @@ function sb_component_admin() {
                                 <div class="col-md-8 p-0">
                                     <div class="px-3 mt-3">
                                         <section class="dashboard-metrics">
-                                            <div class="metric-card"
+                                            <!-- <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
@@ -2043,7 +2043,7 @@ function sb_component_admin() {
                                                     </div>
                                                 </div>
                                                 <div class="metric-increase">Increase by <span>0</span> this week</div>
-                                            </div>
+                                            </div> -->
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
                                                 <div class="graph_tabs">
@@ -2064,7 +2064,7 @@ function sb_component_admin() {
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div>
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
@@ -2089,8 +2089,6 @@ function sb_component_admin() {
                                                 </div>
                                                 <div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div>
                                             </div>
-                                        </section>
-                                        <section class="dashboard-metrics">
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
@@ -2111,7 +2109,31 @@ function sb_component_admin() {
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div>
+                                            </div>
+                                        </section>
+                                        <section class="dashboard-metrics">
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;">
+                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Total Conversations</h3>
+                                                            <p class="total-conversations"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="total_conversations_chart">
+                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div>
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
@@ -2333,46 +2355,7 @@ function sb_component_admin() {
                                                     <canvas id="ticket_activity_chart"></canvas>
                                                 </div>
                                                 <script>
-                                                    const ticket_activityCtx = document.getElementById('ticket_activity_chart').getContext('2d');
-                                                    new Chart(ticket_activityCtx, {
-                                                        type: 'line',
-                                                        data: {
-                                                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                            datasets: [{
-                                                                label: 'Weekly Activity',
-                                                                data: [0, 5, 12, 3, 5, 7],
-                                                                borderColor: '#487FFF',
-                                                                backgroundColor: '#E4ECFF',
-                                                                pointRadius: 4,
-                                                                // borderWidth: 0, // hides the line
-                                                                // pointRadius: 0, // hides the dots
-                                                                fill: true,
-                                                                tension: 0.4,
-                                                                pointBackgroundColor: '#487FFF'
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            responsive: true,
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false
-                                                                }
-                                                            },
-                                                            scales: {
-                                                                x: {
-                                                                    grid: {
-                                                                        display: true
-                                                                    }
-                                                                },
-                                                                y: {
-                                                                    beginAtZero: true,
-                                                                    grid: {
-                                                                        display: true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    });
+                                                    
                                                 </script>
                                             </div>
                                         </section>
@@ -3215,7 +3198,7 @@ function sb_component_admin() {
                                                 </div>
                                                 <div class="col-md-4 p-0">
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
-                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
+                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: 120px;">
                                                             <?php
                                                             foreach ($statues as $key => $value) {
                                                                 echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
