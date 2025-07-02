@@ -210,7 +210,12 @@ function sb_db_escape($value, $numeric = -1) {
     if ($SB_CONNECTION && $value) {
         $value = $SB_CONNECTION->real_escape_string($value);
     }
-    $value = str_replace(['\"', '"'], ['"', '\"'], $value);
+   // $value = str_replace(['\"', '"'], ['"', '\"'], $value);
+   if ($value !== null) {
+        $value = str_replace(['\"', '"'], ['"', '\"'], $value);
+    } else {
+        $value = ''; // or handle it as per your requirement
+    }
     $value = sb_sanatize_string($value);
     $value = htmlspecialchars($value, ENT_NOQUOTES | ENT_SUBSTITUTE, 'utf-8');
     $value = str_replace('&amp;lt;', '&lt;', $value);

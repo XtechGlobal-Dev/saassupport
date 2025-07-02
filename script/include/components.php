@@ -2052,8 +2052,8 @@ function sb_component_admin() {
                                                             <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Active Users</h3>
-                                                            <p>8,000</p>
+                                                            <h3>Total Users</h3>
+                                                            <p class="total-users"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
@@ -2061,61 +2061,6 @@ function sb_component_admin() {
                                                             <canvas class="mt-0" id="active_users_chart"></canvas>
                                                         </div>
                                                         <script>
-                                                            const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
-                                                            const gradient2 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient2.addColorStop(0, 'rgba(72, 255, 112, 0.2)');
-                                                            gradient2.addColorStop(1, 'rgba(72, 255, 112, 0)');
-                                                            new Chart(active_usersCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#45B369',
-                                                                        backgroundColor: gradient2,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
@@ -2130,73 +2075,19 @@ function sb_component_admin() {
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Tickets Created</h3>
-                                                            <p>3,200</p>
+                                                            <p class="total-tickets-created">3,200</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
                                                         <div class="ticket_created_chart">
                                                             <canvas class="mt-0" id="ticket_created_chart"></canvas>
                                                         </div>
-                                                        <script>
-                                                            const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
-                                                            const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
-                                                            gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
-                                                            new Chart(ticket_createdCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#f4941e',
-                                                                        backgroundColor: gradient3,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
-                                                        </script>
+                                                        <!-- <script>
+                                                            
+                                                        </script> -->
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>18%</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div>
                                             </div>
                                         </section>
                                         <section class="dashboard-metrics">
@@ -2209,7 +2100,7 @@ function sb_component_admin() {
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Ticket Resolved</h3>
-                                                            <p>2,700</p>
+                                                            <p class="ticket-resolved"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
@@ -2217,61 +2108,6 @@ function sb_component_admin() {
                                                             <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
                                                         </div>
                                                         <script>
-                                                            const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
-                                                            const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient4.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
-                                                            gradient4.addColorStop(1, 'rgba(231, 110, 241, 0)');
-                                                            new Chart(ticket_resolvedCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#8252E9',
-                                                                        backgroundColor: gradient4,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
@@ -2353,7 +2189,7 @@ function sb_component_admin() {
                                                     </script>
                                                 </div> -->
                                                 </div>
-                                                <div class="metric-increase">Improved by <span>12%</span> this week</div>
+                                                
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
@@ -2430,7 +2266,7 @@ function sb_component_admin() {
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Consistent this week</div>
+                                                
                                             </div>
                                         </section>
                                         <section class="main-charts">
@@ -2450,21 +2286,21 @@ function sb_component_admin() {
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Created</strong></div>
-                                                            <div>1,200</div>
+                                                            <div class="tickets-created"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Resolved</strong></div>
-                                                            <div>9,50</div>
+                                                            <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Pending</strong></div>
-                                                            <div>1,500</div>
+                                                            <div class="tickets-pending"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2473,60 +2309,7 @@ function sb_component_admin() {
                                                     <canvas id="monthlyBarChart"></canvas>
                                                 </div>
                                                 <script>
-                                                    const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
-                                                    new Chart(barCtx, {
-                                                        type: 'bar',
-                                                        data: {
-                                                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                            datasets: [{
-                                                                label: 'Users',
-                                                                data: [85000, 68000, 39000, 47000, 59000, 49000, 41000, 47000, 42000, 60000, 29000, 51000],
-                                                                backgroundColor: '#4285F4',
-                                                                borderRadius: 6,
-                                                                barThickness: 10
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            responsive: true,
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false
-                                                                },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        label: function(context) {
-                                                                            return `${context.raw.toLocaleString()} users`;
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            scales: {
-                                                                x: {
-                                                                    grid: {
-                                                                        display: false
-                                                                    },
-                                                                    ticks: {
-                                                                        color: '#888',
-                                                                        font: {
-                                                                            size: 12
-                                                                        }
-                                                                    }
-                                                                },
-                                                                y: {
-                                                                    grid: {
-                                                                        drawBorder: false,
-                                                                        color: '#eee',
-                                                                        lineWidth: 1
-                                                                    },
-                                                                    ticks: {
-                                                                        callback: value => value / 1000 + 'k',
-                                                                        color: '#aaa'
-                                                                    },
-                                                                    beginAtZero: true
-                                                                }
-                                                            }
-                                                        }
-                                                    });
+                                                    
                                                 </script>
                                             </div>
                                         </section>
@@ -2668,16 +2451,16 @@ function sb_component_admin() {
                                                         <span class="filter-range"></span>
                                                         <li><span class="total"></span><label></label></li>
                                                         <li><span class="new"></span><label></label></li>
-                                                        <li><span class="active"></span><label>Active: 4</label></li>
+                                                        <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
                                                     </ul>
                                                     <div id="chart-container">
                                                         <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
                                                         <div class="chart-center">
                                                             <p class="mb-1"><strong>Customer Report</strong></p>
-                                                            <pre>1500</pre>
+                                                            <pre></pre>
                                                         </div>
                                                     </div>
-                                                    <script>
+                                                    <!-- <script>
                                                         const ctx = document.getElementById('donutChart').getContext('2d');
                                                         new Chart(ctx, {
                                                             type: 'doughnut',
@@ -2703,7 +2486,7 @@ function sb_component_admin() {
                                                                 }
                                                             }
                                                         });
-                                                    </script>
+                                                    </script> -->
                                                 </div>
                                             </div>
                                         </section>
@@ -2718,7 +2501,8 @@ function sb_component_admin() {
                                         </div>
                                         <div class="seprator"></div>
                                         <div class="recent card p-3">
-                                            <ul class="recent-messages list-unstyled">
+                                            <ul class="recent-messages list-unstyled" style="min-height:254px;">
+                                                No massge found
                                             </ul>
                                         </div>
                                         <div class="div"></div>

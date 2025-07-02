@@ -187,6 +187,8 @@ function sb_ajax_execute() {
             return sb_json_response(get_tickets_count($_POST['date_start'], $_POST['date_end']));
         case 'get-tickets-yearly-count':
             return sb_json_response(get_tickets_yearly_count());
+        case 'get-total-users-count':
+            return sb_json_response(get_total_users_count($_POST['date_start'], $_POST['date_end']));
         case 'get_recent_messages':
             return sb_json_response(get_recent_messages());
         case 'add-ticket-custom-field':
