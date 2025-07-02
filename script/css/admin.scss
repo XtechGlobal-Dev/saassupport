@@ -3527,6 +3527,7 @@ td.sb-offline:after {
                         .ticket_created_chart,
                         .ticket_resolved_chart,
                         .avg_response_chart,
+                        .total_conversations_chart,
                         .agent_chart {
                             height: 60px;
                             display: flex;
@@ -6790,6 +6791,27 @@ a.sb-btn-white,
     }
 }
 
+.sb-account-box {
+    .ul_account {
+        li {
+            border-radius: 6px;
+            border-bottom: none;
+            padding: 0 10px;
+            margin-bottom: 8px !important;
+            color: rgb(86, 96, 105);
+            font-weight: 500 !important;
+            font-size: 13px !important;
+
+            &.sb-active,
+            &:hover {
+                color: $color-blue !important;
+                background: #E5EAF0;
+                border-radius: 6px;
+            }
+        }
+    }
+}
+
 .sb-area-reports_new {
     .sb-tab {
         height: calc(100vh - 170px) !important;
@@ -8825,35 +8847,6 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
 
-    // .auth-options {
-    //     display: flex;
-    //     justify-content: space-between;
-    //     align-items: center;
-    //     margin: 24px 0;
-    // }
-
-    // .remember-me {
-    //     display: flex;
-    //     align-items: center;
-    // }
-
-    // .checkbox {
-    //     width: 21px;
-    //     height: 21px;
-    //     background-color: white;
-    //     border: 1.5px solid #dcdcdc;
-    //     border-radius: 4px;
-    //     margin-right: 8px;
-    //     cursor: pointer;
-    // }
-
-    // .remember-text {
-    //     text-transform: capitalize;
-    //     font-weight: 500;
-    //     font-size: 16px;
-    //     color: #666666;
-    //     font-family: Manrope;
-    // }
     .auth-options {
         display: flex;
         justify-content: space-between;
@@ -8910,15 +8903,22 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         text-transform: capitalize;
         font-weight: 500;
         font-size: 16px;
-        color: #194bc1;
+        color: #194bc1 !important;
         cursor: pointer;
         font-family: Manrope;
+    }
+
+    .btn-cancel-reset-password {
+        font-size: 13px;
+        text-align: end;
+        margin: 4px 0 24px 0;
     }
 
     .login-button {
         background-color: #1d4ec3;
         height: 45px;
-        width: 100%;
+        // width: 100%;
+        width: -webkit-fill-available;
         border-radius: 10px;
         color: white;
         font-weight: 600;

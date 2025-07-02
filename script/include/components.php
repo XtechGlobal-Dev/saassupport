@@ -9,7 +9,8 @@
  *
  */
 
-function sb_profile_box() { ?>
+function sb_profile_box()
+{ ?>
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
             <div class="sb-profile">
@@ -61,7 +62,8 @@ function sb_profile_box() { ?>
     </div>
 <?php } ?>
 <?php
-function sb_profile_edit_box() { ?>
+function sb_profile_edit_box()
+{ ?>
     <div class="sb-profile-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -192,7 +194,7 @@ function sb_ticket_box()
             </div>
         </div>
     </div>
-<?php } 
+<?php }
 function sb_ticket_edit_box()
 { ?>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -492,19 +494,25 @@ function sb_ticket_edit_box()
             vertical-align: middle;
         }
 
-        #file-preview-list .col-md-2, #file-preview-list1 .col-md-2,
-        #current-attachments .col-md-2, #current-attachments1 .col-md-2 {
+        #file-preview-list .col-md-2,
+        #file-preview-list1 .col-md-2,
+        #current-attachments .col-md-2,
+        #current-attachments1 .col-md-2 {
             padding: 0
         }
 
-        #file-preview-list .card, #file-preview-list1 .card,
-        #current-attachments .card, #current-attachments1 .card{
+        #file-preview-list .card,
+        #file-preview-list1 .card,
+        #current-attachments .card,
+        #current-attachments1 .card {
             margin: 6px;
             height: 100%;
         }
 
-        #file-preview-list .card-body, #file-preview-list1 .card-body,
-        #current-attachments .card-body, #current-attachments1 .card-body {
+        #file-preview-list .card-body,
+        #file-preview-list1 .card-body,
+        #current-attachments .card-body,
+        #current-attachments1 .card-body {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -573,7 +581,8 @@ function sb_ticket_edit_box()
         }
 
 
-        .user-initials, .assignee-img {
+        .user-initials,
+        .assignee-img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -588,7 +597,9 @@ function sb_ticket_edit_box()
             cursor: pointer;
         }
 
-        .comment-row .user-initials, .sidepanel .user-initials, .sidepanel .assignee-img{
+        .comment-row .user-initials,
+        .sidepanel .user-initials,
+        .sidepanel .assignee-img {
             width: 36px;
             height: 36px;
             line-height: 36px;
@@ -596,7 +607,10 @@ function sb_ticket_edit_box()
             margin: 0 8px;
         }
 
-        .sidepanel .user-initials,.sidepanel .assignee-img{margin: 0}
+        .sidepanel .user-initials,
+        .sidepanel .assignee-img {
+            margin: 0
+        }
 
         .initials {
             position: absolute;
@@ -607,8 +621,7 @@ function sb_ticket_edit_box()
         }
 
         .sb-scroll-area .user-initials,
-        .sb-top-bar .user-initials
-        {
+        .sb-top-bar .user-initials {
             width: 45px;
             height: 45px;
             line-height: 45px;
@@ -616,8 +629,7 @@ function sb_ticket_edit_box()
             left: 0;
         }
 
-        .recent-messages .user-initials
-        {
+        .recent-messages .user-initials {
             width: 45px;
             height: 45px;
             line-height: 45px;
@@ -640,78 +652,100 @@ function sb_ticket_edit_box()
             line-height: 45px;
         }
 
-        .sb-td-tags span{margin:3px 5px 0 0;padding: .45em .75em;font-size:13px}
-        .sb_table_new tbody td.sb-td-tags {white-space: unset;text-overflow:unset;}
+        .sb-td-tags span {
+            margin: 3px 5px 0 0;
+            padding: .45em .75em;
+            font-size: 13px
+        }
 
-        .tsubject input {border: none;padding: 7px 0 6px 7px;font-size: 16px;width: 91%;cursor: pointer;font-weight: 600;border-radius: .25rem} 
-        .tsubject input:hover, .tsubject input.active
-        {   
+        .sb_table_new tbody td.sb-td-tags {
+            white-space: unset;
+            text-overflow: unset;
+        }
+
+        .tsubject input {
+            border: none;
+            padding: 7px 0 6px 7px;
+            font-size: 16px;
+            width: 91%;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: .25rem
+        }
+
+        .tsubject input:hover,
+        .tsubject input.active {
             background-color: rgb(233 233 234);
         }
 
-        .tsubject input.active{
-            border: 1px solid rgb(212, 212, 212);;
+        .tsubject input.active {
+            border: 1px solid rgb(212, 212, 212);
+            ;
             background-color: rgb(248, 248, 249);
         }
 
 
         /*********  Statuses list CSS ***********/
         .status-dropdown {
-        position: relative;
-        overflow: visible !important; /* allow dropdown to overflow */
+            position: relative;
+            overflow: visible !important;
+            /* allow dropdown to overflow */
         }
 
         .status-btn {
-        border: none;
-        border-radius: 20px;
-        padding: 3px 12px;
-        font-weight: 500;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 14px;
+            border: none;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
         }
 
         .arrow {
-        font-size: 12px;
+            font-size: 12px;
         }
 
-        .status-list, .priority-list {
-        display: none;
-        position: absolute;
-        top: 75%;
-        left: 0;
-        min-width: 170px;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-        z-index: 9999;
-        padding: 6px 0;
-        margin: 0;
-        list-style: none;
+        .status-list,
+        .priority-list {
+            display: none;
+            position: absolute;
+            top: 75%;
+            left: 0;
+            min-width: 170px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+            z-index: 9999;
+            padding: 6px 0;
+            margin: 0;
+            list-style: none;
         }
 
-        .status-list li, .priority-list li {
-        padding: 8px 16px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 15px;
-        transition: background 0.15s;
+        .status-list li,
+        .priority-list li {
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 15px;
+            transition: background 0.15s;
         }
 
-        .status-list li:hover, .priority-list li:hover {
-        background: #f5f5f5;
+        .status-list li:hover,
+        .priority-list li:hover {
+            background: #f5f5f5;
         }
 
         .status-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
         }
     </style>
     <script>
@@ -761,7 +795,7 @@ function sb_ticket_edit_box()
             }
 
 
-            
+
             // Code to display applied tags in a palette
             // const paletteContainer = document.getElementById('selected-tags-palette');
             // document.getElementById('tags-filter').addEventListener('change', function () {
@@ -892,7 +926,6 @@ function sb_ticket_edit_box()
 
     <!-- File Upload Handling -->
     <script>
-
         function propagateTagColors() {
             // Map value to color from original select
             const select = document.getElementById('ticket-tags');
@@ -940,10 +973,10 @@ function sb_ticket_edit_box()
             });
         }
 
-                    function refreshTagDots() {
-                        propagateTagColors();
-                        updateTagDots();
-                    }
+        function refreshTagDots() {
+            propagateTagColors();
+            updateTagDots();
+        }
 
 
         jQuery(document).ready(function($) {
@@ -985,8 +1018,7 @@ function sb_ticket_edit_box()
 
                 let reopendTicketAttachmentsPopup = $('#reopendTicketAttachmentsPopup').val();
 
-                if(reopendTicketAttachmentsPopup == '1')
-                {
+                if (reopendTicketAttachmentsPopup == '1') {
                     uploadedFiles = [];
                     $('#reopendTicketAttachmentsPopup').val(0);
                 }
@@ -1294,7 +1326,7 @@ function sb_ticket_edit_box()
 
             });
 
-            
+
 
             // Function to display file previews
             function displayFilePreviews1(files) {
@@ -1442,7 +1474,8 @@ function sb_ticket_edit_box()
     </script>
 <?php } ?>
 <?php
-function sb_login_box() { ?>
+function sb_login_box()
+{ ?>
     <form class="sb sb-rich-login sb-admin-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1476,20 +1509,20 @@ function sb_login_box() { ?>
     </form>
     <img id="sb-error-check" style="display:none" src="<?php echo SB_URL . '/media/logo.svg' ?>" />
     <script>
-        (function ($) {
-            $(document).ready(function () {
+        (function($) {
+            $(document).ready(function() {
                 $('.sb-admin-start').removeAttr('style');
-                $('.sb-submit-login').on('click', function () {
-                    SBF.loginForm(this, false, function () {
+                $('.sb-submit-login').on('click', function() {
+                    SBF.loginForm(this, false, function() {
                         location.reload();
                     });
                 });
-                $('#sb-error-check').one('error', function () {
+                $('#sb-error-check').one('error', function() {
                     $('.sb-info').html('It looks like the chat URL has changed. Edit the config.php file(it\'s in the Support Board folder) and update the SB_URL constant with the new URL.').addClass('sb-active');
                 });
                 SBF.serviceWorker.init();
             });
-            $(window).keydown(function (e) {
+            $(window).keydown(function(e) {
                 if (e.which == 13) {
                     $('.sb-submit-login').click();
                 }
@@ -1505,7 +1538,8 @@ function sb_login_box() { ?>
     </script>
 <?php } ?>
 <?php
-function sb_dialog() { ?>
+function sb_dialog()
+{ ?>
     <div class="sb-dialog-box sb-lightbox">
         <div class="sb-title"></div>
         <p></p>
@@ -1523,7 +1557,8 @@ function sb_dialog() { ?>
     </div>
 <?php } ?>
 <?php
-function sb_updates_box() { ?>
+function sb_updates_box()
+{ ?>
     <div class="sb-lightbox sb-updates-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1551,7 +1586,8 @@ function sb_updates_box() { ?>
     </div>
 <?php } ?>
 <?php
-function sb_app_box() { ?>
+function sb_app_box()
+{ ?>
     <div class="sb-lightbox sb-app-box" data-app="">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1596,7 +1632,8 @@ function sb_app_box() { ?>
     </div>
 <?php } ?>
 <?php
-function sb_direct_message_box() { ?>
+function sb_direct_message_box()
+{ ?>
     <div class="sb-lightbox sb-direct-message-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1638,7 +1675,8 @@ function sb_direct_message_box() { ?>
     </div>
 <?php } ?>
 <?php
-function sb_routing_select($exclude_id = false) {
+function sb_routing_select($exclude_id = false)
+{
     $agents = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE (user_type = "agent" OR user_type = "admin")' . ($exclude_id ? (' AND id <> ' . sb_db_escape($exclude_id)) : ''), false);
     $code = '<div class="sb-inline sb-inline-agents"><h3>' . sb_('Agent') . '</h3><div id="conversation-agent" class="sb-select"><p>' . sb_('None') . '</p><ul><li data-id="" data-value="">' . sb_('None') . '</li>';
     for ($i = 0; $i < count($agents); $i++) {
@@ -1648,10 +1686,11 @@ function sb_routing_select($exclude_id = false) {
 }
 ?>
 <?php
-function sb_installation_box($error = false) {
+function sb_installation_box($error = false)
+{
     global $SB_LANGUAGE;
     $SB_LANGUAGE = isset($_GET['lang']) ? $_GET['lang'] : strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-    ?>
+?>
     <div class="sb-main sb-admin sb-admin-start">
         <form class="sb-intall sb-admin-box">
             <?php if ($error === false || $error == 'installation')
@@ -1752,7 +1791,8 @@ function sb_installation_box($error = false) {
  *
  */
 
-function sb_component_admin() {
+function sb_component_admin()
+{
     $is_cloud = sb_is_cloud();
     $cloud_active_apps = $is_cloud ? sb_get_external_setting('active_apps', []) : [];
     $sb_settings = sb_get_json_resource('json/settings.json');
@@ -1786,7 +1826,7 @@ function sb_component_admin() {
     $is_admin = $active_user && sb_is_agent($active_user, true, true) && !$supervisor;
     $sms = sb_get_multi_setting('sms', 'sms-user');
     $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl() ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
-     $active_areas = [
+    $active_areas = [
         'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']),
         'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
         'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']),
@@ -1825,7 +1865,7 @@ function sb_component_admin() {
         }
         echo '<style>' . $css . '</style>';
     }
-    ?>
+?>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
         <?php if ($logged) { ?>
@@ -1971,10 +2011,10 @@ function sb_component_admin() {
             <main>
                 <?php
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-                $ticketUrl = dirname(SB_URL).'?area=tickets';
+                $ticketUrl = dirname(SB_URL) . '?area=tickets';
                 $header = '<header>
                                  <div class="header-left">
-                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="'.$ticketUrl.'" >
+                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
                                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                         Back to Tickets
                                     </a>
@@ -2024,7 +2064,7 @@ function sb_component_admin() {
                                 <div class="col-md-8 p-0">
                                     <div class="px-3 mt-3">
                                         <section class="dashboard-metrics">
-                                            <div class="metric-card"
+                                            <!-- <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
@@ -2043,7 +2083,7 @@ function sb_component_admin() {
                                                     </div>
                                                 </div>
                                                 <div class="metric-increase">Increase by <span>0</span> this week</div>
-                                            </div>
+                                            </div> -->
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
                                                 <div class="graph_tabs">
@@ -2052,8 +2092,8 @@ function sb_component_admin() {
                                                             <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Active Users</h3>
-                                                            <p>8,000</p>
+                                                            <h3>Total Users</h3>
+                                                            <p class="total-users"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
@@ -2061,65 +2101,10 @@ function sb_component_admin() {
                                                             <canvas class="mt-0" id="active_users_chart"></canvas>
                                                         </div>
                                                         <script>
-                                                            const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
-                                                            const gradient2 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient2.addColorStop(0, 'rgba(72, 255, 112, 0.2)');
-                                                            gradient2.addColorStop(1, 'rgba(72, 255, 112, 0)');
-                                                            new Chart(active_usersCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#45B369',
-                                                                        backgroundColor: gradient2,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div>
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
@@ -2130,73 +2115,41 @@ function sb_component_admin() {
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Tickets Created</h3>
-                                                            <p>3,200</p>
+                                                            <p class="total-tickets-created">3,200</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
                                                         <div class="ticket_created_chart">
                                                             <canvas class="mt-0" id="ticket_created_chart"></canvas>
                                                         </div>
+                                                        <!-- <script>
+                                                            
+                                                        </script> -->
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div>
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;">
+                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Ticket Resolved</h3>
+                                                            <p class="ticket-resolved"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
                                                         <script>
-                                                            const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
-                                                            const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
-                                                            gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
-                                                            new Chart(ticket_createdCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#f4941e',
-                                                                        backgroundColor: gradient3,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>18%</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div>
                                             </div>
                                         </section>
                                         <section class="dashboard-metrics">
@@ -2208,74 +2161,19 @@ function sb_component_admin() {
                                                             <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Ticket Resolved</h3>
-                                                            <p>2,700</p>
+                                                            <h3>Total Conversations</h3>
+                                                            <p class="total-conversations"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
-                                                        <div class="ticket_resolved_chart">
-                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        <div class="total_conversations_chart">
+                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
                                                         </div>
                                                         <script>
-                                                            const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
-                                                            const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient4.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
-                                                            gradient4.addColorStop(1, 'rgba(231, 110, 241, 0)');
-                                                            new Chart(ticket_resolvedCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#8252E9',
-                                                                        backgroundColor: gradient4,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>+200</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div>
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
@@ -2353,7 +2251,7 @@ function sb_component_admin() {
                                                     </script>
                                                 </div> -->
                                                 </div>
-                                                <div class="metric-increase">Improved by <span>12%</span> this week</div>
+
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
@@ -2430,7 +2328,7 @@ function sb_component_admin() {
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Consistent this week</div>
+
                                             </div>
                                         </section>
                                         <section class="main-charts">
@@ -2450,21 +2348,21 @@ function sb_component_admin() {
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Created</strong></div>
-                                                            <div>1,200</div>
+                                                            <div class="tickets-created"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Resolved</strong></div>
-                                                            <div>9,50</div>
+                                                            <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Pending</strong></div>
-                                                            <div>1,500</div>
+                                                            <div class="tickets-pending"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2473,60 +2371,7 @@ function sb_component_admin() {
                                                     <canvas id="monthlyBarChart"></canvas>
                                                 </div>
                                                 <script>
-                                                    const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
-                                                    new Chart(barCtx, {
-                                                        type: 'bar',
-                                                        data: {
-                                                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                            datasets: [{
-                                                                label: 'Users',
-                                                                data: [85000, 68000, 39000, 47000, 59000, 49000, 41000, 47000, 42000, 60000, 29000, 51000],
-                                                                backgroundColor: '#4285F4',
-                                                                borderRadius: 6,
-                                                                barThickness: 10
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            responsive: true,
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false
-                                                                },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        label: function(context) {
-                                                                            return `${context.raw.toLocaleString()} users`;
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            scales: {
-                                                                x: {
-                                                                    grid: {
-                                                                        display: false
-                                                                    },
-                                                                    ticks: {
-                                                                        color: '#888',
-                                                                        font: {
-                                                                            size: 12
-                                                                        }
-                                                                    }
-                                                                },
-                                                                y: {
-                                                                    grid: {
-                                                                        drawBorder: false,
-                                                                        color: '#eee',
-                                                                        lineWidth: 1
-                                                                    },
-                                                                    ticks: {
-                                                                        callback: value => value / 1000 + 'k',
-                                                                        color: '#aaa'
-                                                                    },
-                                                                    beginAtZero: true
-                                                                }
-                                                            }
-                                                        }
-                                                    });
+
                                                 </script>
                                             </div>
                                         </section>
@@ -2550,46 +2395,7 @@ function sb_component_admin() {
                                                     <canvas id="ticket_activity_chart"></canvas>
                                                 </div>
                                                 <script>
-                                                    const ticket_activityCtx = document.getElementById('ticket_activity_chart').getContext('2d');
-                                                    new Chart(ticket_activityCtx, {
-                                                        type: 'line',
-                                                        data: {
-                                                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                            datasets: [{
-                                                                label: 'Weekly Activity',
-                                                                data: [0, 5, 12, 3, 5, 7],
-                                                                borderColor: '#487FFF',
-                                                                backgroundColor: '#E4ECFF',
-                                                                pointRadius: 4,
-                                                                // borderWidth: 0, // hides the line
-                                                                // pointRadius: 0, // hides the dots
-                                                                fill: true,
-                                                                tension: 0.4,
-                                                                pointBackgroundColor: '#487FFF'
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            responsive: true,
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false
-                                                                }
-                                                            },
-                                                            scales: {
-                                                                x: {
-                                                                    grid: {
-                                                                        display: true
-                                                                    }
-                                                                },
-                                                                y: {
-                                                                    beginAtZero: true,
-                                                                    grid: {
-                                                                        display: true
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    });
+                                                    
                                                 </script>
                                             </div>
                                         </section>
@@ -2668,16 +2474,16 @@ function sb_component_admin() {
                                                         <span class="filter-range"></span>
                                                         <li><span class="total"></span><label></label></li>
                                                         <li><span class="new"></span><label></label></li>
-                                                        <li><span class="active"></span><label>Active: 4</label></li>
+                                                        <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
                                                     </ul>
                                                     <div id="chart-container">
                                                         <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
                                                         <div class="chart-center">
                                                             <p class="mb-1"><strong>Customer Report</strong></p>
-                                                            <pre>1500</pre>
+                                                            <pre></pre>
                                                         </div>
                                                     </div>
-                                                    <script>
+                                                    <!-- <script>
                                                         const ctx = document.getElementById('donutChart').getContext('2d');
                                                         new Chart(ctx, {
                                                             type: 'doughnut',
@@ -2703,7 +2509,7 @@ function sb_component_admin() {
                                                                 }
                                                             }
                                                         });
-                                                    </script>
+                                                    </script> -->
                                                 </div>
                                             </div>
                                         </section>
@@ -2718,7 +2524,8 @@ function sb_component_admin() {
                                         </div>
                                         <div class="seprator"></div>
                                         <div class="recent card p-3">
-                                            <ul class="recent-messages list-unstyled">
+                                            <ul class="recent-messages list-unstyled" style="min-height:254px;">
+                                                No massge found
                                             </ul>
                                         </div>
                                         <div class="div"></div>
@@ -2882,30 +2689,28 @@ function sb_component_admin() {
                                             return $status;
                                         }
                                         $statues = sb_get_statues();
-                                        $priorities = sb_get_priorities();    
+                                        $priorities = sb_get_priorities();
                                         ?>
                                         <div id="ticket_statues">
-                                             <ul class="status-list">
-                                            <?php 
-                                            foreach($statues as $status)
-                                            {
-                                                echo '<li data-status="'.$status['name'].'" class="" data-color="'.$status['color'].'" value="'.$status['id'].'">
-                                                    <span class="status-dot"></span> '.$status['name'].'
+                                            <ul class="status-list">
+                                                <?php
+                                                foreach ($statues as $status) {
+                                                    echo '<li data-status="' . $status['name'] . '" class="" data-color="' . $status['color'] . '" value="' . $status['id'] . '">
+                                                    <span class="status-dot"></span> ' . $status['name'] . '
                                                 </li>';
-                                            }
-                                            ?>
+                                                }
+                                                ?>
                                             </ul>
                                         </div>
                                         <div id="ticket_priorities">
-                                             <ul class="priority-list">
-                                            <?php 
-                                            foreach($priorities as $priority)
-                                            {
-                                                echo '<li data-status="'.$priority['name'].'" class="" data-color="'.$priority['color'].'" value="'.$priority['id'].'">
-                                                    <span class="status-dot"></span> '.$priority['name'].'
+                                            <ul class="priority-list">
+                                                <?php
+                                                foreach ($priorities as $priority) {
+                                                    echo '<li data-status="' . $priority['name'] . '" class="" data-color="' . $priority['color'] . '" value="' . $priority['id'] . '">
+                                                    <span class="status-dot"></span> ' . $priority['name'] . '
                                                 </li>';
-                                            }
-                                            ?>
+                                                }
+                                                ?>
                                             </ul>
                                         </div>
                                         <div class="new_table sb-area-tickets-dash">
@@ -3308,24 +3113,23 @@ function sb_component_admin() {
                                 </div> -->
                                 <div class="mr-5 tags-filter" style="">
                                     <?php
-                                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                        $tagsHtml = '';
-                                        $count = count($tags);
-                                        if ($count > 0) 
-                                        {
-                                            ?>
-                                            <select id="tags-filter" name="tags[]" multiple>
-                                                <?php
-                                                for ($i = 0; $i < $count; $i++) {
-                                                $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
-                                                }
-                                                echo $tagsHtml;
-                                                ?>
-                                            </select>
-                                            <?php 
-                                        } 
+                                    $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                    $tagsHtml = '';
+                                    $count = count($tags);
+                                    if ($count > 0) {
                                     ?>
-                                    
+                                        <select id="tags-filter" name="tags[]" multiple>
+                                            <?php
+                                            for ($i = 0; $i < $count; $i++) {
+                                                $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                            }
+                                            echo $tagsHtml;
+                                            ?>
+                                        </select>
+                                    <?php
+                                    }
+                                    ?>
+
                                 </div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
@@ -3427,11 +3231,11 @@ function sb_component_admin() {
                                         <div class="col-md-12 p-0">
                                             <div class="row">
                                                 <div class="col-md-8 p-0">
-                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value=""/></span></h2>
+                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value="" /></span></h2>
                                                 </div>
                                                 <div class="col-md-4 p-0">
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
-                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
+                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: 120px;">
                                                             <?php
                                                             foreach ($statues as $key => $value) {
                                                                 echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
@@ -3445,7 +3249,7 @@ function sb_component_admin() {
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center"  id="view-ticket-attachments">
+                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center" id="view-ticket-attachments">
                                                     <i class="fas fa-paperclip fs-4 mr-2"></i>
                                                     <span class="label">Attachments (<span class="attachments-count">0</span>)</span>
                                                 </div>
@@ -3548,9 +3352,9 @@ function sb_component_admin() {
                                                             </a>
                                                         </div>
                                                     </div> -->
-                                                    
 
-                                                     <!-- Nav tabs -->
+
+                                                    <!-- Nav tabs -->
                                                     <ul class="nav nav-tabs" id="myTab">
                                                         <li class="nav-item">
                                                             <a class="nav-link active" data-target="#tab1" href="javascript:void(0)">Comments</a>
@@ -3571,14 +3375,14 @@ function sb_component_admin() {
                                                                         <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
                                                                             <!-- Comments will be loaded here by JS -->
                                                                         </div>
-                                                                        
-                                                                        <div  class="d-flex align-items-center gap-2 mt-4">
+
+                                                                        <div class="d-flex align-items-center gap-2 mt-4">
                                                                             <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
-                                                                            <textarea class="form-control me-2" id="newComment"  placeholder="Type your comment..."></textarea>
-                                                                            <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment" ></textarea>
-                                                                            
+                                                                            <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
+                                                                            <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
+
                                                                             <button id="addComment" class="btn btn-primary">Send</button>
-                                                                    </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -3623,21 +3427,27 @@ function sb_component_admin() {
                                                             display: flex;
                                                             align-items: flex-end;
                                                         }
-                                                        .comment-row.customer + .comment-row.customer {
+
+                                                        .comment-row.customer+.comment-row.customer {
                                                             margin-top: 2px;
                                                         }
-                                                        .comment-row.agent + .comment-row.agent {
+
+                                                        .comment-row.agent+.comment-row.agent {
                                                             margin-top: 2px;
                                                         }
-                                                        .comment-row.customer + .comment-row.agent {
+
+                                                        .comment-row.customer+.comment-row.agent {
                                                             margin-top: 5px;
                                                         }
-                                                        .comment-row.agent + .comment-row.customer {
+
+                                                        .comment-row.agent+.comment-row.customer {
                                                             margin-top: 5px;
                                                         }
+
                                                         .comment-row.agent {
                                                             flex-direction: row-reverse;
                                                         }
+
                                                         .comment-avatar {
                                                             width: 36px;
                                                             height: 36px;
@@ -3646,6 +3456,7 @@ function sb_component_admin() {
                                                             object-fit: cover;
                                                             margin: 0 8px;
                                                         }
+
                                                         .comment-bubble {
                                                             max-width: 70%;
                                                             padding: 5px 10px;
@@ -3653,8 +3464,9 @@ function sb_component_admin() {
                                                             position: relative;
                                                             font-size: 15px;
                                                             word-break: break-word;
-                                                            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+                                                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
                                                         }
+
                                                         .comment-row.agent .comment-bubble {
                                                             background: #f8f8f8;
                                                             color: #222;
@@ -3663,6 +3475,7 @@ function sb_component_admin() {
                                                             margin-left: 10px;
                                                             border: 1px solid #e0e0e0;
                                                         }
+
                                                         .comment-row.customer .comment-bubble {
                                                             background: #f8f8f8;
                                                             color: #222;
@@ -3671,6 +3484,7 @@ function sb_component_admin() {
                                                             margin-right: 10px;
                                                             border: 1px solid #e0e0e0;
                                                         }
+
                                                         .comment-meta {
                                                             position: relative;
                                                             font-size: 9px;
@@ -3689,9 +3503,10 @@ function sb_component_admin() {
                                                             vertical-align: middle;
                                                             opacity: 0.7;
                                                         }
-                                                            
 
-                                                        .edit-comment-btn, .delete-comment-btn {
+
+                                                        .edit-comment-btn,
+                                                        .delete-comment-btn {
                                                             font-size: 12px;
                                                             color: #ffc107;
                                                             background: none;
@@ -3699,9 +3514,14 @@ function sb_component_admin() {
                                                             cursor: pointer;
                                                             padding: 0;
                                                         }
-                                                        .comment-text {padding-right: 30px;line-height: 18px;font-size: 13px;}
-                                                        </style>
-                                                        <script>
+
+                                                        .comment-text {
+                                                            padding-right: 30px;
+                                                            line-height: 18px;
+                                                            font-size: 13px;
+                                                        }
+                                                    </style>
+                                                    <script>
                                                         // --- Comments/Chat Section Logic ---
                                                         // document.addEventListener('DOMContentLoaded', function () {
                                                         //     const ticketId = SBF.getURL('ticket')   || document.getElementById('ticket_id').value;
@@ -3785,7 +3605,7 @@ function sb_component_admin() {
                                                         //         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
                                                         //     }
 
-                                                            
+
 
                                                         //     function scrollToBottom() {
                                                         //         commentsSection.scrollTop = commentsSection.scrollHeight;
@@ -3902,12 +3722,12 @@ function sb_component_admin() {
                                                         //         });
                                                         //     }
 
-                                                            // Initial load
-                                                            //loadComments();
-                                                            // Optional: Poll for new comments every 30s
-                                                            //setInterval(loadComments, 30000);
+                                                        // Initial load
+                                                        //loadComments();
+                                                        // Optional: Poll for new comments every 30s
+                                                        //setInterval(loadComments, 30000);
                                                         //});
-                                                        </script>
+                                                    </script>
                                                     <script>
                                                         window.SERVER_NOW = "<?php echo date('Y-m-d\TH:i:sP'); ?>";
                                                     </script>
@@ -3935,11 +3755,11 @@ function sb_component_admin() {
                                                                             </span>
                                                                             <div id="assigned_to" data-type="select" class="sb-input">
                                                                                 <select id="select-ticket-agent" style="width:100%;">
-                                                                                    
+
                                                                                 </select>
-                                                                            </div>  
+                                                                            </div>
                                                                         </div>
-                                                                        
+
                                                                         <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
                                                                     </div>
                                                                 </div>
@@ -3958,36 +3778,35 @@ function sb_component_admin() {
                                                                     </div>
                                                                 </div>
                                                                 <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
-                                                                <div class="mb-3 sb-input d-block">
-                                                                    <div class="field-label">Department</div>
-                                                                    <select id="ticket-department" required>
-                                                                        <option value=""><?php echo sb_('Select Department'); ?></option>
-                                                                        <?php
-                                                                        $departments = sb_get_departments();
-                                                                        foreach ($departments as $key => $value) {
-                                                                            echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
+                                                                    <div class="mb-3 sb-input d-block">
+                                                                        <div class="field-label">Department</div>
+                                                                        <select id="ticket-department" required>
+                                                                            <option value=""><?php echo sb_('Select Department'); ?></option>
+                                                                            <?php
+                                                                            $departments = sb_get_departments();
+                                                                            foreach ($departments as $key => $value) {
+                                                                                echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+                                                                    </div>
                                                                 <?php } ?>
-                                                                 <?php
+                                                                <?php
                                                                 $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
                                                                 $tagsHtml = '';
                                                                 $count = count($tags);
-                                                            
-                                                                if ($count > 0) 
-                                                                {
-                                                                    ?>
+
+                                                                if ($count > 0) {
+                                                                ?>
                                                                     <div class="mb-3">
                                                                         <div class="field-label">Tags</div>
                                                                         <div class="mb-2">
                                                                             <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
                                                                             <div class="mr-5 tags-filter" style="">
-                                                                            <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                <select id="ticket-detail-tags-filter" name="tags[]" multiple>
                                                                                     <?php
                                                                                     for ($i = 0; $i < $count; $i++) {
-                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
                                                                                     }
                                                                                     echo $tagsHtml;
                                                                                     ?>
@@ -4009,10 +3828,10 @@ function sb_component_admin() {
                                                                             </span> -->
                                                                         </div>
                                                                     </div>
-                                                                    <?php
-                                                                } 
+                                                                <?php
+                                                                }
                                                                 ?>
-                                                                            
+
                                                                 <div class="mb-3 sb-input d-block">
                                                                     <div class="field-label">Priority</div>
                                                                     <!-- <div class="ticket-priority">
@@ -4020,13 +3839,13 @@ function sb_component_admin() {
                                                                     </div>
                                                                     <div id="priority_id" data-type="select" class="sb-input">
                                                                         <span class="required-label"><?php sb_e('Priority') ?></span> -->
-                                                                        <select id="ticket-priority" required>
-                                                                            <?php
-                                                                            foreach ($priorities as $key => $value) {
-                                                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-                                                                            }
-                                                                            ?>
-                                                                        </select>
+                                                                    <select id="ticket-priority" required>
+                                                                        <?php
+                                                                        foreach ($priorities as $key => $value) {
+                                                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                                        }
+                                                                        ?>
+                                                                    </select>
                                                                     <!-- </div> -->
                                                                 </div>
                                                             </div>
@@ -4049,7 +3868,7 @@ function sb_component_admin() {
                             <div>
                                 <h2 style="margin-bottom: 0;">
                                     Ticket Attachments
-                                </h2>   
+                                </h2>
                             </div>
                             <div>
                                 <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-attachments" data-hide="sb-profile-area" data-show="sb-edit-area">
@@ -4072,7 +3891,7 @@ function sb_component_admin() {
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
-                                    
+
                                     <div class="progress mt-2 d-none" id="upload-progress-container">
                                         <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -4093,78 +3912,78 @@ function sb_component_admin() {
                         </div>
                     </div>
 
-                     <!-- File Attachments Section -->
-                        <!-- <div id="ticketFileAttachments-detail" class="ticket-attachments-box sb-lightbox">
+                    <!-- File Attachments Section -->
+                    <!-- <div id="ticketFileAttachments-detail" class="ticket-attachments-box sb-lightbox">
                             
                         </div> -->
-                    
+
 
                     <script>
                         function propagateTagColors() {
-                        // Map value to color from original select
-                        const select = document.getElementById('ticket-tags');
-                        if (!select) return;
-                        const valueToColor = {};
-                        Array.from(select.options).forEach(opt => {
-                            if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
-                        });
-                        // Dropdown items
-                        document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
-                            const value = item.getAttribute('data-value');
-                            if (valueToColor[value]) {
-                                item.setAttribute('data-color', valueToColor[value]);
-                            }
-                        });
-                        // Selected items
-                        document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
-                            const value = item.getAttribute('data-value');
-                            if (valueToColor[value]) {
-                                item.setAttribute('data-color', valueToColor[value]);
-                            }
-                        });
-                    }
+                            // Map value to color from original select
+                            const select = document.getElementById('ticket-tags');
+                            if (!select) return;
+                            const valueToColor = {};
+                            Array.from(select.options).forEach(opt => {
+                                if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
+                            });
+                            // Dropdown items
+                            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
+                                const value = item.getAttribute('data-value');
+                                if (valueToColor[value]) {
+                                    item.setAttribute('data-color', valueToColor[value]);
+                                }
+                            });
+                            // Selected items
+                            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
+                                const value = item.getAttribute('data-value');
+                                if (valueToColor[value]) {
+                                    item.setAttribute('data-color', valueToColor[value]);
+                                }
+                            });
+                        }
 
-                    function updateTagDots() {
-                        // Dropdown items
-                        document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
-                            if (!item.querySelector('.tag-dot')) {
-                                let color = item.getAttribute('data-color');
-                                let dot = document.createElement('span');
-                                dot.className = 'tag-dot';
-                                dot.style.backgroundColor = color;
-                                item.prepend(dot);
-                            }
-                        });
-                        // Selected items
-                        document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
-                            if (!item.querySelector('.tag-dot')) {
-                                let color = item.getAttribute('data-color');
-                                let dot = document.createElement('span');
-                                dot.className = 'tag-dot';
-                                dot.style.backgroundColor = color;
-                                item.prepend(dot);
-                            }
-                        });
-                    }
-		
-                    function refreshTagDots() {
-                        propagateTagColors();
-                        updateTagDots();
-                    }
+                        function updateTagDots() {
+                            // Dropdown items
+                            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
+                                if (!item.querySelector('.tag-dot')) {
+                                    let color = item.getAttribute('data-color');
+                                    let dot = document.createElement('span');
+                                    dot.className = 'tag-dot';
+                                    dot.style.backgroundColor = color;
+                                    item.prepend(dot);
+                                }
+                            });
+                            // Selected items
+                            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
+                                if (!item.querySelector('.tag-dot')) {
+                                    let color = item.getAttribute('data-color');
+                                    let dot = document.createElement('span');
+                                    dot.className = 'tag-dot';
+                                    dot.style.backgroundColor = color;
+                                    item.prepend(dot);
+                                }
+                            });
+                        }
 
-                    const tagsFilter = document.getElementById('tags-filter');
-                    if (tagsFilter) {
-                        window.tagsFilterChoices = new Choices(tagsFilter, {
-                            removeItemButton: true,
-                            placeholder: true,
-                            placeholderValue: 'Select tags...',
-                            allowHTML: true,
-                            itemSelectText: '',
-                            callbackOnCreateTemplates: function(template) {
-                                return {
-                                    item: (classNames, data) => {
-                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
-                                        return template(`
+                        function refreshTagDots() {
+                            propagateTagColors();
+                            updateTagDots();
+                        }
+
+                        const tagsFilter = document.getElementById('tags-filter');
+                        if (tagsFilter) {
+                            window.tagsFilterChoices = new Choices(tagsFilter, {
+                                removeItemButton: true,
+                                placeholder: true,
+                                placeholderValue: 'Select tags...',
+                                allowHTML: true,
+                                itemSelectText: '',
+                                callbackOnCreateTemplates: function(template) {
+                                    return {
+                                        item: (classNames, data) => {
+                                            const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                            return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                                 data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
@@ -4172,49 +3991,52 @@ function sb_component_admin() {
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                             </div>
                                         `);
-                                    }
-                            };
-                        }
-                        });
-                        
-                        refreshTagDots();
-                        tagsFilter.addEventListener('change', refreshTagDots);
-                        // Listen for any DOM changes in the choices list (item removed/added)
-                        const choicesList = document.querySelector('.choices__list--dropdown');
-                        if (choicesList) {
-                            const observer = new MutationObserver(() => {
-                                refreshTagDots();
+                                        }
+                                    };
+                                }
                             });
-                            observer.observe(choicesList, { childList: true, subtree: true });
+
+                            refreshTagDots();
+                            tagsFilter.addEventListener('change', refreshTagDots);
+                            // Listen for any DOM changes in the choices list (item removed/added)
+                            const choicesList = document.querySelector('.choices__list--dropdown');
+                            if (choicesList) {
+                                const observer = new MutationObserver(() => {
+                                    refreshTagDots();
+                                });
+                                observer.observe(choicesList, {
+                                    childList: true,
+                                    subtree: true
+                                });
+                            }
+                            document.querySelector('.choices').addEventListener('click', function() {
+                                setTimeout(refreshTagDots, 10);
+                            });
+
+
+                            // // Listen for removeItem from Choices instance
+                            // if(tagsFilterChoices)
+                            // {
+                            //     tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                            //         getTicketsFilteredByTag();
+                            //     });
+                            // }
+
                         }
-                        document.querySelector('.choices').addEventListener('click', function() {
-                            setTimeout(refreshTagDots, 10);
-                        });
 
-
-                        // // Listen for removeItem from Choices instance
-                        // if(tagsFilterChoices)
-                        // {
-                        //     tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
-                        //         getTicketsFilteredByTag();
-                        //     });
-                        // }
-
-                    }
-
-                    const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
-                    if (ticketDetailTagsFilter) {
-                        window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
-                            removeItemButton: true,
-                            placeholder: true,
-                            placeholderValue: 'Select tags...',
-                            allowHTML: true,
-                            itemSelectText: '',
-                            callbackOnCreateTemplates: function(template) {
-                                return {
-                                    item: (classNames, data) => {
-                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
-                                        return template(`
+                        const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
+                        if (ticketDetailTagsFilter) {
+                            window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
+                                removeItemButton: true,
+                                placeholder: true,
+                                placeholderValue: 'Select tags...',
+                                allowHTML: true,
+                                itemSelectText: '',
+                                callbackOnCreateTemplates: function(template) {
+                                    return {
+                                        item: (classNames, data) => {
+                                            const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                            return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                                 data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
@@ -4222,115 +4044,115 @@ function sb_component_admin() {
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                             </div>
                                         `);
-                                    }
-                            };
-                        }
-                        });
-                        
-                        refreshTagDots();
-                        ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
-                        // Listen for any DOM changes in the choices list (item removed/added)
-                        const choicesList = document.querySelector('.choices__list--dropdown');
-                        if (choicesList) {
-                            const observer = new MutationObserver(() => {
-                                refreshTagDots();
+                                        }
+                                    };
+                                }
                             });
-                            observer.observe(choicesList, { childList: true, subtree: true });
+
+                            refreshTagDots();
+                            ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
+                            // Listen for any DOM changes in the choices list (item removed/added)
+                            const choicesList = document.querySelector('.choices__list--dropdown');
+                            if (choicesList) {
+                                const observer = new MutationObserver(() => {
+                                    refreshTagDots();
+                                });
+                                observer.observe(choicesList, {
+                                    childList: true,
+                                    subtree: true
+                                });
+                            }
+                            document.querySelector('.choices').addEventListener('click', function() {
+                                setTimeout(refreshTagDots, 10);
+                            });
+
+                            // if(ticketTagsFilterChoices)
+                            // {
+                            //     ticketTagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                            //         getTicketsFilteredByTag();
+                            //     });
+                            // }
                         }
-                        document.querySelector('.choices').addEventListener('click', function() {
-                            setTimeout(refreshTagDots, 10);
+
+
+                        $('#select-ticket-agent').select2({
+                            placeholder: 'Type and search...',
+                            ajax: {
+                                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                                method: 'POST',
+                                dataType: 'json',
+                                delay: 250,
+                                data: function(params) {
+                                    return {
+                                        function: 'ajax_calls',
+                                        'calls[0][function]': 'search-get-users',
+                                        'login-cookie': SBF.loginCookie(),
+                                        'q': params.term, // ✅ Pass search term
+                                        'type': 'agent'
+                                    };
+                                },
+                                processResults: function(response) {
+                                    //response = JSON.parse(response);
+                                    if (response[0][0] == 'success') {
+                                        const users = response[0][1];
+                                        console.log("Processed users:", response[0][1]);
+                                        return {
+                                            results: users.map(user => ({
+                                                id: user.id,
+                                                text: user.first_name + ' ' + user.last_name,
+                                            }))
+                                        };
+                                    }
+                                },
+                                cache: true
+                            },
+                            minimumInputLength: 1
                         });
-                        
-                        // if(ticketTagsFilterChoices)
-                        // {
-                        //     ticketTagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
-                        //         getTicketsFilteredByTag();
-                        //     });
-                        // }
-                    }
 
-
-                    $('#select-ticket-agent').select2({
-                        placeholder: 'Type and search...',
-                        ajax: 
-                        {
-                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                            method: 'POST',
-                            dataType: 'json',
-                            delay: 250,
-                            data: function(params) {
-                                return {
-                                    function: 'ajax_calls',
-                                    'calls[0][function]': 'search-get-users',
-                                    'login-cookie': SBF.loginCookie(),
-                                    'q': params.term, // ✅ Pass search term
-                                    'type': 'agent'
-                                };
-                            },
-                            processResults: function(response) {
-                                //response = JSON.parse(response);
-                                if (response[0][0] == 'success') {
-                                    const users = response[0][1];
-                                    console.log("Processed users:", response[0][1]);
+                        $('#select-ticket-reporter').select2({
+                            placeholder: 'Type and search...',
+                            ajax: {
+                                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                                method: 'POST',
+                                dataType: 'json',
+                                delay: 250,
+                                data: function(params) {
                                     return {
-                                        results: users.map(user => ({
-                                            id: user.id,
-                                            text: user.first_name + ' ' + user.last_name,
-                                        }))
+                                        function: 'ajax_calls',
+                                        'calls[0][function]': 'search-get-users',
+                                        'login-cookie': SBF.loginCookie(),
+                                        'q': params.term, // ✅ Pass search term
+                                        'type': 'user'
                                     };
-                                }
+                                },
+                                processResults: function(response) {
+                                    //response = JSON.parse(response);
+                                    if (response[0][0] == 'success') {
+                                        const users = response[0][1];
+                                        console.log("Processed users:", response[0][1]);
+                                        // document.querySelector('#name select').value = response.priority_id;
+                                        return {
+                                            results: users.map(user => ({
+                                                id: user.id,
+                                                text: user.first_name + ' ' + user.last_name,
+                                                email: user.email,
+                                                name: user.first_name + ' ' + user.last_name
+                                            }))
+                                        };
+                                    }
+                                },
+                                cache: true
                             },
-                            cache: true
-                        },
-                        minimumInputLength: 1
-                    });
-
-                    $('#select-ticket-reporter').select2({
-                        placeholder: 'Type and search...',
-                        ajax: {
-                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                            method: 'POST',
-                            dataType: 'json',
-                            delay: 250,
-                            data: function(params) {
-                                return {
-                                    function: 'ajax_calls',
-                                    'calls[0][function]': 'search-get-users',
-                                    'login-cookie': SBF.loginCookie(),
-                                    'q': params.term, // ✅ Pass search term
-                                    'type': 'user'
-                                };
-                            },
-                            processResults: function(response) {
-                                //response = JSON.parse(response);
-                                if (response[0][0] == 'success') {
-                                    const users = response[0][1];
-                                    console.log("Processed users:", response[0][1]);
-                                    // document.querySelector('#name select').value = response.priority_id;
-                                    return {
-                                        results: users.map(user => ({
-                                            id: user.id,
-                                            text: user.first_name + ' ' + user.last_name,
-                                            email: user.email,
-                                            name: user.first_name + ' ' + user.last_name
-                                        }))
-                                    };
-                                }
-                            },
-                            cache: true
-                        },
-                        minimumInputLength: 1
-                    });
-                </script>
+                            minimumInputLength: 1
+                        });
+                    </script>
                 <?php } ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
                         <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
-                                
                                 <div class="sb-menu-wide sb-menu-articles">
-                                    
                                     <ul>
                                         <li data-type="articles" class="sb-active">
                                             <?php sb_e('Articles') ?>
@@ -4351,7 +4173,7 @@ function sb_component_admin() {
                                 </div>
                             </div>
                             <div>
-                                
+
                                 <a class="sb-btn sb-save-articles sb-icon">
                                     <i class="sb-icon-check"></i>
                                     <?php sb_e('Save changes') ?>
@@ -4364,7 +4186,7 @@ function sb_component_admin() {
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
-                                 <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e('Add new article') ?>
                                 </div>
@@ -4383,54 +4205,54 @@ function sb_component_admin() {
                                         </div>
                                     </div>
                                     <div class="articles_bg">
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Title') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-title">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Content') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea sb-article-content">
-                                    <div>
-                                        <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('External link') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text sb-article-link">
-                                    <div>
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                                <div class="sb-article-categories sb-grid">
-                                    <div>
-                                        <h2>
-                                            <?php sb_e('Parent category') ?>
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Title') ?>
                                         </h2>
-                                        <div class="sb-setting sb-type-select">
+                                        <div class="sb-setting sb-type-text sb-article-title">
                                             <div>
-                                                <select id="article-parent-categories"></select>
+                                                <input type="text" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div>
                                         <h2>
-                                            <?php sb_e('Categories') ?>
+                                            <?php sb_e('Content') ?>
                                         </h2>
-                                        <div class="sb-setting sb-type-select">
+                                        <div class="sb-setting sb-type-textarea sb-article-content">
                                             <div>
-                                                <select id="article-categories"></select>
+                                                <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
                                             </div>
                                         </div>
+                                        <h2>
+                                            <?php sb_e('External link') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text sb-article-link">
+                                            <div>
+                                                <input type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="sb-article-categories sb-grid">
+                                            <div>
+                                                <h2>
+                                                    <?php sb_e('Parent category') ?>
+                                                </h2>
+                                                <div class="sb-setting sb-type-select">
+                                                    <div>
+                                                        <select id="article-parent-categories"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h2>
+                                                    <?php sb_e('Categories') ?>
+                                                </h2>
+                                                <div class="sb-setting sb-type-select">
+                                                    <div>
+                                                        <select id="article-categories"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h2 id="sb-article-id"></h2>
                                     </div>
-                                </div>
-                                <h2 id="sb-article-id"></h2>
-                                 </div>
                                 </div>
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
@@ -4448,37 +4270,37 @@ function sb_component_admin() {
                                         <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
                                             Manage and organize content types.
                                         </h2>
-                                <h2 class="sb-language-switcher-cnt">
-                                    <?php sb_e('Name') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-text">
-                                    <div>
-                                        <input id="category-title" type="text" />
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Description') ?>
-                                </h2>
-                                <div class="sb-setting sb-type-textarea">
-                                    <div>
-                                        <textarea id="category-description"></textarea>
-                                    </div>
-                                </div>
-                                <h2>
-                                    <?php sb_e('Image') ?>
-                                </h2>
-                                <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                    <div id="category-image" class="image">
-                                        <div class="sb-icon-close"></div>
-                                    </div>
-                                </div>
-                                <h2 class="category-parent">
-                                    <?php sb_e('Parent category') ?>
-                                </h2>
-                                <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                    <div class="input">
-                                        <input id="category-parent" type="checkbox" />
-                                         </div>
+                                        <h2 class="sb-language-switcher-cnt">
+                                            <?php sb_e('Name') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-text">
+                                            <div>
+                                                <input id="category-title" type="text" />
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Description') ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-textarea">
+                                            <div>
+                                                <textarea id="category-description"></textarea>
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <?php sb_e('Image') ?>
+                                        </h2>
+                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                            <div id="category-image" class="image">
+                                                <div class="sb-icon-close"></div>
+                                            </div>
+                                        </div>
+                                        <h2 class="category-parent">
+                                            <?php sb_e('Parent category') ?>
+                                        </h2>
+                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                            <div class="input">
+                                                <input id="category-parent" type="checkbox" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -4512,7 +4334,7 @@ function sb_component_admin() {
                                 <ul>
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
-                                        
+
                                         <?php sb_e('Conversations') ?>
                                     </li>
                                     <li class="li" id="conversations" class="sb-active">
@@ -4790,7 +4612,7 @@ function sb_component_admin() {
                                                 <?php sb_e('Save changes') ?>
                                             </a>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
                                 </div>
                                 <?php sb_apps_area($apps, $cloud_active_apps) ?>
@@ -4812,7 +4634,7 @@ function sb_component_admin() {
                                                 </li>
                                                 <?php if ($sms)
                                                     echo '<li data-value="sms">' . sb_('Text messages') . '</li>' ?>
-                                                    <li data-value="popups">
+                                                <li data-value="popups">
                                                     <?php sb_e('Pop-ups') ?>
                                                 </li>
                                                 <li data-value="design">
@@ -4930,7 +4752,7 @@ function sb_component_admin() {
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
-            <?php
+        <?php
         } else {
             if ($is_cloud) {
                 sb_cloud_reset_login();
@@ -4948,7 +4770,7 @@ function sb_component_admin() {
         <input type="email" name="email" style="display:none" autocomplete="email" />
         <input type="password" name="hidden" style="display:none" autocomplete="new-password" />
     </div>
-    <?php
+<?php
     if (!empty(sb_get_setting('custom-js')) && !$is_cloud) {
         echo '<script id="sb-custom-js" src="' . sb_get_setting('custom-js') . '"></script>';
     }
@@ -4974,7 +4796,8 @@ function sb_component_admin() {
  *
  */
 
-function sb_apps_area($apps, $cloud_active_apps) {
+function sb_apps_area($apps, $cloud_active_apps)
+{
     $apps_wp = ['SB_WP', 'SB_WOOCOMMERCE', 'SB_UMP', 'SB_ARMEMBER'];
     $apps_php = [];
     $apps_cloud_excluded = ['whmcs', 'martfury', 'aecommerce', 'perfex', 'opencart'];
@@ -5009,7 +4832,8 @@ function sb_apps_area($apps, $cloud_active_apps) {
     echo $code . '</div></div>';
 }
 
-function sb_apps_panel() {
+function sb_apps_panel()
+{
     $code = '';
     $collapse = sb_get_setting('collapse') ? ' sb-collapse' : '';
     $panels = [['SB_UMP', 'ump'], ['SB_WOOCOMMERCE', 'woocommerce'], ['SB_PERFEX', 'perfex'], ['SB_WHMCS', 'whmcs'], ['SB_AECOMMERCE', 'aecommerce'], ['SB_ARMEMBER', 'armember'], ['SB_ZENDESK', 'zendesk'], ['SB_MARTFURY', 'martfury'], ['SB_OPENCART', 'opencart']];
@@ -5024,7 +4848,8 @@ function sb_apps_panel() {
     echo $code;
 }
 
-function sb_box_ve() {
+function sb_box_ve()
+{
     if ((!isset($_COOKIE['SA_' . 'VGC' . 'KMENS']) && !isset($_COOKIE['_ga_' . 'VGC' . 'KMENS'])) || !password_verify('VGC' . 'KMENS', isset($_COOKIE['_ga_' . 'VGC' . 'KMENS']) ? $_COOKIE['_ga_' . 'VGC' . 'KMENS'] : $_COOKIE['SA_' . 'VGC' . 'KMENS'])) { // Deprecated. _ga will be removed
         echo file_get_contents(SB_PATH . '/resources/sb.html');
         return false;
@@ -5032,7 +4857,8 @@ function sb_box_ve() {
     return true;
 }
 
-function sb_users_table_extra_fields() {
+function sb_users_table_extra_fields()
+{
     $extra_fields = sb_get_setting('user-table-extra-columns');
     $count = $extra_fields && !is_string($extra_fields) ? count($extra_fields) : false;
     if ($count) {
@@ -5045,7 +4871,8 @@ function sb_users_table_extra_fields() {
     }
 }
 
-function sb_dialogflow_languages_list() {
+function sb_dialogflow_languages_list()
+{
     $languages = json_decode(file_get_contents(SB_PATH . '/apps/dialogflow/dialogflow_languages.json'), true);
     $code = '<div data-type="select" class="sb-setting sb-type-select sb-dialogflow-languages"><div class="input"><select><option value="">' . sb_('Default') . '</option>';
     for ($i = 0; $i < count($languages); $i++) {
@@ -5054,7 +4881,8 @@ function sb_dialogflow_languages_list() {
     return $code . '</select></div></div>';
 }
 
-function sb_conversations_filter($cloud_active_apps) {
+function sb_conversations_filter($cloud_active_apps)
+{
     if (sb_get_multi_setting('disable', 'disable-filters')) {
         return;
     }
@@ -5093,7 +4921,8 @@ function sb_conversations_filter($cloud_active_apps) {
     echo $code .= '</div></div>';
 }
 
-function sb_docs_link($id = '', $class = 'sb-docs') {
+function sb_docs_link($id = '', $class = 'sb-docs')
+{
     if (!sb_is_cloud() || defined('SB_CLOUD_DOCS')) {
         echo '<a href="' . (sb_is_cloud() ? SB_CLOUD_DOCS : 'https://board.support/docs') . $id . '" class="' . $class . '" target="_blank"><i class="sb-icon-help"></i></a>';
     }
