@@ -1233,6 +1233,11 @@ function get_users_registrations_count($start_date = null,$end_date = null)
     ];
 }
 
+function  get_count_of_total_tickets() { // Get total Created tickets
+    $res_created = sb_db_get("SELECT COUNT(*) AS total FROM sb_tickets");
+    return $total_created = (int)$res_created['total'];
+}
+
 function get_tickets_count($start_date = null,$end_date = null)
 {
     $start_date = sb_db_escape($start_date);
@@ -1257,9 +1262,14 @@ function get_tickets_count($start_date = null,$end_date = null)
 
     $date_labels = [];
     $date_labels2 = [];
+    $weekday_labels = [];
     foreach ($period as $date) {
-        $date_labels[$date->format('d/m/Y')] = 0;
-        $date_labels2[$date->format('d/m/Y')] = 0;
+        $date_key = $date->format('d/m/Y');
+        $weekday = $date->format('D'); // Returns Mon, Tue, Wed, etc.
+
+        $date_labels[$date_key] = 0;
+        $date_labels2[$date_key] = 0;
+        $weekday_labels[$weekday] = 0;
     }
 
     // Query to get count of tickets per day
@@ -1270,11 +1280,22 @@ function get_tickets_count($start_date = null,$end_date = null)
     ";
     $result = sb_db_get($query,false);
 
+    // Query to get count of total tickets resolved/closed 
+    $query3 = "SELECT  COUNT(*) as total_tickets_count
+        FROM sb_tickets
+    ";
+    $total_tickets_created = get_count_of_total_tickets();
+
     // Fill result into date_labels
     foreach ($result as $key => $val) {
         $date_key = date('d/m/Y', strtotime($val['date']));
         if (array_key_exists($date_key, $date_labels)) {
             $date_labels[$date_key] = (int)$val['count'];
+        }
+
+        $weekday = date('D', strtotime($val['date']));
+        if (array_key_exists($weekday, $weekday_labels)) {
+            $weekday_labels[$weekday] = (int)$val['count'];
         }
     }
     // Query to get count of tickets resolved/closed per day
@@ -1284,6 +1305,13 @@ function get_tickets_count($start_date = null,$end_date = null)
         GROUP BY DATE(updated_at)
     ";
     $result2 = sb_db_get($query2,false);
+
+    // Query to get count of total tickets resolved/closed 
+    $query3 = "SELECT  COUNT(*) as total_resolved_tickets_count
+        FROM sb_tickets
+        WHERE status_id = 5 
+    ";
+    $resolved_tickets_count = sb_db_get($query3,true);
 
     // Fill result into date_labels2
     foreach ($result2 as $key => $val) {
@@ -1300,13 +1328,135 @@ function get_tickets_count($start_date = null,$end_date = null)
             "title" => "Tickets count",
             "description" => "Count of ticket created and tickets resolved in given time span.",
             "tickets_data" => $date_labels,
-             "resolved_ticket_data" => $date_labels2,
+            "tickets_weekday_data" => $weekday_labels,
+            "total_tickets_count" => $total_tickets_created,
+            "resolved_ticket_data" => $weekday_labels,
+            "resolved_tickets_count" => $resolved_tickets_count['total_resolved_tickets_count'],
             "table" => ["Date", "Count"],
             "table_inverse" => true,
         ]
     ];
 }
 
+function get_total_users_count($start_date = null,$end_date = null)
+{
+    $start_date = sb_db_escape($start_date);
+    $end_date = sb_db_escape($end_date);
+
+    // Validate dd/mm/yyyy format
+    if (!preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $start_date) || !preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $end_date)) {
+    return ['error' => false, 'message' => 'Invalid date format. Use YYYY-MM-DD'];
+    }
+
+
+    // Convert dd/mm/yyyy to yyyy-mm-dd
+    $start_date = DateTime::createFromFormat('d/m/Y', $start_date)->format('Y-m-d');
+    $end_date = DateTime::createFromFormat('d/m/Y', $end_date)->format('Y-m-d');
+
+    // Create date range array
+    $period = new DatePeriod(
+        new DateTime($start_date),
+        new DateInterval('P1D'),
+        (new DateTime($end_date))->modify('+1 day') // Include end date
+    );
+
+    $date_labels = [];
+
+    foreach ($period as $date) {
+        $date_labels[$date->format('d/m/Y')] = 0;
+    }
+
+    // Query to get count of tickets per day
+    $query = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_users
+        WHERE user_type = 'user' AND DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(creation_time)
+    ";
+    $result = sb_db_get($query,false);
+
+    
+    // Fill result into date_labels
+    foreach ($result as $row) {
+        $date_key = date('d/m/Y', strtotime($row['date']));
+        if (array_key_exists($date_key, $date_labels)) {
+            $date_labels[$date_key] = (int)$row['count'];
+        }
+    }
+
+
+    $query2 = 'SELECT count(*) as total_users_count FROM sb_users  WHERE user_type = "user"';
+    $totalUsers = sb_db_get($query2,true);
+
+    return $response = [
+        "success",
+        [
+            "title" => "Total Users count",
+            "description" => "Count of total registers users.",
+            "total_users_count" => $totalUsers['total_users_count'],
+            "data" => $date_labels,
+        ]
+    ];
+}
+
+function get_total_conversations_count($start_date = null,$end_date = null)
+{
+    $start_date = sb_db_escape($start_date);
+    $end_date = sb_db_escape($end_date);
+
+    // Validate dd/mm/yyyy format
+    if (!preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $start_date) || !preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $end_date)) {
+    return ['error' => false, 'message' => 'Invalid date format. Use YYYY-MM-DD'];
+    }
+
+
+    // Convert dd/mm/yyyy to yyyy-mm-dd
+    $start_date = DateTime::createFromFormat('d/m/Y', $start_date)->format('Y-m-d');
+    $end_date = DateTime::createFromFormat('d/m/Y', $end_date)->format('Y-m-d');
+
+    // Create date range array
+    $period = new DatePeriod(
+        new DateTime($start_date),
+        new DateInterval('P1D'),
+        (new DateTime($end_date))->modify('+1 day') // Include end date
+    );
+
+    $date_labels = [];
+
+    foreach ($period as $date) {
+        $date_labels[$date->format('d/m/Y')] = 0;
+    }
+
+    // Query to get count of tickets per day
+    $query = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_conversations
+        WHERE DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(creation_time)
+    ";
+    $result = sb_db_get($query,false);
+
+    
+    // Fill result into date_labels
+    foreach ($result as $row) {
+        $date_key = date('d/m/Y', strtotime($row['date']));
+        if (array_key_exists($date_key, $date_labels)) {
+            $date_labels[$date_key] = (int)$row['count'];
+        }
+    }
+
+
+    $query2 = 'SELECT count(*) as total_conversations_count FROM sb_conversations';
+    $totalConversations = sb_db_get($query2,true);
+
+    return $response = [
+        "success",
+        [
+            "title" => "Total conversations count",
+            "description" => "Count of total conversations.",
+            "total_conversations_count" => $totalConversations['total_conversations_count'],
+            "data" => $date_labels,
+        ]
+    ];
+}
 function get_tickets_yearly_count()
 {
     // Get last 12 months from today
@@ -1352,14 +1502,14 @@ function get_tickets_yearly_count()
     foreach ($months as $info) {
         $data[$info['label']] = $info['count'];
     }
-
     // Get total Created tickets
     $res_created = sb_db_get("SELECT COUNT(*) AS total FROM sb_tickets");
-    $total_created = (int)$res_created['total'];
+    $total_tickets_created = get_count_of_total_tickets();
 
     // Mock Resolved and Pending
-    $total_resolved = round($total_created * 0.4);
-    $total_pending = $total_created - $total_resolved;
+    $res_resolved = sb_db_get("SELECT COUNT(*) AS total FROM sb_tickets where status_id = 5");
+    $total_resolved = (int)$res_resolved['total'];
+    $total_pending = $total_tickets_created - $total_resolved;
 
     // Final response
    return $response = [
@@ -1368,9 +1518,9 @@ function get_tickets_yearly_count()
             "title" => "Ticket Support Board",
             "description" => "Ticket Support Board widget counts.",
             "data" => $data,
-            "Created" => $total_created,
-            "Resolved" => $total_resolved,
-            "Pending" => $total_pending
+            "created" => $total_tickets_created,
+            "resolved" => $total_resolved,
+            "pending" => $total_pending
         ]
     ];
 }
