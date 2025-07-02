@@ -607,12 +607,20 @@ function sb_ticket_edit_box()
         }
 
         .sb-scroll-area .user-initials,
-        .sb-top-bar .user-initials {
+        .sb-top-bar .user-initials
+        {
             width: 45px;
             height: 45px;
             line-height: 45px;
             position: absolute;
             left: 0;
+        }
+
+        .recent-messages .user-initials
+        {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
         }
 
         .sb-user-details .user-initials {
@@ -645,7 +653,66 @@ function sb_ticket_edit_box()
             border: 1px solid rgb(212, 212, 212);;
             background-color: rgb(248, 248, 249);
         }
-        
+
+
+        /*********  Statuses list CSS ***********/
+        .status-dropdown {
+        position: relative;
+        overflow: visible !important; /* allow dropdown to overflow */
+        }
+
+        .status-btn {
+        border: none;
+        border-radius: 20px;
+        padding: 3px 12px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        }
+
+        .arrow {
+        font-size: 12px;
+        }
+
+        .status-list, .priority-list {
+        display: none;
+        position: absolute;
+        top: 75%;
+        left: 0;
+        min-width: 170px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        z-index: 9999;
+        padding: 6px 0;
+        margin: 0;
+        list-style: none;
+        }
+
+        .status-list li, .priority-list li {
+        padding: 8px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 15px;
+        transition: background 0.15s;
+        }
+
+        .status-list li:hover, .priority-list li:hover {
+        background: #f5f5f5;
+        }
+
+        .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1914,14 +1981,14 @@ function sb_component_admin() {
                                     <h2 class="title">Setting</h2>
                                 </div>
                                 <div class="header-right">
-                                    <div class="notification">
+                                    <!--div class="notification">
                                         <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
                                     <div class="notification">
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
-                                    </div>
+                                    </div-->
                                     <div class="sb-admin-nav-right user_menu user-profile user_avatar">
                                         <a class="sb-profile">
                                             <img class="avatar_img" src="" data-name="" />
@@ -1985,8 +2052,8 @@ function sb_component_admin() {
                                                             <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Active Users</h3>
-                                                            <p>8,000</p>
+                                                            <h3>Total Users</h3>
+                                                            <p class="total-users"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
@@ -1994,61 +2061,6 @@ function sb_component_admin() {
                                                             <canvas class="mt-0" id="active_users_chart"></canvas>
                                                         </div>
                                                         <script>
-                                                            const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
-                                                            const gradient2 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient2.addColorStop(0, 'rgba(72, 255, 112, 0.2)');
-                                                            gradient2.addColorStop(1, 'rgba(72, 255, 112, 0)');
-                                                            new Chart(active_usersCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#45B369',
-                                                                        backgroundColor: gradient2,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
@@ -2063,73 +2075,19 @@ function sb_component_admin() {
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Tickets Created</h3>
-                                                            <p>3,200</p>
+                                                            <p class="total-tickets-created">3,200</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
                                                         <div class="ticket_created_chart">
                                                             <canvas class="mt-0" id="ticket_created_chart"></canvas>
                                                         </div>
-                                                        <script>
-                                                            const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
-                                                            const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
-                                                            gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
-                                                            new Chart(ticket_createdCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#f4941e',
-                                                                        backgroundColor: gradient3,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
-                                                        </script>
+                                                        <!-- <script>
+                                                            
+                                                        </script> -->
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>18%</span> this week</div>
+                                                <div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div>
                                             </div>
                                         </section>
                                         <section class="dashboard-metrics">
@@ -2142,7 +2100,7 @@ function sb_component_admin() {
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Ticket Resolved</h3>
-                                                            <p>2,700</p>
+                                                            <p class="ticket-resolved"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
@@ -2150,61 +2108,6 @@ function sb_component_admin() {
                                                             <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
                                                         </div>
                                                         <script>
-                                                            const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
-                                                            const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient4.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
-                                                            gradient4.addColorStop(1, 'rgba(231, 110, 241, 0)');
-                                                            new Chart(ticket_resolvedCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#8252E9',
-                                                                        backgroundColor: gradient4,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
                                                         </script>
                                                     </div>
                                                 </div>
@@ -2286,7 +2189,7 @@ function sb_component_admin() {
                                                     </script>
                                                 </div> -->
                                                 </div>
-                                                <div class="metric-increase">Improved by <span>12%</span> this week</div>
+                                                
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
@@ -2363,7 +2266,7 @@ function sb_component_admin() {
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Consistent this week</div>
+                                                
                                             </div>
                                         </section>
                                         <section class="main-charts">
@@ -2383,21 +2286,21 @@ function sb_component_admin() {
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Created</strong></div>
-                                                            <div>1,200</div>
+                                                            <div class="tickets-created"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Resolved</strong></div>
-                                                            <div>9,50</div>
+                                                            <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <i class="fa-solid fa-ticket" style="color: #000;"></i>
                                                         <div>
                                                             <div><strong>Pending</strong></div>
-                                                            <div>1,500</div>
+                                                            <div class="tickets-pending"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2406,60 +2309,7 @@ function sb_component_admin() {
                                                     <canvas id="monthlyBarChart"></canvas>
                                                 </div>
                                                 <script>
-                                                    const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
-                                                    new Chart(barCtx, {
-                                                        type: 'bar',
-                                                        data: {
-                                                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                            datasets: [{
-                                                                label: 'Users',
-                                                                data: [85000, 68000, 39000, 47000, 59000, 49000, 41000, 47000, 42000, 60000, 29000, 51000],
-                                                                backgroundColor: '#4285F4',
-                                                                borderRadius: 6,
-                                                                barThickness: 10
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            responsive: true,
-                                                            plugins: {
-                                                                legend: {
-                                                                    display: false
-                                                                },
-                                                                tooltip: {
-                                                                    callbacks: {
-                                                                        label: function(context) {
-                                                                            return `${context.raw.toLocaleString()} users`;
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            scales: {
-                                                                x: {
-                                                                    grid: {
-                                                                        display: false
-                                                                    },
-                                                                    ticks: {
-                                                                        color: '#888',
-                                                                        font: {
-                                                                            size: 12
-                                                                        }
-                                                                    }
-                                                                },
-                                                                y: {
-                                                                    grid: {
-                                                                        drawBorder: false,
-                                                                        color: '#eee',
-                                                                        lineWidth: 1
-                                                                    },
-                                                                    ticks: {
-                                                                        callback: value => value / 1000 + 'k',
-                                                                        color: '#aaa'
-                                                                    },
-                                                                    beginAtZero: true
-                                                                }
-                                                            }
-                                                        }
-                                                    });
+                                                    
                                                 </script>
                                             </div>
                                         </section>
@@ -2526,7 +2376,7 @@ function sb_component_admin() {
                                                 </script>
                                             </div>
                                         </section>
-                                        <section class="main-charts mb-3">
+                                        <section class="main-charts mb-3 d-none">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Campaigns</h6>
@@ -2589,26 +2439,28 @@ function sb_component_admin() {
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Customer Overview</h6>
-                                                    <select class="form-select form-select-sm w-auto">
-                                                        <option>Yearly</option>
+                                                    <select id="customer-overview" class="form-select form-select-sm w-auto">
+                                                        <option value="month" selected>Last Month</option>
+                                                        <option value="year">Last Year</option>
                                                         <!-- <option>Monthly</option> -->
                                                     </select>
                                                 </div>
                                                 <!-- Donut Chart Block -->
                                                 <div class="overview_chart">
                                                     <ul class="legend" style="list-style: none; padding: 0;">
-                                                        <li><span class="total"></span> Total: 500</li>
-                                                        <li><span class="new"></span> New: 500</li>
-                                                        <li><span class="active"></span> Active: 1500</li>
+                                                        <span class="filter-range"></span>
+                                                        <li><span class="total"></span><label></label></li>
+                                                        <li><span class="new"></span><label></label></li>
+                                                        <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
                                                     </ul>
                                                     <div id="chart-container">
                                                         <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
                                                         <div class="chart-center">
                                                             <p class="mb-1"><strong>Customer Report</strong></p>
-                                                            <pre>1500</pre>
+                                                            <pre></pre>
                                                         </div>
                                                     </div>
-                                                    <script>
+                                                    <!-- <script>
                                                         const ctx = document.getElementById('donutChart').getContext('2d');
                                                         new Chart(ctx, {
                                                             type: 'doughnut',
@@ -2634,7 +2486,7 @@ function sb_component_admin() {
                                                                 }
                                                             }
                                                         });
-                                                    </script>
+                                                    </script> -->
                                                 </div>
                                             </div>
                                         </section>
@@ -2649,51 +2501,8 @@ function sb_component_admin() {
                                         </div>
                                         <div class="seprator"></div>
                                         <div class="recent card p-3">
-                                            <ul class="list-unstyled">
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Chandara" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Chandara Kiev</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">5m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Samuel" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Samuel Queueee</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">41m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3 mb-6">
-                                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laurenz" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Laurenz Jumowa</div>
-                                                        <div class="sub_head2 mb-3">Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum....</div>
-                                                        <small class="text-muted">2h ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
-                                                <li class="d-flex g-3">
-                                                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Chandara" class="avatar" />
-                                                    <div>
-                                                        <div class="head2 mb-2">Chandara Kiev</div>
-                                                        <div class="sub_head2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut...</div>
-                                                        <small class="text-muted">5m ago</small>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <button class="reply-btn">Reply</button>
-                                                    </div>
-                                                </li>
+                                            <ul class="recent-messages list-unstyled" style="min-height:254px;">
+                                                No massge found
                                             </ul>
                                         </div>
                                         <div class="div"></div>
@@ -2845,6 +2654,44 @@ function sb_component_admin() {
                                         <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
                                         <div class="seprator"></div>
+                                        <?php
+                                        function sb_get_priorities()
+                                        {
+                                            $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                            return $priorities;
+                                        }
+                                        function sb_get_statues()
+                                        {
+                                            $status = sb_db_get('SELECT * FROM ticket_status', false);
+                                            return $status;
+                                        }
+                                        $statues = sb_get_statues();
+                                        $priorities = sb_get_priorities();    
+                                        ?>
+                                        <div id="ticket_statues">
+                                             <ul class="status-list">
+                                            <?php 
+                                            foreach($statues as $status)
+                                            {
+                                                echo '<li data-status="'.$status['name'].'" class="" data-color="'.$status['color'].'" value="'.$status['id'].'">
+                                                    <span class="status-dot"></span> '.$status['name'].'
+                                                </li>';
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
+                                        <div id="ticket_priorities">
+                                             <ul class="priority-list">
+                                            <?php 
+                                            foreach($priorities as $priority)
+                                            {
+                                                echo '<li data-status="'.$priority['name'].'" class="" data-color="'.$priority['color'].'" value="'.$priority['id'].'">
+                                                    <span class="status-dot"></span> '.$priority['name'].'
+                                                </li>';
+                                            }
+                                            ?>
+                                            </ul>
+                                        </div>
                                         <div class="new_table sb-area-tickets-dash">
                                             <div class="sb-scroll-area">
                                                 <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
@@ -2856,8 +2703,8 @@ function sb_component_admin() {
                                                             <th data-field="assigned-to">
                                                                 Assigned To
                                                             </th>
-                                                            <th data-field="due-date">
-                                                                Due Date
+                                                            <th data-field="creation-date">
+                                                                Creation Date
                                                             </th>
                                                             <th data-field="status">
                                                                 <?php sb_e('Status') ?>
@@ -3367,20 +3214,6 @@ function sb_component_admin() {
                                                     <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value=""/></span></h2>
                                                 </div>
                                                 <div class="col-md-4 p-0">
-                                                    <?php
-                                                    function sb_get_priorities()
-                                                    {
-                                                        $priorities = sb_db_get('SELECT * FROM priorities', false);
-                                                        return $priorities;
-                                                    }
-                                                    function sb_get_statues()
-                                                    {
-                                                        $status = sb_db_get('SELECT * FROM ticket_status', false);
-                                                        return $status;
-                                                    }
-                                                    $statues = sb_get_statues();
-                                                    $priorities = sb_get_priorities();    
-                                                    ?>
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
                                                         <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: auto;">
                                                             <?php
@@ -3922,47 +3755,48 @@ function sb_component_admin() {
                                                                     </select>
                                                                 </div>
                                                                 <?php } ?>
-                                                                <div class="mb-3">
-                                                                    <div class="field-label">Tags</div>
-                                                                    <div class="mb-2">
-                                                                        <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
-                                                                        <div class="mr-5 tags-filter" style="">
-                                                                            <?php
-                                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                                                                $tagsHtml = '';
-                                                                                $count = count($tags);
-                                                                                if ($count > 0) 
-                                                                                {
+                                                                 <?php
+                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+                                                                $tagsHtml = '';
+                                                                $count = count($tags);
+                                                            
+                                                                if ($count > 0) 
+                                                                {
+                                                                    ?>
+                                                                    <div class="mb-3">
+                                                                        <div class="field-label">Tags</div>
+                                                                        <div class="mb-2">
+                                                                            <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                            <div class="mr-5 tags-filter" style="">
+                                                                            <select id="ticket-detail-tags-filter" name="tags[]" multiple>
+                                                                                    <?php
+                                                                                    for ($i = 0; $i < $count; $i++) {
+                                                                                    $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                    }
+                                                                                    echo $tagsHtml;
                                                                                     ?>
-                                                                                    <select id="ticket-detail-tags-filter" name="tags[]" multiple>
-                                                                                        <?php
-                                                                                        for ($i = 0; $i < $count; $i++) {
-                                                                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
-                                                                                        }
-                                                                                        echo $tagsHtml;
-                                                                                        ?>
-                                                                                    </select>
-                                                                                    <?php 
-                                                                                } 
-                                                                            ?>
-                                                                            
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="sb-td-tags tag-badges">
+                                                                            <!-- <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Business
+                                                                            </span>
+                                                                            <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Urgent
+                                                                            </span>
+                                                                            <span class="tag-badge">
+                                                                                <i class="fas fa-check text-muted"></i>
+                                                                                Priority
+                                                                            </span> -->
                                                                         </div>
                                                                     </div>
-                                                                    <div class="sb-td-tags tag-badges">
-                                                                        <!-- <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Business
-                                                                        </span>
-                                                                        <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Urgent
-                                                                        </span>
-                                                                        <span class="tag-badge">
-                                                                            <i class="fas fa-check text-muted"></i>
-                                                                            Priority
-                                                                        </span> -->
-                                                                    </div>
-                                                                </div>
+                                                                    <?php
+                                                                } 
+                                                                ?>
+                                                                            
                                                                 <div class="mb-3 sb-input d-block">
                                                                     <div class="field-label">Priority</div>
                                                                     <!-- <div class="ticket-priority">

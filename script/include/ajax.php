@@ -153,8 +153,10 @@ function sb_ajax_execute() {
             return sb_json_response(sb_get_users_with_details($_POST['details'], sb_post('user_ids')));
         case 'update-user-to-lead':
             return sb_json_response(sb_update_user_to_lead($_POST['user_id']));
-            case 'get-dashboard-data':
+        case 'get-dashboard-data':
             return sb_json_response(sb_get_dashboad_data());
+        case 'fetch-customer-overview':
+            return sb_json_response(get_dashboad_customer_overview($_POST['filter']));
         case 'get-tickets':
             return sb_json_response(sb_get_tickets( sb_post('ticket_status'),sb_post('sorting', ['creation_time', 'DESC']), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('tags'), sb_post('source')));
         case 'convert-converversion-to-ticket':
@@ -181,6 +183,14 @@ function sb_ajax_execute() {
             return sb_json_response(update_ticket_note($_POST['note'], $_POST['ticket_id']));
         case 'get-users-registrations-count':
             return sb_json_response(get_users_registrations_count($_POST['date_start'], $_POST['date_end']));
+        case 'get-tickets-count':
+            return sb_json_response(get_tickets_count($_POST['date_start'], $_POST['date_end']));
+        case 'get-tickets-yearly-count':
+            return sb_json_response(get_tickets_yearly_count());
+        case 'get-total-users-count':
+            return sb_json_response(get_total_users_count($_POST['date_start'], $_POST['date_end']));
+        case 'get_recent_messages':
+            return sb_json_response(get_recent_messages());
         case 'add-ticket-custom-field':
              return sb_json_response(sb_add_edit_custom_field($_POST['data1']));
         case 'add-ticket-status':
@@ -199,8 +209,8 @@ function sb_ajax_execute() {
              return sb_json_response(delete_ticket_comment($_POST['ticket_id'], $_POST['comment_id']));
         case 'get-ticket-comments':
              return sb_json_response(sb_fetch_ticket_comments($_POST['ticket_id']));
-        // case 'get-ticket-statuses':
-        //      return sb_json_response(sb_get_tickets_statuses());
+        case 'get-ticket-statuses':
+             return sb_json_response(sb_get_tickets_statuses());
         case 'search-get-users':
              return sb_json_response(sb_search_get_users($_POST['q'],$_POST['type']));
         case 'upload-ticket-attachments':
@@ -209,6 +219,8 @@ function sb_ajax_execute() {
              return sb_json_response(update_ticket_attachments($_POST['ticket_id'],$_POST['attachments']));
         case 'update-ticket-status':
              return sb_json_response(update_ticket_status($_POST['ticket_id'],$_POST['ticketStatus']));
+        case 'update-ticket-priority':
+             return sb_json_response(update_ticket_priority($_POST['ticket_id'],$_POST['ticketPriority']));
         case 'remove-ticket-attachment':
              return sb_json_response(sb_remove_ticket_attachment($_POST['attachment_id'],$_POST['ticket_id']));
         case 'get-conversations':
