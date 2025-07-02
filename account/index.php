@@ -90,7 +90,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     $shopify = defined('SHOPIFY_CLIENT_ID') ? super_get_user_data('shopify_shop', get_active_account_id()) : false;
     echo '<script>var messages_volume = [' . implode(',', membership_volume()) . ']; var membership = { quota: ' . $membership['quota'] . ', count: ' . $membership['count'] . ', expired: ' . ($expired ? 'true' : 'false') . (isset($membership['quota_agents']) ? (', quota_agents: ' . $membership['quota_agents'] . ', count_agents: ' . $membership['count_agents']) : '') . ', credits: ' . $membership['credits'] . ' }; var CLOUD_USER_ID = ' . account()['user_id'] . '; var CLOUD_CURRENCY = "' . strtoupper(membership_currency()) . '"; var TWILIO_SMS = ' . (defined('CLOUD_TWILIO_SID') && !empty(CLOUD_TWILIO_SID) ? 'true' : 'false') . '; var external_integration = "' . ($shopify ? 'shopify' : '') . '";</script>' . PHP_EOL; ?>
     <div class="sb-account-box sb-admin sb-loading">
-        <div class="sb-top-bar">
+        <div class="sb-top-bar py-4">
             <div>
                 <h2>
                     <img src="<?php echo SB_CLOUD_BRAND_ICON ?>" />
