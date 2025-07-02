@@ -9804,6 +9804,21 @@ a.sb-btn-white.sb-loading:hover:before,
   background: unset;
 }
 
+.sb-account-box .ul_account li {
+  border-radius: 6px;
+  border-bottom: none;
+  padding: 0 10px;
+  margin-bottom: 8px !important;
+  color: rgb(86, 96, 105);
+  font-weight: 500 !important;
+  font-size: 13px !important;
+}
+.sb-account-box .ul_account li.sb-active, .sb-account-box .ul_account li:hover {
+  color: #155CFD !important;
+  background: #E5EAF0;
+  border-radius: 6px;
+}
+
 .sb-area-reports_new .sb-tab {
   height: calc(100vh - 170px) !important;
 }
@@ -11640,14 +11655,19 @@ a.sb-btn-white.sb-loading:hover:before,
   text-transform: capitalize;
   font-weight: 500;
   font-size: 16px;
-  color: #194bc1;
+  color: #194bc1 !important;
   cursor: pointer;
   font-family: Manrope;
+}
+.sb-admin-box_new .btn-cancel-reset-password {
+  font-size: 13px;
+  text-align: end;
+  margin: 4px 0 24px 0;
 }
 .sb-admin-box_new .login-button {
   background-color: #1d4ec3;
   height: 45px;
-  width: 100%;
+  width: -webkit-fill-available;
   border-radius: 10px;
   color: white;
   font-weight: 600;
