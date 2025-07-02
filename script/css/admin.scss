@@ -6790,6 +6790,27 @@ a.sb-btn-white,
     }
 }
 
+.sb-account-box {
+    .ul_account {
+        li {
+            border-radius: 6px;
+            border-bottom: none;
+            padding: 0 10px;
+            margin-bottom: 8px !important;
+            color: rgb(86, 96, 105);
+            font-weight: 500 !important;
+            font-size: 13px !important;
+
+            &.sb-active,
+            &:hover {
+                color: $color-blue !important;
+                background: #E5EAF0;
+                border-radius: 6px;
+            }
+        }
+    }
+}
+
 .sb-area-reports_new {
     .sb-tab {
         height: calc(100vh - 170px) !important;
@@ -8885,7 +8906,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         font-family: Manrope;
     }
-    .btn-cancel-reset-password{
+
+    .btn-cancel-reset-password {
         font-size: 13px;
         text-align: end;
         margin: 4px 0 24px 0;

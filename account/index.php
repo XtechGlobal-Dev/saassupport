@@ -108,7 +108,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                 <div>
                     <?php sb_e('Installation') ?>
                 </div>
-                <ul>
+                <ul class="ul_account">
                     <li id="nav-installation" class="sb-active">
                         <?php sb_e('Installation') ?>
                     </li>
