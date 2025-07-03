@@ -4340,6 +4340,12 @@ td.sb-offline:after {
   border-bottom: none;
   width: 150px;
 }
+.settings_new .sb-scroll-area .setting_sidebar #tab-apps {
+  display: none;
+}
+.settings_new .sb-scroll-area .setting_sidebar #tab-dialogflow {
+  display: none;
+}
 .settings_new .sb-content {
   height: calc(100vh - 40px);
 }
