@@ -8726,6 +8726,7 @@ a.sb-btn-white.sb-loading:hover:before,
   display: block;
   transition: all 0.4s;
   position: relative;
+  border: 1px solid black;
 }
 .sb-color-palette span:hover {
   opacity: 0.7;
