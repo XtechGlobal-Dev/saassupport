@@ -629,7 +629,7 @@ function box_chart()
                         <div class="login-form sb-main">
                             <h1 class="login-title">Login</h1>
                             <p class="login-description">
-                                Enter the email address and password to log in to your account
+                                Enter the Business Email Address and Password to log in to your account
                             </p>
                             <div class="form-fields">
                                 <div class="field-container mb-4">

@@ -476,6 +476,7 @@
             });
 
             $(box_login).on('click', '.btn-login', function (e) {
+                alert('here');
                 let email = box_login.find('#email input').val();
                 let password = box_login.find('#password input').val();
                 let errors_area = box_login.find('.sb-errors-area');
