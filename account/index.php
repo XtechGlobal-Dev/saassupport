@@ -667,6 +667,9 @@ function box_chart()
                                 <div class="no-account">Don't have an account?</div>
                                 <div class="register-link btn-registration-box">Register</div>
                             </div>
+                            <p class="disclaimer mt-2">
+                                <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="">Terms Of Service</a> and <a target="_blank" href="">Privacy Policy</a>.<br />&copy; 2022-2024 board.support. All rights reserved.')) ?>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -774,9 +777,7 @@ function box_chart()
             </div>
         </div>
     </div>
-    <p class="disclaimer">
-        <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="https://board.support/terms-of-service">Terms Of Service</a> and <a target="_blank" href="https://board.support/privacy">Privacy Policy</a>.<br />&copy; 2022-2024 board.support. All rights reserved.')) ?>
-    </p>
+
 <?php } ?>
 
 <?php function box_referral()

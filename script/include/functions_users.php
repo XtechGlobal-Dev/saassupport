@@ -842,7 +842,7 @@ function sb_search_get_users($input = null,$type = null) {
         $where = '(user_type = "user" OR user_type = "lead" OR user_type = "visitor")';
     } 
 
-    $query = 'SELECT id, first_name, last_name,email FROM sb_users where '.$where.' AND (email LIKE "%'.$input.'%" OR first_name LIKE "%'.$input.'%" OR last_name LIKE "%'.$input.'%" OR CONCAT(first_name, " ", last_name) LIKE "%'.$input.'%")  ORDER BY first_name LIMIT 20';
+    $query = 'SELECT id, first_name, last_name,email,user_type FROM sb_users where '.$where.' AND (email LIKE "%'.$input.'%" OR first_name LIKE "%'.$input.'%" OR last_name LIKE "%'.$input.'%" OR CONCAT(first_name, " ", last_name) LIKE "%'.$input.'%")  ORDER BY first_name LIMIT 20';
     $users = sb_db_get($query, false);
     return $users;
 }
@@ -1330,7 +1330,7 @@ function get_tickets_count($start_date = null,$end_date = null)
             "tickets_data" => $date_labels,
             "tickets_weekday_data" => $weekday_labels,
             "total_tickets_count" => $total_tickets_created,
-            "resolved_ticket_data" => $weekday_labels,
+            "resolved_ticket_data" => $date_labels2,
             "resolved_tickets_count" => $resolved_tickets_count['total_resolved_tickets_count'],
             "table" => ["Date", "Count"],
             "table_inverse" => true,
