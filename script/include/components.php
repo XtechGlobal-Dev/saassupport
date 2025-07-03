@@ -885,6 +885,7 @@ function sb_ticket_edit_box()
             //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
         });
 
+        const capitalizedType = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         $('#select-agent').select2({
             placeholder: 'Type and search...',
             ajax: {
@@ -909,7 +910,7 @@ function sb_ticket_edit_box()
                         return {
                             results: users.map(user => ({
                                 id: user.id,
-                                text: user.first_name + ' ' + user.last_name,
+                                text: user.first_name + ' ' + user.last_name + ' ('+capitalizedType(user.user_type)+')',
                             }))
                         };
                     }
@@ -2318,14 +2319,14 @@ function sb_component_admin()
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Agent Satisfaction</h3>
-                                                            <p>92%</p>
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
                                                         <div class="agent_chart">
                                                             <canvas class="mt-0" id="agent_chart"></canvas>
                                                         </div>
-                                                        <script>
+                                                        <!--script>
                                                             const agentCtx = document.getElementById('agent_chart').getContext('2d');
                                                             const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
                                                             gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
@@ -2381,7 +2382,7 @@ function sb_component_admin()
                                                                     }
                                                                 }
                                                             });
-                                                        </script>
+                                                        </script-->
                                                     </div>
                                                 </div>
 
@@ -4565,7 +4566,7 @@ function sb_component_admin()
                                     </li> -->
                                 </ul>
                             </div>
-                            <div class="sb-content sb-scroll-area pt-4" style="height: calc(100% - 40px);">
+                            <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
