@@ -403,7 +403,7 @@ function sb_ticket_edit_box()
                     <span class="d-block mb-2">Attachments</span>
                     <div class="custom-file">
                         <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments1" multiple>
-                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
                     </div>
                 </div>
             </div>
@@ -1008,10 +1008,41 @@ function sb_ticket_edit_box()
             // Array to store uploaded files
             let uploadedFiles = [];
 
+            const maxFileSizeMB = 3; // Maximum size in MB per file
+            const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
             // File upload handling
             document.getElementById('ticket-attachments').addEventListener('change', function(event) {
                 const files = event.target.files;
                 if (files.length === 0) return;
+
+                let isValid = true;
+                let errorMessage = '';
+
+                if (files.length === 0) return;
+
+                Array.from(files).forEach(file => {
+                    const fileSizeMB = file.size / (1024 * 1024);
+
+                    if (fileSizeMB > maxFileSizeMB) {
+                        isValid = false;
+                        errorMessage += `File "${file.name}" exceeds ${maxFileSizeMB} MB.\n`;
+                    }
+
+                    if (!allowedFileTypes.includes(file.type)) {
+                        isValid = false;
+                        errorMessage += `File "${file.name}" is not an allowed type.\n`;
+                    }
+                });
+
+                if (!isValid) {
+                    //alert(errorMessage);
+                    $(this).val(''); // Clear the input
+                    $('.files-error').html(errorMessage);
+                    return;
+                }
+                else{
+                    $('.files-error').html('');
+                }
 
                 // Create FormData object
                 const formData = new FormData();
@@ -1200,6 +1231,7 @@ function sb_ticket_edit_box()
                     // For images, add a thumbnail preview
                     if (fileType === 'image') {
                         previewContent = `
+                        <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
                             <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
                         </div>
@@ -1208,9 +1240,6 @@ function sb_ticket_edit_box()
                                 <div class="text-truncate">${file.original_filename}</div>
                                 <small class="text-muted">${formatFileSize(file.file_size)}</small>
                             </div>
-                            <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
-                                <i class="bi bi-x"></i>
-                            </button>
                         </div>
                     `;
                     }
@@ -1242,9 +1271,38 @@ function sb_ticket_edit_box()
                 }
             }
 
+           // const maxFileSizeMB = 5; // Maximum size in MB per file
+           // const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
             document.getElementById('ticket-attachments1').addEventListener('change', function(event) {
                 const files = event.target.files;
+                let isValid = true;
+                let errorMessage = '';
+
                 if (files.length === 0) return;
+
+                Array.from(files).forEach(file => {
+                    const fileSizeMB = file.size / (1024 * 1024);
+
+                    if (fileSizeMB > maxFileSizeMB) {
+                        isValid = false;
+                        errorMessage += `File "${file.name}" exceeds ${maxFileSizeMB} MB.\n`;
+                    }
+
+                    if (!allowedFileTypes.includes(file.type)) {
+                        isValid = false;
+                        errorMessage += `File "${file.name}" is not an allowed type.\n`;
+                    }
+                });
+
+                if (!isValid) {
+                    //alert(errorMessage);
+                    $(this).val(''); // Clear the input
+                    $('.files-error').html(errorMessage);
+                    return;
+                }
+                else{
+                    $('.files-error').html('');
+                }
 
                 // Create FormData object
                 const formData = new FormData();
@@ -1370,6 +1428,7 @@ function sb_ticket_edit_box()
                     // For images, add a thumbnail preview
                     if (fileType === 'image') {
                         previewContent = `
+                        <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
                             <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
                         </div>
@@ -1378,9 +1437,6 @@ function sb_ticket_edit_box()
                                 <div class="text-truncate">${file.original_filename}</div>
                                 <small class="text-muted">${formatFileSize(file.file_size)}</small>
                             </div>
-                            <button type="button" class="btn btn-sm btn-danger remove-file" data-index="${uploadedFiles.indexOf(file)}">
-                                <i class="bi bi-x"></i>
-                            </button>
                         </div>
                     `;
                     }
@@ -3887,7 +3943,8 @@ function sb_component_admin()
                                     <div class="custom-file">
                                         <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
                                         <input type="hidden" id="reopendTicketAttachmentsPopup" value="0">
-                                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 10MB</small>
+                                        <span class="text-danger files-error mt-2 d-block"></span>
+                                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
