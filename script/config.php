@@ -37,18 +37,19 @@ define('CLOUD_DB_PASSWORD', '');
 // define('CLOUD_DB_PASSWORD', 'Jshs03#sks');
 define('CLOUD_DB_HOST', 'localhost');
 //define('CLOUD_URL', 'https://saassupport.supermaxai.com');
-define('CLOUD_URL', 'http://localhost/saassupport');
+define('CLOUD_URL', 'http://localhost/nexleon');
 
 define('SB_CLOUD', true);
 define('SB_CLOUD_KEY', 'usnxlshchs');
-define('SB_CLOUD_PATH', 'C:/xampp/htdocs/saassupport/');
+// define('SB_CLOUD_PATH', 'C:/xampp/htdocs/saassupport/');
+define('SB_CLOUD_PATH', 'C:/xampp/htdocs/nexleon/');
 //define('SB_CLOUD_PATH', '/home/saassupport.supermaxai.com/public_html');
 define('SB_CLOUD_BRAND_LOGO', CLOUD_URL.'logo.svg');
 define('SB_CLOUD_BRAND_LOGO_LINK', CLOUD_URL);
 define('SB_CLOUD_BRAND_ICON', CLOUD_URL.'/script/media/cropped-XTECH-FAVICON-192x192.png');
 define('SB_CLOUD_BRAND_ICON_PNG', CLOUD_URL.'/script/media/cropped-XTECH-FAVICON-192x192.png');
 define('SB_CLOUD_BRAND_NAME', 'XTec Global');
-define('SB_CLOUD_MANIFEST_URL', 'https://saassupport.supermaxai.com/manifest.json');
+define('SB_CLOUD_MANIFEST_URL', 'http://localhost/nexleon/manifest.json');
 define('SB_CLOUD_MEMBERSHIP_TYPE', 'messages-agents'); //messages, users, agents
 
 define('PAYMENT_PROVIDER', 'stripe'); //rapyd, verifone, yoomoney, razorpay, manual

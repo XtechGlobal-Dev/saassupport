@@ -1032,7 +1032,15 @@
   display: block !important;
   opacity: 1;
 }
-
+  .required-label::after {
+    content: " *";
+    color: red;
+    margin-left: 4px;
+  }
+  .input-error {
+    border: 1px solid red !important;
+    outline: none;
+}
 .sb-no-results-active > div:not(.sb-no-results) {
   display: none !important;
 }
@@ -11542,7 +11550,7 @@ a.sb-btn-white.sb-loading:hover:before,
   font-size: 18px;
   line-height: 24px;
   text-align: center;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   color: #fff;
 }
 .sb-admin-box_new .top_right {
