@@ -3289,9 +3289,9 @@ div ul.sb-menu,
 .sb-select ul {
   position: absolute;
   margin: 0;
-  z-index: 5;
-  right: 30px;
-  top: 60px;
+  z-index: 10;
+  right: 12px;
+  top: 50px;
 }
 div ul.sb-menu.sb-active,
 .sb-select ul.sb-active {
@@ -4348,8 +4348,14 @@ td.sb-offline:after {
   border-bottom: none;
   width: 150px;
 }
+.settings_new .sb-scroll-area .setting_sidebar #tab-apps {
+  display: none;
+}
+.settings_new .sb-scroll-area .setting_sidebar #tab-dialogflow {
+  display: none;
+}
 .settings_new .sb-content {
-  height: calc(100vh - 40px);
+  height: calc(100vh - 150px);
 }
 .settings_new .sb-content .save_settings {
   display: flex;
@@ -8734,7 +8740,7 @@ a.sb-btn-white.sb-loading:hover:before,
   display: block;
   transition: all 0.4s;
   position: relative;
-  border: 1px solid black;
+  border: 1px solid rgb(212, 212, 212);
 }
 .sb-color-palette span:hover {
   opacity: 0.7;
