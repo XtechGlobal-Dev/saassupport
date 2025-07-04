@@ -319,6 +319,8 @@ function account_save($details) {
 }
 
 function account_reset_password($email = false, $token = false, $password = false) {
+    echo 'email'.$email;
+    exit;
     if ($email && !$password) {
         $email = db_escape($email);
         $token = db_get('SELECT token FROM users WHERE email = "' . $email . '" LIMIT 1');
