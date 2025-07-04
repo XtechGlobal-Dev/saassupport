@@ -99,7 +99,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
             </div>
             <div>
                 <a class="sb-btn sb-btn-dashboard" href="../">
-                    <?php sb_e('Dashboard') ?>
+                   <i class="fa-solid fa-gauge mr-2" aria-hidden="true"></i> <?php sb_e('Go to Dashboard') ?>
                 </a>
             </div>
         </div>
@@ -145,7 +145,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     if ($shopify) {
                         echo '<p>' . str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('Customize your store and enable {R} in the app embeds section.')) . '</p><a class="sb-btn sb-btn-white" href="https://' . $shopify . '/admin/themes/current/editor?context=apps&activateAppId=' . SHOPIFY_APP_ID . '/sb" target="_blank">' . sb_('Preview in theme') . '</a>';
                     } else {
-                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting"><textarea id="embed-code" readonly></textarea></div>';
+                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting"><textarea id="embed-code" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button><span id="copy-tooltip" class="tooltipcode">Copied!</span></div>';
                     }
                     if (defined('DIRECT_CHAT_URL')) {
                         $link = DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']);
@@ -163,7 +163,9 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <?php echo str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('The API token is a required for using the {R} WEB API.')) ?>
                     </p>
                     <div class="sb-setting">
-                        <input value="<?php echo account()['token'] ?>" readonly />
+                        <input value="<?php echo account()['token'] ?>" readonly name="token" id="token-input" />
+                        <button id="copy-token-btn" class="copy-button sb-btn ml-2" type="button">Copy</button>
+                        <span id="token-tooltip" class="token-tooltip">Copied!</span>
                     </div>
                 </div>
                 <div id="tab-membership">
