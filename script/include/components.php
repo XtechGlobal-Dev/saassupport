@@ -3040,7 +3040,7 @@ function sb_component_admin()
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="user">
-                                            <?php sb_e('Users') ?>
+                                            <?php sb_e('Customers') ?>
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="lead">
