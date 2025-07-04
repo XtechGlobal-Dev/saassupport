@@ -2793,9 +2793,9 @@ div ul.sb-menu,
 .sb-select ul {
     position: absolute;
     margin: 0;
-    z-index: 5;
-    right: 30px;
-    top: 60px;
+    z-index: 10;
+    right: 12px;
+    top: 50px;
 
     &.sb-active {
         display: block;

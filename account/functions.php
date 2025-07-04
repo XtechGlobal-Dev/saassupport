@@ -180,7 +180,8 @@ function account_registration($details) {
 
             // Support Board installation
             $response = sb_installation(['db-name' => [$db_name], 'db-user' => [$user_slug], 'db-password' => [$db_password], 'db-host' => [CLOUD_DB_HOST], 'first-name' => [$details['first_name']], 'last-name' => [$details['last_name']], 'password' => [$details['password']], 'email' => [$details['email']], 'url' => CLOUD_URL . '/script']);
-            db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","whatsapp","telegram","messenger","viber","tickets","line"]\')', false, $token);
+            //db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","whatsapp","telegram","messenger","viber","tickets","line"]\')', false, $token);
+            db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","whatsapp","tickets"]\')', false, $token);
 
             // Webhook and return
             cloud_webhook('user-registration', $details);

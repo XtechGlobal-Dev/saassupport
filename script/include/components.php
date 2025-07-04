@@ -885,6 +885,7 @@ function sb_ticket_edit_box()
             //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
         });
 
+        const capitalizedType = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         $('#select-agent').select2({
             placeholder: 'Type and search...',
             ajax: {
@@ -909,7 +910,7 @@ function sb_ticket_edit_box()
                         return {
                             results: users.map(user => ({
                                 id: user.id,
-                                text: user.first_name + ' ' + user.last_name,
+                                text: user.first_name + ' ' + user.last_name + ' ('+capitalizedType(user.user_type)+')',
                             }))
                         };
                     }
@@ -2318,14 +2319,14 @@ function sb_component_admin()
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Agent Satisfaction</h3>
-                                                            <p>92%</p>
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
                                                         <div class="agent_chart">
                                                             <canvas class="mt-0" id="agent_chart"></canvas>
                                                         </div>
-                                                        <script>
+                                                        <!--script>
                                                             const agentCtx = document.getElementById('agent_chart').getContext('2d');
                                                             const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
                                                             gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
@@ -2381,7 +2382,7 @@ function sb_component_admin()
                                                                     }
                                                                 }
                                                             });
-                                                        </script>
+                                                        </script-->
                                                     </div>
                                                 </div>
 
@@ -2394,10 +2395,10 @@ function sb_component_admin()
                                                         <h6 class="head mb-1">Ticket Support Board</h6>
                                                         <p class="sub_head">Monthly overview of support ticket activity</p>
                                                     </div>
-                                                    <select class="form-select form-select-sm w-auto">
+                                                    <!-- <select class="form-select form-select-sm w-auto">
                                                         <option>Yearly</option>
-                                                        <!-- <option>Monthly</option> -->
-                                                    </select>
+                                                        <option>Monthly</option>
+                                                    </select> -->
                                                 </div>
                                                 <div class="d-flex justify-content-center gap-3 mb-3">
                                                     <div class="button_ext">
@@ -2443,8 +2444,8 @@ function sb_component_admin()
                                                         <p class="sub_head">Week support summary</p>
                                                     </div>
                                                     <div class="d-flex flex-column align-items-end">
-                                                        <h6 class="head mb-1">120 Tickets</h6>
-                                                        <p class="green_badge">+25 new</p>
+                                                        <h6 class="head mb-1 total-tickets"><span>0</span> Tickets</h6>
+                                                        <p class="green_badge new-tickets">+<span>0</span> new</p>
                                                     </div>
                                                 </div>
                                                 <div class="ticket_activity_chart">
@@ -2573,7 +2574,7 @@ function sb_component_admin()
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-5 p-0">
+                                <div class="col-md-8 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="bg-white">
                                             <h6 class="head mb-1">Recent Messages</h6>
@@ -2587,7 +2588,7 @@ function sb_component_admin()
                                         <div class="div"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 p-0">
+                                <!-- <div class="col-md-4 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
                                             <div class="mb-5 d-flex justify-content-between align-items-center mb-3">
@@ -2597,7 +2598,7 @@ function sb_component_admin()
                                                 </div>
                                             </div>
                                             <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
-                                            <div class="chatVolChart">
+                                            <!--div class="chatVolChart">
                                                 <canvas id="chatVolChart"></canvas>
                                             </div>
                                             <script>
@@ -2677,8 +2678,8 @@ function sb_component_admin()
                                             </script>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 p-0">
+                                </div> -->
+                                <!-- <div class="col-md-3 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
                                             <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -2721,14 +2722,14 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12 p-0 my-3">
                                     <div class="px-3 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">All Tickets</h6>
                                             </div>
-                                            <p class="label_blue">View All</p>
+                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl;?>">View All</a></p>
                                         </div>
                                         <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
@@ -4565,7 +4566,7 @@ function sb_component_admin()
                                     </li> -->
                                 </ul>
                             </div>
-                            <div class="sb-content sb-scroll-area pt-4" style="height: calc(100% - 40px);">
+                            <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
