@@ -475,12 +475,12 @@ function box_chart()
                     <div class="left_section">
                         <div class="logo-container">
                             <img src="../account/media/logo.svg" alt="logo">
-                            <div class="logo-text">Nexon Helpdesk</div>
+                            <div class="logo-text">Nexleon Helpdesk</div>
                         </div>
                         <div class="laptop-image">
                             <img src="../account/media/dashboard.svg" alt="dash">
                         </div>
-                        <div class="welcome-title">Welcome to Nexon Support Desk</div>
+                        <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
                             Access your tickets, track progress, and connect with our support team — all in one place. Log in to get
                             started.
@@ -490,33 +490,34 @@ function box_chart()
                 <div class="col-md-6 top_right">
                     <div class="right_section">
                         <div class="login-form sb-main">
-                            <h1 class="login-title">Create Account</h1>
+                            <h1 class="login-title">Sign Up</h1>
                             <p class="login-description mb-4">
                                 Enter your details to create a new account
                             </p>
                             <div class="form-fields">
                                 <div class="field-container mb-3">
-                                    <div class="field-label">First Name</div>
+                                    <div class="field-label"><label class="required-label" for="first_name">First Name</label></div>
                                     <div id="first_name" class="input-wrapper sb-input">
                                         <input type="text" placeholder="Enter first name" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="field-container mb-3">
-                                    <div class="field-label">Last Name</div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Last Name</label></div>
                                     <div id="last_name" class="input-wrapper sb-input">
                                         <input type="text" placeholder="Enter last name" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="field-container mb-3">
-                                    <div class="field-label">Email Address</div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Business email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="Enter email address" class="form-input" />
+                                        <input type="email" placeholder="Business email" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="field-container mb-3">
-                                    <div class="field-label">Password</div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Password</label></div>
                                     <div id="password" class="input-wrapper sb-input">
-                                        <input type="password" placeholder="Enter your password" class="form-input" id="password-field" />
+                                        <input type="password" placeholder="8 Characters or more" class="form-input" id="password-field-signup" />
+                                        <i class="far fa-eye" id="togglePasswordsignup" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -527,9 +528,10 @@ function box_chart()
                                     </div>
                                 </div>
                                 <div class="field-container">
-                                    <div class="field-label">Confirm Password</div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Confirm Password</label></div>
                                     <div id="password_2" class="input-wrapper sb-input">
-                                        <input type="password" placeholder="Enter confirm password" class="form-input" id="password-field" />
+                                        <input type="password" placeholder="Enter confirm password" class="form-input" id="password-field-confirm" />
+                                        <i class="far fa-eye" id="togglePasswordconfirm" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -547,10 +549,10 @@ function box_chart()
                                     <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And Privacy Policy</span>
                                 </label>
                             </div>
-                            <button class="login-button btn-register">Create Account</button>
+                            <button class="login-button btn-register">Sign Up</button>
                             <div class="register-prompt">
                                 <div class="no-account">Already have an account?</div>
-                                <div class="register-link sb-btn-login-box">Login</div>
+                                <div class="register-link sb-btn-login-box">Log In</div>
                             </div>
                         </div>
                         <div class="loading-screen">
@@ -612,15 +614,17 @@ function box_chart()
                     <div class="left_section">
                         <div class="logo-container">
                             <img src="../account/media/logo.svg" alt="logo">
-                            <div class="logo-text">Nexon Helpdesk</div>
+                            <div class="logo-text">Nexleon Helpdesk</div>
                         </div>
                         <div class="laptop-image">
                             <img src="../account/media/dashboard.svg" alt="dash">
                         </div>
-                        <div class="welcome-title">Welcome to Nexon Support Desk</div>
+                        <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
-                            Access your tickets, track progress, and connect with our support team — all in one place. Log in to get
-                            started.
+                            
+                        Smart Support Powered by AI — Fast. Reliable. Effortless.
+
+                        Experience next-level customer support with our AI-driven helpdesk. Access your tickets, track real-time progress, and get faster resolutions with intelligent assistance guiding every step. Log in now to get started.
                         </div>
                     </div>
                 </div>
@@ -632,16 +636,18 @@ function box_chart()
                                 Enter the Business Email Address and Password to log in to your account
                             </p>
                             <div class="form-fields">
-                                <div class="field-container mb-4">
-                                    <div class="field-label">email address</div>
+                                <div class="field-container mb-2">
+                                    <div class="field-label"><label class="required-label" for="email">Business Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="Enter your email address" class="form-input" />
+                                        <input type="email" placeholder="name@work-email.com" id="businessemail" class="form-input" />
                                     </div>
                                 </div>
-                                <div class="field-container">
-                                    <div class="field-label">password</div>
+                                <div class="sb-errors-area m-0 text-end emailerror"></div>
+                                <div class="field-container mb-2">
+                                    <div class="field-label"> <label class="required-label" id="password-field" for="password-field">Password</label></div>
                                     <div id="password" class="input-wrapper sb-input">
-                                        <input type="password" placeholder="Enter your password" class="form-input" id="password-field" />
+                                        <input type="password" placeholder="8 Characters or more"   minlength="8" class="form-input" id="passwordfield" />
+                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -651,7 +657,8 @@ function box_chart()
                                         </div> -->
                                     </div>
                                 </div>
-                                <div class="sb-errors-area m-0 text-end"></div>
+                                <div class="sb-errors-area m-0 text-end passworderror"></div>
+                                <div class="sb-errors-area m-0 text-end error"></div>
                             </div>
                             <div class="auth-options">
                                 <label class="remember-me">
@@ -709,12 +716,12 @@ function box_chart()
                     <div class="left_section">
                         <div class="logo-container">
                             <img src="../account/media/logo.svg" alt="logo">
-                            <div class="logo-text">Nexon Helpdesk</div>
+                            <div class="logo-text">Nexleon Helpdesk</div>
                         </div>
                         <div class="laptop-image">
                             <img src="../account/media/dashboard.svg" alt="dash">
                         </div>
-                        <div class="welcome-title">Welcome to Nexon Support Desk</div>
+                        <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
                             No worries — reset it here to regain access to your tickets, track progress, and reconnect with our support team.
                         </div>
@@ -723,22 +730,22 @@ function box_chart()
                 <div class="col-md-6 top_right">
                     <div class="right_section">
                         <div class="login-form sb-main">
-                            <h1 class="login-title">Reset password</h1>
+                            <h1 class="login-title">Forget Password?</h1>
                             <p class="login-description">
-                                Enter your email below, you will receive an email with instructions on how to reset your password
+                                No worries! Just enter your email and we’ll send you login instructions
                             </p>
                             <div class="form-fields">
                                 <div class="field-container">
-                                    <div class="field-label">email address</div>
+                                    <div class="field-label"><label class="required-label" for="email">Business Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="Enter your email address" class="form-input" />
+                                        <input type="email" placeholder="Business Email" id="email-forgot" class="form-input" />
                                     </div>
                                 </div>
                             </div>
                             <div class="forgot-password btn-cancel-reset-password">
-                                Cancel
+                                Go back to login
                             </div>
-                            <button class="login-button sb-btn btn-reset-password">Reset password</button>
+                            <button class="login-button sb-btn btn-reset-password">Send Reset Email</button>
                         </div>
                     </div>
                 </div>
