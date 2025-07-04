@@ -639,12 +639,12 @@ function box_chart()
                                 <div class="field-container mb-2">
                                     <div class="field-label"><label class="required-label" for="email">Business Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="name@work-email.com" class="form-input" />
+                                        <input type="email" placeholder="name@work-email.com" id="businessemail" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="sb-errors-area m-0 text-end emailerror"></div>
                                 <div class="field-container mb-2">
-                                    <div class="field-label"> <label class="required-label" for="password-field">Password</label></div>
+                                    <div class="field-label"> <label class="required-label" id="password-field" for="password-field">Password</label></div>
                                     <div id="password" class="input-wrapper sb-input">
                                         <input type="password" placeholder="8 Characters or more"   minlength="8" class="form-input" id="passwordfield" />
                                         <i class="far fa-eye" id="togglePassword" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
@@ -733,9 +733,9 @@ function box_chart()
                             </p>
                             <div class="form-fields">
                                 <div class="field-container">
-                                    <div class="field-label">Business email</div>
+                                    <div class="field-label"><label class="required-label" for="email">Business Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="Business Email" class="form-input" />
+                                        <input type="email" placeholder="Business Email" id="email-forgot" class="form-input" />
                                     </div>
                                 </div>
                             </div>
