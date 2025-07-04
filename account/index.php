@@ -99,7 +99,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
             </div>
             <div>
                 <a class="sb-btn sb-btn-dashboard" href="../">
-                    <?php sb_e('Dashboard') ?>
+                   <i class="fa-solid fa-gauge mr-2" aria-hidden="true"></i> <?php sb_e('Go to Dashboard') ?>
                 </a>
             </div>
         </div>
@@ -145,7 +145,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     if ($shopify) {
                         echo '<p>' . str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('Customize your store and enable {R} in the app embeds section.')) . '</p><a class="sb-btn sb-btn-white" href="https://' . $shopify . '/admin/themes/current/editor?context=apps&activateAppId=' . SHOPIFY_APP_ID . '/sb" target="_blank">' . sb_('Preview in theme') . '</a>';
                     } else {
-                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting"><textarea id="embed-code" readonly></textarea></div>';
+                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting"><textarea id="embed-code" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button><span id="copy-tooltip" class="tooltipcode">Copied!</span></div>';
                     }
                     if (defined('DIRECT_CHAT_URL')) {
                         $link = DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']);
@@ -156,14 +156,18 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         echo '<h2 class="addons-title">' . sb_('Articles link') . '</h2><p>' . sb_('Use this unique URL to access the articles page. See the docs for other display options.') . '</p><div class="sb-setting sb-direct-link"><input onclick="window.open(\'' . $link . '\')" value="' . $link . '" readonly /></div>';
                     }
                     ?>
-                    <h2 class="addons-title">
-                        <?php sb_e('API token') ?>
-                    </h2>
-                    <p>
-                        <?php echo str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('The API token is a required for using the {R} WEB API.')) ?>
-                    </p>
-                    <div class="sb-setting">
-                        <input value="<?php echo account()['token'] ?>" readonly />
+                    <div class="api_token" style="display:none">
+                        <h2 class="addons-title">
+                            <?php sb_e('API token') ?>
+                        </h2>
+                        <p>
+                            <?php echo str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('The API token is a required for using the {R} WEB API.')) ?>
+                        </p>
+                        <div class="sb-setting">
+                            <input value="<?php echo account()['token'] ?>" readonly name="token" id="token-input" />
+                            <button id="copy-token-btn" class="copy-button sb-btn ml-2" type="button">Copy</button>
+                            <span id="token-tooltip" class="token-tooltip">Copied!</span>
+                        </div>
                     </div>
                 </div>
                 <div id="tab-membership">
@@ -200,32 +204,32 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     <p>
                         <?php sb_e('Update here your profile information.') ?>
                     </p>
-                    <div id="first_name" data-type="text" class="sb-input">
+                    <div id="first_name" data-type="text" class="sb-input" >
                         <span>
                             <?php sb_e('First name') ?>
                         </span>
-                        <input type="text" />
+                        <input type="text" placeholder="First name"  />
                     </div>
-                    <div id="last_name" data-type="text" class="sb-input">
+                    <div id="last_name" data-type="text" class="sb-input"  >
                         <span>
                             <?php sb_e('Last name') ?>
                         </span>
-                        <input type="text" />
+                        <input type="text" placeholder="Last name" />
                     </div>
-                    <div id="email" data-type="text" class="sb-input sb-type-input-button">
+                    <div id="email" data-type="text" class="sb-input sb-type-input-button" >
                         <span>
                             <?php sb_e('Email') ?>
                         </span>
-                        <input type="email" readonly />
+                        <input type="email" readonly placeholder="Email"  />
                         <a class="sb-btn btn-verify-email">
-                            <?php sb_e('Verify') ?>
+                            <?php sb_e('Verify Email') ?>
                         </a>
                     </div>
-                    <div id="phone" data-type="text" class="sb-input sb-type-input-button">
+                    <div id="phone" data-type="text" class="sb-input sb-type-input-button" > 
                         <span>
                             <?php sb_e('Phone') ?>
                         </span>
-                        <input type="tel" />
+                        <input type="tel" placeholder="Phone number"/>
                         <a class="sb-btn btn-verify-phone">
                             <?php sb_e('Verify') ?>
                         </a>
@@ -234,13 +238,13 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <span>
                             <?php sb_e('Password') ?>
                         </span>
-                        <input type="password" value="12345678" />
+                        <input type="password" value="12345678" placeholder="Password" />
                     </div>
-                    <div id="company_details" data-type="text" class="sb-input">
+                    <div id="company_details" data-type="text" class="sb-input"  >
                         <span>
                             <?php sb_e('Company details') ?>
                         </span>
-                        <input type="text" />
+                        <input type="text" placeholder="Company or organization name" />
                     </div>
                     <hr />
                     <div class="sb-flex">
@@ -248,7 +252,8 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                             <i class="sb-icon-check"></i>
                             <?php sb_e('Save changes') ?>
                         </a>
-                        <a id="delete-account" class="sb-btn-text">
+                        <a id="delete-account" class="sb-btn sb-btn-white sb-icon">
+                             <i class="sb-icon-delete"></i>
                             <?php sb_e('Delete account') ?>
                         </a>
                     </div>
