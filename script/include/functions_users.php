@@ -2171,7 +2171,7 @@ function sb_return_saved_ticket_row($ticket_id) {
     }
         ////// replace department id with name
 
-    $ticketTags = isset($tickets['tag_names']) ? explode('||',$tickets['tag_names']) : [];
+    $ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
     $ticketTagsWithColor = [];
     foreach ($ticketTags as $tag) {
         if (isset($tagsArr[$tag])) {
