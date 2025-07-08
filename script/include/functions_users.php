@@ -851,7 +851,7 @@ function sb_get_dashboad_data()
 {
     return ['sucess'=>true,'msg'=>'Dashboard data fecthed sucessfully'];
 }
-function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $tags = false, $source = false) {
+function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], $search = '', $pagination = 0, $extra = false, $post_ids = false, $department = false, $tag = false, $tags = false, $source = false, $user_id = 0) {
     $query = '';
     $query_search = '';
     $ticketStatusArr = [];
@@ -868,6 +868,18 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     if($ticket_status && $ticket_status != 'all')
     {
         $query = ' WHERE t.status_id = "' . $ticketStatusArr[$ticket_status]. '"';
+    }
+
+    if($user_id)
+    {
+        if($query != '')
+        {
+            $query .= ' AND t.contact_id = "' . $user_id. '"';
+        }
+        else
+        {
+            $query .= ' WHERE t.contact_id = "' . $user_id. '"';
+        }
     }
 
     if($tags)
@@ -2171,7 +2183,7 @@ function sb_return_saved_ticket_row($ticket_id) {
     }
         ////// replace department id with name
 
-    $ticketTags = isset($tickets['tag_names']) ? explode('||',$tickets['tag_names']) : [];
+    $ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
     $ticketTagsWithColor = [];
     foreach ($ticketTags as $tag) {
         if (isset($tagsArr[$tag])) {

@@ -5205,7 +5205,7 @@ td.sb-offline:after {
     #push-notifications-onesignal-api-key,
     #push-notifications-sw-path {
         &:not(.sb-active) {
-            display: none !important;
+           /* display: none !important;*/
         }
     }
 }
@@ -8358,7 +8358,7 @@ a.sb-btn-white,
     #amazon-s3,
     #whatsapp-twilio-btn.sb-active+#whatsapp-cloud-sync-btn,
     #whatsapp-twilio-btn.sb-active+#whatsapp-cloud-sync-btn+#whatsapp-cloud-reconnect-btn {
-        display: none !important;
+        // display: none !important;
     }
 
     #google-client-id,
@@ -8366,14 +8366,14 @@ a.sb-btn-white,
     #google-refresh-token,
     #open-ai-key {
         &:not(.sb-active) {
-            display: none !important;
+            // display: none !important;
         }
     }
 
     #whatsapp-cloud-key,
     #whatsapp-twilio-btn {
         &:not(.sb-active) {
-            display: none !important;
+            // display: none !important;
         }
     }
 
@@ -8382,7 +8382,7 @@ a.sb-btn-white,
         .sb-setting,
         .sb-main .sb-title,
         .sb-btn-app-puchase {
-            display: none !important;
+            // display: none !important;
         }
     }
 

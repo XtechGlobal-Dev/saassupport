@@ -5087,12 +5087,12 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                         </div>
                         <div class="sb-edit-box sb-ticket-list" id="customFieldForm">
                             <div id="title" data-type="text" class="sb-input">
-                                <span>Title</span>
+                                <span>Title<span class="required" style="color:red">*</span></span>
                                 <input type="text" class="form-control" name="title" required>
                             </div>
 
                             <div id="type" data-type="select" class="sb-input sb-input-select">
-                                <span>Type</span>
+                                <span>Type<span class="required" style="color:red">*</span></span>
                                 <select class="form-control" name="type" required>
                                     <option value="text" selected>Text</option>
                                     <option value="textarea">Textarea</option>
@@ -5116,7 +5116,7 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                             </div>
 
                             <div id="order" data-type="number" class="sb-input">
-                                <span>Order</span>
+                                <span>Order<span class="required" style="color:red">*</span></span>
                                 <input type="number" class="form-control" name="order" value="0">
                             </div>
 

@@ -1533,6 +1533,48 @@
             return code;
         }
 
+        renderTickets(tickets)
+        {
+            let code = '';
+            tickets.forEach(ticket => {
+                code += `<li data-conversation-status="2" data-conversation-id="3" data-department="" class="sb-active" style="border-bottom: 1px solid rgb(212, 212, 212);margin-top: 5px;padding: 5px 10px;">
+                    <div class="sb-conversation-item" data-user-id="8">
+                        <img loading="lazy" src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="50px">
+                        <div>
+                            <span class="sb-name">${ticket.subject}</span><span class="sb-time"><span data-today="" class="ml-5">${ticket.creation_time}</span></span>
+                        </div>
+                        <div class="sb-message">sdfsdf</div>
+                    </div>
+                </li>`;
+            });
+
+            return code;
+        }
+
+        getUserTickets()
+        {
+            let code = '';
+            if (this.id) 
+            {
+                SBF.ajax({
+                    function: 'get-tickets',
+                    user_id:this.id,
+                }, (response) => {
+                    if(response)
+                    {
+                        const html = this.renderTickets(response);
+                        console.log('wwwwww',html);
+                        $('.tickets-list .sb-user-tickets').html(html);
+                    }
+                        
+                });
+            } else {
+                SBF.error('Missing user ID', 'SBUser.getConversations');
+            }
+        }
+
+
+
         // Get single conversation
         getFullConversation(conversation_id = false, onSuccess = false) {
             if (conversation_id !== false) {
@@ -2988,7 +3030,7 @@
 
         // Populate the dashboard with all conversations
         populateConversations: function (onSuccess = false) {
-            alert('hhhrr');
+            console.log('hhhrr');
             if (!this.is_busy_populate && activeUser()) {
                 this.is_busy_populate = true;
                 setTimeout(() => { this.is_busy_populate = false }, 5000);
@@ -6702,6 +6744,20 @@
             $(this).parent().removeAttr('data-value').css('background-image', '');
             e.preventDefault();
             return false;
+        });
+
+        
+        $(document).on('click','.header_left h2',function()
+        {
+            $(this).siblings().removeClass('sb-active');
+            $(this).addClass('sb-active');
+
+            $('.tickets-list-area').hide();
+            $('.sb-tickets-area').hide();
+
+            $('.'+$(this).data('id')).show();
+
+            main.find('.tickets-list-area').html(activeUser().getUserTickets());
         });
     }
 
