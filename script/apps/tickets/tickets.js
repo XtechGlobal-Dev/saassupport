@@ -89,7 +89,7 @@
                     break;
                 case 'new-ticket':
                     let names = { 'title': 'Title', 'message': 'Message', 'panel': 'Create a new ticket', 'button': 'Create a new ticket' };
-                    this.showSidePanels(false);
+                    this.showSidePanels(true); // Show the side panels by default
                     if (SBF.setting('tickets_names')) {
                         let names_new = SBF.setting('tickets_names');
                         for (var key in names_new) {
@@ -260,7 +260,7 @@
 
         // Initialize the tickets area
         init: function () {
-
+            console.log(activeUser());
             main = $('body').find('.sb-tickets');
             main_panel = main.find(' > div > .sb-panel-main');
             panel = main_panel.find('.sb-panel');
@@ -273,6 +273,9 @@
             width = main.width();
             cache_agents[SBF.setting('bot_id')] = { name: SBF.setting('bot_name'), image: SBF.setting('bot_image') };
             ticketsInit();
+
+            main.find('.user_profile .sb_name').html(activeUser()?.name);
+            main.find('.user_profile .user_type').html(activeUser()?.type);
 
             if (!main.length) {
                 return;
@@ -486,7 +489,6 @@
         * # CONVERSATION AREA
         * ----------------------------------------------------------
         */
-
         main_panel.on('click', '.sb-create-ticket', function () {
             let errors = false;
             editor.removeClass('sb-error');
@@ -554,7 +556,7 @@
                                 conversations.push(new SBConversation([new SBMessage(response[i])], response[i]));
                             }
                         }
-                        left_conversations.html(count ? activeUser().getConversationsCode(conversations) : '<p>' + sb_('No results found.') + '</p>');
+                        left_conversations.html(count ? activeUser().getConversationsCode(conversations) : '<p>' + sb_('No results found1.') + '</p>');
                     });
                 } else {
                     SBChat.populateConversations();
@@ -584,7 +586,7 @@
             SBTickets.showPanel('edit-profile');
         });
 
-        main.on('click', '.sb-profile-menu [data-value="logout"]', function () {
+        main.on('click', '.logout', function () {
             SBF.logout(false);
             SBTickets.showPanel('login');
         });
