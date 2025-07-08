@@ -110,7 +110,7 @@ function sb_profile_edit_box()
                     </div>
                     <?php sb_departments('select') ?>
                     <div id="first_name" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('First name') ?>
                         </span>
                         <input type="text" required />
@@ -122,13 +122,13 @@ function sb_profile_edit_box()
                         <input type="text" />
                     </div>
                     <div id="password" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Password') ?>
                         </span>
                         <input type="password" />
                     </div>
                     <div id="email" data-type="email" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Email') ?>
                         </span>
                         <input type="email" />
@@ -3803,7 +3803,7 @@ function sb_component_admin()
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <div class="field-label">Assignee</div>
+                                                                    <div class="field-label required-label">Assignee</div>
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div class="d-flex align-items-center gap-2 ticket-assignee">
                                                                             <img class="assignee-img" src="" alt="Assignee">
@@ -3821,7 +3821,7 @@ function sb_component_admin()
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <div class="field-label">Reporter</div>
+                                                                    <div class="field-label required-label">Reporter</div>
                                                                     <div class="d-flex align-items-center gap-2 ticket-reporter">
                                                                         <img class="reporter-img" src="" alt="Reporter" style="width: 40px;">
                                                                         <span class="user-initials avatar_initials" style="display:none;">
@@ -3890,7 +3890,7 @@ function sb_component_admin()
                                                                 ?>
 
                                                                 <div class="mb-3 sb-input d-block">
-                                                                    <div class="field-label">Priority</div>
+                                                                    <div class="field-label required-label">Priority</div>
                                                                     <!-- <div class="ticket-priority">
                                                                         High
                                                                     </div>
@@ -5087,12 +5087,12 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                         </div>
                         <div class="sb-edit-box sb-ticket-list" id="customFieldForm">
                             <div id="title" data-type="text" class="sb-input">
-                                <span>Title<span class="required" style="color:red">*</span></span>
+                                <span class="required-label">Title</span>
                                 <input type="text" class="form-control" name="title" required>
                             </div>
 
                             <div id="type" data-type="select" class="sb-input sb-input-select">
-                                <span>Type<span class="required" style="color:red">*</span></span>
+                                <span class="required-label">Type</span>
                                 <select class="form-control" name="type" required>
                                     <option value="text" selected>Text</option>
                                     <option value="textarea">Textarea</option>
@@ -5116,7 +5116,7 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                             </div>
 
                             <div id="order" data-type="number" class="sb-input">
-                                <span>Order<span class="required" style="color:red">*</span></span>
+                                <span class="required-label">Order</span>
                                 <input type="number" class="form-control" name="order" value="0">
                             </div>
 
