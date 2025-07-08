@@ -3280,9 +3280,9 @@ div ul.sb-menu,
 .sb-select ul {
   position: absolute;
   margin: 0;
-  z-index: 5;
-  right: 30px;
-  top: 60px;
+  z-index: 10;
+  right: 12px;
+  top: 50px;
 }
 div ul.sb-menu.sb-active,
 .sb-select ul.sb-active {
@@ -4463,6 +4463,9 @@ div ul.sb-menu .li:hover,
   height: 50px;
   border-radius: 50%;
 }
+.user_header .header_right .user_profile .user_info {
+  text-transform: capitalize;
+}
 .user_header .header_right .user_profile .user_info .sb_name {
   font-weight: 600;
   font-size: 16px;
@@ -4651,8 +4654,8 @@ div ul.sb-menu .li:hover,
 
 */
 .sb-tickets .sb-panel-left {
-  width: 400px;
-  min-width: 400px;
+  width: 375px;
+  min-width: 375px;
   border-right: 1px solid rgb(212, 212, 212);
   background-color: #fff;
   position: relative;
@@ -4723,8 +4726,8 @@ div ul.sb-menu .li:hover,
 
 */
 .sb-tickets .sb-panel-right {
-  min-width: 400px;
-  width: 400px;
+  min-width: 375px;
+  width: 375px;
   border-left: 1px solid rgb(212, 212, 212);
   background-color: rgb(245, 247, 250);
   display: flex;
