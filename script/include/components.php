@@ -2210,7 +2210,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #45b369;">
-                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-user-plus" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/total-user.svg" alt="Total User">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Total Users</h3>
@@ -2225,14 +2226,22 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div-->
+                                               <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-users-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #f4941e;">
-                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/tickets-created.svg" alt="Tickets Created">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Tickets Created</h3>
@@ -2248,14 +2257,22 @@ function sb_component_admin()
                                                         </script> -->
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-tickets-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                             <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #8252E9;">
-                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                        <div class="metric-icon" style="background-color: #0684ff;">
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Ticket Resolved</h3>
@@ -2270,7 +2287,14 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                         </section>
                                         <section class="dashboard-metrics">
@@ -2279,7 +2303,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #8252E9;">
-                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/total-conversations.svg" alt="Total Conversations">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Total Conversations</h3>
@@ -2294,14 +2319,22 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
+                                                <!-- code update  -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-conversations-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #DE3ACE;">
-                                                            <i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3> Avg. Response Time</h3>
@@ -2379,7 +2412,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #00B8F2;">
-                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Agent Satisfaction</h3>
@@ -2466,21 +2500,24 @@ function sb_component_admin()
                                                 </div>
                                                 <div class="d-flex justify-content-center gap-3 mb-3">
                                                     <div class="button_ext">
-                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
+                                                        <img src="./script/media/created.svg" alt="Created">
                                                         <div>
                                                             <div><strong>Created</strong></div>
                                                             <div class="tickets-created"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
-                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
+                                                        <img src="./script/media/resolved.svg" alt="Resolved">
                                                         <div>
                                                             <div><strong>Resolved</strong></div>
                                                             <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
-                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
+                                                        <img src="./script/media/pending.svg" alt="Pending">
                                                         <div>
                                                             <div><strong>Pending</strong></div>
                                                             <div class="tickets-pending"></div>
