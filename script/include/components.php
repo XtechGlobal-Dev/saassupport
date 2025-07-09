@@ -2066,52 +2066,70 @@ function sb_component_admin()
                 </div> -->
             </div>
             <main>
-                <?php
-                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-                $ticketUrl = dirname(SB_URL) . '?area=tickets';
-                $header = '<header>
-                                 <div class="header-left">
-                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
-                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                        Back to Tickets
-                                    </a>
-                                    <h2 class="title">Setting</h2>
+                <!-- new code update -->
+                    <?php
+                        // You can set these dynamically from user session or DB
+                        $user_name = "Peter Parker"; // Dynamic
+                        $user_image = "./path-to-profile.jpg"; // Dynamic
+                        $user_role = "Super Admin"; // Static
+
+                        $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                        $ticketUrl = dirname(SB_URL) . '?area=tickets';
+
+                        $header = '<header>
+                            <div class="header-left">
+                                <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    Back to Tickets
+                                </a>
+                                <h2 class="title">Setting</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <img src="./script/media/notification.svg" alt="notification">
+                                    <span class="badge">0</span>
                                 </div>
-                                <div class="header-right">
-                                    <!--div class="notification">
-                                        <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                        <span class="badge">0</span>
-                                    </div>
-                                    <div class="notification">
-                                        <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                        <span class="badge">0</span>
-                                    </div-->
-                                    <div class="sb-admin-nav-right user_menu user-profile user_avatar">
-                                        <a class="sb-profile">
-                                            <img class="avatar_img" src="" data-name="" />
-                                            <span class="user-initials avatar_initials" style="display:none;">
+                                <!-- User Profile Dropdown -->
+                                <div class="sb-admin-nav-right user_menu user-profile user_avatar">
+                                    <a class="sb-profile">
+                                        <img class="avatar_img" src="' . $user_image . '" alt="user" />
+                                        <span class="user-initials avatar_initials" style="display:none;">
                                                 <span class="initials avatar_name"></span>
                                             </span>
-                                        </a>
-                                        <ul class="sb-menu">
+                                        <div class="user-details">
+                                            <span class="sb-name">' . $user_name . '</span>
+                                            <span class="sb-role">' . $user_role . '</span>
+                                        </div>
+                                    </a>
+                                    <ul class="sb-menu">
                                             <li class="menu_head">
-                                                <img class="avatar_img" src=""  data-name="" />
+                                                <img class="avatar_img" src="' . $user_image . '" alt="user" />
                                                 <span class="user-initials avatar_initials" style="display:none;">
-                                                    <span class="initials avatar_name"></span>
-                                                </span>
-                                                <span class="sb-name"></span>
+                                                <span class="initials avatar_name"></span>
+                                            </span>
+                                                <div class="user-details">
+                                                    <span class="sb-name">' . $user_name . '</span>
+                                                    <span class="sb-role">' . $user_role . '</span>
+                                                </div>
                                             </li>
-                                            <li data-value="status" class="sb-online">Online</li>';
-                if ($is_admin) {
-                    $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
-                        . ($is_cloud ? sb_cloud_account_menu() : '');
-                }
-                $header .= '<li data-value="logout">Logout</li>
-                                        </ul>
-                                    </div>
+                                        <li data-value="status" class="sb-online">Online</li>';
+                                        if ($is_admin) {
+                                            $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
+                                                . ($is_cloud ? sb_cloud_account_menu() : '');
+                                        }
+                        $header .= '</ul>
                                 </div>
-                            </header>';
-                ?>
+                                <!-- Logout Button -->
+                                <div data-value="logout" class="logout">
+                                    <img src="./script/media/logout-icon.svg" alt="logout">
+                                </div>
+                            </div>
+                        </header>';
+                    ?>
+                <!-- new code update -->
+                 <!-- old code -->
+
+                <!-- old code -->
 
                 <div class="sb-area-dashboard">
                     <main>

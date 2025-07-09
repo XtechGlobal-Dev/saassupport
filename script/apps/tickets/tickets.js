@@ -89,7 +89,8 @@
                     break;
                 case 'new-ticket':
                     let names = { 'title': 'Title', 'message': 'Message', 'panel': 'Create a new ticket', 'button': 'Create a new ticket' };
-                    this.showSidePanels(false);
+                    this.showSidePanels(true); // Show the side panels by default
+                    console.log('SBTickets.showPanel', name);
                     if (SBF.setting('tickets_names')) {
                         let names_new = SBF.setting('tickets_names');
                         for (var key in names_new) {
@@ -260,7 +261,6 @@
 
         // Initialize the tickets area
         init: function () {
-
             main = $('body').find('.sb-tickets');
             main_panel = main.find(' > div > .sb-panel-main');
             panel = main_panel.find('.sb-panel');
