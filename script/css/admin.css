@@ -8484,7 +8484,7 @@ td.sb-offline:after {
 .sb-setting #push-notifications-onesignal-app-id:not(.sb-active),
 .sb-setting #push-notifications-onesignal-api-key:not(.sb-active),
 .sb-setting #push-notifications-sw-path:not(.sb-active) {
-  display: none !important;
+  /* display: none !important;*/
 }
 
 .repeater-item .sb-enlarger label {
@@ -11181,49 +11181,6 @@ a.sb-btn-white.sb-loading:hover:before,
 .sb-cloud #whatsapp-cloud-sync-btn,
 .sb-cloud #whatsapp-cloud-reconnect-btn {
   display: flex;
-}
-.sb-cloud #admin-title,
-.sb-cloud #login-icon,
-.sb-cloud #login-message,
-.sb-cloud #envato-purchase-code,
-.sb-cloud #envato-validation,
-.sb-cloud #email-piping-disable-cron,
-.sb-cloud #auto-updates,
-.sb-cloud #pusher,
-.sb-cloud #cookie-domain,
-.sb-cloud #system-requirements,
-.sb-cloud #sb-path,
-.sb-cloud #tab-aecommerce,
-.sb-cloud #admin-icon,
-.sb-cloud #push-notifications-provider,
-.sb-cloud #push-notifications-id,
-.sb-cloud #push-notifications-key,
-.sb-cloud #tab-whmcs,
-.sb-cloud #tab-perfex,
-.sb-cloud #tab-ump,
-.sb-cloud #tab-armember,
-.sb-cloud #tab-martfury,
-.sb-cloud #logs,
-.sb-cloud .sb-version,
-.sb-cloud #amazon-s3,
-.sb-cloud #whatsapp-twilio-btn.sb-active + #whatsapp-cloud-sync-btn,
-.sb-cloud #whatsapp-twilio-btn.sb-active + #whatsapp-cloud-sync-btn + #whatsapp-cloud-reconnect-btn {
-  display: none !important;
-}
-.sb-cloud #google-client-id:not(.sb-active),
-.sb-cloud #google-client-secret:not(.sb-active),
-.sb-cloud #google-refresh-token:not(.sb-active),
-.sb-cloud #open-ai-key:not(.sb-active) {
-  display: none !important;
-}
-.sb-cloud #whatsapp-cloud-key:not(.sb-active),
-.sb-cloud #whatsapp-twilio-btn:not(.sb-active) {
-  display: none !important;
-}
-.sb-cloud .sb-app-box .sb-setting,
-.sb-cloud .sb-app-box .sb-main .sb-title,
-.sb-cloud .sb-app-box .sb-btn-app-puchase {
-  display: none !important;
 }
 .sb-cloud .sb-active-app .sb-btn-app-disable {
   display: block !important;

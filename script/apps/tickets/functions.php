@@ -38,15 +38,15 @@ function sb_component_tickets()
     <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
         <header class="user_header">
             <div class="header_left">
-                <h2 class="tab sb-active">Ticket</h2>
-                <h2 class="tab">conversation</h2>
+                <h2 class="tab sb-active" data-id="sb-tickets-area">Conversations</h2>
+                <h2 class="tab" data-id="tickets-list-area">Tickets</h2>
             </div>
             <div class="header_right">
                 <div class="user_profile">
                     <img class="avatar" style="max-height: 40px;" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
                     <div class="user_info">
-                        <p class="sb_name">User007</p>
-                        <span>User</span>
+                        <p class="sb_name"></p>
+                        <span class="user_type">User</span>
                     </div>
                 </div>
                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
@@ -59,23 +59,25 @@ function sb_component_tickets()
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
                 <div class="sb-panel-left">
-                    <div class="sb-top">
-                        <div>
-                            <?php if (!sb_isset($disable_fields, 'tickets-button'))
-                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
-                            else
-                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; ?>
+                    <div class="conversation-list">
+                        <div class="sb-top">
+                            <div>
+                                <?php if (!sb_isset($disable_fields, 'tickets-button'))
+                                    echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                                else
+                                    echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; ?>
+                            </div>
+                            <div class="sb-search-btn">
+                                <i class="sb-icon sb-icon-search"></i>
+                                <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                            </div>
                         </div>
-                        <div class="sb-search-btn">
-                            <i class="sb-icon sb-icon-search"></i>
-                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
-                        </div>
+                        <ul class="sb-user-conversations sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                            <p>
+                                <?php sb_e('No results found.') ?>
+                            </p>
+                        </ul>
                     </div>
-                    <ul class="sb-user-conversations sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
-                        <p>
-                            <?php sb_e('No results found.') ?>
-                        </p>
-                    </ul>
                 </div>
             <?php } ?>
             <div class="sb-panel-main">
@@ -167,6 +169,27 @@ function sb_component_tickets()
                 echo '<i class="sb-btn-collapse sb-right sb-icon-arrow-right"></i>';
             }
             ?>
+        </div>
+        <div class="tickets-list-area" style="display:none">
+            <div class="tickets-list">
+                <div class="sb-top">
+                    <div>
+                        <?php if (!sb_isset($disable_fields, 'tickets-button'))
+                            echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                        else
+                            echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; ?>
+                    </div>
+                    <div class="sb-search-btn">
+                        <i class="sb-icon sb-icon-search"></i>
+                        <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                    </div>
+                </div>
+                <ul class="sb-user-tickets sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                    <p>
+                        <?php sb_e('No results found.') ?>
+                    </p>
+                </ul>
+            </div>
         </div>
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>

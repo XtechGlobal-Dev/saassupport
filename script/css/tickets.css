@@ -4463,6 +4463,9 @@ div ul.sb-menu .li:hover,
   height: 50px;
   border-radius: 50%;
 }
+.user_header .header_right .user_profile .user_info {
+  text-transform: capitalize;
+}
 .user_header .header_right .user_profile .user_info .sb_name {
   font-weight: 600;
   font-size: 16px;
