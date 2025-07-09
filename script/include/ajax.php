@@ -158,7 +158,7 @@ function sb_ajax_execute() {
         case 'fetch-customer-overview':
             return sb_json_response(get_dashboad_customer_overview($_POST['filter']));
         case 'get-tickets':
-            return sb_json_response(sb_get_tickets( sb_post('ticket_status'),sb_post('sorting', ['creation_time', 'DESC']), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('tags'), sb_post('source')));
+            return sb_json_response(sb_get_tickets( sb_post('ticket_status'),sb_post('sorting', ['creation_time', 'DESC']), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('ticket_id'), sb_post('category'), sb_post('tag'), sb_post('tags'), sb_post('source'), sb_post('user_id')));
         case 'convert-converversion-to-ticket':
             return sb_json_response(sb_convert_conversion_to_tickets(sb_post('conversation_id')));
         case 'count-tickets':

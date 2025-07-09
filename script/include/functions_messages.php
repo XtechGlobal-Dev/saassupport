@@ -148,6 +148,11 @@ function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false) {
     return [];
 }
 
+function get_user_tickets($user_id)
+{
+    
+}
+
 function sb_get_last_conversation_id_or_create($user_id, $status_code = 1) {
     $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE user_id = ' . sb_db_escape($user_id, true) . ' ORDER BY id DESC LIMIT 1'), 'id');
     return $conversation_id ? $conversation_id : sb_isset(sb_isset(sb_new_conversation($user_id, $status_code), 'details'), 'id');

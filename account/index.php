@@ -98,7 +98,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                 </h2>
             </div>
             <div>
-                <a class="sb-btn sb-btn-dashboard" href="../">
+                <a class="sb-btn sb-btn-dashboard" href="<?php echo CLOUD_URL ?>">
                    <i class="fa-solid fa-gauge mr-2" aria-hidden="true"></i> <?php sb_e('Go to Dashboard') ?>
                 </a>
             </div>
