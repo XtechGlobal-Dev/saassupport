@@ -7148,7 +7148,8 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card {
   border-radius: 10px;
   padding: 25px 17px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
+  border: 1px solid #D1D5DB;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
   display: flex;
@@ -7198,9 +7199,12 @@ td.sb-offline:after {
   height: 100%;
   object-fit: cover;
 }
-.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-increase {
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .increase-pill {
   font-size: 12px;
-  color: #45b369;
+  color: #45B369;
+  background-color: rgba(69, 179, 105, 0.1490196078);
+  padding: 5px;
+  border-radius: 6px;
 }
 .sb-area-dashboard main .new_container .main-charts .monthlyBarChart {
   max-width: 1000px;
@@ -7295,10 +7299,10 @@ td.sb-offline:after {
   border-radius: 8px;
   padding: 2px 15px 2px 2px;
 }
-.sb-area-dashboard main .new_container .main-charts .button_ext > i {
+.sb-area-dashboard main .new_container .main-charts .button_ext > img {
   color: #000;
   background: #F3F4F6;
-  padding: 15px;
+  padding: 10px;
   border-radius: 8px;
 }
 .sb-area-dashboard main .new_container .main-charts .green_badge {

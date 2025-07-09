@@ -3566,7 +3566,8 @@ td.sb-offline:after {
                 .metric-card {
                     border-radius: 10px;
                     padding: 25px 17px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0px 4px 30px 0px #2E2D740D;
+                    border: 1px solid #D1D5DB;
 
                     .graph_tabs {
                         display: flex;
@@ -3626,9 +3627,12 @@ td.sb-offline:after {
                         }
                     }
 
-                    .metric-increase {
+                    .increase-pill {
                         font-size: 12px;
-                        color: #45b369;
+                        color: #45B369;
+                        background-color: rgba(69, 179, 105, 0.1490196078);
+                        padding: 5px;
+                        border-radius: 6px;
                     }
                 }
             }
@@ -3747,10 +3751,10 @@ td.sb-offline:after {
                     border-radius: 8px;
                     padding: 2px 15px 2px 2px;
 
-                    >i {
+                    >img {
                         color: #000;
                         background: #F3F4F6;
-                        padding: 15px;
+                        padding: 10px;
                         border-radius: 8px;
                     }
                 }
