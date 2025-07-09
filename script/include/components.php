@@ -2128,6 +2128,52 @@ function sb_component_admin()
                     ?>
                 <!-- new code update -->
                  <!-- old code -->
+                <!--?php
+                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                $ticketUrl = dirname(SB_URL) . '?area=tickets';
+                $header = '<header>
+                                 <div class="header-left">
+                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                        Back to Tickets
+                                    </a>
+                                    <h2 class="title">Setting</h2>
+                                </div>
+                                <div class="header-right">
+                                    div class="notification">
+                                        <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
+                                        <span class="badge">0</span>
+                                    </div>
+                                    <div class="notification">
+                                        <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
+                                        <span class="badge">0</span>
+                                    </div>
+                                    <div class="sb-admin-nav-right user_menu user-profile user_avatar">
+                                        <a class="sb-profile">
+                                            <img class="avatar_img" src="" data-name="" />
+                                            <span class="user-initials avatar_initials" style="display:none;">
+                                                <span class="initials avatar_name"></span>
+                                            </span>
+                                        </a>
+                                        <ul class="sb-menu">
+                                            <li class="menu_head">
+                                                <img class="avatar_img" src=""  data-name="" />
+                                                <span class="user-initials avatar_initials" style="display:none;">
+                                                    <span class="initials avatar_name"></span>
+                                                </span>
+                                                <span class="sb-name"></span>
+                                            </li>
+                                            <li data-value="status" class="sb-online">Online</li>';
+                if ($is_admin) {
+                    $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
+                        . ($is_cloud ? sb_cloud_account_menu() : '');
+                }
+                $header .= '<li data-value="logout">Logout</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>';
+                ?-->
 
                 <!-- old code -->
 
