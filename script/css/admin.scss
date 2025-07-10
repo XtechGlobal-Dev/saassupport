@@ -8779,7 +8779,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: linear-gradient(136.241deg, #0787ff 1.0251%, #0068ff 99.583%);
+        // background-image: linear-gradient(136.241deg, #0787ff 1.0251%, #0068ff 99.583%);
+        background-color: #0a73fe;
      }
 
     .left_section {
@@ -8931,8 +8932,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .checkbox:checked {
-        border-color: #0068ff;
-        background-color: #0068ff;
+        border-color: #0a73fe;
+        background-color: #0a73fe;
     }
 
     .checkbox:checked::after {
@@ -8959,7 +8960,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         text-transform: capitalize;
         font-weight: 500;
         font-size: 16px !important;
-        color: #0068ff !important;
+        color: #0a73fe !important;
         cursor: pointer;
         font-family: Manrope;
     }
@@ -8971,7 +8972,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .login-button {
-        background-color: #0068ff;
+        background-color: #0a73fe;
         height: 45px;
         // width: 100%;
         width: -webkit-fill-available;
@@ -8985,7 +8986,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         margin-bottom: 24px;
     }
     .login-button:hover{
-        background-color: #0068ff !important;
+        background-color: #0a73fe !important;
     }
 
     .register-prompt {
@@ -9094,6 +9095,35 @@ li.menu_head:hover {
     background-color: transparent !important;
 }
 // custom css header dropdown user menu 
+.disclaimer {
+  a {
+    color: #0a73fe !important;
+    text-decoration: none;
+  }
+}
+// 
+// #sb-conversations {
+//   &:hover path,
+//   &.sb-active path {
+//     stroke: black;
+//     fill: none;
+//   }
+// }
+#sb-dashboard,
+#sb-conversations,
+#sb-tickets,
+#sb-users,
+#sb-articles,
+#sb-reports,
+#sb-settings {
+  &:hover path,
+  &.sb-active path {
+    stroke: black;
+    fill: none;
+  }
+}
+
+// 
 /*
  *
  * -----------------------------------------------------------
