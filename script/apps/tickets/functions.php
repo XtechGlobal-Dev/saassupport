@@ -33,20 +33,20 @@ function sb_component_tickets()
         $css .= ' sb-rtl';
     }
 ?>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
 
     <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
-        <!-- <header class="user_header">
+        <header class="user_header">
             <div class="header_left">
-                <h2 class="tab sb-active">Ticket</h2>
-                <h2 class="tab">conversation</h2>
+                <h2 class="tab sb-active" data-id="sb-tickets-area">Conversations</h2>
+                <h2 class="tab" data-id="tickets-list-area">Tickets</h2>
             </div>
             <div class="header_right">
                 <div class="user_profile">
                     <img class="avatar" style="max-height: 40px;" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
                     <div class="user_info">
-                        <p class="sb_name">User007</p>
-                        <span>User</span>
+                        <p class="sb_name"></p>
+                        <span class="user_type">User</span>
                     </div>
                 </div>
                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
@@ -55,27 +55,29 @@ function sb_component_tickets()
                     </svg>
                 </div>
             </div>
-        </header> -->
+        </header>
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
                 <div class="sb-panel-left">
-                    <div class="sb-top">
-                        <div>
-                            <?php if (!sb_isset($disable_fields, 'tickets-button'))
-                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create Ticket') . '</div>';
-                            else
-                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; ?>
-                        </div>
-                        <div class="sb-search-btn">
-                            <i class="sb-icon sb-icon-search"></i>
-                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
-                        </div>
+                    <div class="conversation-list">
+                        <!--div class="sb-top">
+                            <div>
+                                <?php /*if (!sb_isset($disable_fields, 'tickets-button'))
+                                    echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                                else
+                                    echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */?>
+                            </div>
+                            <div class="sb-search-btn">
+                                <i class="sb-icon sb-icon-search"></i>
+                                <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                            </div>
+                        </div-->
+                        <ul class="sb-user-conversations sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                            <p>
+                                <?php sb_e('No results found.') ?>
+                            </p>
+                        </ul>
                     </div>
-                    <ul class="sb-user-conversations sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
-                        <p>
-                            <?php sb_e('No results found.') ?>
-                        </p>
-                    </ul>
                 </div>
             <?php } ?>
             <div class="sb-panel-main">
@@ -168,6 +170,106 @@ function sb_component_tickets()
             }
             ?>
         </div>
+        <div class="tickets-list-area" style="display:none">
+            <div class="sb-panel-left">
+                <div class="tickets-list">
+                    <div class="sb-top p-4">
+                        <div>
+                            <?php if (!sb_isset($disable_fields, 'tickets-button'))
+                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                            else
+                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; 
+                            ?>
+                        </div>
+                        <div class="sb-search-btn">
+                            <i class="sb-icon sb-icon-search"></i>
+                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                        </div>
+                    </div>
+                    <ul class="sb-user-tickets sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                        <p>
+                            <?php sb_e('No results found.') ?>
+                        </p>
+                    </ul>
+                </div>
+            </div>
+            <div class="sb-panel-main p-5">
+                <div>
+                    <div class="mb-2 text-muted small"><span class="user-name">Jimmy Martin</span> <span class="ms-2">raised on this <span class="ticket-creation-time">today 3:00 PM</span></span></div>
+                    <h4 class="ticket-subject">Unable to Login to My Account</h4>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <div class="mb-1 ticket-description">Hi Team,</p>
+                            <p class="mb-1">I'm trying to log in to my account but I keep getting an "Invalid Credentials" error—even though I'm sure the email and password are correct.<br>
+                            I also tried resetting the password, but didn't receive any email. Please look into this urgently.</p>
+                            <p class="mb-0">Thanks,<br>John Doe
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <strong>Comments</strong>
+                                                                                        <!-- Comments/Chat Section -->
+                        <div id="ticket-comments" class="row mt-4">
+                            <div class="col-md-12 p-0">
+                                <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                    <!-- Comments will be loaded here by JS -->
+                                </div>
+
+                                <div class="d-flex align-items-center gap-2 mt-4">
+                                    <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                    <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
+                                    <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
+
+                                    <button id="addComment" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </div>
+<!-- 
+                        <div class="mt-2 mb-3">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="me-2"><img src="https://via.placeholder.com/24" class="rounded-circle" alt="User"></span>
+                                <span class="fw-bold">Jimmy Martin</span>
+                                <span class="text-muted small ms-2">today 3:00 PM</span>
+                            </div>
+                            <div class="ms-5">Test comment</div>
+                        </div>
+                        <div class="d-flex align-items-start">
+                            <span class="me-2"><img src="https://via.placeholder.com/24" class="rounded-circle" alt="User"></span>
+                            <input type="text" class="form-control ms-2" placeholder="Add Comment">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="sb-panel-right p-4">
+                <!-- <div class="sb-top">
+                    <div class="sb-profile-menu">
+                        <div class="sb-profile sb-no-profile-image">
+                            <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png">
+                            <span class="sb-name">test customer</span>
+                        </div>
+                        <div>
+                            <ul class="sb-menu">
+                                <li data-value="edit-profile">Edit profile</li><li data-value="logout">Logout</li>                                    
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="mb-2 text-muted small user-name">Jimmy Martin</div>
+                <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id">54</span></div>
+                <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status">In progress</span></div>
+                <div class="mb-2 tags-wrapper">
+                    <strong>Tags:</strong>
+                    <div class="d-flex flex-wrap gap-1 mt-1">
+                        
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <strong>Priority:</strong>
+                    <span class="ms-2">
+                        <span class="align-middle ticket-priority">Low</span>
+                    </span>
+                </div>
+                <div class="sb-scroll-area"></div>
+            </div>
+        </div>
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -224,6 +326,114 @@ function sb_tickets_css()
         $css .= '.sb-search-btn>input:focus,[data-panel="new-ticket"] .sb-editor.sb-focus { border-color: ' . $color_1 . '; }';
         $css .= '.sb-btn-icon:hover { border-color: ' . $color_1 . '; color: ' . $color_1 . '; }';
     }
+
+	/* Timeline chat style for comments */
+    $css .= '
+	.comment-row {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.comment-row.customer+.comment-row.customer {
+		margin-top: 2px;
+	}
+
+	.comment-row.agent+.comment-row.agent {
+		margin-top: 2px;
+	}
+
+	.comment-row.customer+.comment-row.agent {
+		margin-top: 5px;
+	}
+
+	.comment-row.agent+.comment-row.customer {
+		margin-top: 5px;
+	}
+
+	.comment-row.customer {
+		flex-direction: row-reverse;
+	}
+
+	.comment-avatar {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: #e0e0e0;
+		object-fit: cover;
+		margin: 0 8px;
+	}
+
+	.comment-bubble {
+		max-width: 70%;
+		padding: 5px 10px;
+		border-radius: 18px;
+		position: relative;
+		font-size: 15px;
+		word-break: break-word;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	}
+
+	.comment-row.agent .comment-bubble {
+		background: #f8f8f8;
+		color: #222;
+		border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 18px;
+		margin-left: 10px;
+		border: 1px solid #e0e0e0;
+	}
+
+	.comment-row.customer .comment-bubble {
+		background: #f8f8f8;
+		color: #222;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 18px;
+		margin-right: 10px;
+		border: 1px solid #e0e0e0;
+	}
+
+	.comment-meta {
+		position: relative;
+		font-size: 9px;
+		color: #222;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 6px;
+		width: 100%;
+	}
+
+	.edited-label {
+		font-size: 10px;
+		color: #b0b0b0;
+		margin-left: 4px;
+		vertical-align: middle;
+		opacity: 0.7;
+	}
+
+
+	.edit-comment-btn,
+	.delete-comment-btn {
+		font-size: 12px;
+		color: #ffc107;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.comment-text {
+		padding-right: 30px;
+		line-height: 18px;
+		font-size: 13px;
+	}
+
+	.comment-row
+	{
+		line-height: 36px;
+		font-size: 15px;
+		margin: 0 8px;
+	}';
+
     if ($css != '') {
         echo '<style>' . $css . '</style>';
     }
