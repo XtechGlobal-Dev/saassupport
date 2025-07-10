@@ -3186,7 +3186,6 @@
 
         // Populate the dashboard with all conversations
         populateConversations: function (onSuccess = false) {
-            console.log('hhhrr');
             if (!this.is_busy_populate && activeUser()) {
                 this.is_busy_populate = true;
                 setTimeout(() => { this.is_busy_populate = false }, 5000);
