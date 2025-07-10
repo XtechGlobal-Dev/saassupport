@@ -110,7 +110,7 @@ function sb_profile_edit_box()
                     </div>
                     <?php sb_departments('select') ?>
                     <div id="first_name" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('First name') ?>
                         </span>
                         <input type="text" required />
@@ -122,13 +122,13 @@ function sb_profile_edit_box()
                         <input type="text" />
                     </div>
                     <div id="password" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Password') ?>
                         </span>
                         <input type="password" />
                     </div>
                     <div id="email" data-type="email" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Email') ?>
                         </span>
                         <input type="email" />
@@ -922,7 +922,7 @@ function sb_ticket_edit_box()
     </script>
     <!-- Include Bootstrap JS and dependencies -->
     <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
     <!-- File Upload Handling -->
@@ -1935,9 +1935,9 @@ function sb_component_admin()
                             <p>Agent Admin</p>
                         </div>
                     </div>
-                    <div class="search-bar">
+                    <!-- <div class="search-bar">
                         <input type="text" placeholder="Search">
-                    </div>
+                    </div> -->
                     <nav>
                         <ul>
                             <li><a id="sb-dashboard"><!--i class="fa-solid fa-gauge"></i--><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3935,7 +3935,7 @@ function sb_component_admin()
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <div class="field-label">Assignee</div>
+                                                                    <div class="field-label required-label">Assignee</div>
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div class="d-flex align-items-center gap-2 ticket-assignee">
                                                                             <img class="assignee-img" src="" alt="Assignee">
@@ -3953,7 +3953,7 @@ function sb_component_admin()
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <div class="field-label">Reporter</div>
+                                                                    <div class="field-label required-label">Reporter</div>
                                                                     <div class="d-flex align-items-center gap-2 ticket-reporter">
                                                                         <img class="reporter-img" src="" alt="Reporter" style="width: 40px;">
                                                                         <span class="user-initials avatar_initials" style="display:none;">
@@ -4022,7 +4022,7 @@ function sb_component_admin()
                                                                 ?>
 
                                                                 <div class="mb-3 sb-input d-block">
-                                                                    <div class="field-label">Priority</div>
+                                                                    <div class="field-label required-label">Priority</div>
                                                                     <!-- <div class="ticket-priority">
                                                                         High
                                                                     </div>
@@ -4687,14 +4687,14 @@ function sb_component_admin()
                                     <li id="tab-apps">
                                         <?php echo $disable_translations ? 'Apps' : sb_('Apps') ?>
                                     </li>
-                                    <!-- <li id="tab-articles">
+                                    <li id="tab-articles">
                                         <?php echo $disable_translations ? 'Articles' : sb_('Articles') ?>
                                     </li>
-                                    <li id="tab-automations">
-                                        <?php echo $disable_translations ? 'Automations' : sb_('Automations') ?>
+                                    <!--<li id="tab-automations">
+                                        <?php //echo $disable_translations ? 'Automations' : sb_('Automations') ?>
                                     </li>
                                     <li id="tab-translations">
-                                        <?php echo $disable_translations ? 'Translations' : sb_('Translations') ?>
+                                        <?php //echo $disable_translations ? 'Translations' : sb_('Translations') ?>
                                     </li> -->
                                 </ul>
                             </div>
@@ -4806,9 +4806,21 @@ function sb_component_admin()
                                     <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
                                 </div>
                                 <?php sb_apps_area($apps, $cloud_active_apps) ?>
-                                <!-- <div>
+                                <div>
+                                    <div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Articles Settings</p>
+                                            <p class="des mb-0">Configure articles settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e('Save changes') ?>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <?php sb_populate_settings('articles', $sb_settings) ?>
-                                </div> -->
+                                </div>
                                 <div>
                                     <div class="sb-automations-area">
                                         <div class="sb-select">
@@ -5219,12 +5231,12 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                         </div>
                         <div class="sb-edit-box sb-ticket-list" id="customFieldForm">
                             <div id="title" data-type="text" class="sb-input">
-                                <span>Title<span class="required" style="color:red">*</span></span>
+                                <span class="required-label">Title</span>
                                 <input type="text" class="form-control" name="title" required>
                             </div>
 
                             <div id="type" data-type="select" class="sb-input sb-input-select">
-                                <span>Type<span class="required" style="color:red">*</span></span>
+                                <span class="required-label">Type</span>
                                 <select class="form-control" name="type" required>
                                     <option value="text" selected>Text</option>
                                     <option value="textarea">Textarea</option>
@@ -5248,7 +5260,7 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                             </div>
 
                             <div id="order" data-type="number" class="sb-input">
-                                <span>Order<span class="required" style="color:red">*</span></span>
+                                <span class="required-label">Order</span>
                                 <input type="number" class="form-control" name="order" value="0">
                             </div>
 
