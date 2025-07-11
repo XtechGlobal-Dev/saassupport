@@ -36,7 +36,7 @@ function sb_component_tickets()
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
 
     <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
-        <header class="user_header">
+        <header class="user_header d-none" >
             <div class="header_left">
                 <h2 class="tab sb-active" data-id="sb-tickets-area">Conversations</h2>
                 <h2 class="tab" data-id="tickets-list-area">Tickets</h2>
@@ -195,13 +195,10 @@ function sb_component_tickets()
             </div>
             <div class="sb-panel-main p-5">
                 <div>
-                    <div class="mb-2 text-muted small"><span class="user-name">Jimmy Martin</span> <span class="ms-2">raised on this <span class="ticket-creation-time">today 3:00 PM</span></span></div>
-                    <h4 class="ticket-subject">Unable to Login to My Account</h4>
+                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-2">raised on this <span class="ticket-creation-time"></span></span></div>
+                    <h4 class="ticket-subject"></h4>
                     <div class="bg-light p-3 rounded mb-3">
-                        <div class="mb-1 ticket-description">Hi Team,</p>
-                            <p class="mb-1">I'm trying to log in to my account but I keep getting an "Invalid Credentials" error—even though I'm sure the email and password are correct.<br>
-                            I also tried resetting the password, but didn't receive any email. Please look into this urgently.</p>
-                            <p class="mb-0">Thanks,<br>John Doe
+                        <div class="mb-1 ticket-description">
                         </div>
                     </div>
                     <div class="mt-5">

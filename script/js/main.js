@@ -2914,19 +2914,36 @@
                         $('.sb-tickets .ticket-id').html(ticket_id);
                         $('.sb-tickets .ticket-status').html(response.status_name);
                         $('.sb-tickets .ticket-priority').html(response.priority_name);
-                        if(response.tag_names)
-                        {
-                            $('.sb-tickets .tags-wrapper div').html('');
-                            response.tag_names.split('||').forEach(val => 
-                            {
-                                    $('.sb-tickets .tags-wrapper div').append(`<span class="badge" style="
-                                    background-color: rgb(255, 255, 204);
-                                    color: #FFA500;
-                                    border: 1px solid #FFA500;
-                                    margin-right: 5px;
-                                ">${val}</span>`);
-                            });
-                        }
+
+                        let rowHtml = '';
+                        response.ticket_tags.forEach(tag => {
+                            const ctx = document.createElement("canvas").getContext("2d");
+                            ctx.fillStyle = tag.color;
+                            const validColor = ctx.fillStyle;
+                            const tags_lighten = SBDashboard.lightenColor(validColor, 40);
+                            const style = `
+                                background-color: ${tags_lighten};
+                                color: ${validColor === "#ffff00" ? "#FFA500" : validColor};
+                                border: 1px solid ${validColor === "#ffff00" ? "#FFA500" : validColor};
+                                margin-right: 5px;
+                            `;
+                            rowHtml += `<span class="badge" style="${style}">${tag.name}</span>`;
+
+                        });
+
+                        // if(response.tag_names)
+                        // {
+                                $('.sb-tickets .tags-wrapper div').html(rowHtml);
+                                // response.tag_names.split('||').forEach(val => 
+                                // {
+                                //         $('.sb-tickets .tags-wrapper div').append(`<span class="badge" style="
+                                //         background-color: rgb(255, 255, 204);
+                                //         color: #FFA500;
+                                //         border: 1px solid #FFA500;
+                                //         margin-right: 5px;
+                                //     ">${val}</span>`);
+                                // });
+                         // }
                        
 
                        SBChat.loadComments(ticket_id);
@@ -7016,7 +7033,10 @@
 
             const targetClass = $(this).data('id');
             $('.' + targetClass).show();
-            activeUser().getUserTickets();
+            if (activeUser())
+            {
+                activeUser().getUserTickets();
+            }
         });
     }
 
