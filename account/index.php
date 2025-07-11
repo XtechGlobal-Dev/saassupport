@@ -479,11 +479,11 @@ function box_chart()
                 <div class="col-md-6 top_left">
                     <div class="left_section">
                         <div class="logo-container">
-                            <img src="../account/media/logo.svg" alt="logo">
-                            <div class="logo-text">Nexleon Helpdesk</div>
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt="logo">
+                            <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
                         </div>
                         <div class="laptop-image">
-                            <img src="../account/media/dashboard.svg" alt="dash">
+                            <img src="../account/media/Group.png" alt="dash">
                         </div>
                         <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
@@ -618,19 +618,14 @@ function box_chart()
                 <div class="col-md-6 top_left">
                     <div class="left_section">
                         <div class="logo-container">
-                            <img src="../account/media/logo.svg" alt="logo">
-                            <div class="logo-text">Nexleon Helpdesk</div>
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt="logo">
+                            <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
                         </div>
                         <div class="laptop-image">
-                            <img src="../account/media/dashboard.svg" alt="dash">
+                            <img src="../account/media/Group.png" alt="dash">
                         </div>
                         <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
-                        <div class="welcome-description">
-                            
-                        Smart Support Powered by AI — Fast. Reliable. Effortless.
-
-                        Experience next-level customer support with our AI-driven helpdesk. Access your tickets, track real-time progress, and get faster resolutions with intelligent assistance guiding every step. Log in now to get started.
-                        </div>
+                        <div class="welcome-description">Effortless, AI-powered support. Track tickets, get updates, and resolve issues fast. Log in to begin.</div>
                     </div>
                 </div>
                 <div class="col-md-6 top_right">
@@ -680,7 +675,7 @@ function box_chart()
                                 <div class="register-link btn-registration-box">Register</div>
                             </div>
                             <p class="disclaimer mt-2">
-                                <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="">Terms Of Service</a> and <a target="_blank" href="">Privacy Policy</a>.<br />&copy; 2022-2024 board.support. All rights reserved.')) ?>
+                                <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="">Terms Of Service</a> and <a target="_blank" href="">Privacy Policy</a>.<br />&copy; 2025 Nexleon. All rights reserved.')) ?>
                             </p>
                         </div>
                     </div>
@@ -720,11 +715,11 @@ function box_chart()
                 <div class="col-md-6 top_left">
                     <div class="left_section">
                         <div class="logo-container">
-                            <img src="../account/media/logo.svg" alt="logo">
-                            <div class="logo-text">Nexleon Helpdesk</div>
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt="logo">
+                            <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
                         </div>
                         <div class="laptop-image">
-                            <img src="../account/media/dashboard.svg" alt="dash">
+                            <img src="../account/media/Group.png" alt="dash">
                         </div>
                         <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
