@@ -1534,22 +1534,48 @@
         }
 
         renderTickets(tickets)
-        {
-            let code = '';
-            tickets.forEach(ticket => {
-                code += `<li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" data-department="" style="border-bottom: 1px solid rgb(212, 212, 212);margin-top: 5px;padding: 5px 10px;">
-                    <div class="sb-conversation-item" data-user-id="8">
-                        <img loading="lazy" src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="50px">
-                        <div>
-                            <span class="sb-name">You</span><span class="sb-time"><span data-today="" class="ml-5">${SBF.beautifyTime(ticket.creation_time, true)}</span></span>
-                        </div>
-                        <div class="sb-message">${ticket.subject}</div>
-                    </div>
-                </li>`;
-            });
+        // {
+        //     let code = '';
+        //     tickets.forEach(ticket => {
+        //         code += `<li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" data-department="" style="border-bottom: 1px solid rgb(212, 212, 212);margin-top: 5px;padding: 5px 10px;">
+        //             <div class="sb-conversation-item" data-user-id="8">
+        //                 <img loading="lazy" src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="50px">
+        //                 <div>
+        //                     <span class="sb-name">You</span><span class="sb-time"><span data-today="" class="ml-5">${SBF.beautifyTime(ticket.creation_time, true)}</span></span>
+        //                 </div>
+        //                 <div class="sb-message">${ticket.subject}</div>
+        //             </div>
+        //         </li>`;
+        //     });
 
-            return code;
-        }
+        //     return code;
+        // }
+
+        // custom code changed
+            {
+            let code = '';
+                    tickets.forEach(ticket => {
+                        code += `
+                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
+                                <div class="sb-conversation-item" style="display: flex; align-items: center;">
+                                    <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
+                                    <div style="flex: 1;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span style="font-weight: 600;">You</span>
+                                            <span style="font-size: 12px; color: #666;">${SBF.beautifyTime(ticket.creation_time, true)}</span>
+                                        </div>
+                                        <div style="color: #444; font-size: 14px;">${ticket.subject}</div>
+                                    </div>
+                                    <!--div class="message-received" style="margin-left: auto;">
+                                        <span style="background: #007bff; color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%;">8</span>
+                                    </div-->
+                                </div>
+                            </li>`;
+                    });
+                    return code;
+                }
+
+        // custom code changed
 
         getUserTickets()
         {
@@ -2888,19 +2914,36 @@
                         $('.sb-tickets .ticket-id').html(ticket_id);
                         $('.sb-tickets .ticket-status').html(response.status_name);
                         $('.sb-tickets .ticket-priority').html(response.priority_name);
-                        if(response.tag_names)
-                        {
-                            $('.sb-tickets .tags-wrapper div').html('');
-                            response.tag_names.split('||').forEach(val => 
-                            {
-                                    $('.sb-tickets .tags-wrapper div').append(`<span class="badge" style="
-                                    background-color: rgb(255, 255, 204);
-                                    color: #FFA500;
-                                    border: 1px solid #FFA500;
-                                    margin-right: 5px;
-                                ">${val}</span>`);
-                            });
-                        }
+
+                        let rowHtml = '';
+                        response.ticket_tags.forEach(tag => {
+                            const ctx = document.createElement("canvas").getContext("2d");
+                            ctx.fillStyle = tag.color;
+                            const validColor = ctx.fillStyle;
+                            const tags_lighten = SBDashboard.lightenColor(validColor, 40);
+                            const style = `
+                                background-color: ${tags_lighten};
+                                color: ${validColor === "#ffff00" ? "#FFA500" : validColor};
+                                border: 1px solid ${validColor === "#ffff00" ? "#FFA500" : validColor};
+                                margin-right: 5px;
+                            `;
+                            rowHtml += `<span class="badge" style="${style}">${tag.name}</span>`;
+
+                        });
+
+                        // if(response.tag_names)
+                        // {
+                                $('.sb-tickets .tags-wrapper div').html(rowHtml);
+                                // response.tag_names.split('||').forEach(val => 
+                                // {
+                                //         $('.sb-tickets .tags-wrapper div').append(`<span class="badge" style="
+                                //         background-color: rgb(255, 255, 204);
+                                //         color: #FFA500;
+                                //         border: 1px solid #FFA500;
+                                //         margin-right: 5px;
+                                //     ">${val}</span>`);
+                                // });
+                         // }
                        
 
                        SBChat.loadComments(ticket_id);
@@ -6990,7 +7033,10 @@
 
             const targetClass = $(this).data('id');
             $('.' + targetClass).show();
-            activeUser().getUserTickets();
+            if (activeUser())
+            {
+                activeUser().getUserTickets();
+            }
         });
     }
 

@@ -38,6 +38,8 @@
 
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
+
+            console.log('panel:',name);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -60,6 +62,7 @@
                 case 'edit-profile':
                 case 'login':
                 case 'registration':
+                    $('.user_header').addClass('d-none');
                     let is_edit_profile = name == 'edit-profile';
                     this.showSidePanels(false);
                     main.addClass('sb-panel-form');
@@ -110,6 +113,7 @@
                     }
                     break;
                 default:
+                    $('.user_header').removeClass('d-none');
                     this.showSidePanels(true);
                     if (previous == 'new-ticket') {
                         editor.find('textarea').val('');
@@ -260,7 +264,10 @@
 
         // Initialize the tickets area
         init: function () {
-            console.log(activeUser());
+            if(activeUser())
+            {
+                $('.user_header').removeClass('d-none');
+            }
             main = $('body').find('.sb-tickets');
             main_panel = main.find(' > div > .sb-panel-main');
             panel = main_panel.find('.sb-panel');
@@ -587,8 +594,10 @@
         });
 
         main.on('click', '.logout', function () {
+            console.log('logout1111222');
             SBF.logout(false);
             SBTickets.showPanel('login');
+            $('.user_header').addClass('d-none');
         });
 
         panel.on('click', '> .sb-buttons .sb-submit', function () {

@@ -1089,16 +1089,18 @@ function sb_edit_ticket($tickets_id = 0) {
         $tagsArr[$value['tag-name']] = $value['tag-color'];
     }
     
-    //for ($i = 0; $i < $tickets_count; $i++) {
-        /*$ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
-        $ticketTagsWithColor = [];
-        foreach ($ticketTags as $tag) {
-            if (isset($tagsArr[$tag])) {
-                $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
-            }
+    $ticketTags = isset($result['tag_names']) ? explode('||',$result['tag_names']) : [];
+    $ticketTagsWithColor = [];
+    foreach ($ticketTags as $tag) {
+        if (isset($tagsArr[$tag])) {
+            $ticketTagsWithColor[] = ['name' => $tag, 'color' => $tagsArr[$tag]];
         }
-       $result['ticket_tags'] = $ticketTagsWithColor; */
-    //}
+    }
+    $result['ticket_tags'] = $ticketTagsWithColor; 
+
+
+
+    
     
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
