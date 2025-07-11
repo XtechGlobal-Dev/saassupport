@@ -2066,7 +2066,69 @@ function sb_component_admin()
                 </div> -->
             </div>
             <main>
-                <?php
+                <!-- new code update -->
+                    <?php
+                        // You can set these dynamically from user session or DB
+                        $user_name = ucwords($active_user['first_name'].' '.$active_user['last_name']); // Dynamic
+                        $user_image = $active_user['profile_image']; // Dynamic
+                        $user_role = ucfirst($active_user['user_type']); // Static
+
+                        $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                        $ticketUrl = dirname(SB_URL) . '?area=tickets';
+
+                        $header = '<header>
+                            <div class="header-left">
+                                <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    Back to Tickets
+                                </a>
+                                <h2 class="title">Setting</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="notification">
+                                    <img src="./script/media/notification.svg" alt="notification">
+                                    <span class="badge">0</span>
+                                </div>
+                                <!-- User Profile Dropdown -->
+                                <div class="sb-admin-nav-right user_menu user-profile user_avatar">
+                                    <a class="sb-profile">
+                                        <img class="avatar_img" src="' . $user_image . '" alt="' . $user_name . '" />
+                                        <span class="user-initials avatar_initials" style="display:none;">
+                                                <span class="initials avatar_name"></span>
+                                            </span>
+                                        <div class="user-details">
+                                            <span class="sb-name">' . $user_name . '</span>
+                                            <span class="sb-role">' . $user_role . '</span>
+                                        </div>
+                                    </a>
+                                    <ul class="sb-menu">
+                                            <li class="menu_head">
+                                                <img class="avatar_img" src="' . $user_image . '" alt="' . $user_name . '" />
+                                                <span class="user-initials avatar_initials" style="display:none;">
+                                                <span class="initials avatar_name"></span>
+                                            </span>
+                                                <div class="user-details">
+                                                    <span class="sb-name">' . $user_name . '</span>
+                                                    <span class="sb-role">' . $user_role . '</span>
+                                                </div>
+                                            </li>
+                                        <li data-value="status" class="sb-online">Online</li>';
+                                        if ($is_admin) {
+                                            $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
+                                                . ($is_cloud ? sb_cloud_account_menu() : '');
+                                        }
+                        $header .= '</ul>
+                                </div>
+                                <!-- Logout Button -->
+                                <div data-value="logout" class="logout">
+                                    <img src="./script/media/logout-icon.svg" alt="logout">
+                                </div>
+                            </div>
+                        </header>';
+                    ?>
+                <!-- new code update -->
+                 <!-- old code -->
+                <!--?php
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
                 $ticketUrl = dirname(SB_URL) . '?area=tickets';
                 $header = '<header>
@@ -2078,14 +2140,14 @@ function sb_component_admin()
                                     <h2 class="title">Setting</h2>
                                 </div>
                                 <div class="header-right">
-                                    <!--div class="notification">
+                                    div class="notification">
                                         <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
                                     </div>
                                     <div class="notification">
                                         <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
                                         <span class="badge">0</span>
-                                    </div-->
+                                    </div>
                                     <div class="sb-admin-nav-right user_menu user-profile user_avatar">
                                         <a class="sb-profile">
                                             <img class="avatar_img" src="" data-name="" />
@@ -2111,7 +2173,9 @@ function sb_component_admin()
                                     </div>
                                 </div>
                             </header>';
-                ?>
+                ?-->
+
+                <!-- old code -->
 
                 <div class="sb-area-dashboard">
                     <main>
@@ -2146,7 +2210,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #45b369;">
-                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-user-plus" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/total-user.svg" alt="Total User">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Total Users</h3>
@@ -2161,14 +2226,22 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div-->
+                                               <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-users-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #f4941e;">
-                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/tickets-created.svg" alt="Tickets Created">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Tickets Created</h3>
@@ -2184,14 +2257,22 @@ function sb_component_admin()
                                                         </script> -->
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-tickets-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                             <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #8252E9;">
-                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                        <div class="metric-icon" style="background-color: #0684ff;">
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Ticket Resolved</h3>
@@ -2206,7 +2287,14 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                         </section>
                                         <section class="dashboard-metrics">
@@ -2215,7 +2303,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #8252E9;">
-                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/total-conversations.svg" alt="Total Conversations">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Total Conversations</h3>
@@ -2230,14 +2319,22 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div>
+                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
+                                                <!-- code update  -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-conversations-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #DE3ACE;">
-                                                            <i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3> Avg. Response Time</h3>
@@ -2315,7 +2412,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #00B8F2;">
-                                                            <i class="fa-solid fa-ticket" style="color: #ffffff;"></i>
+                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Agent Satisfaction</h3>
@@ -2402,21 +2500,24 @@ function sb_component_admin()
                                                 </div>
                                                 <div class="d-flex justify-content-center gap-3 mb-3">
                                                     <div class="button_ext">
-                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
+                                                        <img src="./script/media/created.svg" alt="Created">
                                                         <div>
                                                             <div><strong>Created</strong></div>
                                                             <div class="tickets-created"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
-                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
+                                                        <img src="./script/media/resolved.svg" alt="Resolved">
                                                         <div>
                                                             <div><strong>Resolved</strong></div>
                                                             <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
-                                                        <i class="fa-solid fa-ticket" style="color: #000;"></i>
+                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
+                                                        <img src="./script/media/pending.svg" alt="Pending">
                                                         <div>
                                                             <div><strong>Pending</strong></div>
                                                             <div class="tickets-pending"></div>
