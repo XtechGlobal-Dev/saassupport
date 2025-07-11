@@ -675,7 +675,7 @@ function box_chart()
                                 <div class="register-link btn-registration-box">Register</div>
                             </div>
                             <p class="disclaimer mt-2">
-                                <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="">Terms Of Service</a> and <a target="_blank" href="">Privacy Policy</a>.<br />&copy; 2022-2024 board.support. All rights reserved.')) ?>
+                                <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="">Terms Of Service</a> and <a target="_blank" href="">Privacy Policy</a>.<br />&copy; 2025 Nexleon. All rights reserved.')) ?>
                             </p>
                         </div>
                     </div>
