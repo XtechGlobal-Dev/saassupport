@@ -35,7 +35,7 @@ global $SB_LOGIN;
 global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
-const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,
+const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image,
             p.name as priority_name, p.color as priority_color,
             ts.name as status_name, ts.color as status_color,
             (
@@ -43,8 +43,9 @@ const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_nam
                 FROM ticket_tags tt2 
                 WHERE tt2.ticket_id = t.id
             ) AS tag_names
-     FROM sb_tickets t 
-     LEFT JOIN sb_users u ON t.assigned_to = u.id
+    FROM sb_tickets t 
+    LEFT JOIN sb_users u ON t.assigned_to = u.id
+    LEFT JOIN sb_users c ON t.contact_id = c.id
     LEFT JOIN priorities p ON t.priority_id = p.id
     LEFT JOIN ticket_status ts ON t.status_id = ts.id
     LEFT JOIN ticket_tags tt_filter ON t.id = tt_filter.ticket_id';
