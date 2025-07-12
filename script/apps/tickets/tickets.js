@@ -36,6 +36,52 @@
 
     var SBTickets = {
 
+        showInitials: function (container, className) {
+            console.log(container);
+            const containers = $('.' + container + ' .' + className);
+            containers.each(function () {
+                const container = $(this);
+                const img = container.find('img');
+                const name = img.attr("data-name") || "";
+                const initials = name
+                    .split(" ")
+                    .map(word => word[0])
+                    .join("")
+                    .substring(0, 2)
+                    .toUpperCase();
+
+                
+                const span = container.find(".initials");
+                const userInitials = container.find('.user-initials');
+
+                // Fallback: if image is broken, use initials
+                function showInitialsFallback() {
+                    img.hide();
+                    if (span.length) {
+                        userInitials.css("display", "inline-block");
+                        span.text(initials || "NA");
+                    }
+                }
+
+                // Attach error event
+                img.on('error', function(){
+                    console.log('error0');
+                    showInitialsFallback();
+                });
+
+                // Trigger fallback if image is already broken (e.g. 404 cached)
+                if (!img.prop('complete') || typeof img[0].naturalWidth === "undefined" || img[0].naturalWidth === 0) {
+                    console.log('error');
+                    showInitialsFallback();
+                }
+
+                // If the image source is a default user icon, show initials
+                if (img.attr('src') && img.attr('src').includes('user.svg')) {
+                    console.log('error2');
+                    showInitialsFallback();
+                }
+            });
+        },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
 
@@ -63,6 +109,9 @@
                 case 'login':
                 case 'registration':
                     $('.user_header').addClass('d-none');
+                    $('.user_header .header_left h2').removeClass('sb-active');
+                    $('.user_header .header_left h2:first').addClass('sb-active');
+
                     let is_edit_profile = name == 'edit-profile';
                     this.showSidePanels(false);
                     main.addClass('sb-panel-form');
@@ -114,7 +163,18 @@
                     break;
                 default:
                     $('.user_header').removeClass('d-none');
+                    const pImg = activeUser().details?.profile_image ?? '';
+                    console.log(activeUser().details);
+                    
+                    main.find('.user_profile .sb_name').html(activeUser()?.name);
+                    main.find('.user_profile .user_type').html(activeUser()?.type);
+                    main.find('.user_profile .avatar').attr('src',pImg).attr('data-name',activeUser()?.name);
                     this.showSidePanels(true);
+
+                    setTimeout(function(){
+                        SBTickets.showInitials('user_header','user_profile');
+                    },30)
+                    	
                     if (previous == 'new-ticket') {
                         editor.find('textarea').val('');
                         editor.sbActive(false).removeClass('sb-error');
@@ -281,8 +341,15 @@
             cache_agents[SBF.setting('bot_id')] = { name: SBF.setting('bot_name'), image: SBF.setting('bot_image') };
             ticketsInit();
 
-            main.find('.user_profile .sb_name').html(activeUser()?.name);
-            main.find('.user_profile .user_type').html(activeUser()?.type);
+            if(activeUser())
+            {
+                const img = activeUser().details?.profile_image ?? '';
+                main.find('.user_profile .avatar').attr('src',img).attr('data-name',activeUser()?.name);
+                main.find('.user_profile .sb_name').html(activeUser()?.name);
+                main.find('.user_profile .user_type').html(activeUser()?.type);
+                this.showInitials('user_header','user_profile');
+            }
+
 
             if (!main.length) {
                 return;
@@ -312,7 +379,8 @@
                     }
                 }
             }
-            let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
+            //let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
+            let height = parseInt(window.innerHeight) ? (window.innerHeight) : main.data('height');
             let height_offset = parseInt(SBF.null(main.data('offset')) ? 0 : main.data('offset'));
             if (width <= 800) {
                 main.addClass('sb-800');
@@ -324,6 +392,10 @@
                 main.addClass('sb-1300');
             }
             setUserProfile();
+            
+
+
+            console.log(window.innerHeight);
             main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px`);
             setTimeout(function () {
                 main.removeClass('sb-load');
@@ -598,6 +670,8 @@
             SBF.logout(false);
             SBTickets.showPanel('login');
             $('.user_header').addClass('d-none');
+            $('.tickets-list-area').hide();
+            $('.sb-tickets-area').show();
         });
 
         panel.on('click', '> .sb-buttons .sb-submit', function () {

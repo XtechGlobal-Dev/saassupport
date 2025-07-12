@@ -43,7 +43,10 @@ function sb_component_tickets()
             </div>
             <div class="header_right">
                 <div class="user_profile">
-                    <img class="avatar" style="max-height: 40px;" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User">
+                    <img class="avatar" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User" data-name="">
+                    <span class="user-initials avatar_initials" style="display:none;">
+                        <span class="initials avatar_name"></span>
+                    </span>
                     <div class="user_info">
                         <p class="sb_name"></p>
                         <span class="user_type">User</span>
@@ -194,8 +197,9 @@ function sb_component_tickets()
                 </div>
             </div>
             <div class="sb-panel-main p-5">
-                <div>
-                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-2">raised on this <span class="ticket-creation-time"></span></span></div>
+                <p class="no-reords text-center d-none">No results found.</p>
+                <div class="tickets-area">
+                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this <span class="ticket-creation-time"></span></span></div>
                     <h4 class="ticket-subject"></h4>
                     <div class="bg-light p-3 rounded mb-3">
                         <div class="mb-1 ticket-description">
@@ -234,37 +238,40 @@ function sb_component_tickets()
                         </div> -->
                     </div>
                 </div>
+                <div class="sb-panel sb-scroll-area"></div>
             </div>
             <div class="sb-panel-right p-4">
-                <!-- <div class="sb-top">
-                    <div class="sb-profile-menu">
-                        <div class="sb-profile sb-no-profile-image">
-                            <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png">
-                            <span class="sb-name">test customer</span>
+                <div class="right-side-wrapper">
+                    <!-- <div class="sb-top">
+                        <div class="sb-profile-menu">
+                            <div class="sb-profile sb-no-profile-image">
+                                <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png">
+                                <span class="sb-name">test customer</span>
+                            </div>
+                            <div>
+                                <ul class="sb-menu">
+                                    <li data-value="edit-profile">Edit profile</li><li data-value="logout">Logout</li>                                    
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <ul class="sb-menu">
-                                <li data-value="edit-profile">Edit profile</li><li data-value="logout">Logout</li>                                    
-                            </ul>
+                    </div> -->
+                    <div class="mb-2 text-muted small user-name"></div>
+                    <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id"></span></div>
+                    <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status"></span></div>
+                    <div class="mb-2 tags-wrapper">
+                        <strong>Tags:</strong>
+                        <div class="d-flex flex-wrap gap-1 mt-1">
+                            
                         </div>
                     </div>
-                </div> -->
-                <div class="mb-2 text-muted small user-name">Jimmy Martin</div>
-                <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id">54</span></div>
-                <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status">In progress</span></div>
-                <div class="mb-2 tags-wrapper">
-                    <strong>Tags:</strong>
-                    <div class="d-flex flex-wrap gap-1 mt-1">
-                        
+                    <div class="mb-2">
+                        <strong>Priority:</strong>
+                        <span class="ms-2">
+                            <span class="align-middle ticket-priority">Low</span>
+                        </span>
                     </div>
+                    <div class="sb-scroll-area"></div>
                 </div>
-                <div class="mb-2">
-                    <strong>Priority:</strong>
-                    <span class="ms-2">
-                        <span class="align-middle ticket-priority">Low</span>
-                    </span>
-                </div>
-                <div class="sb-scroll-area"></div>
             </div>
         </div>
         <div class="sb-lightbox sb-lightbox-media">
@@ -429,7 +436,33 @@ function sb_tickets_css()
 		line-height: 36px;
 		font-size: 15px;
 		margin: 0 8px;
-	}';
+	}
+    .user-name {
+        text-transform: capitalize;
+    }
+    .user-initials {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #ccc;
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        line-height: 50px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+    }
+    .user_header .user-initials {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        position: absolute;
+        left: 0;
+    }
+    .user_profile{position: relative;padding-left: 58px;}
+    ';
 
     if ($css != '') {
         echo '<style>' . $css . '</style>';
