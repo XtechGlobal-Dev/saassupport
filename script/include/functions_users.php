@@ -936,7 +936,7 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     } else {
         $query = ' WHERE user_type <> "bot"';
     }*/
-   //echo SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100';
+  // echo SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100';
     $tickets = sb_db_get(SELECT_FROM_TICKETS  . $query  . ($main_field_sorting ? (' ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1])) : '') . ' LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100', false);
     $tickets_count = count($tickets);
     if (!$tickets_count) {
@@ -1989,26 +1989,34 @@ function sb_add_edit_ticket_custom_fields($ticket_id = null, $customFields = arr
 function sb_add_edit_ticket_tags($ticket_id = null, $tags = array(), $action = 'new')
 {
     $ticket_id = sb_db_escape($ticket_id, true);
-    if ($ticket_id && $tags) 
+    if ($ticket_id) 
     {
-
-        if ($action == 'new') {
+        if($tags && count($tags))
+        {
+            if ($action == 'new') {
             // Insert new tags
-            foreach ($tags as $tag) {
-                $tag = sb_db_escape($tag);
-                sb_db_query("INSERT INTO ticket_tags (ticket_id, tag) VALUES ($ticket_id, '$tag')");
+                foreach ($tags as $tag) {
+                    $tag = sb_db_escape($tag);
+                    sb_db_query("INSERT INTO ticket_tags (ticket_id, tag) VALUES ($ticket_id, '$tag')");
+                }
+            } elseif ($action == 'edit') {
+                // Update existing tags
+                sb_db_query("DELETE FROM ticket_tags WHERE ticket_id = $ticket_id");
+                foreach ($tags as $tag) {
+                    $tag = sb_db_escape($tag);
+                    sb_db_query("INSERT INTO ticket_tags (ticket_id, tag) VALUES ($ticket_id, '$tag')");
+                }
+            } elseif ($action == 'delete') {
+                // Delete tags
+                sb_db_query("DELETE FROM ticket_tags WHERE ticket_id = $ticket_id");
             }
-        } elseif ($action == 'edit') {
-            // Update existing tags
-            sb_db_query("DELETE FROM ticket_tags WHERE ticket_id = $ticket_id");
-            foreach ($tags as $tag) {
-                $tag = sb_db_escape($tag);
-                sb_db_query("INSERT INTO ticket_tags (ticket_id, tag) VALUES ($ticket_id, '$tag')");
-            }
-        } elseif ($action == 'delete') {
+        }
+        else
+        {
             // Delete tags
             sb_db_query("DELETE FROM ticket_tags WHERE ticket_id = $ticket_id");
         }
+        
     }
 }
 function sb_update_ticket($inputs,$ticket_id =0)
@@ -2128,10 +2136,9 @@ function update_ticket_detail($inputs,$ticket_id =0){
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
 
-    if(isset($inputs['tags']))
-    {
-        sb_add_edit_ticket_tags($ticket_id, $inputs['tags'], $action = 'edit');
-    }
+
+    sb_add_edit_ticket_tags($ticket_id, $inputs['tags'] ?? array(), $action = 'edit');
+
 
     ////// Process file attachments if any
    // sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);

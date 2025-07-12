@@ -1884,6 +1884,14 @@ function sb_component_admin()
     $sms = sb_get_multi_setting('sms', 'sms-user');
     $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl() ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
     $active_areas = [
+        'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 
+        'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
+        'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 
+        'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')),
+        'chatbot' => defined('SB_DIALOGFLOW') && ($is_admin || ($supervisor && $supervisor['supervisor-settings-area'])) && (!$is_cloud || in_array('dialogflow', $cloud_active_apps))];
+    
+    
+    $active_areas = [
         'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']),
         'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
         'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']),
@@ -1952,18 +1960,20 @@ function sb_component_admin()
 <path d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
 </svg>
 </i><span> Inbox</span></a></li>
-                            <?php if ($active_areas['tickets']) { ?>
+                            <?php //if ($active_areas['tickets']) { ?>
                                 <li><a id="sb-tickets"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
 <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg></i><span>Tickets</span></a></li>
-                            <?php } ?>
+                            <?php //} ?>
+                            <?php if ($active_areas['users']) { ?>
                             <li><a id="sb-users"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M14.6934 8.75C14.6934 5.98858 12.4548 3.75 9.69336 3.75C6.93194 3.75 4.69336 5.98858 4.69336 8.75C4.69336 11.5114 6.93194 13.75 9.69336 13.75C12.4548 13.75 14.6934 11.5114 14.6934 8.75Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M16.6934 20.75C16.6934 16.884 13.5594 13.75 9.69336 13.75C5.82737 13.75 2.69336 16.884 2.69336 20.75" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M19.6934 9.25V15.25M22.6934 12.25H16.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg></i><span>Customers</span></a></li>
+                            <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
                                 <li><a id="sb-articles"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1978,12 +1988,14 @@ function sb_component_admin()
 <path d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg></i><span> Reports</span></a></li>
                             <?php } ?>
+                            <?php if ($active_areas['settings']) { ?>
                             <li><a id="sb-settings"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M17.1934 20.1071V21.25M17.1934 20.1071C16.1812 20.1071 15.2895 19.6021 14.7664 18.8352M17.1934 20.1071C18.2056 20.1071 19.0973 19.6021 19.6204 18.8352M14.7664 18.8352L13.6938 19.5357M14.7664 18.8352C14.4571 18.3816 14.2767 17.8364 14.2767 17.25C14.2767 16.6636 14.457 16.1185 14.7663 15.665M19.6204 18.8352L20.693 19.5357M19.6204 18.8352C19.9297 18.3816 20.1101 17.8364 20.1101 17.25C20.1101 16.6636 19.9298 16.1185 19.6205 15.665M17.1934 14.3929C18.2057 14.3929 19.0975 14.898 19.6205 15.665M17.1934 14.3929C16.1811 14.3929 15.2893 14.898 14.7663 15.665M17.1934 14.3929V13.25M19.6205 15.665L20.6934 14.9643M14.7663 15.665L13.6934 14.9643" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 <path d="M4.69336 3.25H20.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 <path d="M4.69336 9.25H20.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 <path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 </svg></i><span> Settings</span></a></li>
+<?php } ?>
                             <!-- <li><a href="#"><i class="fa-solid fa-circle-info"></i><span> Help & Support</span></a></li> -->
                         </ul>
                     </nav>
@@ -2032,9 +2044,9 @@ function sb_component_admin()
                         if ($active_areas['users']) {
                             echo '<a id="sb-users"><span>' . sb_('Users') . '</span></a>';
                         }
-                        if ($active_areas['tickets']) {
+                        //if ($active_areas['tickets']) {
                             echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
-                        }
+                        //}
                         if ($active_areas['chatbot']) {
                             echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>';
                         }
@@ -3273,7 +3285,7 @@ function sb_component_admin()
                     sb_dialogflow_chatbot_area();
                 }
                 ?>
-                <?php if ($active_areas['tickets']) { ?>
+                <?php //if ($active_areas['tickets']) { ?>
                     <style>
                         .sb-table .span-border {
                             text-align: center;
@@ -4336,7 +4348,7 @@ function sb_component_admin()
                             minimumInputLength: 1
                         });
                     </script>
-                <?php } ?>
+                <?php //} ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
                         <?php echo $header; ?>
