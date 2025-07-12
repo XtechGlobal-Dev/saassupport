@@ -1558,7 +1558,7 @@
                         code += `
                             <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
                                 <div class="sb-conversation-item" style="display: flex; align-items: center;">
-                                    <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
+                                    <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
                                     <div style="flex: 1;">
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <span style="font-weight: 600;">You</span>
@@ -1586,8 +1586,11 @@
                     function: 'get-tickets',
                     user_id:this.id,
                 }, (response) => {
-                    if(response)
+                    if(response && response.length)
                     {
+                        $('.no-reords').addClass('d-none');
+                        $('.tickets-area').removeClass('d-none');
+                        $('.right-side-wrapper').css('visibility', '');
                         const html = this.renderTickets(response);
                         $('.tickets-list .sb-user-tickets').html(html);
 
@@ -1596,10 +1599,13 @@
                 
                         if ($targetList.length) {
                             $targetList.first().trigger('click');
-                            console.log($targetList.first());
-                        } else {
-                            console.warn('No <li> found in target:', targetClass);
-                        }
+                        } 
+                    }
+                    else
+                    {
+                        $('.no-reords').removeClass('d-none');
+                        $('.tickets-area').addClass('d-none');
+                        $('.right-side-wrapper').css('visibility', 'hidden');
                     }
                 });
             } else {
@@ -2889,6 +2895,61 @@
                 });
         },
 
+        lightenColor : function (hex, percent = 40) {
+            if (!hex || typeof hex !== 'string') return "#cccccc";
+            hex = hex.replace('#', '');
+            if (hex.length !== 6) return "#cccccc";
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            const rNorm = r / 255;
+            const gNorm = g / 255;
+            const bNorm = b / 255;
+            const max = Math.max(rNorm, gNorm, bNorm);
+            const min = Math.min(rNorm, gNorm, bNorm);
+            let h, s, l = (max + min) / 2;
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case rNorm: h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0); break;
+                    case gNorm: h = (bNorm - rNorm) / d + 2; break;
+                    case bNorm: h = (rNorm - gNorm) / d + 4; break;
+                }
+                h /= 6;
+            }
+            l = Math.min(1, l + (percent / 100));
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+                if (s === 0) {
+                    r = g = b = l;
+                } else {
+                    const hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1 / 6) return p + (q - p) * 6 * t;
+                        if (t < 1 / 2) return q;
+                        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                        return p;
+                    };
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    r = hue2rgb(p, q, h + 1 / 3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1 / 3);
+                }
+                return [
+                    Math.round(r * 255),
+                    Math.round(g * 255),
+                    Math.round(b * 255)
+                ];
+            }
+            const [lr, lg, lb] = hslToRgb(h, s, l);
+            return `rgb(${lr}, ${lg}, ${lb})`;
+        },
+
         openTicket: function(ticket_id)
         {
             console.log(ticket_id);
@@ -2898,7 +2959,7 @@
                 }, (response) => {
                     if(response)
                     {
-                        $('.sb-tickets .user_name').html(response.contact_name);
+                        $('.sb-tickets .user-name').html(response.contact_name);
                         $('.sb-tickets .ticket-creation-time').html(response.creation_time);
                         $('.sb-tickets .ticket-subject').html(response.subject);
                         const delta = JSON.parse(response.description);
@@ -2920,7 +2981,7 @@
                             const ctx = document.createElement("canvas").getContext("2d");
                             ctx.fillStyle = tag.color;
                             const validColor = ctx.fillStyle;
-                            const tags_lighten = SBDashboard.lightenColor(validColor, 40);
+                            const tags_lighten = SBChat.lightenColor(validColor, 40);
                             const style = `
                                 background-color: ${tags_lighten};
                                 color: ${validColor === "#ffff00" ? "#FFA500" : validColor};
