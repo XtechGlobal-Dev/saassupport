@@ -2952,12 +2952,6 @@
 
         openTicket: function(ticket_id)
         {
-
-
-            SBPusher.event('new-ticket-comment', (data) => {
-                console.log('new comment added',data);
-            });
-
             console.log(ticket_id);
             SBF.ajax({
                     function: 'edit-ticket',
@@ -6441,6 +6435,11 @@
                 }
             });
         });
+
+        SBPusher.event('new-ticket-comment', (data) => {
+                console.log('new comment added',data);
+        });
+
 
         // Start a new conversation from the dashboard
         $(main).on('click', '.sb-btn-new-conversation, .sb-departments-list > div, .sb-agents-list > div', function () {
