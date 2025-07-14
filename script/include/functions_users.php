@@ -1135,6 +1135,8 @@ function add_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
     $query = "INSERT INTO comments (ticket_id, user_id, user_role, comment, created_at) VALUES ($ticketId, $userId,'$userRole', '$comment', NOW())";
     $result = sb_db_query($query);
 
+    sb_pusher_trigger('private-user-' . 8, 'new-ticket-comment', [ 'comment' => $comment]);
+
     if ($result) {
         return ['success' => true, 'message' => 'Comment added successfully.'];
     } else {
