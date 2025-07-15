@@ -1114,12 +1114,19 @@ function sb_edit_ticket($tickets_id = 0) {
 
 }
 
-function add_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
+function add_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '',$contactId = 0) {
     $ticketId = sb_db_escape($ticketId, true);
     $comment = sb_db_escape($comment);
     $active_user = sb_get_active_user();
     $userId = sb_db_escape($active_user['id'], true);
     $userRole = sb_is_agent() ? 'agent' : 'customer';
+
+    if(sb_is_agent())
+    {
+        $query = "Select contact_id from sb_tickets where id =  '$ticketId'";
+        $result = sb_db_get($query);
+        $contactId = $result['contact_id'] ?? 0;
+    }
 
     if ($ticketId <= 0 || empty($comment)) {
         return ['success' => false, 'message' => 'Invalid ticket ID or comment.'];
@@ -1135,7 +1142,21 @@ function add_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
     $query = "INSERT INTO comments (ticket_id, user_id, user_role, comment, created_at) VALUES ($ticketId, $userId,'$userRole', '$comment', NOW())";
     $result = sb_db_query($query);
 
-    sb_pusher_trigger('private-user-' . 8, 'new-ticket-comment', [ 'comment' => $comment]);
+    // Insert the comment into the database
+    $query = "select created_at from comments where ticket_id = '".$ticketId."'order by id DESC limit 1";
+    $result2 = sb_db_get($query,true);
+
+    if(!sb_is_agent())
+    {
+        sb_pusher_trigger('agents', 'updates-ticket-comments', [ 'comment' => $comment,'ticket_id'=>$ticketId,'user_id' => $contactId,'last_updated_at' => $result2['created_at']]);
+    }
+    else
+    {
+        sb_pusher_trigger('private-user-'.$contactId, 'new-ticket-comment', [ 'comment' => $comment,'ticket_id'=>$ticketId,'user_id' => $contactId]);
+    }
+    
+    
+   // sb_pusher_trigger('presence-1-98', 'new-ticket-comment', [ 'comment' => $comment]);
 
     if ($result) {
         return ['success' => true, 'message' => 'Comment added successfully.'];
@@ -2455,15 +2476,21 @@ function sb_fetch_ticket_attachments($ticket_id = null)
     }
 }
 
-function sb_fetch_ticket_comments($ticket_id = null)
+function sb_fetch_ticket_comments($ticket_id = null,$last_update_date = null)
 {
     if (!$ticket_id) {
         return [];
     }
     
     $ticket_id = sb_db_escape($ticket_id, true);
+    $where = '';
 
-    $sql = "SELECT c.*, CONCAT(u.first_name, ' ', u.last_name) as user_name, u.profile_image FROM comments c LEFT JOIN sb_users u ON c.user_id = u.id WHERE c.ticket_id = $ticket_id ORDER BY c.created_at ASC";
+    if($last_update_date)
+    {
+        $where = " AND c.created_at >= '$last_update_date'";
+    }
+
+    $sql = "SELECT c.*, CONCAT(u.first_name, ' ', u.last_name) as user_name, u.profile_image, c.created_at as last_update_time FROM comments c LEFT JOIN sb_users u ON c.user_id = u.id WHERE c.ticket_id = $ticket_id $where ORDER BY c.created_at ASC";
     $result = sb_db_get($sql, false);
     $comments = [];
 
@@ -2475,6 +2502,7 @@ function sb_fetch_ticket_comments($ticket_id = null)
 
     return ['comments' => $comments, 'server_now' => date('Y-m-d\TH:i:sP')];
 }
+
 
 function update_ticket_attachments($ticket_id = null, $attachments = null)
 {

@@ -1062,6 +1062,12 @@
                                 SBChat.update();
                             }
                         });
+                        /// sync ticket comment via pusher
+                        this.event('new-ticket-comment', (response) => {
+                            SBChat.loadComments(response.ticket_id,response.last_updated_at);
+                            //SBTicket.new_comment_count++;
+                            SBChat.playSound();
+                        });
                         this.presence(1, () => {
                             this.started = true;
                             SBChat.automations.runAll();
@@ -1102,6 +1108,7 @@
                 return this.init(() => { this.event(event, callback, channel) });
             }
             let channel_original = channel;
+            console.log(channel_original,callback,'tt');
             channel = this.cloudChannelRename(channel);
             if (channel in this.channels) {
                 this.channels[channel].unbind(event);
@@ -2282,6 +2289,8 @@
         offline_message_set: false,
         label_date: false,
         label_date_show: false,
+        last_comment_date: '',
+        datetime_last_comment: false,
 
         // Send a message
         sendMessage: function (user_id = -1, message = '', attachments = [], onSuccess = false, payload = false, conversation_status_code = false) {
@@ -2863,31 +2872,50 @@
             return html;
         },
 
-        loadComments : function (ticket_id) {
+        loadComments : function (ticket_id,last_update_date=null) {
             SBF.ajax({
                 function: 'get-ticket-comments',
-                ticket_id: ticket_id
+                ticket_id: ticket_id,
+                last_update_date: last_update_date,
             }, (response) => {
-                const commentsSection = document.getElementById('comments-section');
+                const commentsSection = $(`.tickets-list-area[data-id=${ticket_id}] #comments-section`);
                 if (response.comments && response.comments.length > 0) {
+
+                    if (response.comments[0].last_update_time) {
+                        this.datetime_last_comment = response.comments[0].last_update_time;
+                    }
+
                     if (response.server_now) {   /// update window.SERVER_NOW time to use in canEditComment function
                         window.SERVER_NOW = response.server_now;
                     }
                     // Group comments by date
-                    let lastDate = '';
+                    //let lastDate = '';
                     let html = '';
                     response.comments.forEach(comment => {
                         const commentDate = comment.created_at.split(' ')[0];
-                        if (commentDate !== lastDate) {
+                        if (commentDate !== this.last_comment_date) {
                             html += `<div class='text-center my-2'><span class='badge bg-secondary' style='font-size:13px;'>${this.formatDateLabel(comment.created_at)}</span></div>`;
-                            lastDate = commentDate;
+                            this.last_comment_date = commentDate;
                         }
                         html += this.renderComment(comment);
                     });
-                    commentsSection.innerHTML = html;
-                    //showInitials('tc_back','comment-row');
-                    //scrollToBottom();
-                // attachEditListeners();
+                    
+                    if(last_update_date)
+                    {
+                        commentsSection.append(html);
+                    }
+                    else
+                    {
+                        commentsSection.html(html);
+                    }
+
+                    setTimeout(() => {
+                        const el = commentsSection[0]; // or get(0)
+                        el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+                    }, 0);
+
+                   // showInitials('tc_back','comment-row');
+
                 }
                 else {
                     commentsSection.innerHTML = '<div class="text-center text-muted">No comments yet.</div>';
@@ -2952,13 +2980,13 @@
 
         openTicket: function(ticket_id)
         {
-            console.log(ticket_id);
             SBF.ajax({
                     function: 'edit-ticket',
                     ticket_id: ticket_id
                 }, (response) => {
                     if(response)
                     {
+                        $('.tickets-list-area').attr('data-id',ticket_id);
                         $('.sb-tickets .user-name').html(response.contact_name);
                         $('.sb-tickets .ticket-creation-time').html(response.creation_time);
                         $('.sb-tickets .ticket-subject').html(response.subject);
@@ -6375,6 +6403,7 @@
                 ticket_id: ticketId,
                 comment_id: commentId,
                 comment: new_comment ? $('.tickets-list-area #newComment').val() : $('.tickets-list-area #oldComment').val(),
+                contact_id:activeUser().id
             }, (response) => {
                 console.log(response);
                 if(response.success) 
@@ -6435,11 +6464,6 @@
                 }
             });
         });
-
-        SBPusher.event('new-ticket-comment', (data) => {
-                console.log('new comment added',data);
-        });
-
 
         // Start a new conversation from the dashboard
         $(main).on('click', '.sb-btn-new-conversation, .sb-departments-list > div, .sb-agents-list > div', function () {

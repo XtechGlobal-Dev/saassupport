@@ -11809,6 +11809,27 @@ li.menu_head:hover {
   fill: none;
 }
 
+.nav-tabs .nav-item {
+  width: 120px;
+  position: relative;
+}
+.nav-tabs .nav-item .sb-notification-counter {
+  position: absolute;
+  right: 4px;
+  bottom: 6px;
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
+  font-size: 12px;
+  border-radius: 50%;
+  text-align: center;
+  background: #155CFD;
+  color: #fff;
+  z-index: 9;
+  letter-spacing: 0.3px;
+  animation: sb-fade-animation 0.3s;
+}
+
 /*
  *
  * -----------------------------------------------------------
