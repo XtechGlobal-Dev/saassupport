@@ -1892,7 +1892,7 @@ td.sb-offline:after {
         position: fixed;
         background: $background-gray;
         border-right: 1px solid $border-color;
-        width: 65px;
+        // width: 65px;
         top: 0;
         left: 0;
         bottom: 0;
@@ -2130,7 +2130,7 @@ td.sb-offline:after {
 
     .header_new {
         background: $background-gray;
-        width: 280px;
+        // width: 280px;
 
         .sidebar {
             padding: 20px;
@@ -2294,8 +2294,10 @@ td.sb-offline:after {
 
 .sb-admin {
     height: 100%;
-    width: calc(100% - 280px);
-    padding-left: 280px;
+    // width: calc(100% - 280px);
+    width: calc(100% - 100px);
+    // padding-left: 280px;
+    padding-left: 100px;
     position: fixed;
     font-size: 14px;
     line-height: 17px;
@@ -9122,8 +9124,88 @@ li.menu_head:hover {
     fill: none;
   }
 }
+/* Parent container */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+// custom code
+/* Sidebar default */
+.sidebar {
+    width: 240px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    background: #fff;
+    height: 100vh;
+}
+
+/* Toggle button */
+.toggle-btn {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: left;
+}
+
+/* Collapsed sidebar */
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .label,
+.sidebar.collapsed .powered-by {
+    display: none;
+}
+
+.sidebar .label {
+    margin-left: 10px;
+}
+
+/* Optional - icons and alignment */
+.sidebar nav ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+.main-content {
+    // margin-left: 240px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 60px;
+}
+#mainContent.sidebar-collapsed {
+    margin-left: 180px !important;
+    width: 90% !important;
+}
 
 // 
+.metric-card {
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+  }
+}
+.high-insr {
+  .card {
+    min-height: 350px !important;
+  }
+}
+// custom code
+ 
 /*
  *
  * -----------------------------------------------------------
