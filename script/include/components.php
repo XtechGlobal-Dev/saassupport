@@ -2577,7 +2577,7 @@ function sb_component_admin()
                         <div class="container new_container">
                             <div class="row">
                                 <div class="col-md-8 p-0">
-                                    <div class="px-3 mt-3">
+                                    <div class="px-3 mt-3 clmn-gap">
                                         <section class="dashboard-metrics">
                                             <!-- <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
@@ -2660,37 +2660,11 @@ function sb_component_admin()
                                                         </span>&nbsp;this week </div>
                                                 <!-- code update -->
                                             </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #0684ff;">
-                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Ticket Resolved</h3>
-                                                            <p class="ticket-resolved"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="ticket_resolved_chart">
-                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
-                                                <!-- code update -->
-                                                <div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div>
-                                                <!-- code update -->
-                                            </div>
-                                            <!--  -->
+                                         
+                                           
+                                        </section>
+                                        <section class="dashboard-metrics">
+                                                <!--  -->
                                                <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
@@ -2722,7 +2696,37 @@ function sb_component_admin()
                                                 <!-- code update -->
                                             </div>
                                             <!--  -->
-                                        </section>
+                                                <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #0684ff;">
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Ticket Resolved</h3>
+                                                            <p class="ticket-resolved"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
+                                            </div>
+                                             </section>
                                         <!--section class="dashboard-metrics">
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
@@ -2962,7 +2966,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="px-3 mt-3">
+                                    <div class="px-3 mt-3 clmn-gap">
                                         <section class="main-charts mb-3">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -3043,7 +3047,7 @@ function sb_component_admin()
                                             </div>
                                         </section>
                                         <section class="main-charts high-inrs">
-                                            <div class="card p-3" style=" height: 292px !important;">
+                                            <div class="card p-3" style=" max-height: 442px !important; display: flex; flex-direction: column; justify-content: center; height: 100%;">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Customer Overview</h6>
                                                     <select id="customer-overview" class="form-select form-select-sm w-auto">
@@ -3103,7 +3107,7 @@ function sb_component_admin()
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-8 p-0">
-                                    <div class="px-3 main-charts">
+                                    <div class="px-3 main-charts clmn-gap">
                                         <div class="bg-white">
                                             <h6 class="head mb-1">Recent Messages</h6>
                                         </div>
@@ -3117,7 +3121,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="px-3 main-charts tables">
+                                    <div class="px-3 main-charts tables clmn-gap">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">All Tickets</h6>
@@ -3167,6 +3171,7 @@ function sb_component_admin()
                                                 } ?>
                                             </ul>
                                         </div>
+                                        
                                         <div id="ticket_priorities">
                                             <ul class="priority-list">
                                                 <?php foreach (
@@ -4020,7 +4025,8 @@ function sb_component_admin()
                                 </div-->
                             </div>
                         </div>
-                        <div class="sb-scroll-area">
+                      
+                        <div class="sb-scroll-area ticket-section">
                             <table class="sb-table sb_table_new sb-table-tickets">
                                 <thead>
                                     <tr>
@@ -5135,12 +5141,12 @@ function sb_component_admin()
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                <div class="sb-add-article sb-btn sb-icon sb-btn-white clr-change">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new article"); ?>
                                 </div>
                                 <ul class="ul-categories"></ul>
-                                <div class="sb-add-category sb-btn sb-icon sb-btn-white">
+                                <div class="sb-add-category sb-btn sb-icon sb-btn-white  clr-change">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new category"); ?>
                                 </div>

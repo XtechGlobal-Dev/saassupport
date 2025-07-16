@@ -4332,14 +4332,15 @@ td.sb-offline:after {
   border-radius: 6px;
   width: 150px;
   padding: 0 10px;
+  color: #000;
 }
 .settings_new .sb-scroll-area .setting_sidebar li.sb-active {
-  background: #E5EAF0;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  background: #e5eaf0;
   border-radius: 6px;
   padding: 0 10px;
   border-bottom: none;
   width: 150px;
+  color: #000;
 }
 .settings_new .sb-scroll-area .setting_sidebar #tab-apps {
   display: none;
@@ -4674,6 +4675,7 @@ td.sb-offline:after {
 .new_table .sb-scroll-area {
   border: 1px solid #EBECEF;
   border-radius: 8px;
+  height: 257px;
 }
 
 .sb_table_new thead {
@@ -9840,7 +9842,7 @@ a.sb-btn-white.sb-loading:hover:before,
   border-bottom: 2px solid #155CFD;
 }
 .sb-area-articles .sb-inner-tab .sb-content-categories {
-  height: calc(100vh - 91px);
+  height: calc(100vh - 180px);
 }
 .sb-area-articles .sb-inner-tab .ul-articles li,
 .sb-area-articles .sb-inner-tab .ul-categories li {
@@ -11815,7 +11817,6 @@ li.menu_head:hover {
   overflow: hidden;
 }
 
-/* Sidebar default */
 .sidebar {
   width: 240px;
   transition: width 0.3s ease;
@@ -11823,42 +11824,34 @@ li.menu_head:hover {
   background: #fff;
   height: 100vh;
 }
-
-/* Toggle button */
-.toggle-btn {
-  padding: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  text-align: left;
-}
-
-/* Collapsed sidebar */
 .sidebar.collapsed {
   width: 60px;
 }
-
 .sidebar.collapsed .logo-text,
 .sidebar.collapsed .label,
 .sidebar.collapsed .powered-by {
   display: none;
 }
-
 .sidebar .label {
   margin-left: 10px;
 }
-
-/* Optional - icons and alignment */
 .sidebar nav ul {
   list-style: none;
   padding-left: 0;
 }
-
 .sidebar nav ul li a {
   display: flex;
   align-items: center;
   padding: 10px;
   color: #333;
   text-decoration: none;
+}
+
+.toggle-btn {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
 }
 
 .main-content {
@@ -11874,14 +11867,84 @@ li.menu_head:hover {
   width: 90% !important;
 }
 
-.metric-card canvas {
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100%;
-}
-
 .high-insr .card {
   min-height: 350px !important;
+}
+
+.new_container .clmn-gap {
+  padding-left: 20px !important;
+  padding-right: 8px !important;
+}
+
+.sb-select ul {
+  position: relative;
+  top: 50%;
+  left: 0;
+  z-index: 9999;
+}
+
+.choices .choices__inner {
+  padding: 3px 0px 3px 10px;
+  min-height: 30px;
+  max-width: 97%;
+}
+
+.select2-container--default .select2-selection--single {
+  height: 42px !important;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 1.5;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  position: absolute;
+  right: 8px;
+  margin-top: 0;
+}
+
+.sb-input > div {
+  padding-right: unset;
+  max-width: 800px;
+}
+
+#subject span {
+  padding-bottom: 6px;
+}
+
+#tags-div span {
+  padding-bottom: 6px;
+}
+
+.sb-scroll-area .sb-list,
+.sb-conversation .sb-list {
+  overflow: unset;
+  overflow-y: unset;
+}
+
+.sb-list .sb-message pre {
+  overflow: unset;
+  overflow-y: unset;
+}
+
+.sb-area-tickets.sb-active .ticket-section {
+  max-height: 700px;
+}
+
+.sb-tab.sb-inner-tab .clr-change {
+  background-color: #2d9cdb;
+  color: #fff;
+  border: unset;
+  border-radius: 7px;
+  height: 35px !important;
+}
+
+.sb-board .sb-user-details .sb-user-details-close i::before {
+  font-size: 11px;
+  line-height: 30px;
 }
 
 /*
