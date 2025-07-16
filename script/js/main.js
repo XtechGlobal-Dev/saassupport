@@ -1066,6 +1066,34 @@
                         this.event('new-ticket-comment', (response) => {
                             SBChat.loadComments(response.ticket_id,response.last_updated_at);
                             //SBTicket.new_comment_count++;
+                            // Initialize array if it doesn't exist
+                            if (!Array.isArray(SBChat.new_comment_count[response.ticket_id])) {
+                                SBChat.new_comment_count[response.ticket_id] = [];
+                            }
+
+                            // Determine next comment count (e.g., 1, 2, 3)
+                            const ticket_comments = SBChat.new_comment_count[response.ticket_id].length + 1;
+
+                            // Add comment count to the array
+                            SBChat.new_comment_count[response.ticket_id].push(ticket_comments);
+
+                            // Debug output
+
+                            // Correctly loop through the object
+                            Object.entries(SBChat.new_comment_count).forEach(([id, countArray]) => {
+                                console.log('ticket_id', id, 'count', countArray.length);
+                                $('.sb-user-tickets li[data-ticket-id="' + id + '"] .notification-counter').remove();
+                                // Append the notification counter to the first cell of the row
+                                $('.sb-user-tickets li[data-ticket-id="' + id + '"]').append(`<span class="notification-counter" data-count="${countArray.length}">${countArray.length}</span>`);
+
+                                if($('.sb-user-tickets li[data-ticket-id="' + id + '"]').hasClass('sb-active'))
+                                {
+                                    setTimeout(() => {
+                                        $('.sb-user-tickets li[data-ticket-id="' + id + '"]').find('.notification-counter').remove();
+                                    },1100);
+                                }
+                            });
+
                             SBChat.playSound();
                         });
                         this.presence(1, () => {
@@ -1563,7 +1591,7 @@
             let code = '';
                     tickets.forEach(ticket => {
                         code += `
-                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
+                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
                                 <div class="sb-conversation-item" style="display: flex; align-items: center;">
                                     <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
                                     <div style="flex: 1;">
@@ -2291,6 +2319,7 @@
         label_date_show: false,
         last_comment_date: '',
         datetime_last_comment: false,
+        new_comment_count:[],
 
         // Send a message
         sendMessage: function (user_id = -1, message = '', attachments = [], onSuccess = false, payload = false, conversation_status_code = false) {
@@ -2986,6 +3015,8 @@
                 }, (response) => {
                     if(response)
                     {
+                        $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+
                         $('.tickets-list-area').attr('data-id',ticket_id);
                         $('.sb-tickets .user-name').html(response.contact_name);
                         $('.sb-tickets .ticket-creation-time').html(response.creation_time);
@@ -6389,6 +6420,8 @@
         // Open a ticket from the dashboard
         $(main).on('click', '.sb-user-tickets li', function () {
             SBChat.openTicket($(this).attr('data-ticket-id'));
+            $(this).addClass('sb-active');
+            $(this).siblings().removeClass('sb-active');
         });
 
          // Add or update ticket

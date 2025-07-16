@@ -11683,7 +11683,7 @@ a.sb-btn-white.sb-loading:hover:before,
 .sb-admin-box_new .login-button {
   background-color: #0a73fe;
   height: 45px;
-  width: -webkit-fill-available;
+  width: 100%;
   border-radius: 10px;
   color: white;
   font-weight: 600;
@@ -11817,6 +11817,25 @@ li.menu_head:hover {
   position: absolute;
   right: 4px;
   bottom: 6px;
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
+  font-size: 12px;
+  border-radius: 50%;
+  text-align: center;
+  background: #155CFD;
+  color: #fff;
+  z-index: 9;
+  letter-spacing: 0.3px;
+  animation: sb-fade-animation 0.3s;
+}
+
+.sb-table-tickets td {
+  position: relative;
+}
+.sb-table-tickets td .sb-notification-counter {
+  position: absolute;
+  margin-left: 10px;
   height: 21px;
   width: 21px;
   line-height: 21px;
