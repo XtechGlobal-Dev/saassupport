@@ -1187,6 +1187,10 @@ div ul.sb-menu,
   border-left-color: #155CFD;
 }
 
+.sb-user-tickets li {
+  position: relative;
+}
+
 .sb-chat-btn span,
 .sb-user-conversations > li > [data-count] {
   position: absolute;
@@ -1217,6 +1221,26 @@ div ul.sb-menu,
 }
 .sb-user-conversations > li:hover > [data-count] {
   border-color: rgb(245, 247, 250);
+}
+
+.sb-user-tickets li > [data-count] {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  background: rgb(202, 52, 52);
+  color: #fff;
+  border-radius: 100%;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 22px;
+  top: 0;
+  left: -3px;
+  z-index: 2;
+  animation: sb-fade-animation 0.3s;
+}
+.sb-user-tickets li > [data-count]:empty, .sb-user-tickets li > [data-count][data-count="0"] {
+  display: none;
 }
 
 /*
@@ -4725,6 +4749,31 @@ div ul.sb-menu .li:hover,
 .sb-tickets .sb-user-conversations > li > [data-count] {
   left: 10px;
   top: 38px;
+}
+.sb-tickets .sb-user-tickets > li.sb-active {
+  background: #EEF2FF;
+}
+.sb-tickets .sb-user-tickets > li > [data-count] {
+  left: 10px;
+  top: 38px;
+}
+.sb-tickets .sb-user-tickets li {
+  position: relative;
+}
+.sb-tickets .sb-user-tickets li .sb-notification-counter {
+  position: absolute;
+  margin-left: 10px;
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
+  font-size: 12px;
+  border-radius: 50%;
+  text-align: center;
+  background: #155CFD;
+  color: #fff;
+  z-index: 9;
+  letter-spacing: 0.3px;
+  animation: sb-fade-animation 0.3s;
 }
 
 /*
