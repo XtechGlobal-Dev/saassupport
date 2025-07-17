@@ -2275,7 +2275,8 @@ function sb_add_edit_custom_field($inputs)
          // Prepare variables for bind_param
         $title = sb_db_escape($data['title']);
         $type = sb_db_escape($data['type']);
-        $required = isset($data['required']) ? 1 : 0;
+        $required = sb_db_escape($data['required'], true); // Convert to boolean
+        $add_to_frontend_form = sb_db_escape($data['add_to_frontend_form'],true);
         $default_value = $data['default_value'] ? sb_db_escape($data['default_value']) :  null;
         $is_active = isset($data['is_active']) ? 1 : 0;
         $order = $data['order'] ?? 0;
@@ -2284,17 +2285,17 @@ function sb_add_edit_custom_field($inputs)
         $sql = '';
         if($fieldId == 0 || $fieldId == "")
         {
-            $sql = "INSERT INTO custom_fields (`title`, `type`, `required`, `default_value`, `options`, `is_active`, `order_no`) VALUES ('$title', '$type', $required, '$default_value', '$options', $is_active, $order)";
+            $sql = "INSERT INTO custom_fields (`title`, `type`, `required`, `add_to_frontend_form`, `default_value`, `options`, `is_active`, `order_no`) VALUES ('$title', '$type', $required,$add_to_frontend_form, '$default_value', '$options', $is_active, $order)";
         }
         else
         {
-           $sql = "Update custom_fields set title = '$title', type = '$type', required = $required, default_value =  '$default_value', options = '$options', is_active = $is_active, order_no = '$order' where id = '$fieldId'";
+           $sql = "Update custom_fields set title = '$title', type = '$type', required = $required, add_to_frontend_form = $add_to_frontend_form, default_value =  '$default_value', options = '$options', is_active = $is_active, order_no = '$order' where id = '$fieldId'";
         }
         
         
         error_log("SQL Query: " . $sql);
 
-        error_log("Bound parameters: title=$title, type=$type, required=$required, default_value=$default_value, is_active=$is_active, order=$order");
+        error_log("Bound parameters: title=$title, type=$type, required=$required, add_to_frontend_form = $add_to_frontend_form, default_value=$default_value, is_active=$is_active, order=$order");
 
         sb_db_query($sql);
        
