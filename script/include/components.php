@@ -2257,13 +2257,12 @@ function sb_component_admin()
       <aside class="sidebar sb-admin-nav collapsed" id="sidebar">
         <!-- Toggle Button -->
         <div class="toggle-btn" onclick="toggleSidebar()" title="Toggle Navigation">
-            ☰
+             <img src="./account/media/hamburger.svg" alt="logo" style="width: 24px; height: auto;">
         </div>
-
         <div class="logo">
             <img width="35" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="Logo" class="logo-icon">
             <div class="logo-text">
-                <h1>Nexon Helpdesk</h1>
+                <h1>Nexleon Helpdesk</h1>
                 <p>Agent Admin</p>
             </div>
         </div>
@@ -2316,9 +2315,11 @@ function sb_component_admin()
         </nav>
 
         <div class="powered-by">
-            <p>POWERED BY</p>
+            <p class="all-reserved">&copy; All Rights Reserved</p>
+            <p class="nexln-help">Made By Nexleon Helpdesk</p>
             <div class="powered-logo">
-                <img src="./account/media/dashboard-logo.svg" alt="logo" style="width: 190px; height: auto;">
+                <!--img src="./account/media/dashboard-logo.svg" alt="logo" style="width: 190px; height: auto;"-->
+                <p></p>
             </div>
         </div>
     </aside>

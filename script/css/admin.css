@@ -5886,6 +5886,7 @@ td.sb-offline:after {
 .sb-admin .header_new .sidebar .powered-by {
   margin-top: auto;
   font-size: 12px;
+  margin-bottom: 30px;
 }
 .sb-admin .header_new .sidebar .powered-by > p {
   font-weight: 500;
@@ -7413,12 +7414,30 @@ td.sb-offline:after {
   object-fit: cover;
 }
 .sb-area-dashboard main .new_container .main-charts .recent.card .reply-btn {
-  background: rgba(41, 83, 232, 0.1019607843);
-  color: #2953E8;
-  padding: 10px 22px;
-  border: 1px solid rgba(41, 83, 232, 0.1019607843);
+  font-size: 13px;
+  line-height: 36px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
   border-radius: 8px;
-  max-height: 20;
+  min-width: 0;
+  background-color: #155CFD;
+  text-decoration: none;
+  color: #fff;
+  height: 35px;
+  padding: 0 25px;
+  position: relative;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.4s;
+  user-select: none;
+}
+.sb-area-dashboard main .new_container .main-charts .recent.card .reply-btn > a {
+  color: #fff;
+  text-decoration: unset;
 }
 .sb-area-dashboard main .new_container .main-charts .agents {
   display: flex;
@@ -7441,10 +7460,30 @@ td.sb-offline:after {
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
 }
 .sb-area-dashboard main .new_container .tables .label_blue {
-  color: #487FFF;
-  font-weight: 400;
-  font-size: 16px;
+  font-size: 13px;
+  line-height: 36px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  border-radius: 8px;
+  min-width: 0;
+  background-color: #155CFD;
+  text-decoration: none;
+  color: #fff;
+  height: 35px;
+  padding: 0 25px;
+  position: relative;
+  display: inline-block;
+  border: none;
+  text-align: center;
   cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.4s;
+  user-select: none;
+}
+.sb-area-dashboard main .new_container .tables .label_blue > a {
+  color: #fff;
+  text-decoration: unset;
 }
 
 .sb-area-ticket-detail {
@@ -11945,6 +11984,14 @@ li.menu_head:hover {
 .sb-board .sb-user-details .sb-user-details-close i::before {
   font-size: 11px;
   line-height: 30px;
+}
+
+.powered-by .all-reserved {
+  font-size: 13px !important;
+}
+.powered-by .nexln-help {
+  font-size: 15px !important;
+  color: #000 !important;
 }
 
 /*
