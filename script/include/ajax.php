@@ -204,13 +204,13 @@ function sb_ajax_execute() {
         case 'get-tickets-custom-fields':
              return sb_json_response(sb_get_tickets_custom_active_fields());
         case 'add-ticket-comment':
-             return sb_json_response(add_ticket_comment($_POST['ticket_id'], $_POST['comment_id'], $_POST['comment']));
+             return sb_json_response(add_ticket_comment($_POST['ticket_id'], $_POST['comment_id'], $_POST['comment'],$_POST['contact_id']));
         case 'update-ticket-comment':
              return sb_json_response(update_ticket_comment($_POST['ticket_id'], $_POST['comment_id'], $_POST['comment']));
         case 'delete-ticket-comment':
              return sb_json_response(delete_ticket_comment($_POST['ticket_id'], $_POST['comment_id']));
         case 'get-ticket-comments':
-             return sb_json_response(sb_fetch_ticket_comments($_POST['ticket_id']));
+             return sb_json_response(sb_fetch_ticket_comments($_POST['ticket_id'], $_POST['last_update_date']));
         case 'get-ticket-statuses':
              return sb_json_response(sb_get_tickets_statuses());
         case 'search-get-users':

@@ -435,7 +435,41 @@
         left: 10px;
         top: 38px;
     }
+
+    .sb-user-tickets>li.sb-active {
+        background: #EEF2FF;
+    }
+
+    .sb-user-tickets>li>[data-count] {
+        left: 10px;
+        top: 38px;
+    }
+
+    .sb-user-tickets
+    {
+        li {
+            position: relative;
+            .sb-notification-counter
+            {
+                position: absolute;
+                margin-left:10px;
+                height: 21px;
+                width: 21px;
+                line-height: 21px;
+                font-size: 12px;
+                border-radius: 50%;
+                text-align: center;
+                background: #155CFD;
+                color: #fff;
+                z-index: 9;
+                letter-spacing: 0.3px;
+                animation: sb-fade-animation 0.3s;
+            }
+        }
+    }
 }
+
+
 
 /*
 
@@ -893,6 +927,10 @@
             }
 
             .sb-conversation {
+                display: none;
+            }
+
+            .tickets-area {
                 display: none;
             }
         }

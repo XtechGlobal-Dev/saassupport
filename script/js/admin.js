@@ -5594,6 +5594,11 @@
                         away_mode = false;
                     }
                 }, 'agents');
+                 SBPusher.event('updates-ticket-comments', (response) => {
+                    console.log('agent ticket comments');
+                    /// sync ticket comment via pusher
+                    SBTicket.loadComments(response.ticket_id);
+                }, 'agents');
                 initialization();
             });
         } else {
