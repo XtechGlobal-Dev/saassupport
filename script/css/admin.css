@@ -12059,6 +12059,10 @@ li.menu_head:hover {
   color: #000 !important;
 }
 
+section.main-charts.recent-message {
+  margin-top: 15px;
+}
+
 /*
  *
  * -----------------------------------------------------------
