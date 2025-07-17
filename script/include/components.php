@@ -10,34 +10,55 @@
  */
 
 function sb_profile_box()
-{ ?>
+{
+    ?>
     <div class="sb-profile-box sb-lightbox">
         <div class="sb-top-bar">
             <div class="sb-profile">
-                <img src="<?php echo SB_URL ?>/media/user.svg" data-name="" />
+                <img src="<?php echo SB_URL; ?>/media/user.svg" data-name="" />
                 <div class="user-initials" data-value="edit-profile" style="display: none">
                     <span class="initials"></span>
                 </div>
                 <span class="sb-name"></span>
             </div>
             <div>
-                <a data-value="custom_email" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Send email') ?>">
+                <a data-value="custom_email" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                    "Send email"
+                ); ?>">
                     <i class="sb-icon-envelope"></i>
                 </a>
                 <?php
-                if (sb_get_multi_setting('sms', 'sms-user')) {
-                    echo '<a data-value="sms" class="sb-btn-icon" data-sb-tooltip="' . sb_('Send text message') . '"><i class="sb-icon-sms"></i></a>';
+                if (sb_get_multi_setting("sms", "sms-user")) {
+                    echo '<a data-value="sms" class="sb-btn-icon" data-sb-tooltip="' .
+                        sb_("Send text message") .
+                        '"><i class="sb-icon-sms"></i></a>';
                 }
-                if (defined('SB_WHATSAPP') && (!function_exists('sb_whatsapp_active') || sb_whatsapp_active())) {
-                    echo '<a data-value="whatsapp" class="sb-btn-icon" data-sb-tooltip="' . sb_('Send a WhatsApp message template') . '"><i class="sb-icon-social-wa"></i></a>'; // Deprecated: remove function_exists('sb_whatsapp_active')
+                if (
+                    defined("SB_WHATSAPP") &&
+                    (!function_exists("sb_whatsapp_active") ||
+                        sb_whatsapp_active())
+                ) {
+                    echo '<a data-value="whatsapp" class="sb-btn-icon" data-sb-tooltip="' .
+                        sb_("Send a WhatsApp message template") .
+                        '"><i class="sb-icon-social-wa"></i></a>'; // Deprecated: remove function_exists('sb_whatsapp_active')
                 }
-                if (((sb_is_agent(false, true, true) && !sb_supervisor()) || sb_get_multi_setting('agents', 'agents-edit-user')) || (sb_supervisor() && sb_get_multi_setting('supervisor', 'supervisor-edit-user'))) {
-                    echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' . sb_('Edit user') . '</a>';
+                if (
+                    (sb_is_agent(false, true, true) && !sb_supervisor()) ||
+                    sb_get_multi_setting("agents", "agents-edit-user") ||
+                    (sb_supervisor() &&
+                        sb_get_multi_setting(
+                            "supervisor",
+                            "supervisor-edit-user"
+                        ))
+                ) {
+                    echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' .
+                        sb_("Edit user") .
+                        "</a>";
                 }
                 ?>
                 <a class="sb-start-conversation sb-btn sb-icon">
                     <i class="sb-icon-message"></i>
-                    <?php sb_e('Start a conversation') ?>
+                    <?php sb_e("Start a conversation"); ?>
                 </a>
                 <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
@@ -47,34 +68,35 @@ function sb_profile_box()
         <div class="sb-main sb-scroll-area">
             <div>
                 <div class="sb-title">
-                    <?php sb_e('Details') ?>
+                    <?php sb_e("Details"); ?>
                 </div>
                 <div class="sb-profile-list"></div>
                 <div class="sb-agent-area"></div>
             </div>
             <div>
                 <div class="sb-title">
-                    <?php sb_e('User conversations') ?>
+                    <?php sb_e("User conversations"); ?>
                 </div>
                 <ul class="sb-user-conversations"></ul>
             </div>
         </div>
     </div>
-<?php } ?>
 <?php
-function sb_profile_edit_box()
-{ ?>
+} ?>
+<?php function sb_profile_edit_box()
+{
+    ?>
     <div class="sb-profile-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
             <div class="sb-profile">
-                <img src="<?php echo SB_URL ?>/media/user.svg" />
+                <img src="<?php echo SB_URL; ?>/media/user.svg" />
                 <span class="sb-name"></span>
             </div>
             <div>
                 <a class="sb-save sb-btn sb-icon">
                     <i class="sb-icon-check"></i>
-                    <?php sb_e('Save changes') ?>
+                    <?php sb_e("Save changes"); ?>
                 </a>
                 <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
@@ -84,12 +106,12 @@ function sb_profile_edit_box()
         <div class="sb-main sb-scroll-area">
             <div class="sb-details">
                 <div class="sb-title">
-                    <?php sb_e('Edit details') ?>
+                    <?php sb_e("Edit details"); ?>
                 </div>
                 <div class="sb-edit-box">
                     <div id="profile_image" data-type="image" class="sb-input sb-input-image sb-profile-image">
                         <span>
-                            <?php sb_e('Profile image') ?>
+                            <?php sb_e("Profile image"); ?>
                         </span>
                         <div class="image">
                             <div class="sb-icon-close"></div>
@@ -97,89 +119,110 @@ function sb_profile_edit_box()
                     </div>
                     <div id="user_type" data-type="select" class="sb-input sb-input-select">
                         <span>
-                            <?php sb_e('Type') ?>
+                            <?php sb_e("Type"); ?>
                         </span>
                         <select>
                             <option value="agent">
-                                <?php sb_e('Agent') ?>
+                                <?php sb_e("Agent"); ?>
                             </option>
                             <option value="admin">
-                                <?php sb_e('Admin') ?>
+                                <?php sb_e("Admin"); ?>
                             </option>
                         </select>
                     </div>
-                    <?php sb_departments('select') ?>
+                    <?php sb_departments("select"); ?>
                     <div id="first_name" data-type="text" class="sb-input">
                         <span class="required-label">
-                            <?php sb_e('First name') ?>
+                            <?php sb_e("First name"); ?>
                         </span>
                         <input type="text" required />
                     </div>
                     <div id="last_name" data-type="text" class="sb-input">
                         <span>
-                            <?php sb_e('Last name') ?>
+                            <?php sb_e("Last name"); ?>
                         </span>
                         <input type="text" />
                     </div>
                     <div id="password" data-type="text" class="sb-input">
                         <span class="required-label">
-                            <?php sb_e('Password') ?>
+                            <?php sb_e("Password"); ?>
                         </span>
                         <input type="password" />
                     </div>
                     <div id="email" data-type="email" class="sb-input">
                         <span class="required-label">
-                            <?php sb_e('Email') ?>
+                            <?php sb_e("Email"); ?>
                         </span>
                         <input type="email" />
                     </div>
                 </div>
                 <a class="sb-delete sb-btn-text sb-btn-red">
                     <i class="sb-icon-delete"></i>
-                    <?php sb_e('Delete user') ?>
+                    <?php sb_e("Delete user"); ?>
                 </a>
             </div>
             <div class="sb-additional-details">
                 <div class="sb-title">
-                    <?php sb_e('Edit additional details') ?>
+                    <?php sb_e("Edit additional details"); ?>
                 </div>
                 <div class="sb-edit-box">
                     <?php
-                    $code = '';
+                    $code = "";
                     $fields = sb_users_get_fields();
                     foreach ($fields as $field) {
-                        $id = $field['id'];
-                        $type = $id == 'country' || $id == 'language' ? 'select' : ($id == 'birthdate' ? 'date' : 'text');
-                        $code .= '<div id="' . $id . '" data-type="' . $type . '" class="sb-input"><span>' . sb_($field['name']) . '</span>';
-                        if ($type == 'date' || $type == 'text') {
+                        $id = $field["id"];
+                        $type =
+                            $id == "country" || $id == "language"
+                                ? "select"
+                                : ($id == "birthdate"
+                                    ? "date"
+                                    : "text");
+                        $code .=
+                            '<div id="' .
+                            $id .
+                            '" data-type="' .
+                            $type .
+                            '" class="sb-input"><span>' .
+                            sb_($field["name"]) .
+                            "</span>";
+                        if ($type == "date" || $type == "text") {
                             $code .= '<input type="' . $type . '" />';
-                        } else if ($id == 'country') {
-                            $code .= sb_select_html('countries');
-                        } else if ($id == 'language') {
-                            $code .= sb_select_html('languages');
+                        } elseif ($id == "country") {
+                            $code .= sb_select_html("countries");
+                        } elseif ($id == "language") {
+                            $code .= sb_select_html("languages");
                         }
-                        $code .= '</div>';
+                        $code .= "</div>";
                     }
-                    echo $code;
-                    ?>
+                    echo $code;?>
                 </div>
             </div>
         </div>
     </div>
-<?php } ?>
+<?php
+} ?>
 <?php
 function sb_ticket_box()
-{ ?>
+{
+    ?>
     <div class="sb-lightbox">
         <div class="sb-top-bar">
 
             <div>
 
-                <?php
-                if (((sb_is_agent(false, true, true) && !sb_supervisor()) || sb_get_multi_setting('agents', 'agents-edit-user')) || (sb_supervisor() && sb_get_multi_setting('supervisor', 'supervisor-edit-user'))) {
-                    echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' . sb_('Edit user') . '</a>';
-                }
-                ?>
+                <?php if (
+                    (sb_is_agent(false, true, true) && !sb_supervisor()) ||
+                    sb_get_multi_setting("agents", "agents-edit-user") ||
+                    (sb_supervisor() &&
+                        sb_get_multi_setting(
+                            "supervisor",
+                            "supervisor-edit-user"
+                        ))
+                ) {
+                    echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' .
+                        sb_("Edit user") .
+                        "</a>";
+                } ?>
                 <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
@@ -188,15 +231,17 @@ function sb_ticket_box()
         <div class="sb-main sb-scroll-area">
             <div>
                 <div class="sb-title">
-                    <?php sb_e('Details') ?>
+                    <?php sb_e("Details"); ?>
                 </div>
                 <div class="sb-ticket-list"></div>
             </div>
         </div>
     </div>
-<?php }
+<?php
+}
 function sb_ticket_edit_box()
-{ ?>
+{
+    ?>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
@@ -218,7 +263,7 @@ function sb_ticket_edit_box()
                 </div>
                 <a class="sb-save sb-btn sb-icon">
                     <i class="sb-icon-check"></i>
-                    <?php sb_e('Save changes') ?>
+                    <?php sb_e("Save changes"); ?>
                 </a>
                 <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
@@ -230,44 +275,58 @@ function sb_ticket_edit_box()
                 <div class="sb-details">
                     <div class="sb-edit-box">
                         <div id="subject" data-type="text" class="sb-input">
-                            <span class="required-label"><?php sb_e('Subject') ?></span>
+                            <span class="required-label"><?php sb_e(
+                                "Subject"
+                            ); ?></span>
                             <input type="text" name="subject" required />
                         </div>
 
                         <!--div id="without_contact" data-type="checkbox" class="sb-input">
-                            <span><?php // sb_e('Guest Ticket') 
-                                    ?></span>
+                            <span><?php // sb_e('Guest Ticket')
+    ?></span>
                             <input type="checkbox" name="without_contact" value="1" />
                         </div-->
 
                         <div id="contact_id" data-type="select" class="sb-input">
-                            <span class="required-label pb-2"><?php sb_e('Customer') ?></span>
+                            <span class="required-label pb-2"><?php sb_e(
+                                "Customer"
+                            ); ?></span>
                             <select id="select-customer" style="width:100%;"></select>
                         </div>
 
                         <div class="sb-input two-divs d-flex">
                             <div id="cust_name" data-type="text" class="sb-input">
-                                <span class="required-label"><?php sb_e('Name') ?></span>
+                                <span class="required-label"><?php sb_e(
+                                    "Name"
+                                ); ?></span>
                                 <input type="text" name="name" value="" disabled="">
                             </div>
                             <div id="cust_email" data-type="text" class="sb-input">
-                                <span class="required-label"><?php sb_e('Email') ?></span>
+                                <span class="required-label"><?php sb_e(
+                                    "Email"
+                                ); ?></span>
                                 <input type="email" name="email" value="" disabled="">
                             </div>
                         </div>
 
                         <!--div id="cust_name" data-type="text" class="sb-input" >
-                            <span class="required-label"><?php sb_e('Name') ?></span>
+                            <span class="required-label"><?php sb_e(
+                                "Name"
+                            ); ?></span>
                             <input type="text" name="name" required value="" disabled />
                         </div>
 
                         <div id="cust_email" data-type="text" class="sb-input" >
-                            <span class="required-label"><?php sb_e('Email') ?></span>
+                            <span class="required-label"><?php sb_e(
+                                "Email"
+                            ); ?></span>
                             <input type="email" name="email" required value="" disabled />
                         </div-->
 
                         <div id="assigned_to" data-type="select" class="sb-input">
-                            <span class="mb-2"><?php sb_e('Assigned To') ?></span>
+                            <span class="mb-2"><?php sb_e(
+                                "Assigned To"
+                            ); ?></span>
                             <div class="">
                                 <select id="select-agent" style="width:100%;"></select>
                             </div>
@@ -277,9 +336,11 @@ function sb_ticket_edit_box()
                 <div class="sb-additional-details">
                     <div class="sb-edit-box">
                         <!--div id="service_id" data-type="select" class="sb-input">
-                            <span><?php sb_e('Service') ?></span>
+                            <span><?php sb_e("Service"); ?></span>
                             <select>
-                                <option value=""><?php sb_e('Select Service') ?></option>
+                                <option value=""><?php sb_e(
+                                    "Select Service"
+                                ); ?></option>
                                 <option value="1" selected="selected">Hardware Issue Fixing</option>
                                 <option value="2">Network issue fix</option>
                                 <option value="3">Software Development</option>
@@ -287,17 +348,27 @@ function sb_ticket_edit_box()
                         </div-->
 
                         <?php
-                        $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                        $tagsHtml = '';
+                        $tags = sb_get_multi_setting("disable", "disable-tags")
+                            ? []
+                            : sb_get_setting("tags", []);
+                        $tagsHtml = "";
                         $count = count($tags);
-                        if ($count > 0) {
-                        ?>
+                        if ($count > 0) { ?>
                             <div id="tags-div" data-type="select" class="sb-input">
-                                <span><?php sb_e('Tags') ?></span>
+                                <span><?php sb_e("Tags"); ?></span>
                                 <select id="ticket-tags" name="tags[]" multiple>
                                     <?php
                                     for ($i = 0; $i < $count; $i++) {
-                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                        $tagsHtml .=
+                                            '<option value="' .
+                                            $tags[$i]["tag-name"] .
+                                            '"  class="tag-option" data-color="' .
+                                            $tags[$i]["tag-color"] .
+                                            '" data-custom-properties={"color":"' .
+                                            $tags[$i]["tag-color"] .
+                                            '"}>' .
+                                            $tags[$i]["tag-name"] .
+                                            "</option>";
                                     }
                                     echo $tagsHtml;
                                     ?>
@@ -306,80 +377,104 @@ function sb_ticket_edit_box()
                                     <option value="1" class="tag-option" data-color="#1976d2" data-custom-properties='{"color":"#1976d2"}'>Feature Request</option>
                                 </select-->
                             </div>
-                        <?php } ?>
+                        <?php }
+                        ?>
 
                         <?php
-                        $department_settings = sb_get_setting('departments-settings');
+                        $department_settings = sb_get_setting(
+                            "departments-settings"
+                        );
                         $departments = sb_get_departments();
-                        if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == 1 && !empty($departments)) {
-                        ?>
+                        if (
+                            isset(
+                                $department_settings["departments-show-list"]
+                            ) &&
+                            $department_settings["departments-show-list"] ==
+                                1 &&
+                            !empty($departments)
+                        ) { ?>
                             <div id="department_id" data-type="select" class="sb-input">
                                 <span>Department</span>
                                 <select>
-                                    <option value=""><?php echo sb_('Select Department'); ?></option>
+                                    <option value=""><?php echo sb_(
+                                        "Select Department"
+                                    ); ?></option>
                                     <?php
-                                    $code = '';
+                                    $code = "";
                                     foreach ($departments as $key => $value) {
-                                        $code .= '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                        $code .=
+                                            '<option value="' .
+                                            $key .
+                                            '">' .
+                                            sb_($value["name"]) .
+                                            "</option>";
                                     }
                                     echo $code;
                                     ?>
                                 </select>
                             </div>
-                        <?php } ?>
+                        <?php }
+                        ?>
 
                         <!--div id="cc" data-type="select" class="sb-input">
-                            <span><?php sb_e('CC') ?></span>
+                            <span><?php sb_e("CC"); ?></span>
                             <select>
                                 <option value="1">System Admin</option>
                             </select>
                         </div-->
 
 
-                        <?php
+                        <?php // { //     $priorities = sb_db_get('SELECT * FROM priorities', false); // { //     $status = sb_db_get('SELECT * FROM ticket_status', false);
+
 
                         // function sb_get_priorities()
-                        // {
-                        //     $priorities = sb_db_get('SELECT * FROM priorities', false);
                         //     return $priorities;
                         // }
-
                         // function sb_get_statues()
-                        // {
-                        //     $status = sb_db_get('SELECT * FROM ticket_status', false);
                         //     return $status;
                         // }
                         $statues = sb_get_statues();
                         $priorities = sb_get_priorities();
-
-
                         ?>
                         <div class="sb-input two-divs d-flex">
                             <div id="status_id" data-type="select" class="sb-input">
-                                <span class="required-label"><?php sb_e('Status') ?></span>
+                                <span class="required-label"><?php sb_e(
+                                    "Status"
+                                ); ?></span>
                                 <select required>
                                     <option value="">Select Status</option>
-                                    <?php
-                                    foreach ($statues as $key => $value) {
-                                        echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-                                    }
-                                    ?>
+                                    <?php foreach ($statues as $key => $value) {
+                                        echo '<option value="' .
+                                            $value["id"] .
+                                            '">' .
+                                            $value["name"] .
+                                            "</option>";
+                                    } ?>
                                 </select>
                             </div>
                             <div id="priority_id" data-type="select" class="sb-input">
-                                <span class="required-label"><?php sb_e('Priority') ?></span>
+                                <span class="required-label"><?php sb_e(
+                                    "Priority"
+                                ); ?></span>
                                 <select required>
-                                    <option value=""><?php sb_e('Select Priority') ?></option>
-                                    <?php
-                                    foreach ($priorities as $key => $value) {
-                                        echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-                                    }
-                                    ?>
+                                    <option value=""><?php sb_e(
+                                        "Select Priority"
+                                    ); ?></option>
+                                    <?php foreach (
+                                        $priorities
+                                        as $key => $value
+                                    ) {
+                                        echo '<option value="' .
+                                            $value["id"] .
+                                            '">' .
+                                            $value["name"] .
+                                            "</option>";
+                                    } ?>
                                 </select>
                             </div>
                         </div>
                         <!--div data-type="file" class="sb-input">
-                            <span><?php sb_e('Attachments') ?></span>
+                            <span><?php sb_e("Attachments"); ?></span>
                             <input type="file" name="attachments[]" multiple />
                             <div id="file-preview"></div>
                         </div-->
@@ -1529,42 +1624,57 @@ function sb_ticket_edit_box()
 
         });
     </script>
-<?php } ?>
 <?php
-function sb_login_box()
-{ ?>
+}
+?>
+<?php function sb_login_box()
+{
+    ?>
     <form class="sb sb-rich-login sb-admin-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
-            <img src="<?php echo sb_get_setting('login-icon', SB_URL . '/media/logo.svg') ?>" />
+            <img src="<?php echo sb_get_setting(
+                "login-icon",
+                SB_URL . "/media/logo.svg"
+            ); ?>" />
             <div class="sb-title">
-                <?php sb_e('Sign In') ?>
+                <?php sb_e("Sign In"); ?>
             </div>
             <div class="sb-text">
-                <?php echo sb_sanatize_string(sb_get_setting('login-message', defined('SB_WP') ? sb_('Please insert email and password of your WordPress account') : sb_('Enter your login details below'))) ?>
+                <?php echo sb_sanatize_string(
+                    sb_get_setting(
+                        "login-message",
+                        defined("SB_WP")
+                            ? sb_(
+                                "Please insert email and password of your WordPress account"
+                            )
+                            : sb_("Enter your login details below")
+                    )
+                ); ?>
             </div>
         </div>
         <div class="sb-main">
             <div id="email" class="sb-input">
                 <span>
-                    <?php sb_e('Email') ?>
+                    <?php sb_e("Email"); ?>
                 </span>
                 <input type="text" />
             </div>
             <div id="password" class="sb-input">
                 <span>
-                    <?php sb_e('Password') ?>
+                    <?php sb_e("Password"); ?>
                 </span>
                 <input type="password" />
             </div>
             <div class="sb-bottom">
                 <div class="sb-btn sb-submit-login">
-                    <?php sb_e('Login') ?>
+                    <?php sb_e("Login"); ?>
                 </div>
             </div>
         </div>
     </form>
-    <img id="sb-error-check" style="display:none" src="<?php echo SB_URL . '/media/logo.svg' ?>" />
+    <img id="sb-error-check" style="display:none" src="<?php echo SB_URL .
+        "/media/logo.svg"; ?>" />
     <script>
         (function($) {
             $(document).ready(function() {
@@ -1593,34 +1703,36 @@ function sb_login_box()
             }
         }(jQuery));
     </script>
-<?php } ?>
 <?php
-function sb_dialog()
-{ ?>
+} ?>
+<?php function sb_dialog()
+{
+    ?>
     <div class="sb-dialog-box sb-lightbox">
         <div class="sb-title"></div>
         <p></p>
         <div>
             <a class="sb-confirm sb-btn">
-                <?php sb_e('Confirm') ?>
+                <?php sb_e("Confirm"); ?>
             </a>
             <a class="sb-cancel sb-btn sb-btn-red">
-                <?php sb_e('Cancel') ?>
+                <?php sb_e("Cancel"); ?>
             </a>
             <a class="sb-close sb-btn">
-                <?php sb_e('Close') ?>
+                <?php sb_e("Close"); ?>
             </a>
         </div>
     </div>
-<?php } ?>
 <?php
-function sb_updates_box()
-{ ?>
+} ?>
+<?php function sb_updates_box()
+{
+    ?>
     <div class="sb-lightbox sb-updates-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
             <div>
-                <?php sb_e('Update center') ?>
+                <?php sb_e("Update center"); ?>
             </div>
             <div>
                 <a class="sb-close sb-btn-icon sb-btn-red">
@@ -1632,19 +1744,20 @@ function sb_updates_box()
             <div class="sb-bottom">
                 <a class="sb-update sb-btn sb-icon">
                     <i class="sb-icon-reload"></i>
-                    <?php sb_e('Update now') ?>
+                    <?php sb_e("Update now"); ?>
                 </a>
                 <a href="https://board.support/changes" target="_blank" class="sb-btn-text">
                     <i class="sb-icon-clock"></i>
-                    <?php sb_e('Change Log') ?>
+                    <?php sb_e("Change Log"); ?>
                 </a>
             </div>
         </div>
     </div>
-<?php } ?>
 <?php
-function sb_app_box()
-{ ?>
+} ?>
+<?php function sb_app_box()
+{
+    ?>
     <div class="sb-lightbox sb-app-box" data-app="">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1658,7 +1771,7 @@ function sb_app_box()
         <div class="sb-main">
             <p></p>
             <div class="sb-title">
-                <?php sb_e('License key') ?>
+                <?php sb_e("License key"); ?>
             </div>
             <div class="sb-setting sb-type-text">
                 <input type="text" required />
@@ -1666,31 +1779,32 @@ function sb_app_box()
             <div class="sb-bottom">
                 <a class="sb-btn sb-icon sb-btn-app-setting">
                     <i class="sb-icon-settings"></i>
-                    <?php sb_e('Settings') ?>
+                    <?php sb_e("Settings"); ?>
                 </a>
                 <a class="sb-activate sb-btn sb-icon">
                     <i class="sb-icon-check"></i>
-                    <?php sb_e('Activate') ?>
+                    <?php sb_e("Activate"); ?>
                 </a>
                 <a class="sb-btn-red sb-btn sb-icon sb-btn-app-disable">
                     <i class="sb-icon-close"></i>
-                    <?php sb_e('Disable') ?>
+                    <?php sb_e("Disable"); ?>
                 </a>
                 <a class="sb-btn sb-icon sb-btn-app-puchase" target="_blank" href="#">
                     <i class="sb-icon-plane"></i>
-                    <?php sb_e('Purchase license') ?>
+                    <?php sb_e("Purchase license"); ?>
                 </a>
                 <a class="sb-btn-text sb-btn-app-details" target="_blank" href="#">
                     <i class="sb-icon-help"></i>
-                    <?php sb_e('Read more') ?>
+                    <?php sb_e("Read more"); ?>
                 </a>
             </div>
         </div>
     </div>
-<?php } ?>
 <?php
-function sb_direct_message_box()
-{ ?>
+} ?>
+<?php function sb_direct_message_box()
+{
+    ?>
     <div class="sb-lightbox sb-direct-message-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1703,143 +1817,182 @@ function sb_direct_message_box()
         </div>
         <div class="sb-main sb-scroll-area">
             <div class="sb-title">
-                <?php sb_e('User IDs') ?>
+                <?php sb_e("User IDs"); ?>
             </div>
             <div class="sb-setting sb-type-text sb-first">
-                <input class="sb-direct-message-users" type="text" placeholder="<?php sb_e('User IDs separated by commas') ?>" required />
+                <input class="sb-direct-message-users" type="text" placeholder="<?php sb_e(
+                    "User IDs separated by commas"
+                ); ?>" required />
             </div>
             <div class="sb-title sb-direct-message-subject">
-                <?php sb_e('Subject') ?>
+                <?php sb_e("Subject"); ?>
             </div>
             <div class="sb-setting sb-type-text sb-direct-message-subject">
-                <input type="text" placeholder="<?php sb_e('Email subject') ?>" />
+                <input type="text" placeholder="<?php sb_e(
+                    "Email subject"
+                ); ?>" />
             </div>
             <div class="sb-title sb-direct-message-title-subject">
-                <?php sb_e('Message') ?>
+                <?php sb_e("Message"); ?>
             </div>
             <div class="sb-setting sb-type-textarea">
-                <textarea placeholder="<?php sb_e('Write here your message...') ?>" required></textarea>
+                <textarea placeholder="<?php sb_e(
+                    "Write here your message..."
+                ); ?>" required></textarea>
             </div>
             <div class="sb-bottom">
                 <a class="sb-send-direct-message sb-btn sb-icon">
                     <i class="sb-icon-plane"></i>
-                    <?php sb_e('Send message now') ?>
+                    <?php sb_e("Send message now"); ?>
                 </a>
                 <div></div>
-                <?php sb_docs_link('#direct-messages', 'sb-btn-text') ?>
+                <?php sb_docs_link("#direct-messages", "sb-btn-text"); ?>
             </div>
         </div>
     </div>
-<?php } ?>
 <?php
-function sb_routing_select($exclude_id = false)
+} ?>
+<?php function sb_routing_select($exclude_id = false)
 {
-    $agents = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE (user_type = "agent" OR user_type = "admin")' . ($exclude_id ? (' AND id <> ' . sb_db_escape($exclude_id)) : ''), false);
-    $code = '<div class="sb-inline sb-inline-agents"><h3>' . sb_('Agent') . '</h3><div id="conversation-agent" class="sb-select"><p>' . sb_('None') . '</p><ul><li data-id="" data-value="">' . sb_('None') . '</li>';
+    $agents = sb_db_get(
+        'SELECT id, first_name, last_name FROM sb_users WHERE (user_type = "agent" OR user_type = "admin")' .
+            ($exclude_id ? " AND id <> " . sb_db_escape($exclude_id) : ""),
+        false
+    );
+    $code =
+        '<div class="sb-inline sb-inline-agents"><h3>' .
+        sb_("Agent") .
+        '</h3><div id="conversation-agent" class="sb-select"><p>' .
+        sb_("None") .
+        '</p><ul><li data-id="" data-value="">' .
+        sb_("None") .
+        "</li>";
     for ($i = 0; $i < count($agents); $i++) {
-        $code .= '<li data-id="' . $agents[$i]['id'] . '">' . $agents[$i]['first_name'] . ' ' . $agents[$i]['last_name'] . '</li>';
+        $code .=
+            '<li data-id="' .
+            $agents[$i]["id"] .
+            '">' .
+            $agents[$i]["first_name"] .
+            " " .
+            $agents[$i]["last_name"] .
+            "</li>";
     }
-    echo $code . '</ul></div></div>';
-}
-?>
-<?php
-function sb_installation_box($error = false)
+    echo $code . "</ul></div></div>";
+} ?>
+<?php function sb_installation_box($error = false)
 {
     global $SB_LANGUAGE;
-    $SB_LANGUAGE = isset($_GET['lang']) ? $_GET['lang'] : strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
-?>
+    $SB_LANGUAGE = isset($_GET["lang"])
+        ? $_GET["lang"]
+        : strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2));
+    ?>
     <div class="sb-main sb-admin sb-admin-start">
         <form class="sb-intall sb-admin-box">
-            <?php if ($error === false || $error == 'installation')
+            <?php if ($error === false || $error == "installation") {
                 echo '<div class="sb-info"></div>';
-            else
-                die('<div class="sb-info sb-active">' . sb_('We\'re having trouble connecting to your database. Please edit the file config.php and check your database connection details. Error: ') . $error . '.</div>'); ?>
+            } else {
+                die(
+                    '<div class="sb-info sb-active">' .
+                        sb_(
+                            'We\'re having trouble connecting to your database. Please edit the file config.php and check your database connection details. Error: '
+                        ) .
+                        $error .
+                        ".</div>"
+                );
+            } ?>
             <div class="sb-top-bar">
-                <img src="<?php echo (!SB_URL || SB_URL == '[url]' ? '' : SB_URL . '/') ?>media/logo.svg" />
+                <img src="<?php echo !SB_URL || SB_URL == "[url]"
+                    ? ""
+                    : SB_URL . "/"; ?>media/logo.svg" />
                 <div class="sb-title">
-                    <?php sb_e('Installation') ?>
+                    <?php sb_e("Installation"); ?>
                 </div>
                 <div class="sb-text">
-                    <?php sb_e('Please complete the installation process by entering your database connection details below. If you are not sure about this, contact your hosting provider for support.') ?>
+                    <?php sb_e(
+                        "Please complete the installation process by entering your database connection details below. If you are not sure about this, contact your hosting provider for support."
+                    ); ?>
                 </div>
             </div>
             <div class="sb-main">
                 <div id="db-name" class="sb-input">
                     <span>
-                        <?php sb_e('Database Name') ?>
+                        <?php sb_e("Database Name"); ?>
                     </span>
                     <input type="text" required />
                 </div>
                 <div id="db-user" class="sb-input">
                     <span>
-                        <?php sb_e('Username') ?>
+                        <?php sb_e("Username"); ?>
                     </span>
                     <input type="text" required />
                 </div>
                 <div id="db-password" class="sb-input">
                     <span>
-                        <?php sb_e('Password') ?>
+                        <?php sb_e("Password"); ?>
                     </span>
                     <input type="text" />
                 </div>
                 <div id="db-host" class="sb-input">
                     <span>
-                        <?php sb_e('Host') ?>
+                        <?php sb_e("Host"); ?>
                     </span>
                     <input type="text" required />
                 </div>
                 <div id="db-port" class="sb-input">
                     <span>
-                        <?php sb_e('Port') ?>
+                        <?php sb_e("Port"); ?>
                     </span>
                     <input type="text" placeholder="Default" />
                 </div>
-                <?php if ($error === false || $error == 'installation') { ?>
+                <?php if ($error === false || $error == "installation") { ?>
                     <div class="sb-text">
-                        <?php sb_e('Enter the user details of the main account you will use to login into the administration area. You can update these details later.') ?>
+                        <?php sb_e(
+                            "Enter the user details of the main account you will use to login into the administration area. You can update these details later."
+                        ); ?>
                     </div>
                     <div id="first-name" class="sb-input">
                         <span>
-                            <?php sb_e('First name') ?>
+                            <?php sb_e("First name"); ?>
                         </span>
                         <input type="text" required />
                     </div>
                     <div id="last-name" class="sb-input">
                         <span>
-                            <?php sb_e('Last name') ?>
+                            <?php sb_e("Last name"); ?>
                         </span>
                         <input type="text" required />
                     </div>
                     <div id="email" class="sb-input">
                         <span>
-                            <?php sb_e('Email') ?>
+                            <?php sb_e("Email"); ?>
                         </span>
                         <input type="email" required />
                     </div>
                     <div id="password" class="sb-input">
                         <span>
-                            <?php sb_e('Password') ?>
+                            <?php sb_e("Password"); ?>
                         </span>
                         <input type="password" required />
                     </div>
                     <div id="password-check" class="sb-input">
                         <span>
-                            <?php sb_e('Repeat password') ?>
+                            <?php sb_e("Repeat password"); ?>
                         </span>
                         <input type="password" required />
                     </div>
                 <?php } ?>
                 <div class="sb-bottom">
                     <div class="sb-btn sb-submit-installation">
-                        <?php sb_e('Complete installation') ?>
+                        <?php sb_e("Complete installation"); ?>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-<?php } ?>
 <?php
-/*
+} ?>
+<?php
+ /*
  * ----------------------------------------------------------
  * ADMIN AREA
  * ----------------------------------------------------------
@@ -1847,48 +2000,163 @@ function sb_installation_box($error = false)
  * Display the administration area
  *
  */
-
+?>
+ <?php
 function sb_component_admin()
 {
     $is_cloud = sb_is_cloud();
-    $cloud_active_apps = $is_cloud ? sb_get_external_setting('active_apps', []) : [];
-    $sb_settings = sb_get_json_resource('json/settings.json');
+    $cloud_active_apps = $is_cloud
+        ? sb_get_external_setting("active_apps", [])
+        : [];
+    $sb_settings = sb_get_json_resource("json/settings.json");
     $active_user = sb_get_active_user(false, true);
-    $collapse = sb_get_setting('collapse') ? ' sb-collapse' : '';
+    $collapse = sb_get_setting("collapse") ? " sb-collapse" : "";
     $apps = [
-        ['SB_WP', 'wordpress', 'WordPress'],
-        ['SB_DIALOGFLOW', 'dialogflow', 'Artificial Intelligence', 'Connect smart chatbots and automate conversations by using one of the most advanced forms of artificial intelligence in the world.'],
-        ['SB_TICKETS', 'tickets', 'Tickets', 'Provide help desk support to your customers by including a ticket area, with all chat features included, on any web page in seconds.'],
-        ['SB_MESSENGER', 'messenger', 'Messenger', 'Read, manage and reply to all messages sent to your Facebook pages and Instagram accounts directly from {R}.'],
-        ['SB_WHATSAPP', 'whatsapp', 'WhatsApp', 'Lets your users reach you via WhatsApp. Read and reply to all messages sent to your WhatsApp Business account directly from {R}.'],
-        ['SB_TWITTER', 'twitter', 'Twitter', 'Lets your users reach you via Twitter. Read and reply to messages sent to your Twitter account directly from {R}.'],
-        ['SB_TELEGRAM', 'telegram', 'Telegram', 'Connect your Telegram bot to {R} to read and reply to all messages sent to your Telegram bot directly in {R}.'],
-        ['SB_VIBER', 'viber', 'Viber', 'Connect your Viber bot to {R} to read and reply to all messages sent to your Viber bot directly in {R}.'],
-        ['SB_LINE', 'line', 'Line', 'Connect your LINE bot to {R} to read and reply to all messages sent to your LINE bot directly in {R}.'],
-        ['SB_WECHAT', 'wechat', 'WeChat', 'Lets your users reach you via WeChat. Read and reply to all messages sent to your WeChat official account directly from {R}.'],
-        ['SB_ZALO', 'zalo', 'Zalo', 'Connect your Zalo Official Account to {R} to read and reply to all messages sent to your Zalo Official Account directly in {R}.'],
-        ['SB_WOOCOMMERCE', 'woocommerce', 'WooCommerce', 'Increase sales, provide better support, and faster solutions, by integrating WooCommerce with {R}.'],
-        ['SB_SLACK', 'slack', 'Slack', 'Communicate with your users right from Slack. Send and receive messages and attachments, use emojis, and much more.'],
-        ['SB_ZENDESK', 'zendesk', 'Zendesk', 'Automatically sync Zendesk customers with {R}, view Zendesk tickets, or create new ones without leaving {R}.'],
-        ['SB_UMP', 'ump', 'Ultimate Membership Pro', 'Enable ticket and chat support for subscribers only, view member profile details and subscription details in the admin area.'],
-        ['SB_PERFEX', 'perfex', 'Perfex', 'Synchronize your Perfex customers in real-time and let them contact you via chat! View profile details, proactively engage them, and more.'],
-        ['SB_WHMCS', 'whmcs', 'Whmcs', 'Synchronize your customers in real-time, chat with them and boost their engagement, or provide a better and faster support.'],
-        ['SB_OPENCART', 'opencart', 'OpenCart', 'Integrate OpenCart with {R} for real-time syncing of customers, order history access, and customer cart visibility.'],
-        ['SB_AECOMMERCE', 'aecommerce', 'Active eCommerce', 'Increase sales and connect you and sellers with customers in real-time by integrating Active eCommerce with {R}.'],
-        ['SB_ARMEMBER', 'armember', 'ARMember', 'Synchronize customers, enable ticket and chat support for subscribers only, view subscription plans in the admin area.'],
-        ['SB_MARTFURY', 'martfury', 'Martfury', 'Increase sales and connect you and sellers with customers in real-time by integrating Martfury with {R}.'],
+        ["SB_WP", "wordpress", "WordPress"],
+        [
+            "SB_DIALOGFLOW",
+            "dialogflow",
+            "Artificial Intelligence",
+            "Connect smart chatbots and automate conversations by using one of the most advanced forms of artificial intelligence in the world.",
+        ],
+        [
+            "SB_TICKETS",
+            "tickets",
+            "Tickets",
+            "Provide help desk support to your customers by including a ticket area, with all chat features included, on any web page in seconds.",
+        ],
+        [
+            "SB_MESSENGER",
+            "messenger",
+            "Messenger",
+            "Read, manage and reply to all messages sent to your Facebook pages and Instagram accounts directly from {R}.",
+        ],
+        [
+            "SB_WHATSAPP",
+            "whatsapp",
+            "WhatsApp",
+            "Lets your users reach you via WhatsApp. Read and reply to all messages sent to your WhatsApp Business account directly from {R}.",
+        ],
+        [
+            "SB_TWITTER",
+            "twitter",
+            "Twitter",
+            "Lets your users reach you via Twitter. Read and reply to messages sent to your Twitter account directly from {R}.",
+        ],
+        [
+            "SB_TELEGRAM",
+            "telegram",
+            "Telegram",
+            "Connect your Telegram bot to {R} to read and reply to all messages sent to your Telegram bot directly in {R}.",
+        ],
+        [
+            "SB_VIBER",
+            "viber",
+            "Viber",
+            "Connect your Viber bot to {R} to read and reply to all messages sent to your Viber bot directly in {R}.",
+        ],
+        [
+            "SB_LINE",
+            "line",
+            "Line",
+            "Connect your LINE bot to {R} to read and reply to all messages sent to your LINE bot directly in {R}.",
+        ],
+        [
+            "SB_WECHAT",
+            "wechat",
+            "WeChat",
+            "Lets your users reach you via WeChat. Read and reply to all messages sent to your WeChat official account directly from {R}.",
+        ],
+        [
+            "SB_ZALO",
+            "zalo",
+            "Zalo",
+            "Connect your Zalo Official Account to {R} to read and reply to all messages sent to your Zalo Official Account directly in {R}.",
+        ],
+        [
+            "SB_WOOCOMMERCE",
+            "woocommerce",
+            "WooCommerce",
+            "Increase sales, provide better support, and faster solutions, by integrating WooCommerce with {R}.",
+        ],
+        [
+            "SB_SLACK",
+            "slack",
+            "Slack",
+            "Communicate with your users right from Slack. Send and receive messages and attachments, use emojis, and much more.",
+        ],
+        [
+            "SB_ZENDESK",
+            "zendesk",
+            "Zendesk",
+            "Automatically sync Zendesk customers with {R}, view Zendesk tickets, or create new ones without leaving {R}.",
+        ],
+        [
+            "SB_UMP",
+            "ump",
+            "Ultimate Membership Pro",
+            "Enable ticket and chat support for subscribers only, view member profile details and subscription details in the admin area.",
+        ],
+        [
+            "SB_PERFEX",
+            "perfex",
+            "Perfex",
+            "Synchronize your Perfex customers in real-time and let them contact you via chat! View profile details, proactively engage them, and more.",
+        ],
+        [
+            "SB_WHMCS",
+            "whmcs",
+            "Whmcs",
+            "Synchronize your customers in real-time, chat with them and boost their engagement, or provide a better and faster support.",
+        ],
+        [
+            "SB_OPENCART",
+            "opencart",
+            "OpenCart",
+            "Integrate OpenCart with {R} for real-time syncing of customers, order history access, and customer cart visibility.",
+        ],
+        [
+            "SB_AECOMMERCE",
+            "aecommerce",
+            "Active eCommerce",
+            "Increase sales and connect you and sellers with customers in real-time by integrating Active eCommerce with {R}.",
+        ],
+        [
+            "SB_ARMEMBER",
+            "armember",
+            "ARMember",
+            "Synchronize customers, enable ticket and chat support for subscribers only, view subscription plans in the admin area.",
+        ],
+        [
+            "SB_MARTFURY",
+            "martfury",
+            "Martfury",
+            "Increase sales and connect you and sellers with customers in real-time by integrating Martfury with {R}.",
+        ],
     ];
-    $logged = $active_user && sb_is_agent($active_user) && (!defined('SB_WP') || !sb_get_setting('wp-force-logout') || sb_wp_verify_admin_login());
+    $logged =
+        $active_user &&
+        sb_is_agent($active_user) &&
+        (!defined("SB_WP") ||
+            !sb_get_setting("wp-force-logout") ||
+            sb_wp_verify_admin_login());
     $supervisor = sb_supervisor();
-    $is_admin = $active_user && sb_is_agent($active_user, true, true) && !$supervisor;
-    $sms = sb_get_multi_setting('sms', 'sms-user');
-    $css_class = ($logged ? 'sb-admin' : 'sb-admin-start') . (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl() ? ' sb-rtl' : '') . ($is_cloud ? ' sb-cloud' : '') . ($supervisor ? ' sb-supervisor' : '');
-    $active_areas = [
-        'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 
-        'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
-        'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 
-        'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')),
-        'chatbot' => defined('SB_DIALOGFLOW') && ($is_admin || ($supervisor && $supervisor['supervisor-settings-area'])) && (!$is_cloud || in_array('dialogflow', $cloud_active_apps))];
+    $is_admin =
+        $active_user && sb_is_agent($active_user, true, true) && !$supervisor;
+    $sms = sb_get_multi_setting("sms", "sms-user");
+    $css_class =
+        ($logged ? "sb-admin" : "sb-admin-start") .
+        (($is_cloud && defined("SB_CLOUD_DEFAULT_RTL")) || sb_is_rtl()
+            ? " sb-rtl"
+            : "") .
+        ($is_cloud ? " sb-cloud" : "") .
+        ($supervisor ? " sb-supervisor" : "");
+    // $active_areas = [
+    //     'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']), 
+    //     'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
+    //     'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 
+    //     'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')),
+    //     'chatbot' => defined('SB_DIALOGFLOW') && ($is_admin || ($supervisor && $supervisor['supervisor-settings-area'])) && (!$is_cloud || in_array('dialogflow', $cloud_active_apps))];
     
     
     $active_areas = [
@@ -1900,61 +2168,103 @@ function sb_component_admin()
         'tickets' => $is_admin,
         'dashboard' => $is_admin,
     ];
-    $disable_translations = sb_get_setting('admin-disable-settings-translations');
-    $admin_colors = [sb_get_setting('color-admin-1'), sb_get_setting('color-admin-2')];
-    if ($supervisor && !$supervisor['supervisor-send-message']) {
+    $disable_translations = sb_get_setting(
+        "admin-disable-settings-translations"
+    );
+    $admin_colors = [
+        sb_get_setting("color-admin-1"),
+        sb_get_setting("color-admin-2"),
+    ];
+    if ($supervisor && !$supervisor["supervisor-send-message"]) {
         echo '<style>.sb-board .sb-conversation .sb-editor,#sb-start-conversation,.sb-top-bar [data-value="sms"],.sb-top-bar [data-value="email"],.sb-menu-users [data-value="message"],.sb-menu-users [data-value="sms"],.sb-menu-users [data-value="email"] { display: none !important; }</style>';
     }
     if ($is_cloud) {
-        require_once(SB_CLOUD_PATH . '/account/functions.php');
+        require_once SB_CLOUD_PATH . "/account/functions.php";
         $sb_settings = sb_cloud_merge_settings($sb_settings);
         cloud_custom_code();
-    } else if (!sb_box_ve()) {
+    } elseif (!sb_box_ve()) {
         return;
     }
     if ($admin_colors[0]) {
-        $css = '.sb-menu-wide ul li.sb-active, .sb-tab > .sb-nav > ul li.sb-active,.sb-table input[type="checkbox"]:checked, .sb-table input[type="checkbox"]:hover { border-color: ' . $admin_colors[0] . '; }';
-        $css .= '.sb-board > .sb-admin-list .sb-scroll-area li.sb-active,.sb-user-conversations > li.sb-active { border-left-color: ' . $admin_colors[0] . '; }';
-        $css .= '.sb-setting input:focus, .sb-setting select:focus, .sb-setting textarea:focus, .sb-setting input:focus, .sb-setting select:focus, .sb-setting textarea:focus,.sb-setting.sb-type-upload-image .image:hover, .sb-setting [data-type="upload-image"] .image:hover, .sb-setting.sb-type-upload-image .image:hover, .sb-setting [data-type="upload-image"] .image:hover,.sb-input > input:focus, .sb-input > input.sb-focus, .sb-input > select:focus, .sb-input > select.sb-focus, .sb-input > textarea:focus, .sb-input > textarea.sb-focus,.sb-search-btn > input,.sb-search-btn > input:focus { border-color: ' . $admin_colors[0] . '; box-shadow: 0 0 5px rgb(108 108 108 / 20%);}';
-        $css .= '.sb-menu-wide ul li.sb-active, .sb-menu-wide ul li:hover, .sb-tab > .sb-nav > ul li.sb-active, .sb-tab > .sb-nav > ul li:hover,.sb-admin > .sb-header > .sb-admin-nav > div > a:hover, .sb-admin > .sb-header > .sb-admin-nav > div > a.sb-active,.sb-setting input[type="checkbox"]:checked:before, .sb-setting input[type="checkbox"]:checked:before,.sb-language-switcher > i:hover,.sb-admin > .sb-header > .sb-admin-nav-right .sb-account .sb-menu li:hover, .sb-admin > .sb-header > .sb-admin-nav-right .sb-account .sb-menu li.sb-active:hover,.sb-admin > .sb-header > .sb-admin-nav-right > div > a:hover,.sb-search-btn i:hover, .sb-search-btn.sb-active i, .sb-filter-btn i:hover, .sb-filter-btn.sb-active i,.sb-loading:before,.sb-board .sb-conversation > .sb-top a:hover i,.sb-panel-details > i:hover,.sb-board .sb-conversation > .sb-top > a:hover,.sb-btn-text:hover,.sb-table input[type="checkbox"]:checked:before,.sb-profile-list [data-id="wp-id"]:hover, .sb-profile-list [data-id="wp-id"]:hover label, .sb-profile-list [data-id="conversation-source"]:hover, .sb-profile-list [data-id="conversation-source"]:hover label, .sb-profile-list [data-id="location"]:hover, .sb-profile-list [data-id="location"]:hover label, .sb-profile-list [data-id="timezone"]:hover, .sb-profile-list [data-id="timezone"]:hover label, .sb-profile-list [data-id="current_url"]:hover, .sb-profile-list [data-id="current_url"]:hover label, .sb-profile-list [data-id="envato-purchase-code"]:hover, .sb-profile-list [data-id="envato-purchase-code"]:hover label,.sb-board > .sb-admin-list .sb-scroll-area li[data-conversation-status="2"] .sb-time,.sb-select p:hover,div ul.sb-menu li.sb-active:not(:hover), .sb-select ul li.sb-active:not(:hover),.sb-board .sb-conversation .sb-list > div .sb-menu-btn:hover { color: ' . $admin_colors[0] . '; }';
-        $css .= '.sb-btn:not(.sb-btn-white), a.sb-btn:not(.sb-btn-white),.sb-area-settings .sb-tab .sb-btn:hover, .daterangepicker td.active, .daterangepicker td.active:hover, .daterangepicker .ranges li.active,div ul.sb-menu li:hover, .sb-select ul li:hover,div.sb-select.sb-select-colors > p:hover,.sb-board > .sb-admin-list .sb-scroll-area li > .sb-notification-counter { background-color: ' . $admin_colors[0] . '; }';
-        $css .= '.sb-board > .sb-admin-list.sb-departments-show li.sb-active:before { background-color: ' . $admin_colors[0] . ' !important;}';
-        $css .= '.sb-btn-icon:hover,.sb-tags-cnt > span:hover { border-color: ' . $admin_colors[0] . '; color: ' . $admin_colors[0] . '; }';
-        $css .= '.sb-btn-icon:hover,.daterangepicker td.in-range { background-color: rgb(151 151 151 / 8%); }';
-        $css .= '.sb-board .sb-user-details,.sb-admin > .sb-header,.sb-select.sb-select-colors > p:not([data-value]),.sb-table tr:hover td,.sb-board .sb-user-details .sb-user-conversations li:hover, .sb-board .sb-user-details .sb-user-conversations li.sb-active, .sb-select.sb-select-colors > p[data-value=""], .sb-select.sb-select-colors > p[data-value="-1"] {background-color: #f5f5f5  }';
-        $css .= '.sb-board > .sb-admin-list .sb-scroll-area li:hover, .sb-board > .sb-admin-list .sb-scroll-area li.sb-active {background-color: #f5f5f5 !important; }';
-        $css .= '.sb-profile-list > ul > li .sb-icon, .sb-profile-list > ul > li > img { color: #424242 }';
-        $css .= '.sb-area-settings .sb-tab .sb-btn:hover, .sb-btn-white:hover, .sb-lightbox .sb-btn-white:hover { background-color: ' . $admin_colors[0] . '; border-color: ' . $admin_colors[0] . ';}';
+        $css =
+            '.sb-menu-wide ul li.sb-active, .sb-tab > .sb-nav > ul li.sb-active,.sb-table input[type="checkbox"]:checked, .sb-table input[type="checkbox"]:hover { border-color: ' .
+            $admin_colors[0] .
+            "; }";
+        $css .=
+            ".sb-board > .sb-admin-list .sb-scroll-area li.sb-active,.sb-user-conversations > li.sb-active { border-left-color: " .
+            $admin_colors[0] .
+            "; }";
+        $css .=
+            '.sb-setting input:focus, .sb-setting select:focus, .sb-setting textarea:focus, .sb-setting input:focus, .sb-setting select:focus, .sb-setting textarea:focus,.sb-setting.sb-type-upload-image .image:hover, .sb-setting [data-type="upload-image"] .image:hover, .sb-setting.sb-type-upload-image .image:hover, .sb-setting [data-type="upload-image"] .image:hover,.sb-input > input:focus, .sb-input > input.sb-focus, .sb-input > select:focus, .sb-input > select.sb-focus, .sb-input > textarea:focus, .sb-input > textarea.sb-focus,.sb-search-btn > input,.sb-search-btn > input:focus { border-color: ' .
+            $admin_colors[0] .
+            "; box-shadow: 0 0 5px rgb(108 108 108 / 20%);}";
+        $css .=
+            '.sb-menu-wide ul li.sb-active, .sb-menu-wide ul li:hover, .sb-tab > .sb-nav > ul li.sb-active, .sb-tab > .sb-nav > ul li:hover,.sb-admin > .sb-header > .sb-admin-nav > div > a:hover, .sb-admin > .sb-header > .sb-admin-nav > div > a.sb-active,.sb-setting input[type="checkbox"]:checked:before, .sb-setting input[type="checkbox"]:checked:before,.sb-language-switcher > i:hover,.sb-admin > .sb-header > .sb-admin-nav-right .sb-account .sb-menu li:hover, .sb-admin > .sb-header > .sb-admin-nav-right .sb-account .sb-menu li.sb-active:hover,.sb-admin > .sb-header > .sb-admin-nav-right > div > a:hover,.sb-search-btn i:hover, .sb-search-btn.sb-active i, .sb-filter-btn i:hover, .sb-filter-btn.sb-active i,.sb-loading:before,.sb-board .sb-conversation > .sb-top a:hover i,.sb-panel-details > i:hover,.sb-board .sb-conversation > .sb-top > a:hover,.sb-btn-text:hover,.sb-table input[type="checkbox"]:checked:before,.sb-profile-list [data-id="wp-id"]:hover, .sb-profile-list [data-id="wp-id"]:hover label, .sb-profile-list [data-id="conversation-source"]:hover, .sb-profile-list [data-id="conversation-source"]:hover label, .sb-profile-list [data-id="location"]:hover, .sb-profile-list [data-id="location"]:hover label, .sb-profile-list [data-id="timezone"]:hover, .sb-profile-list [data-id="timezone"]:hover label, .sb-profile-list [data-id="current_url"]:hover, .sb-profile-list [data-id="current_url"]:hover label, .sb-profile-list [data-id="envato-purchase-code"]:hover, .sb-profile-list [data-id="envato-purchase-code"]:hover label,.sb-board > .sb-admin-list .sb-scroll-area li[data-conversation-status="2"] .sb-time,.sb-select p:hover,div ul.sb-menu li.sb-active:not(:hover), .sb-select ul li.sb-active:not(:hover),.sb-board .sb-conversation .sb-list > div .sb-menu-btn:hover { color: ' .
+            $admin_colors[0] .
+            "; }";
+        $css .=
+            ".sb-btn:not(.sb-btn-white), a.sb-btn:not(.sb-btn-white),.sb-area-settings .sb-tab .sb-btn:hover, .daterangepicker td.active, .daterangepicker td.active:hover, .daterangepicker .ranges li.active,div ul.sb-menu li:hover, .sb-select ul li:hover,div.sb-select.sb-select-colors > p:hover,.sb-board > .sb-admin-list .sb-scroll-area li > .sb-notification-counter { background-color: " .
+            $admin_colors[0] .
+            "; }";
+        $css .=
+            ".sb-board > .sb-admin-list.sb-departments-show li.sb-active:before { background-color: " .
+            $admin_colors[0] .
+            " !important;}";
+        $css .=
+            ".sb-btn-icon:hover,.sb-tags-cnt > span:hover { border-color: " .
+            $admin_colors[0] .
+            "; color: " .
+            $admin_colors[0] .
+            "; }";
+        $css .=
+            ".sb-btn-icon:hover,.daterangepicker td.in-range { background-color: rgb(151 151 151 / 8%); }";
+        $css .=
+            '.sb-board .sb-user-details,.sb-admin > .sb-header,.sb-select.sb-select-colors > p:not([data-value]),.sb-table tr:hover td,.sb-board .sb-user-details .sb-user-conversations li:hover, .sb-board .sb-user-details .sb-user-conversations li.sb-active, .sb-select.sb-select-colors > p[data-value=""], .sb-select.sb-select-colors > p[data-value="-1"] {background-color: #f5f5f5  }';
+        $css .=
+            ".sb-board > .sb-admin-list .sb-scroll-area li:hover, .sb-board > .sb-admin-list .sb-scroll-area li.sb-active {background-color: #f5f5f5 !important; }";
+        $css .=
+            ".sb-profile-list > ul > li .sb-icon, .sb-profile-list > ul > li > img { color: #424242 }";
+        $css .=
+            ".sb-area-settings .sb-tab .sb-btn:hover, .sb-btn-white:hover, .sb-lightbox .sb-btn-white:hover { background-color: " .
+            $admin_colors[0] .
+            "; border-color: " .
+            $admin_colors[0] .
+            ";}";
         if ($admin_colors[1]) {
-            $css .= '.sb-btn:hover, .sb-btn:active, a.sb-btn:hover, a.sb-btn:active { background-color: ' . $admin_colors[1] . '}';
+            $css .=
+                ".sb-btn:hover, .sb-btn:active, a.sb-btn:hover, a.sb-btn:active { background-color: " .
+                $admin_colors[1] .
+                "}";
         }
-        echo '<style>' . $css . '</style>';
+        echo "<style>" . $css . "</style>";
     }
-?>
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-    <div class="sb-main <?php echo $css_class ?>" style="opacity: 0">
+    <div class="sb-main <?php echo $css_class; ?>" style="opacity: 0">
         <?php if ($logged) { ?>
-            <div class="sb-header header_new">
-                <aside class="sidebar sb-admin-nav">
-                    <div class="logo">
-                        <img width="35" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="Logo" class="logo-icon">
-                        <div class="logo-text">
-                            <h1>Nexon Helpdesk</h1>
-                            <p>Agent Admin</p>
-                        </div>
-                    </div>
-                    <!-- <div class="search-bar">
-                        <input type="text" placeholder="Search">
-                    </div> -->
-                    <nav>
-                        <ul>
-                            <li><a id="sb-dashboard"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+           <div class="sb-header header_new">
+      <aside class="sidebar sb-admin-nav collapsed" id="sidebar">
+        <!-- Toggle Button -->
+        <div class="toggle-btn" onclick="toggleSidebar()" title="Toggle Navigation">
+             <img src="./account/media/hamburger.svg" alt="logo" style="width: 24px; height: auto;">
+        </div>
+        <div class="logo">
+            <img width="35" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="Logo" class="logo-icon">
+            <div class="logo-text">
+                <h1>Nexleon Helpdesk</h1>
+                <p>Agent Admin</p>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a id="sb-dashboard"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></i><span>Dashboard</span></a></li>
-                            <li><a id="sb-conversations"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg></i><span class="label">Dashboard</span></a></li>
+                <li><a id="sb-conversations"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.69336 2.75C6.28605 2.91536 5.31763 3.26488 4.5846 4.00363C3.19336 5.40575 3.19336 7.66242 3.19336 12.1758C3.19336 16.6891 3.19336 18.9458 4.5846 20.3479C5.97585 21.75 8.21502 21.75 12.6934 21.75C17.1717 21.75 19.4109 21.75 20.8022 20.3479C22.1934 18.9458 22.1934 16.6891 22.1934 12.1758C22.1934 7.66242 22.1934 5.40575 20.8022 4.00363C20.0691 3.26488 19.1007 2.91536 17.6934 2.75" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M10.1934 8.25C10.6849 8.7557 11.9932 10.75 12.6934 10.75M12.6934 10.75C13.3936 10.75 14.7019 8.7557 15.1934 8.25M12.6934 10.75V2.75" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
@@ -1980,10 +2290,10 @@ function sb_component_admin()
 <path d="M20.4433 11.25V10.25C20.4433 6.47876 20.4433 4.59315 19.2717 3.42157C18.1001 2.25 16.2145 2.25 12.4433 2.25H11.4434C7.67219 2.25 5.78658 2.25 4.61501 3.42156C3.44344 4.59312 3.44342 6.47872 3.44339 10.2499L3.44336 14.25C3.44332 18.0212 3.44331 19.9068 4.61484 21.0784C5.78641 22.2499 7.67209 22.25 11.4433 22.25" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M7.94336 7.25H15.9433M7.94336 12.25H15.9433" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 <path d="M13.9434 21.0768V22.25H15.1168C15.5262 22.25 15.7309 22.25 15.9149 22.1738C16.099 22.0975 16.2437 21.9528 16.5332 21.6634L21.3568 16.8394C21.6298 16.5664 21.7663 16.4299 21.8393 16.2827C21.9782 16.0025 21.9782 15.6736 21.8393 15.3934C21.7663 15.2461 21.6298 15.1096 21.3568 14.8366C21.0837 14.5636 20.9472 14.4271 20.7999 14.3541C20.5197 14.2153 20.1907 14.2153 19.9105 14.3541C19.7633 14.4271 19.6267 14.5636 19.3537 14.8366L14.5301 19.6606C14.2406 19.95 14.0959 20.0947 14.0197 20.2787C13.9434 20.4628 13.9434 20.6674 13.9434 21.0768Z" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
-</svg></i><span>Articles</span></a></li>
-                            <?php } ?>
-                            <?php if ($active_areas['reports']) { ?>
-                                <li><a id="sb-reports"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg></i><span class="label">Articles</span></a></li>
+                <?php } ?>
+                <?php if ($active_areas['reports']) { ?>
+                    <li><a id="sb-reports"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.69336 18.25V16.25M12.6934 18.25V15.25M17.6934 18.25V13.25M3.19336 12.25C3.19336 7.77166 3.19336 5.53249 4.5846 4.14124C5.97585 2.75 8.21502 2.75 12.6934 2.75C17.1717 2.75 19.4109 2.75 20.8022 4.14124C22.1934 5.53249 22.1934 7.77166 22.1934 12.25C22.1934 16.7283 22.1934 18.9675 20.8022 20.3588C19.4109 21.75 17.1717 21.75 12.6934 21.75C8.21502 21.75 5.97585 21.75 4.5846 20.3588C3.19336 18.9675 3.19336 16.7283 3.19336 12.25Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg></i><span> Reports</span></a></li>
@@ -1994,55 +2304,38 @@ function sb_component_admin()
 <path d="M4.69336 3.25H20.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 <path d="M4.69336 9.25H20.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
 <path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
-</svg></i><span> Settings</span></a></li>
+</svg></i><span class="label">Settings</span></a></li>
 <?php } ?>
-                            <!-- <li><a href="#"><i class="fa-solid fa-circle-info"></i><span> Help & Support</span></a></li> -->
-                        </ul>
-                    </nav>
-                    <div class="powered-by">
-                        <p>POWERED BY</p>
-                        <div class="powered-logo">
-                            <!--svg width="108" height="32" viewBox="0 0 108 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.9784 6.60156V17.3942L16.9277 24.9963V14.2037L23.9784 6.61469V6.60156Z" fill="url(#paint0_linear_55_2458)" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M39.981 5.959L39.1539 6.82556L37.749 6.35289L38.5762 5.48633L39.981 5.959ZM36.9087 6.91747L36.0815 7.78403L34.6766 7.31136L35.5038 6.4448L36.9087 6.91747ZM41.0314 8.65059L39.8891 9.8454L37.9459 9.20204L39.0882 8.00724L41.0314 8.65059ZM37.9459 9.20204L36.3441 10.8695L33.6394 9.9767L32.1951 11.4866L34.913 12.3926L36.3572 10.8826L38.7337 11.6704L21.9802 29.6975L16.9121 24.9971L31.5255 9.26769L33.6131 9.96357L35.215 8.29609L37.9328 9.20204H37.9459Z" fill="url(#paint1_linear_55_2458)" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.62849 26.2964L2.4294 25.4036L1.85169 24.0381L1.05078 24.9309L1.62849 26.2964ZM2.36375 23.1584L3.16467 22.2656L2.58696 20.9001L1.78605 21.7929L2.36375 23.1584ZM4.38573 27.1498L5.48863 25.9288L4.70085 24.0381L3.59795 25.2592L4.38573 27.1498ZM4.70085 24.0381L6.25015 22.3181L5.14726 19.6922L6.53901 18.1428L7.64191 20.795L6.25015 22.3444L7.20862 24.6552L23.9753 6.60181L18.9072 1.90137L4.29382 17.6308L5.14726 19.6659L3.59795 21.3859L4.70085 24.0381Z" fill="url(#paint2_linear_55_2458)" />
-                                <path d="M50.382 8.46521V17.9473H49.2709L44.1039 10.5024H44.0113V17.9473H42.8631V8.46521H43.9742L49.1597 15.9286H49.2523V8.46521H50.382ZM52.6796 17.9473V8.46521H58.4022V9.48379H53.8278V12.6877H58.1059V13.7063H53.8278V16.9287H58.4763V17.9473H52.6796ZM61.0274 8.46521L63.4719 12.4099H63.546L65.9906 8.46521H67.3425L64.3609 13.2062L67.3425 17.9473H65.9906L63.546 14.0767H63.4719L61.0274 17.9473H59.6754L62.7312 13.2062L59.6754 8.46521H61.0274ZM76.6845 13.2062C76.6845 14.2063 76.504 15.0705 76.1428 15.799C75.7817 16.5274 75.2863 17.0892 74.6566 17.4843C74.027 17.8794 73.3078 18.0769 72.4991 18.0769C71.6904 18.0769 70.9712 17.8794 70.3416 17.4843C69.7119 17.0892 69.2165 16.5274 68.8554 15.799C68.4942 15.0705 68.3137 14.2063 68.3137 13.2062C68.3137 12.2062 68.4942 11.3419 68.8554 10.6135C69.2165 9.88505 69.7119 9.32329 70.3416 8.9282C70.9712 8.53312 71.6904 8.33557 72.4991 8.33557C73.3078 8.33557 74.027 8.53312 74.6566 8.9282C75.2863 9.32329 75.7817 9.88505 76.1428 10.6135C76.504 11.3419 76.6845 12.2062 76.6845 13.2062ZM75.5734 13.2062C75.5734 12.3852 75.436 11.6923 75.1613 11.1274C74.8897 10.5626 74.5208 10.1351 74.0548 9.84493C73.5918 9.55478 73.0732 9.40971 72.4991 9.40971C71.925 9.40971 71.4049 9.55478 70.9388 9.84493C70.4758 10.1351 70.107 10.5626 69.8323 11.1274C69.5607 11.6923 69.4248 12.3852 69.4248 13.2062C69.4248 14.0273 69.5607 14.7202 69.8323 15.2851C70.107 15.8499 70.4758 16.2774 70.9388 16.5676C71.4049 16.8577 71.925 17.0028 72.4991 17.0028C73.0732 17.0028 73.5918 16.8577 74.0548 16.5676C74.5208 16.2774 74.8897 15.8499 75.1613 15.2851C75.436 14.7202 75.5734 14.0273 75.5734 13.2062ZM86.1342 8.46521V17.9473H85.023L79.856 10.5024H79.7634V17.9473H78.6152V8.46521H79.7264L84.9119 15.9286H85.0045V8.46521H86.1342Z" fill="#111111" />
-                                <path d="M65.8856 23.0769V19.2955H66.3435V20.9794H68.3598V19.2955H68.8177V23.0769H68.3598V21.3856H66.3435V23.0769H65.8856ZM69.7344 23.0769V19.2955H72.0165V19.7017H70.1923V20.9794H71.8983V21.3856H70.1923V22.6707H72.046V23.0769H69.7344ZM72.8418 23.0769V19.2955H73.2997V22.6707H75.0575V23.0769H72.8418ZM75.7665 23.0769V19.2955H77.0442C77.3408 19.2955 77.5833 19.3491 77.7716 19.4562C77.9612 19.562 78.1015 19.7054 78.1926 19.8864C78.2837 20.0673 78.3292 20.2692 78.3292 20.492C78.3292 20.7148 78.2837 20.9173 78.1926 21.0994C78.1027 21.2816 77.9637 21.4269 77.7753 21.5352C77.587 21.6423 77.3457 21.6958 77.0515 21.6958H76.1357V21.2896H77.0368C77.2399 21.2896 77.403 21.2545 77.5261 21.1844C77.6492 21.1142 77.7384 21.0194 77.7938 20.9C77.8504 20.7794 77.8787 20.6434 77.8787 20.492C77.8787 20.3406 77.8504 20.2052 77.7938 20.0858C77.7384 19.9664 77.6485 19.8728 77.5242 19.8051C77.3999 19.7362 77.235 19.7017 77.0294 19.7017H76.2244V23.0769H75.7665ZM80.2338 23.0769H79.0669V19.2955H80.2855C80.6523 19.2955 80.9662 19.3712 81.2271 19.5226C81.4881 19.6728 81.6881 19.8888 81.8272 20.1707C81.9663 20.4514 82.0358 20.7874 82.0358 21.1788C82.0358 21.5727 81.9657 21.9118 81.8253 22.1962C81.685 22.4793 81.4807 22.6972 81.2123 22.8498C80.944 23.0012 80.6178 23.0769 80.2338 23.0769ZM79.5248 22.6707H80.2042C80.5169 22.6707 80.776 22.6104 80.9815 22.4898C81.1871 22.3691 81.3404 22.1974 81.4413 21.9746C81.5422 21.7518 81.5927 21.4866 81.5927 21.1788C81.5927 20.8736 81.5428 20.6108 81.4431 20.3904C81.3434 20.1689 81.1945 19.999 80.9963 19.8808C80.7981 19.7614 80.5513 19.7017 80.2559 19.7017H79.5248V22.6707ZM82.8039 23.0769V19.2955H85.086V19.7017H83.2618V20.9794H84.9679V21.3856H83.2618V22.6707H85.1156V23.0769H82.8039ZM87.9793 20.2409C87.9571 20.0538 87.8673 19.9085 87.7097 19.8051C87.5522 19.7017 87.3589 19.65 87.1299 19.65C86.9625 19.65 86.8161 19.6771 86.6905 19.7313C86.5662 19.7854 86.4689 19.8599 86.3988 19.9547C86.3299 20.0495 86.2954 20.1572 86.2954 20.2778C86.2954 20.3787 86.3194 20.4655 86.3674 20.5381C86.4166 20.6095 86.4794 20.6692 86.5557 20.7172C86.632 20.764 86.7121 20.8028 86.7958 20.8336C86.8795 20.8631 86.9564 20.8871 87.0266 20.9056L87.4106 21.009C87.5091 21.0348 87.6186 21.0705 87.7392 21.1161C87.8611 21.1616 87.9774 21.2238 88.0882 21.3025C88.2002 21.3801 88.2925 21.4798 88.3652 21.6017C88.4378 21.7235 88.4741 21.8731 88.4741 22.0503C88.4741 22.2547 88.4206 22.4393 88.3135 22.6042C88.2076 22.7692 88.0525 22.9003 87.8482 22.9975C87.6451 23.0948 87.3983 23.1434 87.1078 23.1434C86.837 23.1434 86.6025 23.0997 86.4043 23.0123C86.2074 22.9249 86.0523 22.803 85.939 22.6467C85.827 22.4904 85.7636 22.3088 85.7489 22.102H86.2215C86.2338 22.2448 86.2818 22.363 86.3656 22.4565C86.4505 22.5488 86.5576 22.6178 86.6868 22.6633C86.8173 22.7076 86.9576 22.7298 87.1078 22.7298C87.2826 22.7298 87.4395 22.7015 87.5786 22.6449C87.7177 22.587 87.8279 22.507 87.9091 22.4048C87.9904 22.3014 88.031 22.1808 88.031 22.0429C88.031 21.9174 87.9959 21.8152 87.9257 21.7364C87.8556 21.6577 87.7633 21.5937 87.6488 21.5444C87.5343 21.4952 87.4106 21.4521 87.2777 21.4152L86.8124 21.2822C86.517 21.1973 86.2831 21.0761 86.1108 20.9185C85.9384 20.7609 85.8523 20.5548 85.8523 20.3C85.8523 20.0882 85.9095 19.9036 86.024 19.7461C86.1397 19.5873 86.2948 19.4642 86.4893 19.3768C86.685 19.2882 86.9035 19.2438 87.1447 19.2438C87.3884 19.2438 87.6051 19.2875 87.7946 19.3749C87.9842 19.4611 88.1344 19.5793 88.2452 19.7294C88.3572 19.8796 88.4163 20.0501 88.4224 20.2409H87.9793ZM89.227 23.0769V19.2955H89.6849V21.1715H89.7292L91.4278 19.2955H92.0261L90.4382 21.0016L92.0261 23.0769H91.4721L90.1575 21.3192L89.6849 21.8509V23.0769H89.227Z" fill="#121212" />
-                                <defs>
-                                    <linearGradient id="paint0_linear_55_2458" x1="26.753" y1="21.7536" x2="11.8257" y2="7.88237" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0.3" stop-color="#08CCF7" />
-                                        <stop offset="0.4" stop-color="#0CA5F8" />
-                                        <stop offset="0.7" stop-color="#1653FD" />
-                                    </linearGradient>
-                                    <linearGradient id="paint1_linear_55_2458" x1="40.3163" y1="0.99443" x2="13.3333" y2="38.8232" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0.4" stop-color="#08C8F7" />
-                                        <stop offset="0.5" stop-color="#09BCF7" />
-                                        <stop offset="0.6" stop-color="#0BA9F8" />
-                                        <stop offset="0.7" stop-color="#136CFB" />
-                                        <stop offset="0.8" stop-color="#1653FD" />
-                                    </linearGradient>
-                                    <linearGradient id="paint2_linear_55_2458" x1="35.4801" y1="-4.9724" x2="0.507163" y2="23.8571" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0.4" stop-color="#08C8F7" />
-                                        <stop offset="0.5" stop-color="#09BCF7" />
-                                        <stop offset="0.6" stop-color="#0BA9F8" />
-                                        <stop offset="0.7" stop-color="#136CFB" />
-                                        <stop offset="0.8" stop-color="#1653FD" />
-                                    </linearGradient>
-                                </defs>
-                            </svg-->
-                            <img src="./account/media/dashboard-logo.svg" alt="logo" style="width: 190px; height: auto;">
-                        </div>
-                    </div>
-                </aside>
-                <!-- <div class="sb-admin-nav">
+            </ul>
+        </nav>
+
+        <div class="powered-by">
+            <p class="all-reserved">&copy; All Rights Reserved</p>
+            <p class="nexln-help">Made By Nexleon Helpdesk</p>
+            <div class="powered-logo">
+                <!--img src="./account/media/dashboard-logo.svg" alt="logo" style="width: 190px; height: auto;"-->
+                <p></p>
+            </div>
+        </div>
+    </aside>
+    <script>
+            function toggleSidebar() {
+                document.getElementById("sidebar").classList.toggle("collapsed");
+                    document.getElementById("mainContent").classList.toggle("sidebar-collapsed");
+
+            }
+        </script>
+                  <!-- <div class="sb-admin-nav">
                 <a id="sb-conversations" class="sb-active">
                     <span>
-                        <?php sb_e('Conversations') ?>
+                        <?php sb_e("Conversations"); ?>
                     </span>
                 </a>
                         <?php
-                        if ($active_areas['users']) {
-                            echo '<a id="sb-users"><span>' . sb_('Users') . '</span></a>';
+                        if ($active_areas["users"]) {
+                            echo '<a id="sb-users"><span>' .
+                                sb_("Users") .
+                                "</span></a>";
                         }
                         //if ($active_areas['tickets']) {
                             echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
@@ -2050,14 +2343,20 @@ function sb_component_admin()
                         if ($active_areas['chatbot']) {
                             echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>';
                         }
-                        if ($active_areas['articles']) {
-                            echo '<a id="sb-articles"><span>' . sb_('Articles') . '</span></a>';
+                        if ($active_areas["articles"]) {
+                            echo '<a id="sb-articles"><span>' .
+                                sb_("Articles") .
+                                "</span></a>";
                         }
-                        if ($active_areas['reports']) {
-                            echo '<a id="sb-reports"><span>' . sb_('Reports') . '</span></a>';
+                        if ($active_areas["reports"]) {
+                            echo '<a id="sb-reports"><span>' .
+                                sb_("Reports") .
+                                "</span></a>";
                         }
-                        if ($active_areas['settings']) {
-                            echo '<a id="sb-settings"><span>' . sb_('Settings') . '</span></a>';
+                        if ($active_areas["settings"]) {
+                            echo '<a id="sb-settings"><span>' .
+                                sb_("Settings") .
+                                "</span></a>";
                         }
                         ?>
                     </div> -->
@@ -2065,50 +2364,70 @@ function sb_component_admin()
                     <i class="sb-icon-menu"></i>
                     <div class="sb-desktop">
                         <div class="sb-account">
-                            <img src="<?php echo SB_URL ?>/media/user.svg" />
+                            <img src="<?php echo SB_URL; ?>/media/user.svg" />
                             <div>
                                 <a class="sb-profile">
-                                    <img src="<?php echo SB_URL ?>/media/user.svg" />
+                                    <img src="<?php echo SB_URL; ?>/media/user.svg" />
                                     <span class="sb-name"></span>
                                 </a>
                                 <ul class="sb-menu">
                                     <li data-value="status" class="sb-online">
-                                        <?php sb_e('Online') ?>
+                                        <?php sb_e("Online"); ?>
                                     </li>
-                                    <?php
-                                    if ($is_admin) {
-                                        echo '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>' . ($is_cloud ? sb_cloud_account_menu() : '');
-                                    }
-                                    ?>
+                                    <?php if ($is_admin) {
+                                        echo '<li data-value="edit-profile">' .
+                                            sb_("Edit profile") .
+                                            "</li>" .
+                                            ($is_cloud
+                                                ? sb_cloud_account_menu()
+                                                : "");
+                                    } ?>
                                     <li data-value="logout">
-                                        <?php sb_e('Logout') ?>
+                                        <?php sb_e("Logout"); ?>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <?php
-                        if ($is_admin) {
+                        <?php if ($is_admin) {
                             sb_docs_link();
-                            echo '<a href="#" class="sb-version">' . SB_VERSION . '</a>';
-                        }
-                        ?>
+                            echo '<a href="#" class="sb-version">' .
+                                SB_VERSION .
+                                "</a>";
+                        } ?>
                     </div>
                     <div class="sb-mobile">
-                        <?php
-                        if ($is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-edit-user')) || ($supervisor && $supervisor['supervisor-edit-user'])) {
-                            echo '<a href="#" class="edit-profile">' . sb_('Edit profile') . '</a>' . ($is_cloud ? sb_cloud_account_menu('a') : '<a href="#" class="sb-docs">' . sb_('Docs') . '</a>') . '<a href="#" class="sb-version">' . sb_('Updates') . '</a>';
-                        }
-                        ?>
+                        <?php if (
+                            $is_admin ||
+                            (!$supervisor &&
+                                sb_get_multi_setting(
+                                    "agents",
+                                    "agents-edit-user"
+                                )) ||
+                            ($supervisor && $supervisor["supervisor-edit-user"])
+                        ) {
+                            echo '<a href="#" class="edit-profile">' .
+                                sb_("Edit profile") .
+                                "</a>" .
+                                ($is_cloud
+                                    ? sb_cloud_account_menu("a")
+                                    : '<a href="#" class="sb-docs">' .
+                                        sb_("Docs") .
+                                        "</a>") .
+                                '<a href="#" class="sb-version">' .
+                                sb_("Updates") .
+                                "</a>";
+                        } ?>
                         <a href="#" class="sb-online" data-value="status">
-                            <?php sb_e('Online') ?>
+                            <?php sb_e("Online"); ?>
                         </a>
                         <a href="#" class="logout">
-                            <?php sb_e('Logout') ?>
+                            <?php sb_e("Logout"); ?>
                         </a>
                     </div>
                 </div> -->
             </div>
-            <main>
+
+            <main class="main-content" id="mainContent">
                 <!-- new code update -->
                     <?php
                         // You can set these dynamically from user session or DB
@@ -2116,12 +2435,15 @@ function sb_component_admin()
                         $user_image = $active_user['profile_image']; // Dynamic
                         $user_role = ucfirst($active_user['user_type']); // Static
 
-                        $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-                        $ticketUrl = dirname(SB_URL) . '?area=tickets';
-
-                        $header = '<header>
+                    // Static
+                    $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON: sb_get_setting("admin-icon",SB_URL . "/media/icon.svg");
+                    $ticketUrl = dirname(SB_URL) . "?area=tickets";
+                    $header =
+                        '<header>
                             <div class="header-left">
-                                <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
+                                <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' .
+                        $ticketUrl .
+                        '" >
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     Back to Tickets
                                 </a>
@@ -2140,8 +2462,12 @@ function sb_component_admin()
                                                 <span class="initials avatar_name"></span>
                                             </span>
                                         <div class="user-details">
-                                            <span class="sb-name">' . $user_name . '</span>
-                                            <span class="sb-role">' . $user_role . '</span>
+                                            <span class="sb-name">' .
+                        $user_name .
+                        '</span>
+                                            <span class="sb-role">' .
+                        $user_role .
+                        '</span>
                                         </div>
                                     </a>
                                     <ul class="sb-menu">
@@ -2151,16 +2477,23 @@ function sb_component_admin()
                                                 <span class="initials avatar_name"></span>
                                             </span>
                                                 <div class="user-details">
-                                                    <span class="sb-name">' . $user_name . '</span>
-                                                    <span class="sb-role">' . $user_role . '</span>
+                                                    <span class="sb-name">' .
+                        $user_name .
+                        '</span>
+                                                    <span class="sb-role">' .
+                        $user_role .
+                        '</span>
                                                 </div>
                                             </li>
                                         <li data-value="status" class="sb-online">Online</li>';
-                                        if ($is_admin) {
-                                            $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
-                                                . ($is_cloud ? sb_cloud_account_menu() : '');
-                                        }
-                        $header .= '</ul>
+                    if ($is_admin) {
+                        $header .=
+                            '<li data-value="edit-profile">' .
+                            sb_("Edit profile") .
+                            "</li>" .
+                            ($is_cloud ? sb_cloud_account_menu() : "");
+                    }
+                    $header .= '</ul>
                                 </div>
                                 <!-- Logout Button -->
                                 <div data-value="logout" class="logout">
@@ -2226,7 +2559,7 @@ function sb_component_admin()
                         <div class="container new_container">
                             <div class="row">
                                 <div class="col-md-8 p-0">
-                                    <div class="px-3 mt-3">
+                                    <div class="px-3 mt-3 clmn-gap">
                                         <section class="dashboard-metrics">
                                             <!-- <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
@@ -2309,39 +2642,12 @@ function sb_component_admin()
                                                         </span>&nbsp;this week </div>
                                                 <!-- code update -->
                                             </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #0684ff;">
-                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Ticket Resolved</h3>
-                                                            <p class="ticket-resolved"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="ticket_resolved_chart">
-                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
-                                                <!-- code update -->
-                                                <div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div>
-                                                <!-- code update -->
-                                            </div>
+                                         
+                                           
                                         </section>
                                         <section class="dashboard-metrics">
-                                            <div class="metric-card"
+                                                <!--  -->
+                                               <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
@@ -2371,20 +2677,83 @@ function sb_component_admin()
                                                         </span>&nbsp;this week </div>
                                                 <!-- code update -->
                                             </div>
+                                            <!--  -->
+                                                <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #0684ff;">
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Ticket Resolved</h3>
+                                                            <p class="ticket-resolved"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div>
+                                                <!-- code update -->
+                                            </div>
+                                             </section>
+                                        <!--section class="dashboard-metrics">
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;"-->
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                            <!--img src="./script/media/total-conversations.svg" alt="Total Conversations">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Total Conversations</h3>
+                                                            <p class="total-conversations"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="total_conversations_chart">
+                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div-->
+                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
+                                                <!-- code update  -->
+                                                <!--div class="metric-increase">
+                                                        Increase by 
+                                                        <span class="increase-pill">
+                                                            <span class="total-conversations-increase"></span><span>%</span>
+                                                        </span>&nbsp;this week </div-->
+                                                <!-- code update -->
+                                            <!--/div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
+                                                        <div class="metric-icon" style="background-color: #DE3ACE;"-->
                                                             <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
-                                                            <img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
+                                                            <!--img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3> Avg. Response Time</h3>
+                                                            <h3> Avg. Response Time</h3-->
                                                             <!-- <p id="avg_response_time">0h 0m 0s</p> -->
-                                                            <div id="avg_response_time_container"></div>
+                                                            <!--div id="avg_response_time_container"></div>
                                                         </div>
-                                                    </div>
+                                                    </div-->
                                                     <!-- <div class="w-100">
                                                     <div class="avg_response_chart">
                                                         <canvas class="mt-0" id="avg_response_chart"></canvas>
@@ -2447,16 +2816,16 @@ function sb_component_admin()
                                                         });
                                                     </script>
                                                 </div> -->
-                                                </div>
+                                                <!--/div>
 
                                             </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #00B8F2;">
+                                                        <div class="metric-icon" style="background-color: #00B8F2;"-->
                                                             <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
-                                                            <img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
+                                                            <!--img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Agent Satisfaction</h3>
@@ -2466,7 +2835,7 @@ function sb_component_admin()
                                                     <div class="w-100">
                                                         <div class="agent_chart">
                                                             <canvas class="mt-0" id="agent_chart"></canvas>
-                                                        </div>
+                                                        </div-->
                                                         <!--script>
                                                             const agentCtx = document.getElementById('agent_chart').getContext('2d');
                                                             const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
@@ -2524,11 +2893,11 @@ function sb_component_admin()
                                                                 }
                                                             });
                                                         </script-->
-                                                    </div>
+                                                    <!--/div>
                                                 </div>
 
                                             </div>
-                                        </section>
+                                        </section-->
                                         <section class="main-charts">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -2579,7 +2948,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="px-3 mt-3">
+                                    <div class="px-3 mt-3 clmn-gap">
                                         <section class="main-charts mb-3">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -2659,8 +3028,8 @@ function sb_component_admin()
                                                 </div>
                                             </div>
                                         </section>
-                                        <section class="main-charts">
-                                            <div class="card p-3">
+                                        <section class="main-charts high-inrs">
+                                            <div class="card p-3" style=" max-height: 442px !important; display: flex; flex-direction: column; justify-content: center; height: 100%;">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Customer Overview</h6>
                                                     <select id="customer-overview" class="form-select form-select-sm w-auto">
@@ -2714,12 +3083,13 @@ function sb_component_admin()
                                                 </div>
                                             </div>
                                         </section>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-8 p-0">
-                                    <div class="px-3 main-charts">
+                                    <div class="px-3 main-charts clmn-gap">
                                         <div class="bg-white">
                                             <h6 class="head mb-1">Recent Messages</h6>
                                         </div>
@@ -2732,6 +3102,112 @@ function sb_component_admin()
                                         <div class="div"></div>
                                     </div>
                                 </div>
+                                <div class="col-md-4 p-0">
+                                    <div class="px-3 main-charts tables clmn-gap">
+                                        <div class="bg-white d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="head mb-1">All Tickets</h6>
+                                            </div>
+                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a></p>
+                                        </div>
+                                        <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
+                                        <div class="seprator"></div>
+                                        <?php
+                                        function sb_get_priorities()
+                                        {
+                                            $priorities = sb_db_get(
+                                                "SELECT * FROM priorities",
+                                                false
+                                            );
+                                            return $priorities;
+                                        }
+                                        function sb_get_statues()
+                                        {
+                                            $status = sb_db_get(
+                                                "SELECT * FROM ticket_status",
+                                                false
+                                            );
+                                            return $status;
+                                        }
+                                        $statues = sb_get_statues();
+                                        $priorities = sb_get_priorities();
+                                        ?>
+                                        <div id="ticket_statues">
+                                            <ul class="status-list">
+                                                <?php foreach (
+                                                    $statues
+                                                    as $status
+                                                ) {
+                                                    echo '<li data-status="' .
+                                                        $status["name"] .
+                                                        '" class="" data-color="' .
+                                                        $status["color"] .
+                                                        '" value="' .
+                                                        $status["id"] .
+                                                        '">
+                                                    <span class="status-dot"></span> ' .
+                                                        $status["name"] .
+                                                        '
+                                                </li>';
+                                                } ?>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div id="ticket_priorities">
+                                            <ul class="priority-list">
+                                                <?php foreach (
+                                                    $priorities
+                                                    as $priority
+                                                ) {
+                                                    echo '<li data-status="' .
+                                                        $priority["name"] .
+                                                        '" class="" data-color="' .
+                                                        $priority["color"] .
+                                                        '" value="' .
+                                                        $priority["id"] .
+                                                        '">
+                                                    <span class="status-dot"></span> ' .
+                                                        $priority["name"] .
+                                                        '
+                                                </li>';
+                                                } ?>
+                                            </ul>
+                                        </div>
+                                        <div class="new_table sb-area-tickets-dash">
+                                            <div class="sb-scroll-area">
+                                                <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="title">
+                                                                Ticket Title
+                                                            </th>
+                                                            <th data-field="assigned-to">
+                                                                Assigned To
+                                                            </th>
+                                                            <th data-field="creation-date">
+                                                                Creation Date
+                                                            </th>
+                                                            <th data-field="status">
+                                                                <?php sb_e(
+                                                                    "Status"
+                                                                ); ?>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-ticket-id="">
+                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     </div>
                                 <!-- <div class="col-md-4 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
@@ -2740,7 +3216,7 @@ function sb_component_admin()
                                                     <h6 class="head mb-1">Chat Volume</h6>
                                                     <p class="sub_head">Weekly Report</p>
                                                 </div>
-                                            </div>
+                                            </div-->
                                             <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
                                             <!--div class="chatVolChart">
                                                 <canvas id="chatVolChart"></canvas>
@@ -2867,51 +3343,75 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div> -->
-                                <div class="col-md-12 p-0 my-3">
+                                <!--div class="col-md-12 p-0 my-3">
                                     <div class="px-3 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">All Tickets</h6>
                                             </div>
-                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl;?>">View All</a></p>
-                                        </div>
+                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a></p>
+                                        </div-->
                                         <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                                        <div class="seprator"></div>
-                                        <?php
+                                        <!--div class="seprator"></div-->
+                                        <!--?php
                                         function sb_get_priorities()
                                         {
-                                            $priorities = sb_db_get('SELECT * FROM priorities', false);
+                                            $priorities = sb_db_get(
+                                                "SELECT * FROM priorities",
+                                                false
+                                            );
                                             return $priorities;
                                         }
                                         function sb_get_statues()
                                         {
-                                            $status = sb_db_get('SELECT * FROM ticket_status', false);
+                                            $status = sb_db_get(
+                                                "SELECT * FROM ticket_status",
+                                                false
+                                            );
                                             return $status;
                                         }
                                         $statues = sb_get_statues();
                                         $priorities = sb_get_priorities();
                                         ?>
                                         <div id="ticket_statues">
-                                            <ul class="status-list">
-                                                <?php
-                                                foreach ($statues as $status) {
-                                                    echo '<li data-status="' . $status['name'] . '" class="" data-color="' . $status['color'] . '" value="' . $status['id'] . '">
-                                                    <span class="status-dot"></span> ' . $status['name'] . '
+                                            <ul class="status-list"-->
+                                                <!--?php foreach (
+                                                    $statues
+                                                    as $status
+                                                ) {
+                                                    echo '<li data-status="' .
+                                                        $status["name"] .
+                                                        '" class="" data-color="' .
+                                                        $status["color"] .
+                                                        '" value="' .
+                                                        $status["id"] .
+                                                        '">
+                                                    <span class="status-dot"></span> ' .
+                                                        $status["name"] .
+                                                        '
                                                 </li>';
-                                                }
-                                                ?>
+                                                } ?>
                                             </ul>
                                         </div>
                                         <div id="ticket_priorities">
-                                            <ul class="priority-list">
-                                                <?php
-                                                foreach ($priorities as $priority) {
-                                                    echo '<li data-status="' . $priority['name'] . '" class="" data-color="' . $priority['color'] . '" value="' . $priority['id'] . '">
-                                                    <span class="status-dot"></span> ' . $priority['name'] . '
+                                            <ul class="priority-list"-->
+                                                <!--?php foreach (
+                                                    $priorities
+                                                    as $priority
+                                                ) {
+                                                    echo '<li data-status="' .
+                                                        $priority["name"] .
+                                                        '" class="" data-color="' .
+                                                        $priority["color"] .
+                                                        '" value="' .
+                                                        $priority["id"] .
+                                                        '">
+                                                    <span class="status-dot"></span> ' .
+                                                        $priority["name"] .
+                                                        '
                                                 </li>';
-                                                }
-                                                ?>
+                                                } ?>
                                             </ul>
                                         </div>
                                         <div class="new_table sb-area-tickets-dash">
@@ -2928,8 +3428,10 @@ function sb_component_admin()
                                                             <th data-field="creation-date">
                                                                 Creation Date
                                                             </th>
-                                                            <th data-field="status">
-                                                                <?php sb_e('Status') ?>
+                                                            <th data-field="status"-->
+                                                                <!--?php sb_e(
+                                                                    "Status"
+                                                                ); ?>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -2945,7 +3447,7 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div-->
                                 <!-- <div class="col-md-6 p-0">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
@@ -2967,10 +3469,14 @@ function sb_component_admin()
                                                                 Date
                                                             </th>
                                                             <th data-field="status">
-                                                                <?php sb_e('Status') ?> 
+                                                                <?php sb_e(
+                                                                    "Status"
+                                                                ); ?> 
                                                             </th>
                                                             <th data-field="priority">
-                                                                <?php sb_e('Priority') ?>   
+                                                                <?php sb_e(
+                                                                    "Priority"
+                                                                ); ?>   
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -3017,30 +3523,39 @@ function sb_component_admin()
                 <div class="sb-area-conversations">
                     <?php echo $header; ?>
                     <div class="sb-board">
-                        <div class="sb-admin-list<?php echo sb_get_multi_setting('departments-settings', 'departments-show-list') ? ' sb-departments-show' : '' ?>">
+                        <div class="sb-admin-list<?php echo sb_get_multi_setting(
+                            "departments-settings",
+                            "departments-show-list"
+                        )
+                            ? " sb-departments-show"
+                            : ""; ?>">
                             <div class="sb-top">
                                 <div class="sb-select">
                                     <p data-value="0">
-                                        <?php sb_e('Inbox') ?><span></span>
+                                        <?php sb_e("Inbox"); ?><span></span>
                                     </p>
                                     <ul>
                                         <li data-value="0" class="sb-active">
-                                            <?php sb_e('Inbox') ?>
+                                            <?php sb_e("Inbox"); ?>
                                             <span></span>
                                         </li>
                                         <li data-value="3">
-                                            <?php sb_e('Archive') ?>
+                                            <?php sb_e("Archive"); ?>
                                         </li>
                                         <li data-value="4">
-                                            <?php sb_e('Trash') ?>
+                                            <?php sb_e("Trash"); ?>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="sb-flex">
-                                    <?php sb_conversations_filter($cloud_active_apps) ?>
+                                    <?php sb_conversations_filter(
+                                        $cloud_active_apps
+                                    ); ?>
                                     <div class="sb-search-btn">
                                         <i class="sb-icon sb-icon-search"></i>
-                                        <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                                        <input type="text" autocomplete="false" placeholder="<?php sb_e(
+                                            "Search for keywords or users..."
+                                        ); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -3057,7 +3572,9 @@ function sb_component_admin()
                                     <i class="sb-icon-menu"></i>
                                     <ul>
                                         <!-- <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
-                                            <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Convert to a ticket') ?>">
+                                            <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Convert to a ticket"
+                                            ); ?>">
                                                 <i id="sb-icon-refresh" class="sb-icon-refresh"></i>
                                             </a>
                                         </li> -->
@@ -3068,32 +3585,58 @@ function sb_component_admin()
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-value="archive" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Archive conversation') ?>">
+                                            <a data-value="archive" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Archive conversation"
+                                            ); ?>">
                                                 <i class="sb-icon-check"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-value="read" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Mark as read') ?>">
+                                            <a data-value="read" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Mark as read"
+                                            ); ?>">
                                                 <i class="sb-icon-check-circle"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-value="transcript" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Transcript') ?>" data-action="<?php echo sb_get_multi_setting('transcript', 'transcript-action') ?>">
+                                            <a data-value="transcript" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Transcript"
+                                            ); ?>" data-action="<?php echo sb_get_multi_setting(
+    "transcript",
+    "transcript-action"
+); ?>">
                                                 <i class="sb-icon-download"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-value="inbox" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Send to inbox') ?>">
+                                            <a data-value="inbox" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Send to inbox"
+                                            ); ?>">
                                                 <i class="sb-icon-back"></i>
                                             </a>
                                         </li>
-                                        <?php
-                                        if ($is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-delete-conversation')) || ($supervisor && $supervisor['supervisor-delete-conversation'])) {
-                                            echo '<li><a data-value="delete" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' . sb_('Delete conversation') . '"><i class="sb-icon-delete"></i></a></li><li><a data-value="empty-trash" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' . sb_('Empty trash') . '"><i class="sb-icon-delete"></i></a></li>';
-                                        }
-                                        ?>
+                                        <?php if (
+                                            $is_admin ||
+                                            (!$supervisor &&
+                                                sb_get_multi_setting(
+                                                    "agents",
+                                                    "agents-delete-conversation"
+                                                )) ||
+                                            ($supervisor &&
+                                                $supervisor[
+                                                    "supervisor-delete-conversation"
+                                                ])
+                                        ) {
+                                            echo '<li><a data-value="delete" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' .
+                                                sb_("Delete conversation") .
+                                                '"><i class="sb-icon-delete"></i></a></li><li><a data-value="empty-trash" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' .
+                                                sb_("Empty trash") .
+                                                '"><i class="sb-icon-delete"></i></a></li>';
+                                        } ?>
                                         <li>
-                                            <a data-value="panel" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Details') ?>">
+                                            <a data-value="panel" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Details"
+                                            ); ?>">
                                                 <i class="sb-icon-info"></i>
                                             </a>
                                         </li>
@@ -3106,21 +3649,27 @@ function sb_component_admin()
                             <div class="sb-no-conversation-message">
                                 <div>
                                     <label>
-                                        <?php sb_e('Select a conversation') ?>
+                                        <?php sb_e("Select a conversation"); ?>
                                     </label>
                                     <p>
-                                        <?php sb_e('Select a conversation from the left menu.') ?>
+                                        <?php sb_e(
+                                            "Select a conversation from the left menu."
+                                        ); ?>
                                     </p>
                                 </div>
                             </div>
                             <audio id="sb-audio" preload="auto">
-                                <source src="<?php echo sb_get_multi_setting('sound-settings', 'sound-settings-file-admin', SB_URL . '/media/sound.mp3') ?>" type="audio/mpeg">
+                                <source src="<?php echo sb_get_multi_setting(
+                                    "sound-settings",
+                                    "sound-settings-file-admin",
+                                    SB_URL . "/media/sound.mp3"
+                                ); ?>" type="audio/mpeg">
                             </audio>
                         </div>
                         <div class="sb-user-details">
                             <div class="sb-top">
                                 <div class="sb-profile">
-                                    <img src="<?php echo SB_URL ?>/media/user.svg" />
+                                    <img src="<?php echo SB_URL; ?>/media/user.svg" />
                                     <div class="user-initials" style="display: none;">
                                         <span class="initials"></span>
                                     </div>
@@ -3131,25 +3680,64 @@ function sb_component_admin()
                                 <a class="sb-user-details-close sb-close sb-btn-icon sb-btn-red">
                                     <i class="sb-icon-close"></i>
                                 </a>
-                                <div class="sb-profile-list sb-profile-list-conversation<?php echo $collapse ?>"></div>
+                                <div class="sb-profile-list sb-profile-list-conversation<?php echo $collapse; ?>"></div>
                                 <?php
                                 sb_apps_panel();
-                                sb_departments('custom-select');
-                                if (sb_get_multi_setting('routing', 'routing-active') || (sb_is_agent(false, true, true) && sb_get_multi_setting('queue', 'queue-active')) || (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') && sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-menu'))) {
+                                sb_departments("custom-select");
+                                if (
+                                    sb_get_multi_setting(
+                                        "routing",
+                                        "routing-active"
+                                    ) ||
+                                    (sb_is_agent(false, true, true) &&
+                                        sb_get_multi_setting(
+                                            "queue",
+                                            "queue-active"
+                                        )) ||
+                                    (sb_get_multi_setting(
+                                        "agent-hide-conversations",
+                                        "agent-hide-conversations-active"
+                                    ) &&
+                                        sb_get_multi_setting(
+                                            "agent-hide-conversations",
+                                            "agent-hide-conversations-menu"
+                                        ))
+                                ) {
                                     sb_routing_select();
                                 }
-                                if (!sb_get_multi_setting('disable', 'disable-notes')) {
-                                    echo '<div class="sb-panel-details sb-panel-notes' . $collapse . '"><i class="sb-icon-plus"></i><h3>' . sb_('Notes') . '</h3><div></div></div>';
+                                if (
+                                    !sb_get_multi_setting(
+                                        "disable",
+                                        "disable-notes"
+                                    )
+                                ) {
+                                    echo '<div class="sb-panel-details sb-panel-notes' .
+                                        $collapse .
+                                        '"><i class="sb-icon-plus"></i><h3>' .
+                                        sb_("Notes") .
+                                        "</h3><div></div></div>";
                                 }
-                                if (!sb_get_multi_setting('disable', 'disable-tags')) {
-                                    echo '<div class="sb-panel-details sb-panel-tags"><i class="sb-icon-settings"></i><h3>' . sb_('Tags') . '</h3><div></div></div>';
+                                if (
+                                    !sb_get_multi_setting(
+                                        "disable",
+                                        "disable-tags"
+                                    )
+                                ) {
+                                    echo '<div class="sb-panel-details sb-panel-tags"><i class="sb-icon-settings"></i><h3>' .
+                                        sb_("Tags") .
+                                        "</h3><div></div></div>";
                                 }
-                                if (!sb_get_multi_setting('disable', 'disable-attachments')) {
+                                if (
+                                    !sb_get_multi_setting(
+                                        "disable",
+                                        "disable-attachments"
+                                    )
+                                ) {
                                     echo '<div class="sb-panel-details sb-panel-attachments sb-collapse"></div>';
                                 }
                                 ?>
                                 <h3 class="sb-hide">
-                                    <?php sb_e('User conversations') ?>
+                                    <?php sb_e("User conversations"); ?>
                                 </h3>
                                 <ul class="sb-user-conversations"></ul>
                             </div>
@@ -3159,93 +3747,126 @@ function sb_component_admin()
                     <i class="sb-btn-collapse sb-left sb-icon-arrow-left"></i>
                     <i class="sb-btn-collapse sb-right sb-icon-arrow-right"></i>
                 </div>
-                <?php if ($active_areas['users']) { ?>
+                <?php if ($active_areas["users"]) { ?>
                     <div class="sb-area-users">
                         <?php echo $header; ?>
                         <div class="sb-top-bar">
                             <div>
                                 <a class="sb-btn sb-icon sb-new-user sb_btn_new">
                                     <i class="fa-solid fa-user-plus mr-1"></i>
-                                    <?php sb_e('New Customer') ?>
+                                    <?php sb_e("New Customer"); ?>
                                 </a>
                             </div>
                             <div>
                                 <!-- <h2>
-                                    <?php sb_e('Users list') ?>
+                                    <?php sb_e("Users list"); ?>
                                 </h2> -->
                                 <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
                                     <div>
-                                        <?php sb_e('All') ?>
+                                        <?php sb_e("All"); ?>
                                         <span data-count="0"></span>
                                     </div>
                                     <ul>
                                         <li data-type="all" class="sb-active">
-                                            <?php sb_e('All') ?>
+                                            <?php sb_e("All"); ?>
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="user">
-                                            <?php sb_e('Customers') ?>
+                                            <?php sb_e("Customers"); ?>
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="lead">
-                                            <?php sb_e('Leads') ?>
+                                            <?php sb_e("Leads"); ?>
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="visitor">
-                                            <?php sb_e('Visitors') ?>
+                                            <?php sb_e("Visitors"); ?>
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="online">
-                                            <?php sb_e('Online') ?>
+                                            <?php sb_e("Online"); ?>
                                         </li>
-                                        <?php
-                                        if ($is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-tab')) || ($supervisor && $supervisor['supervisor-agents-tab'])) {
-                                            echo '<li data-type="agent">' . sb_('Agents & Admins') . '</li>';
-                                        }
-                                        ?>
+                                        <?php if (
+                                            $is_admin ||
+                                            (!$supervisor &&
+                                                sb_get_multi_setting(
+                                                    "agents",
+                                                    "agents-tab"
+                                                )) ||
+                                            ($supervisor &&
+                                                $supervisor[
+                                                    "supervisor-agents-tab"
+                                                ])
+                                        ) {
+                                            echo '<li data-type="agent">' .
+                                                sb_("Agents & Admins") .
+                                                "</li>";
+                                        } ?>
                                     </ul>
                                 </div>
                                 <div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
                                     <ul>
-                                        <?php
-                                        if ($is_admin) {
-                                            echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
-                                        }
-                                        ?>
+                                        <?php if ($is_admin) {
+                                            echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' .
+                                                sb_("Download CSV") .
+                                                '"><i class="sb-icon-download"></i></a></li>';
+                                        } ?>
                                         <li>
-                                            <a data-value="message" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Send a message') ?>">
+                                            <a data-value="message" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Send a message"
+                                            ); ?>">
                                                 <i class="sb-icon-chat"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-value="custom_email" class="sb-btn-icon" data-sb-tooltip="<?php sb_e('Send an email') ?>">
+                                            <a data-value="custom_email" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                                "Send an email"
+                                            ); ?>">
                                                 <i class="sb-icon-envelope"></i>
                                             </a>
                                         </li>
                                         <?php
                                         if ($sms) {
-                                            echo '<li><a data-value="sms" class="sb-btn-icon" data-sb-tooltip="' . sb_('Send a text message') . '"><i class="sb-icon-sms"></i></a><li>';
+                                            echo '<li><a data-value="sms" class="sb-btn-icon" data-sb-tooltip="' .
+                                                sb_("Send a text message") .
+                                                '"><i class="sb-icon-sms"></i></a><li>';
                                         }
-                                        if (defined('SB_WHATSAPP') && (!function_exists('sb_whatsapp_active') || sb_whatsapp_active())) {
-                                            echo '<li><a data-value="whatsapp" class="sb-btn-icon" data-sb-tooltip="' . sb_('Send a WhatsApp message template') . '"><i class="sb-icon-social-wa"></i></a><li>'; // Deprecated: remove function_exists('sb_whatsapp_active')
+                                        if (
+                                            defined("SB_WHATSAPP") &&
+                                            (!function_exists(
+                                                "sb_whatsapp_active"
+                                            ) ||
+                                                sb_whatsapp_active())
+                                        ) {
+                                            echo '<li><a data-value="whatsapp" class="sb-btn-icon" data-sb-tooltip="' .
+                                                sb_(
+                                                    "Send a WhatsApp message template"
+                                                ) .
+                                                '"><i class="sb-icon-social-wa"></i></a><li>'; // Deprecated: remove function_exists('sb_whatsapp_active')
                                         }
                                         if ($is_admin) {
-                                            echo '<li><a data-value="delete" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' . sb_('Delete users') . '" style="display: none;"><i class="sb-icon-delete"></i></a></li>';
+                                            echo '<li><a data-value="delete" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' .
+                                                sb_("Delete users") .
+                                                '" style="display: none;"><i class="sb-icon-delete"></i></a></li>';
                                         }
                                         ?>
                                     </ul>
                                 </div>
-                                <?php sb_conversations_filter($cloud_active_apps) ?>
+                                <?php sb_conversations_filter(
+                                    $cloud_active_apps
+                                ); ?>
                             </div>
                             <!-- <div>
                                 <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
-                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search users ...') ?>" />
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e(
+                                        "Search users ..."
+                                    ); ?>" />
                                 </div>
                                 <a class="sb-btn sb-icon sb-new-user">
                                     <i class="sb-icon-user"></i>
-                                    <?php sb_e('Add new user') ?>
+                                    <?php sb_e("Add new user"); ?>
                                 </a>
                             </div> -->
                         </div>
@@ -3257,20 +3878,20 @@ function sb_component_admin()
                                             <input type="checkbox" />
                                         </th>
                                         <th data-field="first_name">
-                                            <?php sb_e('Full name') ?>
+                                            <?php sb_e("Full name"); ?>
                                         </th>
-                                        <?php sb_users_table_extra_fields() ?>
+                                        <?php sb_users_table_extra_fields(); ?>
                                         <th data-field="email">
-                                            <?php sb_e('Email') ?>
+                                            <?php sb_e("Email"); ?>
                                         </th>
                                         <th data-field="user_type">
-                                            <?php sb_e('Type') ?>
+                                            <?php sb_e("Type"); ?>
                                         </th>
                                         <th data-field="last_activity">
-                                            <?php sb_e('Last activity') ?>
+                                            <?php sb_e("Last activity"); ?>
                                         </th>
                                         <th data-field="creation_time" class="sb-active">
-                                            <?php sb_e('Registration date') ?>
+                                            <?php sb_e("Registration date"); ?>
                                         </th>
                                     </tr>
                                 </thead>
@@ -3279,9 +3900,8 @@ function sb_component_admin()
                         </div>
                     </div>
                 <?php } ?>
-                <?php
-                if ($active_areas['chatbot']) {
-                    require_once(SB_PATH . '/apps/dialogflow/components.php');
+                <?php if ($active_areas["chatbot"]) {
+                    require_once SB_PATH . "/apps/dialogflow/components.php";
                     sb_dialogflow_chatbot_area();
                 }
                 ?>
@@ -3299,11 +3919,13 @@ function sb_component_admin()
                             <div>
                                 <!-- <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
-                                    <input type="text" autocomplete="false" placeholder="<?php sb_e('Search tickets ...') ?>" />
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e(
+                                        "Search tickets ..."
+                                    ); ?>" />
                                 </div> -->
                                 <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
                                     <i class="fa-solid fa-plus mr-1"></i>
-                                    <?php sb_e('New Ticket') ?>
+                                    <?php sb_e("New Ticket"); ?>
                                 </a>
                             </div>
                             <div>
@@ -3314,108 +3936,131 @@ function sb_component_admin()
                                 </div> -->
                                 <div class="mr-5 tags-filter" style="">
                                     <?php
-                                    $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                    $tagsHtml = '';
+                                    $tags = sb_get_multi_setting(
+                                        "disable",
+                                        "disable-tags"
+                                    )
+                                        ? []
+                                        : sb_get_setting("tags", []);
+                                    $tagsHtml = "";
                                     $count = count($tags);
-                                    if ($count > 0) {
-                                    ?>
+                                    if ($count > 0) { ?>
                                         <select id="tags-filter" name="tags[]" multiple>
                                             <?php
                                             for ($i = 0; $i < $count; $i++) {
-                                                $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                $tagsHtml .=
+                                                    '<option value="' .
+                                                    $tags[$i]["tag-name"] .
+                                                    '"  class="tag-option" data-color="' .
+                                                    $tags[$i]["tag-color"] .
+                                                    '" data-custom-properties={"color":"' .
+                                                    $tags[$i]["tag-color"] .
+                                                    '"}>' .
+                                                    $tags[$i]["tag-name"] .
+                                                    "</option>";
                                             }
                                             echo $tagsHtml;
                                             ?>
                                         </select>
-                                    <?php
-                                    }
+                                    <?php }
                                     ?>
 
                                 </div>
                                 <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
                                     <div>
-                                        <?php sb_e('All') ?>
+                                        <?php sb_e("All"); ?>
                                         <span data-count="0"></span>
                                     </div>
                                     <ul>
                                         <li data-type="all" class="sb-active">
                                             <span data-count="0">0</span>
-                                            <?php sb_e('All') ?>
+                                            <?php sb_e("All"); ?>
                                         </li>
                                         <li data-type="open">
                                             <span data-count="0">0</span>
-                                            <?php sb_e('Open') ?>
+                                            <?php sb_e("Open"); ?>
                                         </li>
                                         <li data-type="in-progress">
                                             <span data-count="0">0</span>
-                                            <?php sb_e('In Progress') ?>
+                                            <?php sb_e("In Progress"); ?>
                                         </li>
                                         <li data-type="answered">
                                             <span data-count="0">0</span>
-                                            <?php sb_e('Answered') ?>
+                                            <?php sb_e("Answered"); ?>
                                         </li>
                                         <li data-type="hold">
                                             <span data-count="0">0</span>
-                                            <?php sb_e('On Hold') ?>
+                                            <?php sb_e("On Hold"); ?>
                                         </li>
                                         <li data-type="closed">
                                             <span data-count="0">0</span>
-                                            <?php sb_e('Closed') ?>
+                                            <?php sb_e("Closed"); ?>
                                         </li>
                                     </ul>
                                 </div>
                                 <!--div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
                                     <ul>
-                                        <?php
-                                        if ($is_admin) {
+                                        <?php if ($is_admin) {
                                             // echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
-                                        }
-                                        ?>
+                                        } ?>
                                     </ul>
                                 </div-->
                             </div>
                         </div>
-                        <div class="sb-scroll-area">
+                      
+                        <div class="sb-scroll-area ticket-section">
                             <table class="sb-table sb_table_new sb-table-tickets">
                                 <thead>
                                     <tr>
                                         <th data-field="id" width="5%">
                                             <!--input type="checkbox" /-->
-                                            <?php sb_e('ID') ?>
+                                            <?php sb_e("ID"); ?>
                                         </th>
                                         <th data-field="subject">
-                                            <?php sb_e('Subject') ?>
+                                            <?php sb_e("Subject"); ?>
                                         </th>
                                         <th data-field="tags" width="20%">
-                                            <?php sb_e('Tags') ?>
+                                            <?php sb_e("Tags"); ?>
                                         </th>
                                         <?php
-                                        $department_settings = sb_get_setting('departments-settings');
-                                        if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') {
-                                        ?>
+                                        $department_settings = sb_get_setting(
+                                            "departments-settings"
+                                        );
+                                        if (
+                                            isset(
+                                                $department_settings[
+                                                    "departments-show-list"
+                                                ]
+                                            ) &&
+                                            $department_settings[
+                                                "departments-show-list"
+                                            ] == "1"
+                                        ) { ?>
                                             <th data-field="department">
-                                                <?php sb_e('Department') ?>
+                                                <?php sb_e("Department"); ?>
                                             </th>
-                                        <?php } ?>
+                                        <?php }
+                                        ?>
                                         <!--th data-field="service">
-                                            <?php //sb_e('Service') 
-                                            ?>
+                                            <?php
+                    //sb_e('Service')
+                    ?>
                                         </th-->
                                         <th data-field="contact">
-                                            <?php sb_e('Contact') ?>
+                                            <?php sb_e("Contact"); ?>
                                         </th>
                                         <th data-field="status">
-                                            <?php sb_e('Status') ?>
+                                            <?php sb_e("Status"); ?>
                                         </th>
                                         <th data-field="priority">
-                                            <?php sb_e('Priority') ?>
+                                            <?php sb_e("Priority"); ?>
                                         </th>
                                         <th data-field="last_reply">
-                                            <?php sb_e('Last Reply') ?>
+                                            <?php sb_e("Last Reply"); ?>
                                         </th>
                                         <th data-field="creation_time">
-                                            <?php sb_e('Created') ?>
+                                            <?php sb_e("Created"); ?>
                                         </th>
                                     </tr>
                                 </thead>
@@ -3437,11 +4082,21 @@ function sb_component_admin()
                                                 <div class="col-md-4 p-0">
                                                     <div class="d-flex align-items-center justify-content-between pl-5">
                                                         <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: 120px;">
-                                                            <?php
-                                                            foreach ($statues as $key => $value) {
-                                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-                                                            }
-                                                            ?>
+                                                            <?php foreach (
+                                                                $statues
+                                                                as $key =>
+                                                                    $value
+                                                            ) {
+                                                                echo '<option value="' .
+                                                                    $value[
+                                                                        "id"
+                                                                    ] .
+                                                                    '">' .
+                                                                    $value[
+                                                                        "name"
+                                                                    ] .
+                                                                    "</option>";
+                                                            } ?>
                                                         </select>
 
                                                         <a class="sb-btn sb-icon sb-save-ticket sb_btn_new">
@@ -3489,7 +4144,10 @@ function sb_component_admin()
                                                                         </div>
 
                                                                         <div class="d-flex align-items-center gap-2 mt-4">
-                                                                            <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                                                            <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()[
+                                                                                "id"
+                                                                            ] ??
+                                                                                0; ?>">
                                                                             <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
                                                                             <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
 
@@ -3841,7 +4499,9 @@ function sb_component_admin()
                                                         //});
                                                     </script>
                                                     <script>
-                                                        window.SERVER_NOW = "<?php echo date('Y-m-d\TH:i:sP'); ?>";
+                                                        window.SERVER_NOW = "<?php echo date(
+                                                            "Y-m-d\TH:i:sP"
+                                                        ); ?>";
                                                     </script>
                                                 </div>
                                                 <div class="col-md-3 p-0">
@@ -3889,27 +4549,60 @@ function sb_component_admin()
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <?php if (isset($department_settings['departments-show-list']) && $department_settings['departments-show-list'] == '1') { ?>
+                                                                <?php if (
+                                                                    isset(
+                                                                        $department_settings[
+                                                                            "departments-show-list"
+                                                                        ]
+                                                                    ) &&
+                                                                    $department_settings[
+                                                                        "departments-show-list"
+                                                                    ] == "1"
+                                                                ) { ?>
                                                                     <div class="mb-3 sb-input d-block">
                                                                         <div class="field-label">Department</div>
                                                                         <select id="ticket-department" required>
-                                                                            <option value=""><?php echo sb_('Select Department'); ?></option>
+                                                                            <option value=""><?php echo sb_(
+                                                                                "Select Department"
+                                                                            ); ?></option>
                                                                             <?php
                                                                             $departments = sb_get_departments();
-                                                                            foreach ($departments as $key => $value) {
-                                                                                echo  '<option value="' . $key . '">' . sb_($value['name']) . '</option>';
+                                                                            foreach (
+                                                                                $departments
+                                                                                as $key =>
+                                                                                    $value
+                                                                            ) {
+                                                                                echo '<option value="' .
+                                                                                    $key .
+                                                                                    '">' .
+                                                                                    sb_(
+                                                                                        $value[
+                                                                                            "name"
+                                                                                        ]
+                                                                                    ) .
+                                                                                    "</option>";
                                                                             }
                                                                             ?>
                                                                         </select>
                                                                     </div>
                                                                 <?php } ?>
                                                                 <?php
-                                                                $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
-                                                                $tagsHtml = '';
-                                                                $count = count($tags);
-
-                                                                if ($count > 0) {
-                                                                ?>
+                                                                $tags = sb_get_multi_setting(
+                                                                    "disable",
+                                                                    "disable-tags"
+                                                                )
+                                                                    ? []
+                                                                    : sb_get_setting(
+                                                                        "tags",
+                                                                        []
+                                                                    );
+                                                                $tagsHtml = "";
+                                                                $count = count(
+                                                                    $tags
+                                                                );
+                                                                if (
+                                                                    $count > 0
+                                                                ) { ?>
                                                                     <div class="mb-3">
                                                                         <div class="field-label">Tags</div>
                                                                         <div class="mb-2">
@@ -3917,8 +4610,38 @@ function sb_component_admin()
                                                                             <div class="mr-5 tags-filter" style="">
                                                                                 <select id="ticket-detail-tags-filter" name="tags[]" multiple>
                                                                                     <?php
-                                                                                    for ($i = 0; $i < $count; $i++) {
-                                                                                        $tagsHtml .= '<option value="' . $tags[$i]['tag-name'] . '"  class="tag-option" data-color="' . $tags[$i]['tag-color'] . '" data-custom-properties={"color":"' . $tags[$i]['tag-color'] . '"}>' . $tags[$i]['tag-name'] . '</option>';
+                                                                                    for (
+                                                                                        $i = 0;
+                                                                                        $i <
+                                                                                        $count;
+                                                                                        $i++
+                                                                                    ) {
+                                                                                        $tagsHtml .=
+                                                                                            '<option value="' .
+                                                                                            $tags[
+                                                                                                $i
+                                                                                            ][
+                                                                                                "tag-name"
+                                                                                            ] .
+                                                                                            '"  class="tag-option" data-color="' .
+                                                                                            $tags[
+                                                                                                $i
+                                                                                            ][
+                                                                                                "tag-color"
+                                                                                            ] .
+                                                                                            '" data-custom-properties={"color":"' .
+                                                                                            $tags[
+                                                                                                $i
+                                                                                            ][
+                                                                                                "tag-color"
+                                                                                            ] .
+                                                                                            '"}>' .
+                                                                                            $tags[
+                                                                                                $i
+                                                                                            ][
+                                                                                                "tag-name"
+                                                                                            ] .
+                                                                                            "</option>";
                                                                                     }
                                                                                     echo $tagsHtml;
                                                                                     ?>
@@ -3940,8 +4663,7 @@ function sb_component_admin()
                                                                             </span> -->
                                                                         </div>
                                                                     </div>
-                                                                <?php
-                                                                }
+                                                                <?php }
                                                                 ?>
 
                                                                 <div class="mb-3 sb-input d-block">
@@ -3950,13 +4672,25 @@ function sb_component_admin()
                                                                         High
                                                                     </div>
                                                                     <div id="priority_id" data-type="select" class="sb-input">
-                                                                        <span class="required-label"><?php sb_e('Priority') ?></span> -->
+                                                                        <span class="required-label"><?php sb_e(
+                                                                            "Priority"
+                                                                        ); ?></span> -->
                                                                     <select id="ticket-priority" required>
-                                                                        <?php
-                                                                        foreach ($priorities as $key => $value) {
-                                                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
-                                                                        }
-                                                                        ?>
+                                                                        <?php foreach (
+                                                                            $priorities
+                                                                            as $key =>
+                                                                                $value
+                                                                        ) {
+                                                                            echo '<option value="' .
+                                                                                $value[
+                                                                                    "id"
+                                                                                ] .
+                                                                                '">' .
+                                                                                $value[
+                                                                                    "name"
+                                                                                ] .
+                                                                                "</option>";
+                                                                        } ?>
                                                                     </select>
                                                                     <!-- </div> -->
                                                                 </div>
@@ -4268,19 +5002,21 @@ function sb_component_admin()
                                 <div class="sb-menu-wide sb-menu-articles">
                                     <ul>
                                         <li data-type="articles" class="sb-active">
-                                            <?php sb_e('Articles') ?>
+                                            <?php sb_e("Articles"); ?>
                                         </li>
                                         <li data-type="categories">
-                                            <?php sb_e('Categories') ?>
+                                            <?php sb_e("Categories"); ?>
                                         </li>
                                         <!-- <li data-type="settings">
-                                            <?php sb_e('Settings') ?>
+                                            <?php sb_e("Settings"); ?>
                                         </li>
                                         <?php
-                                        if ($active_areas['reports']) {
-                                            echo '<li data-type="reports">' . sb_('Reports') . '</li>';
+                                        if ($active_areas["reports"]) {
+                                            echo '<li data-type="reports">' .
+                                                sb_("Reports") .
+                                                "</li>";
                                         }
-                                        sb_docs_link('#articles');
+                                        sb_docs_link("#articles");
                                         ?> -->
                                     </ul>
                                 </div>
@@ -4289,7 +5025,7 @@ function sb_component_admin()
 
                                 <a class="sb-btn sb-save-articles sb-icon">
                                     <i class="sb-icon-check"></i>
-                                    <?php sb_e('Save changes') ?>
+                                    <?php sb_e("Save changes"); ?>
                                 </a>
                                 <a class="sb-btn-icon sb-view-article" href="" target="_blank">
                                     <i class="sb-icon-next"></i>
@@ -4299,14 +5035,14 @@ function sb_component_admin()
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white">
+                                <div class="sb-add-article sb-btn sb-icon sb-btn-white clr-change">
                                     <i class="sb-icon-plus"></i>
-                                    <?php sb_e('Add new article') ?>
+                                    <?php sb_e("Add new article"); ?>
                                 </div>
                                 <ul class="ul-categories"></ul>
-                                <div class="sb-add-category sb-btn sb-icon sb-btn-white">
+                                <div class="sb-add-category sb-btn sb-icon sb-btn-white  clr-change">
                                     <i class="sb-icon-plus"></i>
-                                    <?php sb_e('Add new category') ?>
+                                    <?php sb_e("Add new category"); ?>
                                 </div>
                             </div>
                             <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
@@ -4319,7 +5055,7 @@ function sb_component_admin()
                                     </div>
                                     <div class="articles_bg">
                                         <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e('Title') ?>
+                                            <?php sb_e("Title"); ?>
                                         </h2>
                                         <div class="sb-setting sb-type-text sb-article-title">
                                             <div>
@@ -4327,15 +5063,19 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                         <h2>
-                                            <?php sb_e('Content') ?>
+                                            <?php sb_e("Content"); ?>
                                         </h2>
                                         <div class="sb-setting sb-type-textarea sb-article-content">
                                             <div>
-                                                <?php echo sb_get_setting('disable-editor-js') ? '<textarea></textarea>' : '<div id="editorjs"></div>' ?>
+                                                <?php echo sb_get_setting(
+                                                    "disable-editor-js"
+                                                )
+                                                    ? "<textarea></textarea>"
+                                                    : '<div id="editorjs"></div>'; ?>
                                             </div>
                                         </div>
                                         <h2>
-                                            <?php sb_e('External link') ?>
+                                            <?php sb_e("External link"); ?>
                                         </h2>
                                         <div class="sb-setting sb-type-text sb-article-link">
                                             <div>
@@ -4345,7 +5085,9 @@ function sb_component_admin()
                                         <div class="sb-article-categories sb-grid">
                                             <div>
                                                 <h2>
-                                                    <?php sb_e('Parent category') ?>
+                                                    <?php sb_e(
+                                                        "Parent category"
+                                                    ); ?>
                                                 </h2>
                                                 <div class="sb-setting sb-type-select">
                                                     <div>
@@ -4355,7 +5097,7 @@ function sb_component_admin()
                                             </div>
                                             <div>
                                                 <h2>
-                                                    <?php sb_e('Categories') ?>
+                                                    <?php sb_e("Categories"); ?>
                                                 </h2>
                                                 <div class="sb-setting sb-type-select">
                                                     <div>
@@ -4384,7 +5126,7 @@ function sb_component_admin()
                                             Manage and organize content types.
                                         </h2>
                                         <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e('Name') ?>
+                                            <?php sb_e("Name"); ?>
                                         </h2>
                                         <div class="sb-setting sb-type-text">
                                             <div>
@@ -4392,7 +5134,7 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                         <h2>
-                                            <?php sb_e('Description') ?>
+                                            <?php sb_e("Description"); ?>
                                         </h2>
                                         <div class="sb-setting sb-type-textarea">
                                             <div>
@@ -4400,7 +5142,7 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                         <h2>
-                                            <?php sb_e('Image') ?>
+                                            <?php sb_e("Image"); ?>
                                         </h2>
                                         <div data-type="image" class="sb-input sb-setting sb-input-image">
                                             <div id="category-image" class="image">
@@ -4408,7 +5150,7 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                         <h2 class="category-parent">
-                                            <?php sb_e('Parent category') ?>
+                                            <?php sb_e("Parent category"); ?>
                                         </h2>
                                         <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
                                             <div class="input">
@@ -4421,13 +5163,13 @@ function sb_component_admin()
                         </div>
                     </div>
                 <?php } ?>
-                <?php if ($active_areas['reports']) { ?>
+                <?php if ($active_areas["reports"]) { ?>
                     <div class="sb-area-reports sb-area-reports_new sb-loading">
                         <?php echo $header; ?>
                         <div class="sb-top-bar p-3">
                             <div>
                                 <!-- <h2>
-                                    <?php sb_e('Reports') ?>
+                                    <?php sb_e("Reports"); ?>
                                 </h2> -->
                             </div>
                             <div>
@@ -4442,109 +5184,113 @@ function sb_component_admin()
                         <div class="sb-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <div>
-                                    <?php sb_e('Reports') ?>
+                                    <?php sb_e("Reports"); ?>
                                 </div>
                                 <ul>
                                     <li class="sb-tab-nav-title">
-                                        <img src="<?php echo SB_URL ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
+                                        <img src="<?php echo SB_URL; ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
 
-                                        <?php sb_e('Conversations') ?>
+                                        <?php sb_e("Conversations"); ?>
                                     </li>
                                     <li class="li" id="conversations" class="sb-active">
-                                        <?php sb_e('Conversations') ?>
+                                        <?php sb_e("Conversations"); ?>
                                     </li>
                                     <li class="li" id="missed-conversations">
-                                        <?php sb_e('Missed conversations') ?>
+                                        <?php sb_e("Missed conversations"); ?>
                                     </li>
                                     <li class="li" id="conversations-time">
-                                        <?php sb_e('Conversations time') ?>
+                                        <?php sb_e("Conversations time"); ?>
                                     </li>
                                     <li class="sb-tab-nav-title">
-                                        <img src="<?php echo SB_URL ?>/media/msg_icon.svg" alt="icon" class="mr-1" />
-                                        <?php sb_e('Direct messages') ?>
+                                        <img src="<?php echo SB_URL; ?>/media/msg_icon.svg" alt="icon" class="mr-1" />
+                                        <?php sb_e("Direct messages"); ?>
                                     </li>
                                     <li class="li" id="direct-messages">
-                                        <?php sb_e('Chat messages') ?>
+                                        <?php sb_e("Chat messages"); ?>
                                     </li>
                                     <li class="li" id="direct-emails">
-                                        <?php sb_e('Emails') ?>
+                                        <?php sb_e("Emails"); ?>
                                     </li>
                                     <li class="li" id="direct-sms">
-                                        <?php sb_e('Text messages') ?>
+                                        <?php sb_e("Text messages"); ?>
                                     </li>
                                     <li class="sb-tab-nav-title">
-                                        <img src="<?php echo SB_URL ?>/media/agents_icon.svg" alt="icon" class="mr-1" />
-                                        <?php sb_e('Users and agents') ?>
+                                        <img src="<?php echo SB_URL; ?>/media/agents_icon.svg" alt="icon" class="mr-1" />
+                                        <?php sb_e("Users and agents"); ?>
                                     </li>
                                     <li class="li" id="visitors">
-                                        <?php sb_e('Visitors') ?>
+                                        <?php sb_e("Visitors"); ?>
                                     </li>
                                     <li class="li" id="leads">
-                                        <?php sb_e('Leads') ?>
+                                        <?php sb_e("Leads"); ?>
                                     </li>
                                     <li class="li" id="users">
-                                        <?php sb_e('Users') ?>
+                                        <?php sb_e("Users"); ?>
                                     </li>
                                     <li class="li" id="registrations">
-                                        <?php sb_e('Registrations') ?>
+                                        <?php sb_e("Registrations"); ?>
                                     </li>
                                     <li class="li" id="agents-response-time">
-                                        <?php sb_e('Agent response time') ?>
+                                        <?php sb_e("Agent response time"); ?>
                                     </li>
                                     <li class="li" id="agents-conversations">
-                                        <?php sb_e('Agent conversations') ?>
+                                        <?php sb_e("Agent conversations"); ?>
                                     </li>
                                     <li class="li" id="agents-conversations-time">
-                                        <?php sb_e('Agent conversations time') ?>
+                                        <?php sb_e(
+                                            "Agent conversations time"
+                                        ); ?>
                                     </li>
                                     <li class="li" id="agents-ratings">
-                                        <?php sb_e('Agent ratings') ?>
+                                        <?php sb_e("Agent ratings"); ?>
                                     </li>
                                     <li class="li" id="countries">
-                                        <?php sb_e('Countries') ?>
+                                        <?php sb_e("Countries"); ?>
                                     </li>
                                     <li class="li" id="languages">
-                                        <?php sb_e('Languages') ?>
+                                        <?php sb_e("Languages"); ?>
                                     </li>
                                     <li class="li" id="browsers">
-                                        <?php sb_e('Browsers') ?>
+                                        <?php sb_e("Browsers"); ?>
                                     </li>
                                     <li class="li" id="os">
-                                        <?php sb_e('Operating systems') ?>
+                                        <?php sb_e("Operating systems"); ?>
                                     </li>
                                     <li class="sb-tab-nav-title">
-                                        <img src="<?php echo SB_URL ?>/media/automation_icon.svg" alt="icon" class="mr-1" />
-                                        <?php sb_e('Automation') ?>
+                                        <img src="<?php echo SB_URL; ?>/media/automation_icon.svg" alt="icon" class="mr-1" />
+                                        <?php sb_e("Automation"); ?>
                                     </li>
                                     <li class="li" id="follow-up">
-                                        <?php sb_e('Follow up') ?>
+                                        <?php sb_e("Follow up"); ?>
                                     </li>
                                     <li class="li" id="message-automations">
-                                        <?php sb_e('Message automations') ?>
+                                        <?php sb_e("Message automations"); ?>
                                     </li>
                                     <li class="li" id="email-automations">
-                                        <?php sb_e('Email automations') ?>
+                                        <?php sb_e("Email automations"); ?>
                                     </li>
-                                    <?php
-                                    if ($sms) {
-                                        echo '<li class="li" id="sms-automations">' . sb_('Text message automations') . '</li>';
-                                    }
-                                    ?>
+                                    <?php if ($sms) {
+                                        echo '<li class="li" id="sms-automations">' .
+                                            sb_("Text message automations") .
+                                            "</li>";
+                                    } ?>
                                     <li class="sb-tab-nav-title">
-                                        <img src="<?php echo SB_URL ?>/media/article_icon.svg" alt="icon" class="mr-1" />
-                                        <?php sb_e('Articles') ?>
+                                        <img src="<?php echo SB_URL; ?>/media/article_icon.svg" alt="icon" class="mr-1" />
+                                        <?php sb_e("Articles"); ?>
                                     </li>
                                     <li class="li" id="articles-searches">
-                                        <?php sb_e('Searches') ?>
+                                        <?php sb_e("Searches"); ?>
                                     </li>
                                     <li class="li" id="articles-views">
-                                        <?php sb_e('Article views') ?>
+                                        <?php sb_e("Article views"); ?>
                                     </li>
                                     <li class="li" id="articles-views-single">
-                                        <?php sb_e('Article views by article') ?>
+                                        <?php sb_e(
+                                            "Article views by article"
+                                        ); ?>
                                     </li>
                                     <li class="li" id="articles-ratings">
-                                        <?php sb_e('Article ratings') ?>
+                                        <?php sb_e("Article ratings"); ?>
                                     </li>
                                 </ul>
                             </div>
@@ -4564,60 +5310,95 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <p class="sb-no-results">
-                                    <?php echo sb_('No data found.') ?>
+                                    <?php echo sb_("No data found."); ?>
                                 </p>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
-                <?php if ($active_areas['settings']) { ?>
+                <?php if ($active_areas["settings"]) { ?>
                     <div class="sb-area-settings settings_new">
                         <?php echo $header; ?>
                         <div class="sb-tab">
                             <div class="sb-nav sb-scroll-area">
                                 <div>
-                                    <?php sb_e('Settings') ?>
+                                    <?php sb_e("Settings"); ?>
                                 </div>
                                 <ul class="setting_sidebar">
                                     <li id="tab-chat" class="sb-active">
-                                        <?php echo $disable_translations ? 'Chat' : sb_('Chat') ?>
+                                        <?php echo $disable_translations
+                                            ? "Chat"
+                                            : sb_("Chat"); ?>
                                     </li>
                                     <li id="tab-admin">
-                                        <?php echo $disable_translations ? 'Admin' : sb_('Admin') ?>
+                                        <?php echo $disable_translations
+                                            ? "Admin"
+                                            : sb_("Admin"); ?>
                                     </li>
                                     <li id="tab-notifications">
-                                        <?php echo $disable_translations ? 'Notifications' : sb_('Notifications') ?>
+                                        <?php echo $disable_translations
+                                            ? "Notifications"
+                                            : sb_("Notifications"); ?>
                                     </li>
                                     <li id="tab-users">
-                                        <?php echo $disable_translations ? 'Users' : sb_('Users') ?>
+                                        <?php echo $disable_translations
+                                            ? "Users"
+                                            : sb_("Users"); ?>
                                     </li>
                                     <!-- <li id="tab-design">
-                                        <?php echo $disable_translations ? 'Design' : sb_('Design') ?>
+                                        <?php echo $disable_translations
+                                            ? "Design"
+                                            : sb_("Design"); ?>
                                     </li> -->
                                     <li id="tab-messages">
-                                        <?php echo $disable_translations ? 'Messages & Forms' : sb_('Messages & Forms') ?>
+                                        <?php echo $disable_translations
+                                            ? "Messages & Forms"
+                                            : sb_("Messages & Forms"); ?>
                                     </li>
                                     <li id="tab-various">
-                                        <?php echo $disable_translations ? 'Miscellaneous' : sb_('Miscellaneous') ?>
+                                        <?php echo $disable_translations
+                                            ? "Miscellaneous"
+                                            : sb_("Miscellaneous"); ?>
                                     </li>
-                                    <?php
-                                    for ($i = 0; $i < count($apps); $i++) {
-                                        if (defined($apps[$i][0]) && (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))) {
-                                            echo '<li id="tab-' . $apps[$i][1] . '">' . sb_($apps[$i][2]) . '</li>';
+                                    <?php for (
+                                        $i = 0;
+                                        $i < count($apps);
+                                        $i++
+                                    ) {
+                                        if (
+                                            defined($apps[$i][0]) &&
+                                            (!$is_cloud ||
+                                                in_array(
+                                                    $apps[$i][1],
+                                                    $cloud_active_apps
+                                                ))
+                                        ) {
+                                            echo '<li id="tab-' .
+                                                $apps[$i][1] .
+                                                '">' .
+                                                sb_($apps[$i][2]) .
+                                                "</li>";
                                         }
-                                    }
-                                    ?>
+                                    } ?>
                                     <li id="tab-apps">
-                                        <?php echo $disable_translations ? 'Apps' : sb_('Apps') ?>
+                                        <?php echo $disable_translations
+                                            ? "Apps"
+                                            : sb_("Apps"); ?>
                                     </li>
                                     <li id="tab-articles">
-                                        <?php echo $disable_translations ? 'Articles' : sb_('Articles') ?>
+                                        <?php echo $disable_translations
+                                            ? "Articles"
+                                            : sb_("Articles"); ?>
                                     </li>
                                     <!--<li id="tab-automations">
-                                        <?php //echo $disable_translations ? 'Automations' : sb_('Automations') ?>
+                                        <?php
+                    //echo $disable_translations ? 'Automations' : sb_('Automations')
+                    ?>
                                     </li>
                                     <li id="tab-translations">
-                                        <?php //echo $disable_translations ? 'Translations' : sb_('Translations') ?>
+                                        <?php
+                    //echo $disable_translations ? 'Translations' : sb_('Translations')
+                    ?>
                                     </li> -->
                                 </ul>
                             </div>
@@ -4631,11 +5412,14 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('chat', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "chat",
+                                        $sb_settings
+                                    ); ?>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -4646,11 +5430,14 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('admin', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "admin",
+                                        $sb_settings
+                                    ); ?>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -4661,11 +5448,14 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('notifications', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "notifications",
+                                        $sb_settings
+                                    ); ?>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -4676,11 +5466,14 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('users', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "users",
+                                        $sb_settings
+                                    ); ?>
                                 </div>
                                 <!-- <div>
                                     <div class="sb-top-bar save_settings">
@@ -4691,11 +5484,14 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('design', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "design",
+                                        $sb_settings
+                                    ); ?>
                                 </div> -->
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -4706,11 +5502,14 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('messages', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "messages",
+                                        $sb_settings
+                                    ); ?>
 
                                 </div>
                                 <div>
@@ -4722,13 +5521,19 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('miscellaneous', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "miscellaneous",
+                                        $sb_settings
+                                    ); ?>
                                 </div>
-                                <?php sb_apps_area($apps, $cloud_active_apps) ?>
+                                <?php sb_apps_area(
+                                    $apps,
+                                    $cloud_active_apps
+                                ); ?>
                                 <div>
                                     <div class="sb-top-bar save_settings">
                                         <div class="">
@@ -4738,35 +5543,41 @@ function sb_component_admin()
                                         <div>
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                                 <i class="sb-icon-check"></i>
-                                                <?php sb_e('Save changes') ?>
+                                                <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings('articles', $sb_settings) ?>
+                                    <?php sb_populate_settings(
+                                        "articles",
+                                        $sb_settings
+                                    ); ?>
                                 </div>
                                 <div>
                                     <div class="sb-automations-area">
                                         <div class="sb-select">
                                             <p data-value="messages">
-                                                <?php sb_e('Messages') ?>
+                                                <?php sb_e("Messages"); ?>
                                             </p>
                                             <ul>
                                                 <li data-value="messages" class="sb-active">
-                                                    <?php sb_e('Messages') ?>
+                                                    <?php sb_e("Messages"); ?>
                                                 </li>
                                                 <li data-value="emails">
-                                                    <?php sb_e('Emails') ?>
+                                                    <?php sb_e("Emails"); ?>
                                                 </li>
-                                                <?php if ($sms)
-                                                    echo '<li data-value="sms">' . sb_('Text messages') . '</li>' ?>
+                                                <?php if ($sms) {
+                                                    echo '<li data-value="sms">' .
+                                                        sb_("Text messages") .
+                                                        "</li>";
+                                                } ?>
                                                 <li data-value="popups">
-                                                    <?php sb_e('Pop-ups') ?>
+                                                    <?php sb_e("Pop-ups"); ?>
                                                 </li>
                                                 <li data-value="design">
-                                                    <?php sb_e('Design') ?>
+                                                    <?php sb_e("Design"); ?>
                                                 </li>
                                                 <li data-value="more">
-                                                    <?php sb_e('More') ?>
+                                                    <?php sb_e("More"); ?>
                                                 </li>
                                             </ul>
                                         </div>
@@ -4775,13 +5586,15 @@ function sb_component_admin()
                                                 <ul></ul>
                                                 <div class="sb-add-automation sb-btn sb-icon">
                                                     <i class="sb-icon-plus"></i>
-                                                    <?php sb_e('Add new automation') ?>
+                                                    <?php sb_e(
+                                                        "Add new automation"
+                                                    ); ?>
                                                 </div>
                                             </div>
                                             <div class="sb-content sb-hide">
                                                 <div class="sb-automation-values">
                                                     <h2 class="sb-language-switcher-cnt">
-                                                        <?php sb_e('Name') ?>
+                                                        <?php sb_e("Name"); ?>
                                                     </h2>
                                                     <div class="sb-setting sb-type-text">
                                                         <div>
@@ -4789,7 +5602,9 @@ function sb_component_admin()
                                                         </div>
                                                     </div>
                                                     <h2>
-                                                        <?php sb_e('Message') ?>
+                                                        <?php sb_e(
+                                                            "Message"
+                                                        ); ?>
                                                     </h2>
                                                     <div class="sb-setting sb-type-textarea">
                                                         <div>
@@ -4801,12 +5616,16 @@ function sb_component_admin()
                                                 <div class="sb-automation-conditions">
                                                     <hr />
                                                     <h2>
-                                                        <?php sb_e('Conditions') ?>
+                                                        <?php sb_e(
+                                                            "Conditions"
+                                                        ); ?>
                                                     </h2>
                                                     <div class="sb-conditions"></div>
                                                     <div class="sb-add-condition sb-btn sb-icon">
                                                         <i class="sb-icon-plus"></i>
-                                                        <?php sb_e('Add condition') ?>
+                                                        <?php sb_e(
+                                                            "Add condition"
+                                                        ); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -4823,26 +5642,38 @@ function sb_component_admin()
                                             <div class="sb-hide">
                                                 <div class="sb-menu-wide">
                                                     <div>
-                                                        <?php sb_e('Front End') ?>
+                                                        <?php sb_e(
+                                                            "Front End"
+                                                        ); ?>
                                                     </div>
                                                     <ul>
                                                         <li data-value="front" class="sb-active">
-                                                            <?php sb_e('Front End') ?>
+                                                            <?php sb_e(
+                                                                "Front End"
+                                                            ); ?>
                                                         </li>
                                                         <li data-value="admin">
-                                                            <?php sb_e('Admin') ?>
+                                                            <?php sb_e(
+                                                                "Admin"
+                                                            ); ?>
                                                         </li>
                                                         <li data-value="admin/js">
-                                                            <?php sb_e('Client side admin') ?>
+                                                            <?php sb_e(
+                                                                "Client side admin"
+                                                            ); ?>
                                                         </li>
                                                         <li data-value="admin/settings">
-                                                            <?php sb_e('Settings') ?>
+                                                            <?php sb_e(
+                                                                "Settings"
+                                                            ); ?>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <a class="sb-btn sb-icon sb-add-translation">
                                                     <i class="sb-icon-plus"></i>
-                                                    <?php sb_e('New translation') ?>
+                                                    <?php sb_e(
+                                                        "New translation"
+                                                    ); ?>
                                                 </a>
                                             </div>
                                             <div class="sb-translations-list"></div>
@@ -4853,7 +5684,7 @@ function sb_component_admin()
                         </div>
                     </div>
                 <?php } ?>
-            </main>
+                                                </main>
             <?php
             sb_profile_box();
             sb_profile_edit_box();
@@ -4862,30 +5693,29 @@ function sb_component_admin()
             sb_dialog();
             sb_direct_message_box();
             sb_app_box();
-            if (defined('SB_DIALOGFLOW')) {
-                require_once(SB_PATH . '/apps/dialogflow/components.php');
+            if (defined("SB_DIALOGFLOW")) {
+                require_once SB_PATH . "/apps/dialogflow/components.php";
                 sb_dialogflow_intent_box();
             }
-            if (defined('SB_WHATSAPP')) {
+            if (defined("SB_WHATSAPP")) {
                 sb_whatsapp_send_template_box();
             }
             if ($is_admin && !$is_cloud) {
                 sb_updates_box();
-            } ?>
+            }
+            ?>
             <div id="sb-generic-panel"></div>
-            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
+            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string(
+                $_SERVER["PHP_SELF"]
+            ); ?>" method="post" enctype="multipart/form-data">
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
-        <?php
-        } else {
-            if ($is_cloud) {
+        <?php } else {if ($is_cloud) {
                 sb_cloud_reset_login();
             } else {
                 sb_login_box();
-            }
-        }
-        ?>
+            }} ?>
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -4896,17 +5726,20 @@ function sb_component_admin()
         <input type="password" name="hidden" style="display:none" autocomplete="new-password" />
     </div>
 <?php
-    if (!empty(sb_get_setting('custom-js')) && !$is_cloud) {
-        echo '<script id="sb-custom-js" src="' . sb_get_setting('custom-js') . '"></script>';
-    }
-    if (!empty(sb_get_setting('custom-css')) && !$is_cloud) {
-        echo '<link id="sb-custom-css" rel="stylesheet" type="text/css" href="' . sb_get_setting('custom-css') . '" media="all">';
-    }
-    if ($is_cloud) {
-        sb_cloud_css_js();
-    }
+if (!empty(sb_get_setting("custom-js")) && !$is_cloud) {
+    echo '<script id="sb-custom-js" src="' .
+        sb_get_setting("custom-js") .
+        '"></script>';
 }
-
+if (!empty(sb_get_setting("custom-css")) && !$is_cloud) {
+    echo '<link id="sb-custom-css" rel="stylesheet" type="text/css" href="' .
+        sb_get_setting("custom-css") .
+        '" media="all">';
+}
+if ($is_cloud) {
+    sb_cloud_css_js();
+}
+}
 /*
  * ----------------------------------------------------------
  * HTML FUNCTIONS
@@ -4919,20 +5752,28 @@ function sb_component_admin()
  * 5. Return the Dialogflow languages list
  * 6. Return the conversations filter
  *
- */
-
-function sb_apps_area($apps, $cloud_active_apps)
+ */ function sb_apps_area($apps, $cloud_active_apps)
 {
-    $apps_wp = ['SB_WP', 'SB_WOOCOMMERCE', 'SB_UMP', 'SB_ARMEMBER'];
+    $apps_wp = ["SB_WP", "SB_WOOCOMMERCE", "SB_UMP", "SB_ARMEMBER"];
     $apps_php = [];
-    $apps_cloud_excluded = ['whmcs', 'martfury', 'aecommerce', 'perfex', 'opencart'];
-    $wp = defined('SB_WP');
-    $code = '';
+    $apps_cloud_excluded = [
+        "whmcs",
+        "martfury",
+        "aecommerce",
+        "perfex",
+        "opencart",
+    ];
+    $wp = defined("SB_WP");
+    $code = "";
     $is_cloud = sb_is_cloud();
     for ($i = 0; $i < count($apps); $i++) {
-        if (defined($apps[$i][0]) && (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))) {
+        if (
+            defined($apps[$i][0]) &&
+            (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))
+        ) {
             // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
-            $code .= '<div>
+            $code .=
+                '<div>
             <div class="sb-top-bar save_settings">
                 <div class="">
                     <p class="head mb-4"></p>
@@ -4945,128 +5786,271 @@ function sb_apps_area($apps, $cloud_active_apps)
                     </a>
                 </div>
             </div>
-            ' . sb_populate_app_settings($apps[$i][1]) . '</div>';
+            ' .
+                sb_populate_app_settings($apps[$i][1]) .
+                "</div>";
         }
     }
     $code .= '<div><div class="sb-apps">';
     for ($i = 1; $i < count($apps); $i++) {
-        if ((($wp && !in_array($apps[$i][0], $apps_php)) || (!$wp && !in_array($apps[$i][0], $apps_wp))) && (!$is_cloud || !in_array($apps[$i][1], $apps_cloud_excluded))) {
-            $code .= '<div data-app="' . $apps[$i][1] . '">' . (defined($apps[$i][0]) && (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps)) ? '<i class="sb-icon-check"></i>' : '') . ' <img src="' . SB_URL . '/media/apps/' . $apps[$i][1] . '.svg" /><h2>' . $apps[$i][2] . '</h2><p>' . str_replace('{R}', $is_cloud ? SB_CLOUD_BRAND_NAME : 'Support Board', sb_s($apps[$i][3])) . '</p></div>';
+        if (
+            (($wp && !in_array($apps[$i][0], $apps_php)) ||
+                (!$wp && !in_array($apps[$i][0], $apps_wp))) &&
+            (!$is_cloud || !in_array($apps[$i][1], $apps_cloud_excluded))
+        ) {
+            $code .=
+                '<div data-app="' .
+                $apps[$i][1] .
+                '">' .
+                (defined($apps[$i][0]) &&
+                (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))
+                    ? '<i class="sb-icon-check"></i>'
+                    : "") .
+                ' <img src="' .
+                SB_URL .
+                "/media/apps/" .
+                $apps[$i][1] .
+                '.svg" /><h2>' .
+                $apps[$i][2] .
+                "</h2><p>" .
+                str_replace(
+                    "{R}",
+                    $is_cloud ? SB_CLOUD_BRAND_NAME : "Support Board",
+                    sb_s($apps[$i][3])
+                ) .
+                "</p></div>";
         }
     }
-    echo $code . '</div></div>';
+    echo $code . "</div></div>";
 }
-
 function sb_apps_panel()
 {
-    $code = '';
-    $collapse = sb_get_setting('collapse') ? ' sb-collapse' : '';
-    $panels = [['SB_UMP', 'ump'], ['SB_WOOCOMMERCE', 'woocommerce'], ['SB_PERFEX', 'perfex'], ['SB_WHMCS', 'whmcs'], ['SB_AECOMMERCE', 'aecommerce'], ['SB_ARMEMBER', 'armember'], ['SB_ZENDESK', 'zendesk'], ['SB_MARTFURY', 'martfury'], ['SB_OPENCART', 'opencart']];
+    $code = "";
+    $collapse = sb_get_setting("collapse") ? " sb-collapse" : "";
+    $panels = [
+        ["SB_UMP", "ump"],
+        ["SB_WOOCOMMERCE", "woocommerce"],
+        ["SB_PERFEX", "perfex"],
+        ["SB_WHMCS", "whmcs"],
+        ["SB_AECOMMERCE", "aecommerce"],
+        ["SB_ARMEMBER", "armember"],
+        ["SB_ZENDESK", "zendesk"],
+        ["SB_MARTFURY", "martfury"],
+        ["SB_OPENCART", "opencart"],
+    ];
     for ($i = 0; $i < count($panels); $i++) {
         if (defined($panels[$i][0])) {
-            $code .= '<div class="sb-panel-details sb-panel-' . $panels[$i][1] . $collapse . '"></div>';
+            $code .=
+                '<div class="sb-panel-details sb-panel-' .
+                $panels[$i][1] .
+                $collapse .
+                '"></div>';
         }
     }
     if (sb_is_cloud()) {
-        $code .= '<div class="sb-panel-details sb-panel-shopify' . $collapse . '"></div>';
+        $code .=
+            '<div class="sb-panel-details sb-panel-shopify' .
+            $collapse .
+            '"></div>';
     }
     echo $code;
 }
-
 function sb_box_ve()
 {
-    if ((!isset($_COOKIE['SA_' . 'VGC' . 'KMENS']) && !isset($_COOKIE['_ga_' . 'VGC' . 'KMENS'])) || !password_verify('VGC' . 'KMENS', isset($_COOKIE['_ga_' . 'VGC' . 'KMENS']) ? $_COOKIE['_ga_' . 'VGC' . 'KMENS'] : $_COOKIE['SA_' . 'VGC' . 'KMENS'])) { // Deprecated. _ga will be removed
-        echo file_get_contents(SB_PATH . '/resources/sb.html');
+    if (
+        (!isset($_COOKIE["SA_" . "VGC" . "KMENS"]) &&
+            !isset($_COOKIE["_ga_" . "VGC" . "KMENS"])) ||
+        !password_verify(
+            "VGC" . "KMENS",
+            isset($_COOKIE["_ga_" . "VGC" . "KMENS"])
+                ? $_COOKIE["_ga_" . "VGC" . "KMENS"]
+                : $_COOKIE["SA_" . "VGC" . "KMENS"]
+        )
+    ) {
+        // Deprecated. _ga will be removed
+        echo file_get_contents(SB_PATH . "/resources/sb.html");
         return false;
     }
     return true;
 }
-
 function sb_users_table_extra_fields()
 {
-    $extra_fields = sb_get_setting('user-table-extra-columns');
-    $count = $extra_fields && !is_string($extra_fields) ? count($extra_fields) : false;
+    $extra_fields = sb_get_setting("user-table-extra-columns");
+    $count =
+        $extra_fields && !is_string($extra_fields)
+            ? count($extra_fields)
+            : false;
     if ($count) {
-        $code = '';
+        $code = "";
         for ($i = 0; $i < $count; $i++) {
-            $slug = $extra_fields[$i]['user-table-extra-slug'];
-            $code .= '<th data-field="' . $slug . '" data-extra="true">' . sb_string_slug($slug, 'string') . '</th>';
+            $slug = $extra_fields[$i]["user-table-extra-slug"];
+            $code .=
+                '<th data-field="' .
+                $slug .
+                '" data-extra="true">' .
+                sb_string_slug($slug, "string") .
+                "</th>";
         }
         echo $code;
     }
 }
-
 function sb_dialogflow_languages_list()
 {
-    $languages = json_decode(file_get_contents(SB_PATH . '/apps/dialogflow/dialogflow_languages.json'), true);
-    $code = '<div data-type="select" class="sb-setting sb-type-select sb-dialogflow-languages"><div class="input"><select><option value="">' . sb_('Default') . '</option>';
+    $languages = json_decode(
+        file_get_contents(
+            SB_PATH . "/apps/dialogflow/dialogflow_languages.json"
+        ),
+        true
+    );
+    $code =
+        '<div data-type="select" class="sb-setting sb-type-select sb-dialogflow-languages"><div class="input"><select><option value="">' .
+        sb_("Default") .
+        "</option>";
     for ($i = 0; $i < count($languages); $i++) {
-        $code .= '<option value="' . $languages[$i][1] . '">' . $languages[$i][0] . '</option>';
+        $code .=
+            '<option value="' .
+            $languages[$i][1] .
+            '">' .
+            $languages[$i][0] .
+            "</option>";
     }
-    return $code . '</select></div></div>';
+    return $code . "</select></div></div>";
 }
-
 function sb_conversations_filter($cloud_active_apps)
 {
-    if (sb_get_multi_setting('disable', 'disable-filters')) {
+    if (sb_get_multi_setting("disable", "disable-filters")) {
         return;
     }
     $is_cloud = sb_is_cloud();
-    $departments = sb_is_agent(false, true, true) || !sb_isset(sb_get_active_user(), 'department') ? sb_get_setting('departments', []) : [];
-    $sources = [['em', 'Email', true], ['tk', 'Tickets', 'SB_TICKETS'], ['wa', 'WhatsApp', 'SB_WHATSAPP'], ['fb', 'Messenger', 'SB_MESSENGER'], ['ig', 'Instagram', 'SB_MESSENGER'], ['tg', 'Telegram', 'SB_TELEGRAM'], ['tw', 'Twitter', 'SB_TWITTER'], ['vb', 'Viber', 'SB_VIBER'], ['ln', 'LINE', 'SB_LINE'], ['wc', 'WeChat', 'SB_WECHAT'], ['za', 'Zalo', 'SB_ZALO'], ['tm', 'Text message', true]];
-    $tags = sb_get_multi_setting('disable', 'disable-tags') ? [] : sb_get_setting('tags', []);
+    $departments =
+        sb_is_agent(false, true, true) ||
+        !sb_isset(sb_get_active_user(), "department")
+            ? sb_get_setting("departments", [])
+            : [];
+    $sources = [
+        ["em", "Email", true],
+        ["tk", "Tickets", "SB_TICKETS"],
+        ["wa", "WhatsApp", "SB_WHATSAPP"],
+        ["fb", "Messenger", "SB_MESSENGER"],
+        ["ig", "Instagram", "SB_MESSENGER"],
+        ["tg", "Telegram", "SB_TELEGRAM"],
+        ["tw", "Twitter", "SB_TWITTER"],
+        ["vb", "Viber", "SB_VIBER"],
+        ["ln", "LINE", "SB_LINE"],
+        ["wc", "WeChat", "SB_WECHAT"],
+        ["za", "Zalo", "SB_ZALO"],
+        ["tm", "Text message", true],
+    ];
+    $tags = sb_get_multi_setting("disable", "disable-tags")
+        ? []
+        : sb_get_setting("tags", []);
     $count = is_array($departments) ? count($departments) : 0;
-    $code = (count($tags) && sb_get_multi_setting('tags-settings', 'tags-starred') ? '<i class="sb-icon sb-icon-tag-line sb-filter-star" data-color-text="' . $tags[0]['tag-color'] . '" data-value="' . $tags[0]['tag-name'] . '"></i>' : '') . '<div class="sb-filter-btn"><i class="sb-icon sb-icon-filter"></i><div><div class="sb-select' . ($count ? '' : ' sb-hide') . '"><p>' . sb_('All departments') . '</p><ul' . ($count > 8 ? ' class="sb-scroll-area"' : '') . '><li data-value="">' . sb_('All departments') . '</li>';
+    $code =
+        (count($tags) && sb_get_multi_setting("tags-settings", "tags-starred")
+            ? '<i class="sb-icon sb-icon-tag-line sb-filter-star" data-color-text="' .
+                $tags[0]["tag-color"] .
+                '" data-value="' .
+                $tags[0]["tag-name"] .
+                '"></i>'
+            : "") .
+        '<div class="sb-filter-btn"><i class="sb-icon sb-icon-filter"></i><div><div class="sb-select' .
+        ($count ? "" : " sb-hide") .
+        '"><p>' .
+        sb_("All departments") .
+        "</p><ul" .
+        ($count > 8 ? ' class="sb-scroll-area"' : "") .
+        '><li data-value="">' .
+        sb_("All departments") .
+        "</li>";
     for ($i = 0; $i < $count; $i++) {
-        $code .= '<li data-value="' . $departments[$i]['department-id'] . '">' . ucfirst(sb_($departments[$i]['department-name'])) . '</li>';
+        $code .=
+            '<li data-value="' .
+            $departments[$i]["department-id"] .
+            '">' .
+            ucfirst(sb_($departments[$i]["department-name"])) .
+            "</li>";
     }
-    $code .= '</ul></div>';
-    if (!sb_get_multi_setting('disable', 'disable-channels-filter')) {
+    $code .= "</ul></div>";
+    if (!sb_get_multi_setting("disable", "disable-channels-filter")) {
         $count = count($sources);
-        $code .= '<div class="sb-select"><p>' . sb_('All channels') . '</p><ul' . ($count > 8 ? ' class="sb-scroll-area"' : '') . '><li data-value="false">' . sb_('All channels') . '</li><li data-value="chat">' . sb_('Chat') . '</li>';
+        $code .=
+            '<div class="sb-select"><p>' .
+            sb_("All channels") .
+            "</p><ul" .
+            ($count > 8 ? ' class="sb-scroll-area"' : "") .
+            '><li data-value="false">' .
+            sb_("All channels") .
+            '</li><li data-value="chat">' .
+            sb_("Chat") .
+            "</li>";
         for ($i = 0; $i < $count; $i++) {
-            if ($sources[$i][2] === true || (defined($sources[$i][2]) && (!$is_cloud || in_array(strtolower(substr($sources[$i][2], 3)), $cloud_active_apps)))) {
-                $code .= '<li data-value="' . $sources[$i][0] . '">' . $sources[$i][1] . '</li>';
+            if (
+                $sources[$i][2] === true ||
+                (defined($sources[$i][2]) &&
+                    (!$is_cloud ||
+                        in_array(
+                            strtolower(substr($sources[$i][2], 3)),
+                            $cloud_active_apps
+                        )))
+            ) {
+                $code .=
+                    '<li data-value="' .
+                    $sources[$i][0] .
+                    '">' .
+                    $sources[$i][1] .
+                    "</li>";
             }
         }
-        $code .= '</ul></div>';
+        $code .= "</ul></div>";
     } else {
         $code .= '<div class="sb-select sb-hide"></div>';
     }
     $count = count($tags);
     if ($count) {
-        $code .= '<div class="sb-select"><p>' . sb_('All tags') . '</p><ul' . ($count > 8 ? ' class="sb-scroll-area"' : '') . '><li data-value="">' . sb_('All tags') . '</li>';
+        $code .=
+            '<div class="sb-select"><p>' .
+            sb_("All tags") .
+            "</p><ul" .
+            ($count > 8 ? ' class="sb-scroll-area"' : "") .
+            '><li data-value="">' .
+            sb_("All tags") .
+            "</li>";
         for ($i = 0; $i < $count; $i++) {
-            $code .= '<li data-value="' . $tags[$i]['tag-name'] . '">' . $tags[$i]['tag-name'] . '</li>';
+            $code .=
+                '<li data-value="' .
+                $tags[$i]["tag-name"] .
+                '">' .
+                $tags[$i]["tag-name"] .
+                "</li>";
         }
-        $code .= '</ul></div>';
+        $code .= "</ul></div>";
     } else {
         $code .= '<div class="sb-select sb-hide"></div>';
     }
-    echo $code .= '</div></div>';
+    echo $code .= "</div></div>";
 }
-
-function sb_docs_link($id = '', $class = 'sb-docs')
+function sb_docs_link($id = "", $class = "sb-docs")
 {
-    if (!sb_is_cloud() || defined('SB_CLOUD_DOCS')) {
-        echo '<a href="' . (sb_is_cloud() ? SB_CLOUD_DOCS : 'https://board.support/docs') . $id . '" class="' . $class . '" target="_blank"><i class="sb-icon-help"></i></a>';
+    if (!sb_is_cloud() || defined("SB_CLOUD_DOCS")) {
+        echo '<a href="' .
+            (sb_is_cloud() ? SB_CLOUD_DOCS : "https://board.support/docs") .
+            $id .
+            '" class="' .
+            $class .
+            '" target="_blank"><i class="sb-icon-help"></i></a>';
     }
 }
-
 function sb_get_ticket_custom_fields()
 {
     $query = "SELECT * FROM custom_fields ORDER BY `order_no`";
     return sb_db_get($query, false);
 }
-
 function sb_get_ticket_statuses()
 {
     $query = "SELECT * FROM ticket_status ORDER BY `name`";
     return sb_db_get($query, false);
 }
-
-
-function ticket_custom_field_settings($id = '', $class = 'sb-docs')
+function ticket_custom_field_settings($id = "", $class = "sb-docs")
 {
     // Get all custom fields
     $customFields = sb_get_ticket_custom_fields();
@@ -5097,25 +6081,40 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
                                                 </thead>
                                                 <tbody>';
     foreach ($customFields as $field) {
-        $code .= '<tr data-id="custom_field_row_' . $field["id"] . '">
-                                                        <td>' . $field["title"] . '</td>
-                                                        <td>' . strtoupper($field["type"]) . '</td>
-                                                        <td>' . ($field["required"] ? "Yes" : "No") . '</td>
-                                                        <td>' . ($field["is_active"] ? "Yes" : "No") . '</td>
-                                                        <td>' . ($field["order_no"]) . '</td>
+        $code .=
+            '<tr data-id="custom_field_row_' .
+            $field["id"] .
+            '">
+                                                        <td>' .
+            $field["title"] .
+            '</td>
+                                                        <td>' .
+            strtoupper($field["type"]) .
+            '</td>
+                                                        <td>' .
+            ($field["required"] ? "Yes" : "No") .
+            '</td>
+                                                        <td>' .
+            ($field["is_active"] ? "Yes" : "No") .
+            '</td>
+                                                        <td>' .
+            $field["order_no"] .
+            '</td>
                                                         <td>
-                                                        <a class="sb-btn-icon sb-btn-red edit-custom-field" data-sb-tooltip="Edit custom field" data-id="' . $field["id"] . '">
+                                                        <a class="sb-btn-icon sb-btn-red edit-custom-field" data-sb-tooltip="Edit custom field" data-id="' .
+            $field["id"] .
+            '">
                                                                 <i class="sb-icon-edit"></i>
                                                             </a>
 
-                                                            <a class="sb-btn-icon sb-btn-red delete-custom-field" data-sb-tooltip="Delete custom field" data-id="' . $field["id"] . '">
+                                                            <a class="sb-btn-icon sb-btn-red delete-custom-field" data-sb-tooltip="Delete custom field" data-id="' .
+            $field["id"] .
+            '">
                                                                 <i class="sb-icon-delete"></i>
                                                             </a>
                                                         </td>
                                                     </tr>';
     }
-
-
     $code .= '
                                                 </tbody>
                                             </table>
@@ -5438,7 +6437,6 @@ function ticket_custom_field_settings($id = '', $class = 'sb-docs')
         
         </script-->
         ';
-
     return $code;
 }
 
@@ -5473,22 +6471,32 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs')
                                                 </thead>
                                                 <tbody>';
     foreach ($ticketStatuses as $status) {
-        $code .= '<tr data-id="ticket_status_row_' . $status["id"] . '">
-                                                        <td>' . $status["name"] . '</td>
+        $code .=
+            '<tr data-id="ticket_status_row_' .
+            $status["id"] .
+            '">
+                                                        <td>' .
+            $status["name"] .
+            '</td>
                                                         <td class="sb-color-palette">
-                                                            <span style="background-color:' . $status["color"] . '"></span>
+                                                            <span style="background-color:' .
+            $status["color"] .
+            '"></span>
                                                         </td>
                                                         <td>
-                                                            <a class="sb-btn-icon sb-btn-red edit-ticket-status" data-sb-tooltip="Edit Ticket Status" data-id="' . $status["id"] . '">
+                                                            <a class="sb-btn-icon sb-btn-red edit-ticket-status" data-sb-tooltip="Edit Ticket Status" data-id="' .
+            $status["id"] .
+            '">
                                                                 <i class="sb-icon-edit"></i>
                                                             </a>';
-
-        if ($status['id'] > 5) {
-            $code .= '<a class="sb-btn-icon sb-btn-red delete-ticket-status" data-sb-tooltip="Delete Ticket Status" data-id="' . $status["id"] . '">
+        if ($status["id"] > 5) {
+            $code .=
+                '<a class="sb-btn-icon sb-btn-red delete-ticket-status" data-sb-tooltip="Delete Ticket Status" data-id="' .
+                $status["id"] .
+                '">
                                                                         <i class="sb-icon-delete"></i>
                                                                 </a>';
         }
-
         $code .= '
                                                         </td>
                                                     </tr>';
@@ -5543,7 +6551,6 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs')
                     </div>
                 </div>
             </div>';
-
     return $code;
 }
-?>
+ ?>
