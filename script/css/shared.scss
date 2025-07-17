@@ -342,6 +342,10 @@ div ul.sb-menu,
     }
 }
 
+.sb-user-tickets {
+    li {position:relative}
+}
+  
 .sb-chat-btn span,
 .sb-user-conversations>li>[data-count] {
     position: absolute;
@@ -376,6 +380,30 @@ div ul.sb-menu,
     &:hover>[data-count] {
         border-color: $background-gray;
     }
+}
+
+.sb-user-tickets {
+    li>[data-count] {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    background: $color-red;
+    color: $white;
+    border-radius: 100%;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 22px;
+    top: 0;
+    left: -3px;
+    z-index: 2;
+    animation: sb-fade-animation 0.3s;
+
+    &:empty,
+    &[data-count="0"] {
+        display: none;
+    }
+}
 }
 
 /*

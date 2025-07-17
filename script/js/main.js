@@ -1062,6 +1062,40 @@
                                 SBChat.update();
                             }
                         });
+                        /// sync ticket comment via pusher
+                        this.event('new-ticket-comment', (response) => {
+                            SBChat.loadComments(response.ticket_id,response.last_updated_at);
+                            //SBTicket.new_comment_count++;
+                            // Initialize array if it doesn't exist
+                            if (!Array.isArray(SBChat.new_comment_count[response.ticket_id])) {
+                                SBChat.new_comment_count[response.ticket_id] = [];
+                            }
+
+                            // Determine next comment count (e.g., 1, 2, 3)
+                            const ticket_comments = SBChat.new_comment_count[response.ticket_id].length + 1;
+
+                            // Add comment count to the array
+                            SBChat.new_comment_count[response.ticket_id].push(ticket_comments);
+
+                            // Debug output
+
+                            // Correctly loop through the object
+                            Object.entries(SBChat.new_comment_count).forEach(([id, countArray]) => {
+                                console.log('ticket_id', id, 'count', countArray.length);
+                                $('.sb-user-tickets li[data-ticket-id="' + id + '"] .notification-counter').remove();
+                                // Append the notification counter to the first cell of the row
+                                $('.sb-user-tickets li[data-ticket-id="' + id + '"]').append(`<span class="notification-counter" data-count="${countArray.length}">${countArray.length}</span>`);
+
+                                if($('.sb-user-tickets li[data-ticket-id="' + id + '"]').hasClass('sb-active'))
+                                {
+                                    setTimeout(() => {
+                                        $('.sb-user-tickets li[data-ticket-id="' + id + '"]').find('.notification-counter').remove();
+                                    },1100);
+                                }
+                            });
+
+                            SBChat.playSound();
+                        });
                         this.presence(1, () => {
                             this.started = true;
                             SBChat.automations.runAll();
@@ -1102,6 +1136,7 @@
                 return this.init(() => { this.event(event, callback, channel) });
             }
             let channel_original = channel;
+            console.log(channel_original,callback,'tt');
             channel = this.cloudChannelRename(channel);
             if (channel in this.channels) {
                 this.channels[channel].unbind(event);
@@ -1556,9 +1591,9 @@
             let code = '';
                     tickets.forEach(ticket => {
                         code += `
-                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
+                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
                                 <div class="sb-conversation-item" style="display: flex; align-items: center;">
-                                    <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
+                                    <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
                                     <div style="flex: 1;">
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <span style="font-weight: 600;">You</span>
@@ -1586,8 +1621,11 @@
                     function: 'get-tickets',
                     user_id:this.id,
                 }, (response) => {
-                    if(response)
+                    if(response && response.length)
                     {
+                        $('.no-reords').addClass('d-none');
+                        $('.tickets-area').removeClass('d-none');
+                        $('.right-side-wrapper').css('visibility', '');
                         const html = this.renderTickets(response);
                         $('.tickets-list .sb-user-tickets').html(html);
 
@@ -1596,10 +1634,13 @@
                 
                         if ($targetList.length) {
                             $targetList.first().trigger('click');
-                            console.log($targetList.first());
-                        } else {
-                            console.warn('No <li> found in target:', targetClass);
-                        }
+                        } 
+                    }
+                    else
+                    {
+                        $('.no-reords').removeClass('d-none');
+                        $('.tickets-area').addClass('d-none');
+                        $('.right-side-wrapper').css('visibility', 'hidden');
                     }
                 });
             } else {
@@ -2276,6 +2317,9 @@
         offline_message_set: false,
         label_date: false,
         label_date_show: false,
+        last_comment_date: '',
+        datetime_last_comment: false,
+        new_comment_count:[],
 
         // Send a message
         sendMessage: function (user_id = -1, message = '', attachments = [], onSuccess = false, payload = false, conversation_status_code = false) {
@@ -2857,31 +2901,50 @@
             return html;
         },
 
-        loadComments : function (ticket_id) {
+        loadComments : function (ticket_id,last_update_date=null) {
             SBF.ajax({
                 function: 'get-ticket-comments',
-                ticket_id: ticket_id
+                ticket_id: ticket_id,
+                last_update_date: last_update_date,
             }, (response) => {
-                const commentsSection = document.getElementById('comments-section');
+                const commentsSection = $(`.tickets-list-area[data-id=${ticket_id}] #comments-section`);
                 if (response.comments && response.comments.length > 0) {
+
+                    if (response.comments[0].last_update_time) {
+                        this.datetime_last_comment = response.comments[0].last_update_time;
+                    }
+
                     if (response.server_now) {   /// update window.SERVER_NOW time to use in canEditComment function
                         window.SERVER_NOW = response.server_now;
                     }
                     // Group comments by date
-                    let lastDate = '';
+                    //let lastDate = '';
                     let html = '';
                     response.comments.forEach(comment => {
                         const commentDate = comment.created_at.split(' ')[0];
-                        if (commentDate !== lastDate) {
+                        if (commentDate !== this.last_comment_date) {
                             html += `<div class='text-center my-2'><span class='badge bg-secondary' style='font-size:13px;'>${this.formatDateLabel(comment.created_at)}</span></div>`;
-                            lastDate = commentDate;
+                            this.last_comment_date = commentDate;
                         }
                         html += this.renderComment(comment);
                     });
-                    commentsSection.innerHTML = html;
-                    //showInitials('tc_back','comment-row');
-                    //scrollToBottom();
-                // attachEditListeners();
+                    
+                    if(last_update_date)
+                    {
+                        commentsSection.append(html);
+                    }
+                    else
+                    {
+                        commentsSection.html(html);
+                    }
+
+                    setTimeout(() => {
+                        const el = commentsSection[0]; // or get(0)
+                        el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+                    }, 0);
+
+                   // showInitials('tc_back','comment-row');
+
                 }
                 else {
                     commentsSection.innerHTML = '<div class="text-center text-muted">No comments yet.</div>';
@@ -2889,16 +2952,73 @@
                 });
         },
 
+        lightenColor : function (hex, percent = 40) {
+            if (!hex || typeof hex !== 'string') return "#cccccc";
+            hex = hex.replace('#', '');
+            if (hex.length !== 6) return "#cccccc";
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            const rNorm = r / 255;
+            const gNorm = g / 255;
+            const bNorm = b / 255;
+            const max = Math.max(rNorm, gNorm, bNorm);
+            const min = Math.min(rNorm, gNorm, bNorm);
+            let h, s, l = (max + min) / 2;
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case rNorm: h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0); break;
+                    case gNorm: h = (bNorm - rNorm) / d + 2; break;
+                    case bNorm: h = (rNorm - gNorm) / d + 4; break;
+                }
+                h /= 6;
+            }
+            l = Math.min(1, l + (percent / 100));
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+                if (s === 0) {
+                    r = g = b = l;
+                } else {
+                    const hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1 / 6) return p + (q - p) * 6 * t;
+                        if (t < 1 / 2) return q;
+                        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                        return p;
+                    };
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    r = hue2rgb(p, q, h + 1 / 3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1 / 3);
+                }
+                return [
+                    Math.round(r * 255),
+                    Math.round(g * 255),
+                    Math.round(b * 255)
+                ];
+            }
+            const [lr, lg, lb] = hslToRgb(h, s, l);
+            return `rgb(${lr}, ${lg}, ${lb})`;
+        },
+
         openTicket: function(ticket_id)
         {
-            console.log(ticket_id);
             SBF.ajax({
                     function: 'edit-ticket',
                     ticket_id: ticket_id
                 }, (response) => {
                     if(response)
                     {
-                        $('.sb-tickets .user_name').html(response.contact_name);
+                        $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+
+                        $('.tickets-list-area').attr('data-id',ticket_id);
+                        $('.sb-tickets .user-name').html(response.contact_name);
                         $('.sb-tickets .ticket-creation-time').html(response.creation_time);
                         $('.sb-tickets .ticket-subject').html(response.subject);
                         const delta = JSON.parse(response.description);
@@ -2920,7 +3040,7 @@
                             const ctx = document.createElement("canvas").getContext("2d");
                             ctx.fillStyle = tag.color;
                             const validColor = ctx.fillStyle;
-                            const tags_lighten = SBDashboard.lightenColor(validColor, 40);
+                            const tags_lighten = SBChat.lightenColor(validColor, 40);
                             const style = `
                                 background-color: ${tags_lighten};
                                 color: ${validColor === "#ffff00" ? "#FFA500" : validColor};
@@ -6300,6 +6420,8 @@
         // Open a ticket from the dashboard
         $(main).on('click', '.sb-user-tickets li', function () {
             SBChat.openTicket($(this).attr('data-ticket-id'));
+            $(this).addClass('sb-active');
+            $(this).siblings().removeClass('sb-active');
         });
 
          // Add or update ticket
@@ -6314,6 +6436,7 @@
                 ticket_id: ticketId,
                 comment_id: commentId,
                 comment: new_comment ? $('.tickets-list-area #newComment').val() : $('.tickets-list-area #oldComment').val(),
+                contact_id:activeUser().id
             }, (response) => {
                 console.log(response);
                 if(response.success) 
