@@ -11870,6 +11870,7 @@ li.menu_head:hover {
 .sidebar.collapsed .label,
 .sidebar.collapsed .powered-by {
   display: none;
+  background: red;
 }
 .sidebar .label {
   margin-left: 10px;
