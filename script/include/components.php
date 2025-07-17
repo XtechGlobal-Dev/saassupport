@@ -60,7 +60,8 @@ function sb_profile_box()
                     <i class="sb-icon-message"></i>
                     <?php sb_e("Start a conversation"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                    data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -81,7 +82,7 @@ function sb_profile_box()
             </div>
         </div>
     </div>
-<?php
+    <?php
 } ?>
 <?php function sb_profile_edit_box()
 {
@@ -98,7 +99,8 @@ function sb_profile_box()
                     <i class="sb-icon-check"></i>
                     <?php sb_e("Save changes"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                    data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -173,10 +175,10 @@ function sb_profile_box()
                         $id = $field["id"];
                         $type =
                             $id == "country" || $id == "language"
-                                ? "select"
-                                : ($id == "birthdate"
-                                    ? "date"
-                                    : "text");
+                            ? "select"
+                            : ($id == "birthdate"
+                                ? "date"
+                                : "text");
                         $code .=
                             '<div id="' .
                             $id .
@@ -194,12 +196,12 @@ function sb_profile_box()
                         }
                         $code .= "</div>";
                     }
-                    echo $code;?>
+                    echo $code; ?>
                 </div>
             </div>
         </div>
     </div>
-<?php
+    <?php
 } ?>
 <?php
 function sb_ticket_box()
@@ -223,7 +225,8 @@ function sb_ticket_box()
                         sb_("Edit user") .
                         "</a>";
                 } ?>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                    data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -237,7 +240,7 @@ function sb_ticket_box()
             </div>
         </div>
     </div>
-<?php
+    <?php
 }
 function sb_ticket_edit_box()
 {
@@ -253,7 +256,8 @@ function sb_ticket_edit_box()
                 <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;">
                     <label class="ml-4">Guest Ticket</label>
                     <div class="form-check form-switch mb-0 ml-2">
-                        <input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
+                        <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
+                            id="flexSwitchCheckDefault" style="width: 27px;">
                     </div>
                 </div>
             </div>
@@ -265,7 +269,8 @@ function sb_ticket_edit_box()
                     <i class="sb-icon-check"></i>
                     <?php sb_e("Save changes"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                    data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -283,7 +288,7 @@ function sb_ticket_edit_box()
 
                         <!--div id="without_contact" data-type="checkbox" class="sb-input">
                             <span><?php // sb_e('Guest Ticket')
-    ?></span>
+                                ?></span>
                             <input type="checkbox" name="without_contact" value="1" />
                         </div-->
 
@@ -387,10 +392,10 @@ function sb_ticket_edit_box()
                         $departments = sb_get_departments();
                         if (
                             isset(
-                                $department_settings["departments-show-list"]
-                            ) &&
+                            $department_settings["departments-show-list"]
+                        ) &&
                             $department_settings["departments-show-list"] ==
-                                1 &&
+                            1 &&
                             !empty($departments)
                         ) { ?>
                             <div id="department_id" data-type="select" class="sb-input">
@@ -425,17 +430,17 @@ function sb_ticket_edit_box()
 
 
                         <?php // { //     $priorities = sb_db_get('SELECT * FROM priorities', false); // { //     $status = sb_db_get('SELECT * FROM ticket_status', false);
+                        
 
-
-                        // function sb_get_priorities()
-                        //     return $priorities;
-                        // }
-                        // function sb_get_statues()
-                        //     return $status;
-                        // }
-                        $statues = sb_get_statues();
-                        $priorities = sb_get_priorities();
-                        ?>
+                            // function sb_get_priorities()
+                            //     return $priorities;
+                            // }
+                            // function sb_get_statues()
+                            //     return $status;
+                            // }
+                            $statues = sb_get_statues();
+                            $priorities = sb_get_priorities();
+                            ?>
                         <div class="sb-input two-divs d-flex">
                             <div id="status_id" data-type="select" class="sb-input">
                                 <span class="required-label"><?php sb_e(
@@ -497,15 +502,18 @@ function sb_ticket_edit_box()
                 <div>
                     <span class="d-block mb-2">Attachments</span>
                     <div class="custom-file">
-                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments1" multiple>
-                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
+                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments1"
+                            multiple>
+                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files.
+                            Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
                 <!-- Upload Progress -->
                 <div class="progress mt-2 d-none" id="upload-progress-container1">
-                    <div class="progress-bar" id="upload-progress1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" id="upload-progress1" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                        aria-valuemax="100"></div>
                 </div>
 
                 <!-- Existing File Preview Container -->
@@ -844,7 +852,7 @@ function sb_ticket_edit_box()
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const tagsElement = document.getElementById('ticket-tags');
             if (tagsElement) {
                 const choices = new Choices(tagsElement, {
@@ -853,7 +861,7 @@ function sb_ticket_edit_box()
                     placeholderValue: 'Select tags...',
                     allowHTML: true,
                     itemSelectText: '',
-                    callbackOnCreateTemplates: function(template) {
+                    callbackOnCreateTemplates: function (template) {
                         return {
                             item: (classNames, data) => {
                                 const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
@@ -884,7 +892,7 @@ function sb_ticket_edit_box()
                         subtree: true
                     });
                 }
-                document.querySelector('.choices').addEventListener('click', function() {
+                document.querySelector('.choices').addEventListener('click', function () {
                     setTimeout(refreshTagDots, 10);
                 });
             }
@@ -939,7 +947,7 @@ function sb_ticket_edit_box()
                 method: 'POST',
                 dataType: 'json',
                 delay: 250,
-                data: function(params) {
+                data: function (params) {
                     return {
                         function: 'ajax_calls',
                         'calls[0][function]': 'search-get-users',
@@ -948,7 +956,7 @@ function sb_ticket_edit_box()
                         'type': 'user'
                     };
                 },
-                processResults: function(response) {
+                processResults: function (response) {
                     //response = JSON.parse(response);
                     if (response[0][0] == 'success') {
                         const users = response[0][1];
@@ -970,7 +978,7 @@ function sb_ticket_edit_box()
         });
 
 
-        $('#select-customer').on('select2:select', function(e) {
+        $('#select-customer').on('select2:select', function (e) {
             const selectedCustomer = e.params.data;
 
             console.log(selectedCustomer);
@@ -988,7 +996,7 @@ function sb_ticket_edit_box()
                 method: 'POST',
                 dataType: 'json',
                 delay: 250,
-                data: function(params) {
+                data: function (params) {
                     return {
                         function: 'ajax_calls',
                         'calls[0][function]': 'search-get-users',
@@ -997,7 +1005,7 @@ function sb_ticket_edit_box()
                         'type': 'agent'
                     };
                 },
-                processResults: function(response) {
+                processResults: function (response) {
                     //response = JSON.parse(response);
                     if (response[0][0] == 'success') {
                         const users = response[0][1];
@@ -1005,7 +1013,7 @@ function sb_ticket_edit_box()
                         return {
                             results: users.map(user => ({
                                 id: user.id,
-                                text: user.first_name + ' ' + user.last_name + ' ('+capitalizedType(user.user_type)+')',
+                                text: user.first_name + ' ' + user.last_name + ' (' + capitalizedType(user.user_type) + ')',
                             }))
                         };
                     }
@@ -1031,14 +1039,14 @@ function sb_ticket_edit_box()
                 if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
             });
             // Dropdown items
-            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
+            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function (item) {
                 const value = item.getAttribute('data-value');
                 if (valueToColor[value]) {
                     item.setAttribute('data-color', valueToColor[value]);
                 }
             });
             // Selected items
-            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
+            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function (item) {
                 const value = item.getAttribute('data-value');
                 if (valueToColor[value]) {
                     item.setAttribute('data-color', valueToColor[value]);
@@ -1048,7 +1056,7 @@ function sb_ticket_edit_box()
 
         function updateTagDots() {
             // Dropdown items
-            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
+            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function (item) {
                 if (!item.querySelector('.tag-dot')) {
                     let color = item.getAttribute('data-color');
                     let dot = document.createElement('span');
@@ -1058,7 +1066,7 @@ function sb_ticket_edit_box()
                 }
             });
             // Selected items
-            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
+            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function (item) {
                 if (!item.querySelector('.tag-dot')) {
                     let color = item.getAttribute('data-color');
                     let dot = document.createElement('span');
@@ -1075,11 +1083,11 @@ function sb_ticket_edit_box()
         }
 
 
-        jQuery(document).ready(function($) {
+        jQuery(document).ready(function ($) {
             // This listens for change events on any current or future select inside #parent-container
             // Trigger change
 
-            $('#without_contact input').on('change', function() {
+            $('#without_contact input').on('change', function () {
 
                 const isChecked = $(this).is(':checked');
                 $('#cust_name input, #cust_email input').prop('disabled', !isChecked);
@@ -1105,9 +1113,9 @@ function sb_ticket_edit_box()
             let uploadedFiles = [];
 
             const maxFileSizeMB = 3; // Maximum size in MB per file
-            const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
+            const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf'];
             // File upload handling
-            document.getElementById('ticket-attachments').addEventListener('change', function(event) {
+            document.getElementById('ticket-attachments').addEventListener('change', function (event) {
                 const files = event.target.files;
                 if (files.length === 0) return;
 
@@ -1136,7 +1144,7 @@ function sb_ticket_edit_box()
                     $('.files-error').html(errorMessage);
                     return;
                 }
-                else{
+                else {
                     $('.files-error').html('');
                 }
 
@@ -1175,7 +1183,7 @@ function sb_ticket_edit_box()
                 xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
 
                 // Track upload progress
-                xhr.upload.addEventListener('progress', function(e) {
+                xhr.upload.addEventListener('progress', function (e) {
                     if (e.lengthComputable) {
                         const percentComplete = Math.round((e.loaded / e.total) * 100);
                         progressBar.style.width = percentComplete + '%';
@@ -1185,7 +1193,7 @@ function sb_ticket_edit_box()
                 });
 
                 // Handle response
-                xhr.onload = function() {
+                xhr.onload = function () {
                     if (xhr.status === 200) {
                         let response = JSON.parse(xhr.responseText);
                         let res2 = typeof response[0][1] === 'string' ? JSON.parse(response[0][1]) : response[0][1];
@@ -1217,7 +1225,7 @@ function sb_ticket_edit_box()
                 };
 
                 // Handle errors
-                xhr.onerror = function() {
+                xhr.onerror = function () {
                     alert('Error uploading files. Please try again.');
                     progressContainer.classList.add('d-none');
                 };
@@ -1347,7 +1355,7 @@ function sb_ticket_edit_box()
 
                     // Add event listener to remove button
                     const removeBtn = cardBody.querySelector('.remove-file');
-                    removeBtn.addEventListener('click', function() {
+                    removeBtn.addEventListener('click', function () {
                         const index = parseInt(this.getAttribute('data-index'));
                         removeFile(index);
                     });
@@ -1367,9 +1375,9 @@ function sb_ticket_edit_box()
                 }
             }
 
-           // const maxFileSizeMB = 5; // Maximum size in MB per file
-           // const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
-            document.getElementById('ticket-attachments1').addEventListener('change', function(event) {
+            // const maxFileSizeMB = 5; // Maximum size in MB per file
+            // const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
+            document.getElementById('ticket-attachments1').addEventListener('change', function (event) {
                 const files = event.target.files;
                 let isValid = true;
                 let errorMessage = '';
@@ -1396,7 +1404,7 @@ function sb_ticket_edit_box()
                     $('.files-error').html(errorMessage);
                     return;
                 }
-                else{
+                else {
                     $('.files-error').html('');
                 }
 
@@ -1428,7 +1436,7 @@ function sb_ticket_edit_box()
                 xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
 
                 // Track upload progress
-                xhr.upload.addEventListener('progress', function(e) {
+                xhr.upload.addEventListener('progress', function (e) {
                     if (e.lengthComputable) {
                         const percentComplete = Math.round((e.loaded / e.total) * 100);
                         progressBar.style.width = percentComplete + '%';
@@ -1438,7 +1446,7 @@ function sb_ticket_edit_box()
                 });
 
                 // Handle response
-                xhr.onload = function() {
+                xhr.onload = function () {
                     if (xhr.status === 200) {
                         let response = JSON.parse(xhr.responseText);
                         let res2 = typeof response[0][1] === 'string' ? JSON.parse(response[0][1]) : response[0][1];
@@ -1470,7 +1478,7 @@ function sb_ticket_edit_box()
                 };
 
                 // Handle errors
-                xhr.onerror = function() {
+                xhr.onerror = function () {
                     alert('Error uploading files. Please try again.');
                     progressContainer.classList.add('d-none');
                 };
@@ -1544,7 +1552,7 @@ function sb_ticket_edit_box()
 
                     // Add event listener to remove button
                     const removeBtn = cardBody.querySelector('.remove-file');
-                    removeBtn.addEventListener('click', function() {
+                    removeBtn.addEventListener('click', function () {
                         const index = parseInt(this.getAttribute('data-index'));
                         removeFile1(index);
                     });
@@ -1575,7 +1583,7 @@ function sb_ticket_edit_box()
 
             // Delete existing attachment
             //document.querySelectorAll('.delete-attachment').forEach(button => {
-            $(document).on('click', '.delete-attachment', function() {
+            $(document).on('click', '.delete-attachment', function () {
                 const attachmentId = this.getAttribute('data-id');
                 const ticketId = this.getAttribute('data-ticket-id');
                 const self = this; // 🔒 Save reference to `this`
@@ -1593,7 +1601,7 @@ function sb_ticket_edit_box()
                     xhr.open('POST', '<?php echo SB_URL; ?>/include/ajax.php', true);
 
                     // Handle response
-                    xhr.onload = function() {
+                    xhr.onload = function () {
                         if (xhr.status === 200) {
                             const response = JSON.parse(xhr.responseText);
                             console.log('Delete response:', response);
@@ -1624,7 +1632,7 @@ function sb_ticket_edit_box()
 
         });
     </script>
-<?php
+    <?php
 }
 ?>
 <?php function sb_login_box()
@@ -1645,10 +1653,10 @@ function sb_ticket_edit_box()
                     sb_get_setting(
                         "login-message",
                         defined("SB_WP")
-                            ? sb_(
-                                "Please insert email and password of your WordPress account"
-                            )
-                            : sb_("Enter your login details below")
+                        ? sb_(
+                            "Please insert email and password of your WordPress account"
+                        )
+                        : sb_("Enter your login details below")
                     )
                 ); ?>
             </div>
@@ -1676,20 +1684,20 @@ function sb_ticket_edit_box()
     <img id="sb-error-check" style="display:none" src="<?php echo SB_URL .
         "/media/logo.svg"; ?>" />
     <script>
-        (function($) {
-            $(document).ready(function() {
+        (function ($) {
+            $(document).ready(function () {
                 $('.sb-admin-start').removeAttr('style');
-                $('.sb-submit-login').on('click', function() {
-                    SBF.loginForm(this, false, function() {
+                $('.sb-submit-login').on('click', function () {
+                    SBF.loginForm(this, false, function () {
                         location.reload();
                     });
                 });
-                $('#sb-error-check').one('error', function() {
+                $('#sb-error-check').one('error', function () {
                     $('.sb-info').html('It looks like the chat URL has changed. Edit the config.php file(it\'s in the Support Board folder) and update the SB_URL constant with the new URL.').addClass('sb-active');
                 });
                 SBF.serviceWorker.init();
             });
-            $(window).keydown(function(e) {
+            $(window).keydown(function (e) {
                 if (e.which == 13) {
                     $('.sb-submit-login').click();
                 }
@@ -1703,7 +1711,7 @@ function sb_ticket_edit_box()
             }
         }(jQuery));
     </script>
-<?php
+    <?php
 } ?>
 <?php function sb_dialog()
 {
@@ -1723,7 +1731,7 @@ function sb_ticket_edit_box()
             </a>
         </div>
     </div>
-<?php
+    <?php
 } ?>
 <?php function sb_updates_box()
 {
@@ -1753,7 +1761,7 @@ function sb_ticket_edit_box()
             </div>
         </div>
     </div>
-<?php
+    <?php
 } ?>
 <?php function sb_app_box()
 {
@@ -1800,7 +1808,7 @@ function sb_ticket_edit_box()
             </div>
         </div>
     </div>
-<?php
+    <?php
 } ?>
 <?php function sb_direct_message_box()
 {
@@ -1850,13 +1858,13 @@ function sb_ticket_edit_box()
             </div>
         </div>
     </div>
-<?php
+    <?php
 } ?>
 <?php function sb_routing_select($exclude_id = false)
 {
     $agents = sb_db_get(
         'SELECT id, first_name, last_name FROM sb_users WHERE (user_type = "agent" OR user_type = "admin")' .
-            ($exclude_id ? " AND id <> " . sb_db_escape($exclude_id) : ""),
+        ($exclude_id ? " AND id <> " . sb_db_escape($exclude_id) : ""),
         false
     );
     $code =
@@ -1893,11 +1901,11 @@ function sb_ticket_edit_box()
             } else {
                 die(
                     '<div class="sb-info sb-active">' .
-                        sb_(
-                            'We\'re having trouble connecting to your database. Please edit the file config.php and check your database connection details. Error: '
-                        ) .
-                        $error .
-                        ".</div>"
+                    sb_(
+                        'We\'re having trouble connecting to your database. Please edit the file config.php and check your database connection details. Error: '
+                    ) .
+                    $error .
+                    ".</div>"
                 );
             } ?>
             <div class="sb-top-bar">
@@ -1989,10 +1997,10 @@ function sb_ticket_edit_box()
             </div>
         </form>
     </div>
-<?php
+    <?php
 } ?>
 <?php
- /*
+/*
  * ----------------------------------------------------------
  * ADMIN AREA
  * ----------------------------------------------------------
@@ -2001,7 +2009,7 @@ function sb_ticket_edit_box()
  *
  */
 ?>
- <?php
+<?php
 function sb_component_admin()
 {
     $is_cloud = sb_is_cloud();
@@ -2157,8 +2165,8 @@ function sb_component_admin()
     //     'reports' => ($is_admin && !sb_get_multi_setting('performance', 'performance-reports')) || ($supervisor && $supervisor['supervisor-reports-area']), 
     //     'articles' => ($is_admin && !sb_get_multi_setting('performance', 'performance-articles')) || ($supervisor && sb_isset($supervisor, 'supervisor-articles-area')) || (!$supervisor && !$is_admin && sb_get_multi_setting('agents', 'agents-articles-area')),
     //     'chatbot' => defined('SB_DIALOGFLOW') && ($is_admin || ($supervisor && $supervisor['supervisor-settings-area'])) && (!$is_cloud || in_array('dialogflow', $cloud_active_apps))];
-    
-    
+
+
     $active_areas = [
         'users' => $is_admin || (!$supervisor && sb_get_multi_setting('agents', 'agents-users-area')) || ($supervisor && $supervisor['supervisor-users-area']),
         'settings' => $is_admin || ($supervisor && $supervisor['supervisor-settings-area']),
@@ -2242,90 +2250,145 @@ function sb_component_admin()
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <div class="sb-main <?php echo $css_class; ?>" style="opacity: 0">
         <?php if ($logged) { ?>
-           <div class="sb-header header_new">
-      <aside class="sidebar sb-admin-nav collapsed" id="sidebar">
-        <!-- Toggle Button -->
-        <div class="toggle-btn" onclick="toggleSidebar()" title="Toggle Navigation">
-             <img src="./account/media/hamburger.svg" alt="logo" style="width: 24px; height: auto;">
-        </div>
-        <div class="logo">
-            <img width="35" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="Logo" class="logo-icon">
-            <div class="logo-text">
-                <h1>Nexleon Helpdesk</h1>
-                <p>Agent Admin</p>
-            </div>
-        </div>
+            <div class="sb-header header_new">
+                <aside class="sidebar sb-admin-nav collapsed" id="sidebar">
+                    <!-- Toggle Button -->
+                    <div class="toggle-btn" onclick="toggleSidebar()" title="Toggle Navigation">
+                        <img src="./account/media/hamburger.svg" alt="logo" style="width: 24px; height: auto;">
+                    </div>
+                    <div class="logo">
+                        <img width="35"
+                            src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>"
+                            alt="Logo" class="logo-icon">
+                        <div class="logo-text">
+                            <h1>Nexleon Helpdesk</h1>
+                            <p>Agent Admin</p>
+                        </div>
+                    </div>
 
-        <nav>
-            <ul>
-                <li><a id="sb-dashboard"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></i><span class="label">Dashboard</span></a></li>
-                <li><a id="sb-conversations"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.69336 2.75C6.28605 2.91536 5.31763 3.26488 4.5846 4.00363C3.19336 5.40575 3.19336 7.66242 3.19336 12.1758C3.19336 16.6891 3.19336 18.9458 4.5846 20.3479C5.97585 21.75 8.21502 21.75 12.6934 21.75C17.1717 21.75 19.4109 21.75 20.8022 20.3479C22.1934 18.9458 22.1934 16.6891 22.1934 12.1758C22.1934 7.66242 22.1934 5.40575 20.8022 4.00363C20.0691 3.26488 19.1007 2.91536 17.6934 2.75" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.1934 8.25C10.6849 8.7557 11.9932 10.75 12.6934 10.75M12.6934 10.75C13.3936 10.75 14.7019 8.7557 15.1934 8.25M12.6934 10.75V2.75" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-</i><span> Inbox</span></a></li>
+                    <nav>
+                        <ul>
+                            <li><a id="sb-dashboard"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg></i><span class="label">Dashboard</span></a></li>
+                            <li><a id="sb-conversations"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.69336 2.75C6.28605 2.91536 5.31763 3.26488 4.5846 4.00363C3.19336 5.40575 3.19336 7.66242 3.19336 12.1758C3.19336 16.6891 3.19336 18.9458 4.5846 20.3479C5.97585 21.75 8.21502 21.75 12.6934 21.75C17.1717 21.75 19.4109 21.75 20.8022 20.3479C22.1934 18.9458 22.1934 16.6891 22.1934 12.1758C22.1934 7.66242 22.1934 5.40575 20.8022 4.00363C20.0691 3.26488 19.1007 2.91536 17.6934 2.75"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M10.1934 8.25C10.6849 8.7557 11.9932 10.75 12.6934 10.75M12.6934 10.75C13.3936 10.75 14.7019 8.7557 15.1934 8.25M12.6934 10.75V2.75"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
+                                        </svg>
+                                    </i><span class="label"> Inbox</span></a></li>
                             <?php //if ($active_areas['tickets']) { ?>
-                                <li><a id="sb-tickets"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
-<path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></i><span>Tickets</span></a></li>
+                            <li><a id="sb-tickets"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
+                                                stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
+                                            <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg></i><span class="label">Tickets</span></a></li>
                             <?php //} ?>
                             <?php if ($active_areas['users']) { ?>
-                            <li><a id="sb-users"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.6934 8.75C14.6934 5.98858 12.4548 3.75 9.69336 3.75C6.93194 3.75 4.69336 5.98858 4.69336 8.75C4.69336 11.5114 6.93194 13.75 9.69336 13.75C12.4548 13.75 14.6934 11.5114 14.6934 8.75Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M16.6934 20.75C16.6934 16.884 13.5594 13.75 9.69336 13.75C5.82737 13.75 2.69336 16.884 2.69336 20.75" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M19.6934 9.25V15.25M22.6934 12.25H16.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></i><span>Customers</span></a></li>
+                                <li><a id="sb-users"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M14.6934 8.75C14.6934 5.98858 12.4548 3.75 9.69336 3.75C6.93194 3.75 4.69336 5.98858 4.69336 8.75C4.69336 11.5114 6.93194 13.75 9.69336 13.75C12.4548 13.75 14.6934 11.5114 14.6934 8.75Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M16.6934 20.75C16.6934 16.884 13.5594 13.75 9.69336 13.75C5.82737 13.75 2.69336 16.884 2.69336 20.75"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M19.6934 9.25V15.25M22.6934 12.25H16.6934" stroke="#5F6465"
+                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg></i><span class="label">Customers</span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
-                                <li><a id="sb-articles"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M20.4433 11.25V10.25C20.4433 6.47876 20.4433 4.59315 19.2717 3.42157C18.1001 2.25 16.2145 2.25 12.4433 2.25H11.4434C7.67219 2.25 5.78658 2.25 4.61501 3.42156C3.44344 4.59312 3.44342 6.47872 3.44339 10.2499L3.44336 14.25C3.44332 18.0212 3.44331 19.9068 4.61484 21.0784C5.78641 22.2499 7.67209 22.25 11.4433 22.25" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M7.94336 7.25H15.9433M7.94336 12.25H15.9433" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M13.9434 21.0768V22.25H15.1168C15.5262 22.25 15.7309 22.25 15.9149 22.1738C16.099 22.0975 16.2437 21.9528 16.5332 21.6634L21.3568 16.8394C21.6298 16.5664 21.7663 16.4299 21.8393 16.2827C21.9782 16.0025 21.9782 15.6736 21.8393 15.3934C21.7663 15.2461 21.6298 15.1096 21.3568 14.8366C21.0837 14.5636 20.9472 14.4271 20.7999 14.3541C20.5197 14.2153 20.1907 14.2153 19.9105 14.3541C19.7633 14.4271 19.6267 14.5636 19.3537 14.8366L14.5301 19.6606C14.2406 19.95 14.0959 20.0947 14.0197 20.2787C13.9434 20.4628 13.9434 20.6674 13.9434 21.0768Z" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"/>
-</svg></i><span class="label">Articles</span></a></li>
-                <?php } ?>
-                <?php if ($active_areas['reports']) { ?>
-                    <li><a id="sb-reports"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.69336 18.25V16.25M12.6934 18.25V15.25M17.6934 18.25V13.25M3.19336 12.25C3.19336 7.77166 3.19336 5.53249 4.5846 4.14124C5.97585 2.75 8.21502 2.75 12.6934 2.75C17.1717 2.75 19.4109 2.75 20.8022 4.14124C22.1934 5.53249 22.1934 7.77166 22.1934 12.25C22.1934 16.7283 22.1934 18.9675 20.8022 20.3588C19.4109 21.75 17.1717 21.75 12.6934 21.75C8.21502 21.75 5.97585 21.75 4.5846 20.3588C3.19336 18.9675 3.19336 16.7283 3.19336 12.25Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></i><span> Reports</span></a></li>
+                                <li><a id="sb-articles"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M20.4433 11.25V10.25C20.4433 6.47876 20.4433 4.59315 19.2717 3.42157C18.1001 2.25 16.2145 2.25 12.4433 2.25H11.4434C7.67219 2.25 5.78658 2.25 4.61501 3.42156C3.44344 4.59312 3.44342 6.47872 3.44339 10.2499L3.44336 14.25C3.44332 18.0212 3.44331 19.9068 4.61484 21.0784C5.78641 22.2499 7.67209 22.25 11.4433 22.25"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M7.94336 7.25H15.9433M7.94336 12.25H15.9433" stroke="#5F6465"
+                                                    stroke-width="1.5" stroke-linecap="round" />
+                                                <path
+                                                    d="M13.9434 21.0768V22.25H15.1168C15.5262 22.25 15.7309 22.25 15.9149 22.1738C16.099 22.0975 16.2437 21.9528 16.5332 21.6634L21.3568 16.8394C21.6298 16.5664 21.7663 16.4299 21.8393 16.2827C21.9782 16.0025 21.9782 15.6736 21.8393 15.3934C21.7663 15.2461 21.6298 15.1096 21.3568 14.8366C21.0837 14.5636 20.9472 14.4271 20.7999 14.3541C20.5197 14.2153 20.1907 14.2153 19.9105 14.3541C19.7633 14.4271 19.6267 14.5636 19.3537 14.8366L14.5301 19.6606C14.2406 19.95 14.0959 20.0947 14.0197 20.2787C13.9434 20.4628 13.9434 20.6674 13.9434 21.0768Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
+                                            </svg></i><span class="label">Articles</span></a></li>
+                            <?php } ?>
+                            <?php if ($active_areas['reports']) { ?>
+                                <li><a id="sb-reports"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M7.69336 18.25V16.25M12.6934 18.25V15.25M17.6934 18.25V13.25M3.19336 12.25C3.19336 7.77166 3.19336 5.53249 4.5846 4.14124C5.97585 2.75 8.21502 2.75 12.6934 2.75C17.1717 2.75 19.4109 2.75 20.8022 4.14124C22.1934 5.53249 22.1934 7.77166 22.1934 12.25C22.1934 16.7283 22.1934 18.9675 20.8022 20.3588C19.4109 21.75 17.1717 21.75 12.6934 21.75C8.21502 21.75 5.97585 21.75 4.5846 20.3588C3.19336 18.9675 3.19336 16.7283 3.19336 12.25Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg></i><span class="label"> Reports</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['settings']) { ?>
-                            <li><a id="sb-settings"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M17.1934 20.1071V21.25M17.1934 20.1071C16.1812 20.1071 15.2895 19.6021 14.7664 18.8352M17.1934 20.1071C18.2056 20.1071 19.0973 19.6021 19.6204 18.8352M14.7664 18.8352L13.6938 19.5357M14.7664 18.8352C14.4571 18.3816 14.2767 17.8364 14.2767 17.25C14.2767 16.6636 14.457 16.1185 14.7663 15.665M19.6204 18.8352L20.693 19.5357M19.6204 18.8352C19.9297 18.3816 20.1101 17.8364 20.1101 17.25C20.1101 16.6636 19.9298 16.1185 19.6205 15.665M17.1934 14.3929C18.2057 14.3929 19.0975 14.898 19.6205 15.665M17.1934 14.3929C16.1811 14.3929 15.2893 14.898 14.7663 15.665M17.1934 14.3929V13.25M19.6205 15.665L20.6934 14.9643M14.7663 15.665L13.6934 14.9643" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M4.69336 3.25H20.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M4.69336 9.25H20.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"/>
-</svg></i><span class="label">Settings</span></a></li>
-<?php } ?>
-            </ul>
-        </nav>
+                                <li><a id="sb-settings"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.1934 20.1071V21.25M17.1934 20.1071C16.1812 20.1071 15.2895 19.6021 14.7664 18.8352M17.1934 20.1071C18.2056 20.1071 19.0973 19.6021 19.6204 18.8352M14.7664 18.8352L13.6938 19.5357M14.7664 18.8352C14.4571 18.3816 14.2767 17.8364 14.2767 17.25C14.2767 16.6636 14.457 16.1185 14.7663 15.665M19.6204 18.8352L20.693 19.5357M19.6204 18.8352C19.9297 18.3816 20.1101 17.8364 20.1101 17.25C20.1101 16.6636 19.9298 16.1185 19.6205 15.665M17.1934 14.3929C18.2057 14.3929 19.0975 14.898 19.6205 15.665M17.1934 14.3929C16.1811 14.3929 15.2893 14.898 14.7663 15.665M17.1934 14.3929V13.25M19.6205 15.665L20.6934 14.9643M14.7663 15.665L13.6934 14.9643"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" />
+                                                <path d="M4.69336 3.25H20.6934" stroke="#5F6465" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                                <path d="M4.69336 9.25H20.6934" stroke="#5F6465" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                                <path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5"
+                                                    stroke-linecap="round" />
+                                            </svg></i><span class="label">Settings</span></a></li>
+                            <?php } ?>
+                        </ul>
+                    </nav>
 
-        <div class="powered-by">
-            <p class="all-reserved">&copy; All Rights Reserved</p>
-            <p class="nexln-help">Made By Nexleon Helpdesk</p>
-            <div class="powered-logo">
-                <!--img src="./account/media/dashboard-logo.svg" alt="logo" style="width: 190px; height: auto;"-->
-                <p></p>
-            </div>
-        </div>
-    </aside>
-    <script>
-            function toggleSidebar() {
-                document.getElementById("sidebar").classList.toggle("collapsed");
-                    document.getElementById("mainContent").classList.toggle("sidebar-collapsed");
+                    <div class="powered-by">
+                        <p class="all-reserved">&copy; All Rights Reserved</p>
+                        <p class="nexln-help">Made By Nexleon Helpdesk</p>
+                        <div class="powered-logo">
+                            <!--img src="./account/media/dashboard-logo.svg" alt="logo" style="width: 190px; height: auto;"-->
+                            <p></p>
+                        </div>
+                    </div>
+                </aside>
+                <script>
+                    function toggleSidebar() {
+                        document.getElementById("sidebar").classList.toggle("collapsed");
+                        document.getElementById("mainContent").classList.toggle("sidebar-collapsed");
 
-            }
-        </script>
-                  <!-- <div class="sb-admin-nav">
+                    }
+                </script>
+                <!-- <div class="sb-admin-nav">
                 <a id="sb-conversations" class="sb-active">
                     <span>
                         <?php sb_e("Conversations"); ?>
@@ -2338,7 +2401,7 @@ function sb_component_admin()
                                 "</span></a>";
                         }
                         //if ($active_areas['tickets']) {
-                            echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
+                        echo '<a id="sb-tickets"><span>' . sb_('Tickets') . '</span></a>';
                         //}
                         if ($active_areas['chatbot']) {
                             echo '<a id="sb-chatbot"><span>' . sb_('Chatbot') . '</span></a>';
@@ -2411,8 +2474,8 @@ function sb_component_admin()
                                 ($is_cloud
                                     ? sb_cloud_account_menu("a")
                                     : '<a href="#" class="sb-docs">' .
-                                        sb_("Docs") .
-                                        "</a>") .
+                                    sb_("Docs") .
+                                    "</a>") .
                                 '<a href="#" class="sb-version">' .
                                 sb_("Updates") .
                                 "</a>";
@@ -2429,21 +2492,21 @@ function sb_component_admin()
 
             <main class="main-content" id="mainContent">
                 <!-- new code update -->
-                    <?php
-                        // You can set these dynamically from user session or DB
-                        $user_name = ucwords($active_user['first_name'].' '.$active_user['last_name']); // Dynamic
-                        $user_image = $active_user['profile_image']; // Dynamic
-                        $user_role = ucfirst($active_user['user_type']); // Static
-
-                    // Static
-                    $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON: sb_get_setting("admin-icon",SB_URL . "/media/icon.svg");
-                    $ticketUrl = dirname(SB_URL) . "?area=tickets";
-                    $header =
-                        '<header>
+                <?php
+                // You can set these dynamically from user session or DB
+                $user_name = ucwords($active_user['first_name'] . ' ' . $active_user['last_name']); // Dynamic
+                $user_image = $active_user['profile_image']; // Dynamic
+                $user_role = ucfirst($active_user['user_type']); // Static
+        
+                // Static
+                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
+                $ticketUrl = dirname(SB_URL) . "?area=tickets";
+                $header =
+                    '<header>
                             <div class="header-left">
                                 <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' .
-                        $ticketUrl .
-                        '" >
+                    $ticketUrl .
+                    '" >
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     Back to Tickets
                                 </a>
@@ -2463,11 +2526,11 @@ function sb_component_admin()
                                             </span>
                                         <div class="user-details">
                                             <span class="sb-name">' .
-                        $user_name .
-                        '</span>
+                    $user_name .
+                    '</span>
                                             <span class="sb-role">' .
-                        $user_role .
-                        '</span>
+                    $user_role .
+                    '</span>
                                         </div>
                                     </a>
                                     <ul class="sb-menu">
@@ -2478,22 +2541,22 @@ function sb_component_admin()
                                             </span>
                                                 <div class="user-details">
                                                     <span class="sb-name">' .
-                        $user_name .
-                        '</span>
+                    $user_name .
+                    '</span>
                                                     <span class="sb-role">' .
-                        $user_role .
-                        '</span>
+                    $user_role .
+                    '</span>
                                                 </div>
                                             </li>
                                         <li data-value="status" class="sb-online">Online</li>';
-                    if ($is_admin) {
-                        $header .=
-                            '<li data-value="edit-profile">' .
-                            sb_("Edit profile") .
-                            "</li>" .
-                            ($is_cloud ? sb_cloud_account_menu() : "");
-                    }
-                    $header .= '</ul>
+                if ($is_admin) {
+                    $header .=
+                        '<li data-value="edit-profile">' .
+                        sb_("Edit profile") .
+                        "</li>" .
+                        ($is_cloud ? sb_cloud_account_menu() : "");
+                }
+                $header .= '</ul>
                                 </div>
                                 <!-- Logout Button -->
                                 <div data-value="logout" class="logout">
@@ -2501,9 +2564,9 @@ function sb_component_admin()
                                 </div>
                             </div>
                         </header>';
-                    ?>
+                ?>
                 <!-- new code update -->
-                 <!-- old code -->
+                <!-- old code -->
                 <!--?php
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
                 $ticketUrl = dirname(SB_URL) . '?area=tickets';
@@ -2603,12 +2666,13 @@ function sb_component_admin()
                                                     </div>
                                                 </div>
                                                 <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div-->
-                                               <!-- code update -->
+                                                <!-- code update -->
                                                 <div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-users-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div>
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-users-increase"></span><span>%</span>
+                                                    </span>&nbsp;this week
+                                                </div>
                                                 <!-- code update -->
                                             </div>
                                             <div class="metric-card"
@@ -2636,24 +2700,26 @@ function sb_component_admin()
                                                 <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-tickets-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div>
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-tickets-increase"></span><span>%</span>
+                                                    </span>&nbsp;this week
+                                                </div>
                                                 <!-- code update -->
                                             </div>
-                                         
-                                           
+
+
                                         </section>
                                         <section class="dashboard-metrics">
-                                                <!--  -->
-                                               <div class="metric-card"
+                                            <!--  -->
+                                            <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #8252E9;">
                                                             <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                            <img src="./script/media/total-conversations.svg" alt="Total Conversations">
+                                                            <img src="./script/media/total-conversations.svg"
+                                                                alt="Total Conversations">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Total Conversations</h3>
@@ -2671,20 +2737,22 @@ function sb_component_admin()
                                                 <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
                                                 <!-- code update  -->
                                                 <div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-conversations-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div>
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-conversations-increase"></span><span>%</span>
+                                                    </span>&nbsp;this week
+                                                </div>
                                                 <!-- code update -->
                                             </div>
                                             <!--  -->
-                                                <div class="metric-card"
+                                            <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #0684ff;">
                                                             <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                             <img src="./script/media/tickets-resolved.svg" alt="Tickets Resolved">
+                                                            <img src="./script/media/tickets-resolved.svg"
+                                                                alt="Tickets Resolved">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Ticket Resolved</h3>
@@ -2702,21 +2770,22 @@ function sb_component_admin()
                                                 <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div>
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                    </span>&nbsp;this week
+                                                </div>
                                                 <!-- code update -->
                                             </div>
-                                             </section>
+                                        </section>
                                         <!--section class="dashboard-metrics">
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #8252E9;"-->
-                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                            <!--img src="./script/media/total-conversations.svg" alt="Total Conversations">
+                                        <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                        <!--img src="./script/media/total-conversations.svg" alt="Total Conversations">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Total Conversations</h3>
@@ -2731,30 +2800,30 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div-->
-                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
-                                                <!-- code update  -->
-                                                <!--div class="metric-increase">
+                                        <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
+                                        <!-- code update  -->
+                                        <!--div class="metric-increase">
                                                         Increase by 
                                                         <span class="increase-pill">
                                                             <span class="total-conversations-increase"></span><span>%</span>
                                                         </span>&nbsp;this week </div-->
-                                                <!-- code update -->
-                                            <!--/div>
+                                        <!-- code update -->
+                                        <!--/div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #DE3ACE;"-->
-                                                            <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
-                                                            <!--img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
+                                        <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
+                                        <!--img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3> Avg. Response Time</h3-->
-                                                            <!-- <p id="avg_response_time">0h 0m 0s</p> -->
-                                                            <!--div id="avg_response_time_container"></div>
+                                        <!-- <p id="avg_response_time">0h 0m 0s</p> -->
+                                        <!--div id="avg_response_time_container"></div>
                                                         </div>
                                                     </div-->
-                                                    <!-- <div class="w-100">
+                                        <!-- <div class="w-100">
                                                     <div class="avg_response_chart">
                                                         <canvas class="mt-0" id="avg_response_chart"></canvas>
                                                     </div>
@@ -2816,7 +2885,7 @@ function sb_component_admin()
                                                         });
                                                     </script>
                                                 </div> -->
-                                                <!--/div>
+                                        <!--/div>
 
                                             </div>
                                             <div class="metric-card"
@@ -2824,8 +2893,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #00B8F2;"-->
-                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
-                                                            <!--img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
+                                        <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                        <!--img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>Agent Satisfaction</h3>
@@ -2836,7 +2905,7 @@ function sb_component_admin()
                                                         <div class="agent_chart">
                                                             <canvas class="mt-0" id="agent_chart"></canvas>
                                                         </div-->
-                                                        <!--script>
+                                        <!--script>
                                                             const agentCtx = document.getElementById('agent_chart').getContext('2d');
                                                             const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
                                                             gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
@@ -2893,7 +2962,7 @@ function sb_component_admin()
                                                                 }
                                                             });
                                                         </script-->
-                                                    <!--/div>
+                                        <!--/div>
                                                 </div>
 
                                             </div>
@@ -2945,6 +3014,20 @@ function sb_component_admin()
                                                 </script>
                                             </div>
                                         </section>
+                                        <section class="main-charts recent-message">
+                                            <div class="card p-3">
+                                                <div class="bg-white">
+                                                    <h6 class="head mb-1">Recent Messages</h6>
+                                                </div>
+                                                <div class="seprator"></div>
+                                                <div class="recent card p-3">
+                                                    <ul class="recent-messages list-unstyled" style="min-height:254px;">
+                                                        No massge found
+                                                    </ul>
+                                                </div>
+                                                <div class="div"></div>
+                                            </div>
+                                        </section>
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
@@ -2965,7 +3048,7 @@ function sb_component_admin()
                                                     <canvas id="ticket_activity_chart"></canvas>
                                                 </div>
                                                 <script>
-                                                    
+
                                                 </script>
                                             </div>
                                         </section>
@@ -3029,7 +3112,7 @@ function sb_component_admin()
                                             </div>
                                         </section>
                                         <section class="main-charts high-inrs">
-                                            <div class="card p-3" style=" max-height: 442px !important; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                                            <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h6 class="fw-bold">Customer Overview</h6>
                                                     <select id="customer-overview" class="form-select form-select-sm w-auto">
@@ -3047,7 +3130,8 @@ function sb_component_admin()
                                                         <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
                                                     </ul>
                                                     <div id="chart-container">
-                                                        <canvas id="donutChart" style="max-height: 150px; max-width: 300px;"></canvas>
+                                                        <canvas id="donutChart"
+                                                            style="max-height: 150px; max-width: 300px;"></canvas>
                                                         <div class="chart-center">
                                                             <p class="mb-1"><strong>Customer Report</strong></p>
                                                             <pre></pre>
@@ -3083,13 +3167,126 @@ function sb_component_admin()
                                                 </div>
                                             </div>
                                         </section>
-                                        
+                                        <section class="main-charts mb-3" style="margin-top: 15px;">
+                                            <div class="card p-3">
+                                            <div class="px-3 main-charts tables clmn-gap">
+                                                <div class="bg-white d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="head mb-1">All Tickets</h6>
+                                                    </div>
+                                                    <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View
+                                                            All</a>
+                                                    </p>
+                                                </div>
+                                                <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
+                                                <div class="seprator"></div>
+                                                <?php
+                                                function sb_get_priorities()
+                                                {
+                                                    $priorities = sb_db_get(
+                                                        "SELECT * FROM priorities",
+                                                        false
+                                                    );
+                                                    return $priorities;
+                                                }
+                                                function sb_get_statues()
+                                                {
+                                                    $status = sb_db_get(
+                                                        "SELECT * FROM ticket_status",
+                                                        false
+                                                    );
+                                                    return $status;
+                                                }
+                                                $statues = sb_get_statues();
+                                                $priorities = sb_get_priorities();
+                                                ?>
+                                                <div id="ticket_statues">
+                                                    <ul class="status-list">
+                                                        <?php foreach (
+                                                            $statues
+                                                            as $status
+                                                        ) {
+                                                            echo '<li data-status="' .
+                                                                $status["name"] .
+                                                                '" class="" data-color="' .
+                                                                $status["color"] .
+                                                                '" value="' .
+                                                                $status["id"] .
+                                                                '">
+                                                    <span class="status-dot"></span> ' .
+                                                                $status["name"] .
+                                                                '
+                                                </li>';
+                                                        } ?>
+                                                    </ul>
+                                                </div>
+
+                                                <div id="ticket_priorities">
+                                                    <ul class="priority-list">
+                                                        <?php foreach (
+                                                            $priorities
+                                                            as $priority
+                                                        ) {
+                                                            echo '<li data-status="' .
+                                                                $priority["name"] .
+                                                                '" class="" data-color="' .
+                                                                $priority["color"] .
+                                                                '" value="' .
+                                                                $priority["id"] .
+                                                                '">
+                                                    <span class="status-dot"></span> ' .
+                                                                $priority["name"] .
+                                                                '
+                                                </li>';
+                                                        } ?>
+                                                    </ul>
+                                                </div>
+                                                <div class="new_table sb-area-tickets-dash">
+                                                    <div class="sb-scroll-area">
+                                                        <table
+                                                            class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th data-field="title">
+                                                                        Ticket Title
+                                                                    </th>
+                                                                    <th data-field="assigned-to">
+                                                                        Assigned To
+                                                                    </th>
+                                                                    <th data-field="creation-date">
+                                                                        Creation Date
+                                                                    </th>
+                                                                    <th data-field="status">
+                                                                        <?php sb_e(
+                                                                            "Status"
+                                                                        ); ?>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ticket-id="">
+                                                                    <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                                    <td class="sb-td-tags">Kathryn Murphy</td>
+                                                                    <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                                    <td class="sb-td-status"><span class="span-border"
+                                                                            style="color:#FF0000;border:1px solid #FF0000;">Open</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </section>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-8 p-0">
-                                    <div class="px-3 main-charts clmn-gap">
+                                    <!--div class="px-3 main-charts clmn-gap">
                                         <div class="bg-white">
                                             <h6 class="head mb-1">Recent Messages</h6>
                                         </div>
@@ -3100,20 +3297,21 @@ function sb_component_admin()
                                             </ul>
                                         </div>
                                         <div class="div"></div>
-                                    </div>
+                                    </div-->
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="px-3 main-charts tables clmn-gap">
+                                    <!--div class="px-3 main-charts tables clmn-gap">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">All Tickets</h6>
                                             </div>
-                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a></p>
-                                        </div>
-                                        <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a>
+                                            </p>
+                                        </div-->
+                                    <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                                        <div class="seprator"></div>
-                                        <?php
+                                    <!--div class="seprator"></div-->
+                                    <!--?php
                                         function sb_get_priorities()
                                         {
                                             $priorities = sb_db_get(
@@ -3134,8 +3332,8 @@ function sb_component_admin()
                                         $priorities = sb_get_priorities();
                                         ?>
                                         <div id="ticket_statues">
-                                            <ul class="status-list">
-                                                <?php foreach (
+                                            <ul class="status-list"-->
+                                    <!--?php foreach (
                                                     $statues
                                                     as $status
                                                 ) {
@@ -3153,10 +3351,10 @@ function sb_component_admin()
                                                 } ?>
                                             </ul>
                                         </div>
-                                        
+
                                         <div id="ticket_priorities">
-                                            <ul class="priority-list">
-                                                <?php foreach (
+                                            <ul class="priority-list"-->
+                                    <!--?php foreach (
                                                     $priorities
                                                     as $priority
                                                 ) {
@@ -3188,8 +3386,8 @@ function sb_component_admin()
                                                             <th data-field="creation-date">
                                                                 Creation Date
                                                             </th>
-                                                            <th data-field="status">
-                                                                <?php sb_e(
+                                                            <th data-field="status"-->
+                                    <!--?php sb_e(
                                                                     "Status"
                                                                 ); ?>
                                                             </th>
@@ -3200,14 +3398,16 @@ function sb_component_admin()
                                                             <td class="sb-td-subject">Bug fix: Login issue</td>
                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
+                                                            <td class="sb-td-status"><span class="span-border"
+                                                                    style="color:#FF0000;border:1px solid #FF0000;">Open</span>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                                    </div>
-                                     </div>
+                                    </div-->
+                                </div>
                                 <!-- <div class="col-md-4 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
@@ -3217,8 +3417,8 @@ function sb_component_admin()
                                                     <p class="sub_head">Weekly Report</p>
                                                 </div>
                                             </div-->
-                                            <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
-                                            <!--div class="chatVolChart">
+                                <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
+                                <!--div class="chatVolChart">
                                                 <canvas id="chatVolChart"></canvas>
                                             </div>
                                             <script>
@@ -3351,10 +3551,10 @@ function sb_component_admin()
                                             </div>
                                             <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a></p>
                                         </div-->
-                                        <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                                        <!--div class="seprator"></div-->
-                                        <!--?php
+                                <!--div class="seprator"></div-->
+                                <!--?php
                                         function sb_get_priorities()
                                         {
                                             $priorities = sb_db_get(
@@ -3376,7 +3576,7 @@ function sb_component_admin()
                                         ?>
                                         <div id="ticket_statues">
                                             <ul class="status-list"-->
-                                                <!--?php foreach (
+                                <!--?php foreach (
                                                     $statues
                                                     as $status
                                                 ) {
@@ -3396,7 +3596,7 @@ function sb_component_admin()
                                         </div>
                                         <div id="ticket_priorities">
                                             <ul class="priority-list"-->
-                                                <!--?php foreach (
+                                <!--?php foreach (
                                                     $priorities
                                                     as $priority
                                                 ) {
@@ -3429,7 +3629,7 @@ function sb_component_admin()
                                                                 Creation Date
                                                             </th>
                                                             <th data-field="status"-->
-                                                                <!--?php sb_e(
+                                <!--?php sb_e(
                                                                     "Status"
                                                                 ); ?>
                                                             </th>
@@ -3579,7 +3779,8 @@ function sb_component_admin()
                                             </a>
                                         </li> -->
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
-                                            <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon" data-sb-tooltip="Convert to a ticket">
+                                            <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon"
+                                                data-sb-tooltip="Convert to a ticket">
                                                 <i id="sb-icon-ticket" class="fa-solid fa-repeat text-white" style></i>
                                                 <span>Convert to ticket</span>
                                             </a>
@@ -3602,9 +3803,9 @@ function sb_component_admin()
                                             <a data-value="transcript" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
                                                 "Transcript"
                                             ); ?>" data-action="<?php echo sb_get_multi_setting(
-    "transcript",
-    "transcript-action"
-); ?>">
+                                                 "transcript",
+                                                 "transcript-action"
+                                             ); ?>">
                                                 <i class="sb-icon-download"></i>
                                             </a>
                                         </li>
@@ -3906,750 +4107,777 @@ function sb_component_admin()
                 }
                 ?>
                 <?php //if ($active_areas['tickets']) { ?>
-                    <style>
-                        .sb-table .span-border {
-                            text-align: center;
-                            padding: 3px 7px;
-                            border-radius: 6px;
-                        }
-                    </style>
-                    <div class="sb-area-tickets">
-                        <?php echo $header; ?>
-                        <div class="sb-top-bar">
-                            <div>
-                                <!-- <div class="sb-search-btn">
+                <style>
+                    .sb-table .span-border {
+                        text-align: center;
+                        padding: 3px 7px;
+                        border-radius: 6px;
+                    }
+                </style>
+                <div class="sb-area-tickets">
+                    <?php echo $header; ?>
+                    <div class="sb-top-bar">
+                        <div>
+                            <!-- <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e(
                                         "Search tickets ..."
                                     ); ?>" />
                                 </div> -->
-                                <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
-                                    <i class="fa-solid fa-plus mr-1"></i>
-                                    <?php sb_e("New Ticket"); ?>
-                                </a>
-                            </div>
-                            <div>
-                                <!-- <div  class="color-palette tag-palette">
+                            <a class="sb-btn sb-icon sb-new-ticket sb_btn_new">
+                                <i class="fa-solid fa-plus mr-1"></i>
+                                <?php sb_e("New Ticket"); ?>
+                            </a>
+                        </div>
+                        <div>
+                            <!-- <div  class="color-palette tag-palette">
                                     <span class="sb-active"></span>
                                     <ul id="selected-tags-palette">
                                     </ul>
                                 </div> -->
-                                <div class="mr-5 tags-filter" style="">
-                                    <?php
-                                    $tags = sb_get_multi_setting(
-                                        "disable",
-                                        "disable-tags"
-                                    )
-                                        ? []
-                                        : sb_get_setting("tags", []);
-                                    $tagsHtml = "";
-                                    $count = count($tags);
-                                    if ($count > 0) { ?>
-                                        <select id="tags-filter" name="tags[]" multiple>
-                                            <?php
-                                            for ($i = 0; $i < $count; $i++) {
-                                                $tagsHtml .=
-                                                    '<option value="' .
-                                                    $tags[$i]["tag-name"] .
-                                                    '"  class="tag-option" data-color="' .
-                                                    $tags[$i]["tag-color"] .
-                                                    '" data-custom-properties={"color":"' .
-                                                    $tags[$i]["tag-color"] .
-                                                    '"}>' .
-                                                    $tags[$i]["tag-name"] .
-                                                    "</option>";
-                                            }
-                                            echo $tagsHtml;
-                                            ?>
-                                        </select>
-                                    <?php }
-                                    ?>
+                            <div class="mr-5 tags-filter" style="">
+                                <?php
+                                $tags = sb_get_multi_setting(
+                                    "disable",
+                                    "disable-tags"
+                                )
+                                    ? []
+                                    : sb_get_setting("tags", []);
+                                $tagsHtml = "";
+                                $count = count($tags);
+                                if ($count > 0) { ?>
+                                    <select id="tags-filter" name="tags[]" multiple>
+                                        <?php
+                                        for ($i = 0; $i < $count; $i++) {
+                                            $tagsHtml .=
+                                                '<option value="' .
+                                                $tags[$i]["tag-name"] .
+                                                '"  class="tag-option" data-color="' .
+                                                $tags[$i]["tag-color"] .
+                                                '" data-custom-properties={"color":"' .
+                                                $tags[$i]["tag-color"] .
+                                                '"}>' .
+                                                $tags[$i]["tag-name"] .
+                                                "</option>";
+                                        }
+                                        echo $tagsHtml;
+                                        ?>
+                                    </select>
+                                <?php }
+                                ?>
 
+                            </div>
+                            <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
+                                <div>
+                                    <?php sb_e("All"); ?>
+                                    <span data-count="0"></span>
                                 </div>
-                                <div class="sb-menu-wide sb-menu-tickets sb-menu-wide_new">
-                                    <div>
+                                <ul>
+                                    <li data-type="all" class="sb-active">
+                                        <span data-count="0">0</span>
                                         <?php sb_e("All"); ?>
-                                        <span data-count="0"></span>
-                                    </div>
-                                    <ul>
-                                        <li data-type="all" class="sb-active">
-                                            <span data-count="0">0</span>
-                                            <?php sb_e("All"); ?>
-                                        </li>
-                                        <li data-type="open">
-                                            <span data-count="0">0</span>
-                                            <?php sb_e("Open"); ?>
-                                        </li>
-                                        <li data-type="in-progress">
-                                            <span data-count="0">0</span>
-                                            <?php sb_e("In Progress"); ?>
-                                        </li>
-                                        <li data-type="answered">
-                                            <span data-count="0">0</span>
-                                            <?php sb_e("Answered"); ?>
-                                        </li>
-                                        <li data-type="hold">
-                                            <span data-count="0">0</span>
-                                            <?php sb_e("On Hold"); ?>
-                                        </li>
-                                        <li data-type="closed">
-                                            <span data-count="0">0</span>
-                                            <?php sb_e("Closed"); ?>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!--div class="sb-menu-mobile">
+                                    </li>
+                                    <li data-type="open">
+                                        <span data-count="0">0</span>
+                                        <?php sb_e("Open"); ?>
+                                    </li>
+                                    <li data-type="in-progress">
+                                        <span data-count="0">0</span>
+                                        <?php sb_e("In Progress"); ?>
+                                    </li>
+                                    <li data-type="answered">
+                                        <span data-count="0">0</span>
+                                        <?php sb_e("Answered"); ?>
+                                    </li>
+                                    <li data-type="hold">
+                                        <span data-count="0">0</span>
+                                        <?php sb_e("On Hold"); ?>
+                                    </li>
+                                    <li data-type="closed">
+                                        <span data-count="0">0</span>
+                                        <?php sb_e("Closed"); ?>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
                                     <ul>
                                         <?php if ($is_admin) {
-                                            // echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
-                                        } ?>
+                                        // echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' . sb_('Download CSV') . '"><i class="sb-icon-download"></i></a></li>';
+                                    } ?>
                                     </ul>
                                 </div-->
-                            </div>
-                        </div>
-                      
-                        <div class="sb-scroll-area ticket-section">
-                            <table class="sb-table sb_table_new sb-table-tickets">
-                                <thead>
-                                    <tr>
-                                        <th data-field="id" width="5%">
-                                            <!--input type="checkbox" /-->
-                                            <?php sb_e("ID"); ?>
-                                        </th>
-                                        <th data-field="subject">
-                                            <?php sb_e("Subject"); ?>
-                                        </th>
-                                        <th data-field="tags" width="20%">
-                                            <?php sb_e("Tags"); ?>
-                                        </th>
-                                        <?php
-                                        $department_settings = sb_get_setting(
-                                            "departments-settings"
-                                        );
-                                        if (
-                                            isset(
-                                                $department_settings[
-                                                    "departments-show-list"
-                                                ]
-                                            ) &&
-                                            $department_settings[
-                                                "departments-show-list"
-                                            ] == "1"
-                                        ) { ?>
-                                            <th data-field="department">
-                                                <?php sb_e("Department"); ?>
-                                            </th>
-                                        <?php }
-                                        ?>
-                                        <!--th data-field="service">
-                                            <?php
-                    //sb_e('Service')
-                    ?>
-                                        </th-->
-                                        <th data-field="contact">
-                                            <?php sb_e("Contact"); ?>
-                                        </th>
-                                        <th data-field="status">
-                                            <?php sb_e("Status"); ?>
-                                        </th>
-                                        <th data-field="priority">
-                                            <?php sb_e("Priority"); ?>
-                                        </th>
-                                        <th data-field="last_reply">
-                                            <?php sb_e("Last Reply"); ?>
-                                        </th>
-                                        <th data-field="creation_time">
-                                            <?php sb_e("Created"); ?>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
                         </div>
                     </div>
-                    <div class="sb-area-ticket-detail">
-                        <?php echo $header; ?>
-                        <div class="tc_bg" style="max-height: calc(100vh - 93px);overflow-y: auto;">
-                            <div class="tc_back">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12 p-0">
-                                            <div class="row">
-                                                <div class="col-md-8 p-0">
-                                                    <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span class="tsubject"><input type="text" id="ticket-subject" value="" /></span></h2>
-                                                </div>
-                                                <div class="col-md-4 p-0">
-                                                    <div class="d-flex align-items-center justify-content-between pl-5">
-                                                        <select class="form-select ticket-status-dropdown" id="ticket-status" style="width: 120px;">
-                                                            <?php foreach (
-                                                                $statues
-                                                                as $key =>
-                                                                    $value
-                                                            ) {
-                                                                echo '<option value="' .
-                                                                    $value[
-                                                                        "id"
-                                                                    ] .
-                                                                    '">' .
-                                                                    $value[
-                                                                        "name"
-                                                                    ] .
-                                                                    "</option>";
-                                                            } ?>
-                                                        </select>
 
-                                                        <a class="sb-btn sb-icon sb-save-ticket sb_btn_new">
-                                                            <i class="fa-solid fa-check mr-1"></i>
-                                                            Save changes
-                                                        </a>
+                    <div class="sb-scroll-area ticket-section">
+                        <table class="sb-table sb_table_new sb-table-tickets">
+                            <thead>
+                                <tr>
+                                    <th data-field="id" width="5%">
+                                        <!--input type="checkbox" /-->
+                                        <?php sb_e("ID"); ?>
+                                    </th>
+                                    <th data-field="subject">
+                                        <?php sb_e("Subject"); ?>
+                                    </th>
+                                    <th data-field="tags" width="20%">
+                                        <?php sb_e("Tags"); ?>
+                                    </th>
+                                    <?php
+                                    $department_settings = sb_get_setting(
+                                        "departments-settings"
+                                    );
+                                    if (
+                                        isset(
+                                        $department_settings[
+                                            "departments-show-list"
+                                        ]
+                                    ) &&
+                                        $department_settings[
+                                            "departments-show-list"
+                                        ] == "1"
+                                    ) { ?>
+                                        <th data-field="department">
+                                            <?php sb_e("Department"); ?>
+                                        </th>
+                                    <?php }
+                                    ?>
+                                    <!--th data-field="service">
+                                            <?php
+                                            //sb_e('Service')
+                                            ?>
+                                        </th-->
+                                    <th data-field="contact">
+                                        <?php sb_e("Contact"); ?>
+                                    </th>
+                                    <th data-field="status">
+                                        <?php sb_e("Status"); ?>
+                                    </th>
+                                    <th data-field="priority">
+                                        <?php sb_e("Priority"); ?>
+                                    </th>
+                                    <th data-field="last_reply">
+                                        <?php sb_e("Last Reply"); ?>
+                                    </th>
+                                    <th data-field="creation_time">
+                                        <?php sb_e("Created"); ?>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="sb-area-ticket-detail">
+                    <?php echo $header; ?>
+                    <div class="tc_bg" style="max-height: calc(100vh - 93px);overflow-y: auto;">
+                        <div class="tc_back">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 p-0">
+                                        <div class="row">
+                                            <div class="col-md-8 p-0">
+                                                <h2 class="title mb-0"># <span class="tno">TR-51</span> / <span
+                                                        class="tsubject"><input type="text" id="ticket-subject"
+                                                            value="" /></span></h2>
+                                            </div>
+                                            <div class="col-md-4 p-0">
+                                                <div class="d-flex align-items-center justify-content-between pl-5">
+                                                    <select class="form-select ticket-status-dropdown" id="ticket-status"
+                                                        style="width: 120px;">
+                                                        <?php foreach (
+                                                            $statues
+                                                            as $key =>
+                                                            $value
+                                                        ) {
+                                                            echo '<option value="' .
+                                                                $value[
+                                                                    "id"
+                                                                ] .
+                                                                '">' .
+                                                                $value[
+                                                                    "name"
+                                                                ] .
+                                                                "</option>";
+                                                        } ?>
+                                                    </select>
+
+                                                    <a class="sb-btn sb-icon sb-save-ticket sb_btn_new">
+                                                        <i class="fa-solid fa-check mr-1"></i>
+                                                        Save changes
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 p-0 mt-3 d-flex align-items-center"
+                                                id="view-ticket-attachments">
+                                                <i class="fas fa-paperclip fs-4 mr-2"></i>
+                                                <span class="label">Attachments (<span
+                                                        class="attachments-count">0</span>)</span>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <h2 class="sub_title my-4">Description</h2>
+                                                <div id="description-d" class="description" data-type="textarea"
+                                                    style="margin: 10px 0 0 0;display: block;">
+                                                    <div style="display: inline-block;padding:0;width:100%;">
+                                                        <div id="ticketDescriptionTicketDetail" style="height: 180px;"></div>
                                                     </div>
+                                                    <input id="ticket_id_d" type="hidden" name="ticket_id" />
+                                                    <input id="conversation_id_d" type="hidden" name="conversation_id" />
+                                                    <!-- Hidden input to store uploaded file data -->
+                                                    <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
                                                 </div>
-                                                <div class="col-md-12 p-0 mt-3 d-flex align-items-center" id="view-ticket-attachments">
-                                                    <i class="fas fa-paperclip fs-4 mr-2"></i>
-                                                    <span class="label">Attachments (<span class="attachments-count">0</span>)</span>
-                                                </div>
-                                                <div class="col-md-9 p-0">
-                                                    <h2 class="sub_title my-4">Description</h2>
-                                                    <div id="description-d" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
-                                                        <div style="display: inline-block;padding:0;width:100%;">
-                                                            <div id="ticketDescriptionTicketDetail" style="height: 180px;"></div>
-                                                        </div>
-                                                        <input id="ticket_id_d" type="hidden" name="ticket_id" />
-                                                        <input id="conversation_id_d" type="hidden" name="conversation_id" />
-                                                        <!-- Hidden input to store uploaded file data -->
-                                                        <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
-                                                    </div>
 
-                                                    <!-- Nav tabs -->
-                                                    <ul class="nav nav-tabs" id="myTab">
-                                                        <li class="nav-item">
-                                                            <a class="nav-link active" data-target="#tab1" href="javascript:void(0)">Comments</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" data-target="#tab2" href="javascript:void(0)">Internal Note</a>
-                                                        </li>
-                                                    </ul>
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs" id="myTab">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-target="#tab1"
+                                                            href="javascript:void(0)">Comments</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-target="#tab2"
+                                                            href="javascript:void(0)">Internal Note</a>
+                                                    </li>
+                                                </ul>
 
-                                                    <!-- Tab content -->
-                                                    <div class="tab-content pt-3">
-                                                        <!-- Tab 1 -->
-                                                        <div class="tab-pane active" id="tab1">
-                                                            <div id="blankDiv">
-                                                                <!-- Comments/Chat Section -->
-                                                                <div id="ticket-comments" class="row mt-4">
-                                                                    <div class="col-md-12">
-                                                                        <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
-                                                                            <!-- Comments will be loaded here by JS -->
-                                                                        </div>
+                                                <!-- Tab content -->
+                                                <div class="tab-content pt-3">
+                                                    <!-- Tab 1 -->
+                                                    <div class="tab-pane active" id="tab1">
+                                                        <div id="blankDiv">
+                                                            <!-- Comments/Chat Section -->
+                                                            <div id="ticket-comments" class="row mt-4">
+                                                                <div class="col-md-12">
+                                                                    <div class=""
+                                                                        style="max-height: 350px; overflow-y: auto; background: #fff;"
+                                                                        id="comments-section">
+                                                                        <!-- Comments will be loaded here by JS -->
+                                                                    </div>
 
-                                                                        <div class="d-flex align-items-center gap-2 mt-4">
-                                                                            <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()[
-                                                                                "id"
-                                                                            ] ??
-                                                                                0; ?>">
-                                                                            <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
-                                                                            <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
+                                                                    <div class="d-flex align-items-center gap-2 mt-4">
+                                                                        <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()[
+                                                                            "id"
+                                                                        ] ??
+                                                                            0; ?>">
+                                                                        <textarea class="form-control me-2" id="newComment"
+                                                                            placeholder="Type your comment..."></textarea>
+                                                                        <textarea class="form-control me-2 d-none"
+                                                                            data-comment-id="" id="oldComment"></textarea>
 
-                                                                            <button id="addComment" class="btn btn-primary">Send</button>
-                                                                        </div>
+                                                                        <button id="addComment"
+                                                                            class="btn btn-primary">Send</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <!-- Tab 2 -->
-                                                        <div class="tab-pane" id="tab2">
-                                                            <div class="mb-3">
-                                                                <div id="internal-note" class="description" data-type="textarea" style="margin: 10px 0 0 0;display: block;">
-                                                                    <div style="display: inline-block;padding:0;width:100%;">
-                                                                        <div id="internal-note-t" style="height: 180px;"></div>
-                                                                    </div>
-                                                                    <!-- Hidden input to store uploaded file data -->
-                                                                    <input type="hidden" id="uploaded_files" name="uploaded_files" value="">
-                                                                </div>
-                                                            </div>
-                                                            <button class="btn btn-primary float-end" type="button" id="save-note">Save</button>
-                                                        </div>
                                                     </div>
 
-                                                    <script>
-                                                        $(document).ready(function() {
-                                                            $('#myTab .nav-link').click(function() {
-                                                                // Remove active class from all tabs
-                                                                $('#myTab .nav-link').removeClass('active');
-                                                                $('.tab-pane').removeClass('active');
+                                                    <!-- Tab 2 -->
+                                                    <div class="tab-pane" id="tab2">
+                                                        <div class="mb-3">
+                                                            <div id="internal-note" class="description" data-type="textarea"
+                                                                style="margin: 10px 0 0 0;display: block;">
+                                                                <div style="display: inline-block;padding:0;width:100%;">
+                                                                    <div id="internal-note-t" style="height: 180px;"></div>
+                                                                </div>
+                                                                <!-- Hidden input to store uploaded file data -->
+                                                                <input type="hidden" id="uploaded_files" name="uploaded_files"
+                                                                    value="">
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary float-end" type="button"
+                                                            id="save-note">Save</button>
+                                                    </div>
+                                                </div>
 
-                                                                // Add active class to clicked tab
-                                                                $(this).addClass('active');
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $('#myTab .nav-link').click(function () {
+                                                            // Remove active class from all tabs
+                                                            $('#myTab .nav-link').removeClass('active');
+                                                            $('.tab-pane').removeClass('active');
 
-                                                                // Show corresponding tab pane
-                                                                const target = $(this).data('target');
-                                                                $(target).addClass('active');
-                                                            });
+                                                            // Add active class to clicked tab
+                                                            $(this).addClass('active');
+
+                                                            // Show corresponding tab pane
+                                                            const target = $(this).data('target');
+                                                            $(target).addClass('active');
                                                         });
-                                                    </script>
+                                                    });
+                                                </script>
 
 
-                                                    <style>
-                                                        /* Timeline chat style for comments */
-                                                        .comment-row {
-                                                            display: flex;
-                                                            align-items: flex-end;
-                                                        }
+                                                <style>
+                                                    /* Timeline chat style for comments */
+                                                    .comment-row {
+                                                        display: flex;
+                                                        align-items: flex-end;
+                                                    }
 
-                                                        .comment-row.customer+.comment-row.customer {
-                                                            margin-top: 2px;
-                                                        }
+                                                    .comment-row.customer+.comment-row.customer {
+                                                        margin-top: 2px;
+                                                    }
 
-                                                        .comment-row.agent+.comment-row.agent {
-                                                            margin-top: 2px;
-                                                        }
+                                                    .comment-row.agent+.comment-row.agent {
+                                                        margin-top: 2px;
+                                                    }
 
-                                                        .comment-row.customer+.comment-row.agent {
-                                                            margin-top: 5px;
-                                                        }
+                                                    .comment-row.customer+.comment-row.agent {
+                                                        margin-top: 5px;
+                                                    }
 
-                                                        .comment-row.agent+.comment-row.customer {
-                                                            margin-top: 5px;
-                                                        }
+                                                    .comment-row.agent+.comment-row.customer {
+                                                        margin-top: 5px;
+                                                    }
 
-                                                        .comment-row.agent {
-                                                            flex-direction: row-reverse;
-                                                        }
+                                                    .comment-row.agent {
+                                                        flex-direction: row-reverse;
+                                                    }
 
-                                                        .comment-avatar {
-                                                            width: 36px;
-                                                            height: 36px;
-                                                            border-radius: 50%;
-                                                            background: #e0e0e0;
-                                                            object-fit: cover;
-                                                            margin: 0 8px;
-                                                        }
+                                                    .comment-avatar {
+                                                        width: 36px;
+                                                        height: 36px;
+                                                        border-radius: 50%;
+                                                        background: #e0e0e0;
+                                                        object-fit: cover;
+                                                        margin: 0 8px;
+                                                    }
 
-                                                        .comment-bubble {
-                                                            max-width: 70%;
-                                                            padding: 5px 10px;
-                                                            border-radius: 18px;
-                                                            position: relative;
-                                                            font-size: 15px;
-                                                            word-break: break-word;
-                                                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-                                                        }
+                                                    .comment-bubble {
+                                                        max-width: 70%;
+                                                        padding: 5px 10px;
+                                                        border-radius: 18px;
+                                                        position: relative;
+                                                        font-size: 15px;
+                                                        word-break: break-word;
+                                                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+                                                    }
 
-                                                        .comment-row.agent .comment-bubble {
-                                                            background: #f8f8f8;
-                                                            color: #222;
-                                                            border-bottom-right-radius: 6px;
-                                                            border-bottom-left-radius: 18px;
-                                                            margin-left: 10px;
-                                                            border: 1px solid #e0e0e0;
-                                                        }
+                                                    .comment-row.agent .comment-bubble {
+                                                        background: #f8f8f8;
+                                                        color: #222;
+                                                        border-bottom-right-radius: 6px;
+                                                        border-bottom-left-radius: 18px;
+                                                        margin-left: 10px;
+                                                        border: 1px solid #e0e0e0;
+                                                    }
 
-                                                        .comment-row.customer .comment-bubble {
-                                                            background: #f8f8f8;
-                                                            color: #222;
-                                                            border-bottom-left-radius: 6px;
-                                                            border-bottom-right-radius: 18px;
-                                                            margin-right: 10px;
-                                                            border: 1px solid #e0e0e0;
-                                                        }
+                                                    .comment-row.customer .comment-bubble {
+                                                        background: #f8f8f8;
+                                                        color: #222;
+                                                        border-bottom-left-radius: 6px;
+                                                        border-bottom-right-radius: 18px;
+                                                        margin-right: 10px;
+                                                        border: 1px solid #e0e0e0;
+                                                    }
 
-                                                        .comment-meta {
-                                                            position: relative;
-                                                            font-size: 9px;
-                                                            color: #222;
-                                                            display: flex;
-                                                            justify-content: flex-end;
-                                                            align-items: center;
-                                                            gap: 6px;
-                                                            width: 100%;
-                                                        }
+                                                    .comment-meta {
+                                                        position: relative;
+                                                        font-size: 9px;
+                                                        color: #222;
+                                                        display: flex;
+                                                        justify-content: flex-end;
+                                                        align-items: center;
+                                                        gap: 6px;
+                                                        width: 100%;
+                                                    }
 
-                                                        .edited-label {
-                                                            font-size: 10px;
-                                                            color: #b0b0b0;
-                                                            margin-left: 4px;
-                                                            vertical-align: middle;
-                                                            opacity: 0.7;
-                                                        }
-
-
-                                                        .edit-comment-btn,
-                                                        .delete-comment-btn {
-                                                            font-size: 12px;
-                                                            color: #ffc107;
-                                                            background: none;
-                                                            border: none;
-                                                            cursor: pointer;
-                                                            padding: 0;
-                                                        }
-
-                                                        .comment-text {
-                                                            padding-right: 30px;
-                                                            line-height: 18px;
-                                                            font-size: 13px;
-                                                        }
-                                                    </style>
-                                                    <script>
-                                                        // --- Comments/Chat Section Logic ---
-                                                        // document.addEventListener('DOMContentLoaded', function () {
-                                                        //     const ticketId = SBF.getURL('ticket')   || document.getElementById('ticket_id').value;
-                                                        //     const currentUserId = document.getElementById('currentUserId').value;   
-                                                        //     const currentUserRole = document.getElementById('currentUserRole').value;
-                                                        //     const commentsSection = document.getElementById('comments-section');
-                                                        //     const addCommentForm = document.getElementById('addCommentForm');
-                                                        //     const newCommentInput = document.getElementById('newComment');
-
-                                                        //     // Placeholder avatar
-                                                        //     function getAvatar(user) {
-                                                        //         // If you have user.avatar, use it; else fallback
-                                                        //         return user && user.avatar ? user.avatar : 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user && user.user_name ? user.user_name : user.user_role) + '&size=64&background=2563eb&color=fff';
-                                                        //     }
-
-                                                        //     function formatTimeTo12Hour(dateString) {
-                                                        //         const date = new Date(dateString.replace(' ', 'T'));
-                                                        //         let hours = date.getHours();
-                                                        //         let minutes = date.getMinutes();
-                                                        //         const ampm = hours >= 12 ? 'pm' : 'am';
-                                                        //         hours = hours % 12;
-                                                        //         hours = hours ? hours : 12; // 0 => 12
-                                                        //         minutes = minutes < 10 ? '0' + minutes : minutes;
-                                                        //         return hours + ':' + minutes + ' ' + ampm;
-                                                        //     }
-
-                                                        //     function formatDateLabel(dateString) {
-                                                        //         const date = new Date(dateString.replace(' ', 'T'));
-                                                        //         const today = new Date();
-                                                        //         const yesterday = new Date();
-                                                        //         yesterday.setDate(today.getDate() - 1);
-                                                        //         const isToday = date.toDateString() === today.toDateString();
-                                                        //         const isYesterday = date.toDateString() === yesterday.toDateString();
-                                                        //         if (isToday) return 'Today';
-                                                        //         if (isYesterday) return 'Yesterday';
-                                                        //         return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-                                                        //     }
-
-                                                        //     function renderComment(comment) {
-                                                        //         const isAgent = comment.user_role === 'agent';
-                                                        //         const isOwn = comment.user_id == currentUserId;
-                                                        //         const rowClass = isAgent ? 'agent' : 'customer';
-                                                        //         // Avatar
-                                                        //         const avatarUrl = getAvatar(comment);
-                                                        //         // Bubble
-                                                        //         let html = `<div class="comment-row ${rowClass}">
-                                                        //             <img src="${avatarUrl}" class="comment-avatar" alt="avatar">
-                                                        //             <div class="comment-bubble">
-                                                        //                 <div class="comment-text" data-id="${comment.id}">${escapeHtml(comment.comment)}</div>
-                                                        //                 <div class="comment-meta">
-                                                        //                     <span>${formatTimeTo12Hour(comment.created_at)}</span>`;
-                                                        //         if (comment.is_edited == 1 || comment.is_edited === "1") {
-                                                        //             html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
-                                                        //         }
-                                                        //         // Show Edit button only if own comment and within 10 minutes
-                                                        //         if (isOwn && canEditComment(comment.created_at)) {
-                                                        //             html += `<button class="edit-comment-btn" data-id="${comment.id}">Edit</button>`;
-                                                        //         }
-                                                        //         if (isOwn) {
-                                                        //             html += `<button class="delete-comment-btn" data-id="${comment.id}">Delete</button>`;
-                                                        //         }
-                                                        //         html += `</div>
-                                                        //             </div>
-                                                        //         </div>`;
-                                                        //         return html;
-                                                        //     }
-
-                                                        //     function canEditComment(createdAt) {
-                                                        //         // Use server time injected by PHP for accuracy
-                                                        //         const serverNow = window.SERVER_NOW ? new Date(window.SERVER_NOW) : new Date();
-                                                        //         const commentTime = new Date(createdAt.replace(' ', 'T'));
-                                                        //         const diffMs = serverNow - commentTime;
-                                                        //         const diffMin = diffMs / (1000 * 60);
-                                                        //         return diffMin >= 0 && diffMin <= 10;
-                                                        //     }
-
-                                                        //     function escapeHtml(text) {
-                                                        //         var map = {
-                                                        //             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
-                                                        //         };
-                                                        //         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-                                                        //     }
+                                                    .edited-label {
+                                                        font-size: 10px;
+                                                        color: #b0b0b0;
+                                                        margin-left: 4px;
+                                                        vertical-align: middle;
+                                                        opacity: 0.7;
+                                                    }
 
 
+                                                    .edit-comment-btn,
+                                                    .delete-comment-btn {
+                                                        font-size: 12px;
+                                                        color: #ffc107;
+                                                        background: none;
+                                                        border: none;
+                                                        cursor: pointer;
+                                                        padding: 0;
+                                                    }
 
-                                                        //     function scrollToBottom() {
-                                                        //         commentsSection.scrollTop = commentsSection.scrollHeight;
-                                                        //     }
+                                                    .comment-text {
+                                                        padding-right: 30px;
+                                                        line-height: 18px;
+                                                        font-size: 13px;
+                                                    }
+                                                </style>
+                                                <script>
+                                                    // --- Comments/Chat Section Logic ---
+                                                    // document.addEventListener('DOMContentLoaded', function () {
+                                                    //     const ticketId = SBF.getURL('ticket')   || document.getElementById('ticket_id').value;
+                                                    //     const currentUserId = document.getElementById('currentUserId').value;
+                                                    //     const currentUserRole = document.getElementById('currentUserRole').value;
+                                                    //     const commentsSection = document.getElementById('comments-section');
+                                                    //     const addCommentForm = document.getElementById('addCommentForm');
+                                                    //     const newCommentInput = document.getElementById('newComment');
 
-                                                        //     addCommentForm.addEventListener('submit', function(e) {
-                                                        //         e.preventDefault();
-                                                        //         const comment = newCommentInput.value.trim();
-                                                        //         if (!comment) return;
-                                                        //         fetch('api/add-comment.php', {
-                                                        //             method: 'POST',
-                                                        //             headers: { 'Content-Type': 'application/json' },
-                                                        //             body: JSON.stringify({
-                                                        //                 ticket_id: ticketId,
-                                                        //                 user_id: currentUserId,
-                                                        //                 user_role: currentUserRole,
-                                                        //                 comment: comment
-                                                        //             })
-                                                        //         })
-                                                        //         .then(res => res.json())
-                                                        //         .then(data => {
-                                                        //             if (data.success) {
-                                                        //                 newCommentInput.value = '';
-                                                        //                 loadComments();
-                                                        //             } else {
-                                                        //                 alert(data.error || 'Failed to add comment');
-                                                        //             }
-                                                        //         });
-                                                        //     });
+                                                    //     // Placeholder avatar
+                                                    //     function getAvatar(user) {
+                                                    //         // If you have user.avatar, use it; else fallback
+                                                    //         return user && user.avatar ? user.avatar : 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user && user.user_name ? user.user_name : user.user_role) + '&size=64&background=2563eb&color=fff';
+                                                    //     }
 
-                                                        //     function attachEditListeners() {
-                                                        //         commentsSection.querySelectorAll('.edit-comment-btn').forEach(btn => {
-                                                        //             btn.onclick = function() {
-                                                        //                 const commentId = this.getAttribute('data-id');
-                                                        //                 const commentDiv = commentsSection.querySelector(`.comment-text[data-id='${commentId}']`);
-                                                        //                 if (!commentDiv) return;
-                                                        //                 const oldText = commentDiv.innerText;
-                                                        //                 // Replace with textarea
-                                                        //                 // commentDiv.innerHTML = `<textarea class='form-control form-control-sm edit-comment-textarea' rows='2'>${oldText}</textarea>`;
-                                                        //                 // this.style.display = 'none';
-                                                        //                 // const textarea = commentDiv.querySelector('textarea');
-                                                        //                 const textarea = document.getElementById('oldComment'); 
-                                                        //                 textarea.value = oldText;
-                                                        //                 textarea.classList.remove('d-none');
-                                                        //                 textarea.classList.add('edit-comment-textarea');
-                                                        //                 this.style.display = 'none';
-                                                        //                 textarea.focus();
-                                                        //                 document.getElementById('newComment').classList.add('d-none'); 
-                                                        //                 textarea.onblur = function() {
-                                                        //                     saveEdit(commentId, textarea.value, commentDiv, btn);
-                                                        //                 };
-                                                        //                 textarea.onkeydown = function(e) {
-                                                        //                     if (e.key === 'Enter' && !e.shiftKey) {
-                                                        //                         e.preventDefault();
-                                                        //                         textarea.blur();
-                                                        //                     }
-                                                        //                 };
-                                                        //             };
-                                                        //         });
+                                                    //     function formatTimeTo12Hour(dateString) {
+                                                    //         const date = new Date(dateString.replace(' ', 'T'));
+                                                    //         let hours = date.getHours();
+                                                    //         let minutes = date.getMinutes();
+                                                    //         const ampm = hours >= 12 ? 'pm' : 'am';
+                                                    //         hours = hours % 12;
+                                                    //         hours = hours ? hours : 12; // 0 => 12
+                                                    //         minutes = minutes < 10 ? '0' + minutes : minutes;
+                                                    //         return hours + ':' + minutes + ' ' + ampm;
+                                                    //     }
 
-                                                        //         commentsSection.querySelectorAll('.delete-comment-btn').forEach(btn => {
-                                                        //             btn.onclick = function() {
-                                                        //                 const commentId = this.getAttribute('data-id');
-                                                        //                 deleteComment(commentId);
-                                                        //             };
-                                                        //         });
-                                                        //     }
+                                                    //     function formatDateLabel(dateString) {
+                                                    //         const date = new Date(dateString.replace(' ', 'T'));
+                                                    //         const today = new Date();
+                                                    //         const yesterday = new Date();
+                                                    //         yesterday.setDate(today.getDate() - 1);
+                                                    //         const isToday = date.toDateString() === today.toDateString();
+                                                    //         const isYesterday = date.toDateString() === yesterday.toDateString();
+                                                    //         if (isToday) return 'Today';
+                                                    //         if (isYesterday) return 'Yesterday';
+                                                    //         return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                                                    //     }
 
-                                                        //     function deleteComment(commentId) {
-                                                        //         fetch('api/delete-ticket-comment.php', {
-                                                        //             method: 'POST',
-                                                        //             headers: { 'Content-Type': 'application/json' },
-                                                        //             body: JSON.stringify({ comment_id: commentId })
-                                                        //         })
-                                                        //         .then(res => res.json())
-                                                        //         .then(data => {
-                                                        //             if (data.success) {
-                                                        //                 loadComments();
-                                                        //             } else {
-                                                        //                 alert(data.error || 'Failed to delete comment');
-                                                        //             }
-                                                        //         });
-                                                        //     }
+                                                    //     function renderComment(comment) {
+                                                    //         const isAgent = comment.user_role === 'agent';
+                                                    //         const isOwn = comment.user_id == currentUserId;
+                                                    //         const rowClass = isAgent ? 'agent' : 'customer';
+                                                    //         // Avatar
+                                                    //         const avatarUrl = getAvatar(comment);
+                                                    //         // Bubble
+                                                    //         let html = `<div class="comment-row ${rowClass}">
+                                            //             <img src="${avatarUrl}" class="comment-avatar" alt="avatar">
+                                            //             <div class="comment-bubble">
+                                            //                 <div class="comment-text" data-id="${comment.id}">${escapeHtml(comment.comment)}</div>
+                                            //                 <div class="comment-meta">
+                                            //                     <span>${formatTimeTo12Hour(comment.created_at)}</span>`;
+                                                    //         if (comment.is_edited == 1 || comment.is_edited === "1") {
+                                                    //             html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
+                                                    //         }
+                                                    //         // Show Edit button only if own comment and within 10 minutes
+                                                    //         if (isOwn && canEditComment(comment.created_at)) {
+                                                    //             html += `<button class="edit-comment-btn" data-id="${comment.id}">Edit</button>`;
+                                                    //         }
+                                                    //         if (isOwn) {
+                                                    //             html += `<button class="delete-comment-btn" data-id="${comment.id}">Delete</button>`;
+                                                    //         }
+                                                    //         html += `</div>
+                                            //             </div>
+                                            //         </div>`;
+                                                    //         return html;
+                                                    //     }
 
-                                                        //     function saveEdit(commentId, newText, commentDiv, editBtn) {
-                                                        //         newText = newText.trim();
-                                                        //         if (!newText) {
-                                                        //             commentDiv.innerHTML = '<span class="text-danger small">Comment cannot be empty</span>';
-                                                        //             setTimeout(() => { loadComments(); }, 1200);
-                                                        //             return;
-                                                        //         }
-                                                        //         fetch('api/edit-comment.php', {
-                                                        //             method: 'POST',
-                                                        //             headers: { 'Content-Type': 'application/json' },
-                                                        //             body: JSON.stringify({
-                                                        //                 comment_id: commentId,
-                                                        //                 user_id: currentUserId,
-                                                        //                 comment: newText
-                                                        //             })
-                                                        //         })
-                                                        //         .then(res => res.json())
-                                                        //         .then(data => {
-                                                        //             if (data.success) {
-                                                        //                 const textarea = document.getElementById('oldComment'); 
-                                                        //                 textarea.classList.remove('edit-comment-textarea');
-                                                        //                 textarea.classList.add('d-none');
-                                                        //                 editBtn.style.display = 'block';
-                                                        //                 document.getElementById('newComment').classList.remove('d-none');
-                                                        //                 loadComments();
-                                                        //             } else {
-                                                        //                 commentDiv.innerHTML = `<span class='text-danger small'>${data.error || 'Failed to edit comment'}</span>`;
-                                                        //                 setTimeout(() => { loadComments(); }, 1200);
-                                                        //             }
-                                                        //         });
-                                                        //     }
+                                                    //     function canEditComment(createdAt) {
+                                                    //         // Use server time injected by PHP for accuracy
+                                                    //         const serverNow = window.SERVER_NOW ? new Date(window.SERVER_NOW) : new Date();
+                                                    //         const commentTime = new Date(createdAt.replace(' ', 'T'));
+                                                    //         const diffMs = serverNow - commentTime;
+                                                    //         const diffMin = diffMs / (1000 * 60);
+                                                    //         return diffMin >= 0 && diffMin <= 10;
+                                                    //     }
 
-                                                        // Initial load
-                                                        //loadComments();
-                                                        // Optional: Poll for new comments every 30s
-                                                        //setInterval(loadComments, 30000);
-                                                        //});
-                                                    </script>
-                                                    <script>
-                                                        window.SERVER_NOW = "<?php echo date(
-                                                            "Y-m-d\TH:i:sP"
-                                                        ); ?>";
-                                                    </script>
-                                                </div>
-                                                <div class="col-md-3 p-0">
-                                                    <div class="pl-5">
-                                                        <div class="sidepanel">
-                                                            <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
-                                                            <span class="conversation-id d-none">Conversation ID : <span></span></span>
-                                                            <div class="ticket-fields">
-                                                                <div class="mb-3 without-contact">
-                                                                    <div class="field-label">Guest Ticket</div>
-                                                                    <div class="d-flex align-items-center gap-2"></div>
-                                                                    <div class="form-check form-switch mb-0 ml-2">
-                                                                        <input class="form-check-input" name="without_contact" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width: 27px;">
-                                                                    </div>
+                                                    //     function escapeHtml(text) {
+                                                    //         var map = {
+                                                    //             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+                                                    //         };
+                                                    //         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+                                                    //     }
+
+
+
+                                                    //     function scrollToBottom() {
+                                                    //         commentsSection.scrollTop = commentsSection.scrollHeight;
+                                                    //     }
+
+                                                    //     addCommentForm.addEventListener('submit', function(e) {
+                                                    //         e.preventDefault();
+                                                    //         const comment = newCommentInput.value.trim();
+                                                    //         if (!comment) return;
+                                                    //         fetch('api/add-comment.php', {
+                                                    //             method: 'POST',
+                                                    //             headers: { 'Content-Type': 'application/json' },
+                                                    //             body: JSON.stringify({
+                                                    //                 ticket_id: ticketId,
+                                                    //                 user_id: currentUserId,
+                                                    //                 user_role: currentUserRole,
+                                                    //                 comment: comment
+                                                    //             })
+                                                    //         })
+                                                    //         .then(res => res.json())
+                                                    //         .then(data => {
+                                                    //             if (data.success) {
+                                                    //                 newCommentInput.value = '';
+                                                    //                 loadComments();
+                                                    //             } else {
+                                                    //                 alert(data.error || 'Failed to add comment');
+                                                    //             }
+                                                    //         });
+                                                    //     });
+
+                                                    //     function attachEditListeners() {
+                                                    //         commentsSection.querySelectorAll('.edit-comment-btn').forEach(btn => {
+                                                    //             btn.onclick = function() {
+                                                    //                 const commentId = this.getAttribute('data-id');
+                                                    //                 const commentDiv = commentsSection.querySelector(`.comment-text[data-id='${commentId}']`);
+                                                    //                 if (!commentDiv) return;
+                                                    //                 const oldText = commentDiv.innerText;
+                                                    //                 // Replace with textarea
+                                                    //                 // commentDiv.innerHTML = `<textarea class='form-control form-control-sm edit-comment-textarea' rows='2'>${oldText}</textarea>`;
+                                                    //                 // this.style.display = 'none';
+                                                    //                 // const textarea = commentDiv.querySelector('textarea');
+                                                    //                 const textarea = document.getElementById('oldComment');
+                                                    //                 textarea.value = oldText;
+                                                    //                 textarea.classList.remove('d-none');
+                                                    //                 textarea.classList.add('edit-comment-textarea');
+                                                    //                 this.style.display = 'none';
+                                                    //                 textarea.focus();
+                                                    //                 document.getElementById('newComment').classList.add('d-none');
+                                                    //                 textarea.onblur = function() {
+                                                    //                     saveEdit(commentId, textarea.value, commentDiv, btn);
+                                                    //                 };
+                                                    //                 textarea.onkeydown = function(e) {
+                                                    //                     if (e.key === 'Enter' && !e.shiftKey) {
+                                                    //                         e.preventDefault();
+                                                    //                         textarea.blur();
+                                                    //                     }
+                                                    //                 };
+                                                    //             };
+                                                    //         });
+
+                                                    //         commentsSection.querySelectorAll('.delete-comment-btn').forEach(btn => {
+                                                    //             btn.onclick = function() {
+                                                    //                 const commentId = this.getAttribute('data-id');
+                                                    //                 deleteComment(commentId);
+                                                    //             };
+                                                    //         });
+                                                    //     }
+
+                                                    //     function deleteComment(commentId) {
+                                                    //         fetch('api/delete-ticket-comment.php', {
+                                                    //             method: 'POST',
+                                                    //             headers: { 'Content-Type': 'application/json' },
+                                                    //             body: JSON.stringify({ comment_id: commentId })
+                                                    //         })
+                                                    //         .then(res => res.json())
+                                                    //         .then(data => {
+                                                    //             if (data.success) {
+                                                    //                 loadComments();
+                                                    //             } else {
+                                                    //                 alert(data.error || 'Failed to delete comment');
+                                                    //             }
+                                                    //         });
+                                                    //     }
+
+                                                    //     function saveEdit(commentId, newText, commentDiv, editBtn) {
+                                                    //         newText = newText.trim();
+                                                    //         if (!newText) {
+                                                    //             commentDiv.innerHTML = '<span class="text-danger small">Comment cannot be empty</span>';
+                                                    //             setTimeout(() => { loadComments(); }, 1200);
+                                                    //             return;
+                                                    //         }
+                                                    //         fetch('api/edit-comment.php', {
+                                                    //             method: 'POST',
+                                                    //             headers: { 'Content-Type': 'application/json' },
+                                                    //             body: JSON.stringify({
+                                                    //                 comment_id: commentId,
+                                                    //                 user_id: currentUserId,
+                                                    //                 comment: newText
+                                                    //             })
+                                                    //         })
+                                                    //         .then(res => res.json())
+                                                    //         .then(data => {
+                                                    //             if (data.success) {
+                                                    //                 const textarea = document.getElementById('oldComment');
+                                                    //                 textarea.classList.remove('edit-comment-textarea');
+                                                    //                 textarea.classList.add('d-none');
+                                                    //                 editBtn.style.display = 'block';
+                                                    //                 document.getElementById('newComment').classList.remove('d-none');
+                                                    //                 loadComments();
+                                                    //             } else {
+                                                    //                 commentDiv.innerHTML = `<span class='text-danger small'>${data.error || 'Failed to edit comment'}</span>`;
+                                                    //                 setTimeout(() => { loadComments(); }, 1200);
+                                                    //             }
+                                                    //         });
+                                                    //     }
+
+                                                    // Initial load
+                                                    //loadComments();
+                                                    // Optional: Poll for new comments every 30s
+                                                    //setInterval(loadComments, 30000);
+                                                    //});
+                                                </script>
+                                                <script>
+                                                    window.SERVER_NOW = "<?php echo date(
+                                                        "Y-m-d\TH:i:sP"
+                                                    ); ?>";
+                                                </script>
+                                            </div>
+                                            <div class="col-md-3 p-0">
+                                                <div class="pl-5">
+                                                    <div class="sidepanel">
+                                                        <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
+                                                        <span class="conversation-id d-none">Conversation ID :
+                                                            <span></span></span>
+                                                        <div class="ticket-fields">
+                                                            <div class="mb-3 without-contact">
+                                                                <div class="field-label">Guest Ticket</div>
+                                                                <div class="d-flex align-items-center gap-2"></div>
+                                                                <div class="form-check form-switch mb-0 ml-2">
+                                                                    <input class="form-check-input" name="without_contact"
+                                                                        type="checkbox" role="switch"
+                                                                        id="flexSwitchCheckDefault" style="width: 27px;">
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <div class="field-label required-label">Assignee</div>
-                                                                    <div class="d-flex align-items-center justify-content-between">
-                                                                        <div class="d-flex align-items-center gap-2 ticket-assignee">
-                                                                            <img class="assignee-img" src="" alt="Assignee">
-                                                                            <span class="user-initials avatar_initials" style="display:none;">
-                                                                                <span class="initials avatar_name"></span>
-                                                                            </span>
-                                                                            <div id="assigned_to" data-type="select" class="sb-input">
-                                                                                <select id="select-ticket-agent" style="width:100%;">
-
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <div class="field-label required-label">Reporter</div>
-                                                                    <div class="d-flex align-items-center gap-2 ticket-reporter">
-                                                                        <img class="reporter-img" src="" alt="Reporter" style="width: 40px;">
-                                                                        <span class="user-initials avatar_initials" style="display:none;">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="field-label required-label">Assignee</div>
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <div
+                                                                        class="d-flex align-items-center gap-2 ticket-assignee">
+                                                                        <img class="assignee-img" src="" alt="Assignee">
+                                                                        <span class="user-initials avatar_initials"
+                                                                            style="display:none;">
                                                                             <span class="initials avatar_name"></span>
                                                                         </span>
-                                                                        <span class="name"></span>
-                                                                        <div id="reporter" data-type="select" class="sb-input d-none">
-                                                                            <select id="select-ticket-reporter" style="width:100%;">
+                                                                        <div id="assigned_to" data-type="select"
+                                                                            class="sb-input">
+                                                                            <select id="select-ticket-agent"
+                                                                                style="width:100%;">
+
                                                                             </select>
                                                                         </div>
                                                                     </div>
+
+                                                                    <!-- <p class="assign-link m-0 p-0">Assign to me</p> -->
                                                                 </div>
-                                                                <?php if (
-                                                                    isset(
-                                                                        $department_settings[
-                                                                            "departments-show-list"
-                                                                        ]
-                                                                    ) &&
-                                                                    $department_settings[
-                                                                        "departments-show-list"
-                                                                    ] == "1"
-                                                                ) { ?>
-                                                                    <div class="mb-3 sb-input d-block">
-                                                                        <div class="field-label">Department</div>
-                                                                        <select id="ticket-department" required>
-                                                                            <option value=""><?php echo sb_(
-                                                                                "Select Department"
-                                                                            ); ?></option>
-                                                                            <?php
-                                                                            $departments = sb_get_departments();
-                                                                            foreach (
-                                                                                $departments
-                                                                                as $key =>
-                                                                                    $value
-                                                                            ) {
-                                                                                echo '<option value="' .
-                                                                                    $key .
-                                                                                    '">' .
-                                                                                    sb_(
-                                                                                        $value[
-                                                                                            "name"
-                                                                                        ]
-                                                                                    ) .
-                                                                                    "</option>";
-                                                                            }
-                                                                            ?>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <div class="field-label required-label">Reporter</div>
+                                                                <div class="d-flex align-items-center gap-2 ticket-reporter">
+                                                                    <img class="reporter-img" src="" alt="Reporter"
+                                                                        style="width: 40px;">
+                                                                    <span class="user-initials avatar_initials"
+                                                                        style="display:none;">
+                                                                        <span class="initials avatar_name"></span>
+                                                                    </span>
+                                                                    <span class="name"></span>
+                                                                    <div id="reporter" data-type="select"
+                                                                        class="sb-input d-none">
+                                                                        <select id="select-ticket-reporter" style="width:100%;">
                                                                         </select>
                                                                     </div>
-                                                                <?php } ?>
-                                                                <?php
-                                                                $tags = sb_get_multi_setting(
-                                                                    "disable",
-                                                                    "disable-tags"
-                                                                )
-                                                                    ? []
-                                                                    : sb_get_setting(
-                                                                        "tags",
-                                                                        []
-                                                                    );
-                                                                $tagsHtml = "";
-                                                                $count = count(
-                                                                    $tags
+                                                                </div>
+                                                            </div>
+                                                            <?php if (
+                                                                isset(
+                                                                $department_settings[
+                                                                    "departments-show-list"
+                                                                ]
+                                                            ) &&
+                                                                $department_settings[
+                                                                    "departments-show-list"
+                                                                ] == "1"
+                                                            ) { ?>
+                                                                <div class="mb-3 sb-input d-block">
+                                                                    <div class="field-label">Department</div>
+                                                                    <select id="ticket-department" required>
+                                                                        <option value=""><?php echo sb_(
+                                                                            "Select Department"
+                                                                        ); ?></option>
+                                                                        <?php
+                                                                        $departments = sb_get_departments();
+                                                                        foreach (
+                                                                            $departments
+                                                                            as $key =>
+                                                                            $value
+                                                                        ) {
+                                                                            echo '<option value="' .
+                                                                                $key .
+                                                                                '">' .
+                                                                                sb_(
+                                                                                    $value[
+                                                                                        "name"
+                                                                                    ]
+                                                                                ) .
+                                                                                "</option>";
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <?php
+                                                            $tags = sb_get_multi_setting(
+                                                                "disable",
+                                                                "disable-tags"
+                                                            )
+                                                                ? []
+                                                                : sb_get_setting(
+                                                                    "tags",
+                                                                    []
                                                                 );
-                                                                if (
-                                                                    $count > 0
-                                                                ) { ?>
-                                                                    <div class="mb-3">
-                                                                        <div class="field-label">Tags</div>
-                                                                        <div class="mb-2">
-                                                                            <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
-                                                                            <div class="mr-5 tags-filter" style="">
-                                                                                <select id="ticket-detail-tags-filter" name="tags[]" multiple>
-                                                                                    <?php
-                                                                                    for (
-                                                                                        $i = 0;
-                                                                                        $i <
-                                                                                        $count;
-                                                                                        $i++
-                                                                                    ) {
-                                                                                        $tagsHtml .=
-                                                                                            '<option value="' .
-                                                                                            $tags[
-                                                                                                $i
-                                                                                            ][
-                                                                                                "tag-name"
-                                                                                            ] .
-                                                                                            '"  class="tag-option" data-color="' .
-                                                                                            $tags[
-                                                                                                $i
-                                                                                            ][
-                                                                                                "tag-color"
-                                                                                            ] .
-                                                                                            '" data-custom-properties={"color":"' .
-                                                                                            $tags[
-                                                                                                $i
-                                                                                            ][
-                                                                                                "tag-color"
-                                                                                            ] .
-                                                                                            '"}>' .
-                                                                                            $tags[
-                                                                                                $i
-                                                                                            ][
-                                                                                                "tag-name"
-                                                                                            ] .
-                                                                                            "</option>";
-                                                                                    }
-                                                                                    echo $tagsHtml;
-                                                                                    ?>
-                                                                                </select>
-                                                                            </div>
+                                                            $tagsHtml = "";
+                                                            $count = count(
+                                                                $tags
+                                                            );
+                                                            if (
+                                                                $count > 0
+                                                            ) { ?>
+                                                                <div class="mb-3">
+                                                                    <div class="field-label">Tags</div>
+                                                                    <div class="mb-2">
+                                                                        <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
+                                                                        <div class="mr-5 tags-filter" style="">
+                                                                            <select id="ticket-detail-tags-filter" name="tags[]"
+                                                                                multiple>
+                                                                                <?php
+                                                                                for (
+                                                                                    $i = 0;
+                                                                                    $i <
+                                                                                    $count;
+                                                                                    $i++
+                                                                                ) {
+                                                                                    $tagsHtml .=
+                                                                                        '<option value="' .
+                                                                                        $tags[
+                                                                                            $i
+                                                                                        ][
+                                                                                            "tag-name"
+                                                                                        ] .
+                                                                                        '"  class="tag-option" data-color="' .
+                                                                                        $tags[
+                                                                                            $i
+                                                                                        ][
+                                                                                            "tag-color"
+                                                                                        ] .
+                                                                                        '" data-custom-properties={"color":"' .
+                                                                                        $tags[
+                                                                                            $i
+                                                                                        ][
+                                                                                            "tag-color"
+                                                                                        ] .
+                                                                                        '"}>' .
+                                                                                        $tags[
+                                                                                            $i
+                                                                                        ][
+                                                                                            "tag-name"
+                                                                                        ] .
+                                                                                        "</option>";
+                                                                                }
+                                                                                echo $tagsHtml;
+                                                                                ?>
+                                                                            </select>
                                                                         </div>
-                                                                        <div class="sb-td-tags tag-badges">
-                                                                            <!-- <span class="tag-badge">
+                                                                    </div>
+                                                                    <div class="sb-td-tags tag-badges">
+                                                                        <!-- <span class="tag-badge">
                                                                                 <i class="fas fa-check text-muted"></i>
                                                                                 Business
                                                                             </span>
@@ -4661,44 +4889,44 @@ function sb_component_admin()
                                                                                 <i class="fas fa-check text-muted"></i>
                                                                                 Priority
                                                                             </span> -->
-                                                                        </div>
                                                                     </div>
-                                                                <?php }
-                                                                ?>
+                                                                </div>
+                                                            <?php }
+                                                            ?>
 
-                                                                <div class="mb-3 sb-input d-block">
-                                                                    <div class="field-label required-label">Priority</div>
-                                                                    <!-- <div class="ticket-priority">
+                                                            <div class="mb-3 sb-input d-block">
+                                                                <div class="field-label required-label">Priority</div>
+                                                                <!-- <div class="ticket-priority">
                                                                         High
                                                                     </div>
                                                                     <div id="priority_id" data-type="select" class="sb-input">
                                                                         <span class="required-label"><?php sb_e(
                                                                             "Priority"
                                                                         ); ?></span> -->
-                                                                    <select id="ticket-priority" required>
-                                                                        <?php foreach (
-                                                                            $priorities
-                                                                            as $key =>
-                                                                                $value
-                                                                        ) {
-                                                                            echo '<option value="' .
-                                                                                $value[
-                                                                                    "id"
-                                                                                ] .
-                                                                                '">' .
-                                                                                $value[
-                                                                                    "name"
-                                                                                ] .
-                                                                                "</option>";
-                                                                        } ?>
-                                                                    </select>
-                                                                    <!-- </div> -->
-                                                                </div>
+                                                                <select id="ticket-priority" required>
+                                                                    <?php foreach (
+                                                                        $priorities
+                                                                        as $key =>
+                                                                        $value
+                                                                    ) {
+                                                                        echo '<option value="' .
+                                                                            $value[
+                                                                                "id"
+                                                                            ] .
+                                                                            '">' .
+                                                                            $value[
+                                                                                "name"
+                                                                            ] .
+                                                                            "</option>";
+                                                                    } ?>
+                                                                </select>
+                                                                <!-- </div> -->
                                                             </div>
-                                                            <div class="divider"></div>
-                                                            <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i></h5>
-                                                            <div id="custom-fields" class="sb-input d-block"></div>
                                                         </div>
+                                                        <div class="divider"></div>
+                                                        <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i>
+                                                        </h5>
+                                                        <div id="custom-fields" class="sb-input d-block"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -4708,129 +4936,135 @@ function sb_component_admin()
                             </div>
                         </div>
                     </div>
-                    <div class="ticket-attachments sb-lightbox">
-                        <div class="sb-info"></div>
-                        <div class="sb-top-bar">
-                            <div>
-                                <h2 style="margin-bottom: 0;">
-                                    Ticket Attachments
-                                </h2>
-                            </div>
-                            <div>
-                                <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-attachments" data-hide="sb-profile-area" data-show="sb-edit-area">
-                                    <i class="sb-icon-sms"></i> Save Changes
-                                </a>
-                                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
-                                    <i class="sb-icon-close"></i>
-                                </a>
-                            </div>
+                </div>
+                <div class="ticket-attachments sb-lightbox">
+                    <div class="sb-info"></div>
+                    <div class="sb-top-bar">
+                        <div>
+                            <h2 style="margin-bottom: 0;">
+                                Ticket Attachments
+                            </h2>
                         </div>
+                        <div>
+                            <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-attachments"
+                                data-hide="sb-profile-area" data-show="sb-edit-area">
+                                <i class="sb-icon-sms"></i> Save Changes
+                            </a>
+                            <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                                data-show="sb-table-area">
+                                <i class="sb-icon-close"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                        <div class="sb-main sb-scroll-area">
-                            <div class="sb-details">
-                                <div class="mt-5">
-                                    <span class="d-block mb-2">Attachments</span>
-                                    <div class="custom-file">
-                                        <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments" multiple>
-                                        <input type="hidden" id="reopendTicketAttachmentsPopup" value="0">
-                                        <span class="text-danger files-error mt-2 d-block"></span>
-                                        <small class="form-text text-muted mt-2" style="display:block">You can select multiple files. Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
-                                    </div>
+                    <div class="sb-main sb-scroll-area">
+                        <div class="sb-details">
+                            <div class="mt-5">
+                                <span class="d-block mb-2">Attachments</span>
+                                <div class="custom-file">
+                                    <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments"
+                                        multiple>
+                                    <input type="hidden" id="reopendTicketAttachmentsPopup" value="0">
+                                    <span class="text-danger files-error mt-2 d-block"></span>
+                                    <small class="form-text text-muted mt-2" style="display:block">You can select multiple
+                                        files. Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
                                 </div>
-                                <div class="form-group mb-3">
+                            </div>
+                            <div class="form-group mb-3">
 
-                                    <div class="progress mt-2 d-none" id="upload-progress-container">
-                                        <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                <div class="progress mt-2 d-none" id="upload-progress-container">
+                                    <div class="progress-bar" id="upload-progress" role="progressbar" aria-valuenow="0"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
 
-                                    <div class="mt-2 attachments" id="existing-file-preview-container">
-                                        <span>Current Attachments</span>
-                                        <div class="row" id="current-attachments"></div>
-                                    </div>
+                                <div class="mt-2 attachments" id="existing-file-preview-container">
+                                    <span>Current Attachments</span>
+                                    <div class="row" id="current-attachments"></div>
+                                </div>
 
-                                    <div class="mt-2 attachments">
-                                        <span class="mb-2 d-block">New Attachments</span>
-                                        <div class="mt-2" id="file-preview-container">
-                                            <div class="row" id="file-preview-list"></div>
-                                        </div>
+                                <div class="mt-2 attachments">
+                                    <span class="mb-2 d-block">New Attachments</span>
+                                    <div class="mt-2" id="file-preview-container">
+                                        <div class="row" id="file-preview-list"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- File Attachments Section -->
-                    <!-- <div id="ticketFileAttachments-detail" class="ticket-attachments-box sb-lightbox">
+                <!-- File Attachments Section -->
+                <!-- <div id="ticketFileAttachments-detail" class="ticket-attachments-box sb-lightbox">
                             
                         </div> -->
 
 
-                    <script>
-                        function propagateTagColors() {
-                            // Map value to color from original select
-                            const select = document.getElementById('ticket-tags');
-                            if (!select) return;
-                            const valueToColor = {};
-                            Array.from(select.options).forEach(opt => {
-                                if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
-                            });
-                            // Dropdown items
-                            document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function(item) {
-                                const value = item.getAttribute('data-value');
-                                if (valueToColor[value]) {
-                                    item.setAttribute('data-color', valueToColor[value]);
-                                }
-                            });
-                            // Selected items
-                            document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function(item) {
-                                const value = item.getAttribute('data-value');
-                                if (valueToColor[value]) {
-                                    item.setAttribute('data-color', valueToColor[value]);
-                                }
-                            });
-                        }
+                <script>
+                    function propagateTagColors() {
+                        // Map value to color from original select
+                        const select = document.getElementById('ticket-tags');
+                        if (!select) return;
+                        const valueToColor = {};
+                        Array.from(select.options).forEach(opt => {
+                            if (opt.value) valueToColor[opt.value] = opt.getAttribute('data-color');
+                        });
+                        // Dropdown items
+                        document.querySelectorAll('.choices__list--dropdown .choices__item').forEach(function (item) {
+                            const value = item.getAttribute('data-value');
+                            if (valueToColor[value]) {
+                                item.setAttribute('data-color', valueToColor[value]);
+                            }
+                        });
+                        // Selected items
+                        document.querySelectorAll('.choices__list--multiple .choices__item').forEach(function (item) {
+                            const value = item.getAttribute('data-value');
+                            if (valueToColor[value]) {
+                                item.setAttribute('data-color', valueToColor[value]);
+                            }
+                        });
+                    }
 
-                        function updateTagDots() {
-                            // Dropdown items
-                            document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function(item) {
-                                if (!item.querySelector('.tag-dot')) {
-                                    let color = item.getAttribute('data-color');
-                                    let dot = document.createElement('span');
-                                    dot.className = 'tag-dot';
-                                    dot.style.backgroundColor = color;
-                                    item.prepend(dot);
-                                }
-                            });
-                            // Selected items
-                            document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function(item) {
-                                if (!item.querySelector('.tag-dot')) {
-                                    let color = item.getAttribute('data-color');
-                                    let dot = document.createElement('span');
-                                    dot.className = 'tag-dot';
-                                    dot.style.backgroundColor = color;
-                                    item.prepend(dot);
-                                }
-                            });
-                        }
+                    function updateTagDots() {
+                        // Dropdown items
+                        document.querySelectorAll('.choices__list--dropdown .choices__item[data-color]').forEach(function (item) {
+                            if (!item.querySelector('.tag-dot')) {
+                                let color = item.getAttribute('data-color');
+                                let dot = document.createElement('span');
+                                dot.className = 'tag-dot';
+                                dot.style.backgroundColor = color;
+                                item.prepend(dot);
+                            }
+                        });
+                        // Selected items
+                        document.querySelectorAll('.choices__list--multiple .choices__item[data-color]').forEach(function (item) {
+                            if (!item.querySelector('.tag-dot')) {
+                                let color = item.getAttribute('data-color');
+                                let dot = document.createElement('span');
+                                dot.className = 'tag-dot';
+                                dot.style.backgroundColor = color;
+                                item.prepend(dot);
+                            }
+                        });
+                    }
 
-                        function refreshTagDots() {
-                            propagateTagColors();
-                            updateTagDots();
-                        }
+                    function refreshTagDots() {
+                        propagateTagColors();
+                        updateTagDots();
+                    }
 
-                        const tagsFilter = document.getElementById('tags-filter');
-                        if (tagsFilter) {
-                            window.tagsFilterChoices = new Choices(tagsFilter, {
-                                removeItemButton: true,
-                                placeholder: true,
-                                placeholderValue: 'Select tags...',
-                                allowHTML: true,
-                                itemSelectText: '',
-                                callbackOnCreateTemplates: function(template) {
-                                    return {
-                                        item: (classNames, data) => {
-                                            const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
-                                            return template(`
+                    const tagsFilter = document.getElementById('tags-filter');
+                    if (tagsFilter) {
+                        window.tagsFilterChoices = new Choices(tagsFilter, {
+                            removeItemButton: true,
+                            placeholder: true,
+                            placeholderValue: 'Select tags...',
+                            allowHTML: true,
+                            itemSelectText: '',
+                            callbackOnCreateTemplates: function (template) {
+                                return {
+                                    item: (classNames, data) => {
+                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                        return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                                 data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
@@ -4838,52 +5072,52 @@ function sb_component_admin()
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                             </div>
                                         `);
-                                        }
-                                    };
-                                }
-                            });
-
-                            refreshTagDots();
-                            tagsFilter.addEventListener('change', refreshTagDots);
-                            // Listen for any DOM changes in the choices list (item removed/added)
-                            const choicesList = document.querySelector('.choices__list--dropdown');
-                            if (choicesList) {
-                                const observer = new MutationObserver(() => {
-                                    refreshTagDots();
-                                });
-                                observer.observe(choicesList, {
-                                    childList: true,
-                                    subtree: true
-                                });
+                                    }
+                                };
                             }
-                            document.querySelector('.choices').addEventListener('click', function() {
-                                setTimeout(refreshTagDots, 10);
+                        });
+
+                        refreshTagDots();
+                        tagsFilter.addEventListener('change', refreshTagDots);
+                        // Listen for any DOM changes in the choices list (item removed/added)
+                        const choicesList = document.querySelector('.choices__list--dropdown');
+                        if (choicesList) {
+                            const observer = new MutationObserver(() => {
+                                refreshTagDots();
                             });
-
-
-                            // // Listen for removeItem from Choices instance
-                            // if(tagsFilterChoices)
-                            // {
-                            //     tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
-                            //         getTicketsFilteredByTag();
-                            //     });
-                            // }
-
+                            observer.observe(choicesList, {
+                                childList: true,
+                                subtree: true
+                            });
                         }
+                        document.querySelector('.choices').addEventListener('click', function () {
+                            setTimeout(refreshTagDots, 10);
+                        });
 
-                        const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
-                        if (ticketDetailTagsFilter) {
-                            window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
-                                removeItemButton: true,
-                                placeholder: true,
-                                placeholderValue: 'Select tags...',
-                                allowHTML: true,
-                                itemSelectText: '',
-                                callbackOnCreateTemplates: function(template) {
-                                    return {
-                                        item: (classNames, data) => {
-                                            const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
-                                            return template(`
+
+                        // // Listen for removeItem from Choices instance
+                        // if(tagsFilterChoices)
+                        // {
+                        //     tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                        //         getTicketsFilteredByTag();
+                        //     });
+                        // }
+
+                    }
+
+                    const ticketDetailTagsFilter = document.getElementById('ticket-detail-tags-filter');
+                    if (ticketDetailTagsFilter) {
+                        window.ticketTagsFilterChoices = new Choices(ticketDetailTagsFilter, {
+                            removeItemButton: true,
+                            placeholder: true,
+                            placeholderValue: 'Select tags...',
+                            allowHTML: true,
+                            itemSelectText: '',
+                            callbackOnCreateTemplates: function (template) {
+                                return {
+                                    item: (classNames, data) => {
+                                        const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
+                                        return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                                 data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
@@ -4891,108 +5125,108 @@ function sb_component_admin()
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                             </div>
                                         `);
-                                        }
+                                    }
+                                };
+                            }
+                        });
+
+                        refreshTagDots();
+                        ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
+                        // Listen for any DOM changes in the choices list (item removed/added)
+                        const choicesList = document.querySelector('.choices__list--dropdown');
+                        if (choicesList) {
+                            const observer = new MutationObserver(() => {
+                                refreshTagDots();
+                            });
+                            observer.observe(choicesList, {
+                                childList: true,
+                                subtree: true
+                            });
+                        }
+                        document.querySelector('.choices').addEventListener('click', function () {
+                            setTimeout(refreshTagDots, 10);
+                        });
+
+                        // if(ticketTagsFilterChoices)
+                        // {
+                        //     ticketTagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+                        //         getTicketsFilteredByTag();
+                        //     });
+                        // }
+                    }
+
+
+                    $('#select-ticket-agent').select2({
+                        placeholder: 'Type and search...',
+                        ajax: {
+                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                            method: 'POST',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function (params) {
+                                return {
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-users',
+                                    'login-cookie': SBF.loginCookie(),
+                                    'q': params.term, // ✅ Pass search term
+                                    'type': 'agent'
+                                };
+                            },
+                            processResults: function (response) {
+                                //response = JSON.parse(response);
+                                if (response[0][0] == 'success') {
+                                    const users = response[0][1];
+                                    console.log("Processed users:", response[0][1]);
+                                    return {
+                                        results: users.map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                        }))
                                     };
                                 }
-                            });
-
-                            refreshTagDots();
-                            ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
-                            // Listen for any DOM changes in the choices list (item removed/added)
-                            const choicesList = document.querySelector('.choices__list--dropdown');
-                            if (choicesList) {
-                                const observer = new MutationObserver(() => {
-                                    refreshTagDots();
-                                });
-                                observer.observe(choicesList, {
-                                    childList: true,
-                                    subtree: true
-                                });
-                            }
-                            document.querySelector('.choices').addEventListener('click', function() {
-                                setTimeout(refreshTagDots, 10);
-                            });
-
-                            // if(ticketTagsFilterChoices)
-                            // {
-                            //     ticketTagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
-                            //         getTicketsFilteredByTag();
-                            //     });
-                            // }
-                        }
-
-
-                        $('#select-ticket-agent').select2({
-                            placeholder: 'Type and search...',
-                            ajax: {
-                                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                                method: 'POST',
-                                dataType: 'json',
-                                delay: 250,
-                                data: function(params) {
-                                    return {
-                                        function: 'ajax_calls',
-                                        'calls[0][function]': 'search-get-users',
-                                        'login-cookie': SBF.loginCookie(),
-                                        'q': params.term, // ✅ Pass search term
-                                        'type': 'agent'
-                                    };
-                                },
-                                processResults: function(response) {
-                                    //response = JSON.parse(response);
-                                    if (response[0][0] == 'success') {
-                                        const users = response[0][1];
-                                        console.log("Processed users:", response[0][1]);
-                                        return {
-                                            results: users.map(user => ({
-                                                id: user.id,
-                                                text: user.first_name + ' ' + user.last_name,
-                                            }))
-                                        };
-                                    }
-                                },
-                                cache: true
                             },
-                            minimumInputLength: 1
-                        });
+                            cache: true
+                        },
+                        minimumInputLength: 1
+                    });
 
-                        $('#select-ticket-reporter').select2({
-                            placeholder: 'Type and search...',
-                            ajax: {
-                                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                                method: 'POST',
-                                dataType: 'json',
-                                delay: 250,
-                                data: function(params) {
-                                    return {
-                                        function: 'ajax_calls',
-                                        'calls[0][function]': 'search-get-users',
-                                        'login-cookie': SBF.loginCookie(),
-                                        'q': params.term, // ✅ Pass search term
-                                        'type': 'user'
-                                    };
-                                },
-                                processResults: function(response) {
-                                    //response = JSON.parse(response);
-                                    if (response[0][0] == 'success') {
-                                        const users = response[0][1];
-                                        console.log("Processed users:", response[0][1]);
-                                        // document.querySelector('#name select').value = response.priority_id;
-                                        return {
-                                            results: users.map(user => ({
-                                                id: user.id,
-                                                text: user.first_name + ' ' + user.last_name,
-                                                email: user.email,
-                                                name: user.first_name + ' ' + user.last_name
-                                            }))
-                                        };
-                                    }
-                                },
-                                cache: true
+                    $('#select-ticket-reporter').select2({
+                        placeholder: 'Type and search...',
+                        ajax: {
+                            url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
+                            method: 'POST',
+                            dataType: 'json',
+                            delay: 250,
+                            data: function (params) {
+                                return {
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-users',
+                                    'login-cookie': SBF.loginCookie(),
+                                    'q': params.term, // ✅ Pass search term
+                                    'type': 'user'
+                                };
                             },
-                            minimumInputLength: 1
-                        });
-                    </script>
+                            processResults: function (response) {
+                                //response = JSON.parse(response);
+                                if (response[0][0] == 'success') {
+                                    const users = response[0][1];
+                                    console.log("Processed users:", response[0][1]);
+                                    // document.querySelector('#name select').value = response.priority_id;
+                                    return {
+                                        results: users.map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                            email: user.email,
+                                            name: user.first_name + ' ' + user.last_name
+                                        }))
+                                    };
+                                }
+                            },
+                            cache: true
+                        },
+                        minimumInputLength: 1
+                    });
+                </script>
                 <?php //} ?>
                 <?php if ($active_areas['articles']) { ?>
                     <div class="sb-area-articles sb-loading">
@@ -5392,13 +5626,13 @@ function sb_component_admin()
                                     </li>
                                     <!--<li id="tab-automations">
                                         <?php
-                    //echo $disable_translations ? 'Automations' : sb_('Automations')
-                    ?>
+                                        //echo $disable_translations ? 'Automations' : sb_('Automations')
+                                        ?>
                                     </li>
                                     <li id="tab-translations">
                                         <?php
-                    //echo $disable_translations ? 'Translations' : sb_('Translations')
-                    ?>
+                                        //echo $disable_translations ? 'Translations' : sb_('Translations')
+                                        ?>
                                     </li> -->
                                 </ul>
                             </div>
@@ -5684,7 +5918,7 @@ function sb_component_admin()
                         </div>
                     </div>
                 <?php } ?>
-                                                </main>
+            </main>
             <?php
             sb_profile_box();
             sb_profile_edit_box();
@@ -5711,11 +5945,13 @@ function sb_component_admin()
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
-        <?php } else {if ($is_cloud) {
+        <?php } else {
+            if ($is_cloud) {
                 sb_cloud_reset_login();
             } else {
                 sb_login_box();
-            }} ?>
+            }
+        } ?>
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -5725,20 +5961,20 @@ function sb_component_admin()
         <input type="email" name="email" style="display:none" autocomplete="email" />
         <input type="password" name="hidden" style="display:none" autocomplete="new-password" />
     </div>
-<?php
-if (!empty(sb_get_setting("custom-js")) && !$is_cloud) {
-    echo '<script id="sb-custom-js" src="' .
-        sb_get_setting("custom-js") .
-        '"></script>';
-}
-if (!empty(sb_get_setting("custom-css")) && !$is_cloud) {
-    echo '<link id="sb-custom-css" rel="stylesheet" type="text/css" href="' .
-        sb_get_setting("custom-css") .
-        '" media="all">';
-}
-if ($is_cloud) {
-    sb_cloud_css_js();
-}
+    <?php
+    if (!empty(sb_get_setting("custom-js")) && !$is_cloud) {
+        echo '<script id="sb-custom-js" src="' .
+            sb_get_setting("custom-js") .
+            '"></script>';
+    }
+    if (!empty(sb_get_setting("custom-css")) && !$is_cloud) {
+        echo '<link id="sb-custom-css" rel="stylesheet" type="text/css" href="' .
+            sb_get_setting("custom-css") .
+            '" media="all">';
+    }
+    if ($is_cloud) {
+        sb_cloud_css_js();
+    }
 }
 /*
  * ----------------------------------------------------------
@@ -5752,7 +5988,8 @@ if ($is_cloud) {
  * 5. Return the Dialogflow languages list
  * 6. Return the conversations filter
  *
- */ function sb_apps_area($apps, $cloud_active_apps)
+ */
+function sb_apps_area($apps, $cloud_active_apps)
 {
     $apps_wp = ["SB_WP", "SB_WOOCOMMERCE", "SB_UMP", "SB_ARMEMBER"];
     $apps_php = [];
@@ -5803,7 +6040,7 @@ if ($is_cloud) {
                 $apps[$i][1] .
                 '">' .
                 (defined($apps[$i][0]) &&
-                (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))
+                    (!$is_cloud || in_array($apps[$i][1], $cloud_active_apps))
                     ? '<i class="sb-icon-check"></i>'
                     : "") .
                 ' <img src="' .
@@ -5863,8 +6100,8 @@ function sb_box_ve()
         !password_verify(
             "VGC" . "KMENS",
             isset($_COOKIE["_ga_" . "VGC" . "KMENS"])
-                ? $_COOKIE["_ga_" . "VGC" . "KMENS"]
-                : $_COOKIE["SA_" . "VGC" . "KMENS"]
+            ? $_COOKIE["_ga_" . "VGC" . "KMENS"]
+            : $_COOKIE["SA_" . "VGC" . "KMENS"]
         )
     ) {
         // Deprecated. _ga will be removed
@@ -5878,8 +6115,8 @@ function sb_users_table_extra_fields()
     $extra_fields = sb_get_setting("user-table-extra-columns");
     $count =
         $extra_fields && !is_string($extra_fields)
-            ? count($extra_fields)
-            : false;
+        ? count($extra_fields)
+        : false;
     if ($count) {
         $code = "";
         for ($i = 0; $i < $count; $i++) {
@@ -5925,8 +6162,8 @@ function sb_conversations_filter($cloud_active_apps)
     $departments =
         sb_is_agent(false, true, true) ||
         !sb_isset(sb_get_active_user(), "department")
-            ? sb_get_setting("departments", [])
-            : [];
+        ? sb_get_setting("departments", [])
+        : [];
     $sources = [
         ["em", "Email", true],
         ["tk", "Tickets", "SB_TICKETS"],
@@ -5948,10 +6185,10 @@ function sb_conversations_filter($cloud_active_apps)
     $code =
         (count($tags) && sb_get_multi_setting("tags-settings", "tags-starred")
             ? '<i class="sb-icon sb-icon-tag-line sb-filter-star" data-color-text="' .
-                $tags[0]["tag-color"] .
-                '" data-value="' .
-                $tags[0]["tag-name"] .
-                '"></i>'
+            $tags[0]["tag-color"] .
+            '" data-value="' .
+            $tags[0]["tag-name"] .
+            '"></i>'
             : "") .
         '<div class="sb-filter-btn"><i class="sb-icon sb-icon-filter"></i><div><div class="sb-select' .
         ($count ? "" : " sb-hide") .
@@ -6553,4 +6790,4 @@ function ticket_statuses_settings($id = '', $class = 'sb-docs')
             </div>';
     return $code;
 }
- ?>
+?>
