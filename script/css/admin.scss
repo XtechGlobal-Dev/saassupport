@@ -3664,13 +3664,13 @@ td.sb-offline:after {
                 }
 
                 .ticket_activity_chart {
-                    max-width: 450px;
-                    margin: 10px auto;
+                    // max-width: 450px;
+                    // margin: 10px auto;
 
-                    #ticket_activity_chart {
-                        height: 200px !important;
-                        width: 440px !important;
-                    }
+                    // #ticket_activity_chart {
+                    //     height: 200px !important;
+                    //     width: 440px !important;
+                    // }
                 }
 
                 .overview_chart {
@@ -3711,6 +3711,7 @@ td.sb-offline:after {
                     #chart-container {
                         position: relative;
                         width: 300px;
+                        // width: 100%;
 
                         .chart-center {
                             position: absolute;
