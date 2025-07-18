@@ -797,7 +797,7 @@ function sb_ticket_edit_box()
 
         .status-btn {
             border: none;
-            border-radius: 20px;
+            border-radius: 8px;
             padding: 3px 12px;
             font-weight: 500;
             cursor: pointer;
@@ -806,7 +806,10 @@ function sb_ticket_edit_box()
             gap: 4px;
             font-size: 14px;
         }
-
+        .status-list li, .priority-list li {
+            font-size: 14px;
+        }
+        .status-dot{width: 10px !important; height: 10px !important;}
         .arrow {
             font-size: 12px;
         }
@@ -2268,7 +2271,9 @@ function sb_component_admin()
 
                     <nav>
                         <ul>
-                            <li><a id="sb-dashboard"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            <li><a id="sb-dashboard"><i>
+                              <span class="icon-tooltip" data-tooltip="Dashboard">    
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z"
@@ -2284,8 +2289,13 @@ function sb_component_admin()
                                                 stroke-linejoin="round" />
                                             <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg></i><span class="label">Dashboard</span></a></li>
-                            <li><a id="sb-conversations"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                        </svg></span></i>
+                                
+                                        <span class="label">Dashboard</span></a></li>
+                                          
+                            <li><a id="sb-conversations"><i>
+                             <span class="icon-tooltip" data-tooltip="Inbox">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M7.69336 2.75C6.28605 2.91536 5.31763 3.26488 4.5846 4.00363C3.19336 5.40575 3.19336 7.66242 3.19336 12.1758C3.19336 16.6891 3.19336 18.9458 4.5846 20.3479C5.97585 21.75 8.21502 21.75 12.6934 21.75C17.1717 21.75 19.4109 21.75 20.8022 20.3479C22.1934 18.9458 22.1934 16.6891 22.1934 12.1758C22.1934 7.66242 22.1934 5.40575 20.8022 4.00363C20.0691 3.26488 19.1007 2.91536 17.6934 2.75"
@@ -2298,10 +2308,12 @@ function sb_component_admin()
                                             <path
                                                 d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336"
                                                 stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
-                                        </svg>
+                                        </svg></span>
                                     </i><span class="label"> Inbox</span></a></li>
                             <?php //if ($active_areas['tickets']) { ?>
-                            <li><a id="sb-tickets"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                            <li><a id="sb-tickets"><i>
+                            <span class="icon-tooltip" data-tooltip="Tickets">    
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
@@ -2310,10 +2322,14 @@ function sb_component_admin()
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg></i><span class="label">Tickets</span></a></li>
+                                        </svg>
+                                    </span>
+                                    </i><span class="label">Tickets</span></a></li>
                             <?php //} ?>
                             <?php if ($active_areas['users']) { ?>
-                                <li><a id="sb-users"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                <li><a id="sb-users"><i>
+                                <span class="icon-tooltip" data-tooltip="Customers">    
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M14.6934 8.75C14.6934 5.98858 12.4548 3.75 9.69336 3.75C6.93194 3.75 4.69336 5.98858 4.69336 8.75C4.69336 11.5114 6.93194 13.75 9.69336 13.75C12.4548 13.75 14.6934 11.5114 14.6934 8.75Z"
@@ -2325,11 +2341,15 @@ function sb_component_admin()
                                                     stroke-linejoin="round" />
                                                 <path d="M19.6934 9.25V15.25M22.6934 12.25H16.6934" stroke="#5F6465"
                                                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg></i><span class="label">Customers</span></a></li>
+                                            </svg>
+                                        </span>
+                                        </i><span class="label">Customers</span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
-                                <li><a id="sb-articles"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                <li><a id="sb-articles"><i>
+                                <span class="icon-tooltip" data-tooltip="Articles">    
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M20.4433 11.25V10.25C20.4433 6.47876 20.4433 4.59315 19.2717 3.42157C18.1001 2.25 16.2145 2.25 12.4433 2.25H11.4434C7.67219 2.25 5.78658 2.25 4.61501 3.42156C3.44344 4.59312 3.44342 6.47872 3.44339 10.2499L3.44336 14.25C3.44332 18.0212 3.44331 19.9068 4.61484 21.0784C5.78641 22.2499 7.67209 22.25 11.4433 22.25"
@@ -2340,10 +2360,14 @@ function sb_component_admin()
                                                 <path
                                                     d="M13.9434 21.0768V22.25H15.1168C15.5262 22.25 15.7309 22.25 15.9149 22.1738C16.099 22.0975 16.2437 21.9528 16.5332 21.6634L21.3568 16.8394C21.6298 16.5664 21.7663 16.4299 21.8393 16.2827C21.9782 16.0025 21.9782 15.6736 21.8393 15.3934C21.7663 15.2461 21.6298 15.1096 21.3568 14.8366C21.0837 14.5636 20.9472 14.4271 20.7999 14.3541C20.5197 14.2153 20.1907 14.2153 19.9105 14.3541C19.7633 14.4271 19.6267 14.5636 19.3537 14.8366L14.5301 19.6606C14.2406 19.95 14.0959 20.0947 14.0197 20.2787C13.9434 20.4628 13.9434 20.6674 13.9434 21.0768Z"
                                                     stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
-                                            </svg></i><span class="label">Articles</span></a></li>
+                                            </svg>
+                                        </span>
+                                        </i><span class="label">Articles</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['reports']) { ?>
-                                <li><a id="sb-reports"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                <li><a id="sb-reports"><i>
+                                <span class="icon-tooltip" data-tooltip="Reports">    
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M7.69336 18.25V16.25M12.6934 18.25V15.25M17.6934 18.25V13.25M3.19336 12.25C3.19336 7.77166 3.19336 5.53249 4.5846 4.14124C5.97585 2.75 8.21502 2.75 12.6934 2.75C17.1717 2.75 19.4109 2.75 20.8022 4.14124C22.1934 5.53249 22.1934 7.77166 22.1934 12.25C22.1934 16.7283 22.1934 18.9675 20.8022 20.3588C19.4109 21.75 17.1717 21.75 12.6934 21.75C8.21502 21.75 5.97585 21.75 4.5846 20.3588C3.19336 18.9675 3.19336 16.7283 3.19336 12.25Z"
@@ -2353,10 +2377,14 @@ function sb_component_admin()
                                                     d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142"
                                                     stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
                                                     stroke-linejoin="round" />
-                                            </svg></i><span class="label"> Reports</span></a></li>
+                                            </svg>
+                                        </span>
+                                        </i><span class="label"> Reports</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['settings']) { ?>
-                                <li><a id="sb-settings"><i><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                <li><a id="sb-settings"><i>
+                                <span class="icon-tooltip" data-tooltip="Settings">    
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M17.1934 20.1071V21.25M17.1934 20.1071C16.1812 20.1071 15.2895 19.6021 14.7664 18.8352M17.1934 20.1071C18.2056 20.1071 19.0973 19.6021 19.6204 18.8352M14.7664 18.8352L13.6938 19.5357M14.7664 18.8352C14.4571 18.3816 14.2767 17.8364 14.2767 17.25C14.2767 16.6636 14.457 16.1185 14.7663 15.665M19.6204 18.8352L20.693 19.5357M19.6204 18.8352C19.9297 18.3816 20.1101 17.8364 20.1101 17.25C20.1101 16.6636 19.9298 16.1185 19.6205 15.665M17.1934 14.3929C18.2057 14.3929 19.0975 14.898 19.6205 15.665M17.1934 14.3929C16.1811 14.3929 15.2893 14.898 14.7663 15.665M17.1934 14.3929V13.25M19.6205 15.665L20.6934 14.9643M14.7663 15.665L13.6934 14.9643"
@@ -2367,7 +2395,9 @@ function sb_component_admin()
                                                     stroke-linecap="round" />
                                                 <path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5"
                                                     stroke-linecap="round" />
-                                            </svg></i><span class="label">Settings</span></a></li>
+                                            </svg>
+                                        </span>
+                                        </i><span class="label">Settings</span></a></li>
                             <?php } ?>
                         </ul>
                     </nav>
@@ -3169,124 +3199,125 @@ function sb_component_admin()
                                         </section>
                                         <section class="main-charts mb-3" style="margin-top: 15px;">
                                             <div class="card p-3">
-                                            <div class="px-3 main-charts tables clmn-gap">
-                                                <div class="bg-white d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h6 class="head mb-1">All Tickets</h6>
+                                                <div class="px-3 main-charts tables clmn-gap">
+                                                    <div class="bg-white d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <h6 class="head mb-1">All Tickets</h6>
+                                                        </div>
+                                                        <p class="label_blue"><a class="mr-2"
+                                                                href="<?php echo $ticketUrl; ?>">View
+                                                                All</a>
+                                                        </p>
                                                     </div>
-                                                    <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View
-                                                            All</a>
-                                                    </p>
-                                                </div>
-                                                <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                                                    <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                                                <div class="seprator"></div>
-                                                <?php
-                                                function sb_get_priorities()
-                                                {
-                                                    $priorities = sb_db_get(
-                                                        "SELECT * FROM priorities",
-                                                        false
-                                                    );
-                                                    return $priorities;
-                                                }
-                                                function sb_get_statues()
-                                                {
-                                                    $status = sb_db_get(
-                                                        "SELECT * FROM ticket_status",
-                                                        false
-                                                    );
-                                                    return $status;
-                                                }
-                                                $statues = sb_get_statues();
-                                                $priorities = sb_get_priorities();
-                                                ?>
-                                                <div id="ticket_statues">
-                                                    <ul class="status-list">
-                                                        <?php foreach (
-                                                            $statues
-                                                            as $status
-                                                        ) {
-                                                            echo '<li data-status="' .
-                                                                $status["name"] .
-                                                                '" class="" data-color="' .
-                                                                $status["color"] .
-                                                                '" value="' .
-                                                                $status["id"] .
-                                                                '">
+                                                    <div class="seprator"></div>
+                                                    <?php
+                                                    function sb_get_priorities()
+                                                    {
+                                                        $priorities = sb_db_get(
+                                                            "SELECT * FROM priorities",
+                                                            false
+                                                        );
+                                                        return $priorities;
+                                                    }
+                                                    function sb_get_statues()
+                                                    {
+                                                        $status = sb_db_get(
+                                                            "SELECT * FROM ticket_status",
+                                                            false
+                                                        );
+                                                        return $status;
+                                                    }
+                                                    $statues = sb_get_statues();
+                                                    $priorities = sb_get_priorities();
+                                                    ?>
+                                                    <div id="ticket_statues">
+                                                        <ul class="status-list">
+                                                            <?php foreach (
+                                                                $statues
+                                                                as $status
+                                                            ) {
+                                                                echo '<li data-status="' .
+                                                                    $status["name"] .
+                                                                    '" class="" data-color="' .
+                                                                    $status["color"] .
+                                                                    '" value="' .
+                                                                    $status["id"] .
+                                                                    '">
                                                     <span class="status-dot"></span> ' .
-                                                                $status["name"] .
-                                                                '
+                                                                    $status["name"] .
+                                                                    '
                                                 </li>';
-                                                        } ?>
-                                                    </ul>
-                                                </div>
+                                                            } ?>
+                                                        </ul>
+                                                    </div>
 
-                                                <div id="ticket_priorities">
-                                                    <ul class="priority-list">
-                                                        <?php foreach (
-                                                            $priorities
-                                                            as $priority
-                                                        ) {
-                                                            echo '<li data-status="' .
-                                                                $priority["name"] .
-                                                                '" class="" data-color="' .
-                                                                $priority["color"] .
-                                                                '" value="' .
-                                                                $priority["id"] .
-                                                                '">
+                                                    <div id="ticket_priorities">
+                                                        <ul class="priority-list">
+                                                            <?php foreach (
+                                                                $priorities
+                                                                as $priority
+                                                            ) {
+                                                                echo '<li data-status="' .
+                                                                    $priority["name"] .
+                                                                    '" class="" data-color="' .
+                                                                    $priority["color"] .
+                                                                    '" value="' .
+                                                                    $priority["id"] .
+                                                                    '">
                                                     <span class="status-dot"></span> ' .
-                                                                $priority["name"] .
-                                                                '
+                                                                    $priority["name"] .
+                                                                    '
                                                 </li>';
-                                                        } ?>
-                                                    </ul>
-                                                </div>
-                                                <div class="new_table sb-area-tickets-dash">
-                                                    <div class="sb-scroll-area">
-                                                        <table
-                                                            class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th data-field="title">
-                                                                        Ticket Title
-                                                                    </th>
-                                                                    <th data-field="assigned-to">
-                                                                        Assigned To
-                                                                    </th>
-                                                                    <th data-field="creation-date">
-                                                                        Creation Date
-                                                                    </th>
-                                                                    <th data-field="status">
-                                                                        <?php sb_e(
-                                                                            "Status"
-                                                                        ); ?>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr data-ticket-id="">
-                                                                    <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                                    <td class="sb-td-tags">Kathryn Murphy</td>
-                                                                    <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                                    <td class="sb-td-status"><span class="span-border"
-                                                                            style="color:#FF0000;border:1px solid #FF0000;">Open</span>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                            } ?>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="new_table sb-area-tickets-dash">
+                                                        <div class="sb-scroll-area">
+                                                            <table
+                                                                class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-field="title">
+                                                                            Ticket Title
+                                                                        </th>
+                                                                        <th data-field="assigned-to">
+                                                                            Assigned To
+                                                                        </th>
+                                                                        <th data-field="creation-date">
+                                                                            Creation Date
+                                                                        </th>
+                                                                        <th data-field="status">
+                                                                            <?php sb_e(
+                                                                                "Status"
+                                                                            ); ?>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr data-ticket-id="">
+                                                                        <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                                        <td class="sb-td-tags">Kathryn Murphy</td>
+                                                                        <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                                        <td class="sb-td-status"><span class="span-border"
+                                                                                style="color:#FF0000;border:1px solid #FF0000;">Open</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </section>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <!--div class="row mt-3">
                                 <div class="col-md-8 p-0">
-                                    <!--div class="px-3 main-charts clmn-gap">
+                                    <div class="px-3 main-charts clmn-gap">
                                         <div class="bg-white">
                                             <h6 class="head mb-1">Recent Messages</h6>
                                         </div>
@@ -3297,10 +3328,10 @@ function sb_component_admin()
                                             </ul>
                                         </div>
                                         <div class="div"></div>
-                                    </div-->
+                                    </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <!--div class="px-3 main-charts tables clmn-gap">
+                                    <div class="px-3 main-charts tables clmn-gap">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h6 class="head mb-1">All Tickets</h6>
@@ -3406,8 +3437,8 @@ function sb_component_admin()
                                                 </table>
                                             </div>
                                         </div>
-                                    </div-->
-                                </div>
+                                    </div>
+                                </div-->
                                 <!-- <div class="col-md-4 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
@@ -3716,8 +3747,8 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
-                            </div>
+                                </div>
+                            </div-->
                     </main>
                 </div>
                 <div class="sb-area-conversations">
