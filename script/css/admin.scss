@@ -8603,7 +8603,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 .tag-dot {
     display: inline-block;
     width: 12px;
-    height: 12px;
+    height: 7px;
     border-radius: 50%;
     margin-right: 6px;
     vertical-align: middle;
@@ -8794,12 +8794,13 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             min-height: 34px;
         }
     }
-     &.sb-active {
-    .ticket-section {
-      max-height: none;
-      overflow: visible;
+
+    &.sb-active {
+        .ticket-section {
+            max-height: none;
+            overflow: visible;
+        }
     }
-  }
 }
 
 
@@ -9394,10 +9395,11 @@ li.menu_head:hover {
         padding-bottom: 6px;
     }
 }
+
 #department_id {
-  span {
-    padding-bottom: 6px;
-  }
+    span {
+        padding-bottom: 6px;
+    }
 }
 
 #tags-div {
@@ -9459,51 +9461,83 @@ li.menu_head:hover {
         color: #000 !important;
     }
 }
+
 section {
-  &.main-charts {
-    &.recent-message {
-      margin-top: 15px;
-      margin-bottom: 15px;
+    &.main-charts {
+        &.recent-message {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+    }
+}
+
+// tooltip
+.icon-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: #fff;
+        padding: 5px 8px;
+        font-size: 12px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 9999;
+        margin-bottom: 6px;
+        font-style: normal;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+}
+
+// tool tip
+.attachment-card {
+    i {
+        &.fa-solid {
+            &.fa-x {
+                &.remove-file {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    z-index: 2;
+                    cursor: pointer;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+
+}
+
+i {
+  &.fa-solid {
+    &.fa-x {
+      &.delete-attachment {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 2;
+        cursor: pointer;
+        font-size: 10px;
+      }
     }
   }
 }
-// tooltip
-.icon-tooltip {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  &::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 5px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 9999;
-    margin-bottom: 6px;
-    font-style: normal;
-  }
-
-  &:hover::after {
-    opacity: 1;
-  }
-}
-// tool tip
 
 // custom code
-// 
-
-// 
 /*
  *
  * -----------------------------------------------------------
