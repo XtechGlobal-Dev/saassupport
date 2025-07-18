@@ -87,8 +87,6 @@
         },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
-
-            console.log('panel1:',panel);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -522,6 +520,13 @@
     //     }
     // }
 
+    function convertTextToQuillFormat(text) {
+        const delta = {
+            ops: [{ insert: text.trim() + '\n' }]
+        };
+        return JSON.stringify(delta);
+    }
+
     function createTicket() {
         if (loading(this)) return;
 
@@ -535,14 +540,16 @@
         panel.find('.sb-attachments > div').each(function () {
             const name = $(this).attr('data-name');
             const path = $(this).attr('data-value');
+            const size = $(this).attr('data-size');
+            const type = $(this).attr('data-type');
 
             if (name && path && typeof path === 'string') {
                 finalAttachments.push({
                     filename: name,
                     original_filename: name,
                     file_path: path,
-                    file_type: null,
-                    file_size: null
+                    file_type: type,
+                    file_size: size
                 });
             }
         });
@@ -553,7 +560,7 @@
 
 
         const customer_id = activeUser().details.id ?? 0;
-        const customer_name = activeUser().details.first_name ? activeUser().details.first_name + activeUser().details.last_name: '';
+        const customer_name = activeUser().details.first_name ? activeUser().details.first_name +' '+ activeUser().details.last_name: '';
         const customer_email = activeUser().details.email ?? '';
 
 
@@ -571,6 +578,7 @@
         //let uploadedFiles = ticket_edit_box.find('#uploaded_files1').val() ?? null;
         let guest = 0;
         message = SBF.escape(message);
+        message = convertTextToQuillFormat(message);
 
 
         const contact_id = [];
@@ -598,7 +606,7 @@
         conversation_id.push('Conversation ID');
 
         const attachments = [];
-        attachments.push(finalAttachments);
+        attachments.push(JSON.stringify(finalAttachments));
         attachments.push('Attachments');
 
         const withoutContact = [];

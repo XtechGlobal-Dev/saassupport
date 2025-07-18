@@ -1136,7 +1136,6 @@
                 return this.init(() => { this.event(event, callback, channel) });
             }
             let channel_original = channel;
-            console.log(channel_original,callback,'tt');
             channel = this.cloudChannelRename(channel);
             if (channel in this.channels) {
                 this.channels[channel].unbind(event);
@@ -4386,6 +4385,7 @@
 
         // Upload response
         uploadResponse: function (response) {
+            
             response = JSON.parse(response);
             if (response[0] == 'success') {
                 if (response[1] == 'extension_error') {
@@ -4408,7 +4408,17 @@
                     }, 500);
                 } else {
                     let name = SBF.beautifyAttachmentName(response[1].substr(response[1].lastIndexOf('/') + 1));
-                    chat_editor.find('.sb-attachments').append(`<div data-name="${name}" data-value="${response[1]}"${response.length > 2 ? ' data-size="' + response[2][0] + '|' + response[2][1] + '"' : ''}>${name}<i class="sb-icon-close"></i></div>`);
+                    //chat_editor.find('.sb-attachments').append(`<div data-name="${name}" data-value="${response[1]}"${response.length > 2 ? ' data-size="' + response[2][0] + '|' + response[2][1] + '"' : ''} ${response.length > 2 ? ' data-type="' + response[2]['mime'] +'"' : ''} ${response.length > 2 ? ' data-memory-size="' + response['size_bytes'] +'"' : ''}>${name}<i class="sb-icon-close"></i></div>`);
+                    chat_editor.find('.sb-attachments').append(`
+                        <div 
+                        data-name="${name}" 
+                        data-value="${response[1]}"
+                        ${response[2] ? ` data-size="${response[2][0]}|${response[2][1]}"` : ''}
+                        ${response[2]?.mime ? ` data-type="${response[2].mime}"` : ''}
+                        ${response.size_bytes ? ` data-memory-size="${response.size_bytes}"` : ''}
+                    >${name}<i class="sb-icon-close"></i>
+                    </div>
+                    `);
                     chat_editor.sbActive(true);
                 }
             } else {
@@ -6437,7 +6447,6 @@
                 comment: new_comment ? $('.tickets-list-area #newComment').val() : $('.tickets-list-area #oldComment').val(),
                 contact_id:activeUser().id
             }, (response) => {
-                console.log(response);
                 if(response.success) 
                 {
                     SBChat.loadComments(ticketId);
@@ -6485,7 +6494,6 @@
                 ticket_id: ticketId,
                 comment_id: commentId,
             }, (response) => {
-                console.log(response);
                 if(response.success) 
                 {
                     SBChat.loadComments(ticketId);

@@ -1537,7 +1537,7 @@ function sb_ticket_edit_box()
                         previewContent = `
                         <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
-                            <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
+                            <img src="${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px;" alt="${file.original_filename}">
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 text-truncate">
