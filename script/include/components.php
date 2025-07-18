@@ -496,7 +496,7 @@ function sb_ticket_edit_box()
                 <!-- Hidden input to store uploaded file data -->
                 <input type="hidden" id="uploaded_files1" name="uploaded_files" value="">
             </div>
-            <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
+            <div id="ticketCustomFieldsContainer" class="custom-field" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
             <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
                 <div>
@@ -541,7 +541,9 @@ function sb_ticket_edit_box()
             flex-wrap: wrap;
             gap: 10px;
         }
-
+        .custom-field span {
+            padding-bottom: 6px;
+        }
         #ticketCustomFieldsContainer>.sb-input,
         #ticketFileAttachments-detail>div,
         .first-section>div {
@@ -1308,7 +1310,7 @@ function sb_ticket_edit_box()
                     card.className = 'card';
 
                     const cardBody = document.createElement('div');
-                    cardBody.className = 'card-body p-2';
+                    cardBody.className = 'card-body p-2 attachment-card';
 
                     // Determine file type icon
                     let fileIcon = 'bi-file-earmark';
@@ -1340,7 +1342,7 @@ function sb_ticket_edit_box()
                         previewContent = `
                         <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
-                            <img src="${file.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${file.original_filename}">
+                            <img src="${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top: 10px;" alt="${file.original_filename}">
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 text-truncate">
@@ -1505,7 +1507,7 @@ function sb_ticket_edit_box()
                     card.className = 'card';
 
                     const cardBody = document.createElement('div');
-                    cardBody.className = 'card-body p-2';
+                    cardBody.className = 'card-body p-2 attachment-card';
 
                     // Determine file type icon
                     let fileIcon = 'bi-file-earmark';
@@ -1537,7 +1539,7 @@ function sb_ticket_edit_box()
                         previewContent = `
                         <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
-                            <img src="${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px;" alt="${file.original_filename}">
+                            <img src="${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top: 10px;" alt="${file.original_filename}">
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 text-truncate">
