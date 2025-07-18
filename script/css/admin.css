@@ -11539,6 +11539,10 @@ a.sb-btn-white.sb-loading:hover:before,
   width: 200px;
   min-height: 34px;
 }
+.sb-area-tickets.sb-active .ticket-section {
+  max-height: none;
+  overflow: visible;
+}
 
 .choices .choices__inner,
 .choices .choices__input {
@@ -11894,6 +11898,7 @@ li.menu_head:hover {
 .sidebar.collapsed .label,
 .sidebar.collapsed .powered-by {
   display: none;
+  background: red;
 }
 .sidebar .label {
   margin-left: 10px;
@@ -12033,10 +12038,6 @@ li.menu_head:hover {
   overflow-y: unset;
 }
 
-.sb-area-tickets.sb-active .ticket-section {
-  max-height: 700px;
-}
-
 .sb-tab.sb-inner-tab .clr-change {
   background-color: #2d9cdb;
   color: #fff;
@@ -12056,6 +12057,10 @@ li.menu_head:hover {
 .powered-by .nexln-help {
   font-size: 15px !important;
   color: #000 !important;
+}
+
+section.main-charts.recent-message {
+  margin-top: 15px;
 }
 
 /*
