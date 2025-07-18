@@ -2143,7 +2143,7 @@ td.sb-offline:after {
         // width: 280px;
 
         .sidebar {
-            padding: 20px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
 
@@ -3664,13 +3664,13 @@ td.sb-offline:after {
                 }
 
                 .ticket_activity_chart {
-                    max-width: 450px;
-                    margin: 10px auto;
+                    // max-width: 450px;
+                    // margin: 10px auto;
 
-                    #ticket_activity_chart {
-                        height: 200px !important;
-                        width: 440px !important;
-                    }
+                    // #ticket_activity_chart {
+                    //     height: 200px !important;
+                    //     width: 440px !important;
+                    // }
                 }
 
                 .overview_chart {
@@ -3711,6 +3711,7 @@ td.sb-offline:after {
                     #chart-container {
                         position: relative;
                         width: 300px;
+                        // width: 100%;
 
                         .chart-center {
                             position: absolute;
@@ -5368,15 +5369,16 @@ td.sb-offline:after {
 .sb-btn-white,
 a.sb-btn-white,
 .sb-lightbox .sb-btn-white {
-    background-color: $white;
-    color: rgb(86, 96, 105);
-    border: 1px solid rgb(204, 210, 213);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+    // background-color: #fff;
+    // color: rgb(86, 96, 105);
+    /* border: 1px solid rgb(204, 210, 213); */
+    // box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     padding: 0 10px;
     white-space: nowrap;
-    border-radius: 4px;
-    height: 33px;
+    border-radius: 8px;
+    height: 35px;
     line-height: 33px;
+    color: #fff;
 
     &.sb-icon {
         padding-left: 30px;
@@ -8792,8 +8794,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             min-height: 34px;
         }
     }
-
-    &.sb-active {
+     &.sb-active {
     .ticket-section {
       max-height: none;
       overflow: visible;
@@ -9094,7 +9095,6 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 }
 
-
 // custom css for header user menu 
 .sb-profile {
     display: flex;
@@ -9222,7 +9222,7 @@ li.menu_head:hover {
     height: 100vh;
 
     &.collapsed {
-        width: 60px;
+        width: 50px;
 
         .logo-text,
         .label,
@@ -9418,7 +9418,6 @@ li.menu_head:hover {
     }
 }
 
-
 .sb-tab {
     &.sb-inner-tab {
         .clr-change {
@@ -9459,16 +9458,47 @@ section {
   &.main-charts {
     &.recent-message {
       margin-top: 15px;
+      margin-bottom: 15px;
     }
   }
 }
+// tooltip
+.icon-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+    margin-bottom: 6px;
+    font-style: normal;
+  }
 
-
-
+  &:hover::after {
+    opacity: 1;
+  }
+}
+// tool tip
 
 // custom code
+// 
 
+// 
 /*
  *
  * -----------------------------------------------------------
