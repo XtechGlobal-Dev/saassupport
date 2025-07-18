@@ -1062,6 +1062,40 @@
                                 SBChat.update();
                             }
                         });
+                        /// sync ticket comment via pusher
+                        this.event('new-ticket-comment', (response) => {
+                            SBChat.loadComments(response.ticket_id,response.last_updated_at);
+                            //SBTicket.new_comment_count++;
+                            // Initialize array if it doesn't exist
+                            if (!Array.isArray(SBChat.new_comment_count[response.ticket_id])) {
+                                SBChat.new_comment_count[response.ticket_id] = [];
+                            }
+
+                            // Determine next comment count (e.g., 1, 2, 3)
+                            const ticket_comments = SBChat.new_comment_count[response.ticket_id].length + 1;
+
+                            // Add comment count to the array
+                            SBChat.new_comment_count[response.ticket_id].push(ticket_comments);
+
+                            // Debug output
+
+                            // Correctly loop through the object
+                            Object.entries(SBChat.new_comment_count).forEach(([id, countArray]) => {
+                                console.log('ticket_id', id, 'count', countArray.length);
+                                $('.sb-user-tickets li[data-ticket-id="' + id + '"] .notification-counter').remove();
+                                // Append the notification counter to the first cell of the row
+                                $('.sb-user-tickets li[data-ticket-id="' + id + '"]').append(`<span class="notification-counter" data-count="${countArray.length}">${countArray.length}</span>`);
+
+                                if($('.sb-user-tickets li[data-ticket-id="' + id + '"]').hasClass('sb-active'))
+                                {
+                                    setTimeout(() => {
+                                        $('.sb-user-tickets li[data-ticket-id="' + id + '"]').find('.notification-counter').remove();
+                                    },1100);
+                                }
+                            });
+
+                            SBChat.playSound();
+                        });
                         this.presence(1, () => {
                             this.started = true;
                             SBChat.automations.runAll();
@@ -1556,7 +1590,7 @@
             let code = '';
                     tickets.forEach(ticket => {
                         code += `
-                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
+                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
                                 <div class="sb-conversation-item" style="display: flex; align-items: center;">
                                     <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
                                     <div style="flex: 1;">
@@ -2282,6 +2316,9 @@
         offline_message_set: false,
         label_date: false,
         label_date_show: false,
+        last_comment_date: '',
+        datetime_last_comment: false,
+        new_comment_count:[],
 
         // Send a message
         sendMessage: function (user_id = -1, message = '', attachments = [], onSuccess = false, payload = false, conversation_status_code = false) {
@@ -2847,8 +2884,7 @@
             if (comment.is_edited == 1 || comment.is_edited === "1") {
                 html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
             }
-
-            console.log(isOwn, this.canEditComment(comment.created_at),comment.created_at,'here');
+    
             // Show Edit button only if own comment and within 10 minutes
             if (isOwn && this.canEditComment(comment.created_at)) {
                 
@@ -2863,31 +2899,50 @@
             return html;
         },
 
-        loadComments : function (ticket_id) {
+        loadComments : function (ticket_id,last_update_date=null) {
             SBF.ajax({
                 function: 'get-ticket-comments',
-                ticket_id: ticket_id
+                ticket_id: ticket_id,
+                last_update_date: last_update_date,
             }, (response) => {
-                const commentsSection = document.getElementById('comments-section');
+                const commentsSection = $(`.tickets-list-area[data-id=${ticket_id}] #comments-section`);
                 if (response.comments && response.comments.length > 0) {
+
+                    if (response.comments[0].last_update_time) {
+                        this.datetime_last_comment = response.comments[0].last_update_time;
+                    }
+
                     if (response.server_now) {   /// update window.SERVER_NOW time to use in canEditComment function
                         window.SERVER_NOW = response.server_now;
                     }
                     // Group comments by date
-                    let lastDate = '';
+                    //let lastDate = '';
                     let html = '';
                     response.comments.forEach(comment => {
                         const commentDate = comment.created_at.split(' ')[0];
-                        if (commentDate !== lastDate) {
+                        if (commentDate !== this.last_comment_date) {
                             html += `<div class='text-center my-2'><span class='badge bg-secondary' style='font-size:13px;'>${this.formatDateLabel(comment.created_at)}</span></div>`;
-                            lastDate = commentDate;
+                            this.last_comment_date = commentDate;
                         }
                         html += this.renderComment(comment);
                     });
-                    commentsSection.innerHTML = html;
-                    //showInitials('tc_back','comment-row');
-                    //scrollToBottom();
-                // attachEditListeners();
+                    
+                    if(last_update_date)
+                    {
+                        commentsSection.append(html);
+                    }
+                    else
+                    {
+                        commentsSection.html(html);
+                    }
+
+                    setTimeout(() => {
+                        const el = commentsSection[0]; // or get(0)
+                        el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+                    }, 0);
+
+                   // showInitials('tc_back','comment-row');
+
                 }
                 else {
                     commentsSection.innerHTML = '<div class="text-center text-muted">No comments yet.</div>';
@@ -2952,13 +3007,15 @@
 
         openTicket: function(ticket_id)
         {
-            console.log(ticket_id);
             SBF.ajax({
                     function: 'edit-ticket',
                     ticket_id: ticket_id
                 }, (response) => {
                     if(response)
                     {
+                        $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+
+                        $('.tickets-list-area').attr('data-id',ticket_id);
                         $('.sb-tickets .user-name').html(response.contact_name);
                         $('.sb-tickets .ticket-creation-time').html(response.creation_time);
                         $('.sb-tickets .ticket-subject').html(response.subject);
@@ -4328,6 +4385,7 @@
 
         // Upload response
         uploadResponse: function (response) {
+            
             response = JSON.parse(response);
             if (response[0] == 'success') {
                 if (response[1] == 'extension_error') {
@@ -4350,7 +4408,17 @@
                     }, 500);
                 } else {
                     let name = SBF.beautifyAttachmentName(response[1].substr(response[1].lastIndexOf('/') + 1));
-                    chat_editor.find('.sb-attachments').append(`<div data-name="${name}" data-value="${response[1]}"${response.length > 2 ? ' data-size="' + response[2][0] + '|' + response[2][1] + '"' : ''}>${name}<i class="sb-icon-close"></i></div>`);
+                    //chat_editor.find('.sb-attachments').append(`<div data-name="${name}" data-value="${response[1]}"${response.length > 2 ? ' data-size="' + response[2][0] + '|' + response[2][1] + '"' : ''} ${response.length > 2 ? ' data-type="' + response[2]['mime'] +'"' : ''} ${response.length > 2 ? ' data-memory-size="' + response['size_bytes'] +'"' : ''}>${name}<i class="sb-icon-close"></i></div>`);
+                    chat_editor.find('.sb-attachments').append(`
+                        <div 
+                        data-name="${name}" 
+                        data-value="${response[1]}"
+                        ${response[2] ? ` data-size="${response[2][0]}|${response[2][1]}"` : ''}
+                        ${response[2]?.mime ? ` data-type="${response[2].mime}"` : ''}
+                        ${response.size_bytes ? ` data-memory-size="${response.size_bytes}"` : ''}
+                    >${name}<i class="sb-icon-close"></i>
+                    </div>
+                    `);
                     chat_editor.sbActive(true);
                 }
             } else {
@@ -6361,6 +6429,8 @@
         // Open a ticket from the dashboard
         $(main).on('click', '.sb-user-tickets li', function () {
             SBChat.openTicket($(this).attr('data-ticket-id'));
+            $(this).addClass('sb-active');
+            $(this).siblings().removeClass('sb-active');
         });
 
          // Add or update ticket
@@ -6375,8 +6445,8 @@
                 ticket_id: ticketId,
                 comment_id: commentId,
                 comment: new_comment ? $('.tickets-list-area #newComment').val() : $('.tickets-list-area #oldComment').val(),
+                contact_id:activeUser().id
             }, (response) => {
-                console.log(response);
                 if(response.success) 
                 {
                     SBChat.loadComments(ticketId);
@@ -6424,7 +6494,6 @@
                 ticket_id: ticketId,
                 comment_id: commentId,
             }, (response) => {
-                console.log(response);
                 if(response.success) 
                 {
                     SBChat.loadComments(ticketId);
@@ -6435,11 +6504,6 @@
                 }
             });
         });
-
-        SBPusher.event('new-ticket-comment', (data) => {
-                console.log('new comment added',data);
-        });
-
 
         // Start a new conversation from the dashboard
         $(main).on('click', '.sb-btn-new-conversation, .sb-departments-list > div, .sb-agents-list > div', function () {

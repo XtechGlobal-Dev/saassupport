@@ -2287,7 +2287,7 @@
         {
           "type": "checkbox",
           "id": "departments-show-list",
-          "title": "Display in conversation list"
+          "title": "Display in conversation list & tickets"
         },
         {
           "type": "checkbox",
