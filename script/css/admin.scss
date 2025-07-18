@@ -2223,7 +2223,7 @@ td.sb-offline:after {
             .powered-by {
                 margin-top: auto;
                 font-size: 12px;
-                    margin-bottom: 30px;
+                margin-bottom: 30px;
 
                 >p {
                     font-weight: 500;
@@ -3915,32 +3915,32 @@ td.sb-offline:after {
                         // border: 1px solid #2953E81A;
                         // border-radius: 8px;
                         // max-height: 20;
-                          font-size: 13px;
-                            line-height: 36px;
-                            letter-spacing: 0.3px;
-                            font-weight: 500;
-                            border-radius: 8px;
-                            min-width: 0;
-                            background-color: #155CFD;
-                            text-decoration: none;
-                            color: #fff;
-                            height: 35px;
-                            padding: 0 25px;
-                            position: relative;
-                            display: inline-block;
-                            border: none;
-                            text-align: center;
-                            cursor: pointer;
-                            outline: none;
-                            box-shadow: none;
-                            transition: all 0.4s;
-                            user-select: none;
-
-                    >a {
+                        font-size: 13px;
+                        line-height: 36px;
+                        letter-spacing: 0.3px;
+                        font-weight: 500;
+                        border-radius: 8px;
+                        min-width: 0;
+                        background-color: #155CFD;
+                        text-decoration: none;
                         color: #fff;
-                        text-decoration: unset;
+                        height: 35px;
+                        padding: 0 25px;
+                        position: relative;
+                        display: inline-block;
+                        border: none;
+                        text-align: center;
+                        cursor: pointer;
+                        outline: none;
+                        box-shadow: none;
+                        transition: all 0.4s;
+                        user-select: none;
 
-                    }
+                        >a {
+                            color: #fff;
+                            text-decoration: unset;
+
+                        }
                     }
                 }
 
@@ -8792,7 +8792,15 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             min-height: 34px;
         }
     }
+
+    &.sb-active {
+    .ticket-section {
+      max-height: none;
+      overflow: visible;
+    }
+  }
 }
+
 
 .choices {
 
@@ -9086,6 +9094,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 }
 
+
 // custom css for header user menu 
 .sb-profile {
     display: flex;
@@ -9219,6 +9228,7 @@ li.menu_head:hover {
         .label,
         .powered-by {
             display: none;
+            background: red;
         }
     }
 
@@ -9265,15 +9275,12 @@ li.menu_head:hover {
     width: 90% !important;
 }
 
-.nav-tabs 
-{
-    .nav-item
-    {
+.nav-tabs {
+    .nav-item {
         width: 120px;
         position: relative;
 
-        .sb-notification-counter
-        {
+        .sb-notification-counter {
             position: absolute;
             right: 4px;
             bottom: 6px;
@@ -9292,14 +9299,13 @@ li.menu_head:hover {
     }
 }
 
-.sb-table-tickets 
-{
+.sb-table-tickets {
     td {
         position: relative;
-        .sb-notification-counter
-        {
+
+        .sb-notification-counter {
             position: absolute;
-            margin-left:10px;
+            margin-left: 10px;
             height: 21px;
             width: 21px;
             line-height: 21px;
@@ -9412,13 +9418,6 @@ li.menu_head:hover {
     }
 }
 
-.sb-area-tickets {
-    &.sb-active {
-        .ticket-section {
-            max-height: 700px;
-        }
-    }
-}
 
 .sb-tab {
     &.sb-inner-tab {
@@ -9445,16 +9444,28 @@ li.menu_head:hover {
         }
     }
 }
-.powered-by {
-  .all-reserved {
-    font-size: 13px !important;
-  }
 
-  .nexln-help {
-    font-size: 15px !important;
-    color: #000 !important;
+.powered-by {
+    .all-reserved {
+        font-size: 13px !important;
+    }
+
+    .nexln-help {
+        font-size: 15px !important;
+        color: #000 !important;
+    }
+}
+section {
+  &.main-charts {
+    &.recent-message {
+      margin-top: 15px;
+    }
   }
 }
+
+
+
+
 
 // custom code
 

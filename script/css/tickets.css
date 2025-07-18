@@ -5162,6 +5162,13 @@ div ul.sb-menu .li:hover,
   height: 0;
 }
 
+.tickets-list-area .sb-panel-main .sb-panel.text-middle {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
 .sb-panel-form .sb-form {
   margin: 22px 0 30px 0;
   max-width: 500px;

@@ -100,8 +100,8 @@
   {
     "type": "multi-input",
     "id": "tickets-fields",
-    "title": "Ticket Form Fields",
-    "content": "Select which fields to include in the new ticket creation form.",
+    "title": "User Panel Ticket Form Fields",
+    "content": "Select which fields to include in the new ticket creation form on user panel.",
     "value": [
       {
         "type": "checkbox",

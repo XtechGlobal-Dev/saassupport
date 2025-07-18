@@ -36,7 +36,7 @@ global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
 const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image,
-            p.name as priority_name, p.color as priority_color,
+            p.name as priority_name, p.color as priority_color,u.user_type,
             ts.name as status_name, ts.color as status_color,
             (
                 SELECT GROUP_CONCAT(DISTINCT tt2.tag SEPARATOR "||") 
@@ -2369,6 +2369,10 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
                     $skip = true;
                 }
             }
+            if (empty($agents)) {
+                return false;
+            }
+
             $rows = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE id IN (' . substr($agents_ids, 0, -1) . ')', false);
             $agent_names = [];
             for ($i = 0; $i < count($rows); $i++) {
