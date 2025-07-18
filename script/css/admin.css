@@ -5847,7 +5847,7 @@ td.sb-offline:after {
   background: rgb(245, 247, 250);
 }
 .sb-admin .header_new .sidebar {
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 }
@@ -7241,14 +7241,6 @@ td.sb-offline:after {
   height: 370px !important;
   width: 900px;
 }
-.sb-area-dashboard main .new_container .main-charts .ticket_activity_chart {
-  max-width: 450px;
-  margin: 10px auto;
-}
-.sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-  height: 200px !important;
-  width: 440px !important;
-}
 .sb-area-dashboard main .new_container .main-charts .overview_chart {
   display: flex;
   justify-content: space-between;
@@ -8616,15 +8608,13 @@ td.sb-offline:after {
 .sb-btn-white,
 a.sb-btn-white,
 .sb-lightbox .sb-btn-white {
-  background-color: #fff;
-  color: rgb(86, 96, 105);
-  border: 1px solid rgb(204, 210, 213);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+  /* border: 1px solid rgb(204, 210, 213); */
   padding: 0 10px;
   white-space: nowrap;
-  border-radius: 4px;
-  height: 33px;
+  border-radius: 8px;
+  height: 35px;
   line-height: 33px;
+  color: #fff;
 }
 .sb-area-settings .sb-tab .sb-btn.sb-icon,
 .sb-btn-white.sb-icon,
@@ -11892,7 +11882,7 @@ li.menu_head:hover {
   height: 100vh;
 }
 .sidebar.collapsed {
-  width: 60px;
+  width: 50px;
 }
 .sidebar.collapsed .logo-text,
 .sidebar.collapsed .label,
@@ -12061,6 +12051,36 @@ li.menu_head:hover {
 
 section.main-charts.recent-message {
   margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.icon-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  margin-bottom: 6px;
+  font-style: normal;
+}
+.icon-tooltip:hover::after {
+  opacity: 1;
 }
 
 /*
