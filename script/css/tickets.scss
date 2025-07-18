@@ -958,6 +958,21 @@
     }
 }
 
+.tickets-list-area {
+    .sb-panel-main 
+    {
+        .sb-panel {
+            &.text-middle
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 70%;
+            }
+        }
+    }
+}
+
 .sb-panel-form {
 
     .sb-form {

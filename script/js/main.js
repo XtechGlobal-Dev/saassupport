@@ -2885,8 +2885,7 @@
             if (comment.is_edited == 1 || comment.is_edited === "1") {
                 html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
             }
-
-            console.log(isOwn, this.canEditComment(comment.created_at),comment.created_at,'here');
+    
             // Show Edit button only if own comment and within 10 minutes
             if (isOwn && this.canEditComment(comment.created_at)) {
                 
