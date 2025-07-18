@@ -16,12 +16,15 @@
     var main_panel;
     var conversation_area;
     var panel;
+    var ticket_panel;
+    var ticket_main_panel;
     var editor;
     var active_panel;
     var left_conversations;
     var cache_agents = {};
     var cache_account = {};
     var main_title;
+    var ticket_main_title;
     var agent_profile;
     var user_profile;
     var width;
@@ -84,8 +87,6 @@
         },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
-
-            console.log('panel:',name);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -141,16 +142,16 @@
                     break;
                 case 'new-ticket':
                     let names = { 'title': 'Title', 'message': 'Message', 'panel': 'Create a new ticket', 'button': 'Create a new ticket' };
-                    this.showSidePanels(true); // Show the side panels by default
-                    if (SBF.setting('tickets_names')) {
-                        let names_new = SBF.setting('tickets_names');
-                        for (var key in names_new) {
-                            if (names_new[key]) names[key.replace('tickets-names-', '')] = names_new[key];
-                        }
-                    }
-                    setTitle(sb_(names.panel));
-                    panel.html(`<div class="sb-info"></div><div class="sb-input sb-input-text sb-ticket-title"><span>${sb_(names.title)}</span><input type="text" required></div>${main.find('.sb-ticket-fields').html()}<div class="sb-input sb-editor-cnt"><span>${sb_(names.message)}</span></div><div class="sb-btn sb-icon sb-create-ticket"><i class="sb-icon-plus"></i>${sb_(names.button)}</div>`);
-                    main_panel.find('.sb-editor-cnt').append(editor);
+                    //this.showSidePanels(true); // Show the side panels by default
+                    // if (SBF.setting('tickets_names')) {
+                    //     let names_new = SBF.setting('tickets_names');
+                    //     for (var key in names_new) {
+                    //         if (names_new[key]) names[key.replace('tickets-names-', '')] = names_new[key];
+                    //     }
+                    // }
+                    setTicketTitle(sb_(names.panel));
+                    ticket_panel.html(`<div class="sb-info"></div><div id="subject" class="sb-input sb-input-text sb-ticket-title"><span>${sb_(names.title)}</span><input type="text" required></div>${main.find('.sb-ticket-fields').html()}<div id="description" class="sb-input sb-editor-cnt"><span>${sb_(names.message)}</span></div>   <div id="ticketCustomFieldsContainer"></div>   <div class="sb-btn sb-icon sb-create-ticket"><i class="sb-icon-plus"></i>${sb_(names.button)}</div>`);
+                    ticket_main_panel.find('.sb-editor-cnt').append(editor);
                     if (SBF.setting('tickets_recaptcha')) {
                         if (recaptcha) {
                             recaptcha.show();
@@ -331,8 +332,11 @@
             main = $('body').find('.sb-tickets');
             main_panel = main.find(' > div > .sb-panel-main');
             panel = main_panel.find('.sb-panel');
+            ticket_panel = $('.tickets-list-area').find('.sb-panel');
+            ticket_main_panel = $('.tickets-list-area').find('.sb-panel-main');
             editor = main_panel.find('.sb-editor');
             main_title = main_panel.find(' > .sb-top .sb-title');
+            ticket_main_title = ticket_main_panel.find(' > .sb-top .sb-title');
             left_conversations = main.find('.sb-user-conversations');
             conversation_area = main_panel.find('.sb-list');
             agent_profile = main.find('.sb-profile-agent');
@@ -491,29 +495,212 @@
         setTitle(!name || name == -1 ? activeUser().name : name);
     }
 
-    function submitTicketPartial() {
-        let message = '';
+    // function submitTicketPartial() {
+    //     let message = '';
+    //     let settings = SBForm.getAll(panel);
+    //     let department = 'department' in settings ? settings['department'][0] : null;
+    //     let attachments = [];
+    //     SBChat.clear();
+    //     editor.sbActive(false);
+    //     for (var key in settings) {
+    //         if (settings[key][1] && settings[key][0]) {
+    //             message += `*${sb_(settings[key][1])}*\n${key == 'department' ? panel.find('#department li.sb-active').html() : settings[key][0]}\n\n`;
+    //         }
+    //     }
+    //     message += editor.find('textarea').val().trim();
+    //     panel.find('.sb-attachments > div').each(function () {
+    //         attachments.push([$(this).attr('data-name'), $(this).attr('data-value')]);
+    //     });
+    //     if (!activeUser()) {
+    //         SBChat.addUserAndLogin(() => {
+    //             SBChat.newConversation(2, -1, message, attachments, department, null, function () { SBTickets.welcome() });
+    //         });
+    //     } else {
+    //         SBChat.newConversation(2, -1, message, attachments, department, null, function () { SBTickets.welcome() });
+    //     }
+    // }
+
+    function convertTextToQuillFormat(text) {
+        const delta = {
+            ops: [{ insert: text.trim() + '\n' }]
+        };
+        return JSON.stringify(delta);
+    }
+
+    function createTicket() {
+        if (loading(this)) return;
+
         let settings = SBForm.getAll(panel);
         let department = 'department' in settings ? settings['department'][0] : null;
-        let attachments = [];
-        SBChat.clear();
+        let finalAttachments = [];
+
+        let message = '';
         editor.sbActive(false);
-        for (var key in settings) {
-            if (settings[key][1] && settings[key][0]) {
-                message += `*${sb_(settings[key][1])}*\n${key == 'department' ? panel.find('#department li.sb-active').html() : settings[key][0]}\n\n`;
-            }
-        }
         message += editor.find('textarea').val().trim();
         panel.find('.sb-attachments > div').each(function () {
-            attachments.push([$(this).attr('data-name'), $(this).attr('data-value')]);
+            const name = $(this).attr('data-name');
+            const path = $(this).attr('data-value');
+            const size = $(this).attr('data-size');
+            const type = $(this).attr('data-type');
+
+            if (name && path && typeof path === 'string') {
+                finalAttachments.push({
+                    filename: name,
+                    original_filename: name,
+                    file_path: path,
+                    file_type: type,
+                    file_size: size
+                });
+            }
         });
-        if (!activeUser()) {
-            SBChat.addUserAndLogin(() => {
-                SBChat.newConversation(2, -1, message, attachments, department, null, function () { SBTickets.welcome() });
-            });
-        } else {
-            SBChat.newConversation(2, -1, message, attachments, department, null, function () { SBTickets.welcome() });
+
+
+        //console.log(JSON.stringify(finalAttachments, null, 2));
+
+
+
+        const customer_id = activeUser().details.id ?? 0;
+        const customer_name = activeUser().details.first_name ? activeUser().details.first_name +' '+ activeUser().details.last_name: '';
+        const customer_email = activeUser().details.email ?? '';
+
+
+        let new_ticket =  true;
+        let ticket_id = 0;
+        let data = {};
+
+        // Get settings
+        let ticketDataPart1 = SBForm.getAll(panel);
+        //let ticketDataPart2 = SBTicket.getAll(ticket_edit_box.find('.sb-additional-details'));
+        //let ticketCustomFields = SBTicket.getAll(ticket_edit_box.find('#ticketCustomFieldsContainer'));
+
+        //let ticketDataPart3 = ticket_edit_box.find('#description textarea').val();
+        let conversationId = null;
+        //let uploadedFiles = ticket_edit_box.find('#uploaded_files1').val() ?? null;
+        let guest = 0;
+        message = SBF.escape(message);
+        message = convertTextToQuillFormat(message);
+
+
+        const contact_id = [];
+        contact_id.push(customer_id);
+        contact_id.push('Contact ID');
+
+        const cust_name = [];
+        cust_name.push(customer_name);
+        cust_name.push('Customer Name');
+
+        const cust_email = [];
+        cust_email.push(customer_email);
+        cust_email.push('Customer Email');
+
+        const status_id = [];
+        status_id.push(1);
+        status_id.push('Status ID');
+
+        const description = [];
+        description.push(message);
+        description.push('Description');
+
+        const conversation_id = [];
+        conversation_id.push(conversationId);
+        conversation_id.push('Conversation ID');
+
+        const attachments = [];
+        attachments.push(JSON.stringify(finalAttachments));
+        attachments.push('Attachments');
+
+        const withoutContact = [];
+        withoutContact.push(guest);
+        withoutContact.push('withoutContact');
+
+        const container = document.getElementById('ticketCustomFieldsContainer');
+        const fields = container.querySelectorAll('input, select, textarea');
+
+        const values = {};
+
+        fields.forEach(field => {
+            const name = field.id.replace('custom_', ''); // fallback if name missing
+            values[name] = field.value;
+        });
+
+        const customField = [];
+        customField.push(values);
+        customField.push('custom_fields');
+
+        let ticketData = { ...ticketDataPart1, description, status_id, contact_id, cust_name, cust_email, conversation_id, attachments, withoutContact, customField };
+        console.log(ticketData);
+
+        let output = {};
+        $.map(ticketData, function (value, key) {
+            data[key] = value[0];
+        });
+
+        let isFormValid = true;
+        let emptyFields = [];
+
+        // Validate all inputs, selects, and textareas inside the lightbox
+        document.querySelectorAll('.sb-ticket-edit-box input, .sb-ticket-edit-box select, .sb-ticket-edit-box textarea').forEach(el => {
+            // Skip validation for optional fields (no "required" attribute)
+            //if (el.type != 'file' && el.type !== 'checkbox' && el.type !== 'hidden' && el.parentElement.id !== 'cc') {
+            if (el.hasAttribute('required')) {
+                // Check for empty text or unselected select
+                if (el.value.trim() === '') {
+                    const labelSpan = el.previousElementSibling;
+                    if (labelSpan && labelSpan.tagName.toLowerCase() === 'span') {
+                        emptyFields.push(labelSpan.textContent.trim());
+                    }
+                    else if (el.id == 'select-customer') {
+                        emptyFields.push("Customer");
+                        el.nextElementSibling.style.border = '1px solid red'; // Highlight the empty field
+                    }
+                    isFormValid = false;
+                    el.style.border = '1px solid red'; // Highlight the empty field
+                }
+                else {
+                    el.style.border = 'none'; // Highlight the empty field
+                    if (el.id == 'select-customer') {
+
+                        el.nextElementSibling.style.border = 'none'; // Highlight the empty field
+                    }
+                }
+
+            }
+        });
+
+        if (!isFormValid) {
+            SBTicket.showErrorMessage(ticket_edit_box, `${emptyFields.join(', ')} are required.`);
+            $(this).sbLoading(false);
+            return;
         }
+
+        if (!data.user_type) {
+            data.ticket_type = 'new';
+        }
+
+        // console.log(data);
+        // Save the settings
+        SBF.ajax({
+            function: (new_ticket ? 'add-ticket' : 'update-ticket'),
+            ticket_id: ticket_id,
+            data1: ticketData,
+        }, (response) => {
+            
+            $(this).sbLoading(false);
+
+            //admin.sbHideLightbox();
+            //if(!new_ticket)
+            //SBTicket.updateRow(response);
+
+            //SBTickets.updateRow(ticketData);
+           // infoBottom(new_ticket ? 'New Ticket Created' : 'Ticket updated');
+
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
+
+           // $(header).find('.sb-admin-nav #sb-tickets').click();
+
+        });
     }
 
     function ticketsInit() {
@@ -561,6 +748,9 @@
 
         main_panel.on('click', '> .sb-top .sb-close', function () {
             SBTickets.showPanel();
+            $('.tickets-list-area .sb-panel-main .sb-top').hide();
+            $('.tickets-list-area .sb-panel-main').addClass('p-5');
+            $('.tickets-list-area .sb-panel-main .sb-scroll-area').removeClass('text-middle');
         });
 
         /*
@@ -592,7 +782,8 @@
                                 token: token
                             }, (response) => {
                                 if (response === true) {
-                                    submitTicketPartial();
+                                    //submitTicketPartial();
+                                    createTicket();
                                     $('.grecaptcha-badge').hide();
                                 } else SBChat.busy(false);
                             });
@@ -600,7 +791,8 @@
                     });
                     return;
                 }
-                submitTicketPartial();
+               // submitTicketPartial();
+                createTicket();
             }
         });
 
@@ -751,5 +943,12 @@
 
     function setTitle(title) {
         $(main_title).html(title).sbActive(title);
+    }
+
+    function setTicketTitle(title) {
+        $(ticket_main_title).html(title).sbActive(title);
+        $('.tickets-list-area .sb-panel-main').removeClass('p-5');
+        $('.tickets-list-area .sb-panel-main .sb-top').show();
+        $('.tickets-list-area .sb-panel-main .sb-scroll-area').addClass('text-middle');
     }
 }(jQuery));
