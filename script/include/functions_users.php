@@ -1903,6 +1903,9 @@ function sb_add_ticket($inputs)
         sb_add_edit_ticket_tags($ticket_id, $tags, $action = 'new');
         
         ////// Process file attachments if any
+
+        //print_r($inputs['attachments'][0]);
+
         sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
 
         return sb_return_saved_ticket_row($ticket_id);
@@ -1911,13 +1914,13 @@ function sb_add_ticket($inputs)
 function sb_save_ticket_attachments($ticket_id, $attachments) {
     if (isset($attachments) && !empty($attachments)) {
         $uploadedFiles = json_decode($attachments, true);
+
         if (json_last_error() === JSON_ERROR_NONE && is_array($uploadedFiles)) {
             foreach ($uploadedFiles as $file) {
                 // Verify the file exists
                 $filePath = '../../' . $file['file_path'];
                 if (file_exists($filePath)) {
                     $fileName = sb_db_escape($file['filename']);
-                    $originalFileName = sb_db_escape($file['original_filename']);
                     $originalFileName = sb_db_escape($file['original_filename']);
                     $filePath = sb_db_escape($file['file_path']);
                     $fileType = sb_db_escape($file['file_type']);
