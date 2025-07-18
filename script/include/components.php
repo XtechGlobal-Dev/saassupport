@@ -496,7 +496,7 @@ function sb_ticket_edit_box()
                 <!-- Hidden input to store uploaded file data -->
                 <input type="hidden" id="uploaded_files1" name="uploaded_files" value="">
             </div>
-            <div id="ticketCustomFieldsContainer" style="margin: 10px 0 0 0;"></div>
+            <div id="ticketCustomFieldsContainer" class="custom-field" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
             <div id="ticketFileAttachments" style="margin: 10px 0 0 0;">
                 <div>
@@ -541,7 +541,9 @@ function sb_ticket_edit_box()
             flex-wrap: wrap;
             gap: 10px;
         }
-
+        .custom-field span {
+            padding-bottom: 6px;
+        }
         #ticketCustomFieldsContainer>.sb-input,
         #ticketFileAttachments-detail>div,
         .first-section>div {
@@ -4289,7 +4291,7 @@ function sb_component_admin()
                                         <?php sb_e("Priority"); ?>
                                     </th>
                                     <th data-field="last_reply">
-                                        <?php sb_e("Last Reply"); ?>
+                                        <?php sb_e("Assigned To"); ?>
                                     </th>
                                     <th data-field="creation_time">
                                         <?php sb_e("Created"); ?>

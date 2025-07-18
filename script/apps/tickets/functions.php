@@ -197,6 +197,13 @@ function sb_component_tickets()
                 </div>
             </div>
             <div class="sb-panel-main p-5">
+                <div class="sb-top" style="display:none">
+                                        <div class="sb-title sb-active"></div>
+                    <a class="sb-close sb-btn-icon sb-btn-red">
+                        <i class="sb-icon-close"></i>
+                    </a>
+                    <div class="sb-label-date-top"></div>
+                </div>
                 <p class="no-reords text-center d-none">No results found.</p>
                 <div class="tickets-area">
                     <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this <span class="ticket-creation-time"></span></span></div>
@@ -281,17 +288,62 @@ function sb_component_tickets()
         <div class="sb-lightbox-overlay"></div>
         <div class="sb-ticket-fields">
             <?php
-            $code = '';
+             $code = '';
             if (sb_get_multi_setting('tickets-fields', 'tickets-field-departments')) {
                 $departments = sb_get_departments();
-                $code .= '<div id="department" class="sb-input sb-input-select"><span>' . sb_(sb_isset(sb_get_setting('departments-settings'), 'departments-label', 'Department')) . '</span><div class="sb-select"><p data-value="" data-required="true">' . sb_('Select a value') . '</p><ul>';
-                foreach ($departments as $key => $value) {
-                    $code .= '<li data-value="' . $key . '">' . sb_($value['name']) . '</li>';
-                }
-                $code .= '</ul></div></div>';
+                
+                ?>
+                <div id="department_id" data-type="select" class="sb-input">
+                    <span>Department</span>
+                    <select>
+                        <option value=""><?php echo sb_(
+                            "Select Department"
+                        ); ?></option>
+                        <?php
+                        foreach ($departments as $key => $value) {
+                            echo '<option value="' .$key .'">' .sb_($value["name"]) .'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            <?php
             }
             if (sb_get_multi_setting('tickets-fields', 'tickets-field-priority')) {
-                $code .= '<div id="priority" class="sb-input sb-input-select"><span>' . sb_('Priority') . '</span><div class="sb-select"><p data-value="" data-required="true">' . sb_('Select a value') . '</p><ul><li data-value="' . sb_('General issue') . '">' . sb_('General issue') . '</li><li data-value="' . sb_('Medium') . '">' . sb_('Medium') . '</li><li data-value="' . sb_('Critical') . '">' . sb_('Critical') . '</li></ul></div></div>';
+                // $code .= '<div id="priority" class="sb-input sb-input-select">
+                //     <span>' . sb_('Priority') . '</span>
+                //     <div class="sb-select">
+                //         <p data-value="" data-required="true">' . sb_('Select a value') . '</p>
+                //         <ul>
+                //         <li data-value="' . sb_('General issue') . '">' . sb_('General issue') . '</li>
+                //         <li data-value="' . sb_('Medium') . '">' . sb_('Medium') . '</li>
+                //         <li data-value="' . sb_('Critical') . '">' . sb_('Critical') . '</li>
+                //         </ul>
+                //     </div>
+                // </div>';
+
+                function sb_get_priorities()
+                {
+                    $priorities = sb_db_get(
+                        "SELECT * FROM priorities",
+                        false
+                    );
+                    return $priorities;
+                }
+
+                $priorities = sb_get_priorities();
+                ?>
+                <div id="priority_id" data-type="select" class="sb-input">
+                    <span class="required-label">Priority</span>
+                    <select required>
+                        <option value="">Select Priority</option>
+                        <?php
+                        foreach ($priorities as $key => $value) {
+                            echo '<option value="' .$value["id"] .'">' .$value["name"] .'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            <?php
             }
             if (sb_get_multi_setting('wc-tickets-products', 'wc-tickets-products-active')) {
                 $products = sb_woocommerce_get_products([], false, sb_get_user_language());
