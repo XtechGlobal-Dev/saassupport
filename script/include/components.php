@@ -2648,7 +2648,7 @@ function sb_component_admin()
 
                 <!-- old code -->
 
-                <div class="sb-area-dashboard">
+                <div class="sb-area-dashboard screen-size">
                     <main>
                         <?php echo $header; ?>
                         <div class="container new_container">
@@ -4149,7 +4149,7 @@ function sb_component_admin()
                 </style>
                 <div class="sb-area-tickets">
                     <?php echo $header; ?>
-                    <div class="sb-top-bar">
+                    <div class="sb-top-bar new-ticket-button">
                         <div>
                             <!-- <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
@@ -4244,7 +4244,7 @@ function sb_component_admin()
                     </div>
 
                     <div class="sb-scroll-area ticket-section">
-                        <table class="sb-table sb_table_new sb-table-tickets">
+                        <table class="sb-table sb_table_new sb-table-tickets tab-scroll">
                             <thead>
                                 <tr>
                                     <th data-field="id" width="5%">
@@ -4307,7 +4307,7 @@ function sb_component_admin()
                     <div class="tc_bg" style="max-height: calc(100vh - 93px);overflow-y: auto;">
                         <div class="tc_back">
                             <div class="container">
-                                <div class="row">
+                                <div class="row tablet-sizee">
                                     <div class="col-md-12 p-0">
                                         <div class="row">
                                             <div class="col-md-8 p-0">
@@ -4348,7 +4348,7 @@ function sb_component_admin()
                                                 <span class="label">Attachments (<span
                                                         class="attachments-count">0</span>)</span>
                                             </div>
-                                            <div class="col-md-9 p-0">
+                                            <div class="col-md-9 p-0 table-align">
                                                 <h2 class="sub_title my-4">Description</h2>
                                                 <div id="description-d" class="description" data-type="textarea"
                                                     style="margin: 10px 0 0 0;display: block;">
@@ -4754,7 +4754,7 @@ function sb_component_admin()
                                                     ); ?>";
                                                 </script>
                                             </div>
-                                            <div class="col-md-3 p-0">
+                                            <div class="col-md-3 p-0 table-rightside">
                                                 <div class="pl-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
