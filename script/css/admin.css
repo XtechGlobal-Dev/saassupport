@@ -4686,7 +4686,7 @@ td.sb-offline:after {
 }
 
 .new_table {
-  padding: 20px;
+  padding-bottom: 20px;
   background: #fff;
   border-radius: 0 0 8px 8px;
 }
@@ -7240,6 +7240,14 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .main-charts .monthlyBarChart #monthlyBarChart {
   height: 370px !important;
   width: 900px;
+}
+.sb-area-dashboard main .new_container .main-charts .ticket_activity_chart {
+  max-width: 450px;
+  margin: 10px auto;
+}
+.sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
+  height: 200px !important;
+  width: 440px !important;
 }
 .sb-area-dashboard main .new_container .main-charts .overview_chart {
   display: flex;
@@ -11875,7 +11883,7 @@ li.menu_head:hover {
 }
 
 .sidebar {
-  width: 240px;
+  width: 230px;
   transition: width 0.3s ease;
   overflow: hidden;
   background: #fff;
@@ -12105,6 +12113,39 @@ i.fa-solid.fa-x.delete-attachment {
   font-size: 10px;
 }
 
+@media (max-width: 1540px) {
+  .screen-size .row > .col-md-8,
+  .screen-size .row > .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .sb-area-tickets.sb-active .ticket-section {
+    overflow: scroll;
+  }
+  .sb-area-tickets.sb-active .tab-scroll {
+    table-layout: unset;
+  }
+  .new-ticket-button {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  .new-ticket-button > * {
+    flex-shrink: 0;
+  }
+  .tablet-sizee .table-align {
+    width: 100%;
+  }
+  .tablet-sizee .table-rightside {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+  .tablet-sizee .pl-5 {
+    padding-left: 0;
+  }
+}
 /*
  *
  * -----------------------------------------------------------
