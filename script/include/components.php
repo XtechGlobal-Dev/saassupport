@@ -4242,11 +4242,14 @@ function sb_component_admin()
                                 </div-->
                         </div>
                     </div>
+                    <!--  -->
+                                    <div class="container-fluid py-4">
 
-                    <div class="sb-scroll-area ticket-section">
-                        <table class="sb-table sb_table_new sb-table-tickets tab-scroll">
-                            <thead>
-                                <tr>
+    <!-- Table -->
+    <div class="table-responsive" style="overflow: visible;">
+      <table id="ticketTable" class="table table-bordered table-hover align-middle text-nowrap bg-white w-100">
+        <thead class="table-light">
+ <tr>
                                     <th data-field="id" width="5%">
                                         <!--input type="checkbox" /-->
                                         <?php sb_e("ID"); ?>
@@ -4297,10 +4300,534 @@ function sb_component_admin()
                                         <?php sb_e("Created"); ?>
                                     </th>
                                 </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+        </thead>
+        <tbody>
+          <!-- Sample Row -->
+          <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+      <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+                 <tr>
+            <td>#t1</td>
+            <td>customer</td>
+            <td><span class="badge badge-tag">shivank</span> <span class="badge badge-tag">test</span></td>
+            <td>null</td>
+            <td>User #73293</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle status-inprogress" data-bs-toggle="dropdown">
+                  In Progress
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item status-open" href="#">Open</a></li>
+                  <li><a class="dropdown-item status-inprogress" href="#">In Progress</a></li>
+                  <li><a class="dropdown-item status-hold" href="#">Hold</a></li>
+                  <li><a class="dropdown-item status-answered" href="#">Answered</a></li>
+                  <li><a class="dropdown-item status-closed" href="#">Closed</a></li>
+                  <li><a class="dropdown-item status-wp" href="#">WordPress Dev</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm dropdown-toggle priority-low" data-bs-toggle="dropdown">
+                    
+                  Low
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item priority-low" href="#">Low</a></li>
+                  <li><a class="dropdown-item priority-high" href="#">High</a></li>
+                  <li><a class="dropdown-item priority-critical" href="#">Critical</a></li>
+                </ul>
+              </div>
+            </td>
+            <td>—</td>
+            <td>Friday 5:06 PM</td>
+          </tr>
+          
+          <!-- Repeat for more records -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#ticketTable').DataTable({
+        pageLength: 10,
+        lengthMenu: [10, 25, 50, 100],
+        order: [[0, 'desc']],
+        responsive: true,
+        dom: 'lrtip' // hides the search filter
+      });
+    });
+  </script>
+    <style>
+
+        /* Make sure the dropdown is not cut off by table or container */
+        .table-responsive {
+        overflow: visible !important;
+        }
+
+        table.dataTable tbody td {
+        overflow: visible !important;
+        position: relative !important;
+        z-index: auto !important;
+        }
+
+        .dropdown-menu {
+        z-index: 9999 !important; /* Boost visibility over DataTables */
+        }
+
+    .badge-tag {
+      background-color: #fce4ec;
+      color: #d81b60;
+      font-size: 12px;
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      padding: 6px 15px;
+    }
+
+    .status-inprogress { background-color: #fff3cd; color: #856404; }
+    .status-open { background-color: #f8d7da; color: #721c24; }
+    .status-hold { background-color: #fde2e2; color: #f44336; }
+    .status-answered { background-color: #d4edda; color: #155724; }
+    .status-closed { background-color: #e2e3e5; color: #6c757d; }
+    .status-wp { background-color: #cce5ff; color: #004085; }
+
+    .priority-low { background-color: #e2e3e5; color: #333; }
+    .priority-high { background-color: #f8d7da; color: #d9534f; }
+    .priority-critical { background-color: #f5c6cb; color: #a94442; }
+
+    .dropdown-toggle {
+      border: none;
+      padding: 5px 10px;
+    }
+
+    /* Fix dropdown visibility inside DataTables */
+    table.dataTable tbody td {
+      overflow: visible !important;
+      position: relative !important;
+      z-index: 1;
+    }
+
+    .dropdown-menu {
+      z-index: 1050 !important;
+    }
+  </style>
+                    <!--  -->
+                
+
+
                 </div>
                 <div class="sb-area-ticket-detail">
                     <?php echo $header; ?>
