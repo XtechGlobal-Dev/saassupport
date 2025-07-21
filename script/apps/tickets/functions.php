@@ -38,8 +38,8 @@ function sb_component_tickets()
     <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
         <header class="user_header d-none" >
             <div class="header_left">
-                <h2 class="tab sb-active" data-id="sb-tickets-area">Conversations</h2>
-                <h2 class="tab" data-id="tickets-list-area">Tickets</h2>
+                <h2 class="tab  sb-active" data-id="tickets-list-area">Tickets</h2>
+                <h2 class="tab" data-id="sb-tickets-area">Conversations</h2>
             </div>
             <div class="header_right">
                 <div class="user_profile">
@@ -59,7 +59,79 @@ function sb_component_tickets()
                 </div>
             </div>
         </header>
-        <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
+        <div class="tickets-list-area">
+            <div class="sb-panel-left">
+                <div class="tickets-list">
+                    <div class="sb-top p-4">
+                        <div>
+                            <?php if (!sb_isset($disable_fields, 'tickets-button'))
+                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                            else
+                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; 
+                            ?>
+                        </div>
+                        <div class="sb-search-btn">
+                            <i class="sb-icon sb-icon-search"></i>
+                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                        </div>
+                    </div>
+                    <ul class="sb-user-tickets sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                        <p class="p-4">
+                            <?php sb_e('No results found.') ?>
+                        </p>
+                    </ul>
+                </div>
+            </div>
+            <div class="sb-panel-main p-5">
+                <div class="sb-top" style="display:none">
+                                        <div class="sb-title sb-active"></div>
+                    <a class="sb-close sb-btn-icon sb-btn-red">
+                        <i class="sb-icon-close"></i>
+                    </a>
+                    <div class="sb-label-date-top"></div>
+                </div>
+                <p class="no-reords text-center d-none">No results found.</p>
+                <div class="tickets-area">
+                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this <span class="ticket-creation-time"></span></span></div>
+                    <h4 class="ticket-subject"></h4>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <div class="mb-1 ticket-description">
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <strong>Comments</strong>
+                                                                                        <!-- Comments/Chat Section -->
+                        <div id="ticket-comments" class="row mt-4">
+                            <div class="col-md-12 p-0">
+                                <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                    <!-- Comments will be loaded here by JS -->
+                                </div>
+
+                                <div class="d-flex align-items-center gap-2 mt-4">
+                                    <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                    <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
+                                    <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
+
+                                    <button id="addComment" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-panel sb-scroll-area"></div>
+            </div>
+            <div class="sb-panel-right p-4">
+                <div class="right-side-wrapper d-none" >
+                    <div class="mb-2 text-muted small user-name"></div>
+                    <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id"></span></div>
+                    <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status"></span></div>
+                    <div class="row ticket-attachments"></div>
+                    
+                    <div class="sb-scroll-area"></div>
+                </div>
+            </div>
+        </div>
+        <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;display:none">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
                 <div class="sb-panel-left">
                     <div class="conversation-list">
@@ -173,114 +245,7 @@ function sb_component_tickets()
             }
             ?>
         </div>
-        <div class="tickets-list-area" style="display:none">
-            <div class="sb-panel-left">
-                <div class="tickets-list">
-                    <div class="sb-top p-4">
-                        <div>
-                            <?php if (!sb_isset($disable_fields, 'tickets-button'))
-                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
-                            else
-                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; 
-                            ?>
-                        </div>
-                        <div class="sb-search-btn">
-                            <i class="sb-icon sb-icon-search"></i>
-                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
-                        </div>
-                    </div>
-                    <ul class="sb-user-tickets sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
-                        <p>
-                            <?php sb_e('No results found.') ?>
-                        </p>
-                    </ul>
-                </div>
-            </div>
-            <div class="sb-panel-main p-5">
-                <div class="sb-top" style="display:none">
-                                        <div class="sb-title sb-active"></div>
-                    <a class="sb-close sb-btn-icon sb-btn-red">
-                        <i class="sb-icon-close"></i>
-                    </a>
-                    <div class="sb-label-date-top"></div>
-                </div>
-                <p class="no-reords text-center d-none">No results found.</p>
-                <div class="tickets-area">
-                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this <span class="ticket-creation-time"></span></span></div>
-                    <h4 class="ticket-subject"></h4>
-                    <div class="bg-light p-3 rounded mb-3">
-                        <div class="mb-1 ticket-description">
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <strong>Comments</strong>
-                                                                                        <!-- Comments/Chat Section -->
-                        <div id="ticket-comments" class="row mt-4">
-                            <div class="col-md-12 p-0">
-                                <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
-                                    <!-- Comments will be loaded here by JS -->
-                                </div>
-
-                                <div class="d-flex align-items-center gap-2 mt-4">
-                                    <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
-                                    <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
-                                    <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
-
-                                    <button id="addComment" class="btn btn-primary">Send</button>
-                                </div>
-                            </div>
-                        </div>
-<!-- 
-                        <div class="mt-2 mb-3">
-                            <div class="d-flex align-items-center mb-1">
-                                <span class="me-2"><img src="https://via.placeholder.com/24" class="rounded-circle" alt="User"></span>
-                                <span class="fw-bold">Jimmy Martin</span>
-                                <span class="text-muted small ms-2">today 3:00 PM</span>
-                            </div>
-                            <div class="ms-5">Test comment</div>
-                        </div>
-                        <div class="d-flex align-items-start">
-                            <span class="me-2"><img src="https://via.placeholder.com/24" class="rounded-circle" alt="User"></span>
-                            <input type="text" class="form-control ms-2" placeholder="Add Comment">
-                        </div> -->
-                    </div>
-                </div>
-                <div class="sb-panel sb-scroll-area"></div>
-            </div>
-            <div class="sb-panel-right p-4">
-                <div class="right-side-wrapper">
-                    <!-- <div class="sb-top">
-                        <div class="sb-profile-menu">
-                            <div class="sb-profile sb-no-profile-image">
-                                <img src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png">
-                                <span class="sb-name">test customer</span>
-                            </div>
-                            <div>
-                                <ul class="sb-menu">
-                                    <li data-value="edit-profile">Edit profile</li><li data-value="logout">Logout</li>                                    
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="mb-2 text-muted small user-name"></div>
-                    <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id"></span></div>
-                    <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status"></span></div>
-                    <div class="mb-2 tags-wrapper">
-                        <strong>Tags:</strong>
-                        <div class="d-flex flex-wrap gap-1 mt-1">
-                            
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <strong>Priority:</strong>
-                        <span class="ms-2">
-                            <span class="align-middle ticket-priority">Low</span>
-                        </span>
-                    </div>
-                    <div class="sb-scroll-area"></div>
-                </div>
-            </div>
-        </div>
+        
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -309,18 +274,6 @@ function sb_component_tickets()
             <?php
             }
             if (sb_get_multi_setting('tickets-fields', 'tickets-field-priority')) {
-                // $code .= '<div id="priority" class="sb-input sb-input-select">
-                //     <span>' . sb_('Priority') . '</span>
-                //     <div class="sb-select">
-                //         <p data-value="" data-required="true">' . sb_('Select a value') . '</p>
-                //         <ul>
-                //         <li data-value="' . sb_('General issue') . '">' . sb_('General issue') . '</li>
-                //         <li data-value="' . sb_('Medium') . '">' . sb_('Medium') . '</li>
-                //         <li data-value="' . sb_('Critical') . '">' . sb_('Critical') . '</li>
-                //         </ul>
-                //     </div>
-                // </div>';
-
                 function sb_get_priorities()
                 {
                     $priorities = sb_db_get(
