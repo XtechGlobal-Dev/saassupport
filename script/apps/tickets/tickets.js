@@ -87,6 +87,7 @@
         },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
+            console.log('$$$',name);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -358,6 +359,7 @@
             if (!main.length) {
                 return;
             }
+            
             if (SBF.setting('tickets_registration_required') && (!activeUser() || ['visitor', 'lead'].includes(activeUser().type))) {
                 let redirect = SBF.setting('tickets_registration_redirect');
                 if (redirect) {
@@ -372,12 +374,19 @@
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
                     }
-                } else {
+                } 
+                else if(activeUser())
+                {
+                    console.log('asasas');
+                    console.log(activeUser().getUserTickets());
+                }
+                else {
                     main.addClass('sb-no-conversations');
                     if (SBF.setting('privacy') && !SBF.storage('privacy_approved')) {
                         SBTickets.showPanel('privacy');
                     } else if (!SBF.setting('tickets_disable_first')) {
                         SBTickets.showPanel('new-ticket');
+                        console.log();
                     } else {
                         setConversationName();
                     }
@@ -400,7 +409,7 @@
 
 
             console.log(window.innerHeight);
-            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px`);
+            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px;display:none`);
             setTimeout(function () {
                 main.removeClass('sb-load');
             }, 300);
@@ -862,8 +871,8 @@
             SBF.logout(false);
             SBTickets.showPanel('login');
             $('.user_header').addClass('d-none');
-            $('.tickets-list-area').hide();
-            $('.sb-tickets-area').show();
+            $('.tickets-list-area').show();
+            $('.sb-tickets-area').hide();
         });
 
         panel.on('click', '> .sb-buttons .sb-submit', function () {

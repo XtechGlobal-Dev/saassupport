@@ -1028,9 +1028,6 @@ function sb_ticket_edit_box()
             minimumInputLength: 1
         });
     </script>
-    <!-- Include Bootstrap JS and dependencies -->
-    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script-->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
     <!-- File Upload Handling -->
@@ -1166,6 +1163,8 @@ function sb_ticket_edit_box()
                 for (let i = 0; i < files.length; i++) {
                     formData.append('files[]', files[i]);
                 }
+
+                const ticket_id = $('.sb-area-ticket-detail.sb-active').data('id');
 
                 formData.append('function', 'ajax_calls');
                 formData.append('calls[0][function]', 'upload-ticket-attachments');
@@ -1342,7 +1341,7 @@ function sb_ticket_edit_box()
                         previewContent = `
                         <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
-                            <img src="${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top: 10px;" alt="${file.original_filename}">
+                            <img src="script/${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top: 10px;" alt="${file.original_filename}">
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 text-truncate">
@@ -1420,10 +1419,11 @@ function sb_ticket_edit_box()
                     formData.append('files[]', files[i]);
                 }
 
+
                 formData.append('function', 'ajax_calls');
                 formData.append('calls[0][function]', 'upload-ticket-attachments');
                 formData.append('login-cookie', SBF.loginCookie());
-                formData.append('ticket_id', 0); // Replace with actual ticket ID
+                formData.append('ticket_id', ticket_id); // Replace with actual ticket ID
 
 
                 console.log('Files to upload:', files);
@@ -1539,7 +1539,7 @@ function sb_ticket_edit_box()
                         previewContent = `
                         <i class="fa-solid fa-x remove-file" style="color: #dc3545;" data-index="${uploadedFiles.indexOf(file)}"></i>
                         <div class="text-center mb-2">
-                            <img src="${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top: 10px;" alt="${file.original_filename}">
+                            <img src="script/${file.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top: 10px;" alt="${file.original_filename}">
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 text-truncate">
@@ -2648,7 +2648,7 @@ function sb_component_admin()
 
                 <!-- old code -->
 
-                <div class="sb-area-dashboard">
+                <div class="sb-area-dashboard screen-size">
                     <main>
                         <?php echo $header; ?>
                         <div class="container new_container">
@@ -4149,7 +4149,7 @@ function sb_component_admin()
                 </style>
                 <div class="sb-area-tickets">
                     <?php echo $header; ?>
-                    <div class="sb-top-bar">
+                    <div class="sb-top-bar new-ticket-button">
                         <div>
                             <!-- <div class="sb-search-btn">
                                     <i class="sb-icon sb-icon-search"></i>
@@ -4244,7 +4244,7 @@ function sb_component_admin()
                     </div>
 
                     <div class="sb-scroll-area ticket-section">
-                        <table class="sb-table sb_table_new sb-table-tickets">
+                        <table class="sb-table sb_table_new sb-table-tickets tab-scroll">
                             <thead>
                                 <tr>
                                     <th data-field="id" width="5%">
@@ -4254,10 +4254,17 @@ function sb_component_admin()
                                     <th data-field="subject">
                                         <?php sb_e("Subject"); ?>
                                     </th>
-                                    <th data-field="tags" width="20%">
-                                        <?php sb_e("Tags"); ?>
-                                    </th>
                                     <?php
+                                    $tags = sb_get_multi_setting("disable", "disable-tags") ? []: sb_get_setting("tags", []);
+                                    $count = count($tags);
+                                    if($count > 0)
+                                    {
+                                    ?>
+                                        <th data-field="tags" width="20%">
+                                            <?php sb_e("Tags"); ?>
+                                        </th>
+                                    <?php
+                                    }
                                     $department_settings = sb_get_setting(
                                         "departments-settings"
                                     );
@@ -4294,7 +4301,7 @@ function sb_component_admin()
                                         <?php sb_e("Assigned To"); ?>
                                     </th>
                                     <th data-field="creation_time">
-                                        <?php sb_e("Created"); ?>
+                                        <?php sb_e("Created At"); ?>
                                     </th>
                                 </tr>
                             </thead>
@@ -4307,7 +4314,7 @@ function sb_component_admin()
                     <div class="tc_bg" style="max-height: calc(100vh - 93px);overflow-y: auto;">
                         <div class="tc_back">
                             <div class="container">
-                                <div class="row">
+                                <div class="row tablet-sizee">
                                     <div class="col-md-12 p-0">
                                         <div class="row">
                                             <div class="col-md-8 p-0">
@@ -4348,7 +4355,7 @@ function sb_component_admin()
                                                 <span class="label">Attachments (<span
                                                         class="attachments-count">0</span>)</span>
                                             </div>
-                                            <div class="col-md-9 p-0">
+                                            <div class="col-md-9 p-0 table-align">
                                                 <h2 class="sub_title my-4">Description</h2>
                                                 <div id="description-d" class="description" data-type="textarea"
                                                     style="margin: 10px 0 0 0;display: block;">
@@ -4754,7 +4761,7 @@ function sb_component_admin()
                                                     ); ?>";
                                                 </script>
                                             </div>
-                                            <div class="col-md-3 p-0">
+                                            <div class="col-md-3 p-0 table-rightside">
                                                 <div class="pl-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
