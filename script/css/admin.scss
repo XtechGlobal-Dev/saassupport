@@ -8796,12 +8796,12 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     }
 
-    &.sb-active {
-        .ticket-section {
-            max-height: none;
-            overflow: visible;
-        }
-    }
+    // &.sb-active {
+    //     .ticket-section {
+    //         max-height: none;
+    //         overflow: visible;
+    //     }
+    // }
 }
 
 
@@ -9537,7 +9537,7 @@ i {
     }
   }
 }
-// cuistom responsive
+// custom responsive
 @media (max-width: 1540px) {
   .screen-size {
     .row {
@@ -9548,16 +9548,16 @@ i {
       }
     }
   }
-.sb-area-tickets {
-  &.sb-active {
-    .ticket-section {
-      overflow: scroll;
-    }
-    .tab-scroll {
-    table-layout: unset;
-   }
-  }
-}
+// .sb-area-tickets {
+//   &.sb-active {
+//     .ticket-section {
+//       overflow: scroll;
+//     }
+//     .tab-scroll {
+//     table-layout: unset;
+//    }
+//   }
+// }
 .new-ticket-button {
   overflow-x: auto;
   white-space: nowrap;
@@ -9565,7 +9565,7 @@ i {
   gap: 10px;
 
   > * {
-    flex-shrink: 0; // Prevent items from shrinking on narrow view
+    flex-shrink: 0;
   }
 }
 .tablet-sizee {
@@ -9586,7 +9586,6 @@ i {
 
 }
 // custom responsive
-
 // custom css
 /*
  *
