@@ -3033,7 +3033,11 @@
                 }, (response) => {
                     if(response)
                     {
-                        $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+                        setTimeout(function()
+                        {
+                            $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+                        },1100);
+                        
 
                         $('.tickets-list-area').attr('data-id',ticket_id);
                         $('.sb-tickets .user-name').html(response.contact_name);
@@ -3051,8 +3055,7 @@
                         $('#addComment').attr('ticket-id',ticket_id);
                         $('.sb-tickets .ticket-id').html(ticket_id);
                         $('.sb-tickets .ticket-status').html(response.status_name);
-                        console.log('77777',response.attachments);
-                        
+
                         let attachmentsHtml = '';
                         const filesCount = Object.entries(response.attachments).length;
                         Object.entries(response.attachments).forEach(([key, value]) => {
