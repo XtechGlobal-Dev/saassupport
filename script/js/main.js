@@ -1624,7 +1624,7 @@
                     {
                         $('.no-reords').addClass('d-none');
                         $('.tickets-area').removeClass('d-none');
-                        $('.right-side-wrapper').css('visibility', '');
+                        $('.right-side-wrapper').css('visibility', '').removeClass('d-none');
                         const html = this.renderTickets(response);
                         $('.tickets-list .sb-user-tickets').html(html);
 
@@ -1637,9 +1637,10 @@
                     }
                     else
                     {
-                        $('.no-reords').removeClass('d-none');
+                        //$('.no-reords').removeClass('d-none');
                         $('.tickets-area').addClass('d-none');
                         $('.right-side-wrapper').css('visibility', 'hidden');
+                        $('.sb-new-ticket').trigger('click');
                     }
                 });
             } else {
@@ -3031,38 +3032,26 @@
                         $('#addComment').attr('ticket-id',ticket_id);
                         $('.sb-tickets .ticket-id').html(ticket_id);
                         $('.sb-tickets .ticket-status').html(response.status_name);
-                        $('.sb-tickets .ticket-priority').html(response.priority_name);
-
-                        let rowHtml = '';
-                        response.ticket_tags.forEach(tag => {
-                            const ctx = document.createElement("canvas").getContext("2d");
-                            ctx.fillStyle = tag.color;
-                            const validColor = ctx.fillStyle;
-                            const tags_lighten = SBChat.lightenColor(validColor, 40);
-                            const style = `
-                                background-color: ${tags_lighten};
-                                color: ${validColor === "#ffff00" ? "#FFA500" : validColor};
-                                border: 1px solid ${validColor === "#ffff00" ? "#FFA500" : validColor};
-                                margin-right: 5px;
-                            `;
-                            rowHtml += `<span class="badge" style="${style}">${tag.name}</span>`;
+                        console.log('77777',response.attachments);
+                        
+                        let attachmentsHtml = '';
+                        const filesCount = Object.entries(response.attachments).length;
+                        Object.entries(response.attachments).forEach(([key, value]) => {
+                            attachmentsHtml += `<div class="col-md-5 mb-2">
+                                                    <div class="card">
+                                                        <div class="card-body p-2">
+                                                            <div class="text-center mb-2">
+                                                                <img src="${SB_URL}/${value.file_path}" class="img-thumbnail p-0" style="max-height: 100px;" alt="${value.original_filename}">
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
 
                         });
 
-                        // if(response.tag_names)
-                        // {
-                                $('.sb-tickets .tags-wrapper div').html(rowHtml);
-                                // response.tag_names.split('||').forEach(val => 
-                                // {
-                                //         $('.sb-tickets .tags-wrapper div').append(`<span class="badge" style="
-                                //         background-color: rgb(255, 255, 204);
-                                //         color: #FFA500;
-                                //         border: 1px solid #FFA500;
-                                //         margin-right: 5px;
-                                //     ">${val}</span>`);
-                                // });
-                         // }
-                       
+                        $('#existing-file-preview-container').removeClass('d-none');
+                        $('.tickets-list-area .ticket-attachments').html(attachmentsHtml);
 
                        SBChat.loadComments(ticket_id);
                     }
