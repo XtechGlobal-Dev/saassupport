@@ -371,16 +371,19 @@
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
             } else {
-                console.log('hhheeee1');
+                
                 if (activeUser() && activeUser().conversations.length) {
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
                     }
+
+                    $(document).find('.header_left h2:first').trigger('click');  // load list of tickets
                 } 
                 else if(activeUser())
                 {
                     console.log('asasas');
                     console.log(activeUser().getUserTickets());
+                    console.log('hhheeee12');
                 }
                 else {
                     main.addClass('sb-no-conversations');
@@ -392,6 +395,7 @@
                     } else {
                         setConversationName();
                     }
+                    console.log('hhheeee13');
                 }
             }
             //let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
