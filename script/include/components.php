@@ -541,9 +541,11 @@ function sb_ticket_edit_box()
             flex-wrap: wrap;
             gap: 10px;
         }
+
         .custom-field span {
             padding-bottom: 6px;
         }
+
         #ticketCustomFieldsContainer>.sb-input,
         #ticketFileAttachments-detail>div,
         .first-section>div {
@@ -757,11 +759,11 @@ function sb_ticket_edit_box()
             line-height: 45px;
         }
 
-        .sb-td-tags span {
+        /* .sb-td-tags span {
             margin: 3px 5px 0 0;
             padding: .45em .75em;
             font-size: 13px
-        }
+        } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -791,10 +793,10 @@ function sb_ticket_edit_box()
 
 
         /*********  Statuses list CSS ***********/
-        .status-dropdown {
+        /* .status-dropdown {
             position: relative;
             overflow: visible !important;
-            /* allow dropdown to overflow */
+            
         }
 
         .status-btn {
@@ -808,10 +810,17 @@ function sb_ticket_edit_box()
             gap: 4px;
             font-size: 14px;
         }
-        .status-list li, .priority-list li {
+
+        .status-list li,
+        .priority-list li {
             font-size: 14px;
         }
-        .status-dot{width: 10px !important; height: 10px !important;}
+
+        .status-dot {
+            width: 10px !important;
+            height: 10px !important;
+        }
+
         .arrow {
             font-size: 12px;
         }
@@ -854,7 +863,7 @@ function sb_ticket_edit_box()
             height: 12px;
             border-radius: 50%;
             display: inline-block;
-        }
+        } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -2274,131 +2283,131 @@ function sb_component_admin()
                     <nav>
                         <ul>
                             <li><a id="sb-dashboard"><i>
-                              <span class="icon-tooltip" data-tooltip="Dashboard">    
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg></span></i>
-                                
-                                        <span class="label">Dashboard</span></a></li>
-                                          
+                                        <span class="icon-tooltip" data-tooltip="Dashboard">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg></span></i>
+
+                                    <span class="label">Dashboard</span></a></li>
+
                             <li><a id="sb-conversations"><i>
-                             <span class="icon-tooltip" data-tooltip="Inbox">
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7.69336 2.75C6.28605 2.91536 5.31763 3.26488 4.5846 4.00363C3.19336 5.40575 3.19336 7.66242 3.19336 12.1758C3.19336 16.6891 3.19336 18.9458 4.5846 20.3479C5.97585 21.75 8.21502 21.75 12.6934 21.75C17.1717 21.75 19.4109 21.75 20.8022 20.3479C22.1934 18.9458 22.1934 16.6891 22.1934 12.1758C22.1934 7.66242 22.1934 5.40575 20.8022 4.00363C20.0691 3.26488 19.1007 2.91536 17.6934 2.75"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M10.1934 8.25C10.6849 8.7557 11.9932 10.75 12.6934 10.75M12.6934 10.75C13.3936 10.75 14.7019 8.7557 15.1934 8.25M12.6934 10.75V2.75"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
-                                        </svg></span>
+                                        <span class="icon-tooltip" data-tooltip="Inbox">
+                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M7.69336 2.75C6.28605 2.91536 5.31763 3.26488 4.5846 4.00363C3.19336 5.40575 3.19336 7.66242 3.19336 12.1758C3.19336 16.6891 3.19336 18.9458 4.5846 20.3479C5.97585 21.75 8.21502 21.75 12.6934 21.75C17.1717 21.75 19.4109 21.75 20.8022 20.3479C22.1934 18.9458 22.1934 16.6891 22.1934 12.1758C22.1934 7.66242 22.1934 5.40575 20.8022 4.00363C20.0691 3.26488 19.1007 2.91536 17.6934 2.75"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M10.1934 8.25C10.6849 8.7557 11.9932 10.75 12.6934 10.75M12.6934 10.75C13.3936 10.75 14.7019 8.7557 15.1934 8.25M12.6934 10.75V2.75"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
+                                            </svg></span>
                                     </i><span class="label"> Inbox</span></a></li>
                             <?php //if ($active_areas['tickets']) { ?>
                             <li><a id="sb-tickets"><i>
-                            <span class="icon-tooltip" data-tooltip="Tickets">    
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
-                                                stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
-                                            <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
+                                        <span class="icon-tooltip" data-tooltip="Tickets">
+                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
+                                                    stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
+                                                <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
                                     </i><span class="label">Tickets</span></a></li>
                             <?php //} ?>
                             <?php if ($active_areas['users']) { ?>
                                 <li><a id="sb-users"><i>
-                                <span class="icon-tooltip" data-tooltip="Customers">    
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M14.6934 8.75C14.6934 5.98858 12.4548 3.75 9.69336 3.75C6.93194 3.75 4.69336 5.98858 4.69336 8.75C4.69336 11.5114 6.93194 13.75 9.69336 13.75C12.4548 13.75 14.6934 11.5114 14.6934 8.75Z"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M16.6934 20.75C16.6934 16.884 13.5594 13.75 9.69336 13.75C5.82737 13.75 2.69336 16.884 2.69336 20.75"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M19.6934 9.25V15.25M22.6934 12.25H16.6934" stroke="#5F6465"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
+                                            <span class="icon-tooltip" data-tooltip="Customers">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M14.6934 8.75C14.6934 5.98858 12.4548 3.75 9.69336 3.75C6.93194 3.75 4.69336 5.98858 4.69336 8.75C4.69336 11.5114 6.93194 13.75 9.69336 13.75C12.4548 13.75 14.6934 11.5114 14.6934 8.75Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M16.6934 20.75C16.6934 16.884 13.5594 13.75 9.69336 13.75C5.82737 13.75 2.69336 16.884 2.69336 20.75"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M19.6934 9.25V15.25M22.6934 12.25H16.6934" stroke="#5F6465"
+                                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
                                         </i><span class="label">Customers</span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
                                 <li><a id="sb-articles"><i>
-                                <span class="icon-tooltip" data-tooltip="Articles">    
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M20.4433 11.25V10.25C20.4433 6.47876 20.4433 4.59315 19.2717 3.42157C18.1001 2.25 16.2145 2.25 12.4433 2.25H11.4434C7.67219 2.25 5.78658 2.25 4.61501 3.42156C3.44344 4.59312 3.44342 6.47872 3.44339 10.2499L3.44336 14.25C3.44332 18.0212 3.44331 19.9068 4.61484 21.0784C5.78641 22.2499 7.67209 22.25 11.4433 22.25"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M7.94336 7.25H15.9433M7.94336 12.25H15.9433" stroke="#5F6465"
-                                                    stroke-width="1.5" stroke-linecap="round" />
-                                                <path
-                                                    d="M13.9434 21.0768V22.25H15.1168C15.5262 22.25 15.7309 22.25 15.9149 22.1738C16.099 22.0975 16.2437 21.9528 16.5332 21.6634L21.3568 16.8394C21.6298 16.5664 21.7663 16.4299 21.8393 16.2827C21.9782 16.0025 21.9782 15.6736 21.8393 15.3934C21.7663 15.2461 21.6298 15.1096 21.3568 14.8366C21.0837 14.5636 20.9472 14.4271 20.7999 14.3541C20.5197 14.2153 20.1907 14.2153 19.9105 14.3541C19.7633 14.4271 19.6267 14.5636 19.3537 14.8366L14.5301 19.6606C14.2406 19.95 14.0959 20.0947 14.0197 20.2787C13.9434 20.4628 13.9434 20.6674 13.9434 21.0768Z"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
+                                            <span class="icon-tooltip" data-tooltip="Articles">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M20.4433 11.25V10.25C20.4433 6.47876 20.4433 4.59315 19.2717 3.42157C18.1001 2.25 16.2145 2.25 12.4433 2.25H11.4434C7.67219 2.25 5.78658 2.25 4.61501 3.42156C3.44344 4.59312 3.44342 6.47872 3.44339 10.2499L3.44336 14.25C3.44332 18.0212 3.44331 19.9068 4.61484 21.0784C5.78641 22.2499 7.67209 22.25 11.4433 22.25"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M7.94336 7.25H15.9433M7.94336 12.25H15.9433" stroke="#5F6465"
+                                                        stroke-width="1.5" stroke-linecap="round" />
+                                                    <path
+                                                        d="M13.9434 21.0768V22.25H15.1168C15.5262 22.25 15.7309 22.25 15.9149 22.1738C16.099 22.0975 16.2437 21.9528 16.5332 21.6634L21.3568 16.8394C21.6298 16.5664 21.7663 16.4299 21.8393 16.2827C21.9782 16.0025 21.9782 15.6736 21.8393 15.3934C21.7663 15.2461 21.6298 15.1096 21.3568 14.8366C21.0837 14.5636 20.9472 14.4271 20.7999 14.3541C20.5197 14.2153 20.1907 14.2153 19.9105 14.3541C19.7633 14.4271 19.6267 14.5636 19.3537 14.8366L14.5301 19.6606C14.2406 19.95 14.0959 20.0947 14.0197 20.2787C13.9434 20.4628 13.9434 20.6674 13.9434 21.0768Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
                                         </i><span class="label">Articles</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['reports']) { ?>
                                 <li><a id="sb-reports"><i>
-                                <span class="icon-tooltip" data-tooltip="Reports">    
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.69336 18.25V16.25M12.6934 18.25V15.25M17.6934 18.25V13.25M3.19336 12.25C3.19336 7.77166 3.19336 5.53249 4.5846 4.14124C5.97585 2.75 8.21502 2.75 12.6934 2.75C17.1717 2.75 19.4109 2.75 20.8022 4.14124C22.1934 5.53249 22.1934 7.77166 22.1934 12.25C22.1934 16.7283 22.1934 18.9675 20.8022 20.3588C19.4109 21.75 17.1717 21.75 12.6934 21.75C8.21502 21.75 5.97585 21.75 4.5846 20.3588C3.19336 18.9675 3.19336 16.7283 3.19336 12.25Z"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
+                                            <span class="icon-tooltip" data-tooltip="Reports">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M7.69336 18.25V16.25M12.6934 18.25V15.25M17.6934 18.25V13.25M3.19336 12.25C3.19336 7.77166 3.19336 5.53249 4.5846 4.14124C5.97585 2.75 8.21502 2.75 12.6934 2.75C17.1717 2.75 19.4109 2.75 20.8022 4.14124C22.1934 5.53249 22.1934 7.77166 22.1934 12.25C22.1934 16.7283 22.1934 18.9675 20.8022 20.3588C19.4109 21.75 17.1717 21.75 12.6934 21.75C8.21502 21.75 5.97585 21.75 4.5846 20.3588C3.19336 18.9675 3.19336 16.7283 3.19336 12.25Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M6.68555 11.7363C8.84065 11.8081 13.7275 11.4828 16.5071 7.07132M14.6857 6.53835L16.5612 6.23649C16.7898 6.20738 17.1254 6.38785 17.2079 6.60298L17.7038 8.24142"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
                                         </i><span class="label"> Reports</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['settings']) { ?>
                                 <li><a id="sb-settings"><i>
-                                <span class="icon-tooltip" data-tooltip="Settings">    
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17.1934 20.1071V21.25M17.1934 20.1071C16.1812 20.1071 15.2895 19.6021 14.7664 18.8352M17.1934 20.1071C18.2056 20.1071 19.0973 19.6021 19.6204 18.8352M14.7664 18.8352L13.6938 19.5357M14.7664 18.8352C14.4571 18.3816 14.2767 17.8364 14.2767 17.25C14.2767 16.6636 14.457 16.1185 14.7663 15.665M19.6204 18.8352L20.693 19.5357M19.6204 18.8352C19.9297 18.3816 20.1101 17.8364 20.1101 17.25C20.1101 16.6636 19.9298 16.1185 19.6205 15.665M17.1934 14.3929C18.2057 14.3929 19.0975 14.898 19.6205 15.665M17.1934 14.3929C16.1811 14.3929 15.2893 14.898 14.7663 15.665M17.1934 14.3929V13.25M19.6205 15.665L20.6934 14.9643M14.7663 15.665L13.6934 14.9643"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" />
-                                                <path d="M4.69336 3.25H20.6934" stroke="#5F6465" stroke-width="1.5"
-                                                    stroke-linecap="round" />
-                                                <path d="M4.69336 9.25H20.6934" stroke="#5F6465" stroke-width="1.5"
-                                                    stroke-linecap="round" />
-                                                <path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5"
-                                                    stroke-linecap="round" />
-                                            </svg>
-                                        </span>
+                                            <span class="icon-tooltip" data-tooltip="Settings">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M17.1934 20.1071V21.25M17.1934 20.1071C16.1812 20.1071 15.2895 19.6021 14.7664 18.8352M17.1934 20.1071C18.2056 20.1071 19.0973 19.6021 19.6204 18.8352M14.7664 18.8352L13.6938 19.5357M14.7664 18.8352C14.4571 18.3816 14.2767 17.8364 14.2767 17.25C14.2767 16.6636 14.457 16.1185 14.7663 15.665M19.6204 18.8352L20.693 19.5357M19.6204 18.8352C19.9297 18.3816 20.1101 17.8364 20.1101 17.25C20.1101 16.6636 19.9298 16.1185 19.6205 15.665M17.1934 14.3929C18.2057 14.3929 19.0975 14.898 19.6205 15.665M17.1934 14.3929C16.1811 14.3929 15.2893 14.898 14.7663 15.665M17.1934 14.3929V13.25M19.6205 15.665L20.6934 14.9643M14.7663 15.665L13.6934 14.9643"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" />
+                                                    <path d="M4.69336 3.25H20.6934" stroke="#5F6465" stroke-width="1.5"
+                                                        stroke-linecap="round" />
+                                                    <path d="M4.69336 9.25H20.6934" stroke="#5F6465" stroke-width="1.5"
+                                                        stroke-linecap="round" />
+                                                    <path d="M4.69336 15.25H9.69336" stroke="#5F6465" stroke-width="1.5"
+                                                        stroke-linecap="round" />
+                                                </svg>
+                                            </span>
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
                         </ul>
@@ -3211,8 +3220,6 @@ function sb_component_admin()
                                                                 All</a>
                                                         </p>
                                                     </div>
-                                                    <!-- tickets_table = tickets_area.find('.sb-table-tickets');
-                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
                                                     <div class="seprator"></div>
                                                     <?php
                                                     function sb_get_priorities()
@@ -3234,44 +3241,26 @@ function sb_component_admin()
                                                     $statues = sb_get_statues();
                                                     $priorities = sb_get_priorities();
                                                     ?>
-                                                    <div id="ticket_statues">
-                                                        <ul class="status-list">
+                                                    <div id="ticket_statues" >
+                                                        <ul class="status-list dropdown-menu">
                                                             <?php foreach (
                                                                 $statues
                                                                 as $status
                                                             ) {
-                                                                echo '<li data-status="' .
-                                                                    $status["name"] .
-                                                                    '" class="" data-color="' .
-                                                                    $status["color"] .
-                                                                    '" value="' .
-                                                                    $status["id"] .
-                                                                    '">
-                                                    <span class="status-dot"></span> ' .
-                                                                    $status["name"] .
-                                                                    '
-                                                </li>';
+                                                                echo '<li data-status="' .$status["name"] .'" class="" data-color="' .$status["color"] .'" value="' .$status["id"] .'">
+                                                                        <a class="dropdown-item" href="#"> ' . $status["name"] .'</a></li>';
                                                             } ?>
                                                         </ul>
                                                     </div>
 
                                                     <div id="ticket_priorities">
-                                                        <ul class="priority-list">
+                                                        <ul class="priority-list dropdown-menu">
                                                             <?php foreach (
                                                                 $priorities
                                                                 as $priority
                                                             ) {
-                                                                echo '<li data-status="' .
-                                                                    $priority["name"] .
-                                                                    '" class="" data-color="' .
-                                                                    $priority["color"] .
-                                                                    '" value="' .
-                                                                    $priority["id"] .
-                                                                    '">
-                                                    <span class="status-dot"></span> ' .
-                                                                    $priority["name"] .
-                                                                    '
-                                                </li>';
+                                                                echo '<li data-status="' .$priority["name"] .'" class="" data-color="' .$priority["color"] .'" value="' .$priority["id"] .'">
+                                                                <a class="dropdown-item" href="#">' .$priority["name"] .'</a></li>';
                                                             } ?>
                                                         </ul>
                                                     </div>
@@ -3341,10 +3330,10 @@ function sb_component_admin()
                                             <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a>
                                             </p>
                                         </div-->
-                                    <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                            <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                                    <!--div class="seprator"></div-->
-                                    <!--?php
+                            <!--div class="seprator"></div-->
+                            <!--?php
                                         function sb_get_priorities()
                                         {
                                             $priorities = sb_db_get(
@@ -3366,7 +3355,7 @@ function sb_component_admin()
                                         ?>
                                         <div id="ticket_statues">
                                             <ul class="status-list"-->
-                                    <!--?php foreach (
+                            <!--?php foreach (
                                                     $statues
                                                     as $status
                                                 ) {
@@ -3387,7 +3376,7 @@ function sb_component_admin()
 
                                         <div id="ticket_priorities">
                                             <ul class="priority-list"-->
-                                    <!--?php foreach (
+                            <!--?php foreach (
                                                     $priorities
                                                     as $priority
                                                 ) {
@@ -3420,7 +3409,7 @@ function sb_component_admin()
                                                                 Creation Date
                                                             </th>
                                                             <th data-field="status"-->
-                                    <!--?php sb_e(
+                            <!--?php sb_e(
                                                                     "Status"
                                                                 ); ?>
                                                             </th>
@@ -3441,7 +3430,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div-->
-                                <!-- <div class="col-md-4 p-0">
+                            <!-- <div class="col-md-4 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
                                             <div class="mb-5 d-flex justify-content-between align-items-center mb-3">
@@ -3450,8 +3439,8 @@ function sb_component_admin()
                                                     <p class="sub_head">Weekly Report</p>
                                                 </div>
                                             </div-->
-                                <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
-                                <!--div class="chatVolChart">
+                            <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
+                            <!--div class="chatVolChart">
                                                 <canvas id="chatVolChart"></canvas>
                                             </div>
                                             <script>
@@ -3532,7 +3521,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div> -->
-                                <!-- <div class="col-md-3 p-0">
+                            <!-- <div class="col-md-3 p-0">
                                     <div class="px-3 main-charts">
                                         <div class="p-3 card">
                                             <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -3576,7 +3565,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div> -->
-                                <!--div class="col-md-12 p-0 my-3">
+                            <!--div class="col-md-12 p-0 my-3">
                                     <div class="px-3 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -3584,10 +3573,10 @@ function sb_component_admin()
                                             </div>
                                             <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a></p>
                                         </div-->
-                                <!-- tickets_table = tickets_area.find('.sb-table-tickets');
+                            <!-- tickets_table = tickets_area.find('.sb-table-tickets');
                                         tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                                <!--div class="seprator"></div-->
-                                <!--?php
+                            <!--div class="seprator"></div-->
+                            <!--?php
                                         function sb_get_priorities()
                                         {
                                             $priorities = sb_db_get(
@@ -3609,7 +3598,7 @@ function sb_component_admin()
                                         ?>
                                         <div id="ticket_statues">
                                             <ul class="status-list"-->
-                                <!--?php foreach (
+                            <!--?php foreach (
                                                     $statues
                                                     as $status
                                                 ) {
@@ -3629,7 +3618,7 @@ function sb_component_admin()
                                         </div>
                                         <div id="ticket_priorities">
                                             <ul class="priority-list"-->
-                                <!--?php foreach (
+                            <!--?php foreach (
                                                     $priorities
                                                     as $priority
                                                 ) {
@@ -3662,7 +3651,7 @@ function sb_component_admin()
                                                                 Creation Date
                                                             </th>
                                                             <th data-field="status"-->
-                                <!--?php sb_e(
+                            <!--?php sb_e(
                                                                     "Status"
                                                                 ); ?>
                                                             </th>
@@ -3681,7 +3670,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div-->
-                                <!-- <div class="col-md-6 p-0">
+                            <!-- <div class="col-md-6 p-0">
                                     <div class="pl-3 pr-3 pt-0 main-charts tables">
                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                             <div>
@@ -4242,72 +4231,180 @@ function sb_component_admin()
                                 </div-->
                         </div>
                     </div>
+                    <!--  -->
+                    <div class="container-fluid py-4">
+                        <div class="pe-4">
+                            <!-- Table -->
+                            <div class="table-responsive" style="overflow: visible;">
+                                <div class="sb-scroll-area scroll-table">
+                                    <table id="ticketTable" class=" sb-table-tickets table table-bordered table-hover align-middle text-nowrap bg-white w-100 ">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th data-field="id" width="5%">
+                                                    <?php sb_e("ID"); ?>
+                                                </th>
+                                                <th data-field="subject">
+                                                    <?php sb_e("Subject"); ?>
+                                                </th>
+                                                <?php
+                                                $tags = sb_get_multi_setting("disable", "disable-tags") ? []: sb_get_setting("tags", []);
+                                                $count = count($tags);
+                                                if($count > 0)
+                                                {
+                                                ?>
+                                                    <th data-field="tags" width="20%">
+                                                        <?php sb_e("Tags"); ?>
+                                                    </th>
+                                                <?php
+                                                }
+                                                $department_settings = sb_get_setting(
+                                                    "departments-settings"
+                                                );
+                                                if (
+                                                    isset(
+                                                    $department_settings[
+                                                        "departments-show-list"
+                                                    ]
+                                                ) &&
+                                                    $department_settings[
+                                                        "departments-show-list"
+                                                    ] == "1"
+                                                ) { ?>
+                                                    <th data-field="department">
+                                                        <?php sb_e("Department"); ?>
+                                                    </th>
+                                                <?php }
+                                                ?>
+                                                <th data-field="contact">
+                                                    <?php sb_e("Contact"); ?>
+                                                </th>
+                                                <th data-field="status">
+                                                    <?php sb_e("Status"); ?>
+                                                </th>
+                                                <th data-field="priority">
+                                                    <?php sb_e("Priority"); ?>
+                                                </th>
+                                                <th data-field="last_reply">
+                                                    <?php sb_e("Assigned To"); ?>
+                                                </th>
+                                                <th data-field="creation_time">
+                                                    <?php sb_e("Created"); ?>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Sample Row -->
+                                            
 
-                    <div class="sb-scroll-area ticket-section">
-                        <table class="sb-table sb_table_new sb-table-tickets tab-scroll">
-                            <thead>
-                                <tr>
-                                    <th data-field="id" width="5%">
-                                        <!--input type="checkbox" /-->
-                                        <?php sb_e("ID"); ?>
-                                    </th>
-                                    <th data-field="subject">
-                                        <?php sb_e("Subject"); ?>
-                                    </th>
-                                    <?php
-                                    $tags = sb_get_multi_setting("disable", "disable-tags") ? []: sb_get_setting("tags", []);
-                                    $count = count($tags);
-                                    if($count > 0)
-                                    {
-                                    ?>
-                                        <th data-field="tags" width="20%">
-                                            <?php sb_e("Tags"); ?>
-                                        </th>
-                                    <?php
-                                    }
-                                    $department_settings = sb_get_setting(
-                                        "departments-settings"
-                                    );
-                                    if (
-                                        isset(
-                                        $department_settings[
-                                            "departments-show-list"
-                                        ]
-                                    ) &&
-                                        $department_settings[
-                                            "departments-show-list"
-                                        ] == "1"
-                                    ) { ?>
-                                        <th data-field="department">
-                                            <?php sb_e("Department"); ?>
-                                        </th>
-                                    <?php }
-                                    ?>
-                                    <!--th data-field="service">
-                                            <?php
-                                            //sb_e('Service')
-                                            ?>
-                                        </th-->
-                                    <th data-field="contact">
-                                        <?php sb_e("Contact"); ?>
-                                    </th>
-                                    <th data-field="status">
-                                        <?php sb_e("Status"); ?>
-                                    </th>
-                                    <th data-field="priority">
-                                        <?php sb_e("Priority"); ?>
-                                    </th>
-                                    <th data-field="last_reply">
-                                        <?php sb_e("Assigned To"); ?>
-                                    </th>
-                                    <th data-field="creation_time">
-                                        <?php sb_e("Created At"); ?>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                                            
+                                            <!-- Repeat for more records -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+                    <!-- Scripts -->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+                    <style>
+                        /* Make sure the dropdown is not cut off by table or container */
+                        .table-responsive {
+                            overflow: visible !important;
+                        }
+
+                        table.dataTable tbody td {
+                            overflow: visible !important;
+                            position: relative !important;
+                            z-index: auto !important;
+                        }
+
+                        .dropdown-menu {
+                            z-index: 9999 !important;
+                            /* Boost visibility over DataTables */
+                        }
+
+                        .badge-tag {
+                            background-color: #fce4ec;
+                            color: #d81b60;
+                            font-size: 12px;
+                        }
+
+                        .dropdown-menu .dropdown-item {
+                            font-size: 14px;
+                            padding: 6px 15px;
+                        }
+
+                        .status-inprogress {
+                            background-color: #fff3cd;
+                            color: #856404;
+                        }
+
+                        .status-open {
+                            background-color: #f8d7da;
+                            color: #721c24;
+                        }
+
+                        .status-hold {
+                            background-color: #fde2e2;
+                            color: #f44336;
+                        }
+
+                        .status-answered {
+                            background-color: #d4edda;
+                            color: #155724;
+                        }
+
+                        .status-closed {
+                            background-color: #e2e3e5;
+                            color: #6c757d;
+                        }
+
+                        .status-wp {
+                            background-color: #cce5ff;
+                            color: #004085;
+                        }
+
+                        .priority-low {
+                            background-color: #E2F0CB;
+                            color: #2E7D32;
+                        }
+
+                        .priority-high {
+                            background-color: #FFF3CD;
+                            color: #856404;
+                        }
+
+                        .priority-critical {
+                            background-color: #F8D7DA;
+                            color: #721C24;
+                        }
+
+                        .dropdown-toggle {
+                            border: none;
+                            padding: 5px 10px;
+                        }
+
+                        /* Fix dropdown visibility inside DataTables */
+                        table.dataTable tbody td {
+                            overflow: visible !important;
+                            position: relative !important;
+                            z-index: 1;
+                        }
+
+                        .dropdown-menu {
+                            z-index: 1050 !important;
+                        }
+                        .sb-scroll-area.scroll-table { height: 700px !important; }
+                    </style>
+                    <!--  -->
+
+
+
                 </div>
                 <div class="sb-area-ticket-detail">
                     <?php echo $header; ?>

@@ -11347,8 +11347,8 @@ a.sb-btn-white.sb-loading:hover:before,
 
 .tag-dot {
   display: inline-block;
-  width: 12px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   margin-right: 6px;
   vertical-align: middle;
@@ -11536,10 +11536,6 @@ a.sb-btn-white.sb-loading:hover:before,
   padding: 0 0 0 3px;
   width: 200px;
   min-height: 34px;
-}
-.sb-area-tickets.sb-active .ticket-section {
-  max-height: none;
-  overflow: visible;
 }
 
 .choices .choices__inner,
@@ -12118,12 +12114,6 @@ i.fa-solid.fa-x.delete-attachment {
   .screen-size .row > .col-md-4 {
     flex: 0 0 100%;
     max-width: 100%;
-  }
-  .sb-area-tickets.sb-active .ticket-section {
-    overflow: scroll;
-  }
-  .sb-area-tickets.sb-active .tab-scroll {
-    table-layout: unset;
   }
   .new-ticket-button {
     overflow-x: auto;
