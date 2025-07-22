@@ -3050,13 +3050,8 @@
 
                         });
 
-                        console.log(attachmentsHtml);
-                        if (attachmentsHtml != '') {
-
-                            $('#existing-file-preview-container').removeClass('d-none');
-                            $('.tickets-list-area .ticket-attachments').html(attachmentsHtml);
-                        }
-                       
+                        $('#existing-file-preview-container').removeClass('d-none');
+                        $('.tickets-list-area .ticket-attachments').html(attachmentsHtml);
 
                        SBChat.loadComments(ticket_id);
                     }
