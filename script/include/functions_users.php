@@ -1031,7 +1031,7 @@ function sb_remove_ticket_attachment($attachment_id = 0, $ticket_id = 0) {
     sb_db_query('DELETE FROM ticket_attachments WHERE id = ' . $attachment_id . ' AND ticket_id = ' . $ticket_id);
     if ($attachment) {
         
-            $file_path = '../../uploads/ticket_attachments/' . $attachment['filename'];
+            $file_path = 'uploads/' . $attachment['filename'];
             // Check if the file exists and delete it
             if (file_exists($file_path)) {
                 unlink($file_path);
@@ -1656,7 +1656,7 @@ function get_dashboad_customer_overview($filter = 'month')
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
 
     // Create uploads directory if it doesn't exist
-    $uploadsDir = '../../uploads/ticket_attachments/';
+    $uploadsDir = '../uploads/ticket_attachments/';
     if (!is_dir($uploadsDir)) {
         mkdir($uploadsDir, 0755, true);
     }
@@ -1918,16 +1918,18 @@ function sb_save_ticket_attachments($ticket_id, $attachments) {
         if (json_last_error() === JSON_ERROR_NONE && is_array($uploadedFiles)) {
             foreach ($uploadedFiles as $file) {
                 // Verify the file exists
-                $filePath = '../../' . $file['file_path'];
+                $filePath = '../' . $file['file_path'];
+                $filePath = str_replace(SB_URL,'',$filePath);
+                $filePath2 = str_replace('../','',$filePath);
+                $filePath2 = str_replace('/uploads','uploads',$filePath2);
                 if (file_exists($filePath)) {
                     $fileName = sb_db_escape($file['filename']);
                     $originalFileName = sb_db_escape($file['original_filename']);
-                    $filePath = sb_db_escape($file['file_path']);
                     $fileType = sb_db_escape($file['file_type']);
                     $fileSize = sb_db_escape($file['file_size']);
                     // Insert attachment record
                     $sql = "INSERT INTO ticket_attachments (ticket_id, filename, original_filename, file_path, file_type, file_size) 
-                    VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath', '$fileType', $fileSize)";
+                    VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath2', '$fileType', $fileSize)";
                     $result = sb_db_query($sql,false);
                 }
             }
