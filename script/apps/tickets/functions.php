@@ -125,6 +125,7 @@ function sb_component_tickets()
                     <div class="mb-2 text-muted small user-name"></div>
                     <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id"></span></div>
                     <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status"></span></div>
+                    <p><strong>Ticket Attachments:</strong></p>
                     <div class="row ticket-attachments"></div>
                     
                     <div class="sb-scroll-area"></div>

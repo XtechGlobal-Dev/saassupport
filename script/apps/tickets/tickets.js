@@ -366,10 +366,12 @@
                     document.location = redirect + (redirect.includes('?') ? '&' : '?') + 'sb=true';
                     return;
                 } else {
+                     console.log('asasas0');
                     main.addClass('sb-no-conversations');
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
             } else {
+                console.log('hhheeee1');
                 if (activeUser() && activeUser().conversations.length) {
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
