@@ -8603,8 +8603,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 // General dot class
 .tag-dot {
     display: inline-block;
-    width: 12px;
-    height: 7px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     margin-right: 6px;
     vertical-align: middle;
@@ -9215,7 +9215,7 @@ li.menu_head:hover {
     overflow: hidden;
 }
 
-// custom code
+// custom css
 .sidebar {
     width: 230px;
     transition: width 0.3s ease;
@@ -9322,17 +9322,6 @@ li.menu_head:hover {
         }
     }
 }
-
-
-
-// 
-// .metric-card {
-//   canvas {
-//     width: 100% !important;
-//     height: auto !important;
-//     max-width: 100%;
-//   }
-// }
 .high-insr {
     .card {
         min-height: 350px !important;
@@ -9365,13 +9354,13 @@ li.menu_head:hover {
 
 .select2-container--default {
     .select2-selection--single {
-        height: 42px !important; // Match your input field height
+        height: 42px !important; 
         padding: 4px 8px;
         display: flex;
         align-items: center;
 
         .select2-selection__rendered {
-            line-height: 1.5; // optional: aligns text
+            line-height: 1.5; 
         }
 
         .select2-selection__arrow {
@@ -9379,7 +9368,7 @@ li.menu_head:hover {
             transform: translateY(-50%) !important;
             position: absolute;
             right: 8px;
-            margin-top: 0; // override default
+            margin-top: 0; 
         }
     }
 }
@@ -9537,6 +9526,7 @@ i {
     }
   }
 }
+
 // custom responsive
 @media (max-width: 1540px) {
   .screen-size {
@@ -9548,16 +9538,7 @@ i {
       }
     }
   }
-// .sb-area-tickets {
-//   &.sb-active {
-//     .ticket-section {
-//       overflow: scroll;
-//     }
-//     .tab-scroll {
-//     table-layout: unset;
-//    }
-//   }
-// }
+
 .new-ticket-button {
   overflow-x: auto;
   white-space: nowrap;
