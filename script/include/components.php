@@ -310,7 +310,7 @@ function sb_ticket_edit_box()
                                 <span class="required-label"><?php sb_e(
                                     "Email"
                                 ); ?></span>
-                                <input type="email" name="email" value="" disabled="">
+                                <input type="email" name="email" value="" >
                             </div>
                         </div>
 
@@ -1092,7 +1092,7 @@ function sb_ticket_edit_box()
             $('#without_contact input').on('change', function () {
 
                 const isChecked = $(this).is(':checked');
-                $('#cust_name input, #cust_email input').prop('disabled', !isChecked);
+                //$('#cust_name input, #cust_email input').prop('disabled', !isChecked);
                 $('#cust_name input, #cust_email input').prop('required', isChecked);
 
                 if (isChecked) {
