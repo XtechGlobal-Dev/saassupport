@@ -791,6 +791,8 @@ function sb_ticket_edit_box()
             background-color: rgb(248, 248, 249);
         }
 
+        .status-dropdown .dropdown-menu li .dropdown-item {width:unset}
+
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
