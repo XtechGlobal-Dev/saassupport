@@ -4468,10 +4468,26 @@ div ul.sb-menu .li:hover,
   padding: 20px;
   text-transform: capitalize;
   color: #4D5969;
+  position: relative;
 }
 .user_header .header_left .tab.sb-active {
   color: #000000;
   border-bottom: 2px solid #1653FD;
+}
+.user_header .header_left .tab .notification-counter {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  background: rgb(202, 52, 52);
+  color: #fff;
+  border-radius: 100%;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 22px;
+  top: 0;
+  z-index: 2;
+  animation: sb-fade-animation 0.3s;
 }
 .user_header .header_right {
   display: flex;
