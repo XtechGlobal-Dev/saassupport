@@ -4290,7 +4290,7 @@ function sb_component_admin()
                                                     <?php sb_e("Assigned To"); ?>
                                                 </th>
                                                 <th data-field="creation_time">
-                                                    <?php sb_e("Created"); ?>
+                                                    <?php sb_e("Created At"); ?>
                                                 </th>
                                             </tr>
                                         </thead>
