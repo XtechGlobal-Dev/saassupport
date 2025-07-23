@@ -1215,11 +1215,13 @@ function sb_pusher_trigger($channel, $event, $data = []) {
             case 'close-notifications':
             case 'close-notifications-received':
             case 'new-ticket-comment':
+            case 'new-customer-ticket':
             case 'typing':
                 $security = sb_is_agent() || $channel == ('private-user-' . $user_id);
                 break;
             case 'update-conversations':
             case 'updates-ticket-comments':
+            case 'updates-new-ticket':
                 if ($user_id) {
                     $security = true;
                 }

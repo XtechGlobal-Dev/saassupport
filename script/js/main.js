@@ -1077,8 +1077,6 @@
                             // Add comment count to the array
                             SBChat.new_comment_count[response.ticket_id].push(ticket_comments);
 
-                            // Debug output
-
                             // Correctly loop through the object
                             Object.entries(SBChat.new_comment_count).forEach(([id, countArray]) => {
                                 console.log('ticket_id', id, 'count', countArray.length);
@@ -1096,6 +1094,40 @@
 
                             SBChat.playSound();
                         });
+
+                        this.event('new-customer-ticket', (response) => {
+                            // Initialize array if it doesn't exist
+                            if (!Array.isArray(SBChat.new_ticket_count[response.ticket_id])) {
+                                SBChat.new_ticket_count[response.ticket_id] = [];
+                            }
+
+                            // Determine next comment count (e.g., 1, 2, 3)
+                            const ticket_comments = SBChat.new_ticket_count[response.ticket_id].length + 1;
+
+                            // Add comment count to the array
+                            SBChat.new_ticket_count[response.ticket_id].push(ticket_comments);
+
+                            activeUser().getUserTickets();  // refresh tickets list
+
+                            // Correctly loop through the object
+                            // Object.entries(SBChat.new_comment_count).forEach(([id, countArray]) => {
+                            //     console.log('ticket_id', id, 'count', countArray.length);
+                            //     $('.sb-user-tickets li[data-ticket-id="' + id + '"] .notification-counter').remove();
+                            //     // Append the notification counter to the first cell of the row
+                            //     $('.sb-user-tickets li[data-ticket-id="' + id + '"]').append(`<span class="notification-counter" data-count="${countArray.length}">${countArray.length}</span>`);
+
+                            //     if($('.sb-user-tickets li[data-ticket-id="' + id + '"]').hasClass('sb-active'))
+                            //     {
+                            //         setTimeout(() => {
+                            //             $('.sb-user-tickets li[data-ticket-id="' + id + '"]').find('.notification-counter').remove();
+                            //         },1100);
+                            //     }
+                            // });
+
+                            SBChat.playSound();
+                        });
+
+                        
                         this.presence(1, () => {
                             this.started = true;
                             SBChat.automations.runAll();
@@ -1568,46 +1600,32 @@
         }
 
         renderTickets(tickets)
-        // {
-        //     let code = '';
-        //     tickets.forEach(ticket => {
-        //         code += `<li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" data-department="" style="border-bottom: 1px solid rgb(212, 212, 212);margin-top: 5px;padding: 5px 10px;">
-        //             <div class="sb-conversation-item" data-user-id="8">
-        //                 <img loading="lazy" src="http://localhost/saassupport/script/uploads/07-07-25/2656611.png" width="50px">
-        //                 <div>
-        //                     <span class="sb-name">You</span><span class="sb-time"><span data-today="" class="ml-5">${SBF.beautifyTime(ticket.creation_time, true)}</span></span>
-        //                 </div>
-        //                 <div class="sb-message">${ticket.subject}</div>
-        //             </div>
-        //         </li>`;
-        //     });
-
-        //     return code;
-        // }
-
         // custom code changed
             {
-            let code = '';
-                    tickets.forEach(ticket => {
-                        code += `
-                            <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
-                                <div class="sb-conversation-item" style="display: flex; align-items: center;">
-                                    <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
-                                    <div style="flex: 1;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span style="font-weight: 600;">You</span>
-                                            <span style="font-size: 12px; color: #666;">${SBF.beautifyTime(ticket.creation_time, true)}</span>
-                                        </div>
-                                        <div style="color: #444; font-size: 14px;">${ticket.subject}</div>
+                let code = '';
+                tickets.forEach(ticket => {
+                    code += `
+                        <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
+                            <div class="sb-conversation-item" style="display: flex; align-items: center;">
+                                <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-weight: 600;">You</span>
+                                        <span style="font-size: 12px; color: #666;">${SBF.beautifyTime(ticket.creation_time, true)}</span>
                                     </div>
-                                    <!--div class="message-received" style="margin-left: auto;">
-                                        <span style="background: #007bff; color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%;">8</span>
-                                    </div-->
+                                    <div style="color: #444; font-size: 14px;">${ticket.subject}</div>
                                 </div>
-                            </li>`;
-                    });
-                    return code;
-                }
+                                <!--div class="message-received" style="margin-left: auto;">
+                                    <span style="background: #007bff; color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%;">8</span>
+                                </div-->
+                            </div>
+                            ${SBChat.new_ticket_count[ticket.id] && SBChat.new_ticket_count[ticket.id].length ?
+                            `<span class="notification-counter" data-count="${SBChat.new_ticket_count[ticket.id].length}">${SBChat.new_ticket_count[ticket.id].length}</span>`
+                            : ''}
+                        </li>`;
+                });
+                return code;
+            }
 
         // custom code changed
 
@@ -2320,6 +2338,7 @@
         last_comment_date: '',
         datetime_last_comment: false,
         new_comment_count:[],
+        new_ticket_count: [],
 
         // Send a message
         sendMessage: function (user_id = -1, message = '', attachments = [], onSuccess = false, payload = false, conversation_status_code = false) {
@@ -3014,7 +3033,11 @@
                 }, (response) => {
                     if(response)
                     {
-                        $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+                        setTimeout(function()
+                        {
+                            $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
+                        },1100);
+                        
 
                         $('.tickets-list-area').attr('data-id',ticket_id);
                         $('.sb-tickets .user-name').html(response.contact_name);
@@ -3032,8 +3055,7 @@
                         $('#addComment').attr('ticket-id',ticket_id);
                         $('.sb-tickets .ticket-id').html(ticket_id);
                         $('.sb-tickets .ticket-status').html(response.status_name);
-                        console.log('77777',response.attachments);
-                        
+
                         let attachmentsHtml = '';
                         const filesCount = Object.entries(response.attachments).length;
                         Object.entries(response.attachments).forEach(([key, value]) => {

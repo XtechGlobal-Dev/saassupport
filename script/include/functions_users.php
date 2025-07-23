@@ -1882,19 +1882,23 @@ function sb_add_ticket($inputs)
         {
             sb_db_query('UPDATE sb_conversations SET converted_to_ticket = 1 WHERE id = ' . $data['conversation_id']);
         }
-        
 
-       // print_r($data);
-        // Update CCs
-        if (isset($data['cc'][0]) && $data['cc'][0] != '') {
-            /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
-            foreach ($_POST['cc'] as $userId) {
-                $db->insert('ticket_ccs', [
-                    'ticket_id' => $ticketId,
-                    'user_id' => $userId
-                ]);
-            }*/
+        if(sb_is_agent())
+        {
+            $query = "Select contact_id from sb_tickets where id =  '$ticket_id'";
+            $result = sb_db_get($query);
+            $contactId = $result['contact_id'] ?? 0;
         }
+
+        if(!sb_is_agent())
+        {
+            sb_pusher_trigger('agents', 'updates-new-ticket', ['ticket_id'=>$ticket_id,'user_id' => $data['contact_id']]);
+        }
+        else
+        {
+            sb_pusher_trigger('private-user-'.$data['contact_id'], 'new-customer-ticket', ['ticket_id'=>$ticket_id,'user_id' => $data['contact_id']]);
+        }
+    
 
         ///// Insert ticket custom fields
         sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'new');
