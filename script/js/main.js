@@ -1086,11 +1086,20 @@
 
                                 if($('.sb-user-tickets li[data-ticket-id="' + id + '"]').hasClass('sb-active'))
                                 {
+                                    /// Refresh comments notification for opened ticket after 1100 milliseconds
                                     setTimeout(() => {
+                                        if (SBChat.new_comment_count[id]) {
+                                            delete SBChat.new_comment_count[id];
+                                        }
+                                        activeUser().ticketsMenuNotificationCounter(); //// refresh ticket tab notification count
+
                                         $('.sb-user-tickets li[data-ticket-id="' + id + '"]').find('.notification-counter').remove();
+                                        
                                     },1100);
                                 }
                             });
+
+                            activeUser().ticketsMenuNotificationCounter(); //// refresh ticket tab notification count
 
                             SBChat.playSound();
                         });
@@ -1123,6 +1132,12 @@
                             //         },1100);
                             //     }
                             // });
+
+                            setTimeout(function()
+                            {
+                                activeUser().ticketsMenuNotificationCounter(); //// refresh ticket tab notification count
+                            },1000);
+                           
 
                             SBChat.playSound();
                         });
@@ -1570,6 +1585,14 @@
             }
         }
 
+        conversationsMenuNotificationCounter()
+        {
+             //// Refresh Tab counter
+            $('.user_header .header_left h2').eq(1).find('.notification-counter').remove();
+            if(SBChat.notifications.length)
+                $('.user_header .header_left h2').eq(1).append(`<span data-count="${SBChat.notifications.length}" class="notification-counter">${SBChat.notifications.length}</span>`);
+        }
+
         // Get conversations code
         getConversationsCode(conversations = false) {
             let code = '';
@@ -1577,6 +1600,7 @@
             if (!conversations) {
                 conversations = this.conversations;
             }
+            const notificationCounter = 0;
             for (var i = 0; i < conversations.length; i++) {
                 if (conversations[i] instanceof SBConversation) {
                     if (!admin && !SBChat.isConversationAllowed(conversations[i].get('source'), conversations[i].status_code)) {
@@ -1596,38 +1620,67 @@
                     SBF.error('Conversation not of type SBConversation', 'SBUser.getConversationsCode');
                 }
             }
+           this.conversationsMenuNotificationCounter();
             return code;
         }
 
-        renderTickets(tickets)
-        // custom code changed
-            {
-                let code = '';
-                tickets.forEach(ticket => {
-                    code += `
-                        <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
-                            <div class="sb-conversation-item" style="display: flex; align-items: center;">
-                                <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
-                                <div style="flex: 1;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-weight: 600;">You</span>
-                                        <span style="font-size: 12px; color: #666;">${SBF.beautifyTime(ticket.creation_time, true)}</span>
-                                    </div>
-                                    <div style="color: #444; font-size: 14px;">${ticket.subject}</div>
-                                </div>
-                                <!--div class="message-received" style="margin-left: auto;">
-                                    <span style="background: #007bff; color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%;">8</span>
-                                </div-->
-                            </div>
-                            ${SBChat.new_ticket_count[ticket.id] && SBChat.new_ticket_count[ticket.id].length ?
-                            `<span class="notification-counter" data-count="${SBChat.new_ticket_count[ticket.id].length}">${SBChat.new_ticket_count[ticket.id].length}</span>`
-                            : ''}
-                        </li>`;
-                });
-                return code;
+        ticketsMenuNotificationCounter()
+        {
+            let newTicketCount = 0;
+            let newCommentsCount = 0;
+
+            for (const id in SBChat.new_ticket_count) {
+                if (Array.isArray(SBChat.new_ticket_count[id])) {
+                    newTicketCount += SBChat.new_ticket_count[id].length;
+                }
             }
 
-        // custom code changed
+            for (const id in SBChat.new_comment_count) {
+                if (Array.isArray(SBChat.new_comment_count[id])) {
+                    newCommentsCount += SBChat.new_comment_count[id].length;
+                }
+            }
+
+            const totalCount = newTicketCount + newCommentsCount;
+
+             //// Refresh Tab counter
+            $('.user_header .header_left h2').eq(0).find('.notification-counter').remove();
+
+            if (totalCount > 0) {
+                const tooltip = `${newTicketCount ? `${newTicketCount} new ticket${newTicketCount > 1 ? 's' : ''}` : ''}${newTicketCount && newCommentsCount ? ', ' : ''}${newCommentsCount ? `${newCommentsCount} new comment${newCommentsCount > 1 ? 's' : ''}` : ''}`;
+                
+                $('.user_header .header_left h2').eq(0).append(`<span data-count="${totalCount}" class="notification-counter" title="${tooltip}">${totalCount}</span>`);
+            } 
+                
+        }
+
+
+        renderTickets(tickets)
+        {
+            let code = '';
+            tickets.forEach(ticket => {
+                code += `
+                    <li data-ticket-status="${ticket.status_id}" data-ticket-id="${ticket.id}" style="position:relative;margin: 10px 0; border-radius: 8px; background-color: #f0f6ff; padding: 12px; list-style: none;">
+                        <div class="sb-conversation-item" style="display: flex; align-items: center;">
+                            <img src="${ticket.profile_image}" width="40" height="40" style="border-radius: 50%; object-fit: cover; margin-right: 10px;" />
+                            <div style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 600;">You</span>
+                                    <span style="font-size: 12px; color: #666;">${SBF.beautifyTime(ticket.creation_time, true)}</span>
+                                </div>
+                                <div style="color: #444; font-size: 14px;">${ticket.subject}</div>
+                            </div>
+                            <!--div class="message-received" style="margin-left: auto;">
+                                <span style="background: #007bff; color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%;">8</span>
+                            </div-->
+                        </div>
+                        ${SBChat.new_ticket_count[ticket.id] && SBChat.new_ticket_count[ticket.id].length ?
+                        `<span class="notification-counter" data-count="${SBChat.new_ticket_count[ticket.id].length}">${SBChat.new_ticket_count[ticket.id].length}</span>`
+                        : ''}
+                    </li>`;
+            });
+            return code;
+        }
 
         getUserTickets()
         {
@@ -1645,6 +1698,8 @@
                         $('.right-side-wrapper').css('visibility', '').removeClass('d-none');
                         const html = this.renderTickets(response);
                         $('.tickets-list .sb-user-tickets').html(html);
+
+                        this.ticketsMenuNotificationCounter(); //// refresh ticket tab notification count
 
                         /****  Open first ticket by default *****/
                         const $targetList = $('.tickets-list .sb-user-tickets').find('li');
@@ -2958,7 +3013,7 @@
 
                     setTimeout(() => {
                         const el = commentsSection[0]; // or get(0)
-                        el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+                        //el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
                     }, 0);
 
                    // showInitials('tc_back','comment-row');
@@ -3033,10 +3088,22 @@
                 }, (response) => {
                     if(response)
                     {
+                        // 1. Clear notification data
+                        if (SBChat.new_ticket_count) {
+                            delete SBChat.new_ticket_count[ticket_id];
+                        }
+
+                        if (SBChat.new_comment_count) {
+                            delete SBChat.new_comment_count[ticket_id];
+                        }
+                        
                         setTimeout(function()
                         {
+                            // 2. Refresh ticker menu notification counter
+                            activeUser().ticketsMenuNotificationCounter();
+                            // 3. Remove the counter span (inside the clicked row)
                             $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
-                        },1100);
+                        },300);
                         
 
                         $('.tickets-list-area').attr('data-id',ticket_id);
@@ -3731,6 +3798,8 @@
             storage('notifications', this.notifications);
             main.find('.sb-chat-btn span').attr('data-count', count).html(count > -1 ? count : 0);
             SBF.event('SBNotificationsUpdate', { conversation_id: conversation_id, message_id: message_id });
+
+            activeUser().conversationsMenuNotificationCounter();
         },
 
         // Set the active conversation status
