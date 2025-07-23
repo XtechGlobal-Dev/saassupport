@@ -7655,7 +7655,6 @@
         // Save
         $(settings_area).on('click', '.sb-save-changes', function () {
             SBSettings.save(this);
-            window.location.reload();
         });
 
         // Miscellaneous
