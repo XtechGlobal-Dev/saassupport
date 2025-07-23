@@ -5777,7 +5777,319 @@ function sb_component_admin()
                             </div>
                             <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
-                                    <div class="sb-top-bar save_settings">
+
+                                    <div class="main-content">
+                                        <h2>Chat</h2>
+                                        <hr>
+                                        <div class="settings-card">
+                                            <div class="my-tabs">
+                                                <div class="my-tab active" onclick="switchTab(this)">Chatbot Design</div>
+                                                <div class="my-tab" onclick="switchTab(this)">Chat Behaviour & Control</div>
+                                            </div>
+
+                                            <!-- Settings content for Chatbot Design -->
+                                            <div id="chatbotDesignContent">
+                                                <div class="section-title">Dashboard display</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="dashboardDisplay"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="dashboardDisplay">Display the dashboard instead of the chat area on
+                                                        initialization.</label>
+                                                </div>
+
+                                                <div class="section-title">Disable dashboard</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="disableDashboard"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="disableDashboard">Disable the dashboard, and allow only one
+                                                        conversation per user.</label>
+                                                </div>
+
+                                                <div class="section-title">Language</div>
+                                                <p class="text-muted">Set the chat language or translate it automatically to match
+                                                    the user language. Default is English.</p>
+
+                                                <!-- Language dropdown -->
+                                                <div class="language-dropdown">
+                                                    <div class="language-toggle" onclick="toggleDropdown()">
+                                                        <span class="fi fi-us"></span> English
+                                                    </div>
+                                                    <div class="language-options" id="langOptions" style="display: none;">
+                                                        <div onclick="selectLang('us', 'English')"><span class="fi fi-us"></span>
+                                                            English</div>
+                                                        <div onclick="selectLang('pk', 'Urdu')"><span class="fi fi-pk"></span> Urdu
+                                                        </div>
+                                                        <div onclick="selectLang('fr', 'French')"><span class="fi fi-fr"></span>
+                                                            French</div>
+                                                        <div onclick="selectLang('es', 'Spanish')"><span class="fi fi-es"></span>
+                                                            Spanish</div>
+                                                        <div onclick="selectLang('de', 'German')"><span class="fi fi-de"></span>
+                                                            German</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Settings content for Chat Behaviour & Control -->
+                                            <div id="chatBehaviourControlContent" style="display: none;">
+                                                <div class="section-title">Allow only one conversation</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="chatAutoResponse"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="chatAutoResponse">Allow only one conversation per user.</label>
+                                                </div>
+
+                                                <div class="section-title">Hide chat outside of office hours</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Chatdisableofficehourse"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="Chatdisableofficehourse">Disable and hide the chat widget outside of
+                                                        scheduled office hours.</label>
+                                                </div>
+
+                                                <div class="section-title">Hide chat if no agents online</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Chatdisableoffline"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="Chatdisableoffline">Disable and hide the chat widget if all agents
+                                                        are offline.</label>
+                                                </div>
+                                                <div class="section-title">Disable uploads</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Disableuploads"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="Disableuploads">Disable file uploading capabilities within the
+                                                        chat.</label>
+                                                </div>
+                                                <div class="section-title">Disable voice messages</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Disablevoicemessages"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="Disablevoicemessages">Disable voice message capabilities within the
+                                                        chat.</label>
+                                                </div>
+                                                <div class="section-title">Close chat by admin/agent</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Closechatbyadmin"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="Closechatbyadmin">Allow the user to archive a conversation and hide
+                                                        archived</label>
+                                                </div>
+                                                <div class="section-title">Close chat by admin/agent</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Closechatbyadmin"
+                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                    <label for="Closechatbyadmin">Allow the user to archive a conversation and hide
+                                                        archived</label>
+                                                </div>
+
+                                                <!--  -->
+                                                <!-- Manual Initialization Section -->
+                                                <div>
+
+                                                    <div
+                                                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                                        <div>
+                                                            <strong style="font-size: 16px; color: #222;">Agents menu</strong>
+                                                            <div style="font-size: 14px; color: #555; margin-top:10px;">
+                                                                Show the agents menu in the dashboard and force users to choose an
+                                                                agent before starting a conversation.
+                                                            </div>
+                                                        </div>
+                                                        <!-- Toggle -->
+                                                        <label
+                                                            style="position: relative; display: inline-block; width: 44px; height: 24px;">
+                                                            <input type="checkbox" checked
+                                                                style="opacity: 0; width: 0; height: 0;" />
+                                                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #4ade80;
+                                                                border-radius: 34px;
+                                                            transition: .4s;"></span>
+                                                            <span style="position: absolute;height: 18px;width: 18px;left: 3px;bottom: 3px;background-color: white;border-radius: 50%;transition: .4s;"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="section-title">One conversation per agent</div>
+                                                    <div class="checkbox-wrapper">
+                                                        <input type="checkbox" id="allowusers"
+                                                            style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                        <label for="allowusers">Only allow users to have one ongoing conversation
+                                                            per agent.</label>
+                                                    </div>
+                                                    <div class="section-title">Display online agents only</div>
+                                                    <div class="checkbox-wrapper">
+                                                        <input type="checkbox" id="Onlineagentsonly"
+                                                            style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
+                                                        <label for="Onlineagentsonly">Show only agents who are currently
+                                                            online.</label>
+                                                    </div>
+                                                    <div class="section-title">Dashboard title</div>
+                                                    <div class="checkbox-wrapper">
+                                                        <div class="DashboardTitle">
+                                                            <input type="text" id="DashboardTitle" placeholder="Dashboard title"
+                                                                style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        // Add this function to switch between the tabs
+                                        function switchTab(clickedTab) {
+                                            // Remove the active class from all tabs
+                                            document.querySelectorAll('.my-tab').forEach(tab => tab.classList.remove('active'));
+                                            // Add the active class to the clicked tab
+                                            clickedTab.classList.add('active');
+ 
+                                            // Show the corresponding content
+                                            if (clickedTab.textContent === "Chatbot Design") {
+                                                document.getElementById('chatbotDesignContent').style.display = 'block';
+                                                document.getElementById('chatBehaviourControlContent').style.display = 'none';
+                                            } else {
+                                                document.getElementById('chatbotDesignContent').style.display = 'none';
+                                                document.getElementById('chatBehaviourControlContent').style.display = 'block';
+                                            }
+                                        }
+ 
+                                        // Set default active tab
+                                        document.addEventListener('DOMContentLoaded', () => {
+                                            switchTab(document.querySelector('.my-tab.active'));
+                                        });
+ 
+                                        // Toggle the language dropdown visibility
+                                        function toggleDropdown() {
+                                            const options = document.getElementById('langOptions');
+                                            const isVisible = options.style.display === 'block';
+                                            options.style.display = isVisible ? 'none' : 'block';
+                                        }
+ 
+                                        // Select the language and close the dropdown
+                                        function selectLang(code, name) {
+                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${name}`;
+                                            document.getElementById('langOptions').style.display = 'none';
+                                        }
+ 
+                                        // Close the dropdown if clicked outside of it
+                                        document.addEventListener('click', function (e) {
+                                            const langBox = document.querySelector('.language-dropdown');
+                                            if (!langBox.contains(e.target)) {
+                                                document.getElementById('langOptions').style.display = 'none';
+                                            }
+                                        });
+                                    </script>
+ 
+                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
+                                        rel="stylesheet">
+ 
+                                    <style>
+                                        .checkbox-wrapper {
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 0px;
+                                            margin-bottom: 20px;
+                                            margin-top: 10px;
+                                        }
+ 
+                                        .settings-card {
+                                            /* background-color: #fff;
+                                            padding: 25px;
+                                            border-radius: 8px;
+                                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+                                        }
+ 
+                                        .my-tabs {
+                                            display: flex;
+                                            margin-bottom: 20px;
+                                        }
+ 
+                                        .my-tab {
+                                            padding: 10px 15px;
+                                            cursor: pointer;
+                                            border: 1px solid transparent;
+                                            border-top-left-radius: 5px;
+                                            border-top-right-radius: 5px;
+                                            border-bottom-right-radius: 5px;
+                                            border-bottom-left-radius: 5px;
+                                            background-color: #f8f9fa;
+                                            margin-right: 5px;
+                                        }
+ 
+                                        .my-tab.active {
+                                            background-color: #1B1F23;
+                                            font-weight: 400;
+                                            color: #fff;
+                                        }
+ 
+                                        .section-title {
+                                            font-weight: 700;
+                                            margin-top: 29px;
+                                            margin-bottom: 7px;
+                                            font-size: 15px;
+                                        }
+ 
+                                        .my-form-check {
+                                            margin-bottom: 25px;
+                                            margin-top: 7px;
+                                        }
+ 
+                                        .my-form-check input {
+                                            margin-right: 5px;
+                                        }
+ 
+                                        .text-muted {
+                                            color: #6c757d;
+                                            font-size: 13px;
+                                            margin-bottom: 3px;
+                                        }
+ 
+                                        .language-dropdown {
+                                            position: relative;
+                                            display: inline-block;
+                                            margin-top: 10px;
+                                        }
+ 
+                                        .language-toggle {
+                                            padding: 6px 12px;
+                                            border: 1px solid #ccc;
+                                            background: #fff;
+                                            cursor: pointer;
+                                            border-radius: 4px;
+                                            font-size: 14px;
+                                            min-width: 140px;
+                                        }
+ 
+                                        .language-toggle .fi {
+                                            margin-right: 8px;
+                                        }
+ 
+                                        .language-options {
+                                            position: absolute;
+                                            background: #fff;
+                                            border: 1px solid #ccc;
+                                            margin-top: 5px;
+                                            display: none;
+                                            z-index: 999;
+                                            border-radius: 4px;
+                                            min-width: 140px;
+                                        }
+ 
+                                        .language-options div {
+                                            padding: 8px 12px;
+                                            cursor: pointer;
+                                        }
+ 
+                                        .language-options div:hover {
+                                            background-color: #f1f1f1;
+                                        }
+ 
+                                        h2 {
+                                            font-size: 24px;
+                                            margin-bottom: 25px;
+                                        }
+                                    </style>
+
+
+                                    <!-- <div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Chat Settings</p>
                                             <p class="des mb-0">Configure your chat settings.</p>
@@ -5792,7 +6104,7 @@ function sb_component_admin()
                                     <?php sb_populate_settings(
                                         "chat",
                                         $sb_settings
-                                    ); ?>
+                                    ); ?> -->
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
