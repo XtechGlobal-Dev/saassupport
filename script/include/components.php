@@ -2410,6 +2410,8 @@ function sb_component_admin()
                                             </span>
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
+                            <!-- acc -->
+                            <!-- acc -->
                         </ul>
                     </nav>
 
@@ -2594,8 +2596,8 @@ function sb_component_admin()
                     $header .=
                         '<li data-value="edit-profile">' .
                         sb_("Edit profile") .
-                        "</li>" .
-                        ($is_cloud ? sb_cloud_account_menu() : "");
+                        "</li>";
+                    //  ($is_cloud ? sb_cloud_account_menu() : "");
                 }
                 $header .= '</ul>
                                 </div>
@@ -2607,56 +2609,6 @@ function sb_component_admin()
                         </header>';
                 ?>
                 <!-- new code update -->
-                <!-- old code -->
-                <!--?php
-                $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
-                $ticketUrl = dirname(SB_URL) . '?area=tickets';
-                $header = '<header>
-                                 <div class="header-left">
-                                    <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 d-none" href="' . $ticketUrl . '" >
-                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                        Back to Tickets
-                                    </a>
-                                    <h2 class="title">Setting</h2>
-                                </div>
-                                <div class="header-right">
-                                    div class="notification">
-                                        <i class="fa-solid fa-bell" style="font-size: 28px;"></i>
-                                        <span class="badge">0</span>
-                                    </div>
-                                    <div class="notification">
-                                        <i class="fa-solid fa-envelope-open-text" style="font-size: 28px;"></i>
-                                        <span class="badge">0</span>
-                                    </div>
-                                    <div class="sb-admin-nav-right user_menu user-profile user_avatar">
-                                        <a class="sb-profile">
-                                            <img class="avatar_img" src="" data-name="" />
-                                            <span class="user-initials avatar_initials" style="display:none;">
-                                                <span class="initials avatar_name"></span>
-                                            </span>
-                                        </a>
-                                        <ul class="sb-menu">
-                                            <li class="menu_head">
-                                                <img class="avatar_img" src=""  data-name="" />
-                                                <span class="user-initials avatar_initials" style="display:none;">
-                                                    <span class="initials avatar_name"></span>
-                                                </span>
-                                                <span class="sb-name"></span>
-                                            </li>
-                                            <li data-value="status" class="sb-online">Online</li>';
-                if ($is_admin) {
-                    $header .= '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>'
-                        . ($is_cloud ? sb_cloud_account_menu() : '');
-                }
-                $header .= '<li data-value="logout">Logout</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </header>';
-                ?-->
-
-                <!-- old code -->
-
                 <div class="sb-area-dashboard screen-size">
                     <main>
                         <?php echo $header; ?>
@@ -2665,26 +2617,6 @@ function sb_component_admin()
                                 <div class="col-md-8 p-0">
                                     <div class="px-3 mt-3 clmn-gap">
                                         <section class="dashboard-metrics">
-                                            <!-- <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #487fff;">
-                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>New Users</h3>
-                                                            <p>0</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="new_users_chart">
-                                                            <canvas class="mt-0" id="new_users_chart"></canvas>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="metric-increase">Increase by <span>0</span> this week</div>
-                                            </div> -->
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
                                                 <div class="graph_tabs">
@@ -2706,7 +2638,6 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
                                                     Increase by
@@ -2775,7 +2706,6 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
                                                 <!-- code update  -->
                                                 <div class="metric-increase">
                                                     Increase by
@@ -2791,7 +2721,6 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #0684ff;">
-                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
                                                             <img src="./script/media/tickets-resolved.svg"
                                                                 alt="Tickets Resolved">
                                                         </div>
@@ -2808,7 +2737,6 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
                                                     Increase by
@@ -2819,195 +2747,6 @@ function sb_component_admin()
                                                 <!-- code update -->
                                             </div>
                                         </section>
-                                        <!--section class="dashboard-metrics">
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #8252E9;"-->
-                                        <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                        <!--img src="./script/media/total-conversations.svg" alt="Total Conversations">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Total Conversations</h3>
-                                                            <p class="total-conversations"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="total_conversations_chart">
-                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div-->
-                                        <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
-                                        <!-- code update  -->
-                                        <!--div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-conversations-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div-->
-                                        <!-- code update -->
-                                        <!--/div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #DE3ACE;"-->
-                                        <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
-                                        <!--img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3> Avg. Response Time</h3-->
-                                        <!-- <p id="avg_response_time">0h 0m 0s</p> -->
-                                        <!--div id="avg_response_time_container"></div>
-                                                        </div>
-                                                    </div-->
-                                        <!-- <div class="w-100">
-                                                    <div class="avg_response_chart">
-                                                        <canvas class="mt-0" id="avg_response_chart"></canvas>
-                                                    </div>
-                                                    <script>
-                                                        const avg_responseCtx = document.getElementById('avg_response_chart').getContext('2d');
-                                                        const gradient5 = avg_responseCtx.createLinearGradient(0, 0, 0, 200);
-                                                        gradient5.addColorStop(0, 'rgba(220, 61, 235, 0.2)');
-                                                        gradient5.addColorStop(1, 'rgba(220, 61, 235, 0)');
-                                                        new Chart(avg_responseCtx, {
-                                                            type: 'line',
-                                                            data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                datasets: [{
-                                                                    data: [0, 5, 12, 3, 5, 7],
-                                                                    borderColor: '#DE3ACE',
-                                                                    backgroundColor: gradient5,
-                                                                    fill: true,
-                                                                    tension: 0.4,
-                                                                    pointRadius: 0,
-                                                                    pointHoverRadius: 0,
-                                                                    borderWidth: 2
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                responsive: true,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: false
-                                                                    }
-                                                                },
-                                                                scales: {
-                                                                    x: {
-                                                                        grid: {
-                                                                            display: false
-                                                                        },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
-                                                                        }
-                                                                    },
-                                                                    y: {
-                                                                        grid: {
-                                                                            display: false
-                                                                        },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                    </script>
-                                                </div> -->
-                                        <!--/div>
-
-                                            </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #00B8F2;"-->
-                                        <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
-                                        <!--img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Agent Satisfaction</h3>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="agent_chart">
-                                                            <canvas class="mt-0" id="agent_chart"></canvas>
-                                                        </div-->
-                                        <!--script>
-                                                            const agentCtx = document.getElementById('agent_chart').getContext('2d');
-                                                            const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
-                                                            gradient6.addColorStop(1, 'rgba(61, 186, 235, 0)');
-                                                            new Chart(agentCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#00B8F2',
-                                                                        backgroundColor: gradient6,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
-                                                        </script-->
-                                        <!--/div>
-                                                </div>
-
-                                            </div>
-                                        </section-->
                                         <section class="main-charts">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -3015,14 +2754,10 @@ function sb_component_admin()
                                                         <h6 class="head mb-1">Ticket Support Board</h6>
                                                         <p class="sub_head">Monthly overview of support ticket activity</p>
                                                     </div>
-                                                    <!-- <select class="form-select form-select-sm w-auto">
-                                                        <option>Yearly</option>
-                                                        <option>Monthly</option>
-                                                    </select> -->
+
                                                 </div>
                                                 <div class="d-flex justify-content-center gap-3 mb-3">
                                                     <div class="button_ext">
-                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
                                                         <img src="./script/media/created.svg" alt="Created">
                                                         <div>
                                                             <div><strong>Created</strong></div>
@@ -3030,7 +2765,6 @@ function sb_component_admin()
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
-                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
                                                         <img src="./script/media/resolved.svg" alt="Resolved">
                                                         <div>
                                                             <div><strong>Resolved</strong></div>
@@ -3038,7 +2772,6 @@ function sb_component_admin()
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
-                                                        <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
                                                         <img src="./script/media/pending.svg" alt="Pending">
                                                         <div>
                                                             <div><strong>Pending</strong></div>
@@ -3046,7 +2779,6 @@ function sb_component_admin()
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="chart-placeholder" style="height: 350px;">Bar Chart Placeholder</div> -->
                                                 <div class="monthlyBarChart">
                                                     <canvas id="monthlyBarChart"></canvas>
                                                 </div>
@@ -3168,7 +2900,6 @@ function sb_component_admin()
                                                         <span class="filter-range"></span>
                                                         <li><span class="total"></span><label></label></li>
                                                         <li><span class="new"></span><label></label></li>
-                                                        <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
                                                     </ul>
                                                     <div id="chart-container">
                                                         <canvas id="donutChart"
@@ -3178,33 +2909,7 @@ function sb_component_admin()
                                                             <pre></pre>
                                                         </div>
                                                     </div>
-                                                    <!-- <script>
-                                                        const ctx = document.getElementById('donutChart').getContext('2d');
-                                                        new Chart(ctx, {
-                                                            type: 'doughnut',
-                                                            data: {
-                                                                labels: ['Total', 'New', 'Active'],
-                                                                datasets: [{
-                                                                    data: [500, 500, 1500],
-                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
-                                                                    borderWidth: 0
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                cutout: '70%',
-                                                                rotation: -90,
-                                                                circumference: 180,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: true
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                    </script> -->
+
                                                 </div>
                                             </div>
                                         </section>
@@ -3220,8 +2925,7 @@ function sb_component_admin()
                                                                 All</a>
                                                         </p>
                                                     </div>
-                                                    <!-- tickets_table = tickets_area.find('.sb-table-tickets');
-                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
+
                                                     <div class="seprator"></div>
                                                     <?php
                                                     function sb_get_priorities()
@@ -3326,440 +3030,7 @@ function sb_component_admin()
 
                                 </div>
                             </div>
-                            <!--div class="row mt-3">
-                                <div class="col-md-8 p-0">
-                                    <div class="px-3 main-charts clmn-gap">
-                                        <div class="bg-white">
-                                            <h6 class="head mb-1">Recent Messages</h6>
-                                        </div>
-                                        <div class="seprator"></div>
-                                        <div class="recent card p-3">
-                                            <ul class="recent-messages list-unstyled" style="min-height:254px;">
-                                                No massge found
-                                            </ul>
-                                        </div>
-                                        <div class="div"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 p-0">
-                                    <div class="px-3 main-charts tables clmn-gap">
-                                        <div class="bg-white d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="head mb-1">All Tickets</h6>
-                                            </div>
-                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a>
-                                            </p>
-                                        </div-->
-                            <!-- tickets_table = tickets_area.find('.sb-table-tickets');
-                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                            <!--div class="seprator"></div-->
-                            <!--?php
-                                        function sb_get_priorities()
-                                        {
-                                            $priorities = sb_db_get(
-                                                "SELECT * FROM priorities",
-                                                false
-                                            );
-                                            return $priorities;
-                                        }
-                                        function sb_get_statues()
-                                        {
-                                            $status = sb_db_get(
-                                                "SELECT * FROM ticket_status",
-                                                false
-                                            );
-                                            return $status;
-                                        }
-                                        $statues = sb_get_statues();
-                                        $priorities = sb_get_priorities();
-                                        ?>
-                                        <div id="ticket_statues">
-                                            <ul class="status-list"-->
-                            <!--?php foreach (
-                                                    $statues
-                                                    as $status
-                                                ) {
-                                                    echo '<li data-status="' .
-                                                        $status["name"] .
-                                                        '" class="" data-color="' .
-                                                        $status["color"] .
-                                                        '" value="' .
-                                                        $status["id"] .
-                                                        '">
-                                                    <span class="status-dot"></span> ' .
-                                                        $status["name"] .
-                                                        '
-                                                </li>';
-                                                } ?>
-                                            </ul>
-                                        </div>
 
-                                        <div id="ticket_priorities">
-                                            <ul class="priority-list"-->
-                            <!--?php foreach (
-                                                    $priorities
-                                                    as $priority
-                                                ) {
-                                                    echo '<li data-status="' .
-                                                        $priority["name"] .
-                                                        '" class="" data-color="' .
-                                                        $priority["color"] .
-                                                        '" value="' .
-                                                        $priority["id"] .
-                                                        '">
-                                                    <span class="status-dot"></span> ' .
-                                                        $priority["name"] .
-                                                        '
-                                                </li>';
-                                                } ?>
-                                            </ul>
-                                        </div>
-                                        <div class="new_table sb-area-tickets-dash">
-                                            <div class="sb-scroll-area">
-                                                <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
-                                                    <thead>
-                                                        <tr>
-                                                            <th data-field="title">
-                                                                Ticket Title
-                                                            </th>
-                                                            <th data-field="assigned-to">
-                                                                Assigned To
-                                                            </th>
-                                                            <th data-field="creation-date">
-                                                                Creation Date
-                                                            </th>
-                                                            <th data-field="status"-->
-                            <!--?php sb_e(
-                                                                    "Status"
-                                                                ); ?>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border"
-                                                                    style="color:#FF0000;border:1px solid #FF0000;">Open</span>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div-->
-                            <!-- <div class="col-md-4 p-0">
-                                    <div class="px-3 main-charts">
-                                        <div class="p-3 card">
-                                            <div class="mb-5 d-flex justify-content-between align-items-center mb-3">
-                                                <div>
-                                                    <h6 class="head mb-1">Chat Volume</h6>
-                                                    <p class="sub_head">Weekly Report</p>
-                                                </div>
-                                            </div-->
-                            <!-- <div class="chart-placeholder" style="height: 250px;">Line Chart Placeholder</div> -->
-                            <!--div class="chatVolChart">
-                                                <canvas id="chatVolChart"></canvas>
-                                            </div>
-                                            <script>
-                                                const chatVolCtx = document.getElementById('chatVolChart').getContext('2d');
-                                                new Chart(chatVolCtx, {
-                                                    type: 'bar',
-                                                    data: {
-                                                        labels: ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                        datasets: [{
-                                                                label: 'Reply Done: 100',
-                                                                data: [30, 60, 40, 50, 30, 45, 40],
-                                                                backgroundColor: '#4CAF50',
-                                                                borderRadius: 4,
-                                                                barThickness: 5
-                                                            },
-                                                            {
-                                                                label: 'Pending: 500',
-                                                                data: [70, 140, 80, 120, 70, 135, 110],
-                                                                backgroundColor: '#4285F4',
-                                                                borderRadius: 4,
-                                                                barThickness: 5
-                                                            },
-                                                            {
-                                                                label: 'Overdue: 1500',
-                                                                data: [50, 120, 60, 90, 80, 95, 85],
-                                                                backgroundColor: '#FFA726',
-                                                                borderRadius: 4,
-                                                                barThickness: 5
-                                                            }
-                                                        ]
-                                                    },
-                                                    options: {
-                                                        responsive: true,
-                                                        plugins: {
-                                                            legend: {
-                                                                position: 'top',
-                                                                labels: {
-                                                                    usePointStyle: true,
-                                                                    pointStyle: 'rectRounded',
-                                                                    padding: 20
-                                                                }
-                                                            },
-                                                            tooltip: {
-                                                                callbacks: {
-                                                                    label: function(context) {
-                                                                        return context.dataset.label.split(':')[0] + ': ' + context.raw;
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        scales: {
-                                                            x: {
-                                                                stacked: false,
-                                                                grid: {
-                                                                    display: false
-                                                                },
-                                                                ticks: {
-                                                                    color: '#555',
-                                                                    font: {
-                                                                        size: 12
-                                                                    }
-                                                                }
-                                                            },
-                                                            y: {
-                                                                beginAtZero: true,
-                                                                grid: {
-                                                                    drawBorder: false,
-                                                                    color: '#eee'
-                                                                },
-                                                                ticks: {
-                                                                    color: '#aaa'
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                });
-                                            </script>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            <!-- <div class="col-md-3 p-0">
-                                    <div class="px-3 main-charts">
-                                        <div class="p-3 card">
-                                            <div class="mb-3 d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <h6 class="head mb-1">Top Agents</h6>
-                                                    <p class="sub_head">Weekly Report</p>
-                                                </div>
-                                            </div>
-                                            <div class="agents">
-                                                <li class="li d-flex align-items-center mb-2 pr-2">
-                                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="small-avatar" />
-                                                    <div class="head2 flex-grow-1">John Smith</div>
-                                                    <div class="sub_head2">34 Chats</div>
-                                                </li>
-                                                <li class="li d-flex align-items-center mb-2 pr-2">
-                                                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
-                                                    <div class="head2 flex-grow-1">John Smith</div>
-                                                    <div class="sub_head2">25 Chats</div>
-                                                </li>
-                                                <li class="li d-flex align-items-center mb-2 pr-2">
-                                                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
-                                                    <div class="head2 flex-grow-1">John Smith</div>
-                                                    <div class="sub_head2">15 Chats</div>
-                                                </li>
-                                                <li class="li d-flex align-items-center mb-2 pr-2">
-                                                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
-                                                    <div class="head2 flex-grow-1">John Smith</div>
-                                                    <div class="sub_head2">15 Chats</div>
-                                                </li>
-                                                <li class="li d-flex align-items-center mb-2 pr-2">
-                                                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
-                                                    <div class="head2 flex-grow-1">John Smith</div>
-                                                    <div class="sub_head2">15 Chats</div>
-                                                </li>
-                                                <li class="li d-flex align-items-center mb-2 pr-2">
-                                                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="John Smith" class="small-avatar" />
-                                                    <div class="head2 flex-grow-1">John Smith</div>
-                                                    <div class="sub_head2">11 Chats</div>
-                                                </li>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            <!--div class="col-md-12 p-0 my-3">
-                                    <div class="px-3 main-charts tables">
-                                        <div class="bg-white d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="head mb-1">All Tickets</h6>
-                                            </div>
-                                            <p class="label_blue"><a class="mr-2" href="<?php echo $ticketUrl; ?>">View All</a></p>
-                                        </div-->
-                            <!-- tickets_table = tickets_area.find('.sb-table-tickets');
-                                        tickets_table_menu = tickets_area.find('.sb-menu-tickets'); -->
-                            <!--div class="seprator"></div-->
-                            <!--?php
-                                        function sb_get_priorities()
-                                        {
-                                            $priorities = sb_db_get(
-                                                "SELECT * FROM priorities",
-                                                false
-                                            );
-                                            return $priorities;
-                                        }
-                                        function sb_get_statues()
-                                        {
-                                            $status = sb_db_get(
-                                                "SELECT * FROM ticket_status",
-                                                false
-                                            );
-                                            return $status;
-                                        }
-                                        $statues = sb_get_statues();
-                                        $priorities = sb_get_priorities();
-                                        ?>
-                                        <div id="ticket_statues">
-                                            <ul class="status-list"-->
-                            <!--?php foreach (
-                                                    $statues
-                                                    as $status
-                                                ) {
-                                                    echo '<li data-status="' .
-                                                        $status["name"] .
-                                                        '" class="" data-color="' .
-                                                        $status["color"] .
-                                                        '" value="' .
-                                                        $status["id"] .
-                                                        '">
-                                                    <span class="status-dot"></span> ' .
-                                                        $status["name"] .
-                                                        '
-                                                </li>';
-                                                } ?>
-                                            </ul>
-                                        </div>
-                                        <div id="ticket_priorities">
-                                            <ul class="priority-list"-->
-                            <!--?php foreach (
-                                                    $priorities
-                                                    as $priority
-                                                ) {
-                                                    echo '<li data-status="' .
-                                                        $priority["name"] .
-                                                        '" class="" data-color="' .
-                                                        $priority["color"] .
-                                                        '" value="' .
-                                                        $priority["id"] .
-                                                        '">
-                                                    <span class="status-dot"></span> ' .
-                                                        $priority["name"] .
-                                                        '
-                                                </li>';
-                                                } ?>
-                                            </ul>
-                                        </div>
-                                        <div class="new_table sb-area-tickets-dash">
-                                            <div class="sb-scroll-area">
-                                                <table class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
-                                                    <thead>
-                                                        <tr>
-                                                            <th data-field="title">
-                                                                Ticket Title
-                                                            </th>
-                                                            <th data-field="assigned-to">
-                                                                Assigned To
-                                                            </th>
-                                                            <th data-field="creation-date">
-                                                                Creation Date
-                                                            </th>
-                                                            <th data-field="status"-->
-                            <!--?php sb_e(
-                                                                    "Status"
-                                                                ); ?>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                            <td class="sb-td-tags">Kathryn Murphy</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div-->
-                            <!-- <div class="col-md-6 p-0">
-                                    <div class="pl-3 pr-3 pt-0 main-charts tables">
-                                        <div class="bg-white d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="head mb-1">Ticket Support</h6>
-                                            </div>
-                                            <p class="label_blue">View All</p>
-                                        </div>
-                                        <div class="seprator"></div>
-                                        <div class="new_table">
-                                            <div class="sb-scroll-area">
-                                                <table class="sb-table sb_table_new sb-table-tickets">
-                                                    <thead>
-                                                        <tr>
-                                                            <th data-field="id">
-                                                                Ticket ID
-                                                            </th>
-                                                            <th data-field="subject">
-                                                                Date
-                                                            </th>
-                                                            <th data-field="status">
-                                                                <?php sb_e(
-                                                                    "Status"
-                                                                ); ?> 
-                                                            </th>
-                                                            <th data-field="priority">
-                                                                <?php sb_e(
-                                                                    "Priority"
-                                                                ); ?>   
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">TCKT-59861244</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">TCKT-59861244</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">TCKT-59861244</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">TCKT-59861244</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
-                                                        </tr>
-                                                        <tr data-ticket-id="">
-                                                            <td class="sb-td-subject">TCKT-59861244</td>
-                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                            <td class="sb-td-status"><span class="span-border" style="color:#FF0000;border:1px solid #FF0000;">Open</span></td>
-                                                            <td class="sb-td-priority"><span class="span-border" style="color:null;border:1px solid null;">null</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div-->
                     </main>
                 </div>
                 <div class="sb-area-conversations">
@@ -6540,11 +5811,15 @@ function sb_component_admin()
                                     <?php sb_e("Settings"); ?>
                                 </div>
                                 <ul class="setting_sidebar">
+
                                     <li id="tab-chat" class="sb-active">
                                         <?php echo $disable_translations
                                             ? "Chat"
                                             : sb_("Chat"); ?>
                                     </li>
+                                    <?php
+                                    echo ($is_cloud ? sb_cloud_account_menu() : "");
+                                    ?>
                                     <li id="tab-admin">
                                         <?php echo $disable_translations
                                             ? "Admin"
@@ -6638,29 +5913,52 @@ function sb_component_admin()
                                     <!-- chat settings -->
                                     <div class="main-content">
                                         <h2>Chat</h2>
-
+                                        <hr>
                                         <div class="settings-card">
                                             <div class="my-tabs">
-                                                <div class="my-tab active" onclick="switchTab(this)">Chatbot Design</div>
-                                                <div class="my-tab" onclick="switchTab(this)">Chat Behaviour & Control</div>
+                                                <div class="my-tab active" onclick="switchTab(this)">Chat Availability</div>
+                                                <div class="my-tab" onclick="switchTab(this)">Chat Appearance & Features</div>
+                                                <div class="my-tab" onclick="switchTab(this)">Chat Management</div>
                                             </div>
 
-                                            <!-- Settings content for Chatbot Design -->
-                                            <div id="chatbotDesignContent">
+                                            <!-- Chat Availability -->
+                                            <div id="chatAvailabilityContent">
+                                                <div class="section-title">Hide chat outside of office hours</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="dashboardDisplay">
+                                                    <label for="dashboardDisplay">Disable and hide the chat widget outside of
+                                                        scheduled office hours.</label>
+                                                </div>
+
+                                                <div class="section-title">Hide chat if no agents online</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="disableDashboard">
+                                                    <label for="disableDashboard">Disable and hide the chat widget if all agents are
+                                                        offline.</label>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Chat Appearance Content -->
+                                            <div id="ChatAppearanceContent" style="display: none;">
                                                 <div class="section-title">Dashboard display</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="dashboardDisplay"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="dashboardDisplay">Display the dashboard instead of the chat area on
+                                                    <input type="checkbox" id="chatAutoResponse">
+                                                    <label for="chatAutoResponse">Display the dashboard instead of the chat area on
                                                         initialization.</label>
                                                 </div>
 
                                                 <div class="section-title">Disable dashboard</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="disableDashboard"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="disableDashboard">Disable the dashboard, and allow only one
+                                                    <input type="checkbox" id="ChatDisableOfficeHours">
+                                                    <label for="ChatDisableOfficeHours">Disable the dashboard, and allow only one
                                                         conversation per user.</label>
+                                                </div>
+
+                                                <div class="section-title">Allow only one conversation</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="ChatDisableOffline">
+                                                    <label for="ChatDisableOffline">Allow only one conversation per user.</label>
                                                 </div>
 
                                                 <div class="section-title">Language</div>
@@ -6685,170 +5983,94 @@ function sb_component_admin()
                                                             German</div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <!-- Settings content for Chat Behaviour & Control -->
-                                            <div id="chatBehaviourControlContent" style="display: none;">
-                                                <div class="section-title">Allow only one conversation</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="chatAutoResponse"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="chatAutoResponse">Allow only one conversation per user.</label>
-                                                </div>
-
-                                                <div class="section-title">Hide chat outside of office hours</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Chatdisableofficehourse"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Chatdisableofficehourse">Disable and hide the chat widget outside of scheduled office hours.</label>
-                                                </div>
-
-                                                <div class="section-title">Hide chat if no agents online</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Chatdisableoffline"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Chatdisableoffline">Disable and hide the chat widget if all agents are offline.</label>
-                                                </div>
                                                 <div class="section-title">Disable uploads</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Disableuploads"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Disableuploads">Disable file uploading capabilities within the chat.</label>
+                                                    <input type="checkbox" id="DisableUploads">
+                                                    <label for="DisableUploads">Disable file uploading capabilities within the
+                                                        chat.</label>
                                                 </div>
-                                                 <div class="section-title">Disable voice messages</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Disablevoicemessages"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Disablevoicemessages">Disable voice message capabilities within the chat.</label>
-                                                </div>
-                                                 <div class="section-title">Close chat by admin/agent</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Closechatbyadmin"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Closechatbyadmin">Allow the user to archive a conversation and hide archived</label>
-                                                </div>
-                                                 <div class="section-title">Close chat by admin/agent</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Closechatbyadmin"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Closechatbyadmin">Allow the user to archive a conversation and hide archived</label>
-                                                </div>
-                                                
-                                                <!--  -->
-                                                <!-- Manual Initialization Section -->
-<div>
 
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-        <div>
-            <strong style="font-size: 16px; color: #222;">Agents menu</strong>
-            <div style="font-size: 14px; color: #555; margin-top:10px;">
-                Show the agents menu in the dashboard and force users to choose an agent before starting a conversation.
-            </div>
-        </div>
-        <!-- Toggle -->
-        <label style="position: relative; display: inline-block; width: 44px; height: 24px;">
-            <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;" />
-            <span style="
-                position: absolute;
-                cursor: pointer;
-                top: 0; left: 0;
-                right: 0; bottom: 0;
-                background-color: #4ade80;
-                border-radius: 34px;
-                transition: .4s;"></span>
-            <span style="
-                position: absolute;
-                height: 18px;
-                width: 18px;
-                left: 3px;
-                bottom: 3px;
-                background-color: white;
-                border-radius: 50%;
-                transition: .4s;"></span>
-        </label>
-    </div>
-    <div class="section-title">One conversation per agent</div>
+                                                <div class="section-title">Disable voice messages</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="allowusers"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="allowusers">Only allow users to have one ongoing conversation per agent.</label>
+                                                    <input type="checkbox" id="DisableVoiceMessages">
+                                                    <label for="DisableVoiceMessages">Disable voice message capabilities within the
+                                                        chat.</label>
                                                 </div>
-                                                    <div class="section-title">Display online agents only</div>
+
+                                                <div class="section-title">Agents menu</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Onlineagentsonly"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Onlineagentsonly">Show only agents who are currently online.</label>
+                                                    <label for="agentsmenutitle">Show the agents menu in the dashboard and force the
+                                                        user to choose an agent to start a conversation.</label>
                                                 </div>
-                                                
-                                                    <div class="section-title">Dashboard title</div>
+
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Dashboardtitle"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Dashboardtitle">Show only agents who are currently online.</label>
-                                                        
+                                                    <input type="checkbox" id="Active">
+                                                    <label for="Active">Active</label>
                                                 </div>
-                                                  <div class="DashboardTitle">
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="One conversation per agent">
+                                                    <label for="Oneconversationperagent">One conversation per agent</label>
+                                                </div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Displayonlineagentsonly">
+                                                    <label for="Displayonlineagentsonly">Display online agents only</label>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 0px; margin-top: 15px;">
+                                                    <b for="DashboardTitle" style="min-width: 110px;">Dashboard title</b>
                                                     <input type="text" id="DashboardTitle" placeholder="Dashboard title"
-            style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
-        </div>
-                                                
+                                                        style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
+                                                </div>
 
-
-
-
-</div>
-
-                                                <!--  -->
-                                                
                                             </div>
 
+                                            <!-- Chat Management -->
+                                            <div id="chatManagementContent" style="display: none;">
+                                                <div class="section-title">Close chat by admin/agent</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="ChatManagementToggle">
+                                                    <label for="ChatManagementToggle">Allow the user to archive a conversation and
+                                                        hide archived</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <script>
-                                        // Add this function to switch between the tabs
                                         function switchTab(clickedTab) {
-                                            // Remove the active class from all tabs
+                                            // Remove active class from all tabs
                                             document.querySelectorAll('.my-tab').forEach(tab => tab.classList.remove('active'));
-                                            // Add the active class to the clicked tab
                                             clickedTab.classList.add('active');
 
-                                            // Show the corresponding content
-                                            if (clickedTab.textContent === "Chatbot Design") {
-                                                document.getElementById('chatbotDesignContent').style.display = 'block';
-                                                document.getElementById('chatBehaviourControlContent').style.display = 'none';
-                                            } else {
-                                                document.getElementById('chatbotDesignContent').style.display = 'none';
-                                                document.getElementById('chatBehaviourControlContent').style.display = 'block';
+                                            // Hide all tab contents
+                                            document.getElementById('chatAvailabilityContent').style.display = 'none';
+                                            document.getElementById('ChatAppearanceContent').style.display = 'none';
+                                            document.getElementById('chatManagementContent').style.display = 'none';
+
+                                            // Show selected tab content
+                                            const tabText = clickedTab.textContent.trim();
+                                            if (tabText === "Chat Availability") {
+                                                document.getElementById('chatAvailabilityContent').style.display = 'block';
+                                            } else if (tabText === "Chat Appearance & Features") {
+                                                document.getElementById('ChatAppearanceContent').style.display = 'block';
+                                            } else if (tabText === "Chat Management") {
+                                                document.getElementById('chatManagementContent').style.display = 'block';
                                             }
                                         }
 
-                                        // Set default active tab
-                                        document.addEventListener('DOMContentLoaded', () => {
-                                            switchTab(document.querySelector('.my-tab.active'));
-                                        });
-
-                                        // Toggle the language dropdown visibility
+                                        // Optional: Toggle language dropdown
                                         function toggleDropdown() {
                                             const options = document.getElementById('langOptions');
-                                            const isVisible = options.style.display === 'block';
-                                            options.style.display = isVisible ? 'none' : 'block';
+                                            options.style.display = options.style.display === 'none' ? 'block' : 'none';
                                         }
 
-                                        // Select the language and close the dropdown
-                                        function selectLang(code, name) {
-                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${name}`;
+                                        // Optional: Select language handler
+                                        function selectLang(code, label) {
+                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${label}`;
                                             document.getElementById('langOptions').style.display = 'none';
                                         }
-
-                                        // Close the dropdown if clicked outside of it
-                                        document.addEventListener('click', function (e) {
-                                            const langBox = document.querySelector('.language-dropdown');
-                                            if (!langBox.contains(e.target)) {
-                                                document.getElementById('langOptions').style.display = 'none';
-                                            }
-                                        });
                                     </script>
+
 
                                     <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
                                         rel="stylesheet">
@@ -6862,11 +6084,23 @@ function sb_component_admin()
                                             margin-top: 10px;
                                         }
 
-                                        .settings-card {
-                                            background-color: #fff;
-                                            padding: 25px;
-                                            border-radius: 8px;
-                                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                                        input[type="checkbox"] {
+                                            appearance: auto;
+                                            /* show default browser checkbox */
+                                            display: inline-block;
+                                            width: 16px;
+                                            height: 16px;
+                                            margin-right: 8px;
+                                            vertical-align: middle;
+                                        }
+
+                                        .checkbox-wrapper {
+                                            margin-bottom: 12px;
+                                        }
+
+                                        label {
+                                            font-size: 14px;
+                                            color: #333;
                                         }
 
                                         .my-tabs {
