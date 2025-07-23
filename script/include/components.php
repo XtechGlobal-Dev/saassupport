@@ -5778,37 +5778,78 @@ function sb_component_admin()
                             <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
 
+                                    
+                                    <!--div class="sb-top-bar save_settings">
+                                        <div class="">
+                                            <p class="head mb-4">Chat Settings</p>
+                                            <p class="des mb-0">Configure your chat settings.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e("Save changes"); ?>
+                                            </a>
+                                        </div>
+                                    </div-->
+                                    <!--?php sb_populate_settings(
+                                        "chat",
+                                        $sb_settings
+                                    ); ?-->
+                                    <!-- chat settings -->
                                     <div class="main-content">
                                         <h2>Chat</h2>
                                         <hr>
                                         <div class="settings-card">
                                             <div class="my-tabs">
-                                                <div class="my-tab active" onclick="switchTab(this)">Chatbot Design</div>
-                                                <div class="my-tab" onclick="switchTab(this)">Chat Behaviour & Control</div>
+                                                <div class="my-tab active" onclick="switchTab(this)">Chat Availability</div>
+                                                <div class="my-tab" onclick="switchTab(this)">Chat Appearance & Features</div>
+                                                <div class="my-tab" onclick="switchTab(this)">Chat Management</div>
                                             </div>
-
-                                            <!-- Settings content for Chatbot Design -->
-                                            <div id="chatbotDesignContent">
+ 
+                                            <!-- Chat Availability -->
+                                            <div id="chatAvailabilityContent">
+                                                <div class="section-title">Hide chat outside of office hours</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="dashboardDisplay">
+                                                    <label for="dashboardDisplay">Disable and hide the chat widget outside of
+                                                        scheduled office hours.</label>
+                                                </div>
+ 
+                                                <div class="section-title">Hide chat if no agents online</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="disableDashboard">
+                                                    <label for="disableDashboard">Disable and hide the chat widget if all agents are
+                                                        offline.</label>
+                                                </div>
+ 
+                                            </div>
+ 
+                                            <!-- Chat Appearance Content -->
+                                            <div id="ChatAppearanceContent" style="display: none;">
                                                 <div class="section-title">Dashboard display</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="dashboardDisplay"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="dashboardDisplay">Display the dashboard instead of the chat area on
+                                                    <input type="checkbox" id="chatAutoResponse">
+                                                    <label for="chatAutoResponse">Display the dashboard instead of the chat area on
                                                         initialization.</label>
                                                 </div>
-
+ 
                                                 <div class="section-title">Disable dashboard</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="disableDashboard"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="disableDashboard">Disable the dashboard, and allow only one
+                                                    <input type="checkbox" id="ChatDisableOfficeHours">
+                                                    <label for="ChatDisableOfficeHours">Disable the dashboard, and allow only one
                                                         conversation per user.</label>
                                                 </div>
-
+ 
+                                                <div class="section-title">Allow only one conversation</div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="ChatDisableOffline">
+                                                    <label for="ChatDisableOffline">Allow only one conversation per user.</label>
+                                                </div>
+ 
                                                 <div class="section-title">Language</div>
                                                 <p class="text-muted">Set the chat language or translate it automatically to match
                                                     the user language. Default is English.</p>
-
+ 
                                                 <!-- Language dropdown -->
                                                 <div class="language-dropdown">
                                                     <div class="language-toggle" onclick="toggleDropdown()">
@@ -5827,156 +5868,94 @@ function sb_component_admin()
                                                             German</div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <!-- Settings content for Chat Behaviour & Control -->
-                                            <div id="chatBehaviourControlContent" style="display: none;">
-                                                <div class="section-title">Allow only one conversation</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="chatAutoResponse"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="chatAutoResponse">Allow only one conversation per user.</label>
-                                                </div>
-
-                                                <div class="section-title">Hide chat outside of office hours</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Chatdisableofficehourse"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Chatdisableofficehourse">Disable and hide the chat widget outside of
-                                                        scheduled office hours.</label>
-                                                </div>
-
-                                                <div class="section-title">Hide chat if no agents online</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Chatdisableoffline"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Chatdisableoffline">Disable and hide the chat widget if all agents
-                                                        are offline.</label>
-                                                </div>
+ 
                                                 <div class="section-title">Disable uploads</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Disableuploads"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Disableuploads">Disable file uploading capabilities within the
+                                                    <input type="checkbox" id="DisableUploads">
+                                                    <label for="DisableUploads">Disable file uploading capabilities within the
                                                         chat.</label>
                                                 </div>
+ 
                                                 <div class="section-title">Disable voice messages</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Disablevoicemessages"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Disablevoicemessages">Disable voice message capabilities within the
+                                                    <input type="checkbox" id="DisableVoiceMessages">
+                                                    <label for="DisableVoiceMessages">Disable voice message capabilities within the
                                                         chat.</label>
                                                 </div>
+ 
+                                                <div class="section-title">Agents menu</div>
+                                                <div class="checkbox-wrapper">
+                                                    <label for="agentsmenutitle">Show the agents menu in the dashboard and force the
+                                                        user to choose an agent to start a conversation.</label>
+                                                </div>
+ 
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Active">
+                                                    <label for="Active">Active</label>
+                                                </div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="One conversation per agent">
+                                                    <label for="Oneconversationperagent">One conversation per agent</label>
+                                                </div>
+                                                <div class="checkbox-wrapper">
+                                                    <input type="checkbox" id="Displayonlineagentsonly">
+                                                    <label for="Displayonlineagentsonly">Display online agents only</label>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 0px; margin-top: 15px;">
+                                                    <b for="DashboardTitle" style="min-width: 110px;">Dashboard title</b>
+                                                    <input type="text" id="DashboardTitle" placeholder="Dashboard title"
+                                                        style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
+                                                </div>
+ 
+                                            </div>
+ 
+                                            <!-- Chat Management -->
+                                            <div id="chatManagementContent" style="display: none;">
                                                 <div class="section-title">Close chat by admin/agent</div>
                                                 <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Closechatbyadmin"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Closechatbyadmin">Allow the user to archive a conversation and hide
-                                                        archived</label>
-                                                </div>
-                                                <div class="section-title">Close chat by admin/agent</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Closechatbyadmin"
-                                                        style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                    <label for="Closechatbyadmin">Allow the user to archive a conversation and hide
-                                                        archived</label>
-                                                </div>
-
-                                                <!--  -->
-                                                <!-- Manual Initialization Section -->
-                                                <div>
-
-                                                    <div
-                                                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                                                        <div>
-                                                            <strong style="font-size: 16px; color: #222;">Agents menu</strong>
-                                                            <div style="font-size: 14px; color: #555; margin-top:10px;">
-                                                                Show the agents menu in the dashboard and force users to choose an
-                                                                agent before starting a conversation.
-                                                            </div>
-                                                        </div>
-                                                        <!-- Toggle -->
-                                                        <label
-                                                            style="position: relative; display: inline-block; width: 44px; height: 24px;">
-                                                            <input type="checkbox" checked
-                                                                style="opacity: 0; width: 0; height: 0;" />
-                                                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #4ade80;
-                                                                border-radius: 34px;
-                                                            transition: .4s;"></span>
-                                                            <span style="position: absolute;height: 18px;width: 18px;left: 3px;bottom: 3px;background-color: white;border-radius: 50%;transition: .4s;"></span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="section-title">One conversation per agent</div>
-                                                    <div class="checkbox-wrapper">
-                                                        <input type="checkbox" id="allowusers"
-                                                            style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                        <label for="allowusers">Only allow users to have one ongoing conversation
-                                                            per agent.</label>
-                                                    </div>
-                                                    <div class="section-title">Display online agents only</div>
-                                                    <div class="checkbox-wrapper">
-                                                        <input type="checkbox" id="Onlineagentsonly"
-                                                            style="appearance: auto; display: inline-block; width: 16px; height: 16px; margin-right: 8px;">
-                                                        <label for="Onlineagentsonly">Show only agents who are currently
-                                                            online.</label>
-                                                    </div>
-                                                    <div class="section-title">Dashboard title</div>
-                                                    <div class="checkbox-wrapper">
-                                                        <div class="DashboardTitle">
-                                                            <input type="text" id="DashboardTitle" placeholder="Dashboard title"
-                                                                style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
-                                                        </div>
-                                                    </div>
+                                                    <input type="checkbox" id="ChatManagementToggle">
+                                                    <label for="ChatManagementToggle">Allow the user to archive a conversation and
+                                                        hide archived</label>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
-
+ 
                                     <script>
-                                        // Add this function to switch between the tabs
                                         function switchTab(clickedTab) {
-                                            // Remove the active class from all tabs
+                                            // Remove active class from all tabs
                                             document.querySelectorAll('.my-tab').forEach(tab => tab.classList.remove('active'));
-                                            // Add the active class to the clicked tab
                                             clickedTab.classList.add('active');
  
-                                            // Show the corresponding content
-                                            if (clickedTab.textContent === "Chatbot Design") {
-                                                document.getElementById('chatbotDesignContent').style.display = 'block';
-                                                document.getElementById('chatBehaviourControlContent').style.display = 'none';
-                                            } else {
-                                                document.getElementById('chatbotDesignContent').style.display = 'none';
-                                                document.getElementById('chatBehaviourControlContent').style.display = 'block';
+                                            // Hide all tab contents
+                                            document.getElementById('chatAvailabilityContent').style.display = 'none';
+                                            document.getElementById('ChatAppearanceContent').style.display = 'none';
+                                            document.getElementById('chatManagementContent').style.display = 'none';
+ 
+                                            // Show selected tab content
+                                            const tabText = clickedTab.textContent.trim();
+                                            if (tabText === "Chat Availability") {
+                                                document.getElementById('chatAvailabilityContent').style.display = 'block';
+                                            } else if (tabText === "Chat Appearance & Features") {
+                                                document.getElementById('ChatAppearanceContent').style.display = 'block';
+                                            } else if (tabText === "Chat Management") {
+                                                document.getElementById('chatManagementContent').style.display = 'block';
                                             }
                                         }
  
-                                        // Set default active tab
-                                        document.addEventListener('DOMContentLoaded', () => {
-                                            switchTab(document.querySelector('.my-tab.active'));
-                                        });
- 
-                                        // Toggle the language dropdown visibility
+                                        // Optional: Toggle language dropdown
                                         function toggleDropdown() {
                                             const options = document.getElementById('langOptions');
-                                            const isVisible = options.style.display === 'block';
-                                            options.style.display = isVisible ? 'none' : 'block';
+                                            options.style.display = options.style.display === 'none' ? 'block' : 'none';
                                         }
  
-                                        // Select the language and close the dropdown
-                                        function selectLang(code, name) {
-                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${name}`;
+                                        // Optional: Select language handler
+                                        function selectLang(code, label) {
+                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${label}`;
                                             document.getElementById('langOptions').style.display = 'none';
                                         }
- 
-                                        // Close the dropdown if clicked outside of it
-                                        document.addEventListener('click', function (e) {
-                                            const langBox = document.querySelector('.language-dropdown');
-                                            if (!langBox.contains(e.target)) {
-                                                document.getElementById('langOptions').style.display = 'none';
-                                            }
-                                        });
                                     </script>
+ 
  
                                     <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
                                         rel="stylesheet">
@@ -5990,11 +5969,23 @@ function sb_component_admin()
                                             margin-top: 10px;
                                         }
  
-                                        .settings-card {
-                                            /* background-color: #fff;
-                                            padding: 25px;
-                                            border-radius: 8px;
-                                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+                                        input[type="checkbox"] {
+                                            appearance: auto;
+                                            /* show default browser checkbox */
+                                            display: inline-block;
+                                            width: 16px;
+                                            height: 16px;
+                                            margin-right: 8px;
+                                            vertical-align: middle;
+                                        }
+ 
+                                        .checkbox-wrapper {
+                                            margin-bottom: 12px;
+                                        }
+ 
+                                        label {
+                                            font-size: 14px;
+                                            color: #333;
                                         }
  
                                         .my-tabs {
@@ -6087,7 +6078,10 @@ function sb_component_admin()
                                             margin-bottom: 25px;
                                         }
                                     </style>
-
+ 
+ 
+                                    <!-- chat settings -->
+                                
 
                                     <!-- <div class="sb-top-bar save_settings">
                                         <div class="">
@@ -6101,10 +6095,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
-                                        "chat",
-                                        $sb_settings
-                                    ); ?> -->
+                                    <?php //sb_populate_settings("chat",$sb_settings); ?> -->
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
