@@ -4347,23 +4347,23 @@ td.sb-offline:after {
 
 .settings_new .sb-scroll-area .setting_sidebar li {
   margin-bottom: 20px;
-  padding-left: 10px;
-  max-width: 150px;
+  padding-left: 20px;
+  max-width: 100%;
 }
 .settings_new .sb-scroll-area .setting_sidebar li.sb-active,
 .settings_new .sb-scroll-area .setting_sidebar li:hover {
   background: #E5EAF0;
-  border-radius: 6px;
-  width: 150px;
-  padding: 0 10px;
+  border-radius: unset;
+  width: 100%;
+  padding: 0px 7px 0px 20px;
   color: #000;
 }
 .settings_new .sb-scroll-area .setting_sidebar li.sb-active {
   background: #e5eaf0;
-  border-radius: 6px;
-  padding: 0 10px;
+  border-radius: unset;
+  padding: 0px 7px 0px 20px;
   border-bottom: none;
-  width: 150px;
+  width: 100%;
   color: #000;
 }
 .settings_new .sb-scroll-area .setting_sidebar #tab-apps {
@@ -4414,12 +4414,13 @@ td.sb-offline:after {
 }
 .sb-tab > .sb-nav {
   min-width: 200px;
+  min-width: 220px;
   border-right: 1px solid rgb(212, 212, 212);
-  padding: 15px 20px 20px 20px;
+  padding: 15px 0px 0px 0px;
 }
 .sb-tab > .sb-nav > ul {
   display: block;
-  max-width: 200px;
+  max-width: 100%;
 }
 .sb-tab > .sb-nav > ul li {
   margin-right: 0;
@@ -8006,9 +8007,7 @@ td.sb-offline:after {
 }
 .sb-area-settings > .sb-tab > .sb-content {
   padding-left: 30px;
-}
-.sb-area-settings > .sb-tab > .sb-content > div {
-  max-width: 1000px;
+  background-color: #fff;
 }
 .sb-area-settings > .sb-tab > .sb-content > div > .sb-setting + .sb-setting {
   margin-top: 15px;
@@ -12141,6 +12140,14 @@ i.fa-solid.fa-x.delete-attachment {
   z-index: 2;
   cursor: pointer;
   font-size: 10px;
+}
+
+.setting_sidebar li {
+  margin: 0 !important;
+  padding: 12px 20px !important;
+  line-height: 1.2 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
 @media (max-width: 1540px) {
