@@ -1910,6 +1910,24 @@ td.sb-offline:after {
         z-index: 9;
 
         >.sb-admin-nav {
+
+            .sb-notification-counter
+            {
+                position: absolute;
+                top:1px;
+                right: 1px;
+                height: 16px;
+                width: 16px;
+                line-height: 16px;
+                font-size: 9px;
+                border-radius: 50%;
+                text-align: center;
+                background: $color-blue;
+                color: $white;
+                z-index: 9;
+                letter-spacing: 0.3px;
+                animation: sb-fade-animation .3s;
+            }
             >img {
                 height: 35px;
                 margin: 18px 15px;
@@ -2191,6 +2209,7 @@ td.sb-offline:after {
 
                     li {
                         margin-bottom: 15px;
+                        position: relative;
 
                         &:hover a {
                             color: #212528;
@@ -8404,6 +8423,7 @@ a.sb-btn-white,
         display: flex;
     }
 
+
     #admin-title,
     #login-icon,
     #login-message,
@@ -8467,6 +8487,23 @@ a.sb-btn-white,
             display: none;
         }
     }
+}
+
+.sidebar-notification-icon{
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    font-size: 9px;
+    border-radius: 50%;
+    text-align: center;
+    background: #155CFD;
+    color: #fff;
+    z-index: 9;
+    letter-spacing: 0.3px;
+    animation: sb-fade-animation 0.3s;
+    right: 1px;
+    top: 0px;
 }
 
 .sb-main:not(.sb-cloud) {
@@ -8603,8 +8640,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 // General dot class
 .tag-dot {
     display: inline-block;
-    width: 12px;
-    height: 7px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     margin-right: 6px;
     vertical-align: middle;
@@ -8796,12 +8833,12 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     }
 
-    &.sb-active {
-        .ticket-section {
-            max-height: none;
-            overflow: visible;
-        }
-    }
+    // &.sb-active {
+    //     .ticket-section {
+    //         max-height: none;
+    //         overflow: visible;
+    //     }
+    // }
 }
 
 
@@ -9215,7 +9252,7 @@ li.menu_head:hover {
     overflow: hidden;
 }
 
-// custom code
+// custom css
 .sidebar {
     width: 230px;
     transition: width 0.3s ease;
@@ -9322,17 +9359,6 @@ li.menu_head:hover {
         }
     }
 }
-
-
-
-// 
-// .metric-card {
-//   canvas {
-//     width: 100% !important;
-//     height: auto !important;
-//     max-width: 100%;
-//   }
-// }
 .high-insr {
     .card {
         min-height: 350px !important;
@@ -9365,13 +9391,13 @@ li.menu_head:hover {
 
 .select2-container--default {
     .select2-selection--single {
-        height: 42px !important; // Match your input field height
+        height: 42px !important; 
         padding: 4px 8px;
         display: flex;
         align-items: center;
 
         .select2-selection__rendered {
-            line-height: 1.5; // optional: aligns text
+            line-height: 1.5; 
         }
 
         .select2-selection__arrow {
@@ -9379,7 +9405,7 @@ li.menu_head:hover {
             transform: translateY(-50%) !important;
             position: absolute;
             right: 8px;
-            margin-top: 0; // override default
+            margin-top: 0; 
         }
     }
 }
@@ -9537,7 +9563,8 @@ i {
     }
   }
 }
-// cuistom responsive
+
+// custom responsive
 @media (max-width: 1540px) {
   .screen-size {
     .row {
@@ -9548,16 +9575,7 @@ i {
       }
     }
   }
-.sb-area-tickets {
-  &.sb-active {
-    .ticket-section {
-      overflow: scroll;
-    }
-    .tab-scroll {
-    table-layout: unset;
-   }
-  }
-}
+
 .new-ticket-button {
   overflow-x: auto;
   white-space: nowrap;
@@ -9565,7 +9583,7 @@ i {
   gap: 10px;
 
   > * {
-    flex-shrink: 0; // Prevent items from shrinking on narrow view
+    flex-shrink: 0;
   }
 }
 .tablet-sizee {
@@ -9586,7 +9604,6 @@ i {
 
 }
 // custom responsive
-
 // custom css
 /*
  *
