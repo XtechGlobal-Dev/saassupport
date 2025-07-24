@@ -1,234 +1,239 @@
 {
-  "chat": [
-    {
-      "type": "checkbox",
-      "id": "chat-login-init",
-      "title": "Login initialization",
-      "content": "Initialize and display the chat widget only when the user is logged in.",
-      "keywords": ""
-    },
-    {
-      "type": "checkbox",
-      "id": "init-dashboard",
-      "title": "Dashboard display",
-      "content": "Display the dashboard instead of the chat area on initialization."
-    },
-    {
-      "type": "checkbox",
-      "id": "disable-dashboard",
-      "title": "Disable dashboard",
-      "content": "Disable the dashboard, and allow only one conversation per user."
-    },
-    {
-      "type": "checkbox",
-      "id": "force-one-conversation",
-      "title": "Allow only one conversation",
-      "content": "Allow only one conversation per user."
-    },
-    {
-      "type": "checkbox",
-      "id": "chat-timetable-disable",
-      "title": "Hide chat outside of office hours",
-      "content": "Disable and hide the chat widget outside of scheduled office hours."
-    },
-    {
-      "type": "checkbox",
-      "id": "chat-offline-disable",
-      "title": "Hide chat if no agents online",
-      "content": "Disable and hide the chat widget if all agents are offline."
-    },
-    {
-      "type": "select",
-      "id": "front-auto-translations",
-      "title": "Language",
-      "content": "Set the chat language or translate it automatically to match the user language. Default is English.",
-      "value": [
-        [ "", "Default" ],
-        [ "auto", "Multilingual" ],
-        [ "sq", "Albanian" ],
-        [ "am", "Amharic" ],
-        [ "ar", "Arabic" ],
-        [ "bn", "Bengali" ],
-        [ "bg", "Bulgarian" ],
-        [ "br", "Portuguese - Brasilian" ],
-        [ "my", "Burmese" ],
-        [ "zh", "Chinese" ],
-        [ "zt", "Chinese - Traditional" ],
-        [ "hr", "Croatian" ],
-        [ "cs", "Czech" ],
-        [ "da", "Danish" ],
-        [ "nl", "Dutch" ],
-        [ "en", "English" ],
-        [ "et", "Estonian" ],
-        [ "tl", "Filipino" ],
-        [ "fi", "Finnish" ],
-        [ "fr", "French" ],
-        [ "ka", "Georgian" ],
-        [ "de", "German" ],
-        [ "el", "Greek" ],
-        [ "he", "Hebrew" ],
-        [ "hi", "Hindi" ],
-        [ "hu", "Hungarian" ],
-        [ "is", "Icelandic" ],
-        [ "id", "Indonesian" ],
-        [ "it", "Italian" ],
-        [ "ja", "Japanese" ],
-        [ "ko", "Korean" ],
-        [ "lt", "Lithuanian" ],
-        [ "mk", "Macedonian" ],
-        [ "ms", "Malay" ],
-        [ "mn", "Mongolian" ],
-        [ "no", "Norwegian" ],
-        [ "pa", "Punjabi - Gurmurkhi" ],
-        [ "fa", "Persian" ],
-        [ "pl", "Polish" ],
-        [ "pt", "Portuguese" ],
-        [ "ro", "Romanian" ],
-        [ "ru", "Russian" ],
-        [ "sr", "Serbian" ],
-        [ "sk", "Slovak" ],
-        [ "sl", "Slovenian" ],
-        [ "es", "Spanish" ],
-        [ "su", "Sundanese" ],
-        [ "sv", "Swedish" ],
-        [ "th", "Thai" ],
-        [ "tr", "Turkish" ],
-        [ "uk", "Ukrainian" ],
-        [ "vi", "Vietnamese" ]
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "auto-open",
-      "title": "Open automatically",
-      "content": "Open the chat window automatically when a new message is received."
-    },
-    {
-      "type": "checkbox",
-      "id": "disable-uploads",
-      "title": "Disable uploads",
-      "content": "Disable file uploading capabilities within the chat."
-    },
-    {
-      "type": "checkbox",
-      "id": "disable-voice-messages",
-      "title": "Disable voice messages",
-      "content": "Disable voice message capabilities within the chat."
-    },
-    {
-      "type": "checkbox",
-      "id": "close-chat",
-      "title": "Close chat",
-      "content": "Allow the user to archive a conversation and hide archived conversations."
-    },
-    {
-      "type": "checkbox",
-      "id": "chat-manual-init",
-      "title": "Manual initialization",
-      "content": "Disable auto-initialization of the chat widget. When this setting is active you must initialize the chat widget with a custom JavaScript API code written by you. If the chat doesn't appear and this setting is enabled, disable it."
-    },
-    {
-      "type": "multi-input",
-      "id": "agents-menu",
-      "title": "Agents menu",
-      "content": "Show the agents menu in the dashboard and force the user to choose an agent to start a conversation.",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "agents-menu-active",
-          "title": "Active"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-menu-force-one",
-          "title": "One conversation per agent"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-menu-online-only",
-          "title": "Display online agents only"
-        },
-        {
-          "type": "text",
-          "id": "agents-menu-title",
-          "title": "Dashboard title"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
-      "id": "messaging-channels",
-      "title": "Messaging channels",
-      "content": "Allow users to contact you via their favorite messaging apps.",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "messaging-channels-active",
-          "title": "Active"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-title",
-          "title": "Dashboard title"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-wa",
-          "title": "WhatsApp"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-fb",
-          "title": "Messenger"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-ig",
-          "title": "Instagram"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-tw",
-          "title": "Twitter"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-tg",
-          "title": "Telegram"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-vb",
-          "title": "Viber"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-za",
-          "title": "Zalo"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-ln",
-          "title": "LINE"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-wc",
-          "title": "WeChat"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-em",
-          "title": "Email"
-        },
-        {
-          "type": "text",
-          "id": "messaging-channels-tk",
-          "title": "Ticket"
-        }
-      ]
-    }
-  ],
+  "chat": {
+    "chat-appearance-and-features": [
+      {
+        "type": "checkbox",
+        "id": "chat-login-init",
+        "title": "Login initialization",
+        "content": "Initialize and display the chat widget only when the user is logged in."
+      },
+      {
+        "type": "checkbox",
+        "id": "init-dashboard",
+        "title": "Dashboard display",
+        "content": "Display the dashboard instead of the chat area on initialization."
+      },
+      {
+        "type": "checkbox",
+        "id": "disable-dashboard",
+        "title": "Disable dashboard",
+        "content": "Disable the dashboard, and allow only one conversation per user."
+      },
+      {
+        "type": "checkbox",
+        "id": "force-one-conversation",
+        "title": "Allow only one conversation",
+        "content": "Allow only one conversation per user."
+      },
+      {
+        "type": "checkbox",
+        "id": "auto-open",
+        "title": "Open automatically",
+        "content": "Open the chat window automatically when a new message is received."
+      },
+      {
+        "type": "checkbox",
+        "id": "disable-uploads",
+        "title": "Disable uploads",
+        "content": "Disable file uploading capabilities within the chat."
+      },
+      {
+        "type": "checkbox",
+        "id": "disable-voice-messages",
+        "title": "Disable voice messages",
+        "content": "Disable voice message capabilities within the chat."
+      },
+	  {
+        "type": "checkbox",
+        "id": "chat-manual-init",
+        "title": "Manual initialization",
+        "content": "Disable auto-initialization of the chat widget. When this setting is active you must initialize the chat widget with a custom JavaScript API code written by you. If the chat doesn't appear and this setting is enabled, disable it."
+      },
+      {
+        "type": "select",
+        "id": "front-auto-translations",
+        "title": "Language",
+        "content": "Set the chat language or translate it automatically to match the user language. Default is English.",
+        "value": [
+          ["", "Default"],
+          ["auto", "Multilingual"],
+          ["sq", "Albanian"],
+          ["am", "Amharic"],
+          ["ar", "Arabic"],
+          ["bn", "Bengali"],
+          ["bg", "Bulgarian"],
+          ["br", "Portuguese - Brasilian"],
+          ["my", "Burmese"],
+          ["zh", "Chinese"],
+          ["zt", "Chinese - Traditional"],
+          ["hr", "Croatian"],
+          ["cs", "Czech"],
+          ["da", "Danish"],
+          ["nl", "Dutch"],
+          ["en", "English"],
+          ["et", "Estonian"],
+          ["tl", "Filipino"],
+          ["fi", "Finnish"],
+          ["fr", "French"],
+          ["ka", "Georgian"],
+          ["de", "German"],
+          ["el", "Greek"],
+          ["he", "Hebrew"],
+          ["hi", "Hindi"],
+          ["hu", "Hungarian"],
+          ["is", "Icelandic"],
+          ["id", "Indonesian"],
+          ["it", "Italian"],
+          ["ja", "Japanese"],
+          ["ko", "Korean"],
+          ["lt", "Lithuanian"],
+          ["mk", "Macedonian"],
+          ["ms", "Malay"],
+          ["mn", "Mongolian"],
+          ["no", "Norwegian"],
+          ["pa", "Punjabi - Gurmurkhi"],
+          ["fa", "Persian"],
+          ["pl", "Polish"],
+          ["pt", "Portuguese"],
+          ["ro", "Romanian"],
+          ["ru", "Russian"],
+          ["sr", "Serbian"],
+          ["sk", "Slovak"],
+          ["sl", "Slovenian"],
+          ["es", "Spanish"],
+          ["su", "Sundanese"],
+          ["sv", "Swedish"],
+          ["th", "Thai"],
+          ["tr", "Turkish"],
+          ["uk", "Ukrainian"],
+          ["vi", "Vietnamese"]
+        ]
+      },
+	  {
+        "type": "multi-input",
+        "id": "agents-menu",
+        "title": "Agents menu",
+        "content": "Show the agents menu in the dashboard and force the user to choose an agent to start a conversation.",
+        "value": [
+          {
+            "type": "checkbox",
+            "id": "agents-menu-active",
+            "title": "Active"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-menu-force-one",
+            "title": "One conversation per agent"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-menu-online-only",
+            "title": "Display online agents only"
+          },
+          {
+            "type": "text",
+            "id": "agents-menu-title",
+            "title": "Dashboard title"
+          }
+        ]
+      },
+      {
+        "type": "multi-input",
+        "id": "messaging-channels",
+        "title": "Messaging channels",
+        "content": "Allow users to contact you via their favorite messaging apps.",
+        "value": [
+          {
+            "type": "checkbox",
+            "id": "messaging-channels-active",
+            "title": "Active"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-title",
+            "title": "Dashboard title"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-wa",
+            "title": "WhatsApp"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-fb",
+            "title": "Messenger"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-ig",
+            "title": "Instagram"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-tw",
+            "title": "Twitter"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-tg",
+            "title": "Telegram"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-vb",
+            "title": "Viber"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-za",
+            "title": "Zalo"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-ln",
+            "title": "LINE"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-wc",
+            "title": "WeChat"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-em",
+            "title": "Email"
+          },
+          {
+            "type": "text",
+            "id": "messaging-channels-tk",
+            "title": "Ticket"
+          }
+        ]
+      }
+    ],
+    "chat-availability": [
+      {
+        "type": "checkbox",
+        "id": "chat-timetable-disable",
+        "title": "Hide chat outside of office hours",
+        "content": "Disable and hide the chat widget outside of scheduled office hours."
+      },
+      {
+        "type": "checkbox",
+        "id": "chat-offline-disable",
+        "title": "Hide chat if no agents online",
+        "content": "Disable and hide the chat widget if all agents are offline."
+      }
+    ],
+    "chat-management": [
+      {
+        "type": "checkbox",
+        "id": "close-chat",
+        "title": "Close chat by admin/agent",
+        "content": "Allow the user to archive a conversation and hide archived conversations."
+      }
+    ]
+  },
   "messages": [
     {
       "type": "multi-input",
