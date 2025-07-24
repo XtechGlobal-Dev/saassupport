@@ -5912,8 +5912,12 @@ function sb_component_admin()
                                     ); ?-->
                                     <!-- chat settings -->
                                     <div class="main-content">
-                                        <h2>Chat</h2>
+                                        <!--  -->
+                                        <h2>Chat <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                                <i class="sb-icon-check"></i>Save changes</a>
+                                        </h2>
                                         <hr>
+                                        <!--  -->
                                         <div class="settings-card">
                                             <div class="my-tabs">
                                                 <div class="my-tab active" onclick="switchTab(this)">Chat Availability</div>
@@ -5923,116 +5927,225 @@ function sb_component_admin()
 
                                             <!-- Chat Availability -->
                                             <div id="chatAvailabilityContent">
-                                                <div class="section-title">Hide chat outside of office hours</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="dashboardDisplay">
-                                                    <label for="dashboardDisplay">Disable and hide the chat widget outside of
-                                                        scheduled office hours.</label>
-                                                </div>
-
-                                                <div class="section-title">Hide chat if no agents online</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="disableDashboard">
-                                                    <label for="disableDashboard">Disable and hide the chat widget if all agents are
-                                                        offline.</label>
-                                                </div>
-
-                                            </div>
-
-                                            <!-- Chat Appearance Content -->
-                                            <div id="ChatAppearanceContent" style="display: none;">
-                                                <div class="section-title">Dashboard display</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="chatAutoResponse">
-                                                    <label for="chatAutoResponse">Display the dashboard instead of the chat area on
-                                                        initialization.</label>
-                                                </div>
-
-                                                <div class="section-title">Disable dashboard</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="ChatDisableOfficeHours">
-                                                    <label for="ChatDisableOfficeHours">Disable the dashboard, and allow only one
-                                                        conversation per user.</label>
-                                                </div>
-
-                                                <div class="section-title">Allow only one conversation</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="ChatDisableOffline">
-                                                    <label for="ChatDisableOffline">Allow only one conversation per user.</label>
-                                                </div>
-
-                                                <div class="section-title">Language</div>
-                                                <p class="text-muted">Set the chat language or translate it automatically to match
-                                                    the user language. Default is English.</p>
-
-                                                <!-- Language dropdown -->
-                                                <div class="language-dropdown">
-                                                    <div class="language-toggle" onclick="toggleDropdown()">
-                                                        <span class="fi fi-us"></span> English
-                                                    </div>
-                                                    <div class="language-options" id="langOptions" style="display: none;">
-                                                        <div onclick="selectLang('us', 'English')"><span class="fi fi-us"></span>
-                                                            English</div>
-                                                        <div onclick="selectLang('pk', 'Urdu')"><span class="fi fi-pk"></span> Urdu
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Hide chat outside of office hours</h6>
+                                                    <p class="text-muted small">
+                                                        Disable and hide the chat widget outside of
+                                                        scheduled office hours.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
                                                         </div>
-                                                        <div onclick="selectLang('fr', 'French')"><span class="fi fi-fr"></span>
-                                                            French</div>
-                                                        <div onclick="selectLang('es', 'Spanish')"><span class="fi fi-es"></span>
-                                                            Spanish</div>
-                                                        <div onclick="selectLang('de', 'German')"><span class="fi fi-de"></span>
-                                                            German</div>
                                                     </div>
                                                 </div>
 
-                                                <div class="section-title">Disable uploads</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="DisableUploads">
-                                                    <label for="DisableUploads">Disable file uploading capabilities within the
-                                                        chat.</label>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Hide chat if no agents online</h6>
+                                                    <p class="text-muted small">
+                                                        Disable and hide the chat widget if all agents are
+                                                        offline.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  Chat Availability -->
+                                            <!-- Chat Appearance & Features -->
+                                            <div id="ChatAppearanceContent" style="display: none;">
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Dashboard display</h6>
+                                                    <p class="text-muted small">
+                                                        Display the dashboard instead of the chat area on
+                                                        initialization.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Disable dashboard</h6>
+                                                    <p class="text-muted small">
+                                                        Disable the dashboard, and allow only one
+                                                        conversation per user.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Allow only one conversation</h6>
+                                                    <p class="text-muted small">
+                                                        Allow only one conversation per user.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Language</h6>
+                                                    <p class="text-muted small">
+                                                        Set the chat language or translate it automatically to match
+                                                        the user language. Default is English.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="language-dropdown">
+                                                            <div class="language-toggle" onclick="toggleDropdown()">
+                                                                <span class="fi fi-us"></span> English
+                                                            </div>
+                                                            <div class="language-options" id="langOptions" style="display: none;">
+                                                                <div onclick="selectLang('us', 'English')"><span
+                                                                        class="fi fi-us"></span>
+                                                                    English</div>
+                                                                <div onclick="selectLang('pk', 'Urdu')"><span
+                                                                        class="fi fi-pk"></span>
+                                                                    Urdu
+                                                                </div>
+                                                                <div onclick="selectLang('fr', 'French')"><span
+                                                                        class="fi fi-fr"></span>
+                                                                    French</div>
+                                                                <div onclick="selectLang('es', 'Spanish')"><span
+                                                                        class="fi fi-es"></span>
+                                                                    Spanish</div>
+                                                                <div onclick="selectLang('de', 'German')"><span
+                                                                        class="fi fi-de"></span>
+                                                                    German</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Disable uploads</h6>
+                                                    <p class="text-muted small">
+                                                        Disable file uploading capabilities within the
+                                                        chat.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Disable voice messages</h6>
+                                                    <p class="text-muted small">
+                                                        Disable voice message capabilities within the
+                                                        chat.
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="section-title">Disable voice messages</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="DisableVoiceMessages">
-                                                    <label for="DisableVoiceMessages">Disable voice message capabilities within the
-                                                        chat.</label>
-                                                </div>
 
-                                                <div class="section-title">Agents menu</div>
-                                                <div class="checkbox-wrapper">
-                                                    <label for="agentsmenutitle">Show the agents menu in the dashboard and force the
-                                                        user to choose an agent to start a conversation.</label>
-                                                </div>
-
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Active">
-                                                    <label for="Active">Active</label>
-                                                </div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="One conversation per agent">
-                                                    <label for="Oneconversationperagent">One conversation per agent</label>
-                                                </div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Displayonlineagentsonly">
-                                                    <label for="Displayonlineagentsonly">Display online agents only</label>
-                                                </div>
-                                                <div style="display: flex; align-items: center; gap: 0px; margin-top: 15px;">
-                                                    <b for="DashboardTitle" style="min-width: 110px;">Dashboard title</b>
-                                                    <input type="text" id="DashboardTitle" placeholder="Dashboard title"
-                                                        style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
+                                                <div class="grid-container-new">
+                                                    <div class="column">
+                                                        <h6 class="fw-semibold">Agents menu</h6>
+                                                        <p class="text-muted small">
+                                                            Show the agents menu in the dashboard and force the
+                                                            user to choose an agent to start a conversation.
+                                                        </p>
+                                                    </div>
+                                                    <div class="input">
+                                                        <div class="column">
+                                                            <h6 class="fw-semibold grpp">Active</h6>
+                                                            <div
+                                                                class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                                <input class="form-check-input status-switch" type="checkbox"
+                                                                    id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                                <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                    <span class="status-text">On</span>
+                                                                </label>
+                                                            </div>&nbsp;
+                                                            <h6 class="fw-semibold grpp">One conversation per agent</h6>
+                                                            <div
+                                                                class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                                <input class="form-check-input status-switch" type="checkbox"
+                                                                    id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                                <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                    <span class="status-text">On</span>
+                                                                </label>
+                                                            </div>&nbsp;
+                                                            <h6 class="fw-semibold grpp">Display online agents only</h6>
+                                                            <div
+                                                                class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                                <input class="form-check-input status-switch" type="checkbox"
+                                                                    id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                                <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                    <span class="status-text">On</span>
+                                                                </label>
+                                                            </div>&nbsp;
+                                                            <div class="text-box">
+                                                                <h6 class="fw-semibold grpp">Dashboard title</h6>
+                                                                <input type="text" id="dashtitle" class="form-control tex-arr"
+                                                                    placeholder="Dashboard title">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
 
+                                            <!-- Chat Appearance & Features -->
                                             <!-- Chat Management -->
                                             <div id="chatManagementContent" style="display: none;">
-                                                <div class="section-title">Close chat by admin/agent</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="ChatManagementToggle">
-                                                    <label for="ChatManagementToggle">Allow the user to archive a conversation and
-                                                        hide archived</label>
+                                                <div class="mb-4">
+                                                    <h6 class="fw-semibold">Close chat by admin/agent</h6>
+                                                    <p class="text-muted small">
+                                                        Allow the user to archive a conversation and
+                                                        hide archived
+                                                    </p>
+                                                    <div class="input">
+                                                        <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                                            <input class="form-check-input status-switch" type="checkbox"
+                                                                id="typingHintsSwitch" checked data-on="On" data-off="Off">
+                                                            <label class="form-check-label m-0" for="typingHintsSwitch">
+                                                                <span class="status-text">On</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <!-- Chat Management -->
                                         </div>
                                     </div>
 
@@ -6076,36 +6189,57 @@ function sb_component_admin()
                                         rel="stylesheet">
 
                                     <style>
-                                        .checkbox-wrapper {
+                                        .mb-4 {
+    margin-bottom: 2.5rem !important;
+}
+                                        .sb-top-barr.save_settings_top {
+                                            display: flex;
+                                            justify-content: space-between;
+                                        }
+
+                                        input#dashtitle {
+                                            padding: 8px;
+                                            width: 100%;
+                                            max-width: 300px;
+                                            font-size: 14px;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                        }
+
+                                        p.text-muted.small {
+                                            font-size: 14px;
+                                        }
+
+                                        h6.fw-semibold.grpp {
+                                            font-size: 14px;
+                                            font-weight: 500 !important;
+                                        }
+
+                                        .text-box {
                                             display: flex;
                                             align-items: center;
-                                            gap: 0px;
-                                            margin-bottom: 20px;
-                                            margin-top: 10px;
+                                            gap: 10px;
                                         }
 
-                                        input[type="checkbox"] {
-                                            appearance: auto;
-                                            /* show default browser checkbox */
-                                            display: inline-block;
-                                            width: 16px;
-                                            height: 16px;
-                                            margin-right: 8px;
-                                            vertical-align: middle;
+                                        .grid-container-new {
+                                            display: grid;
+                                            grid-template-columns: 1fr 1fr;
+                                            gap: 60px;
+                                            padding-top: 10px;
+                                            max-width: 1000px;
                                         }
 
-                                        .checkbox-wrapper {
-                                            margin-bottom: 12px;
-                                        }
-
-                                        label {
-                                            font-size: 14px;
-                                            color: #333;
+                                        .column {
+                                            /* background-color: #f2f2f2; */
+                                            /* padding: 20px; */
+                                            /* border: 1px solid #ccc; */
+                                            border-radius: 8px;
                                         }
 
                                         .my-tabs {
                                             display: flex;
-                                            margin-bottom: 20px;
+                                            margin-bottom: 40px;
+                                            gap: 10px;
                                         }
 
                                         .my-tab {
@@ -6126,27 +6260,6 @@ function sb_component_admin()
                                             color: #fff;
                                         }
 
-                                        .section-title {
-                                            font-weight: 700;
-                                            margin-top: 29px;
-                                            margin-bottom: 7px;
-                                            font-size: 15px;
-                                        }
-
-                                        .my-form-check {
-                                            margin-bottom: 25px;
-                                            margin-top: 7px;
-                                        }
-
-                                        .my-form-check input {
-                                            margin-right: 5px;
-                                        }
-
-                                        .text-muted {
-                                            color: #6c757d;
-                                            font-size: 13px;
-                                            margin-bottom: 3px;
-                                        }
 
                                         .language-dropdown {
                                             position: relative;
@@ -6187,15 +6300,9 @@ function sb_component_admin()
                                         .language-options div:hover {
                                             background-color: #f1f1f1;
                                         }
-
-                                        h2 {
-                                            font-size: 24px;
-                                            margin-bottom: 25px;
-                                        }
                                     </style>
-
-
                                     <!-- chat settings -->
+
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">

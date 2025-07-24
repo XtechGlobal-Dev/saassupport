@@ -4352,7 +4352,7 @@ td.sb-offline:after {
 }
 .settings_new .sb-scroll-area .setting_sidebar li.sb-active,
 .settings_new .sb-scroll-area .setting_sidebar li:hover {
-  background: #E5EAF0;
+  background: #f0f3f4;
   border-radius: unset;
   width: 100%;
   padding: 0px 7px 0px 20px;
