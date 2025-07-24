@@ -5796,7 +5796,7 @@ function sb_component_admin()
                                         $sb_settings
                                     ); ?-->
                                     <!-- chat settings -->
-                                    <div class="main-content">
+                                    <!-- <div class="main-content">
                                         <h2>Chat</h2>
                                         <hr>
                                         <div class="settings-card">
@@ -5806,7 +5806,7 @@ function sb_component_admin()
                                                 <div class="my-tab" onclick="switchTab(this)">Chat Management</div>
                                             </div>
  
-                                            <!-- Chat Availability -->
+                                            
                                             <div id="chatAvailabilityContent">
                                                 <div class="section-title">Hide chat outside of office hours</div>
                                                 <div class="checkbox-wrapper">
@@ -5824,7 +5824,7 @@ function sb_component_admin()
  
                                             </div>
  
-                                            <!-- Chat Appearance Content -->
+                                           
                                             <div id="ChatAppearanceContent" style="display: none;">
                                                 <div class="section-title">Dashboard display</div>
                                                 <div class="checkbox-wrapper">
@@ -5850,7 +5850,7 @@ function sb_component_admin()
                                                 <p class="text-muted">Set the chat language or translate it automatically to match
                                                     the user language. Default is English.</p>
  
-                                                <!-- Language dropdown -->
+                                               
                                                 <div class="language-dropdown">
                                                     <div class="language-toggle" onclick="toggleDropdown()">
                                                         <span class="fi fi-us"></span> English
@@ -5909,7 +5909,7 @@ function sb_component_admin()
  
                                             </div>
  
-                                            <!-- Chat Management -->
+                                            
                                             <div id="chatManagementContent" style="display: none;">
                                                 <div class="section-title">Close chat by admin/agent</div>
                                                 <div class="checkbox-wrapper">
@@ -6077,13 +6077,13 @@ function sb_component_admin()
                                             font-size: 24px;
                                             margin-bottom: 25px;
                                         }
-                                    </style>
+                                    </style> -->
  
  
-                                    <!-- chat settings -->
+                                    
                                 
 
-                                    <!-- <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Chat Settings</p>
                                             <p class="des mb-0">Configure your chat settings.</p>
@@ -6095,7 +6095,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php //sb_populate_settings("chat",$sb_settings); ?> -->
+                                    <?php sb_populate_settings("chat",$sb_settings); ?>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
