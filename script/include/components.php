@@ -5803,74 +5803,104 @@ function sb_component_admin()
                                         <hr>
                                         <div class="settings-card">
                                             <div class="my-tabs">
-                                                <div class="my-tab active" onclick="switchTab(this)">Chat Availability</div>
-                                                <div class="my-tab" onclick="switchTab(this)">Chat Appearance & Features</div>
-                                                <div class="my-tab" onclick="switchTab(this)">Chat Management</div>
+                                                <div class="my-tab active" data-target="availability-content" >Availability</div>
+                                                <div class="my-tab" data-target="appearance-content">Appearance & Features</div>
+                                                <div class="my-tab" data-target="management-content">Management</div>
                                             </div>
- 
                                             
-                                            <div id="chatAvailabilityContent">
+                                            <div id="availability-content" class="settings-tab">
                                                  <?php sb_populate_settings("chat",$sb_settings,true,'chat-availability'); ?>
 											</div>
 											
-											<div id="ChatAppearanceContent" style="display: none;">
+											<div id="appearance-content" style="display: none;" class="settings-tab">
                                                  <?php sb_populate_settings("chat",$sb_settings,true,'chat-appearance-and-features'); ?>
 											</div>
 											
-											<div id="chatManagementContent" style="display: none;">
+											<div id="management-content" style="display: none;" class="settings-tab">
                                                  <?php sb_populate_settings("chat",$sb_settings,true,'chat-management'); ?>
                                             </div>
-											
 										</div>
-										
 									</div>
-                                    
- 
                                     <script>
-                                        function switchTab(clickedTab) {
-                                            // Remove active class from all tabs
-                                            document.querySelectorAll('.my-tab').forEach(tab => tab.classList.remove('active'));
-                                            clickedTab.classList.add('active');
+									$('.my-tab').click(function()
+									{
+										$('.my-tab').removeClass('active');
+										$(this).addClass('active');
+										$('.settings-tab').hide();
+										$('#'+$(this).data('target')).show();
+									});
+									</script>
  
-                                            // Hide all tab contents
-                                            document.getElementById('chatAvailabilityContent').style.display = 'none';
-                                            document.getElementById('ChatAppearanceContent').style.display = 'none';
-                                            document.getElementById('chatManagementContent').style.display = 'none';
- 
-                                            // Show selected tab content
-                                            const tabText = clickedTab.textContent.trim();
-                                            if (tabText === "Chat Availability") {
-                                                document.getElementById('chatAvailabilityContent').style.display = 'block';
-                                            } else if (tabText === "Chat Appearance & Features") {
-                                                document.getElementById('ChatAppearanceContent').style.display = 'block';
-                                            } else if (tabText === "Chat Management") {
-                                                document.getElementById('chatManagementContent').style.display = 'block';
-                                            }
-                                        }
- 
-                                        // Optional: Toggle language dropdown
-                                        function toggleDropdown() {
-                                            const options = document.getElementById('langOptions');
-                                            options.style.display = options.style.display === 'none' ? 'block' : 'none';
-                                        }
- 
-                                        // Optional: Select language handler
-                                        function selectLang(code, label) {
-                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${label}`;
-                                            document.getElementById('langOptions').style.display = 'none';
-                                        }
-                                    </script>
- 
- 
-                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
-                                        rel="stylesheet">
+                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"rel="stylesheet">
  
                                     <style>
+                                       
+                                        input.agents-textfield {
+                                            width: 100%;
+                                            max-width: max-content;
+                                        }
+ 
+                                        select.country-drop {
+                                            width: 100%;
+                                            max-width: max-content;
+                                        }
+ 
+                                        .sb-setting label.custom-switch {
+                                            min-width: unset;
+                                        }
+ 
+                                        .custom-switch {
+                                            position: relative;
+                                            display: inline-block;
+                                            width: 36px;
+                                            height: 18px;
+                                        }
+ 
+                                        .custom-switch input {
+                                            opacity: 0;
+                                            width: 0;
+                                            height: 0;
+                                        }
+ 
+                                        .custom-switch .slider {
+                                            position: absolute;
+                                            cursor: pointer;
+                                            background-color: #ccc;
+                                            border-radius: 34px;
+                                            top: 0;
+                                            left: 0;
+                                            right: 0;
+                                            bottom: 0;
+                                            transition: .4s;
+                                        }
+ 
+                                        .custom-switch .slider:before {
+                                            position: absolute;
+                                            content: "";
+                                            height: 14px;
+                                            width: 14px;
+                                            left: 2px;
+                                            bottom: 2px;
+                                            background-color: white;
+                                            transition: .4s;
+                                            border-radius: 50%;
+                                        }
+ 
+                                        .custom-switch input:checked+.slider {
+                                            background-color: #0d6efd;
+                                            /* Bootstrap primary */
+                                        }
+ 
+                                        .custom-switch input:checked+.slider:before {
+                                            transform: translateX(18px);
+                                        }
+ 
                                         .my-tabs {
                                             display: flex;
                                             margin-bottom: 40px;
                                             gap: 10px;
                                         }
+ 
                                         .my-tab {
                                             padding: 10px 15px;
                                             cursor: pointer;
@@ -5888,53 +5918,14 @@ function sb_component_admin()
                                             font-weight: 400;
                                             color: #fff;
                                         }
- 
-                                       
-                                        .language-dropdown {
-                                            position: relative;
-                                            display: inline-block;
-                                            margin-top: 10px;
-                                        }
- 
-                                        .language-toggle {
-                                            padding: 6px 12px;
-                                            border: 1px solid #ccc;
-                                            background: #fff;
-                                            cursor: pointer;
-                                            border-radius: 4px;
-                                            font-size: 14px;
-                                            min-width: 140px;
-                                        }
- 
-                                        .language-toggle .fi {
-                                            margin-right: 8px;
-                                        }
- 
-                                        .language-options {
-                                            position: absolute;
-                                            background: #fff;
-                                            border: 1px solid #ccc;
-                                            margin-top: 5px;
-                                            display: none;
-                                            z-index: 999;
-                                            border-radius: 4px;
-                                            min-width: 140px;
-                                        }
- 
-                                        .language-options div {
-                                            padding: 8px 12px;
-                                            cursor: pointer;
-                                        }
- 
-                                        .language-options div:hover {
-                                            background-color: #f1f1f1;
+
+                                        .main-content .sb-setting {
+                                            border-bottom: 1px solid rgb(230, 230, 230);
+                                            align-items: center;
+                                            padding: 35px 0px 35px 0px;
                                         }
                                     </style>
                                     <!-- chat settings -->
- 
- 
-                                    
-                                
 
                                     <!-- <div class="sb-top-bar save_settings">
                                         <div class="">

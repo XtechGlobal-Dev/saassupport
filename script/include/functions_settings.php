@@ -664,24 +664,13 @@ function sb_get_chat_setting_code($setting) {
         $type = $setting['type'];
         $disable_translations = sb_get_setting('admin-disable-settings-translations');
         $keywords = sb_isset($setting, 'keywords');
-        //$content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="mb-4 sb-setting sb-type-' . $type . '">
-        $content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="mb-4 sb-setting">
-        <h6 class="fw-semibold">' . sb_s($setting['title'], $disable_translations) . '</h6>
-        <p class="text-muted small">' . sb_s($setting['content'], $disable_translations) . sb_get_setting_code_help($setting) . '</p>
-        <div class="sb-setting-content">
-        
-        
-        </div>
-        <div class="input">';
+        $content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="sb-setting sb-type-' . $type . '"><div class="sb-setting-content"><h2>' . sb_s($setting['title'], $disable_translations) . '</h2><p>' . sb_s($setting['content'], $disable_translations) . sb_get_setting_code_help($setting) . '</p></div><div class="input">';
         switch ($type) {
             case 'color':
                 $content .= '<input type="text"><i class="sb-close sb-icon-close"></i>';
                 break;
             case 'text':
-                //$content .= '<input type="text">';
-                $content .= '<input type="text" id="dashtitle" class="form-control"
-                                                        placeholder="Dashboard title"
-                                                        style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;">';
+                $content .= '<input type="text">';
                 break;
             case 'password':
                 $content .= '<input type="password">';
@@ -699,13 +688,10 @@ function sb_get_chat_setting_code($setting) {
                 break;
             case 'checkbox':
                 //$content .= '<input type="checkbox">';
-                $content .= '<div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
-                                                        <input class="form-check-input status-switch" type="checkbox"
-                                                            id="typingHintsSwitch" checked data-on="On" data-off="Off">
-                                                        <label class="form-check-label m-0" for="typingHintsSwitch">
-                                                            <span class="status-text text-success">On</span>
-                                                        </label>
-                                                    </div>';
+                $content .= '<label class="custom-switch">
+						<input type="checkbox">
+						<span class="slider"></span>
+					</label>';
                 break;
             case 'radio':
                 $values = $setting['value'];
@@ -753,7 +739,11 @@ function sb_get_chat_setting_code($setting) {
                             $content .= '<div class="image"><i class="sb-icon-close"></i></div>';
                             break;
                         case 'checkbox':
-                            $content .= '<input type="checkbox">';
+                            //$content .= '<input type="checkbox">';
+                            $content .= '<label class="custom-switch">
+						<input type="checkbox">
+						<span class="slider"></span>
+					</label>';
                             break;
                         case 'select':
                             $content .= '<select>';
