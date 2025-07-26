@@ -859,9 +859,8 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     $ticketStatusArr['open'] = '1';        
     $ticketStatusArr['in-progress'] = '2';    
     $ticketStatusArr['hold'] = '3';
-    $ticketStatusArr['waiting'] = '4';
-    $ticketStatusArr['answered'] = '5';
-    $ticketStatusArr['closed'] = '6';
+    $ticketStatusArr['answered'] = '4';
+    $ticketStatusArr['closed'] = '5';
     
     $sorting_field = $sorting[0];
     $main_field_sorting = in_array($sorting_field, ['id', 'first_name', 'last_name', 'email', 'profile_image', 'user_type', 'creation_time', 'last_activity', 'department']);
@@ -1059,7 +1058,7 @@ function sb_count_tickets() {
             $query = 'AND id IN (' . substr($query, 0, -1) . ')';
         }
     }*/
-    return sb_db_get('SELECT COUNT(id) AS `all`, SUM(CASE WHEN status_id = "1"' . $query . ' THEN 1 ELSE 0 END) AS `open`, SUM(CASE WHEN status_id = "2"' . $query . ' THEN 1 ELSE 0 END) AS `in-progress`, SUM(CASE WHEN status_id = "3"' . $query . ' THEN 1 ELSE 0 END) AS `hold`, SUM(CASE WHEN status_id = "4"' . $query . ' THEN 1 ELSE 0 END) AS `waiting`, SUM(CASE WHEN status_id = "5"' . $query . ' THEN 1 ELSE 0 END) AS `answered`, SUM(CASE WHEN status_id = "6"' . $query . ' THEN 1 ELSE 0 END) AS `closed` FROM sb_tickets');
+    return sb_db_get('SELECT COUNT(id) AS `all`, SUM(CASE WHEN status_id = "1"' . $query . ' THEN 1 ELSE 0 END) AS `open`, SUM(CASE WHEN status_id = "2"' . $query . ' THEN 1 ELSE 0 END) AS `in-progress`, SUM(CASE WHEN status_id = "3"' . $query . ' THEN 1 ELSE 0 END) AS `hold`, SUM(CASE WHEN status_id = "4"' . $query . ' THEN 1 ELSE 0 END) AS `answered`, SUM(CASE WHEN status_id = "5"' . $query . ' THEN 1 ELSE 0 END) AS `closed` FROM sb_tickets');
 }
 
 function sb_edit_ticket($tickets_id = 0) {
@@ -1779,7 +1778,7 @@ function sb_add_ticket($inputs)
             'assigned_to' => isset($inputs['assigned_to'][0]) ? sb_db_escape($inputs['assigned_to'][0],true) : 0,
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
-            'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
+            'priority_id' => isset($inputs['priority_id'][0]) ? sb_db_escape($inputs['priority_id'][0],true) : '4',
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
@@ -1848,7 +1847,7 @@ function sb_add_ticket($inputs)
         }*/
 
 
-        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
+        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."','".sb_get_active_user_ID()."', NULL, '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
         if($data['assigned_to'] == 0)
         {
              $values .=",NULL";
@@ -1876,7 +1875,7 @@ function sb_add_ticket($inputs)
         $values .=")";
 
        //echo 'INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values;
-        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,assigned_to,department_id,conversation_id) '.$values, true);
+        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,priority_id,contact_name,contact_email,tags,description,created_by,updated_by,creation_time,updated_at,status_id,assigned_to,department_id,conversation_id) '.$values, true);
 
         if($data['conversation_id'] != 0)  ///// updated sb_conversationstable to mark conversation as converted
         {
@@ -2103,7 +2102,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
         $data['conversation_id'] = "'".$data['conversation_id']."'";
     }
 
-    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to =".$data['assigned_to'].",priority_id = '".$data['priority_id']."',department_id= ".$data['department_id'].",tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
+    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to =".$data['assigned_to'].",priority_id = '".$data['priority_id']."',department_id= ".$data['department_id'].",tags='".$data['tags']."',description='".$data['description']."',updated_by= '".sb_get_active_user_ID()."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
 
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
@@ -2162,7 +2161,7 @@ function update_ticket_detail($inputs,$ticket_id =0){
     //     $data['conversation_id'] = "'".$data['conversation_id']."'";
     // }
 
-    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
+    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."',updated_by= '".sb_get_active_user_ID()."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
     sb_db_query($sql);
 
     ///// Update ticket custom fields
@@ -2439,6 +2438,11 @@ function sb_delete_ticket_status($id)
 function sb_get_tickets_custom_active_fields()
 {
     $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order_no`";
+    return sb_db_get($query,false);
+}
+function get_latest_five_customers()
+{
+    $query = "SELECT id,first_name,last_name,email FROM sb_users WHERE user_type IN ('user','lead') ORDER BY `id` DESC limit 5";
     return sb_db_get($query,false);
 }
 function sb_get_tickets_statuses()
