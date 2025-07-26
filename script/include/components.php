@@ -5796,201 +5796,109 @@ function sb_component_admin()
                                         $sb_settings
                                     ); ?-->
                                     <!-- chat settings -->
-                                    <!-- <div class="main-content">
-                                        <h2>Chat</h2>
+                                     <div class="main-content">
+                                        <h2>Chat <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                            <i class="sb-icon-check"></i>Save changes</a>
+                                        </h2>
                                         <hr>
                                         <div class="settings-card">
                                             <div class="my-tabs">
-                                                <div class="my-tab active" onclick="switchTab(this)">Chat Availability</div>
-                                                <div class="my-tab" onclick="switchTab(this)">Chat Appearance & Features</div>
-                                                <div class="my-tab" onclick="switchTab(this)">Chat Management</div>
+                                                <div class="my-tab active" data-target="availability-content" >Availability</div>
+                                                <div class="my-tab" data-target="appearance-content">Appearance & Features</div>
+                                                <div class="my-tab" data-target="management-content">Management</div>
                                             </div>
- 
                                             
-                                            <div id="chatAvailabilityContent">
-                                                <div class="section-title">Hide chat outside of office hours</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="dashboardDisplay">
-                                                    <label for="dashboardDisplay">Disable and hide the chat widget outside of
-                                                        scheduled office hours.</label>
-                                                </div>
- 
-                                                <div class="section-title">Hide chat if no agents online</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="disableDashboard">
-                                                    <label for="disableDashboard">Disable and hide the chat widget if all agents are
-                                                        offline.</label>
-                                                </div>
- 
+                                            <div id="availability-content" class="settings-tab">
+                                                 <?php sb_populate_settings("chat",$sb_settings,true,'chat-availability'); ?>
+											</div>
+											
+											<div id="appearance-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("chat",$sb_settings,true,'chat-appearance-and-features'); ?>
+											</div>
+											
+											<div id="management-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("chat",$sb_settings,true,'chat-management'); ?>
                                             </div>
- 
-                                           
-                                            <div id="ChatAppearanceContent" style="display: none;">
-                                                <div class="section-title">Dashboard display</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="chatAutoResponse">
-                                                    <label for="chatAutoResponse">Display the dashboard instead of the chat area on
-                                                        initialization.</label>
-                                                </div>
- 
-                                                <div class="section-title">Disable dashboard</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="ChatDisableOfficeHours">
-                                                    <label for="ChatDisableOfficeHours">Disable the dashboard, and allow only one
-                                                        conversation per user.</label>
-                                                </div>
- 
-                                                <div class="section-title">Allow only one conversation</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="ChatDisableOffline">
-                                                    <label for="ChatDisableOffline">Allow only one conversation per user.</label>
-                                                </div>
- 
-                                                <div class="section-title">Language</div>
-                                                <p class="text-muted">Set the chat language or translate it automatically to match
-                                                    the user language. Default is English.</p>
- 
-                                               
-                                                <div class="language-dropdown">
-                                                    <div class="language-toggle" onclick="toggleDropdown()">
-                                                        <span class="fi fi-us"></span> English
-                                                    </div>
-                                                    <div class="language-options" id="langOptions" style="display: none;">
-                                                        <div onclick="selectLang('us', 'English')"><span class="fi fi-us"></span>
-                                                            English</div>
-                                                        <div onclick="selectLang('pk', 'Urdu')"><span class="fi fi-pk"></span> Urdu
-                                                        </div>
-                                                        <div onclick="selectLang('fr', 'French')"><span class="fi fi-fr"></span>
-                                                            French</div>
-                                                        <div onclick="selectLang('es', 'Spanish')"><span class="fi fi-es"></span>
-                                                            Spanish</div>
-                                                        <div onclick="selectLang('de', 'German')"><span class="fi fi-de"></span>
-                                                            German</div>
-                                                    </div>
-                                                </div>
- 
-                                                <div class="section-title">Disable uploads</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="DisableUploads">
-                                                    <label for="DisableUploads">Disable file uploading capabilities within the
-                                                        chat.</label>
-                                                </div>
- 
-                                                <div class="section-title">Disable voice messages</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="DisableVoiceMessages">
-                                                    <label for="DisableVoiceMessages">Disable voice message capabilities within the
-                                                        chat.</label>
-                                                </div>
- 
-                                                <div class="section-title">Agents menu</div>
-                                                <div class="checkbox-wrapper">
-                                                    <label for="agentsmenutitle">Show the agents menu in the dashboard and force the
-                                                        user to choose an agent to start a conversation.</label>
-                                                </div>
- 
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Active">
-                                                    <label for="Active">Active</label>
-                                                </div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="One conversation per agent">
-                                                    <label for="Oneconversationperagent">One conversation per agent</label>
-                                                </div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="Displayonlineagentsonly">
-                                                    <label for="Displayonlineagentsonly">Display online agents only</label>
-                                                </div>
-                                                <div style="display: flex; align-items: center; gap: 0px; margin-top: 15px;">
-                                                    <b for="DashboardTitle" style="min-width: 110px;">Dashboard title</b>
-                                                    <input type="text" id="DashboardTitle" placeholder="Dashboard title"
-                                                        style="padding: 8px; width: 100%; max-width: 300px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;" />
-                                                </div>
- 
-                                            </div>
- 
-                                            
-                                            <div id="chatManagementContent" style="display: none;">
-                                                <div class="section-title">Close chat by admin/agent</div>
-                                                <div class="checkbox-wrapper">
-                                                    <input type="checkbox" id="ChatManagementToggle">
-                                                    <label for="ChatManagementToggle">Allow the user to archive a conversation and
-                                                        hide archived</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
- 
+										</div>
+									</div>
                                     <script>
-                                        function switchTab(clickedTab) {
-                                            // Remove active class from all tabs
-                                            document.querySelectorAll('.my-tab').forEach(tab => tab.classList.remove('active'));
-                                            clickedTab.classList.add('active');
+									$('.my-tab').click(function()
+									{
+										$('.my-tab').removeClass('active');
+										$(this).addClass('active');
+										$('.settings-tab').hide();
+										$('#'+$(this).data('target')).show();
+									});
+									</script>
  
-                                            // Hide all tab contents
-                                            document.getElementById('chatAvailabilityContent').style.display = 'none';
-                                            document.getElementById('ChatAppearanceContent').style.display = 'none';
-                                            document.getElementById('chatManagementContent').style.display = 'none';
- 
-                                            // Show selected tab content
-                                            const tabText = clickedTab.textContent.trim();
-                                            if (tabText === "Chat Availability") {
-                                                document.getElementById('chatAvailabilityContent').style.display = 'block';
-                                            } else if (tabText === "Chat Appearance & Features") {
-                                                document.getElementById('ChatAppearanceContent').style.display = 'block';
-                                            } else if (tabText === "Chat Management") {
-                                                document.getElementById('chatManagementContent').style.display = 'block';
-                                            }
-                                        }
- 
-                                        // Optional: Toggle language dropdown
-                                        function toggleDropdown() {
-                                            const options = document.getElementById('langOptions');
-                                            options.style.display = options.style.display === 'none' ? 'block' : 'none';
-                                        }
- 
-                                        // Optional: Select language handler
-                                        function selectLang(code, label) {
-                                            document.querySelector('.language-toggle').innerHTML = `<span class="fi fi-${code}"></span> ${label}`;
-                                            document.getElementById('langOptions').style.display = 'none';
-                                        }
-                                    </script>
- 
- 
-                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
-                                        rel="stylesheet">
+                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"rel="stylesheet">
  
                                     <style>
-                                        .checkbox-wrapper {
-                                            display: flex;
-                                            align-items: center;
-                                            gap: 0px;
-                                            margin-bottom: 20px;
-                                            margin-top: 10px;
+                                       
+                                        input.agents-textfield {
+                                            width: 100%;
+                                            max-width: max-content;
                                         }
  
-                                        input[type="checkbox"] {
-                                            appearance: auto;
-                                            /* show default browser checkbox */
+                                        select.country-drop {
+                                            width: 100%;
+                                            max-width: max-content;
+                                        }
+ 
+                                        .sb-setting label.custom-switch {
+                                            min-width: unset;
+                                        }
+ 
+                                        .custom-switch {
+                                            position: relative;
                                             display: inline-block;
-                                            width: 16px;
-                                            height: 16px;
-                                            margin-right: 8px;
-                                            vertical-align: middle;
+                                            width: 36px;
+                                            height: 18px;
                                         }
  
-                                        .checkbox-wrapper {
-                                            margin-bottom: 12px;
+                                        .custom-switch input {
+                                            opacity: 0;
+                                            width: 0;
+                                            height: 0;
                                         }
  
-                                        label {
-                                            font-size: 14px;
-                                            color: #333;
+                                        .custom-switch .slider {
+                                            position: absolute;
+                                            cursor: pointer;
+                                            background-color: #ccc;
+                                            border-radius: 34px;
+                                            top: 0;
+                                            left: 0;
+                                            right: 0;
+                                            bottom: 0;
+                                            transition: .4s;
+                                        }
+ 
+                                        .custom-switch .slider:before {
+                                            position: absolute;
+                                            content: "";
+                                            height: 14px;
+                                            width: 14px;
+                                            left: 2px;
+                                            bottom: 2px;
+                                            background-color: white;
+                                            transition: .4s;
+                                            border-radius: 50%;
+                                        }
+ 
+                                        .custom-switch input:checked+.slider {
+                                            background-color: #0d6efd;
+                                            /* Bootstrap primary */
+                                        }
+ 
+                                        .custom-switch input:checked+.slider:before {
+                                            transform: translateX(18px);
                                         }
  
                                         .my-tabs {
                                             display: flex;
-                                            margin-bottom: 20px;
+                                            margin-bottom: 40px;
+                                            gap: 10px;
                                         }
  
                                         .my-tab {
@@ -6010,80 +5918,16 @@ function sb_component_admin()
                                             font-weight: 400;
                                             color: #fff;
                                         }
- 
-                                        .section-title {
-                                            font-weight: 700;
-                                            margin-top: 29px;
-                                            margin-bottom: 7px;
-                                            font-size: 15px;
-                                        }
- 
-                                        .my-form-check {
-                                            margin-bottom: 25px;
-                                            margin-top: 7px;
-                                        }
- 
-                                        .my-form-check input {
-                                            margin-right: 5px;
-                                        }
- 
-                                        .text-muted {
-                                            color: #6c757d;
-                                            font-size: 13px;
-                                            margin-bottom: 3px;
-                                        }
- 
-                                        .language-dropdown {
-                                            position: relative;
-                                            display: inline-block;
-                                            margin-top: 10px;
-                                        }
- 
-                                        .language-toggle {
-                                            padding: 6px 12px;
-                                            border: 1px solid #ccc;
-                                            background: #fff;
-                                            cursor: pointer;
-                                            border-radius: 4px;
-                                            font-size: 14px;
-                                            min-width: 140px;
-                                        }
- 
-                                        .language-toggle .fi {
-                                            margin-right: 8px;
-                                        }
- 
-                                        .language-options {
-                                            position: absolute;
-                                            background: #fff;
-                                            border: 1px solid #ccc;
-                                            margin-top: 5px;
-                                            display: none;
-                                            z-index: 999;
-                                            border-radius: 4px;
-                                            min-width: 140px;
-                                        }
- 
-                                        .language-options div {
-                                            padding: 8px 12px;
-                                            cursor: pointer;
-                                        }
- 
-                                        .language-options div:hover {
-                                            background-color: #f1f1f1;
-                                        }
- 
-                                        h2 {
-                                            font-size: 24px;
-                                            margin-bottom: 25px;
-                                        }
-                                    </style> -->
- 
- 
-                                    
-                                
 
-                                    <div class="sb-top-bar save_settings">
+                                        .main-content .sb-setting {
+                                            border-bottom: 1px solid rgb(230, 230, 230);
+                                            align-items: center;
+                                            padding: 35px 0px 35px 0px;
+                                        }
+                                    </style>
+                                    <!-- chat settings -->
+
+                                    <!-- <div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Chat Settings</p>
                                             <p class="des mb-0">Configure your chat settings.</p>
@@ -6094,8 +5938,8 @@ function sb_component_admin()
                                                 <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
-                                    </div>
-                                    <?php sb_populate_settings("chat",$sb_settings); ?>
+                                    </div> -->
+                                    <?php //sb_populate_settings("chat",$sb_settings,true,'chat-appearance-and-features'); ?>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">

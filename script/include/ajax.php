@@ -203,6 +203,8 @@ function sb_ajax_execute() {
              return sb_json_response(sb_delete_ticket_status($_POST['id']));
         case 'get-tickets-custom-fields':
              return sb_json_response(sb_get_tickets_custom_active_fields());
+        case 'get-latest-five-customers':
+             return sb_json_response(get_latest_five_customers());
         case 'add-ticket-comment':
              return sb_json_response(add_ticket_comment($_POST['ticket_id'], $_POST['comment_id'], $_POST['comment'],$_POST['contact_id']));
         case 'update-ticket-comment':
