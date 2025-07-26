@@ -43,7 +43,7 @@
         "title": "Disable voice messages",
         "content": "Disable voice message capabilities within the chat."
       },
-	  {
+      {
         "type": "checkbox",
         "id": "chat-manual-init",
         "title": "Manual initialization",
@@ -55,61 +55,217 @@
         "title": "Language",
         "content": "Set the chat language or translate it automatically to match the user language. Default is English.",
         "value": [
-          ["", "Default"],
-          ["auto", "Multilingual"],
-          ["sq", "Albanian"],
-          ["am", "Amharic"],
-          ["ar", "Arabic"],
-          ["bn", "Bengali"],
-          ["bg", "Bulgarian"],
-          ["br", "Portuguese - Brasilian"],
-          ["my", "Burmese"],
-          ["zh", "Chinese"],
-          ["zt", "Chinese - Traditional"],
-          ["hr", "Croatian"],
-          ["cs", "Czech"],
-          ["da", "Danish"],
-          ["nl", "Dutch"],
-          ["en", "English"],
-          ["et", "Estonian"],
-          ["tl", "Filipino"],
-          ["fi", "Finnish"],
-          ["fr", "French"],
-          ["ka", "Georgian"],
-          ["de", "German"],
-          ["el", "Greek"],
-          ["he", "Hebrew"],
-          ["hi", "Hindi"],
-          ["hu", "Hungarian"],
-          ["is", "Icelandic"],
-          ["id", "Indonesian"],
-          ["it", "Italian"],
-          ["ja", "Japanese"],
-          ["ko", "Korean"],
-          ["lt", "Lithuanian"],
-          ["mk", "Macedonian"],
-          ["ms", "Malay"],
-          ["mn", "Mongolian"],
-          ["no", "Norwegian"],
-          ["pa", "Punjabi - Gurmurkhi"],
-          ["fa", "Persian"],
-          ["pl", "Polish"],
-          ["pt", "Portuguese"],
-          ["ro", "Romanian"],
-          ["ru", "Russian"],
-          ["sr", "Serbian"],
-          ["sk", "Slovak"],
-          ["sl", "Slovenian"],
-          ["es", "Spanish"],
-          ["su", "Sundanese"],
-          ["sv", "Swedish"],
-          ["th", "Thai"],
-          ["tr", "Turkish"],
-          ["uk", "Ukrainian"],
-          ["vi", "Vietnamese"]
+          [
+            "",
+            "Default"
+          ],
+          [
+            "auto",
+            "Multilingual"
+          ],
+          [
+            "sq",
+            "Albanian"
+          ],
+          [
+            "am",
+            "Amharic"
+          ],
+          [
+            "ar",
+            "Arabic"
+          ],
+          [
+            "bn",
+            "Bengali"
+          ],
+          [
+            "bg",
+            "Bulgarian"
+          ],
+          [
+            "br",
+            "Portuguese - Brasilian"
+          ],
+          [
+            "my",
+            "Burmese"
+          ],
+          [
+            "zh",
+            "Chinese"
+          ],
+          [
+            "zt",
+            "Chinese - Traditional"
+          ],
+          [
+            "hr",
+            "Croatian"
+          ],
+          [
+            "cs",
+            "Czech"
+          ],
+          [
+            "da",
+            "Danish"
+          ],
+          [
+            "nl",
+            "Dutch"
+          ],
+          [
+            "en",
+            "English"
+          ],
+          [
+            "et",
+            "Estonian"
+          ],
+          [
+            "tl",
+            "Filipino"
+          ],
+          [
+            "fi",
+            "Finnish"
+          ],
+          [
+            "fr",
+            "French"
+          ],
+          [
+            "ka",
+            "Georgian"
+          ],
+          [
+            "de",
+            "German"
+          ],
+          [
+            "el",
+            "Greek"
+          ],
+          [
+            "he",
+            "Hebrew"
+          ],
+          [
+            "hi",
+            "Hindi"
+          ],
+          [
+            "hu",
+            "Hungarian"
+          ],
+          [
+            "is",
+            "Icelandic"
+          ],
+          [
+            "id",
+            "Indonesian"
+          ],
+          [
+            "it",
+            "Italian"
+          ],
+          [
+            "ja",
+            "Japanese"
+          ],
+          [
+            "ko",
+            "Korean"
+          ],
+          [
+            "lt",
+            "Lithuanian"
+          ],
+          [
+            "mk",
+            "Macedonian"
+          ],
+          [
+            "ms",
+            "Malay"
+          ],
+          [
+            "mn",
+            "Mongolian"
+          ],
+          [
+            "no",
+            "Norwegian"
+          ],
+          [
+            "pa",
+            "Punjabi - Gurmurkhi"
+          ],
+          [
+            "fa",
+            "Persian"
+          ],
+          [
+            "pl",
+            "Polish"
+          ],
+          [
+            "pt",
+            "Portuguese"
+          ],
+          [
+            "ro",
+            "Romanian"
+          ],
+          [
+            "ru",
+            "Russian"
+          ],
+          [
+            "sr",
+            "Serbian"
+          ],
+          [
+            "sk",
+            "Slovak"
+          ],
+          [
+            "sl",
+            "Slovenian"
+          ],
+          [
+            "es",
+            "Spanish"
+          ],
+          [
+            "su",
+            "Sundanese"
+          ],
+          [
+            "sv",
+            "Swedish"
+          ],
+          [
+            "th",
+            "Thai"
+          ],
+          [
+            "tr",
+            "Turkish"
+          ],
+          [
+            "uk",
+            "Ukrainian"
+          ],
+          [
+            "vi",
+            "Vietnamese"
+          ]
         ]
       },
-	  {
+      {
         "type": "multi-input",
         "id": "agents-menu",
         "title": "Agents menu",
@@ -267,8 +423,14 @@
           "id": "welcome-trigger",
           "title": "Trigger",
           "value": [
-            [ "load", "On page load" ],
-            [ "open", "On chat open" ]
+            [
+              "load",
+              "On page load"
+            ],
+            [
+              "open",
+              "On chat open"
+            ]
           ]
         },
         {
@@ -422,9 +584,18 @@
           "id": "chat-timetable-type",
           "title": "Message type",
           "value": [
-            [ "", "Chat message" ],
-            [ "info", "Info message" ],
-            [ "header", "Header" ]
+            [
+              "",
+              "Chat message"
+            ],
+            [
+              "info",
+              "Info message"
+            ],
+            [
+              "header",
+              "Header"
+            ]
           ]
         },
         {
@@ -552,360 +723,418 @@
       ]
     }
   ],
-  "admin": [
-    {
-      "type": "checkbox",
-      "id": "collapse",
-      "title": "Collapse panels",
-      "content": "Automatically collapse the conversation details panel, and other panels, of the admin area."
-    },
-    {
-      "type": "checkbox",
-      "id": "hide-conversation-details",
-      "title": "Hide conversation details panel",
-      "content": "Automatically hide the conversation details panel."
-    },
-    {
-      "type": "text",
-      "id": "admin-title",
-      "title": "Admin title",
-      "content": "Set the title of the administration area."
-    },
-    {
-      "type": "upload-image",
-      "id": "login-icon",
-      "title": "Admin login logo",
-      "content": "Replace the brand logo on the admin login page.",
-      "background-size": "auto 64px"
-    },
-    {
-      "type": "upload-image",
-      "id": "admin-icon",
-      "title": "Admin icon",
-      "content": "Replace the top-left brand icon on the admin area and the browser favicon.",
-      "background-size": "auto 64px"
-    },
-    {
-      "type": "text",
-      "id": "login-message",
-      "title": "Admin login message",
-      "content": "Replace the admin login page message."
-    },
-    {
-      "type": "checkbox",
-      "id": "admin-auto-translations",
-      "title": "Automatically translate admin area",
-      "content": "Automatically translate the admin area to match the agent profile language or browser language.",
-      "help": "https://board.support/docs/#multilingual-admin"
-    },
-    {
-      "type": "checkbox",
-      "id": "admin-disable-settings-translations",
-      "title": "Do not translate settings area",
-      "content": "Activate this option if you don't want to translate the settings area."
-    },
-    {
-      "type": "checkbox",
-      "id": "admin-auto-archive",
-      "title": "Automatically archive conversations",
-      "content": "Archive automatically the conversations marked as read every 24h."
-    },
-    {
-      "type": "checkbox",
-      "id": "order-by-date",
-      "title": "Sort conversations by date",
-      "content": "Always sort conversations by date in the admin area."
-    },
-    {
-      "type": "multi-input",
-      "id": "agents",
-      "title": "Agent privileges",
-      "content": "Set which actions to allow agents.",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "agents-users-area",
-          "title": "Users area"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-articles-area",
-          "title": "Articles area"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-edit-user",
-          "title": "Edit user"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-tab",
-          "title": "Agents and admins tab"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-delete-conversation",
-          "title": "Delete conversation"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-delete-message",
-          "title": "Delete message"
-        },
-        {
-          "type": "checkbox",
-          "id": "agents-update-department",
-          "title": "Update conversation department"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "supervisors",
-      "title": "Supervisors",
-      "content": "Set which actions to allow supervisors.",
-      "help": "https://board.support/docs/#agents",
-      "items": [
-        {
-          "type": "text",
-          "id": "supervisor-id",
-          "name": "Admin IDs"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-users-area",
-          "name": "Users area"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-settings-area",
-          "name": "Settings area"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-reports-area",
-          "name": "Reports area"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-articles-area",
-          "name": "Articles area"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-edit-user",
-          "name": "Edit user"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-agents-tab",
-          "name": "Agents and admins tab"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-delete-conversation",
-          "name": "Delete conversation"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-delete-message",
-          "name": "Delete message"
-        },
-        {
-          "type": "checkbox",
-          "id": "supervisor-send-message",
-          "name": "Send message"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "show-profile-images-admin",
-      "title": "Show profile images",
-      "content": "Show the profile image of agents and users within the conversation."
-    },
-    {
-      "type": "multi-input",
-      "id": "disable",
-      "title": "Disable features",
-      "content": "Disable any features that you don't need.",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "disable-channels-filter",
-          "title": "Channels filter"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-filters",
-          "title": "Filters"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-attachments",
-          "title": "Attachments list"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-tags",
-          "title": "Tags"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-notes",
-          "title": "Notes"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
-      "id": "notes-settings",
-      "title": "Notes settings",
-      "content": "Manage the notes settings.",
-      "help": "https://board.support/docs/#notes",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "notes-hide-name",
-          "title": "Hide note information"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
-      "id": "tags-settings",
-      "title": "Tags settings",
-      "content": "Manage the tags settings.",
-      "help": "https://board.support/docs/#tags",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "tags-show",
-          "title": "Display in conversation list"
-        },
-        {
-          "type": "checkbox",
-          "id": "tags-starred",
-          "title": "Starred tag"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "tags",
-      "title": "Tags",
-      "content": "Add and manage tags.",
-      "help": "https://board.support/docs/#tags",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "tag-name"
-        },
-        {
-          "type": "color-palette",
-          "name": "Color",
-          "id": "tag-color"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
-      "id": "transcript",
-      "title": "Transcript",
-      "content": "Transcript settings.",
-      "help": "https://board.support/docs/#transcript",
-      "value": [
-        {
-          "type": "select",
-          "id": "transcript-type",
-          "title": "Type",
-          "value": [
-            [ "csv", "CSV" ],
-            [ "txt", "Text" ]
-          ]
-        },
-        {
-          "type": "select",
-          "id": "transcript-action",
-          "title": "Button action",
-          "value": [
-            [ "download", "Download" ],
-            [ "email", "Send to user's email" ]
-          ]
-        },
-        {
-          "type": "textarea",
-          "id": "transcript-message",
-          "title": "Message"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "user-table-extra-columns",
-      "title": "Users table additional columns",
-      "content": "Displays additional columns in the user table. Enter the name of the fields to add.",
-      "help": "https://board.support/docs/#user-table-extra-columns",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "user-table-extra-slug"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "saved-replies",
-      "title": "Saved replies",
-      "content": "Add and manage saved replies that can be used by agents in the chat editor. Saved replies can be printed by typing # followed by the reply name plus space. Use \u005cn to do a line break.",
-      "help": "https://board.support/docs/#saved-replies",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "reply-name"
-        },
-        {
-          "type": "textarea",
-          "name": "Text",
-          "id": "reply-text"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "id": "custom-js",
-      "title": "Custom JS",
-      "content": "Enter the URL of a .js file, to load it automatically in the admin area."
-    },
-    {
-      "type": "text",
-      "id": "custom-css",
-      "title": "Custom CSS",
-      "content": "Enter the URL of a .css file, to load it automatically in the admin area."
-    },
-    {
-      "type": "text",
-      "id": "manifest-url",
-      "title": "Manifest file URL",
-      "content": "Use this option to change the PWA icon. See the docs for more details.",
-      "help": "https://board.support/docs/#pwa"
-    },
-    {
-      "type": "color",
-      "id": "color-admin-1",
-      "title": "Primary color",
-      "content": "Set the primary color of the admin area."
-    },
-    {
-      "type": "color",
-      "id": "color-admin-2",
-      "title": "Secondary color",
-      "content": "Set the secondary color of the admin area."
-    }
-  ],
+  "admin": {
+    "panel-setting": [
+      {
+        "type": "checkbox",
+        "id": "collapse",
+        "title": "Collapse panels",
+        "content": "Automatically collapse the conversation details panel and other panels of the admin area."
+      },
+      {
+        "type": "checkbox",
+        "id": "hide-conversation-details",
+        "title": "Hide conversation details panel",
+        "content": "Automatically hide the conversation details panel."
+      },
+      {
+        "type": "checkbox",
+        "id": "show-profile-images-admin",
+        "title": "Show profile images",
+        "content": "Show the profile image of agents and users within the conversation."
+      },
+      {
+        "type": "multi-input",
+        "id": "disable",
+        "title": "Disable features",
+        "content": "Disable any features that you don't need.",
+        "value": [
+          {
+            "type": "checkbox",
+            "id": "disable-channels-filter",
+            "title": "Channels filter"
+          },
+          {
+            "type": "checkbox",
+            "id": "disable-filters",
+            "title": "Filters"
+          },
+          {
+            "type": "checkbox",
+            "id": "disable-attachments",
+            "title": "Attachments list"
+          },
+          {
+            "type": "checkbox",
+            "id": "disable-tags",
+            "title": "Tags"
+          },
+          {
+            "type": "checkbox",
+            "id": "disable-notes",
+            "title": "Notes"
+          }
+        ]
+      }
+    ],
+    "language": [
+      {
+        "type": "checkbox",
+        "id": "admin-auto-translations",
+        "title": "Automatically translate admin area",
+        "content": "Automatically translate the admin area to match the agent profile language or browser language.",
+        "help": "https://board.support/docs/#multilingual-admin"
+      },
+      {
+        "type": "checkbox",
+        "id": "admin-disable-settings-translations",
+        "title": "Do not translate settings area",
+        "content": "Activate this option if you don’t want to translate the settings area."
+      }
+    ],
+    "chat-management": [
+      {
+        "type": "checkbox",
+        "id": "admin-auto-archive",
+        "title": "Automatically archive conversations",
+        "content": "Archive automatically the conversations marked as read every 24h."
+      },
+      {
+        "type": "checkbox",
+        "id": "order-by-date",
+        "title": "Sort conversations by date",
+        "content": "Always sort conversations by date in the admin area."
+      }
+    ],
+    "permission-setting": [
+      {
+        "type": "multi-input",
+        "id": "agents",
+        "title": "Agent privileges",
+        "content": "Set which actions to allow agents.",
+        "value": [
+          {
+            "type": "checkbox",
+            "id": "agents-users-area",
+            "title": "Users area"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-articles-area",
+            "title": "Articles area"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-edit-user",
+            "title": "Edit user"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-tab",
+            "title": "Agents and admins tab"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-delete-conversation",
+            "title": "Delete conversation"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-delete-message",
+            "title": "Delete message"
+          },
+          {
+            "type": "checkbox",
+            "id": "agents-update-department",
+            "title": "Update conversation department"
+          }
+        ]
+      },
+      {
+        "type": "repeater",
+        "id": "supervisors",
+        "title": "Supervisors",
+        "content": "Set which actions to allow supervisors.",
+        "help": "https://board.support/docs/#agents",
+        "items": [
+          {
+            "type": "text",
+            "id": "supervisor-id",
+            "name": "Admin IDs"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-users-area",
+            "name": "Users area"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-settings-area",
+            "name": "Settings area"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-reports-area",
+            "name": "Reports area"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-articles-area",
+            "name": "Articles area"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-edit-user",
+            "name": "Edit user"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-agents-tab",
+            "name": "Agents and admins tab"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-delete-conversation",
+            "name": "Delete conversation"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-delete-message",
+            "name": "Delete message"
+          },
+          {
+            "type": "checkbox",
+            "id": "supervisor-send-message",
+            "name": "Send message"
+          }
+        ]
+      }
+    ],
+    "settings-customization": [
+      {
+        "type": "multi-input",
+        "id": "notes-settings",
+        "title": "Notes settings",
+        "content": "Manage the notes settings.",
+        "help": "https://board.support/docs/#notes",
+        "value": [
+          {
+            "type": "checkbox",
+            "id": "notes-hide-name",
+            "title": "Hide note information"
+          }
+        ]
+      },
+      {
+        "type": "multi-input",
+        "id": "tags-settings",
+        "title": "Tags settings",
+        "content": "Manage the tags settings.",
+        "help": "https://board.support/docs/#tags",
+        "value": [
+          {
+            "type": "checkbox",
+            "id": "tags-show",
+            "title": "Display in conversation list"
+          },
+          {
+            "type": "checkbox",
+            "id": "tags-starred",
+            "title": "Starred tag"
+          }
+        ]
+      },
+      {
+        "type": "repeater",
+        "id": "tags",
+        "title": "Tags",
+        "content": "Add and manage tags.",
+        "help": "https://board.support/docs/#tags",
+        "items": [
+          {
+            "type": "text",
+            "name": "Name",
+            "id": "tag-name"
+          },
+          {
+            "type": "color-palette",
+            "name": "Color",
+            "id": "tag-color"
+          }
+        ]
+      },
+      {
+        "type": "multi-input",
+        "id": "transcript",
+        "title": "Transcript",
+        "content": "Transcript settings.",
+        "help": "https://board.support/docs/#transcript",
+        "value": [
+          {
+            "type": "select",
+            "id": "transcript-type",
+            "title": "Type",
+            "value": [
+              [
+                "csv",
+                "CSV"
+              ],
+              [
+                "txt",
+                "Text"
+              ]
+            ]
+          },
+          {
+            "type": "select",
+            "id": "transcript-action",
+            "title": "Button action",
+            "value": [
+              [
+                "download",
+                "Download"
+              ],
+              [
+                "email",
+                "Send to user's email"
+              ]
+            ]
+          },
+          {
+            "type": "textarea",
+            "id": "transcript-message",
+            "title": "Message"
+          }
+        ]
+      }
+    ],
+    "customer": [
+      {
+        "type": "repeater",
+        "id": "user-table-extra-columns",
+        "title": "Users table additional columns",
+        "content": "Displays additional columns in the user table. Enter the name of the fields to add.",
+        "help": "https://board.support/docs/#user-table-extra-columns",
+        "items": [
+          {
+            "type": "text",
+            "name": "Name",
+            "id": "user-table-extra-slug"
+          }
+        ]
+      }
+    ],
+    "auto-saved-message-inbox": [
+      {
+        "type": "repeater",
+        "id": "saved-replies",
+        "title": "Saved replies",
+        "content": "Add and manage saved replies that can be used by agents in the chat editor. Saved replies can be printed by typing # followed by the reply name plus space. Use \n to do a line break.",
+        "help": "https://board.support/docs/#saved-replies",
+        "items": [
+          {
+            "type": "text",
+            "name": "Name",
+            "id": "reply-name"
+          },
+          {
+            "type": "textarea",
+            "name": "Text",
+            "id": "reply-text"
+          }
+        ]
+      }
+    ],
+    "customization-and-themes": [
+      {
+        "type": "text",
+        "id": "custom-js",
+        "title": "Custom JS",
+        "content": "Enter the URL of a .js file, to load it automatically in the admin area."
+      },
+      {
+        "type": "text",
+        "id": "custom-css",
+        "title": "Custom CSS",
+        "content": "Enter the URL of a .css file, to load it automatically in the admin area."
+      },
+      {
+        "type": "text",
+        "id": "manifest-url",
+        "title": "Manifest file URL",
+        "content": "Use this option to change the PWA icon. See the docs for more details.",
+        "help": "https://board.support/docs/#pwa"
+      },
+      {
+        "type": "color",
+        "id": "color-admin-1",
+        "title": "Primary color",
+        "content": "Set the primary color of the admin area."
+      },
+      {
+        "type": "color",
+        "id": "color-admin-2",
+        "title": "Secondary color",
+        "content": "Set the secondary color of the admin area."
+      },
+      {
+        "type": "text",
+        "id": "admin-title",
+        "title": "Admin title",
+        "content": "Set the title of the administration area."
+      },
+      {
+        "type": "upload-image",
+        "id": "login-icon",
+        "title": "Admin login logo",
+        "content": "Replace the brand logo on the admin login page.",
+        "background-size": "auto 64px"
+      },
+      {
+        "type": "upload-image",
+        "id": "admin-icon",
+        "title": "Admin icon",
+        "content": "Replace the top-left brand icon on the admin area and the browser favicon.",
+        "background-size": "auto 64px"
+      },
+      {
+        "type": "text",
+        "id": "login-message",
+        "title": "Admin login message",
+        "content": "Replace the admin login page message."
+      }
+    ],
+    "switch-accounts": [],
+    "department": [
+      {
+        "type": "repeater",
+        "id": "departments",
+        "title": "Departments",
+        "content": "Add and manage additional support departments.",
+        "items": [
+          {
+            "type": "text",
+            "name": "Name",
+            "id": "department-name"
+          },
+          {
+            "type": "color-palette",
+            "name": "Color",
+            "id": "department-color"
+          },
+          {
+            "type": "upload-image",
+            "name": "Image",
+            "id": "department-image"
+          },
+          {
+            "type": "auto-id",
+            "id": "department-id"
+          }
+        ]
+      }
+    ]
+  },
   "notifications": [
     {
       "type": "multi-input",
@@ -929,17 +1158,50 @@
           "id": "sound-settings-volume",
           "title": "Volume",
           "value": [
-            [ "", "Default" ],
-            [ 0.1, 1 ],
-            [ 0.2, 2 ],
-            [ 0.3, 3 ],
-            [ 0.4, 4 ],
-            [ 0.5, 5 ],
-            [ 0.6, 6 ],
-            [ 0.7, 7 ],
-            [ 0.8, 8 ],
-            [ 0.9, 9 ],
-            [ 1, 10 ]
+            [
+              "",
+              "Default"
+            ],
+            [
+              0.1,
+              1
+            ],
+            [
+              0.2,
+              2
+            ],
+            [
+              0.3,
+              3
+            ],
+            [
+              0.4,
+              4
+            ],
+            [
+              0.5,
+              5
+            ],
+            [
+              0.6,
+              6
+            ],
+            [
+              0.7,
+              7
+            ],
+            [
+              0.8,
+              8
+            ],
+            [
+              0.9,
+              9
+            ],
+            [
+              1,
+              10
+            ]
           ]
         },
         {
@@ -947,17 +1209,50 @@
           "id": "sound-settings-volume-admin",
           "title": "Volume - admin",
           "value": [
-            [ "", "Default" ],
-            [ 0.1, 1 ],
-            [ 0.2, 2 ],
-            [ 0.3, 3 ],
-            [ 0.4, 4 ],
-            [ 0.5, 5 ],
-            [ 0.6, 6 ],
-            [ 0.7, 7 ],
-            [ 0.8, 8 ],
-            [ 0.9, 9 ],
-            [ 1, 10 ]
+            [
+              "",
+              "Default"
+            ],
+            [
+              0.1,
+              1
+            ],
+            [
+              0.2,
+              2
+            ],
+            [
+              0.3,
+              3
+            ],
+            [
+              0.4,
+              4
+            ],
+            [
+              0.5,
+              5
+            ],
+            [
+              0.6,
+              6
+            ],
+            [
+              0.7,
+              7
+            ],
+            [
+              0.8,
+              8
+            ],
+            [
+              0.9,
+              9
+            ],
+            [
+              1,
+              10
+            ]
           ]
         },
         {
@@ -965,17 +1260,50 @@
           "id": "sound-settings-repeat",
           "title": "Repeat",
           "value": [
-            [ "", "Default" ],
-            [ 1, 2 ],
-            [ 2, 3 ],
-            [ 3, 4 ],
-            [ 4, 5 ],
-            [ 5, 6 ],
-            [ 6, 7 ],
-            [ 7, 8 ],
-            [ 8, 9 ],
-            [ 9, 10 ],
-            [ 9999, "Infinite loop" ]
+            [
+              "",
+              "Default"
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              9,
+              10
+            ],
+            [
+              9999,
+              "Infinite loop"
+            ]
           ]
         },
         {
@@ -983,17 +1311,50 @@
           "id": "sound-settings-repeat-admin",
           "title": "Repeat - admin",
           "value": [
-            [ "", "Default" ],
-            [ 1, 2 ],
-            [ 2, 3 ],
-            [ 3, 4 ],
-            [ 4, 5 ],
-            [ 5, 6 ],
-            [ 6, 7 ],
-            [ 7, 8 ],
-            [ 8, 9 ],
-            [ 9, 10 ],
-            [ 9999, "Infinite loop" ]
+            [
+              "",
+              "Default"
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              9,
+              10
+            ],
+            [
+              9999,
+              "Infinite loop"
+            ]
           ]
         },
         {
@@ -1022,10 +1383,22 @@
       "title": "Desktop notifications",
       "content": "Show a desktop notification when a new message is received.",
       "value": [
-        [ "", "Disabled" ],
-        [ "all", "Users and agents" ],
-        [ "users", "Users only" ],
-        [ "agents", "Agents only" ]
+        [
+          "",
+          "Disabled"
+        ],
+        [
+          "all",
+          "Users and agents"
+        ],
+        [
+          "users",
+          "Users only"
+        ],
+        [
+          "agents",
+          "Agents only"
+        ]
       ]
     },
     {
@@ -1034,10 +1407,22 @@
       "title": "Flash notifications",
       "content": "Show a browser tab notification when a new message is received.",
       "value": [
-        [ "", "Disabled" ],
-        [ "all", "Users and agents" ],
-        [ "users", "Users only" ],
-        [ "agents", "Agents only" ]
+        [
+          "",
+          "Disabled"
+        ],
+        [
+          "all",
+          "Users and agents"
+        ],
+        [
+          "users",
+          "Users only"
+        ],
+        [
+          "agents",
+          "Agents only"
+        ]
       ]
     },
     {
@@ -1052,8 +1437,14 @@
           "id": "push-notifications-provider",
           "title": "Provider",
           "value": [
-            [ "pusher", "Pusher" ],
-            [ "onesignal", "OneSignal" ]
+            [
+              "pusher",
+              "Pusher"
+            ],
+            [
+              "onesignal",
+              "OneSignal"
+            ]
           ]
         },
         {
@@ -1263,10 +1654,22 @@
           "id": "email-piping-port",
           "name": "Port",
           "value": [
-            [ 993, 993 ],
-            [ 995, 995 ],
-            [ 110, 110 ],
-            [ 143, 143 ]
+            [
+              993,
+              993
+            ],
+            [
+              995,
+              995
+            ],
+            [
+              110,
+              110
+            ],
+            [
+              143,
+              143
+            ]
           ]
         },
         {
@@ -1404,10 +1807,22 @@
       "title": "Require registration",
       "content": "Require the user registration or login before start a chat. To enable the login area the password field must be included.",
       "value": [
-        [ "", "Disabled" ],
-        [ "registration-login", "Registration and login form" ],
-        [ "registration", "Registration form" ],
-        [ "login", "Login form" ]
+        [
+          "",
+          "Disabled"
+        ],
+        [
+          "registration-login",
+          "Registration and login form"
+        ],
+        [
+          "registration",
+          "Registration form"
+        ],
+        [
+          "login",
+          "Login form"
+        ]
       ],
       "help": "https://board.support/docs/#registration"
     },
@@ -1701,238 +2116,934 @@
       "title": "Single phone country code",
       "content": "Force users to use only one phone country code.",
       "value": [
-        [ "", "" ],
-        [ "+1", "+1" ],
-        [ "+7", "+7" ],
-        [ "+20", "+20" ],
-        [ "+27", "+27" ],
-        [ "+30", "+30" ],
-        [ "+31", "+31" ],
-        [ "+32", "+32" ],
-        [ "+33", "+33" ],
-        [ "+34", "+34" ],
-        [ "+36", "+36" ],
-        [ "+39", "+39" ],
-        [ "+40", "+40" ],
-        [ "+41", "+41" ],
-        [ "+43", "+43" ],
-        [ "+44", "+44" ],
-        [ "+45", "+45" ],
-        [ "+46", "+46" ],
-        [ "+47", "+47" ],
-        [ "+48", "+48" ],
-        [ "+49", "+49" ],
-        [ "+51", "+51" ],
-        [ "+52", "+52" ],
-        [ "+53", "+53" ],
-        [ "+54", "+54" ],
-        [ "+55", "+55" ],
-        [ "+56", "+56" ],
-        [ "+57", "+57" ],
-        [ "+58", "+58" ],
-        [ "+60", "+60" ],
-        [ "+61", "+61" ],
-        [ "+62", "+62" ],
-        [ "+63", "+63" ],
-        [ "+64", "+64" ],
-        [ "+65", "+65" ],
-        [ "+66", "+66" ],
-        [ "+81", "+81" ],
-        [ "+82", "+82" ],
-        [ "+84", "+84" ],
-        [ "+86", "+86" ],
-        [ "+90", "+90" ],
-        [ "+91", "+91" ],
-        [ "+92", "+92" ],
-        [ "+93", "+93" ],
-        [ "+94", "+94" ],
-        [ "+95", "+95" ],
-        [ "+98", "+98" ],
-        [ "+211", "+211" ],
-        [ "+212", "+212" ],
-        [ "+213", "+213" ],
-        [ "+216", "+216" ],
-        [ "+218", "+218" ],
-        [ "+220", "+220" ],
-        [ "+221", "+221" ],
-        [ "+222", "+222" ],
-        [ "+223", "+223" ],
-        [ "+224", "+224" ],
-        [ "+225", "+225" ],
-        [ "+226", "+226" ],
-        [ "+227", "+227" ],
-        [ "+228", "+228" ],
-        [ "+229", "+229" ],
-        [ "+230", "+230" ],
-        [ "+231", "+231" ],
-        [ "+232", "+232" ],
-        [ "+233", "+233" ],
-        [ "+234", "+234" ],
-        [ "+235", "+235" ],
-        [ "+236", "+236" ],
-        [ "+237", "+237" ],
-        [ "+238", "+238" ],
-        [ "+239", "+239" ],
-        [ "+240", "+240" ],
-        [ "+241", "+241" ],
-        [ "+242", "+242" ],
-        [ "+243", "+243" ],
-        [ "+244", "+244" ],
-        [ "+245", "+245" ],
-        [ "+246", "+246" ],
-        [ "+248", "+248" ],
-        [ "+249", "+249" ],
-        [ "+250", "+250" ],
-        [ "+251", "+251" ],
-        [ "+252", "+252" ],
-        [ "+253", "+253" ],
-        [ "+254", "+254" ],
-        [ "+255", "+255" ],
-        [ "+256", "+256" ],
-        [ "+257", "+257" ],
-        [ "+258", "+258" ],
-        [ "+260", "+260" ],
-        [ "+261", "+261" ],
-        [ "+262", "+262" ],
-        [ "+263", "+263" ],
-        [ "+264", "+264" ],
-        [ "+265", "+265" ],
-        [ "+266", "+266" ],
-        [ "+267", "+267" ],
-        [ "+268", "+268" ],
-        [ "+269", "+269" ],
-        [ "+290", "+290" ],
-        [ "+291", "+291" ],
-        [ "+297", "+297" ],
-        [ "+298", "+298" ],
-        [ "+299", "+299" ],
-        [ "+350", "+350" ],
-        [ "+351", "+351" ],
-        [ "+352", "+352" ],
-        [ "+353", "+353" ],
-        [ "+354", "+354" ],
-        [ "+355", "+355" ],
-        [ "+356", "+356" ],
-        [ "+357", "+357" ],
-        [ "+358", "+358" ],
-        [ "+359", "+359" ],
-        [ "+370", "+370" ],
-        [ "+371", "+371" ],
-        [ "+372", "+372" ],
-        [ "+373", "+373" ],
-        [ "+374", "+374" ],
-        [ "+375", "+375" ],
-        [ "+376", "+376" ],
-        [ "+377", "+377" ],
-        [ "+378", "+378" ],
-        [ "+379", "+379" ],
-        [ "+380", "+380" ],
-        [ "+381", "+381" ],
-        [ "+382", "+382" ],
-        [ "+385", "+385" ],
-        [ "+386", "+386" ],
-        [ "+387", "+387" ],
-        [ "+389", "+389" ],
-        [ "+420", "+420" ],
-        [ "+421", "+421" ],
-        [ "+423", "+423" ],
-        [ "+500", "+500" ],
-        [ "+501", "+501" ],
-        [ "+502", "+502" ],
-        [ "+503", "+503" ],
-        [ "+504", "+504" ],
-        [ "+505", "+505" ],
-        [ "+506", "+506" ],
-        [ "+507", "+507" ],
-        [ "+508", "+508" ],
-        [ "+509", "+509" ],
-        [ "+590", "+590" ],
-        [ "+591", "+591" ],
-        [ "+592", "+592" ],
-        [ "+593", "+593" ],
-        [ "+594", "+594" ],
-        [ "+595", "+595" ],
-        [ "+596", "+596" ],
-        [ "+597", "+597" ],
-        [ "+598", "+598" ],
-        [ "+599", "+599" ],
-        [ "+670", "+670" ],
-        [ "+672", "+672" ],
-        [ "+673", "+673" ],
-        [ "+674", "+674" ],
-        [ "+675", "+675" ],
-        [ "+676", "+676" ],
-        [ "+677", "+677" ],
-        [ "+678", "+678" ],
-        [ "+679", "+679" ],
-        [ "+680", "+680" ],
-        [ "+681", "+681" ],
-        [ "+682", "+682" ],
-        [ "+683", "+683" ],
-        [ "+685", "+685" ],
-        [ "+686", "+686" ],
-        [ "+687", "+687" ],
-        [ "+688", "+688" ],
-        [ "+689", "+689" ],
-        [ "+690", "+690" ],
-        [ "+691", "+691" ],
-        [ "+692", "+692" ],
-        [ "+850", "+850" ],
-        [ "+852", "+852" ],
-        [ "+853", "+853" ],
-        [ "+855", "+855" ],
-        [ "+856", "+856" ],
-        [ "+870", "+870" ],
-        [ "+880", "+880" ],
-        [ "+886", "+886" ],
-        [ "+960", "+960" ],
-        [ "+961", "+961" ],
-        [ "+962", "+962" ],
-        [ "+963", "+963" ],
-        [ "+964", "+964" ],
-        [ "+965", "+965" ],
-        [ "+966", "+966" ],
-        [ "+967", "+967" ],
-        [ "+968", "+968" ],
-        [ "+970", "+970" ],
-        [ "+971", "+971" ],
-        [ "+972", "+972" ],
-        [ "+973", "+973" ],
-        [ "+974", "+974" ],
-        [ "+975", "+975" ],
-        [ "+976", "+976" ],
-        [ "+977", "+977" ],
-        [ "+992", "+992" ],
-        [ "+993", "+993" ],
-        [ "+994", "+994" ],
-        [ "+995", "+995" ],
-        [ "+996", "+996" ],
-        [ "+998", "+998" ],
-        [ "+1-242", "+1-242" ],
-        [ "+1-246", "+1-246" ],
-        [ "+1-264", "+1-264" ],
-        [ "+1-268", "+1-268" ],
-        [ "+1-284", "+1-284" ],
-        [ "+1-340", "+1-340" ],
-        [ "+1-345", "+1-345" ],
-        [ "+1-441", "+1-441" ],
-        [ "+1-473", "+1-473" ],
-        [ "+1-649", "+1-649" ],
-        [ "+1-664", "+1-664" ],
-        [ "+1-670", "+1-670" ],
-        [ "+1-671", "+1-671" ],
-        [ "+1-684", "+1-684" ],
-        [ "+1-758", "+1-758" ],
-        [ "+1-767", "+1-767" ],
-        [ "+1-784", "+1-784" ],
-        [ "+1-809", "+1-809" ],
-        [ "+1-868", "+1-868" ],
-        [ "+1-869", "+1-869" ],
-        [ "+1-876", "+1-876" ],
-        [ "+44-1481", "+44-1481" ],
-        [ "+44-1534", "+44-1534" ],
-        [ "+44-1624", "+44-1624" ],
-        [ "+358-18", "+358-18" ]
+        [
+          "",
+          ""
+        ],
+        [
+          "+1",
+          "+1"
+        ],
+        [
+          "+7",
+          "+7"
+        ],
+        [
+          "+20",
+          "+20"
+        ],
+        [
+          "+27",
+          "+27"
+        ],
+        [
+          "+30",
+          "+30"
+        ],
+        [
+          "+31",
+          "+31"
+        ],
+        [
+          "+32",
+          "+32"
+        ],
+        [
+          "+33",
+          "+33"
+        ],
+        [
+          "+34",
+          "+34"
+        ],
+        [
+          "+36",
+          "+36"
+        ],
+        [
+          "+39",
+          "+39"
+        ],
+        [
+          "+40",
+          "+40"
+        ],
+        [
+          "+41",
+          "+41"
+        ],
+        [
+          "+43",
+          "+43"
+        ],
+        [
+          "+44",
+          "+44"
+        ],
+        [
+          "+45",
+          "+45"
+        ],
+        [
+          "+46",
+          "+46"
+        ],
+        [
+          "+47",
+          "+47"
+        ],
+        [
+          "+48",
+          "+48"
+        ],
+        [
+          "+49",
+          "+49"
+        ],
+        [
+          "+51",
+          "+51"
+        ],
+        [
+          "+52",
+          "+52"
+        ],
+        [
+          "+53",
+          "+53"
+        ],
+        [
+          "+54",
+          "+54"
+        ],
+        [
+          "+55",
+          "+55"
+        ],
+        [
+          "+56",
+          "+56"
+        ],
+        [
+          "+57",
+          "+57"
+        ],
+        [
+          "+58",
+          "+58"
+        ],
+        [
+          "+60",
+          "+60"
+        ],
+        [
+          "+61",
+          "+61"
+        ],
+        [
+          "+62",
+          "+62"
+        ],
+        [
+          "+63",
+          "+63"
+        ],
+        [
+          "+64",
+          "+64"
+        ],
+        [
+          "+65",
+          "+65"
+        ],
+        [
+          "+66",
+          "+66"
+        ],
+        [
+          "+81",
+          "+81"
+        ],
+        [
+          "+82",
+          "+82"
+        ],
+        [
+          "+84",
+          "+84"
+        ],
+        [
+          "+86",
+          "+86"
+        ],
+        [
+          "+90",
+          "+90"
+        ],
+        [
+          "+91",
+          "+91"
+        ],
+        [
+          "+92",
+          "+92"
+        ],
+        [
+          "+93",
+          "+93"
+        ],
+        [
+          "+94",
+          "+94"
+        ],
+        [
+          "+95",
+          "+95"
+        ],
+        [
+          "+98",
+          "+98"
+        ],
+        [
+          "+211",
+          "+211"
+        ],
+        [
+          "+212",
+          "+212"
+        ],
+        [
+          "+213",
+          "+213"
+        ],
+        [
+          "+216",
+          "+216"
+        ],
+        [
+          "+218",
+          "+218"
+        ],
+        [
+          "+220",
+          "+220"
+        ],
+        [
+          "+221",
+          "+221"
+        ],
+        [
+          "+222",
+          "+222"
+        ],
+        [
+          "+223",
+          "+223"
+        ],
+        [
+          "+224",
+          "+224"
+        ],
+        [
+          "+225",
+          "+225"
+        ],
+        [
+          "+226",
+          "+226"
+        ],
+        [
+          "+227",
+          "+227"
+        ],
+        [
+          "+228",
+          "+228"
+        ],
+        [
+          "+229",
+          "+229"
+        ],
+        [
+          "+230",
+          "+230"
+        ],
+        [
+          "+231",
+          "+231"
+        ],
+        [
+          "+232",
+          "+232"
+        ],
+        [
+          "+233",
+          "+233"
+        ],
+        [
+          "+234",
+          "+234"
+        ],
+        [
+          "+235",
+          "+235"
+        ],
+        [
+          "+236",
+          "+236"
+        ],
+        [
+          "+237",
+          "+237"
+        ],
+        [
+          "+238",
+          "+238"
+        ],
+        [
+          "+239",
+          "+239"
+        ],
+        [
+          "+240",
+          "+240"
+        ],
+        [
+          "+241",
+          "+241"
+        ],
+        [
+          "+242",
+          "+242"
+        ],
+        [
+          "+243",
+          "+243"
+        ],
+        [
+          "+244",
+          "+244"
+        ],
+        [
+          "+245",
+          "+245"
+        ],
+        [
+          "+246",
+          "+246"
+        ],
+        [
+          "+248",
+          "+248"
+        ],
+        [
+          "+249",
+          "+249"
+        ],
+        [
+          "+250",
+          "+250"
+        ],
+        [
+          "+251",
+          "+251"
+        ],
+        [
+          "+252",
+          "+252"
+        ],
+        [
+          "+253",
+          "+253"
+        ],
+        [
+          "+254",
+          "+254"
+        ],
+        [
+          "+255",
+          "+255"
+        ],
+        [
+          "+256",
+          "+256"
+        ],
+        [
+          "+257",
+          "+257"
+        ],
+        [
+          "+258",
+          "+258"
+        ],
+        [
+          "+260",
+          "+260"
+        ],
+        [
+          "+261",
+          "+261"
+        ],
+        [
+          "+262",
+          "+262"
+        ],
+        [
+          "+263",
+          "+263"
+        ],
+        [
+          "+264",
+          "+264"
+        ],
+        [
+          "+265",
+          "+265"
+        ],
+        [
+          "+266",
+          "+266"
+        ],
+        [
+          "+267",
+          "+267"
+        ],
+        [
+          "+268",
+          "+268"
+        ],
+        [
+          "+269",
+          "+269"
+        ],
+        [
+          "+290",
+          "+290"
+        ],
+        [
+          "+291",
+          "+291"
+        ],
+        [
+          "+297",
+          "+297"
+        ],
+        [
+          "+298",
+          "+298"
+        ],
+        [
+          "+299",
+          "+299"
+        ],
+        [
+          "+350",
+          "+350"
+        ],
+        [
+          "+351",
+          "+351"
+        ],
+        [
+          "+352",
+          "+352"
+        ],
+        [
+          "+353",
+          "+353"
+        ],
+        [
+          "+354",
+          "+354"
+        ],
+        [
+          "+355",
+          "+355"
+        ],
+        [
+          "+356",
+          "+356"
+        ],
+        [
+          "+357",
+          "+357"
+        ],
+        [
+          "+358",
+          "+358"
+        ],
+        [
+          "+359",
+          "+359"
+        ],
+        [
+          "+370",
+          "+370"
+        ],
+        [
+          "+371",
+          "+371"
+        ],
+        [
+          "+372",
+          "+372"
+        ],
+        [
+          "+373",
+          "+373"
+        ],
+        [
+          "+374",
+          "+374"
+        ],
+        [
+          "+375",
+          "+375"
+        ],
+        [
+          "+376",
+          "+376"
+        ],
+        [
+          "+377",
+          "+377"
+        ],
+        [
+          "+378",
+          "+378"
+        ],
+        [
+          "+379",
+          "+379"
+        ],
+        [
+          "+380",
+          "+380"
+        ],
+        [
+          "+381",
+          "+381"
+        ],
+        [
+          "+382",
+          "+382"
+        ],
+        [
+          "+385",
+          "+385"
+        ],
+        [
+          "+386",
+          "+386"
+        ],
+        [
+          "+387",
+          "+387"
+        ],
+        [
+          "+389",
+          "+389"
+        ],
+        [
+          "+420",
+          "+420"
+        ],
+        [
+          "+421",
+          "+421"
+        ],
+        [
+          "+423",
+          "+423"
+        ],
+        [
+          "+500",
+          "+500"
+        ],
+        [
+          "+501",
+          "+501"
+        ],
+        [
+          "+502",
+          "+502"
+        ],
+        [
+          "+503",
+          "+503"
+        ],
+        [
+          "+504",
+          "+504"
+        ],
+        [
+          "+505",
+          "+505"
+        ],
+        [
+          "+506",
+          "+506"
+        ],
+        [
+          "+507",
+          "+507"
+        ],
+        [
+          "+508",
+          "+508"
+        ],
+        [
+          "+509",
+          "+509"
+        ],
+        [
+          "+590",
+          "+590"
+        ],
+        [
+          "+591",
+          "+591"
+        ],
+        [
+          "+592",
+          "+592"
+        ],
+        [
+          "+593",
+          "+593"
+        ],
+        [
+          "+594",
+          "+594"
+        ],
+        [
+          "+595",
+          "+595"
+        ],
+        [
+          "+596",
+          "+596"
+        ],
+        [
+          "+597",
+          "+597"
+        ],
+        [
+          "+598",
+          "+598"
+        ],
+        [
+          "+599",
+          "+599"
+        ],
+        [
+          "+670",
+          "+670"
+        ],
+        [
+          "+672",
+          "+672"
+        ],
+        [
+          "+673",
+          "+673"
+        ],
+        [
+          "+674",
+          "+674"
+        ],
+        [
+          "+675",
+          "+675"
+        ],
+        [
+          "+676",
+          "+676"
+        ],
+        [
+          "+677",
+          "+677"
+        ],
+        [
+          "+678",
+          "+678"
+        ],
+        [
+          "+679",
+          "+679"
+        ],
+        [
+          "+680",
+          "+680"
+        ],
+        [
+          "+681",
+          "+681"
+        ],
+        [
+          "+682",
+          "+682"
+        ],
+        [
+          "+683",
+          "+683"
+        ],
+        [
+          "+685",
+          "+685"
+        ],
+        [
+          "+686",
+          "+686"
+        ],
+        [
+          "+687",
+          "+687"
+        ],
+        [
+          "+688",
+          "+688"
+        ],
+        [
+          "+689",
+          "+689"
+        ],
+        [
+          "+690",
+          "+690"
+        ],
+        [
+          "+691",
+          "+691"
+        ],
+        [
+          "+692",
+          "+692"
+        ],
+        [
+          "+850",
+          "+850"
+        ],
+        [
+          "+852",
+          "+852"
+        ],
+        [
+          "+853",
+          "+853"
+        ],
+        [
+          "+855",
+          "+855"
+        ],
+        [
+          "+856",
+          "+856"
+        ],
+        [
+          "+870",
+          "+870"
+        ],
+        [
+          "+880",
+          "+880"
+        ],
+        [
+          "+886",
+          "+886"
+        ],
+        [
+          "+960",
+          "+960"
+        ],
+        [
+          "+961",
+          "+961"
+        ],
+        [
+          "+962",
+          "+962"
+        ],
+        [
+          "+963",
+          "+963"
+        ],
+        [
+          "+964",
+          "+964"
+        ],
+        [
+          "+965",
+          "+965"
+        ],
+        [
+          "+966",
+          "+966"
+        ],
+        [
+          "+967",
+          "+967"
+        ],
+        [
+          "+968",
+          "+968"
+        ],
+        [
+          "+970",
+          "+970"
+        ],
+        [
+          "+971",
+          "+971"
+        ],
+        [
+          "+972",
+          "+972"
+        ],
+        [
+          "+973",
+          "+973"
+        ],
+        [
+          "+974",
+          "+974"
+        ],
+        [
+          "+975",
+          "+975"
+        ],
+        [
+          "+976",
+          "+976"
+        ],
+        [
+          "+977",
+          "+977"
+        ],
+        [
+          "+992",
+          "+992"
+        ],
+        [
+          "+993",
+          "+993"
+        ],
+        [
+          "+994",
+          "+994"
+        ],
+        [
+          "+995",
+          "+995"
+        ],
+        [
+          "+996",
+          "+996"
+        ],
+        [
+          "+998",
+          "+998"
+        ],
+        [
+          "+1-242",
+          "+1-242"
+        ],
+        [
+          "+1-246",
+          "+1-246"
+        ],
+        [
+          "+1-264",
+          "+1-264"
+        ],
+        [
+          "+1-268",
+          "+1-268"
+        ],
+        [
+          "+1-284",
+          "+1-284"
+        ],
+        [
+          "+1-340",
+          "+1-340"
+        ],
+        [
+          "+1-345",
+          "+1-345"
+        ],
+        [
+          "+1-441",
+          "+1-441"
+        ],
+        [
+          "+1-473",
+          "+1-473"
+        ],
+        [
+          "+1-649",
+          "+1-649"
+        ],
+        [
+          "+1-664",
+          "+1-664"
+        ],
+        [
+          "+1-670",
+          "+1-670"
+        ],
+        [
+          "+1-671",
+          "+1-671"
+        ],
+        [
+          "+1-684",
+          "+1-684"
+        ],
+        [
+          "+1-758",
+          "+1-758"
+        ],
+        [
+          "+1-767",
+          "+1-767"
+        ],
+        [
+          "+1-784",
+          "+1-784"
+        ],
+        [
+          "+1-809",
+          "+1-809"
+        ],
+        [
+          "+1-868",
+          "+1-868"
+        ],
+        [
+          "+1-869",
+          "+1-869"
+        ],
+        [
+          "+1-876",
+          "+1-876"
+        ],
+        [
+          "+44-1481",
+          "+44-1481"
+        ],
+        [
+          "+44-1534",
+          "+44-1534"
+        ],
+        [
+          "+44-1624",
+          "+44-1624"
+        ],
+        [
+          "+358-18",
+          "+358-18"
+        ]
       ]
     },
     {
@@ -1971,9 +3082,18 @@
       "title": "Show sender's name",
       "content": "Show the sender's name in every message.",
       "value": [
-        [ "", "Disabled" ],
-        [ "chat", "Chat" ],
-        [ "chat-admin", "Chat and admin" ]
+        [
+          "",
+          "Disabled"
+        ],
+        [
+          "chat",
+          "Chat"
+        ],
+        [
+          "chat-admin",
+          "Chat and admin"
+        ]
       ]
     },
     {
@@ -2032,8 +3152,14 @@
       "title": "Chat position",
       "content": "Set the position of the chat widget.",
       "value": [
-        [ "right", "Right" ],
-        [ "left", "Left" ]
+        [
+          "right",
+          "Right"
+        ],
+        [
+          "left",
+          "Left"
+        ]
       ]
     },
     {
@@ -2054,9 +3180,18 @@
       "title": "Header type",
       "content": "Set the header appearance.",
       "value": [
-        [ "agents", "Agents" ],
-        [ "brand", "Brand" ],
-        [ "minimal", "Minimal" ]
+        [
+          "agents",
+          "Agents"
+        ],
+        [
+          "brand",
+          "Brand"
+        ],
+        [
+          "minimal",
+          "Minimal"
+        ]
       ]
     },
     {
@@ -2090,14 +3225,29 @@
       "id": "chat-sb-icons",
       "title": "Built-in chat button icons",
       "content": "Change the chat button image with a custom one.",
-      "images": [ "button-chat-2.svg", "button-chat-3.svg", "button-chat-4.svg", "button-chat-5.svg" ]
+      "images": [
+        "button-chat-2.svg",
+        "button-chat-3.svg",
+        "button-chat-4.svg",
+        "button-chat-5.svg"
+      ]
     },
     {
       "type": "select-images",
       "id": "chat-background",
       "title": "Chat background",
       "content": "Choose a background texture for the chat header and conversation area.",
-      "images": [ "textures/square/texture-1.png", "textures/square/texture-2.png", "textures/square/texture-3.png", "textures/square/texture-4.png", "textures/square/texture-5.png", "textures/square/texture-6.png", "textures/square/texture-7.png", "textures/square/texture-8.png", "textures/square/texture-9.png" ]
+      "images": [
+        "textures/square/texture-1.png",
+        "textures/square/texture-2.png",
+        "textures/square/texture-3.png",
+        "textures/square/texture-4.png",
+        "textures/square/texture-5.png",
+        "textures/square/texture-6.png",
+        "textures/square/texture-7.png",
+        "textures/square/texture-8.png",
+        "textures/square/texture-9.png"
+      ]
     },
     {
       "type": "multi-input",
@@ -2130,9 +3280,18 @@
           "id": "chat-button-offset-mobile",
           "title": "Apply to",
           "value": [
-            [ "all", "All" ],
-            [ "desktop", "Only desktop" ],
-            [ "mobile", "Only mobile devices" ]
+            [
+              "all",
+              "All"
+            ],
+            [
+              "desktop",
+              "Only desktop"
+            ],
+            [
+              "mobile",
+              "Only mobile devices"
+            ]
           ]
         }
       ]
@@ -2232,20 +3391,62 @@
           "id": "newsletter-service",
           "title": "Service",
           "value": [
-            [ "mailchimp", "Mailchimp" ],
-            [ "sendinblue", "Brevo" ],
-            [ "sendgrid", "SendGrid" ],
-            [ "elasticemail", "Elastic Email" ],
-            [ "campaignmonitor", "Campaign Monitor" ],
-            [ "hubspot", "Hubspot" ],
-            [ "moosend", "Moosend" ],
-            [ "getresponse", "GetResponse" ],
-            [ "convertkit", "ConvertKit" ],
-            [ "activecampaign", "ActiveCampaign" ],
-            [ "mailerlite", "MailerLite" ],
-            [ "mailjet", "Mailjet" ],
-            [ "sendy", "Sendy" ],
-            [ "sendfox", "SendFox" ]
+            [
+              "mailchimp",
+              "Mailchimp"
+            ],
+            [
+              "sendinblue",
+              "Brevo"
+            ],
+            [
+              "sendgrid",
+              "SendGrid"
+            ],
+            [
+              "elasticemail",
+              "Elastic Email"
+            ],
+            [
+              "campaignmonitor",
+              "Campaign Monitor"
+            ],
+            [
+              "hubspot",
+              "Hubspot"
+            ],
+            [
+              "moosend",
+              "Moosend"
+            ],
+            [
+              "getresponse",
+              "GetResponse"
+            ],
+            [
+              "convertkit",
+              "ConvertKit"
+            ],
+            [
+              "activecampaign",
+              "ActiveCampaign"
+            ],
+            [
+              "mailerlite",
+              "MailerLite"
+            ],
+            [
+              "mailjet",
+              "Mailjet"
+            ],
+            [
+              "sendy",
+              "Sendy"
+            ],
+            [
+              "sendfox",
+              "SendFox"
+            ]
           ]
         },
         {
@@ -2314,33 +3515,6 @@
           "type": "text",
           "id": "departments-title",
           "title": "Dashboard title"
-        }
-      ]
-    },
-    {
-      "type": "repeater",
-      "id": "departments",
-      "title": "Departments",
-      "content": "Add and manage additional support departments.",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "department-name"
-        },
-        {
-          "type": "color-palette",
-          "name": "Color",
-          "id": "department-color"
-        },
-        {
-          "type": "upload-image",
-          "name": "Image",
-          "id": "department-image"
-        },
-        {
-          "type": "auto-id",
-          "id": "department-id"
         }
       ]
     },

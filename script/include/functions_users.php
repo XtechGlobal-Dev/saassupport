@@ -859,9 +859,8 @@ function sb_get_tickets($ticket_status, $sorting = ['t.creation_time', 'DESC'], 
     $ticketStatusArr['open'] = '1';        
     $ticketStatusArr['in-progress'] = '2';    
     $ticketStatusArr['hold'] = '3';
-    $ticketStatusArr['waiting'] = '4';
-    $ticketStatusArr['answered'] = '5';
-    $ticketStatusArr['closed'] = '6';
+    $ticketStatusArr['answered'] = '4';
+    $ticketStatusArr['closed'] = '5';
     
     $sorting_field = $sorting[0];
     $main_field_sorting = in_array($sorting_field, ['id', 'first_name', 'last_name', 'email', 'profile_image', 'user_type', 'creation_time', 'last_activity', 'department']);
@@ -1059,7 +1058,7 @@ function sb_count_tickets() {
             $query = 'AND id IN (' . substr($query, 0, -1) . ')';
         }
     }*/
-    return sb_db_get('SELECT COUNT(id) AS `all`, SUM(CASE WHEN status_id = "1"' . $query . ' THEN 1 ELSE 0 END) AS `open`, SUM(CASE WHEN status_id = "2"' . $query . ' THEN 1 ELSE 0 END) AS `in-progress`, SUM(CASE WHEN status_id = "3"' . $query . ' THEN 1 ELSE 0 END) AS `hold`, SUM(CASE WHEN status_id = "4"' . $query . ' THEN 1 ELSE 0 END) AS `waiting`, SUM(CASE WHEN status_id = "5"' . $query . ' THEN 1 ELSE 0 END) AS `answered`, SUM(CASE WHEN status_id = "6"' . $query . ' THEN 1 ELSE 0 END) AS `closed` FROM sb_tickets');
+    return sb_db_get('SELECT COUNT(id) AS `all`, SUM(CASE WHEN status_id = "1"' . $query . ' THEN 1 ELSE 0 END) AS `open`, SUM(CASE WHEN status_id = "2"' . $query . ' THEN 1 ELSE 0 END) AS `in-progress`, SUM(CASE WHEN status_id = "3"' . $query . ' THEN 1 ELSE 0 END) AS `hold`, SUM(CASE WHEN status_id = "4"' . $query . ' THEN 1 ELSE 0 END) AS `answered`, SUM(CASE WHEN status_id = "5"' . $query . ' THEN 1 ELSE 0 END) AS `closed` FROM sb_tickets');
 }
 
 function sb_edit_ticket($tickets_id = 0) {

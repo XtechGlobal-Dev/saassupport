@@ -310,7 +310,7 @@ function sb_ticket_edit_box()
                                 <span class="required-label"><?php sb_e(
                                     "Email"
                                 ); ?></span>
-                                <input type="email" name="email" value="" >
+                                <input type="email" name="email" value="">
                             </div>
                         </div>
 
@@ -760,10 +760,10 @@ function sb_ticket_edit_box()
         }
 
         /* .sb-td-tags span {
-            margin: 3px 5px 0 0;
-            padding: .45em .75em;
-            font-size: 13px
-        } */
+                                margin: 3px 5px 0 0;
+                                padding: .45em .75em;
+                                font-size: 13px
+                            } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -791,81 +791,83 @@ function sb_ticket_edit_box()
             background-color: rgb(248, 248, 249);
         }
 
-        .status-dropdown .dropdown-menu li .dropdown-item {width:unset}
+        .status-dropdown .dropdown-menu li .dropdown-item {
+            width: unset
+        }
 
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-            position: relative;
-            overflow: visible !important;
+                                position: relative;
+                                overflow: visible !important;
             
-        }
+                            }
 
-        .status-btn {
-            border: none;
-            border-radius: 8px;
-            padding: 3px 12px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 14px;
-        }
+                            .status-btn {
+                                border: none;
+                                border-radius: 8px;
+                                padding: 3px 12px;
+                                font-weight: 500;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+                                font-size: 14px;
+                            }
 
-        .status-list li,
-        .priority-list li {
-            font-size: 14px;
-        }
+                            .status-list li,
+                            .priority-list li {
+                                font-size: 14px;
+                            }
 
-        .status-dot {
-            width: 10px !important;
-            height: 10px !important;
-        }
+                            .status-dot {
+                                width: 10px !important;
+                                height: 10px !important;
+                            }
 
-        .arrow {
-            font-size: 12px;
-        }
+                            .arrow {
+                                font-size: 12px;
+                            }
 
-        .status-list,
-        .priority-list {
-            display: none;
-            position: absolute;
-            top: 75%;
-            left: 0;
-            min-width: 170px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-            z-index: 9999;
-            padding: 6px 0;
-            margin: 0;
-            list-style: none;
-        }
+                            .status-list,
+                            .priority-list {
+                                display: none;
+                                position: absolute;
+                                top: 75%;
+                                left: 0;
+                                min-width: 170px;
+                                background: #fff;
+                                border: 1px solid #ddd;
+                                border-radius: 8px;
+                                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                z-index: 9999;
+                                padding: 6px 0;
+                                margin: 0;
+                                list-style: none;
+                            }
 
-        .status-list li,
-        .priority-list li {
-            padding: 8px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 15px;
-            transition: background 0.15s;
-        }
+                            .status-list li,
+                            .priority-list li {
+                                padding: 8px 16px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+                                font-size: 15px;
+                                transition: background 0.15s;
+                            }
 
-        .status-list li:hover,
-        .priority-list li:hover {
-            background: #f5f5f5;
-        }
+                            .status-list li:hover,
+                            .priority-list li:hover {
+                                background: #f5f5f5;
+                            }
 
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        } */
+                            .status-dot {
+                                width: 12px;
+                                height: 12px;
+                                border-radius: 50%;
+                                display: inline-block;
+                            } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -2268,10 +2270,7 @@ function sb_component_admin()
         <?php if ($logged) { ?>
             <div class="sb-header header_new">
                 <aside class="sidebar sb-admin-nav collapsed" id="sidebar">
-                    <!-- Toggle Button -->
-                    <div class="toggle-btn" onclick="toggleSidebar()" title="Toggle Navigation">
-                        <img src="./account/media/hamburger.svg" alt="logo" style="width: 24px; height: auto;">
-                    </div>
+
                     <div class="logo">
                         <img width="35"
                             src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>"
@@ -2284,29 +2283,33 @@ function sb_component_admin()
 
                     <nav>
                         <ul>
-                            <li><a id="sb-dashboard"><i>
-                                        <span class="icon-tooltip" data-tooltip="Dashboard">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path
-                                                    d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z"
-                                                    stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg></span></i>
-
+                            <li><a id="sb-dashboard">
+                                    <i>
+                                        <div class="icon-wrapper">
+                                            <span class="icon-tooltip" data-tooltip="Dashboard">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M10.5 6.75C10.5 4.67893 8.82107 3 6.75 3C4.67893 3 3 4.67893 3 6.75C3 8.82107 4.67893 10.5 6.75 10.5C8.82107 10.5 10.5 8.82107 10.5 6.75Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M21 17.25C21 15.1789 19.3211 13.5 17.25 13.5C15.1789 13.5 13.5 15.1789 13.5 17.25C13.5 19.3211 15.1789 21 17.25 21C19.3211 21 21 19.3211 21 17.25Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M10.5 17.25C10.5 15.1789 8.82107 13.5 6.75 13.5C4.67893 13.5 3 15.1789 3 17.25C3 19.3211 4.67893 21 6.75 21C8.82107 21 10.5 19.3211 10.5 17.25Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M17.25 3V10.5M21 6.75H13.5" stroke="#5F6465" stroke-width="1.5"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg></span>
+                                        </div>
+                                    </i>
                                     <span class="label">Dashboard</span></a></li>
 
                             <li><a id="sb-conversations"><i>
+                                <div class="icon-wrapper">
                                         <span class="icon-tooltip" data-tooltip="Inbox">
                                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -2322,9 +2325,11 @@ function sb_component_admin()
                                                     d="M22.1934 13.75H17.2677C16.4256 13.75 15.764 14.4536 15.3929 15.1972C14.9897 16.0051 14.1823 16.75 12.6934 16.75C11.2045 16.75 10.3971 16.0051 9.9939 15.1972C9.62278 14.4536 8.96113 13.75 8.11902 13.75H3.19336"
                                                     stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
                                             </svg></span>
+                                            </div>
                                     </i><span class="label"> Inbox</span></a></li>
                             <?php //if ($active_areas['tickets']) { ?>
                             <li><a id="sb-tickets"><i>
+                                <div class="icon-wrapper">
                                         <span class="icon-tooltip" data-tooltip="Tickets">
                                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -2337,10 +2342,12 @@ function sb_component_admin()
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </span>
+                                        </div>
                                     </i><span class="label">Tickets</span></a></li>
                             <?php //} ?>
                             <?php if ($active_areas['users']) { ?>
                                 <li><a id="sb-users"><i>
+                                    <div class="icon-wrapper">
                                             <span class="icon-tooltip" data-tooltip="Customers">
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2356,11 +2363,13 @@ function sb_component_admin()
                                                         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                             </span>
+                                            </div>
                                         </i><span class="label">Customers</span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
                                 <li><a id="sb-articles"><i>
+                                    <div class="icon-wrapper">
                                             <span class="icon-tooltip" data-tooltip="Articles">
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2375,10 +2384,12 @@ function sb_component_admin()
                                                         stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
                                                 </svg>
                                             </span>
+                                            </div>
                                         </i><span class="label">Articles</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['reports']) { ?>
                                 <li><a id="sb-reports"><i>
+                                    <div class="icon-wrapper">
                                             <span class="icon-tooltip" data-tooltip="Reports">
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2392,10 +2403,12 @@ function sb_component_admin()
                                                         stroke-linejoin="round" />
                                                 </svg>
                                             </span>
+                                            </div>
                                         </i><span class="label"> Reports</span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['settings']) { ?>
                                 <li><a id="sb-settings"><i>
+                                    <div class="icon-wrapper">
                                             <span class="icon-tooltip" data-tooltip="Settings">
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2410,6 +2423,7 @@ function sb_component_admin()
                                                         stroke-linecap="round" />
                                                 </svg>
                                             </span>
+                                            </div>
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
                         </ul>
@@ -2424,13 +2438,7 @@ function sb_component_admin()
                         </div>
                     </div>
                 </aside>
-                <script>
-                    function toggleSidebar() {
-                        document.getElementById("sidebar").classList.toggle("collapsed");
-                        document.getElementById("mainContent").classList.toggle("sidebar-collapsed");
 
-                    }
-                </script>
                 <!-- <div class="sb-admin-nav">
                 <a id="sb-conversations" class="sb-active">
                     <span>
@@ -3243,14 +3251,14 @@ function sb_component_admin()
                                                     $statues = sb_get_statues();
                                                     $priorities = sb_get_priorities();
                                                     ?>
-                                                    <div id="ticket_statues" >
+                                                    <div id="ticket_statues">
                                                         <ul class="status-list dropdown-menu">
                                                             <?php foreach (
                                                                 $statues
                                                                 as $status
                                                             ) {
-                                                                echo '<li data-status="' .$status["name"] .'" class="" data-color="' .$status["color"] .'" value="' .$status["id"] .'">
-                                                                        <a class="dropdown-item" href="#"> ' . $status["name"] .'</a></li>';
+                                                                echo '<li data-status="' . $status["name"] . '" class="" data-color="' . $status["color"] . '" value="' . $status["id"] . '">
+                                                                        <a class="dropdown-item" href="#"> ' . $status["name"] . '</a></li>';
                                                             } ?>
                                                         </ul>
                                                     </div>
@@ -3261,8 +3269,8 @@ function sb_component_admin()
                                                                 $priorities
                                                                 as $priority
                                                             ) {
-                                                                echo '<li data-status="' .$priority["name"] .'" class="" data-color="' .$priority["color"] .'" value="' .$priority["id"] .'">
-                                                                <a class="dropdown-item" href="#">' .$priority["name"] .'</a></li>';
+                                                                echo '<li data-status="' . $priority["name"] . '" class="" data-color="' . $priority["color"] . '" value="' . $priority["id"] . '">
+                                                                <a class="dropdown-item" href="#">' . $priority["name"] . '</a></li>';
                                                             } ?>
                                                         </ul>
                                                     </div>
@@ -4239,7 +4247,8 @@ function sb_component_admin()
                             <!-- Table -->
                             <div class="table-responsive" style="overflow: visible;">
                                 <div class="sb-scroll-area scroll-table">
-                                    <table id="ticketTable" class=" sb-table-tickets table table-bordered table-hover align-middle text-nowrap bg-white w-100 ">
+                                    <table id="ticketTable"
+                                        class=" sb-table-tickets table table-bordered table-hover align-middle text-nowrap bg-white w-100 ">
                                         <thead class="table-light">
                                             <tr>
                                                 <th data-field="id" width="5%">
@@ -4249,15 +4258,14 @@ function sb_component_admin()
                                                     <?php sb_e("Subject"); ?>
                                                 </th>
                                                 <?php
-                                                $tags = sb_get_multi_setting("disable", "disable-tags") ? []: sb_get_setting("tags", []);
+                                                $tags = sb_get_multi_setting("disable", "disable-tags") ? [] : sb_get_setting("tags", []);
                                                 $count = count($tags);
-                                                if($count > 0)
-                                                {
-                                                ?>
+                                                if ($count > 0) {
+                                                    ?>
                                                     <th data-field="tags" width="20%">
                                                         <?php sb_e("Tags"); ?>
                                                     </th>
-                                                <?php
+                                                    <?php
                                                 }
                                                 $department_settings = sb_get_setting(
                                                     "departments-settings"
@@ -4296,9 +4304,9 @@ function sb_component_admin()
                                         </thead>
                                         <tbody>
                                             <!-- Sample Row -->
-                                            
 
-                                            
+
+
                                             <!-- Repeat for more records -->
                                         </tbody>
                                     </table>
@@ -4401,7 +4409,10 @@ function sb_component_admin()
                         .dropdown-menu {
                             z-index: 1050 !important;
                         }
-                        .sb-scroll-area.scroll-table { height: 700px !important; }
+
+                        .sb-scroll-area.scroll-table {
+                            height: 700px !important;
+                        }
                     </style>
                     <!--  -->
 
@@ -5778,7 +5789,7 @@ function sb_component_admin()
                             <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
 
-                                    
+
                                     <!--div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Chat Settings</p>
@@ -5796,73 +5807,72 @@ function sb_component_admin()
                                         $sb_settings
                                     ); ?-->
                                     <!-- chat settings -->
-                                     <div class="main-content">
+                                    <div class="main-content">
                                         <h2>Chat <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
-                                            <i class="sb-icon-check"></i>Save changes</a>
+                                                <i class="sb-icon-check"></i>Save changes</a>
                                         </h2>
                                         <hr>
                                         <!--  -->
                                         <div class="settings-card">
                                             <div class="my-tabs">
-                                                <div class="my-tab active" data-target="availability-content" >Availability</div>
+                                                <div class="my-tab active" data-target="availability-content">Availability</div>
                                                 <div class="my-tab" data-target="appearance-content">Appearance & Features</div>
                                                 <div class="my-tab" data-target="management-content">Management</div>
                                             </div>
-                                            
+
                                             <div id="availability-content" class="settings-tab">
-                                                 <?php sb_populate_settings("chat",$sb_settings,true,'chat-availability'); ?>
-											</div>
-											
-											<div id="appearance-content" style="display: none;" class="settings-tab">
-                                                 <?php sb_populate_settings("chat",$sb_settings,true,'chat-appearance-and-features'); ?>
-											</div>
-											
-											<div id="management-content" style="display: none;" class="settings-tab">
-                                                 <?php sb_populate_settings("chat",$sb_settings,true,'chat-management'); ?>
+                                                <?php sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
                                             </div>
-										</div>
-									</div>
+
+                                            <div id="appearance-content" style="display: none;" class="settings-tab">
+                                                <?php sb_populate_settings("chat", $sb_settings, true, 'chat-appearance-and-features'); ?>
+                                            </div>
+
+                                            <div id="management-content" style="display: none;" class="settings-tab">
+                                                <?php sb_populate_settings("chat", $sb_settings, true, 'chat-management'); ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <script>
-									$('.my-tab').click(function()
-									{
-										$('.my-tab').removeClass('active');
-										$(this).addClass('active');
-										$('.settings-tab').hide();
-										$('#'+$(this).data('target')).show();
-									});
-									</script>
- 
-                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"rel="stylesheet">
- 
+                                        $('.my-tab').click(function () {
+                                            $('.my-tab').removeClass('active');
+                                            $(this).addClass('active');
+                                            $('.settings-tab').hide();
+                                            $('#' + $(this).data('target')).show();
+                                        });
+                                    </script>
+
+                                    <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
+                                        rel="stylesheet">
+
                                     <style>
-                                       
                                         input.agents-textfield {
                                             width: 100%;
                                             max-width: max-content;
                                         }
- 
+
                                         select.country-drop {
                                             width: 100%;
                                             max-width: max-content;
                                         }
- 
+
                                         .sb-setting label.custom-switch {
                                             min-width: unset;
                                         }
- 
+
                                         .custom-switch {
                                             position: relative;
                                             display: inline-block;
                                             width: 36px;
                                             height: 18px;
                                         }
- 
+
                                         .custom-switch input {
                                             opacity: 0;
                                             width: 0;
                                             height: 0;
                                         }
- 
+
                                         .custom-switch .slider {
                                             position: absolute;
                                             cursor: pointer;
@@ -5874,7 +5884,7 @@ function sb_component_admin()
                                             bottom: 0;
                                             transition: .4s;
                                         }
- 
+
                                         .custom-switch .slider:before {
                                             position: absolute;
                                             content: "";
@@ -5886,22 +5896,22 @@ function sb_component_admin()
                                             transition: .4s;
                                             border-radius: 50%;
                                         }
- 
+
                                         .custom-switch input:checked+.slider {
                                             background-color: #0d6efd;
                                             /* Bootstrap primary */
                                         }
- 
+
                                         .custom-switch input:checked+.slider:before {
                                             transform: translateX(18px);
                                         }
- 
+
                                         .my-tabs {
                                             display: flex;
                                             margin-bottom: 40px;
                                             gap: 10px;
                                         }
- 
+
                                         .my-tab {
                                             padding: 10px 15px;
                                             cursor: pointer;
@@ -5913,7 +5923,7 @@ function sb_component_admin()
                                             background-color: #f8f9fa;
                                             margin-right: 5px;
                                         }
- 
+
                                         .my-tab.active {
                                             background-color: #1B1F23;
                                             font-weight: 400;
