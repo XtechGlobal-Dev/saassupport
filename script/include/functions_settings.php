@@ -427,10 +427,10 @@ function sb_populate_settings($category, $settings, $echo = true, $subcategory =
     // Generate HTML
     $code = '';
     foreach ($settings_list as $setting) {
-        if($category == 'chat')
+       // if($category == 'chat')
             $code .= sb_get_chat_setting_code($setting);
-        else
-            $code .= sb_get_setting_code($setting);
+        // else
+        //     $code .= sb_get_setting_code($setting);
     }
 
     if ($echo) {
