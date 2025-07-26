@@ -38,14 +38,7 @@ CREATE TABLE `agents` (
 --
 
 INSERT INTO `agents` (`id`, `admin_id`, `email`) VALUES
-(20, 53, 'technical_agent@xtcglobal.com'),
-(21, 58, 'agent@aa.com'),
-(22, 58, 'testagent@abc.com'),
-(24, 87, 'komal@xtecglobal.com'),
-(25, 88, 'samsingh@mail.com'),
-(27, 91, 'admin1@mail.com'),
-(29, 94, 'agent01@mail.com'),
-(30, 98, 'test@agent.com');
+(1, 98, 'test@agent.com');
 
 -- --------------------------------------------------------
 
@@ -64,21 +57,8 @@ CREATE TABLE `membership_counter` (
 --
 
 INSERT INTO `membership_counter` (`user_id`, `count`, `date`) VALUES
-(53, 14, '04-25'),
-(53, 6, '05-25'),
-(58, 42, '05-25'),
-(69, 2, '05-25'),
-(58, 12, '06-25'),
-(84, 1, '06-25'),
-(86, 3, '07-25'),
-(87, 2, '07-25'),
-(90, 1, '07-25'),
-(93, 1, '07-25'),
-(94, 5, '07-25'),
-(96, 1, '07-25'),
 (98, 203, '07-25'),
-(100, 1, '07-25'),
-(102, 3, '07-25');
+
 
 -- --------------------------------------------------------
 
@@ -162,16 +142,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `membership`, `membership_expiration`, `token`, `last_activity`, `creation_time`, `email_confirmed`, `phone_confirmed`, `customer_id`, `extra`, `credits`) VALUES
-(58, 'Kirandeep', 'Singh', 'kirandeep.singh@xtecglobal.com2', NULL, '$2y$10$MA4YOdkY2fQoFH07zXit9eU8QkEdh6BfDqu/NShmPQioTe2bImmn.', '0', '', 'e43f2dcf8bb2028766bc733da37ff74543d699b5', '2025-05-06 07:45:30', '2025-05-06 07:45:30', 0, 0, '', '', 0.05),
-(97, 'Kirandeep', 'Singh', 'kirandeep.singh@gmail.com', NULL, '$2y$10$rsUM6we3RAr95wn3rkVPy.wi1Pnja3HFyoYz0ow8PbJOVlqCyxeeS', '0', '', 'a6b26225f30bf81fbe4aeb8f260303733ea155bc', '2025-07-04 08:47:40', '2025-07-04 08:47:40', 0, 0, '', '', 0.05),
-(98, 'Kirandeep', 'Singh', 'kirandeep.singh@xtecglobal.com', NULL, '$2y$10$lEYjIWMZde0vHom1BjZriehtQ28HUshBYLPlGxWHeu6vrENvo3ZiS', '0', '', '53d3e8898c45fd81c128c679d43bfff3b2efbee8', '2025-07-04 09:09:22', '2025-07-04 09:09:22', 0, 0, '', '', 0.05),
-(99, 'New', 'Account', 'new@new.com', NULL, '$2y$10$vPxGn5Jnc7KNylZ6y6bOpeU5UHo9xOqwhQYbRNlTqQPrz6XLFIPhi', '0', '', 'a714685e7412c8806a6b4a85d84e9f3862d8d7a1', '2025-07-17 06:40:24', '2025-07-17 06:40:24', 0, 0, '', '', 0.05),
-(100, 'new', 'new', 'new1@gmail.com', '1234567890', '$2y$10$hH4YuHB7m5iMoZu.YAl83uB3bmSdzujaoRr3c63QxK5d9iBmCzwPy', '0', '', '4a790f8b404e22efb437c05da8589fd7cac2bd78', '2025-07-17 06:41:33', '2025-07-17 06:41:33', 0, 0, '', '', 0.05),
-(101, 'Kirandeep', 'Singh', 'kirandeep.singh3@gmail.com', NULL, '$2y$10$6PP41eKiWNd.Bh/bL9d/UOttVIeRzLynVYiMV39xEzdX26N98hbma', '0', '', '312656519306d67554748883ebb0acb88fefc174', '2025-07-21 05:34:31', '2025-07-21 05:34:31', 0, 0, '', '', 0.05),
-(102, 'Kirandeep', 'Singh', 'kirandeep.singh4@gmail.com', NULL, '$2y$10$4Z4hMnzbs5eUFWnhwDTy8ev3v9V7RKqBKFWl5h1ZZ3iqij5aY5bDi', '0', '', 'ea9c0cd0c2da88dff6febf278899001bd6bba956', '2025-07-21 05:35:09', '2025-07-21 05:35:09', 0, 0, '', '', 0.05),
-(103, 'Kirandeep', 'Singh', 'kirandeep.singh6@gmail.com', NULL, '$2y$10$kl4kLG/e0ksIISM2eOytHOUcsWbYWlIVjP7i5/oRsgsQkWDXqnsSi', '0', '', '0862999a64d35942264b470b44710ded5c90ec5b', '2025-07-24 09:13:37', '2025-07-24 09:13:37', 0, 0, '', '', 0.05),
-(104, 'Kirandeep', 'Singh', 'kirandeep.singh7@gmail.com', NULL, '$2y$10$QvdZavRcsrzW8vPbOiEy5uVIfzAjzNF7YflXovmQgxZYMZyjhao5C', '0', '', 'fb3f25d0db6b352c77aedb4a8ae17a0bae11b912', '2025-07-24 09:14:28', '2025-07-24 09:14:28', 0, 0, '', '', 0.05);
-
+(98, 'Kirandeep', 'Singh', 'kirandeep.singh@xtecglobal.com', NULL, '$2y$10$lEYjIWMZde0vHom1BjZriehtQ28HUshBYLPlGxWHeu6vrENvo3ZiS', '0', '', '53d3e8898c45fd81c128c679d43bfff3b2efbee8', '2025-07-04 09:09:22', '2025-07-04 09:09:22', 0, 0, '', '', 0.05)
 -- --------------------------------------------------------
 
 --
@@ -190,22 +161,6 @@ CREATE TABLE `users_data` (
 --
 
 INSERT INTO `users_data` (`id`, `user_id`, `slug`, `value`) VALUES
-(397, 58, 'email_limit', '27-06-25|1'),
-(453, 88, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"2\"},1751597759]'),
-(456, 58, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"1\"},1751598848]'),
-(462, 90, 'active_membership_cache', '[{\"id\":\"FcWLt\",\"price\":\"300\",\"currency\":\"usd\",\"period\":\"year\",\"name\":\"Plan One Test\",\"quota\":600000,\"quota_agents\":6,\"credits\":0.05,\"expiration\":\"04-07-26\",\"count\":\"1\",\"count_agents\":\"1\"},1751608386]'),
-(467, 91, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"3\"},1751621386]'),
-(468, 92, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"1\"},1751669681]'),
-(478, 93, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":\"1\",\"count_agents\":\"1\"},1751692932]'),
-(482, 95, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"1\"},1751696432]'),
-(483, 94, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":\"5\",\"count_agents\":\"2\"},1751696832]'),
-(484, 86, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":\"3\",\"count_agents\":\"1\"},1751697351]'),
-(491, 96, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":\"1\",\"count_agents\":\"1\"},1751700148]'),
-(493, 97, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"1\"},1751705310]'),
-(523, 100, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"1\"},1752820895]'),
-(524, 100, 'company_details', 'New Company'),
-(535, 102, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":\"3\",\"count_agents\":\"1\"},1753180360]'),
-(537, 104, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":0,\"count_agents\":\"1\"},1753437612]'),
 (538, 98, 'email_limit', '25-07-25|1'),
 (539, 98, 'active_membership_cache', '[{\"id\":\"free\",\"price\":\"0\",\"currency\":\"usd\",\"period\":\"\",\"name\":\"Free\",\"quota\":\"100223\",\"quota_agents\":\"6\",\"credits\":0.05,\"expiration\":false,\"count\":\"203\",\"count_agents\":\"2\"},1753525989]');
 
