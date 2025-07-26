@@ -552,65 +552,46 @@
       ]
     }
   ],
-  
-   
-  "admin": {
-
-  "panel-setting": [
-     {
+  "admin": [
+    {
       "type": "checkbox",
       "id": "collapse",
       "title": "Collapse panels",
-      "content": "Automatically collapse the conversation details panel and other panels of the admin area."
+      "content": "Automatically collapse the conversation details panel, and other panels, of the admin area."
     },
-      {
+    {
       "type": "checkbox",
       "id": "hide-conversation-details",
       "title": "Hide conversation details panel",
       "content": "Automatically hide the conversation details panel."
-    },  
+    },
     {
-      "type": "checkbox",
-      "id": "show-profile-images-admin",
-      "title": "Show profile images",
-      "content": "Show the profile image of agents and users within the conversation."
-    }, 
+      "type": "text",
+      "id": "admin-title",
+      "title": "Admin title",
+      "content": "Set the title of the administration area."
+    },
     {
-      "type": "multi-input",
-      "id": "disable",
-      "title": "Disable features",
-      "content": "Disable any features that you don't need.",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "disable-channels-filter",
-          "title": "Channels filter"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-filters",
-          "title": "Filters"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-attachments",
-          "title": "Attachments list"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-tags",
-          "title": "Tags"
-        },
-        {
-          "type": "checkbox",
-          "id": "disable-notes",
-          "title": "Notes"
-        }
-      ]
-    }
-  ],
-  "language": [
-      {
+      "type": "upload-image",
+      "id": "login-icon",
+      "title": "Admin login logo",
+      "content": "Replace the brand logo on the admin login page.",
+      "background-size": "auto 64px"
+    },
+    {
+      "type": "upload-image",
+      "id": "admin-icon",
+      "title": "Admin icon",
+      "content": "Replace the top-left brand icon on the admin area and the browser favicon.",
+      "background-size": "auto 64px"
+    },
+    {
+      "type": "text",
+      "id": "login-message",
+      "title": "Admin login message",
+      "content": "Replace the admin login page message."
+    },
+    {
       "type": "checkbox",
       "id": "admin-auto-translations",
       "title": "Automatically translate admin area",
@@ -621,12 +602,8 @@
       "type": "checkbox",
       "id": "admin-disable-settings-translations",
       "title": "Do not translate settings area",
-      "content": "Activate this option if you don’t want to translate the settings area."
-    }
-  ],
-
-  "admin-chat-management": [
-
+      "content": "Activate this option if you don't want to translate the settings area."
+    },
     {
       "type": "checkbox",
       "id": "admin-auto-archive",
@@ -638,11 +615,7 @@
       "id": "order-by-date",
       "title": "Sort conversations by date",
       "content": "Always sort conversations by date in the admin area."
-    }
-
-  ],
-
-  "permission-setting":[
+    },
     {
       "type": "multi-input",
       "id": "agents",
@@ -744,11 +717,47 @@
           "name": "Send message"
         }
       ]
-    } 
-  ],
-
-   "settings-customization":[
-       {
+    },
+    {
+      "type": "checkbox",
+      "id": "show-profile-images-admin",
+      "title": "Show profile images",
+      "content": "Show the profile image of agents and users within the conversation."
+    },
+    {
+      "type": "multi-input",
+      "id": "disable",
+      "title": "Disable features",
+      "content": "Disable any features that you don't need.",
+      "value": [
+        {
+          "type": "checkbox",
+          "id": "disable-channels-filter",
+          "title": "Channels filter"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable-filters",
+          "title": "Filters"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable-attachments",
+          "title": "Attachments list"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable-tags",
+          "title": "Tags"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable-notes",
+          "title": "Notes"
+        }
+      ]
+    },
+    {
       "type": "multi-input",
       "id": "notes-settings",
       "title": "Notes settings",
@@ -762,7 +771,7 @@
         }
       ]
     },
-   {
+    {
       "type": "multi-input",
       "id": "tags-settings",
       "title": "Tags settings",
@@ -800,7 +809,7 @@
         }
       ]
     },
- {
+    {
       "type": "multi-input",
       "id": "transcript",
       "title": "Transcript",
@@ -831,9 +840,7 @@
           "title": "Message"
         }
       ]
-    }
-   ],
-     "customer":[
+    },
     {
       "type": "repeater",
       "id": "user-table-extra-columns",
@@ -847,14 +854,12 @@
           "id": "user-table-extra-slug"
         }
       ]
-    }
-   ],
-    "auto-saved-message-inbox":[
+    },
     {
       "type": "repeater",
       "id": "saved-replies",
       "title": "Saved replies",
-      "content": "Add and manage saved replies that can be used by agents in the chat editor. Saved replies can be printed by typing # followed by the reply name plus space. Use \n to do a line break.",
+      "content": "Add and manage saved replies that can be used by agents in the chat editor. Saved replies can be printed by typing # followed by the reply name plus space. Use \u005cn to do a line break.",
       "help": "https://board.support/docs/#saved-replies",
       "items": [
         {
@@ -868,17 +873,14 @@
           "id": "reply-text"
         }
       ]
-    } 
-    ],
-
-    "customization-and-themes":[
-       {
+    },
+    {
       "type": "text",
       "id": "custom-js",
       "title": "Custom JS",
       "content": "Enter the URL of a .js file, to load it automatically in the admin area."
     },
-     {
+    {
       "type": "text",
       "id": "custom-css",
       "title": "Custom CSS",
@@ -891,7 +893,7 @@
       "content": "Use this option to change the PWA icon. See the docs for more details.",
       "help": "https://board.support/docs/#pwa"
     },
-      {
+    {
       "type": "color",
       "id": "color-admin-1",
       "title": "Primary color",
@@ -902,75 +904,8 @@
       "id": "color-admin-2",
       "title": "Secondary color",
       "content": "Set the secondary color of the admin area."
-    },
-    
-         {
-      "type": "text",
-      "id": "admin-title",
-      "title": "Admin title",
-      "content": "Set the title of the administration area."
-    },
-    {
-      "type": "upload-image",
-      "id": "login-icon",
-      "title": "Admin login logo",
-      "content": "Replace the brand logo on the admin login page.",
-      "background-size": "auto 64px"
-    },
-    {
-      "type": "upload-image",
-      "id": "admin-icon",
-      "title": "Admin icon",
-      "content": "Replace the top-left brand icon on the admin area and the browser favicon.",
-      "background-size": "auto 64px"
-    },
-    {
-      "type": "text",
-      "id": "login-message",
-      "title": "Admin login message",
-      "content": "Replace the admin login page message."
     }
-
-    ],
-     "switch-accounts":[
-
-
-     ],
-
-     "department":[
-
-          {
-      "type": "repeater",
-      "id": "departments",
-      "title": "Departments",
-      "content": "Add and manage additional support departments.",
-      "items": [
-        {
-          "type": "text",
-          "name": "Name",
-          "id": "department-name"
-        },
-        {
-          "type": "color-palette",
-          "name": "Color",
-          "id": "department-color"
-        },
-        {
-          "type": "upload-image",
-          "name": "Image",
-          "id": "department-image"
-        },
-        {
-          "type": "auto-id",
-          "id": "department-id"
-        }
-      ]
-     }
-
-     ]
-  },
-    
-  
+  ],
   "notifications": [
     {
       "type": "multi-input",
@@ -2382,7 +2317,33 @@
         }
       ]
     },
-
+    {
+      "type": "repeater",
+      "id": "departments",
+      "title": "Departments",
+      "content": "Add and manage additional support departments.",
+      "items": [
+        {
+          "type": "text",
+          "name": "Name",
+          "id": "department-name"
+        },
+        {
+          "type": "color-palette",
+          "name": "Color",
+          "id": "department-color"
+        },
+        {
+          "type": "upload-image",
+          "name": "Image",
+          "id": "department-image"
+        },
+        {
+          "type": "auto-id",
+          "id": "department-id"
+        }
+      ]
+    },
     {
       "type": "multi-input",
       "id": "queue",

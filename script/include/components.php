@@ -5821,16 +5821,6 @@ function sb_component_admin()
                                             </div>
 										</div>
 									</div>
-                                    <script>
-									$('.my-tab').click(function()
-									{
-										$('.my-tab').removeClass('active');
-										$(this).addClass('active');
-										$('.settings-tab').hide();
-										$('#'+$(this).data('target')).show();
-									});
-									</script>
- 
                                     <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"rel="stylesheet">
  
                                     <style>
@@ -5942,7 +5932,7 @@ function sb_component_admin()
                                     <?php //sb_populate_settings("chat",$sb_settings,true,'chat-appearance-and-features'); ?>
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <!-- <div class="sb-top-bar save_settings">
                                         <div class="">
                                             <p class="head mb-4">Admin Settings</p>
                                             <p class="des mb-0">Configure your admin settings.</p>
@@ -5953,11 +5943,68 @@ function sb_component_admin()
                                                 <?php sb_e("Save changes"); ?>
                                             </a>
                                         </div>
-                                    </div>
-                                    <?php sb_populate_settings(
-                                        "admin",
-                                        $sb_settings
-                                    ); ?>
+                                    </div> -->
+                                    <?php //sb_populate_settings("admin",$sb_settings ); ?>
+                                    <div class="main-content">
+                                        <h2>Admin <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                            <i class="sb-icon-check"></i>Save changes</a>
+                                        </h2>
+                                        <hr>
+                                        <div class="settings-card">
+                                            <div class="my-tabs">
+                                                <div class="my-tab active" data-target="panel-setting-content" >Panel Setting</div>
+                                                <div class="my-tab" data-target="language">Language</div>
+                                                <div class="my-tab" data-target="admin-chat-management-content">Chat Management</div>
+                                                <div class="my-tab" data-target="permission-setting-content">Permission Setting</div>
+                                                <div class="my-tab" data-target="settings-customization-content">Settings Customization</div>
+                                                <div class="my-tab" data-target="customer-content">Customer </div>
+                                                <div class="my-tab" data-target="auto-saved-message-inbox-content">Auto Saved Message Inbox</div>
+                                                <div class="my-tab" data-target="customization-and-themes-content">Customization & Themes</div>
+                                                <div class="my-tab" data-target="switch-accounts-content">Switch Accounts</div>
+                                                <div class="my-tab" data-target="department-content">Department</div>
+                                            </div>
+                                            
+                                            <div id="panel-setting-content" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'panel-setting'); ?>
+											</div>
+											
+											<div id="language" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'language'); ?>
+											</div>
+											
+											<div id="admin-chat-management-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'admin-chat-management'); ?>
+                                            </div>
+
+                                            <div id="permission-setting-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'permission-setting'); ?>
+                                            </div>
+
+                                            <div id="settings-customization-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'settings-customization'); ?>
+                                            </div>
+                                            
+                                            <div id="customer-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'customer'); ?>
+                                            </div>
+                                            
+                                            <div id="auto-saved-message-inbox-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'auto-saved-message-inbox'); ?>
+                                            </div>
+                                            
+                                            <div id="customization-and-themes-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'customization-and-themes'); ?>
+                                            </div>
+                                            
+                                            <div id="switch-accounts-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'switch-accounts'); ?>
+                                            </div>
+
+                                            <div id="department-content" style="display: none;" class="settings-tab">
+                                                 <?php sb_populate_settings("admin",$sb_settings,true,'department'); ?>
+                                            </div>
+										</div>
+									</div>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -6203,6 +6250,16 @@ function sb_component_admin()
                             </div>
                         </div>
                     </div>
+                    <script>
+                    $('.my-tab').click(function()
+                    {
+                        $('.my-tab').removeClass('active');
+                        $(this).addClass('active');
+                        $('.settings-tab').hide();
+                        $('#'+$(this).data('target')).show();
+                    });
+                    </script>
+ 
                 <?php } ?>
             </main>
             <?php
