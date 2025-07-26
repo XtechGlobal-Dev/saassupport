@@ -2440,6 +2440,11 @@ function sb_get_tickets_custom_active_fields()
     $query = "SELECT * FROM custom_fields WHERE is_active = 1 ORDER BY `order_no`";
     return sb_db_get($query,false);
 }
+function get_latest_five_customers()
+{
+    $query = "SELECT id,first_name,last_name,email FROM sb_users WHERE user_type IN ('user','lead') ORDER BY `id` DESC limit 5";
+    return sb_db_get($query,false);
+}
 function sb_get_tickets_statuses()
 {
     $query = "SELECT * FROM ticket_status ORDER BY `name`";
