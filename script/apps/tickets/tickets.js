@@ -87,8 +87,7 @@
         },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
-
-            console.log('panel1:',panel);
+            console.log('$$$',name);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -360,29 +359,43 @@
             if (!main.length) {
                 return;
             }
+            
             if (SBF.setting('tickets_registration_required') && (!activeUser() || ['visitor', 'lead'].includes(activeUser().type))) {
                 let redirect = SBF.setting('tickets_registration_redirect');
                 if (redirect) {
                     document.location = redirect + (redirect.includes('?') ? '&' : '?') + 'sb=true';
                     return;
                 } else {
+                     console.log('asasas0');
                     main.addClass('sb-no-conversations');
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
             } else {
+                
                 if (activeUser() && activeUser().conversations.length) {
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
                     }
-                } else {
+
+                    $(document).find('.header_left h2:first').trigger('click');  // load list of tickets
+                } 
+                else if(activeUser())
+                {
+                    console.log('asasas');
+                    console.log(activeUser().getUserTickets());
+                    console.log('hhheeee12');
+                }
+                else {
                     main.addClass('sb-no-conversations');
                     if (SBF.setting('privacy') && !SBF.storage('privacy_approved')) {
                         SBTickets.showPanel('privacy');
                     } else if (!SBF.setting('tickets_disable_first')) {
                         SBTickets.showPanel('new-ticket');
+                        console.log();
                     } else {
                         setConversationName();
                     }
+                    console.log('hhheeee13');
                 }
             }
             //let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
@@ -402,7 +415,7 @@
 
 
             console.log(window.innerHeight);
-            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px`);
+            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px;display:none`);
             setTimeout(function () {
                 main.removeClass('sb-load');
             }, 300);
@@ -522,6 +535,13 @@
     //     }
     // }
 
+    function convertTextToQuillFormat(text) {
+        const delta = {
+            ops: [{ insert: text.trim() + '\n' }]
+        };
+        return JSON.stringify(delta);
+    }
+
     function createTicket() {
         if (loading(this)) return;
 
@@ -535,14 +555,16 @@
         panel.find('.sb-attachments > div').each(function () {
             const name = $(this).attr('data-name');
             const path = $(this).attr('data-value');
+            const size = $(this).attr('data-size');
+            const type = $(this).attr('data-type');
 
             if (name && path && typeof path === 'string') {
                 finalAttachments.push({
                     filename: name,
                     original_filename: name,
                     file_path: path,
-                    file_type: null,
-                    file_size: null
+                    file_type: type,
+                    file_size: size
                 });
             }
         });
@@ -553,7 +575,7 @@
 
 
         const customer_id = activeUser().details.id ?? 0;
-        const customer_name = activeUser().details.first_name ? activeUser().details.first_name + activeUser().details.last_name: '';
+        const customer_name = activeUser().details.first_name ? activeUser().details.first_name +' '+ activeUser().details.last_name: '';
         const customer_email = activeUser().details.email ?? '';
 
 
@@ -571,6 +593,7 @@
         //let uploadedFiles = ticket_edit_box.find('#uploaded_files1').val() ?? null;
         let guest = 0;
         message = SBF.escape(message);
+        message = convertTextToQuillFormat(message);
 
 
         const contact_id = [];
@@ -598,7 +621,7 @@
         conversation_id.push('Conversation ID');
 
         const attachments = [];
-        attachments.push(finalAttachments);
+        attachments.push(JSON.stringify(finalAttachments));
         attachments.push('Attachments');
 
         const withoutContact = [];
@@ -854,8 +877,8 @@
             SBF.logout(false);
             SBTickets.showPanel('login');
             $('.user_header').addClass('d-none');
-            $('.tickets-list-area').hide();
-            $('.sb-tickets-area').show();
+            $('.tickets-list-area').show();
+            $('.sb-tickets-area').hide();
         });
 
         panel.on('click', '> .sb-buttons .sb-submit', function () {

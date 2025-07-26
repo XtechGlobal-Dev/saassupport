@@ -5660,6 +5660,22 @@ td.sb-offline:after {
   bottom: 0;
   z-index: 9;
 }
+.sb-admin > .sb-header > .sb-admin-nav .sb-notification-counter {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+  font-size: 9px;
+  border-radius: 50%;
+  text-align: center;
+  background: #155CFD;
+  color: #fff;
+  z-index: 9;
+  letter-spacing: 0.3px;
+  animation: sb-fade-animation 0.3s;
+}
 .sb-admin > .sb-header > .sb-admin-nav > img {
   height: 35px;
   margin: 18px 15px;
@@ -5885,6 +5901,7 @@ td.sb-offline:after {
 }
 .sb-admin .header_new .sidebar nav ul li {
   margin-bottom: 15px;
+  position: relative;
 }
 .sb-admin .header_new .sidebar nav ul li:hover a {
   color: #212528;
@@ -11254,6 +11271,23 @@ a.sb-btn-white.sb-loading:hover:before,
   display: none;
 }
 
+.sidebar-notification-icon {
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+  font-size: 9px;
+  border-radius: 50%;
+  text-align: center;
+  background: #155CFD;
+  color: #fff;
+  z-index: 9;
+  letter-spacing: 0.3px;
+  animation: sb-fade-animation 0.3s;
+  right: 1px;
+  top: 0px;
+}
+
 .sb-main:not(.sb-cloud) #google-sync-mode,
 .sb-main:not(.sb-cloud) #open-ai-sync-mode,
 .sb-main:not(.sb-cloud) #whatsapp-cloud-sync-mode,
@@ -12143,6 +12177,10 @@ i.fa-solid.fa-x.delete-attachment {
     padding-left: 0;
   }
 }
+.toggle-btn {
+  display: none;
+}
+
 /*
  *
  * -----------------------------------------------------------
