@@ -1031,7 +1031,7 @@ function sb_remove_ticket_attachment($attachment_id = 0, $ticket_id = 0) {
     sb_db_query('DELETE FROM ticket_attachments WHERE id = ' . $attachment_id . ' AND ticket_id = ' . $ticket_id);
     if ($attachment) {
         
-            $file_path = '../../uploads/ticket_attachments/' . $attachment['filename'];
+            $file_path = 'uploads/' . $attachment['filename'];
             // Check if the file exists and delete it
             if (file_exists($file_path)) {
                 unlink($file_path);
@@ -1656,7 +1656,7 @@ function get_dashboad_customer_overview($filter = 'month')
 function sb_upload_ticket_attachments($tickets_id = 0, $files = []) {
 
     // Create uploads directory if it doesn't exist
-    $uploadsDir = '../../uploads/ticket_attachments/';
+    $uploadsDir = '../uploads/ticket_attachments/';
     if (!is_dir($uploadsDir)) {
         mkdir($uploadsDir, 0755, true);
     }
@@ -1779,7 +1779,7 @@ function sb_add_ticket($inputs)
             'assigned_to' => isset($inputs['assigned_to'][0]) ? sb_db_escape($inputs['assigned_to'][0],true) : 0,
             'contact_name' => sb_db_escape($inputs['cust_name'][0]),
             'contact_email' => sb_db_escape($inputs['cust_email'][0]),
-            'priority_id' => sb_db_escape($inputs['priority_id'][0],true),
+            'priority_id' => isset($inputs['priority_id'][0]) ? sb_db_escape($inputs['priority_id'][0],true) : '4',
             'status_id' => sb_db_escape($inputs['status_id'][0],true),  // Default to Open status
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
@@ -1848,7 +1848,7 @@ function sb_add_ticket($inputs)
         }*/
 
 
-        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."', '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
+        $values = 'VALUES  (\''.$data['subject']."', '".$data['contact_id']."', '".$data['priority_id']."', '".$data['contact_name']."', '".$data['contact_email']."', '".$data['tags']."', '".$data['description']."','".sb_get_active_user_ID()."', NULL, '".sb_gmt_now()."', '".sb_gmt_now()."', '".$data['status_id']."'";
         if($data['assigned_to'] == 0)
         {
              $values .=",NULL";
@@ -1876,25 +1876,29 @@ function sb_add_ticket($inputs)
         $values .=")";
 
        //echo 'INSERT into sb_tickets(subject,contact_id,assigned_to,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,department_id,conversation_id) '.$values;
-        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,priority_id,contact_name,contact_email,tags,description,creation_time,updated_at,status_id,assigned_to,department_id,conversation_id) '.$values, true);
+        $ticket_id = sb_db_query('INSERT into sb_tickets(subject,contact_id,priority_id,contact_name,contact_email,tags,description,created_by,updated_by,creation_time,updated_at,status_id,assigned_to,department_id,conversation_id) '.$values, true);
 
         if($data['conversation_id'] != 0)  ///// updated sb_conversationstable to mark conversation as converted
         {
             sb_db_query('UPDATE sb_conversations SET converted_to_ticket = 1 WHERE id = ' . $data['conversation_id']);
         }
-        
 
-       // print_r($data);
-        // Update CCs
-        if (isset($data['cc'][0]) && $data['cc'][0] != '') {
-            /*$db->delete('ticket_ccs', 'ticket_id = ?', [$ticketId]);
-            foreach ($_POST['cc'] as $userId) {
-                $db->insert('ticket_ccs', [
-                    'ticket_id' => $ticketId,
-                    'user_id' => $userId
-                ]);
-            }*/
+        if(sb_is_agent())
+        {
+            $query = "Select contact_id from sb_tickets where id =  '$ticket_id'";
+            $result = sb_db_get($query);
+            $contactId = $result['contact_id'] ?? 0;
         }
+
+        if(!sb_is_agent())
+        {
+            sb_pusher_trigger('agents', 'updates-new-ticket', ['ticket_id'=>$ticket_id,'user_id' => $data['contact_id']]);
+        }
+        else
+        {
+            sb_pusher_trigger('private-user-'.$data['contact_id'], 'new-customer-ticket', ['ticket_id'=>$ticket_id,'user_id' => $data['contact_id']]);
+        }
+    
 
         ///// Insert ticket custom fields
         sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'new');
@@ -1903,6 +1907,9 @@ function sb_add_ticket($inputs)
         sb_add_edit_ticket_tags($ticket_id, $tags, $action = 'new');
         
         ////// Process file attachments if any
+
+        //print_r($inputs['attachments'][0]);
+
         sb_save_ticket_attachments($ticket_id, $inputs['attachments'][0]);
 
         return sb_return_saved_ticket_row($ticket_id);
@@ -1911,20 +1918,22 @@ function sb_add_ticket($inputs)
 function sb_save_ticket_attachments($ticket_id, $attachments) {
     if (isset($attachments) && !empty($attachments)) {
         $uploadedFiles = json_decode($attachments, true);
+
         if (json_last_error() === JSON_ERROR_NONE && is_array($uploadedFiles)) {
             foreach ($uploadedFiles as $file) {
                 // Verify the file exists
-                $filePath = '../../' . $file['file_path'];
+                $filePath = '../' . $file['file_path'];
+                $filePath = str_replace(SB_URL,'',$filePath);
+                $filePath2 = str_replace('../','',$filePath);
+                $filePath2 = str_replace('/uploads','uploads',$filePath2);
                 if (file_exists($filePath)) {
                     $fileName = sb_db_escape($file['filename']);
                     $originalFileName = sb_db_escape($file['original_filename']);
-                    $originalFileName = sb_db_escape($file['original_filename']);
-                    $filePath = sb_db_escape($file['file_path']);
                     $fileType = sb_db_escape($file['file_type']);
                     $fileSize = sb_db_escape($file['file_size']);
                     // Insert attachment record
                     $sql = "INSERT INTO ticket_attachments (ticket_id, filename, original_filename, file_path, file_type, file_size) 
-                    VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath', '$fileType', $fileSize)";
+                    VALUES ($ticket_id,  '$fileName', '$originalFileName', '$filePath2', '$fileType', $fileSize)";
                     $result = sb_db_query($sql,false);
                 }
             }
@@ -2094,7 +2103,7 @@ function sb_update_ticket($inputs,$ticket_id =0)
         $data['conversation_id'] = "'".$data['conversation_id']."'";
     }
 
-    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to =".$data['assigned_to'].",priority_id = '".$data['priority_id']."',department_id= ".$data['department_id'].",tags='".$data['tags']."',description='".$data['description']."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
+    sb_db_query('update sb_tickets set subject = \''.$data['subject']."',contact_id  ='".$data['contact_id']."',contact_name  ='".$data['contact_name']."',contact_email  ='".$data['contact_email']."',assigned_to =".$data['assigned_to'].",priority_id = '".$data['priority_id']."',department_id= ".$data['department_id'].",tags='".$data['tags']."',description='".$data['description']."',updated_by= '".sb_get_active_user_ID()."',updated_at= '".sb_gmt_now()."',status_id='".$data['status_id']."' where id = '".$ticket_id."'");
 
     ///// Update ticket custom fields
     sb_add_edit_ticket_custom_fields($ticket_id, $customFields, $action = 'edit');
@@ -2153,7 +2162,7 @@ function update_ticket_detail($inputs,$ticket_id =0){
     //     $data['conversation_id'] = "'".$data['conversation_id']."'";
     // }
 
-    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
+    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."',updated_by= '".sb_get_active_user_ID()."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
     sb_db_query($sql);
 
     ///// Update ticket custom fields

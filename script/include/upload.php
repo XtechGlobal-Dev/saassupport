@@ -5,7 +5,7 @@
  * UPLOAD.PHP
  * ==========================================================
  *
- * Manage all uploads of front-end and admin. © 2017-2025 board.support. All rights reserved.
+ * Manage all uploads of front-end and admin. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
@@ -38,6 +38,10 @@ if (isset($_FILES['file'])) {
             $file_name = rand(1000, 99999) . '_' . sb_string_slug($file_name);
             $path = $path . '/' . $file_name;
             $url = $url . '/' . $file_name;
+
+            $file_size = $_FILES['file']['size']; // bytes
+            $file_size_mb = round($file_size / (1024 * 1024), 2); // MB
+
             $response = ['success', ''];
             move_uploaded_file($_FILES['file']['tmp_name'], $path);
             if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
@@ -51,6 +55,8 @@ if (isset($_FILES['file'])) {
                 }
             }
             $response[1] = $url;
+            $response['size_bytes'] = $file_size;
+            $response['size_mb'] = $file_size_mb;
             die(json_encode($response));
         } else {
             die(json_encode(['success', 'extension_error']));

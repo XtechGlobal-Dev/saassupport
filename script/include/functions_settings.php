@@ -383,21 +383,66 @@ function sb_get_block_setting($value) {
     return false;
 }
 
-function sb_populate_settings($category, $settings, $echo = true) {
+// function sb_populate_settings($category, $settings, $echo = true) {
+//     if (!isset($settings) && file_exists(SB_PATH . '/resources/json/settings.json')) {
+//         $settings = sb_get_json_resource('json/settings.json');
+//     }
+//     $settings = $settings[$category];
+//     $code = '';
+//     for ($i = 0; $i < count($settings); $i++) {
+//         $code .= sb_get_setting_code($settings[$i]);
+//     }
+//     if ($echo) {
+//         echo $code;
+//         return true;
+//     } else {
+//         return $code;
+//     }
+// }
+
+function sb_populate_settings($category, $settings, $echo = true, $subcategory = null) {
     if (!isset($settings) && file_exists(SB_PATH . '/resources/json/settings.json')) {
         $settings = sb_get_json_resource('json/settings.json');
     }
-    $settings = $settings[$category];
-    $code = '';
-    for ($i = 0; $i < count($settings); $i++) {
-        $code .= sb_get_setting_code($settings[$i]);
+
+    // Validate main category
+    if (!isset($settings[$category])) {
+        return false;
     }
+
+    $category_data = $settings[$category];
+
+    // Determine the format and extract settings list accordingly
+    if (isset($subcategory) && is_array($category_data) && isset($category_data[$subcategory])) {
+        // Nested subcategory format: "chat": { "subcat": [ ... ] }
+        $settings_list = $category_data[$subcategory];
+    } elseif (isset($category_data[0]) && is_array($category_data[0])) {
+        // Flat array format: "chat": [ ... ]
+        $settings_list = $category_data;
+    } else {
+        // Fallback: maybe invalid structure or missing subcategory
+        return false;
+    }
+
+    // Generate HTML
+    $code = '';
+    foreach ($settings_list as $setting) {
+        if($category == 'chat')
+            $code .= sb_get_chat_setting_code($setting);
+        else
+            $code .= sb_get_setting_code($setting);
+    }
+
     if ($echo) {
         echo $code;
         return true;
     } else {
         return $code;
     }
+}
+
+function sb_is_assoc(array $arr) {
+    return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
 function sb_populate_app_settings($app_name) {
@@ -609,33 +654,215 @@ function sb_get_setting_code($setting) {
         } else {
             return $content;
         }
+    }
+    return '';
+}
 
-        /*}
-        else
-        {
-           ?>
-            <div id="tickets-fields" data-type="multi-input" class="sb-setting sb-type-multi-input">
-                <div class="sb-setting-content">
-                    <h2>Ticket fields</h2>
-                    <p>Choose which fields to include in the new ticket form.</p>
-                </div>
-                <div class="input" style="display: block;float: left;">
-                    <div id="tickets-field-departments" data-type="checkbox" class="multi-input-checkbox">
-                        <label>Departments</label><input type="checkbox">
-                    </div>
-                    <div id="tickets-field-priority" data-type="checkbox" class="multi-input-checkbox">
-                        <label>Priority</label>
-                        <input type="checkbox">
-                    </div>
-                    <?php //ticket_settings(); ?>
-                </div>
-            </div>
+function sb_get_chat_setting_code($setting) {
+    if (isset($setting)) {
+        $id = $setting['id'];
+        $type = $setting['type'];
+        $disable_translations = sb_get_setting('admin-disable-settings-translations');
+        $keywords = sb_isset($setting, 'keywords');
+        $content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="sb-setting sb-type-' . $type . '"><div class="sb-setting-content"><h2>' . sb_s($setting['title'], $disable_translations) . '</h2><p>' . sb_s($setting['content'], $disable_translations) . sb_get_setting_code_help($setting) . '</p></div><div class="input">';
+        switch ($type) {
+            case 'color':
+                $content .= '<input type="text"><i class="sb-close sb-icon-close"></i>';
+                break;
+            case 'text':
+                $content .= '<input type="text">';
+                break;
+            case 'password':
+                $content .= '<input type="password">';
+                break;
+            case 'textarea':
+                $content .= '<textarea></textarea>';
+                break;
+            case 'select':
+                $values = $setting['value'];
+                $content .= '<select>';
+                for ($i = 0; $i < count($values); $i++) {
+                    $content .= '<option value="' . $values[$i][0] . '">' . sb_s($values[$i][1], $disable_translations) . '</option>';
+                }
+                $content .= '</select>';
+                break;
+            case 'checkbox':
+                //$content .= '<input type="checkbox">';
+                $content .= '<label class="custom-switch">
+						<input type="checkbox">
+						<span class="slider"></span>
+					</label>';
+                break;
+            case 'radio':
+                $values = $setting['value'];
+                for ($i = 0; $i < count($values); $i++) {
+                    $content .= '<div><input type="radio" name="' . $id . '" value="' . strtolower(str_replace(' ', '-', $values[$i])) . '"><label>' . $setting["value"][$i] . '</label></div>';
+                }
+                break;
+            case 'number':
+                $content .= '<input type="number">' . (isset($setting['unit']) ? '<label>' . $setting['unit'] . '</label>' : '');
+                break;
+            case 'upload':
+                $content .= (empty($setting['text-field']) ? '' : '<input type="url">') . '<a class="sb-btn">' . sb_(sb_isset($setting, 'button-text', 'Choose file')) . '</a>';
+                break;
+            case 'upload-image':
+                $content .= '<div class="image"' . (isset($setting['background-size']) ? ' style="background-size: ' . $setting['background-size'] . '"' : '') . '><i class="sb-icon-close"></i></div>';
+                break;
+            case 'input-button':
+                $content .= '<input type="text"><a class="sb-btn">' . sb_s($setting['button-text'], $disable_translations) . '</a>';
+                break;
+            case 'button':
+                $content .= '<a class="sb-btn" href="' . $setting['button-url'] . '" target="_blank">' . sb_s($setting['button-text'], $disable_translations) . '</a>';
+                break;
+            case 'multi-input':
+                $values = $setting['value'];
+                for ($i = 0; $i < count($values); $i++) {
+                    $sub_type = $values[$i]['type'];
+                    $content .= '<div id="' . $values[$i]['id'] . '" data-type="' . $sub_type . '" class="multi-input-' . $sub_type . '"><label>' . sb_s($values[$i]['title'], $disable_translations) . sb_get_setting_code_help($values[$i]) . '</label>';
+                    switch ($sub_type) {
+                        case 'text':
+                            $content .= '<input type="text">';
+                            break;
+                        case 'password':
+                            $content .= '<input type="password">';
+                            break;
+                        case 'number':
+                            $content .= '<input type="number">';
+                            break;
+                        case 'textarea':
+                            $content .= '<textarea></textarea>';
+                            break;
+                        case 'upload':
+                            $content .= '<input type="url"><button type="button">' . sb_('Choose file') . '</button>';
+                            break;
+                        case 'upload-image':
+                            $content .= '<div class="image"><i class="sb-icon-close"></i></div>';
+                            break;
+                        case 'checkbox':
+                            //$content .= '<input type="checkbox">';
+                            $content .= '<label class="custom-switch">
+						<input type="checkbox">
+						<span class="slider"></span>
+					</label>';
+                            break;
+                        case 'select':
+                            $content .= '<select>';
+                            $items = $values[$i]['value'];
+                            for ($j = 0; $j < count($items); $j++) {
+                                $content .= '<option value="' . $items[$j][0] . '">' . sb_s($items[$j][1], $disable_translations) . '</option>';
+                            }
+                            $content .= '</select>';
+                            break;
+                        case 'button':
+                            $content .= '<a class="sb-btn" href="' . $values[$i]['button-url'] . '" target="_blank">' . sb_s($values[$i]['button-text'], $disable_translations) . '</a>';
+                            break;
+                        case 'select-checkbox':
+                            $items = $values[$i]['value'];
+                            $content .= '<input type="text" class="sb-select-checkbox-input" readonly><div class="sb-select-checkbox">';
+                            for ($i = 0; $i < count($items); $i++) {
+                                $content .= '<div class="multi-input-checkbox"><input id="' . $items[$i][0] . '" type="checkbox"><label>' . sb_s($items[$i][1], $disable_translations) . '</label></div>';
+                            }
+                            $content .= '</div>';
+                            break;
+                    }
+                    $content .= '</div>';
+                }
+                break;
+            case 'range':
+                $range = (key_exists('range', $setting) ? $setting['range'] : array(0, 100));
+                $unit = (key_exists('unit', $setting) ? '<label>' . $setting['unit'] . '</label>' : '');
+                $content .= '<label class="range-value">' . $range[0] . '</label><input type="range" min="' . $range[0] . '" max="' . $range[1] . '" value="' . $range[0] . '" />' . $unit;
+                break;
+            case 'repeater':
+                $content .= '<div class="sb-repeater"><div class="repeater-item">';
+                for ($i = 0; $i < count($setting['items']); $i++) {
+                    $item = $setting['items'][$i];
+                    $content .= '<div>' . (isset($item['name']) ? '<label>' . sb_s($item['name'], $disable_translations) . '</label>' : '');
+                    switch ($item['type']) {
+                        case 'url':
+                        case 'text':
+                        case 'number':
+                        case 'password':
+                            $content .= '<input data-id="' . $item['id'] . '" type="' . $item['type'] . '">';
+                            break;
+                        case 'textarea':
+                            $content .= '<textarea data-id="' . $item['id'] . '"></textarea>';
+                            break;
+                        case 'checkbox':
+                            $content .= '<input data-id="' . $item['id'] . '" type="checkbox">';
+                            break;
+                        case 'auto-id':
+                            $content .= '<input data-type="auto-id" data-id="' . $item['id'] . '" value="1" type="text" readonly="true">';
+                            break;
+                        case 'hidden':
+                            $content .= '<input data-id="' . $item['id'] . '" type="hidden">';
+                            break;
+                        case 'color-palette':
+                            $content .= sb_color_palette($item['id']);
+                            break;
+                        case 'upload-image':
+                            $content .= '<div data-type="upload-image"><div data-id="' . $item['id'] . '" class="image"><i class="sb-icon-close"></i></div></div>';
+                            break;
+                        case 'upload-file':
+                            $content .= '<div data-type="upload-file" class="sb-flex"><input type="url" data-id="' . $item['id'] . '" disabled><a class="sb-btn">' . sb_('Choose file') . '</a></div>';
+                            break;
+                        case 'button':
+                            $content .= '<a data-id="' . $item['id'] . '" href="' . $item['button-url'] . '" class="sb-btn" target="_blank">' . sb_s($item['button-text'], $disable_translations) . '</a>';
+                            break;
+                        case 'select':
+                            $values = $item['value'];
+                            $content .= '<select data-id="' . $item['id'] . '">';
+                            for ($i = 0; $i < count($values); $i++) {
+                                $content .= '<option value="' . $values[$i][0] . '">' . sb_s($values[$i][1], $disable_translations) . '</option>';
+                            }
+                            $content .= '</select>';
+                            break;
+                    }
+                    $content .= '</div>';
+                }
+                $content .= '<i class="sb-icon-close"></i></div></div><a class="sb-btn sb-repeater-add">' . sb_('Add new item') . '</a>';
+                break;
+            case 'timetable':
+                $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                $hours = [['', ''], ['00:00', '12:00 am'], ['00:30', '12:30 am'], ['01:00', '1:00 am'], ['01:30', '1:30 am'], ['02:00', '2:00 am'], ['02:30', '2:30 am'], ['03:00', '3:00 am'], ['03:30', '3:30 am'], ['04:00', '4:00 am'], ['04:30', '4:30 am'], ['05:00', '5:00 am'], ['05:30', '5:30 am'], ['06:00', '6:00 am'], ['06:30', '6:30 am'], ['07:00', '7:00 am'], ['07:30', '7:30 am'], ['08:00', '8:00 am'], ['08:30', '8:30 am'], ['09:00', '9:00 am'], ['09:30', '9:30 am'], ['10:00', '10:00 am'], ['10:30', '10:30 am'], ['11:00', '11:00 am'], ['11:30', '11:30 am'], ['12:00', '12:00 pm'], ['12:30', '12:30 pm'], ['13:00', '1:00 pm'], ['13:30', '1:30 pm'], ['14:00', '2:00 pm'], ['14:30', '2:30 pm'], ['15:00', '3:00 pm'], ['15:30', '3:30 pm'], ['16:00', '4:00 pm'], ['16:30', '4:30 pm'], ['17:00', '5:00 pm'], ['17:30', '5:30 pm'], ['18:00', '6:00 pm'], ['18:30', '6:30 pm'], ['19:00', '7:00 pm'], ['19:30', '7:30 pm'], ['20:00', '8:00 pm'], ['20:30', '8:30 pm'], ['21:00', '9:00 pm'], ['21:30', '9:30 pm'], ['22:00', '10:00 pm'], ['22:30', '10:30 pm'], ['23:00', '11:00 pm'], ['23:30', '11:30 pm'], ['closed', sb_('Closed')]];
+                $select = '<div class="sb-custom-select">';
+                for ($i = 0; $i < count($hours); $i++) {
+                    $select .= '<span data-value="' . $hours[$i][0] . '">' . $hours[$i][1] . '</span>';
+                }
+                $content .= '<div class="sb-timetable">';
+                for ($i = 0; $i < 7; $i++) {
+                    $content .= '<div data-day="' . strtolower($days[$i]) . '"><label>' . sb_($days[$i]) . '</label><div><div></div><span>' . sb_('To') . '</span><div></div><span>' . sb_('And') . '</span><div></div><span>' . sb_('To') . '</span><div></div></div></div>';
+                }
+                $content .= $select . '</div></div>';
+                break;
+            case 'select-images':
+                $content .= '<div class="sb-icon-close"></div>';
+                for ($i = 0; $i < count($setting['images']); $i++) {
+                    $content .= '<div data-value="' . $setting['images'][$i] . '" style="background-image: url(\'' . SB_URL . '/media/' . $setting['images'][$i] . '\')"></div>';
+                }
+                break;
+            case 'select-checkbox':
+                $values = $setting['value'];
+                $content .= '<select disabled><option>AA</option></select><div class="sb-select-checkbox">';
+                for ($i = 0; $i < count($values); $i++) {
+                    $content .= '<div id="' . $values[$i]['id'] . '" data-type="checkbox" class="multi-input-checkbox"><input type="checkbox"><label>' . sb_s($values[$i]['title'], $disable_translations) . '</label></div>';
+                }
+                $content .= '</div>';
+                break;
+        }
+        if (isset($setting['setting']) && ($type == 'multi-input' || !empty($setting['multilingual']))) {
+            $content .= '<div class="sb-language-switcher-cnt"><label>' . sb_('Languages') . '</label></div>';
+        }
+        
+         $content .= '</div></div>';
 
-
-            
-            <?php
-            
-        }*/
+        if ($id == 'tickets-custom-fields') {
+            return ticket_custom_field_settings();
+        } else if ($id == 'tickets-statuses') {
+            return ticket_statuses_settings();
+        } else {
+            return $content;
+        }
     }
     return '';
 }
