@@ -463,7 +463,7 @@ function box_chart()
                     <?php sb_e('Already have an account?') ?>
                 </div>
                 <div class="sb-text sb-btn-login-box">
-                    <?php sb_e('Log in') ?>
+                    <?php sb_e('Sign In') ?>
                 </div>
             </div>
             <div class="sb-errors-area"></div>
@@ -548,16 +548,16 @@ function box_chart()
                                 </div>
                             </div>
                             <div class="sb-errors-area m-0 text-end"></div>
-                            <div class="auth-options">
+                            <div class="auth-options mt-2">
                                 <label class="remember-me">
-                                    <input type="checkbox" class="checkbox" checked />
+                                    <input type="checkbox" class="checkbox" checked style="margin-top:5px;" />
                                     <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And Privacy Policy</span>
                                 </label>
                             </div>
                             <button class="login-button btn-register">Sign Up</button>
                             <div class="register-prompt">
                                 <div class="no-account">Already have an account?</div>
-                                <div class="register-link sb-btn-login-box">Log In</div>
+                                <div class="register-link sb-btn-login-box">Sign In</div>
                             </div>
                         </div>
                         <div class="loading-screen">
@@ -631,7 +631,7 @@ function box_chart()
                 <div class="col-md-6 top_right">
                     <div class="right_section">
                         <div class="login-form sb-main">
-                            <h1 class="login-title">Login</h1>
+                            <h1 class="login-title">Sign In</h1>
                             <p class="login-description">
                                 Enter the Business Email Address and Password to log in to your account
                             </p>
@@ -742,8 +742,8 @@ function box_chart()
                                     </div>
                                 </div>
                             </div>
-                            <div class="forgot-password btn-cancel-reset-password">
-                                Go back to login
+                            <div class="forgot-password btn-cancel-reset-password mt-2">
+                                Back to Sign In
                             </div>
                             <button class="login-button sb-btn btn-reset-password">Send Reset Email</button>
                         </div>

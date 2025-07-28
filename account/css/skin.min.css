@@ -25,7 +25,7 @@ GLOBAL
     opacity: 1; } }
 body {
   font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
-  min-height: 0; overflow: hidden; }
+  min-height: 0; }
 
 body.on-load * {
   transition: none !important; }
