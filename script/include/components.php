@@ -253,13 +253,15 @@ function sb_ticket_edit_box()
         <div class="sb-top-bar">
             <div class="sb-ticket">
                 <span class="sb-name"></span>
-                <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;">
+                <?php /*
+                <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
                     <label class="ml-4">Guest Ticket</label>
                     <div class="form-check form-switch mb-0 ml-2">
                         <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
                             id="flexSwitchCheckDefault" style="width: 27px;">
                     </div>
-                </div>
+                </div>*/
+                ?>
             </div>
             <div>
                 <div id="conversation_id_div" data-type="checkbox" class="sb-input mr-4 d-none" style="font-size: 13px;">
@@ -495,6 +497,7 @@ function sb_ticket_edit_box()
                 <input id="conversation_id" type="hidden" name="conversation_id" />
                 <!-- Hidden input to store uploaded file data -->
                 <input type="hidden" id="uploaded_files1" name="uploaded_files" value="">
+                <input type="hidden" id="new_user" name="new_user" value="0">
             </div>
             <div id="ticketCustomFieldsContainer" class="custom-field" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
@@ -958,53 +961,7 @@ function sb_ticket_edit_box()
             //     });
             // });
         });
-        $('#select-customer').select2({
-            placeholder: 'Type and search...',
-            ajax: {
-                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                method: 'POST',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        function: 'ajax_calls',
-                        'calls[0][function]': 'search-get-users',
-                        'login-cookie': SBF.loginCookie(),
-                        'q': params.term, // ✅ Pass search term
-                        'type': 'user'
-                    };
-                },
-                processResults: function (response) {
-                    //response = JSON.parse(response);
-                    if (response[0][0] == 'success') {
-                        const users = response[0][1];
-                        console.log("Processed users:", response[0][1]);
-                        // document.querySelector('#name select').value = response.priority_id;
-                        return {
-                            results: users.map(user => ({
-                                id: user.id,
-                                text: user.first_name + ' ' + user.last_name,
-                                email: user.email,
-                                name: user.first_name + ' ' + user.last_name
-                            }))
-                        };
-                    }
-                },
-                cache: true
-            },
-            minimumInputLength: 1
-        });
-
-
-        $('#select-customer').on('select2:select', function (e) {
-            const selectedCustomer = e.params.data;
-
-            console.log(selectedCustomer);
-            // Now fill other input fields
-            document.querySelector('#cust_name input').value = selectedCustomer.name;
-            document.querySelector('#cust_email input').value = selectedCustomer.email;
-            //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
-        });
+       
 
         const capitalizedType = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         $('#select-agent').select2({
