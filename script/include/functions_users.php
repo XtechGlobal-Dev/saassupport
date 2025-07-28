@@ -1096,10 +1096,6 @@ function sb_edit_ticket($tickets_id = 0) {
         }
     }
     $result['ticket_tags'] = $ticketTagsWithColor; 
-
-
-
-    
     
     if ($result) {
         $result['custom_fields'] = sb_fetch_ticket_custom_fields_data($tickets_id);
@@ -1784,10 +1780,26 @@ function sb_add_ticket($inputs)
             'department_id' => isset($inputs['department_id'][0]) ?  sb_db_escape($inputs['department_id'][0],true) : 0,
             'description' => sb_db_escape($inputs['description'][0]),
             'tags' => '',   //// leave default tags column empty
-            'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0,
+            'conversation_id' => isset($inputs['conversation_id'][0]) && $inputs['conversation_id'][0] != "" ?  sb_db_escape($inputs['conversation_id'][0],true) : 0
         ];
 
-        //print_r($data);
+        $new_user = isset($inputs['new_user'][0]) ? sb_db_escape($inputs['new_user'][0],true) : 0;
+
+        if($new_user)
+        {
+            $contactName =  explode(' ',$data['contact_name']);
+            $firstName = isset($contactName[0]) ? $contactName[0] : '';
+            $lastName = isset($contactName[1]) ? $contactName[1] : '';
+            $contactEmail = $data['contact_email'];
+            $token = bin2hex(openssl_random_pseudo_bytes(20));
+            $profileImg = SB_URL . '/media/user.svg';
+            $values = 'VALUES  (\''.$firstName."', '".$lastName."', '".$contactEmail."','".$profileImg."','user','".sb_gmt_now()."', '".$token."')";
+        
+            $query = "INSERT into sb_users (first_name,last_name, email, profile_image, user_type, creation_time,token)  $values";
+              
+            $user_id = sb_db_query($query,true);
+            $data['contact_id'] = $user_id;
+        }
         
 
         $customFields = array();
@@ -2442,7 +2454,7 @@ function sb_get_tickets_custom_active_fields()
 }
 function get_latest_five_customers()
 {
-    $query = "SELECT id,first_name,last_name,email FROM sb_users WHERE user_type IN ('user','lead') ORDER BY `id` DESC limit 5";
+    $query = "SELECT id,first_name,last_name,email FROM sb_users WHERE user_type IN ('user','lead', 'visitor') ORDER BY `id` DESC limit 5";
     return sb_db_get($query,false);
 }
 function sb_get_tickets_statuses()

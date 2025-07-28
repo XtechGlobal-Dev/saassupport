@@ -253,13 +253,15 @@ function sb_ticket_edit_box()
         <div class="sb-top-bar">
             <div class="sb-ticket">
                 <span class="sb-name"></span>
-                <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;">
+                <?php /*
+                <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
                     <label class="ml-4">Guest Ticket</label>
                     <div class="form-check form-switch mb-0 ml-2">
                         <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
                             id="flexSwitchCheckDefault" style="width: 27px;">
                     </div>
-                </div>
+                </div>*/
+                ?>
             </div>
             <div>
                 <div id="conversation_id_div" data-type="checkbox" class="sb-input mr-4 d-none" style="font-size: 13px;">
@@ -495,6 +497,7 @@ function sb_ticket_edit_box()
                 <input id="conversation_id" type="hidden" name="conversation_id" />
                 <!-- Hidden input to store uploaded file data -->
                 <input type="hidden" id="uploaded_files1" name="uploaded_files" value="">
+                <input type="hidden" id="new_user" name="new_user" value="0">
             </div>
             <div id="ticketCustomFieldsContainer" class="custom-field" style="margin: 10px 0 0 0;"></div>
             <!-- File Attachments Section -->
@@ -740,6 +743,8 @@ function sb_ticket_edit_box()
             width: 45px;
             height: 45px;
             line-height: 45px;
+        min-width: 45px;
+        min-height: 45px;
         }
 
         .sb-user-details .user-initials {
@@ -760,10 +765,10 @@ function sb_ticket_edit_box()
         }
 
         /* .sb-td-tags span {
-                                    margin: 3px 5px 0 0;
-                                    padding: .45em .75em;
-                                    font-size: 13px
-                                } */
+                                        margin: 3px 5px 0 0;
+                                        padding: .45em .75em;
+                                        font-size: 13px
+                                    } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -798,76 +803,76 @@ function sb_ticket_edit_box()
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                    position: relative;
-                                    overflow: visible !important;
+                                        position: relative;
+                                        overflow: visible !important;
             
-                                }
+                                    }
 
-                                .status-btn {
-                                    border: none;
-                                    border-radius: 8px;
-                                    padding: 3px 12px;
-                                    font-weight: 500;
-                                    cursor: pointer;
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 4px;
-                                    font-size: 14px;
-                                }
+                                    .status-btn {
+                                        border: none;
+                                        border-radius: 8px;
+                                        padding: 3px 12px;
+                                        font-weight: 500;
+                                        cursor: pointer;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 4px;
+                                        font-size: 14px;
+                                    }
 
-                                .status-list li,
-                                .priority-list li {
-                                    font-size: 14px;
-                                }
+                                    .status-list li,
+                                    .priority-list li {
+                                        font-size: 14px;
+                                    }
 
-                                .status-dot {
-                                    width: 10px !important;
-                                    height: 10px !important;
-                                }
+                                    .status-dot {
+                                        width: 10px !important;
+                                        height: 10px !important;
+                                    }
 
-                                .arrow {
-                                    font-size: 12px;
-                                }
+                                    .arrow {
+                                        font-size: 12px;
+                                    }
 
-                                .status-list,
-                                .priority-list {
-                                    display: none;
-                                    position: absolute;
-                                    top: 75%;
-                                    left: 0;
-                                    min-width: 170px;
-                                    background: #fff;
-                                    border: 1px solid #ddd;
-                                    border-radius: 8px;
-                                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                    z-index: 9999;
-                                    padding: 6px 0;
-                                    margin: 0;
-                                    list-style: none;
-                                }
+                                    .status-list,
+                                    .priority-list {
+                                        display: none;
+                                        position: absolute;
+                                        top: 75%;
+                                        left: 0;
+                                        min-width: 170px;
+                                        background: #fff;
+                                        border: 1px solid #ddd;
+                                        border-radius: 8px;
+                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                        z-index: 9999;
+                                        padding: 6px 0;
+                                        margin: 0;
+                                        list-style: none;
+                                    }
 
-                                .status-list li,
-                                .priority-list li {
-                                    padding: 8px 16px;
-                                    cursor: pointer;
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 4px;
-                                    font-size: 15px;
-                                    transition: background 0.15s;
-                                }
+                                    .status-list li,
+                                    .priority-list li {
+                                        padding: 8px 16px;
+                                        cursor: pointer;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 4px;
+                                        font-size: 15px;
+                                        transition: background 0.15s;
+                                    }
 
-                                .status-list li:hover,
-                                .priority-list li:hover {
-                                    background: #f5f5f5;
-                                }
+                                    .status-list li:hover,
+                                    .priority-list li:hover {
+                                        background: #f5f5f5;
+                                    }
 
-                                .status-dot {
-                                    width: 12px;
-                                    height: 12px;
-                                    border-radius: 50%;
-                                    display: inline-block;
-                                } */
+                                    .status-dot {
+                                        width: 12px;
+                                        height: 12px;
+                                        border-radius: 50%;
+                                        display: inline-block;
+                                    } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -958,53 +963,7 @@ function sb_ticket_edit_box()
             //     });
             // });
         });
-        $('#select-customer').select2({
-            placeholder: 'Type and search...',
-            ajax: {
-                url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
-                method: 'POST',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        function: 'ajax_calls',
-                        'calls[0][function]': 'search-get-users',
-                        'login-cookie': SBF.loginCookie(),
-                        'q': params.term, // ✅ Pass search term
-                        'type': 'user'
-                    };
-                },
-                processResults: function (response) {
-                    //response = JSON.parse(response);
-                    if (response[0][0] == 'success') {
-                        const users = response[0][1];
-                        console.log("Processed users:", response[0][1]);
-                        // document.querySelector('#name select').value = response.priority_id;
-                        return {
-                            results: users.map(user => ({
-                                id: user.id,
-                                text: user.first_name + ' ' + user.last_name,
-                                email: user.email,
-                                name: user.first_name + ' ' + user.last_name
-                            }))
-                        };
-                    }
-                },
-                cache: true
-            },
-            minimumInputLength: 1
-        });
-
-
-        $('#select-customer').on('select2:select', function (e) {
-            const selectedCustomer = e.params.data;
-
-            console.log(selectedCustomer);
-            // Now fill other input fields
-            document.querySelector('#cust_name input').value = selectedCustomer.name;
-            document.querySelector('#cust_email input').value = selectedCustomer.email;
-            //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
-        });
+       
 
         const capitalizedType = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         $('#select-agent').select2({
@@ -2670,12 +2629,12 @@ function sb_component_admin()
                 <div class="sb-area-dashboard screen-size">
                     <main>
                         <?php echo $header; ?>
-                        <div class="container new_container">
+                        <div class="container new_container py-3">
                             <div class="row">
                                 <div class="col-md-8 p-0">
-                                    <div class="px-3 mt-3 clmn-gap">
+                                    <div class="px-3 clmn-gap">
                                         <section class="dashboard-metrics">
-                                            <!-- <div class="metric-card"
+                                            <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
@@ -2693,8 +2652,8 @@ function sb_component_admin()
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="metric-increase">Increase by <span>0</span> this week</div>
-                                            </div> -->
+                                                <div class="metric-increase">Increase by <span>0</span> in last 7 days</div>
+                                            </div>
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EAFFF9 100%);">
                                                 <div class="graph_tabs">
@@ -2716,13 +2675,13 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% this week</div-->
+                                                <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% in last 7 days</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
                                                     Increase by
                                                     <span class="increase-pill">
                                                         <span class="total-users-increase"></span><span>%</span>
-                                                    </span>&nbsp;this week
+                                                    </span>&nbsp;in last 7 days
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -2748,13 +2707,13 @@ function sb_component_admin()
                                                         </script> -->
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% this week</div-->
+                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% in last 7 days</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
                                                     Increase by
                                                     <span class="increase-pill">
                                                         <span class="total-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;this week
+                                                    </span>&nbsp;in last 7 days
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -2785,13 +2744,13 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
+                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% in last 7 days</div-->
                                                 <!-- code update  -->
                                                 <div class="metric-increase">
                                                     Increase by
                                                     <span class="increase-pill">
                                                         <span class="total-conversations-increase"></span><span>%</span>
-                                                    </span>&nbsp;this week
+                                                    </span>&nbsp;in last 7 days
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -2818,15 +2777,46 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% this week</div-->
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% in last 7 days</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
                                                     Increase by
                                                     <span class="increase-pill">
                                                         <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;this week
+                                                    </span>&nbsp;in last 7 days
                                                 </div>
                                                 <!-- code update -->
+                                            </div>
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;">
+
+                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
+                                                            <img src="./script/media/total-conversations.svg"
+                                                                alt="Total Conversations">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Total Conversations</h3>
+                                                            <p class="total-conversations"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="total_conversations_chart">
+                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-conversations-increase"></span><span>%</span>
+                                                    </span>&nbsp;in last 7 days
+                                                </div>
+
                                             </div>
                                         </section>
                                         <!--section class="dashboard-metrics">
@@ -2851,13 +2841,13 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div-->
-                                        <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% this week</div-->
+                                        <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% in last 7 days</div-->
                                         <!-- code update  -->
                                         <!--div class="metric-increase">
                                                         Increase by 
                                                         <span class="increase-pill">
                                                             <span class="total-conversations-increase"></span><span>%</span>
-                                                        </span>&nbsp;this week </div-->
+                                                        </span>&nbsp;in last 7 days </div-->
                                         <!-- code update -->
                                         <!--/div>
                                             <div class="metric-card"
@@ -3030,7 +3020,7 @@ function sb_component_admin()
                                                         <option>Monthly</option>
                                                     </select> -->
                                                 </div>
-                                                <div class="d-flex justify-content-center gap-3 mb-3">
+                                                <div class="d-flex justify-content-center gap-3 mb-3 flex-wrap flex-md-nowrap">
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
                                                         <img src="./script/media/created.svg" alt="Created">
@@ -3065,24 +3055,162 @@ function sb_component_admin()
                                                 </script>
                                             </div>
                                         </section>
-                                        <section class="main-charts recent-message">
-                                            <div class="card p-3">
-                                                <div class="bg-white">
-                                                    <h6 class="head mb-1">Recent Messages</h6>
+                                        <section class="main-charts high-inrs">
+                                            <div class="customer-overview">
+                                                <div class="customer-overview-card card p-3">
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <h6 class="fw-bold">Customer Overview</h6>
+                                                        <select id="customer-overview"
+                                                            class="form-select form-select-sm w-auto">
+                                                            <option value="month" selected>Last Month</option>
+                                                            <option value="year">Last Year</option>
+                                                            <!-- <option>Monthly</option> -->
+                                                        </select>
+                                                    </div>
+                                                    <!-- Donut Chart Block -->
+                                                    <div class="overview_chart">
+                                                        <ul class="legend" style="list-style: none; padding: 0;">
+                                                            <span class="filter-range"></span>
+                                                            <li><span class="total"></span><label></label></li>
+                                                            <li><span class="new"></span><label></label></li>
+                                                            <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
+                                                        </ul>
+                                                        <div id="chart-container">
+                                                            <canvas id="donutChart"
+                                                                style="max-height: 150px; max-width: 300px;"></canvas>
+                                                            <div class="chart-center">
+                                                                <p class="mb-1"><strong>Customer Report</strong></p>
+                                                                <pre></pre>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <script>
+                                                        const ctx = document.getElementById('donutChart').getContext('2d');
+                                                        new Chart(ctx, {
+                                                            type: 'doughnut',
+                                                            data: {
+                                                                labels: ['Total', 'New', 'Active'],
+                                                                datasets: [{
+                                                                    data: [500, 500, 1500],
+                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
+                                                                    borderWidth: 0
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                cutout: '70%',
+                                                                rotation: -90,
+                                                                circumference: 180,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        enabled: true
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    </script> -->
+                                                    </div>
                                                 </div>
-                                                <div class="seprator"></div>
-                                                <div class="recent card p-3">
-                                                    <ul class="recent-messages list-unstyled" style="min-height:254px;">
-                                                        No massge found
-                                                    </ul>
+                                                <div class="customer-overview-card card p-3">
+                                                    <div class="px-3 main-charts tables clmn-gap">
+                                                        <div class="bg-white d-flex justify-content-between align-items-center">
+                                                            <div>
+                                                                <h6 class="head mb-1">All Tickets</h6>
+                                                            </div>
+                                                            <p class="label_blue"><a class="mr-2"
+                                                                    href="<?php echo $ticketUrl; ?>">View
+                                                                    All</a>
+                                                            </p>
+                                                        </div>
+                                                        <div class="seprator"></div>
+                                                        <?php
+                                                        function sb_get_priorities()
+                                                        {
+                                                            $priorities = sb_db_get(
+                                                                "SELECT * FROM priorities",
+                                                                false
+                                                            );
+                                                            return $priorities;
+                                                        }
+                                                        function sb_get_statues()
+                                                        {
+                                                            $status = sb_db_get(
+                                                                "SELECT * FROM ticket_status",
+                                                                false
+                                                            );
+                                                            return $status;
+                                                        }
+                                                        $statues = sb_get_statues();
+                                                        $priorities = sb_get_priorities();
+                                                        ?>
+                                                        <div id="ticket_statues">
+                                                            <ul class="status-list dropdown-menu">
+                                                                <?php foreach (
+                                                                    $statues
+                                                                    as $status
+                                                                ) {
+                                                                    echo '<li data-status="' . $status["name"] . '" class="" data-color="' . $status["color"] . '" value="' . $status["id"] . '">
+                                                                        <a class="dropdown-item" href="#"> ' . $status["name"] . '</a></li>';
+                                                                } ?>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div id="ticket_priorities">
+                                                            <ul class="priority-list dropdown-menu">
+                                                                <?php foreach (
+                                                                    $priorities
+                                                                    as $priority
+                                                                ) {
+                                                                    echo '<li data-status="' . $priority["name"] . '" class="" data-color="' . $priority["color"] . '" value="' . $priority["id"] . '">
+                                                                <a class="dropdown-item" href="#">' . $priority["name"] . '</a></li>';
+                                                                } ?>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="new_table sb-area-tickets-dash">
+                                                            <div class="sb-scroll-area">
+                                                                <table
+                                                                    class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th data-field="title">
+                                                                                Ticket Title
+                                                                            </th>
+                                                                            <th data-field="assigned-to">
+                                                                                Assigned To
+                                                                            </th>
+                                                                            <th data-field="creation-date">
+                                                                                Creation Date
+                                                                            </th>
+                                                                            <th data-field="status">
+                                                                                <?php sb_e(
+                                                                                    "Status"
+                                                                                ); ?>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ticket-id="">
+                                                                            <td class="sb-td-subject">Bug fix: Login issue</td>
+                                                                            <td class="sb-td-tags">Kathryn Murphy</td>
+                                                                            <td><span>05/15/25</span> <span>10:01 AM</span></td>
+                                                                            <td class="sb-td-status"><span class="span-border"
+                                                                                    style="color:#FF0000;border:1px solid #FF0000;">Open</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="div"></div>
                                             </div>
                                         </section>
+
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="px-3 mt-3 clmn-gap">
+                                    <div class="px-3 mt-3 mt-md-0 clmn-gap">
                                         <section class="main-charts mb-3">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -3162,154 +3290,18 @@ function sb_component_admin()
                                                 </div>
                                             </div>
                                         </section>
-                                        <section class="main-charts high-inrs">
-                                            <div class="card p-3">
-                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h6 class="fw-bold">Customer Overview</h6>
-                                                    <select id="customer-overview" class="form-select form-select-sm w-auto">
-                                                        <option value="month" selected>Last Month</option>
-                                                        <option value="year">Last Year</option>
-                                                        <!-- <option>Monthly</option> -->
-                                                    </select>
+                                        <section class="main-charts recent-message">
+                                            <div class="card p-3 messages-list">
+                                                <div class="bg-white">
+                                                    <h6 class="head mb-1">Recent Messages</h6>
                                                 </div>
-                                                <!-- Donut Chart Block -->
-                                                <div class="overview_chart">
-                                                    <ul class="legend" style="list-style: none; padding: 0;">
-                                                        <span class="filter-range"></span>
-                                                        <li><span class="total"></span><label></label></li>
-                                                        <li><span class="new"></span><label></label></li>
-                                                        <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
+                                                <div class="seprator"></div>
+                                                <div class="recent card p-3">
+                                                    <ul class="recent-messages list-unstyled" style="min-height:254px;">
+                                                        No massge found
                                                     </ul>
-                                                    <div id="chart-container">
-                                                        <canvas id="donutChart"
-                                                            style="max-height: 150px; max-width: 300px;"></canvas>
-                                                        <div class="chart-center">
-                                                            <p class="mb-1"><strong>Customer Report</strong></p>
-                                                            <pre></pre>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <script>
-                                                        const ctx = document.getElementById('donutChart').getContext('2d');
-                                                        new Chart(ctx, {
-                                                            type: 'doughnut',
-                                                            data: {
-                                                                labels: ['Total', 'New', 'Active'],
-                                                                datasets: [{
-                                                                    data: [500, 500, 1500],
-                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
-                                                                    borderWidth: 0
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                cutout: '70%',
-                                                                rotation: -90,
-                                                                circumference: 180,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: true
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                    </script> -->
                                                 </div>
-                                            </div>
-                                        </section>
-                                        <section class="main-charts mb-3" style="margin-top: 15px;">
-                                            <div class="card p-3">
-                                                <div class="px-3 main-charts tables clmn-gap">
-                                                    <div class="bg-white d-flex justify-content-between align-items-center">
-                                                        <div>
-                                                            <h6 class="head mb-1">All Tickets</h6>
-                                                        </div>
-                                                        <p class="label_blue"><a class="mr-2"
-                                                                href="<?php echo $ticketUrl; ?>">View
-                                                                All</a>
-                                                        </p>
-                                                    </div>
-                                                    <div class="seprator"></div>
-                                                    <?php
-                                                    function sb_get_priorities()
-                                                    {
-                                                        $priorities = sb_db_get(
-                                                            "SELECT * FROM priorities",
-                                                            false
-                                                        );
-                                                        return $priorities;
-                                                    }
-                                                    function sb_get_statues()
-                                                    {
-                                                        $status = sb_db_get(
-                                                            "SELECT * FROM ticket_status",
-                                                            false
-                                                        );
-                                                        return $status;
-                                                    }
-                                                    $statues = sb_get_statues();
-                                                    $priorities = sb_get_priorities();
-                                                    ?>
-                                                    <div id="ticket_statues">
-                                                        <ul class="status-list dropdown-menu">
-                                                            <?php foreach (
-                                                                $statues
-                                                                as $status
-                                                            ) {
-                                                                echo '<li data-status="' . $status["name"] . '" class="" data-color="' . $status["color"] . '" value="' . $status["id"] . '">
-                                                                        <a class="dropdown-item" href="#"> ' . $status["name"] . '</a></li>';
-                                                            } ?>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div id="ticket_priorities">
-                                                        <ul class="priority-list dropdown-menu">
-                                                            <?php foreach (
-                                                                $priorities
-                                                                as $priority
-                                                            ) {
-                                                                echo '<li data-status="' . $priority["name"] . '" class="" data-color="' . $priority["color"] . '" value="' . $priority["id"] . '">
-                                                                <a class="dropdown-item" href="#">' . $priority["name"] . '</a></li>';
-                                                            } ?>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="new_table sb-area-tickets-dash">
-                                                        <div class="sb-scroll-area">
-                                                            <table
-                                                                class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th data-field="title">
-                                                                            Ticket Title
-                                                                        </th>
-                                                                        <th data-field="assigned-to">
-                                                                            Assigned To
-                                                                        </th>
-                                                                        <th data-field="creation-date">
-                                                                            Creation Date
-                                                                        </th>
-                                                                        <th data-field="status">
-                                                                            <?php sb_e(
-                                                                                "Status"
-                                                                            ); ?>
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr data-ticket-id="">
-                                                                        <td class="sb-td-subject">Bug fix: Login issue</td>
-                                                                        <td class="sb-td-tags">Kathryn Murphy</td>
-                                                                        <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                                        <td class="sb-td-status"><span class="span-border"
-                                                                                style="color:#FF0000;border:1px solid #FF0000;">Open</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div class="div"></div>
                                             </div>
                                         </section>
                                     </div>
