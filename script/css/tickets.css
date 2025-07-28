@@ -5338,7 +5338,7 @@ div ul.sb-menu .li:hover,
 
 [data-panel=new-ticket] .sb-panel input,
 [data-panel=new-ticket] .sb-panel select {
-  padding: 15px;
+  padding: 10px;
 }
 [data-panel=new-ticket] .sb-panel > div {
   max-width: 800px;

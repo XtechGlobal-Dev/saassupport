@@ -39,14 +39,18 @@ A modern, responsive ticketing and chat support system built with PHP, MySQL, Bo
 
 1. Clone the repo:
    git clone https://github.com/XtechGlobal-Dev/saassupport.git
-   
-2. Configure the environment:
+
+2. Make sure /config folder exists under /script folder i.e. (/script/config) 
+
+3. Make Sure admin.php under scripts folder i.e. /scripts/admin.php
+
+4. Configure the environment:
 
 /script/config.php
 
 Set your database and Pusher credentials
 
-3. Import the database:
+5. Import the database:
 
 mysql -u root -p your_db_name < import.sql
 
