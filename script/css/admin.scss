@@ -470,27 +470,7 @@ td.sb-offline:after {
     .sb-content {
         height: calc(100vh - 150px);
 
-        .save_settings {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            border-bottom: 0.5px solid #D1D5DB;
-            border-radius: 0px;
-            padding: 20px 10px;
-
-            .head {
-                font-weight: 700;
-                font-size: 25px;
-                line-height: 40px;
-                margin-bottom: 10px !important
-            }
-
-            .des {
-                font-weight: 300;
-                font-size: 16px;
-                color: #475367;
-            }
-        }
+        
         
 
             .users-tab {
@@ -5513,6 +5493,9 @@ td.sb-offline:after {
         border-bottom: 0 !important;
     }
 }
+#tags .input {
+    width: fit-content;
+}
 
 
 .custom-switch input:checked+.slider:before {
@@ -9537,11 +9520,30 @@ li.menu_head:hover {
 
     .settings-header {
         position: sticky;
-        top: -16px;
+        top: -24px;
         background: #ffffff;
         z-index: 999;
         width: 100%;
         padding: 5px 5px;
+         display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 0.5px solid #D1D5DB;
+            border-radius: 0px;
+            padding: 20px 10px;
+
+            .head {
+                font-weight: 700;
+                font-size: 25px;
+                line-height: 40px;
+                margin-bottom: 10px !important
+            }
+
+            .des {
+                font-weight: 300;
+                font-size: 16px;
+                color: #475367;
+            }
     }
 
     .settings-card {
