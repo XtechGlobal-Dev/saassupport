@@ -1294,6 +1294,7 @@ function get_tickets_count($start_date = null,$end_date = null)
 
     $date_labels = [];
     $date_labels2 = [];
+    $date_labels3 = [];
     $weekday_labels = [];
     foreach ($period as $date) {
         $date_key = $date->format('d/m/Y');
@@ -1301,6 +1302,7 @@ function get_tickets_count($start_date = null,$end_date = null)
 
         $date_labels[$date_key] = 0;
         $date_labels2[$date_key] = 0;
+        $date_labels3[$date_key] = 0;
         $weekday_labels[$weekday] = 0;
     }
 
@@ -1353,6 +1355,24 @@ function get_tickets_count($start_date = null,$end_date = null)
         }
     }
 
+        // Query to get count of total tickets pending 
+     $query4 = "SELECT DATE(updated_at) as date, COUNT(*) as count
+        FROM sb_tickets
+        WHERE status_id NOT IN (1,5) AND DATE(updated_at) BETWEEN '$start_date' AND '$end_date'
+        GROUP BY DATE(updated_at)
+    ";
+    $result3 = sb_db_get($query4,false);
+
+    // Fill result into date_labels3
+    foreach ($result3 as $key => $val) {
+        $date_key = date('d/m/Y', strtotime($val['date']));
+        if (array_key_exists($date_key, $date_labels3)) {
+            $date_labels3[$date_key] = (int)$val['count'];
+        }
+    }
+
+
+    $pending_tickets_count = $total_tickets_created - $resolved_tickets_count['total_resolved_tickets_count'];
     // Prepare final response
     return $response = [
         "success",
@@ -1364,6 +1384,8 @@ function get_tickets_count($start_date = null,$end_date = null)
             "total_tickets_count" => $total_tickets_created,
             "resolved_ticket_data" => $date_labels2,
             "resolved_tickets_count" => $resolved_tickets_count['total_resolved_tickets_count'],
+            "pending_ticket_data" => $date_labels3,
+            "pending_tickets_count" => $pending_tickets_count,
             "table" => ["Date", "Count"],
             "table_inverse" => true,
         ]

@@ -4821,13 +4821,10 @@ td.sb-offline:after {
   align-items: center;
 }
 .sb-profile img {
-  position: absolute;
   width: 50px;
   height: 50px;
+  min-width: 50px;
   border-radius: 50%;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 .sb-profile > span {
   font-size: 16px;
@@ -5946,7 +5943,7 @@ td.sb-offline:after {
   background: #edf2f9;
 }
 .sb-admin .header_new .sidebar {
-  padding: 24px;
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
 }
@@ -5954,6 +5951,7 @@ td.sb-offline:after {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
+  padding-top: 0;
 }
 .sb-admin .header_new .sidebar .logo .logo-icon {
   width: auto;
@@ -7273,7 +7271,7 @@ td.sb-offline:after {
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card {
   border-radius: 10px;
-  padding: 25px 17px;
+  padding: 30px 17px;
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
   border: 1px solid #D1D5DB;
 }
@@ -7285,6 +7283,7 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
@@ -7337,9 +7336,6 @@ td.sb-offline:after {
   font-size: 18px;
 }
 .sb-area-dashboard main .new_container .main-charts .customer-overview {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
   margin-top: 15px;
 }
 .sb-area-dashboard main .new_container .main-charts .monthlyBarChart {
@@ -7351,7 +7347,7 @@ td.sb-offline:after {
   width: 100% !important;
 }
 .sb-area-dashboard main .new_container .main-charts .monthlyBarChart #monthlyBarChart {
-  height: 370px !important;
+  height: 415px !important;
   width: 900px;
 }
 .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart {
@@ -7359,7 +7355,7 @@ td.sb-offline:after {
   margin: 0px auto;
 }
 .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-  height: 200px !important;
+  height: 190px !important;
   width: 100% !important;
   max-width: 450px !important;
   margin: 0 auto;
@@ -7604,7 +7600,7 @@ td.sb-offline:after {
   margin-right: 8px;
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
 }
-.sb-area-dashboard main .new_container .tables .label_blue {
+.sb-area-dashboard main .label_blue {
   font-size: 13px;
   line-height: 36px;
   letter-spacing: 0.3px;
@@ -7626,7 +7622,7 @@ td.sb-offline:after {
   transition: all 0.4s;
   user-select: none;
 }
-.sb-area-dashboard main .new_container .tables .label_blue > a {
+.sb-area-dashboard main .label_blue > a {
   color: #fff;
   text-decoration: unset;
 }
@@ -8264,7 +8260,7 @@ td.sb-offline:after {
   font-size: 13px;
   line-height: 22px;
   letter-spacing: 0.3px;
-  margin: 5px 0 0 0;
+  margin: 0;
   color: rgb(120, 134, 146);
 }
 
@@ -8289,7 +8285,7 @@ td.sb-offline:after {
   font-size: 15px;
   letter-spacing: 0.3px;
   margin: 0;
-  color: rgb(86, 96, 105);
+  color: #111827;
 }
 .sb-setting .sb-icon-help {
   transform: translateY(1px);
@@ -8381,7 +8377,7 @@ td.sb-offline:after {
   font-weight: 600;
   font-size: 14px;
   line-height: 23px;
-  margin: 0 30px 15px 0;
+  margin: 0;
   display: block;
   min-width: 220px;
   letter-spacing: 0.3px;
@@ -8672,6 +8668,10 @@ td.sb-offline:after {
 .sb-setting #push-notifications-onesignal-api-key:not(.sb-active),
 .sb-setting #push-notifications-sw-path:not(.sb-active) {
   /* display: none !important;*/
+}
+
+.sb-setting > .input {
+  width: fit-content;
 }
 
 .repeater-item .sb-enlarger label {
@@ -12058,6 +12058,15 @@ li.menu_head:hover {
 
 .main-content {
   transition: margin-left 0.3s ease;
+  position: relative;
+}
+.main-content .settings-header {
+  position: sticky;
+  top: -16px;
+  background: #ffffff;
+  z-index: 999;
+  width: 100%;
+  padding: 5px 5px;
 }
 
 .sidebar.collapsed + .main-content {
@@ -12418,6 +12427,10 @@ div#messaging-channels {
     margin: 5px 0 0 0;
   }
 }
+.sb-area-dashboard main .customer-overview-chart {
+  border: 0;
+}
+
 @media (min-width: 465px) {
   .sb-menu-mobile > ul {
     box-shadow: none;
@@ -12539,13 +12552,15 @@ div#messaging-channels {
     display: block;
   }
 }
-@media only screen and (min-width: 1024px) {
-  .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list {
-    min-height: calc(100vh - 179px);
-  }
+@media (min-width: 1024px) {
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card {
-    min-height: calc(100vh - 178px);
-    max-height: calc(100vh - 178px);
+    min-height: 423px;
+  }
+  .customer-overview-chart {
+    min-height: 359px;
+  }
+  .sb-admin .header_new .sidebar {
+    padding-top: 16px;
   }
 }
 @media only screen and (max-width: 767px) {
