@@ -12099,6 +12099,10 @@ li.menu_head:hover {
   text-align: center;
 }
 
+#user-additional-fields .input .repeater-item i, #rich-messages .input .repeater-item i {
+  right: -14px;
+}
+
 .main-content {
   transition: margin-left 0.3s ease;
   position: relative;
