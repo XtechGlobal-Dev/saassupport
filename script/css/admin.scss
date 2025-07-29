@@ -3952,6 +3952,7 @@ td.sb-offline:after {
                     font-size: 14px;
                     color: #45B369;
                     padding: 8px;
+                    margin-bottom: 0;
 
                 }
 
@@ -10199,6 +10200,19 @@ div#messaging-channels {
                             &::-webkit-scrollbar {
                                 width: 0px;
                             }
+                        }
+                    }
+                }
+                .main-charts {
+                    .monthlyBarChart {
+                        #monthlyBarChart {
+                            width: 80% !important;
+                        }
+                    }
+                    .ticket_activity_chart {
+                        #ticket_activity_chart {
+                                height: 188px !important;
+                                width: 86% !important;
                         }
                     }
                 }
