@@ -10147,6 +10147,13 @@ div#messaging-channels {
     }
 }
 
+.my-tab {
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (min-width: 465px) {
     .sb-menu-mobile>ul {
         box-shadow: none;
@@ -10299,6 +10306,7 @@ div#messaging-channels {
     }
 }
 
+
 @media (min-width: 1024px) {
     .sb-area-dashboard {
         main {
@@ -10345,9 +10353,6 @@ div#messaging-channels {
 
                 .my-tab {
                     min-width: fit-content;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
                 }
             }
 
