@@ -8593,9 +8593,6 @@ td.sb-offline:after {
 .sb-setting.sb-type-double-select .input select {
   min-width: 100px;
 }
-.sb-setting.sb-type-repeater > .input {
-  width: 100%;
-}
 .sb-setting .sb-repeater {
   margin-bottom: 15px;
   display: block;
@@ -8729,10 +8726,6 @@ td.sb-offline:after {
 }
 .sb-setting:last-child {
   border-bottom: 0 !important;
-}
-
-.sb-setting > .input {
-  width: fit-content;
 }
 
 .custom-switch input:checked + .slider:before {
@@ -12143,14 +12136,10 @@ li.menu_head:hover {
   min-width: fit-content;
 }
 .main-content .settings-card .settings-tab .sb-setting {
-  flex-wrap: wrap;
   gap: 20px 0;
 }
 .main-content .settings-card .settings-tab .sb-setting.sb-type-upload-image .input .image {
   min-width: 195px;
-}
-.main-content .settings-card .settings-tab #supervisors {
-  justify-content: space-between;
 }
 .main-content .settings-card .settings-tab #supervisors .input {
   width: fit-content !important;
@@ -12849,6 +12838,15 @@ div#messaging-channels {
     position: unset;
     padding-top: 24px;
     margin-left: 2px;
+  }
+  .main-content .settings-card .settings-tab .sb-setting {
+    flex-wrap: wrap;
+  }
+  .sb-setting > .input {
+    width: fit-content;
+  }
+  .sb-setting.sb-type-repeater > .input {
+    width: 100%;
   }
   .sb-admin .sb-area-settings > .sb-tab {
     position: relative !important;
