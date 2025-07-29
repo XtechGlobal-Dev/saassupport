@@ -6082,10 +6082,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
                                         "notifications",
                                         $sb_settings
                                     ); ?>
+                                    </div>
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings">
@@ -6100,10 +6102,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
                                         "users",
                                         $sb_settings
                                     ); ?>
+                                    </div>
                                 </div>
                                 <!-- <div>
                                     <div class="sb-top-bar save_settings">
@@ -6136,10 +6140,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
                                         "messages",
                                         $sb_settings
                                     ); ?>
+                                    </div>
 
                                 </div>
                                 <div>
@@ -6155,10 +6161,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
                                         "miscellaneous",
                                         $sb_settings
                                     ); ?>
+                                    </div>
                                 </div>
                                 <?php sb_apps_area(
                                     $apps,
@@ -6177,10 +6185,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
                                         "articles",
                                         $sb_settings
                                     ); ?>
+                                    </div>
                                 </div>
                                 <div>
                                     <div class="sb-automations-area">
@@ -6418,8 +6428,8 @@ function sb_apps_area($apps, $cloud_active_apps)
                 '<div>
             <div class="sb-top-bar save_settings">
                 <div class="">
-                    <p class="head mb-4"></p>
-                    <p class="des mb-0"></p>
+                    <p class="head mb-4">Tickets Settings</p>
+                    <p class="des mb-0">Configure tickets settings.</p>
                 </div>
                 <div>
                     <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
@@ -6428,9 +6438,10 @@ function sb_apps_area($apps, $cloud_active_apps)
                     </a>
                 </div>
             </div>
+            <div class="users-tab">
             ' .
                 sb_populate_app_settings($apps[$i][1]) .
-                "</div>";
+                "</div></div>";
         }
     }
     $code .= '<div><div class="sb-apps">';

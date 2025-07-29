@@ -474,14 +474,15 @@ td.sb-offline:after {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
-            border: 0.5px solid #D1D5DB;
-            border-radius: 10px;
+            border-bottom: 0.5px solid #D1D5DB;
+            border-radius: 0px;
             padding: 20px 10px;
 
             .head {
                 font-weight: 700;
                 font-size: 25px;
-                line-height: 40px
+                line-height: 40px;
+                margin-bottom: 10px !important
             }
 
             .des {
@@ -490,6 +491,13 @@ td.sb-offline:after {
                 color: #475367;
             }
         }
+        
+
+            .users-tab {
+                border: 1px solid rgb(209, 213, 219);
+                border-radius: 8px;
+                padding: 0px 15px;
+            }
     }
 }
 
@@ -556,7 +564,7 @@ td.sb-offline:after {
     }
 
     h2 {
-        font-size: 15px;
+        font-size: 25px;
         letter-spacing: .3px;
         line-height: 27px;
         margin: 2px 0 15px;

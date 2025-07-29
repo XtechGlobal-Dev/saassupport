@@ -4456,19 +4456,25 @@ td.sb-offline:after {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  border: 0.5px solid #D1D5DB;
-  border-radius: 10px;
+  border-bottom: 0.5px solid #D1D5DB;
+  border-radius: 0px;
   padding: 20px 10px;
 }
 .settings_new .sb-content .save_settings .head, .settings_new .sb-content .save_settings .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .settings_new .sb-content .save_settings .sub_head {
   font-weight: 700;
   font-size: 25px;
   line-height: 40px;
+  margin-bottom: 10px !important;
 }
 .settings_new .sb-content .save_settings .des {
   font-weight: 300;
   font-size: 16px;
   color: #475367;
+}
+.settings_new .sb-content .users-tab {
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 8px;
+  padding: 0px 15px;
 }
 
 .sb-tab {
@@ -4519,7 +4525,7 @@ td.sb-offline:after {
   margin-bottom: 0;
 }
 .sb-tab h2 {
-  font-size: 15px;
+  font-size: 25px;
   letter-spacing: 0.3px;
   line-height: 27px;
   margin: 2px 0 15px;
