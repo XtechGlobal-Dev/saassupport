@@ -6389,6 +6389,10 @@ td.sb-offline:after {
 .sb-board > .sb-admin-list.sb-departments-show li.sb-active:before {
   background-color: #155CFD !important;
 }
+.sb-board .sb-area-conversations .sb-scroll-area ul li .sb-profile img {
+  position: absolute;
+  left: 0;
+}
 .sb-board .sb-conversation {
   width: 100%;
   min-width: 0;
@@ -7466,6 +7470,7 @@ td.sb-offline:after {
   font-size: 14px;
   color: #45B369;
   padding: 8px;
+  margin-bottom: 0;
 }
 .sb-area-dashboard main .new_container .main-charts .progress-item {
   display: flex;
@@ -12633,6 +12638,9 @@ div#messaging-channels {
   }
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card::-webkit-scrollbar {
     width: 0px;
+  }
+  .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
+    height: 188px !important;
   }
   .customer-overview-chart {
     min-height: 330px;
