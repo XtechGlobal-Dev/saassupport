@@ -474,14 +474,15 @@ td.sb-offline:after {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
-            border: 0.5px solid #D1D5DB;
-            border-radius: 10px;
+            border-bottom: 0.5px solid #D1D5DB;
+            border-radius: 0px;
             padding: 20px 10px;
 
             .head {
                 font-weight: 700;
                 font-size: 25px;
-                line-height: 40px
+                line-height: 40px;
+                margin-bottom: 10px !important
             }
 
             .des {
@@ -490,6 +491,13 @@ td.sb-offline:after {
                 color: #475367;
             }
         }
+        
+
+            .users-tab {
+                border: 1px solid rgb(209, 213, 219);
+                border-radius: 8px;
+                padding: 0px 15px;
+            }
     }
 }
 
@@ -556,7 +564,7 @@ td.sb-offline:after {
     }
 
     h2 {
-        font-size: 15px;
+        font-size: 25px;
         letter-spacing: .3px;
         line-height: 27px;
         margin: 2px 0 15px;
@@ -2773,6 +2781,8 @@ td.sb-offline:after {
                         height: 45px;
                         transform: none;
                         top: 0;
+                        position: absolute;
+                        left: 0;
                     }
 
                     .sb-name {
@@ -3632,6 +3642,7 @@ td.sb-offline:after {
         .title {
             font-weight: 600;
             font-size: 28px;
+            font-family: 'InterSemiBold';
         }
 
         .notification {
@@ -3804,6 +3815,7 @@ td.sb-offline:after {
                                 font-size: 24px;
                                 font-weight: 600;
                                 margin-bottom: 0;
+                                font-family: 'InterSemiBold';
                             }
                         }
                     }
@@ -3980,15 +3992,17 @@ td.sb-offline:after {
                         padding: 10px;
                         border-radius: 8px;
                     }
+
                     div {
                         strong {
-                            color: #4B5563;
-                            font-family: 'InterMedium';
+                            color: #666;
+                            font-weight: normal;
                         }
                     }
+
                     .tickets-pending {
                         color: #111827;
-    font-family: 'InterSemiBold';
+                        font-family: "InterBold";
                     }
                 }
 
@@ -9779,12 +9793,13 @@ section {
         &.recent-message {
             margin-top: 15px;
             margin-bottom: 15px;
+
             .user-initials {
                 width: 50px;
                 height: 50px;
-                    line-height: 50px;
-    min-width: 50px;
-    min-height: 50px;
+                line-height: 50px;
+                min-width: 50px;
+                min-height: 50px;
             }
         }
     }
@@ -10140,6 +10155,13 @@ div#messaging-channels {
     }
 }
 
+.my-tab {
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (min-width: 465px) {
     .sb-menu-mobile>ul {
         box-shadow: none;
@@ -10291,6 +10313,7 @@ div#messaging-channels {
         display: block;
     }
 }
+
 
 @media (min-width: 1024px) {
     .sb-area-dashboard {
@@ -10491,6 +10514,9 @@ div#messaging-channels {
 
                 .my-tab {
                     min-width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
 
