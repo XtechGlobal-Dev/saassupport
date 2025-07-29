@@ -2639,7 +2639,8 @@ function sb_component_admin()
                                                 <div class="graph_tabs">
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #487fff;">
-                                                            <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+                                                            <!-- <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> -->
+                                                            <img src="./script/media/total-user.svg" alt="Total User">
                                                         </div>
                                                         <div class="metric-info">
                                                             <h3>New Users</h3>
@@ -2685,43 +2686,7 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #f4941e;">
-                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
-                                                            <img src="./script/media/tickets-created.svg" alt="Tickets Created">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Tickets Created</h3>
-                                                            <p class="total-tickets-created">3,200</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="ticket_created_chart">
-                                                            <canvas class="mt-0" id="ticket_created_chart"></canvas>
-                                                        </div>
-                                                        <!-- <script>
-                                                            
-                                                        </script> -->
-                                                    </div>
-                                                </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% in last 7 days</div-->
-                                                <!-- code update -->
-                                                <div class="metric-increase">
-                                                    Increase by
-                                                    <span class="increase-pill">
-                                                        <span class="total-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
-                                                </div>
-                                                <!-- code update -->
-                                            </div>
-
-
-                                        </section>
-                                        <section class="dashboard-metrics">
-                                            <!--  -->
+                                             <!--  -->
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
@@ -2755,6 +2720,74 @@ function sb_component_admin()
                                                 <!-- code update -->
                                             </div>
                                             <!--  -->
+
+                                        </section>
+                                        <section class="dashboard-metrics">
+                                           <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #f4941e;">
+                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/tickets-created.svg" alt="Tickets Created">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Tickets Created</h3>
+                                                            <p class="total-tickets-created">3,200</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_created_chart">
+                                                            <canvas class="mt-0" id="ticket_created_chart"></canvas>
+                                                        </div>
+                                                        <!-- <script>
+                                                            
+                                                        </script> -->
+                                                    </div>
+                                                </div>
+                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% in last 7 days</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-tickets-increase"></span><span>%</span>
+                                                    </span>&nbsp;in last 7 days
+                                                </div>
+                                                <!-- code update -->
+                                            </div>
+
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #8252E9;">
+
+                                                            <!-- <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i> -->
+                                                            <img src="./script/media/tickets-created.svg"
+                                                                alt="Tickets Pending">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Tickets Pending</h3>
+                                                            <p class="ticket-pending"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_pending_chart">
+                                                            <canvas class="mt-0" id="ticket_pending_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="metric-increase">
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-pending-tickets-increase"></span><span>%</span>
+                                                    </span>&nbsp;in last 7 days
+                                                </div>
+
+                                            </div>
+
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EFF4FF 100%);">
                                                 <div class="graph_tabs">
@@ -2765,7 +2798,7 @@ function sb_component_admin()
                                                                 alt="Tickets Resolved">
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Ticket Resolved</h3>
+                                                            <h3>Tickets Resolved</h3>
                                                             <p class="ticket-resolved"></p>
                                                         </div>
                                                     </div>
@@ -2787,227 +2820,9 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #8252E9;">
 
-                                                            <i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i>
-                                                            <img src="./script/media/total-conversations.svg"
-                                                                alt="Total Conversations">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Total Conversations</h3>
-                                                            <p class="total-conversations"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="total_conversations_chart">
-                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                                <div class="metric-increase">
-                                                    Increase by
-                                                    <span class="increase-pill">
-                                                        <span class="total-conversations-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
-                                                </div>
-
-                                            </div>
                                         </section>
-                                        <!--section class="dashboard-metrics">
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #8252E9;"-->
-                                        <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                        <!--img src="./script/media/total-conversations.svg" alt="Total Conversations">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Total Conversations</h3>
-                                                            <p class="total-conversations"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="total_conversations_chart">
-                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div-->
-                                        <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% in last 7 days</div-->
-                                        <!-- code update  -->
-                                        <!--div class="metric-increase">
-                                                        Increase by 
-                                                        <span class="increase-pill">
-                                                            <span class="total-conversations-increase"></span><span>%</span>
-                                                        </span>&nbsp;in last 7 days </div-->
-                                        <!-- code update -->
-                                        <!--/div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #DE3ACE;"-->
-                                        <!--i class="fa-solid fa-hourglass-start" style="color: #ffffff;"></i-->
-                                        <!--img src="./script/media/avg-response-time.svg" alt="Avg Response Time">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3> Avg. Response Time</h3-->
-                                        <!-- <p id="avg_response_time">0h 0m 0s</p> -->
-                                        <!--div id="avg_response_time_container"></div>
-                                                        </div>
-                                                    </div-->
-                                        <!-- <div class="w-100">
-                                                    <div class="avg_response_chart">
-                                                        <canvas class="mt-0" id="avg_response_chart"></canvas>
-                                                    </div>
-                                                    <script>
-                                                        const avg_responseCtx = document.getElementById('avg_response_chart').getContext('2d');
-                                                        const gradient5 = avg_responseCtx.createLinearGradient(0, 0, 0, 200);
-                                                        gradient5.addColorStop(0, 'rgba(220, 61, 235, 0.2)');
-                                                        gradient5.addColorStop(1, 'rgba(220, 61, 235, 0)');
-                                                        new Chart(avg_responseCtx, {
-                                                            type: 'line',
-                                                            data: {
-                                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                datasets: [{
-                                                                    data: [0, 5, 12, 3, 5, 7],
-                                                                    borderColor: '#DE3ACE',
-                                                                    backgroundColor: gradient5,
-                                                                    fill: true,
-                                                                    tension: 0.4,
-                                                                    pointRadius: 0,
-                                                                    pointHoverRadius: 0,
-                                                                    borderWidth: 2
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                responsive: true,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: false
-                                                                    }
-                                                                },
-                                                                scales: {
-                                                                    x: {
-                                                                        grid: {
-                                                                            display: false
-                                                                        },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
-                                                                        }
-                                                                    },
-                                                                    y: {
-                                                                        grid: {
-                                                                            display: false
-                                                                        },
-                                                                        ticks: {
-                                                                            display: false
-                                                                        },
-                                                                        border: {
-                                                                            display: false
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                    </script>
-                                                </div> -->
-                                        <!--/div>
-
-                                            </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #00B8F2;"-->
-                                        <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
-                                        <!--img src="./script/media/agent-satisfaction.svg" alt="Agent Satisfaction">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Agent Satisfaction</h3>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="agent_chart">
-                                                            <canvas class="mt-0" id="agent_chart"></canvas>
-                                                        </div-->
-                                        <!--script>
-                                                            const agentCtx = document.getElementById('agent_chart').getContext('2d');
-                                                            const gradient6 = agentCtx.createLinearGradient(0, 0, 0, 200);
-                                                            gradient6.addColorStop(0, 'rgba(61, 186, 235, 0.2)');
-                                                            gradient6.addColorStop(1, 'rgba(61, 186, 235, 0)');
-                                                            new Chart(agentCtx, {
-                                                                type: 'line',
-                                                                data: {
-                                                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                                                                    datasets: [{
-                                                                        data: [0, 5, 12, 3, 5, 7],
-                                                                        borderColor: '#00B8F2',
-                                                                        backgroundColor: gradient6,
-                                                                        fill: true,
-                                                                        tension: 0.4,
-                                                                        pointRadius: 0,
-                                                                        pointHoverRadius: 0,
-                                                                        borderWidth: 2
-                                                                    }]
-                                                                },
-                                                                options: {
-                                                                    responsive: true,
-                                                                    plugins: {
-                                                                        legend: {
-                                                                            display: false
-                                                                        },
-                                                                        tooltip: {
-                                                                            enabled: false
-                                                                        }
-                                                                    },
-                                                                    scales: {
-                                                                        x: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        },
-                                                                        y: {
-                                                                            grid: {
-                                                                                display: false
-                                                                            },
-                                                                            ticks: {
-                                                                                display: false
-                                                                            },
-                                                                            border: {
-                                                                                display: false
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
-                                                        </script-->
-                                        <!--/div>
-                                                </div>
-
-                                            </div>
-                                        </section-->
+                                        
                                         <section class="main-charts">
                                             <div class="card p-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -4277,8 +4092,8 @@ function sb_component_admin()
                                                     </th>
                                                 <?php }
                                                 ?>
-                                                <th data-field="contact">
-                                                    <?php sb_e("Contact"); ?>
+                                                <th data-field="Customer">
+                                                    <?php sb_e("Customer"); ?>
                                                 </th>
                                                 <th data-field="status">
                                                     <?php sb_e("Status"); ?>
