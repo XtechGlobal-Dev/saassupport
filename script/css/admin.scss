@@ -3888,7 +3888,8 @@ td.sb-offline:after {
                     border-radius: 8px;
                     padding: 0 !important;
 
-                    &.main-charts-card, &.tickets_activity_card {
+                    &.main-charts-card,
+                    &.tickets_activity_card {
                         padding: 1.5rem !important;
                     }
                 }
@@ -10193,6 +10194,11 @@ div#messaging-channels {
                     .messages-list {
                         .recent.card {
                             min-height: 425px;
+                            max-height: 425px;
+
+                            &::-webkit-scrollbar {
+                                width: 0px;
+                            }
                         }
                     }
                 }

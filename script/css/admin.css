@@ -12629,6 +12629,10 @@ div#messaging-channels {
 @media (min-width: 1024px) {
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card {
     min-height: 425px;
+    max-height: 425px;
+  }
+  .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card::-webkit-scrollbar {
+    width: 0px;
   }
   .customer-overview-chart {
     min-height: 330px;
