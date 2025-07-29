@@ -4764,7 +4764,7 @@ td.sb-offline:after {
 }
 
 .new_table {
-  padding-bottom: 20px;
+  padding: 1rem 1rem;
   background: #fff;
   border-radius: 0 0 8px 8px;
 }
@@ -4776,8 +4776,12 @@ td.sb-offline:after {
 }
 .new_table .sb-scroll-area {
   border: 1px solid #EBECEF;
+  border-right: 0;
   border-radius: 8px;
   height: 257px;
+}
+.new_table .sb-scroll-area::-webkit-scrollbar {
+  width: 0px;
 }
 
 .sb_table_new thead {
@@ -7283,7 +7287,6 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
-.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
@@ -7303,6 +7306,9 @@ td.sb-offline:after {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-icon i {
+  font-size: 20px;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-card-upper .metric-info h3 {
   font-size: 14px;
@@ -7347,7 +7353,7 @@ td.sb-offline:after {
   width: 100% !important;
 }
 .sb-area-dashboard main .new_container .main-charts .monthlyBarChart #monthlyBarChart {
-  height: 415px !important;
+  height: 380px !important;
   width: 900px;
 }
 .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart {
@@ -7355,9 +7361,8 @@ td.sb-offline:after {
   margin: 0px auto;
 }
 .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-  height: 190px !important;
+  height: 173px !important;
   width: 100% !important;
-  max-width: 450px !important;
   margin: 0 auto;
 }
 .sb-area-dashboard main .new_container .main-charts .overview_chart {
@@ -7406,6 +7411,10 @@ td.sb-offline:after {
   background: #fff;
   border: none;
   border-radius: 8px;
+  padding: 0 !important;
+}
+.sb-area-dashboard main .new_container .main-charts .card.main-charts-card, .sb-area-dashboard main .new_container .main-charts .card.tickets_activity_card {
+  padding: 1.5rem !important;
 }
 .sb-area-dashboard main .new_container .main-charts .head, .sb-area-dashboard main .new_container .main-charts .sub_head {
   font-weight: 700;
@@ -7428,10 +7437,11 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .main-charts .sub_head2 {
   font-weight: 400;
   font-size: 12px;
-  color: #3A3A3A;
+  color: #000;
   font-family: "InterRegular";
 }
 .sb-area-dashboard main .new_container .main-charts .text-muted {
+  color: #7e7e7e !important;
   font-family: "InterRegular";
 }
 .sb-area-dashboard main .new_container .main-charts .button_ext {
@@ -7531,8 +7541,10 @@ td.sb-offline:after {
   text-align: right;
 }
 .sb-area-dashboard main .new_container .main-charts .bg-white {
-  padding: 15px;
+  padding: 1.5rem 1.5rem 0.5rem;
   border-radius: 8px 8px 0 0;
+  border-bottom: 0.9px solid #F0F1F5;
+  box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
 }
 .sb-area-dashboard main .new_container .main-charts .seprator {
   box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
@@ -7547,6 +7559,7 @@ td.sb-offline:after {
   box-shadow: unset;
   border-radius: 0;
   overflow-y: scroll;
+  padding: 1rem 1.5rem 1.5rem !important;
 }
 .sb-area-dashboard main .new_container .main-charts .recent.card .avatar {
   width: 45px;
@@ -8266,7 +8279,8 @@ td.sb-offline:after {
 
 .sb-setting {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  padding: 20px 0px 20px 0px !important;
 }
 .sb-setting > .sb-setting-content {
   max-width: 420px;
@@ -8352,8 +8366,8 @@ td.sb-offline:after {
   margin: 0;
   text-align: center;
   vertical-align: middle;
-  width: 35px;
-  min-width: 35px !important;
+  width: 46px;
+  min-width: 46px !important;
   outline: none;
   box-shadow: none;
   -webkit-appearance: none;
@@ -8381,9 +8395,18 @@ td.sb-offline:after {
   display: block;
   min-width: 220px;
   letter-spacing: 0.3px;
+  width: 46px;
+  height: 23px;
+}
+.sb-setting label .slider::before {
+  height: 19px;
+  width: 19px;
 }
 .sb-setting label:empty {
   display: none !important;
+}
+.sb-setting label.custom-switch {
+  margin-right: 0 !important;
 }
 .sb-setting input[type=number] {
   padding-right: 0;
@@ -8669,9 +8692,17 @@ td.sb-offline:after {
 .sb-setting #push-notifications-sw-path:not(.sb-active) {
   /* display: none !important;*/
 }
+.sb-setting:last-child {
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
 
 .sb-setting > .input {
   width: fit-content;
+}
+
+.custom-switch input:checked + .slider:before {
+  transform: translateX(23px);
 }
 
 .repeater-item .sb-enlarger label {
@@ -12122,11 +12153,6 @@ li.menu_head:hover {
   min-height: 350px !important;
 }
 
-.new_container .clmn-gap {
-  padding-left: 20px !important;
-  padding-right: 8px !important;
-}
-
 .sb-select ul {
   position: relative;
   top: 50%;
@@ -12430,6 +12456,54 @@ div#messaging-channels {
 .sb-area-dashboard main .customer-overview-chart {
   border: 0;
 }
+.sb-area-dashboard main .customer-overview-chart h6 {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 0;
+  color: #111827;
+  font-family: "InterBold";
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40%;
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart ul li {
+  position: relative;
+  padding-left: 14px;
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  background: #000;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart ul li:nth-child(2)::before {
+  background: #45B369;
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart ul li:nth-child(3)::before {
+  background: #FF9F29;
+}
+.sb-area-dashboard main .customer-overview-chart .overview_chart #chart-container {
+  width: 60%;
+}
+
+.overview_chart.my-auto div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (min-width: 465px) {
   .sb-menu-mobile > ul {
@@ -12554,10 +12628,10 @@ div#messaging-channels {
 }
 @media (min-width: 1024px) {
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card {
-    min-height: 423px;
+    min-height: 425px;
   }
   .customer-overview-chart {
-    min-height: 359px;
+    min-height: 330px;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;

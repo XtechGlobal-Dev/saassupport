@@ -847,7 +847,7 @@ td.sb-offline:after {
 
 .new_table {
     // padding: 20px;
-    padding-bottom: 20px;
+    padding: 1rem 1rem;
     background: #fff;
     border-radius: 0 0 8px 8px;
 
@@ -862,9 +862,13 @@ td.sb-offline:after {
 
     .sb-scroll-area {
         border: 1px solid #EBECEF;
+        border-right: 0;
         border-radius: 8px;
         height: 257px;
 
+        &::-webkit-scrollbar {
+            width: 0px;
+        }
     }
 }
 
@@ -3724,7 +3728,6 @@ td.sb-offline:after {
                         .active_users_chart,
                         .ticket_created_chart,
                         .ticket_resolved_chart,
-                        .ticket_pending_chart,
                         .avg_response_chart,
                         .total_conversations_chart,
                         .agent_chart {
@@ -3746,6 +3749,10 @@ td.sb-offline:after {
                             display: flex;
                             align-items: center;
                             justify-content: center;
+
+                            i {
+                                font-size: 20px;
+                            }
                         }
 
                         .metric-info {
@@ -3806,7 +3813,7 @@ td.sb-offline:after {
                     }
 
                     #monthlyBarChart {
-                        height: 415px !important;
+                        height: 380px !important;
                         width: 900px;
                     }
                 }
@@ -3816,9 +3823,9 @@ td.sb-offline:after {
                     margin: 0px auto;
 
                     #ticket_activity_chart {
-                        height: 190px !important;
+                        height: 173px !important;
                         width: 100% !important;
-                        max-width: 450px !important;
+                        // max-width: 450px !important;
                         margin: 0 auto;
                     }
                 }
@@ -3879,6 +3886,11 @@ td.sb-offline:after {
                     background: #fff;
                     border: none;
                     border-radius: 8px;
+                    padding: 0 !important;
+
+                    &.main-charts-card, &.tickets_activity_card {
+                        padding: 1.5rem !important;
+                    }
                 }
 
                 .head {
@@ -3906,12 +3918,12 @@ td.sb-offline:after {
                 .sub_head2 {
                     font-weight: 400;
                     font-size: 12px;
-                    color: #3A3A3A;
+                    color: #000;
                     font-family: 'InterRegular';
                 }
 
                 .text-muted {
-
+                    color: #7e7e7e !important;
                     font-family: 'InterRegular';
                 }
 
@@ -4040,8 +4052,10 @@ td.sb-offline:after {
                 }
 
                 .bg-white {
-                    padding: 15px;
+                    padding: 1.5rem 1.5rem 0.5rem;
                     border-radius: 8px 8px 0 0;
+                    border-bottom: 0.9px solid #F0F1F5;
+                    box-shadow: 0px 1.8px 3.6px 0px #00000013;
                 }
 
                 .seprator {
@@ -4059,6 +4073,7 @@ td.sb-offline:after {
                     box-shadow: unset;
                     border-radius: 0;
                     overflow-y: scroll;
+                    padding: 1rem 1.5rem 1.5rem !important;
 
                     .avatar {
                         width: 45px;
@@ -4953,7 +4968,8 @@ td.sb-offline:after {
 
 .sb-setting {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding: 20px 0px 20px 0px !important;
 
     >.sb-setting-content {
         max-width: 420px;
@@ -5045,8 +5061,8 @@ td.sb-offline:after {
         margin: 0;
         text-align: center;
         vertical-align: middle;
-        width: 35px;
-        min-width: 35px !important;
+        width: 46px;
+        min-width: 46px !important;
         outline: none;
         box-shadow: none;
         -webkit-appearance: none;
@@ -5076,9 +5092,22 @@ td.sb-offline:after {
         display: block;
         min-width: 220px;
         letter-spacing: 0.3px;
+        width: 46px;
+        height: 23px;
+
+        .slider {
+            &::before {
+                height: 19px;
+                width: 19px;
+            }
+        }
 
         &:empty {
             display: none !important;
+        }
+
+        &.custom-switch {
+            margin-right: 0 !important;
         }
     }
 
@@ -5426,10 +5455,19 @@ td.sb-offline:after {
             /* display: none !important;*/
         }
     }
+
+    &:last-child {
+        border-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
 }
 
-.sb-setting > .input {
+.sb-setting>.input {
     width: fit-content;
+}
+
+.custom-switch input:checked+.slider:before {
+    transform: translateX(23px);
 }
 
 
@@ -9519,13 +9557,6 @@ li.menu_head:hover {
     }
 }
 
-.new_container {
-    .clmn-gap {
-        padding-left: 20px !important;
-        padding-right: 8px !important;
-    }
-}
-
 .sb-select {
     ul {
         position: relative;
@@ -9936,7 +9967,69 @@ div#messaging-channels {
     main {
         .customer-overview-chart {
             border: 0;
+
+            h6 {
+                font-weight: 700;
+                font-size: 18px;
+                margin-bottom: 0;
+                color: #111827;
+                font-family: "InterBold";
+            }
+
+            .overview_chart {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    width: 40%;
+
+                    li {
+                        position: relative;
+                        padding-left: 14px;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 4px;
+                            background: #000;
+                            height: 10px;
+                            width: 10px;
+                            border-radius: 50%;
+                        }
+
+                        &:nth-child(2) {
+                            &::before {
+                                background: #45B369;
+                            }
+                        }
+
+                        &:nth-child(3) {
+                            &::before {
+                                background: #FF9F29;
+                            }
+                        }
+                    }
+                }
+
+                #chart-container {
+                    width: 60%;
+                }
+            }
         }
+    }
+}
+
+.overview_chart.my-auto {
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -10099,7 +10192,7 @@ div#messaging-channels {
                 .main-charts.recent-message {
                     .messages-list {
                         .recent.card {
-                            min-height: 423px;
+                            min-height: 425px;
                         }
                     }
                 }
@@ -10109,7 +10202,7 @@ div#messaging-channels {
     }
 
     .customer-overview-chart {
-        min-height: 359px;
+        min-height: 330px;
     }
 
     .sb-admin {
