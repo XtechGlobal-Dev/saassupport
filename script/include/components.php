@@ -2520,7 +2520,7 @@ function sb_component_admin()
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     Back to Tickets
                                 </a>
-                                <h2 class="title">Setting</h2>
+                                <h2 class="title mb-0">Setting</h2>
                             </div>
                             <div class="header-right">
                                 <!--div class="notification">
@@ -3058,61 +3058,6 @@ function sb_component_admin()
                                         <section class="main-charts high-inrs">
                                             <div class="customer-overview">
                                                 <div class="customer-overview-card card p-3">
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <h6 class="fw-bold">Customer Overview</h6>
-                                                        <select id="customer-overview"
-                                                            class="form-select form-select-sm w-auto">
-                                                            <option value="month" selected>Last Month</option>
-                                                            <option value="year">Last Year</option>
-                                                            <!-- <option>Monthly</option> -->
-                                                        </select>
-                                                    </div>
-                                                    <!-- Donut Chart Block -->
-                                                    <div class="overview_chart">
-                                                        <ul class="legend" style="list-style: none; padding: 0;">
-                                                            <span class="filter-range"></span>
-                                                            <li><span class="total"></span><label></label></li>
-                                                            <li><span class="new"></span><label></label></li>
-                                                            <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
-                                                        </ul>
-                                                        <div id="chart-container">
-                                                            <canvas id="donutChart"
-                                                                style="max-height: 150px; max-width: 300px;"></canvas>
-                                                            <div class="chart-center">
-                                                                <p class="mb-1"><strong>Customer Report</strong></p>
-                                                                <pre></pre>
-                                                            </div>
-                                                        </div>
-                                                        <!-- <script>
-                                                        const ctx = document.getElementById('donutChart').getContext('2d');
-                                                        new Chart(ctx, {
-                                                            type: 'doughnut',
-                                                            data: {
-                                                                labels: ['Total', 'New', 'Active'],
-                                                                datasets: [{
-                                                                    data: [500, 500, 1500],
-                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
-                                                                    borderWidth: 0
-                                                                }]
-                                                            },
-                                                            options: {
-                                                                cutout: '70%',
-                                                                rotation: -90,
-                                                                circumference: 180,
-                                                                plugins: {
-                                                                    legend: {
-                                                                        display: false
-                                                                    },
-                                                                    tooltip: {
-                                                                        enabled: true
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-                                                    </script> -->
-                                                    </div>
-                                                </div>
-                                                <div class="customer-overview-card card p-3">
                                                     <div class="px-3 main-charts tables clmn-gap">
                                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                                             <div>
@@ -3292,8 +3237,12 @@ function sb_component_admin()
                                         </section>
                                         <section class="main-charts recent-message">
                                             <div class="card p-3 messages-list">
-                                                <div class="bg-white">
+                                                <div class="bg-white d-flex align-items-center justify-content-between">
                                                     <h6 class="head mb-1">Recent Messages</h6>
+                                                    <p class="label_blue mb-0">
+                                                        <a class="mr-2" href="http://localhost/saassupport/?area=conversations">View
+                                                        All</a>
+                                                    </p>
                                                 </div>
                                                 <div class="seprator"></div>
                                                 <div class="recent card p-3">
@@ -3304,6 +3253,62 @@ function sb_component_admin()
                                                 <div class="div"></div>
                                             </div>
                                         </section>
+                                        
+                                                <div class="customer-overview-card card p-3 customer-overview-chart">
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <h6 class="fw-bold">Customer Overview</h6>
+                                                        <select id="customer-overview"
+                                                            class="form-select form-select-sm w-auto">
+                                                            <option value="month" selected>Last Month</option>
+                                                            <option value="year">Last Year</option>
+                                                            <!-- <option>Monthly</option> -->
+                                                        </select>
+                                                    </div>
+                                                    <!-- Donut Chart Block -->
+                                                    <div class="overview_chart my-auto">
+                                                        <ul class="legend" style="list-style: none; padding: 0;">
+                                                            <span class="filter-range"></span>
+                                                            <li><span class="total"></span><label></label></li>
+                                                            <li><span class="new"></span><label></label></li>
+                                                            <!-- <li><span class="active"></span><label>Active: 4</label></li> -->
+                                                        </ul>
+                                                        <div id="chart-container d-flex align-items-center justify-content-center flex-column">
+                                                            <canvas id="donutChart"
+                                                                style="max-height: 150px; max-width: 300px;"></canvas>
+                                                            <div class="chart-center">
+                                                                <p class="mb-1"><strong>Customer Report</strong></p>
+                                                                <pre></pre>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <script>
+                                                        const ctx = document.getElementById('donutChart').getContext('2d');
+                                                        new Chart(ctx, {
+                                                            type: 'doughnut',
+                                                            data: {
+                                                                labels: ['Total', 'New', 'Active'],
+                                                                datasets: [{
+                                                                    data: [500, 500, 1500],
+                                                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
+                                                                    borderWidth: 0
+                                                                }]
+                                                            },
+                                                            options: {
+                                                                cutout: '70%',
+                                                                rotation: -90,
+                                                                circumference: 180,
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: false
+                                                                    },
+                                                                    tooltip: {
+                                                                        enabled: true
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    </script> -->
+                                                    </div>
+                                                </div>
                                     </div>
 
                                 </div>
@@ -5954,7 +5959,7 @@ function sb_component_admin()
                                     </div> -->
                                     <?php //sb_populate_settings("admin",$sb_settings ); ?>
                                     <div class="main-content">
-                                        <h2>Admin <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                        <h2 class="settings-header">Admin <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
                                                 <i class="sb-icon-check"></i>Save changes</a>
                                         </h2>
                                         <hr>
