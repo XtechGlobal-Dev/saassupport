@@ -918,13 +918,10 @@ td.sb-offline:after {
     align-items: center;
 
     img {
-        position: absolute;
         width: 50px;
         height: 50px;
+        min-width: 50px;
         border-radius: 50%;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
     }
 
     >span {
@@ -2274,7 +2271,7 @@ td.sb-offline:after {
         // width: 280px;
 
         .sidebar {
-            padding: 24px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
 
@@ -2282,6 +2279,7 @@ td.sb-offline:after {
                 display: flex;
                 align-items: center;
                 margin-bottom: 30px;
+                padding-top: 0;
 
                 .logo-icon {
                     width: auto;
@@ -3714,7 +3712,7 @@ td.sb-offline:after {
 
                 .metric-card {
                     border-radius: 10px;
-                    padding: 25px 17px;
+                    padding: 30px 17px;
                     box-shadow: 0px 4px 30px 0px #2E2D740D;
                     border: 1px solid #D1D5DB;
 
@@ -3795,9 +3793,6 @@ td.sb-offline:after {
                 }
 
                 .customer-overview {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 15px;
                     margin-top: 15px;
                 }
 
@@ -3805,12 +3800,13 @@ td.sb-offline:after {
                     max-width: 100%;
                     display: flex;
                     justify-content: center;
+
                     canvas {
                         width: 100% !important;
                     }
 
                     #monthlyBarChart {
-                        height: 370px !important;
+                        height: 415px !important;
                         width: 900px;
                     }
                 }
@@ -3820,7 +3816,7 @@ td.sb-offline:after {
                     margin: 0px auto;
 
                     #ticket_activity_chart {
-                        height: 200px !important;
+                        height: 190px !important;
                         width: 100% !important;
                         max-width: 450px !important;
                         margin: 0 auto;
@@ -3911,11 +3907,12 @@ td.sb-offline:after {
                     font-weight: 400;
                     font-size: 12px;
                     color: #3A3A3A;
-                font-family: 'InterRegular';
+                    font-family: 'InterRegular';
                 }
+
                 .text-muted {
-                    
-    font-family: 'InterRegular';
+
+                    font-family: 'InterRegular';
                 }
 
                 .button_ext {
@@ -4093,7 +4090,7 @@ td.sb-offline:after {
                         user-select: none;
 
                         >a {
-                        color: #2953E8;
+                            color: #2953E8;
                             text-decoration: unset;
 
                         }
@@ -4125,39 +4122,34 @@ td.sb-offline:after {
                 }
             }
 
-            .tables {
-                .label_blue {
-                    // color: #487FFF;
-                    // font-weight: 400;
-                    // font-size: 16px;
-                    // cursor: pointer;
-                    font-size: 13px;
-                    line-height: 36px;
-                    letter-spacing: 0.3px;
-                    font-weight: 500;
-                    border-radius: 8px;
-                    min-width: 0;
-                    background-color: #155CFD;
-                    text-decoration: none;
-                    color: #fff;
-                    height: 35px;
-                    padding: 0 25px;
-                    position: relative;
-                    display: inline-block;
-                    border: none;
-                    text-align: center;
-                    cursor: pointer;
-                    outline: none;
-                    box-shadow: none;
-                    transition: all 0.4s;
-                    user-select: none;
+        }
 
-                    >a {
-                        color: #fff;
-                        text-decoration: unset;
+        .label_blue {
+            font-size: 13px;
+            line-height: 36px;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            border-radius: 8px;
+            min-width: 0;
+            background-color: #155CFD;
+            text-decoration: none;
+            color: #fff;
+            height: 35px;
+            padding: 0 25px;
+            position: relative;
+            display: inline-block;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            box-shadow: none;
+            transition: all 0.4s;
+            user-select: none;
 
-                    }
-                }
+            >a {
+                color: #fff;
+                text-decoration: unset;
+
             }
         }
     }
@@ -4955,7 +4947,7 @@ td.sb-offline:after {
     font-size: 13px;
     line-height: 22px;
     letter-spacing: 0.3px;
-    margin: 5px 0 0 0;
+    margin: 0;
     color: rgb(120, 134, 146);
 }
 
@@ -4982,7 +4974,7 @@ td.sb-offline:after {
         font-size: 15px;
         letter-spacing: 0.3px;
         margin: 0;
-        color: $color-gray;
+        color: #111827;
     }
 
     .sb-icon-help {
@@ -5080,7 +5072,7 @@ td.sb-offline:after {
         font-weight: 600;
         font-size: 14px;
         line-height: 23px;
-        margin: 0 30px 15px 0;
+        margin: 0;
         display: block;
         min-width: 220px;
         letter-spacing: 0.3px;
@@ -5435,6 +5427,11 @@ td.sb-offline:after {
         }
     }
 }
+
+.sb-setting > .input {
+    width: fit-content;
+}
+
 
 .repeater-item {
 
@@ -9449,6 +9446,16 @@ li.menu_head:hover {
 .main-content {
     // margin-left: 240px;
     transition: margin-left 0.3s ease;
+    position: relative;
+
+    .settings-header {
+        position: sticky;
+        top: -16px;
+        background: #ffffff;
+        z-index: 999;
+        width: 100%;
+        padding: 5px 5px;
+    }
 }
 
 .sidebar.collapsed+.main-content {
@@ -9925,6 +9932,14 @@ div#messaging-channels {
     }
 }
 
+.sb-area-dashboard {
+    main {
+        .customer-overview-chart {
+            border: 0;
+        }
+    }
+}
+
 @media (min-width: 465px) {
     .sb-menu-mobile>ul {
         box-shadow: none;
@@ -10077,22 +10092,30 @@ div#messaging-channels {
     }
 }
 
-@media only screen and (min-width: 1024px) {
+@media (min-width: 1024px) {
     .sb-area-dashboard {
         main {
             .new_container {
-                .main-charts {
-                    &.recent-message {
-                        .messages-list {
-                                min-height: calc(100vh - 179px);
-                                .recent.card {
-                                    min-height: calc(100vh - 178px);
-                                    max-height: calc(100vh - 178px);
-}
+                .main-charts.recent-message {
+                    .messages-list {
+                        .recent.card {
+                            min-height: 423px;
                         }
                     }
-                    
                 }
+            }
+        }
+
+    }
+
+    .customer-overview-chart {
+        min-height: 359px;
+    }
+
+    .sb-admin {
+        .header_new {
+            .sidebar {
+                padding-top: 16px;
             }
         }
     }
@@ -10170,22 +10193,24 @@ div#messaging-channels {
 
     .sb-area-dashboard {
         header {
-        .header-right {
-            gap: 10px;
-        }
-        .title {
-            font-size: 20px;
-        }
-    }
-    main {
-        .new_container {
-            .main-charts {
-                .customer-overview {
-                    grid-template-columns: 1fr;
+            .header-right {
+                gap: 10px;
+            }
 
+            .title {
+                font-size: 20px;
+            }
+        }
+
+        main {
+            .new_container {
+                .main-charts {
+                    .customer-overview {
+                        grid-template-columns: 1fr;
+
+                    }
                 }
             }
         }
-    }
     }
 }
