@@ -1364,6 +1364,8 @@ function get_tickets_count($start_date = null,$end_date = null)
             "total_tickets_count" => $total_tickets_created,
             "resolved_ticket_data" => $date_labels2,
             "resolved_tickets_count" => $resolved_tickets_count['total_resolved_tickets_count'],
+            "pending_ticket_data" => $date_labels2,
+            "pending_tickets_count" => $resolved_tickets_count['total_resolved_tickets_count'],
             "table" => ["Date", "Count"],
             "table_inverse" => true,
         ]

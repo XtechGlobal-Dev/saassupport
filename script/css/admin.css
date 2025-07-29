@@ -7285,6 +7285,7 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
