@@ -12572,6 +12572,13 @@ div#messaging-channels {
   align-items: center;
 }
 
+.my-tab {
+  min-width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (min-width: 465px) {
   .sb-menu-mobile > ul {
     box-shadow: none;
@@ -12714,9 +12721,6 @@ div#messaging-channels {
   }
   .main-content .settings-card .my-tabs .my-tab {
     min-width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) {
     min-width: 56%;
