@@ -2851,6 +2851,21 @@ td.sb-offline:after {
         }
     }
 
+    .sb-area-conversations {
+        .sb-scroll-area {
+            ul {
+                li {
+                    .sb-profile {
+                        img {
+                            position: absolute;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .sb-conversation {
         width: 100%;
         min-width: 0;
@@ -3952,6 +3967,7 @@ td.sb-offline:after {
                     font-size: 14px;
                     color: #45B369;
                     padding: 8px;
+                    margin-bottom: 0;
 
                 }
 
@@ -10199,6 +10215,13 @@ div#messaging-channels {
                             &::-webkit-scrollbar {
                                 width: 0px;
                             }
+                        }
+                    }
+                }
+                .main-charts {
+                    .ticket_activity_chart {
+                        #ticket_activity_chart {
+                                height: 188px !important;
                         }
                     }
                 }
