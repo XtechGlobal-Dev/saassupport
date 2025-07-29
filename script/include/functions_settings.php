@@ -777,7 +777,7 @@ function sb_get_chat_setting_code($setting) {
                 $content .= '<div class="sb-repeater"><div class="repeater-item">';
                 for ($i = 0; $i < count($setting['items']); $i++) {
                     $item = $setting['items'][$i];
-                    $content .= '<div>' . (isset($item['name']) ? '<label>' . sb_s($item['name'], $disable_translations) . '</label>' : '');
+                    $content .= '<div class="item-index">' . (isset($item['name']) ? '<label>' . sb_s($item['name'], $disable_translations) . '</label>' : '');
                     switch ($item['type']) {
                         case 'url':
                         case 'text':
