@@ -2841,7 +2841,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Total Resolved</h3>
+                                                            <h3>Tickets Resolved</h3>
                                                             <p class="total-conversations"></p>
                                                         </div>
                                                     </div>
