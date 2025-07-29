@@ -4456,19 +4456,25 @@ td.sb-offline:after {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  border: 0.5px solid #D1D5DB;
-  border-radius: 10px;
+  border-bottom: 0.5px solid #D1D5DB;
+  border-radius: 0px;
   padding: 20px 10px;
 }
 .settings_new .sb-content .save_settings .head, .settings_new .sb-content .save_settings .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .settings_new .sb-content .save_settings .sub_head {
   font-weight: 700;
   font-size: 25px;
   line-height: 40px;
+  margin-bottom: 10px !important;
 }
 .settings_new .sb-content .save_settings .des {
   font-weight: 300;
   font-size: 16px;
   color: #475367;
+}
+.settings_new .sb-content .users-tab {
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 8px;
+  padding: 0px 15px;
 }
 
 .sb-tab {
@@ -4519,7 +4525,7 @@ td.sb-offline:after {
   margin-bottom: 0;
 }
 .sb-tab h2 {
-  font-size: 15px;
+  font-size: 25px;
   letter-spacing: 0.3px;
   line-height: 27px;
   margin: 2px 0 15px;
@@ -6327,6 +6333,8 @@ td.sb-offline:after {
   height: 45px;
   transform: none;
   top: 0;
+  position: absolute;
+  left: 0;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-name {
   height: 23px;
@@ -7037,6 +7045,7 @@ td.sb-offline:after {
 .sb-area-ticket-detail header .title {
   font-weight: 600;
   font-size: 28px;
+  font-family: "InterSemiBold";
 }
 .sb-area-dashboard header .notification,
 .sb-area-conversations header .notification,
@@ -7340,6 +7349,7 @@ td.sb-offline:after {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 0;
+  font-family: "InterSemiBold";
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .metric-chart {
   height: 50px;
@@ -7480,12 +7490,12 @@ td.sb-offline:after {
   border-radius: 8px;
 }
 .sb-area-dashboard main .new_container .main-charts .button_ext div strong {
-  color: #4B5563;
-  font-family: "InterMedium";
+  color: #666;
+  font-weight: normal;
 }
 .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending {
   color: #111827;
-  font-family: "InterSemiBold";
+  font-family: "InterBold";
 }
 .sb-area-dashboard main .new_container .main-charts .green_badge {
   background: rgba(69, 179, 105, 0.1490196078);
@@ -12568,6 +12578,13 @@ div#messaging-channels {
   align-items: center;
 }
 
+.my-tab {
+  min-width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (min-width: 465px) {
   .sb-menu-mobile > ul {
     box-shadow: none;
@@ -12802,6 +12819,9 @@ div#messaging-channels {
   }
   .main-content .settings-card .my-tabs .my-tab {
     min-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) {
     min-width: 56%;
