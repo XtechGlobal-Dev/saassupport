@@ -5347,10 +5347,6 @@ td.sb-offline:after {
         }
     }
 
-    &.sb-type-repeater>.input {
-        width: 100%;
-    }
-
     .sb-repeater {
         margin-bottom: 15px;
         display: block;
@@ -5518,9 +5514,6 @@ td.sb-offline:after {
     }
 }
 
-.sb-setting>.input {
-    width: fit-content;
-}
 
 .custom-switch input:checked+.slider:before {
     transform: translateX(23px) !important;
@@ -9567,7 +9560,6 @@ li.menu_head:hover {
             }
 
             .sb-setting {
-                flex-wrap: wrap;
                 gap: 20px 0;
 
                 &.sb-type-upload-image {
@@ -9580,7 +9572,6 @@ li.menu_head:hover {
             }
 
             #supervisors {
-                justify-content: space-between;
 
                 .input {
                     width: fit-content !important;
@@ -10561,9 +10552,21 @@ div#messaging-channels {
                         }
                     }
                 }
+                .sb-setting {
+                    flex-wrap: wrap;
+                }
             }
         }
     }
+    
+    .sb-setting>.input {
+    width: fit-content;
+}
+
+    .sb-setting.sb-type-repeater > .input {
+        width: 100%;
+    }
+
 
     .sb-admin .sb-area-settings>.sb-tab {
         position: relative !important;
