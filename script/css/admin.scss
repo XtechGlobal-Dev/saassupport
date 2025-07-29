@@ -2851,6 +2851,21 @@ td.sb-offline:after {
         }
     }
 
+    .sb-area-conversations {
+        .sb-scroll-area {
+            ul {
+                li {
+                    .sb-profile {
+                        img {
+                            position: absolute;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .sb-conversation {
         width: 100%;
         min-width: 0;
@@ -10204,15 +10219,9 @@ div#messaging-channels {
                     }
                 }
                 .main-charts {
-                    .monthlyBarChart {
-                        #monthlyBarChart {
-                            width: 80% !important;
-                        }
-                    }
                     .ticket_activity_chart {
                         #ticket_activity_chart {
                                 height: 188px !important;
-                                width: 86% !important;
                         }
                     }
                 }
