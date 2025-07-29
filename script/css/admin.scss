@@ -9513,6 +9513,17 @@ li.menu_head:hover {
     text-align: center;
 }
 
+#user-additional-fields, #rich-messages {
+    .input {
+        .repeater-item {
+            i {
+                right: -14px;
+
+            }
+        }
+    }
+}
+
 .main-content {
     // margin-left: 240px;
     transition: margin-left 0.3s ease;
