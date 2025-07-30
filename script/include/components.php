@@ -4395,11 +4395,14 @@ function sb_component_admin()
                         </div>
                     </div>
                     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+                    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
 
                     <!-- Scripts -->
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+                    
+    <script src="https://cdn.jsdelivr.net/npm/@iconify-json/hugeicons@1.2.6/index.min.js"></script>
 
                     <style>
                         /* Make sure the dropdown is not cut off by table or container */
