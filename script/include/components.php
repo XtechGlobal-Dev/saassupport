@@ -3857,9 +3857,9 @@ function sb_component_admin()
                                                 <span>Convert to ticket</span>
                                             </a>
                                         </li>
-                                        <li id="view-profile-list" class="sb-convert-to-ticket-list">
+                                        <li id="view-profile-list" class="">
                                             <a id="view-profile-button" data-value="view-profile" class="sb-btn sb-icon"
-                                                data-sb-tooltip="Convert to a ticket">
+                                                data-sb-tooltip="View Profile">
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
