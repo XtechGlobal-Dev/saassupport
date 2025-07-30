@@ -254,13 +254,13 @@ function sb_ticket_edit_box()
             <div class="sb-ticket">
                 <span class="sb-name"></span>
                 <?php /*
-           <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
-               <label class="ml-4">Guest Ticket</label>
-               <div class="form-check form-switch mb-0 ml-2">
-                   <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
-                       id="flexSwitchCheckDefault" style="width: 27px;">
-               </div>
-           </div>*/
+       <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
+           <label class="ml-4">Guest Ticket</label>
+           <div class="form-check form-switch mb-0 ml-2">
+               <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
+                   id="flexSwitchCheckDefault" style="width: 27px;">
+           </div>
+       </div>*/
                 ?>
             </div>
             <div>
@@ -765,10 +765,10 @@ function sb_ticket_edit_box()
         }
 
         /* .sb-td-tags span {
-                                                            margin: 3px 5px 0 0;
-                                                            padding: .45em .75em;
-                                                            font-size: 13px
-                                                        } */
+                                                                            margin: 3px 5px 0 0;
+                                                                            padding: .45em .75em;
+                                                                            font-size: 13px
+                                                                        } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -803,76 +803,76 @@ function sb_ticket_edit_box()
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                            position: relative;
-                                                            overflow: visible !important;
+                                                                            position: relative;
+                                                                            overflow: visible !important;
             
-                                                        }
+                                                                        }
 
-                                                        .status-btn {
-                                                            border: none;
-                                                            border-radius: 8px;
-                                                            padding: 3px 12px;
-                                                            font-weight: 500;
-                                                            cursor: pointer;
-                                                            display: flex;
-                                                            align-items: center;
-                                                            gap: 4px;
-                                                            font-size: 14px;
-                                                        }
+                                                                        .status-btn {
+                                                                            border: none;
+                                                                            border-radius: 8px;
+                                                                            padding: 3px 12px;
+                                                                            font-weight: 500;
+                                                                            cursor: pointer;
+                                                                            display: flex;
+                                                                            align-items: center;
+                                                                            gap: 4px;
+                                                                            font-size: 14px;
+                                                                        }
 
-                                                        .status-list li,
-                                                        .priority-list li {
-                                                            font-size: 14px;
-                                                        }
+                                                                        .status-list li,
+                                                                        .priority-list li {
+                                                                            font-size: 14px;
+                                                                        }
 
-                                                        .status-dot {
-                                                            width: 10px !important;
-                                                            height: 10px !important;
-                                                        }
+                                                                        .status-dot {
+                                                                            width: 10px !important;
+                                                                            height: 10px !important;
+                                                                        }
 
-                                                        .arrow {
-                                                            font-size: 12px;
-                                                        }
+                                                                        .arrow {
+                                                                            font-size: 12px;
+                                                                        }
 
-                                                        .status-list,
-                                                        .priority-list {
-                                                            display: none;
-                                                            position: absolute;
-                                                            top: 75%;
-                                                            left: 0;
-                                                            min-width: 170px;
-                                                            background: #fff;
-                                                            border: 1px solid #ddd;
-                                                            border-radius: 8px;
-                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                            z-index: 9999;
-                                                            padding: 6px 0;
-                                                            margin: 0;
-                                                            list-style: none;
-                                                        }
+                                                                        .status-list,
+                                                                        .priority-list {
+                                                                            display: none;
+                                                                            position: absolute;
+                                                                            top: 75%;
+                                                                            left: 0;
+                                                                            min-width: 170px;
+                                                                            background: #fff;
+                                                                            border: 1px solid #ddd;
+                                                                            border-radius: 8px;
+                                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                                                            z-index: 9999;
+                                                                            padding: 6px 0;
+                                                                            margin: 0;
+                                                                            list-style: none;
+                                                                        }
 
-                                                        .status-list li,
-                                                        .priority-list li {
-                                                            padding: 8px 16px;
-                                                            cursor: pointer;
-                                                            display: flex;
-                                                            align-items: center;
-                                                            gap: 4px;
-                                                            font-size: 15px;
-                                                            transition: background 0.15s;
-                                                        }
+                                                                        .status-list li,
+                                                                        .priority-list li {
+                                                                            padding: 8px 16px;
+                                                                            cursor: pointer;
+                                                                            display: flex;
+                                                                            align-items: center;
+                                                                            gap: 4px;
+                                                                            font-size: 15px;
+                                                                            transition: background 0.15s;
+                                                                        }
 
-                                                        .status-list li:hover,
-                                                        .priority-list li:hover {
-                                                            background: #f5f5f5;
-                                                        }
+                                                                        .status-list li:hover,
+                                                                        .priority-list li:hover {
+                                                                            background: #f5f5f5;
+                                                                        }
 
-                                                        .status-dot {
-                                                            width: 12px;
-                                                            height: 12px;
-                                                            border-radius: 50%;
-                                                            display: inline-block;
-                                                        } */
+                                                                        .status-dot {
+                                                                            width: 12px;
+                                                                            height: 12px;
+                                                                            border-radius: 50%;
+                                                                            display: inline-block;
+                                                                        } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -2842,7 +2842,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Total Resolved</h3>
+                                                            <h3>Tickets Resolved</h3>
                                                             <p class="total-conversations"></p>
                                                         </div>
                                                     </div>
@@ -3824,12 +3824,12 @@ function sb_component_admin()
                                     <?php sb_conversations_filter(
                                         $cloud_active_apps
                                     ); ?>
-                                    <div class="sb-search-btn">
-                                        <i class="sb-icon sb-icon-search"></i>
-                                        <input type="text" autocomplete="false" placeholder="<?php sb_e(
-                                            "Search for keywords or users..."
-                                        ); ?>" />
-                                    </div>
+                                </div>
+                                <div class="sb-search-btn search-input">
+                                    <i class="sb-icon sb-icon-search"></i>
+                                    <input type="text" autocomplete="false" placeholder="<?php sb_e(
+                                        "Search..."
+                                    ); ?>" />
                                 </div>
                             </div>
                             <div class="sb-scroll-area">
@@ -3854,22 +3854,44 @@ function sb_component_admin()
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon"
                                                 data-sb-tooltip="Convert to a ticket">
-                                                <i id="sb-icon-ticket" class="fa-solid fa-repeat text-white" style></i>
                                                 <span>Convert to ticket</span>
                                             </a>
                                         </li>
+                                        <li id="view-profile-list" class="">
+                                            <a id="view-profile-button" data-value="view-profile" class="sb-btn sb-icon"
+                                                data-sb-tooltip="View Profile">
+                                                <span>View Profile</span>
+                                            </a>
+                                        </li>
                                         <li>
-                                            <a data-value="archive" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
+                                            <a data-value="archive" class="sb-btn-icon" style="display: flex; align-items: center; justify-content: center;" data-sb-tooltip="<?php sb_e(
                                                 "Archive conversation"
                                             ); ?>">
-                                                <i class="sb-icon-check"></i>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M7.30078 11.0665L5.43359 12.9337L9.1891 16.6892C9.44699 16.9471 9.78469 17.0759 10.1227 17.0759C10.4607 17.0759 10.7984 16.9471 11.0563 16.6892L18.5673 9.17822L16.7001 7.31104L10.1227 13.8884L7.30078 11.0665Z"
+                                                        fill="#22C55E" />
+                                                    <path
+                                                        d="M23.0567 7.3288C22.4523 5.89966 21.5871 4.61663 20.4854 3.51462C19.3837 2.41291 18.1003 1.54768 16.6712 0.943276C15.1913 0.317457 13.6196 0 12 0C10.3804 0 8.8087 0.317457 7.3288 0.943276C5.89966 1.54768 4.61663 2.41291 3.51462 3.51462C2.41291 4.61633 1.54768 5.89966 0.943276 7.3288C0.317457 8.8087 0 10.3804 0 12C0 13.6196 0.317457 15.1913 0.943276 16.6712C1.54768 18.1003 2.41291 19.3834 3.51462 20.4854C4.61633 21.5871 5.89966 22.4523 7.3288 23.0567C8.8087 23.6825 10.3804 24 12 24C13.4154 24 14.8014 23.7556 16.1196 23.2738C17.3933 22.8082 18.5718 22.1334 19.6231 21.2679L18.6907 20.1354C16.8129 21.6816 14.437 22.533 12 22.533C6.19218 22.533 1.46699 17.8078 1.46699 12C1.46699 6.19218 6.19218 1.46699 12 1.46699C17.8078 1.46699 22.533 6.19218 22.533 12C22.533 14.4282 21.6871 16.7974 20.1512 18.6716L21.2858 19.6014C22.146 18.5519 22.8164 17.3759 23.2788 16.1061C23.7574 14.7923 24 13.4107 24 12C24 10.3804 23.6825 8.8087 23.0567 7.3288Z"
+                                                        fill="#22C55E" />
+                                                </svg>
                                             </a>
                                         </li>
                                         <li>
                                             <a data-value="read" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
                                                 "Mark as read"
                                             ); ?>">
-                                                <i class="sb-icon-check-circle"></i>
+                                                <svg width="29" height="24" viewBox="0 0 29 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M19.3418 1.19824C22.0089 -0.273185 25.4006 0.652378 26.8623 3.30176C28.3337 5.96876 27.4079 9.36042 24.7588 10.8223L24.5 10.9648V22.8604C24.5 23.0467 24.4397 23.1628 24.3711 23.2314C24.3025 23.3 24.1863 23.3604 24 23.3604H1C0.813676 23.3604 0.697524 23.3 0.628906 23.2314C0.56031 23.1628 0.500025 23.0467 0.5 22.8604V6.86035C0.5 6.63877 0.555306 6.5393 0.583984 6.50488C0.604837 6.47994 0.633876 6.45996 0.700195 6.45996H0.703125L16.0029 6.36035L16.4766 6.35742L16.499 5.88379C16.5919 3.93497 17.6115 2.10923 19.333 1.20312L19.3418 1.19824ZM1.5 22.3604H23.5V11.2666L22.8418 11.4863C22.8402 11.4868 22.8302 11.4893 22.8096 11.4941C22.7877 11.4993 22.758 11.506 22.7217 11.5127C22.6491 11.526 22.5533 11.5397 22.4385 11.5518C22.2083 11.5759 21.9097 11.5905 21.5762 11.5732C20.9023 11.5384 20.1259 11.3765 19.4775 10.9443L19.1943 10.7559L18.915 10.9492L12.7188 15.2451C12.6683 15.2774 12.5733 15.3105 12.4502 15.3105C12.3244 15.3105 12.2263 15.2772 12.1768 15.2441L2.28613 8.34961L1.5 7.80273V22.3604ZM3.91602 8.27148L12.3154 14.0713L12.6035 14.2705L12.8887 14.0684L17.9883 10.4688L18.4375 10.1523L18.0801 9.73438C17.5197 9.08055 17.1485 8.43205 16.8682 7.68457L16.7461 7.36035H2.5957L3.91602 8.27148ZM22 1.56055C19.5239 1.56055 17.5 3.5844 17.5 6.06055C17.5002 8.53655 19.524 10.5605 22 10.5605C24.476 10.5605 26.4998 8.53655 26.5 6.06055C26.5 3.5844 24.4761 1.56055 22 1.56055Z"
+                                                        fill="black" stroke="#5E5E5E" />
+                                                    <path
+                                                        d="M22 3.36035C22.1864 3.36035 22.3025 3.42065 22.3711 3.48926C22.4397 3.55787 22.5 3.67398 22.5 3.86035V7.86035C22.5 8.04673 22.4397 8.16283 22.3711 8.23145C22.3025 8.30006 22.1864 8.36035 22 8.36035C21.8136 8.36035 21.6975 8.30006 21.6289 8.23145C21.5603 8.16283 21.5 8.04673 21.5 7.86035V3.86035C21.5 3.67398 21.5603 3.55787 21.6289 3.48926C21.6975 3.42065 21.8136 3.36035 22 3.36035Z"
+                                                        fill="black" stroke="#5E5E5E" />
+                                                </svg>
+
                                             </a>
                                         </li>
                                         <li>
@@ -3879,7 +3901,14 @@ function sb_component_admin()
                                                  "transcript",
                                                  "transcript-action"
                                              ); ?>">
-                                                <i class="sb-icon-download"></i>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1 17.5V20.25C1 20.9793 1.28973 21.6788 1.80546 22.1945C2.32118 22.7103 3.02065 23 3.75 23H20.25C20.9793 23 21.6788 22.7103 22.1945 22.1945C22.7103 21.6788 23 20.9793 23 20.25V17.5M17.5 12L12 17.5M12 17.5L6.5 12M12 17.5V1"
+                                                        stroke="#5E5E5E" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+
                                             </a>
                                         </li>
                                         <li>
@@ -3903,9 +3932,15 @@ function sb_component_admin()
                                         ) {
                                             echo '<li><a data-value="delete" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' .
                                                 sb_("Delete conversation") .
-                                                '"><i class="sb-icon-delete"></i></a></li><li><a data-value="empty-trash" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' .
+                                                '"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.74 9.00003L14.394 18M9.606 18L9.26 9.00003M19.228 5.79003C19.57 5.84203 19.91 5.89703 20.25 5.95603M19.228 5.79003L18.16 19.673C18.1164 20.2383 17.8611 20.7662 17.445 21.1513C17.029 21.5364 16.4829 21.7502 15.916 21.75H8.084C7.5171 21.7502 6.97102 21.5364 6.55498 21.1513C6.13894 20.7662 5.88359 20.2383 5.84 19.673L4.772 5.79003M19.228 5.79003C18.0739 5.61555 16.9138 5.48313 15.75 5.39303M4.772 5.79003C4.43 5.84103 4.09 5.89603 3.75 5.95503M4.772 5.79003C5.92613 5.61555 7.08623 5.48313 8.25 5.39303M15.75 5.39303V4.47703C15.75 3.29703 14.84 2.31303 13.66 2.27603C12.5536 2.24067 11.4464 2.24067 10.34 2.27603C9.16 2.31303 8.25 3.29803 8.25 4.47703V5.39303M15.75 5.39303C13.2537 5.20011 10.7463 5.20011 8.25 5.39303" stroke="#5E5E5E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a></li><li><a data-value="empty-trash" class="sb-btn-icon sb-btn-red" data-sb-tooltip="' .
                                                 sb_("Empty trash") .
-                                                '"><i class="sb-icon-delete"></i></a></li>';
+                                                '"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.74 9.00003L14.394 18M9.606 18L9.26 9.00003M19.228 5.79003C19.57 5.84203 19.91 5.89703 20.25 5.95603M19.228 5.79003L18.16 19.673C18.1164 20.2383 17.8611 20.7662 17.445 21.1513C17.029 21.5364 16.4829 21.7502 15.916 21.75H8.084C7.5171 21.7502 6.97102 21.5364 6.55498 21.1513C6.13894 20.7662 5.88359 20.2383 5.84 19.673L4.772 5.79003M19.228 5.79003C18.0739 5.61555 16.9138 5.48313 15.75 5.39303M4.772 5.79003C4.43 5.84103 4.09 5.89603 3.75 5.95503M4.772 5.79003C5.92613 5.61555 7.08623 5.48313 8.25 5.39303M15.75 5.39303V4.47703C15.75 3.29703 14.84 2.31303 13.66 2.27603C12.5536 2.24067 11.4464 2.24067 10.34 2.27603C9.16 2.31303 8.25 3.29803 8.25 4.47703V5.39303M15.75 5.39303C13.2537 5.20011 10.7463 5.20011 8.25 5.39303" stroke="#5E5E5E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a></li>';
                                         } ?>
                                         <li>
                                             <a data-value="panel" class="sb-btn-icon" data-sb-tooltip="<?php sb_e(
@@ -3997,7 +4032,7 @@ function sb_component_admin()
                                         "disable-tags"
                                     )
                                 ) {
-                                    echo '<div class="sb-panel-details sb-panel-tags"><i class="sb-icon-settings"></i><h3>' .
+                                    echo '<div class="sb-panel-details sb-panel-tags"><i class="sb-icon-plus"></i><h3>' .
                                         sb_("Tags") .
                                         "</h3><div></div></div>";
                                 }
@@ -4283,8 +4318,8 @@ function sb_component_admin()
                         </div>
                     </div>
                     <!--  -->
-                    <div class="container-fluid py-4">
-                        <div class="pe-4">
+                    <div class="container-fluid py-4 px-0">
+                        <div class="pe-4 px-3">
                             <!-- Table -->
                             <div class="table-responsive" style="overflow: visible;">
                                 <div class="sb-scroll-area scroll-table">
@@ -5849,11 +5884,16 @@ function sb_component_admin()
                                     ); ?-->
                                     <!-- chat settings -->
                                     <div class="main-content">
-                                        <h2>Chat <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
-                                                <i class="sb-icon-check"></i>Save changes</a>
-                                        </h2>
-                                        <hr>
-                                        <!--  -->
+                                        <div class="sb-top-bar settings-header">
+                                            <div>
+                                                <p class="head">Chat</p>
+                                            </div>
+                                            <div>
+                                                <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                                    <i class="sb-icon-check"></i>Save changes</a>
+                                            </div>
+                                        </div>
+
                                         <div class="settings-card">
                                             <div class="my-tabs">
                                                 <div class="my-tab active" data-target="availability-content">Availability</div>
@@ -6003,11 +6043,15 @@ function sb_component_admin()
                                     </div> -->
                                     <?php //sb_populate_settings("admin",$sb_settings ); ?>
                                     <div class="main-content">
-                                        <h2 class="settings-header">Admin <a class="sb-btn sb-save-changes sb-icon sb_btn_new"
-                                                style="float: right;">
-                                                <i class="sb-icon-check"></i>Save changes</a>
-                                        </h2>
-                                        <hr>
+                                        <div class="sb-top-bar settings-header">
+                                            <div>
+                                                <p class="head">Admin</p>
+                                            </div>
+                                            <div>
+                                                <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                                    <i class="sb-icon-check"></i>Save changes</a>
+                                            </div>
+                                        </div>
                                         <div class="settings-card">
                                             <div class="my-tabs">
                                                 <div class="my-tab active" data-target="panel-setting-content">Panel Setting</div>
@@ -6070,7 +6114,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Notification Settings</p>
                                             <p class="des mb-0">Configure your notification settings.</p>
@@ -6082,13 +6126,15 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
-                                        "notifications",
-                                        $sb_settings
-                                    ); ?>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "notifications",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Users Settings</p>
                                             <p class="des mb-0">Configure your users settings.</p>
@@ -6100,10 +6146,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
-                                        "users",
-                                        $sb_settings
-                                    ); ?>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "users",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
                                 </div>
                                 <!-- <div>
                                     <div class="sb-top-bar save_settings">
@@ -6124,7 +6172,7 @@ function sb_component_admin()
                                     ); ?>
                                 </div> -->
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Messages Settings</p>
                                             <p class="des mb-0">Configure your message settings.</p>
@@ -6136,14 +6184,16 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
-                                        "messages",
-                                        $sb_settings
-                                    ); ?>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "messages",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
 
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Miscellaneous Settings</p>
                                             <p class="des mb-0">Configure additional options and preferences.</p>
@@ -6155,17 +6205,19 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
-                                        "miscellaneous",
-                                        $sb_settings
-                                    ); ?>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "miscellaneous",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
                                 </div>
                                 <?php sb_apps_area(
                                     $apps,
                                     $cloud_active_apps
                                 ); ?>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Articles Settings</p>
                                             <p class="des mb-0">Configure articles settings.</p>
@@ -6177,10 +6229,12 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <?php sb_populate_settings(
-                                        "articles",
-                                        $sb_settings
-                                    ); ?>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "articles",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
                                 </div>
                                 <div>
                                     <div class="sb-automations-area">
@@ -6416,10 +6470,10 @@ function sb_apps_area($apps, $cloud_active_apps)
             // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
             $code .=
                 '<div>
-            <div class="sb-top-bar save_settings">
+            <div class="sb-top-bar save_settings settings-header">
                 <div class="">
-                    <p class="head mb-4"></p>
-                    <p class="des mb-0"></p>
+                    <p class="head mb-4">Tickets Settings</p>
+                    <p class="des mb-0">Configure tickets settings.</p>
                 </div>
                 <div>
                     <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
@@ -6428,9 +6482,10 @@ function sb_apps_area($apps, $cloud_active_apps)
                     </a>
                 </div>
             </div>
+            <div class="users-tab">
             ' .
                 sb_populate_app_settings($apps[$i][1]) .
-                "</div>";
+                "</div></div>";
         }
     }
     $code .= '<div><div class="sb-apps">';
@@ -6595,7 +6650,13 @@ function sb_conversations_filter($cloud_active_apps)
             $tags[0]["tag-name"] .
             '"></i>'
             : "") .
-        '<div class="sb-filter-btn"><i class="sb-icon sb-icon-filter"></i><div><div class="sb-select' .
+        '<div class="sb-filter-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.7801 8.25167L18.2506 5.72294L18.2673 14.5714C18.2673 15.0452 17.8839 15.4286 17.4101 15.4286C16.938 15.4286 16.553 15.0452 16.553 14.5714L16.5363 5.7832L14.0687 8.25167C13.7338 8.58566 13.1914 8.58566 12.8566 8.25167C12.5218 7.91685 12.5218 7.37361 12.8566 7.03878L16.3839 3.51144C16.6183 3.2009 16.9916 3 17.4101 3C17.7366 3 18.0329 3.12053 18.2589 3.31976C18.2924 3.34486 18.3242 3.37249 18.3544 3.40263L21.9922 7.03878C22.327 7.37361 22.327 7.91685 21.9922 8.25167C21.6574 8.58566 21.115 8.58566 20.7801 8.25167Z" fill="black"/>
+<path d="M1.71484 6.25708C1.71484 5.87873 2.0212 5.57153 2.40123 5.57153H9.1713C9.33536 5.57153 9.48604 5.62846 9.60322 5.72387C9.75896 5.84944 9.8577 6.04196 9.8577 6.25708V6.60028C9.8577 6.97862 9.55136 7.28582 9.1713 7.28582H2.40123C2.20201 7.28582 2.02288 7.20211 1.89732 7.06735C1.82701 6.99285 1.77511 6.90244 1.74498 6.802C1.72489 6.73839 1.71484 6.67059 1.71484 6.60028V6.25708Z" fill="black"/>
+<path d="M2.14844 12.477C2.08315 12.503 2.02288 12.5381 1.96931 12.5816C1.81361 12.7072 1.71484 12.8989 1.71484 13.114V13.4572C1.71484 13.8356 2.0212 14.1428 2.40123 14.1428H13.0284C13.4085 14.1428 13.7148 13.8356 13.7148 13.4572V13.114C13.7148 12.7357 13.4085 12.4285 13.0284 12.4285H2.40123C2.3125 12.4285 2.22712 12.446 2.14844 12.477Z" fill="black"/>
+<path d="M1.77846 19.684C1.73828 19.7711 1.71484 19.8682 1.71484 19.9712V20.3144C1.71484 20.5329 1.81696 20.7279 1.97601 20.8534C2.0932 20.9455 2.24051 20.9999 2.40123 20.9999H20.8092C21.1892 20.9999 21.4956 20.6927 21.4956 20.3144V19.9712C21.4956 19.5928 21.1892 19.2856 20.8092 19.2856H2.40123C2.125 19.2856 1.88728 19.4488 1.77846 19.684Z" fill="black"/>
+</svg>
+<div><div class="sb-select' .
         ($count ? "" : " sb-hide") .
         '"><p>' .
         sb_("All departments") .
