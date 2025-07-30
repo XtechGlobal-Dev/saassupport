@@ -3691,8 +3691,9 @@ td.sb-offline:after {
                         0px 0px 4px 0px #00000040 inset;
                     padding: 0px 15px;
                     border-radius: 10px;
-                    width: 86%;
+                    width: 100%;
                     color: #fff;
+                    max-width: 335px;
                     margin-bottom: 25px;
 
                     ul {
