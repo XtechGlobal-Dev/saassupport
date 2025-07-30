@@ -5849,11 +5849,16 @@ function sb_component_admin()
                                     ); ?-->
                                     <!-- chat settings -->
                                     <div class="main-content">
-                                        <h2>Chat <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
+                                        <div class="sb-top-bar settings-header">
+                                            <div>
+                                                <p class="head">Chat</p>
+                                            </div>
+                                            <div>
+                                                <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
                                                 <i class="sb-icon-check"></i>Save changes</a>
-                                        </h2>
-                                        <hr>
-                                        <!--  -->
+                                            </div>
+                                        </div>
+
                                         <div class="settings-card">
                                             <div class="my-tabs">
                                                 <div class="my-tab active" data-target="availability-content">Availability</div>
@@ -6003,11 +6008,15 @@ function sb_component_admin()
                                     </div> -->
                                     <?php //sb_populate_settings("admin",$sb_settings ); ?>
                                     <div class="main-content">
-                                        <h2 class="settings-header">Admin <a class="sb-btn sb-save-changes sb-icon sb_btn_new"
-                                                style="float: right;">
+                                        <div class="sb-top-bar settings-header">
+                                            <div>
+                                                <p class="head">Admin</p>
+                                            </div>
+                                            <div>
+                                                <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
                                                 <i class="sb-icon-check"></i>Save changes</a>
-                                        </h2>
-                                        <hr>
+                                            </div>
+                                        </div>
                                         <div class="settings-card">
                                             <div class="my-tabs">
                                                 <div class="my-tab active" data-target="panel-setting-content">Panel Setting</div>
@@ -6070,7 +6079,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Notification Settings</p>
                                             <p class="des mb-0">Configure your notification settings.</p>
@@ -6090,7 +6099,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Users Settings</p>
                                             <p class="des mb-0">Configure your users settings.</p>
@@ -6128,7 +6137,7 @@ function sb_component_admin()
                                     ); ?>
                                 </div> -->
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Messages Settings</p>
                                             <p class="des mb-0">Configure your message settings.</p>
@@ -6149,7 +6158,7 @@ function sb_component_admin()
 
                                 </div>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Miscellaneous Settings</p>
                                             <p class="des mb-0">Configure additional options and preferences.</p>
@@ -6173,7 +6182,7 @@ function sb_component_admin()
                                     $cloud_active_apps
                                 ); ?>
                                 <div>
-                                    <div class="sb-top-bar save_settings">
+                                    <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Articles Settings</p>
                                             <p class="des mb-0">Configure articles settings.</p>
@@ -6426,7 +6435,7 @@ function sb_apps_area($apps, $cloud_active_apps)
             // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
             $code .=
                 '<div>
-            <div class="sb-top-bar save_settings">
+            <div class="sb-top-bar save_settings settings-header">
                 <div class="">
                     <p class="head mb-4">Tickets Settings</p>
                     <p class="des mb-0">Configure tickets settings.</p>

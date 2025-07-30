@@ -4452,25 +4452,6 @@ td.sb-offline:after {
 .settings_new .sb-content {
   height: calc(100vh - 150px);
 }
-.settings_new .sb-content .save_settings {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  border-bottom: 0.5px solid #D1D5DB;
-  border-radius: 0px;
-  padding: 20px 10px;
-}
-.settings_new .sb-content .save_settings .head, .settings_new .sb-content .save_settings .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .settings_new .sb-content .save_settings .sub_head {
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 40px;
-  margin-bottom: 10px !important;
-}
-.settings_new .sb-content .save_settings .des {
-  font-weight: 300;
-  font-size: 16px;
-  color: #475367;
-}
 .settings_new .sb-content .users-tab {
   border: 1px solid rgb(209, 213, 219);
   border-radius: 8px;
@@ -8728,6 +8709,10 @@ td.sb-offline:after {
   border-bottom: 0 !important;
 }
 
+#tags .input {
+  width: fit-content;
+}
+
 .custom-switch input:checked + .slider:before {
   transform: translateX(23px) !important;
 }
@@ -12114,17 +12099,38 @@ li.menu_head:hover {
   text-align: center;
 }
 
+#user-additional-fields .input .repeater-item i, #rich-messages .input .repeater-item i {
+  right: -14px;
+}
+
 .main-content {
   transition: margin-left 0.3s ease;
   position: relative;
 }
 .main-content .settings-header {
   position: sticky;
-  top: -16px;
+  top: -24px;
   background: #ffffff;
   z-index: 999;
   width: 100%;
   padding: 5px 5px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 0.5px solid #D1D5DB;
+  border-radius: 0px;
+  padding: 20px 10px;
+}
+.main-content .settings-header .head, .main-content .settings-header .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .main-content .settings-header .sub_head {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 40px;
+  margin-bottom: 10px !important;
+}
+.main-content .settings-header .des {
+  font-weight: 300;
+  font-size: 16px;
+  color: #475367;
 }
 .main-content .settings-card .settings-tab {
   border: 1px solid rgb(209, 213, 219);
