@@ -5311,12 +5311,13 @@ td.sb-offline:after {
 
 .sb-panel-notes > div > div {
   margin: 0 15px;
-  background: #ffeab0;
+  background: #487FFF;
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   overflow: hidden;
+  color: #fff;
 }
 .sb-panel-notes > div > div > span:first-child {
   display: block;
@@ -5345,7 +5346,6 @@ td.sb-offline:after {
   right: 17px;
   font-size: 16px;
   line-height: 26px;
-  background: #ffeab0;
 }
 .sb-panel-notes > div > div > span:first-child i.sb-edit-note:hover {
   color: #155CFD;
@@ -5354,7 +5354,6 @@ td.sb-offline:after {
   font-weight: 400;
   font-size: 12px;
   float: right;
-  opacity: 0.7;
   transition-delay: 1s;
 }
 .sb-panel-notes > div > div > span:first-child.sb-note-hide-info {
@@ -6969,8 +6968,8 @@ td.sb-offline:after {
   display: flex;
   align-content: center;
   align-items: center;
-  padding: 15px;
-  border-top: 1px solid rgb(212, 212, 212);
+  padding: 20px 15px;
+  border-top: 1px solid #CBD5E1;
 }
 .sb-board .sb-user-details .sb-inline h3 {
   margin-right: 15px;
@@ -6999,6 +6998,28 @@ td.sb-offline:after {
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments, .sb-board .sb-user-details .sb-inline.sb-inline-agents {
   padding: 0 0 0 15px;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments {
+  display: flex;
+  flex-direction: column;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select {
+  background: #487FFF;
+  box-shadow: 0px 4px 7.2px -2px rgba(0, 0, 0, 0.2509803922), 0px 0px 4px 0px rgba(0, 0, 0, 0.2509803922) inset;
+  padding: 0px 15px;
+  border-radius: 10px;
+  width: 86%;
+  color: #fff;
+  margin-bottom: 25px;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select ul {
+  top: 0;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p:hover {
+  color: #fff;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p::after {
+  color: #fff;
 }
 .sb-board .sb-no-conversation-message {
   position: absolute;
