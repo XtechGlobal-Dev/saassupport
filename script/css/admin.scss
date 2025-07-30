@@ -3664,6 +3664,7 @@ td.sb-offline:after {
                     font-size: 13px !important;
                     line-height: 55px !important;
                     border-radius: 0;
+                    color: #fff !important;
 
                     &:after {
                         line-height: 55px;
@@ -8514,6 +8515,11 @@ a.sb-btn-white,
 
 .daterangepicker .drp-calendar.single .calendar-table {
     border: none;
+}
+
+.sb-list .sb-right .sb-reply-message {
+    color: #fff !important;
+    border: 0 !important;
 }
 
 .daterangepicker .calendar-table .next span,
