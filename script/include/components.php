@@ -4318,8 +4318,8 @@ function sb_component_admin()
                         </div>
                     </div>
                     <!--  -->
-                    <div class="container-fluid py-4">
-                        <div class="pe-4">
+                    <div class="container-fluid py-4 px-0">
+                        <div class="pe-4 px-3">
                             <!-- Table -->
                             <div class="table-responsive" style="overflow: visible;">
                                 <div class="sb-scroll-area scroll-table">

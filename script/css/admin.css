@@ -4646,6 +4646,12 @@ td.sb-offline:after {
   color: #155CFD;
 }
 
+.status-dropdown .dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .sb-table {
   margin: 0 0 20px 0;
   width: 100%;
@@ -6609,7 +6615,6 @@ td.sb-offline:after {
 .sb-board .sb-conversation .sb-list > div .sb-image img {
   border: 0.93px solid #E2E8F0;
   border-radius: 12px;
-  max-height: 200px;
   object-fit: cover;
   width: 100%;
   min-width: 240px;
