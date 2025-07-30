@@ -38,6 +38,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     </title>
     <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
     <script src="../script/js/min/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@iconify-json/hugeicons@1.2.6/index.min.js"></script>
     <script id="sbinit" src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
     <link rel="stylesheet" href="../script/css/admin.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
     <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>" media="(max-width: 464px)" />

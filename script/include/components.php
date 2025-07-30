@@ -3163,7 +3163,10 @@ function sb_component_admin()
                                                                     <thead>
                                                                         <tr>
                                                                             <th data-field="title">
-                                                                                Ticket Title
+                                                                                ID
+                                                                            </th>
+                                                                            <th data-field="title">
+                                                                                Subject
                                                                             </th>
                                                                             <th data-field="assigned-to">
                                                                                 Assigned To
@@ -3180,6 +3183,7 @@ function sb_component_admin()
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr data-ticket-id="">
+                                                                            <td class="sb-td-id">Bug fix: Login issue</td>
                                                                             <td class="sb-td-subject">Bug fix: Login issue</td>
                                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
@@ -4391,11 +4395,14 @@ function sb_component_admin()
                         </div>
                     </div>
                     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+                    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
 
                     <!-- Scripts -->
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+                    
+    <script src="https://cdn.jsdelivr.net/npm/@iconify-json/hugeicons@1.2.6/index.min.js"></script>
 
                     <style>
                         /* Make sure the dropdown is not cut off by table or container */
