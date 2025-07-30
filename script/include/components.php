@@ -2507,6 +2507,7 @@ function sb_component_admin()
                 // Static
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
                 $ticketUrl = dirname(SB_URL) . "?area=tickets";
+                $inboxUrl = dirname(SB_URL) . "?area=conversations";
                 $header =
                     '<header>
                             <div class="header-left">
@@ -3283,9 +3284,8 @@ function sb_component_admin()
                                                 <div class="bg-white d-flex align-items-center justify-content-between">
                                                     <h6 class="head">Recent Messages</h6>
                                                     <p class="label_blue mb-0">
-                                                        <a class="mr-2"
-                                                            href="http://localhost/saassupport/?area=conversations">View
-                                                            All</a>
+                                                        <a class="mr-2" href="<?php echo $inboxUrl;?>">View
+                                                        All</a>
                                                     </p>
                                                 </div>
                                                 <div class="seprator"></div>
