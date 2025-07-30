@@ -3163,7 +3163,10 @@ function sb_component_admin()
                                                                     <thead>
                                                                         <tr>
                                                                             <th data-field="title">
-                                                                                Ticket Title
+                                                                                ID
+                                                                            </th>
+                                                                            <th data-field="title">
+                                                                                Subject
                                                                             </th>
                                                                             <th data-field="assigned-to">
                                                                                 Assigned To
@@ -3180,6 +3183,7 @@ function sb_component_admin()
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr data-ticket-id="">
+                                                                            <td class="sb-td-id">Bug fix: Login issue</td>
                                                                             <td class="sb-td-subject">Bug fix: Login issue</td>
                                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
