@@ -12337,10 +12337,10 @@ li.menu_head:hover {
   background: #ffffff;
   z-index: 999;
   width: 100%;
-  padding: 0px 5px !important;
+  padding: 5px 5px !important;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   border-bottom: 0.5px solid #D1D5DB;
   border-radius: 0px;
   padding: 20px 10px;
