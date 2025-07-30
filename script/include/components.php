@@ -4032,7 +4032,7 @@ function sb_component_admin()
                                         "disable-tags"
                                     )
                                 ) {
-                                    echo '<div class="sb-panel-details sb-panel-tags"><i class="sb-icon-settings"></i><h3>' .
+                                    echo '<div class="sb-panel-details sb-panel-tags"><i class="sb-icon-plus"></i><h3>' .
                                         sb_("Tags") .
                                         "</h3><div></div></div>";
                                 }
