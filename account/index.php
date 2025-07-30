@@ -44,8 +44,10 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <!-- Manrope font cdn link  -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
     <!-- Bootstrap cdn link  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/hgi-stroke-rounded.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
     <?php
     if ($rtl) {
         echo '<link rel="stylesheet" href="../script/css/rtl-admin.css?v=' . SB_VERSION . '" />';
