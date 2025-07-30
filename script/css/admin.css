@@ -4872,7 +4872,6 @@ td.sb-offline:after {
   letter-spacing: 0.3px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 .sb-list-items:not(:empty) + .sb-btn {
