@@ -3225,7 +3225,10 @@ function sb_component_admin()
                                                                     <thead>
                                                                         <tr>
                                                                             <th data-field="title">
-                                                                                Ticket Title
+                                                                                ID
+                                                                            </th>
+                                                                            <th data-field="title">
+                                                                                Subject
                                                                             </th>
                                                                             <th data-field="assigned-to">
                                                                                 Assigned To
@@ -3242,6 +3245,7 @@ function sb_component_admin()
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr data-ticket-id="">
+                                                                            <td class="sb-td-id">Bug fix: Login issue</td>
                                                                             <td class="sb-td-subject">Bug fix: Login issue</td>
                                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
@@ -3866,7 +3870,7 @@ function sb_component_admin()
                             : ""; ?>">
                             <div class="sb-top">
                                 <div class="sb-select">
-                                    <p data-value="0">
+                                    <p data-value="0" data-sb-tooltip="Unread Conversations">
                                         <?php sb_e("Inbox"); ?><span></span>
                                     </p>
                                     <ul>
@@ -6789,8 +6793,13 @@ function sb_conversations_filter($cloud_active_apps)
             $tags[0]["tag-name"] .
             '"></i>'
             : "") .
-        '<div class="sb-filter-btn "><i class="sb-icon sb-icon-filter"></i>
-<div class="align-items-center" style="gap: 20px;"><div class="sb-select' .
+        '<div class="sb-filter-btn"><svg class="toggle-filter" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.7801 8.25167L18.2506 5.72294L18.2673 14.5714C18.2673 15.0452 17.8839 15.4286 17.4101 15.4286C16.938 15.4286 16.553 15.0452 16.553 14.5714L16.5363 5.7832L14.0687 8.25167C13.7338 8.58566 13.1914 8.58566 12.8566 8.25167C12.5218 7.91685 12.5218 7.37361 12.8566 7.03878L16.3839 3.51144C16.6183 3.2009 16.9916 3 17.4101 3C17.7366 3 18.0329 3.12053 18.2589 3.31976C18.2924 3.34486 18.3242 3.37249 18.3544 3.40263L21.9922 7.03878C22.327 7.37361 22.327 7.91685 21.9922 8.25167C21.6574 8.58566 21.115 8.58566 20.7801 8.25167Z" fill="black"/>
+<path d="M1.71484 6.25708C1.71484 5.87873 2.0212 5.57153 2.40123 5.57153H9.1713C9.33536 5.57153 9.48604 5.62846 9.60322 5.72387C9.75896 5.84944 9.8577 6.04196 9.8577 6.25708V6.60028C9.8577 6.97862 9.55136 7.28582 9.1713 7.28582H2.40123C2.20201 7.28582 2.02288 7.20211 1.89732 7.06735C1.82701 6.99285 1.77511 6.90244 1.74498 6.802C1.72489 6.73839 1.71484 6.67059 1.71484 6.60028V6.25708Z" fill="black"/>
+<path d="M2.14844 12.477C2.08315 12.503 2.02288 12.5381 1.96931 12.5816C1.81361 12.7072 1.71484 12.8989 1.71484 13.114V13.4572C1.71484 13.8356 2.0212 14.1428 2.40123 14.1428H13.0284C13.4085 14.1428 13.7148 13.8356 13.7148 13.4572V13.114C13.7148 12.7357 13.4085 12.4285 13.0284 12.4285H2.40123C2.3125 12.4285 2.22712 12.446 2.14844 12.477Z" fill="black"/>
+<path d="M1.77846 19.684C1.73828 19.7711 1.71484 19.8682 1.71484 19.9712V20.3144C1.71484 20.5329 1.81696 20.7279 1.97601 20.8534C2.0932 20.9455 2.24051 20.9999 2.40123 20.9999H20.8092C21.1892 20.9999 21.4956 20.6927 21.4956 20.3144V19.9712C21.4956 19.5928 21.1892 19.2856 20.8092 19.2856H2.40123C2.125 19.2856 1.88728 19.4488 1.77846 19.684Z" fill="black"/>
+</svg>
+<div><div class="sb-select' .
         ($count ? "" : " sb-hide") .
         '"><p>' .
         sb_("All departments") .

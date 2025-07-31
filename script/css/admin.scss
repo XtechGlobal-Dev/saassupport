@@ -2016,8 +2016,10 @@ td.sb-offline:after {
     &[data-badge]:after {
         content: attr(data-badge);
         position: absolute;
-        right: -17px;
-        top: 5px;
+        // right: -17px;
+        // top: 5px;
+        right: -7px;
+        top: -3px;
         background: $color-red;
         color: $white;
         font-size: 10px;
@@ -2753,6 +2755,10 @@ td.sb-offline:after {
                 .sb-filter-btn {
                     height: fit-content;
                     width: fit-content;
+                    svg {
+                        position: relative;
+                        z-index: 5;
+                    }
                 }
             }
 
