@@ -529,6 +529,7 @@ td.sb-offline:after {
 
     >.sb-nav.sb-scroll-area {
         border-right: none;
+
         &::-webkit-scrollbar {
             width: 0px;
         }
@@ -1827,6 +1828,16 @@ td.sb-offline:after {
                     min-height: 40px;
                 }
             }
+
+            td {
+                .user-initials {
+                    position: unset !important;
+
+                    .initials {
+                        position: unset;
+                    }
+                }
+            }
         }
     }
 }
@@ -1958,7 +1969,10 @@ td.sb-offline:after {
 
 .sb-filter-btn {
     i {
-        z-index: 0;
+        z-index: 3;
+        position: relative;
+        top: 0 !important;
+        right: 0 !important;
     }
 
     >div {
@@ -2720,10 +2734,11 @@ td.sb-offline:after {
             .sb-select {
                 p {
                     color: #1E293B;
-                    font-size: 18px !important;
+                    font-size: 14px !important;
                     font-family: 'InterSemiBold';
                     display: flex;
                     align-items: center;
+                    padding-right: 13px;
 
                     span {
                         color: #1653FD;
@@ -2783,6 +2798,10 @@ td.sb-offline:after {
                     border-bottom: none;
                 }
 
+                &[data-conversation-status="2"] {
+                    background: #c9c9c94d !important;
+                }
+
                 >.sb-notification-counter {
                     position: absolute;
                     right: 19px;
@@ -2809,7 +2828,7 @@ td.sb-offline:after {
                 }
 
                 &.sb-active {
-                    opacity: 1;
+                    // opacity: 1;
                     background-color: #EEF2FF !important;
 
                     &:before {
@@ -3048,9 +3067,16 @@ td.sb-offline:after {
                 background: #fff !important;
                 border-radius: 14px;
 
+                .sb-message-attachments {
+                    a {
+                        color: #fff !important;
+                    }
+                }
+
                 .sb-message {
                     color: #1E293B;
                     font-weight: 500;
+
 
                     &.sb-message-media {
                         width: 100%;
@@ -3303,13 +3329,14 @@ td.sb-offline:after {
             margin: 1px 15px 15px 15px;
             border: 1px solid #E2E8F0;
             border-radius: 16px;
-            box-shadow: 0px 4px 6px -2px #10182808,0px 12px 16px -4px #10182814;
+            box-shadow: 0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814;
             transition: box-shadow linear 40ms, border-color linear 0.2s;
             background-color: $white;
 
             .sb-textarea {
                 border: none;
                 padding: 0 !important;
+
                 textarea {
                     min-height: 66px !important;
                 }
@@ -3481,7 +3508,8 @@ td.sb-offline:after {
                 opacity: .7;
             }
 
-            img, .user-initials {
+            img,
+            .user-initials {
                 min-width: 50px;
                 min-height: 50px;
             }
@@ -3489,11 +3517,12 @@ td.sb-offline:after {
             .user-initials {
                 position: relative;
                 margin-right: 0;
+
                 .initials {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
 
             .sb-name {
@@ -3847,6 +3876,25 @@ td.sb-offline:after {
             line-height: 8px;
             font-weight: 400;
             background: none;
+        }
+    }
+}
+
+
+.sb-area-users {
+    .sb-top-bar {
+        div {
+            .sb-filter-btn {
+                width: 38px;
+                height: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                i {
+                    font-size: 15px;
+                }
+            }
         }
     }
 }
@@ -9830,7 +9878,7 @@ li.menu_head:hover {
         background: #ffffff;
         z-index: 999;
         width: 100%;
-        padding: 5px 5px!important;
+        padding: 5px 5px !important;
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
@@ -10290,7 +10338,9 @@ div#messaging-channels {
 #ticketTable {
     th {
         pointer-events: none;
-        &::before, &::after {
+
+        &::before,
+        &::after {
             content: none;
         }
     }
@@ -10463,16 +10513,52 @@ div#messaging-channels {
     }
 }
 
-.my-tab {
-    min-width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .my-tabs {
     margin-bottom: 20px;
-    padding-top: 20px;
+    padding: 6px 12px;
+    background: #ECECF0;
+    border-radius: 40px;
+    width: fit-content;
+    position: relative;
+    min-width: 600px;
+    overflow: hidden;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+        height: 0;
+    }
+
+    .my-tab {
+        background: none;
+        gap: 6px;
+        position: relative;
+        z-index: 2;
+        width: 33%;
+        margin: 0;
+        min-width: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.active {
+            background: none;
+            color: #000;
+            font-weight: 800;
+        }
+    }
+
+    .tab-slider {
+        background: #fff !important;
+        border-radius: 40px;
+        height: 39px;
+        position: absolute;
+        z-index: 0;
+        display: inline-block;
+        transition: all 0.4s linear;
+        // width: 31% !important;
+        // max-width: 31%;
+    }
 }
 
 @media (min-width: 465px) {
@@ -10792,7 +10878,7 @@ div#messaging-channels {
     .sb-admin {
         .header_new {
             .sidebar {
-                .logo{
+                .logo {
                     &::before {
                         bottom: 4px;
                     }
