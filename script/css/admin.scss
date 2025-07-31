@@ -9804,6 +9804,7 @@ div {
     ul.sb-menu {
         right: 30px;
         top: 60px;
+        z-index: 10000;
     }
 }
 
@@ -9954,13 +9955,12 @@ li.menu_head:hover {
         .settings-tab {
             border: 1px solid rgb(209, 213, 219) !important;
             border-radius: 8px;
-            padding: 0px 15px 15px;
+            padding: 15px 15px;
             display: flex;
             flex-direction: column;
             gap: 20px;
 
             .settings-head {
-                padding-top: 15px;
                 p {
                     display: flex;
                     align-items: center;
