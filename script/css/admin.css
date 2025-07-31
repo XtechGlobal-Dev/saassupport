@@ -5722,8 +5722,8 @@ td.sb-offline:after {
 .sb-filter-btn[data-badge]:after {
   content: attr(data-badge);
   position: absolute;
-  right: -17px;
-  top: 5px;
+  right: -7px;
+  top: -3px;
   background: rgb(202, 52, 52);
   color: #fff;
   font-size: 10px;
@@ -6293,6 +6293,10 @@ td.sb-offline:after {
 .sb-board > .sb-admin-list > .sb-top .sb-flex .sb-filter-btn {
   height: fit-content;
   width: fit-content;
+}
+.sb-board > .sb-admin-list > .sb-top .sb-flex .sb-filter-btn svg {
+  position: relative;
+  z-index: 5;
 }
 .sb-board > .sb-admin-list > .sb-top > .sb-select > p span {
   padding-left: 5px;
