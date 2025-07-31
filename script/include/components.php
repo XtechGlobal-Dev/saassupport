@@ -257,8 +257,8 @@ function sb_ticket_edit_box()
 <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
 <label class="ml-4">Guest Ticket</label>
 <div class="form-check form-switch mb-0 ml-2">
-   <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
-       id="flexSwitchCheckDefault" style="width: 27px;">
+<input class="form-check-input" name="without_contact" type="checkbox" role="switch"
+    id="flexSwitchCheckDefault" style="width: 27px;">
 </div>
 </div>*/
                 ?>
@@ -765,10 +765,10 @@ function sb_ticket_edit_box()
         }
 
         /* .sb-td-tags span {
-                                                                                                                            margin: 3px 5px 0 0;
-                                                                                                                            padding: .45em .75em;
-                                                                                                                            font-size: 13px
-                                                                                                                        } */
+                                                                                                                                        margin: 3px 5px 0 0;
+                                                                                                                                        padding: .45em .75em;
+                                                                                                                                        font-size: 13px
+                                                                                                                                    } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -803,76 +803,76 @@ function sb_ticket_edit_box()
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                                                                            position: relative;
-                                                                                                                            overflow: visible !important;
+                                                                                                                                        position: relative;
+                                                                                                                                        overflow: visible !important;
             
-                                                                                                                        }
+                                                                                                                                    }
 
-                                                                                                                        .status-btn {
-                                                                                                                            border: none;
-                                                                                                                            border-radius: 8px;
-                                                                                                                            padding: 3px 12px;
-                                                                                                                            font-weight: 500;
-                                                                                                                            cursor: pointer;
-                                                                                                                            display: flex;
-                                                                                                                            align-items: center;
-                                                                                                                            gap: 4px;
-                                                                                                                            font-size: 14px;
-                                                                                                                        }
+                                                                                                                                    .status-btn {
+                                                                                                                                        border: none;
+                                                                                                                                        border-radius: 8px;
+                                                                                                                                        padding: 3px 12px;
+                                                                                                                                        font-weight: 500;
+                                                                                                                                        cursor: pointer;
+                                                                                                                                        display: flex;
+                                                                                                                                        align-items: center;
+                                                                                                                                        gap: 4px;
+                                                                                                                                        font-size: 14px;
+                                                                                                                                    }
 
-                                                                                                                        .status-list li,
-                                                                                                                        .priority-list li {
-                                                                                                                            font-size: 14px;
-                                                                                                                        }
+                                                                                                                                    .status-list li,
+                                                                                                                                    .priority-list li {
+                                                                                                                                        font-size: 14px;
+                                                                                                                                    }
 
-                                                                                                                        .status-dot {
-                                                                                                                            width: 10px !important;
-                                                                                                                            height: 10px !important;
-                                                                                                                        }
+                                                                                                                                    .status-dot {
+                                                                                                                                        width: 10px !important;
+                                                                                                                                        height: 10px !important;
+                                                                                                                                    }
 
-                                                                                                                        .arrow {
-                                                                                                                            font-size: 12px;
-                                                                                                                        }
+                                                                                                                                    .arrow {
+                                                                                                                                        font-size: 12px;
+                                                                                                                                    }
 
-                                                                                                                        .status-list,
-                                                                                                                        .priority-list {
-                                                                                                                            display: none;
-                                                                                                                            position: absolute;
-                                                                                                                            top: 75%;
-                                                                                                                            left: 0;
-                                                                                                                            min-width: 170px;
-                                                                                                                            background: #fff;
-                                                                                                                            border: 1px solid #ddd;
-                                                                                                                            border-radius: 8px;
-                                                                                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                                                                            z-index: 9999;
-                                                                                                                            padding: 6px 0;
-                                                                                                                            margin: 0;
-                                                                                                                            list-style: none;
-                                                                                                                        }
+                                                                                                                                    .status-list,
+                                                                                                                                    .priority-list {
+                                                                                                                                        display: none;
+                                                                                                                                        position: absolute;
+                                                                                                                                        top: 75%;
+                                                                                                                                        left: 0;
+                                                                                                                                        min-width: 170px;
+                                                                                                                                        background: #fff;
+                                                                                                                                        border: 1px solid #ddd;
+                                                                                                                                        border-radius: 8px;
+                                                                                                                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                                                                                                                        z-index: 9999;
+                                                                                                                                        padding: 6px 0;
+                                                                                                                                        margin: 0;
+                                                                                                                                        list-style: none;
+                                                                                                                                    }
 
-                                                                                                                        .status-list li,
-                                                                                                                        .priority-list li {
-                                                                                                                            padding: 8px 16px;
-                                                                                                                            cursor: pointer;
-                                                                                                                            display: flex;
-                                                                                                                            align-items: center;
-                                                                                                                            gap: 4px;
-                                                                                                                            font-size: 15px;
-                                                                                                                            transition: background 0.15s;
-                                                                                                                        }
+                                                                                                                                    .status-list li,
+                                                                                                                                    .priority-list li {
+                                                                                                                                        padding: 8px 16px;
+                                                                                                                                        cursor: pointer;
+                                                                                                                                        display: flex;
+                                                                                                                                        align-items: center;
+                                                                                                                                        gap: 4px;
+                                                                                                                                        font-size: 15px;
+                                                                                                                                        transition: background 0.15s;
+                                                                                                                                    }
 
-                                                                                                                        .status-list li:hover,
-                                                                                                                        .priority-list li:hover {
-                                                                                                                            background: #f5f5f5;
-                                                                                                                        }
+                                                                                                                                    .status-list li:hover,
+                                                                                                                                    .priority-list li:hover {
+                                                                                                                                        background: #f5f5f5;
+                                                                                                                                    }
 
-                                                                                                                        .status-dot {
-                                                                                                                            width: 12px;
-                                                                                                                            height: 12px;
-                                                                                                                            border-radius: 50%;
-                                                                                                                            display: inline-block;
-                                                                                                                        } */
+                                                                                                                                    .status-dot {
+                                                                                                                                        width: 12px;
+                                                                                                                                        height: 12px;
+                                                                                                                                        border-radius: 50%;
+                                                                                                                                        display: inline-block;
+                                                                                                                                    } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1669,6 +1669,12 @@ function sb_ticket_edit_box()
         });
 
         window.initTabSlider = initTabSlider;
+
+        $(".sidebar li a").on("click", function () {
+            setTimeout(() => {
+                initTabSlider();
+            }, 100);
+        });
     </script>
 
     <?php
@@ -5583,7 +5589,8 @@ function sb_component_admin()
                                             <p class="des mb-0">Manage preferences and options for your articles.</p>
                                         </div>
                                     </div> -->
-                            <div class="sb-content sb-content-articles sb-scroll-area sb-loading bg-white mt-2">
+                            <div class="sb-content sb-content-articles sb-scroll-area sb-loading bg-white mt-2"
+                                style="border-radius: 8px;">
                                 <!-- <div class="content_article"> -->
                                 <!-- <div> -->
                                 <h2 class="sb-language-switcher-cnt">
@@ -5959,6 +5966,7 @@ function sb_component_admin()
                                         <div class="sb-top-bar settings-header">
                                             <div>
                                                 <p class="head">Chat</p>
+                                                <p class="des mb-0">Manage your chat widget availability and appearance</p>
                                             </div>
                                             <div>
                                                 <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
@@ -6044,6 +6052,31 @@ function sb_component_admin()
                                             </div>
 
                                             <div id="availability-content" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
+                                                                    stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                                <path
+                                                                    d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Chat Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your chat widget is visible and available to
+                                                        visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
                                             </div>
 
@@ -6256,7 +6289,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Notification Settings</p>
@@ -6269,14 +6302,14 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="users-tab">
+                                    <div class="users-tab settings-tab">
                                         <?php sb_populate_settings(
                                             "notifications",
                                             $sb_settings
                                         ); ?>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Users Settings</p>
@@ -6289,7 +6322,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="users-tab">
+                                    <div class="users-tab settings-tab">
                                         <?php sb_populate_settings(
                                             "users",
                                             $sb_settings
@@ -6314,7 +6347,7 @@ function sb_component_admin()
                                         $sb_settings
                                     ); ?>
                                 </div> -->
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Messages Settings</p>
@@ -6327,7 +6360,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="users-tab">
+                                    <div class="users-tab settings-tab">
                                         <?php sb_populate_settings(
                                             "messages",
                                             $sb_settings
@@ -6335,7 +6368,7 @@ function sb_component_admin()
                                     </div>
 
                                 </div>
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Miscellaneous Settings</p>
@@ -6348,7 +6381,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="users-tab">
+                                    <div class="users-tab settings-tab">
                                         <?php sb_populate_settings(
                                             "miscellaneous",
                                             $sb_settings
@@ -6359,7 +6392,7 @@ function sb_component_admin()
                                     $apps,
                                     $cloud_active_apps
                                 ); ?>
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Articles Settings</p>
@@ -6372,14 +6405,14 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="users-tab">
+                                    <div class="users-tab settings-tab">
                                         <?php sb_populate_settings(
                                             "articles",
                                             $sb_settings
                                         ); ?>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-automations-area">
                                         <div class="sb-select">
                                             <p data-value="messages">
@@ -6459,7 +6492,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="settings-card">
                                     <div class="sb-translations sb-tab">
                                         <div class="sb-nav sb-nav-only">
                                             <div class="sb-active"></div>
@@ -6612,7 +6645,7 @@ function sb_apps_area($apps, $cloud_active_apps)
         ) {
             // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
             $code .=
-                '<div>
+                '<div class="settings-card">
             <div class="sb-top-bar save_settings settings-header">
                 <div class="">
                     <p class="head mb-4">Tickets Settings</p>
@@ -6625,7 +6658,7 @@ function sb_apps_area($apps, $cloud_active_apps)
                     </a>
                 </div>
             </div>
-            <div class="users-tab">
+            <div class="users-tab settings-tab">
             ' .
                 sb_populate_app_settings($apps[$i][1]) .
                 "</div></div>";

@@ -2755,6 +2755,7 @@ td.sb-offline:after {
                 .sb-filter-btn {
                     height: fit-content;
                     width: fit-content;
+
                     svg {
                         position: relative;
                         z-index: 5;
@@ -3554,6 +3555,13 @@ td.sb-offline:after {
                 display: flex;
                 flex-direction: column;
                 gap: 7px;
+                li {
+                    i {
+                        font-size: 20px;
+                        position: absolute;
+                        left: 0;
+                    }
+                }
             }
 
             [data-id="telegram_bcid"],
@@ -3913,10 +3921,18 @@ td.sb-offline:after {
     }
 
     .sb-select {
-    p {
-        padding-right: 15px;
+        p {
+            padding-right: 15px;
+        }
     }
 }
+
+.sb-setting.sb-type-textarea {
+    .codex-editor {
+        .ce-toolbar__actions {
+            position: unset;
+        }
+    }
 }
 
 .container {
@@ -5129,6 +5145,20 @@ td.sb-offline:after {
     display: none;
 }
 
+.sb-content-articles {
+    h2 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    .sb-setting {
+        padding: 0px 0px 15px 0px !important;
+    }
+}
+
+.sb-area-articles .sb-setting + h2 {
+    margin-top: 12px !important;
+}
 /*
  *
  * -----------------------------------------------------------
@@ -9898,7 +9928,7 @@ li.menu_head:hover {
         background: #ffffff;
         z-index: 999;
         width: 100%;
-        padding: 5px 5px !important;
+        padding: 5px 5px 10px !important;
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
@@ -9922,9 +9952,35 @@ li.menu_head:hover {
 
     .settings-card {
         .settings-tab {
-            border: 1px solid rgb(209, 213, 219);
+            border: 1px solid rgb(209, 213, 219) !important;
             border-radius: 8px;
-            padding: 0px 15px;
+            padding: 0px 15px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .settings-head {
+                padding-top: 15px;
+                p {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    font-size: 16px;
+                    color: #0A0A0A;
+                    margin-bottom: 8px;
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                        path {
+                            stroke: #40404e;
+                        }
+                    }
+                    &:nth-child(2) {
+                        font-size: 14px;
+                        color: #717182;
+                    }
+                }
+            }
 
             .sb-repeater {
                 .repeater-item {
@@ -9936,6 +9992,9 @@ li.menu_head:hover {
             }
 
             .sb-setting {
+                border: 1px solid #0000001A !important;
+                padding: 20px !important;
+                border-radius: 8px;
                 gap: 20px 0;
 
                 &.sb-type-upload-image {
@@ -10536,7 +10595,7 @@ div#messaging-channels {
 
 .my-tabs {
     margin-bottom: 20px;
-    padding: 6px 12px;
+    padding: 6px 8px;
     background: #ECECF0;
     border-radius: 40px;
     width: fit-content;
@@ -10560,6 +10619,7 @@ div#messaging-channels {
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 6px 15px;
 
         &.active {
             background: none;
@@ -10571,11 +10631,11 @@ div#messaging-channels {
     .tab-slider {
         background: #fff !important;
         border-radius: 40px;
-        height: 39px;
+        height: 31px;
         position: absolute;
         z-index: 0;
         display: inline-block;
-        transition: all 0.4s linear;
+        transition: all 0.1s linear;
         // width: 31% !important;
         // max-width: 31%;
     }
