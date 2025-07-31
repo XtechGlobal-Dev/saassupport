@@ -140,10 +140,10 @@ function sb_profile_box()
                         <input type="text" required />
                     </div>
                     <div id="last_name" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e("Last name"); ?>
                         </span>
-                        <input type="text" />
+                        <input type="text" required />
                     </div>
                     <div id="password" data-type="text" class="sb-input">
                         <span class="required-label">
@@ -254,13 +254,13 @@ function sb_ticket_edit_box()
             <div class="sb-ticket">
                 <span class="sb-name"></span>
                 <?php /*
-       <div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
-           <label class="ml-4">Guest Ticket</label>
-           <div class="form-check form-switch mb-0 ml-2">
-               <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
-                   id="flexSwitchCheckDefault" style="width: 27px;">
-           </div>
-       </div>*/
+<div id="without_contact" data-type="checkbox" class="sb-input" style="font-size: 13px;display:none">
+<label class="ml-4">Guest Ticket</label>
+<div class="form-check form-switch mb-0 ml-2">
+   <input class="form-check-input" name="without_contact" type="checkbox" role="switch"
+       id="flexSwitchCheckDefault" style="width: 27px;">
+</div>
+</div>*/
                 ?>
             </div>
             <div>
@@ -765,10 +765,10 @@ function sb_ticket_edit_box()
         }
 
         /* .sb-td-tags span {
-                                                                            margin: 3px 5px 0 0;
-                                                                            padding: .45em .75em;
-                                                                            font-size: 13px
-                                                                        } */
+                                                                                                                            margin: 3px 5px 0 0;
+                                                                                                                            padding: .45em .75em;
+                                                                                                                            font-size: 13px
+                                                                                                                        } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -803,76 +803,76 @@ function sb_ticket_edit_box()
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                            position: relative;
-                                                                            overflow: visible !important;
+                                                                                                                            position: relative;
+                                                                                                                            overflow: visible !important;
             
-                                                                        }
+                                                                                                                        }
 
-                                                                        .status-btn {
-                                                                            border: none;
-                                                                            border-radius: 8px;
-                                                                            padding: 3px 12px;
-                                                                            font-weight: 500;
-                                                                            cursor: pointer;
-                                                                            display: flex;
-                                                                            align-items: center;
-                                                                            gap: 4px;
-                                                                            font-size: 14px;
-                                                                        }
+                                                                                                                        .status-btn {
+                                                                                                                            border: none;
+                                                                                                                            border-radius: 8px;
+                                                                                                                            padding: 3px 12px;
+                                                                                                                            font-weight: 500;
+                                                                                                                            cursor: pointer;
+                                                                                                                            display: flex;
+                                                                                                                            align-items: center;
+                                                                                                                            gap: 4px;
+                                                                                                                            font-size: 14px;
+                                                                                                                        }
 
-                                                                        .status-list li,
-                                                                        .priority-list li {
-                                                                            font-size: 14px;
-                                                                        }
+                                                                                                                        .status-list li,
+                                                                                                                        .priority-list li {
+                                                                                                                            font-size: 14px;
+                                                                                                                        }
 
-                                                                        .status-dot {
-                                                                            width: 10px !important;
-                                                                            height: 10px !important;
-                                                                        }
+                                                                                                                        .status-dot {
+                                                                                                                            width: 10px !important;
+                                                                                                                            height: 10px !important;
+                                                                                                                        }
 
-                                                                        .arrow {
-                                                                            font-size: 12px;
-                                                                        }
+                                                                                                                        .arrow {
+                                                                                                                            font-size: 12px;
+                                                                                                                        }
 
-                                                                        .status-list,
-                                                                        .priority-list {
-                                                                            display: none;
-                                                                            position: absolute;
-                                                                            top: 75%;
-                                                                            left: 0;
-                                                                            min-width: 170px;
-                                                                            background: #fff;
-                                                                            border: 1px solid #ddd;
-                                                                            border-radius: 8px;
-                                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                            z-index: 9999;
-                                                                            padding: 6px 0;
-                                                                            margin: 0;
-                                                                            list-style: none;
-                                                                        }
+                                                                                                                        .status-list,
+                                                                                                                        .priority-list {
+                                                                                                                            display: none;
+                                                                                                                            position: absolute;
+                                                                                                                            top: 75%;
+                                                                                                                            left: 0;
+                                                                                                                            min-width: 170px;
+                                                                                                                            background: #fff;
+                                                                                                                            border: 1px solid #ddd;
+                                                                                                                            border-radius: 8px;
+                                                                                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                                                                                                            z-index: 9999;
+                                                                                                                            padding: 6px 0;
+                                                                                                                            margin: 0;
+                                                                                                                            list-style: none;
+                                                                                                                        }
 
-                                                                        .status-list li,
-                                                                        .priority-list li {
-                                                                            padding: 8px 16px;
-                                                                            cursor: pointer;
-                                                                            display: flex;
-                                                                            align-items: center;
-                                                                            gap: 4px;
-                                                                            font-size: 15px;
-                                                                            transition: background 0.15s;
-                                                                        }
+                                                                                                                        .status-list li,
+                                                                                                                        .priority-list li {
+                                                                                                                            padding: 8px 16px;
+                                                                                                                            cursor: pointer;
+                                                                                                                            display: flex;
+                                                                                                                            align-items: center;
+                                                                                                                            gap: 4px;
+                                                                                                                            font-size: 15px;
+                                                                                                                            transition: background 0.15s;
+                                                                                                                        }
 
-                                                                        .status-list li:hover,
-                                                                        .priority-list li:hover {
-                                                                            background: #f5f5f5;
-                                                                        }
+                                                                                                                        .status-list li:hover,
+                                                                                                                        .priority-list li:hover {
+                                                                                                                            background: #f5f5f5;
+                                                                                                                        }
 
-                                                                        .status-dot {
-                                                                            width: 12px;
-                                                                            height: 12px;
-                                                                            border-radius: 50%;
-                                                                            display: inline-block;
-                                                                        } */
+                                                                                                                        .status-dot {
+                                                                                                                            width: 12px;
+                                                                                                                            height: 12px;
+                                                                                                                            border-radius: 50%;
+                                                                                                                            display: inline-block;
+                                                                                                                        } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1609,6 +1609,68 @@ function sb_ticket_edit_box()
 
         });
     </script>
+
+    <script>
+        function updateSlider($tab) {
+            const $container = $tab.closest(".my-tabs");
+            const $slider = $container.find(".tab-slider");
+
+            const tabOffset = $tab.offset().left;
+            const containerOffset = $container.offset().left;
+            const left = tabOffset - containerOffset;
+            const width = $tab.outerWidth();
+
+            $slider.css({
+                left: left,
+                width: width
+            });
+        }
+
+        function initTabSlider() {
+            setTimeout(function () {
+                $(".my-tabs").each(function () {
+                    const $activeTab = $(this).find(".my-tab.active");
+                    if ($activeTab.length) {
+                        updateSlider($activeTab);
+                    }
+                });
+            }, 100);
+        }
+
+        $(document).ready(function () {
+            initTabSlider();
+
+            $(".my-tab").on("click", function () {
+                const $container = $(this).closest(".my-tabs");
+                $container.find(".my-tab").removeClass("active");
+                $(this).addClass("active");
+                updateSlider($(this));
+            });
+
+            const targetNode = document.querySelector(".setting_sidebar");
+            if (targetNode) {
+                const observer = new MutationObserver((mutationsList) => {
+                    for (const mutation of mutationsList) {
+                        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                            if (mutation.target.classList.contains("sb-active")) {
+                                initTabSlider();
+                            }
+                        }
+                    }
+                });
+
+                document.querySelectorAll(".setting_sidebar li").forEach((li) => {
+                    observer.observe(li, {
+                        attributes: true,
+                        attributeFilter: ["class"]
+                    });
+                });
+            }
+        });
+
+        window.initTabSlider = initTabSlider;
+    </script>
+
     <?php
 }
 ?>
@@ -3284,8 +3346,8 @@ function sb_component_admin()
                                                 <div class="bg-white d-flex align-items-center justify-content-between">
                                                     <h6 class="head">Recent Messages</h6>
                                                     <p class="label_blue mb-0">
-                                                        <a class="mr-2" href="<?php echo $inboxUrl;?>">View
-                                                        All</a>
+                                                        <a class="mr-2" href="<?php echo $inboxUrl; ?>">View
+                                                            All</a>
                                                     </p>
                                                 </div>
                                                 <div class="seprator"></div>
@@ -3864,9 +3926,11 @@ function sb_component_admin()
                                             </a>
                                         </li>
                                         <li>
-                                            <a data-value="archive" class="sb-btn-icon" style="display: flex; align-items: center; justify-content: center;" data-sb-tooltip="<?php sb_e(
-                                                "Archive conversation"
-                                            ); ?>">
+                                            <a data-value="archive" class="sb-btn-icon"
+                                                style="display: flex; align-items: center; justify-content: center;"
+                                                data-sb-tooltip="<?php sb_e(
+                                                    "Archive conversation"
+                                                ); ?>">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -4397,8 +4461,8 @@ function sb_component_admin()
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-                    
-    <script src="https://cdn.jsdelivr.net/npm/@iconify-json/hugeicons@1.2.6/index.min.js"></script>
+
+                    <script src="https://cdn.jsdelivr.net/npm/@iconify-json/hugeicons@1.2.6/index.min.js"></script>
 
                     <style>
                         /* Make sure the dropdown is not cut off by table or container */
@@ -5498,80 +5562,81 @@ function sb_component_admin()
                         <div class="sb-tab sb-inner-tab">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon sb-btn-white clr-change">
+                                <div class="sb-add-article sb-btn sb-icon">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new article"); ?>
                                 </div>
                                 <ul class="ul-categories"></ul>
-                                <div class="sb-add-category sb-btn sb-icon sb-btn-white  clr-change">
+                                <div class="sb-add-category sb-btn sb-icon">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new category"); ?>
                                 </div>
                             </div>
-                            <div class="sb-content sb-content-articles sb-scroll-area sb-loading">
-                                <div class="content_article">
-                                    <div class="articleHEad">
+
+                            <!-- <div class="articleHEad">
                                         <div class="">
                                             <p class="head mb-4">Articles Settings</p>
                                             <p class="des mb-0">Manage preferences and options for your articles.</p>
                                         </div>
-                                    </div>
-                                    <div class="articles_bg">
-                                        <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e("Title"); ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text sb-article-title">
-                                            <div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e("Content"); ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-textarea sb-article-content">
-                                            <div>
-                                                <?php echo sb_get_setting(
-                                                    "disable-editor-js"
-                                                )
-                                                    ? "<textarea></textarea>"
-                                                    : '<div id="editorjs"></div>'; ?>
-                                            </div>
-                                        </div>
-                                        <h2>
-                                            <?php sb_e("External link"); ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text sb-article-link">
-                                            <div>
-                                                <input type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="sb-article-categories sb-grid">
-                                            <div>
-                                                <h2>
-                                                    <?php sb_e(
-                                                        "Parent category"
-                                                    ); ?>
-                                                </h2>
-                                                <div class="sb-setting sb-type-select">
-                                                    <div>
-                                                        <select id="article-parent-categories"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <h2>
-                                                    <?php sb_e("Categories"); ?>
-                                                </h2>
-                                                <div class="sb-setting sb-type-select">
-                                                    <div>
-                                                        <select id="article-categories"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 id="sb-article-id"></h2>
+                                    </div> -->
+                            <div class="sb-content sb-content-articles sb-scroll-area sb-loading bg-white mt-2">
+                                <!-- <div class="content_article"> -->
+                                <!-- <div> -->
+                                <h2 class="sb-language-switcher-cnt">
+                                    <?php sb_e("Title"); ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text sb-article-title">
+                                    <div>
+                                        <input type="text" />
                                     </div>
                                 </div>
+                                <h2>
+                                    <?php sb_e("Content"); ?>
+                                </h2>
+                                <div class="sb-setting sb-type-textarea sb-article-content">
+                                    <div>
+                                        <?php echo sb_get_setting(
+                                            "disable-editor-js"
+                                        )
+                                            ? "<textarea></textarea>"
+                                            : '<div id="editorjs"></div>'; ?>
+                                    </div>
+                                </div>
+                                <h2>
+                                    <?php sb_e("External link"); ?>
+                                </h2>
+                                <div class="sb-setting sb-type-text sb-article-link">
+                                    <div>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                                <div class="sb-article-categories sb-grid">
+                                    <div>
+                                        <h2>
+                                            <?php sb_e(
+                                                "Parent category"
+                                            ); ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-select">
+                                            <div>
+                                                <select id="article-parent-categories"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h2>
+                                            <?php sb_e("Categories"); ?>
+                                        </h2>
+                                        <div class="sb-setting sb-type-select">
+                                            <div>
+                                                <select id="article-categories"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 id="sb-article-id"></h2>
+                                <!-- </div> -->
+                                <!-- </div> -->
                             </div>
                             <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
                                 <div class="content_article">
@@ -5899,9 +5964,79 @@ function sb_component_admin()
 
                                         <div class="settings-card">
                                             <div class="my-tabs">
-                                                <div class="my-tab active" data-target="availability-content">Availability</div>
-                                                <div class="my-tab" data-target="appearance-content">Appearance & Features</div>
-                                                <div class="my-tab" data-target="management-content">Management</div>
+                                                <div class="my-tab active" data-target="availability-content">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2783)">
+                                                            <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
+                                                                stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2783">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Availability
+                                                </div>
+                                                <div class="my-tab" data-target="appearance-content">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2786)">
+                                                            <path
+                                                                d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2786">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.203125 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>Appearance & Features
+                                                </div>
+                                                <div class="my-tab" data-target="management-content">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2789)">
+                                                            <path
+                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2789">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Management
+                                                </div>
+                                                <div class="tab-slider"></div>
                                             </div>
 
                                             <div id="availability-content" class="settings-tab">
@@ -6072,6 +6207,7 @@ function sb_component_admin()
                                                     Themes</div>
                                                 <div class="my-tab" data-target="switch-accounts-content">Switch Accounts</div>
                                                 <div class="my-tab" data-target="department-content">Department</div>
+                                                <div class="tab-slider"></div>
                                             </div>
 
                                             <div id="panel-setting-content" class="settings-tab">
@@ -6653,13 +6789,8 @@ function sb_conversations_filter($cloud_active_apps)
             $tags[0]["tag-name"] .
             '"></i>'
             : "") .
-        '<div class="sb-filter-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M20.7801 8.25167L18.2506 5.72294L18.2673 14.5714C18.2673 15.0452 17.8839 15.4286 17.4101 15.4286C16.938 15.4286 16.553 15.0452 16.553 14.5714L16.5363 5.7832L14.0687 8.25167C13.7338 8.58566 13.1914 8.58566 12.8566 8.25167C12.5218 7.91685 12.5218 7.37361 12.8566 7.03878L16.3839 3.51144C16.6183 3.2009 16.9916 3 17.4101 3C17.7366 3 18.0329 3.12053 18.2589 3.31976C18.2924 3.34486 18.3242 3.37249 18.3544 3.40263L21.9922 7.03878C22.327 7.37361 22.327 7.91685 21.9922 8.25167C21.6574 8.58566 21.115 8.58566 20.7801 8.25167Z" fill="black"/>
-<path d="M1.71484 6.25708C1.71484 5.87873 2.0212 5.57153 2.40123 5.57153H9.1713C9.33536 5.57153 9.48604 5.62846 9.60322 5.72387C9.75896 5.84944 9.8577 6.04196 9.8577 6.25708V6.60028C9.8577 6.97862 9.55136 7.28582 9.1713 7.28582H2.40123C2.20201 7.28582 2.02288 7.20211 1.89732 7.06735C1.82701 6.99285 1.77511 6.90244 1.74498 6.802C1.72489 6.73839 1.71484 6.67059 1.71484 6.60028V6.25708Z" fill="black"/>
-<path d="M2.14844 12.477C2.08315 12.503 2.02288 12.5381 1.96931 12.5816C1.81361 12.7072 1.71484 12.8989 1.71484 13.114V13.4572C1.71484 13.8356 2.0212 14.1428 2.40123 14.1428H13.0284C13.4085 14.1428 13.7148 13.8356 13.7148 13.4572V13.114C13.7148 12.7357 13.4085 12.4285 13.0284 12.4285H2.40123C2.3125 12.4285 2.22712 12.446 2.14844 12.477Z" fill="black"/>
-<path d="M1.77846 19.684C1.73828 19.7711 1.71484 19.8682 1.71484 19.9712V20.3144C1.71484 20.5329 1.81696 20.7279 1.97601 20.8534C2.0932 20.9455 2.24051 20.9999 2.40123 20.9999H20.8092C21.1892 20.9999 21.4956 20.6927 21.4956 20.3144V19.9712C21.4956 19.5928 21.1892 19.2856 20.8092 19.2856H2.40123C2.125 19.2856 1.88728 19.4488 1.77846 19.684Z" fill="black"/>
-</svg>
-<div><div class="sb-select' .
+        '<div class="sb-filter-btn "><i class="sb-icon sb-icon-filter"></i>
+<div class="align-items-center" style="gap: 20px;"><div class="sb-select' .
         ($count ? "" : " sb-hide") .
         '"><p>' .
         sb_("All departments") .
