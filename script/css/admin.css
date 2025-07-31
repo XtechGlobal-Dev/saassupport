@@ -7208,6 +7208,14 @@ td.sb-offline:after {
 .sb-area-users .sb-top-bar div .sb-filter-btn i {
   font-size: 15px;
 }
+.sb-area-users .sb-filter-btn.sb-active div {
+  align-items: center;
+  gap: 15px;
+  border-radius: 4px;
+}
+.sb-area-users .sb-select p {
+  padding-right: 15px;
+}
 
 .container {
   padding: 0 !important;
