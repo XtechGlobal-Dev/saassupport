@@ -5563,7 +5563,7 @@ function sb_component_admin()
                                 </a>
                             </div>
                         </div>
-                        <div class="sb-tab sb-inner-tab">
+                        <div class="sb-tab sb-inner-tab px-3">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
                                 <ul class="ul-articles"></ul>
                                 <div class="sb-add-article sb-btn sb-icon">

@@ -3903,6 +3903,20 @@ td.sb-offline:after {
             }
         }
     }
+
+    .sb-filter-btn.sb-active {
+        div {
+            align-items: center;
+            gap: 15px;
+            border-radius: 4px;
+        }
+    }
+
+    .sb-select {
+    p {
+        padding-right: 15px;
+    }
+}
 }
 
 .container {
