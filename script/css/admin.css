@@ -5561,6 +5561,12 @@ td.sb-offline:after {
   min-width: 40px;
   min-height: 40px;
 }
+.sb-area-users .sb-table-users tr td .user-initials {
+  position: unset !important;
+}
+.sb-area-users .sb-table-users tr td .user-initials .initials {
+  position: unset;
+}
 
 .sb-setting {
   position: relative;
@@ -5677,7 +5683,10 @@ td.sb-offline:after {
 }
 
 .sb-filter-btn i {
-  z-index: 0;
+  z-index: 3;
+  position: relative;
+  top: 0 !important;
+  right: 0 !important;
 }
 .sb-filter-btn > div {
   display: none;
@@ -5713,8 +5722,8 @@ td.sb-offline:after {
 .sb-filter-btn[data-badge]:after {
   content: attr(data-badge);
   position: absolute;
-  right: -17px;
-  top: 5px;
+  right: -7px;
+  top: -3px;
   background: rgb(202, 52, 52);
   color: #fff;
   font-size: 10px;
@@ -6269,10 +6278,11 @@ td.sb-offline:after {
 }
 .sb-board > .sb-admin-list > .sb-top .sb-select p {
   color: #1E293B;
-  font-size: 18px !important;
+  font-size: 14px !important;
   font-family: "InterSemiBold";
   display: flex;
   align-items: center;
+  padding-right: 13px;
 }
 .sb-board > .sb-admin-list > .sb-top .sb-select p span {
   color: #1653FD;
@@ -6283,6 +6293,10 @@ td.sb-offline:after {
 .sb-board > .sb-admin-list > .sb-top .sb-flex .sb-filter-btn {
   height: fit-content;
   width: fit-content;
+}
+.sb-board > .sb-admin-list > .sb-top .sb-flex .sb-filter-btn svg {
+  position: relative;
+  z-index: 5;
 }
 .sb-board > .sb-admin-list > .sb-top > .sb-select > p span {
   padding-left: 5px;
@@ -6320,6 +6334,9 @@ td.sb-offline:after {
 .sb-board > .sb-admin-list > .sb-scroll-area li:last-child {
   border-bottom: none;
 }
+.sb-board > .sb-admin-list > .sb-scroll-area li[data-conversation-status="2"] {
+  background: rgba(201, 201, 201, 0.3019607843) !important;
+}
 .sb-board > .sb-admin-list > .sb-scroll-area li > .sb-notification-counter {
   position: absolute;
   right: 19px;
@@ -6343,7 +6360,6 @@ td.sb-offline:after {
   opacity: 0;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li.sb-active {
-  opacity: 1;
   background-color: #EEF2FF !important;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li.sb-active:before {
@@ -6530,6 +6546,9 @@ td.sb-offline:after {
   max-width: calc(100% - 275px);
   background: #fff !important;
   border-radius: 14px;
+}
+.sb-board .sb-conversation .sb-list > div .sb-message-attachments a {
+  color: #fff !important;
 }
 .sb-board .sb-conversation .sb-list > div .sb-message {
   color: #1E293B;
@@ -6883,7 +6902,8 @@ td.sb-offline:after {
 .sb-board .sb-user-details .sb-profile:hover {
   opacity: 0.7;
 }
-.sb-board .sb-user-details .sb-profile img, .sb-board .sb-user-details .sb-profile .user-initials {
+.sb-board .sb-user-details .sb-profile img,
+.sb-board .sb-user-details .sb-profile .user-initials {
   min-width: 50px;
   min-height: 50px;
 }
@@ -7176,6 +7196,25 @@ td.sb-offline:after {
   line-height: 8px;
   font-weight: 400;
   background: none;
+}
+
+.sb-area-users .sb-top-bar div .sb-filter-btn {
+  width: 38px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sb-area-users .sb-top-bar div .sb-filter-btn i {
+  font-size: 15px;
+}
+.sb-area-users .sb-filter-btn.sb-active div {
+  align-items: center;
+  gap: 15px;
+  border-radius: 4px;
+}
+.sb-area-users .sb-select p {
+  padding-right: 15px;
 }
 
 .container {
@@ -12810,16 +12849,45 @@ div#messaging-channels {
   align-items: center;
 }
 
-.my-tab {
+.my-tabs {
+  margin-bottom: 20px;
+  padding: 6px 12px;
+  background: #ECECF0;
+  border-radius: 40px;
+  width: fit-content;
+  position: relative;
+  min-width: 600px;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.my-tabs::-webkit-scrollbar {
+  height: 0;
+}
+.my-tabs .my-tab {
+  background: none;
+  gap: 6px;
+  position: relative;
+  z-index: 2;
+  width: 33%;
+  margin: 0;
   min-width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.my-tabs {
-  margin-bottom: 20px;
-  padding-top: 20px;
+.my-tabs .my-tab.active {
+  background: none;
+  color: #000;
+  font-weight: 800;
+}
+.my-tabs .tab-slider {
+  background: #fff !important;
+  border-radius: 40px;
+  height: 39px;
+  position: absolute;
+  z-index: 0;
+  display: inline-block;
+  transition: all 0.4s linear;
 }
 
 @media (min-width: 465px) {
