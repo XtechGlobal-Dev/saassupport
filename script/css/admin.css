@@ -4328,7 +4328,7 @@ td.sb-offline:after {
   color: #000000;
   font-size: 15px;
   line-height: 38px;
-  margin: 0 30px 0 0;
+  margin: 0 10px 0 0;
   transition: all 0.4s;
   letter-spacing: 0.3px;
   cursor: pointer;
@@ -4400,6 +4400,7 @@ td.sb-offline:after {
   font-weight: 400;
   font-size: 12.8px;
   line-height: 30px;
+  background: #fff;
 }
 .sb-menu-wide_new ul li span {
   font-weight: 600;
@@ -4418,8 +4419,13 @@ td.sb-offline:after {
   color: #155CFD;
 }
 .sb-menu-wide_new ul li.sb-active {
-  border-bottom: 2px solid #155CFD;
   transition: none;
+  background: #1653FD;
+  color: #fff !important;
+  border: 1px solid #1653FD !important;
+}
+.sb-menu-wide_new ul li.sb-active span {
+  color: #fff !important;
 }
 
 .settings_new .sb-scroll-area .setting_sidebar li {
@@ -5558,8 +5564,17 @@ td.sb-offline:after {
   padding-left: 0;
 }
 .sb-area-users .sb-table-users tr a.sb-profile img {
-  min-width: 40px;
-  min-height: 40px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+}
+.sb-area-users .sb-table-users tr a.sb-profile span {
+  font-weight: normal;
+  font-size: 14px;
+}
+.sb-area-users .sb-table-users tr th {
+  pointer-events: none;
 }
 .sb-area-users .sb-table-users tr td .user-initials {
   position: unset !important;
@@ -5715,6 +5730,7 @@ td.sb-offline:after {
 }
 .sb-filter-btn.sb-active > div {
   display: flex;
+  gap: 8px;
 }
 .sb-filter-btn.sb-active:after {
   display: none;
@@ -6337,6 +6353,22 @@ td.sb-offline:after {
 .sb-board > .sb-admin-list > .sb-scroll-area li[data-conversation-status="2"] {
   background: rgba(201, 201, 201, 0.3019607843) !important;
 }
+.sb-board > .sb-admin-list > .sb-scroll-area li[data-conversation-status="3"] {
+  position: relative;
+}
+.sb-board > .sb-admin-list > .sb-scroll-area li[data-conversation-status="3"]::after {
+  content: "Archived" !important;
+  position: absolute !important;
+  bottom: 7px;
+  right: 20px;
+  width: fit-content;
+  color: #808080;
+  background: #ebebeb;
+  padding: 4px 5px;
+  font-size: 11px;
+  border-radius: 5px;
+  opacity: 1 !important;
+}
 .sb-board > .sb-admin-list > .sb-scroll-area li > .sb-notification-counter {
   position: absolute;
   right: 19px;
@@ -6463,6 +6495,9 @@ td.sb-offline:after {
 }
 .sb-board > .sb-admin-list.sb-departments-show li.sb-active:before {
   background-color: #155CFD !important;
+}
+.sb-board .sb-admin-list.sb-departments-show .sb-top {
+  padding-bottom: 20px;
 }
 .sb-board .sb-area-conversations .sb-scroll-area ul li .sb-profile img {
   position: absolute;
@@ -7053,12 +7088,12 @@ td.sb-offline:after {
 }
 .sb-board .sb-user-details .sb-inline > .sb-select {
   width: 100%;
-  height: 55px;
+  height: 45px;
 }
 .sb-board .sb-user-details .sb-inline > .sb-select > p {
   font-weight: 400;
   font-size: 13px !important;
-  line-height: 55px !important;
+  line-height: 45px !important;
   border-radius: 0;
   color: #fff !important;
 }
@@ -8224,6 +8259,18 @@ td.sb-offline:after {
 
 .sb-profile-box .sb-profile-list {
   padding-right: 30px;
+}
+.sb-profile-box .sb-profile-list ul li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 0;
+}
+.sb-profile-box .sb-profile-list ul li i {
+  font-size: 18px;
+}
+.sb-profile-box .sb-profile-list ul li img {
+  position: unset;
 }
 .sb-profile-box .sb-user-conversations > p {
   padding: 10px 15px 8px 15px;
@@ -12000,7 +12047,7 @@ a.sb-btn-white.sb-loading:hover:before,
   width: 205px;
 }
 .sb-area-tickets .tags-filter .choices__inner {
-  padding: 0 0 0 3px;
+  padding: 0 0 0 6px;
   width: 200px;
   min-height: 34px;
 }
@@ -12008,6 +12055,7 @@ a.sb-btn-white.sb-loading:hover:before,
 .choices .choices__inner,
 .choices .choices__input {
   background-color: #fff;
+  border-radius: 4px;
 }
 
 .tag-palette {
@@ -12361,6 +12409,7 @@ li.menu_head:hover {
   overflow: hidden;
   background: #fff;
   height: 100vh;
+  z-index: 1002;
 }
 .sidebar.collapsed {
   width: 50px;
@@ -12772,78 +12821,6 @@ div#messaging-channels {
   content: none;
 }
 
-/*
- *
- * -----------------------------------------------------------
- * RESPONSIVE
- * -----------------------------------------------------------
- *
-*/
-@media (max-width: 1600px) {
-  .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
-    max-width: 200px;
-    margin-right: 30px;
-  }
-}
-@media (max-width: 1300px) {
-  .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
-    max-width: 100px;
-  }
-  .sb-area-users .sb-menu-wide ul li {
-    margin-right: 10px;
-  }
-  .sb-setting .repeater-item > div label {
-    margin: 0 0 15px 0;
-  }
-  .sb-setting .repeater-item > div,
-  .sb-setting .repeater-item > div,
-  .sb-setting .input > div:not([data-type=textarea]):not(.sb-repeater-add) {
-    display: block;
-  }
-  .sb-setting .input > div:not([data-type=textarea]):not(.sb-repeater-add) > label {
-    margin: 0 30px 10px 0;
-  }
-  .sb-setting > .sb-setting-content {
-    flex-shrink: 1;
-  }
-  .sb-setting input,
-  .sb-setting select,
-  .sb-setting textarea,
-  .sb-setting input,
-  .sb-setting select,
-  .sb-setting textarea {
-    min-width: 0;
-  }
-  [data-id=open-ai-faq-set-data] .repeater-item > div {
-    display: flex;
-  }
-  #sb-chatbot-qea .sb-enlarger {
-    min-height: 30px;
-  }
-  .sb-type-timetable > .input {
-    overflow: hidden;
-  }
-  .sb-type-timetable .sb-timetable > div > div {
-    flex-wrap: wrap;
-  }
-  .sb-type-timetable .sb-timetable > div > div [data-day] {
-    margin-bottom: 5px;
-  }
-  .sb-area-reports > .sb-tab > .sb-content {
-    display: block;
-  }
-  .sb-area-reports > .sb-tab > .sb-content .sb-reports-chart {
-    width: auto;
-  }
-  .sb-area-reports > .sb-tab > .sb-content .sb-reports-sidebar {
-    max-width: 100%;
-  }
-  .sb-repeater-block-data .sb-setting + .sb-setting,
-  .sb-repeater-block-actions .sb-setting + .sb-setting,
-  .sb-repeater-block-rest-api .sb-setting + .sb-setting {
-    margin: 5px 0 0 0;
-  }
-}
 .sb-area-dashboard main .customer-overview-chart {
   border: 0;
 }
@@ -12938,6 +12915,87 @@ div#messaging-channels {
   transition: all 0.1s linear;
 }
 
+.toggle-btn {
+  display: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+  border: 0;
+}
+
+/*
+ *
+ * -----------------------------------------------------------
+ * RESPONSIVE
+ * -----------------------------------------------------------
+ *
+*/
+@media (max-width: 1600px) {
+  .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
+    max-width: 200px;
+    margin-right: 30px;
+  }
+}
+@media (max-width: 1300px) {
+  .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
+    max-width: 100px;
+  }
+  .sb-area-users .sb-menu-wide ul li {
+    margin-right: 10px;
+  }
+  .sb-setting .repeater-item > div label {
+    margin: 0 0 15px 0;
+  }
+  .sb-setting .repeater-item > div,
+  .sb-setting .repeater-item > div,
+  .sb-setting .input > div:not([data-type=textarea]):not(.sb-repeater-add) {
+    display: block;
+  }
+  .sb-setting .input > div:not([data-type=textarea]):not(.sb-repeater-add) > label {
+    margin: 0 30px 10px 0;
+  }
+  .sb-setting > .sb-setting-content {
+    flex-shrink: 1;
+  }
+  .sb-setting input,
+  .sb-setting select,
+  .sb-setting textarea,
+  .sb-setting input,
+  .sb-setting select,
+  .sb-setting textarea {
+    min-width: 0;
+  }
+  [data-id=open-ai-faq-set-data] .repeater-item > div {
+    display: flex;
+  }
+  #sb-chatbot-qea .sb-enlarger {
+    min-height: 30px;
+  }
+  .sb-type-timetable > .input {
+    overflow: hidden;
+  }
+  .sb-type-timetable .sb-timetable > div > div {
+    flex-wrap: wrap;
+  }
+  .sb-type-timetable .sb-timetable > div > div [data-day] {
+    margin-bottom: 5px;
+  }
+  .sb-area-reports > .sb-tab > .sb-content {
+    display: block;
+  }
+  .sb-area-reports > .sb-tab > .sb-content .sb-reports-chart {
+    width: auto;
+  }
+  .sb-area-reports > .sb-tab > .sb-content .sb-reports-sidebar {
+    max-width: 100%;
+  }
+  .sb-repeater-block-data .sb-setting + .sb-setting,
+  .sb-repeater-block-actions .sb-setting + .sb-setting,
+  .sb-repeater-block-rest-api .sb-setting + .sb-setting {
+    margin: 5px 0 0 0;
+  }
+}
 @media (min-width: 465px) {
   .sb-menu-mobile > ul {
     box-shadow: none;
@@ -13249,6 +13307,22 @@ div#messaging-channels {
   .main-content .settings-card .settings-tab .sb-setting {
     flex-wrap: wrap;
   }
+  .sb-admin .header_new .sidebar {
+    position: fixed;
+    top: -150%;
+    left: 0;
+    transition: 0.5s ease-in-out;
+  }
+  .sb-admin .header_new .sidebar.side-open {
+    top: 0;
+    transition: 0.5s ease-in-out;
+  }
+  .sb-admin .header_new .sidebar .powered-by {
+    flex-direction: column;
+  }
+  .toggle-btn {
+    display: block;
+  }
   .sb-setting > .input {
     width: fit-content;
   }
@@ -13264,10 +13338,65 @@ div#messaging-channels {
     padding: 15px !important;
     top: 0px !important;
     background: #f5f5f5;
-    z-index: 1000;
+    z-index: 93;
   }
   .sb-admin .sb-area-settings > .sb-tab > .sb-nav:not(.sb-active) {
     height: fit-content !important;
+  }
+  .main-content .settings-header {
+    z-index: 94;
+  }
+  .sb-header.header_new {
+    box-shadow: none !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+  .sb-admin main {
+    padding-top: 0 !important;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button {
+    height: fit-content;
+    justify-content: flex-start;
+    gap: 10px;
+    overflow: unset;
+    position: relative;
+    padding-block: 10px;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button div {
+    padding-right: 0;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button div a {
+    text-indent: unset;
+    font-size: 14px;
+    width: fit-content;
+    height: fit-content;
+    overflow: unset;
+    background: #2D9CDB;
+    color: #fff;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button div a i {
+    line-height: 1;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .tags-filter {
+    width: fit-content;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .tags-filter .choices {
+    width: fit-content;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .tags-filter .choices .choices__inner {
+    width: 100px;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .tags-filter .choices .choices__inner input {
+    min-width: 94px !important;
+  }
+  .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .sb-menu-wide.sb-menu-tickets.sb-menu-wide_new div {
+    padding-right: 15px;
+  }
+  #ticketTable_length {
+    margin-bottom: 15px;
+  }
+  #ticketTable_info {
+    padding-bottom: 0.85rem;
   }
 }
 

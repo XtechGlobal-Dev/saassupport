@@ -309,7 +309,7 @@ td.sb-offline:after {
         color: $color-black;
         font-size: 15px;
         line-height: 38px;
-        margin: 0 30px 0 0;
+        margin: 0 10px 0 0;
         transition: $transition;
         letter-spacing: 0.3px;
         cursor: pointer;
@@ -388,6 +388,7 @@ td.sb-offline:after {
             font-weight: 400;
             font-size: 12.8px;
             line-height: 30px;
+            background: #fff;
 
             span {
                 font-weight: 600;
@@ -413,13 +414,14 @@ td.sb-offline:after {
 
 
         li.sb-active {
-            border-bottom: 2px solid $color-blue;
             transition: none;
-            // border: 1px solid #1F2937;
-            // transition: none;
-            // box-shadow: 0px 4px 4px 0px #00000040;
-            // background: #E5EAF0;
-            // font-weight: 500;
+            background: #1653FD;
+            color: #fff !important;
+            border: 1px solid #1653FD !important;
+
+            span {
+                color: #fff !important;
+            }
         }
     }
 }
@@ -1824,9 +1826,20 @@ td.sb-offline:after {
                 padding-left: 0;
 
                 img {
-                    min-width: 40px;
-                    min-height: 40px;
+                    width: 30px;
+                    height: 30px;
+                    min-width: 30px;
+                    min-height: 30px;
                 }
+
+                span {
+                    font-weight: normal;
+                    font-size: 14px;
+                }
+            }
+
+            th {
+                pointer-events: none;
             }
 
             td {
@@ -2006,6 +2019,7 @@ td.sb-offline:after {
 
         >div {
             display: flex;
+            gap: 8px;
         }
 
         &:after {
@@ -2809,6 +2823,24 @@ td.sb-offline:after {
                     background: #c9c9c94d !important;
                 }
 
+                &[data-conversation-status="3"] {
+                    position: relative;
+
+                    &::after {
+                        content: 'Archived' !important;
+                        position: absolute !important;
+                        bottom: 7px;
+                        right: 20px;
+                        width: fit-content;
+                        color: #808080;
+                        background: #ebebeb;
+                        padding: 4px 5px;
+                        font-size: 11px;
+                        border-radius: 5px;
+                        opacity: 1 !important;
+                    }
+                }
+
                 >.sb-notification-counter {
                     position: absolute;
                     right: 19px;
@@ -2961,6 +2993,12 @@ td.sb-offline:after {
 
         &.sb-departments-show li.sb-active:before {
             background-color: $color-blue !important;
+        }
+    }
+
+    .sb-admin-list.sb-departments-show {
+        .sb-top {
+            padding-bottom: 20px;
         }
     }
 
@@ -3555,6 +3593,7 @@ td.sb-offline:after {
                 display: flex;
                 flex-direction: column;
                 gap: 7px;
+
                 li {
                     i {
                         font-size: 20px;
@@ -3700,12 +3739,12 @@ td.sb-offline:after {
 
             >.sb-select {
                 width: 100%;
-                height: 55px;
+                height: 45px;
 
                 >p {
                     font-weight: 400;
                     font-size: 13px !important;
-                    line-height: 55px !important;
+                    line-height: 45px !important;
                     border-radius: 0;
                     color: #fff !important;
 
@@ -4931,6 +4970,20 @@ td.sb-offline:after {
 .sb-profile-box {
     .sb-profile-list {
         padding-right: 30px;
+        ul {
+            li {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding-left: 0;
+                i {
+                    font-size: 18px;
+                }
+                img {
+                    position: unset;
+                }
+            }
+        }
     }
 
     .sb-user-conversations>p {
@@ -5156,9 +5209,10 @@ td.sb-offline:after {
     }
 }
 
-.sb-area-articles .sb-setting + h2 {
+.sb-area-articles .sb-setting+h2 {
     margin-top: 12px !important;
 }
+
 /*
  *
  * -----------------------------------------------------------
@@ -9421,7 +9475,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         width: 205px;
 
         .choices__inner {
-            padding: 0 0 0 3px;
+            padding: 0 0 0 6px;
             width: 200px;
             min-height: 34px;
         }
@@ -9441,6 +9495,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     .choices__inner,
     .choices__input {
         background-color: #fff;
+        border-radius: 4px;
     }
 
 }
@@ -9865,6 +9920,7 @@ li.menu_head:hover {
     overflow: hidden;
     background: #fff;
     height: 100vh;
+    z-index: 1002;
 
     &.collapsed {
         width: 50px;
@@ -9968,13 +10024,16 @@ li.menu_head:hover {
                     font-size: 16px;
                     color: #0A0A0A;
                     margin-bottom: 8px;
+
                     svg {
                         width: 18px;
                         height: 18px;
+
                         path {
                             stroke: #40404e;
                         }
                     }
+
                     &:nth-child(2) {
                         font-size: 14px;
                         color: #717182;
@@ -10425,103 +10484,6 @@ div#messaging-channels {
     }
 }
 
-// custom css end
-/*
- *
- * -----------------------------------------------------------
- * RESPONSIVE
- * -----------------------------------------------------------
- *
-*/
-
-@media (max-width: 1600px) {
-    .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
-        max-width: 200px;
-        margin-right: 30px;
-    }
-}
-
-@media (max-width: 1300px) {
-    .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
-        max-width: 100px;
-    }
-
-    .sb-area-users .sb-menu-wide ul li {
-        margin-right: 10px;
-    }
-
-    .sb-setting {
-        .repeater-item>div label {
-            margin: 0 0 15px 0;
-        }
-
-        .repeater-item>div,
-        .repeater-item>div,
-        .input>div:not([data-type="textarea"]):not(.sb-repeater-add) {
-            display: block;
-        }
-
-        .input>div:not([data-type="textarea"]):not(.sb-repeater-add)>label {
-            margin: 0 30px 10px 0;
-        }
-
-        >.sb-setting-content {
-            flex-shrink: 1;
-        }
-
-        input,
-        select,
-        textarea,
-        input,
-        select,
-        textarea {
-            min-width: 0;
-        }
-    }
-
-    [data-id="open-ai-faq-set-data"] .repeater-item>div {
-        display: flex;
-    }
-
-    #sb-chatbot-qea .sb-enlarger {
-        min-height: 30px;
-    }
-
-    .sb-type-timetable {
-        >.input {
-            overflow: hidden;
-        }
-
-        .sb-timetable>div>div {
-            flex-wrap: wrap;
-
-            [data-day] {
-                margin-bottom: 5px;
-            }
-        }
-    }
-
-    .sb-area-reports {
-        >.sb-tab>.sb-content {
-            display: block;
-
-            .sb-reports-chart {
-                width: auto;
-            }
-
-            .sb-reports-sidebar {
-                max-width: 100%;
-            }
-        }
-    }
-
-    .sb-repeater-block-data .sb-setting+.sb-setting,
-    .sb-repeater-block-actions .sb-setting+.sb-setting,
-    .sb-repeater-block-rest-api .sb-setting+.sb-setting {
-        margin: 5px 0 0 0;
-    }
-}
-
 .sb-area-dashboard {
     main {
         .customer-overview-chart {
@@ -10638,6 +10600,112 @@ div#messaging-channels {
         transition: all 0.1s linear;
         // width: 31% !important;
         // max-width: 31%;
+    }
+}
+
+.toggle-btn {
+    display: none;
+    background: none;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+    border: 0;
+}
+
+// custom css end
+/*
+ *
+ * -----------------------------------------------------------
+ * RESPONSIVE
+ * -----------------------------------------------------------
+ *
+*/
+
+@media (max-width: 1600px) {
+    .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
+        max-width: 200px;
+        margin-right: 30px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
+        max-width: 100px;
+    }
+
+    .sb-area-users .sb-menu-wide ul li {
+        margin-right: 10px;
+    }
+
+    .sb-setting {
+        .repeater-item>div label {
+            margin: 0 0 15px 0;
+        }
+
+        .repeater-item>div,
+        .repeater-item>div,
+        .input>div:not([data-type="textarea"]):not(.sb-repeater-add) {
+            display: block;
+        }
+
+        .input>div:not([data-type="textarea"]):not(.sb-repeater-add)>label {
+            margin: 0 30px 10px 0;
+        }
+
+        >.sb-setting-content {
+            flex-shrink: 1;
+        }
+
+        input,
+        select,
+        textarea,
+        input,
+        select,
+        textarea {
+            min-width: 0;
+        }
+    }
+
+    [data-id="open-ai-faq-set-data"] .repeater-item>div {
+        display: flex;
+    }
+
+    #sb-chatbot-qea .sb-enlarger {
+        min-height: 30px;
+    }
+
+    .sb-type-timetable {
+        >.input {
+            overflow: hidden;
+        }
+
+        .sb-timetable>div>div {
+            flex-wrap: wrap;
+
+            [data-day] {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    .sb-area-reports {
+        >.sb-tab>.sb-content {
+            display: block;
+
+            .sb-reports-chart {
+                width: auto;
+            }
+
+            .sb-reports-sidebar {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .sb-repeater-block-data .sb-setting+.sb-setting,
+    .sb-repeater-block-actions .sb-setting+.sb-setting,
+    .sb-repeater-block-rest-api .sb-setting+.sb-setting {
+        margin: 5px 0 0 0;
     }
 }
 
@@ -10792,7 +10860,6 @@ div#messaging-channels {
         display: block;
     }
 }
-
 
 @media (min-width: 1024px) {
     .sb-area-dashboard {
@@ -11123,6 +11190,31 @@ div#messaging-channels {
         }
     }
 
+    .sb-admin {
+        .header_new {
+            .sidebar {
+                position: fixed;
+                top: -150%;
+                left: 0;
+                transition: .5s ease-in-out;
+
+                &.side-open {
+                    top: 0;
+                    transition: .5s ease-in-out;
+                }
+
+                .powered-by {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+    .toggle-btn {
+        display: block;
+    }
+
+
     .sb-setting>.input {
         width: fit-content;
     }
@@ -11142,10 +11234,88 @@ div#messaging-channels {
         padding: 15px !important;
         top: 0px !important;
         background: #f5f5f5;
-        z-index: 1000;
+        z-index: 93;
     }
 
     .sb-admin .sb-area-settings>.sb-tab>.sb-nav:not(.sb-active) {
         height: fit-content !important;
+    }
+
+    .main-content {
+        .settings-header {
+            z-index: 94;
+        }
+    }
+
+    .sb-header.header_new {
+        box-shadow: none !important;
+        height: 0 !important;
+        width: 0 !important;
+    }
+
+    .sb-admin {
+        main {
+            padding-top: 0 !important;
+
+            .sb-area-tickets {
+                .sb-top-bar.new-ticket-button {
+                    height: fit-content;
+                    justify-content: flex-start;
+                    gap: 10px;
+                    overflow: unset;
+                    position: relative;
+                    padding-block: 10px;
+
+                    div {
+                        padding-right: 0;
+
+                        a {
+                            text-indent: unset;
+                            font-size: 14px;
+                            width: fit-content;
+                            height: fit-content;
+                            overflow: unset;
+                            background: #2D9CDB;
+                            color: #fff;
+
+                            i {
+                                line-height: 1;
+                            }
+                        }
+                    }
+
+                    .tags-filter {
+                        width: fit-content;
+
+                        .choices {
+                            width: fit-content;
+
+                            .choices__inner {
+                                width: 100px;
+
+                                input {
+                                    min-width: 94px !important;
+                                }
+                            }
+                        }
+                    }
+
+                    .sb-menu-wide.sb-menu-tickets.sb-menu-wide_new {
+                        div {
+                            padding-right: 15px;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    #ticketTable_length {
+        margin-bottom: 15px;
+    }
+
+    #ticketTable_info {
+        padding-bottom: .85rem;
     }
 }
