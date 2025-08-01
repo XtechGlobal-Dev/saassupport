@@ -5170,7 +5170,7 @@
 
         profileRow: function (key, value, name = key) {
             if (!value) return '';
-            let icons = { id: 'user-check-02', full_name: 'user-check-01', email: 'mail-send-01', phone: 'phone', user_type: 'user-check-01', last_activity: 'calendar-03', creation_time: 'calendar-03', token: 'shuffle', currency: 'coins-dollar', location: 'pin-location-03', country: 'pin-location-03', address: 'pin-location-03', city: 'pin-location-03', postal_code: 'pin-location-03', browser: 'web-design-01', os: 'web-design-01', current_url: 'link-02', timezone: 'time-04' };
+            let icons = { id: 'user-check-02', full_name: 'user-check-01', email: 'mail-send-01', phone: 'phone', user_type: 'user-check-01', last_activity: 'calendar-03', creation_time: 'calendar-03', token: 'shuffle', currency: 'coins-dollar', location: 'pin-location-03', country: 'pin-location-03', address: 'pin-location-03', city: 'pin-location-03', state: 'pin-location-03', postal_code: 'pin-location-03', browser: 'web-design-01', os: 'web-design-01', current_url: 'link-02', timezone: 'time-04' };
             let icon = `<i class="hgi hgi-stroke hgi-${key in icons ? icons[key] : 'chatting-01'}"></i>`;
             let lowercase;
             let image = false;
