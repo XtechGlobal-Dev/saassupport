@@ -765,10 +765,10 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         }
 
         /* .sb-td-tags span {
-                                                                                                                                                        margin: 3px 5px 0 0;
-                                                                                                                                                        padding: .45em .75em;
-                                                                                                                                                        font-size: 13px
-                                                                                                                                                    } */
+                                                                                                                                                            margin: 3px 5px 0 0;
+                                                                                                                                                            padding: .45em .75em;
+                                                                                                                                                            font-size: 13px
+                                                                                                                                                        } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -803,76 +803,76 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                                                                                                        position: relative;
-                                                                                                                                                        overflow: visible !important;
+                                                                                                                                                            position: relative;
+                                                                                                                                                            overflow: visible !important;
             
-                                                                                                                                                    }
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-btn {
-                                                                                                                                                        border: none;
-                                                                                                                                                        border-radius: 8px;
-                                                                                                                                                        padding: 3px 12px;
-                                                                                                                                                        font-weight: 500;
-                                                                                                                                                        cursor: pointer;
-                                                                                                                                                        display: flex;
-                                                                                                                                                        align-items: center;
-                                                                                                                                                        gap: 4px;
-                                                                                                                                                        font-size: 14px;
-                                                                                                                                                    }
+                                                                                                                                                        .status-btn {
+                                                                                                                                                            border: none;
+                                                                                                                                                            border-radius: 8px;
+                                                                                                                                                            padding: 3px 12px;
+                                                                                                                                                            font-weight: 500;
+                                                                                                                                                            cursor: pointer;
+                                                                                                                                                            display: flex;
+                                                                                                                                                            align-items: center;
+                                                                                                                                                            gap: 4px;
+                                                                                                                                                            font-size: 14px;
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-list li,
-                                                                                                                                                    .priority-list li {
-                                                                                                                                                        font-size: 14px;
-                                                                                                                                                    }
+                                                                                                                                                        .status-list li,
+                                                                                                                                                        .priority-list li {
+                                                                                                                                                            font-size: 14px;
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-dot {
-                                                                                                                                                        width: 10px !important;
-                                                                                                                                                        height: 10px !important;
-                                                                                                                                                    }
+                                                                                                                                                        .status-dot {
+                                                                                                                                                            width: 10px !important;
+                                                                                                                                                            height: 10px !important;
+                                                                                                                                                        }
 
-                                                                                                                                                    .arrow {
-                                                                                                                                                        font-size: 12px;
-                                                                                                                                                    }
+                                                                                                                                                        .arrow {
+                                                                                                                                                            font-size: 12px;
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-list,
-                                                                                                                                                    .priority-list {
-                                                                                                                                                        display: none;
-                                                                                                                                                        position: absolute;
-                                                                                                                                                        top: 75%;
-                                                                                                                                                        left: 0;
-                                                                                                                                                        min-width: 170px;
-                                                                                                                                                        background: #fff;
-                                                                                                                                                        border: 1px solid #ddd;
-                                                                                                                                                        border-radius: 8px;
-                                                                                                                                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                                                                                                        z-index: 9999;
-                                                                                                                                                        padding: 6px 0;
-                                                                                                                                                        margin: 0;
-                                                                                                                                                        list-style: none;
-                                                                                                                                                    }
+                                                                                                                                                        .status-list,
+                                                                                                                                                        .priority-list {
+                                                                                                                                                            display: none;
+                                                                                                                                                            position: absolute;
+                                                                                                                                                            top: 75%;
+                                                                                                                                                            left: 0;
+                                                                                                                                                            min-width: 170px;
+                                                                                                                                                            background: #fff;
+                                                                                                                                                            border: 1px solid #ddd;
+                                                                                                                                                            border-radius: 8px;
+                                                                                                                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                                                                                                                                            z-index: 9999;
+                                                                                                                                                            padding: 6px 0;
+                                                                                                                                                            margin: 0;
+                                                                                                                                                            list-style: none;
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-list li,
-                                                                                                                                                    .priority-list li {
-                                                                                                                                                        padding: 8px 16px;
-                                                                                                                                                        cursor: pointer;
-                                                                                                                                                        display: flex;
-                                                                                                                                                        align-items: center;
-                                                                                                                                                        gap: 4px;
-                                                                                                                                                        font-size: 15px;
-                                                                                                                                                        transition: background 0.15s;
-                                                                                                                                                    }
+                                                                                                                                                        .status-list li,
+                                                                                                                                                        .priority-list li {
+                                                                                                                                                            padding: 8px 16px;
+                                                                                                                                                            cursor: pointer;
+                                                                                                                                                            display: flex;
+                                                                                                                                                            align-items: center;
+                                                                                                                                                            gap: 4px;
+                                                                                                                                                            font-size: 15px;
+                                                                                                                                                            transition: background 0.15s;
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-list li:hover,
-                                                                                                                                                    .priority-list li:hover {
-                                                                                                                                                        background: #f5f5f5;
-                                                                                                                                                    }
+                                                                                                                                                        .status-list li:hover,
+                                                                                                                                                        .priority-list li:hover {
+                                                                                                                                                            background: #f5f5f5;
+                                                                                                                                                        }
 
-                                                                                                                                                    .status-dot {
-                                                                                                                                                        width: 12px;
-                                                                                                                                                        height: 12px;
-                                                                                                                                                        border-radius: 50%;
-                                                                                                                                                        display: inline-block;
-                                                                                                                                                    } */
+                                                                                                                                                        .status-dot {
+                                                                                                                                                            width: 12px;
+                                                                                                                                                            height: 12px;
+                                                                                                                                                            border-radius: 50%;
+                                                                                                                                                            display: inline-block;
+                                                                                                                                                        } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -2464,6 +2464,28 @@ function sb_component_admin()
                                             </div>
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
+                            <li>
+                                <a id="sb-accout"><i>
+                                        <div class="icon-wrapper">
+                                            <span class="icon-tooltip" data-tooltip="Inbox">
+                                                <svg width="26" height="27" viewBox="0 0 26 27" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M16.5984 9.73794C16.5984 7.74972 14.9867 6.13794 12.9984 6.13794C11.0102 6.13794 9.39844 7.74972 9.39844 9.73794C9.39844 11.7262 11.0102 13.3379 12.9984 13.3379C14.9867 13.3379 16.5984 11.7262 16.5984 9.73794Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M25 13.3379C25 6.71047 19.6274 1.33789 13 1.33789C6.37258 1.33789 1 6.71047 1 13.3379C1 19.9653 6.37258 25.3379 13 25.3379C19.6274 25.3379 25 19.9653 25 13.3379Z"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M19 19.3379C19 16.0242 16.3137 13.3379 13 13.3379C9.6863 13.3379 7 16.0242 7 19.3379"
+                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </i><span class="label">Accout</span></a></li>
                         </ul>
                     </nav>
 
@@ -4275,7 +4297,8 @@ function sb_component_admin()
                             </div> -->
                         </div>
                         <div class="sb-scroll-area">
-                            <table id="customerTable" class="sb-table-tickets table table-bordered table-hover align-middle text-nowrap bg-white w-100 sb-table-users">
+                            <table id="customerTable"
+                                class="sb-table-tickets table table-bordered table-hover align-middle text-nowrap bg-white w-100 sb-table-users">
                                 <thead class="table-light">
                                     <tr>
                                         <th>
