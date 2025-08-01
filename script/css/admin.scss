@@ -4164,6 +4164,20 @@ td.sb-offline:after {
     }
 }
 
+.sb-area-conversations {
+    .sb-admin-list.sb-departments-show {
+        .sb-scroll-area {
+            ul {
+                li {
+                    &:hover {
+                        background: #EEF2FF !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .sb-area-dashboard {
     main {
         width: 100%;
