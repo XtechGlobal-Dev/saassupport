@@ -125,6 +125,8 @@ function sb_ajax_execute() {
             return sb_json_response(sb_get_user($_POST['user_id'], sb_post('extra')));
         case 'get-users':
             return sb_json_response(sb_get_users(sb_post('sorting', ['creation_time', 'DESC']), sb_post('user_types', []), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('users_id'), sb_post('department'), sb_post('tag'), sb_post('source')));
+        case 'get-users-list':
+            return sb_json_response(get_users_list(sb_post('sorting')));
         case 'get-new-users':
             return sb_json_response(sb_get_new_users($_POST['datetime']));
         case 'get-user-extra':

@@ -12965,6 +12965,82 @@ div#messaging-channels {
   overflow-x: scroll;
 }
 
+.sb-scroll-area .bulk-users-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.sb-scroll-area .bulk-users-container .select-user {
+  width: 100%;
+}
+.sb-scroll-area .bulk-users-container .form-check.d-flex, .sb-scroll-area .bulk-users-container #selectedCount {
+  width: fit-content;
+  margin-bottom: 0 !important;
+  display: flex;
+  gap: 10px;
+  height: fit-content;
+}
+.sb-scroll-area .bulk-users-container #selectedCount {
+  margin-left: auto;
+  background: #eceef2;
+  border-radius: 20px;
+  padding: 4px 8px;
+  font-weight: 500;
+  font-size: 12px;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px 10px !important;
+  width: 100%;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check label span.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check label p {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 1 !important;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check label p span:nth-child(1) {
+  color: #242424;
+  font-weight: 600;
+  font-size: 14px;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check label p span:nth-child(2) {
+  color: #717182;
+  font-size: 12px;
+}
+.sb-scroll-area .sb-type-textarea {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px !important;
+  width: 100%;
+}
+.sb-scroll-area .sb-type-textarea textarea {
+  background: #f3f3f5;
+  min-height: 100px;
+}
+
 /*
  *
  * -----------------------------------------------------------

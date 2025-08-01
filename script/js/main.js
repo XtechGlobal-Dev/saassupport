@@ -6538,6 +6538,14 @@
             });
         });
 
+        $('#newComment').on('keydown', function(e) {
+            // Check if Enter is pressed without Shift
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); // Prevent newline
+                $('#addComment').click(); // Trigger Send button
+            }
+        });
+
         $('.tickets-list-area').on('click', '.edit-comment-btn', function () {
             $('.tickets-list-area #newComment').removeClass('d-none');
             const commentId = this.getAttribute('data-id');
