@@ -5057,12 +5057,16 @@ td.sb-offline:after {
   color: rgb(202, 52, 52);
 }
 .sb-panel-details .sb-list-links > a {
-  padding: 0 15px;
+  padding: 0 30px;
   cursor: pointer;
   display: block;
   text-decoration: none;
   color: #000000;
   transition: all 0.4s;
+  overflow: hidden;
+  max-width: 85%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .sb-panel-details .sb-list-links > a > span span {
   display: inline-block;
@@ -5242,10 +5246,21 @@ td.sb-offline:after {
   margin: 15px 15px 0 15px;
 }
 .sb-panel-details.sb-collapse > .sb-collapse-btn {
-  margin-left: 15px;
+  margin-left: 30px;
 }
 .sb-panel-details:empty {
   display: none;
+}
+
+.sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
+  background-color: #2D9CDB !important;
+}
+
+.sb-player {
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .sb-panel-attachments {
@@ -5320,7 +5335,7 @@ td.sb-offline:after {
 }
 
 .sb-panel-notes > div > div {
-  margin: 0 15px;
+  margin: 0 30px;
   background: #487FFF;
   padding: 15px;
   border-radius: 10px;
@@ -5445,7 +5460,8 @@ td.sb-offline:after {
 }
 
 .sb-panel-tags > div {
-  margin: 10px;
+  margin: 10px 0;
+  padding-inline: 30px;
 }
 .sb-panel-tags > div span {
   cursor: default;
@@ -5736,7 +5752,9 @@ td.sb-offline:after {
 }
 .sb-filter-btn.sb-active > div {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 5px;
+  height: fit-content;
 }
 .sb-filter-btn.sb-active:after {
   display: none;
@@ -6694,6 +6712,9 @@ td.sb-offline:after {
   position: relative;
   z-index: 1;
 }
+.sb-board .sb-conversation .sb-list .sb-label-date span {
+  margin-top: 0 !important;
+}
 .sb-board .sb-conversation .sb-list .sb-label-date span::before {
   content: "";
   height: 1px;
@@ -6928,16 +6949,18 @@ td.sb-offline:after {
   display: flex;
   border-bottom: 1px solid rgb(212, 212, 212);
   background: #F8FAFC;
+  padding: 15px 30px;
 }
 .sb-board .sb-user-details h3 {
-  margin: 15px;
+  margin: 15px 0;
+  padding-inline: 30px;
   font-size: 15px;
   line-height: 25px;
   font-weight: 600;
 }
 .sb-board .sb-user-details > div > h3 {
   margin: 0;
-  padding: 15px;
+  padding: 15px 30px;
   border-top: 1px solid rgb(212, 212, 212);
 }
 .sb-board .sb-user-details .sb-profile {
@@ -6976,7 +6999,7 @@ td.sb-offline:after {
   transition: all 0.4s;
 }
 .sb-board .sb-user-details .sb-profile-list {
-  padding: 15px;
+  padding: 15px 30px;
 }
 .sb-board .sb-user-details .sb-profile-list ul {
   margin-top: 0;
@@ -7048,7 +7071,7 @@ td.sb-offline:after {
   height: calc(100vh - 70px);
 }
 .sb-board .sb-user-details .sb-user-conversations {
-  margin: 0 0 15px 15px;
+  margin: 0 0 15px 30px;
 }
 .sb-board .sb-user-details .sb-user-conversations li {
   border-left: 1px solid #d4d4d4;
@@ -7118,24 +7141,35 @@ td.sb-offline:after {
   width: 100%;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments, .sb-board .sb-user-details .sb-inline.sb-inline-agents {
-  padding: 0 0 0 15px;
+  padding: 0 30px;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select {
   background: #487FFF;
   box-shadow: 0px 4px 7.2px -2px rgba(0, 0, 0, 0.2509803922), 0px 0px 4px 0px rgba(0, 0, 0, 0.2509803922) inset;
-  padding: 0px 15px;
+  padding: 0px;
   border-radius: 10px;
   width: 100%;
   color: #fff;
-  max-width: 335px;
   margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select ul {
   top: 0;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p {
+  padding: 0 15px;
+  position: unset;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p span {
+  position: absolute;
+  right: 0;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p:hover {
   color: #fff;
@@ -12973,7 +13007,8 @@ div#messaging-channels {
 .sb-scroll-area .bulk-users-container .select-user {
   width: 100%;
 }
-.sb-scroll-area .bulk-users-container .form-check.d-flex, .sb-scroll-area .bulk-users-container #selectedCount {
+.sb-scroll-area .bulk-users-container .form-check.d-flex,
+.sb-scroll-area .bulk-users-container #selectedCount {
   width: fit-content;
   margin-bottom: 0 !important;
   display: flex;
@@ -13048,6 +13083,172 @@ div#messaging-channels {
  * -----------------------------------------------------------
  *
 */
+.sb-account-box.sb-admin .sb-scroll-area {
+  background: #f9fafb;
+}
+
+#tab-membership {
+  max-width: 100%;
+}
+#tab-membership .box-membership .box-black {
+  background: #111827;
+  padding: 32px 30px;
+  border-radius: 16px;
+}
+#tab-membership .box-membership .box-black h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+#tab-membership .box-membership .box-black .membership-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box span {
+  font-size: 16px;
+  color: #D1D5DB;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box span:nth-child(1) {
+  width: fit-content;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box .progress {
+  width: 100%;
+  height: 11px;
+  background: #374151;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box:nth-child(1) .progress .progress-bar {
+  background: #3B82F6;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box:nth-child(2) {
+  margin-left: 0;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box:nth-child(2) .progress .progress-bar {
+  background: #22C55E;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box p {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box p span:nth-child(2) {
+  font-size: 26px;
+  font-weight: 700;
+  color: #4ADE80;
+}
+#tab-membership .plans-box-menu ul {
+  background: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  width: fit-content;
+  padding: 4px;
+  border-radius: 8px;
+}
+#tab-membership .plans-box-menu ul li {
+  padding: 3px 20px;
+}
+#tab-membership .plans-box-menu ul li.sb-active {
+  background: #fff;
+  border-radius: 8px;
+  color: #000;
+  border-bottom: 0;
+}
+#tab-membership .addons-title {
+  border-bottom: 0;
+  font-size: 30px;
+  color: #000;
+  font-weight: 700;
+  padding-bottom: 15px;
+  margin-top: 40px;
+}
+#tab-membership .plans-box {
+  grid-template-columns: 1fr;
+}
+#tab-membership .plans-box div {
+  background: #fff;
+  border: 1.33px solid #E5E7EB;
+  box-shadow: 0px 1.33px 2.67px 0px rgba(0, 0, 0, 0.0509803922);
+  border-radius: 16px;
+  color: #000;
+  flex-direction: column;
+}
+#tab-membership .plans-box div.sb-visible {
+  display: flex;
+}
+#tab-membership .plans-box div h3 span {
+  font-size: 12px;
+  color: #4B5563;
+}
+#tab-membership .plans-box div h4 {
+  font-size: 20px;
+  color: #111827;
+  margin-bottom: 5px;
+}
+#tab-membership .plans-box div h3 {
+  font-size: 40px;
+  font-weight: 700;
+}
+#tab-membership .plans-box div h3 span {
+  font-size: 16px;
+  font-weight: 400;
+}
+#tab-membership .plans-box div ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+#tab-membership .plans-box div ul li {
+  color: #374151;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  padding-left: 20px;
+}
+#tab-membership .plans-box div ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(45deg);
+  width: 8px;
+  height: 14px;
+  border-bottom: 3px solid #22C55E;
+  border-right: 3px solid #22C55E;
+}
+#tab-membership .plans-box div button {
+  font-size: 16px;
+  line-height: 36px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  border-radius: 8px;
+  min-width: 0;
+  background-color: #155CFD;
+  text-decoration: none;
+  color: #fff;
+  height: 35px;
+  padding: 0 25px;
+  position: relative;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.4s;
+  user-select: none;
+  height: 50px;
+  margin-top: 50px;
+}
+
 @media (max-width: 1600px) {
   .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
     max-width: 200px;
