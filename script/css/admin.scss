@@ -10668,6 +10668,94 @@ div#messaging-channels {
     }
 }
 
+.sb-scroll-area {
+    .bulk-users-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        .select-user {
+            width: 100%;
+        }
+        .form-check.d-flex, #selectedCount {
+            width: fit-content;
+            margin-bottom: 0 !important;
+            display: flex;
+            gap: 10px;
+            height: fit-content;
+        }
+        #selectedCount {
+            margin-left: auto;
+            background: #eceef2;
+            border-radius: 20px;
+            padding: 4px 8px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+        .bulk-users-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 15px 10px !important;
+            width: 100%;
+
+            .form-check {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+
+                    span.profile-img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        background-color: #f0f0f0;
+                        font-size: 13px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    p {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                        line-height: 1 !important;
+
+                        span {
+                            &:nth-child(1) {
+                                color: #242424;
+                                font-weight: 600;
+                                font-size: 14px;
+                            }
+
+                            &:nth-child(2) {
+                                color: #717182;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+        .sb-type-textarea {
+            display: flex;
+            flex-direction: column;
+            padding-top: 5px !important;
+            width: 100%;
+
+            textarea {
+                background: #f3f3f5;
+                min-height: 100px;
+            }
+        }
+}
+
 // custom css end
 /*
  *
@@ -11005,12 +11093,14 @@ div#messaging-channels {
                 .sb-select {
                     ul {
                         left: 21px;
+
                         li {
                             font-size: 11px;
                         }
                     }
                 }
             }
+
             .sb-scroll-area {
                 li {
                     .sb-profile {
@@ -11019,10 +11109,12 @@ div#messaging-channels {
                             height: 20px;
                             line-height: 20px;
                         }
+
                         .sb-time {
                             font-size: 11px;
                         }
                     }
+
                     p {
                         font-size: 12px;
                     }
@@ -11033,10 +11125,13 @@ div#messaging-channels {
         .sb-user-details {
             .sb-inline.sb-inline-departments {
                 padding-right: 15px;
+
                 .sb-select {
                     width: 90%;
+
                     p {
                         width: 100%;
+
                         &::after {
                             line-height: 45px;
                         }
@@ -11050,6 +11145,7 @@ div#messaging-channels {
         .sb-admin-list {
             max-width: 215px;
             min-width: 215px;
+
             .sb-scroll-area {
                 li {
                     .sb-profile {
@@ -11076,25 +11172,29 @@ div#messaging-channels {
                     }
                 }
             }
+
             .sb-select {
                 p {
                     font-size: 11px !important;
                 }
             }
+
             .sb-filter-btn {
                 svg {
                     width: 20px;
                 }
+
                 &.sb-active {
-                > div {
-                    min-width: fit-content;
-                }
-                .sb-select {
-                    p {
-                        font-size: 11px !important;
+                    >div {
+                        min-width: fit-content;
+                    }
+
+                    .sb-select {
+                        p {
+                            font-size: 11px !important;
+                        }
                     }
                 }
-            }
             }
         }
     }
