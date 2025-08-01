@@ -4016,8 +4016,10 @@ function sb_component_admin()
                             : ""; ?>">
                             <div class="sb-top">
                                 <div class="sb-select">
-                                    <p data-value="0" data-sb-tooltip="Unread Conversations">
-                                        <?php sb_e("Inbox"); ?><span></span>
+                                    <!-- <p data-value="0" data-sb-tooltip="Unread Conversations"> -->
+                                    <p data-value="0">
+
+                                        <?php sb_e("Inbox"); ?><span data-sb-tooltip="Unread Conversations"></span>
                                     </p>
                                     <ul>
                                         <li data-value="0" class="sb-active">
@@ -6402,6 +6404,7 @@ function sb_component_admin()
                                         <div class="sb-top-bar settings-header">
                                             <div>
                                                 <p class="head">Admin</p>
+                                                <p class="des mb-0">Manage your admin widget availability and appearance</p>
                                             </div>
                                             <div>
                                                 <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
@@ -6429,42 +6432,212 @@ function sb_component_admin()
                                             </div>
 
                                             <div id="panel-setting-content" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Panel Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your panel widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'panel-setting'); ?>
                                             </div>
 
                                             <div id="language" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Language Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your language widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'language'); ?>
                                             </div>
 
                                             <div id="admin-chat-management-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Chat Management Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your chat management widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'admin-chat-management'); ?>
                                             </div>
 
                                             <div id="permission-setting-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Permission Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your permission widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'permission-setting'); ?>
                                             </div>
 
                                             <div id="settings-customization-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Settings Customization Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your settings customization widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'settings-customization'); ?>
                                             </div>
 
                                             <div id="customer-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Customer Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your customer widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'customer'); ?>
                                             </div>
 
                                             <div id="auto-saved-message-inbox-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Auto Saved Message Inbox Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your auto saved message inbox widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'auto-saved-message-inbox'); ?>
                                             </div>
 
                                             <div id="customization-and-themes-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Customization & Themes Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your customization & Themes widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'customization-and-themes'); ?>
                                             </div>
 
                                             <div id="switch-accounts-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Switch Accounts Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your switch accounts widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'switch-accounts'); ?>
                                             </div>
 
                                             <div id="department-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                <path d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z" stroke="black" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white" transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Department Availability
+                                                    </p>
+                                                    <p class="des mb-0">Control when your Department widget is visible and available to visitors</p>
+                                                </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'department'); ?>
                                             </div>
                                         </div>
@@ -7007,7 +7180,7 @@ function sb_conversations_filter($cloud_active_apps)
             $tags[0]["tag-name"] .
             '"></i>'
             : "") .
-        '<div class="sb-filter-btn"><svg class="toggle-filter" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        '<div class="sb-filter-btn"><svg class="toggle-filter" data-sb-tooltip="Filters" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M20.7801 8.25167L18.2506 5.72294L18.2673 14.5714C18.2673 15.0452 17.8839 15.4286 17.4101 15.4286C16.938 15.4286 16.553 15.0452 16.553 14.5714L16.5363 5.7832L14.0687 8.25167C13.7338 8.58566 13.1914 8.58566 12.8566 8.25167C12.5218 7.91685 12.5218 7.37361 12.8566 7.03878L16.3839 3.51144C16.6183 3.2009 16.9916 3 17.4101 3C17.7366 3 18.0329 3.12053 18.2589 3.31976C18.2924 3.34486 18.3242 3.37249 18.3544 3.40263L21.9922 7.03878C22.327 7.37361 22.327 7.91685 21.9922 8.25167C21.6574 8.58566 21.115 8.58566 20.7801 8.25167Z" fill="black"/>
 <path d="M1.71484 6.25708C1.71484 5.87873 2.0212 5.57153 2.40123 5.57153H9.1713C9.33536 5.57153 9.48604 5.62846 9.60322 5.72387C9.75896 5.84944 9.8577 6.04196 9.8577 6.25708V6.60028C9.8577 6.97862 9.55136 7.28582 9.1713 7.28582H2.40123C2.20201 7.28582 2.02288 7.20211 1.89732 7.06735C1.82701 6.99285 1.77511 6.90244 1.74498 6.802C1.72489 6.73839 1.71484 6.67059 1.71484 6.60028V6.25708Z" fill="black"/>
 <path d="M2.14844 12.477C2.08315 12.503 2.02288 12.5381 1.96931 12.5816C1.81361 12.7072 1.71484 12.8989 1.71484 13.114V13.4572C1.71484 13.8356 2.0212 14.1428 2.40123 14.1428H13.0284C13.4085 14.1428 13.7148 13.8356 13.7148 13.4572V13.114C13.7148 12.7357 13.4085 12.4285 13.0284 12.4285H2.40123C2.3125 12.4285 2.22712 12.446 2.14844 12.477Z" fill="black"/>

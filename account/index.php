@@ -39,13 +39,15 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
     <script src="../script/js/min/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@iconify-json/hugeicons@1.2.6/index.min.js"></script>
-    <script id="sbinit" src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
+    <script id="sbinit"
+        src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
     <link rel="stylesheet" href="../script/css/admin.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
-    <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>" media="(max-width: 464px)" />
+    <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>"
+        media="(max-width: 464px)" />
     <!-- Manrope font cdn link  -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
     <!-- Bootstrap cdn link  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/hgi-stroke-rounded.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
@@ -102,7 +104,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
             </div>
             <div>
                 <a class="sb-btn sb-btn-dashboard" href="<?php echo CLOUD_URL ?>">
-                   <i class="fa-solid fa-gauge mr-2" aria-hidden="true"></i> <?php sb_e('Go to Dashboard') ?>
+                    <i class="fa-solid fa-gauge mr-2" aria-hidden="true"></i> <?php sb_e('Go to Dashboard') ?>
                 </a>
             </div>
         </div>
@@ -207,32 +209,32 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     <p>
                         <?php sb_e('Update here your profile information.') ?>
                     </p>
-                    <div id="first_name" data-type="text" class="sb-input" >
+                    <div id="first_name" data-type="text" class="sb-input">
                         <span>
                             <?php sb_e('First name') ?>
                         </span>
-                        <input type="text" placeholder="First name"  />
+                        <input type="text" placeholder="First name" />
                     </div>
-                    <div id="last_name" data-type="text" class="sb-input"  >
+                    <div id="last_name" data-type="text" class="sb-input">
                         <span>
                             <?php sb_e('Last name') ?>
                         </span>
                         <input type="text" placeholder="Last name" />
                     </div>
-                    <div id="email" data-type="text" class="sb-input sb-type-input-button" >
+                    <div id="email" data-type="text" class="sb-input sb-type-input-button">
                         <span>
                             <?php sb_e('Email') ?>
                         </span>
-                        <input type="email" readonly placeholder="Email"  />
+                        <input type="email" readonly placeholder="Email" />
                         <a class="sb-btn btn-verify-email">
                             <?php sb_e('Verify Email') ?>
                         </a>
                     </div>
-                    <div id="phone" data-type="text" class="sb-input sb-type-input-button" > 
+                    <div id="phone" data-type="text" class="sb-input sb-type-input-button">
                         <span>
                             <?php sb_e('Phone') ?>
                         </span>
-                        <input type="tel" placeholder="Phone number"/>
+                        <input type="tel" placeholder="Phone number" />
                         <a class="sb-btn btn-verify-phone">
                             <?php sb_e('Verify') ?>
                         </a>
@@ -243,7 +245,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         </span>
                         <input type="password" value="12345678" placeholder="Password" />
                     </div>
-                    <div id="company_details" data-type="text" class="sb-input"  >
+                    <div id="company_details" data-type="text" class="sb-input">
                         <span>
                             <?php sb_e('Company details') ?>
                         </span>
@@ -256,7 +258,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                             <?php sb_e('Save changes') ?>
                         </a>
                         <a id="delete-account" class="sb-btn sb-btn-white sb-icon">
-                             <i class="sb-icon-delete"></i>
+                            <i class="sb-icon-delete"></i>
                             <?php sb_e('Delete account') ?>
                         </a>
                     </div>
@@ -276,15 +278,61 @@ function box_membership($membership)
     $membership_type = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages');
     $membership_type_ma = $membership_type == 'messages-agents';
     $name = $membership_type_ma ? 'messages' : $membership_type;
-    $box_two = $membership_type_ma ? '<div><span>' . $membership['count_agents'] . ' / <span class="membership-quota">' . ($membership['quota_agents'] == 9999 ? '∞' : $membership['quota_agents']) . '</span></span> <span>' . sb_('Agents') . '</span></div>' : '';
+    $box_two = $membership_type_ma ? '<div class="detail-box"><span>' . sb_('Agents') . '</span><span>' . $membership['count_agents'] . ' / <span class="membership-quota">' . ($membership['quota_agents'] == 9999 ? '∞' : $membership['quota_agents']) . '</span></span> 
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: ' . ($membership["quota_agents"] > 0 ? ($membership["count_agents"] / $membership["quota_agents"]) * 100 : 0) . '%;" aria-valuenow=' . $membership['count_agents'] . ' aria-valuemin=' . $membership['count_agents'] . ' aria-valuemax=' . $membership['quota_agents'] . '></div>
+        </div></div>' : '';
     $price_string = $membership['price'] == 0 ? '' : (substr($membership['expiration'], -2) == '37' ? '<span id="membership-appsumo" data-id="' . account_get_payment_id() . '"></span>' : (mb_strtoupper($membership['currency']) . ' ' . $membership['price'] . ' ' . membership_get_period_string($membership['period'])));
-    echo '<div class="box-maso box-membership"><div class="box-black"><h2>' . sb_(date('F')) . ', ' . date('Y') . '</h2><div><div><span>' . $membership['count'] . ' / <span class="membership-quota">' . $membership['quota'] . '</span></span> <span>' . sb_($name) . '</span></div>' . $box_two . '</div></div><div class="box-black"><h2>' . sb_('Active Membership') . '</h2><div><div><span class="membership-name">' . sb_($membership['name']) . '</span> <span class="membership-price" data-currency="' . $membership['currency'] . '">' . $price_string . '</span></div></div></div></div>';
+    echo '
+    <div class="box-maso box-membership">
+        <div class="box-black">
+            <h2>' . sb_(date('F')) . ', ' . date('Y') . '</h2>
+            <div class="membership-detail-list">
+                <div class="detail-box">
+                    <span>' . sb_($name) . '</span>
+                    <span>' . $membership['count'] . ' / <span class="membership-quota">' . $membership['quota'] . '</span></span>
+                    <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: ' . ($membership['quota'] > 0 ? ($membership['count'] / $membership['quota']) * 100 : 0) . '%;" aria-valuenow=' . $membership['count'] . ' aria-valuemin=' . $membership['count'] . ' aria-valuemax=' . $membership['quota'] . '></div>
+        </div>
+                </div>' . $box_two .
+        '</div>
+        </div>
+        <div class="box-black">
+            <h2>Current Status</h2>
+            <div class="membership-detail-list">
+                <div class="detail-box">
+                    <p>
+                        <span>' . sb_('Active Membership') . '</span>
+                        <span class="membership-name">' . sb_($membership['name']) . '</span> 
+                    </p>
+                    <div>
+                        <svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32.2803 0.805664C49.9626 0.805664 64.2968 15.14 64.2969 32.8223C64.2969 50.5046 49.9626 64.8389 32.2803 64.8389C14.598 64.8388 0.263672 50.5046 0.263672 32.8223C0.263707 15.14 14.598 0.805699 32.2803 0.805664Z" fill="#22C55E"/>
+                            <path d="M32.2803 0.805664C49.9626 0.805664 64.2968 15.14 64.2969 32.8223C64.2969 50.5046 49.9626 64.8389 32.2803 64.8389C14.598 64.8388 0.263672 50.5046 0.263672 32.8223C0.263707 15.14 14.598 0.805699 32.2803 0.805664Z" stroke="#E5E7EB"/>
+                            <path d="M41.6182 48.8306H22.9414V16.814H41.6182V48.8306Z" stroke="#E5E7EB"/>
+                            <g clip-path="url(#clip0_1485_2470)">
+                                <path d="M41.2251 26.5441C41.7463 27.0653 41.7463 27.9115 41.2251 28.4326L30.5529 39.1049C30.0318 39.626 29.1855 39.626 28.6644 39.1049L23.3283 33.7687C22.8072 33.2476 22.8072 32.4014 23.3283 31.8803C23.8494 31.3592 24.6957 31.3592 25.2168 31.8803L29.6108 36.27L39.3408 26.5441C39.8619 26.023 40.7082 26.023 41.2293 26.5441H41.2251Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_1485_2470">
+                                    <path d="M22.9414 22.1504H41.6178V43.4948H22.9414V22.1504Z" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                <div style="margin-left: 0;">
+                    <span class="membership-price" data-currency="' . $membership['currency'] . '">' . $price_string . '</span>
+                </div>
+            </div>
+        </div>
+    </div>';
 }
 
 function box_membership_plans($active_membership_id, $expired = false)
 {
     $plans = memberships();
-    $code = '<div id="plans" class="plans-box">';
+    $code = '<h2 class="addons-title">Current Plan</h2><div id="plans" class="plans-box">';
     $menu_items = [];
     $membership_type = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages');
     $membership_type_ma = $membership_type == 'messages-agents';
@@ -298,7 +346,12 @@ function box_membership_plans($active_membership_id, $expired = false)
         if (!in_array($menu, $menu_items)) {
             array_push($menu_items, $menu);
         }
-        $code .= '<div data-menu="' . $menu . '" data-id="' . $plan['id'] . '"' . ($active_membership_id == $plan['id'] ? ' data-active-membership="true"' : '') . ($active_membership_id == $plan['id'] && $expired ? ' data-expired="true"' : '') . '>' . ($active_membership_id == $plan['id'] ? '<div class="active-membership-info">' . sb_('Active Membership') . ($expired ? ' ' . sb_('Expired') : '') . '</div>' : '') . '<h3>' . mb_strtoupper($plan['currency']) . ' ' . $plan['price'] . ' ' . $period_top . '</h3><h4>' . $plan['name'] . '</h4><p>' . $plan['quota'] . ' ' . sb_($membership_type_ma ? 'messages' : $membership_type) . ' ' . $period . ($membership_type_ma ? ('<br>' . ($plan['quota_agents'] == 9999 ? sb_('unlimited') : $plan['quota_agents']) . ' ' . sb_('agents')) : '') . '<br>' . cloud_embeddings_chars_limit($plan) . ' ' . sb_('characters to train the chatbot') . '</p></div>';
+        $code .= '<div data-menu="' . $menu . '" data-id="' . $plan['id'] . '"' . ($active_membership_id == $plan['id'] ? ' data-active-membership="true"' : '') . ($active_membership_id == $plan['id'] && $expired ? ' data-expired="true"' : '') . '>' . ($active_membership_id == $plan['id'] ? '<div class="active-membership-info">' . sb_('Active Membership') . ($expired ? ' ' . sb_('Expired') : '') . '</div>' : '') . '<h4>' . $plan['name'] . '</h4><h3>' . mb_strtoupper($plan['currency']) . ' ' . $plan['price'] . ' <span>' . $period_top . '</span></h3>
+        <ul>
+            <li>' . $plan['quota'] . ' ' . sb_($membership_type_ma ? 'messages' : $membership_type) . ' '. $period .' </li>
+            <li>' . ($membership_type_ma ? (($plan['quota_agents'] == 9999 ? sb_('unlimited') : $plan['quota_agents']) . ' ' . sb_('agents')) : '') . '</li>
+            <li>' . cloud_embeddings_chars_limit($plan) . ' ' . sb_('characters to train the chatbot') . '</li>
+        </ul><button type="button" class="label_blue mb-0">Manage Plan</button></div>';
     }
     $code .= '</div>';
     if (count($menu_items) > 1) {
@@ -339,14 +392,15 @@ function box_addons()
     $addons = sb_defined('CLOUD_ADDONS');
     if ($white_label_price || $addons) {
         $account = account();
-        $code = '<h2 class="addons-title">' . sb_('Add-ons') . '</h2><p>' . sb_('Add-ons are optional features with a fixed subscription cost.') . '</p><div id="addons" class="plans-box">';
+        // $code = '<h2 class="addons-title">' . sb_('Add-ons') . '</h2><p>' . sb_('Add-ons are optional features with a fixed subscription cost.') . '</p><div id="addons" class="plans-box">';
+        $code = '<h2 class="addons-title">' . sb_('Add-ons') . '</h2><div id="addons" class="plans-box">';
         if ($white_label_price) {
-            $code .= '<div class="sb-visible' . (membership_is_white_label($account['user_id']) ? ' sb-plan-active' : '') . '" id="purchase-white-label"><h3>' . strtoupper(membership_currency()) . ' ' . $white_label_price . ' ' . sb_('a year') . '</h3><h4>' . sb_('White Label') . '</h4><p>' . sb_('Remove our branding and logo from the chat widget.') . '</p></div>';
+            $code .= '<div class="sb-visible' . (membership_is_white_label($account['user_id']) ? ' sb-plan-active' : '') . '" id="purchase-white-label"><h4>' . sb_('White Label') . '</h4><h3>' . strtoupper(membership_currency()) . ' ' . $white_label_price . ' <span>' . sb_('a year') . '</span></h3><p>' . sb_('Remove our branding and logo from the chat widget.') . '</p></div>';
         }
         if ($addons) {
             for ($i = 0; $i < count($addons); $i++) {
                 $addon = $addons[$i];
-                $code .= '<div class="sb-visible sb-custom-addon" data-index="' . $i . '" data-id="' . sb_string_slug($addon['title']) . '"><h3>' . strtoupper(membership_currency()) . ' ' . $addon['price'] . '</h3><h4>' . sb_($addon['title']) . '</h4><p>' . sb_($addon['description']) . '</p></div>';
+                $code .= '<div class="sb-visible sb-custom-addon" data-index="' . $i . '" data-id="' . sb_string_slug($addon['title']) . '"><h4>' . sb_($addon['title']) . '</h4><h3>' . strtoupper(membership_currency()) . ' ' . $addon['price'] . '</h3><p>' . sb_($addon['description']) . '</p></div>';
             }
         }
         echo $code . '</div>';
@@ -406,7 +460,8 @@ function box_chart()
 {
     $appsumo = base64_decode(sb_isset($_GET, 'appsumo'));
     global $cloud_settings; ?>
-    <div class="sb-registration-box sb-cloud-box sb-admin-box sb-admin-box_new<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
+    <div
+        class="sb-registration-box sb-cloud-box sb-admin-box sb-admin-box_new<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
         <!-- <div class="sb-info"></div>
         <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
@@ -482,7 +537,7 @@ function box_chart()
                 <div class="col-md-6 top_left">
                     <div class="left_section">
                         <div class="logo-container">
-                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt="logo">
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
                             <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
                         </div>
                         <div class="laptop-image">
@@ -490,7 +545,8 @@ function box_chart()
                         </div>
                         <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
-                            Access your tickets, track progress, and connect with our support team — all in one place. Log in to get
+                            Access your tickets, track progress, and connect with our support team — all in one place. Log
+                            in to get
                             started.
                         </div>
                     </div>
@@ -504,28 +560,34 @@ function box_chart()
                             </p>
                             <div class="form-fields">
                                 <div class="field-container mb-3">
-                                    <div class="field-label"><label class="required-label" for="first_name">First Name</label></div>
+                                    <div class="field-label"><label class="required-label" for="first_name">First
+                                            Name</label></div>
                                     <div id="first_name" class="input-wrapper sb-input">
                                         <input type="text" placeholder="Enter first name" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="field-container mb-3">
-                                    <div class="field-label"><label class="required-label" for="first_name">Last Name</label></div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Last
+                                            Name</label></div>
                                     <div id="last_name" class="input-wrapper sb-input">
                                         <input type="text" placeholder="Enter last name" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="field-container mb-3">
-                                    <div class="field-label"><label class="required-label" for="first_name">Business email</label></div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Business
+                                            email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
                                         <input type="email" placeholder="Business email" class="form-input" />
                                     </div>
                                 </div>
                                 <div class="field-container mb-3">
-                                    <div class="field-label"><label class="required-label" for="first_name">Password</label></div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Password</label>
+                                    </div>
                                     <div id="password" class="input-wrapper sb-input">
-                                        <input type="password" placeholder="8 Characters or more" class="form-input" id="password-field-signup" />
-                                        <i class="far fa-eye" id="togglePasswordsignup" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                                        <input type="password" placeholder="8 Characters or more" class="form-input"
+                                            id="password-field-signup" />
+                                        <i class="far fa-eye" id="togglePasswordsignup"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -536,10 +598,13 @@ function box_chart()
                                     </div>
                                 </div>
                                 <div class="field-container">
-                                    <div class="field-label"><label class="required-label" for="first_name">Confirm Password</label></div>
+                                    <div class="field-label"><label class="required-label" for="first_name">Confirm
+                                            Password</label></div>
                                     <div id="password_2" class="input-wrapper sb-input">
-                                        <input type="password" placeholder="Enter confirm password" class="form-input" id="password-field-confirm" />
-                                        <i class="far fa-eye" id="togglePasswordconfirm" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                                        <input type="password" placeholder="Enter confirm password" class="form-input"
+                                            id="password-field-confirm" />
+                                        <i class="far fa-eye" id="togglePasswordconfirm"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -554,7 +619,8 @@ function box_chart()
                             <div class="auth-options mt-2">
                                 <label class="remember-me">
                                     <input type="checkbox" class="checkbox" checked style="margin-top:5px;" />
-                                    <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And Privacy Policy</span>
+                                    <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And
+                                        Privacy Policy</span>
                                 </label>
                             </div>
                             <button class="login-button btn-register">Sign Up</button>
@@ -575,8 +641,8 @@ function box_chart()
         </div>
     </div>
     <div class="sb-login-box sb-cloud-box sb-admin-box sb-admin-box_new<?php if (isset($_GET['login']))
-                                                                            echo ' active' ?>">
-        <!-- <div class="sb-info"></div>
+        echo ' active' ?>">
+            <!-- <div class="sb-info"></div>
         <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
@@ -621,14 +687,15 @@ function box_chart()
                 <div class="col-md-6 top_left">
                     <div class="left_section">
                         <div class="logo-container">
-                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt="logo">
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
                             <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
                         </div>
                         <div class="laptop-image">
                             <img src="../account/media/Group.png" alt="dash">
                         </div>
                         <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
-                        <div class="welcome-description">Effortless, AI-powered support. Track tickets, get updates, and resolve issues fast. Log in to begin.</div>
+                        <div class="welcome-description">Effortless, AI-powered support. Track tickets, get updates, and
+                            resolve issues fast. Log in to begin.</div>
                     </div>
                 </div>
                 <div class="col-md-6 top_right">
@@ -640,17 +707,22 @@ function box_chart()
                             </p>
                             <div class="form-fields">
                                 <div class="field-container mb-2">
-                                    <div class="field-label"><label class="required-label" for="email">Business Email</label></div>
+                                    <div class="field-label"><label class="required-label" for="email">Business
+                                            Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="name@work-email.com" id="businessemail" class="form-input" />
+                                        <input type="email" placeholder="name@work-email.com" id="businessemail"
+                                            class="form-input" />
                                     </div>
                                 </div>
                                 <div class="sb-errors-area m-0 text-end emailerror"></div>
                                 <div class="field-container mb-2">
-                                    <div class="field-label"> <label class="required-label" id="password-field" for="password-field">Password</label></div>
+                                    <div class="field-label"> <label class="required-label" id="password-field"
+                                            for="password-field">Password</label></div>
                                     <div id="password" class="input-wrapper sb-input">
-                                        <input type="password" placeholder="8 Characters or more"   minlength="8" class="form-input" id="passwordfield" />
-                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                                        <input type="password" placeholder="8 Characters or more" minlength="8"
+                                            class="form-input" id="passwordfield" />
+                                        <i class="far fa-eye" id="togglePassword"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -718,7 +790,7 @@ function box_chart()
                 <div class="col-md-6 top_left">
                     <div class="left_section">
                         <div class="logo-container">
-                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt="logo">
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
                             <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
                         </div>
                         <div class="laptop-image">
@@ -726,7 +798,8 @@ function box_chart()
                         </div>
                         <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
                         <div class="welcome-description">
-                            No worries — reset it here to regain access to your tickets, track progress, and reconnect with our support team.
+                            No worries — reset it here to regain access to your tickets, track progress, and reconnect with
+                            our support team.
                         </div>
                     </div>
                 </div>
@@ -739,9 +812,11 @@ function box_chart()
                             </p>
                             <div class="form-fields">
                                 <div class="field-container">
-                                    <div class="field-label"><label class="required-label" for="email">Business Email</label></div>
+                                    <div class="field-label"><label class="required-label" for="email">Business
+                                            Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="Business Email" id="email-forgot" class="form-input" />
+                                        <input type="email" placeholder="Business Email" id="email-forgot"
+                                            class="form-input" />
                                     </div>
                                 </div>
                             </div>
@@ -756,10 +831,10 @@ function box_chart()
         </div>
     </div>
     <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset']))
-                                                                        echo ' active' ?>">
-        <div class="sb-info"></div>
-        <div class="sb-top-bar">
-            <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
+        echo ' active' ?>">
+            <div class="sb-info"></div>
+            <div class="sb-top-bar">
+                <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
                 <?php sb_e('Reset password') ?>
             </div>
@@ -802,7 +877,8 @@ function box_chart()
                 <?php echo sb_isset($cloud_settings, 'referral-text', '') ?>
             </p>
             <div class="sb-input">
-                <input value="<?php echo CLOUD_URL . '?ref=' . sb_encryption('encrypt', account()['user_id']) ?>" type="text" readonly />
+                <input value="<?php echo CLOUD_URL . '?ref=' . sb_encryption('encrypt', account()['user_id']) ?>" type="text"
+                    readonly />
             </div>
             <hr class="space" />
             <h2 class="addons-title">
@@ -832,5 +908,5 @@ function box_chart()
                 <i class="sb-icon-check"></i><?php sb_e('Save changes') ?>
             </a>
         </div>
-<?php }
+    <?php }
 } ?>
