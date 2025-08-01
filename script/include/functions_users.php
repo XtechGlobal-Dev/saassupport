@@ -738,6 +738,20 @@ function sb_get_user($user_id, $extra = false) {
     return false;
 }
 
+function get_users_list($sorting = ['creation_time', 'DESC'])
+{
+    $sorting_field = $sorting[0];
+    $users = sb_db_get('select id, first_name, last_name, email FROM sb_users  where user_type="user" ORDER BY ' . sb_db_escape($sorting_field) . ' ' . sb_db_escape($sorting[1]),false);
+    $users_count = count($users);
+    if (!$users_count) {
+        return [];
+    }
+    else
+    {
+        return $users;
+    }
+}
+
 function sb_get_users($sorting = ['creation_time', 'DESC'], $user_types = [], $search = '', $pagination = 0, $extra = false, $user_ids = false, $department = false, $tag = false, $source = false) {
     $query = '';
     $query_search = '';
