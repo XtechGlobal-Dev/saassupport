@@ -1863,7 +1863,7 @@ function sb_ticket_edit_box()
             </div>
         </div>
         <div class="sb-main sb-scroll-area">
-            <div class="sb-title">
+            <!-- <div class="sb-title">
                 <?php sb_e("User IDs"); ?>
             </div>
             <div class="sb-setting sb-type-text sb-first">
@@ -1894,9 +1894,104 @@ function sb_ticket_edit_box()
                 </a>
                 <div></div>
                 <?php sb_docs_link("#direct-messages", "sb-btn-text"); ?>
+            </div> -->
+
+            <div class="mt-3">
+                <label class="form-label">Select Users (Max 10)</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="selectAll">
+                    <label class="form-check-label" for="selectAll">Select All</label>
+                </div>
+
+                <div id="selectedCount" class="text-muted small mb-2">0 / 10 selected</div>
+
+                <div class="border rounded p-2 bulk-users-wrapper" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Example Users -->
+                </div>
+                <input type="hidden" class="sb-setting sb-direct-message-users" id="selectedUserIds" name="selectedUserIds" value="">
+            </div>
+
+            <div class="mt-3 sb-title sb-direct-message-subject">
+                <label class="form-label"><?php sb_e("Subject"); ?></label>
+                <div class="sb-setting sb-type-text sb-direct-message-subject">
+                    <input type="text" placeholder="<?php sb_e(
+                        "Email subject"
+                    ); ?>" />
+                </div>
+            </div>
+            <div class="mt-3 sb-setting sb-type-textarea">
+                <label class="form-label">Message</label>
+                <div class="sb-setting sb-type-textarea">
+                    <textarea class="form-control" rows="3" placeholder="<?php sb_e("Write here your message..." ); ?>" required></textarea>
+                </div>
+            </div>
+            <div class="mt-3 text-end">
+                <a class="sb-send-direct-message sb-btn sb-icon">
+                    <i class="sb-icon-plane"></i>
+                    <?php sb_e("Send message now"); ?>
+                </a>
+                <div>
+                <?php sb_docs_link("#direct-messages", "sb-btn-text"); ?>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            const maxSelection = 10;
+
+            function updateSelected() {
+                const checked = $('.user-checkbox:checked');
+                const count = checked.length;
+
+                console.log(count);
+
+                $('#selectedCount').text(`${count} / ${maxSelection} selected`);
+
+                // Update hidden field with selected IDs
+                const ids = checked.map(function () {
+                    return $(this).val();
+                }).get().join(',');
+
+                $('#selectedUserIds').val(ids);
+
+                // Update select all checkbox state
+               // $('#selectAll').prop('checked', $('.user-checkbox').length === count);
+            }
+
+            $('.bulk-users-wrapper').on('change', '.user-checkbox',function () {
+                const checkedCount = $('.user-checkbox:checked').length;
+
+                if (checkedCount > maxSelection) {
+                    this.checked = false;
+                    alert(`You can select up to ${maxSelection} users.`);
+                    return;
+                }
+
+                updateSelected();
+            });
+
+            $('#selectAll').on('change', function () {
+                if (this.checked) {
+                    let checkedCount = $('.user-checkbox:checked').length;
+
+                    $('.user-checkbox').each(function () {
+                        if (!$(this).prop('checked') && checkedCount < maxSelection) {
+                            $(this).prop('checked', true);
+                            checkedCount++;
+                        }
+                    });
+                } else {
+                    // Allow unchecking all regardless of count
+                    $('.user-checkbox').prop('checked', false);
+                }
+
+                updateSelected();
+            });
+
+            updateSelected(); // Initialize count on load
+        });
+        </script>
     <?php
 } ?>
 <?php function sb_routing_select($exclude_id = false)

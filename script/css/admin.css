@@ -6936,6 +6936,11 @@ td.sb-offline:after {
   flex-direction: column;
   gap: 7px;
 }
+.sb-board .sb-user-details .sb-profile-list ul li i {
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+}
 .sb-board .sb-user-details .sb-profile-list [data-id=telegram_bcid],
 .sb-board .sb-user-details .sb-profile-list [data-id=token],
 .sb-board .sb-user-details .sb-profile-list [data-id=woocommerce_session_key],
@@ -7215,6 +7220,10 @@ td.sb-offline:after {
 }
 .sb-area-users .sb-select p {
   padding-right: 15px;
+}
+
+.sb-setting.sb-type-textarea .codex-editor .ce-toolbar__actions {
+  position: unset;
 }
 
 .container {
@@ -8371,6 +8380,18 @@ td.sb-offline:after {
 
 .sb-direct-message-subject:not(.sb-active) {
   display: none;
+}
+
+.sb-content-articles h2 {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+.sb-content-articles .sb-setting {
+  padding: 0px 0px 15px 0px !important;
+}
+
+.sb-area-articles .sb-setting + h2 {
+  margin-top: 12px !important;
 }
 
 /*
@@ -12292,6 +12313,7 @@ a.sb-btn-white.sb-loading:hover:before,
 div ul.sb-menu {
   right: 30px;
   top: 60px;
+  z-index: 10000;
 }
 
 .sb-select ul {
@@ -12382,7 +12404,7 @@ li.menu_head:hover {
   background: #ffffff;
   z-index: 999;
   width: 100%;
-  padding: 5px 5px !important;
+  padding: 5px 5px 10px !important;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -12402,15 +12424,40 @@ li.menu_head:hover {
   color: #475367;
 }
 .main-content .settings-card .settings-tab {
-  border: 1px solid rgb(209, 213, 219);
+  border: 1px solid rgb(209, 213, 219) !important;
   border-radius: 8px;
-  padding: 0px 15px;
+  padding: 15px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.main-content .settings-card .settings-tab .settings-head p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #0A0A0A;
+  margin-bottom: 8px;
+}
+.main-content .settings-card .settings-tab .settings-head p svg {
+  width: 18px;
+  height: 18px;
+}
+.main-content .settings-card .settings-tab .settings-head p svg path {
+  stroke: #40404e;
+}
+.main-content .settings-card .settings-tab .settings-head p:nth-child(2) {
+  font-size: 14px;
+  color: #717182;
 }
 .main-content .settings-card .settings-tab .sb-repeater .repeater-item input {
   width: fit-content;
   min-width: fit-content;
 }
 .main-content .settings-card .settings-tab .sb-setting {
+  border: 1px solid rgba(0, 0, 0, 0.1019607843) !important;
+  padding: 20px !important;
+  border-radius: 8px;
   gap: 20px 0;
 }
 .main-content .settings-card .settings-tab .sb-setting.sb-type-upload-image .input .image {
@@ -12851,7 +12898,7 @@ div#messaging-channels {
 
 .my-tabs {
   margin-bottom: 20px;
-  padding: 6px 12px;
+  padding: 6px 8px;
   background: #ECECF0;
   border-radius: 40px;
   width: fit-content;
@@ -12874,6 +12921,7 @@ div#messaging-channels {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 6px 15px;
 }
 .my-tabs .my-tab.active {
   background: none;
@@ -12883,11 +12931,11 @@ div#messaging-channels {
 .my-tabs .tab-slider {
   background: #fff !important;
   border-radius: 40px;
-  height: 39px;
+  height: 31px;
   position: absolute;
   z-index: 0;
   display: inline-block;
-  transition: all 0.4s linear;
+  transition: all 0.1s linear;
 }
 
 @media (min-width: 465px) {
