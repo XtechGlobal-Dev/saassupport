@@ -4176,6 +4176,15 @@ td.sb-offline:after {
             }
         }
     }
+    .sb-scroll-area {
+            ul {
+                li {
+                    &:hover {
+                        background: #EEF2FF !important;
+                    }
+                }
+            }
+        }
 }
 
 .sb-area-dashboard {
