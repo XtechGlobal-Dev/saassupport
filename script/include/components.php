@@ -2562,7 +2562,7 @@ function sb_component_admin()
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
                             <li>
-                                <a id="sb-accout"><i>
+                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership"><i>
                                         <div class="icon-wrapper">
                                             <span class="icon-tooltip" data-tooltip="Inbox">
                                                 <svg width="25" height="25" viewBox="0 0 26 27" fill="none"
