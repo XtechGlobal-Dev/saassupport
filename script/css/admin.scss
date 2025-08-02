@@ -640,6 +640,7 @@ td.sb-offline:after {
         .sb-btn {
             display: inline-block;
             margin-top: 15px;
+            background: #0069f0;
         }
     }
 }
@@ -1776,6 +1777,10 @@ td.sb-offline:after {
             display: none;
         }
     }
+}
+
+.sb-save-articles.sb-btn, .sb-main main .sb-btn {
+    background: #0069f0;
 }
 
 .sb-popup.sb-replies .sb-replies-list ul {
@@ -11907,7 +11912,7 @@ div#messaging-channels {
                 div {
                     .sb-btn.sb-icon {
                         text-indent: unset;
-                        background: #1B7EB4;
+                        background: #0069f0;
 
                         i {
                             color: #fff;
