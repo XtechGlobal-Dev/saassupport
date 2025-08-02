@@ -7480,6 +7480,13 @@ td.sb-offline:after {
   width: 100%;
   padding: 0 !important;
   border: 0 !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-chart .chart-cnt.mt-3 canvas {
+  max-height: 100%;
 }
 .sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-sidebar {
   background: #fff;
