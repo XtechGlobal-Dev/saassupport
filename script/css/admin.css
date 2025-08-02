@@ -4834,9 +4834,9 @@ td.sb-offline:after {
   align-items: center;
 }
 .sb-profile img {
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
+  width: 45px;
+  height: 45px;
+  min-width: 45px;
   border-radius: 50%;
 }
 .sb-profile > span {
@@ -6457,8 +6457,8 @@ td.sb-offline:after {
   padding-left: 58px;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile img {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   transform: none;
   top: 0;
   position: absolute;
@@ -11537,6 +11537,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .sb-list .sb-right .sb-reply-message {
   color: #fff !important;
   border: 0 !important;
+  background: none;
 }
 
 .daterangepicker .calendar-table .next span,
