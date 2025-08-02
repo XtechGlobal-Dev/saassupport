@@ -6446,9 +6446,6 @@ td.sb-offline:after {
   z-index: 2;
   height: 100%;
 }
-.sb-board > .sb-admin-list > .sb-scroll-area li:last-child:after {
-  display: none;
-}
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile {
   align-items: flex-start;
   padding-left: 58px;
