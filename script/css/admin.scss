@@ -4217,6 +4217,10 @@ td.sb-offline:after {
             border-radius: 8px;
             ul {
                 li {
+                    display: flex;
+                    align-items: center;
+                    gap: 3px;
+                    line-height: 35px;
                     &:hover {
                         color: #155cfd !important;
                     }

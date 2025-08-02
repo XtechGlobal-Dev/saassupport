@@ -7452,6 +7452,12 @@ td.sb-offline:after {
   padding: 20px 20px;
   border-radius: 8px;
 }
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 35px;
+}
 .sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li:hover {
   color: #155cfd !important;
 }
