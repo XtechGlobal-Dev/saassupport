@@ -5259,7 +5259,7 @@ td.sb-offline:after {
 }
 
 .sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
-  background-color: #2D9CDB !important;
+  background-color: #155cfd !important;
 }
 
 .sb-player {
@@ -7435,6 +7435,64 @@ td.sb-offline:after {
 
 .sb-setting.sb-type-textarea .codex-editor .ce-toolbar__actions {
   position: unset;
+}
+
+.sb-area-reports.sb-area-reports_new .sb-top-bar {
+  border-bottom: 0;
+}
+.sb-area-reports.sb-area-reports_new .sb-top-bar .sb-setting.sb-type-text {
+  border-bottom: 0;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab {
+  gap: 20px;
+  padding: 0px 20px 10px;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only {
+  background: #fff;
+  padding: 20px 20px;
+  border-radius: 8px;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 35px;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li:hover {
+  color: #155cfd !important;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li img {
+  width: 16px;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area {
+  gap: 20px;
+  padding: 0 !important;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-chart {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 20px;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-chart .chart-cnt.mt-3 {
+  margin-top: 0 !important;
+  width: 100%;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-chart .chart-cnt.mt-3 canvas {
+  max-height: 100%;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-sidebar {
+  background: #fff;
+  border-radius: 8px;
+  margin: 0 !important;
+  padding: 20px 20px;
 }
 
 .container {
@@ -12910,7 +12968,7 @@ li.menu_head:hover {
 }
 
 .sb-tab.sb-inner-tab .clr-change {
-  background-color: #2d9cdb;
+  background-color: #155cfd;
   color: #fff;
   border: unset;
   border-radius: 7px;
@@ -14091,7 +14149,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: fit-content;
     height: fit-content;
     overflow: unset;
-    background: #2D9CDB;
+    background: #155cfd;
     color: #fff;
   }
   .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button div a i {

@@ -5439,7 +5439,7 @@ function sb_component_admin()
                                     <?php sb_e("Reports"); ?>
                                 </h2> -->
                             </div>
-                            <div>
+                            <div class="top-bar-search">
                                 <div class="sb-setting sb-type-text">
                                     <input id="sb-date-picker" placeholder="00/00/0000 - 00/00/0000" type="text" />
                                 </div>
