@@ -7186,6 +7186,25 @@ td.sb-offline:after {
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p::after {
   color: #fff;
 }
+.sb-board .sb-user-details .sb-inline-departments #conversation-department {
+  display: block;
+}
+.sb-board .sb-user-details .sb-inline-departments #conversation-department p {
+  position: relative !important;
+  padding-right: 15px;
+}
+.sb-board .sb-user-details .sb-inline-departments #conversation-department p::after {
+  line-height: 47px;
+  right: 15px;
+}
+.sb-board .sb-user-details .sb-inline-departments #conversation-department p span {
+  top: 40%;
+  right: 30px;
+}
+.sb-board .sb-user-details .sb-inline-departments #conversation-department ul li:hover {
+  background: #1653FD !important;
+  color: #fff !important;
+}
 .sb-board .sb-no-conversation-message {
   position: absolute;
   left: 0;
@@ -8319,7 +8338,6 @@ td.sb-offline:after {
   top: 0;
   margin-left: 0;
   margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
   overflow: hidden;
   overflow-y: scroll;
 }
