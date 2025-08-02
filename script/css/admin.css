@@ -6358,7 +6358,7 @@ td.sb-offline:after {
   z-index: 9;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area {
-  height: calc(100vh - 238px);
+  height: calc(100vh - 227px);
   padding: 0;
   background: #fff;
   box-shadow: 0px 0px 8.4px 0px rgba(0, 0, 0, 0.2509803922);
@@ -6612,6 +6612,7 @@ td.sb-offline:after {
   max-width: calc(100% - 275px);
   background: #fff !important;
   border-radius: 14px;
+  padding: 8px 12px;
 }
 .sb-board .sb-conversation .sb-list > div .sb-message-attachments a {
   color: #fff !important;
@@ -7597,7 +7598,14 @@ td.sb-offline:after {
   transition-delay: 0.2s;
 }
 
-.sb-area-conversations .sb-admin-list.sb-departments-show .sb-scroll-area ul li:hover {
+.sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
+  background: #EEF2FF !important;
+}
+
+.sb-main main .sb-area-conversations .sb-admin-list.sb-departments-show .sb-scroll-area ul li:hover {
+  background: #EEF2FF !important;
+}
+.sb-main main .sb-area-conversations .sb-scroll-area ul li:hover {
   background: #EEF2FF !important;
 }
 
@@ -9171,6 +9179,8 @@ a.sb-btn-white,
   justify-content: center;
   gap: 8px;
   width: fit-content;
+  min-width: 140px;
+  background: #0069f0;
 }
 .sb-area-settings .sb-tab .sb-btn.sb-icon,
 .sb-btn-white.sb-icon,
@@ -9280,6 +9290,18 @@ a.sb-btn-white.sb-loading:hover:before,
   width: 70px;
   height: 70px;
   max-height: 70px;
+}
+
+#ticketTable_wrapper {
+  min-height: calc(100vh - 240px);
+}
+
+ul.status-list.dropdown-menu {
+  max-height: 415px;
+  overflow-y: scroll;
+}
+ul.status-list.dropdown-menu::-webkit-scrollbar {
+  width: 0px;
 }
 
 [data-automation-type=more] .sb-automation-values > h2 + div + h2,
@@ -12995,7 +13017,7 @@ div#messaging-channels {
   overflow-x: scroll;
 }
 .table-responsive .sb-scroll-area.scroll-table::-webkit-scrollbar {
-  width: 1px;
+  width: 0px;
   height: 0;
 }
 
