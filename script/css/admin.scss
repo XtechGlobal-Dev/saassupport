@@ -2744,6 +2744,7 @@ td.sb-offline:after {
 
         .sb-flex {
             justify-content: flex-end;
+            gap: 8px;
         }
     }
 
@@ -4044,6 +4045,67 @@ td.sb-offline:after {
                     }
                 }
             }
+        }
+    }
+}
+
+#customerTable_wrapper,
+#ticketTable_wrapper {
+    .row {
+        align-items: center;
+        justify-content: space-between;
+
+        .col-md-6 {
+            width: fit-content !important;
+
+            input {
+                box-shadow: none;
+                border: 0;
+            }
+
+            &:nth-child(2) {
+                order: 1;
+            }
+
+            &:nth-child(1) {
+                order: 2;
+            }
+
+            .dataTables_length {
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+        }
+
+        .col-md-5 {
+            width: fit-content !important;
+            order: 2;
+
+            input {
+                box-shadow: none;
+                border: 0;
+            }
+
+            .dataTables_info {
+                padding-top: 0;
+            }
+        }
+
+        .col-md-7 {
+            width: fit-content !important;
+            order: 1;
+
+            input {
+                box-shadow: none;
+                border: 0;
+            }
+        }
+
+        &.dt-row {
+            margin-block: 10px;
         }
     }
 }
@@ -11973,9 +12035,11 @@ main {
         .new_table.sb-area-tickets-dash {
             .sb-scroll-area {
                 overflow-x: scroll;
+
                 &::-webkit-scrollbar {
                     height: 0;
                 }
+
                 table {
                     table-layout: unset;
                 }
@@ -12285,13 +12349,15 @@ main {
 
                 }
             }
+
             .recent {
                 .recent-messages {
-                        overflow-x: scroll;
-                        &::-webkit-scrollbar {
-                            height: 0;
-                        }
-                    
+                    overflow-x: scroll;
+
+                    &::-webkit-scrollbar {
+                        height: 0;
+                    }
+
                 }
             }
         }
@@ -12433,9 +12499,11 @@ main {
         .new_table.sb-area-tickets-dash {
             .sb-scroll-area {
                 overflow-x: scroll;
+
                 &::-webkit-scrollbar {
                     height: 0;
                 }
+
                 table {
                     table-layout: unset;
                 }

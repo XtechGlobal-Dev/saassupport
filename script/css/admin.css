@@ -6284,6 +6284,7 @@ td.sb-offline:after {
 }
 .sb-board > div > .sb-top .sb-flex {
   justify-content: flex-end;
+  gap: 8px;
 }
 .sb-board > .sb-admin-list {
   background: #fff;
@@ -7318,6 +7319,63 @@ td.sb-offline:after {
 }
 #customerTable thead tr th.sb-active::after {
   content: none;
+}
+
+#customerTable_wrapper .row,
+#ticketTable_wrapper .row {
+  align-items: center;
+  justify-content: space-between;
+}
+#customerTable_wrapper .row .col-md-6,
+#ticketTable_wrapper .row .col-md-6 {
+  width: fit-content !important;
+}
+#customerTable_wrapper .row .col-md-6 input,
+#ticketTable_wrapper .row .col-md-6 input {
+  box-shadow: none;
+  border: 0;
+}
+#customerTable_wrapper .row .col-md-6:nth-child(2),
+#ticketTable_wrapper .row .col-md-6:nth-child(2) {
+  order: 1;
+}
+#customerTable_wrapper .row .col-md-6:nth-child(1),
+#ticketTable_wrapper .row .col-md-6:nth-child(1) {
+  order: 2;
+}
+#customerTable_wrapper .row .col-md-6 .dataTables_length label,
+#ticketTable_wrapper .row .col-md-6 .dataTables_length label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#customerTable_wrapper .row .col-md-5,
+#ticketTable_wrapper .row .col-md-5 {
+  width: fit-content !important;
+  order: 2;
+}
+#customerTable_wrapper .row .col-md-5 input,
+#ticketTable_wrapper .row .col-md-5 input {
+  box-shadow: none;
+  border: 0;
+}
+#customerTable_wrapper .row .col-md-5 .dataTables_info,
+#ticketTable_wrapper .row .col-md-5 .dataTables_info {
+  padding-top: 0;
+}
+#customerTable_wrapper .row .col-md-7,
+#ticketTable_wrapper .row .col-md-7 {
+  width: fit-content !important;
+  order: 1;
+}
+#customerTable_wrapper .row .col-md-7 input,
+#ticketTable_wrapper .row .col-md-7 input {
+  box-shadow: none;
+  border: 0;
+}
+#customerTable_wrapper .row.dt-row,
+#ticketTable_wrapper .row.dt-row {
+  margin-block: 10px;
 }
 
 .sb-account-box .sb-nav {
