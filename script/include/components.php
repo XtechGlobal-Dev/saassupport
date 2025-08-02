@@ -1959,8 +1959,6 @@ function sb_ticket_edit_box()
                 const checked = $('.user-checkbox:checked');
                 const count = checked.length;
 
-                console.log(count);
-
                 $('#selectedCount').text(`${count} / ${maxSelection} selected`);
 
                 // Update hidden field with selected IDs
@@ -1984,6 +1982,11 @@ function sb_ticket_edit_box()
                 }
 
                 updateSelected();
+
+                if(checkedCount)
+                    $('.bulk-users-wrapper').removeClass('sb-error');
+                else
+                    $('.bulk-users-wrapper').addClass('sb-error');
             });
 
             $('#selectAll').on('change', function () {
@@ -1996,6 +1999,12 @@ function sb_ticket_edit_box()
                             checkedCount++;
                         }
                     });
+
+                    if(checkedCount)
+                        $('.bulk-users-wrapper').removeClass('sb-error');
+                    else
+                        $('.bulk-users-wrapper').addClass('sb-error');
+
                 } else {
                     // Allow unchecking all regardless of count
                     $('.user-checkbox').prop('checked', false);
