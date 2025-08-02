@@ -2562,10 +2562,10 @@ function sb_component_admin()
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
                             <li>
-                                <a id="sb-accout"><i>
+                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership"><i>
                                         <div class="icon-wrapper">
                                             <span class="icon-tooltip" data-tooltip="Inbox">
-                                                <svg width="26" height="27" viewBox="0 0 26 27" fill="none"
+                                                <svg width="25" height="25" viewBox="0 0 26 27" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M16.5984 9.73794C16.5984 7.74972 14.9867 6.13794 12.9984 6.13794C11.0102 6.13794 9.39844 7.74972 9.39844 9.73794C9.39844 11.7262 11.0102 13.3379 12.9984 13.3379C14.9867 13.3379 16.5984 11.7262 16.5984 9.73794Z"
