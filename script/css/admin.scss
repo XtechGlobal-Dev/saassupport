@@ -2379,12 +2379,12 @@ td.sb-offline:after {
                 margin-bottom: 8px;
                 padding-top: 0;
                 position: relative;
-                min-height: 70px;
+                min-height: 65px;
 
                 &::before {
                     position: absolute;
                     bottom: 0;
-                    left: -26px;
+                    left: -24px;
                     right: 0;
                     content: "";
                     height: 1.3px;
@@ -3613,8 +3613,8 @@ td.sb-offline:after {
 
             img,
             .user-initials {
-                min-width: 50px;
-                min-height: 50px;
+                min-width: 45px;
+                min-height: 45px;
             }
 
             .user-initials {
@@ -4215,8 +4215,8 @@ td.sb-offline:after {
                     border-bottom: 1px solid #d7d7d7;
 
                     >img {
-                        height: 50px;
-                        width: 50px;
+                        height: 45px;
+                        width: 45px;
                         border-radius: 50%;
                     }
                 }
@@ -4360,8 +4360,8 @@ td.sb-offline:after {
                         margin-bottom: 16px;
 
                         .metric-icon {
-                            width: 50px;
-                            height: 50px;
+                            width: 45px;
+                            height: 45px;
                             border-radius: 50%;
                             display: flex;
                             align-items: center;
@@ -4708,10 +4708,10 @@ td.sb-offline:after {
                     padding: 1rem 1.5rem 1.5rem !important;
 
                     .avatar {
-                        width: 50px;
-                        height: 50px;
-                        min-width: 50px;
-                        min-height: 50px;
+                        width: 45px;
+                        height: 45px;
+                        min-width: 45px;
+                        min-height: 45px;
                         border-radius: 50%;
                         object-fit: cover;
                     }
@@ -6277,6 +6277,11 @@ td.sb-offline:after {
 .sb-type-select.sb-loading select {
     visibility: hidden;
     transition: none;
+}
+
+span.user-initials {
+    width: 45px;
+    height: 45px;
 }
 
 .sb-area-settings .sb-tab .sb-btn,
@@ -11189,15 +11194,15 @@ div#messaging-channels {
             background: #F3F4F6;
             border: 1px solid #E5E7EB;
             width: fit-content;
-            padding: 4px;
-            border-radius: 8px;
+            padding: 4.5px;
+            border-radius: 10px;
 
             li {
-                padding: 3px 20px;
+                padding: 3px 28px;
 
                 &.sb-active {
                     background: #fff;
-                    border-radius: 8px;
+                    border-radius: 10px;
                     color: #000;
                     border-bottom: 0;
                 }
