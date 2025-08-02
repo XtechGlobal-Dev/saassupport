@@ -13408,6 +13408,16 @@ div#messaging-channels {
   margin-top: 50px;
 }
 
+main .sb-area-users .sb-scroll-area .sb-table-users thead th:nth-child(1) {
+  display: none !important;
+}
+main .sb-area-users .sb-scroll-area .sb-table-users thead th:last-child {
+  color: rgb(36, 39, 42) !important;
+}
+main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
+  display: none !important;
+}
+
 @media (max-width: 1600px) {
   .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
     max-width: 200px;
@@ -13931,11 +13941,14 @@ div#messaging-channels {
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon {
     text-indent: unset;
     background: #0069f0;
+    height: fit-content;
+    width: fit-content;
+    font-size: 12px;
   }
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon i {
     color: #fff;
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 13px;
+    line-height: 13px;
   }
   .toggle-btn {
     display: block;
@@ -14081,6 +14094,9 @@ div#messaging-channels {
   main .sb-area-users .sb-scroll-area .sb-table-users thead th:not(:first-child) {
     display: revert;
   }
+  main .sb-area-users .sb-scroll-area .sb-table-users thead th:nth-child(1) {
+    display: none !important;
+  }
   main .sb-area-users .sb-scroll-area .sb-table-users tbody {
     display: revert !important;
   }
@@ -14089,6 +14105,9 @@ div#messaging-channels {
   }
   main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:not(.sb-td-profile):not(:first-child) {
     display: revert;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
+    display: none !important;
   }
 }
 
