@@ -7955,7 +7955,7 @@ td.sb-offline:after {
   text-align: right;
 }
 .sb-area-dashboard main .new_container .main-charts .bg-white {
-  padding: 1.5rem 1.5rem 0.5rem;
+  padding: 1.1rem 1.5rem 0.9rem;
   border-radius: 8px 8px 0 0;
   border-bottom: 0.9px solid #F0F1F5;
   box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
@@ -13238,6 +13238,24 @@ div#messaging-channels {
   font-size: 26px;
   font-weight: 700;
   color: #4ADE80;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box .check {
+  width: 65px !important;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #22C55E;
+  position: relative;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box .check::before {
+  content: "";
+  transform: rotate(45deg);
+  height: 24px;
+  width: 12px;
+  border-bottom: 4px solid #fff;
+  border-right: 4px solid #fff;
 }
 #tab-membership .plans-box-menu ul {
   background: #F3F4F6;
