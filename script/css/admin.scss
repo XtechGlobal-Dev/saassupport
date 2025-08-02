@@ -876,6 +876,14 @@ td.sb-offline:after {
             width: 0px;
         }
     }
+
+    table {
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+    }
 }
 
 .sb_table_new {
@@ -1779,7 +1787,8 @@ td.sb-offline:after {
     }
 }
 
-.sb-save-articles.sb-btn, .sb-main main .sb-btn {
+.sb-save-articles.sb-btn,
+.sb-main main .sb-btn {
     background: #0069f0;
 }
 
@@ -2935,9 +2944,7 @@ td.sb-offline:after {
                     height: 100%;
                 }
 
-                &:last-child:after {
-                    display: none;
-                }
+
 
                 .sb-profile {
                     align-items: flex-start;
@@ -3995,6 +4002,60 @@ td.sb-offline:after {
     }
 }
 
+#customerTable {
+    thead {
+        tr {
+            th {
+                &.sb-active {
+                    border-bottom: 0;
+
+                    &::after {
+                        content: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sb-account-box {
+    .sb-nav {
+        min-width: 250px;
+
+        ul.ul_account {
+            padding-inline: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            li {
+                margin-bottom: 0 !important;
+                padding: 8px 18px;
+                font-size: 14px !important;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                &.sb-active,
+                &:hover {
+                    background: #2563EB;
+                    color: #fff !important;
+
+                    svg {
+                        path {
+                            fill: #fff !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 .sb-area-users {
     .sb-top-bar {
@@ -4006,8 +4067,19 @@ td.sb-offline:after {
                 align-items: center;
                 justify-content: center;
 
+                svg {
+                    transition: all .4s ease-in-out;
+                }
+
                 i {
                     font-size: 15px;
+                }
+
+                &.sb-active {
+                    svg {
+                        transition: all .4s ease-in-out;
+                        transform: rotate(180deg);
+                    }
                 }
             }
         }
@@ -4582,7 +4654,7 @@ td.sb-offline:after {
                 }
 
                 .bg-white {
-                    padding: 1.5rem 1.5rem 0.5rem;
+                    padding: 1.1rem 1.5rem 0.9rem;
                     border-radius: 8px 8px 0 0;
                     border-bottom: 0.9px solid #F0F1F5;
                     box-shadow: 0px 1.8px 3.6px 0px #00000013;
@@ -4957,8 +5029,7 @@ td.sb-offline:after {
     .sb-scroll-area {
         overflow: hidden;
         overflow-y: scroll;
-        margin: 15px 0 0 15px;
-        padding-right: 15px;
+        padding: 15px 15px 0;
         height: calc(100vh - 85px);
 
         &:hover+.sb-scroll-bar {
@@ -4976,13 +5047,35 @@ td.sb-offline:after {
         >div {
             left: auto;
             right: 0;
-            top: 56px;
+            top: 27px;
             width: auto;
             padding: 15px;
             z-index: 5;
 
             .sb-select:last-child {
                 margin-right: 0;
+            }
+
+            .sb-select {
+                margin-left: 0;
+
+                p {
+                    max-width: fit-content;
+                }
+
+                ul {
+                    margin-top: 0 !important;
+                    top: 0;
+                    margin-left: 0;
+                    margin-bottom: 0 !important;
+                    padding-bottom: 0 !important;
+                    overflow: hidden;
+                    overflow-y: scroll;
+
+                    &::-webkit-scrollbar {
+                        width: 0;
+                    }
+                }
             }
         }
 
@@ -10383,6 +10476,13 @@ li.menu_head:hover {
     span {
         padding-bottom: 6px;
     }
+
+    .tag-dot {
+        min-width: 10px;
+        min-height: 10px;
+        max-height: 10px;
+        padding-bottom: 0;
+    }
 }
 
 .sb-scroll-area,
@@ -10796,6 +10896,7 @@ div#messaging-channels {
 
 .sb-area-users {
     .sb-scroll-area {
+        overflow: hidden;
         overflow-x: scroll;
     }
 }
@@ -10876,6 +10977,11 @@ div#messaging-channels {
                         }
                     }
                 }
+            }
+
+            &.sb-error {
+                border: 1px solid rgb(202, 52, 52) !important;
+                box-shadow: 0 0 5px rgba(202, 52, 52, 0.25);
             }
         }
     }
@@ -10982,6 +11088,26 @@ div#messaging-channels {
                                 font-weight: 700;
                                 color: #4ADE80;
                             }
+                        }
+                    }
+
+                    .check {
+                        width: 65px !important;
+                        height: 65px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background: #22C55E;
+                        position: relative;
+
+                        &::before {
+                            content: '';
+                            transform: rotate(45deg);
+                            height: 24px;
+                            width: 12px;
+                            border-bottom: 4px solid #fff;
+                            border-right: 4px solid #fff;
                         }
                     }
                 }
@@ -12107,6 +12233,55 @@ div#messaging-channels {
                     }
                 }
             }
+        }
+    }
+
+    main {
+
+
+        .sb-area-users {
+            display: revert !important;
+
+            .sb-scroll-area {
+                &::-webkit-scrollbar {
+                    height: 0;
+                }
+
+                .sb-table-users {
+                    display: revert !important;
+
+                    tr {
+                        display: revert !important;
+                    }
+
+                    thead {
+                        display: revert;
+
+                        th {
+                            display: revert !important;
+
+                            &:not(:first-child) {
+                                display: revert;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        display: revert !important;
+
+                        tr {
+                            float: none;
+
+                            td {
+                                &:not(.sb-td-profile):not(:first-child) {
+                                    display: revert;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

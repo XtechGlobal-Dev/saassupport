@@ -4786,6 +4786,11 @@ td.sb-offline:after {
 .new_table .sb-scroll-area::-webkit-scrollbar {
   width: 0px;
 }
+.new_table table thead {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
 
 .sb_table_new thead {
   background: #F5F6FA;
@@ -5530,7 +5535,8 @@ td.sb-offline:after {
   display: none;
 }
 
-.sb-save-articles.sb-btn, .sb-main main .sb-btn {
+.sb-save-articles.sb-btn,
+.sb-main main .sb-btn {
   background: #0069f0;
 }
 
@@ -6446,9 +6452,6 @@ td.sb-offline:after {
   z-index: 2;
   height: 100%;
 }
-.sb-board > .sb-admin-list > .sb-scroll-area li:last-child:after {
-  display: none;
-}
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile {
   align-items: flex-start;
   padding-left: 58px;
@@ -7291,6 +7294,42 @@ td.sb-offline:after {
   background: none;
 }
 
+#customerTable thead tr th.sb-active {
+  border-bottom: 0;
+}
+#customerTable thead tr th.sb-active::after {
+  content: none;
+}
+
+.sb-account-box .sb-nav {
+  min-width: 250px;
+}
+.sb-account-box .sb-nav ul.ul_account {
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sb-account-box .sb-nav ul.ul_account li {
+  margin-bottom: 0 !important;
+  padding: 8px 18px;
+  font-size: 14px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sb-account-box .sb-nav ul.ul_account li svg {
+  width: 20px;
+  height: 20px;
+}
+.sb-account-box .sb-nav ul.ul_account li.sb-active, .sb-account-box .sb-nav ul.ul_account li:hover {
+  background: #2563EB;
+  color: #fff !important;
+}
+.sb-account-box .sb-nav ul.ul_account li.sb-active svg path, .sb-account-box .sb-nav ul.ul_account li:hover svg path {
+  fill: #fff !important;
+}
+
 .sb-area-users .sb-top-bar div .sb-filter-btn {
   width: 38px;
   height: 22px;
@@ -7298,8 +7337,15 @@ td.sb-offline:after {
   align-items: center;
   justify-content: center;
 }
+.sb-area-users .sb-top-bar div .sb-filter-btn svg {
+  transition: all 0.4s ease-in-out;
+}
 .sb-area-users .sb-top-bar div .sb-filter-btn i {
   font-size: 15px;
+}
+.sb-area-users .sb-top-bar div .sb-filter-btn.sb-active svg {
+  transition: all 0.4s ease-in-out;
+  transform: rotate(180deg);
 }
 .sb-area-users .sb-filter-btn.sb-active div {
   align-items: center;
@@ -7916,7 +7962,7 @@ td.sb-offline:after {
   text-align: right;
 }
 .sb-area-dashboard main .new_container .main-charts .bg-white {
-  padding: 1.5rem 1.5rem 0.5rem;
+  padding: 1.1rem 1.5rem 0.9rem;
   border-radius: 8px 8px 0 0;
   border-bottom: 0.9px solid #F0F1F5;
   box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.0745098039);
@@ -8240,8 +8286,7 @@ td.sb-offline:after {
 .sb-area-users .sb-scroll-area {
   overflow: hidden;
   overflow-y: scroll;
-  margin: 15px 0 0 15px;
-  padding-right: 15px;
+  padding: 15px 15px 0;
   height: calc(100vh - 85px);
 }
 .sb-area-users .sb-scroll-area:hover + .sb-scroll-bar {
@@ -8255,13 +8300,31 @@ td.sb-offline:after {
 .sb-area-users .sb-filter-btn > div {
   left: auto;
   right: 0;
-  top: 56px;
+  top: 27px;
   width: auto;
   padding: 15px;
   z-index: 5;
 }
 .sb-area-users .sb-filter-btn > div .sb-select:last-child {
   margin-right: 0;
+}
+.sb-area-users .sb-filter-btn > div .sb-select {
+  margin-left: 0;
+}
+.sb-area-users .sb-filter-btn > div .sb-select p {
+  max-width: fit-content;
+}
+.sb-area-users .sb-filter-btn > div .sb-select ul {
+  margin-top: 0 !important;
+  top: 0;
+  margin-left: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.sb-area-users .sb-filter-btn > div .sb-select ul::-webkit-scrollbar {
+  width: 0;
 }
 .sb-area-users .sb-filter-btn.sb-active {
   position: relative;
@@ -12714,6 +12777,12 @@ li.menu_head:hover {
 #tags-div span {
   padding-bottom: 6px;
 }
+#tags-div .tag-dot {
+  min-width: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  padding-bottom: 0;
+}
 
 .sb-scroll-area .sb-list,
 .sb-conversation .sb-list {
@@ -13027,6 +13096,7 @@ div#messaging-channels {
 }
 
 .sb-area-users .sb-scroll-area {
+  overflow: hidden;
   overflow-x: scroll;
 }
 
@@ -13095,6 +13165,10 @@ div#messaging-channels {
 .sb-scroll-area .bulk-users-container .bulk-users-wrapper .form-check label p span:nth-child(2) {
   color: #717182;
   font-size: 12px;
+}
+.sb-scroll-area .bulk-users-container .bulk-users-wrapper.sb-error {
+  border: 1px solid rgb(202, 52, 52) !important;
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.25);
 }
 .sb-scroll-area .sb-type-textarea {
   display: flex;
@@ -13175,6 +13249,24 @@ div#messaging-channels {
   font-size: 26px;
   font-weight: 700;
   color: #4ADE80;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box .check {
+  width: 65px !important;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #22C55E;
+  position: relative;
+}
+#tab-membership .box-membership .box-black .membership-detail-list .detail-box .check::before {
+  content: "";
+  transform: rotate(45deg);
+  height: 24px;
+  width: 12px;
+  border-bottom: 4px solid #fff;
+  border-right: 4px solid #fff;
 }
 #tab-membership .plans-box-menu ul {
   background: #F3F4F6;
@@ -13931,6 +14023,36 @@ div#messaging-channels {
   }
   .sb-board .sb-admin-list .sb-top .sb-select ul {
     top: 124px;
+  }
+  main .sb-area-users {
+    display: revert !important;
+  }
+  main .sb-area-users .sb-scroll-area::-webkit-scrollbar {
+    height: 0;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users {
+    display: revert !important;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users tr {
+    display: revert !important;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users thead {
+    display: revert;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users thead th {
+    display: revert !important;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users thead th:not(:first-child) {
+    display: revert;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users tbody {
+    display: revert !important;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr {
+    float: none;
+  }
+  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:not(.sb-td-profile):not(:first-child) {
+    display: revert;
   }
 }
 
