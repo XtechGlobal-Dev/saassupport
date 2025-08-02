@@ -4200,6 +4200,59 @@ td.sb-offline:after {
     }
 }
 
+.sb-area-reports.sb-area-reports_new {
+    .sb-top-bar {
+        border-bottom: 0;
+        .sb-setting.sb-type-text {
+            border-bottom: 0;
+        }
+    }
+    .sb-tab {
+        gap: 20px;
+        padding: 0px 20px 10px;
+
+        .sb-nav.sb-nav-only {
+            background: #fff;
+            padding: 20px 20px;
+            border-radius: 8px;
+            ul {
+                li {
+                    img {
+                        width: 16px;
+                    }
+                }
+            }
+        }
+
+        .sb-content.sb-scroll-area {
+            gap: 20px;
+            padding: 0 !important;
+
+            .sb-reports-chart {
+                display: flex;
+                align-items: center;
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px 20px;
+
+                .chart-cnt.mt-3 {
+                    margin-top: 0 !important;
+                    width: 100%;
+                    padding: 0 !important;
+                    border: 0 !important;
+                }
+            }
+
+            .sb-reports-sidebar {
+                background: #fff;
+                border-radius: 8px;
+                margin: 0 !important;
+                padding: 20px 20px;
+            }
+        }
+    }
+}
+
 .container {
     padding: 0 !important;
     margin: 0 !important;
