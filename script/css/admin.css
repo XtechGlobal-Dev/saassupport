@@ -4591,6 +4591,7 @@ td.sb-offline:after {
 .sb-inner-tab .sb-nav .sb-btn {
   display: inline-block;
   margin-top: 15px;
+  background: #0069f0;
 }
 
 .sb-menu-mobile > ul {
@@ -5527,6 +5528,10 @@ td.sb-offline:after {
 }
 .sb-popup.sb-popup-lightbox:after {
   display: none;
+}
+
+.sb-save-articles.sb-btn, .sb-main main .sb-btn {
+  background: #0069f0;
 }
 
 .sb-popup.sb-replies .sb-replies-list ul li {
@@ -13797,7 +13802,7 @@ div#messaging-channels {
   }
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon {
     text-indent: unset;
-    background: #1B7EB4;
+    background: #0069f0;
   }
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon i {
     color: #fff;
