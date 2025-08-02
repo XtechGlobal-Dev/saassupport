@@ -937,9 +937,9 @@ td.sb-offline:after {
     align-items: center;
 
     img {
-        width: 50px;
-        height: 50px;
-        min-width: 50px;
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
         border-radius: 50%;
     }
 
@@ -2951,8 +2951,8 @@ td.sb-offline:after {
                     padding-left: 58px;
 
                     img {
-                        width: 50px;
-                        height: 50px;
+                        width: 45px;
+                        height: 45px;
                         transform: none;
                         top: 0;
                         position: absolute;
@@ -3864,6 +3864,36 @@ td.sb-offline:after {
                 }
             }
         }
+
+        .sb-inline-departments {
+            #conversation-department {
+                display: block;
+
+                p {
+                    position: relative !important;
+                    padding-right: 15px;
+
+                    &::after {
+                        line-height: 47px;
+                        right: 15px;
+                    }
+
+                    span {
+                        top: 40%;
+                        right: 30px;
+                    }
+                }
+
+                ul {
+                    li {
+                        &:hover {
+                            background: #1653FD !important;
+                            color: #fff !important;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .sb-no-conversation-message {
@@ -4680,6 +4710,8 @@ td.sb-offline:after {
                     .avatar {
                         width: 50px;
                         height: 50px;
+                        min-width: 50px;
+                        min-height: 50px;
                         border-radius: 50%;
                         object-fit: cover;
                     }
@@ -5068,7 +5100,6 @@ td.sb-offline:after {
                     top: 0;
                     margin-left: 0;
                     margin-bottom: 0 !important;
-                    padding-bottom: 0 !important;
                     overflow: hidden;
                     overflow-y: scroll;
 
@@ -5393,19 +5424,45 @@ td.sb-offline:after {
     display: none;
 }
 
-.sb-content-articles {
-    h2 {
-        margin-bottom: 5px;
-        font-size: 18px;
-    }
+.sb-tab {
+    .sb-content-articles {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
 
-    .sb-setting {
-        padding: 0px 0px 15px 0px !important;
-    }
-}
+        .sb-article-categories {
+            width: 100%;
 
-.sb-area-articles .sb-setting+h2 {
-    margin-top: 12px !important;
+            div {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        h2 {
+            margin: 0 !important;
+            font-size: 18px;
+            padding-bottom: 15px;
+        }
+
+        .sb-setting {
+            padding: 0px 0px 15px 0px !important;
+            width: calc(100% - 127px);
+            max-width: unset !important;
+
+            #editorjs {
+                .image-tool__image {
+                    img {
+                        max-height: 200px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -8930,6 +8987,7 @@ ul.status-list.dropdown-menu {
 .sb-list .sb-right .sb-reply-message {
     color: #fff !important;
     border: 0 !important;
+    background: none;
 }
 
 .daterangepicker .calendar-table .next span,
@@ -9161,6 +9219,18 @@ ul.status-list.dropdown-menu {
 .daterangepicker .ranges li.active {
     background-color: $color-blue;
     color: #fff;
+}
+
+.select2-container--default .select2-selection--single {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    background-color: #fff;
+    padding: 7.5px 7.5px 3.75px;
+    border: 1px solid #ddd;
+    border-radius: 2.5px;
+    font-size: 14px;
+    overflow: hidden;
 }
 
 @media (min-width: 564px) {
@@ -10993,7 +11063,6 @@ div#messaging-channels {
         width: 100%;
 
         textarea {
-            background: #f3f3f5;
             min-height: 100px;
         }
     }
@@ -11235,6 +11304,44 @@ div#messaging-channels {
                 margin-top: 50px;
             }
         }
+    }
+}
+
+main {
+    .sb-area-users {
+
+        .sb-scroll-area {
+
+            .sb-table-users {
+
+                thead {
+
+                    th {
+
+                        &:nth-child(1) {
+                            display: none !important;
+                        }
+
+                        &:last-child {
+                            color: rgb(36, 39, 42) !important;
+                        }
+                    }
+                }
+
+                tbody {
+
+                    tr {
+
+                        td {
+                            &:nth-child(1) {
+                                display: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -11856,6 +11963,20 @@ div#messaging-channels {
             }
         }
     }
+
+    main {
+        .new_table.sb-area-tickets-dash {
+            .sb-scroll-area {
+                overflow-x: scroll;
+                &::-webkit-scrollbar {
+                    height: 0;
+                }
+                table {
+                    table-layout: unset;
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -12039,11 +12160,14 @@ div#messaging-channels {
                     .sb-btn.sb-icon {
                         text-indent: unset;
                         background: #0069f0;
+                        height: fit-content;
+                        width: fit-content;
+                        font-size: 12px;
 
                         i {
                             color: #fff;
-                            font-size: 20px;
-                            line-height: 28px;
+                            font-size: 13px;
+                            line-height: 13px;
                         }
                     }
                 }
@@ -12156,6 +12280,15 @@ div#messaging-channels {
 
                 }
             }
+            .recent {
+                .recent-messages {
+                        overflow-x: scroll;
+                        &::-webkit-scrollbar {
+                            height: 0;
+                        }
+                    
+                }
+            }
         }
     }
 
@@ -12237,8 +12370,6 @@ div#messaging-channels {
     }
 
     main {
-
-
         .sb-area-users {
             display: revert !important;
 
@@ -12263,6 +12394,10 @@ div#messaging-channels {
                             &:not(:first-child) {
                                 display: revert;
                             }
+
+                            &:nth-child(1) {
+                                display: none !important;
+                            }
                         }
                     }
 
@@ -12276,12 +12411,34 @@ div#messaging-channels {
                                 &:not(.sb-td-profile):not(:first-child) {
                                     display: revert;
                                 }
+
+                                &:nth-child(1) {
+                                    display: none !important;
+                                }
                             }
                         }
                     }
                 }
             }
 
+        }
+    }
+
+    main {
+        .new_table.sb-area-tickets-dash {
+            .sb-scroll-area {
+                overflow-x: scroll;
+                &::-webkit-scrollbar {
+                    height: 0;
+                }
+                table {
+                    table-layout: unset;
+                }
+
+                #customerTable {
+                    display: none !important;
+                }
+            }
         }
     }
 }
