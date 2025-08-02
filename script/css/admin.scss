@@ -4247,6 +4247,13 @@ td.sb-offline:after {
                     width: 100%;
                     padding: 0 !important;
                     border: 0 !important;
+                    height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                    canvas {
+                        max-height: 100%;
+                    }
                 }
             }
 
