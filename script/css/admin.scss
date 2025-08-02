@@ -3863,6 +3863,31 @@ td.sb-offline:after {
                     }
                 }
             }
+        } 
+        .sb-inline-departments {
+            #conversation-department {
+                display: block;
+                p {
+                position: relative !important;
+                padding-right: 15px;
+                &::after {
+                    line-height: 47px;
+                    right: 15px;
+                }
+                span {
+                    top: 40%;
+                    right: 30px;
+                }
+            }
+                ul {
+                    li {
+                        &:hover {
+                            background: #1653FD !important;
+                            color: #fff !important;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -5068,7 +5093,6 @@ td.sb-offline:after {
                     top: 0;
                     margin-left: 0;
                     margin-bottom: 0 !important;
-                    padding-bottom: 0 !important;
                     overflow: hidden;
                     overflow-y: scroll;
 
