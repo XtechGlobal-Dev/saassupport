@@ -1829,9 +1829,9 @@ function sb_add_ticket($inputs)
             $contactEmail = $data['contact_email'];
             $token = bin2hex(openssl_random_pseudo_bytes(20));
             $profileImg = SB_URL . '/media/user.svg';
-            $values = 'VALUES  (\''.$firstName."', '".$lastName."', '".$contactEmail."','".$profileImg."','user','".sb_gmt_now()."', '".$token."')";
+            $values = 'VALUES  (\''.$firstName."', '".$lastName."', '".$contactEmail."','".$profileImg."','user','".sb_gmt_now()."', '".$token."','".sb_gmt_now()."')";
         
-            $query = "INSERT into sb_users (first_name,last_name, email, profile_image, user_type, creation_time,token)  $values";
+            $query = "INSERT into sb_users (first_name,last_name, email, profile_image, user_type, creation_time,token,last_activity)  $values";
               
             $user_id = sb_db_query($query,true);
             $data['contact_id'] = $user_id;
