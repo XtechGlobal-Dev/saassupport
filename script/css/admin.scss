@@ -3863,22 +3863,27 @@ td.sb-offline:after {
                     }
                 }
             }
-        } 
+        }
+
         .sb-inline-departments {
             #conversation-department {
                 display: block;
+
                 p {
-                position: relative !important;
-                padding-right: 15px;
-                &::after {
-                    line-height: 47px;
-                    right: 15px;
+                    position: relative !important;
+                    padding-right: 15px;
+
+                    &::after {
+                        line-height: 47px;
+                        right: 15px;
+                    }
+
+                    span {
+                        top: 40%;
+                        right: 30px;
+                    }
                 }
-                span {
-                    top: 40%;
-                    right: 30px;
-                }
-            }
+
                 ul {
                     li {
                         &:hover {
@@ -5417,19 +5422,44 @@ td.sb-offline:after {
     display: none;
 }
 
-.sb-content-articles {
-    h2 {
-        margin-bottom: 5px;
-        font-size: 18px;
-    }
+.sb-tab {
+    .sb-content-articles {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
 
-    .sb-setting {
-        padding: 0px 0px 15px 0px !important;
-    }
-}
+        .sb-article-categories {
+            width: 100%;
 
-.sb-area-articles .sb-setting+h2 {
-    margin-top: 12px !important;
+            div {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        h2 {
+            margin: 0 !important;
+            font-size: 18px;
+            padding-bottom: 15px;
+        }
+
+        .sb-setting {
+            padding: 0px 0px 15px 0px !important;
+            width: calc(100% - 127px);
+            max-width: unset !important;
+            #editorjs {
+                .image-tool__image {
+                    img {
+                        max-height: 200px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -11018,7 +11048,6 @@ div#messaging-channels {
         width: 100%;
 
         textarea {
-            background: #f3f3f5;
             min-height: 100px;
         }
     }
