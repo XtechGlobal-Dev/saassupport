@@ -47,7 +47,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <!-- Manrope font cdn link  -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+    <link rel="stylesheet" href="<?php echo SB_VERSION ?>/css/hgi-stroke-rounded.css" />
     <!-- Bootstrap cdn link  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/hgi-stroke-rounded.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
@@ -204,7 +204,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     if ($shopify) {
                         echo '<p>' . str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('Customize your store and enable {R} in the app embeds section.')) . '</p><a class="sb-btn sb-btn-white" href="https://' . $shopify . '/admin/themes/current/editor?context=apps&activateAppId=' . SHOPIFY_APP_ID . '/sb" target="_blank">' . sb_('Preview in theme') . '</a>';
                     } else {
-                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting"><textarea id="embed-code" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button><span id="copy-tooltip" class="tooltipcode">Copied!</span></div>';
+                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>Chatbot embed code</p><textarea id="embed-code" class="embed-code" style="width: calc(100% - 113px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>Ticket panel embed code</p><textarea id="embed-code2" class="embed-code" style="width: calc(100% - 113px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div>';
                     }
                     if (defined('DIRECT_CHAT_URL')) {
                         $link = DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']);

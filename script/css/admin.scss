@@ -1453,7 +1453,7 @@ td.sb-offline:after {
 }
 
 .sb-main main .sb-board>.sb-admin-list .sb-scroll-area li:hover {
-    background-color: #2D9CDB !important;
+    background-color: #155cfd !important;
 }
 
 .sb-player {
@@ -2379,12 +2379,12 @@ td.sb-offline:after {
                 margin-bottom: 8px;
                 padding-top: 0;
                 position: relative;
-                min-height: 70px;
+                min-height: 65px;
 
                 &::before {
                     position: absolute;
                     bottom: 0;
-                    left: -26px;
+                    left: -24px;
                     right: 0;
                     content: "";
                     height: 1.3px;
@@ -2744,6 +2744,7 @@ td.sb-offline:after {
 
         .sb-flex {
             justify-content: flex-end;
+            gap: 8px;
         }
     }
 
@@ -3613,8 +3614,8 @@ td.sb-offline:after {
 
             img,
             .user-initials {
-                min-width: 50px;
-                min-height: 50px;
+                min-width: 45px;
+                min-height: 45px;
             }
 
             .user-initials {
@@ -4048,6 +4049,67 @@ td.sb-offline:after {
     }
 }
 
+#customerTable_wrapper,
+#ticketTable_wrapper {
+    .row {
+        align-items: center;
+        justify-content: space-between;
+
+        .col-md-6 {
+            width: fit-content !important;
+
+            input {
+                box-shadow: none;
+                border: 0;
+            }
+
+            &:nth-child(2) {
+                order: 1;
+            }
+
+            &:nth-child(1) {
+                order: 2;
+            }
+
+            .dataTables_length {
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+        }
+
+        .col-md-5 {
+            width: fit-content !important;
+            order: 2;
+
+            input {
+                box-shadow: none;
+                border: 0;
+            }
+
+            .dataTables_info {
+                padding-top: 0;
+            }
+        }
+
+        .col-md-7 {
+            width: fit-content !important;
+            order: 1;
+
+            input {
+                box-shadow: none;
+                border: 0;
+            }
+        }
+
+        &.dt-row {
+            margin-block: 10px;
+        }
+    }
+}
+
 .sb-account-box {
     .sb-nav {
         min-width: 250px;
@@ -4138,6 +4200,73 @@ td.sb-offline:after {
     }
 }
 
+.sb-area-reports.sb-area-reports_new {
+    .sb-top-bar {
+        border-bottom: 0;
+        .sb-setting.sb-type-text {
+            border-bottom: 0;
+        }
+    }
+    .sb-tab {
+        gap: 20px;
+        padding: 0px 20px 10px;
+
+        .sb-nav.sb-nav-only {
+            background: #fff;
+            padding: 20px 20px;
+            border-radius: 8px;
+            ul {
+                li {
+                    display: flex;
+                    align-items: center;
+                    gap: 3px;
+                    line-height: 35px;
+                    &:hover {
+                        color: #155cfd !important;
+                    }
+                    img {
+                        width: 16px;
+                    }
+                }
+            }
+        }
+
+        .sb-content.sb-scroll-area {
+            gap: 20px;
+            padding: 0 !important;
+
+            .sb-reports-chart {
+                display: flex;
+                align-items: center;
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px 20px;
+
+                .chart-cnt.mt-3 {
+                    margin-top: 0 !important;
+                    width: 100%;
+                    padding: 0 !important;
+                    border: 0 !important;
+                    height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                    canvas {
+                        max-height: 100%;
+                    }
+                }
+            }
+
+            .sb-reports-sidebar {
+                background: #fff;
+                border-radius: 8px;
+                margin: 0 !important;
+                padding: 20px 20px;
+            }
+        }
+    }
+}
+
 .container {
     padding: 0 !important;
     margin: 0 !important;
@@ -4215,8 +4344,8 @@ td.sb-offline:after {
                     border-bottom: 1px solid #d7d7d7;
 
                     >img {
-                        height: 50px;
-                        width: 50px;
+                        height: 45px;
+                        width: 45px;
                         border-radius: 50%;
                     }
                 }
@@ -4360,8 +4489,8 @@ td.sb-offline:after {
                         margin-bottom: 16px;
 
                         .metric-icon {
-                            width: 50px;
-                            height: 50px;
+                            width: 45px;
+                            height: 45px;
                             border-radius: 50%;
                             display: flex;
                             align-items: center;
@@ -4708,10 +4837,10 @@ td.sb-offline:after {
                     padding: 1rem 1.5rem 1.5rem !important;
 
                     .avatar {
-                        width: 50px;
-                        height: 50px;
-                        min-width: 50px;
-                        min-height: 50px;
+                        width: 45px;
+                        height: 45px;
+                        min-width: 45px;
+                        min-height: 45px;
                         border-radius: 50%;
                         object-fit: cover;
                     }
@@ -6277,6 +6406,11 @@ td.sb-offline:after {
 .sb-type-select.sb-loading select {
     visibility: hidden;
     transition: none;
+}
+
+span.user-initials {
+    width: 45px;
+    height: 45px;
 }
 
 .sb-area-settings .sb-tab .sb-btn,
@@ -10575,7 +10709,7 @@ li.menu_head:hover {
 .sb-tab {
     &.sb-inner-tab {
         .clr-change {
-            background-color: #2d9cdb;
+            background-color: #155cfd;
             color: #fff;
             border: unset;
             border-radius: 7px;
@@ -11189,15 +11323,15 @@ div#messaging-channels {
             background: #F3F4F6;
             border: 1px solid #E5E7EB;
             width: fit-content;
-            padding: 4px;
-            border-radius: 8px;
+            padding: 4.5px;
+            border-radius: 10px;
 
             li {
-                padding: 3px 20px;
+                padding: 3px 28px;
 
                 &.sb-active {
                     background: #fff;
-                    border-radius: 8px;
+                    border-radius: 10px;
                     color: #000;
                     border-bottom: 0;
                 }
@@ -11968,9 +12102,11 @@ main {
         .new_table.sb-area-tickets-dash {
             .sb-scroll-area {
                 overflow-x: scroll;
+
                 &::-webkit-scrollbar {
                     height: 0;
                 }
+
                 table {
                     table-layout: unset;
                 }
@@ -12247,7 +12383,7 @@ main {
                             width: fit-content;
                             height: fit-content;
                             overflow: unset;
-                            background: #2D9CDB;
+                            background: #155cfd;
                             color: #fff;
 
                             i {
@@ -12280,13 +12416,15 @@ main {
 
                 }
             }
+
             .recent {
                 .recent-messages {
-                        overflow-x: scroll;
-                        &::-webkit-scrollbar {
-                            height: 0;
-                        }
-                    
+                    overflow-x: scroll;
+
+                    &::-webkit-scrollbar {
+                        height: 0;
+                    }
+
                 }
             }
         }
@@ -12428,9 +12566,11 @@ main {
         .new_table.sb-area-tickets-dash {
             .sb-scroll-area {
                 overflow-x: scroll;
+
                 &::-webkit-scrollbar {
                     height: 0;
                 }
+
                 table {
                     table-layout: unset;
                 }
