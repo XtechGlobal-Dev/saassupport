@@ -12714,6 +12714,12 @@ li.menu_head:hover {
 #tags-div span {
   padding-bottom: 6px;
 }
+#tags-div .tag-dot {
+  min-width: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  padding-bottom: 0;
+}
 
 .sb-scroll-area .sb-list,
 .sb-conversation .sb-list {

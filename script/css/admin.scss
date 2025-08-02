@@ -10383,6 +10383,12 @@ li.menu_head:hover {
     span {
         padding-bottom: 6px;
     }
+    .tag-dot {
+        min-width: 10px;
+        min-height: 10px;
+        max-height: 10px;
+        padding-bottom: 0;
+    }
 }
 
 .sb-scroll-area,
