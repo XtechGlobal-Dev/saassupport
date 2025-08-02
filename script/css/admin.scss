@@ -5451,6 +5451,7 @@ td.sb-offline:after {
             padding: 0px 0px 15px 0px !important;
             width: calc(100% - 127px);
             max-width: unset !important;
+
             #editorjs {
                 .image-tool__image {
                     img {
@@ -11292,6 +11293,43 @@ div#messaging-channels {
     }
 }
 
+main {
+    .sb-area-users {
+
+        .sb-scroll-area {
+
+            .sb-table-users {
+
+                thead {
+
+                    th {
+
+                        &:nth-child(1) {
+                            display: none !important;
+                        }
+                        &:last-child {
+                            color: rgb(36, 39, 42) !important;
+                        }
+                    }
+                }
+
+                tbody {
+
+                    tr {
+
+                        td {
+                            &:nth-child(1) {
+                                display: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
         max-width: 200px;
@@ -12093,11 +12131,14 @@ div#messaging-channels {
                     .sb-btn.sb-icon {
                         text-indent: unset;
                         background: #0069f0;
+                        height: fit-content;
+                        width: fit-content;
+                        font-size: 12px;
 
                         i {
                             color: #fff;
-                            font-size: 20px;
-                            line-height: 28px;
+                            font-size: 13px;
+                            line-height: 13px;
                         }
                     }
                 }
@@ -12291,8 +12332,6 @@ div#messaging-channels {
     }
 
     main {
-
-
         .sb-area-users {
             display: revert !important;
 
@@ -12317,6 +12356,10 @@ div#messaging-channels {
                             &:not(:first-child) {
                                 display: revert;
                             }
+
+                            &:nth-child(1) {
+                                display: none !important;
+                            }
                         }
                     }
 
@@ -12329,6 +12372,10 @@ div#messaging-channels {
                             td {
                                 &:not(.sb-td-profile):not(:first-child) {
                                     display: revert;
+                                }
+
+                                &:nth-child(1) {
+                                    display: none !important;
                                 }
                             }
                         }
