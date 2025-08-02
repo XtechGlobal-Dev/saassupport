@@ -1453,7 +1453,7 @@ td.sb-offline:after {
 }
 
 .sb-main main .sb-board>.sb-admin-list .sb-scroll-area li:hover {
-    background-color: #2D9CDB !important;
+    background-color: #155cfd !important;
 }
 
 .sb-player {
@@ -4217,6 +4217,9 @@ td.sb-offline:after {
             border-radius: 8px;
             ul {
                 li {
+                    &:hover {
+                        color: #155cfd !important;
+                    }
                     img {
                         width: 16px;
                     }
@@ -10695,7 +10698,7 @@ li.menu_head:hover {
 .sb-tab {
     &.sb-inner-tab {
         .clr-change {
-            background-color: #2d9cdb;
+            background-color: #155cfd;
             color: #fff;
             border: unset;
             border-radius: 7px;
@@ -12369,7 +12372,7 @@ main {
                             width: fit-content;
                             height: fit-content;
                             overflow: unset;
-                            background: #2D9CDB;
+                            background: #155cfd;
                             color: #fff;
 
                             i {

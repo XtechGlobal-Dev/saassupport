@@ -5259,7 +5259,7 @@ td.sb-offline:after {
 }
 
 .sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
-  background-color: #2D9CDB !important;
+  background-color: #155cfd !important;
 }
 
 .sb-player {
@@ -7451,6 +7451,9 @@ td.sb-offline:after {
   background: #fff;
   padding: 20px 20px;
   border-radius: 8px;
+}
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li:hover {
+  color: #155cfd !important;
 }
 .sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li img {
   width: 16px;
@@ -12952,7 +12955,7 @@ li.menu_head:hover {
 }
 
 .sb-tab.sb-inner-tab .clr-change {
-  background-color: #2d9cdb;
+  background-color: #155cfd;
   color: #fff;
   border: unset;
   border-radius: 7px;
@@ -14133,7 +14136,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: fit-content;
     height: fit-content;
     overflow: unset;
-    background: #2D9CDB;
+    background: #155cfd;
     color: #fff;
   }
   .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button div a i {
