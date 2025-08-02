@@ -2570,28 +2570,39 @@ function sb_component_admin()
                                             </div>
                                         </i><span class="label">Settings</span></a></li>
                             <?php } ?>
-                            <li>
-                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership"><i>
-                                        <div class="icon-wrapper">
-                                            <span class="icon-tooltip" data-tooltip="Inbox">
-                                                <svg width="25" height="25" viewBox="0 0 26 27" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M16.5984 9.73794C16.5984 7.74972 14.9867 6.13794 12.9984 6.13794C11.0102 6.13794 9.39844 7.74972 9.39844 9.73794C9.39844 11.7262 11.0102 13.3379 12.9984 13.3379C14.9867 13.3379 16.5984 11.7262 16.5984 9.73794Z"
-                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M25 13.3379C25 6.71047 19.6274 1.33789 13 1.33789C6.37258 1.33789 1 6.71047 1 13.3379C1 19.9653 6.37258 25.3379 13 25.3379C19.6274 25.3379 25 19.9653 25 13.3379Z"
-                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M19 19.3379C19 16.0242 16.3137 13.3379 13 13.3379C9.6863 13.3379 7 16.0242 7 19.3379"
-                                                        stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </i><span class="label">Accout</span></a></li>
+                            <?php 
+                            if($is_admin && $is_cloud)
+                            {
+                                ?>
+                                <li>
+                                    <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership">
+                                        <i>
+                                            <div class="icon-wrapper">
+                                                <span class="icon-tooltip" data-tooltip="Inbox">
+                                                    <svg width="25" height="25" viewBox="0 0 26 27" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M16.5984 9.73794C16.5984 7.74972 14.9867 6.13794 12.9984 6.13794C11.0102 6.13794 9.39844 7.74972 9.39844 9.73794C9.39844 11.7262 11.0102 13.3379 12.9984 13.3379C14.9867 13.3379 16.5984 11.7262 16.5984 9.73794Z"
+                                                            stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path
+                                                            d="M25 13.3379C25 6.71047 19.6274 1.33789 13 1.33789C6.37258 1.33789 1 6.71047 1 13.3379C1 19.9653 6.37258 25.3379 13 25.3379C19.6274 25.3379 25 19.9653 25 13.3379Z"
+                                                            stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path
+                                                            d="M19 19.3379C19 16.0242 16.3137 13.3379 13 13.3379C9.6863 13.3379 7 16.0242 7 19.3379"
+                                                            stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </i>
+                                        <span class="label">Account</span>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                            ?>
                         </ul>
                     </nav>
 
@@ -2777,8 +2788,8 @@ function sb_component_admin()
                     $header .=
                         '<li data-value="edit-profile">' .
                         sb_("Edit profile") .
-                        "</li>" .
-                        ($is_cloud ? sb_cloud_account_menu() : "");
+                        "</li>" ;
+                        //($is_cloud ? sb_cloud_account_menu() : "");
                 }
                 $header .= '</ul>
                                 </div>
@@ -5428,7 +5439,7 @@ function sb_component_admin()
                                     <?php sb_e("Reports"); ?>
                                 </h2> -->
                             </div>
-                            <div>
+                            <div class="top-bar-search">
                                 <div class="sb-setting sb-type-text">
                                     <input id="sb-date-picker" placeholder="00/00/0000 - 00/00/0000" type="text" />
                                 </div>

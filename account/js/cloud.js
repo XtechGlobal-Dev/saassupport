@@ -103,7 +103,7 @@
 
             ajax('account-user-details', {}, (response) => {
                 account = response;
-                box_account.find('#embed-code').val(`<!-- ${BRAND_NAME} -->\n<script id="chat-init" src="${CLOUD_URL}/account/js/init.js?id=${response.chat_id}"></script>`);
+                //box_account.find('#embed-code').val(`<!-- ${BRAND_NAME} -->\n<script id="chat-init" src="${CLOUD_URL}/account/js/init.js?id=${response.chat_id}"></script>`);
                 box_account.stopLoading();
                 for (var i = 0; i < profile_keys.length; i++) {
                     if (profile_keys[i] in response) {
