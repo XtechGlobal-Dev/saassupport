@@ -8004,6 +8004,8 @@ td.sb-offline:after {
 .sb-area-dashboard main .new_container .main-charts .recent.card .avatar {
   width: 50px;
   height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -13841,6 +13843,15 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-menu-wide_new ul li {
     min-width: fit-content;
   }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area {
+    overflow-x: scroll;
+  }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area::-webkit-scrollbar {
+    height: 0;
+  }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area table {
+    table-layout: unset;
+  }
 }
 @media only screen and (max-width: 767px) {
   .sb-admin-box_new .right_section {
@@ -14038,6 +14049,12 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .sb-menu-wide.sb-menu-tickets.sb-menu-wide_new div {
     padding-right: 15px;
   }
+  .sb-admin main .recent .recent-messages {
+    overflow-x: scroll;
+  }
+  .sb-admin main .recent .recent-messages::-webkit-scrollbar {
+    height: 0;
+  }
   #ticketTable_length {
     margin-bottom: 15px;
   }
@@ -14119,6 +14136,18 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     display: revert;
   }
   main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
+    display: none !important;
+  }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area {
+    overflow-x: scroll;
+  }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area::-webkit-scrollbar {
+    height: 0;
+  }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area table {
+    table-layout: unset;
+  }
+  main .new_table.sb-area-tickets-dash .sb-scroll-area #customerTable {
     display: none !important;
   }
 }
