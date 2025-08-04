@@ -1850,6 +1850,16 @@ td.sb-offline:after {
 }
 
 .sb-area-users {
+    #customerTable_wrapper {
+        .dt-row {
+            margin-inline: 0 !important;
+
+            .col-sm-12 {
+                padding: 0 !important;
+            }
+        }
+    }
+
     .sb-table-users {
         tr {
             a.sb-profile {
@@ -1870,6 +1880,11 @@ td.sb-offline:after {
 
             th {
                 pointer-events: none;
+
+                &::before,
+                &::after {
+                    content: none !important;
+                }
             }
 
             td {
@@ -1894,6 +1909,23 @@ td.sb-offline:after {
                     min-height: 40px;
                 }
             }
+        }
+    }
+}
+
+.sb-area-articles {
+    .sb-tab.sb-inner-tab {
+        gap: 20px;
+        margin-top: 15px;
+
+        .sb-nav.sb-nav-only.sb-scroll-area {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .sb-content.sb-scroll-area {
+            margin-top: 0 !important;
+            border-radius: 8px;
         }
     }
 }
@@ -10095,6 +10127,10 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 }
 
+.sb-account-box>.sb-tab {
+    height: calc(100% - 95px) !important;
+}
+
 // Minor spacing adjustments
 .choices[data-type*="select-multiple"] .choices__inner .choices__button,
 .choices[data-type*="text"] .choices__button {
@@ -10114,7 +10150,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 }
 
-.table-responsive, #ticketTable_wrapper {
+.table-responsive,
+#ticketTable_wrapper {
     &::-webkit-scrollbar {
         height: 0;
         width: 0;
@@ -10125,6 +10162,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     .row {
         &:nth-child(2) {
             margin: 0;
+
             .col-sm-12 {
                 padding: 0;
             }
@@ -10148,6 +10186,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     .table-responsive .sb-scroll-area.scroll-table {
         scrollbar-width: none;
+
         &::-webkit-scrollbar {
             width: 0;
             height: 0;
