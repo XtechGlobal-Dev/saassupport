@@ -19,6 +19,7 @@ if (defined('SB_CROSS_DOMAIN') && SB_CROSS_DOMAIN) {
 }
 if (isset($_FILES['file'])) {
     if (0 < $_FILES['file']['error']) {
+        die($_FILES['file']['error']);
         die(json_encode(['error', 'Error into upload.php file.']));
     } else {
         $file_name = sb_sanatize_file_name($_FILES['file']['name']);
