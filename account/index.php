@@ -98,7 +98,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         <div class="sb-top-bar py-4">
             <div>
                 <h2>
-                    <img src="<?php echo SB_CLOUD_BRAND_ICON ?>" />
+                    <!-- <img src="<?php echo SB_CLOUD_BRAND_ICON ?>" /> -->
                     <?php sb_e('Account') ?>
                 </h2>
             </div>
@@ -110,6 +110,9 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         </div>
         <div class="sb-tab">
             <div class="sb-nav">
+                <span class="logo">
+                    <img src="<?php echo SB_CLOUD_BRAND_ICON ?>" />
+                </span>
                 <div>
                     <?php sb_e('Installation') ?>
                 </div>
@@ -437,7 +440,10 @@ function box_addons()
         // $code = '<h2 class="addons-title">' . sb_('Add-ons') . '</h2><p>' . sb_('Add-ons are optional features with a fixed subscription cost.') . '</p><div id="addons" class="plans-box">';
         $code = '<h2 class="addons-title">' . sb_('Add-ons') . '</h2><div id="addons" class="plans-box">';
         if ($white_label_price) {
-            $code .= '<div class="sb-visible' . (membership_is_white_label($account['user_id']) ? ' sb-plan-active' : '') . '" id="purchase-white-label"><h4>' . sb_('White Label') . '</h4><h3>' . strtoupper(membership_currency()) . ' ' . $white_label_price . ' <span>' . sb_('a year') . '</span></h3><p>' . sb_('Remove our branding and logo from the chat widget.') . '</p></div>';
+            $code .= '<div class="sb-visible' . (membership_is_white_label($account['user_id']) ? ' sb-plan-active' : '') . '" id="purchase-white-label"><h4>' . sb_('White Label') . '</h4><h3>' . strtoupper(membership_currency()) . ' ' . $white_label_price . ' <span>' . sb_('a year') . '</span></h3><p>' . sb_('Remove our branding and logo from the chat widget.') . '</p><p class="d-flex align-items-center" style="gap:20px; margin-top: 10px;""><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.696 10.7325C21.696 10.77 21.696 10.8076 21.696 10.8451C21.6793 12.3667 20.2953 13.4006 18.7737 13.4006H14.6924C13.5876 13.4006 12.6913 14.2969 12.6913 15.4016C12.6913 15.5434 12.708 15.6809 12.733 15.8143C12.8206 16.2396 13.004 16.6481 13.1832 17.0608C13.4375 17.6361 13.6877 18.2072 13.6877 18.8117C13.6877 20.1374 12.7872 21.3422 11.4615 21.3964C11.3156 21.4006 11.1697 21.4047 11.0196 21.4047C5.12905 21.4047 0.351562 16.6273 0.351562 10.7325C0.351562 4.83779 5.12905 0.0603027 11.0238 0.0603027C16.9185 0.0603027 21.696 4.83779 21.696 10.7325ZM5.68767 12.0666C5.68767 11.7127 5.54712 11.3734 5.29695 11.1233C5.04677 10.8731 4.70745 10.7325 4.35365 10.7325C3.99984 10.7325 3.66052 10.8731 3.41035 11.1233C3.16017 11.3734 3.01962 11.7127 3.01962 12.0666C3.01962 12.4204 3.16017 12.7597 3.41035 13.0099C3.66052 13.26 3.99984 13.4006 4.35365 13.4006C4.70745 13.4006 5.04677 13.26 5.29695 13.0099C5.54712 12.7597 5.68767 12.4204 5.68767 12.0666ZM5.68767 8.06447C6.04148 8.06447 6.38079 7.92392 6.63097 7.67374C6.88115 7.42356 7.0217 7.08425 7.0217 6.73044C7.0217 6.37664 6.88115 6.03732 6.63097 5.78714C6.38079 5.53696 6.04148 5.39641 5.68767 5.39641C5.33387 5.39641 4.99455 5.53696 4.74437 5.78714C4.49419 6.03732 4.35365 6.37664 4.35365 6.73044C4.35365 7.08425 4.49419 7.42356 4.74437 7.67374C4.99455 7.92392 5.33387 8.06447 5.68767 8.06447ZM12.3578 4.06239C12.3578 3.70858 12.2173 3.36926 11.9671 3.11909C11.7169 2.86891 11.3776 2.72836 11.0238 2.72836C10.67 2.72836 10.3307 2.86891 10.0805 3.11909C9.83031 3.36926 9.68976 3.70858 9.68976 4.06239C9.68976 4.41619 9.83031 4.75551 10.0805 5.00569C10.3307 5.25587 10.67 5.39641 11.0238 5.39641C11.3776 5.39641 11.7169 5.25587 11.9671 5.00569C12.2173 4.75551 12.3578 4.41619 12.3578 4.06239ZM16.3599 8.06447C16.7137 8.06447 17.053 7.92392 17.3032 7.67374C17.5534 7.42356 17.6939 7.08425 17.6939 6.73044C17.6939 6.37664 17.5534 6.03732 17.3032 5.78714C17.053 5.53696 16.7137 5.39641 16.3599 5.39641C16.0061 5.39641 15.6668 5.53696 15.4166 5.78714C15.1664 6.03732 15.0259 6.37664 15.0259 6.73044C15.0259 7.08425 15.1664 7.42356 15.4166 7.67374C15.6668 7.92392 16.0061 8.06447 16.3599 8.06447Z" fill="#A855F7"/>
+</svg>
+Custom branding options</p></div>';
         }
         if ($addons) {
             for ($i = 0; $i < count($addons); $i++) {
