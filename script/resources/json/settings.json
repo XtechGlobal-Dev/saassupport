@@ -390,8 +390,9 @@
       }
     ]
   },
-  "messages": [
-    {
+  "messages": {
+    "messages-text": [
+       {
       "type": "multi-input",
       "id": "welcome-message",
       "title": "Welcome message",
@@ -521,97 +522,6 @@
     },
     {
       "type": "multi-input",
-      "setting": "emails",
-      "id": "email-subscribe",
-      "title": "Follow up email",
-      "content": "Email template for the email sent to the user after submitting their email through the follow-up message form. You can use text, HTML, and the following merge fields: {user_name}, {user_email}.",
-      "value": [
-        {
-          "type": "text",
-          "id": "email-subscribe-subject",
-          "title": "Subject"
-        },
-        {
-          "type": "textarea",
-          "id": "email-subscribe-content",
-          "title": "Content"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
-      "id": "rating-message",
-      "title": "Rating",
-      "content": "Display the feedback form to rate the conversation when it is archived.",
-      "help": "https://board.support/docs/#rating",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "rating-active",
-          "title": "Active"
-        },
-        {
-          "type": "checkbox",
-          "id": "rating-message-area",
-          "title": "Message area"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
-      "id": "chat-timetable",
-      "title": "Offline message",
-      "content": "Notify the user when their message is sent outside of the scheduled office hours or all agents are offline.",
-      "help": "https://board.support/docs/#offline-message",
-      "value": [
-        {
-          "type": "checkbox",
-          "id": "chat-timetable-active",
-          "title": "Active"
-        },
-        {
-          "type": "checkbox",
-          "id": "chat-timetable-hide",
-          "title": "Hide timetable"
-        },
-        {
-          "type": "checkbox",
-          "id": "chat-timetable-agents",
-          "title": "Disable agents check"
-        },
-        {
-          "type": "select",
-          "id": "chat-timetable-type",
-          "title": "Message type",
-          "value": [
-            [
-              "",
-              "Chat message"
-            ],
-            [
-              "info",
-              "Info message"
-            ],
-            [
-              "header",
-              "Header"
-            ]
-          ]
-        },
-        {
-          "type": "text",
-          "id": "chat-timetable-title",
-          "title": "Title"
-        },
-        {
-          "type": "textarea",
-          "id": "chat-timetable-msg",
-          "title": "Message"
-        }
-      ]
-    },
-    {
-      "type": "multi-input",
       "id": "close-message",
       "title": "Close message",
       "content": "Send a message to the user when the agent archive the conversation.",
@@ -721,8 +631,103 @@
           "title": "Decline button text"
         }
       ]
+    },
+    {
+      "type": "multi-input",
+      "id": "chat-timetable",
+      "title": "Offline message",
+      "content": "Notify the user when their message is sent outside of the scheduled office hours or all agents are offline.",
+      "help": "https://board.support/docs/#offline-message",
+      "value": [
+        {
+          "type": "checkbox",
+          "id": "chat-timetable-active",
+          "title": "Active"
+        },
+        {
+          "type": "checkbox",
+          "id": "chat-timetable-hide",
+          "title": "Hide timetable"
+        },
+        {
+          "type": "checkbox",
+          "id": "chat-timetable-agents",
+          "title": "Disable agents check"
+        },
+        {
+          "type": "select",
+          "id": "chat-timetable-type",
+          "title": "Message type",
+          "value": [
+            [
+              "",
+              "Chat message"
+            ],
+            [
+              "info",
+              "Info message"
+            ],
+            [
+              "header",
+              "Header"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "id": "chat-timetable-title",
+          "title": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "chat-timetable-msg",
+          "title": "Message"
+        }
+      ]
+    },
+    {
+      "type": "multi-input",
+      "id": "rating-message",
+      "title": "Rating",
+      "content": "Display the feedback form to rate the conversation when it is archived.",
+      "help": "https://board.support/docs/#rating",
+      "value": [
+        {
+          "type": "checkbox",
+          "id": "rating-active",
+          "title": "Active"
+        },
+        {
+          "type": "checkbox",
+          "id": "rating-message-area",
+          "title": "Message area"
+        }
+      ]
     }
-  ],
+    ],
+    "messages-email": [
+      {
+      "type": "multi-input",
+      "setting": "emails",
+      "id": "email-subscribe",
+      "title": "Follow up email",
+      "content": "Email template for the email sent to the user after submitting their email through the follow-up message form. You can use text, HTML, and the following merge fields: {user_name}, {user_email}.",
+      "value": [
+        {
+          "type": "text",
+          "id": "email-subscribe-subject",
+          "title": "Subject"
+        },
+        {
+          "type": "textarea",
+          "id": "email-subscribe-content",
+          "title": "Content"
+        }
+      ]
+    }
+    ],
+    "messages-form": []
+  },
   
    
   "admin": {
