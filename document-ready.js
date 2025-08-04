@@ -3987,7 +3987,7 @@ $(document).ready(function () {
                                 parent.next().click();
                             }
                             parent.remove();
-                        }, 300);
+                        }, 1000);
                     }
                 });
             }
