@@ -4762,7 +4762,7 @@ function sb_component_admin()
                                                         <span class="conversation-id d-none">Conversation ID :
                                                             <span></span></span>
                                                         <div class="ticket-fields">
-                                                            <div class="mb-3 without-contact">
+                                                            <!-- <div class="mb-3 without-contact">
                                                                 <div class="field-label">Guest Ticket</div>
                                                                 <div class="d-flex align-items-center gap-2"></div>
                                                                 <div class="form-check form-switch mb-0 ml-2">
@@ -4770,7 +4770,7 @@ function sb_component_admin()
                                                                         type="checkbox" role="switch"
                                                                         id="flexSwitchCheckDefault" style="width: 27px;">
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="mb-3">
                                                                 <div class="field-label required-label">Assignee</div>
                                                                 <div class="d-flex align-items-center justify-content-between">
