@@ -1674,6 +1674,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         window.initTabSlider = initTabSlider;
 
+        
         $(".sidebar li a").on("click", function () {
             setTimeout(() => {
                 initTabSlider();
@@ -1685,6 +1686,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         jQuery(document).ready(function ($) {
             $(".toggle-btn").click(function () {
                 $(".sidebar.sb-admin-nav").toggleClass("side-open");
+            })
+            $(".sidebar nav li a").click(function() {
+                $(".sidebar.sb-admin-nav").removeClass("side-open")
             })
         })
     </script>
