@@ -7225,7 +7225,7 @@ function sb_component_admin()
                                     </div>
 
                                 </div>
-                                <div>
+                                <?php /*<div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Miscellaneous Settings</p>
@@ -7244,7 +7244,7 @@ function sb_component_admin()
                                             $sb_settings
                                         ); ?>
                                     </div>
-                                </div>
+                                </div>*/?>
                                 <?php sb_apps_area(
                                     $apps,
                                     $cloud_active_apps
@@ -7304,7 +7304,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Setting
+                                                Settings
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -7369,48 +7369,9 @@ function sb_component_admin()
 
                                             <?php sb_populate_settings("articles", $sb_settings, true, 'articles-settings'); ?>
                                         </div>
-
-                                        <!-- <div id="form-content" style="display: none;" class="settings-tab">
-                                            <div class="settings-head">
-                                                <p class="head">
-                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <g clip-path="url(#clip0_1833_2789)">
-                                                            <path
-                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                            <path
-                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                            <path
-                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                            <path
-                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_1833_2789">
-                                                                <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.765625 0.75)"></rect>
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
-                                                    Form
-                                                </p>
-                                                <p class="des mb-0">Control when your form widget is visible and available to
-                                                    visitors</p>
-                                            </div>
-
-                                            <?php sb_populate_settings("messages", $sb_settings, true, 'messages-form'); ?>
-                                        </div> -->
                                     </div>
                                 </div>
-                                <div>
+                                <?php /*<div>
                                     <div class="sb-automations-area">
                                         <div class="sb-select">
                                             <p data-value="messages">
@@ -7489,7 +7450,8 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*/?>
+                                <?php /*
                                 <div>
                                     <div class="sb-translations sb-tab">
                                         <div class="sb-nav sb-nav-only">
@@ -7537,7 +7499,7 @@ function sb_component_admin()
                                             <div class="sb-translations-list"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*/?>
                             </div>
                         </div>
                     </div>
