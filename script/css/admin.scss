@@ -8320,6 +8320,9 @@ ul.status-list.dropdown-menu {
 .sb-content-articles,
 .sb-content-categories {
     background: $background-gray;
+    &::before {
+        content: none !important;
+    }
 
     h2 {
         font-weight: 500 !important;
@@ -11498,7 +11501,18 @@ div#messaging-channels {
     overflow-x: scroll;
 
     &::-webkit-scrollbar {
-        height: 0px;
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        height: 3px;
+        margin-inline: 20px;
+        background-color: #edf2f9;
+        border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #d5d5d5;
+        border-radius: 20px;
     }
 
     .my-tab {
