@@ -6398,9 +6398,17 @@ td.sb-offline:after {
   padding: 0;
   background: #fff;
   box-shadow: 0px 0px 8.4px 0px rgba(0, 0, 0, 0.2509803922);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area::-webkit-scrollbar {
   width: 0px;
+}
+.sb-board > .sb-admin-list > .sb-scroll-area ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li {
   position: relative;
@@ -6641,14 +6649,25 @@ td.sb-offline:after {
   padding: 10px 0 5px 0;
   overflow-y: scroll;
 }
+.sb-board .sb-conversation .sb-list .sb-message-attachments a {
+  color: #1E293B;
+  font-weight: 500;
+}
+.sb-board .sb-conversation .sb-list .sb-time span {
+  color: #475569;
+  font-weight: 500;
+}
+.sb-board .sb-conversation .sb-list .sb-right .sb-message-attachments a {
+  color: #fff !important;
+}
+.sb-board .sb-conversation .sb-list .sb-right .sb-time span {
+  color: #fff;
+}
 .sb-board .sb-conversation .sb-list > div {
   max-width: calc(100% - 275px);
   background: #fff !important;
   border-radius: 14px;
   padding: 8px 12px;
-}
-.sb-board .sb-conversation .sb-list > div .sb-message-attachments a {
-  color: #fff !important;
 }
 .sb-board .sb-conversation .sb-list > div .sb-message {
   color: #1E293B;
@@ -6735,6 +6754,7 @@ td.sb-offline:after {
   object-fit: cover;
   width: 100%;
   min-width: 240px;
+  padding-inline: 12px;
 }
 .sb-board .sb-conversation .sb-list > div:last-child {
   animation: none;
@@ -7412,13 +7432,6 @@ td.sb-offline:after {
   margin-block: 10px;
 }
 
-#ticketTable_wrapper .row .col-md-5 {
-  order: 1;
-}
-#ticketTable_wrapper .row .col-md-7 {
-  order: 2;
-}
-
 ul.pagination li.disabled a {
   background: #fff;
 }
@@ -7587,28 +7600,83 @@ body .daterangepicker td.active:hover {
   background-color: #006ff9;
 }
 
-#tab-profile {
+#tab-profile.sb-active {
   max-width: unset;
   background: #fff;
   padding: 2rem 2rem;
   border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-#tab-profile a.btn-verify-email {
+#tab-profile.sb-active #banner-verify-your-email,
+#tab-profile.sb-active h2.first-title,
+#tab-profile.sb-active p {
+  width: 100%;
+}
+#tab-profile.sb-active .sb-input {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+#tab-profile.sb-active .sb-input span {
+  padding-bottom: 8px;
+}
+#tab-profile.sb-active #email {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#tab-profile.sb-active #email span {
+  display: flex;
+  width: 100%;
+}
+#tab-profile.sb-active #email input {
+  width: calc(100% - 109px);
+}
+#tab-profile.sb-active a.btn-verify-email {
   background-color: #006ff9;
   color: #ffffff;
   border-radius: 8px;
   border: 0;
 }
-#tab-profile .sb-flex {
+#tab-profile.sb-active .sb-flex {
   display: flex;
   align-items: center;
   justify-content: center !important;
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
+  margin-top: 1rem;
 }
-#tab-profile .sb-flex a {
+#tab-profile.sb-active .sb-flex a {
   width: fit-content;
   margin-left: 0 !important;
+}
+#tab-profile.sb-active .sb-flex a i {
+  font-size: 14px;
+}
+
+#tab-referral,
+#tab-installation {
+  max-width: unset;
+  background: #fff;
+  padding: 2rem 2rem;
+  border-radius: 8px;
+}
+#tab-referral h2.first-title,
+#tab-installation h2.first-title {
+  margin-top: 0 !important;
+}
+#tab-referral h2.addons-title,
+#tab-installation h2.addons-title {
+  margin-top: 20px;
+}
+#tab-referral textarea,
+#tab-installation textarea {
+  resize: none;
 }
 
 .container {
@@ -7904,11 +7972,27 @@ body .daterangepicker td.active:hover {
   background: #EEF2FF !important;
 }
 
+.sb-main main .sb-area-conversations .sb-board > .sb-admin-list .sb-flex .sb-filter-btn .sb-select ul li:hover {
+  background: #155cfd !important;
+}
+
 .sb-main main .sb-area-conversations .sb-admin-list.sb-departments-show .sb-scroll-area ul li:hover {
   background: #EEF2FF !important;
 }
+.sb-main main .sb-area-conversations .sb-admin-list.sb-departments-show .sb-flex ul.sb-scroll-area.sb-active li:hover {
+  background: #155cfd !important;
+}
+.sb-main main .sb-area-conversations .sb-admin-list.sb-departments-show .sb-flex .sb-select {
+  margin-right: 0;
+}
 .sb-main main .sb-area-conversations .sb-scroll-area ul li:hover {
   background: #EEF2FF !important;
+}
+.sb-main main .sb-area-conversations .sb-scroll-area .sb-flex ul.sb-scroll-area.sb-active li:hover {
+  background: #155cfd !important;
+}
+.sb-main main .sb-area-conversations .sb-user-details.sb-active .sb-panel-attachments .sb-flex {
+  margin-bottom: 5px;
 }
 
 .sb-area-dashboard main {
@@ -8390,7 +8474,7 @@ body .daterangepicker td.active:hover {
   width: 100%;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .sidepanel {
-  border: 1px solid #a5a7aa;
+  border: 1px solid #d5d5d5;
   border-radius: 10px;
   padding: 15px;
 }
@@ -13394,7 +13478,7 @@ div#messaging-channels {
   overflow-x: scroll;
 }
 .my-tabs::-webkit-scrollbar {
-  height: 0;
+  height: 0px;
 }
 .my-tabs .my-tab {
   background: none;
@@ -13414,14 +13498,22 @@ div#messaging-channels {
   color: #000;
   font-weight: 800;
 }
+.my-tabs .my-tab svg {
+  height: 20px;
+  width: 20px;
+}
 .my-tabs .tab-slider {
   background: #fff !important;
   border-radius: 40px;
-  height: 31px;
+  height: 34px;
   position: absolute;
   z-index: 0;
   display: inline-block;
   transition: all 0.1s linear;
+}
+
+.articles-card .my-tabs {
+  min-width: fit-content;
 }
 
 .toggle-btn {
@@ -13623,7 +13715,8 @@ div#messaging-channels {
   border-radius: 10px;
 }
 #tab-membership .plans-box-menu ul li {
-  padding: 3px 28px;
+  padding: 3px 24px;
+  font-size: 14px;
 }
 #tab-membership .plans-box-menu ul li.sb-active {
   background: #fff;
@@ -13658,12 +13751,12 @@ div#messaging-channels {
   color: #4B5563;
 }
 #tab-membership .plans-box div h4 {
-  font-size: 20px;
+  font-size: 16px;
   color: #111827;
   margin-bottom: 5px;
 }
 #tab-membership .plans-box div h3 {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
 }
 #tab-membership .plans-box div h3 span {
@@ -13678,7 +13771,7 @@ div#messaging-channels {
 }
 #tab-membership .plans-box div ul li {
   color: #374151;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   position: relative;
   padding-left: 20px;
@@ -13695,7 +13788,6 @@ div#messaging-channels {
   border-right: 3px solid #22C55E;
 }
 #tab-membership .plans-box div button {
-  font-size: 16px;
   line-height: 36px;
   letter-spacing: 0.3px;
   font-weight: 500;
@@ -13715,8 +13807,9 @@ div#messaging-channels {
   box-shadow: none;
   transition: all 0.4s;
   user-select: none;
-  height: 50px;
   margin-top: 50px;
+  font-size: 15px;
+  height: 44px;
 }
 #tab-membership #plans .sb-visible {
   position: relative;
@@ -14414,41 +14507,63 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-board .sb-admin-list .sb-top .sb-select ul {
     top: 124px;
   }
-  main .sb-area-users {
+  main .sb-area-users.sb-active {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area::-webkit-scrollbar {
+  main .sb-area-users.sb-active #customerTable_wrapper .row .col-md-6 {
+    margin-top: 10px;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area {
+    padding-inline: 1rem !important;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area::-webkit-scrollbar {
     height: 0;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users {
+  main .sb-area-users.sb-active .sb-scroll-area .row.dt-row {
+    overflow: hidden;
+    overflow-x: scroll;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tr {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tr {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead {
     display: revert;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead th {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th {
     display: revert !important;
+    padding-left: 26px;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead th:not(:first-child) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:nth-child(2) {
+    border-left: 1px solid #d5d5d5;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:not(:first-child) {
     display: revert;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead th:nth-child(1) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:nth-child(1) {
     display: none !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:last-child {
+    border-top: 1px solid #d5d5d5;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr {
     float: none;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:not(.sb-td-profile):not(:first-child) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr td:not(.sb-td-profile):not(:first-child) {
     display: revert;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     display: none !important;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr td.sb-td-profile {
+    border-bottom: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;
+    border-left: 1px solid #d5d5d5;
   }
   main .new_table.sb-area-tickets-dash .sb-scroll-area {
     overflow-x: scroll;
@@ -14461,6 +14576,27 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   main .new_table.sb-area-tickets-dash .sb-scroll-area #customerTable {
     display: none !important;
+  }
+  .sb-area-articles.sb-active .sb-top-bar {
+    padding-block: 8px;
+  }
+  .sb-area-articles.sb-active .sb-top-bar .sb-menu-wide.sb-menu-articles ul {
+    position: unset;
+    display: flex;
+  }
+  .sb-area-articles.sb-active .sb-top-bar .sb-menu-wide.sb-menu-articles ul li {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  .sb-area-articles.sb-active .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area {
+    padding: 1rem 0;
+  }
+  .sb-area-articles.sb-active .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li {
+    padding-inline: 15px;
+  }
+  .sb-area-articles.sb-active .sb-tab.sb-inner-tab .sb-content.sb-scroll-area {
+    border-radius: 0;
+    padding-inline: 0;
   }
 }
 

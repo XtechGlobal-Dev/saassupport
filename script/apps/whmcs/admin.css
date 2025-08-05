@@ -68,7 +68,7 @@ body > .navigation {
     z-index: 999994;
 }
 
-@media (max-width: 464px) {
+@media (max-width: 767px) {
     .sidebar-minimized .sb-admin {
         width: 100%;
     }
