@@ -7991,13 +7991,39 @@ body .daterangepicker td.active:hover {
   transition-delay: 0.2s;
 }
 
-span.badge[data-value=red] {
+span.badge {
+  color: #000 !important;
+}
+span.badge[data-color=red] {
   background-color: #e22424 !important;
   color: #fff !important;
 }
-span.badge[data-value=green] {
+span.badge[data-color=green] {
   background-color: #1fa839 !important;
   color: #fff !important;
+}
+span.badge[data-color=pink] {
+  background-color: #5b31f1 !important;
+  color: #fff !important;
+}
+span.badge[data-color=blue] {
+  background-color: #008db5 !important;
+  color: #fff !important;
+}
+span.badge[data-color=yellow] {
+  background-color: #f5a212 !important;
+  color: #fff !important;
+}
+span.badge[data-color=gray] {
+  background-color: #282828 !important;
+  color: #fff !important;
+}
+
+.sb-td-tags span {
+  margin-right: 5px;
+}
+.sb-td-tags span:last-child {
+  margin-right: 0;
 }
 
 .sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
