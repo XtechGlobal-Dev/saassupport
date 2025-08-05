@@ -507,6 +507,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                     <div class="custom-file">
                         <input type="file" class="form-control d-block" style="width:96%;" id="ticket-attachments1"
                             multiple>
+                        <span class="text-danger files-error mt-2 d-block"></span>
                         <small class="form-text text-muted mt-2" style="display:block">You can select multiple files.
                             Maximum file size: 5MB. Allowed file types are .jpeg, .png, .pdf</small>
                     </div>
@@ -1351,8 +1352,8 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 }
             }
 
-            // const maxFileSizeMB = 5; // Maximum size in MB per file
-            // const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
+            //const maxFileSizeMB = 5; // Maximum size in MB per file
+           // const allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf']; 
             document.getElementById('ticket-attachments1').addEventListener('change', function (event) {
                 const files = event.target.files;
                 let isValid = true;
