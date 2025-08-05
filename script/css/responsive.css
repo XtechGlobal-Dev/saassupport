@@ -7,7 +7,7 @@
 * Front-end responsive CSS. This file is imported only.
 *
 */
-@media (max-width: 464px) {
+@media (max-width: 767px) {
   body.sb-chat-open {
     overscroll-behavior-y: contain;
   }

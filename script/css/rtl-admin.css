@@ -772,7 +772,7 @@
     padding-right: 45px;
   }
 }
-@media (max-width: 464px) {
+@media (max-width: 767px) {
   .sb-rtl .sb-menu-wide > ul li, .sb-rtl .sb-nav > ul li {
     padding: 10px 15px 10px 25px;
   }
