@@ -1512,8 +1512,8 @@ textarea {
     h3 {
         margin: 0;
         padding: 0;
-        font-size: 15px;
-        line-height: 25px;
+        font-size: 13px;
+        line-height: 23px;
         white-space: nowrap;
         letter-spacing: 0.5px;
         color: $white;
@@ -1957,6 +1957,15 @@ textarea {
 .sb-setting {
     position: relative;
     display: inline-block;
+    .input {
+        .container {
+            .row {
+                .col-md-12 {
+                    padding: 0;
+                }
+            }
+        }
+    }
 }
 
 
@@ -4672,6 +4681,19 @@ body {
         }
     }
 }
+
+span.badge {
+  &[data-value="red"] {
+    background-color: #e22424 !important;
+    color: #fff !important;
+  }
+
+  &[data-value="green"] {
+    background-color: #1fa839 !important;
+    color: #fff !important;
+  }
+}
+
 
 .sb-main main .sb-board>.sb-admin-list .sb-scroll-area li:hover {
     background: #EEF2FF !important;
@@ -10373,6 +10395,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     .row {
         &:nth-child(2) {
             margin: 0;
+            overflow: visible;
 
             .col-sm-12 {
                 padding: 0;
