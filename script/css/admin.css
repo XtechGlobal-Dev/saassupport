@@ -12749,6 +12749,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12 {
   padding: 0;
+  overflow-x: scroll;
 }
 
 .sb-area-tickets .tags-filter {
