@@ -7907,8 +7907,14 @@ body .daterangepicker td.active:hover {
 .sb-main main .sb-area-conversations .sb-admin-list.sb-departments-show .sb-scroll-area ul li:hover {
   background: #EEF2FF !important;
 }
+.sb-main main .sb-area-conversations .sb-admin-list.sb-departments-show .sb-flex ul.sb-scroll-area.sb-active li:hover {
+  background: #155cfd !important;
+}
 .sb-main main .sb-area-conversations .sb-scroll-area ul li:hover {
   background: #EEF2FF !important;
+}
+.sb-main main .sb-area-conversations .sb-scroll-area .sb-flex ul.sb-scroll-area.sb-active li:hover {
+  background: #155cfd !important;
 }
 
 .sb-area-dashboard main {
@@ -8390,7 +8396,7 @@ body .daterangepicker td.active:hover {
   width: 100%;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .sidepanel {
-  border: 1px solid #a5a7aa;
+  border: 1px solid #d5d5d5;
   border-radius: 10px;
   padding: 15px;
 }
@@ -13394,7 +13400,7 @@ div#messaging-channels {
   overflow-x: scroll;
 }
 .my-tabs::-webkit-scrollbar {
-  height: 0;
+  height: 0px;
 }
 .my-tabs .my-tab {
   background: none;
@@ -13414,14 +13420,22 @@ div#messaging-channels {
   color: #000;
   font-weight: 800;
 }
+.my-tabs .my-tab svg {
+  height: 20px;
+  width: 20px;
+}
 .my-tabs .tab-slider {
   background: #fff !important;
   border-radius: 40px;
-  height: 31px;
+  height: 34px;
   position: absolute;
   z-index: 0;
   display: inline-block;
   transition: all 0.1s linear;
+}
+
+.articles-card .my-tabs {
+  min-width: fit-content;
 }
 
 .toggle-btn {
@@ -13623,7 +13637,8 @@ div#messaging-channels {
   border-radius: 10px;
 }
 #tab-membership .plans-box-menu ul li {
-  padding: 3px 28px;
+  padding: 3px 24px;
+  font-size: 14px;
 }
 #tab-membership .plans-box-menu ul li.sb-active {
   background: #fff;
@@ -13658,12 +13673,12 @@ div#messaging-channels {
   color: #4B5563;
 }
 #tab-membership .plans-box div h4 {
-  font-size: 20px;
+  font-size: 16px;
   color: #111827;
   margin-bottom: 5px;
 }
 #tab-membership .plans-box div h3 {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
 }
 #tab-membership .plans-box div h3 span {
@@ -13678,7 +13693,7 @@ div#messaging-channels {
 }
 #tab-membership .plans-box div ul li {
   color: #374151;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   position: relative;
   padding-left: 20px;
@@ -13695,7 +13710,6 @@ div#messaging-channels {
   border-right: 3px solid #22C55E;
 }
 #tab-membership .plans-box div button {
-  font-size: 16px;
   line-height: 36px;
   letter-spacing: 0.3px;
   font-weight: 500;
@@ -13715,8 +13729,9 @@ div#messaging-channels {
   box-shadow: none;
   transition: all 0.4s;
   user-select: none;
-  height: 50px;
   margin-top: 50px;
+  font-size: 15px;
+  height: 44px;
 }
 #tab-membership #plans .sb-visible {
   position: relative;
@@ -14414,41 +14429,63 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-board .sb-admin-list .sb-top .sb-select ul {
     top: 124px;
   }
-  main .sb-area-users {
+  main .sb-area-users.sb-active {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area::-webkit-scrollbar {
+  main .sb-area-users.sb-active #customerTable_wrapper .row .col-md-6 {
+    margin-top: 10px;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area {
+    padding-inline: 1rem !important;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area::-webkit-scrollbar {
     height: 0;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users {
+  main .sb-area-users.sb-active .sb-scroll-area .row.dt-row {
+    overflow: hidden;
+    overflow-x: scroll;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tr {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tr {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead {
     display: revert;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead th {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th {
     display: revert !important;
+    padding-left: 26px;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead th:not(:first-child) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:nth-child(2) {
+    border-left: 1px solid #d5d5d5;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:not(:first-child) {
     display: revert;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users thead th:nth-child(1) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:nth-child(1) {
     display: none !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users thead th:last-child {
+    border-top: 1px solid #d5d5d5;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody {
     display: revert !important;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr {
     float: none;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:not(.sb-td-profile):not(:first-child) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr td:not(.sb-td-profile):not(:first-child) {
     display: revert;
   }
-  main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     display: none !important;
+  }
+  main .sb-area-users.sb-active .sb-scroll-area .sb-table-users tbody tr td.sb-td-profile {
+    border-bottom: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;
+    border-left: 1px solid #d5d5d5;
   }
   main .new_table.sb-area-tickets-dash .sb-scroll-area {
     overflow-x: scroll;
