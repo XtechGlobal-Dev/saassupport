@@ -1512,8 +1512,8 @@ textarea {
     h3 {
         margin: 0;
         padding: 0;
-        font-size: 15px;
-        line-height: 25px;
+        font-size: 13px;
+        line-height: 23px;
         white-space: nowrap;
         letter-spacing: 0.5px;
         color: $white;
@@ -1957,6 +1957,15 @@ textarea {
 .sb-setting {
     position: relative;
     display: inline-block;
+    .input {
+        .container {
+            .row {
+                .col-md-12 {
+                    padding: 0;
+                }
+            }
+        }
+    }
 }
 
 
@@ -4672,6 +4681,45 @@ body {
         }
     }
 }
+
+span.badge {
+    background-color: #fce4ec6b !important;
+    color: #000 !important;
+  &[data-color="red"] {
+    background-color: #e22424 !important;
+    color: #fff !important;
+  }
+  &[data-color="green"] {
+    background-color: #1fa839 !important;
+    color: #fff !important;
+  }
+  &[data-color="pink"] {
+    background-color: #5b31f1 !important;
+    color: #fff !important;
+  }
+  &[data-color="blue"] {
+    background-color: #008db5 !important;
+    color: #fff !important;
+  }
+  &[data-color="yellow"] {
+    background-color: #f5a212 !important;
+    color: #fff !important;
+  }
+  &[data-color="gray"] {
+    background-color: #282828 !important;
+    color: #fff !important;
+  }
+}
+
+.sb-td-tags {
+    span {
+        margin-right: 5px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
 
 .sb-main main .sb-board>.sb-admin-list .sb-scroll-area li:hover {
     background: #EEF2FF !important;
@@ -10373,6 +10421,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     .row {
         &:nth-child(2) {
             margin: 0;
+            overflow: visible;
 
             .col-sm-12 {
                 padding: 0;
@@ -12950,7 +12999,7 @@ main {
                     height: fit-content;
                     justify-content: flex-start;
                     gap: 10px;
-                    overflow: unset;
+                    overflow: hidden;
                     position: relative;
                     padding-block: 10px;
 
@@ -13327,6 +13376,46 @@ main {
                 }
             }
         }
+    }
+}
+
+
+@media only screen and (min-width: 465px) and (max-width: 730px) {
+    .ab-admin {
+        .sb-area-users {
+            .sb-top-bar {
+                div {
+                    .sb-btn.sb-icon {
+                        font-size: 10px;
+                        i {
+                            font-size: 10px;
+                            margin-right: 0 !important;
+                        }
+                    }
+                }
+            }
+        .sb-menu-wide {
+            ul {
+                max-width: 75px;
+            }
+        }
+        .sb-menu-mobile {
+            ul {
+                li {
+                    a {
+                        width: fit-content;
+                    }
+                }
+            }
+        }
+        .sb-filter-btn {
+            width: 20px;
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
     }
 }
 
