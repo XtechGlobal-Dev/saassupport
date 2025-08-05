@@ -32,18 +32,21 @@ function sb_component_tickets()
     if (sb_is_rtl()) {
         $css .= ' sb-rtl';
     }
-?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
-        <header class="user_header d-none" >
+    <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>"
+        data-height="<?php echo sb_get_setting('tickets-height') ?>"
+        data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
+        <header class="user_header d-none">
             <div class="header_left">
                 <h2 class="tab  sb-active" data-id="tickets-list-area">Tickets</h2>
                 <h2 class="tab" data-id="sb-tickets-area">Conversations</h2>
             </div>
             <div class="header_right">
                 <div class="user_profile">
-                    <img class="avatar" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>" alt="User" data-name="">
+                    <img class="avatar" src="<?php echo sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>"
+                        alt="User" data-name="">
                     <span class="user-initials avatar_initials" style="display:none;">
                         <span class="initials avatar_name"></span>
                     </span>
@@ -54,7 +57,9 @@ function sb_component_tickets()
                 </div>
                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.83333 24.5C4.19167 24.5 3.64256 24.2717 3.186 23.8152C2.72944 23.3586 2.50078 22.8091 2.5 22.1667V5.83333C2.5 5.19167 2.72867 4.64256 3.186 4.186C3.64333 3.72944 4.19244 3.50078 4.83333 3.5H11.8333C12.1639 3.5 12.4412 3.612 12.6652 3.836C12.8892 4.06 13.0008 4.33689 13 4.66667C12.9992 4.99644 12.8872 5.27372 12.664 5.4985C12.4408 5.72328 12.1639 5.83489 11.8333 5.83333H4.83333V22.1667H11.8333C12.1639 22.1667 12.4412 22.2787 12.6652 22.5027C12.8892 22.7267 13.0008 23.0036 13 23.3333C12.9992 23.6631 12.8872 23.9404 12.664 24.1652C12.4408 24.3899 12.1639 24.5016 11.8333 24.5H4.83333ZM19.0375 15.1667H10.6667C10.3361 15.1667 10.0592 15.0547 9.836 14.8307C9.61278 14.6067 9.50078 14.3298 9.5 14C9.49922 13.6702 9.61122 13.3933 9.836 13.1693C10.0608 12.9453 10.3377 12.8333 10.6667 12.8333H19.0375L16.85 10.6458C16.6361 10.4319 16.5292 10.1694 16.5292 9.85833C16.5292 9.54722 16.6361 9.275 16.85 9.04167C17.0639 8.80833 17.3361 8.68661 17.6667 8.6765C17.9972 8.66639 18.2792 8.77839 18.5125 9.0125L22.6833 13.1833C22.9167 13.4167 23.0333 13.6889 23.0333 14C23.0333 14.3111 22.9167 14.5833 22.6833 14.8167L18.5125 18.9875C18.2792 19.2208 18.0023 19.3328 17.6818 19.3235C17.3614 19.3142 17.0841 19.1924 16.85 18.9583C16.6361 18.725 16.5342 18.4481 16.5443 18.1277C16.5544 17.8072 16.6661 17.5397 16.8792 17.325L19.0375 15.1667Z" fill="#67636D" />
+                        <path
+                            d="M4.83333 24.5C4.19167 24.5 3.64256 24.2717 3.186 23.8152C2.72944 23.3586 2.50078 22.8091 2.5 22.1667V5.83333C2.5 5.19167 2.72867 4.64256 3.186 4.186C3.64333 3.72944 4.19244 3.50078 4.83333 3.5H11.8333C12.1639 3.5 12.4412 3.612 12.6652 3.836C12.8892 4.06 13.0008 4.33689 13 4.66667C12.9992 4.99644 12.8872 5.27372 12.664 5.4985C12.4408 5.72328 12.1639 5.83489 11.8333 5.83333H4.83333V22.1667H11.8333C12.1639 22.1667 12.4412 22.2787 12.6652 22.5027C12.8892 22.7267 13.0008 23.0036 13 23.3333C12.9992 23.6631 12.8872 23.9404 12.664 24.1652C12.4408 24.3899 12.1639 24.5016 11.8333 24.5H4.83333ZM19.0375 15.1667H10.6667C10.3361 15.1667 10.0592 15.0547 9.836 14.8307C9.61278 14.6067 9.50078 14.3298 9.5 14C9.49922 13.6702 9.61122 13.3933 9.836 13.1693C10.0608 12.9453 10.3377 12.8333 10.6667 12.8333H19.0375L16.85 10.6458C16.6361 10.4319 16.5292 10.1694 16.5292 9.85833C16.5292 9.54722 16.6361 9.275 16.85 9.04167C17.0639 8.80833 17.3361 8.68661 17.6667 8.6765C17.9972 8.66639 18.2792 8.77839 18.5125 9.0125L22.6833 13.1833C22.9167 13.4167 23.0333 13.6889 23.0333 14C23.0333 14.3111 22.9167 14.5833 22.6833 14.8167L18.5125 18.9875C18.2792 19.2208 18.0023 19.3328 17.6818 19.3235C17.3614 19.3142 17.0841 19.1924 16.85 18.9583C16.6361 18.725 16.5342 18.4481 16.5443 18.1277C16.5544 17.8072 16.6661 17.5397 16.8792 17.325L19.0375 15.1667Z"
+                            fill="#67636D" />
                     </svg>
                 </div>
             </div>
@@ -67,15 +72,17 @@ function sb_component_tickets()
                             <?php if (!sb_isset($disable_fields, 'tickets-button'))
                                 echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
                             else
-                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; 
+                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>';
                             ?>
                         </div>
                         <div class="sb-search-btn">
                             <i class="sb-icon sb-icon-search"></i>
-                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
+                            <input type="text" autocomplete="false"
+                                placeholder="<?php sb_e('Search for keywords or users...') ?>" />
                         </div>
                     </div>
-                    <ul class="sb-user-tickets sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                    <ul class="sb-user-tickets sb-scroll-area"
+                        data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
                         <p class="p-4">
                             <?php sb_e('No results found.') ?>
                         </p>
@@ -84,7 +91,7 @@ function sb_component_tickets()
             </div>
             <div class="sb-panel-main p-5">
                 <div class="sb-top" style="display:none">
-                                        <div class="sb-title sb-active"></div>
+                    <div class="sb-title sb-active"></div>
                     <a class="sb-close sb-btn-icon sb-btn-red">
                         <i class="sb-icon-close"></i>
                     </a>
@@ -92,7 +99,8 @@ function sb_component_tickets()
                 </div>
                 <p class="no-reords text-center d-none">No results found.</p>
                 <div class="tickets-area">
-                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this <span class="ticket-creation-time"></span></span></div>
+                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this
+                            <span class="ticket-creation-time"></span></span></div>
                     <h4 class="ticket-subject"></h4>
                     <div class="bg-light p-3 rounded mb-3">
                         <div class="mb-1 ticket-description">
@@ -100,17 +108,21 @@ function sb_component_tickets()
                     </div>
                     <div class="mt-5">
                         <strong>Comments</strong>
-                                                                                        <!-- Comments/Chat Section -->
+                        <!-- Comments/Chat Section -->
                         <div id="ticket-comments" class="row mt-4">
                             <div class="col-md-12 p-0">
-                                <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;" id="comments-section">
+                                <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;"
+                                    id="comments-section">
                                     <!-- Comments will be loaded here by JS -->
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2 mt-4">
-                                    <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
-                                    <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."></textarea>
-                                    <textarea class="form-control me-2 d-none" data-comment-id="" id="oldComment"></textarea>
+                                    <input type="hidden" id="currentUserId"
+                                        value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
+                                    <textarea class="form-control me-2" id="newComment"
+                                        placeholder="Type your comment..."></textarea>
+                                    <textarea class="form-control me-2 d-none" data-comment-id=""
+                                        id="oldComment"></textarea>
 
                                     <button id="addComment" class="btn btn-primary">Send</button>
                                 </div>
@@ -121,13 +133,13 @@ function sb_component_tickets()
                 <div class="sb-panel sb-scroll-area"></div>
             </div>
             <div class="sb-panel-right p-4">
-                <div class="right-side-wrapper d-none" >
+                <div class="right-side-wrapper d-none">
                     <div class="mb-2 text-muted small user-name"></div>
                     <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id"></span></div>
                     <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status"></span></div>
                     <p><strong>Ticket Attachments:</strong></p>
                     <div class="row ticket-attachments"></div>
-                    
+
                     <div class="sb-scroll-area"></div>
                 </div>
             </div>
@@ -139,16 +151,17 @@ function sb_component_tickets()
                         <!--div class="sb-top">
                             <div>
                                 <?php /*if (!sb_isset($disable_fields, 'tickets-button'))
-                                    echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
-                                else
-                                    echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */?>
+                               echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                           else
+                               echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
                             </div>
                             <div class="sb-search-btn">
                                 <i class="sb-icon sb-icon-search"></i>
                                 <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
                             </div>
                         </div-->
-                        <ul class="sb-user-conversations sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
+                        <ul class="sb-user-conversations sb-scroll-area"
+                            data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
                             <p>
                                 <?php sb_e('No results found.') ?>
                             </p>
@@ -193,7 +206,8 @@ function sb_component_tickets()
                     <div class="sb-top">
                         <?php if (sb_get_setting('tickets-registration-required')) { ?>
                             <div class="sb-profile-menu">
-                                <div class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
+                                <div
+                                    class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
                                     <img src="" />
                                     <span class="sb-name"></span>
                                 </div>
@@ -210,7 +224,7 @@ function sb_component_tickets()
                                     </ul>
                                 </div>
                             </div>
-                        <?php
+                            <?php
                         } else {
                             echo '<div class="sb-title">' . sb_('Details') . '</div>';
                         }
@@ -236,7 +250,7 @@ function sb_component_tickets()
                     </div>
                     <div class="sb-no-conversation-message"></div>
                 </div>
-            <?php
+                <?php
             }
             if (!sb_isset($disable_fields, 'tickets-left-panel') && !$disable_arrows) {
                 echo '<i class="sb-btn-collapse sb-left sb-icon-arrow-left"></i>';
@@ -246,7 +260,7 @@ function sb_component_tickets()
             }
             ?>
         </div>
-        
+
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -254,10 +268,10 @@ function sb_component_tickets()
         <div class="sb-lightbox-overlay"></div>
         <div class="sb-ticket-fields">
             <?php
-             $code = '';
+            $code = '';
             if (sb_get_multi_setting('tickets-fields', 'tickets-field-departments')) {
                 $departments = sb_get_departments();
-                
+
                 ?>
                 <div id="department_id" data-type="select" class="sb-input">
                     <span>Department</span>
@@ -267,12 +281,12 @@ function sb_component_tickets()
                         ); ?></option>
                         <?php
                         foreach ($departments as $key => $value) {
-                            echo '<option value="' .$key .'">' .sb_($value["name"]) .'</option>';
+                            echo '<option value="' . $key . '">' . sb_($value["name"]) . '</option>';
                         }
                         ?>
                     </select>
                 </div>
-            <?php
+                <?php
             }
             if (sb_get_multi_setting('tickets-fields', 'tickets-field-priority')) {
                 function sb_get_priorities()
@@ -292,12 +306,12 @@ function sb_component_tickets()
                         <option value="">Select Priority</option>
                         <?php
                         foreach ($priorities as $key => $value) {
-                            echo '<option value="' .$value["id"] .'">' .$value["name"] .'</option>';
+                            echo '<option value="' . $value["id"] . '">' . $value["name"] . '</option>';
                         }
                         ?>
                     </select>
                 </div>
-            <?php
+                <?php
             }
             if (sb_get_multi_setting('wc-tickets-products', 'wc-tickets-products-active')) {
                 $products = sb_woocommerce_get_products([], false, sb_get_user_language());
@@ -337,7 +351,7 @@ function sb_tickets_css()
         $css .= '.sb-btn-icon:hover { border-color: ' . $color_1 . '; color: ' . $color_1 . '; }';
     }
 
-	/* Timeline chat style for comments */
+    /* Timeline chat style for comments */
     $css .= '
 	.comment-row {
 		display: flex;
