@@ -1674,6 +1674,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         window.initTabSlider = initTabSlider;
 
+        
         $(".sidebar li a").on("click", function () {
             setTimeout(() => {
                 initTabSlider();
