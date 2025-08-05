@@ -765,10 +765,10 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         }
 
         /* .sb-td-tags span {
-                                                             margin: 3px 5px 0 0;
-                                                            padding: .45em .75em;
-                                                            font-size: 13px
-                                                        } */
+                                                                 margin: 3px 5px 0 0;
+                                                                padding: .45em .75em;
+                                                                font-size: 13px
+                                                            } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -803,76 +803,76 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                                                                                                                            position: relative;
-                                                                                                                                                                            overflow: visible !important;
+                                                                                                                                                                                position: relative;
+                                                                                                                                                                                overflow: visible !important;
             
-                                                                                                                                                                        }
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-btn {
-                                                                                                                                                                            border: none;
-                                                                                                                                                                            border-radius: 8px;
-                                                                                                                                                                            padding: 3px 12px;
-                                                                                                                                                                            font-weight: 500;
-                                                                                                                                                                            cursor: pointer;
-                                                                                                                                                                            display: flex;
-                                                                                                                                                                            align-items: center;
-                                                                                                                                                                            gap: 4px;
-                                                                                                                                                                            font-size: 14px;
-                                                                                                                                                                        }
+                                                                                                                                                                            .status-btn {
+                                                                                                                                                                                border: none;
+                                                                                                                                                                                border-radius: 8px;
+                                                                                                                                                                                padding: 3px 12px;
+                                                                                                                                                                                font-weight: 500;
+                                                                                                                                                                                cursor: pointer;
+                                                                                                                                                                                display: flex;
+                                                                                                                                                                                align-items: center;
+                                                                                                                                                                                gap: 4px;
+                                                                                                                                                                                font-size: 14px;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-list li,
-                                                                                                                                                                        .priority-list li {
-                                                                                                                                                                            font-size: 14px;
-                                                                                                                                                                        }
+                                                                                                                                                                            .status-list li,
+                                                                                                                                                                            .priority-list li {
+                                                                                                                                                                                font-size: 14px;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-dot {
-                                                                                                                                                                            width: 10px !important;
-                                                                                                                                                                            height: 10px !important;
-                                                                                                                                                                        }
+                                                                                                                                                                            .status-dot {
+                                                                                                                                                                                width: 10px !important;
+                                                                                                                                                                                height: 10px !important;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .arrow {
-                                                                                                                                                                            font-size: 12px;
-                                                                                                                                                                        }
+                                                                                                                                                                            .arrow {
+                                                                                                                                                                                font-size: 12px;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-list,
-                                                                                                                                                                        .priority-list {
-                                                                                                                                                                            display: none;
-                                                                                                                                                                            position: absolute;
-                                                                                                                                                                            top: 75%;
-                                                                                                                                                                            left: 0;
-                                                                                                                                                                            min-width: 170px;
-                                                                                                                                                                            background: #fff;
-                                                                                                                                                                            border: 1px solid #ddd;
-                                                                                                                                                                            border-radius: 8px;
-                                                                                                                                                                            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                                                                                                                            z-index: 9999;
-                                                                                                                                                                            padding: 6px 0;
-                                                                                                                                                                            margin: 0;
-                                                                                                                                                                            list-style: none;
-                                                                                                                                                                        }
+                                                                                                                                                                            .status-list,
+                                                                                                                                                                            .priority-list {
+                                                                                                                                                                                display: none;
+                                                                                                                                                                                position: absolute;
+                                                                                                                                                                                top: 75%;
+                                                                                                                                                                                left: 0;
+                                                                                                                                                                                min-width: 170px;
+                                                                                                                                                                                background: #fff;
+                                                                                                                                                                                border: 1px solid #ddd;
+                                                                                                                                                                                border-radius: 8px;
+                                                                                                                                                                                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                                                                                                                                                                z-index: 9999;
+                                                                                                                                                                                padding: 6px 0;
+                                                                                                                                                                                margin: 0;
+                                                                                                                                                                                list-style: none;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-list li,
-                                                                                                                                                                        .priority-list li {
-                                                                                                                                                                            padding: 8px 16px;
-                                                                                                                                                                            cursor: pointer;
-                                                                                                                                                                            display: flex;
-                                                                                                                                                                            align-items: center;
-                                                                                                                                                                            gap: 4px;
-                                                                                                                                                                            font-size: 15px;
-                                                                                                                                                                            transition: background 0.15s;
-                                                                                                                                                                        }
+                                                                                                                                                                            .status-list li,
+                                                                                                                                                                            .priority-list li {
+                                                                                                                                                                                padding: 8px 16px;
+                                                                                                                                                                                cursor: pointer;
+                                                                                                                                                                                display: flex;
+                                                                                                                                                                                align-items: center;
+                                                                                                                                                                                gap: 4px;
+                                                                                                                                                                                font-size: 15px;
+                                                                                                                                                                                transition: background 0.15s;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-list li:hover,
-                                                                                                                                                                        .priority-list li:hover {
-                                                                                                                                                                            background: #f5f5f5;
-                                                                                                                                                                        }
+                                                                                                                                                                            .status-list li:hover,
+                                                                                                                                                                            .priority-list li:hover {
+                                                                                                                                                                                background: #f5f5f5;
+                                                                                                                                                                            }
 
-                                                                                                                                                                        .status-dot {
-                                                                                                                                                                            width: 12px;
-                                                                                                                                                                            height: 12px;
-                                                                                                                                                                            border-radius: 50%;
-                                                                                                                                                                            display: inline-block;
-                                                                                                                                                                        } */
+                                                                                                                                                                            .status-dot {
+                                                                                                                                                                                width: 12px;
+                                                                                                                                                                                height: 12px;
+                                                                                                                                                                                border-radius: 50%;
+                                                                                                                                                                                display: inline-block;
+                                                                                                                                                                            } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1684,6 +1684,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         jQuery(document).ready(function ($) {
             $(".toggle-btn").click(function () {
                 $(".sidebar.sb-admin-nav").toggleClass("side-open");
+            })
+            $(".sidebar nav li a").click(function() {
+                $(".sidebar.sb-admin-nav").removeClass("side-open")
             })
         })
     </script>
@@ -2967,10 +2970,6 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                        </section>
-
-                                        <section class="dashboard-metrics">
-                                            <!--  -->
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
@@ -4329,18 +4328,22 @@ function sb_component_admin()
                                     <div class="col-md-12 p-0">
                                         <div class="row">
                                             <div class="col-md-8 p-0 col-lg-9">
-                                                <h2 class="title mb-0 d-flex align-items-center gap-1"># <span class="tno">TR-51</span> / 
-                                                <span class="tsubject d-flex align-items-center w-100">
-                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white px-1" aria-hidden="true"
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            fill="none" viewBox="0 0 24 24">
+                                                <h2 class="title mb-0 d-flex align-items-center gap-1"># <span
+                                                        class="tno">TR-51</span> /
+                                                    <span class="tsubject d-flex align-items-center w-100">
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white px-1"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" fill="none" viewBox="0 0 24 24">
                                                             <path stroke="currentColor" stroke-linecap="round"
                                                                 stroke-linejoin="round" stroke-width="2"
                                                                 d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                                         </svg>
-                                                        <input type="text" id="ticket-subject" placeholder="Enter Ticket Subject" value="" style="border: 1px solid #d5d5d5; border-radius: 0; padding-inline: 10px; width: 100%;" />
-                                                        
-                                                    </span></h2>
+                                                        <input type="text" id="ticket-subject"
+                                                            placeholder="Enter Ticket Subject" value=""
+                                                            style="border: 1px solid #d5d5d5; border-radius: 0; padding-inline: 10px; width: 100%;" />
+
+                                                    </span>
+                                                </h2>
                                             </div>
                                             <div class="col-md-4 p-0 col-lg-3">
                                                 <div class="d-flex align-items-center justify-content-end gap-3 pl-5">
@@ -4414,7 +4417,7 @@ function sb_component_admin()
                                                                         <!-- Comments will be loaded here by JS -->
                                                                     </div>
 
-                                                                    <div class="d-flex align-items-center gap-2 mt-4">
+                                                                    <div class="d-flex align-items-center gap-2">
                                                                         <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()[
                                                                             "id"
                                                                         ] ??
@@ -5397,7 +5400,7 @@ function sb_component_admin()
                                 <!-- </div> -->
                                 <!-- </div> -->
                             </div>
-                            <div class="sb-content sb-content-categories sb-scroll-area sb-loading">
+                            <div class="sb-content sb-content-categories sb-scroll-area bg-white mt-2 sb-loading">
                                 <div class="content_article">
                                     <div class="articleHEad">
                                         <div class="">
@@ -5406,42 +5409,44 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <div class="articles_bg">
-                                        <h2 class="fw-semibold fs-6 m-0 mb-2">
-                                            Categories Settings
-                                        </h2>
-                                        <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
-                                            Manage and organize content types.
-                                        </h2>
-                                        <h2 class="sb-language-switcher-cnt">
-                                            <?php sb_e("Name"); ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-text">
-                                            <div>
-                                                <input id="category-title" type="text" />
+                                        <div class="input_container">
+                                            <h2 class="sb-language-switcher-cnt">
+                                                <?php sb_e("Name"); ?>
+                                            </h2>
+                                            <div class="sb-setting sb-type-text">
+                                                <div>
+                                                    <input id="category-title" type="text" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <h2>
-                                            <?php sb_e("Description"); ?>
-                                        </h2>
-                                        <div class="sb-setting sb-type-textarea">
-                                            <div>
-                                                <textarea id="category-description"></textarea>
+                                        <div class="input_container">
+                                            <h2>
+                                                <?php sb_e("Description"); ?>
+                                            </h2>
+                                            <div class="sb-setting sb-type-textarea">
+                                                <div>
+                                                    <textarea id="category-description"></textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                        <h2>
-                                            <?php sb_e("Image"); ?>
-                                        </h2>
-                                        <div data-type="image" class="sb-input sb-setting sb-input-image">
-                                            <div id="category-image" class="image">
-                                                <div class="sb-icon-close"></div>
+                                        <div class="input_container">
+                                            <h2>
+                                                <?php sb_e("Image"); ?>
+                                            </h2>
+                                            <div data-type="image" class="sb-input sb-setting sb-input-image">
+                                                <div id="category-image" class="image">
+                                                    <div class="sb-icon-close"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <h2 class="category-parent">
-                                            <?php sb_e("Parent category"); ?>
-                                        </h2>
-                                        <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
-                                            <div class="input">
-                                                <input id="category-parent" type="checkbox" />
+                                        <div class="input_container">
+                                            <h2 class="category-parent">
+                                                <?php sb_e("Parent category"); ?>
+                                            </h2>
+                                            <div data-type="checkbox" class="sb-setting sb-type-checkbox category-parent">
+                                                <div class="input">
+                                                    <input id="category-parent" type="checkbox" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -5643,12 +5648,12 @@ function sb_component_admin()
                                             : sb_("Messages & Forms"); ?>
                                     </li>
                                     <?php /*
-                                           <li id="tab-various">
-                                               <?php echo $disable_translations
-                                                   ? "Miscellaneous"
-                                                   : sb_("Miscellaneous"); ?>
-                                           </li>
-                                           */ ?>
+                                                  <li id="tab-various">
+                                                      <?php echo $disable_translations
+                                                          ? "Miscellaneous"
+                                                          : sb_("Miscellaneous"); ?>
+                                                  </li>
+                                                  */ ?>
                                     <?php for (
                                         $i = 0;
                                         $i < count($apps);
@@ -7303,7 +7308,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Setting
+                                                Settings
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
