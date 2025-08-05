@@ -5692,7 +5692,7 @@ div ul.sb-menu .li:hover,
   padding-right: 0;
 }
 
-@media (max-width: 464px) {
+@media (max-width: 767px) {
   .sb-btn-emoji {
     display: none;
   }

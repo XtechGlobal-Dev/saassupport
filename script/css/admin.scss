@@ -2889,9 +2889,19 @@ td.sb-offline:after {
             padding: 0;
             background: #fff;
             box-shadow: 0px 0px 8.4px 0px #00000040;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
 
             &::-webkit-scrollbar {
                 width: 0px;
+            }
+
+            ul {
+
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
             }
 
             li {
@@ -3196,17 +3206,42 @@ td.sb-offline:after {
             padding: 10px 0 5px 0;
             overflow-y: scroll;
 
+            .sb-message-attachments {
+                a {
+                    color: #1E293B;
+                    font-weight: 500;
+                }
+            }
+
+            .sb-time {
+                span {
+                    color: #475569;
+                    font-weight: 500;
+                }
+            }
+
+            .sb-right {
+                .sb-message-attachments {
+                    a {
+                        color: #fff !important;
+                    }
+                }
+
+                .sb-time {
+                    span {
+                        color: #fff;
+                    }
+                }
+            }
+
+
             >div {
                 max-width: calc(100% - 275px);
                 background: #fff !important;
                 border-radius: 14px;
                 padding: 8px 12px;
 
-                .sb-message-attachments {
-                    a {
-                        color: #fff !important;
-                    }
-                }
+
 
                 .sb-message {
                     color: #1E293B;
@@ -3314,6 +3349,7 @@ td.sb-offline:after {
                         object-fit: cover;
                         width: 100%;
                         min-width: 240px;
+                        padding-inline: 12px;
                     }
                 }
 
@@ -4157,18 +4193,6 @@ td.sb-offline:after {
 }
 
 
-#ticketTable_wrapper {
-    .row {
-        .col-md-5 {
-            order: 1;
-        }
-
-        .col-md-7 {
-            order: 2;
-        }
-    }
-}
-
 ul.pagination {
     li {
         &.disabled {
@@ -4402,29 +4426,93 @@ body {
 }
 
 #tab-profile {
+    &.sb-active {
+        max-width: unset;
+        background: #fff;
+        padding: 2rem 2rem;
+        border-radius: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        #banner-verify-your-email,
+        h2.first-title,
+        p {
+            width: 100%;
+        }
+
+        .sb-input {
+            width: 49%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            margin-top: 0;
+
+            span {
+                padding-bottom: 8px;
+            }
+        }
+
+        #email {
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            span {
+                display: flex;
+                width: 100%;
+            }
+
+            input {
+                width: calc(100% - 109px);
+            }
+        }
+
+        a.btn-verify-email {
+            background-color: #006ff9;
+            color: #ffffff;
+            border-radius: 8px;
+            border: 0;
+        }
+
+        .sb-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center !important;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            margin-top: 1rem;
+
+            a {
+                width: fit-content;
+                margin-left: 0 !important;
+
+                i {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+#tab-referral,
+#tab-installation {
     max-width: unset;
     background: #fff;
     padding: 2rem 2rem;
     border-radius: 8px;
 
-    a.btn-verify-email {
-        background-color: #006ff9;
-        color: #ffffff;
-        border-radius: 8px;
-        border: 0;
+    h2.first-title {
+        margin-top: 0 !important;
     }
 
-    .sb-flex {
-        display: flex;
-        align-items: center;
-        justify-content: center !important;
-        flex-wrap: wrap;
-        gap: 20px;
+    h2.addons-title {
+        margin-top: 20px;
+    }
 
-        a {
-            width: fit-content;
-            margin-left: 0 !important;
-        }
+    textarea {
+        resize: none;
     }
 }
 
@@ -4566,6 +4654,10 @@ body {
     background: #EEF2FF !important;
 }
 
+.sb-main main .sb-area-conversations .sb-board>.sb-admin-list .sb-flex .sb-filter-btn .sb-select ul li:hover {
+    background: #155cfd !important;
+}
+
 .sb-main {
     main {
         .sb-area-conversations {
@@ -4588,6 +4680,9 @@ body {
                             }
                         }
                     }
+                    .sb-select {
+                        margin-right: 0;
+                    }
                 }
             }
 
@@ -4599,6 +4694,7 @@ body {
                         }
                     }
                 }
+
                 .sb-flex {
                     ul.sb-scroll-area.sb-active {
                         li {
@@ -4606,6 +4702,14 @@ body {
                                 background: #155cfd !important;
                             }
                         }
+                    }
+                }
+            }
+
+            .sb-user-details.sb-active {
+                .sb-panel-attachments {
+                    .sb-flex {
+                        margin-bottom: 5px;
                     }
                 }
             }
@@ -5846,8 +5950,6 @@ body {
         align-items: flex-start;
         margin-bottom: 30px;
     }
-
-
 
     >.sb-tab {
 
@@ -12908,6 +13010,41 @@ main {
                 #customerTable {
                     display: none !important;
                 }
+            }
+        }
+    }
+
+    .sb-area-articles.sb-active {
+        .sb-top-bar {
+            padding-block: 8px;
+
+            .sb-menu-wide.sb-menu-articles {
+                ul {
+                    position: unset;
+                    display: flex;
+
+                    li {
+                        padding: 10px 15px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .sb-tab.sb-inner-tab {
+            .sb-nav.sb-nav-only.sb-scroll-area {
+                padding: 1rem 0;
+
+                ul {
+                    li {
+                        padding-inline: 15px;
+                    }
+                }
+            }
+
+            .sb-content.sb-scroll-area {
+                border-radius: 0;
+                padding-inline: 0;
             }
         }
     }
