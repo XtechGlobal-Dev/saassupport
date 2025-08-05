@@ -7992,6 +7992,7 @@ body .daterangepicker td.active:hover {
 }
 
 span.badge {
+  background-color: rgba(252, 228, 236, 0.4196078431) !important;
   color: #000 !important;
 }
 span.badge[data-color=red] {
@@ -14603,7 +14604,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     height: fit-content;
     justify-content: flex-start;
     gap: 10px;
-    overflow: unset;
+    overflow: hidden;
     position: relative;
     padding-block: 10px;
   }
@@ -14837,6 +14838,28 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-area-dashboard main .new_container .dashboard-metrics {
     grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+  }
+}
+@media only screen and (min-width: 465px) and (max-width: 730px) {
+  .ab-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon {
+    font-size: 10px;
+  }
+  .ab-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon i {
+    font-size: 10px;
+    margin-right: 0 !important;
+  }
+  .ab-admin .sb-area-users .sb-menu-wide ul {
+    max-width: 75px;
+  }
+  .ab-admin .sb-area-users .sb-menu-mobile ul li a {
+    width: fit-content;
+  }
+  .ab-admin .sb-area-users .sb-filter-btn {
+    width: 20px;
+  }
+  .ab-admin .sb-area-users .sb-filter-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
 @media only screen and (max-width: 464px) {

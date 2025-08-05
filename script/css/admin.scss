@@ -4683,6 +4683,7 @@ body {
 }
 
 span.badge {
+    background-color: #fce4ec6b !important;
     color: #000 !important;
   &[data-color="red"] {
     background-color: #e22424 !important;
@@ -12998,7 +12999,7 @@ main {
                     height: fit-content;
                     justify-content: flex-start;
                     gap: 10px;
-                    overflow: unset;
+                    overflow: hidden;
                     position: relative;
                     padding-block: 10px;
 
@@ -13375,6 +13376,46 @@ main {
                 }
             }
         }
+    }
+}
+
+
+@media only screen and (min-width: 465px) and (max-width: 730px) {
+    .ab-admin {
+        .sb-area-users {
+            .sb-top-bar {
+                div {
+                    .sb-btn.sb-icon {
+                        font-size: 10px;
+                        i {
+                            font-size: 10px;
+                            margin-right: 0 !important;
+                        }
+                    }
+                }
+            }
+        .sb-menu-wide {
+            ul {
+                max-width: 75px;
+            }
+        }
+        .sb-menu-mobile {
+            ul {
+                li {
+                    a {
+                        width: fit-content;
+                    }
+                }
+            }
+        }
+        .sb-filter-btn {
+            width: 20px;
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
     }
 }
 
