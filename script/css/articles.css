@@ -274,7 +274,7 @@
  * -----------------------------------------------------------
  *
 */
-@media (max-width: 464px) {
+@media (max-width: 767px) {
   .sb-articles-page .sb-articles-header > div {
     min-width: 0;
     width: 100%;
