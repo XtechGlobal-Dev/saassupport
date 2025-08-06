@@ -12088,6 +12088,20 @@ main {
     }
 }
 
+.sb-board {
+    .sb-user-details {
+        #sb-attachments-filter {
+            ul {
+                li {
+                    &:hover {
+                        color: #000 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
         max-width: 200px;
