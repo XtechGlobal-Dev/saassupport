@@ -11563,9 +11563,32 @@ div#messaging-channels {
     }
 }
 
+.my-tabs-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    button.tab-arrow {
+        background: #fff;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        padding: 0;
+        outline: none;
+        border: 1px solid #d5d5d5;
+    margin-bottom: 40px;
+    }
+}
 
 .my-tabs {
-    margin-bottom: 20px;
     padding: 6px 8px 1px;
     background: #ECECF0;
     border-radius: 40px;
@@ -12062,6 +12085,20 @@ main {
     }
     .sb-search-dropdown-items {
         border-color: #2D9CDB;
+    }
+}
+
+.sb-board {
+    .sb-user-details {
+        #sb-attachments-filter {
+            ul {
+                li {
+                    &:hover {
+                        color: #000 !important;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -12841,7 +12878,7 @@ main {
         .settings-card {
             .my-tabs {
                 overflow-x: scroll;
-                min-width: 95%;
+                min-width: 67%;
                 max-width: 95%;
 
                 .my-tab {
