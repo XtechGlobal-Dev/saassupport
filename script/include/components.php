@@ -766,10 +766,10 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         }
 
         /* .sb-td-tags span {
-                                                                 margin: 3px 5px 0 0;
-                                                                padding: .45em .75em;
-                                                                font-size: 13px
-                                                            } */
+                                                                                     margin: 3px 5px 0 0;
+                                                                                    padding: .45em .75em;
+                                                                                    font-size: 13px
+                                                                                } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -804,76 +804,76 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                                                                                                                                position: relative;
-                                                                                                                                                                                overflow: visible !important;
+                                                                                                                                                                                                    position: relative;
+                                                                                                                                                                                                    overflow: visible !important;
             
-                                                                                                                                                                            }
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-btn {
-                                                                                                                                                                                border: none;
-                                                                                                                                                                                border-radius: 8px;
-                                                                                                                                                                                padding: 3px 12px;
-                                                                                                                                                                                font-weight: 500;
-                                                                                                                                                                                cursor: pointer;
-                                                                                                                                                                                display: flex;
-                                                                                                                                                                                align-items: center;
-                                                                                                                                                                                gap: 4px;
-                                                                                                                                                                                font-size: 14px;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .status-btn {
+                                                                                                                                                                                                    border: none;
+                                                                                                                                                                                                    border-radius: 8px;
+                                                                                                                                                                                                    padding: 3px 12px;
+                                                                                                                                                                                                    font-weight: 500;
+                                                                                                                                                                                                    cursor: pointer;
+                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                    align-items: center;
+                                                                                                                                                                                                    gap: 4px;
+                                                                                                                                                                                                    font-size: 14px;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-list li,
-                                                                                                                                                                            .priority-list li {
-                                                                                                                                                                                font-size: 14px;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .status-list li,
+                                                                                                                                                                                                .priority-list li {
+                                                                                                                                                                                                    font-size: 14px;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-dot {
-                                                                                                                                                                                width: 10px !important;
-                                                                                                                                                                                height: 10px !important;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .status-dot {
+                                                                                                                                                                                                    width: 10px !important;
+                                                                                                                                                                                                    height: 10px !important;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .arrow {
-                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .arrow {
+                                                                                                                                                                                                    font-size: 12px;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-list,
-                                                                                                                                                                            .priority-list {
-                                                                                                                                                                                display: none;
-                                                                                                                                                                                position: absolute;
-                                                                                                                                                                                top: 75%;
-                                                                                                                                                                                left: 0;
-                                                                                                                                                                                min-width: 170px;
-                                                                                                                                                                                background: #fff;
-                                                                                                                                                                                border: 1px solid #ddd;
-                                                                                                                                                                                border-radius: 8px;
-                                                                                                                                                                                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                                                                                                                                z-index: 9999;
-                                                                                                                                                                                padding: 6px 0;
-                                                                                                                                                                                margin: 0;
-                                                                                                                                                                                list-style: none;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .status-list,
+                                                                                                                                                                                                .priority-list {
+                                                                                                                                                                                                    display: none;
+                                                                                                                                                                                                    position: absolute;
+                                                                                                                                                                                                    top: 75%;
+                                                                                                                                                                                                    left: 0;
+                                                                                                                                                                                                    min-width: 170px;
+                                                                                                                                                                                                    background: #fff;
+                                                                                                                                                                                                    border: 1px solid #ddd;
+                                                                                                                                                                                                    border-radius: 8px;
+                                                                                                                                                                                                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                                                                                                                                                                                                    z-index: 9999;
+                                                                                                                                                                                                    padding: 6px 0;
+                                                                                                                                                                                                    margin: 0;
+                                                                                                                                                                                                    list-style: none;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-list li,
-                                                                                                                                                                            .priority-list li {
-                                                                                                                                                                                padding: 8px 16px;
-                                                                                                                                                                                cursor: pointer;
-                                                                                                                                                                                display: flex;
-                                                                                                                                                                                align-items: center;
-                                                                                                                                                                                gap: 4px;
-                                                                                                                                                                                font-size: 15px;
-                                                                                                                                                                                transition: background 0.15s;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .status-list li,
+                                                                                                                                                                                                .priority-list li {
+                                                                                                                                                                                                    padding: 8px 16px;
+                                                                                                                                                                                                    cursor: pointer;
+                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                    align-items: center;
+                                                                                                                                                                                                    gap: 4px;
+                                                                                                                                                                                                    font-size: 15px;
+                                                                                                                                                                                                    transition: background 0.15s;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-list li:hover,
-                                                                                                                                                                            .priority-list li:hover {
-                                                                                                                                                                                background: #f5f5f5;
-                                                                                                                                                                            }
+                                                                                                                                                                                                .status-list li:hover,
+                                                                                                                                                                                                .priority-list li:hover {
+                                                                                                                                                                                                    background: #f5f5f5;
+                                                                                                                                                                                                }
 
-                                                                                                                                                                            .status-dot {
-                                                                                                                                                                                width: 12px;
-                                                                                                                                                                                height: 12px;
-                                                                                                                                                                                border-radius: 50%;
-                                                                                                                                                                                display: inline-block;
-                                                                                                                                                                            } */
+                                                                                                                                                                                                .status-dot {
+                                                                                                                                                                                                    width: 12px;
+                                                                                                                                                                                                    height: 12px;
+                                                                                                                                                                                                    border-radius: 50%;
+                                                                                                                                                                                                    display: inline-block;
+                                                                                                                                                                                                } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1649,6 +1649,17 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 $container.find(".my-tab").removeClass("active");
                 $(this).addClass("active");
                 updateSlider($(this));
+            });
+
+            $(".tab-arrow.left").on("click", function () {
+                const $tabs = $(this).siblings(".my-tabs");
+                $tabs.animate({ scrollLeft: $tabs.scrollLeft() - 150 }, 200);
+            });
+
+            // RIGHT arrow
+            $(".tab-arrow.right").on("click", function () {
+                const $tabs = $(this).siblings(".my-tabs");
+                $tabs.animate({ scrollLeft: $tabs.scrollLeft() + 150 }, 200);
             });
 
             const targetNode = document.querySelector(".setting_sidebar");
@@ -5546,12 +5557,12 @@ function sb_component_admin()
                                             : sb_("Messages & Forms"); ?>
                                     </li>
                                     <?php /*
-                                                  <li id="tab-various">
-                                                      <?php echo $disable_translations
-                                                          ? "Miscellaneous"
-                                                          : sb_("Miscellaneous"); ?>
-                                                  </li>
-                                                  */ ?>
+                                                                                     <li id="tab-various">
+                                                                                         <?php echo $disable_translations
+                                                                                             ? "Miscellaneous"
+                                                                                             : sb_("Miscellaneous"); ?>
+                                                                                     </li>
+                                                                                     */ ?>
                                     <?php for (
                                         $i = 0;
                                         $i < count($apps);
@@ -5628,93 +5639,98 @@ function sb_component_admin()
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <div class="sb-search-dropdown">
-                                    <div class="sb-search-btn">
-                                        <i class="sb-icon sb-icon-search"></i>
-                                        <input id="sb-search-settings" type="text" autocomplete="false" placeholder="<?php sb_e('Search ...') ?>" />
-                                    </div>
-                                    <div class="sb-search-dropdown-items"></div>
-                                </div>
- 
+                                                    <div class="sb-search-btn">
+                                                        <i class="sb-icon sb-icon-search"></i>
+                                                        <input id="sb-search-settings" type="text" autocomplete="false"
+                                                            placeholder="<?php sb_e('Search ...') ?>" />
+                                                    </div>
+                                                    <div class="sb-search-dropdown-items"></div>
+                                                </div>
+
                                                 <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
                                                     <i class="sb-icon-check"></i>Save changes</a>
                                             </div>
                                         </div>
 
                                         <div class="settings-card">
-                                            <div class="my-tabs">
-                                                <div class="my-tab active" data-target="availability-content">
-                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <g clip-path="url(#clip0_1833_2783)">
-                                                            <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
-                                                                stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path
-                                                                d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_1833_2783">
-                                                                <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.765625 0.75)" />
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
-                                                    Availability
+                                            <div class="my-tabs-container">
+                                                <button class="tab-arrow left">&#8592;</button>
+                                                <div class="my-tabs">
+                                                    <div class="my-tab active" data-target="availability-content">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
+                                                                    stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.765625 0.75)" />
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Availability
+                                                    </div>
+                                                    <div class="my-tab" data-target="appearance-content">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2786)">
+                                                                <path
+                                                                    d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2786">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.203125 0.75)" />
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>Appearance & Features
+                                                    </div>
+                                                    <div class="my-tab" data-target="management-content">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2789)">
+                                                                <path
+                                                                    d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2789">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.765625 0.75)" />
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Management
+                                                    </div>
+                                                    <div class="tab-slider"></div>
                                                 </div>
-                                                <div class="my-tab" data-target="appearance-content">
-                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <g clip-path="url(#clip0_1833_2786)">
-                                                            <path
-                                                                d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path
-                                                                d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_1833_2786">
-                                                                <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.203125 0.75)" />
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>Appearance & Features
-                                                </div>
-                                                <div class="my-tab" data-target="management-content">
-                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <g clip-path="url(#clip0_1833_2789)">
-                                                            <path
-                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path
-                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path
-                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                            <path
-                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_1833_2789">
-                                                                <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.765625 0.75)" />
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
-                                                    Management
-                                                </div>
-                                                <div class="tab-slider"></div>
+                                                <button class="tab-arrow right">&#8594;</button>
                                             </div>
 
                                             <div id="availability-content" class="settings-tab">
@@ -5960,214 +5976,224 @@ function sb_component_admin()
                                             </div>
                                         </div>
                                         <div class="settings-card">
-                                            <div class="my-tabs">
-                                                <div class="my-tab active" data-target="panel-setting-content">
-                                                    <svg width="17" height="19" viewBox="0 0 17 19" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M2.5 10.75V1M2.5 10.75C2.89782 10.75 3.27936 10.908 3.56066 11.1893C3.84196 11.4706 4 11.8522 4 12.25C4 12.6478 3.84196 13.0294 3.56066 13.3107C3.27936 13.592 2.89782 13.75 2.5 13.75M2.5 10.75C2.10218 10.75 1.72064 10.908 1.43934 11.1893C1.15804 11.4706 1 11.8522 1 12.25C1 12.6478 1.15804 13.0294 1.43934 13.3107C1.72064 13.592 2.10218 13.75 2.5 13.75M2.5 13.75V17.5M14.5 10.75V1M14.5 10.75C14.8978 10.75 15.2794 10.908 15.5607 11.1893C15.842 11.4706 16 11.8522 16 12.25C16 12.6478 15.842 13.0294 15.5607 13.3107C15.2794 13.592 14.8978 13.75 14.5 13.75M14.5 10.75C14.1022 10.75 13.7206 10.908 13.4393 11.1893C13.158 11.4706 13 11.8522 13 12.25C13 12.6478 13.158 13.0294 13.4393 13.3107C13.7206 13.592 14.1022 13.75 14.5 13.75M14.5 13.75V17.5M8.5 4.75V1M8.5 4.75C8.89782 4.75 9.27936 4.90804 9.56066 5.18934C9.84196 5.47064 10 5.85218 10 6.25C10 6.64782 9.84196 7.02936 9.56066 7.31066C9.27936 7.59196 8.89782 7.75 8.5 7.75M8.5 4.75C8.10218 4.75 7.72064 4.90804 7.43934 5.18934C7.15804 5.47064 7 5.85218 7 6.25C7 6.64782 7.15804 7.02936 7.43934 7.31066C7.72064 7.59196 8.10218 7.75 8.5 7.75M8.5 7.75V17.5"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                    Panel Setting
-                                                </div>
-                                                <div class="my-tab" data-target="language">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M7 8.37931H11.5M11.5 8.37931H14.5M11.5 8.37931V7M17 8.37931H14.5M14.5 8.37931C13.9725 10.2656 12.8679 12.0487 11.6071 13.6158M11.6071 13.6158C10.5631 14.9134 9.41205 16.0628 8.39286 17M11.6071 13.6158C10.9643 12.8621 10.0643 11.6426 9.80714 11.0909M11.6071 13.6158L13.5357 15.6207"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
-                                                            stroke="black" stroke-width="1.5" />
-                                                    </svg>
-
-
-                                                    Language
-                                                </div>
-                                                <div class="my-tab" data-target="admin-chat-management-content">
-                                                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M18.75 6.761C19.634 7.045 20.25 7.889 20.25 8.858V13.144C20.25 14.28 19.403 15.244 18.27 15.337C17.93 15.364 17.59 15.389 17.25 15.409V18.5L14.25 15.5C12.896 15.5 11.556 15.445 10.23 15.337C9.94133 15.3137 9.66053 15.2313 9.405 15.095M18.75 6.761C18.5955 6.71127 18.4358 6.67939 18.274 6.666C15.5959 6.44368 12.9041 6.44368 10.226 6.666C9.095 6.76 8.25 7.723 8.25 8.858V13.144C8.25 13.981 8.71 14.724 9.405 15.095M18.75 6.761V4.887C18.75 3.266 17.598 1.861 15.99 1.652C13.9208 1.38379 11.8365 1.24951 9.75 1.25C7.635 1.25 5.552 1.387 3.51 1.652C1.902 1.861 0.75 3.266 0.75 4.887V11.113C0.75 12.734 1.902 14.139 3.51 14.348C4.087 14.423 4.667 14.488 5.25 14.542V19.25L9.405 15.095"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                    Chat Management
-                                                </div>
-                                                <div class="my-tab" data-target="permission-setting-content">
-                                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M20.5039 5.99855C20.504 6.62191 20.3745 7.23847 20.1238 7.80916C19.873 8.37985 19.5064 8.89222 19.0473 9.31379C18.5881 9.73537 18.0463 10.0569 17.4563 10.2581C16.8664 10.4593 16.241 10.5357 15.6199 10.4826C14.5439 10.3916 13.3559 10.5536 12.6699 11.3866L5.51793 20.0706C5.29232 20.3456 5.01163 20.5703 4.69392 20.7303C4.37622 20.8902 4.02854 20.9819 3.67326 20.9994C3.31798 21.0169 2.96298 20.9598 2.6311 20.8318C2.29922 20.7038 1.99782 20.5077 1.74629 20.2562C1.49477 20.0047 1.2987 19.7033 1.17069 19.3714C1.04269 19.0395 0.985594 18.6845 1.00308 18.3292C1.02057 17.9739 1.11225 17.6263 1.27222 17.3086C1.4322 16.9909 1.65692 16.7102 1.93193 16.4846L10.6159 9.33255C11.4489 8.64655 11.6109 7.45855 11.5199 6.38255C11.4528 5.60073 11.5913 4.81493 11.9216 4.10315C12.252 3.39137 12.7627 2.77834 13.4031 2.3249C14.0436 1.87146 14.7914 1.59338 15.5725 1.51824C16.3536 1.4431 17.1408 1.57352 17.8559 1.89655L14.5799 5.17255C14.7067 5.72065 14.9848 6.22214 15.3826 6.61993C15.7803 7.01772 16.2818 7.29582 16.8299 7.42255L20.1059 4.14655C20.3619 4.71155 20.5039 5.33855 20.5039 5.99855Z"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                    Permission Setting
-                                                </div>
-                                                <div class="my-tab" data-target="settings-customization-content">
-                                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M15.181 16.2665C16.0555 16.2665 16.7643 15.5577 16.7643 14.6832C16.7643 13.8087 16.0555 13.0999 15.181 13.0999C14.3065 13.0999 13.5977 13.8087 13.5977 14.6832C13.5977 15.5577 14.3065 16.2665 15.181 16.2665Z"
-                                                            stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M16.2662 10.712L16.13 9.6167H14.23L14.0938 10.712C13.7581 10.8039 13.4383 10.9375 13.1407 11.1069L12.2698 10.429L10.924 11.7726L11.6048 12.6444C11.4338 12.9404 11.3008 13.26 11.2089 13.5966L10.1133 13.7333V15.6333L11.2089 15.7701C11.3008 16.1067 11.4338 16.4259 11.6048 16.7223L10.924 17.5941L12.2698 18.9377L13.1407 18.2598C13.4383 18.4289 13.755 18.5628 14.0938 18.6546L14.23 19.75H16.13L16.2662 18.6546C16.6018 18.5628 16.9217 18.4292 17.2193 18.2598L18.0902 18.9377L19.436 17.5941L18.7552 16.7223C18.9261 16.4263 19.0592 16.1067 19.151 15.7701L20.2467 15.6333V13.7333L19.151 13.5966C19.0592 13.26 18.9262 12.9407 18.7552 12.6444L19.436 11.7726L18.0902 10.429L17.2193 11.1069C16.9217 10.9378 16.605 10.8038 16.2662 10.712Z"
-                                                            stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M5.99741 3.91669C6.87186 3.91669 7.58075 3.2078 7.58075 2.33334C7.58075 1.45889 6.87186 0.75 5.99741 0.75C5.12295 0.75 4.41406 1.45889 4.41406 2.33334C4.41406 3.2078 5.12295 3.91669 5.99741 3.91669Z"
-                                                            stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M5.99741 13.4167C6.87186 13.4167 7.58075 12.7078 7.58075 11.8333C7.58075 10.9589 6.87186 10.25 5.99741 10.25C5.12295 10.25 4.41406 10.9589 4.41406 11.8333C4.41406 12.7078 5.12295 13.4167 5.99741 13.4167Z"
-                                                            stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.431 8.66669C11.3055 8.66669 12.0143 7.9578 12.0143 7.08334C12.0143 6.20889 11.3055 5.5 10.431 5.5C9.55654 5.5 8.84766 6.20889 8.84766 7.08334C8.84766 7.9578 9.55654 8.66669 10.431 8.66669Z"
-                                                            stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M12.0117 7.08325H15.1784" stroke="black" stroke-width="1.18257"
-                                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M1.24609 2.33325H4.41274" stroke="black" stroke-width="1.18257"
-                                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M1.24609 11.8333H4.41274" stroke="black" stroke-width="1.18257"
-                                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M15.1781 2.33325H7.57812" stroke="black" stroke-width="1.18257"
-                                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M10.9696 11.8333H7.57812" stroke="black" stroke-width="1.18257"
-                                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path d="M1.24609 7.08325H8.84608" stroke="black" stroke-width="1.18257"
-                                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                    Settings Customization
-                                                </div>
-                                                <div class="my-tab" data-target="customer-content">
-                                                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M15.5578 13.396C16.0256 13.0765 16.5742 12.8961 17.1403 12.8754C17.7064 12.8548 18.2668 12.9949 18.7566 13.2794C19.2464 13.564 19.6456 13.9814 19.9081 14.4834C20.1706 14.9854 20.2856 15.5514 20.2398 16.116C19.0399 16.5353 17.7655 16.6985 16.4988 16.595C16.4949 15.4616 16.1685 14.3518 15.5578 13.397C15.0157 12.5468 14.2679 11.847 13.3836 11.3625C12.4993 10.878 11.5071 10.6243 10.4988 10.625C9.4906 10.6245 8.49859 10.8782 7.61449 11.3627C6.7304 11.8473 5.98277 12.5469 5.44076 13.397M16.4978 16.594L16.4988 16.625C16.4988 16.85 16.4868 17.072 16.4618 17.291C14.6471 18.3321 12.5909 18.8783 10.4988 18.875C8.32876 18.875 6.29176 18.299 4.53576 17.291C4.51006 17.0596 4.4977 16.8269 4.49876 16.594M4.49876 16.594C3.23239 16.7013 1.95867 16.5387 0.759764 16.117C0.714115 15.5526 0.829159 14.9867 1.09159 14.4849C1.35403 13.9831 1.75313 13.5658 2.24277 13.2813C2.7324 12.9968 3.29256 12.8567 3.85848 12.8771C4.42441 12.8976 4.97297 13.0778 5.44076 13.397M4.49876 16.594C4.50236 15.4607 4.83039 14.3519 5.44076 13.397M13.4988 4.625C13.4988 5.42065 13.1827 6.18371 12.6201 6.74632C12.0575 7.30893 11.2944 7.625 10.4988 7.625C9.70311 7.625 8.94005 7.30893 8.37744 6.74632C7.81483 6.18371 7.49876 5.42065 7.49876 4.625C7.49876 3.82935 7.81483 3.06629 8.37744 2.50368C8.94005 1.94107 9.70311 1.625 10.4988 1.625C11.2944 1.625 12.0575 1.94107 12.6201 2.50368C13.1827 3.06629 13.4988 3.82935 13.4988 4.625ZM19.4988 7.625C19.4988 7.92047 19.4406 8.21306 19.3275 8.48604C19.2144 8.75902 19.0487 9.00706 18.8398 9.21599C18.6308 9.42492 18.3828 9.59066 18.1098 9.70373C17.8368 9.8168 17.5442 9.875 17.2488 9.875C16.9533 9.875 16.6607 9.8168 16.3877 9.70373C16.1147 9.59066 15.8667 9.42492 15.6578 9.21599C15.4488 9.00706 15.2831 8.75902 15.17 8.48604C15.057 8.21306 14.9988 7.92047 14.9988 7.625C14.9988 7.02826 15.2358 6.45597 15.6578 6.03401C16.0797 5.61205 16.652 5.375 17.2488 5.375C17.8455 5.375 18.4178 5.61205 18.8398 6.03401C19.2617 6.45597 19.4988 7.02826 19.4988 7.625ZM5.99876 7.625C5.99876 7.92047 5.94057 8.21306 5.82749 8.48604C5.71442 8.75902 5.54869 9.00706 5.33975 9.21599C5.13082 9.42492 4.88278 9.59066 4.6098 9.70373C4.33682 9.8168 4.04424 9.875 3.74876 9.875C3.45329 9.875 3.16071 9.8168 2.88773 9.70373C2.61474 9.59066 2.36671 9.42492 2.15777 9.21599C1.94884 9.00706 1.78311 8.75902 1.67004 8.48604C1.55696 8.21306 1.49876 7.92047 1.49876 7.625C1.49876 7.02826 1.73582 6.45597 2.15777 6.03401C2.57973 5.61205 3.15203 5.375 3.74876 5.375C4.3455 5.375 4.9178 5.61205 5.33975 6.03401C5.76171 6.45597 5.99876 7.02826 5.99876 7.625Z"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-
-                                                    Customer
-                                                </div>
-                                                <div class="my-tab" data-target="auto-saved-message-inbox-content">
-                                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M18.7985 12.6323H14.1195C13.3195 12.6323 12.6911 13.3007 12.3386 14.0071C11.9555 14.7745 11.1886 15.4821 9.77424 15.4821C8.3599 15.4821 7.59298 14.7745 7.20998 14.0071C6.85744 13.3007 6.22893 12.6323 5.42899 12.6323H0.75"
-                                                            stroke="black" stroke-width="1.5" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M14.6758 5.02626C14.6758 5.02626 15.0339 5.13576 15.5313 5.86524C15.5313 5.86524 16.2608 4.29028 17.2721 3.74316"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M18.8144 11.2162C18.8144 15.4741 18.8144 17.6029 17.4917 18.9258C16.1689 20.2485 14.04 20.2485 9.78222 20.2485C5.52438 20.2485 3.39547 20.2485 2.07273 18.9258C0.75 17.6029 0.75 15.4741 0.75 11.2162C0.75 6.95845 0.75 4.82955 2.07273 3.50681C3.39547 2.18408 5.52438 2.18408 9.78222 2.18408"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M19.7511 5.03376C19.7511 7.12348 18.0571 8.81752 15.9673 8.81752C13.8777 8.81752 12.1836 7.12348 12.1836 5.03376C12.1836 2.94405 13.8777 1.25 15.9673 1.25C18.0571 1.25 19.7511 2.94405 19.7511 5.03376Z"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round" />
-                                                    </svg>
-
-                                                    Auto Saved Message Inbox
-                                                </div>
-                                                <div class="my-tab" data-target="customization-and-themes-content">
-                                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M12.9986 6.13437L7.30799 7.76025C7.02657 7.84066 6.88586 7.88086 6.76963 7.95644C6.66673 8.02333 6.57822 8.11007 6.50926 8.2116C6.43135 8.32628 6.38831 8.46615 6.30224 8.74589L2.84593 19.9789M2.84593 19.9789L14.0789 16.5226C14.3587 16.4365 14.4985 16.3934 14.6132 16.3155C14.7147 16.2466 14.8015 16.1581 14.8684 16.0552C14.9439 15.939 14.9842 15.7982 15.0645 15.5168L16.6904 9.82624M2.84593 19.9789L8.9246 13.9001M3.7689 7.05734V1.51953M1 4.28843H6.5378M19.3381 6.93609L15.8888 3.48672C15.5233 3.1212 15.3404 2.93846 15.1297 2.86998C14.9444 2.80975 14.7446 2.80975 14.5593 2.86998C14.3486 2.93846 14.1658 3.1212 13.8003 3.48672L13.1199 4.16718C12.7544 4.5327 12.5715 4.71544 12.5031 4.92619C12.4429 5.11156 12.4429 5.31124 12.5031 5.49662C12.5715 5.70736 12.7544 5.89011 13.1199 6.25562L16.5692 9.70496C16.9347 10.0705 17.1175 10.2533 17.3282 10.3217C17.5135 10.382 17.7133 10.382 17.8986 10.3217C18.1093 10.2533 18.2922 10.0705 18.6577 9.70496L19.3381 9.02455C19.7036 8.65901 19.8864 8.47626 19.9548 8.26552C20.0151 8.08014 20.0151 7.88047 19.9548 7.69509C19.8864 7.48435 19.7036 7.3016 19.3381 6.93609ZM10.2297 10.7492C11.2492 10.7492 12.0756 11.5756 12.0756 12.5951C12.0756 13.6147 11.2492 14.4411 10.2297 14.4411C9.21016 14.4411 8.38374 13.6147 8.38374 12.5951C8.38374 11.5756 9.21016 10.7492 10.2297 10.7492Z"
-                                                            stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                    Customization & Themes
-                                                </div>
-                                                <div class="my-tab" data-target="switch-accounts-content">
-                                                    <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <mask id="mask0_1995_2948" style="mask-type:luminance"
-                                                            maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="20">
-                                                            <path d="M0 0.249146H19.0001V19.2493H0V0.249146Z" fill="white" />
-                                                        </mask>
-                                                        <g mask="url(#mask0_1995_2948)">
+                                            <div class="my-tabs-container">
+                                                <button class="tab-arrow left">&#8592;</button>
+                                                <div class="my-tabs">
+                                                    <div class="my-tab active" data-target="panel-setting-content">
+                                                        <svg width="17" height="19" viewBox="0 0 17 19" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
                                                             <path
-                                                                d="M9.50129 8.40773C7.77254 8.40773 6.37109 9.80918 6.37109 11.5379C6.37109 12.4023 7.0718 13.103 7.93619 13.103H11.0664C11.9308 13.103 12.6315 12.4023 12.6315 11.5379C12.6315 9.80918 11.23 8.40773 9.50129 8.40773Z"
-                                                                stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                d="M2.5 10.75V1M2.5 10.75C2.89782 10.75 3.27936 10.908 3.56066 11.1893C3.84196 11.4706 4 11.8522 4 12.25C4 12.6478 3.84196 13.0294 3.56066 13.3107C3.27936 13.592 2.89782 13.75 2.5 13.75M2.5 10.75C2.10218 10.75 1.72064 10.908 1.43934 11.1893C1.15804 11.4706 1 11.8522 1 12.25C1 12.6478 1.15804 13.0294 1.43934 13.3107C1.72064 13.592 2.10218 13.75 2.5 13.75M2.5 13.75V17.5M14.5 10.75V1M14.5 10.75C14.8978 10.75 15.2794 10.908 15.5607 11.1893C15.842 11.4706 16 11.8522 16 12.25C16 12.6478 15.842 13.0294 15.5607 13.3107C15.2794 13.592 14.8978 13.75 14.5 13.75M14.5 10.75C14.1022 10.75 13.7206 10.908 13.4393 11.1893C13.158 11.4706 13 11.8522 13 12.25C13 12.6478 13.158 13.0294 13.4393 13.3107C13.7206 13.592 14.1022 13.75 14.5 13.75M14.5 13.75V17.5M8.5 4.75V1M8.5 4.75C8.89782 4.75 9.27936 4.90804 9.56066 5.18934C9.84196 5.47064 10 5.85218 10 6.25C10 6.64782 9.84196 7.02936 9.56066 7.31066C9.27936 7.59196 8.89782 7.75 8.5 7.75M8.5 4.75C8.10218 4.75 7.72064 4.90804 7.43934 5.18934C7.15804 5.47064 7 5.85218 7 6.25C7 6.64782 7.15804 7.02936 7.43934 7.31066C7.72064 7.59196 8.10218 7.75 8.5 7.75M8.5 7.75V17.5"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                        Panel Setting
+                                                    </div>
+                                                    <div class="my-tab" data-target="language">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M7 8.37931H11.5M11.5 8.37931H14.5M11.5 8.37931V7M17 8.37931H14.5M14.5 8.37931C13.9725 10.2656 12.8679 12.0487 11.6071 13.6158M11.6071 13.6158C10.5631 14.9134 9.41205 16.0628 8.39286 17M11.6071 13.6158C10.9643 12.8621 10.0643 11.6426 9.80714 11.0909M11.6071 13.6158L13.5357 15.6207"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                                 stroke-linejoin="round" />
                                                             <path
-                                                                d="M11.0638 6.84262C11.0638 7.70701 10.3631 8.40771 9.49869 8.40771C8.6343 8.40771 7.93359 7.70701 7.93359 6.84262C7.93359 5.97822 8.6343 5.27752 9.49869 5.27752C10.3631 5.27752 11.0638 5.97822 11.0638 6.84262Z"
-                                                                stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z"
+                                                                stroke="black" stroke-width="1.5" />
+                                                        </svg>
+
+
+                                                        Language
+                                                    </div>
+                                                    <div class="my-tab" data-target="admin-chat-management-content">
+                                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M18.75 6.761C19.634 7.045 20.25 7.889 20.25 8.858V13.144C20.25 14.28 19.403 15.244 18.27 15.337C17.93 15.364 17.59 15.389 17.25 15.409V18.5L14.25 15.5C12.896 15.5 11.556 15.445 10.23 15.337C9.94133 15.3137 9.66053 15.2313 9.405 15.095M18.75 6.761C18.5955 6.71127 18.4358 6.67939 18.274 6.666C15.5959 6.44368 12.9041 6.44368 10.226 6.666C9.095 6.76 8.25 7.723 8.25 8.858V13.144C8.25 13.981 8.71 14.724 9.405 15.095M18.75 6.761V4.887C18.75 3.266 17.598 1.861 15.99 1.652C13.9208 1.38379 11.8365 1.24951 9.75 1.25C7.635 1.25 5.552 1.387 3.51 1.652C1.902 1.861 0.75 3.266 0.75 4.887V11.113C0.75 12.734 1.902 14.139 3.51 14.348C4.087 14.423 4.667 14.488 5.25 14.542V19.25L9.405 15.095"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                        Chat Management
+                                                    </div>
+                                                    <div class="my-tab" data-target="permission-setting-content">
+                                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M20.5039 5.99855C20.504 6.62191 20.3745 7.23847 20.1238 7.80916C19.873 8.37985 19.5064 8.89222 19.0473 9.31379C18.5881 9.73537 18.0463 10.0569 17.4563 10.2581C16.8664 10.4593 16.241 10.5357 15.6199 10.4826C14.5439 10.3916 13.3559 10.5536 12.6699 11.3866L5.51793 20.0706C5.29232 20.3456 5.01163 20.5703 4.69392 20.7303C4.37622 20.8902 4.02854 20.9819 3.67326 20.9994C3.31798 21.0169 2.96298 20.9598 2.6311 20.8318C2.29922 20.7038 1.99782 20.5077 1.74629 20.2562C1.49477 20.0047 1.2987 19.7033 1.17069 19.3714C1.04269 19.0395 0.985594 18.6845 1.00308 18.3292C1.02057 17.9739 1.11225 17.6263 1.27222 17.3086C1.4322 16.9909 1.65692 16.7102 1.93193 16.4846L10.6159 9.33255C11.4489 8.64655 11.6109 7.45855 11.5199 6.38255C11.4528 5.60073 11.5913 4.81493 11.9216 4.10315C12.252 3.39137 12.7627 2.77834 13.4031 2.3249C14.0436 1.87146 14.7914 1.59338 15.5725 1.51824C16.3536 1.4431 17.1408 1.57352 17.8559 1.89655L14.5799 5.17255C14.7067 5.72065 14.9848 6.22214 15.3826 6.61993C15.7803 7.01772 16.2818 7.29582 16.8299 7.42255L20.1059 4.14655C20.3619 4.71155 20.5039 5.33855 20.5039 5.99855Z"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                        Permission Setting
+                                                    </div>
+                                                    <div class="my-tab" data-target="settings-customization-content">
+                                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.181 16.2665C16.0555 16.2665 16.7643 15.5577 16.7643 14.6832C16.7643 13.8087 16.0555 13.0999 15.181 13.0999C14.3065 13.0999 13.5977 13.8087 13.5977 14.6832C13.5977 15.5577 14.3065 16.2665 15.181 16.2665Z"
+                                                                stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path
+                                                                d="M16.2662 10.712L16.13 9.6167H14.23L14.0938 10.712C13.7581 10.8039 13.4383 10.9375 13.1407 11.1069L12.2698 10.429L10.924 11.7726L11.6048 12.6444C11.4338 12.9404 11.3008 13.26 11.2089 13.5966L10.1133 13.7333V15.6333L11.2089 15.7701C11.3008 16.1067 11.4338 16.4259 11.6048 16.7223L10.924 17.5941L12.2698 18.9377L13.1407 18.2598C13.4383 18.4289 13.755 18.5628 14.0938 18.6546L14.23 19.75H16.13L16.2662 18.6546C16.6018 18.5628 16.9217 18.4292 17.2193 18.2598L18.0902 18.9377L19.436 17.5941L18.7552 16.7223C18.9261 16.4263 19.0592 16.1067 19.151 15.7701L20.2467 15.6333V13.7333L19.151 13.5966C19.0592 13.26 18.9262 12.9407 18.7552 12.6444L19.436 11.7726L18.0902 10.429L17.2193 11.1069C16.9217 10.9378 16.605 10.8038 16.2662 10.712Z"
+                                                                stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path
+                                                                d="M5.99741 3.91669C6.87186 3.91669 7.58075 3.2078 7.58075 2.33334C7.58075 1.45889 6.87186 0.75 5.99741 0.75C5.12295 0.75 4.41406 1.45889 4.41406 2.33334C4.41406 3.2078 5.12295 3.91669 5.99741 3.91669Z"
+                                                                stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path
+                                                                d="M5.99741 13.4167C6.87186 13.4167 7.58075 12.7078 7.58075 11.8333C7.58075 10.9589 6.87186 10.25 5.99741 10.25C5.12295 10.25 4.41406 10.9589 4.41406 11.8333C4.41406 12.7078 5.12295 13.4167 5.99741 13.4167Z"
+                                                                stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.431 8.66669C11.3055 8.66669 12.0143 7.9578 12.0143 7.08334C12.0143 6.20889 11.3055 5.5 10.431 5.5C9.55654 5.5 8.84766 6.20889 8.84766 7.08334C8.84766 7.9578 9.55654 8.66669 10.431 8.66669Z"
+                                                                stroke="black" stroke-width="1.18257" stroke-miterlimit="10"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M12.0117 7.08325H15.1784" stroke="black" stroke-width="1.18257"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M1.24609 2.33325H4.41274" stroke="black" stroke-width="1.18257"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M1.24609 11.8333H4.41274" stroke="black" stroke-width="1.18257"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M15.1781 2.33325H7.57812" stroke="black" stroke-width="1.18257"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M10.9696 11.8333H7.57812" stroke="black" stroke-width="1.18257"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M1.24609 7.08325H8.84608" stroke="black" stroke-width="1.18257"
+                                                                stroke-miterlimit="10" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                        Settings Customization
+                                                    </div>
+                                                    <div class="my-tab" data-target="customer-content">
+                                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.5578 13.396C16.0256 13.0765 16.5742 12.8961 17.1403 12.8754C17.7064 12.8548 18.2668 12.9949 18.7566 13.2794C19.2464 13.564 19.6456 13.9814 19.9081 14.4834C20.1706 14.9854 20.2856 15.5514 20.2398 16.116C19.0399 16.5353 17.7655 16.6985 16.4988 16.595C16.4949 15.4616 16.1685 14.3518 15.5578 13.397C15.0157 12.5468 14.2679 11.847 13.3836 11.3625C12.4993 10.878 11.5071 10.6243 10.4988 10.625C9.4906 10.6245 8.49859 10.8782 7.61449 11.3627C6.7304 11.8473 5.98277 12.5469 5.44076 13.397M16.4978 16.594L16.4988 16.625C16.4988 16.85 16.4868 17.072 16.4618 17.291C14.6471 18.3321 12.5909 18.8783 10.4988 18.875C8.32876 18.875 6.29176 18.299 4.53576 17.291C4.51006 17.0596 4.4977 16.8269 4.49876 16.594M4.49876 16.594C3.23239 16.7013 1.95867 16.5387 0.759764 16.117C0.714115 15.5526 0.829159 14.9867 1.09159 14.4849C1.35403 13.9831 1.75313 13.5658 2.24277 13.2813C2.7324 12.9968 3.29256 12.8567 3.85848 12.8771C4.42441 12.8976 4.97297 13.0778 5.44076 13.397M4.49876 16.594C4.50236 15.4607 4.83039 14.3519 5.44076 13.397M13.4988 4.625C13.4988 5.42065 13.1827 6.18371 12.6201 6.74632C12.0575 7.30893 11.2944 7.625 10.4988 7.625C9.70311 7.625 8.94005 7.30893 8.37744 6.74632C7.81483 6.18371 7.49876 5.42065 7.49876 4.625C7.49876 3.82935 7.81483 3.06629 8.37744 2.50368C8.94005 1.94107 9.70311 1.625 10.4988 1.625C11.2944 1.625 12.0575 1.94107 12.6201 2.50368C13.1827 3.06629 13.4988 3.82935 13.4988 4.625ZM19.4988 7.625C19.4988 7.92047 19.4406 8.21306 19.3275 8.48604C19.2144 8.75902 19.0487 9.00706 18.8398 9.21599C18.6308 9.42492 18.3828 9.59066 18.1098 9.70373C17.8368 9.8168 17.5442 9.875 17.2488 9.875C16.9533 9.875 16.6607 9.8168 16.3877 9.70373C16.1147 9.59066 15.8667 9.42492 15.6578 9.21599C15.4488 9.00706 15.2831 8.75902 15.17 8.48604C15.057 8.21306 14.9988 7.92047 14.9988 7.625C14.9988 7.02826 15.2358 6.45597 15.6578 6.03401C16.0797 5.61205 16.652 5.375 17.2488 5.375C17.8455 5.375 18.4178 5.61205 18.8398 6.03401C19.2617 6.45597 19.4988 7.02826 19.4988 7.625ZM5.99876 7.625C5.99876 7.92047 5.94057 8.21306 5.82749 8.48604C5.71442 8.75902 5.54869 9.00706 5.33975 9.21599C5.13082 9.42492 4.88278 9.59066 4.6098 9.70373C4.33682 9.8168 4.04424 9.875 3.74876 9.875C3.45329 9.875 3.16071 9.8168 2.88773 9.70373C2.61474 9.59066 2.36671 9.42492 2.15777 9.21599C1.94884 9.00706 1.78311 8.75902 1.67004 8.48604C1.55696 8.21306 1.49876 7.92047 1.49876 7.625C1.49876 7.02826 1.73582 6.45597 2.15777 6.03401C2.57973 5.61205 3.15203 5.375 3.74876 5.375C4.3455 5.375 4.9178 5.61205 5.33975 6.03401C5.76171 6.45597 5.99876 7.02826 5.99876 7.625Z"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+
+                                                        Customer
+                                                    </div>
+                                                    <div class="my-tab" data-target="auto-saved-message-inbox-content">
+                                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M18.7985 12.6323H14.1195C13.3195 12.6323 12.6911 13.3007 12.3386 14.0071C11.9555 14.7745 11.1886 15.4821 9.77424 15.4821C8.3599 15.4821 7.59298 14.7745 7.20998 14.0071C6.85744 13.3007 6.22893 12.6323 5.42899 12.6323H0.75"
+                                                                stroke="black" stroke-width="1.5" stroke-linejoin="round" />
+                                                            <path
+                                                                d="M14.6758 5.02626C14.6758 5.02626 15.0339 5.13576 15.5313 5.86524C15.5313 5.86524 16.2608 4.29028 17.2721 3.74316"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                                 stroke-linejoin="round" />
                                                             <path
-                                                                d="M0.851049 12.0215C0.111194 9.19392 0.770409 6.06049 2.88221 3.73576C6.20333 0.0797596 11.8595 -0.191735 15.5155 3.12943L16.3425 3.88071"
-                                                                stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                                d="M18.8144 11.2162C18.8144 15.4741 18.8144 17.6029 17.4917 18.9258C16.1689 20.2485 14.04 20.2485 9.78222 20.2485C5.52438 20.2485 3.39547 20.2485 2.07273 18.9258C0.75 17.6029 0.75 15.4741 0.75 11.2162C0.75 6.95845 0.75 4.82955 2.07273 3.50681C3.39547 2.18408 5.52438 2.18408 9.78222 2.18408"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
                                                             <path
-                                                                d="M18.1515 7.47695C18.8914 10.3045 18.2322 13.4379 16.1204 15.7627C12.7993 19.4187 7.14313 19.6902 3.48713 16.369L2.46094 15.4368"
-                                                                stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M16.7319 1.78922L16.8546 4.34697L14.2969 4.46973"
-                                                                stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M2.26729 17.7092L2.14453 15.1515L4.70227 15.0287"
-                                                                stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
-                                                                stroke-linecap="round" stroke-linejoin="round" />
-                                                        </g>
-                                                    </svg>
+                                                                d="M19.7511 5.03376C19.7511 7.12348 18.0571 8.81752 15.9673 8.81752C13.8777 8.81752 12.1836 7.12348 12.1836 5.03376C12.1836 2.94405 13.8777 1.25 15.9673 1.25C18.0571 1.25 19.7511 2.94405 19.7511 5.03376Z"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round" />
+                                                        </svg>
 
-                                                    Switch Accounts
-                                                </div>
-                                                <div class="my-tab" data-target="department-content">
-                                                    <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <mask id="mask0_1996_3079" style="mask-type:luminance"
-                                                            maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="20">
-                                                            <path d="M0 0.249268H19V19.2493H0V0.249268Z" fill="white" />
-                                                        </mask>
-                                                        <g mask="url(#mask0_1996_3079)">
+                                                        Auto Saved Message Inbox
+                                                    </div>
+                                                    <div class="my-tab" data-target="customization-and-themes-content">
+                                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
                                                             <path
-                                                                d="M10.6133 4.14575C10.6133 4.76058 10.1148 5.25903 9.5 5.25903C8.88517 5.25903 8.38672 4.76058 8.38672 4.14575C8.38672 3.53092 8.88517 3.03247 9.5 3.03247C10.1148 3.03247 10.6133 3.53092 10.6133 4.14575Z"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M7.36719 7.96289C7.64091 7.0431 8.4929 6.37238 9.50161 6.37238C10.5103 6.37238 11.3623 7.0431 11.636 7.96289"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M13.3945 4.70239C13.3945 6.85437 11.65 8.59888 9.49805 8.59888C7.34607 8.59888 5.60156 6.85437 5.60156 4.70239C5.60156 2.55042 7.34607 0.805907 9.49805 0.805907C11.65 0.805907 13.3945 2.55042 13.3945 4.70239Z"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M5.60156 14.2024C5.60156 14.8172 5.10311 15.3157 4.48828 15.3157C3.87345 15.3157 3.375 14.8172 3.375 14.2024C3.375 13.5876 3.87345 13.0891 4.48828 13.0891C5.10311 13.0891 5.60156 13.5876 5.60156 14.2024Z"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M2.35547 18.0195C2.62919 17.0997 3.48118 16.429 4.48989 16.429C5.49856 16.429 6.35055 17.0997 6.62427 18.0195"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M8.38477 14.759C8.38477 16.911 6.64025 18.6926 4.48828 18.6926C2.33631 18.6926 0.554688 16.911 0.554688 14.759C0.554688 12.6071 2.33631 10.8625 4.48828 10.8625C6.64025 10.8625 8.38477 12.6071 8.38477 14.759Z"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M15.625 14.2024C15.625 14.8172 15.1265 15.3157 14.5117 15.3157C13.8969 15.3157 13.3984 14.8172 13.3984 14.2024C13.3984 13.5876 13.8969 13.0891 14.5117 13.0891C15.1265 13.0891 15.625 13.5876 15.625 14.2024Z"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M12.375 18.0195C12.6487 17.0997 13.5007 16.429 14.5094 16.429C15.5181 16.429 16.3701 17.0997 16.6438 18.0195"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path
-                                                                d="M18.4434 14.759C18.4434 16.911 16.6617 18.6926 14.5098 18.6926C12.3578 18.6926 10.6133 16.911 10.6133 14.759C10.6133 12.6071 12.3578 10.8625 14.5098 10.8625C16.6617 10.8625 18.4434 12.6071 18.4434 14.759Z"
-                                                                stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path d="M9.5 8.59888V10.8625" stroke="black" stroke-width="1.11328"
-                                                                stroke-miterlimit="10" />
-                                                            <path d="M7.57031 11.9758L9.49859 10.8625" stroke="black"
-                                                                stroke-width="1.11328" stroke-miterlimit="10" />
-                                                            <path d="M11.4283 11.9758L9.5 10.8625" stroke="black"
-                                                                stroke-width="1.11328" stroke-miterlimit="10" />
-                                                        </g>
-                                                    </svg>
+                                                                d="M12.9986 6.13437L7.30799 7.76025C7.02657 7.84066 6.88586 7.88086 6.76963 7.95644C6.66673 8.02333 6.57822 8.11007 6.50926 8.2116C6.43135 8.32628 6.38831 8.46615 6.30224 8.74589L2.84593 19.9789M2.84593 19.9789L14.0789 16.5226C14.3587 16.4365 14.4985 16.3934 14.6132 16.3155C14.7147 16.2466 14.8015 16.1581 14.8684 16.0552C14.9439 15.939 14.9842 15.7982 15.0645 15.5168L16.6904 9.82624M2.84593 19.9789L8.9246 13.9001M3.7689 7.05734V1.51953M1 4.28843H6.5378M19.3381 6.93609L15.8888 3.48672C15.5233 3.1212 15.3404 2.93846 15.1297 2.86998C14.9444 2.80975 14.7446 2.80975 14.5593 2.86998C14.3486 2.93846 14.1658 3.1212 13.8003 3.48672L13.1199 4.16718C12.7544 4.5327 12.5715 4.71544 12.5031 4.92619C12.4429 5.11156 12.4429 5.31124 12.5031 5.49662C12.5715 5.70736 12.7544 5.89011 13.1199 6.25562L16.5692 9.70496C16.9347 10.0705 17.1175 10.2533 17.3282 10.3217C17.5135 10.382 17.7133 10.382 17.8986 10.3217C18.1093 10.2533 18.2922 10.0705 18.6577 9.70496L19.3381 9.02455C19.7036 8.65901 19.8864 8.47626 19.9548 8.26552C20.0151 8.08014 20.0151 7.88047 19.9548 7.69509C19.8864 7.48435 19.7036 7.3016 19.3381 6.93609ZM10.2297 10.7492C11.2492 10.7492 12.0756 11.5756 12.0756 12.5951C12.0756 13.6147 11.2492 14.4411 10.2297 14.4411C9.21016 14.4411 8.38374 13.6147 8.38374 12.5951C8.38374 11.5756 9.21016 10.7492 10.2297 10.7492Z"
+                                                                stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </svg>
+                                                        Customization & Themes
+                                                    </div>
+                                                    <div class="my-tab" data-target="switch-accounts-content">
+                                                        <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <mask id="mask0_1995_2948" style="mask-type:luminance"
+                                                                maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="20">
+                                                                <path d="M0 0.249146H19.0001V19.2493H0V0.249146Z" fill="white" />
+                                                            </mask>
+                                                            <g mask="url(#mask0_1995_2948)">
+                                                                <path
+                                                                    d="M9.50129 8.40773C7.77254 8.40773 6.37109 9.80918 6.37109 11.5379C6.37109 12.4023 7.0718 13.103 7.93619 13.103H11.0664C11.9308 13.103 12.6315 12.4023 12.6315 11.5379C12.6315 9.80918 11.23 8.40773 9.50129 8.40773Z"
+                                                                    stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M11.0638 6.84262C11.0638 7.70701 10.3631 8.40771 9.49869 8.40771C8.6343 8.40771 7.93359 7.70701 7.93359 6.84262C7.93359 5.97822 8.6343 5.27752 9.49869 5.27752C10.3631 5.27752 11.0638 5.97822 11.0638 6.84262Z"
+                                                                    stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M0.851049 12.0215C0.111194 9.19392 0.770409 6.06049 2.88221 3.73576C6.20333 0.0797596 11.8595 -0.191735 15.5155 3.12943L16.3425 3.88071"
+                                                                    stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M18.1515 7.47695C18.8914 10.3045 18.2322 13.4379 16.1204 15.7627C12.7993 19.4187 7.14313 19.6902 3.48713 16.369L2.46094 15.4368"
+                                                                    stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M16.7319 1.78922L16.8546 4.34697L14.2969 4.46973"
+                                                                    stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M2.26729 17.7092L2.14453 15.1515L4.70227 15.0287"
+                                                                    stroke="black" stroke-width="1.11329" stroke-miterlimit="10"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                            </g>
+                                                        </svg>
 
-                                                    Department
+                                                        Switch Accounts
+                                                    </div>
+                                                    <div class="my-tab" data-target="department-content">
+                                                        <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <mask id="mask0_1996_3079" style="mask-type:luminance"
+                                                                maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="20">
+                                                                <path d="M0 0.249268H19V19.2493H0V0.249268Z" fill="white" />
+                                                            </mask>
+                                                            <g mask="url(#mask0_1996_3079)">
+                                                                <path
+                                                                    d="M10.6133 4.14575C10.6133 4.76058 10.1148 5.25903 9.5 5.25903C8.88517 5.25903 8.38672 4.76058 8.38672 4.14575C8.38672 3.53092 8.88517 3.03247 9.5 3.03247C10.1148 3.03247 10.6133 3.53092 10.6133 4.14575Z"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M7.36719 7.96289C7.64091 7.0431 8.4929 6.37238 9.50161 6.37238C10.5103 6.37238 11.3623 7.0431 11.636 7.96289"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M13.3945 4.70239C13.3945 6.85437 11.65 8.59888 9.49805 8.59888C7.34607 8.59888 5.60156 6.85437 5.60156 4.70239C5.60156 2.55042 7.34607 0.805907 9.49805 0.805907C11.65 0.805907 13.3945 2.55042 13.3945 4.70239Z"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M5.60156 14.2024C5.60156 14.8172 5.10311 15.3157 4.48828 15.3157C3.87345 15.3157 3.375 14.8172 3.375 14.2024C3.375 13.5876 3.87345 13.0891 4.48828 13.0891C5.10311 13.0891 5.60156 13.5876 5.60156 14.2024Z"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M2.35547 18.0195C2.62919 17.0997 3.48118 16.429 4.48989 16.429C5.49856 16.429 6.35055 17.0997 6.62427 18.0195"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M8.38477 14.759C8.38477 16.911 6.64025 18.6926 4.48828 18.6926C2.33631 18.6926 0.554688 16.911 0.554688 14.759C0.554688 12.6071 2.33631 10.8625 4.48828 10.8625C6.64025 10.8625 8.38477 12.6071 8.38477 14.759Z"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M15.625 14.2024C15.625 14.8172 15.1265 15.3157 14.5117 15.3157C13.8969 15.3157 13.3984 14.8172 13.3984 14.2024C13.3984 13.5876 13.8969 13.0891 14.5117 13.0891C15.1265 13.0891 15.625 13.5876 15.625 14.2024Z"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M12.375 18.0195C12.6487 17.0997 13.5007 16.429 14.5094 16.429C15.5181 16.429 16.3701 17.0997 16.6438 18.0195"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path
+                                                                    d="M18.4434 14.759C18.4434 16.911 16.6617 18.6926 14.5098 18.6926C12.3578 18.6926 10.6133 16.911 10.6133 14.759C10.6133 12.6071 12.3578 10.8625 14.5098 10.8625C16.6617 10.8625 18.4434 12.6071 18.4434 14.759Z"
+                                                                    stroke="black" stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path d="M9.5 8.59888V10.8625" stroke="black" stroke-width="1.11328"
+                                                                    stroke-miterlimit="10" />
+                                                                <path d="M7.57031 11.9758L9.49859 10.8625" stroke="black"
+                                                                    stroke-width="1.11328" stroke-miterlimit="10" />
+                                                                <path d="M11.4283 11.9758L9.5 10.8625" stroke="black"
+                                                                    stroke-width="1.11328" stroke-miterlimit="10" />
+                                                            </g>
+                                                        </svg>
+
+                                                        Department
+                                                    </div>
+                                                    <div class="tab-slider"></div>
                                                 </div>
-                                                <div class="tab-slider"></div>
+                                                <button class="tab-arrow right">&#8594;</button>
                                             </div>
 
                                             <div id="panel-setting-content" class="settings-tab">
@@ -6476,199 +6502,204 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <div class="settings-card">
-                                        <div class="my-tabs">
-                                            <div class="my-tab active" data-target="panel-setting">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2783)">
-                                                        <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
-                                                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2783">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Panel Setting
+                                        <div class="my-tabs-container">
+                                            <button class="tab-arrow left">&#8592;</button>
+                                            <div class="my-tabs">
+                                                <div class="my-tab active" data-target="panel-setting">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2783)">
+                                                            <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
+                                                                stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2783">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Panel Setting
+                                                </div>
+                                                <div class="my-tab" data-target="notifications-availability">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2786)">
+                                                            <path
+                                                                d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2786">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.203125 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>Availability
+                                                </div>
+                                                <div class="my-tab" data-target="chat-management">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2789)">
+                                                            <path
+                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2789">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Chat Management
+                                                </div>
+                                                <div class="my-tab" data-target="appearance-feature">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2789)">
+                                                            <path
+                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2789">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Appearance & Features
+                                                </div>
+                                                <div class="my-tab" data-target="notifications-management">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2789)">
+                                                            <path
+                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2789">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Management
+                                                </div>
+                                                <div class="my-tab" data-target="notifications-email">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2789)">
+                                                            <path
+                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2789">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Email
+                                                </div>
+                                                <div class="my-tab" data-target="settings-customization">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_1833_2789)">
+                                                            <path
+                                                                d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path
+                                                                d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1833_2789">
+                                                                <rect width="14" height="14" fill="white"
+                                                                    transform="translate(0.765625 0.75)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                    Settings Customization
+                                                </div>
+                                                <div class="tab-slider"></div>
                                             </div>
-                                            <div class="my-tab" data-target="notifications-availability">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2786)">
-                                                        <path
-                                                            d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2786">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.203125 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>Availability
-                                            </div>
-                                            <div class="my-tab" data-target="chat-management">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2789)">
-                                                        <path
-                                                            d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2789">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Chat Management
-                                            </div>
-                                            <div class="my-tab" data-target="appearance-feature">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2789)">
-                                                        <path
-                                                            d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2789">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Appearance & Features
-                                            </div>
-                                            <div class="my-tab" data-target="notifications-management">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2789)">
-                                                        <path
-                                                            d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2789">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Management
-                                            </div>
-                                            <div class="my-tab" data-target="notifications-email">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2789)">
-                                                        <path
-                                                            d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2789">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Email
-                                            </div>
-                                            <div class="my-tab" data-target="settings-customization">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2789)">
-                                                        <path
-                                                            d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2789">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Settings Customization
-                                            </div>
-                                            <div class="tab-slider"></div>
+                                            <button class="tab-arrow right">&#8594;</button>
                                         </div>
 
                                         <div id="panel-setting" class="settings-tab">
@@ -6679,7 +6710,8 @@ function sb_component_admin()
                                                         <g clip-path="url(#clip0_1833_2783)">
                                                             <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
                                                                 stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round">
+                                                            </path>
                                                             <path
                                                                 d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
@@ -6779,7 +6811,8 @@ function sb_component_admin()
                                                         <g clip-path="url(#clip0_1833_2783)">
                                                             <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
                                                                 stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round">
+                                                            </path>
                                                             <path
                                                                 d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
@@ -6963,471 +6996,479 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <div class="settings-card">
-                                        <div class="my-tabs">
-                                            <div class="my-tab active" data-target="message-content">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2783)">
-                                                        <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
-                                                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2783">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Message
-                                            </div>
-                                            <div class="my-tab" data-target="email-content">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2786)">
-                                                        <path
-                                                            d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2786">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.203125 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>Email
-                                            </div>
-                                            <div class="my-tab" data-target="form-content">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2789)">
-                                                        <path
-                                                            d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2789">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Form
-                                            </div>
-                                            <div class="tab-slider"></div>
-                                        </div>
-
-                                        <div id="message-content" class="settings-tab">
-                                            <div class="settings-head">
-                                                <p class="head">
+                                        <div class="my-tabs-container">
+                                            <button class="tab-arrow left">&#8592;</button>
+                                            <div class="my-tabs">
+                                                <div class="my-tab active" data-target="message-content">
                                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1833_2783)">
                                                             <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
                                                                 stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                             <clipPath id="clip0_1833_2783">
                                                                 <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.765625 0.75)"></rect>
+                                                                    transform="translate(0.765625 0.75)" />
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
                                                     Message
-                                                </p>
-                                                <p class="des mb-0">Control when your message widget is visible and available to
-                                                    visitors</p>
-                                            </div>
-
-                                            <?php sb_populate_settings("messages", $sb_settings, true, 'messages-text'); ?>
-                                        </div>
-
-                                        <div id="email-content" style="display: none;" class="settings-tab">
-                                            <div class="settings-head">
-                                                <p class="head">
+                                                </div>
+                                                <div class="my-tab" data-target="email-content">
                                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1833_2786)">
                                                             <path
                                                                 d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                             <clipPath id="clip0_1833_2786">
                                                                 <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.203125 0.75)"></rect>
+                                                                    transform="translate(0.203125 0.75)" />
                                                             </clipPath>
                                                         </defs>
-                                                    </svg>
-                                                    Email
-                                                </p>
-                                                <p class="des mb-0">Control when your email widget is visible and available to
-                                                    visitors</p>
-                                            </div>
-
-                                            <?php sb_populate_settings("messages", $sb_settings, true, 'messages-email'); ?>
-                                        </div>
-
-                                        <div id="form-content" style="display: none;" class="settings-tab">
-                                            <div class="settings-head">
-                                                <p class="head">
+                                                    </svg>Email
+                                                </div>
+                                                <div class="my-tab" data-target="form-content">
                                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1833_2789)">
                                                             <path
                                                                 d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                             <clipPath id="clip0_1833_2789">
                                                                 <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.765625 0.75)"></rect>
+                                                                    transform="translate(0.765625 0.75)" />
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
                                                     Form
-                                                </p>
-                                                <p class="des mb-0">Control when your form widget is visible and available to
-                                                    visitors</p>
+                                                </div>
+                                                <div class="tab-slider"></div>
+                                            </div>
+                                                <button class="tab-arrow right">&#8594;</button>
                                             </div>
 
-                                            <?php sb_populate_settings("messages", $sb_settings, true, 'messages-form'); ?>
+                                            <div id="message-content" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
+                                                                    stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round">
+                                                                </path>
+                                                                <path
+                                                                    d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Message
+                                                    </p>
+                                                    <p class="des mb-0">Control when your message widget is visible and available to
+                                                        visitors</p>
+                                                </div>
+
+                                                <?php sb_populate_settings("messages", $sb_settings, true, 'messages-text'); ?>
+                                            </div>
+
+                                            <div id="email-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2786)">
+                                                                <path
+                                                                    d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                                <path
+                                                                    d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2786">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.203125 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Email
+                                                    </p>
+                                                    <p class="des mb-0">Control when your email widget is visible and available to
+                                                        visitors</p>
+                                                </div>
+
+                                                <?php sb_populate_settings("messages", $sb_settings, true, 'messages-email'); ?>
+                                            </div>
+
+                                            <div id="form-content" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2789)">
+                                                                <path
+                                                                    d="M10.1003 13V11.8333C10.1003 11.2145 9.85443 10.621 9.41684 10.1834C8.97926 9.74583 8.38577 9.5 7.76693 9.5H4.26693C3.64809 9.5 3.0546 9.74583 2.61701 10.1834C2.17943 10.621 1.93359 11.2145 1.93359 11.8333V13"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                                <path
+                                                                    d="M10.0977 2.57471C10.598 2.70442 11.0411 2.99661 11.3575 3.40541C11.6738 3.81421 11.8454 4.31648 11.8454 4.83337C11.8454 5.35027 11.6738 5.85254 11.3575 6.26134C11.0411 6.67014 10.598 6.96232 10.0977 7.09204"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                                <path
+                                                                    d="M13.5977 13.0001V11.8334C13.5973 11.3164 13.4252 10.8142 13.1085 10.4056C12.7917 9.99701 12.3482 9.70518 11.8477 9.57593"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                                <path
+                                                                    d="M6.01693 7.16667C7.30559 7.16667 8.35026 6.122 8.35026 4.83333C8.35026 3.54467 7.30559 2.5 6.01693 2.5C4.72826 2.5 3.68359 3.54467 3.68359 4.83333C3.68359 6.122 4.72826 7.16667 6.01693 7.16667Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2789">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Form
+                                                    </p>
+                                                    <p class="des mb-0">Control when your form widget is visible and available to
+                                                        visitors</p>
+                                                </div>
+
+                                                <?php sb_populate_settings("messages", $sb_settings, true, 'messages-form'); ?>
+                                            </div>
                                         </div>
+
                                     </div>
-
-                                </div>
-                                <?php /*<div>
-                                           <div class="sb-top-bar save_settings settings-header">
-                                               <div class="">
-                                                   <p class="head mb-4">Miscellaneous Settings</p>
-                                                   <p class="des mb-0">Configure additional options and preferences.</p>
-                                               </div>
-                                               <div>
-                                                   <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
-                                                       <i class="sb-icon-check"></i>
-                                                       <?php sb_e("Save changes"); ?>
-                                                   </a>
-                                               </div>
-                                           </div>
-                                           <div class="users-tab">
-                                               <?php sb_populate_settings(
-                                                   "miscellaneous",
-                                                   $sb_settings
-                                               ); ?>
-                                           </div>
-                                       </div>*/ ?>
-                                <?php sb_apps_area(
-                                    $apps,
-                                    $cloud_active_apps
-                                ); ?>
-                                <div>
-                                    <div class="sb-top-bar save_settings settings-header">
-                                        <div class="">
-                                            <p class="head mb-4">Articles Settings</p>
-                                            <p class="des mb-0">Configure articles settings.</p>
-                                        </div>
-                                        <div>
-                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
-                                                <i class="sb-icon-check"></i>
-                                                <?php sb_e("Save changes"); ?>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="settings-card articles-card">
-                                        <div class="my-tabs">
-                                            <div class="my-tab active" data-target="articles-display">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2783)">
-                                                        <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
-                                                            stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
-                                                        <path
-                                                            d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2783">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.765625 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Display
+                                    <?php /*<div>
+                                                                              <div class="sb-top-bar save_settings settings-header">
+                                                                                  <div class="">
+                                                                                      <p class="head mb-4">Miscellaneous Settings</p>
+                                                                                      <p class="des mb-0">Configure additional options and preferences.</p>
+                                                                                  </div>
+                                                                                  <div>
+                                                                                      <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                                                          <i class="sb-icon-check"></i>
+                                                                                          <?php sb_e("Save changes"); ?>
+                                                                                      </a>
+                                                                                  </div>
+                                                                              </div>
+                                                                              <div class="users-tab">
+                                                                                  <?php sb_populate_settings(
+                                                                                      "miscellaneous",
+                                                                                      $sb_settings
+                                                                                  ); ?>
+                                                                              </div>
+                                                                          </div>*/ ?>
+                                    <?php sb_apps_area(
+                                        $apps,
+                                        $cloud_active_apps
+                                    ); ?>
+                                    <div>
+                                        <div class="sb-top-bar save_settings settings-header">
+                                            <div class="">
+                                                <p class="head mb-4">Articles Settings</p>
+                                                <p class="des mb-0">Configure articles settings.</p>
                                             </div>
-                                            <div class="my-tab" data-target="articles-setting">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_1833_2786)">
-                                                        <path
-                                                            d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                        <path
-                                                            d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
-                                                            stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_1833_2786">
-                                                            <rect width="14" height="14" fill="white"
-                                                                transform="translate(0.203125 0.75)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                                Settings
+                                            <div>
+                                                <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                    <i class="sb-icon-check"></i>
+                                                    <?php sb_e("Save changes"); ?>
+                                                </a>
                                             </div>
-                                            <div class="tab-slider"></div>
                                         </div>
-
-                                        <div id="articles-display" class="settings-tab">
-                                            <div class="settings-head">
-                                                <p class="head">
+                                        <div class="settings-card articles-card">
+                                            <div class="my-tabs">
+                                                <div class="my-tab active" data-target="articles-display">
                                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1833_2783)">
                                                             <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
                                                                 stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                             <clipPath id="clip0_1833_2783">
                                                                 <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.765625 0.75)"></rect>
+                                                                    transform="translate(0.765625 0.75)" />
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
                                                     Display
-                                                </p>
-                                                <p class="des mb-0">Control when your display widget is visible and available to
-                                                    visitors</p>
-                                            </div>
-
-                                            <?php sb_populate_settings("articles", $sb_settings, true, 'articles-display'); ?>
-                                        </div>
-
-                                        <div id="articles-setting" style="display: none;" class="settings-tab">
-                                            <div class="settings-head">
-                                                <p class="head">
+                                                </div>
+                                                <div class="my-tab" data-target="articles-setting">
                                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_1833_2786)">
                                                             <path
                                                                 d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                             <path
                                                                 d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
                                                                 stroke="black" stroke-width="1.16667" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                         </g>
                                                         <defs>
                                                             <clipPath id="clip0_1833_2786">
                                                                 <rect width="14" height="14" fill="white"
-                                                                    transform="translate(0.203125 0.75)"></rect>
+                                                                    transform="translate(0.203125 0.75)" />
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
-                                                    Setting
-                                                </p>
-                                                <p class="des mb-0">Control when your email widget is visible and available to
-                                                    visitors</p>
+                                                    Settings
+                                                </div>
+                                                <div class="tab-slider"></div>
                                             </div>
 
-                                            <?php sb_populate_settings("articles", $sb_settings, true, 'articles-settings'); ?>
+                                            <div id="articles-display" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2783)">
+                                                                <path d="M7.76562 4.25V7.75L10.099 8.91667" stroke="black"
+                                                                    stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round">
+                                                                </path>
+                                                                <path
+                                                                    d="M7.76693 13.5834C10.9886 13.5834 13.6003 10.9717 13.6003 7.75008C13.6003 4.52842 10.9886 1.91675 7.76693 1.91675C4.54527 1.91675 1.93359 4.52842 1.93359 7.75008C1.93359 10.9717 4.54527 13.5834 7.76693 13.5834Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2783">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.765625 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Display
+                                                    </p>
+                                                    <p class="des mb-0">Control when your display widget is visible and available to
+                                                        visitors</p>
+                                                </div>
+
+                                                <?php sb_populate_settings("articles", $sb_settings, true, 'articles-display'); ?>
+                                            </div>
+
+                                            <div id="articles-setting" style="display: none;" class="settings-tab">
+                                                <div class="settings-head">
+                                                    <p class="head">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1833_2786)">
+                                                                <path
+                                                                    d="M1.40756 7.95297C1.35894 7.822 1.35894 7.67793 1.40756 7.54697C1.88105 6.39888 2.68477 5.41724 3.71684 4.72649C4.7489 4.03574 5.96283 3.66699 7.20472 3.66699C8.44661 3.66699 9.66054 4.03574 10.6926 4.72649C11.7247 5.41724 12.5284 6.39888 13.0019 7.54697C13.0505 7.67793 13.0505 7.822 13.0019 7.95297C12.5284 9.10105 11.7247 10.0827 10.6926 10.7734C9.66054 11.4642 8.44661 11.8329 7.20472 11.8329C5.96283 11.8329 4.7489 11.4642 3.71684 10.7734C2.68477 10.0827 1.88105 9.10105 1.40756 7.95297Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                                <path
+                                                                    d="M7.20312 9.5C8.16962 9.5 8.95312 8.7165 8.95312 7.75C8.95312 6.7835 8.16962 6 7.20312 6C6.23663 6 5.45312 6.7835 5.45312 7.75C5.45312 8.7165 6.23663 9.5 7.20312 9.5Z"
+                                                                    stroke="black" stroke-width="1.16667" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1833_2786">
+                                                                    <rect width="14" height="14" fill="white"
+                                                                        transform="translate(0.203125 0.75)"></rect>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        Setting
+                                                    </p>
+                                                    <p class="des mb-0">Control when your email widget is visible and available to
+                                                        visitors</p>
+                                                </div>
+
+                                                <?php sb_populate_settings("articles", $sb_settings, true, 'articles-settings'); ?>
+                                            </div>
                                         </div>
                                     </div>
+                                    <?php /*<div>
+                                                                              <div class="sb-automations-area">
+                                                                                  <div class="sb-select">
+                                                                                      <p data-value="messages">
+                                                                                          <?php sb_e("Messages"); ?>
+                                                                                      </p>
+                                                                                      <ul>
+                                                                                          <li data-value="messages" class="sb-active">
+                                                                                              <?php sb_e("Messages"); ?>
+                                                                                          </li>
+                                                                                          <li data-value="emails">
+                                                                                              <?php sb_e("Emails"); ?>
+                                                                                          </li>
+                                                                                          <?php if ($sms) {
+                                                                                              echo '<li data-value="sms">' .
+                                                                                                  sb_("Text messages") .
+                                                                                                  "</li>";
+                                                                                          } ?>
+                                                                                          <li data-value="popups">
+                                                                                              <?php sb_e("Pop-ups"); ?>
+                                                                                          </li>
+                                                                                          <li data-value="design">
+                                                                                              <?php sb_e("Design"); ?>
+                                                                                          </li>
+                                                                                          <li data-value="more">
+                                                                                              <?php sb_e("More"); ?>
+                                                                                          </li>
+                                                                                      </ul>
+                                                                                  </div>
+                                                                                  <div class="sb-inner-tab sb-tab">
+                                                                                      <div class="sb-nav sb-nav-only">
+                                                                                          <ul></ul>
+                                                                                          <div class="sb-add-automation sb-btn sb-icon">
+                                                                                              <i class="sb-icon-plus"></i>
+                                                                                              <?php sb_e(
+                                                                                                  "Add new automation"
+                                                                                              ); ?>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                      <div class="sb-content sb-hide">
+                                                                                          <div class="sb-automation-values">
+                                                                                              <h2 class="sb-language-switcher-cnt">
+                                                                                                  <?php sb_e("Name"); ?>
+                                                                                              </h2>
+                                                                                              <div class="sb-setting sb-type-text">
+                                                                                                  <div>
+                                                                                                      <input data-id="name" type="text" />
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                              <h2>
+                                                                                                  <?php sb_e(
+                                                                                                      "Message"
+                                                                                                  ); ?>
+                                                                                              </h2>
+                                                                                              <div class="sb-setting sb-type-textarea">
+                                                                                                  <div>
+                                                                                                      <textarea data-id="message"></textarea>
+                                                                                                  </div>
+                                                                                              </div>
+                                                                                              <div class="sb-automation-extra"></div>
+                                                                                          </div>
+                                                                                          <div class="sb-automation-conditions">
+                                                                                              <hr />
+                                                                                              <h2>
+                                                                                                  <?php sb_e(
+                                                                                                      "Conditions"
+                                                                                                  ); ?>
+                                                                                              </h2>
+                                                                                              <div class="sb-conditions"></div>
+                                                                                              <div class="sb-add-condition sb-btn sb-icon">
+                                                                                                  <i class="sb-icon-plus"></i>
+                                                                                                  <?php sb_e(
+                                                                                                      "Add condition"
+                                                                                                  ); ?>
+                                                                                              </div>
+                                                                                          </div>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>*/ ?>
+                                    <?php /*
+                                                                          <div>
+                                                                              <div class="sb-translations sb-tab">
+                                                                                  <div class="sb-nav sb-nav-only">
+                                                                                      <div class="sb-active"></div>
+                                                                                      <ul></ul>
+                                                                                  </div>
+                                                                                  <div class="sb-content">
+                                                                                      <div class="sb-hide">
+                                                                                          <div class="sb-menu-wide">
+                                                                                              <div>
+                                                                                                  <?php sb_e(
+                                                                                                      "Front End"
+                                                                                                  ); ?>
+                                                                                              </div>
+                                                                                              <ul>
+                                                                                                  <li data-value="front" class="sb-active">
+                                                                                                      <?php sb_e(
+                                                                                                          "Front End"
+                                                                                                      ); ?>
+                                                                                                  </li>
+                                                                                                  <li data-value="admin">
+                                                                                                      <?php sb_e(
+                                                                                                          "Admin"
+                                                                                                      ); ?>
+                                                                                                  </li>
+                                                                                                  <li data-value="admin/js">
+                                                                                                      <?php sb_e(
+                                                                                                          "Client side admin"
+                                                                                                      ); ?>
+                                                                                                  </li>
+                                                                                                  <li data-value="admin/settings">
+                                                                                                      <?php sb_e(
+                                                                                                          "Settings"
+                                                                                                      ); ?>
+                                                                                                  </li>
+                                                                                              </ul>
+                                                                                          </div>
+                                                                                          <a class="sb-btn sb-icon sb-add-translation">
+                                                                                              <i class="sb-icon-plus"></i>
+                                                                                              <?php sb_e(
+                                                                                                  "New translation"
+                                                                                              ); ?>
+                                                                                          </a>
+                                                                                      </div>
+                                                                                      <div class="sb-translations-list"></div>
+                                                                                  </div>
+                                                                              </div>
+                                                                          </div>*/ ?>
                                 </div>
-                                <?php /*<div>
-                                           <div class="sb-automations-area">
-                                               <div class="sb-select">
-                                                   <p data-value="messages">
-                                                       <?php sb_e("Messages"); ?>
-                                                   </p>
-                                                   <ul>
-                                                       <li data-value="messages" class="sb-active">
-                                                           <?php sb_e("Messages"); ?>
-                                                       </li>
-                                                       <li data-value="emails">
-                                                           <?php sb_e("Emails"); ?>
-                                                       </li>
-                                                       <?php if ($sms) {
-                                                           echo '<li data-value="sms">' .
-                                                               sb_("Text messages") .
-                                                               "</li>";
-                                                       } ?>
-                                                       <li data-value="popups">
-                                                           <?php sb_e("Pop-ups"); ?>
-                                                       </li>
-                                                       <li data-value="design">
-                                                           <?php sb_e("Design"); ?>
-                                                       </li>
-                                                       <li data-value="more">
-                                                           <?php sb_e("More"); ?>
-                                                       </li>
-                                                   </ul>
-                                               </div>
-                                               <div class="sb-inner-tab sb-tab">
-                                                   <div class="sb-nav sb-nav-only">
-                                                       <ul></ul>
-                                                       <div class="sb-add-automation sb-btn sb-icon">
-                                                           <i class="sb-icon-plus"></i>
-                                                           <?php sb_e(
-                                                               "Add new automation"
-                                                           ); ?>
-                                                       </div>
-                                                   </div>
-                                                   <div class="sb-content sb-hide">
-                                                       <div class="sb-automation-values">
-                                                           <h2 class="sb-language-switcher-cnt">
-                                                               <?php sb_e("Name"); ?>
-                                                           </h2>
-                                                           <div class="sb-setting sb-type-text">
-                                                               <div>
-                                                                   <input data-id="name" type="text" />
-                                                               </div>
-                                                           </div>
-                                                           <h2>
-                                                               <?php sb_e(
-                                                                   "Message"
-                                                               ); ?>
-                                                           </h2>
-                                                           <div class="sb-setting sb-type-textarea">
-                                                               <div>
-                                                                   <textarea data-id="message"></textarea>
-                                                               </div>
-                                                           </div>
-                                                           <div class="sb-automation-extra"></div>
-                                                       </div>
-                                                       <div class="sb-automation-conditions">
-                                                           <hr />
-                                                           <h2>
-                                                               <?php sb_e(
-                                                                   "Conditions"
-                                                               ); ?>
-                                                           </h2>
-                                                           <div class="sb-conditions"></div>
-                                                           <div class="sb-add-condition sb-btn sb-icon">
-                                                               <i class="sb-icon-plus"></i>
-                                                               <?php sb_e(
-                                                                   "Add condition"
-                                                               ); ?>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>*/ ?>
-                                <?php /*
-                                       <div>
-                                           <div class="sb-translations sb-tab">
-                                               <div class="sb-nav sb-nav-only">
-                                                   <div class="sb-active"></div>
-                                                   <ul></ul>
-                                               </div>
-                                               <div class="sb-content">
-                                                   <div class="sb-hide">
-                                                       <div class="sb-menu-wide">
-                                                           <div>
-                                                               <?php sb_e(
-                                                                   "Front End"
-                                                               ); ?>
-                                                           </div>
-                                                           <ul>
-                                                               <li data-value="front" class="sb-active">
-                                                                   <?php sb_e(
-                                                                       "Front End"
-                                                                   ); ?>
-                                                               </li>
-                                                               <li data-value="admin">
-                                                                   <?php sb_e(
-                                                                       "Admin"
-                                                                   ); ?>
-                                                               </li>
-                                                               <li data-value="admin/js">
-                                                                   <?php sb_e(
-                                                                       "Client side admin"
-                                                                   ); ?>
-                                                               </li>
-                                                               <li data-value="admin/settings">
-                                                                   <?php sb_e(
-                                                                       "Settings"
-                                                                   ); ?>
-                                                               </li>
-                                                           </ul>
-                                                       </div>
-                                                       <a class="sb-btn sb-icon sb-add-translation">
-                                                           <i class="sb-icon-plus"></i>
-                                                           <?php sb_e(
-                                                               "New translation"
-                                                           ); ?>
-                                                       </a>
-                                                   </div>
-                                                   <div class="sb-translations-list"></div>
-                                               </div>
-                                           </div>
-                                       </div>*/ ?>
                             </div>
                         </div>
-                    </div>
-                    <script>
-                        $('.my-tab').click(function () {
-                            $(this).siblings().removeClass('active');
-                            $(this).addClass('active');
-                            $(this).parent().parent().find('.settings-tab').hide();
-                            $('#' + $(this).data('target')).show();
-                        });
-                    </script>
+                        <script>
+                            $('.my-tab').click(function () {
+                                $(this).siblings().removeClass('active');
+                                $(this).addClass('active');
+                                $(this).parent().parent().find('.settings-tab').hide();
+                                $('#' + $(this).data('target')).show();
+                            });
+                        </script>
 
-                <?php } ?>
+                    <?php } ?>
             </main>
             <?php
             sb_profile_box();
