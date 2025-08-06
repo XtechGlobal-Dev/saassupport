@@ -5655,6 +5655,12 @@ textarea {
   border-radius: 8px;
   padding: 1rem;
 }
+.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li {
+  display: none;
+}
+.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li:not(:empty) {
+  display: block;
+}
 .sb-area-articles .sb-tab.sb-inner-tab .sb-content.sb-scroll-area {
   margin-top: 0 !important;
   border-radius: 8px;
