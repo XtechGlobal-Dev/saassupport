@@ -539,7 +539,7 @@ td.sb-offline:after {
 
     .sb-content {
         width: 100%;
-        padding: 20px 15px 30px 30px;
+        padding: 20px 1rem 30px 1rem !important;
 
         >.sb-active {
             animation: sb-fade-animation 0.4s;
@@ -800,6 +800,7 @@ td.sb-offline:after {
         border-radius: 3px;
         outline: none;
         box-shadow: none;
+        appearance: none;
         -webkit-appearance: none;
     }
 
@@ -1664,7 +1665,6 @@ textarea {
 }
 
 .sb-panel-tags>div {
-    >div {}
 
     &:empty {
         margin-bottom: -15px;
@@ -1945,6 +1945,14 @@ textarea {
             background: #fff;
             border-radius: 8px;
             padding: 1rem;
+            ul {
+                li {
+                    display: none;
+                    &:not(:empty) {
+                        display: block;
+                    }
+                }
+            }
         }
 
         .sb-content.sb-scroll-area {
@@ -1957,6 +1965,7 @@ textarea {
 .sb-setting {
     position: relative;
     display: inline-block;
+
     .input {
         .container {
             .row {
@@ -2519,10 +2528,6 @@ textarea {
                             border-radius: 5px;
                             font-size: 14px;
                             cursor: pointer;
-
-                            i {
-                                // margin-right: 10px;
-                            }
 
                             &.sb-active {
                                 color: #000;
@@ -4381,7 +4386,7 @@ ul.pagination {
 
     .sb-tab {
         gap: 20px;
-        padding: 0px 20px 10px;
+        padding: 0px 1rem 10px;
 
         .sb-nav.sb-nav-only {
             background: #fff;
@@ -4574,7 +4579,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 30px;
+        padding: 20px 1rem;
         border-bottom: 1px solid #eaedf4;
         background: #fff;
 
@@ -4685,35 +4690,42 @@ body {
 span.badge {
     background-color: #fce4ec6b !important;
     color: #000 !important;
-  &[data-color="red"] {
-    background-color: #e22424 !important;
-    color: #fff !important;
-  }
-  &[data-color="green"] {
-    background-color: #1fa839 !important;
-    color: #fff !important;
-  }
-  &[data-color="pink"] {
-    background-color: #5b31f1 !important;
-    color: #fff !important;
-  }
-  &[data-color="blue"] {
-    background-color: #008db5 !important;
-    color: #fff !important;
-  }
-  &[data-color="yellow"] {
-    background-color: #f5a212 !important;
-    color: #fff !important;
-  }
-  &[data-color="gray"] {
-    background-color: #282828 !important;
-    color: #fff !important;
-  }
+
+    &[data-color="red"] {
+        background-color: #e22424 !important;
+        color: #fff !important;
+    }
+
+    &[data-color="green"] {
+        background-color: #1fa839 !important;
+        color: #fff !important;
+    }
+
+    &[data-color="pink"] {
+        background-color: #5b31f1 !important;
+        color: #fff !important;
+    }
+
+    &[data-color="blue"] {
+        background-color: #008db5 !important;
+        color: #fff !important;
+    }
+
+    &[data-color="yellow"] {
+        background-color: #f5a212 !important;
+        color: #fff !important;
+    }
+
+    &[data-color="gray"] {
+        background-color: #282828 !important;
+        color: #fff !important;
+    }
 }
 
 .sb-td-tags {
     span {
         margin-right: 5px;
+
         &:last-child {
             margin-right: 0;
         }
@@ -5534,11 +5546,9 @@ span.badge {
 
 
 /*
- *
  * -----------------------------------------------------------
  * USERS AREA
  * -----------------------------------------------------------
- *
 */
 
 .sb-area-users {
@@ -5547,7 +5557,7 @@ span.badge {
     .sb-scroll-area {
         overflow: hidden;
         overflow-y: scroll;
-        padding: 15px 15px 0;
+        padding: 15px 1rem 0;
         height: calc(100vh - 85px);
 
         &:hover+.sb-scroll-bar {
@@ -5936,6 +5946,14 @@ span.badge {
 
         .input_container {
             width: 48%;
+            select {
+                option {
+                    display: none;
+                    &:not(:empty) {
+                        display: block;
+                    }
+                }
+            }
 
             &:last-child {
                 width: 100%;
@@ -6366,6 +6384,7 @@ span.badge {
         min-width: 46px !important;
         outline: none;
         box-shadow: none;
+        appearance: none;
         -webkit-appearance: none;
 
         &:checked:before {
@@ -7040,10 +7059,6 @@ a.sb-btn-white,
             &::-webkit-scrollbar {
                 height: 0;
             }
-        }
-
-        &:last-child {
-            margin-top: 15px;
         }
     }
 }
@@ -8368,6 +8383,7 @@ ul.status-list.dropdown-menu {
 .sb-content-articles,
 .sb-content-categories {
     background: $background-gray;
+
     &::before {
         content: none !important;
     }
@@ -10009,61 +10025,6 @@ ul.status-list.dropdown-menu {
         display: flex;
     }
 
-
-    #admin-title,
-    #login-icon,
-    #login-message,
-    #envato-purchase-code,
-    #envato-validation,
-    #email-piping-disable-cron,
-    #auto-updates,
-    #pusher,
-    #cookie-domain,
-    #system-requirements,
-    #sb-path,
-    #tab-aecommerce,
-    #admin-icon,
-    #push-notifications-provider,
-    #push-notifications-id,
-    #push-notifications-key,
-    #tab-whmcs,
-    #tab-perfex,
-    #tab-ump,
-    #tab-armember,
-    #tab-martfury,
-    #logs,
-    .sb-version,
-    #amazon-s3,
-    #whatsapp-twilio-btn.sb-active+#whatsapp-cloud-sync-btn,
-    #whatsapp-twilio-btn.sb-active+#whatsapp-cloud-sync-btn+#whatsapp-cloud-reconnect-btn {
-        // display: none !important;
-    }
-
-    #google-client-id,
-    #google-client-secret,
-    #google-refresh-token,
-    #open-ai-key {
-        &:not(.sb-active) {
-            // display: none !important;
-        }
-    }
-
-    #whatsapp-cloud-key,
-    #whatsapp-twilio-btn {
-        &:not(.sb-active) {
-            // display: none !important;
-        }
-    }
-
-    .sb-app-box {
-
-        .sb-setting,
-        .sb-main .sb-title,
-        .sb-btn-app-puchase {
-            // display: none !important;
-        }
-    }
-
     .sb-active-app {
         .sb-btn-app-disable {
             display: block !important;
@@ -10426,6 +10387,17 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             .col-sm-12 {
                 padding: 0;
                 overflow-x: scroll;
+
+                &::-webkit-scrollbar {
+                    background: none;
+                    height: 4px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    height: 4px;
+                    background: #e5e5e5;
+                    border-radius: 20px;
+                }
             }
         }
     }
@@ -11348,7 +11320,7 @@ i {
 
 .setting_sidebar li {
     margin: 0 !important;
-    padding: 12px 20px !important;
+    padding: 12px 1rem !important;
     line-height: 1.2 !important;
     font-size: 14px !important;
     font-weight: 500 !important;
@@ -11541,7 +11513,7 @@ div#messaging-channels {
 
 .my-tabs {
     margin-bottom: 20px;
-    padding: 6px 8px;
+    padding: 6px 8px 1px;
     background: #ECECF0;
     border-radius: 40px;
     width: fit-content;
@@ -11557,9 +11529,10 @@ div#messaging-channels {
     &::-webkit-scrollbar-track {
         height: 3px;
         margin-inline: 20px;
-        background-color: #edf2f9;
+        background-color: transparent;
         border-radius: 20px;
     }
+
     &::-webkit-scrollbar-thumb {
         background: #d5d5d5;
         border-radius: 20px;
@@ -12286,9 +12259,11 @@ main {
             .new_container {
                 .dashboard-metrics {
                     grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
+
                     .metric-card {
                         .metric-card-upper {
                             width: 53%;
+
                             .metric-icon {
                                 min-width: 45px;
                             }
@@ -12854,8 +12829,6 @@ main {
     }
 
     .sb-admin {
-        
-
         .sb-area-users {
             .sb-top-bar {
                 div {
@@ -12917,16 +12890,20 @@ main {
     .main-content {
         header {
             padding-inline: 15px;
+
             .sb-profile {
                 padding-left: 15px;
             }
         }
+
         .settings-header {
-                align-items: center;
+            align-items: center;
             z-index: 92;
+
             p.des {
                 line-height: 22px;
             }
+
             div {
                 &:last-child {
                     height: fit-content;
@@ -13079,6 +13056,17 @@ main {
 
     #ticketTable_info {
         padding-bottom: .85rem;
+    }
+
+    #ticketTable_wrapper {
+        min-height: calc(100vh - 240px);
+        overflow: hidden;
+        .row {
+
+            &:last-child {
+                margin-top: 15px;
+            }
+        }
     }
 
     .sb-admin .sb-menu-mobile>i.sb-active+ul {
@@ -13352,14 +13340,18 @@ main {
                 &::-webkit-scrollbar {
                     width: 0;
                 }
+
                 .sb-reports-chart {
                     margin-bottom: 20px;
                 }
-                .sb-reports-chart, .sb-reports-sidebar {
+
+                .sb-reports-chart,
+                .sb-reports-sidebar {
                     padding-inline: 10px;
                     border: 1px solid #d5d5d578;
                 }
             }
+
             .sb-nav.sb-nav-only {
                 ul {
                     width: calc(100% - 40px);
@@ -13378,6 +13370,31 @@ main {
             }
         }
     }
+
+    .sb-account-box {
+        #tab-installation {
+            padding-inline: 1rem;
+            .sb-setting {
+                display: flex;
+                textarea {
+                    width: 100% !important;
+                    margin: 5px 0 20px;
+                }
+            }
+        }
+
+        #tab-membership {
+            .plans-box-menu {
+                ul {
+                    display: flex;
+                    align-items: center;
+                    li {
+                        padding: 10px 24px !important;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
@@ -13388,6 +13405,7 @@ main {
                 div {
                     .sb-btn.sb-icon {
                         font-size: 10px;
+
                         i {
                             font-size: 10px;
                             margin-right: 0 !important;
@@ -13395,28 +13413,32 @@ main {
                     }
                 }
             }
-        .sb-menu-wide {
-            ul {
-                max-width: 75px;
+
+            .sb-menu-wide {
+                ul {
+                    max-width: 75px;
+                }
             }
-        }
-        .sb-menu-mobile {
-            ul {
-                li {
-                    a {
-                        width: fit-content;
+
+            .sb-menu-mobile {
+                ul {
+                    li {
+                        a {
+                            width: fit-content;
+                        }
                     }
                 }
             }
-        }
-        .sb-filter-btn {
-            width: 20px;
-            svg {
-                width: 18px;
-                height: 18px;
+
+            .sb-filter-btn {
+                width: 20px;
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
             }
         }
-    }
     }
 }
 
