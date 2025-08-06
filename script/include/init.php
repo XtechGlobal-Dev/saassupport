@@ -55,7 +55,8 @@ if (sb_isset($_GET, 'mode') == 'tickets') {
 echo sb_is_cloud() ? '<!-- ' . SB_CLOUD_BRAND_NAME . ' - ' . CLOUD_URL . ' -->' : '<!-- Support Board - https://board.support -->';
 die();
 
-function sb_component_chat() {
+function sb_component_chat()
+{
     sb_js_global();
     sb_css();
     $header_headline = sb_get_setting('header-headline');
@@ -97,8 +98,9 @@ function sb_component_chat() {
     <div class="sb-main sb-chat sb-no-conversations<?php echo $css ?>" style="display: none; transition: none;">
         <div class="sb-body">
             <div class="sb-scroll-area<?php echo $texture ? ' sb-texture-' . substr($texture, -5, 1) : '' ?>">
-                <div class="sb-header sb-header-main sb-header-type-<?php echo $header_type ?>" <?php echo $background ? 'style="background-image: url(' . $background . ')"' : '' ?>>
-                    <i class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?>"></i>
+                <div class="sb-header sb-header-main sb-header-type-<?php echo $header_type ?>" <?php echo $background ? 'style="background-image: url(' . $background . ')"' : '' ?> style="padding-bottom: 0; box-shadow: none;">
+                    <i
+                        class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?>"></i>
                     <div class="sb-content">
                         <?php
                         if ($header_type == 'brand') {
@@ -124,13 +126,21 @@ function sb_component_chat() {
                     </div>
                     <div class="sb-label-date-top"></div>
                 </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="margin-top: 163px;">
+                    <path fill="#155cfd" fill-opacity="1"
+                        d="M0,96L60,133.3C120,171,240,245,360,266.7C480,288,600,256,720,224C840,192,960,160,1080,144C1200,128,1320,128,1380,128L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
+                    </path>
+                </svg>
+
                 <div class="sb-list sb-active"></div>
                 <div class="sb-dashboard">
                     <div class="sb-dashboard-conversations">
                         <div class="sb-title">
                             <?php sb_e('Conversations') ?>
                         </div>
-                        <ul class="sb-user-conversations<?php echo sb_get_setting('force-one-conversation') ? ' sb-one-conversation' : '' ?>"></ul>
+                        <ul
+                            class="sb-user-conversations<?php echo sb_get_setting('force-one-conversation') ? ' sb-one-conversation' : '' ?>">
+                        </ul>
                         <?php
                         if (!$agents_menu && !$disable_dashboard) {
                             echo (!$departments_menu ? '<div class="sb-btn sb-btn-new-conversation">' . sb_('New conversation') . '</div>' : '') . '<div class="sb-btn sb-btn-all-conversations">' . sb_('View all') . '</div>';
@@ -154,6 +164,7 @@ function sb_component_chat() {
                 </div>
                 <div class="sb-panel sb-panel-articles"></div>
             </div>
+
             <?php
             sb_component_editor();
             if (defined('SB_CLOUD_BRAND_LOGO')) {
@@ -167,7 +178,9 @@ function sb_component_chat() {
             <img class="sb-close" alt="" src="<?php echo SB_URL ?>/media/button-close.svg" />
         </div>
         <i class="sb-icon sb-icon-close sb-responsive-close-btn"></i>
-        <audio id="sb-audio" preload="auto"><source src="<?php echo SB_URL ?>/media/sound.mp3" type="audio/mpeg"></audio>
+        <audio id="sb-audio" preload="auto">
+            <source src="<?php echo SB_URL ?>/media/sound.mp3" type="audio/mpeg">
+        </audio>
         <div class="sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -176,7 +189,8 @@ function sb_component_chat() {
     </div>
 <?php }
 
-function sb_cross_site_init() {
+function sb_cross_site_init()
+{
     if (defined('SB_CROSS_DOMAIN') && defined('SB_CROSS_DOMAIN_URL') && SB_CROSS_DOMAIN) {
         $domains = [];
         $current_domain = false;
@@ -217,7 +231,8 @@ function sb_cross_site_init() {
     }
 }
 
-function sb_agents_menu() {
+function sb_agents_menu()
+{
     $online_agent_ids = sb_get_multi_setting('agents-menu', 'agents-menu-online-only') ? sb_get_online_user_ids(true) : false;
     $agents = sb_db_get('SELECT id, first_name, last_name, profile_image FROM sb_users WHERE ' . ($online_agent_ids !== false ? 'id IN (' . (count($online_agent_ids) ? implode(', ', $online_agent_ids) : '""') . ')' : 'user_type = "agent"'), false);
     $code = '<div class="sb-dashboard-agents"><div class="sb-title">' . sb_(sb_get_multi_setting('agents-menu', 'agents-menu-title', 'Agents')) . '</div><div class="sb-agents-list"' . (sb_get_multi_setting('agents-menu', 'agents-menu-force-one') ? ' data-force-one="true"' : '') . '>';
@@ -228,7 +243,8 @@ function sb_agents_menu() {
     echo $code . ($count ? '' : '<span class="sb-no-results">' . sb_('No online agents available.') . '</span>') . '</div></div>';
 }
 
-function sb_messaging_channels() {
+function sb_messaging_channels()
+{
     $channels = [['wa', 'WhatsApp'], ['fb', 'Messenger'], ['ig', 'Instagram'], ['tw', 'Twitter'], ['tg', 'Telegram'], ['vb', 'Viber'], ['ln', 'LINE'], ['wc', 'WeChat'], ['za', 'Zalo'], ['em', 'Email'], ['tk', 'Ticket'], ['tm', 'Phone']];
     $code = '<div class="sb-messaging-channels"><div class="sb-title">' . sb_(sb_get_multi_setting('messaging-channels', 'messaging-channels-title', 'Channels')) . '</div><div class="sb-channels-list">';
     for ($i = 0; $i < count($channels); $i++) {

@@ -5722,7 +5722,15 @@ function sb_component_admin()
                                                 <p class="head">Chat</p>
                                                 <p class="des mb-0">Manage your chat widget availability and appearance</p>
                                             </div>
-                                            <div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="sb-search-dropdown">
+                                    <div class="sb-search-btn">
+                                        <i class="sb-icon sb-icon-search"></i>
+                                        <input id="sb-search-settings" type="text" autocomplete="false" placeholder="<?php sb_e('Search ...') ?>" />
+                                    </div>
+                                    <div class="sb-search-dropdown-items"></div>
+                                </div>
+ 
                                                 <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
                                                     <i class="sb-icon-check"></i>Save changes</a>
                                             </div>
