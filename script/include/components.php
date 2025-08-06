@@ -5411,13 +5411,8 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <div class="articles_bg">
-                                        <h2 class="fw-semibold fs-6 m-0 mb-2">
-                                            Categories Settings
-                                        </h2>
-                                        <h2 class="fw-normal fs-7 mt-0 mx-o mb-5">
-                                            Manage and organize content types.
-                                        </h2>
-                                        <h2 class="sb-language-switcher-cnt">
+                                       
+                                        <h2 class="sb-language-switcher-cnt w-100">
                                             <?php sb_e("Name"); ?>
                                         </h2>
                                         <div class="sb-setting sb-type-text">
