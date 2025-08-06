@@ -1879,6 +1879,17 @@ textarea {
 
             .col-sm-12 {
                 padding: 0 !important;
+                table {
+                    thead, tbody {
+                        tr {
+                            th, td {
+                                &:nth-child(2) {
+                                    border-left: 1px solid #d5d5d5;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -4166,6 +4177,7 @@ textarea {
         label,
         .dataTables_info {
             text-transform: capitalize;
+            letter-spacing: .5px;
         }
 
         .col-md-6 {
@@ -5242,6 +5254,14 @@ span.badge {
 
                         }
                     }
+
+                    ul.recent-messages {
+                        li {
+                            div.d-flex {
+                                margin-left: auto;
+                            }
+                        }
+                    }
                 }
 
                 .agents {
@@ -5959,7 +5979,7 @@ span.badge {
                 width: 100%;
 
                 h2 {
-                    margin-bottom: 20px !important;
+                    margin-bottom: 12px !important;
                 }
             }
 
@@ -6040,6 +6060,7 @@ span.badge {
 
         .sb-setting {
             width: 100%;
+            padding-top: 10px !important;
 
             #editorjs {
                 .image-tool__image {
@@ -8493,6 +8514,20 @@ ul.status-list.dropdown-menu {
     .sb-inner-tab {
         .sb-content-categories {
             height: calc(100vh - 180px);
+            background: #fff;
+            .articles_bg {
+                border: 0;
+                padding: 0;
+                .sb-setting {
+                    padding-top: 0 !important;
+                    &:last-child {
+                        padding: 0 !important;
+                        margin-right: auto;
+                        margin-left: 10px;
+                        width: fit-content;
+                    }
+                }
+            }
         }
 
         .ul-articles,
@@ -10387,6 +10422,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             .col-sm-12 {
                 padding: 0;
                 overflow-x: scroll;
+                margin-block: 10px;
 
                 &::-webkit-scrollbar {
                     background: none;
