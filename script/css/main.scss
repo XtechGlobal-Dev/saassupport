@@ -1,4 +1,3 @@
-
 /*
 * 
 * ==========================================================
@@ -86,7 +85,10 @@
 }
 
 .sb-shopify {
-    [class*="sb-icon-"], .sb-bar-icons > div, .sb-dashboard-btn:empty {
+
+    [class*="sb-icon-"],
+    .sb-bar-icons>div,
+    .sb-dashboard-btn:empty {
         display: block;
     }
 
@@ -103,30 +105,42 @@
     border-radius: 12px;
     background: rgba(144, 154, 165, 0.35);
 
-    > div {
+    >div {
         height: 2px;
         background: rgb(144, 154, 165);
     }
 }
 
-div ul.sb-menu li:hover, .sb-select ul li:hover {
+.sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active {
+    .wave-bg {
+        display: none;
+    }
+}
+
+div ul.sb-menu li:hover,
+.sb-select ul li:hover {
     color: $white !important;
 }
 
 .sb-main {
-    ::-webkit-input-placeholder, .sb-articles-page ::-webkit-input-placeholder {
+
+    ::-webkit-input-placeholder,
+    .sb-articles-page ::-webkit-input-placeholder {
         color: #a5aeb6;
     }
 
-    ::-moz-placeholder, .sb-articles-page ::-moz-placeholder {
+    ::-moz-placeholder,
+    .sb-articles-page ::-moz-placeholder {
         color: #a5aeb6;
     }
 
-    :-ms-input-placeholder, .sb-articles-page :-ms-input-placeholder {
+    :-ms-input-placeholder,
+    .sb-articles-page :-ms-input-placeholder {
         color: #a5aeb6;
     }
 
-    :-moz-placeholder, .sb-articles-page :-moz-placeholder {
+    :-moz-placeholder,
+    .sb-articles-page :-moz-placeholder {
         color: #a5aeb6;
     }
 
@@ -163,7 +177,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 }
 
-.sb-ul > span {
+.sb-ul>span {
     position: relative;
     display: block;
     padding-left: 20px;
@@ -201,7 +215,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         background-size: cover;
         margin: 0;
 
-        > .sb-list {
+        >.sb-list {
             float: left;
             clear: both;
             width: 100%;
@@ -225,7 +239,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-    b, strong {
+    b,
+    strong {
         font-weight: 500;
     }
 
@@ -278,7 +293,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             font-weight: 400;
             font-size: 13px;
             letter-spacing: 0.5px;
-            line-height: 25px;
+            line-height: 20px;
             height: 50px;
             overflow: hidden;
             color: rgba(255, 255, 255, 0.8);
@@ -287,14 +302,19 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         .sb-profiles {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
             transition: $transition;
+            .chatbot-images {
+            margin-left: -11px;
+            &:nth-child(1) {
+                margin-left: 0;
+            }
+        }
 
-            > div {
+            >div {
                 margin: 0 10px;
                 position: relative;
 
-                > img {
+                >img {
                     width: 45px;
                     height: 45px;
                     border-radius: 50%;
@@ -303,7 +323,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
                 }
 
-                > span {
+                >span {
                     display: block;
                     text-align: center;
                     overflow: hidden;
@@ -311,7 +331,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     right: -35px;
                     height: 28px;
                     top: -25px;
-                    font-size: 13px;
+                    font-size: 12px;
                     letter-spacing: 0.3px;
                     padding: 0 15px;
                     line-height: 29px;
@@ -320,9 +340,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     box-shadow: 0 2px 7px 0px rgba(0, 0, 0, 0.2);
                     opacity: 0;
                     position: absolute;
+                    width: fit-content;
                 }
 
-                &:hover > span {
+                &:hover>span {
                     top: -40px;
                     opacity: 1;
                     transition: all 0.4s;
@@ -385,7 +406,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             padding: 5px 60px 5px 30px;
             z-index: 9;
 
-            > span:first-child {
+            >span:first-child {
                 display: block;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -409,7 +430,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-            + div + .sb-editor {
+            +div+.sb-editor {
                 display: none;
             }
         }
@@ -423,26 +444,26 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         right: 0;
         z-index: 9;
 
-        > div {
+        >div {
             position: relative;
             bottom: auto;
         }
 
-        > .sb-dashboard-btn {
+        >.sb-dashboard-btn {
             top: 10px;
             right: 14px;
             left: auto !important;
             background: none !important;
             font-size: 10px;
-            width: 20px !important;
-            height: 23px !important;
+            width: 26px !important;
+            height: 26px !important;
             line-height: 23px !important;
             text-align: right !important;
             display: block;
             z-index: 9;
 
             &:hover {
-                opacity: 1;
+                background: rgba(0, 0, 0, 0.25) !important;
             }
 
             &:before {
@@ -451,18 +472,18 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         .sb-title {
-            padding: 30px 0 15px 0;
+            padding: 15px 0 8px 0;
         }
 
-        .sb-brand + .sb-title {
+        .sb-brand+.sb-title {
             padding-top: 22px;
         }
 
-        & + .sb-list {
+        &+.sb-list {
             margin-top: 218px;
         }
 
-        &:hover > .sb-icon-close:not(:hover) {
+        &:hover>.sb-icon-close:not(:hover) {
             opacity: .5;
         }
 
@@ -474,7 +495,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     .sb-header-hide {
         display: none;
 
-        & + .sb-scroll-area {
+        &+.sb-scroll-area {
             border-top: 2px solid $color-blue;
         }
     }
@@ -590,7 +611,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             display: inline-block !important;
         }
 
-        > ul > li:nth-of-type(1n+4) {
+        >ul>li:nth-of-type(1n+4) {
             display: none;
         }
     }
@@ -625,7 +646,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         opacity: 1 !important;
         z-index: 11;
 
-        & + .sb-list {
+        &+.sb-list {
             padding-top: 90px;
             margin-top: 0;
         }
@@ -667,7 +688,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 display: block;
             }
 
-            > div {
+            >div {
                 height: 40px;
 
                 span {
@@ -742,7 +763,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 
         .sb-header-main {
             padding: 0 20px 65px 20px;
-            z-index: 0;
         }
 
         .sb-header-type-minimal {
@@ -750,7 +770,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-    &:not(.sb-dashboard-active) .sb-header-main > div {
+    &:not(.sb-dashboard-active) .sb-header-main>div {
         opacity: 1 !important;
         top: 0 !important;
     }
@@ -761,7 +781,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-    > .sb-body {
+    >.sb-body {
         display: none;
         position: absolute;
         width: 385px;
@@ -769,7 +789,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         background: $white;
         right: 0;
         bottom: 0;
-        border-radius: 6px;
+        border-radius: 26px;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06), 0 3px 32px rgba(0, 0, 0, 0.16);
         z-index: 99995;
         text-align: left;
@@ -778,25 +798,27 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         transition: height .4s;
     }
 
-    &.sb-active > .sb-body {
+    &.sb-active>.sb-body {
         display: flex;
         animation: sb-chat-open-animation 0.4s;
     }
 
     &.sb-notify-active {
         .sb-header-agent {
-            & + .sb-list {
+            &+.sb-list {
                 padding-top: 170px !important;
             }
         }
 
         &:not(.sb-dashboard-active) {
             .sb-header-main {
-                .sb-profiles, .sb-brand + div + .sb-text {
+
+                .sb-profiles,
+                .sb-brand+div+.sb-text {
                     visibility: hidden;
                 }
 
-                & + .sb-list {
+                &+.sb-list {
 
                     .sb-notify-message {
                         top: 130px;
@@ -804,7 +826,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-            .sb-header-type-minimal + .sb-list {
+            .sb-header-type-minimal+.sb-list {
                 padding-top: 30px;
             }
         }
@@ -819,7 +841,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             display: none;
         }
 
-        .sb-dashboard-btn, .sb-profile {
+        .sb-dashboard-btn,
+        .sb-profile {
             animation: none !important;
         }
     }
@@ -859,7 +882,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             }
         }
 
-        .sb-bar-icons > div:not(:hover) {
+        .sb-bar-icons>div:not(:hover) {
             opacity: 0.5;
         }
 
@@ -874,7 +897,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         &.sb-active {
-            .sb-bar + .sb-popup.sb-emoji:after {
+            .sb-bar+.sb-popup.sb-emoji:after {
                 right: 40px;
             }
 
@@ -886,7 +909,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 padding-right: 80px;
             }
 
-            .sb-bar-icons > div {
+            .sb-bar-icons>div {
                 margin-right: 0;
             }
         }
@@ -927,7 +950,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-    .sb-dashboard > div,
+    .sb-dashboard>div,
     .sb-init-form {
         text-align: center;
         color: $color-gray;
@@ -936,10 +959,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.2);
         border-radius: 4px;
 
-        > .sb-title,
-        > .sb-top,
-        > div > .sb-title,
-        > div > .sb-top {
+        >.sb-title,
+        >.sb-top,
+        >div>.sb-title,
+        >div>.sb-top {
             font-weight: 500;
             font-size: 15px;
             letter-spacing: .3px;
@@ -961,7 +984,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             animation: sb-fade-animation 0.5s;
         }
 
-        > div {
+        >div {
             .sb-user-conversations {
                 padding: 10px 0;
 
@@ -978,7 +1001,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     }
                 }
 
-                > p {
+                >p {
                     padding: 25px;
                 }
 
@@ -987,7 +1010,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-            > .sb-btn {
+            >.sb-btn {
                 width: auto;
                 margin: 13px auto;
                 font-weight: 500;
@@ -1004,7 +1027,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-            .sb-one-conversation:not(:empty) + .sb-btn-new-conversation, .sb-btn-all-conversations {
+            .sb-one-conversation:not(:empty)+.sb-btn-new-conversation,
+            .sb-btn-all-conversations {
                 display: none;
             }
         }
@@ -1024,15 +1048,15 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 
     .sb-header-type-minimal:not(.sb-header-agent) {
-        & + .sb-list {
+        &+.sb-list {
             margin-top: 160px;
         }
 
-        & + div + .sb-dashboard {
+        &+div+.sb-dashboard {
             margin-top: 170px;
         }
 
-        & + div + div + div + .sb-init-form {
+        &+div+div+div+.sb-init-form {
             margin-top: 150px;
         }
     }
@@ -1047,7 +1071,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 
     &.sb-init-form-active {
-        .sb-editor, .sb-scroll-area .sb-list, .sb-scroll-area .sb-dashboard {
+
+        .sb-editor,
+        .sb-scroll-area .sb-list,
+        .sb-scroll-area .sb-dashboard {
             display: none;
         }
 
@@ -1088,7 +1115,9 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         .sb-input-btn {
-            input, .sb-btn {
+
+            input,
+            .sb-btn {
                 margin: 0;
                 width: auto;
                 flex-grow: 1;
@@ -1121,24 +1150,24 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 border-bottom-right-radius: 0 !important;
                 position: relative;
 
-                &:focus + .sb-btn {
+                &:focus+.sb-btn {
                     z-index: 0;
                 }
             }
         }
 
-        .sb-top + .sb-form {
+        .sb-top+.sb-form {
             padding-top: 10px;
         }
 
         .sb-form {
             padding: 0 25px;
 
-            & + .sb-btn {
+            &+.sb-btn {
                 margin-top: 25px;
             }
 
-            & + .sb-form {
+            &+.sb-form {
                 margin-top: 10px;
             }
 
@@ -1147,7 +1176,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             }
         }
 
-        .sb-input > span.sb-active {
+        .sb-input>span.sb-active {
             background: $white !important;
         }
 
@@ -1166,24 +1195,24 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             margin: 0;
             text-align: center;
 
-            > div {
+            >div {
                 margin: 0;
                 border-radius: 30px;
 
-                & + div {
+                &+div {
                     margin-top: 15px;
                 }
             }
         }
 
-        > div > .sb-loading {
+        >div>.sb-loading {
             left: 50%;
             margin: 15px 15px 15px -15px;
         }
     }
 
     .sb-privacy {
-        > a {
+        >a {
             padding: 0 25px 25px 25px;
             display: block;
             text-decoration: none;
@@ -1206,7 +1235,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             margin: 0 10px;
         }
 
-        .sb-title, .sb-buttons {
+        .sb-title,
+        .sb-buttons {
             text-align: left;
         }
     }
@@ -1249,7 +1279,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             border-right-color: rgb(255, 255, 255);
         }
 
-        .sb-top + .sb-text {
+        .sb-top+.sb-text {
             margin-top: 5px;
         }
 
@@ -1281,7 +1311,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             }
         }
 
-        > img {
+        >img {
             width: 50px;
             height: 50px;
             left: -70px;
@@ -1300,7 +1330,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             right: auto;
         }
 
-        > .sb-body {
+        >.sb-body {
             right: auto;
             left: 0;
         }
@@ -1321,17 +1351,19 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 transform: rotate(35deg);
             }
 
-            > img {
+            >img {
                 right: -70px;
                 left: auto;
             }
         }
     }
 
-    .sb-departments-list, .sb-agents-list, .sb-channels-list {
+    .sb-departments-list,
+    .sb-agents-list,
+    .sb-channels-list {
         padding: 10px 0;
 
-        > div {
+        >div {
             display: flex;
             align-items: center;
             position: relative;
@@ -1340,8 +1372,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             text-align: left;
             cursor: pointer;
             transition: all 0.4s;
+            background: #000;
 
-            img, div {
+            img,
+            div {
                 width: 30px;
                 height: 30px;
             }
@@ -1362,6 +1396,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 background-color: $background-gray;
             }
         }
+
+
     }
 
     .sb-agents-list {
@@ -1382,7 +1418,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 }
 
-.sb-input > span:not(.sb-filled):not(.sb-active) + input[type=date]:not(:focus)::-webkit-datetime-edit {
+.sb-input>span:not(.sb-filled):not(.sb-active)+input[type=date]:not(:focus)::-webkit-datetime-edit {
     color: transparent;
 }
 
@@ -1435,7 +1471,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 }
 
 .sb-cloud {
-    > .sb-body {
+    >.sb-body {
         padding-bottom: 28px;
     }
 
@@ -1473,7 +1509,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         display: none !important;
     }
 
-    > .sb-body {
+    >.sb-body {
         padding-bottom: 0 !important;
     }
 }
@@ -1486,16 +1522,17 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 */
 
 @media (max-height: 678px) {
+
     .sb-chat .sb-body .sb-scroll-area,
     .sb-chat .sb-body .sb-dashboard {
         min-height: 200px;
     }
 
-    .sb-chat .sb-scroll-area > .sb-list {
+    .sb-chat .sb-scroll-area>.sb-list {
         min-height: 100%;
     }
 
-    .sb-chat .sb-scroll-area .sb-header-main + .sb-list {
+    .sb-chat .sb-scroll-area .sb-header-main+.sb-list {
         min-height: 50px;
     }
 }

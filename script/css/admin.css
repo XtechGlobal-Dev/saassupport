@@ -5614,6 +5614,9 @@ textarea {
 .sb-area-users #customerTable_wrapper .dt-row .col-sm-12 {
   padding: 0 !important;
 }
+.sb-area-users #customerTable_wrapper .dt-row .col-sm-12 table thead tr th:nth-child(2), .sb-area-users #customerTable_wrapper .dt-row .col-sm-12 table thead tr td:nth-child(2), .sb-area-users #customerTable_wrapper .dt-row .col-sm-12 table tbody tr th:nth-child(2), .sb-area-users #customerTable_wrapper .dt-row .col-sm-12 table tbody tr td:nth-child(2) {
+  border-left: 1px solid #d5d5d5;
+}
 .sb-area-users .sb-table-users tr a.sb-profile {
   padding-left: 0;
 }
@@ -7405,6 +7408,7 @@ textarea {
 #ticketTable_wrapper .row label,
 #ticketTable_wrapper .row .dataTables_info {
   text-transform: capitalize;
+  letter-spacing: 0.5px;
 }
 #customerTable_wrapper .row .col-md-6,
 #ticketTable_wrapper .row .col-md-6 {
@@ -7470,6 +7474,16 @@ ul.pagination li.disabled a {
   width: calc(100% - 130px);
   margin-left: auto !important;
 }
+.sb-account-box .sb-top-bar div h2 {
+  width: fit-content;
+  text-indent: unset;
+}
+.sb-account-box .sb-top-bar div a.sb-btn {
+  font-size: 14px;
+}
+.sb-account-box .sb-top-bar div a.sb-btn i {
+  font-size: 14px;
+}
 .sb-account-box .sb-nav {
   min-width: 100px;
   width: 100px;
@@ -7485,7 +7499,7 @@ ul.pagination li.disabled a {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 84px;
+  min-height: 88px;
   border-bottom: 1px solid #d4d4d4;
 }
 .sb-account-box .sb-nav span.logo img {
@@ -8417,6 +8431,9 @@ span.badge[data-color=gray] {
   color: #2953E8;
   text-decoration: unset;
 }
+.sb-area-dashboard main .new_container .main-charts .recent.card ul.recent-messages li div.d-flex {
+  margin-left: auto;
+}
 .sb-area-dashboard main .new_container .main-charts .agents {
   display: flex;
   flex-direction: column;
@@ -8997,7 +9014,7 @@ span.badge[data-color=gray] {
 }
 .sb-tab .sb-content-articles .input_container:last-child h2,
 .sb-tab .sb-content-categories .input_container:last-child h2 {
-  margin-bottom: 20px !important;
+  margin-bottom: 12px !important;
 }
 .sb-tab .sb-content-articles .input_container h2,
 .sb-tab .sb-content-articles .input_container input,
@@ -9056,7 +9073,7 @@ span.badge[data-color=gray] {
 .sb-tab .sb-content-categories .sb-area-dashboard main .new_container .main-charts p.sub_head,
 .sb-area-dashboard main .new_container .main-charts .sb-tab .sb-content-categories p.sub_head {
   margin: 0 !important;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 27px;
   font-weight: 500;
 }
@@ -9065,6 +9082,7 @@ span.badge[data-color=gray] {
 .sb-tab .sb-content-categories .sb-area-dashboard main .new_container .main-charts p.sub_head,
 .sb-area-dashboard main .new_container .main-charts .sb-tab .sb-content-categories p.sub_head {
   margin-bottom: 7px !important;
+  font-size: 18px;
 }
 .sb-tab .sb-content-articles p.des,
 .sb-tab .sb-content-categories p.des {
@@ -9073,6 +9091,7 @@ span.badge[data-color=gray] {
 .sb-tab .sb-content-articles .sb-setting,
 .sb-tab .sb-content-categories .sb-setting {
   width: 100%;
+  padding-top: 10px !important;
 }
 .sb-tab .sb-content-articles .sb-setting #editorjs .image-tool__image img,
 .sb-tab .sb-content-categories .sb-setting #editorjs .image-tool__image img {
@@ -11086,6 +11105,20 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 .sb-area-articles .sb-inner-tab .sb-content-categories {
   height: calc(100vh - 180px);
+  background: #fff;
+}
+.sb-area-articles .sb-inner-tab .sb-content-categories .articles_bg {
+  border: 0;
+  padding: 0;
+}
+.sb-area-articles .sb-inner-tab .sb-content-categories .articles_bg .sb-setting {
+  padding-top: 0 !important;
+}
+.sb-area-articles .sb-inner-tab .sb-content-categories .articles_bg .sb-setting:last-child {
+  padding: 0 !important;
+  margin-right: auto;
+  margin-left: 10px;
+  width: fit-content;
 }
 .sb-area-articles .sb-inner-tab .ul-articles li,
 .sb-area-articles .sb-inner-tab .ul-categories li {
@@ -12761,6 +12794,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12 {
   padding: 0;
   overflow-x: scroll;
+  margin-block: 10px;
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar {
   background: none;
@@ -13480,12 +13514,16 @@ i.fa-solid.fa-x.delete-attachment {
   font-weight: 500 !important;
 }
 
+.sb-account-box.sb-admin .sb-nav {
+  padding-top: 2px;
+}
+
+.sb-account-box .sb-top-bar {
+  padding: 24px 15px !important;
+  height: 42px;
+}
+
 @media (max-width: 1540px) {
-  .screen-size .row > .col-md-8,
-  .screen-size .row > .col-md-4 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
   .new-ticket-button {
     overflow-x: auto;
     white-space: nowrap;
@@ -13622,9 +13660,33 @@ div#messaging-channels {
   align-items: center;
 }
 
+.my-tabs-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.my-tabs-container button.tab-arrow {
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  padding: 0;
+  outline: none;
+  border: 1px solid #d5d5d5;
+  margin-bottom: 40px;
+}
+
 .my-tabs {
-  margin-bottom: 20px;
-  padding: 6px 8px 1px;
+  padding: 6px 8px 6px;
   background: #ECECF0;
   border-radius: 40px;
   width: fit-content;
@@ -13634,7 +13696,7 @@ div#messaging-channels {
   overflow-x: scroll;
 }
 .my-tabs::-webkit-scrollbar {
-  height: 5px;
+  height: 0px;
 }
 .my-tabs::-webkit-scrollbar-track {
   height: 3px;
@@ -14003,6 +14065,17 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   display: none !important;
 }
 
+.sb-search-dropdown .sb-search-btn {
+  margin-right: 30px;
+}
+.sb-search-dropdown .sb-search-dropdown-items {
+  border-color: #2D9CDB;
+}
+
+.sb-board .sb-user-details #sb-attachments-filter ul li:hover {
+  color: #000 !important;
+}
+
 @media (max-width: 1600px) {
   .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
     max-width: 200px;
@@ -14114,6 +14187,11 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
 }
 @media (min-width: 465px) and (max-width: 1024px) {
+  .screen-size .row > .col-md-8,
+  .screen-size .row > .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
   .sb-board > .sb-admin-list,
   .sb-board .sb-user-details {
     max-width: 250px;
@@ -14495,7 +14573,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .main-content .settings-card .my-tabs {
     overflow-x: scroll;
-    min-width: 95%;
+    min-width: 67%;
     max-width: 95%;
   }
   .main-content .settings-card .my-tabs .my-tab {
@@ -14884,6 +14962,67 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-account-box #tab-membership .plans-box-menu ul li {
     padding: 10px 24px !important;
+  }
+  .sb-account-box .sb-top-bar {
+    width: auto;
+  }
+  .sb-admin .header_new .sidebar {
+    position: fixed;
+    top: 0%;
+    left: -150%;
+    transition: 0.5s ease-in-out;
+  }
+  .sb-admin .header_new .sidebar.side-open {
+    left: 0;
+    transition: 0.5s ease-in-out;
+    overflow-y: scroll !important;
+  }
+  .sb-admin .header_new .sidebar .powered-by {
+    flex-direction: column;
+  }
+  .sb-account-box.sb-admin .sb-nav {
+    position: fixed;
+    top: 0%;
+    left: -150%;
+    transition: 0.5s ease-in-out;
+    padding-inline: 0;
+    padding-top: 3px;
+  }
+  .sb-account-box.sb-admin .sb-nav.side-open {
+    left: 0;
+    transition: 0.5s ease-in-out;
+    overflow-y: scroll !important;
+  }
+  .sb-account-box.sb-admin .sb-nav .powered-by {
+    flex-direction: column;
+  }
+  .sb-account-box.sb-admin .sb-nav div:not(.sb-btn) {
+    display: none;
+  }
+  .sb-account-box.sb-admin .sb-nav ul.ul_account li {
+    padding-inline: 15px !important;
+    margin-bottom: 15px !important;
+  }
+  #tab-profile.sb-active {
+    padding: 1rem;
+  }
+  #tab-profile.sb-active .sb-input {
+    height: fit-content;
+  }
+  #tab-profile.sb-active #email input {
+    width: 100%;
+  }
+  #tab-referral h2.addons-title {
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+  #tab-referral .text-earnings {
+    margin-top: 15px;
+  }
+  .sb-tab .sb-content h2 + p {
+    margin-bottom: 15px;
   }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {

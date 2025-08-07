@@ -1879,6 +1879,17 @@ textarea {
 
             .col-sm-12 {
                 padding: 0 !important;
+                table {
+                    thead, tbody {
+                        tr {
+                            th, td {
+                                &:nth-child(2) {
+                                    border-left: 1px solid #d5d5d5;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -4166,6 +4177,7 @@ textarea {
         label,
         .dataTables_info {
             text-transform: capitalize;
+            letter-spacing: .5px;
         }
 
         .col-md-6 {
@@ -4244,6 +4256,18 @@ ul.pagination {
     .sb-top-bar {
         width: calc(100% - 130px);
         margin-left: auto !important;
+        div {
+            h2 {
+                width: fit-content;
+                text-indent: unset;
+            }
+            a.sb-btn {
+                font-size: 14px;
+                i {
+                    font-size: 14px;
+                }
+            }
+        }
     }
 
     .sb-nav {
@@ -4262,7 +4286,7 @@ ul.pagination {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 84px;
+            min-height: 88px;
             border-bottom: 1px solid #d4d4d4;
 
             img {
@@ -5242,6 +5266,14 @@ span.badge {
 
                         }
                     }
+
+                    ul.recent-messages {
+                        li {
+                            div.d-flex {
+                                margin-left: auto;
+                            }
+                        }
+                    }
                 }
 
                 .agents {
@@ -5959,7 +5991,7 @@ span.badge {
                 width: 100%;
 
                 h2 {
-                    margin-bottom: 20px !important;
+                    margin-bottom: 12px !important;
                 }
             }
 
@@ -6025,13 +6057,14 @@ span.badge {
         h2,
         p.head {
             margin: 0 !important;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 27px;
             font-weight: 500;
         }
 
         p.head {
             margin-bottom: 7px !important;
+            font-size: 18px;
         }
 
         p.des {
@@ -6040,6 +6073,7 @@ span.badge {
 
         .sb-setting {
             width: 100%;
+            padding-top: 10px !important;
 
             #editorjs {
                 .image-tool__image {
@@ -8493,6 +8527,20 @@ ul.status-list.dropdown-menu {
     .sb-inner-tab {
         .sb-content-categories {
             height: calc(100vh - 180px);
+            background: #fff;
+            .articles_bg {
+                border: 0;
+                padding: 0;
+                .sb-setting {
+                    padding-top: 0 !important;
+                    &:last-child {
+                        padding: 0 !important;
+                        margin-right: auto;
+                        margin-left: 10px;
+                        width: fit-content;
+                    }
+                }
+            }
         }
 
         .ul-articles,
@@ -10387,6 +10435,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             .col-sm-12 {
                 padding: 0;
                 overflow-x: scroll;
+                margin-block: 10px;
 
                 &::-webkit-scrollbar {
                     background: none;
@@ -11326,18 +11375,22 @@ i {
     font-weight: 500 !important;
 }
 
+.sb-account-box.sb-admin {
+    .sb-nav {
+        padding-top: 2px;
+    }
+}
+
+.sb-account-box {
+    .sb-top-bar {
+        padding: 24px 15px !important;
+        height: 42px;
+    }
+}
+
 // custom responsive
 @media (max-width: 1540px) {
-    .screen-size {
-        .row {
-
-            >.col-md-8,
-            >.col-md-4 {
-                flex: 0 0 100%;
-                max-width: 100%;
-            }
-        }
-    }
+    
 
     .new-ticket-button {
         overflow-x: auto;
@@ -11510,10 +11563,33 @@ div#messaging-channels {
     }
 }
 
+.my-tabs-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    button.tab-arrow {
+        background: #fff;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        padding: 0;
+        outline: none;
+        border: 1px solid #d5d5d5;
+    margin-bottom: 40px;
+    }
+}
 
 .my-tabs {
-    margin-bottom: 20px;
-    padding: 6px 8px 1px;
+    padding: 6px 8px 6px;
     background: #ECECF0;
     border-radius: 40px;
     width: fit-content;
@@ -11523,7 +11599,7 @@ div#messaging-channels {
     overflow-x: scroll;
 
     &::-webkit-scrollbar {
-        height: 5px;
+        height: 0px;
     }
 
     &::-webkit-scrollbar-track {
@@ -12003,6 +12079,29 @@ main {
     }
 }
 
+.sb-search-dropdown {
+    .sb-search-btn {
+        margin-right: 30px;
+    }
+    .sb-search-dropdown-items {
+        border-color: #2D9CDB;
+    }
+}
+
+.sb-board {
+    .sb-user-details {
+        #sb-attachments-filter {
+            ul {
+                li {
+                    &:hover {
+                        color: #000 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
         max-width: 200px;
@@ -12146,6 +12245,17 @@ main {
 }
 
 @media (min-width: 465px) and (max-width: 1024px) {
+
+    .screen-size {
+        .row {
+
+            >.col-md-8,
+            >.col-md-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
 
     .sb-board>.sb-admin-list,
     .sb-board .sb-user-details {
@@ -12768,7 +12878,7 @@ main {
         .settings-card {
             .my-tabs {
                 overflow-x: scroll;
-                min-width: 95%;
+                min-width: 67%;
                 max-width: 95%;
 
                 .my-tab {
@@ -13392,6 +13502,96 @@ main {
                         padding: 10px 24px !important;
                     }
                 }
+            }
+        }
+    }
+
+    .sb-account-box {
+        .sb-top-bar {
+            width: auto;
+        }
+    }
+
+    .sb-admin {
+        .header_new {
+            .sidebar {
+                position: fixed;
+                top: 0%;
+                left: -150%;
+                transition: .5s ease-in-out;
+
+                &.side-open {
+                    left: 0;
+                    transition: .5s ease-in-out;
+                    overflow-y: scroll !important;
+                }
+
+                .powered-by {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+    .sb-account-box.sb-admin {
+        .sb-nav {
+                position: fixed;
+                top: 0%;
+                left: -150%;
+                transition: .5s ease-in-out;
+                padding-inline: 0;
+                padding-top: 3px;
+
+                &.side-open {
+                    left: 0;
+                    transition: .5s ease-in-out;
+                    overflow-y: scroll !important;
+                }
+
+                .powered-by {
+                    flex-direction: column;
+                }
+                div {
+                    &:not(.sb-btn) {
+                        display: none;
+                    }
+                }
+                ul.ul_account {
+                    li {
+                        padding-inline: 15px !important;
+                        margin-bottom: 15px !important;
+                    }
+                }
+            }
+    }
+
+    #tab-profile.sb-active {
+        padding: 1rem;
+        .sb-input {
+            height: fit-content;
+        }
+        #email {
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    #tab-referral {
+        h2.addons-title {
+            font-size: 16px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .text-earnings {
+            margin-top: 15px;
+        }
+    }
+
+    .sb-tab {
+        .sb-content {
+            h2 + p {
+                margin-bottom: 15px;
             }
         }
     }
