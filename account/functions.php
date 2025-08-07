@@ -2922,7 +2922,7 @@ function cloud_css_js_front() {
         echo '<link rel="stylesheet" href="' . $css . '" media="all" />';
     }
     if ($js) {
-        echo '<script src="' . $js . '"></script>';
+       // echo '<script src="' . $js . '"></script>';
     }
 }
 
