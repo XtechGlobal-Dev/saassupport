@@ -6029,7 +6029,7 @@ function sb_component_admin()
                                         </div>
                                         <div class="settings-card">
                                             <div class="my-tabs-container">
-                                                <button class="tab-arrow left">&#8592;</button>
+                                                <button class="tab-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <div class="my-tabs">
                                                     <div class="my-tab active" data-target="panel-setting-content">
                                                         <svg width="17" height="19" viewBox="0 0 17 19" fill="none"
@@ -6245,7 +6245,7 @@ function sb_component_admin()
                                                     </div>
                                                     <div class="tab-slider"></div>
                                                 </div>
-                                                <button class="tab-arrow right">&#8594;</button>
+                                                <button class="tab-arrow right"><i class="fa-solid fa-chevron-right"></i></button>
                                             </div>
 
                                             <div id="panel-setting-content" class="settings-tab">
