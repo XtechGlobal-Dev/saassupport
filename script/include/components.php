@@ -7328,134 +7328,134 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                     <?php /*<div>
-                                                                              <div class="sb-automations-area">
-                                                                                  <div class="sb-select">
-                                                                                      <p data-value="messages">
-                                                                                          <?php sb_e("Messages"); ?>
-                                                                                      </p>
-                                                                                      <ul>
-                                                                                          <li data-value="messages" class="sb-active">
-                                                                                              <?php sb_e("Messages"); ?>
-                                                                                          </li>
-                                                                                          <li data-value="emails">
-                                                                                              <?php sb_e("Emails"); ?>
-                                                                                          </li>
-                                                                                          <?php if ($sms) {
-                                                                                              echo '<li data-value="sms">' .
-                                                                                                  sb_("Text messages") .
-                                                                                                  "</li>";
-                                                                                          } ?>
-                                                                                          <li data-value="popups">
-                                                                                              <?php sb_e("Pop-ups"); ?>
-                                                                                          </li>
-                                                                                          <li data-value="design">
-                                                                                              <?php sb_e("Design"); ?>
-                                                                                          </li>
-                                                                                          <li data-value="more">
-                                                                                              <?php sb_e("More"); ?>
-                                                                                          </li>
-                                                                                      </ul>
-                                                                                  </div>
-                                                                                  <div class="sb-inner-tab sb-tab">
-                                                                                      <div class="sb-nav sb-nav-only">
-                                                                                          <ul></ul>
-                                                                                          <div class="sb-add-automation sb-btn sb-icon">
-                                                                                              <i class="sb-icon-plus"></i>
-                                                                                              <?php sb_e(
-                                                                                                  "Add new automation"
-                                                                                              ); ?>
-                                                                                          </div>
-                                                                                      </div>
-                                                                                      <div class="sb-content sb-hide">
-                                                                                          <div class="sb-automation-values">
-                                                                                              <h2 class="sb-language-switcher-cnt">
-                                                                                                  <?php sb_e("Name"); ?>
-                                                                                              </h2>
-                                                                                              <div class="sb-setting sb-type-text">
-                                                                                                  <div>
-                                                                                                      <input data-id="name" type="text" />
-                                                                                                  </div>
-                                                                                              </div>
-                                                                                              <h2>
-                                                                                                  <?php sb_e(
-                                                                                                      "Message"
-                                                                                                  ); ?>
-                                                                                              </h2>
-                                                                                              <div class="sb-setting sb-type-textarea">
-                                                                                                  <div>
-                                                                                                      <textarea data-id="message"></textarea>
-                                                                                                  </div>
-                                                                                              </div>
-                                                                                              <div class="sb-automation-extra"></div>
-                                                                                          </div>
-                                                                                          <div class="sb-automation-conditions">
-                                                                                              <hr />
-                                                                                              <h2>
-                                                                                                  <?php sb_e(
-                                                                                                      "Conditions"
-                                                                                                  ); ?>
-                                                                                              </h2>
-                                                                                              <div class="sb-conditions"></div>
-                                                                                              <div class="sb-add-condition sb-btn sb-icon">
-                                                                                                  <i class="sb-icon-plus"></i>
-                                                                                                  <?php sb_e(
-                                                                                                      "Add condition"
-                                                                                                  ); ?>
-                                                                                              </div>
-                                                                                          </div>
-                                                                                      </div>
-                                                                                  </div>
-                                                                              </div>
-                                                                          </div>*/ ?>
-                                    <?php /*
-                                                                          <div>
-                                                                              <div class="sb-translations sb-tab">
-                                                                                  <div class="sb-nav sb-nav-only">
-                                                                                      <div class="sb-active"></div>
-                                                                                      <ul></ul>
-                                                                                  </div>
-                                                                                  <div class="sb-content">
-                                                                                      <div class="sb-hide">
-                                                                                          <div class="sb-menu-wide">
-                                                                                              <div>
-                                                                                                  <?php sb_e(
-                                                                                                      "Front End"
-                                                                                                  ); ?>
-                                                                                              </div>
-                                                                                              <ul>
-                                                                                                  <li data-value="front" class="sb-active">
-                                                                                                      <?php sb_e(
-                                                                                                          "Front End"
-                                                                                                      ); ?>
-                                                                                                  </li>
-                                                                                                  <li data-value="admin">
-                                                                                                      <?php sb_e(
-                                                                                                          "Admin"
-                                                                                                      ); ?>
-                                                                                                  </li>
-                                                                                                  <li data-value="admin/js">
-                                                                                                      <?php sb_e(
-                                                                                                          "Client side admin"
-                                                                                                      ); ?>
-                                                                                                  </li>
-                                                                                                  <li data-value="admin/settings">
-                                                                                                      <?php sb_e(
-                                                                                                          "Settings"
-                                                                                                      ); ?>
-                                                                                                  </li>
-                                                                                              </ul>
-                                                                                          </div>
-                                                                                          <a class="sb-btn sb-icon sb-add-translation">
-                                                                                              <i class="sb-icon-plus"></i>
-                                                                                              <?php sb_e(
-                                                                                                  "New translation"
-                                                                                              ); ?>
-                                                                                          </a>
-                                                                                      </div>
-                                                                                      <div class="sb-translations-list"></div>
-                                                                                  </div>
-                                                                              </div>
-                                                                          </div>*/ ?>
+                                                <div class="sb-automations-area">
+                                                    <div class="sb-select">
+                                                        <p data-value="messages">
+                                                            <?php sb_e("Messages"); ?>
+                                                        </p>
+                                                        <ul>
+                                                            <li data-value="messages" class="sb-active">
+                                                                <?php sb_e("Messages"); ?>
+                                                            </li>
+                                                            <li data-value="emails">
+                                                                <?php sb_e("Emails"); ?>
+                                                            </li>
+                                                            <?php if ($sms) {
+                                                                echo '<li data-value="sms">' .
+                                                                    sb_("Text messages") .
+                                                                    "</li>";
+                                                            } ?>
+                                                            <li data-value="popups">
+                                                                <?php sb_e("Pop-ups"); ?>
+                                                            </li>
+                                                            <li data-value="design">
+                                                                <?php sb_e("Design"); ?>
+                                                            </li>
+                                                            <li data-value="more">
+                                                                <?php sb_e("More"); ?>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="sb-inner-tab sb-tab">
+                                                        <div class="sb-nav sb-nav-only">
+                                                            <ul></ul>
+                                                            <div class="sb-add-automation sb-btn sb-icon">
+                                                                <i class="sb-icon-plus"></i>
+                                                                <?php sb_e(
+                                                                    "Add new automation"
+                                                                ); ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="sb-content sb-hide">
+                                                            <div class="sb-automation-values">
+                                                                <h2 class="sb-language-switcher-cnt">
+                                                                    <?php sb_e("Name"); ?>
+                                                                </h2>
+                                                                <div class="sb-setting sb-type-text">
+                                                                    <div>
+                                                                        <input data-id="name" type="text" />
+                                                                    </div>
+                                                                </div>
+                                                                <h2>
+                                                                    <?php sb_e(
+                                                                        "Message"
+                                                                    ); ?>
+                                                                </h2>
+                                                                <div class="sb-setting sb-type-textarea">
+                                                                    <div>
+                                                                        <textarea data-id="message"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="sb-automation-extra"></div>
+                                                            </div>
+                                                            <div class="sb-automation-conditions">
+                                                                <hr />
+                                                                <h2>
+                                                                    <?php sb_e(
+                                                                        "Conditions"
+                                                                    ); ?>
+                                                                </h2>
+                                                                <div class="sb-conditions"></div>
+                                                                <div class="sb-add-condition sb-btn sb-icon">
+                                                                    <i class="sb-icon-plus"></i>
+                                                                    <?php sb_e(
+                                                                        "Add condition"
+                                                                    ); ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*/ ?>
+                                        <?php /*
+                                            <div>
+                                                <div class="sb-translations sb-tab">
+                                                    <div class="sb-nav sb-nav-only">
+                                                        <div class="sb-active"></div>
+                                                        <ul></ul>
+                                                    </div>
+                                                    <div class="sb-content">
+                                                        <div class="sb-hide">
+                                                            <div class="sb-menu-wide">
+                                                                <div>
+                                                                    <?php sb_e(
+                                                                        "Front End"
+                                                                    ); ?>
+                                                                </div>
+                                                                <ul>
+                                                                    <li data-value="front" class="sb-active">
+                                                                        <?php sb_e(
+                                                                            "Front End"
+                                                                        ); ?>
+                                                                    </li>
+                                                                    <li data-value="admin">
+                                                                        <?php sb_e(
+                                                                            "Admin"
+                                                                        ); ?>
+                                                                    </li>
+                                                                    <li data-value="admin/js">
+                                                                        <?php sb_e(
+                                                                            "Client side admin"
+                                                                        ); ?>
+                                                                    </li>
+                                                                    <li data-value="admin/settings">
+                                                                        <?php sb_e(
+                                                                            "Settings"
+                                                                        ); ?>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <a class="sb-btn sb-icon sb-add-translation">
+                                                                <i class="sb-icon-plus"></i>
+                                                                <?php sb_e(
+                                                                    "New translation"
+                                                                ); ?>
+                                                            </a>
+                                                        </div>
+                                                        <div class="sb-translations-list"></div>
+                                                    </div>
+                                                </div>
+                                            </div>*/ ?>
                                 </div>
                             </div>
                         </div>
@@ -7463,7 +7463,7 @@ function sb_component_admin()
                             $('.my-tab').click(function () {
                                 $(this).siblings().removeClass('active');
                                 $(this).addClass('active');
-                                $(this).parent().parent().find('.settings-tab').hide();
+                                $(this).parent().parent().parent().find('.settings-tab').hide();
                                 $('#' + $(this).data('target')).show();
                             });
                         </script>
