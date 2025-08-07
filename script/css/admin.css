@@ -6078,6 +6078,8 @@ textarea {
   padding-top: 0;
   position: relative;
   min-height: 65px;
+  align-items: center;
+  justify-content: center;
 }
 .sb-admin .header_new .sidebar .logo::before {
   position: absolute;
@@ -6091,7 +6093,7 @@ textarea {
 }
 .sb-admin .header_new .sidebar .logo .logo-icon {
   width: auto;
-  height: 50px;
+  height: 40px;
 }
 .sb-admin .header_new .sidebar .logo .logo-text h1 {
   margin: 0 0 8px 0;
@@ -6265,7 +6267,7 @@ textarea {
   margin-left: 15px;
 }
 .sb-admin > main > div > .sb-tab {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 86px);
 }
 
 .sb-search-dropdown {
