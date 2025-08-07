@@ -176,7 +176,9 @@ function sb_component_chat()
             <?php
             sb_component_editor();
             if (defined('SB_CLOUD_BRAND_LOGO')) {
-                echo '<a href="' . SB_CLOUD_BRAND_LOGO_LINK . '" target="_blank" class="sb-cloud-brand"><img src="' . SB_CLOUD_BRAND_LOGO . '" loading="lazy" /></a>';
+                echo '<a href="' . SB_CLOUD_BRAND_LOGO_LINK . '" target="_blank" class="sb-cloud-brand" style="text-decoration: none; color: #000; line-height: 18px; font-size: 12px; font-weight: 500;">
+                    Chat ⚡️ by Nexleon Helpdesk
+                </a>';
             }
             ?>
         </div>
