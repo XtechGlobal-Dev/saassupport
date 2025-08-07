@@ -3747,7 +3747,11 @@
                 chat_scroll_area.find(' > div').sbActive(false);
                 panel.sbActive(true);
                 if (!this.start_header) this.start_header = [chat_header.html(), chat_header.attr('class')];
-                chat_header.attr('class', 'sb-header sb-header-panel').html(`<span>${sb_(title)}</span><div class="sb-dashboard-btn sb-icon-close"></div>`);
+                chat_header.attr('class', 'sb-header sb-header-panel').html(`<svg class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?> sb-dashboard-btn sb-icon-close"
+                        style="right: unset; left: 10px; top: 15px; width: 26px; height: 26px;" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg><span style="padding-left: 15px;">${sb_(title)}</span>`);
                 main.addClass('sb-panel-active');
                 this.dashboard = true;
             }
