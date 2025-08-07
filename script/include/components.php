@@ -2775,7 +2775,7 @@ function sb_component_admin()
                         '<li data-value="edit-profile">' .
                         sb_("Edit profile") .
                         "</li>";
-                    //($is_cloud ? sb_cloud_account_menu() : "");
+                    ($is_cloud ? sb_cloud_account_menu() : "");
                 }
                 $header .= '</ul>
                                 </div>
