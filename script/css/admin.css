@@ -9055,6 +9055,14 @@ span.badge[data-color=gray] {
   display: flex;
   margin-inline: auto;
 }
+.sb-tab .sb-content-articles .input_container #editorjs .codex-editor .codex-editor__redactor,
+.sb-tab .sb-content-categories .input_container #editorjs .codex-editor .codex-editor__redactor {
+  padding-top: 25px;
+}
+.sb-tab .sb-content-articles .input_container #editorjs .ce-toolbar.ce-toolbar--opened,
+.sb-tab .sb-content-categories .input_container #editorjs .ce-toolbar.ce-toolbar--opened {
+  top: 0 !important;
+}
 .sb-tab .sb-content-articles .sb-article-categories,
 .sb-tab .sb-content-categories .sb-article-categories {
   width: 100%;

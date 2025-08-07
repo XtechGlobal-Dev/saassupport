@@ -100,8 +100,7 @@ function sb_component_tickets()
                 <p class="no-reords text-center d-none">No results found.</p>
                 <div class="tickets-area w-100" style="height: 100%;">
                     <h4 class="ticket-subject mb-0"></h4>
-                    <div class="text-muted small tickets-header"><span class="user-name"></span> <span class="ms-1">raised
-                            on this
+                    <div class="text-muted small tickets-header"><span class="user-name"></span> <span class="ms-1">raised this on
                             <span class="ticket-creation-time"></span></span></div>
                     <div class="tickets-text d-none">
                     </div>
@@ -210,7 +209,7 @@ function sb_component_tickets()
                         </div-->
                         <ul class="sb-user-conversations sb-scroll-area"
                             data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
-                            <p>
+                            <p style="padding: 15px;">
                                 <?php sb_e('No results found.') ?>
                             </p>
                         </ul>
