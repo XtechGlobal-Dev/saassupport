@@ -4741,8 +4741,15 @@ div ul.sb-menu .li:hover,
   background: rgb(144, 154, 165);
 }
 
-.sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active .wave-bg {
+.sb-main.sb-chat.sb-cloud.sb-active .wave-bg,
+.sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active .wave-bg,
+.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active.sb-panel-active .wave-bg {
   display: none;
+}
+
+.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .wave-bg,
+.sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active .wave-bg {
+  display: flex;
 }
 
 div ul.sb-menu li:hover,
@@ -5756,7 +5763,7 @@ div ul.sb-menu li:hover,
   text-align: left;
   cursor: pointer;
   transition: all 0.4s;
-  background: #000;
+  background: #FFF;
 }
 .sb-chat .sb-departments-list > div img,
 .sb-chat .sb-departments-list > div div,

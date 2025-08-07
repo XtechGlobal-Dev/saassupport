@@ -10184,6 +10184,7 @@ ul.status-list.dropdown-menu {
     }
 }
 
+
 .sb-menu [data-value="switch"] {
     position: static !important;
 
@@ -10193,18 +10194,27 @@ ul.status-list.dropdown-menu {
         // top: -61px;
         // height: calc(100vh + 45px);
         left: -50px;
-        bottom: -120px;
-        height: 150px;
+        top: 75%;
+        height: fit-content;
         padding: 8px 15px;
         background: #FFF;
         box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
         border-radius: 4px;
         opacity: 0;
         transition: all 0.4s linear .2s;
+        &::-webkit-scrollbar {
+            height: 0;
+            width: 0;
+        }
 
         a {
             display: block;
             padding: 6px 0;
+            text-decoration: none;
+            color: #000;
+            &:hover {
+                color: #0069f0;
+            }
         }
     }
 
@@ -11011,7 +11021,7 @@ li.menu_head:hover {
             padding: 15px 15px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
 
             .settings-head {
                 p {

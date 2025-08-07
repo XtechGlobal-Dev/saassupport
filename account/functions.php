@@ -2922,7 +2922,7 @@ function cloud_css_js_front() {
         echo '<link rel="stylesheet" href="' . $css . '" media="all" />';
     }
     if ($js) {
-       // echo '<script src="' . $js . '"></script>';
+        echo '<script src="' . $js . '"></script>';
     }
 }
 
@@ -3031,7 +3031,7 @@ function sb_cloud_account_menu($tag = 'li') {
     $credits = isset($_GET['credit']) && $_GET['credit'] === '1' ? '#credits' : '';
 
     if (sb_isset($account, 'owner')) {
-        $code = '<' . $tag . ' data-value="account">' . sb_('Account') . '</' . $tag . '>';
+       // $code = '<' . $tag . ' data-value="account">' . sb_('Account') . '</' . $tag . '>';
     }
     if (defined('SB_CLOUD_DOCS')) {
         //$code .= ($tag == 'a' ? '' : '<li data-value="help">') . '<a href="' . SB_CLOUD_DOCS . '" target="_blank">' . sb_('Help') . '</a>' . ($tag == 'a' ? '' : '</li>');

@@ -12580,8 +12580,8 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .sb-menu [data-value=switch] > div {
   position: absolute;
   left: -50px;
-  bottom: -120px;
-  height: 150px;
+  top: 75%;
+  height: fit-content;
   padding: 8px 15px;
   background: #FFF;
   box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -12589,9 +12589,18 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   opacity: 0;
   transition: all 0.4s linear 0.2s;
 }
+.sb-menu [data-value=switch] > div::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
 .sb-menu [data-value=switch] > div a {
   display: block;
   padding: 6px 0;
+  text-decoration: none;
+  color: #000;
+}
+.sb-menu [data-value=switch] > div a:hover {
+  color: #0069f0;
 }
 .sb-menu [data-value=switch]:hover > div {
   opacity: 1;
@@ -13254,7 +13263,7 @@ li.menu_head:hover {
   padding: 15px 15px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 .main-content .settings-card .settings-tab .settings-head p {
   display: flex;
