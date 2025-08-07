@@ -209,7 +209,7 @@ function sb_component_tickets()
                         </div-->
                         <ul class="sb-user-conversations sb-scroll-area"
                             data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
-                            <p>
+                            <p style="padding: 15px;">
                                 <?php sb_e('No results found.') ?>
                             </p>
                         </ul>
