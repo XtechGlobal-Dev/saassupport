@@ -98,9 +98,16 @@ function sb_component_chat()
     <div class="sb-main sb-chat sb-no-conversations<?php echo $css ?>" style="display: none; transition: none;">
         <div class="sb-body">
             <div class="sb-scroll-area<?php echo $texture ? ' sb-texture-' . substr($texture, -5, 1) : '' ?>">
-                <div class="sb-header sb-header-main sb-header-type-<?php echo $header_type ?>" <?php echo $background ? 'style="background-image: url(' . $background . ')"' : '' ?> style="padding-bottom: 0; box-shadow: none;">
-                    <i
-                        class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?>"></i>
+                <div class="sb-header sb-header-main sb-header-type-<?php echo $header_type ?>" <?php echo $background ? 'style="background-image: url(' . $background . ')"' : '' ?>
+                    style="padding-bottom: 0; box-shadow: none;">
+
+                    <svg class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?>"
+                        style="right: unset; left: 10px; opacity: 1;" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+
+                    <!-- <i class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?>"></i> -->
                     <div class="sb-content">
                         <?php
                         if ($header_type == 'brand') {
@@ -118,7 +125,7 @@ function sb_component_chat()
                             $agents = sb_db_get('SELECT first_name, profile_image FROM sb_users WHERE user_type = "agent" OR user_type = "admin" LIMIT 3', false);
                             $code = '';
                             for ($i = 0; $i < count($agents); $i++) {
-                                $code .= '<div><span>' . $agents[$i]['first_name'] . '</span><img src="' . $agents[$i]['profile_image'] . '" loading="lazy" alt="" /></div>';
+                                $code .= '<div class="chatbot-images" style="margin-right: 0;"><span>' . $agents[$i]['first_name'] . '</span><img src="' . $agents[$i]['profile_image'] . '" loading="lazy" alt="" style="width: 35px; height: 35px;" /></div>';
                             }
                             echo '<div class="sb-profiles">' . $code . '</div>';
                         }
@@ -126,13 +133,14 @@ function sb_component_chat()
                     </div>
                     <div class="sb-label-date-top"></div>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="margin-top: 160px; position: fixed; width: 385px; z-index: 8;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"
+                    style="margin-top: 109px; position: fixed; width: 385px; z-index: 8;" class="wave-bg">
                     <path fill="#155cfd" fill-opacity="1"
                         d="M0,96L60,133.3C120,171,240,245,360,266.7C480,288,600,256,720,224C840,192,960,160,1080,144C1200,128,1320,128,1380,128L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
                     </path>
                 </svg>
 
-                <div class="sb-list sb-active" style="margin-top: 233px;"></div>
+                <div class="sb-list sb-active" style="margin-top: 180px;"></div>
                 <div class="sb-dashboard">
                     <div class="sb-dashboard-conversations">
                         <div class="sb-title">
