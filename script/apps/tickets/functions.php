@@ -89,7 +89,7 @@ function sb_component_tickets()
                     </ul>
                 </div>
             </div>
-            <div class="sb-panel-main p-5">
+            <div class="sb-panel-main">
                 <div class="sb-top" style="display:none">
                     <div class="sb-title sb-active"></div>
                     <a class="sb-close sb-btn-icon sb-btn-red">
@@ -98,29 +98,33 @@ function sb_component_tickets()
                     <div class="sb-label-date-top"></div>
                 </div>
                 <p class="no-reords text-center d-none">No results found.</p>
-                <div class="tickets-area">
-                    <div class="mb-2 text-muted small"><span class="user-name"></span> <span class="ms-1">raised on this
+                <div class="tickets-area w-100" style="height: 100%;">
+                    <h4 class="ticket-subject mb-0"></h4>
+                    <div class="text-muted small tickets-header"><span class="user-name"></span> <span class="ms-1">raised
+                            on this
                             <span class="ticket-creation-time"></span></span></div>
-                    <h4 class="ticket-subject"></h4>
-                    <div class="bg-light p-3 rounded mb-3">
-                        <div class="mb-1 ticket-description">
-                        </div>
+                    <div class="tickets-text d-none">
                     </div>
-                    <div class="mt-5">
+                    <div class="mb-3 pb-0 ticket-description-container" style="padding: 15px;">
+                        <p class="ticket-description"></p>
+                    </div>
+                    <div class="tickets-chat-area ">
                         <strong>Comments</strong>
                         <!-- Comments/Chat Section -->
-                        <div id="ticket-comments" class="row mt-4">
-                            <div class="col-md-12 p-0">
-                                <div class="" style="max-height: 350px; overflow-y: auto; background: #fff;"
+                        <div id="ticket-comments" class="row mt-4 mx-0">
+                            <div class="col-md-12 p-0 bg-white">
+                                <div class=""
+                                    style="max-height: 350px; overflow-y: auto; background: #fff; border: 1px solid #d5d5d5; border-bottom: 0;"
                                     id="comments-section">
                                     <!-- Comments will be loaded here by JS -->
                                 </div>
 
-                                <div class="d-flex align-items-center gap-2 mt-4">
+                                <div class="d-flex align-items-center gap-2 mt-2"
+                                    style="border: 1px solid #d5d5d5;background: #fff;border-radius: 14px;padding: 0 15px;min-height: 100px;">
                                     <input type="hidden" id="currentUserId"
                                         value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
-                                    <textarea class="form-control me-2" id="newComment"
-                                        placeholder="Type your comment..."></textarea>
+                                    <textarea class="form-control me-2" id="newComment" placeholder="Type your comment..."
+                                        style="border: 0; resize: none; box-shadow: none; padding: 0;"></textarea>
                                     <textarea class="form-control me-2 d-none" data-comment-id=""
                                         id="oldComment"></textarea>
 
@@ -132,12 +136,56 @@ function sb_component_tickets()
                 </div>
                 <div class="sb-panel sb-scroll-area"></div>
             </div>
-            <div class="sb-panel-right p-4">
+            <div class="sb-panel-right">
                 <div class="right-side-wrapper d-none">
                     <div class="mb-2 text-muted small user-name"></div>
-                    <div class="mb-2"><strong>Ticket ID:</strong> <span class="ticket-id"></span></div>
-                    <div class="mb-2"><strong>Status:</strong> <span class="badge bg-secondary ticket-status"></span></div>
-                    <p><strong>Ticket Attachments:</strong></p>
+                    <div class="mb-2">
+                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+                            <path
+                                d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
+                                stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"></path>
+                            <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>Ticket ID: <span class="ticket-id"></span>
+                    </div>
+
+                    <div class="mb-2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="me-1"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M18.9809 9.25283C18.2198 7.32031 16.6794 5.77999 14.7469 5.01897C14.5229 5.27358 14.3413 5.56647 14.2133 5.88656C16.0226 6.54172 17.4581 7.97718 18.1133 9.7864C18.4334 9.6584 18.7263 9.47685 18.9809 9.25283ZM12.2276 5.50391C12.1521 5.50131 12.0762 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 11.9237 18.4987 11.8478 18.4961 11.7721C18.8387 11.6648 19.1655 11.5216 19.472 11.347C19.4905 11.5622 19.5 11.78 19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C12.2199 4.5 12.4376 4.50946 12.6527 4.52801C12.4781 4.83451 12.3349 5.16128 12.2276 5.50391Z"
+                                fill="#222222" />
+                            <circle cx="17" cy="7" r="3" fill="#222222" />
+                        </svg>
+                        Status:<span class="badge bg-secondary ticket-status"></span>
+                    </div>
+
+                    <p>
+                        <svg width="20" height="20" viewBox="-8 0 32 32" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+
+                            <title>attachment</title>
+                            <desc>Created with Sketch Beta.</desc>
+                            <defs>
+
+                            </defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                                sketch:type="MSPage">
+                                <g id="Icon-Set-Filled" sketch:type="MSLayerGroup"
+                                    transform="translate(-214.000000, -153.000000)" fill="#000000">
+                                    <path
+                                        d="M228,157 L228,177 C228,180.313 225.313,183 222,183 C218.687,183 216,180.313 216,177 L216,159 C216,156.791 217.791,155 220,155 C222.209,155 224,156.791 224,159 L224,177 C224,178.104 223.104,179 222,179 C220.896,179 220,178.104 220,177 L220,161 L218,161 L218,177 C218,179.209 219.791,181 222,181 C224.209,181 226,179.209 226,177 L226,159 C226,155.687 223.313,153 220,153 C216.687,153 214,155.687 214,159 L214,178 C214.493,181.945 217.921,185 222,185 C226.079,185 229.507,181.945 230,178 L230,157 L228,157"
+                                        id="attachment" sketch:type="MSShapeGroup">
+
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                        Ticket Attachments:
+                    </p>
                     <div class="row ticket-attachments"></div>
 
                     <div class="sb-scroll-area"></div>
@@ -151,9 +199,9 @@ function sb_component_tickets()
                         <!--div class="sb-top">
                             <div>
                                 <?php /*if (!sb_isset($disable_fields, 'tickets-button'))
-                               echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
-                           else
-                               echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
+                     echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                 else
+                     echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
                             </div>
                             <div class="sb-search-btn">
                                 <i class="sb-icon sb-icon-search"></i>

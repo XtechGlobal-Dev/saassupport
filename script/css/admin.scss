@@ -10184,6 +10184,7 @@ ul.status-list.dropdown-menu {
     }
 }
 
+
 .sb-menu [data-value="switch"] {
     position: static !important;
 
@@ -10193,8 +10194,8 @@ ul.status-list.dropdown-menu {
         // top: -61px;
         // height: calc(100vh + 45px);
         left: -50px;
-        bottom: -120px;
-        height: 150px;
+        top: 75%;
+        height: fit-content;
         padding: 8px 15px;
         background: #FFF;
         box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -10205,6 +10206,11 @@ ul.status-list.dropdown-menu {
         a {
             display: block;
             padding: 6px 0;
+            text-decoration: none;
+            color: #000;
+            &:hover {
+                color: #0069f0;
+            }
         }
     }
 
