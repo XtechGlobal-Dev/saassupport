@@ -11589,7 +11589,7 @@ div#messaging-channels {
 }
 
 .my-tabs {
-    padding: 6px 8px 1px;
+    padding: 6px 8px 6px;
     background: #ECECF0;
     border-radius: 40px;
     width: fit-content;
@@ -11599,7 +11599,7 @@ div#messaging-channels {
     overflow-x: scroll;
 
     &::-webkit-scrollbar {
-        height: 5px;
+        height: 0px;
     }
 
     &::-webkit-scrollbar-track {
