@@ -5006,20 +5006,23 @@ div ul.sb-menu .li:hover,
   color: #000;
 }
 .sb-tickets .tickets-area {
-  height: 100%;
-  max-height: calc(100vh - 87px);
+  height: fit-content !important;
+  max-height: calc(100vh - 106px);
   overflow: hidden;
   overflow-y: scroll;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-bottom: 20px;
 }
 .sb-tickets .tickets-area::-webkit-scrollbar {
   width: 0;
 }
 .sb-tickets .tickets-area .ticket-description-container {
   border-top: 1px solid #d5d5d5;
+  display: flex;
+  width: 100%;
 }
 .sb-tickets .tickets-area .ticket-description-container p {
   background: #fff;
@@ -5235,11 +5238,11 @@ ul.sb-user-conversations.sb-scroll-area {
 
 # MAIN PANEL
 ==========================================================
-
 */
 .sb-tickets .sb-panel-main {
   width: 100%;
   position: relative;
+  padding: 0 !important;
   background: #F8FAFC;
 }
 .sb-tickets .sb-panel-main > .sb-top .sb-title {
@@ -5352,7 +5355,6 @@ ul.sb-user-conversations.sb-scroll-area {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
 }
 
 .sb-panel-form .sb-form {

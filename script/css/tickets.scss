@@ -754,14 +754,15 @@
     }
 
     .tickets-area {
-        height: 100%;
-        max-height: calc(100vh - 87px);
+        height: fit-content !important;
+        max-height: calc(100vh - 106px);
         overflow: hidden;
         overflow-y: scroll;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         justify-content: space-between;
+        padding-bottom: 20px;
 
         &::-webkit-scrollbar {
             width: 0;
@@ -769,6 +770,8 @@
 
         .ticket-description-container {
             border-top: 1px solid #d5d5d5;
+            display: flex;
+            width: 100%;
 
             p {
                 background: #fff;
@@ -1029,13 +1032,13 @@ ul.sb-user-conversations.sb-scroll-area {
 
 # MAIN PANEL
 ==========================================================
-
 */
 
 .sb-tickets {
     .sb-panel-main {
         width: 100%;
         position: relative;
+        padding: 0 !important;
         background: #F8FAFC;
 
         >.sb-top {
@@ -1192,7 +1195,6 @@ ul.sb-user-conversations.sb-scroll-area {
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-                width: 70%;
             }
         }
     }
