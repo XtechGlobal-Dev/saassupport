@@ -2466,6 +2466,8 @@ textarea {
                 padding-top: 0;
                 position: relative;
                 min-height: 65px;
+                align-items: center;
+                justify-content: center;
 
                 &::before {
                     position: absolute;
@@ -2480,7 +2482,7 @@ textarea {
 
                 .logo-icon {
                     width: auto;
-                    height: 50px;
+                    height: 40px;
                     // margin-right: 10px;
                 }
 
@@ -2740,7 +2742,7 @@ textarea {
             }
 
             >.sb-tab {
-                height: calc(100vh - 70px);
+                height: calc(100vh - 86px);
             }
         }
     }
