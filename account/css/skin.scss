@@ -303,10 +303,8 @@ REGISTRATION AND LOGIN
 }
 
 /*
-     
 ACCOUNT
 ==========================================================
-
 */
 
 .sb-account-box .sb-top-bar, .sb-super-box .sb-admin .sb-top-bar {
@@ -315,7 +313,7 @@ ACCOUNT
     align-items: center;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid #eaedf4;
 
     h2 {
         display: flex;
