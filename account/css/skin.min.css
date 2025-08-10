@@ -202,7 +202,7 @@ ACCOUNT
   align-items: center;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #d4d4d4; }
+  border-bottom: 1px solid #eaedf4; }
   .sb-account-box .sb-top-bar h2, .sb-super-box .sb-admin .sb-top-bar h2 {
     display: flex;
     align-items: center;

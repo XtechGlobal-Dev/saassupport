@@ -113,7 +113,7 @@
 
 .sb-main.sb-chat.sb-cloud.sb-active,
 .sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active,
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active.sb-panel-active{
+.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active.sb-panel-active {
     .wave-bg {
         display: none;
     }
@@ -125,6 +125,7 @@
         display: flex;
     }
 }
+
 div ul.sb-menu li:hover,
 .sb-select ul li:hover {
     color: $white !important;
@@ -231,6 +232,12 @@ div ul.sb-menu li:hover,
             width: 100%;
             min-height: 200px;
             box-sizing: border-box;
+            max-height: 350px;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 0;
+            }
 
             .sb-notify-message {
                 position: absolute;
@@ -313,12 +320,14 @@ div ul.sb-menu li:hover,
             display: flex;
             justify-content: center;
             transition: $transition;
+
             .chatbot-images {
-            margin-left: -11px;
-            &:nth-child(1) {
-                margin-left: 0;
+                margin-left: -11px;
+
+                &:nth-child(1) {
+                    margin-left: 0;
+                }
             }
-        }
 
             >div {
                 margin: 0 10px;
@@ -991,20 +1000,22 @@ div ul.sb-menu li:hover,
         max-height: 350px;
         background: none;
         overflow-y: scroll;
+
         &::-webkit-scrollbar {
             width: 5px;
         }
+
         &::-webkit-scrollbar-thumb {
             background: #d5d5d5;
-            border-radius: 40px;   
+            border-radius: 40px;
         }
+
         &.sb-active {
             animation: sb-fade-animation 0.5s;
         }
 
         >div {
             .sb-user-conversations {
-                padding: 10px 0;
 
                 li {
                     border: none;
