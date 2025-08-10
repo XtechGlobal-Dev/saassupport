@@ -1258,7 +1258,7 @@ div ul.sb-menu,
   float: left;
   clear: both;
   position: relative;
-  margin: 2px 10px 25px 20px;
+  margin: 2px 10px 15px 20px;
   box-shadow: none;
   background-color: rgb(245, 245, 245);
   border-radius: 6px;
@@ -4841,6 +4841,11 @@ div ul.sb-menu li:hover,
   width: 100%;
   min-height: 200px;
   box-sizing: border-box;
+  max-height: 350px;
+  overflow-y: scroll;
+}
+.sb-chat .sb-scroll-area > .sb-list::-webkit-scrollbar {
+  width: 0;
 }
 .sb-chat .sb-scroll-area > .sb-list .sb-notify-message {
   position: absolute;
@@ -5457,9 +5462,6 @@ div ul.sb-menu li:hover,
 }
 .sb-chat .sb-dashboard.sb-active {
   animation: sb-fade-animation 0.5s;
-}
-.sb-chat .sb-dashboard > div .sb-user-conversations {
-  padding: 10px 0;
 }
 .sb-chat .sb-dashboard > div .sb-user-conversations li {
   border: none;
