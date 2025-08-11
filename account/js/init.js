@@ -31,7 +31,8 @@ if (typeof String.prototype.replaceAll === 'undefined') {
     xhr.onload = () => {
         if (xhr.responseText) {
             let response = JSON.parse(xhr.responseText);
-            let url_sb = `${url}/script/js/${url.includes('localhost') || location.href.includes('localhost') || url.includes('debug') || location.href.includes('debug') ? 'main' : 'min/main.min'}.js?v=${response[1]}&cloud=${response[0]}${url_full.includes('?') ? ('&' + url_full.substring(url_full.indexOf('?') + 1)) : ''}`;
+            //let url_sb = `${url}/script/js/${url.includes('localhost') || location.href.includes('localhost') || url.includes('debug') || location.href.includes('debug') ? 'main' : 'min/main.min'}.js?v=${response[1]}&cloud=${response[0]}${url_full.includes('?') ? ('&' + url_full.substring(url_full.indexOf('?') + 1)) : ''}`;
+            let url_sb = `${url}/script/js/${url.includes('localhost') || location.href.includes('localhost') || url.includes('debug') || location.href.includes('debug') ? 'main' : 'main'}.js?v=${response[1]}&cloud=${response[0]}${url_full.includes('?') ? ('&' + url_full.substring(url_full.indexOf('?') + 1)) : ''}`;
             if (typeof jQuery == 'undefined') {
                 getScript(url + '/script/js/min/jquery.min.js', () => {
                     loadScript(url_sb, 'sbinit');
