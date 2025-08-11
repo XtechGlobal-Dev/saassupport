@@ -4952,7 +4952,8 @@ function sb_component_admin()
                                                             </div>
                                                         </div>
                                                         <div class="divider"></div>
-                                                        <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i>
+                                                        <h5 class="field-label">More Fields
+                                                            <!-- <i class="fas fa-chevron-down"></i> -->
                                                         </h5>
                                                         <div id="custom-fields" class="sb-input d-block"></div>
                                                     </div>
