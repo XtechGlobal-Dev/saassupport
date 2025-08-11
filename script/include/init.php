@@ -166,7 +166,7 @@ function sb_component_chat()
                         sb_messaging_channels();
                     }
                     if (sb_get_setting('articles-active')) {
-                        echo sb_get_rich_message('articles');
+                        //echo sb_get_rich_message('articles');
                     }
                     ?>
                 </div>
