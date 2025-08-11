@@ -4455,7 +4455,7 @@ td.sb-offline:after {
   display: none;
 }
 .settings_new .sb-content {
-  height: calc(100vh - 150px);
+  height: calc(100vh - 128px);
 }
 .settings_new .sb-content .users-tab {
   border: 1px solid rgb(209, 213, 219);
@@ -6277,7 +6277,7 @@ textarea {
   margin-left: 15px;
 }
 .sb-admin > main > div > .sb-tab {
-  height: calc(100vh - 86px);
+  height: calc(100vh - 78px);
 }
 
 .sb-search-dropdown {
@@ -6291,7 +6291,8 @@ textarea {
 .sb-search-dropdown .sb-search-btn input {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  box-shadow: 0 0px 5px rgba(39, 156, 255, 0.5);
+  box-shadow: none;
+  border: 1px solid #d5d5d5;
 }
 .sb-search-dropdown .sb-search-dropdown-items {
   position: absolute;
@@ -6330,6 +6331,8 @@ textarea {
 }
 .sb-search-dropdown .sb-active + .sb-search-dropdown-items {
   display: block;
+  box-shadow: none;
+  border-color: #d5d5d5;
 }
 
 /*
@@ -13297,7 +13300,7 @@ li.menu_head:hover {
 .main-content .settings-header .head, .main-content .settings-header .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .main-content .settings-header .sub_head {
   font-weight: 700;
   font-size: 25px;
-  line-height: 40px;
+  line-height: 30px;
   margin-bottom: 10px !important;
 }
 .main-content .settings-header .des {
@@ -13344,7 +13347,7 @@ li.menu_head:hover {
 }
 .main-content .settings-card .settings-tab .sb-setting {
   border: 1px solid rgba(0, 0, 0, 0.1019607843) !important;
-  padding: 20px !important;
+  padding: 15px !important;
   border-radius: 8px;
   gap: 20px 0;
 }
