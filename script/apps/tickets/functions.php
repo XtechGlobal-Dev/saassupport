@@ -99,9 +99,13 @@ function sb_component_tickets()
                 </div>
                 <p class="no-reords text-center d-none">No results found.</p>
                 <div class="tickets-area" style="height: 100%;">
-                    <h4 class="ticket-subject mb-0"></h4>
-                    <div class="text-muted small tickets-header"><span class="user-name"></span> <span class="ms-1">raised this on
-                            <span class="ticket-creation-time"></span></span></div>
+                    <div class="ticket-description-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                        <h4 class="ticket-subject mb-0"></h4>
+                        <div class="text-muted small tickets-header">
+                            <span class="user-name"></span> <span class="ms-1">raised this on
+                            <span class="ticket-creation-time"></span></span>
+                        </div>
+                    </div>
                     <div class="tickets-text d-none">
                     </div>
                     <div class="mb-3 pb-0 ticket-description-container" style="padding: 15px;">
