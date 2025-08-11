@@ -7245,8 +7245,10 @@
         });
 
         
+        
         $(document).on('click','.header_left h2', function()
         {
+           
             $(this).siblings().removeClass('sb-active');
             $(this).addClass('sb-active');
 
@@ -7254,12 +7256,31 @@
             $('.sb-tickets-area').hide();
 
             const targetClass = $(this).data('id');
+             console.log(targetClass,22);
+             console.log('activeUser on trigger:', activeUser());
             $('.' + targetClass).show();
             if (activeUser())
             {
+                console.log('targetClassasasasas');
                 activeUser().getUserTickets();
             }
         });
+
+
+        setTimeout(function() {
+            $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
+            if(!(activeUser()))
+            {
+                setTimeout(function() {
+                    $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
+                }, 1400); // small delay so activeUser() is ready
+            }
+        }, 400); // small delay so activeUser() is ready
+
+        
+
+
+        //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
     }
 
 }(jQuery));
