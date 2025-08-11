@@ -381,9 +381,7 @@
                 } 
                 else if(activeUser())
                 {
-                    console.log('asasas');
-                    console.log(activeUser().getUserTickets());
-                    console.log('hhheeee12');
+
                 }
                 else {
                     main.addClass('sb-no-conversations');
