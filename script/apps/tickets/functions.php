@@ -98,7 +98,7 @@ function sb_component_tickets()
                     <div class="sb-label-date-top"></div>
                 </div>
                 <p class="no-reords text-center d-none">No results found.</p>
-                <div class="tickets-area w-100" style="height: 100%;">
+                <div class="tickets-area" style="height: 100%;">
                     <h4 class="ticket-subject mb-0"></h4>
                     <div class="text-muted small tickets-header"><span class="user-name"></span> <span class="ms-1">raised this on
                             <span class="ticket-creation-time"></span></span></div>

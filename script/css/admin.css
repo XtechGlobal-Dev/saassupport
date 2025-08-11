@@ -4505,7 +4505,7 @@ td.sb-offline:after {
 }
 .sb-tab .sb-content {
   width: 100%;
-  padding: 20px 1rem 30px 1rem !important;
+  padding: 20px 15px 30px 15px !important;
 }
 .sb-tab .sb-content > .sb-active {
   animation: sb-fade-animation 0.4s;
@@ -4781,7 +4781,7 @@ td.sb-offline:after {
   border: 1px solid #EBECEF;
   border-right: 0;
   border-radius: 8px;
-  height: 177px;
+  height: 178px;
 }
 .new_table .sb-scroll-area::-webkit-scrollbar {
   width: 0px;
@@ -6236,7 +6236,7 @@ textarea {
 .sb-admin > main > div > .sb-top-bar {
   height: 40px;
   margin: 0;
-  padding: 15px 20px;
+  padding: 15px;
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -7772,7 +7772,7 @@ body .daterangepicker td.active:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 1rem;
+  padding: 20px 15px;
   border-bottom: 1px solid #eaedf4;
   background: #fff;
 }
@@ -8515,7 +8515,7 @@ span.badge[data-color=gray] {
   background-color: #edf2f9;
 }
 .sb-area-ticket-detail .tc_bg {
-  padding: 20px 40px;
+  padding: 20px 15px;
 }
 .sb-area-ticket-detail .tc_bg .tc_back {
   background-color: #fff;
@@ -8744,7 +8744,7 @@ span.initials.avatar_name {
 .sb-area-users .sb-scroll-area {
   overflow: hidden;
   overflow-y: scroll;
-  padding: 15px 1rem 0;
+  padding: 15px 15px 0;
   height: calc(100vh - 85px);
 }
 .sb-area-users .sb-scroll-area:hover + .sb-scroll-bar {
@@ -14487,8 +14487,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
 }
 @media (min-width: 1024px) {
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card {
-    min-height: 419px;
-    max-height: 419px;
+    min-height: 425px;
+    max-height: 425px;
   }
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card::-webkit-scrollbar {
     width: 0px;

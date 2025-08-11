@@ -806,11 +806,10 @@
         &::-webkit-scrollbar {
             width: 0;
         }
-
         .ticket-description-container {
             border-top: 1px solid #d5d5d5;
             display: flex;
-            width: 100%;
+        width: -webkit-fill-available;
 
             p {
                 background: #fff;
@@ -818,6 +817,11 @@
                 border-radius: 10px;
                 padding: 12px;
                 margin-bottom: 0.5rem;
+                display: none;
+                word-break: break-all;
+                &:not(:empty) {
+                    display: flex;
+                }
             }
         }
     }
@@ -1076,10 +1080,10 @@ ul.sb-user-conversations.sb-scroll-area {
 
 .sb-tickets {
     .sb-panel-main {
-        width: 100%;
         position: relative;
         padding: 0 !important;
         background: #F8FAFC;
+        width: calc(100% - 645px);
 
         >.sb-top {
             .sb-title {
