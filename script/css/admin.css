@@ -8078,6 +8078,14 @@ span.badge[data-color=gray] {
   margin-right: 0;
 }
 
+ul.pagination li a.page-link {
+  color: #696969;
+  font-weight: 400;
+}
+ul.pagination li.active a.page-link {
+  color: #fff;
+}
+
 .sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
   background: #EEF2FF !important;
 }
@@ -13266,7 +13274,8 @@ li.menu_head:hover {
   text-decoration: none;
 }
 
-.toggle-btn, .account-toggle-btn {
+.toggle-btn,
+.account-toggle-btn {
   padding: 10px;
   cursor: pointer;
   font-size: 20px;
@@ -13828,7 +13837,8 @@ div#messaging-channels {
   min-width: fit-content;
 }
 
-.toggle-btn, .account-toggle-btn {
+.toggle-btn,
+.account-toggle-btn {
   display: none;
   background: none;
   padding: 0;
@@ -14708,7 +14718,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     font-size: 13px;
     line-height: 13px;
   }
-  .toggle-btn, .account-toggle-btn {
+  .toggle-btn,
+  .account-toggle-btn {
     display: block;
   }
   header .title {
