@@ -4444,11 +4444,11 @@ function sb_component_admin()
                                                     }
 
                                                     .comment-row.customer+.comment-row.customer {
-                                                        margin-top: 2px;
+                                                        margin-top: 15px;
                                                     }
 
                                                     .comment-row.agent+.comment-row.agent {
-                                                        margin-top: 2px;
+                                                        margin-top: 15px;
                                                     }
 
                                                     .comment-row.customer+.comment-row.agent {
@@ -4952,7 +4952,8 @@ function sb_component_admin()
                                                             </div>
                                                         </div>
                                                         <div class="divider"></div>
-                                                        <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i>
+                                                        <h5 class="field-label">More Fields
+                                                            <!-- <i class="fas fa-chevron-down"></i> -->
                                                         </h5>
                                                         <div id="custom-fields" class="sb-input d-block"></div>
                                                     </div>
