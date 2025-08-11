@@ -2934,9 +2934,6 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                        </section>
-
-                                        <section class="dashboard-metrics">
                                             <!--  -->
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
@@ -4314,7 +4311,7 @@ function sb_component_admin()
                                                 </h2>
                                             </div>
                                             <div class="col-md-4 p-0 col-lg-3">
-                                                <div class="d-flex align-items-center justify-content-end gap-3 pl-5">
+                                                <div class="d-flex align-items-center justify-content-end gap-3 pl-5 mt-3 mt-md-0">
                                                     <select class="form-select ticket-status-dropdown" id="ticket-status"
                                                         style="width: 120px;">
                                                         <?php foreach (
@@ -4447,11 +4444,11 @@ function sb_component_admin()
                                                     }
 
                                                     .comment-row.customer+.comment-row.customer {
-                                                        margin-top: 2px;
+                                                        margin-top: 15px;
                                                     }
 
                                                     .comment-row.agent+.comment-row.agent {
-                                                        margin-top: 2px;
+                                                        margin-top: 15px;
                                                     }
 
                                                     .comment-row.customer+.comment-row.agent {
@@ -4753,7 +4750,7 @@ function sb_component_admin()
                                                 </script>
                                             </div>
                                             <div class="col-md-3 p-0 table-rightside">
-                                                <div class="pl-5">
+                                                <div class="ps-md-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
                                                         <span class="conversation-id d-none">Conversation ID :
@@ -4955,7 +4952,8 @@ function sb_component_admin()
                                                             </div>
                                                         </div>
                                                         <div class="divider"></div>
-                                                        <h5 class="field-label">More Fields <i class="fas fa-chevron-down"></i>
+                                                        <h5 class="field-label">More Fields
+                                                            <!-- <i class="fas fa-chevron-down"></i> -->
                                                         </h5>
                                                         <div id="custom-fields" class="sb-input d-block"></div>
                                                     </div>
