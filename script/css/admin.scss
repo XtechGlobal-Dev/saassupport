@@ -4464,6 +4464,10 @@ ul.pagination {
                     img {
                         width: 16px;
                     }
+                    &.sb-active {
+                        color: #000 !important;
+                        font-weight: 700;
+                    }
                 }
             }
         }
