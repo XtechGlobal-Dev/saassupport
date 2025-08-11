@@ -3074,8 +3074,6 @@ function sb_component_admin()
 
                                             </div>
                                         </section>
-
-                                
                                         <!--section class="dashboard-metrics">
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
