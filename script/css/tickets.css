@@ -4846,7 +4846,8 @@ div ul.sb-menu .li:hover,
 .sb-tickets .sb-panel-right .right-side-wrapper svg path {
   stroke: #000;
 }
-.sb-tickets .sb-panel-right .right-side-wrapper .mb-2:nth-child(3) svg path, .sb-tickets .sb-panel-right .right-side-wrapper .mb-2:nth-child(3) svg circle {
+.sb-tickets .sb-panel-right .right-side-wrapper .mb-2:nth-child(3) svg path,
+.sb-tickets .sb-panel-right .right-side-wrapper .mb-2:nth-child(3) svg circle {
   stroke-width: 0.5px;
 }
 .sb-tickets .sb-panel-right .right-side-wrapper p svg path {
@@ -5365,7 +5366,7 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-tickets.sb-panel-active .sb-panel-main .tickets-area {
   display: none;
 }
-.sb-tickets.sb-no-conversations .sb-panel-main > .sb-top .sb-close, .sb-tickets[data-panel=registration] .sb-panel-main > .sb-top .sb-close, .sb-tickets[data-panel=login] .sb-panel-main > .sb-top .sb-close, .sb-tickets[data-panel=edit-profile] .sb-login-area, .sb-tickets[data-panel=edit-profile] .sb-panel .sb-text, .sb-tickets[data-panel=privacy] .sb-panel-main > .sb-top .sb-close {
+.sb-tickets[data-panel=registration] .sb-panel-main > .sb-top .sb-close, .sb-tickets[data-panel=login] .sb-panel-main > .sb-top .sb-close, .sb-tickets[data-panel=edit-profile] .sb-login-area, .sb-tickets[data-panel=edit-profile] .sb-panel .sb-text, .sb-tickets[data-panel=privacy] .sb-panel-main > .sb-top .sb-close {
   display: none !important;
 }
 .sb-tickets[data-panel=registration] > .sb-tickets-area, .sb-tickets[data-panel=login] > .sb-tickets-area {
@@ -5374,6 +5375,35 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 .sb-tickets[data-panel=registration] > .sb-tickets-area > .sb-collapsed, .sb-tickets[data-panel=login] > .sb-tickets-area > .sb-collapsed {
   height: 0;
+}
+.sb-tickets.sb-panel-form .tickets-list-area {
+  max-height: calc(100vh - 2px);
+}
+.sb-tickets.sb-panel-form .sb-panel-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sb-tickets.sb-panel-form .sb-panel-main .sb-top {
+  width: 100%;
+  max-width: 600px;
+  padding-left: 0;
+}
+.sb-tickets.sb-panel-form .sb-panel-main .sb-top .sb-title {
+  padding-left: 0;
+}
+.sb-tickets.sb-panel-form .sb-panel-main .sb-panel {
+  overflow: hidden;
+  height: fit-content;
+  width: 100%;
+  max-width: 600px;
+}
+.sb-tickets.sb-panel-form .sb-panel-main .sb-panel .sb-form {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 100%;
 }
 
 .tickets-list-area {
