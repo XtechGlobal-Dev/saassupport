@@ -110,7 +110,7 @@ function sb_component_tickets()
                     <div class="tickets-chat-area ">
                         <strong>Comments</strong>
                         <!-- Comments/Chat Section -->
-                        <div id="ticket-comments" class="row mt-2 mx-0">
+                        <div id="ticket-comments" class="row mt-4 mx-0">
                             <div class="col-md-12 p-0 bg-white">
                                 <div class=""
                                     style="max-height: 350px; overflow-y: auto; background: #fff; border: 1px solid #d5d5d5; border-bottom: 0;"
@@ -118,7 +118,7 @@ function sb_component_tickets()
                                     <!-- Comments will be loaded here by JS -->
                                 </div>
 
-                                <div class="d-flex align-items-center gap-2"
+                                <div class="d-flex align-items-center gap-2 mt-2"
                                     style="border: 1px solid #d5d5d5;background: #fff;border-radius: 14px;padding: 0 15px;min-height: 100px;">
                                     <input type="hidden" id="currentUserId"
                                         value="<?php echo sb_get_active_user()['id'] ?? 0; ?>">
