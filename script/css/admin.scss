@@ -3276,6 +3276,7 @@ textarea {
             height: 100%;
             padding: 10px 0 5px 0;
             overflow-y: scroll;
+
             &::-webkit-scrollbar-track {
                 background: none;
             }
@@ -3804,6 +3805,7 @@ textarea {
                         position: absolute;
                         left: 0;
                     }
+
                     img {
                         min-height: 19px;
                     }
@@ -4294,94 +4296,94 @@ ul.pagination {
                 font-family: "InterSemiBold";
                 font-weight: 600;
                 margin-bottom: 0;
-        }
-
-        a.sb-btn {
-            font-size: 14px;
-
-            i {
-                font-size: 14px;
             }
-        }
-    }
-}
 
-.sb-nav {
-    // min-width: 250px;
-    min-width: 100px;
-    width: 100px;
-    padding: 10px 0 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    background: #fff;
-    height: 100vh;
+            a.sb-btn {
+                font-size: 14px;
 
-    span.logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 83px;
-        border-bottom: 1px solid #eaedf4;
-
-        img {
-            width: 40px;
-        }
-    }
-
-    ul.ul_account {
-        // padding-inline: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-
-        li {
-            margin-bottom: 0 !important;
-            padding: 20px 0px;
-            font-size: 11px !important;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-direction: column;
-            color: #5F6465;
-            text-align: center;
-            height: fit-content;
-            line-height: 1.4;
-            overflow: visible;
-
-            svg {
-                width: 20px;
-                height: 20px;
-
-                path {
-                    fill: rgb(95, 100, 101);
+                i {
+                    font-size: 14px;
                 }
             }
+        }
+    }
 
-            &.sb-active,
-            &:hover {
-                box-shadow: none;
-                font-weight: 500 !important;
-                color: #000 !important;
-                background: none;
+    .sb-nav {
+        // min-width: 250px;
+        min-width: 100px;
+        width: 100px;
+        padding: 10px 0 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99;
+        background: #fff;
+        height: 100vh;
+
+        span.logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 83px;
+            border-bottom: 1px solid #eaedf4;
+
+            img {
+                width: 40px;
+            }
+        }
+
+        ul.ul_account {
+            // padding-inline: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            li {
+                margin-bottom: 0 !important;
+                padding: 20px 0px;
+                font-size: 11px !important;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex-direction: column;
+                color: #5F6465;
+                text-align: center;
+                height: fit-content;
+                line-height: 1.4;
+                overflow: visible;
 
                 svg {
+                    width: 20px;
+                    height: 20px;
+
                     path {
-                        fill: #000 !important;
+                        fill: rgb(95, 100, 101);
+                    }
+                }
+
+                &.sb-active,
+                &:hover {
+                    box-shadow: none;
+                    font-weight: 500 !important;
+                    color: #000 !important;
+                    background: none;
+
+                    svg {
+                        path {
+                            fill: #000 !important;
+                        }
                     }
                 }
             }
         }
     }
-}
 
-.sb-tab {
-    .sb-content {
-        width: calc(100% - 135px);
-        margin-left: auto;
+    .sb-tab {
+        .sb-content {
+            width: calc(100% - 135px);
+            margin-left: auto;
+        }
     }
-}
 }
 
 .sb-area-users {
@@ -4467,6 +4469,7 @@ ul.pagination {
                     img {
                         width: 16px;
                     }
+
                     &.sb-active {
                         color: #000 !important;
                         font-weight: 700;
@@ -4796,6 +4799,20 @@ span.badge {
     }
 }
 
+ul.pagination {
+    li {
+        a.page-link {
+            color: #696969;
+            font-weight: 400;
+        }
+
+        &.active {
+            a.page-link {
+                color: #fff;
+            }
+        }
+    }
+}
 
 .sb-main main .sb-board>.sb-admin-list .sb-scroll-area li:hover {
     background: #EEF2FF !important;
@@ -4812,6 +4829,7 @@ span.badge {
             .sb-board {
                 height: calc(100vh - 78px);
             }
+
             .sb-admin-list.sb-departments-show {
                 .sb-scroll-area {
                     ul {
@@ -11030,7 +11048,8 @@ li.menu_head:hover {
     }
 }
 
-.toggle-btn, .account-toggle-btn {
+.toggle-btn,
+.account-toggle-btn {
     padding: 10px;
     cursor: pointer;
     font-size: 20px;
@@ -11261,8 +11280,10 @@ li.menu_head:hover {
     .tags-filter {
         margin-right: 0 !important;
     }
+
     .choices {
         display: flex;
+
         .choices__inner {
             max-width: 100%;
         }
@@ -11592,6 +11613,7 @@ div#messaging-channels {
             content: none;
         }
     }
+
     td {
         a.ml-2 {
             background: #d5d5d5;
@@ -11766,7 +11788,8 @@ div#messaging-channels {
     min-width: fit-content;
 }
 
-.toggle-btn, .account-toggle-btn {
+.toggle-btn,
+.account-toggle-btn {
     display: none;
     background: none;
     padding: 0;
@@ -13071,7 +13094,8 @@ main {
         }
     }
 
-    .toggle-btn, .account-toggle-btn {
+    .toggle-btn,
+    .account-toggle-btn {
         display: block;
     }
 

@@ -747,7 +747,7 @@
 
         #ticket-comments {
             #comments-section {
-                max-height: calc(100vh - 445px) !important;
+                max-height: calc(100vh - 672px) !important;
                 border: 0 !important;
 
                 .comment-row {
@@ -832,6 +832,12 @@
                 margin-bottom: 0.5rem;
                 display: none;
                 word-break: break-all;
+                max-height: 250px;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
+
 
                 &:not(:empty) {
                     display: flex;
