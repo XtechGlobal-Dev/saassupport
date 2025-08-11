@@ -4444,11 +4444,11 @@ function sb_component_admin()
                                                     }
 
                                                     .comment-row.customer+.comment-row.customer {
-                                                        margin-top: 2px;
+                                                        margin-top: 15px;
                                                     }
 
                                                     .comment-row.agent+.comment-row.agent {
-                                                        margin-top: 2px;
+                                                        margin-top: 15px;
                                                     }
 
                                                     .comment-row.customer+.comment-row.agent {

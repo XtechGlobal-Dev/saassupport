@@ -151,7 +151,21 @@
                     //     }
                     // }
                     setTicketTitle(sb_(names.panel));
-                    ticket_panel.html(`<div class="sb-info"></div><div id="subject" class="sb-input sb-input-text sb-ticket-title"><span>${sb_(names.title)}</span><input type="text" required></div>${main.find('.sb-ticket-fields').html()}<div id="description" class="sb-input sb-editor-cnt"><span>${sb_(names.message)}</span></div>   <div id="ticketCustomFieldsContainer"></div>   <div class="sb-btn sb-icon sb-create-ticket"><i class="sb-icon-plus"></i>${sb_(names.button)}</div>`);
+                    ticket_panel.html(`
+                        <div class="tickets-form d-flex flex-column mx-auto">
+                            <div class="sb-info"></div>
+                            <div id="subject" class="sb-input sb-input-text sb-ticket-title">
+                                <span>${sb_(names.title)}</span>
+                                <input type="text" required>
+                            </div>${main.find('.sb-ticket-fields').html()}
+                            <div id="description" class="sb-input sb-editor-cnt">
+                                <span>${sb_(names.message)}</span>
+                            </div>   
+                            <div id="ticketCustomFieldsContainer"></div>   
+                            <div class="sb-btn sb-icon sb-create-ticket">
+                                <i class="sb-icon-plus"></i>${sb_(names.button)}
+                            </div>
+                        </div>`);
                     ticket_main_panel.find('.sb-editor-cnt').append(editor);
                     if (SBF.setting('tickets_recaptcha')) {
                         if (recaptcha) {
