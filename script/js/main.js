@@ -7273,8 +7273,18 @@
             {
                 setTimeout(function() {
                     $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
+                }, 900); // small delay so activeUser() is ready
+            }
+
+            if(!(activeUser()))
+            {
+                setTimeout(function() {
+                    $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                 }, 1400); // small delay so activeUser() is ready
             }
+
+            $('.tickets-area').css('visibility', 'visible');
+
         }, 400); // small delay so activeUser() is ready
 
         

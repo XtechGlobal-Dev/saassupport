@@ -737,6 +737,7 @@
         margin-inline: auto;
         box-shadow: 0px 1px 8.4px 0px rgba(0, 0, 0, 0.2509803922);
         border-radius: 10px;
+        margin-top: auto;
 
         #ticket-comments {
             #comments-section {
@@ -798,18 +799,23 @@
         overflow: hidden;
         overflow-y: scroll;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        flex-wrap: wrap;
-        justify-content: space-between;
         padding-bottom: 20px;
+        min-height: calc(100vh - 107px);
 
         &::-webkit-scrollbar {
             width: 0;
         }
+
+        .ticket-description-header {
+            border-bottom: 1px solid #d5d5d5;
+            padding-bottom: 2px;
+        }
         .ticket-description-container {
-            border-top: 1px solid #d5d5d5;
+            
             display: flex;
-        width: -webkit-fill-available;
+            width: -webkit-fill-available;
 
             p {
                 background: #fff;
