@@ -7625,6 +7625,10 @@ ul.pagination li.disabled a {
 .sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li img {
   width: 16px;
 }
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-nav.sb-nav-only ul li.sb-active {
+  color: #000 !important;
+  font-weight: 700;
+}
 .sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area {
   gap: 20px;
   padding: 0 !important;
