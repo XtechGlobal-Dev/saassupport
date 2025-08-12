@@ -87,7 +87,7 @@
         },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
-            console.log('$$$',name);
+            console.log('$$$2',name);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -935,6 +935,7 @@
                                 SBF.event('SBRegistrationForm', { user: settings });
                                 SBF.event('SBNewEmailAddress', { name: activeUser().name, email: activeUser().get('email') });
                                 SBTickets.showPanel('new-ticket');
+                                console.log('hhhhhhrrrrrrr55');
                             }
                             if (SBF.setting('wp_registration') && 'email' in settings && 'password' in settings) {
                                 console.log(settings);
@@ -952,13 +953,15 @@
         });
 
         panel.on('click', '.sb-submit-login', function () {
+            console.log('login clicked');
             SBF.loginForm(this, panel, (response) => {
                 activeUser(new SBUser(response[0]));
                 setUserProfile();
                 SBChat.populateConversations((response) => {
                     if (response.length == 0) {
                         main.addClass('sb-no-conversations');
-                        SBTickets.showPanel('new-ticket');
+                        SBTickets.showPanel('default');
+                        $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                     } else {
                         SBChat.openConversation(response[0].id);
                         SBTickets.showPanel();

@@ -7256,12 +7256,9 @@
             $('.sb-tickets-area').hide();
 
             const targetClass = $(this).data('id');
-             console.log(targetClass,22);
-             console.log('activeUser on trigger:', activeUser());
             $('.' + targetClass).show();
             if (activeUser())
             {
-                console.log('targetClassasasasas');
                 activeUser().getUserTickets();
             }
         });
@@ -7286,9 +7283,6 @@
             $('.tickets-area').css('visibility', 'visible');
 
         }, 400); // small delay so activeUser() is ready
-
-        
-
 
         //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
     }
