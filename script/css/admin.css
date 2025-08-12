@@ -5297,6 +5297,7 @@ td.sb-offline:after {
 
 textarea {
   resize: none !important;
+  box-shadow: none !important;
 }
 
 .sb-info-card {
@@ -6675,7 +6676,7 @@ textarea {
 .sb-board .sb-conversation > .sb-top > a {
   font-weight: 600;
   position: relative;
-  padding: 0 15px 0 0;
+  padding: 0 0px 0 0;
   margin: 0;
   cursor: pointer;
   text-decoration: none;
@@ -6688,6 +6689,14 @@ textarea {
 }
 .sb-board .sb-conversation > .sb-top > a:hover {
   color: #155CFD;
+}
+.sb-board .sb-conversation > .sb-top .sb-labels {
+  padding-left: 5px;
+}
+.sb-board .sb-conversation > .sb-top .sb-labels .sb-status-online {
+  font-size: 12px;
+  line-height: 20px;
+  padding: 1px 5px 0 5px;
 }
 .sb-board .sb-conversation > .sb-top i {
   color: rgb(86, 96, 105);
