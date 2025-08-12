@@ -7376,17 +7376,9 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <?php
-                                
-                                $arr = $cloud_active_apps;
-
-                                // Swap
-                                $temp = $arr[0];
-                                $arr[0] = $arr[1];
-                                $arr[1] = $temp;
-
                                 sb_apps_area(
                                     $apps,
-                                    $arr
+                                    $cloud_active_apps
                                 ); 
                                 
                                 ?>
