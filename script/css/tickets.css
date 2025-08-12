@@ -4787,9 +4787,6 @@ div ul.sb-menu .li:hover,
   padding-block: 3px !important;
   font-size: 12px;
 }
-.sb-tickets .sb-panel-left .sb-top .sb-search-btn input {
-  min-width: unset;
-}
 .sb-tickets .sb-user-conversations > li.sb-active {
   background: #EEF2FF;
 }
