@@ -4702,8 +4702,8 @@ div ul.sb-menu .li:hover,
 
 */
 .sb-tickets .sb-panel-left {
-  width: 270px;
-  min-width: 270px;
+  width: 400px;
+  min-width: 400px;
   border-right: 1px solid rgb(212, 212, 212);
   position: relative;
   border-top-left-radius: 4px;
@@ -4714,6 +4714,7 @@ div ul.sb-menu .li:hover,
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background: rgba(217, 217, 217, 0.3019607843);
 }
 .sb-tickets .sb-panel-left .sb-scroll-bar {
   opacity: 0.2 !important;
@@ -4734,6 +4735,7 @@ div ul.sb-menu .li:hover,
   background: transparent;
   transition: all 0.4s;
   border-bottom: 1px solid #E2E8F0;
+  padding: 17px 12px !important;
 }
 .sb-tickets .sb-panel-left .sb-scroll-area li.sb-active {
   background-color: #EEF2FF !important;
@@ -4779,8 +4781,7 @@ div ul.sb-menu .li:hover,
   align-items: center;
   justify-content: space-between;
   padding-left: 60px;
-  padding-block: 9.5px !important;
-  border-bottom: 1px solid #d5d5d5;
+  padding-block: 14px !important;
 }
 .sb-tickets .sb-panel-left .sb-top .sb-btn {
   padding-block: 3px !important;
@@ -4829,10 +4830,10 @@ div ul.sb-menu .li:hover,
 
 */
 .sb-tickets .sb-panel-right {
-  min-width: 375px;
-  width: 375px;
-  border-left: 1px solid rgb(212, 212, 212);
-  background-color: #F8FAFC;
+  min-width: 400px;
+  width: 400px;
+  box-shadow: 0px 0px 2.4px 0px rgba(0, 0, 0, 0.2509803922);
+  background-color: rgba(217, 217, 217, 0.3019607843);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -4983,7 +4984,7 @@ div ul.sb-menu .li:hover,
   background: #fff;
   width: calc(100% - 3rem);
   margin-inline: auto;
-  box-shadow: 0px 1px 8.4px 0px rgba(0, 0, 0, 0.2509803922);
+  box-shadow: 0px 4px 22.7px 0px rgba(0, 0, 0, 0.2509803922);
   border-radius: 10px;
   margin-top: auto;
 }
@@ -5041,15 +5042,15 @@ div ul.sb-menu .li:hover,
 }
 .sb-tickets .tickets-area .ticket-description-header {
   border-bottom: 1px solid #d5d5d5;
-  padding-bottom: 2px;
+  padding: 14px 0px;
 }
 .sb-tickets .tickets-area .ticket-description-container {
   display: flex;
-  width: -webkit-fill-available;
+  width: calc(100% - 30px);
 }
 .sb-tickets .tickets-area .ticket-description-container p {
   background: #fff;
-  box-shadow: 0px 1px 8.4px 0px rgba(0, 0, 0, 0.2509803922);
+  box-shadow: 0px 4px 22.7px 0px rgba(0, 0, 0, 0.2509803922);
   border-radius: 10px;
   padding: 12px;
   margin-bottom: 0.5rem;
@@ -5057,6 +5058,8 @@ div ul.sb-menu .li:hover,
   word-break: break-all;
   max-height: 250px;
   overflow-y: scroll;
+  width: 100%;
+  min-height: 250px;
 }
 .sb-tickets .tickets-area .ticket-description-container p::-webkit-scrollbar {
   width: 0;
@@ -5276,8 +5279,8 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-tickets .sb-panel-main {
   position: relative;
   padding: 0 !important;
-  background: #F8FAFC;
-  width: calc(100% - 645px);
+  background: #FFF;
+  width: calc(100% - 800px);
 }
 .sb-tickets .sb-panel-main > .sb-top .sb-title {
   font-weight: 500;
@@ -5418,6 +5421,10 @@ ul.sb-user-conversations.sb-scroll-area {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.sb-main.sb-tickets.sb-no-conversations.sb-panel-active .tickets-list-area {
+  max-height: calc(100vh - 1px);
 }
 
 .sb-panel-form .sb-form {
