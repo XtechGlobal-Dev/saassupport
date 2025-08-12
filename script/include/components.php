@@ -5608,6 +5608,11 @@ function sb_component_admin()
                                             ? "Messages & Forms"
                                             : sb_("Messages & Forms"); ?>
                                     </li>
+                                    <li id="tab-articles">
+                                        <?php echo $disable_translations
+                                            ? "Articles"
+                                            : sb_("Articles"); ?>
+                                    </li>
                                     <?php /*
                                                                                                                                       <li id="tab-various">
                                                                                                                                           <?php echo $disable_translations
@@ -5620,8 +5625,8 @@ function sb_component_admin()
                                         $i < count($apps);
                                         $i++
                                     ) {
-                                        if ($apps[$i][1] != 'tickets')
-                                            continue;
+                                        // if ($apps[$i][1] != 'tickets')
+                                        //     continue;
 
                                         if (
                                             defined($apps[$i][0]) &&
@@ -5645,11 +5650,7 @@ function sb_component_admin()
                                                                                       : sb_("Apps"); ?>
                                                                               </li>
                                                                               */ ?>
-                                    <li id="tab-articles">
-                                        <?php echo $disable_translations
-                                            ? "Articles"
-                                            : sb_("Articles"); ?>
-                                    </li>
+                                    
                                     <!--<li id="tab-automations">
                                         <?php
                                         //echo $disable_translations ? 'Automations' : sb_('Automations')
@@ -7251,10 +7252,6 @@ function sb_component_admin()
                                                 ); ?>
                                             </div>
                                         </div>*/ ?>
-                                <?php sb_apps_area(
-                                    $apps,
-                                    $cloud_active_apps
-                                ); ?>
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
@@ -7378,6 +7375,21 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                
+                                $arr = $cloud_active_apps;
+
+                                // Swap
+                                $temp = $arr[0];
+                                $arr[0] = $arr[1];
+                                $arr[1] = $temp;
+
+                                sb_apps_area(
+                                    $apps,
+                                    $arr
+                                ); 
+                                
+                                ?>
                                 <?php /*<div>
                                             <div class="sb-automations-area">
                                                 <div class="sb-select">
@@ -7612,7 +7624,7 @@ function sb_apps_area($apps, $cloud_active_apps)
         ) {
             // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
             $code .=
-                '<div>
+                '<div class="'.$apps[$i][1].'">
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
                             <p class="head mb-4">Tickets Settings</p>
@@ -7631,7 +7643,7 @@ function sb_apps_area($apps, $cloud_active_apps)
                 "</div></div>";
         }
     }
-    $code .= '<div><div class="sb-apps">';
+    $code .= '<div class="apps-div"><div class="sb-apps">';
     for ($i = 1; $i < count($apps); $i++) {
         if (
             (($wp && !in_array($apps[$i][0], $apps_php)) ||
