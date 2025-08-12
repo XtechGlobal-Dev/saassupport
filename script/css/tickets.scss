@@ -1108,7 +1108,7 @@ ul.sb-user-conversations.sb-scroll-area {
         position: relative;
         padding: 0 !important;
         background: #FFF;
-        width: calc(100% - 800px);
+        width: 100%;
 
         >.sb-top {
             .sb-title {
@@ -1286,6 +1286,14 @@ ul.sb-user-conversations.sb-scroll-area {
                     width: 100%;
                     margin-inline: auto;
                     max-width: 100%;
+                }
+            }
+        }
+        
+        .ticket-login {
+            .sb-info {
+                &:nth-child(4) {
+                    display: none;
                 }
             }
         }
