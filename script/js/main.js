@@ -1079,7 +1079,6 @@
 
                             // Correctly loop through the object
                             Object.entries(SBChat.new_comment_count).forEach(([id, countArray]) => {
-                                console.log('ticket_id', id, 'count', countArray.length);
                                 $('.sb-user-tickets li[data-ticket-id="' + id + '"] .notification-counter').remove();
                                 // Append the notification counter to the first cell of the row
                                 $('.sb-user-tickets li[data-ticket-id="' + id + '"]').append(`<span class="notification-counter" data-count="${countArray.length}">${countArray.length}</span>`);
@@ -2980,7 +2979,7 @@
                 ticket_id: ticket_id,
                 last_update_date: last_update_date,
             }, (response) => {
-                const commentsSection = $(`.tickets-list-area[data-id=${ticket_id}] #comments-section`);
+                const commentsSection = $(document).find(`.tickets-list-area[data-id=${ticket_id}] #comments-section`);
                 if (response.comments && response.comments.length > 0) {
 
                     if (response.comments[0].last_update_time) {
@@ -3013,10 +3012,12 @@
 
                     setTimeout(() => {
                         const el = commentsSection[0]; // or get(0)
-                        //el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
-                    }, 0);
+                        if(el){
+                            el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+                        }
+                    }, 20);
 
-                   // showInitials('tc_back','comment-row');
+                  // showInitials('tc_back','comment-row');
 
                 }
                 else {
