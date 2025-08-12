@@ -6567,6 +6567,9 @@ textarea {
   opacity: 0.8;
   color: #3c3c3c;
 }
+.sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time span {
+  color: #3c3c3c;
+}
 .sb-board > .sb-admin-list > .sb-scroll-area li p {
   font-size: 13px;
   height: 22px;

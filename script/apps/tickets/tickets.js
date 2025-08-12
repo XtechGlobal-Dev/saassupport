@@ -40,7 +40,6 @@
     var SBTickets = {
 
         showInitials: function (container, className) {
-            console.log(container);
             const containers = $('.' + container + ' .' + className);
             containers.each(function () {
                 const container = $(this);
@@ -68,26 +67,22 @@
 
                 // Attach error event
                 img.on('error', function(){
-                    console.log('error0');
                     showInitialsFallback();
                 });
 
                 // Trigger fallback if image is already broken (e.g. 404 cached)
                 if (!img.prop('complete') || typeof img[0].naturalWidth === "undefined" || img[0].naturalWidth === 0) {
-                    console.log('error');
                     showInitialsFallback();
                 }
 
                 // If the image source is a default user icon, show initials
                 if (img.attr('src') && img.attr('src').includes('user.svg')) {
-                    console.log('error2');
                     showInitialsFallback();
                 }
             });
         },
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
-            console.log('$$$2',name);
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
@@ -180,7 +175,6 @@
                 default:
                     $('.user_header').removeClass('d-none');
                     const pImg = activeUser().details?.profile_image ?? '';
-                    console.log(activeUser().details);
                     
                     main.find('.user_profile .sb_name').html(activeUser()?.name);
                     main.find('.user_profile .user_type').html(activeUser()?.type);
@@ -380,7 +374,6 @@
                     document.location = redirect + (redirect.includes('?') ? '&' : '?') + 'sb=true';
                     return;
                 } else {
-                     console.log('asasas0');
                     main.addClass('sb-no-conversations');
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
@@ -407,7 +400,6 @@
                     } else {
                         setConversationName();
                     }
-                    console.log('hhheeee13');
                 }
             }
             //let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
@@ -424,9 +416,6 @@
             }
             setUserProfile();
             
-
-
-            console.log(window.innerHeight);
             main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px;display:none`);
             setTimeout(function () {
                 main.removeClass('sb-load');
@@ -581,11 +570,6 @@
             }
         });
 
-
-        //console.log(JSON.stringify(finalAttachments, null, 2));
-
-
-
         const customer_id = activeUser().details.id ?? 0;
         const customer_name = activeUser().details.first_name ? activeUser().details.first_name +' '+ activeUser().details.last_name: '';
         const customer_email = activeUser().details.email ?? '';
@@ -655,7 +639,6 @@
         customField.push('custom_fields');
 
         let ticketData = { ...ticketDataPart1, description, status_id, contact_id, cust_name, cust_email, conversation_id, attachments, withoutContact, customField };
-        console.log(ticketData);
 
         let output = {};
         $.map(ticketData, function (value, key) {
@@ -704,7 +687,6 @@
             data.ticket_type = 'new';
         }
 
-        // console.log(data);
         // Save the settings
         SBF.ajax({
             function: (new_ticket ? 'add-ticket' : 'update-ticket'),
@@ -885,7 +867,6 @@
         });
 
         main.on('click', '.logout', function () {
-            console.log('logout1111222');
             SBF.logout(false);
             SBTickets.showPanel('login');
             $('.user_header').addClass('d-none');
@@ -935,7 +916,6 @@
                                 SBF.event('SBRegistrationForm', { user: settings });
                                 SBF.event('SBNewEmailAddress', { name: activeUser().name, email: activeUser().get('email') });
                                 SBTickets.showPanel('new-ticket');
-                                console.log('hhhhhhrrrrrrr55');
                             }
                             if (SBF.setting('wp_registration') && 'email' in settings && 'password' in settings) {
                                 console.log(settings);
@@ -953,7 +933,6 @@
         });
 
         panel.on('click', '.sb-submit-login', function () {
-            console.log('login clicked');
             SBF.loginForm(this, panel, (response) => {
                 activeUser(new SBUser(response[0]));
                 setUserProfile();
@@ -961,11 +940,11 @@
                     if (response.length == 0) {
                         main.addClass('sb-no-conversations');
                         SBTickets.showPanel('default');
-                        $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                     } else {
                         SBChat.openConversation(response[0].id);
                         SBTickets.showPanel();
                     }
+                    $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                 });
             });
         });

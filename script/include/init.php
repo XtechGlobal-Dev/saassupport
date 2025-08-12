@@ -98,9 +98,7 @@ function sb_component_chat()
     <div class="sb-main sb-chat sb-no-conversations<?php echo $css ?>" style="display: none; transition: none;">
         <div class="sb-body">
             <div class="sb-scroll-area<?php echo $texture ? ' sb-texture-' . substr($texture, -5, 1) : '' ?>">
-                <div class="sb-header sb-header-main sb-header-type-<?php echo $header_type ?>" <?php echo $background ? 'style="background-image: url(' . $background . ')"' : '' ?>
-                    style="padding-bottom: 0; box-shadow: none;">
-
+                <div class="sb-header sb-header-main sb-header-type-<?php echo $header_type ?>" <?php echo $background ? 'style="background-image: url(' . $background . ')"' : '' ?>>
                     <svg class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?>"
                         style="right: unset; left: 10px; opacity: 1;" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -166,7 +164,7 @@ function sb_component_chat()
                         sb_messaging_channels();
                     }
                     if (sb_get_setting('articles-active')) {
-                        //echo sb_get_rich_message('articles');
+                        echo sb_get_rich_message('articles');
                     }
                     ?>
                 </div>
