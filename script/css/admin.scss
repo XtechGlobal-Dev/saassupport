@@ -3097,6 +3097,9 @@ textarea {
                         white-space: nowrap;
                         opacity: 0.8;
                         color: #3c3c3c;
+                        span {
+                        color: #3c3c3c;
+                        }
                     }
                 }
 
@@ -3246,7 +3249,7 @@ textarea {
             >a {
                 font-weight: 600;
                 position: relative;
-                padding: 0 15px 0 0;
+                padding: 0 0px 0 0;
                 margin: 0;
                 cursor: pointer;
                 text-decoration: none;
@@ -3259,6 +3262,14 @@ textarea {
 
                 &:hover {
                     color: $color-blue;
+                }
+            }
+            .sb-labels {
+                padding-left: 5px;
+                .sb-status-online {
+                    font-size: 12px;
+                    line-height: 20px;
+                    padding: 1px 5px 0 5px;
                 }
             }
 
@@ -4804,6 +4815,7 @@ ul.pagination {
         a.page-link {
             color: #696969;
             font-weight: 400;
+            box-shadow: none;
         }
 
         &.active {
@@ -10532,7 +10544,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
             .col-sm-12 {
                 padding: 0;
-                overflow-x: scroll;
+                overflow-x: unset;
                 margin-block: 10px;
 
                 &::-webkit-scrollbar {
@@ -12531,7 +12543,7 @@ main {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1287px) {
+@media only screen and (min-width: 768px) and (max-width: 1449px) {
 
     .sb-board {
         .sb-conversation {
@@ -12539,13 +12551,14 @@ main {
                 ul {
                     flex-wrap: wrap;
                     justify-content: flex-end;
-                    padding-top: 15px;
+                    padding-top: 0px;
 
                     li {
                         a {
                             padding-inline: 3px;
                             width: fit-content;
                             z-index: 0;
+                            margin-inline: 1.5px;
 
                             svg {
                                 width: 18px;
@@ -12555,17 +12568,29 @@ main {
 
                         &:nth-child(1),
                         &:nth-child(2) {
-                            width: 32%;
+                            width: fit-content;
+                            min-width: unset;
+
 
                             a {
                                 width: 80%;
                                 font-size: 11px;
                                 padding: 0px 8px !important;
+                                min-width: unset;
+                                padding: 0 !important;
+                                background: none !important;
+                                height: fit-content;
+                                span {
+                                    display: none !important;
+                                }
+                                svg {
+                                    display: block !important;
+                                }
                             }
                         }
 
                         &:nth-child(3) {
-                            margin-left: 10rem;
+                            margin-left: 0rem;
                         }
                     }
                 }
