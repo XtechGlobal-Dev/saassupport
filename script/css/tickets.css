@@ -4787,9 +4787,6 @@ div ul.sb-menu .li:hover,
   padding-block: 3px !important;
   font-size: 12px;
 }
-.sb-tickets .sb-panel-left .sb-top .sb-search-btn input {
-  min-width: unset;
-}
 .sb-tickets .sb-user-conversations > li.sb-active {
   background: #EEF2FF;
 }
@@ -5280,7 +5277,7 @@ ul.sb-user-conversations.sb-scroll-area {
   position: relative;
   padding: 0 !important;
   background: #FFF;
-  width: calc(100% - 800px);
+  width: 100%;
 }
 .sb-tickets .sb-panel-main > .sb-top .sb-title {
   font-weight: 500;
@@ -5412,6 +5409,9 @@ ul.sb-user-conversations.sb-scroll-area {
   width: 100%;
   margin-inline: auto;
   max-width: 100%;
+}
+.sb-tickets.sb-panel-form .ticket-login .sb-info:nth-child(4) {
+  display: none;
 }
 
 .tickets-list-area {
