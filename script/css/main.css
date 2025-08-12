@@ -1247,7 +1247,6 @@ div ul.sb-menu,
 
 # MESSAGES LIST AND CHAT
 ==========================================================
-
 */
 .sb-chat .sb-btn-text:hover,
 .sb-list .sb-btn-text:hover {
@@ -5829,6 +5828,7 @@ div ul.sb-menu li:hover,
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-scroll-area .sb-header,
 .sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active .sb-scroll-area .sb-header {
   padding-bottom: 0 !important;
+  box-shadow: none !important;
 }
 
 .sb-input > span:not(.sb-filled):not(.sb-active) + input[type=date]:not(:focus)::-webkit-datetime-edit {

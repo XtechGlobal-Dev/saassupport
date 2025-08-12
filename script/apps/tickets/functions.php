@@ -137,7 +137,7 @@ function sb_component_tickets()
                         </div>
                     </div>
                 </div>
-                <div class="sb-panel sb-scroll-area"></div>
+                <div class="sb-panel sb-scroll-area ticket-login"></div>
             </div>
             <div class="sb-panel-right">
                 <div class="right-side-wrapper d-none">

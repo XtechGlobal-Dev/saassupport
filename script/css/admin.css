@@ -5297,6 +5297,7 @@ td.sb-offline:after {
 
 textarea {
   resize: none !important;
+  box-shadow: none !important;
 }
 
 .sb-info-card {
@@ -6567,6 +6568,9 @@ textarea {
   opacity: 0.8;
   color: #3c3c3c;
 }
+.sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time span {
+  color: #3c3c3c;
+}
 .sb-board > .sb-admin-list > .sb-scroll-area li p {
   font-size: 13px;
   height: 22px;
@@ -6672,7 +6676,7 @@ textarea {
 .sb-board .sb-conversation > .sb-top > a {
   font-weight: 600;
   position: relative;
-  padding: 0 15px 0 0;
+  padding: 0 0px 0 0;
   margin: 0;
   cursor: pointer;
   text-decoration: none;
@@ -6685,6 +6689,14 @@ textarea {
 }
 .sb-board .sb-conversation > .sb-top > a:hover {
   color: #155CFD;
+}
+.sb-board .sb-conversation > .sb-top .sb-labels {
+  padding-left: 5px;
+}
+.sb-board .sb-conversation > .sb-top .sb-labels .sb-status-online {
+  font-size: 12px;
+  line-height: 20px;
+  padding: 1px 5px 0 5px;
 }
 .sb-board .sb-conversation > .sb-top i {
   color: rgb(86, 96, 105);
@@ -8081,6 +8093,7 @@ span.badge[data-color=gray] {
 ul.pagination li a.page-link {
   color: #696969;
   font-weight: 400;
+  box-shadow: none;
 }
 ul.pagination li.active a.page-link {
   color: #fff;
@@ -12862,7 +12875,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12 {
   padding: 0;
-  overflow-x: scroll;
+  overflow-x: unset;
   margin-block: 10px;
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar {
@@ -14386,31 +14399,43 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     grid-template-columns: repeat(auto-fit, minmax(32.2%, 1fr));
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1287px) {
+@media only screen and (min-width: 768px) and (max-width: 1449px) {
   .sb-board .sb-conversation .sb-menu-mobile ul {
     flex-wrap: wrap;
     justify-content: flex-end;
-    padding-top: 15px;
+    padding-top: 0px;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li a {
     padding-inline: 3px;
     width: fit-content;
     z-index: 0;
+    margin-inline: 1.5px;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li a svg {
     width: 18px;
     height: 18px;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1), .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) {
-    width: 32%;
+    width: fit-content;
+    min-width: unset;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a {
     width: 80%;
     font-size: 11px;
     padding: 0px 8px !important;
+    min-width: unset;
+    padding: 0 !important;
+    background: none !important;
+    height: fit-content;
+  }
+  .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a span, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a span {
+    display: none !important;
+  }
+  .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a svg, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a svg {
+    display: block !important;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(3) {
-    margin-left: 10rem;
+    margin-left: 0rem;
   }
   .sb-board .sb-conversation .sb-top a {
     font-size: 16px;

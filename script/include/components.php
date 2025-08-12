@@ -3637,13 +3637,15 @@ function sb_component_admin()
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon"
                                                 data-sb-tooltip="Convert to a ticket">
-                                                <span>Convert to ticket</span>
+                                                <svg enable-background="new 0 0 50 50" height="50" class="d-xl-none" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg"><g id="Layer_29"/><g id="Layer_28"/><g id="Layer_27"/><g id="Layer_26"/><g id="Layer_25"/><g id="Layer_24"/><g id="Layer_23"/><g id="Layer_22"/><g id="Layer_21"/><g id="Layer_20"/><g id="Layer_19"/><g id="Layer_18"/><g id="Layer_17"/><g id="Layer_16"/><g id="Layer_15"/><g id="Layer_14"/><g id="Layer_13"/><g id="Layer_12"/><g id="Layer_11"/><g id="Layer_10"/><g id="Layer_9"/><g id="Layer_8"><path clip-rule="evenodd" d="m29.164 17.501-11.664 11.664c-.344.344-.903.344-1.248 0-.346-.344-.345-.904 0-1.249l11.664-11.663c.344-.345.904-.345 1.249 0 .344.344.343.903-.001 1.248m.596 6.073c.344-.345.904-.345 1.249 0s.344.904 0 1.248l-6.187 6.187c-.344.344-.904.344-1.249 0s-.345-.904 0-1.249zm9.132-5.569-6.896-6.9c-1.553-1.553-3.739-1.418-5.16.002l-15.729 15.73c-1.42 1.42-1.417 3.742 0 5.159l6.897 6.896c1.419 1.419 3.738 1.42 5.158 0l2.886-2.886c.891-5.073 4.884-9.068 9.958-9.957l2.886-2.885c2.244-2.244.503-4.656 0-5.159zm-3.641 19.249h7.897c.488 0 .883.395.883.883s-.395.883-.883.883h-7.893l1.665 1.665c.345.345.345.904 0 1.249-.345.344-.904.344-1.249 0l-3.129-3.13c-.105-.091-.187-.206-.243-.344l-.005-.013-.047-.176-.001-.01-.002-.012-.001-.009-.002-.013-.001-.008-.002-.021-.001-.021-.001-.021v-.021-.021l.001-.022.001-.022.002-.023.002-.022.003-.023.004-.022.004-.021.005-.022.003-.013.002-.008.003-.012.003-.009.003-.012.003-.009c.041-.133.113-.258.219-.364l3.175-3.176c.345-.344.904-.344 1.249 0 .345.345.345.904 0 1.249zm13.655.881c0-5.946-4.826-10.771-10.772-10.771s-10.771 4.825-10.771 10.771c0 5.945 4.826 10.771 10.771 10.771 5.948 0 10.772-4.823 10.772-10.771zm-11.551-37.58c-.676-.676-1.74-.741-2.496-.158-2.131 1.647-5.179 1.648-7.31.001-.757-.586-1.816-.515-2.496.157l-24.496 24.501c-.676.677-.744 1.737-.16 2.494 1.647 2.131 1.646 5.179-.001 7.31-.584.755-.517 1.821.158 2.496l12.09 12.089c.676.677 1.739.74 2.496.158 2.136-1.65 5.175-1.65 7.31 0 .755.583 1.82.517 2.496-.158l3.625-3.625c-1.637-2.035-2.58-4.53-2.694-7.143l-1.465 1.465c-2.109 2.11-5.547 2.109-7.656 0l-6.897-6.897c-2.132-2.136-2.12-5.536 0-7.656l15.73-15.731c3.349-3.349 6.558-1.097 7.655 0l6.896 6.9c2.113 2.114 2.109 5.546.002 7.654l-1.464 1.464c2.611.114 5.111 1.058 7.142 2.695l3.625-3.628c.673-.677.742-1.737.158-2.493-1.647-2.133-1.648-5.177.001-7.31.586-.758.514-1.817-.158-2.496z" fill-rule="evenodd" fill="#5e5e5e" /></g><g id="Layer_7"/><g id="Layer_6"/><g id="Layer_5"/><g id="Layer_4"/><g id="Layer_3"/><g id="Layer_2"/></svg>
+                                                <span class="d-none d-xl-block">Convert to ticket</span>
                                             </a>
                                         </li>
                                         <li id="view-profile-list" class="">
                                             <a id="view-profile-button" data-value="view-profile" class="sb-btn sb-icon"
                                                 data-sb-tooltip="View Profile">
-                                                <span>View Profile</span>
+                                                <svg id="Layer" height="512" class="d-xl-none" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><g id="user-eye"><path d="m6.009 6.5a4 4 0 1 1 4 4 4 4 0 0 1 -4-4zm5.901 13.5a2.952 2.952 0 0 1 0-3.01 7.37 7.37 0 0 1 3.329-3.035.3.3 0 0 0 .066-.533 5.69 5.69 0 0 0 -3.305-.922h-4c-4.06 0-5.5 2.97-5.5 5.52 0 2.28 1.21 3.48 3.5 3.48h6.39a.3.3 0 0 0 .3-.3.374.374 0 0 0 -.1-.22 8.412 8.412 0 0 1 -.68-.98zm9.89-.76a5.17 5.17 0 0 1 -4.3 2.76 5.17 5.17 0 0 1 -4.3-2.76 1.453 1.453 0 0 1 0-1.48 5.17 5.17 0 0 1 4.3-2.76 5.17 5.17 0 0 1 4.3 2.76 1.453 1.453 0 0 1 0 1.48zm-3.05-.74a1.25 1.25 0 0 0 -1.25-1.25h-.01a1.25 1.25 0 1 0 1.26 1.25z" fill="#5e5e5e"/></g></svg>
+                                                <span class="d-none d-xl-block">View Profile</span>
                                             </a>
                                         </li>
                                         <li>
@@ -5606,6 +5608,11 @@ function sb_component_admin()
                                             ? "Messages & Forms"
                                             : sb_("Messages & Forms"); ?>
                                     </li>
+                                    <li id="tab-articles">
+                                        <?php echo $disable_translations
+                                            ? "Articles"
+                                            : sb_("Articles"); ?>
+                                    </li>
                                     <?php /*
                                                                                                                                       <li id="tab-various">
                                                                                                                                           <?php echo $disable_translations
@@ -5618,8 +5625,8 @@ function sb_component_admin()
                                         $i < count($apps);
                                         $i++
                                     ) {
-                                        if ($apps[$i][1] != 'tickets')
-                                            continue;
+                                        // if ($apps[$i][1] != 'tickets')
+                                        //     continue;
 
                                         if (
                                             defined($apps[$i][0]) &&
@@ -5643,11 +5650,7 @@ function sb_component_admin()
                                                                                       : sb_("Apps"); ?>
                                                                               </li>
                                                                               */ ?>
-                                    <li id="tab-articles">
-                                        <?php echo $disable_translations
-                                            ? "Articles"
-                                            : sb_("Articles"); ?>
-                                    </li>
+                                    
                                     <!--<li id="tab-automations">
                                         <?php
                                         //echo $disable_translations ? 'Automations' : sb_('Automations')
@@ -7249,10 +7252,6 @@ function sb_component_admin()
                                                 ); ?>
                                             </div>
                                         </div>*/ ?>
-                                <?php sb_apps_area(
-                                    $apps,
-                                    $cloud_active_apps
-                                ); ?>
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
@@ -7376,6 +7375,13 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                sb_apps_area(
+                                    $apps,
+                                    $cloud_active_apps
+                                ); 
+                                
+                                ?>
                                 <?php /*<div>
                                             <div class="sb-automations-area">
                                                 <div class="sb-select">
@@ -7610,7 +7616,7 @@ function sb_apps_area($apps, $cloud_active_apps)
         ) {
             // $code .= '<div>' . sb_populate_app_settings($apps[$i][1]) . '</div>';
             $code .=
-                '<div>
+                '<div class="'.$apps[$i][1].'">
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
                             <p class="head mb-4">Tickets Settings</p>
@@ -7629,7 +7635,7 @@ function sb_apps_area($apps, $cloud_active_apps)
                 "</div></div>";
         }
     }
-    $code .= '<div><div class="sb-apps">';
+    $code .= '<div class="apps-div"><div class="sb-apps">';
     for ($i = 1; $i < count($apps); $i++) {
         if (
             (($wp && !in_array($apps[$i][0], $apps_php)) ||
