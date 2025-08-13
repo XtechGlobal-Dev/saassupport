@@ -1999,7 +1999,7 @@
             }
 
             // Message creation
-            return `<div data-id="${this.details.id}" class="${css}" ${type}>${thumb}${reply}<div class="sb-cnt"><div class="sb-message${media_code && !message ? ' sb-message-media' : ''}"${delivery_failed ? ' style="opacity:.7"' : ''}>${delivery_failed ? SBAdmin.conversations.getDeliveryFailedMessage(delivery_failed) : ''}${(name + message + media_code).trim()}</div>${attachments_code}<div class="sb-time">${SBF.beautifyTime(this.details.creation_time, true)}${admin && agent && this.details.status_code == 2 ? '<i class="sb-icon-check"></i>' : ''}</div></div>${admin_menu}</div>`;
+            return `<div data-id="${this.details.id}" class="${css} ${media_code && !message ? ' media-item' : ''}" ${type}>${thumb}${reply}<div class="sb-cnt"><div class="sb-message${media_code && !message ? ' sb-message-media' : ''}"${delivery_failed ? ' style="opacity:.7"' : ''}>${delivery_failed ? SBAdmin.conversations.getDeliveryFailedMessage(delivery_failed) : ''}${(name + message + media_code).trim()}</div>${attachments_code}<div class="sb-time">${SBF.beautifyTime(this.details.creation_time, true)}${admin && agent && this.details.status_code == 2 ? '<i class="sb-icon-check"></i>' : ''}</div></div>${admin_menu}</div>`;
         }
 
         render(message = false) {
