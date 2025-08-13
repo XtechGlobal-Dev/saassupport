@@ -5262,6 +5262,25 @@ div ul.sb-menu .li:hover,
 .sb-tickets .sb-conversation .sb-list .sb-thumb-active .sb-cnt .sb-time {
   opacity: 0.8;
 }
+.sb-tickets .sb-conversation .sb-list .media-item {
+  background: #fff;
+  border: 0.93px solid #E2E8F0;
+  border-radius: 14px;
+}
+.sb-tickets .sb-conversation .sb-list .media-item .sb-cnt {
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.sb-tickets .sb-conversation .sb-list .media-item .sb-cnt .sb-message {
+  margin: 0;
+}
+.sb-tickets .sb-conversation .sb-list .media-item .sb-cnt .sb-message img {
+  border-radius: 14px;
+}
+.sb-tickets .sb-conversation .sb-list .media-item .sb-cnt .sb-time {
+  color: #000;
+}
 
 ul.sb-user-conversations.sb-scroll-area {
   margin-top: 59px;

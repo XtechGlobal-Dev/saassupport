@@ -156,6 +156,7 @@ hr.hr-border {
 }
 .sb-content .banner.banner-success {
   background: #e6f1ec;
+  width: 100%;
 }
 .sb-content .banner.banner-success h2, .sb-content .banner.banner-success p, .sb-content .banner.banner-success i, .sb-content .banner.banner-success a {
   color: rgb(26, 146, 96);
