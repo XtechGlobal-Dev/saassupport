@@ -5297,7 +5297,6 @@ td.sb-offline:after {
 
 textarea {
   resize: none !important;
-  box-shadow: none !important;
 }
 
 .sb-info-card {
@@ -6727,6 +6726,9 @@ textarea {
 .sb-board .sb-conversation .sb-list .sb-right .sb-time span {
   color: #fff;
 }
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-time span {
+  color: #475569;
+}
 .sb-board .sb-conversation .sb-list > div {
   max-width: calc(100% - 275px);
   background: #fff !important;
@@ -7423,6 +7425,12 @@ textarea {
   line-height: 8px;
   font-weight: 400;
   background: none;
+}
+
+.tickts-scroll-area .row.dt-row .col-sm-12 {
+  max-height: calc(100vh - 290px);
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 #customerTable thead tr th.sb-active {

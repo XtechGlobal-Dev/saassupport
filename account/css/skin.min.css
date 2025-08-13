@@ -121,7 +121,8 @@ hr.hr-border {
       color: #ca3434;
       background: rgba(202, 52, 52, 0.1); }
   .sb-content .banner.banner-success {
-    background: #e6f1ec; }
+    background: #e6f1ec; 
+        width: 100%; }
     .sb-content .banner.banner-success h2, .sb-content .banner.banner-success p, .sb-content .banner.banner-success i, .sb-content .banner.banner-success a {
       color: #1a9260; }
     .sb-content .banner.banner-success .sb-icon-close:hover {
