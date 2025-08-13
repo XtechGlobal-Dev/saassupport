@@ -7427,6 +7427,12 @@ textarea {
   background: none;
 }
 
+.tickts-scroll-area .row.dt-row .col-sm-12 {
+  max-height: calc(100vh - 290px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 #customerTable thead tr th.sb-active {
   border-bottom: 1px solid #d5d5d5;
 }
