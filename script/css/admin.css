@@ -12908,6 +12908,12 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 .sb-area-tickets .table-responsive .sb-scroll-area.scroll-table {
   scrollbar-width: none;
+  max-height: unset;
+  overflow: hidden;
+}
+.sb-area-tickets .table-responsive .sb-scroll-area.scroll-table #ticketTable_wrapper .row.dt-row .col-sm-12 {
+  max-height: calc(100vh - 290px);
+  overflow-y: scroll;
 }
 .sb-area-tickets .table-responsive .sb-scroll-area.scroll-table::-webkit-scrollbar {
   width: 0;
