@@ -153,10 +153,10 @@
                                 <span>${sb_(names.title)}</span>
                                 <input type="text" required>
                             </div>${main.find('.sb-ticket-fields').html()}
+                            <div id="ticketCustomFieldsContainer" style="margin: 10px 0;">${main.find('.ticket-custom-fields').html()}</div>
                             <div id="description" class="sb-input sb-editor-cnt">
                                 <span>${sb_(names.message)}</span>
-                            </div>   
-                            <div id="ticketCustomFieldsContainer"></div>   
+                            </div>
                             <div class="sb-btn sb-icon sb-create-ticket">
                                 <i class="sb-icon-plus"></i>${sb_(names.button)}
                             </div>

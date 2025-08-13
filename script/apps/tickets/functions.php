@@ -191,7 +191,27 @@ function sb_component_tickets()
                     </p>
                     <div class="row ticket-attachments"></div>
 
-                    <div class="sb-scroll-area"></div>
+                    
+                </div>
+                <div class="sb-scroll-area">
+
+                <?php
+                        $code = '';
+                        // if (!sb_isset($disable_fields, 'tickets-agent')) {
+                        //     echo '<div class="sb-profile sb-profile-agent sb-profile-empty"><img src="" /><div><span class="sb-name"></span><span class="sb-status"></span></div></div>' . (sb_isset($disable_fields, 'tickets-agent-details') ? '' : '<div class="sb-agent-label"></div>');
+                        // }
+                        // $code .= '<div class="sb-ticket-details"></div>';
+                        // if (!sb_isset($disable_fields, 'tickets-department')) {
+                        //     $code .= '<div class="sb-department" data-label="' . sb_(sb_isset(sb_get_setting('departments-settings'), 'departments-single-label', 'Department')) . '"></div>';
+                        // }
+                        //$code .= '<div class="sb-conversation-attachments"></div>';
+                        if (sb_get_setting('tickets-articles')) {
+                            $code .= sb_get_rich_message('articles');
+                        }
+                        echo $code;
+
+                        ?>
+
                 </div>
             </div>
         </div>
@@ -385,6 +405,65 @@ function sb_component_tickets()
                 }
             }
             echo $code;
+            ?>
+        </div>
+        <div class="ticket-custom-fields" style="display:none">
+            <?php 
+            
+            $fields = get_ticket_custom_fields();
+
+            if (!empty($fields) && is_array($fields)) {
+                foreach ($fields as $field) {
+                    echo '<div id="' . htmlspecialchars($field['title']) . '" data-type="' . htmlspecialchars($field['type']) . '" class="sb-input">';
+                    
+                    // Label
+                    echo '<span class="' . ($field['required'] == '1' ? 'required-label' : '') . '">' . htmlspecialchars($field['title']) . '</span>';
+
+                    switch ($field['type']) {
+                        case 'text':
+                            echo '<input type="text" class="form-control" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                    name="custom_fields[' . $field['id'] . ']" 
+                                    value="' . htmlspecialchars($field['default_value']) . '" 
+                                    ' . ($field['required'] == '1' ? 'required' : '') . ' 
+                                    placeholder="' . htmlspecialchars($field['title']) . '">';
+                            break;
+
+                        case 'textarea':
+                            echo '<textarea class="form-control" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                    name="custom_fields[' . $field['id'] . ']" 
+                                    rows="3" ' . ($field['required'] == '1' ? 'required' : '') . ' 
+                                    placeholder="' . htmlspecialchars($field['title']) . '">' . htmlspecialchars($field['default_value']) . '</textarea>';
+                            break;
+
+                        case 'select':
+                            $options = array_filter(array_map('trim', explode('|', $field['options'])));
+                            echo '<select class="form-control" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                    name="custom_fields[' . $field['id'] . ']" 
+                                    ' . ($field['required'] == '1' ? 'required' : '') . '>';
+                            echo '<option value="">Select ' . htmlspecialchars($field['title']) . '</option>';
+                            foreach ($options as $option) {
+                                $selected = ($option === $field['default_value']) ? 'selected' : '';
+                                echo '<option value="' . htmlspecialchars($option) . '" ' . $selected . '>' . htmlspecialchars($option) . '</option>';
+                            }
+                            echo '</select>';
+                            break;
+
+                        case 'checkbox':
+                            $checked = ($field['default_value'] == '1') ? 'checked' : '';
+                            echo '<div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                        name="custom_fields[' . $field['id'] . ']" 
+                                        value="1" 
+                                        ' . $checked . ' 
+                                        ' . ($field['required'] == '1' ? 'required' : '') . '>
+                                    <label class="form-check-label" for="custom_' . $field['id'] . '">' . htmlspecialchars($field['title']) . '</label>
+                                </div>';
+                            break;
+                    }
+
+                    echo '</div>'; // close sb-input
+                }
+            }
             ?>
         </div>
     </div>
