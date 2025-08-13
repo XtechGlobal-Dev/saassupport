@@ -1087,6 +1087,25 @@
                     }
                 }
             }
+            .media-item {
+                background: #fff;
+                border: 0.93px solid #E2E8F0;
+                border-radius: 14px;
+                .sb-cnt {
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: flex-start;
+                    .sb-message {
+                        margin: 0;
+                        img {
+                            border-radius: 14px;
+                        }
+                    }
+                    .sb-time {
+                        color: #000;
+                    }
+                }
+            }
         }
     }
 }
@@ -1156,6 +1175,16 @@ ul.sb-user-conversations.sb-scroll-area {
         >.sb-top {
             display: none;
         }
+        // &.ticket-login {
+        //     .sb-top {
+        //         display: block;
+        //         font-size: 24px;
+        //         font-weight: 500;
+        //         border-bottom: 1px solid #d5d5d5;
+        //         padding-bottom: 14px;
+        //         margin-bottom: 26px;
+        //     }
+        // }
 
         >.sb-loading {
             width: 30px;
