@@ -3966,7 +3966,7 @@ function sb_component_admin()
                                 </a>
                             </div> -->
                         </div>
-                        <div class="sb-scroll-area">
+                        <div class="sb-scroll-area tickts-scroll-area">
                             <table id="customerTable"
                                 class="sb-table-tickets table table-bordered table-hover align-middle text-nowrap bg-white w-100 sb-table-users">
                                 <thead class="table-light">
