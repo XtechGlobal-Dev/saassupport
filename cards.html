@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .color-white {
+            color: #fff;
+        }
+
+        .box-container {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 35px 15px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media screen and (min-width:1380px) {
+            .box-container {
+                flex-direction: row
+            }
+        }
+
+        .box-item {
+            position: relative;
+            -webkit-backface-visibility: hidden;
+            width: 32%;
+            margin-bottom: 35px;
+            max-width: 100%;
+        }
+
+        .box-item:nth-child(1) .flip-box .flip-box-front,
+        .box-item:nth-child(1) .flip-box .flip-box-back {
+            background: url(https://www.alluringinfotech.com/static/img/Cloud-Server.png) #0a203f;
+            background-size: 45%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .box-item:nth-child(2) .flip-box .flip-box-front,
+        .box-item:nth-child(2) .flip-box .flip-box-back {
+            background: url(https://www.alluringinfotech.com/static/img/codeing.png) #0a203f;
+            background-size: 45%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .box-item:nth-child(3) .flip-box .flip-box-front,
+        .box-item:nth-child(3) .flip-box .flip-box-back {
+            background: url(https://www.alluringinfotech.com/static/img/DB.png) #0a203f;
+            background-size: 45%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .flip-box {
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            perspective: 1000px;
+            -webkit-perspective: 1000px;
+        }
+
+        .flip-box-front,
+        .flip-box-back {
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            min-height: 300px;
+            -ms-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+            transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+            -webkit-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            position: relative;
+        }
+
+        /* .flip-box-front:before,
+        .flip-box-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #123974;
+            backdrop-filter: blur(20px);
+            z-index: 0;
+        } */
+
+        .flip-box-front {
+            -ms-transform: rotateY(0deg);
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+
+        .flip-box:hover .flip-box-front {
+            -ms-transform: rotateY(-180deg);
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            -ms-transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-box-back:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            backdrop-filter: blur(3px);
+        }
+
+        .flip-box:hover .flip-box-back {
+            -ms-transform: rotateY(0deg);
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box-back .button__icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .flip-box-back .button__icons img {
+            width: 15%;
+        }
+
+        .flip-box .inner {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            padding: 60px;
+            outline: 1px solid transparent;
+            -webkit-perspective: inherit;
+            perspective: inherit;
+            z-index: 2;
+
+            transform: translateY(-50%) translateZ(60px) scale(.94);
+            -webkit-transform: translateY(-50%) translateZ(60px) scale(.94);
+            -ms-transform: translateY(-50%) translateZ(60px) scale(.94);
+            top: 50%;
+        }
+
+        .flip-box-header {
+            font-size: 34px;
+            text-shadow: 0px 0px 2px black;
+        }
+
+        .flip-box p {
+            font-size: 20px;
+            line-height: 1.5em;
+        }
+
+        .flip-box-img {
+            margin-top: 25px;
+        }
+
+        .flip-box-button {
+            background-color: transparent;
+            border: 2px solid #fff;
+            border-radius: 2px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            padding: 15px 20px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-container">
+        <div class="box-item">
+            <div class="flip-box">
+                <div class="flip-box-front text-center">
+                    <div class="inner color-white">
+                        <h3 class="flip-box-header">Cloud Services</h3>
+                    </div>
+                </div>
+                <div class="flip-box-back text-center">
+                    <div class="button__icons">
+                        <img src="https://www.alluringinfotech.com/static/img/microsoft-azure.svg" title="Microsoft Azure" alt="Microsoft Azure">
+                        <img src="https://www.alluringinfotech.com/static/img/bitlauncher.png" title="Bitlaunch" alt="BitLaunch">
+                        <img src="https://www.alluringinfotech.com/static/img/aws-svg.svg" title="AWS" alt="AWS">
+                        <img src="https://www.alluringinfotech.com/static/img/google_cloud-icon.svg" title="Google Cloud" alt="Google Cloud">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-item">
+            <div class="flip-box">
+                <div class="flip-box-front text-center">
+                    <div class="inner color-white">
+                        <h3 class="flip-box-header">Never Sleeps</h3>
+                    </div>
+                </div>
+                <div class="flip-box-back text-center">
+                    <div class="button__icons">
+                        <img src="https://www.alluringinfotech.com/static/img/microsoft-azure.svg" title="Microsoft Azure" alt="Microsoft Azure">
+                        <img src="https://www.alluringinfotech.com/static/img/bitlauncher.png" title="Bitlaunch" alt="BitLaunch">
+                        <img src="https://www.alluringinfotech.com/static/img/aws-svg.svg" title="AWS" alt="AWS">
+                        <img src="https://www.alluringinfotech.com/static/img/google_cloud-icon.svg" title="Google Cloud" alt="Google Cloud">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-item">
+            <div class="flip-box">
+                <div class="flip-box-front text-center">
+                    <div class="inner color-white">
+                        <h3 class="flip-box-header">Dedicated</h3>
+                    </div>
+                </div>
+                <div class="flip-box-back text-center">
+                    <div class="button__icons">
+                        <img src="https://www.alluringinfotech.com/static/img/microsoft-azure.svg" title="Microsoft Azure" alt="Microsoft Azure">
+                        <img src="https://www.alluringinfotech.com/static/img/bitlauncher.png" title="Bitlaunch" alt="BitLaunch">
+                        <img src="https://www.alluringinfotech.com/static/img/aws-svg.svg" title="AWS" alt="AWS">
+                        <img src="https://www.alluringinfotech.com/static/img/google_cloud-icon.svg" title="Google Cloud" alt="Google Cloud">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

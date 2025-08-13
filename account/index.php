@@ -333,7 +333,6 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         </span>
                         <input type="text" placeholder="Company or organization name" />
                     </div>
-                    <hr />
                     <div class="sb-flex">
                         <a id="save-profile" class="sb-btn sb-btn-white sb-icon">
                             <i class="sb-icon-check"></i>

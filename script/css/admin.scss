@@ -10599,6 +10599,16 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     .table-responsive .sb-scroll-area.scroll-table {
         scrollbar-width: none;
+        max-height: unset;
+        overflow: hidden;
+        #ticketTable_wrapper {
+            .row.dt-row {
+                .col-sm-12 {
+                    max-height: calc(100vh - 290px);
+                    overflow-y: scroll;
+                }
+            }
+        }
 
         &::-webkit-scrollbar {
             width: 0;
