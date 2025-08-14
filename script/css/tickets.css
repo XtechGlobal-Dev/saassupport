@@ -4884,26 +4884,27 @@ div ul.sb-menu .li:hover,
 .sb-tickets .sb-panel-right .right-side-wrapper .right-details svg path {
   stroke: #033bbe;
 }
-.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments {
+.sb-tickets .sb-panel-right .right-side-wrapper .sb-ticket-attachments {
   border-top: 1px solid rgb(212, 212, 212);
   margin-top: 15px;
   padding-top: 15px;
 }
-.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments {
+.sb-tickets .sb-panel-right .right-side-wrapper .sb-ticket-attachments .ticket-attachments {
   padding: 0;
   font-size: 13px;
   font-weight: 500;
 }
-.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments svg {
-  height: 16px;
-  width: 16px;
-  margin-right: 18px !important;
+.sb-tickets .sb-panel-right .right-side-wrapper .sb-ticket-attachments .ticket-attachments a {
+  text-decoration: none;
+  padding-inline: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #000;
+  font-weight: normal;
 }
-.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments svg g g {
-  fill: #033bbe;
-}
-.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments svg path {
-  stroke: #033bbe;
+.sb-tickets .sb-panel-right .right-side-wrapper .sb-ticket-attachments .ticket-attachments a i {
+  color: #033bbe;
 }
 .sb-tickets .sb-panel-right .right-side-wrapper svg path {
   stroke: #000;

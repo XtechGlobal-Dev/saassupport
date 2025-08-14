@@ -12889,11 +12889,13 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar {
   background: none;
   height: 4px;
+  width: 4px;
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar-thumb {
   height: 4px;
   background: #e5e5e5;
   border-radius: 20px;
+  width: 4px;
 }
 
 .sb-area-tickets .tags-filter {
@@ -12918,6 +12920,15 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .sb-area-tickets .table-responsive .sb-scroll-area.scroll-table::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+table {
+  position: relative;
+}
+table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .choices .choices__inner,
