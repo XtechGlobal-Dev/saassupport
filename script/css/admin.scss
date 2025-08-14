@@ -10571,12 +10571,14 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 &::-webkit-scrollbar {
                     background: none;
                     height: 4px;
+                    width: 4px;
                 }
 
                 &::-webkit-scrollbar-thumb {
                     height: 4px;
                     background: #e5e5e5;
                     border-radius: 20px;
+                    width: 4px;
                 }
             }
         }
@@ -10624,6 +10626,14 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     // }
 }
 
+table {
+    position: relative;
+    thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+}
 
 .choices {
 

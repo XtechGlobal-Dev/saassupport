@@ -604,28 +604,24 @@
                 }
             }
 
-            .right-conversation-attachments {
+            .sb-ticket-attachments {
                 border-top: 1px solid rgb(212, 212, 212);
                 margin-top: 15px;
                 padding-top: 15px;
-                .right-sttachments {
+                .ticket-attachments {
                     padding: 0;
                     font-size: 13px;
                     font-weight: 500;
-
-                    svg {
-                        height: 16px;
-                        width: 16px;
-                        margin-right: 18px !important;
-
-                        g {
-                            g {
-                                fill: #033bbe;
-                            }
-                        }
-
-                        path {
-                            stroke: #033bbe;
+                    a {
+                        text-decoration: none;
+                        padding-inline: 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 18px;
+                        color: #000;
+                        font-weight: normal;
+                        i {
+                            color: #033bbe;
                         }
                     }
                 }
