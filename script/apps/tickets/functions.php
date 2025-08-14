@@ -167,7 +167,7 @@ function sb_component_tickets()
                         Status:<span class="badge bg-secondary ticket-status"></span>
                     </div>
 
-                    <div class="sb-conversation-attachments">
+                    <div class="sb-ticket-attachments">
                         <div class="sb-title">Attachments</div>
                         <div class="row ticket-attachments"></div>
                     </div>
