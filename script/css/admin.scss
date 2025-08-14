@@ -11164,7 +11164,7 @@ li.menu_head:hover {
         }
     }
 
-    .settings-card {
+    // .settings-card {
         .settings-tab {
             border: 1px solid rgb(209, 213, 219) !important;
             border-radius: 8px;
@@ -11249,7 +11249,7 @@ li.menu_head:hover {
                 }
             }
         }
-    }
+    // }
 
 .sidebar.collapsed+.main-content {
     margin-left: 60px;
@@ -12822,7 +12822,7 @@ main {
 
 @media only screen and (min-width: 768px) and (max-width: 1900px) {
     // .main-content {
-        .settings-card {
+        // .settings-card {
             .my-tabs {
                 overflow-x: scroll;
 
@@ -12873,7 +12873,7 @@ main {
                     }
                 }
             }
-        }
+        // }
 
         .settings-header {
             top: -24px;
@@ -12883,7 +12883,7 @@ main {
 
 @media only screen and (min-width: 768px) and (max-width: 1600px) {
     // .main-content {
-        .settings-card {
+        // .settings-card {
             .my-tabs {
                 overflow-x: scroll;
 
@@ -12934,7 +12934,7 @@ main {
                     }
                 }
             }
-        }
+        // }
 
         .settings-header {
             top: -24px;
@@ -13077,7 +13077,7 @@ main {
     }
 
     // .main-content {
-        .settings-card {
+        // .settings-card {
             .my-tabs {
                 overflow-x: scroll;
                 min-width: 67%;
@@ -13137,7 +13137,7 @@ main {
                     flex-wrap: wrap;
                 }
             }
-        }
+        // }
     // }
 
     .sb-admin {
@@ -13224,7 +13224,7 @@ main {
             }
         }
 
-        .settings-card {
+        // .settings-card {
             .settings-tab {
                 .sb-setting-content {
                     p {
@@ -13264,9 +13264,8 @@ main {
                     }
                 }
             }
-        }
+        // }
     // }
-
     .powered-by {
         .nexln-help {
             font-size: 12px !important;
