@@ -6813,12 +6813,8 @@ textarea {
 .sb-board .sb-conversation .sb-list > div .sb-message img {
   max-width: 100%;
 }
-.sb-board .sb-conversation .sb-list > div .sb-image {
-  max-width: 500px;
-}
 .sb-board .sb-conversation .sb-list > div .sb-image img {
   object-fit: cover;
-  width: 100%;
   min-width: 240px;
   padding-inline: 12px;
 }
