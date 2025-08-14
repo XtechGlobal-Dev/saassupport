@@ -141,8 +141,35 @@ function sb_component_tickets()
                 <div class="sb-panel sb-scroll-area ticket-login"></div>
             </div>
             <div class="sb-panel-right">
-                <div class="right-side-wrapper d-none">
-                    <div class="mb-2 text-muted small user-name"></div>
+                <!-- <div class="right-side-wrapper d-none"> -->
+                    <div class="sb-top">
+                        <?php if (sb_get_setting('tickets-registration-required')) { ?>
+                            <div class="sb-profile-menu">
+                                <div
+                                    class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
+                                    <img src="" />
+                                    <span class="sb-name"></span>
+                                </div>
+                                <div>
+                                    <ul class="sb-menu">
+                                        <?php
+                                        if (!sb_isset($disable_fields, 'tickets-edit-profile')) {
+                                            echo '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>';
+                                        }
+                                        if (!sb_get_setting('tickets-registration-disable-password')) {
+                                            echo '<li data-value="logout">' . sb_('Logout') . '</li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <?php
+                        } else {
+                            echo '<div class="sb-title">' . sb_('Details') . '</div>';
+                        }
+                        ?>
+                    </div>
+                    <!-- <div class="mb-2 text-muted small user-name"></div> -->
                     <div class="mb-2 right-details">
                         <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
                             class="me-1">
@@ -153,7 +180,7 @@ function sb_component_tickets()
                                 stroke-linejoin="round"></path>
                             <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"></path>
-                        </svg>Ticket ID: <span class="ticket-id"></span>
+                        </svg>Ticket ID <span class="ticket-id"></span>
                     </div>
 
                     <div class="mb-2 right-details">
@@ -164,14 +191,14 @@ function sb_component_tickets()
                                 fill="#222222" />
                             <circle cx="17" cy="7" r="3" fill="#222222" />
                         </svg>
-                        Status:<span class="badge bg-secondary ticket-status"></span>
+                        Status <span class="badge bg-secondary ticket-status"></span>
                     </div>
 
                     <div class="sb-ticket-attachments">
                         <div class="sb-title">Attachments</div>
                         <div class="row ticket-attachments"></div>
                     </div>
-                </div>
+                <!-- </div> -->
                 <div class="sb-scroll-area">
 
                     <?php
