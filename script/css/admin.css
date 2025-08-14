@@ -6159,7 +6159,7 @@ textarea {
   font-weight: 500;
 }
 .sb-admin .header_new .sidebar nav ul li a.sb-active svg path {
-  stroke-width: 2px;
+  stroke-width: 1.5px;
 }
 .sb-admin .header_new .sidebar .powered-by {
   margin-top: auto;
@@ -6293,6 +6293,10 @@ textarea {
   border-bottom-left-radius: 0;
   box-shadow: none;
   border: 1px solid #d5d5d5;
+}
+.sb-search-dropdown .sb-search-btn input:focus {
+  box-shadow: none !important;
+  border-color: #d5d5d5 !important;
 }
 .sb-search-dropdown .sb-search-dropdown-items {
   position: absolute;
@@ -6742,7 +6746,11 @@ textarea {
 .sb-board .sb-conversation .sb-list > div .sb-message.sb-message-media {
   width: 100%;
   border-radius: 12px;
+  margin: 0;
   margin-bottom: 3px;
+}
+.sb-board .sb-conversation .sb-list > div .sb-message .sb-image {
+  margin-inline: auto;
 }
 .sb-board .sb-conversation .sb-list > div .sb-menu {
   width: 170px;
@@ -6816,7 +6824,6 @@ textarea {
 .sb-board .sb-conversation .sb-list > div .sb-image img {
   object-fit: cover;
   min-width: 240px;
-  padding-inline: 12px;
 }
 .sb-board .sb-conversation .sb-list > div:last-child {
   animation: none;
@@ -6857,6 +6864,9 @@ textarea {
 }
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time {
   padding: 0 10px 5px;
+}
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-cnt {
+  max-width: 260px;
 }
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-message,
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time {
@@ -12920,6 +12930,9 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 
 table {
   position: relative;
+}
+table.table.dataTable {
+  margin-top: 0 !important;
 }
 table thead {
   position: sticky;
