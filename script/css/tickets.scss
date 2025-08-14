@@ -1341,6 +1341,19 @@ ul.sb-user-conversations.sb-scroll-area {
             }
         }
     }
+    .tickets-list {
+        .sb-top {
+            .sb-search-btn {
+                display: none;
+            }
+        }
+    }
+}
+
+.sb-main.sb-tickets.sb-panel-active {
+    .sb-top {
+        display: flex !important;
+    }
 }
 
 .sb-main.sb-tickets.sb-no-conversations.sb-panel-active {
