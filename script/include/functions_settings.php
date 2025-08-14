@@ -982,6 +982,12 @@ function sb_get_multi_setting($id, $sub_id, $default = false) {
     return $default;
 }
 
+function get_ticket_custom_fields()
+{
+    $query = "SELECT * FROM custom_fields ORDER BY `order_no`";
+    return sb_db_get($query, false);
+}
+
 function sb_get_external_setting($name, $default = false) {
     $result = sb_db_get('SELECT value FROM sb_settings WHERE name = "' . sb_db_escape($name) . '"', false);
     $settings = [];

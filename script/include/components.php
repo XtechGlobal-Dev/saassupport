@@ -1649,10 +1649,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         function checkArrowVisibility($tabsContainer) {
             const scrollWidth = $tabsContainer[0].scrollWidth;
-            console.log("scrollWidth", scrollWidth)
             const clientWidth = $tabsContainer[0].clientWidth;
-            console.log("clientWidth", clientWidth)
-
             const $leftArrow = $tabsContainer.siblings(".tab-arrow.left");
             const $rightArrow = $tabsContainer.siblings(".tab-arrow.right");
 
