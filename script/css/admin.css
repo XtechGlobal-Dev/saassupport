@@ -13325,7 +13325,8 @@ li.menu_head:hover {
   transition: margin-left 0.3s ease;
   position: relative;
 }
-.main-content .settings-header {
+
+.settings-header {
   position: sticky;
   top: -24px;
   background: #ffffff;
@@ -13340,24 +13341,25 @@ li.menu_head:hover {
   border-radius: 0px;
   padding: 20px 10px;
 }
-.main-content .settings-header .head, .main-content .settings-header .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .main-content .settings-header .sub_head {
+.settings-header .head, .settings-header .sb-area-dashboard main .new_container .main-charts .sub_head, .sb-area-dashboard main .new_container .main-charts .settings-header .sub_head {
   font-weight: 700;
   font-size: 25px;
   line-height: 30px;
   margin-bottom: 10px !important;
 }
-.main-content .settings-header .des {
+.settings-header .des {
   font-weight: 300;
   font-size: 16px;
   color: #475367;
 }
-.main-content .settings-header div {
+.settings-header div {
   height: fit-content;
 }
-.main-content .settings-header .sb-search-dropdown {
+.settings-header .sb-search-dropdown {
   height: -webkit-fill-available;
 }
-.main-content .settings-card .settings-tab {
+
+.settings-tab {
   border: 1px solid rgb(209, 213, 219) !important;
   border-radius: 8px;
   padding: 15px 15px;
@@ -13365,7 +13367,7 @@ li.menu_head:hover {
   flex-direction: column;
   gap: 15px;
 }
-.main-content .settings-card .settings-tab .settings-head p {
+.settings-tab .settings-head p {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -13373,39 +13375,39 @@ li.menu_head:hover {
   color: #0A0A0A;
   margin-bottom: 8px;
 }
-.main-content .settings-card .settings-tab .settings-head p svg {
+.settings-tab .settings-head p svg {
   width: 18px;
   height: 18px;
 }
-.main-content .settings-card .settings-tab .settings-head p svg path {
+.settings-tab .settings-head p svg path {
   stroke: #40404e;
 }
-.main-content .settings-card .settings-tab .settings-head p:nth-child(2) {
+.settings-tab .settings-head p:nth-child(2) {
   font-size: 14px;
   color: #717182;
 }
-.main-content .settings-card .settings-tab .sb-repeater .repeater-item input {
+.settings-tab .sb-repeater .repeater-item input {
   width: fit-content;
   min-width: fit-content;
 }
-.main-content .settings-card .settings-tab .sb-setting {
+.settings-tab .sb-setting {
   border: 1px solid rgba(0, 0, 0, 0.1019607843) !important;
   padding: 15px !important;
   border-radius: 8px;
   gap: 20px 0;
 }
-.main-content .settings-card .settings-tab .sb-setting.sb-type-upload-image .input .image {
+.settings-tab .sb-setting.sb-type-upload-image .input .image {
   min-width: 195px;
 }
-.main-content .settings-card .settings-tab #supervisors .input {
+.settings-tab #supervisors .input {
   width: fit-content !important;
 }
-.main-content .settings-card .settings-tab #departments .sb-repeater .repeater-item .item-index:nth-child(4) {
+.settings-tab #departments .sb-repeater .repeater-item .item-index:nth-child(4) {
   padding-left: 5px;
   width: 14px;
   min-width: 14px;
 }
-.main-content .settings-card .settings-tab #departments i {
+.settings-tab #departments i {
   position: unset;
   margin-top: 11px;
   margin-left: 2px;
@@ -14560,78 +14562,78 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1900px) {
-  .main-content .settings-card .my-tabs {
+  .my-tabs {
     overflow-x: scroll;
   }
-  .main-content .settings-card .my-tabs .my-tab {
+  .my-tabs .my-tab {
     min-width: fit-content;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) {
     min-width: 56%;
     display: flex;
     flex-direction: column;
     max-width: 48%;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) input {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) input {
     max-width: 100%;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) label {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) label {
     line-height: 23px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(2), .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(3) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(2), .settings-tab #departments .repeater-item .item-index:nth-child(3) {
     padding-top: 24px;
     padding-left: 12px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(4) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(4) {
     padding-top: 20px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(4) input {
+  .settings-tab #departments .repeater-item .item-index:nth-child(4) input {
     max-width: 14px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item i {
+  .settings-tab #departments .repeater-item i {
     position: unset;
     padding-top: 24px;
     margin-left: 2px;
   }
-  .main-content .settings-header {
+  .settings-header {
     top: -24px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1600px) {
-  .main-content .settings-card .my-tabs {
+  .my-tabs {
     overflow-x: scroll;
   }
-  .main-content .settings-card .my-tabs .my-tab {
+  .my-tabs .my-tab {
     min-width: fit-content;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) {
     min-width: 56%;
     display: flex;
     flex-direction: column;
     max-width: 48%;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) input {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) input {
     max-width: 100%;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) label {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) label {
     line-height: 23px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(2), .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(3) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(2), .settings-tab #departments .repeater-item .item-index:nth-child(3) {
     padding-top: 24px;
     padding-left: 12px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(4) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(4) {
     padding-top: 20px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(4) input {
+  .settings-tab #departments .repeater-item .item-index:nth-child(4) input {
     max-width: 14px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item i {
+  .settings-tab #departments .repeater-item i {
     position: unset;
     padding-top: 24px;
     margin-left: 2px;
   }
-  .main-content .settings-header {
+  .settings-header {
     top: -24px;
   }
 }
@@ -14711,45 +14713,45 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-dashboard main .new_container .main-charts .customer-overview {
     grid-template-columns: 1fr;
   }
-  .main-content .settings-card .my-tabs {
+  .my-tabs {
     overflow-x: scroll;
     min-width: 67%;
     max-width: 95%;
   }
-  .main-content .settings-card .my-tabs .my-tab {
+  .my-tabs .my-tab {
     min-width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) {
     min-width: 56%;
     display: flex;
     flex-direction: column;
     max-width: 48%;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) input {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) input {
     max-width: 100%;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(1) label {
+  .settings-tab #departments .repeater-item .item-index:nth-child(1) label {
     line-height: 23px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(2), .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(3) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(2), .settings-tab #departments .repeater-item .item-index:nth-child(3) {
     padding-top: 24px;
     padding-left: 12px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(4) {
+  .settings-tab #departments .repeater-item .item-index:nth-child(4) {
     padding-top: 20px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item .item-index:nth-child(4) input {
+  .settings-tab #departments .repeater-item .item-index:nth-child(4) input {
     max-width: 14px;
   }
-  .main-content .settings-card .settings-tab #departments .repeater-item i {
+  .settings-tab #departments .repeater-item i {
     position: unset;
     padding-top: 24px;
     margin-left: 2px;
   }
-  .main-content .settings-card .settings-tab .sb-setting {
+  .settings-tab .sb-setting {
     flex-wrap: wrap;
   }
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon {
@@ -14791,40 +14793,40 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin .sb-area-settings > .sb-tab > .sb-nav:not(.sb-active) {
     height: fit-content !important;
   }
-  .main-content header {
+  header {
     padding-inline: 15px;
   }
-  .main-content header .sb-profile {
+  header .sb-profile {
     padding-left: 15px;
   }
-  .main-content .settings-header {
+  .settings-header {
     align-items: center;
     z-index: 92;
   }
-  .main-content .settings-header p.des {
+  .settings-header p.des {
     line-height: 22px;
   }
-  .main-content .settings-header div:last-child {
+  .settings-header div:last-child {
     height: fit-content;
   }
-  .main-content .settings-card .settings-tab .sb-setting-content p {
+  .settings-tab .sb-setting-content p {
     font-size: 14px;
   }
-  .main-content .settings-card .settings-tab .input label {
+  .settings-tab .input label {
     font-size: 14px;
     margin-right: 0 !important;
   }
-  .main-content .settings-card .settings-tab .sb-repeater .repeater-item i.sb-icon-close {
+  .settings-tab .sb-repeater .repeater-item i.sb-icon-close {
     right: 0;
     top: 0;
   }
-  .main-content .settings-card .settings-tab #supervisors .input {
+  .settings-tab #supervisors .input {
     width: 100% !important;
   }
-  .main-content .settings-card .settings-tab #supervisors .input input {
+  .settings-tab #supervisors .input input {
     width: 100%;
   }
-  .main-content .settings-card .settings-tab .sb-setting .input {
+  .settings-tab .sb-setting .input {
     width: 100% !important;
   }
   .powered-by .nexln-help {
@@ -15035,12 +15037,12 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     border-radius: 0;
     padding-inline: 0;
   }
-  .sb-area-settings.sb-active .main-content .sb-top-bar div a.sb-btn {
+  .sb-area-settings.sb-active .sb-top-bar div a.sb-btn {
     background: #0069f0;
     text-indent: unset;
     font-size: 14px;
   }
-  .sb-area-settings.sb-active .main-content .sb-top-bar div a.sb-btn i {
+  .sb-area-settings.sb-active .sb-top-bar div a.sb-btn i {
     color: #fff;
     height: 45px;
   }
