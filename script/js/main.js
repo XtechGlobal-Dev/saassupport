@@ -3127,17 +3127,9 @@
                         let attachmentsHtml = '';
                         const filesCount = Object.entries(response.attachments).length;
                         Object.entries(response.attachments).forEach(([key, value]) => {
-                            attachmentsHtml += `<div class="col-md-5 mb-2">
-                                                    <div class="card">
-                                                        <div class="card-body p-2">
-                                                            <div class="text-center mb-2">
-                                                                <img src="${SB_URL}/${value.file_path}" class="img-thumbnail p-0" style="max-height: 100px;" alt="${value.original_filename}">
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>`;
-
+                            attachmentsHtml += `<a href="${SB_URL}/${value.file_path}" target="_blank">
+                                                    <i class="sb-icon sb-icon-file"></i>${value.original_filename}
+                                                </a>`;
                         });
 
                         $('#existing-file-preview-container').removeClass('d-none');
