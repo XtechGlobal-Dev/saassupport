@@ -214,6 +214,14 @@ function sb_component_tickets()
 
                 </div>
             </div>
+            <?php
+            if (!sb_isset($disable_fields, 'tickets-left-panel') && !$disable_arrows) {
+                echo '<i class="sb-btn-collapse sb-left sb-icon-arrow-left"></i>';
+            }
+            if (!sb_isset($disable_fields, 'tickets-right-panel') && !$disable_arrows) {
+                echo '<i class="sb-btn-collapse sb-right sb-icon-arrow-right"></i>';
+            }
+            ?>
         </div>
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;display:none">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
