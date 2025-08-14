@@ -4533,6 +4533,19 @@ div ul.sb-menu .li:hover,
   position: relative;
   box-shadow: 0px 0px 1px 0px #000000;
 }
+.sb-tickets > .sb-tickets-area .sb-btn-collapse {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+}
+.sb-tickets > .sb-tickets-area .sb-btn-collapse.sb-left {
+  left: 0;
+}
+.sb-tickets > .sb-tickets-area .sb-btn-collapse.sb-right {
+  right: 0;
+}
 .sb-tickets > .tickets-list-area {
   display: flex;
   justify-content: space-between;
@@ -4781,6 +4794,7 @@ div ul.sb-menu .li:hover,
   align-items: center;
   justify-content: space-between;
   padding-left: 60px;
+  padding-left: 40px !important;
   padding-block: 14px !important;
 }
 .sb-tickets .sb-panel-left .sb-top .sb-btn {
@@ -4838,8 +4852,58 @@ div ul.sb-menu .li:hover,
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
+.sb-tickets .sb-panel-right .right-side-wrapper {
+  padding: 20px 20px 0;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .user-name {
+  margin-bottom: 15px !important;
+  padding-inline: 0 !important;
+  padding-top: 0 !important;
+}
 .sb-tickets .sb-panel-right .right-side-wrapper .row {
   margin: 0;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-details {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 0 !important;
+  padding: 0;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-details span {
+  padding-right: 0;
+  font-weight: normal;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-details span.badge {
+  padding-right: 0.65em;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-details svg {
+  height: 16px;
+  width: 16px;
+  margin-right: 18px !important;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-details svg path {
+  stroke: #033bbe;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments {
+  border-top: 1px solid rgb(212, 212, 212);
+  margin-top: 15px;
+  padding-top: 15px;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments svg {
+  height: 16px;
+  width: 16px;
+  margin-right: 18px !important;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments svg g g {
+  fill: #033bbe;
+}
+.sb-tickets .sb-panel-right .right-side-wrapper .right-conversation-attachments .right-sttachments svg path {
+  stroke: #033bbe;
 }
 .sb-tickets .sb-panel-right .right-side-wrapper svg path {
   stroke: #000;
@@ -4874,6 +4938,7 @@ div ul.sb-menu .li:hover,
 }
 .sb-tickets .sb-panel-right > .sb-scroll-area {
   padding: 20px;
+  padding-top: 0;
 }
 .sb-tickets .sb-panel-right > .sb-top {
   padding-right: 60px;
@@ -5435,6 +5500,19 @@ ul.sb-user-conversations.sb-scroll-area {
 
 .tickets-list-area {
   max-height: calc(100vh - 87px);
+}
+.tickets-list-area .sb-btn-collapse {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+}
+.tickets-list-area .sb-btn-collapse.sb-left {
+  left: 0;
+}
+.tickets-list-area .sb-btn-collapse.sb-right {
+  right: 0;
 }
 .tickets-list-area .sb-panel-main .sb-panel.text-middle {
   display: block;
