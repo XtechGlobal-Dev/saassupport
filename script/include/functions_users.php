@@ -2460,7 +2460,7 @@ function sb_delete_ticket_custom_field($id)
         sb_db_query('DELETE FROM custom_fields WHERE id = ' . $id);
     }
     else {
-        return ['success' => false, 'message' => 'This field is used in tickets.'];
+        return ['success' => false, 'message' => 'This field is used to create tickets. You can\'t delete it.'];
     }
     return ['success' => true, 'message' => 'Custom field deleted successfully.'];;
 }

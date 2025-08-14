@@ -6813,12 +6813,8 @@ textarea {
 .sb-board .sb-conversation .sb-list > div .sb-message img {
   max-width: 100%;
 }
-.sb-board .sb-conversation .sb-list > div .sb-image {
-  max-width: 500px;
-}
 .sb-board .sb-conversation .sb-list > div .sb-image img {
   object-fit: cover;
-  width: 100%;
   min-width: 240px;
   padding-inline: 12px;
 }
@@ -12889,11 +12885,13 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar {
   background: none;
   height: 4px;
+  width: 4px;
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar-thumb {
   height: 4px;
   background: #e5e5e5;
   border-radius: 20px;
+  width: 4px;
 }
 
 .sb-area-tickets .tags-filter {
@@ -12908,10 +12906,25 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 .sb-area-tickets .table-responsive .sb-scroll-area.scroll-table {
   scrollbar-width: none;
+  max-height: unset;
+  overflow: hidden;
+}
+.sb-area-tickets .table-responsive .sb-scroll-area.scroll-table #ticketTable_wrapper .row.dt-row .col-sm-12 {
+  max-height: calc(100vh - 290px);
+  overflow-y: scroll;
 }
 .sb-area-tickets .table-responsive .sb-scroll-area.scroll-table::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+table {
+  position: relative;
+}
+table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .choices .choices__inner,

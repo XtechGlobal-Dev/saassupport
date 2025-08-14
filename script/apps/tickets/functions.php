@@ -99,11 +99,12 @@ function sb_component_tickets()
                 </div>
                 <p class="no-reords text-center d-none">No results found.</p>
                 <div class="tickets-area" style="height: 100%; visibility:hidden;">
-                    <div class="ticket-description-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <div class="ticket-description-header"
+                        style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                         <h4 class="ticket-subject mb-0"></h4>
                         <div class="text-muted small tickets-header">
                             <span class="user-name"></span> <span class="ms-1">raised this on
-                            <span class="ticket-creation-time"></span></span>
+                                <span class="ticket-creation-time"></span></span>
                         </div>
                     </div>
                     <div class="tickets-text d-none">
@@ -140,10 +141,38 @@ function sb_component_tickets()
                 <div class="sb-panel sb-scroll-area ticket-login"></div>
             </div>
             <div class="sb-panel-right">
-                <div class="right-side-wrapper d-none">
-                    <div class="mb-2 text-muted small user-name"></div>
-                    <div class="mb-2">
-                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+                <!-- <div class="right-side-wrapper d-none"> -->
+                    <div class="sb-top">
+                        <?php if (sb_get_setting('tickets-registration-required')) { ?>
+                            <div class="sb-profile-menu">
+                                <div
+                                    class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
+                                    <img src="" />
+                                    <span class="sb-name"></span>
+                                </div>
+                                <div>
+                                    <ul class="sb-menu">
+                                        <?php
+                                        if (!sb_isset($disable_fields, 'tickets-edit-profile')) {
+                                            echo '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>';
+                                        }
+                                        if (!sb_get_setting('tickets-registration-disable-password')) {
+                                            echo '<li data-value="logout">' . sb_('Logout') . '</li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <?php
+                        } else {
+                            echo '<div class="sb-title">' . sb_('Details') . '</div>';
+                        }
+                        ?>
+                    </div>
+                    <!-- <div class="mb-2 text-muted small user-name"></div> -->
+                    <div class="mb-2 right-details">
+                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            class="me-1">
                             <path
                                 d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
                                 stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"></path>
@@ -151,10 +180,10 @@ function sb_component_tickets()
                                 stroke-linejoin="round"></path>
                             <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"></path>
-                        </svg>Ticket ID: <span class="ticket-id"></span>
+                        </svg>Ticket ID <span class="ticket-id"></span>
                     </div>
 
-                    <div class="mb-2">
+                    <div class="mb-2 right-details">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="me-1"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -162,38 +191,43 @@ function sb_component_tickets()
                                 fill="#222222" />
                             <circle cx="17" cy="7" r="3" fill="#222222" />
                         </svg>
-                        Status:<span class="badge bg-secondary ticket-status"></span>
+                        Status <span class="badge bg-secondary ticket-status"></span>
                     </div>
 
-                    <p>
-                        <svg width="20" height="20" viewBox="-8 0 32 32" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                    <div class="sb-ticket-attachments">
+                        <div class="sb-title">Attachments</div>
+                        <div class="row ticket-attachments"></div>
+                    </div>
+                <!-- </div> -->
+                <div class="sb-scroll-area">
 
-                            <title>attachment</title>
-                            <desc>Created with Sketch Beta.</desc>
-                            <defs>
+                    <?php
+                    $code = '';
+                    // if (!sb_isset($disable_fields, 'tickets-agent')) {
+                    //     echo '<div class="sb-profile sb-profile-agent sb-profile-empty"><img src="" /><div><span class="sb-name"></span><span class="sb-status"></span></div></div>' . (sb_isset($disable_fields, 'tickets-agent-details') ? '' : '<div class="sb-agent-label"></div>');
+                    // }
+                    // $code .= '<div class="sb-ticket-details"></div>';
+                    // if (!sb_isset($disable_fields, 'tickets-department')) {
+                    //     $code .= '<div class="sb-department" data-label="' . sb_(sb_isset(sb_get_setting('departments-settings'), 'departments-single-label', 'Department')) . '"></div>';
+                    // }
+                    //$code .= '<div class="sb-conversation-attachments"></div>';
+                    if (sb_get_setting('tickets-articles')) {
+                        $code .= sb_get_rich_message('articles');
+                    }
+                    echo $code;
 
-                            </defs>
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
-                                sketch:type="MSPage">
-                                <g id="Icon-Set-Filled" sketch:type="MSLayerGroup"
-                                    transform="translate(-214.000000, -153.000000)" fill="#000000">
-                                    <path
-                                        d="M228,157 L228,177 C228,180.313 225.313,183 222,183 C218.687,183 216,180.313 216,177 L216,159 C216,156.791 217.791,155 220,155 C222.209,155 224,156.791 224,159 L224,177 C224,178.104 223.104,179 222,179 C220.896,179 220,178.104 220,177 L220,161 L218,161 L218,177 C218,179.209 219.791,181 222,181 C224.209,181 226,179.209 226,177 L226,159 C226,155.687 223.313,153 220,153 C216.687,153 214,155.687 214,159 L214,178 C214.493,181.945 217.921,185 222,185 C226.079,185 229.507,181.945 230,178 L230,157 L228,157"
-                                        id="attachment" sketch:type="MSShapeGroup">
+                    ?>
 
-                                    </path>
-                                </g>
-                            </g>
-                        </svg>
-                        Ticket Attachments:
-                    </p>
-                    <div class="row ticket-attachments"></div>
-
-                    <div class="sb-scroll-area"></div>
                 </div>
             </div>
+            <?php
+            if (!sb_isset($disable_fields, 'tickets-left-panel') && !$disable_arrows) {
+                echo '<i class="sb-btn-collapse sb-left sb-icon-arrow-left"></i>';
+            }
+            if (!sb_isset($disable_fields, 'tickets-right-panel') && !$disable_arrows) {
+                echo '<i class="sb-btn-collapse sb-right sb-icon-arrow-right"></i>';
+            }
+            ?>
         </div>
         <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;display:none">
             <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
@@ -202,9 +236,9 @@ function sb_component_tickets()
                         <!--div class="sb-top">
                             <div>
                                 <?php /*if (!sb_isset($disable_fields, 'tickets-button'))
-                     echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
-                 else
-                     echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
+                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+            else
+                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
                             </div>
                             <div class="sb-search-btn">
                                 <i class="sb-icon sb-icon-search"></i>
@@ -385,6 +419,65 @@ function sb_component_tickets()
                 }
             }
             echo $code;
+            ?>
+        </div>
+        <div class="ticket-custom-fields" style="display:none">
+            <?php
+
+            $fields = get_ticket_custom_fields();
+
+            if (!empty($fields) && is_array($fields)) {
+                foreach ($fields as $field) {
+                    echo '<div id="' . htmlspecialchars($field['title']) . '" data-type="' . htmlspecialchars($field['type']) . '" class="sb-input">';
+
+                    // Label
+                    echo '<span class="' . ($field['required'] == '1' ? 'required-label' : '') . '">' . htmlspecialchars($field['title']) . '</span>';
+
+                    switch ($field['type']) {
+                        case 'text':
+                            echo '<input type="text" class="form-control" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                    name="custom_fields[' . $field['id'] . ']" 
+                                    value="' . htmlspecialchars($field['default_value']) . '" 
+                                    ' . ($field['required'] == '1' ? 'required' : '') . ' 
+                                    placeholder="' . htmlspecialchars($field['title']) . '">';
+                            break;
+
+                        case 'textarea':
+                            echo '<textarea class="form-control" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                    name="custom_fields[' . $field['id'] . ']" 
+                                    rows="3" ' . ($field['required'] == '1' ? 'required' : '') . ' 
+                                    placeholder="' . htmlspecialchars($field['title']) . '">' . htmlspecialchars($field['default_value']) . '</textarea>';
+                            break;
+
+                        case 'select':
+                            $options = array_filter(array_map('trim', explode('|', $field['options'])));
+                            echo '<select class="form-control" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                    name="custom_fields[' . $field['id'] . ']" 
+                                    ' . ($field['required'] == '1' ? 'required' : '') . '>';
+                            echo '<option value="">Select ' . htmlspecialchars($field['title']) . '</option>';
+                            foreach ($options as $option) {
+                                $selected = ($option === $field['default_value']) ? 'selected' : '';
+                                echo '<option value="' . htmlspecialchars($option) . '" ' . $selected . '>' . htmlspecialchars($option) . '</option>';
+                            }
+                            echo '</select>';
+                            break;
+
+                        case 'checkbox':
+                            $checked = ($field['default_value'] == '1') ? 'checked' : '';
+                            echo '<div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="custom_' . $field['id'] . '" data-id="custom_' . $field['id'] . '" 
+                                        name="custom_fields[' . $field['id'] . ']" 
+                                        value="1" 
+                                        ' . $checked . ' 
+                                        ' . ($field['required'] == '1' ? 'required' : '') . '>
+                                    <label class="form-check-label" for="custom_' . $field['id'] . '">' . htmlspecialchars($field['title']) . '</label>
+                                </div>';
+                            break;
+                    }
+
+                    echo '</div>'; // close sb-input
+                }
+            }
             ?>
         </div>
     </div>
