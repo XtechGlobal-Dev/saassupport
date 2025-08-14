@@ -5701,7 +5701,7 @@ function sb_component_admin()
                                         </div>
                                     </div>
 
-                                    <div class="settings-card">
+                                    <!-- <div class="settings-card"> -->
                                         <div class="my-tabs-container">
                                             <button class="tab-arrow left">&#8592;</button>
                                             <div class="my-tabs">
@@ -5883,7 +5883,7 @@ function sb_component_admin()
 
                                             <?php sb_populate_settings("chat", $sb_settings, true, 'chat-management'); ?>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
 
                                     <link href="https://cdn.jsdelivr.net/npm/flag-icons@6.11.0/css/flag-icons.min.css"
                                         rel="stylesheet">
@@ -6023,7 +6023,7 @@ function sb_component_admin()
                                                     <i class="sb-icon-check"></i>Save changes</a>
                                             </div>
                                         </div>
-                                        <div class="settings-card">
+                                        <!-- <div class="settings-card"> -->
                                             <div class="my-tabs-container">
                                                 <button class="tab-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
                                                 <div class="my-tabs">
@@ -6533,7 +6533,7 @@ function sb_component_admin()
                                                 </div>
                                                 <?php sb_populate_settings("admin", $sb_settings, true, 'department'); ?>
                                             </div>
-                                        </div>
+                                        <!-- </div> -->
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
@@ -6548,7 +6548,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="settings-card">
+                                    <!-- <div class="settings-card"> -->
                                         <div class="my-tabs-container">
                                             <button class="tab-arrow left">&#8592;</button>
                                             <div class="my-tabs">
@@ -6989,7 +6989,7 @@ function sb_component_admin()
 
                                             <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-settings-customization'); ?>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
@@ -7042,7 +7042,7 @@ function sb_component_admin()
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="settings-card">
+                                    <!-- <div class="settings-card"> -->
                                         <div class="my-tabs-container">
                                             <button class="tab-arrow left">&#8592;</button>
                                             <div class="my-tabs">
@@ -7223,7 +7223,7 @@ function sb_component_admin()
 
                                             <?php sb_populate_settings("messages", $sb_settings, true, 'messages-form'); ?>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
 
                                 </div>
                                 <?php /*<div>
