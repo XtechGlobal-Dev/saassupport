@@ -3440,11 +3440,10 @@ textarea {
                 }
 
                 .sb-image {
-                    max-width: 500px;
+                    // max-width: 500px;
 
                     img {
                         object-fit: cover;
-                        width: 100%;
                         min-width: 240px;
                         padding-inline: 12px;
                     }
