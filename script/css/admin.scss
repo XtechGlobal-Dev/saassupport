@@ -11124,7 +11124,10 @@ li.menu_head:hover {
     transition: margin-left 0.3s ease;
     position: relative;
 
-    .settings-header {
+    
+}
+
+.settings-header {
         position: sticky;
         top: -24px;
         background: #ffffff;
@@ -11247,7 +11250,6 @@ li.menu_head:hover {
             }
         }
     }
-}
 
 .sidebar.collapsed+.main-content {
     margin-left: 60px;
@@ -12819,7 +12821,7 @@ main {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1900px) {
-    .main-content {
+    // .main-content {
         .settings-card {
             .my-tabs {
                 overflow-x: scroll;
@@ -12876,11 +12878,11 @@ main {
         .settings-header {
             top: -24px;
         }
-    }
+    // }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1600px) {
-    .main-content {
+    // .main-content {
         .settings-card {
             .my-tabs {
                 overflow-x: scroll;
@@ -12937,7 +12939,7 @@ main {
         .settings-header {
             top: -24px;
         }
-    }
+    // }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -13074,7 +13076,7 @@ main {
         }
     }
 
-    .main-content {
+    // .main-content {
         .settings-card {
             .my-tabs {
                 overflow-x: scroll;
@@ -13136,7 +13138,7 @@ main {
                 }
             }
         }
-    }
+    // }
 
     .sb-admin {
         .sb-area-users {
@@ -13198,7 +13200,7 @@ main {
         height: fit-content !important;
     }
 
-    .main-content {
+    // .main-content {
         header {
             padding-inline: 15px;
 
@@ -13263,7 +13265,7 @@ main {
                 }
             }
         }
-    }
+    // }
 
     .powered-by {
         .nexln-help {
@@ -13591,7 +13593,7 @@ main {
     }
 
     .sb-area-settings.sb-active {
-        .main-content {
+        // .main-content {
             .sb-top-bar {
                 div {
                     a.sb-btn {
@@ -13606,7 +13608,7 @@ main {
                     }
                 }
             }
-        }
+        // }
     }
 
     #ticketTable_wrapper {

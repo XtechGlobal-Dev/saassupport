@@ -699,6 +699,9 @@
         &>.sb-scroll-area {
             padding: 20px;
             padding-top: 0;
+            &::-webkit-scrollbar {
+                width: 0;
+            }
         }
 
         >.sb-top {
