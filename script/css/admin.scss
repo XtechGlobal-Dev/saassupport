@@ -4224,6 +4224,31 @@ textarea {
     }
 }
 
+#add-conversation-to-ticket {
+    padding: 60px 30px;
+    // display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &.sb-active {
+        display: flex;
+    }
+    p {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 30px;
+        margin: 0 0 20px 0;
+    }
+    .sb-close {
+        background: none;
+        padding: 0;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #000;
+    }
+}
+
 .tickts-scroll-area {
     .row.dt-row {
         .col-sm-12 {
