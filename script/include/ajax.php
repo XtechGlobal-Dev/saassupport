@@ -219,6 +219,8 @@ function sb_ajax_execute() {
              return sb_json_response(sb_get_tickets_statuses());
         case 'search-get-users':
              return sb_json_response(sb_search_get_users($_POST['q'],$_POST['type']));
+        case 'link-conversation-to-ticket':
+             return sb_json_response(link_conversation_to_ticket($_POST['ticket_id']));
         case 'search-get-tickets':
              return sb_json_response(search_get_tickets($_POST['q'],$_POST['type']));
         case 'upload-ticket-attachments':
