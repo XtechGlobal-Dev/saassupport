@@ -1890,9 +1890,6 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
             <div>
                 <div data-type="select" class="sb-input">
-                    <span class="required-label pb-2"><?php sb_e(
-                        "Search Ticket"
-                    ); ?></span>
                     <select id="selected_ticket_id" style="width:100%;"></select>
                     <a class="sb-btn">Submit</a>
                 </div>
