@@ -1894,7 +1894,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                         "Search Ticket"
                     ); ?></span>
                     <select id="selected_ticket_id" style="width:100%;"></select>
-                    <a class="sb-btn">Submit</a>
+                    <a id="link-ticket" class="sb-btn">Submit</a>
                 </div>
                 <a class="sb-close sb-btn">
                     <i class="sb-icon-close"></i>             
