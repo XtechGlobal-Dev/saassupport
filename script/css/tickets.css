@@ -4484,7 +4484,7 @@ div ul.sb-menu .li:hover,
   font-weight: 500;
   font-size: 11px;
   line-height: 22px;
-  top: 0;
+  top: 7px;
   z-index: 2;
   animation: sb-fade-animation 0.3s;
 }
