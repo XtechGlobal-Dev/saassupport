@@ -1871,7 +1871,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         </div>
     </div>
 
-    <div id="add-conversation-to-ticket" class="sb-dialog-box sb-lightbox" data-type="convert-ticket">
+    <div id="add-conversation-to-ticket" class="sb-lightbox" data-type="convert-ticket">
         <div class="sb-title"></div>
         <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
         <div>
