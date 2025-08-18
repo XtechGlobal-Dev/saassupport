@@ -1274,6 +1274,17 @@ ul.sb-user-conversations.sb-scroll-area {
                 top: 54px;
             }
         }
+
+        .ticket-login {
+            .tickets-form {
+                textarea {
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar {
+                        width: 0;
+                    }
+                }
+            }
+        }
     }
 
     .sb-panel {
@@ -1436,6 +1447,12 @@ ul.sb-user-conversations.sb-scroll-area {
         }
 
         .ticket-login {
+            .tickets-form {
+                textarea {
+                    overflow-y: scroll;
+                }
+            }
+
             .sb-info {
                 &:nth-child(4) {
                     display: none;
