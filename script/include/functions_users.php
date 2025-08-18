@@ -861,6 +861,29 @@ function sb_search_get_users($input = null,$type = null) {
     return $users;
 }
 
+function search_get_tickets($input = null,$type = null)
+{
+    $input = sb_db_escape($input);
+    if (empty($input) || empty($type)) {
+        return [];
+    }
+
+    // Remove only if it starts with "t" followed by digits
+    $input = preg_replace('/^[tT](\d+)/', '$1', $input);
+
+    $where = '';
+    if($input)
+    {
+        $where = 'Where id = "'.$input.'"  OR subject like "%'.$input.'%"';
+    }
+    if ($type != 'all') {
+        $where = ' AND status_id IN ("'.$type.'")';
+    }
+
+   $query = 'SELECT id, subject, status_id FROM sb_tickets '.$where.'  ORDER BY id DESC LIMIT 20';
+    $tickets = sb_db_get($query, false);
+    return $tickets;
+}
 function sb_get_dashboad_data()
 {
     return ['sucess'=>true,'msg'=>'Dashboard data fecthed sucessfully'];

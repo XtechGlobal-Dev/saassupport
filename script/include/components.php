@@ -1872,18 +1872,33 @@ id="flexSwitchCheckDefault" style="width: 27px;">
     </div>
 
     <div id="add-conversation-to-ticket" class="sb-lightbox" data-type="convert-ticket">
-        <div class="sb-title"></div>
-        <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
-        <div>
-            <a class="sb-confirm sb-btn">
-                Add to new ticket            
-            </a>
-            <a class="sb-cancel sb-btn">
-                Add to existing ticket                   
-            </a>
-            <a class="sb-close sb-btn">
-                <i class="sb-icon-close"></i>            
-            </a>
+        <div id="ticket-action-selector" class="popup-wrapper">
+            <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
+            <div>
+                <a class="sb-confirm sb-btn">
+                    Link to new ticket            
+                </a>
+                <a id="link-to-existing-ticket" class="sb-btn">
+                    Link to existing ticket                   
+                </a>
+                <a class="sb-close sb-btn">
+                    <i class="sb-icon-close"></i>            
+                </a>
+            </div>
+        </div>
+        <div id="ticket-selector" class="popup-wrapper" style="display:none">
+            <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
+            <div>
+                <div data-type="select" class="sb-input">
+                    <span class="required-label pb-2"><?php sb_e(
+                        "Search Ticket"
+                    ); ?></span>
+                    <select id="selected_ticket_id" style="width:100%;"></select>
+                </div>
+                <a class="sb-close sb-btn">
+                    Sumbit            
+                </a>
+            </div>
         </div>
     </div>
     <?php
