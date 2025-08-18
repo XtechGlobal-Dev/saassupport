@@ -2831,6 +2831,18 @@ textarea {
     }
 }
 
+.sb-td-priority {
+    .dropdown {
+        ul.priority-list {
+            position: fixed;
+        }
+    }
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded] {
+    z-index: 6 !important;
+}
+
 /*
  *
  * -----------------------------------------------------------
@@ -3505,7 +3517,7 @@ textarea {
                 &.media-item, &.attachment {
                     background: #fff !important;
                     border: 0.93px solid #E2E8F0;
-                    padding: 4px;
+                    padding: 4px 12px;
 
                     .sb-time {
                         padding: 0 10px 5px;
