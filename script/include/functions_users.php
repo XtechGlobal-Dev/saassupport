@@ -861,6 +861,11 @@ function sb_search_get_users($input = null,$type = null) {
     return $users;
 }
 
+function link_conversation_to_ticket($ticket_id = null) 
+{
+    
+}
+
 function search_get_tickets($input = null,$type = null)
 {
     $input = sb_db_escape($input);

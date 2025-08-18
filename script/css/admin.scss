@@ -4927,7 +4927,6 @@ ul.pagination {
     background: #155cfd !important;
 }
 
-
 .sb-main {
     main {
         .sb-area-conversations {
@@ -4991,7 +4990,6 @@ ul.pagination {
         }
     }
 }
-
 
 .sb-area-dashboard {
     main {
@@ -5615,6 +5613,20 @@ ul.pagination {
                 border-top: 1px solid #e0e0e0;
                 margin: 16px 0;
             }
+        }
+    }
+}
+
+#ticket-selector {
+    .sb-input {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: space-between;
+        .sb-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
