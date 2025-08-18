@@ -3326,10 +3326,17 @@ textarea {
                     }
                 }
 
-                &.media-item {
+                &.media-item, &.attachment {
                     .sb-time {
                         span {
                             color: #475569;
+                        }
+                    }
+                    .sb-message-attachments {
+                        width: 100%;
+                        padding-top: 0;
+                        a  {
+                            color: #475569 !important;
                         }
                     }
                 }
@@ -3406,7 +3413,7 @@ textarea {
                     align-items: center;
                     justify-content: space-between;
                     flex-wrap: wrap;
-                    gap: 10px;
+                    gap: 2px 10px;
                 }
 
                 .sb-time {
@@ -3495,7 +3502,7 @@ textarea {
                     color: #fff;
                 }
 
-                &.media-item {
+                &.media-item, &.attachment {
                     background: #fff !important;
                     border: 0.93px solid #E2E8F0;
                     padding: 4px;
@@ -3512,6 +3519,9 @@ textarea {
                         color: #1E293B;
                         font-weight: 500;
                         margin: 0;
+                        .sb-agent-name {
+                            width: fit-content;
+                        }
                     }
                 }
             }
