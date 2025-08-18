@@ -4220,6 +4220,9 @@ textarea {
             max-height: calc(100vh - 290px);
             overflow: hidden;
             overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 0;
+            }
         }
     }
 }
@@ -4672,6 +4675,13 @@ body {
         margin: 0;
     }
 }
+.users-tab {
+    overflow-y: scroll;
+    max-height: 64vh;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
 
 .sb-area-dashboard,
 .sb-area-conversations,
@@ -4792,6 +4802,12 @@ body {
                 transition-delay: .2s;
             }
         }
+    }
+}
+
+.sb-area-ticket-detail {
+    .tc_bg {
+        max-height: calc(100vh - 117px) !important;
     }
 }
 
@@ -7225,6 +7241,7 @@ a.sb-btn-white,
 ul.status-list.dropdown-menu {
     max-height: 415px;
     overflow-y: scroll;
+    position: fixed;
 
     &::-webkit-scrollbar {
         width: 0px;
@@ -11186,6 +11203,11 @@ li.menu_head:hover {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            overflow-y: scroll;
+            max-height: 64vh;
+            &::-webkit-scrollbar {
+                width: 0;
+            }
 
             .settings-head {
                 p {
