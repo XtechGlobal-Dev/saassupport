@@ -7438,6 +7438,9 @@ textarea {
   overflow: hidden;
   overflow-y: scroll;
 }
+.tickts-scroll-area .row.dt-row .col-sm-12::-webkit-scrollbar {
+  width: 0;
+}
 
 #customerTable thead tr th.sb-active {
   border-bottom: 1px solid #d5d5d5;
@@ -7790,6 +7793,14 @@ body .daterangepicker td.active:hover {
   margin: 0;
 }
 
+.users-tab {
+  overflow-y: scroll;
+  max-height: 64vh;
+}
+.users-tab::-webkit-scrollbar {
+  width: 0;
+}
+
 .sb-area-dashboard header,
 .sb-area-conversations header,
 .sb-area-tickets header,
@@ -8066,6 +8077,10 @@ body .daterangepicker td.active:hover {
   opacity: 1;
   visibility: visible;
   transition-delay: 0.2s;
+}
+
+.sb-area-ticket-detail .tc_bg {
+  max-height: calc(100vh - 117px) !important;
 }
 
 span.badge {
@@ -9995,6 +10010,7 @@ a.sb-btn-white.sb-loading:hover:before,
 ul.status-list.dropdown-menu {
   max-height: 415px;
   overflow-y: scroll;
+  position: fixed;
 }
 ul.status-list.dropdown-menu::-webkit-scrollbar {
   width: 0px;
@@ -13379,6 +13395,11 @@ li.menu_head:hover {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  overflow-y: scroll;
+  max-height: 64vh;
+}
+.settings-tab::-webkit-scrollbar {
+  width: 0;
 }
 .settings-tab .settings-head p {
   display: flex;
