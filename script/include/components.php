@@ -1872,18 +1872,33 @@ id="flexSwitchCheckDefault" style="width: 27px;">
     </div>
 
     <div id="add-conversation-to-ticket" class="sb-lightbox" data-type="convert-ticket">
-        <div class="sb-title"></div>
-        <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
-        <div>
-            <a class="sb-confirm sb-btn">
-                Add to new ticket            
-            </a>
-            <a class="sb-cancel sb-btn">
-                Add to existing ticket                   
-            </a>
-            <a class="sb-close sb-btn">
-                <i class="sb-icon-close"></i>            
-            </a>
+        <div id="ticket-action-selector" class="popup-wrapper">
+            <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
+            <div>
+                <a class="sb-confirm sb-btn">
+                    Link to new ticket            
+                </a>
+                <a id="link-to-existing-ticket" class="sb-btn">
+                    Link to existing ticket                   
+                </a>
+                <a class="sb-close sb-btn">
+                    <i class="sb-icon-close"></i>            
+                </a>
+            </div>
+        </div>
+        <div id="ticket-selector" class="popup-wrapper" style="display:none">
+            <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
+            <div>
+                <div data-type="select" class="sb-input">
+                    <span class="required-label pb-2"><?php sb_e(
+                        "Search Ticket"
+                    ); ?></span>
+                    <select id="selected_ticket_id" style="width:100%;"></select>
+                </div>
+                <a class="sb-close sb-btn">
+                    Sumbit            
+                </a>
+            </div>
         </div>
     </div>
     <?php
@@ -3649,7 +3664,7 @@ function sb_component_admin()
                                         </li> -->
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon"
-                                                data-sb-tooltip="Convert to a ticket">
+                                                data-sb-tooltip="Link to a ticket">
                                                 <svg enable-background="new 0 0 50 50" height="50" class="d-xl-none"
                                                     viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
                                                     <g id="Layer_29" />
@@ -4810,7 +4825,7 @@ function sb_component_admin()
                                                 <div class="ps-md-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
-                                                        <span class="conversation-id d-none">Conversation ID :
+                                                        <span class="conversation-id d-none">Linked Conversation ID :
                                                             <span></span></span>
                                                         <div class="ticket-fields">
                                                             <!-- <div class="mb-3 without-contact">
