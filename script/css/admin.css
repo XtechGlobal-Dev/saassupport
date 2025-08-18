@@ -6730,8 +6730,15 @@ textarea {
 .sb-board .sb-conversation .sb-list .sb-right .sb-time span {
   color: #fff;
 }
-.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-time span {
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-time span, .sb-board .sb-conversation .sb-list .sb-right.attachment .sb-time span {
   color: #475569;
+}
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-message-attachments, .sb-board .sb-conversation .sb-list .sb-right.attachment .sb-message-attachments {
+  width: 100%;
+  padding-top: 0;
+}
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-message-attachments a, .sb-board .sb-conversation .sb-list .sb-right.attachment .sb-message-attachments a {
+  color: #475569 !important;
 }
 .sb-board .sb-conversation .sb-list > div {
   max-width: calc(100% - 275px);
@@ -6792,7 +6799,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 2px 10px;
 }
 .sb-board .sb-conversation .sb-list > div .sb-time {
   position: unset;
@@ -6857,22 +6864,28 @@ textarea {
 .sb-board .sb-conversation .sb-list div.sb-right .sb-time {
   color: #fff;
 }
-.sb-board .sb-conversation .sb-list div.sb-right.media-item {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item, .sb-board .sb-conversation .sb-list div.sb-right.attachment {
   background: #fff !important;
   border: 0.93px solid #E2E8F0;
   padding: 4px;
 }
-.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time {
   padding: 0 10px 5px;
 }
-.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-cnt {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-cnt, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-cnt {
   max-width: 260px;
 }
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-message,
-.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-message,
+.sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time {
   color: #1E293B;
   font-weight: 500;
   margin: 0;
+}
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-message .sb-agent-name,
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time .sb-agent-name, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-message .sb-agent-name,
+.sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time .sb-agent-name {
+  width: fit-content;
 }
 .sb-board .sb-conversation .sb-list .sb-highlight:after {
   content: "";
