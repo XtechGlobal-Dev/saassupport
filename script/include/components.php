@@ -1882,7 +1882,8 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 Add to existing ticket                   
             </a>
             <a class="sb-close sb-btn">
-                Close            </a>
+                <i class="sb-icon-close"></i>            
+            </a>
         </div>
     </div>
     <?php
