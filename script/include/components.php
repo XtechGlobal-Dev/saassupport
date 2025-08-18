@@ -3649,7 +3649,7 @@ function sb_component_admin()
                                         </li> -->
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon"
-                                                data-sb-tooltip="Convert to a ticket">
+                                                data-sb-tooltip="Link to a ticket">
                                                 <svg enable-background="new 0 0 50 50" height="50" class="d-xl-none"
                                                     viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
                                                     <g id="Layer_29" />
@@ -4810,7 +4810,7 @@ function sb_component_admin()
                                                 <div class="ps-md-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
-                                                        <span class="conversation-id d-none">Conversation ID :
+                                                        <span class="conversation-id d-none">Linked Conversation ID :
                                                             <span></span></span>
                                                         <div class="ticket-fields">
                                                             <!-- <div class="mb-3 without-contact">
