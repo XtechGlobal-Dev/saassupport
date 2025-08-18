@@ -8711,6 +8711,18 @@ ul.pagination li.active a.page-link {
   margin: 16px 0;
 }
 
+#ticket-selector .sb-input {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+#ticket-selector .sb-input .sb-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .sb-area-conversations > .sb-btn-collapse {
   display: none;
   position: fixed;
