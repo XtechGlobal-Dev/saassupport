@@ -1894,9 +1894,10 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                         "Search Ticket"
                     ); ?></span>
                     <select id="selected_ticket_id" style="width:100%;"></select>
+                    <a class="sb-btn">Submit</a>
                 </div>
                 <a class="sb-close sb-btn">
-                    Sumbit            
+                    <i class="sb-icon-close"></i>             
                 </a>
             </div>
         </div>
