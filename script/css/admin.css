@@ -6339,6 +6339,14 @@ textarea {
   border-color: #d5d5d5;
 }
 
+.sb-td-priority .dropdown ul.priority-list {
+  position: fixed;
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded] {
+  z-index: 6 !important;
+}
+
 /*
  *
  * -----------------------------------------------------------
@@ -6867,7 +6875,7 @@ textarea {
 .sb-board .sb-conversation .sb-list div.sb-right.media-item, .sb-board .sb-conversation .sb-list div.sb-right.attachment {
   background: #fff !important;
   border: 0.93px solid #E2E8F0;
-  padding: 4px;
+  padding: 4px 12px;
 }
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time {
   padding: 0 10px 5px;
