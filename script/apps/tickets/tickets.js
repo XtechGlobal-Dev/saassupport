@@ -153,7 +153,6 @@
                                 <span>${sb_(names.title)}</span>
                                 <input type="text" required>
                             </div>${main.find('.sb-ticket-fields').html()}
-                            <div id="ticketCustomFieldsContainer" style="margin: 10px 0;">${main.find('.ticket-custom-fields').html()}</div>
                             <div id="description" class="sb-input sb-editor-cnt">
                                 <span>${sb_(names.message)}</span>
                             </div>
@@ -161,6 +160,8 @@
                                 <i class="sb-icon-plus"></i>${sb_(names.button)}
                             </div>
                         </div>`);
+
+                        //// <div id="ticketCustomFieldsContainer" style="margin: 10px 0;">${main.find('.ticket-custom-fields').html()}</div>
                     ticket_main_panel.find('.sb-editor-cnt').append(editor);
                     if (SBF.setting('tickets_recaptcha')) {
                         if (recaptcha) {
@@ -624,19 +625,19 @@
         withoutContact.push(guest);
         withoutContact.push('withoutContact');
 
-        const container = document.getElementById('ticketCustomFieldsContainer');
-        const fields = container.querySelectorAll('input, select, textarea');
-
-        const values = {};
-
-        fields.forEach(field => {
-            const name = field.id.replace('custom_', ''); // fallback if name missing
-            values[name] = field.value;
-        });
-
         const customField = [];
-        customField.push(values);
-        customField.push('custom_fields');
+        // const container = document.getElementById('ticketCustomFieldsContainer');
+        // const fields = container.querySelectorAll('input, select, textarea');
+
+        // const values = {};
+
+        // fields.forEach(field => {
+        //     const name = field.id.replace('custom_', ''); // fallback if name missing
+        //     values[name] = field.value;
+        // });
+
+        // customField.push(values);
+        // customField.push('custom_fields');
 
         let ticketData = { ...ticketDataPart1, description, status_id, contact_id, cust_name, cust_email, conversation_id, attachments, withoutContact, customField };
 

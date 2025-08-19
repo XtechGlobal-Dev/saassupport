@@ -368,6 +368,17 @@ function sb_otp($email = false, $otp = false) {
  */
 
 function sb_add_user($settings = [], $settings_extra = [], $hash_password = true, $skip_otp = true) {
+    require_once(SB_CLOUD_PATH . '/account/functions.php');
+    $membership = membership_get_active(false);
+    $membership["count_agents"].'|'.$membership["quota_agents"];
+    if(isset($settings['user_type']) && ($settings['user_type'] == 'agent' || $settings['user_type'] == 'admin'))
+    {
+        if($membership["count_agents"] >= $membership["quota_agents"])
+        {
+            return new SBValidationError('agent-limit-reached');
+        }
+    }
+
     $keys = ['profile_image', 'first_name', 'last_name', 'email', 'user_type', 'password', 'department'];
     for ($i = 0; $i < count($keys); $i++) {
         $settings[$keys[$i]] = sb_isset($settings, $keys[$i], '');
