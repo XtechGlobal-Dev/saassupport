@@ -861,6 +861,49 @@ function sb_search_get_users($input = null,$type = null) {
     return $users;
 }
 
+function link_conversation_to_ticket($ticket_id = null,$conversation_id = null) 
+{
+    if($ticket_id && $conversation_id)
+    {
+        $ticket_id = sb_db_escape($ticket_id,true);
+        $conversation_id = sb_db_escape($conversation_id,true);
+        $query = "UPDATE sb_tickets SET conversation_id = '$conversation_id' WHERE id = $ticket_id";
+        $query2 = "UPDATE sb_conversations SET converted_to_ticket = '1' WHERE id = $conversation_id";
+        sb_db_query($query);
+        sb_db_query($query2);
+        return ['success'=>true,'msg'=>'Conversation linked to ticket sucessfully'];
+    }
+    else
+    {
+         return ['success'=>false,'msg'=>'Invalid Ticket or Conversation ID'];
+    }
+}
+
+function search_get_tickets($input = null,$type = null)
+{
+    $input = sb_db_escape($input);
+    if (empty($input) || empty($type)) {
+        return [];
+    }
+
+    // Remove only if it starts with "t" followed by digits
+    $input = preg_replace('/^[tT](\d+)/', '$1', $input);
+
+    $where = '';
+    if($input)
+    {
+        $where .= 'Where (id = "'.$input.'"  OR subject like "%'.$input.'%")';
+    }
+    if ($type != 'all') {
+        $where .= ' AND status_id IN ("'.$type.'")';
+    }
+
+    $where .= " AND conversation_id IS NULL";
+
+    $query = 'SELECT id, subject, status_id FROM sb_tickets '.$where.'  ORDER BY id DESC LIMIT 20';
+    $tickets = sb_db_get($query, false);
+    return $tickets;
+}
 function sb_get_dashboad_data()
 {
     return ['sucess'=>true,'msg'=>'Dashboard data fecthed sucessfully'];

@@ -6339,6 +6339,14 @@ textarea {
   border-color: #d5d5d5;
 }
 
+.sb-td-priority .dropdown ul.priority-list {
+  position: fixed;
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded] {
+  z-index: 6 !important;
+}
+
 /*
  *
  * -----------------------------------------------------------
@@ -6541,6 +6549,9 @@ textarea {
   align-items: flex-start;
   padding-left: 58px;
 }
+.sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile svg {
+  min-width: 20px;
+}
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile img {
   width: 45px;
   height: 45px;
@@ -6561,6 +6572,7 @@ textarea {
   color: #1E293B;
   font-size: 16px;
   font-weight: 600;
+  min-width: 75px;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time {
   margin-left: auto;
@@ -6730,8 +6742,15 @@ textarea {
 .sb-board .sb-conversation .sb-list .sb-right .sb-time span {
   color: #fff;
 }
-.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-time span {
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-time span, .sb-board .sb-conversation .sb-list .sb-right.attachment .sb-time span {
   color: #475569;
+}
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-message-attachments, .sb-board .sb-conversation .sb-list .sb-right.attachment .sb-message-attachments {
+  width: 100%;
+  padding-top: 0;
+}
+.sb-board .sb-conversation .sb-list .sb-right.media-item .sb-message-attachments a, .sb-board .sb-conversation .sb-list .sb-right.attachment .sb-message-attachments a {
+  color: #475569 !important;
 }
 .sb-board .sb-conversation .sb-list > div {
   max-width: calc(100% - 275px);
@@ -6792,7 +6811,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 2px 10px;
 }
 .sb-board .sb-conversation .sb-list > div .sb-time {
   position: unset;
@@ -6857,22 +6876,28 @@ textarea {
 .sb-board .sb-conversation .sb-list div.sb-right .sb-time {
   color: #fff;
 }
-.sb-board .sb-conversation .sb-list div.sb-right.media-item {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item, .sb-board .sb-conversation .sb-list div.sb-right.attachment {
   background: #fff !important;
   border: 0.93px solid #E2E8F0;
-  padding: 4px;
+  padding: 4px 12px;
 }
-.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time {
   padding: 0 10px 5px;
 }
-.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-cnt {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-cnt, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-cnt {
   max-width: 260px;
 }
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-message,
-.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time {
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-message,
+.sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time {
   color: #1E293B;
   font-weight: 500;
   margin: 0;
+}
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-message .sb-agent-name,
+.sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time .sb-agent-name, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-message .sb-agent-name,
+.sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time .sb-agent-name {
+  width: fit-content;
 }
 .sb-board .sb-conversation .sb-list .sb-highlight:after {
   content: "";
@@ -7433,10 +7458,37 @@ textarea {
   background: none;
 }
 
+#add-conversation-to-ticket {
+  padding: 60px 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#add-conversation-to-ticket.sb-active {
+  display: flex;
+}
+#add-conversation-to-ticket p {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+  margin: 0 0 20px 0;
+}
+#add-conversation-to-ticket .sb-close {
+  background: none;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #000;
+}
+
 .tickts-scroll-area .row.dt-row .col-sm-12 {
   max-height: calc(100vh - 290px);
   overflow: hidden;
   overflow-y: scroll;
+}
+.tickts-scroll-area .row.dt-row .col-sm-12::-webkit-scrollbar {
+  width: 0;
 }
 
 #customerTable thead tr th.sb-active {
@@ -7790,6 +7842,14 @@ body .daterangepicker td.active:hover {
   margin: 0;
 }
 
+.users-tab {
+  overflow-y: scroll;
+  max-height: 64vh;
+}
+.users-tab::-webkit-scrollbar {
+  width: 0;
+}
+
 .sb-area-dashboard header,
 .sb-area-conversations header,
 .sb-area-tickets header,
@@ -8066,6 +8126,10 @@ body .daterangepicker td.active:hover {
   opacity: 1;
   visibility: visible;
   transition-delay: 0.2s;
+}
+
+.sb-area-ticket-detail .tc_bg {
+  max-height: calc(100vh - 117px) !important;
 }
 
 span.badge {
@@ -8649,6 +8713,18 @@ ul.pagination li.active a.page-link {
 .sb-area-ticket-detail .tc_bg .tc_back .divider {
   border-top: 1px solid #e0e0e0;
   margin: 16px 0;
+}
+
+#ticket-selector .sb-input {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+#ticket-selector .sb-input .sb-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sb-area-conversations > .sb-btn-collapse {
@@ -9995,6 +10071,7 @@ a.sb-btn-white.sb-loading:hover:before,
 ul.status-list.dropdown-menu {
   max-height: 415px;
   overflow-y: scroll;
+  position: fixed;
 }
 ul.status-list.dropdown-menu::-webkit-scrollbar {
   width: 0px;
@@ -13362,8 +13439,9 @@ li.menu_head:hover {
 }
 .settings-header .des {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 15px;
   color: #475367;
+  line-height: 1.5;
 }
 .settings-header div {
   height: fit-content;
@@ -13379,6 +13457,11 @@ li.menu_head:hover {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  overflow-y: scroll;
+  max-height: 64vh;
+}
+.settings-tab::-webkit-scrollbar {
+  width: 0;
 }
 .settings-tab .settings-head p {
   display: flex;
@@ -13398,6 +13481,7 @@ li.menu_head:hover {
 .settings-tab .settings-head p:nth-child(2) {
   font-size: 14px;
   color: #717182;
+  line-height: 1.5;
 }
 .settings-tab .sb-repeater .repeater-item input {
   width: fit-content;

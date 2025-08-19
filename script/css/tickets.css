@@ -4484,7 +4484,7 @@ div ul.sb-menu .li:hover,
   font-weight: 500;
   font-size: 11px;
   line-height: 22px;
-  top: 0;
+  top: 7px;
   z-index: 2;
   animation: sb-fade-animation 0.3s;
 }
@@ -5412,6 +5412,12 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-tickets .sb-panel-main > .sb-top .sb-label-date-top {
   top: 54px;
 }
+.sb-tickets .sb-panel-main .ticket-login .tickets-form textarea {
+  overflow-y: scroll;
+}
+.sb-tickets .sb-panel-main .ticket-login .tickets-form textarea::-webkit-scrollbar {
+  width: 0;
+}
 .sb-tickets .sb-panel {
   padding: 20px;
   height: calc(100% - 60px);
@@ -5516,6 +5522,9 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 .sb-tickets.sb-panel-form .sb-panel.sb-scroll-area.ticket-login .sb-top {
   display: none !important;
+}
+.sb-tickets.sb-panel-form .ticket-login .tickets-form textarea {
+  overflow-y: scroll;
 }
 .sb-tickets.sb-panel-form .ticket-login .sb-info:nth-child(4) {
   display: none;
