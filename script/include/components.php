@@ -7324,8 +7324,8 @@ function sb_component_admin()
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Articles Settings</p>
-                                            <p class="des mb-0">Configure articles settings.</p>
+                                            <p class="head mb-4">Articles</p>
+                                            <p class="des mb-0">The Articles settings allow the user to configure the visibility of the articles on the chat dashboard and adjust its properties.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7696,7 +7696,7 @@ function sb_apps_area($apps, $cloud_active_apps)
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
                             <p class="head mb-4">Tickets Settings</p>
-                            <p class="des mb-0">Configure tickets settings.</p>
+                            <p class="des mb-0">The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets.</p>
                         </div>
                         
                                         <div class="d-flex align-items-center">
