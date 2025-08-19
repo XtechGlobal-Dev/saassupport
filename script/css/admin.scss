@@ -3081,6 +3081,9 @@ textarea {
                 .sb-profile {
                     align-items: flex-start;
                     padding-left: 58px;
+                    svg {
+                        min-width: 20px;
+                    }
 
                     img {
                         width: 45px;
@@ -11241,8 +11244,9 @@ li.menu_head:hover {
 
         .des {
             font-weight: 300;
-            font-size: 16px;
+            font-size: 15px;
             color: #475367;
+            line-height: 1.5;
         }
 
         div {
@@ -11289,6 +11293,7 @@ li.menu_head:hover {
                     &:nth-child(2) {
                         font-size: 14px;
                         color: #717182;
+                        line-height: 1.5;
                     }
                 }
             }
