@@ -892,13 +892,15 @@ function search_get_tickets($input = null,$type = null)
     $where = '';
     if($input)
     {
-        $where = 'Where id = "'.$input.'"  OR subject like "%'.$input.'%"';
+        $where .= 'Where (id = "'.$input.'"  OR subject like "%'.$input.'%")';
     }
     if ($type != 'all') {
-        $where = ' AND status_id IN ("'.$type.'")';
+        $where .= ' AND status_id IN ("'.$type.'")';
     }
 
-   $query = 'SELECT id, subject, status_id FROM sb_tickets '.$where.'  ORDER BY id DESC LIMIT 20';
+    $where .= " AND conversation_id IS NULL";
+
+    $query = 'SELECT id, subject, status_id FROM sb_tickets '.$where.'  ORDER BY id DESC LIMIT 20';
     $tickets = sb_db_get($query, false);
     return $tickets;
 }
