@@ -4800,6 +4800,8 @@ div ul.sb-menu .li:hover,
 .sb-tickets .sb-panel-left .sb-top .sb-btn {
   padding-block: 3px !important;
   font-size: 12px;
+  white-space: normal;
+  height: fit-content;
 }
 .sb-tickets .sb-user-conversations > li.sb-active {
   background: #EEF2FF;
@@ -5500,6 +5502,7 @@ ul.sb-user-conversations.sb-scroll-area {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: #edf2f9;
 }
 .sb-tickets.sb-panel-form .sb-panel-main .sb-top {
   width: 100%;
@@ -5551,12 +5554,22 @@ ul.sb-user-conversations.sb-scroll-area {
   margin-left: auto;
   margin-right: auto;
 }
+.tickets-list-area .sb-panel-main .ticket-login {
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.2);
+}
 .tickets-list-area .tickets-list .sb-top .sb-search-btn {
   display: none;
 }
 
 .sb-main.sb-tickets.sb-panel-active .sb-top {
   display: flex !important;
+  background: #ffffff;
+  padding-left: 20px;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.2);
+  border: 0;
 }
 
 .sb-main.sb-tickets.sb-no-conversations.sb-panel-active .tickets-list-area {
