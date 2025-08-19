@@ -1870,6 +1870,36 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             </a>
         </div>
     </div>
+
+    <div id="add-conversation-to-ticket" class="sb-lightbox" data-type="convert-ticket">
+        <div id="ticket-action-selector" class="popup-wrapper">
+            <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
+            <div>
+                <a class="sb-confirm sb-btn">
+                    Link to new ticket            
+                </a>
+                <a id="link-to-existing-ticket" class="sb-btn">
+                    Link to existing ticket                   
+                </a>
+                <a class="sb-close sb-btn">
+                    <i class="sb-icon-close"></i>            
+                </a>
+            </div>
+        </div>
+        <div id="ticket-selector" class="popup-wrapper" style="display:none">
+            <p><?php sb_e("Add Conversation to New or Existing Ticket"); ?></p>
+            <div>
+                <div data-type="select" class="sb-input">
+                    <select id="selected_ticket_id" style="width:100%;"></select>
+                    <input type="hidden" id="selected_conversation_id">
+                    <button id="link-ticket" class="sb-btn">Submit</button>
+                </div>
+                <a class="sb-close sb-btn">
+                    <i class="sb-icon-close"></i>             
+                </a>
+            </div>
+        </div>
+    </div>
     <?php
 } ?>
 <?php function sb_updates_box()
@@ -3633,7 +3663,7 @@ function sb_component_admin()
                                         </li> -->
                                         <li id="convert-to-ticket-list" class="sb-convert-to-ticket-list">
                                             <a id="convert-to-ticket" data-value="convert-to-ticket" class="sb-btn sb-icon"
-                                                data-sb-tooltip="Convert to a ticket">
+                                                data-sb-tooltip="Link to a ticket">
                                                 <svg enable-background="new 0 0 50 50" height="50" class="d-xl-none"
                                                     viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
                                                     <g id="Layer_29" />
@@ -3669,7 +3699,7 @@ function sb_component_admin()
                                                     <g id="Layer_3" />
                                                     <g id="Layer_2" />
                                                 </svg>
-                                                <span class="d-none d-xl-block">Convert to ticket</span>
+                                                <span class="d-none d-xl-block">Link to ticket</span>
                                             </a>
                                         </li>
                                         <li id="view-profile-list" class="">
@@ -4794,7 +4824,7 @@ function sb_component_admin()
                                                 <div class="ps-md-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
-                                                        <span class="conversation-id d-none">Conversation ID :
+                                                        <span class="conversation-id d-none">Linked Conversation ID :
                                                             <span></span></span>
                                                         <div class="ticket-fields">
                                                             <!-- <div class="mb-3 without-contact">
@@ -5725,8 +5755,8 @@ function sb_component_admin()
                                     <!-- chat settings -->
                                     <div class="sb-top-bar settings-header">
                                         <div>
-                                            <p class="head">Chat</p>
-                                            <p class="des mb-0">Manage your chat widget availability and appearance</p>
+                                            <p class="head">Chat Settings</p>
+                                            <p class="des mb-0">The Chat settings contain modifiers for the chat widget that can be adjusted according to user preferences. Here, you may update the chat Availability, Features, and Management settings.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -5846,8 +5876,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Chat Availability
                                             </p>
-                                            <p class="des mb-0">Control when your chat widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">Chat Availability allows the admin to adjust the visibility of the chat widget in accordance to the workplace’s office hours and agent availability. If these modifiers are turned on, the chat will be disabled and hidden if it is outside work hours or if there are no agents online.</p>
                                         </div>
 
                                         <?php sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
@@ -5875,11 +5904,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Appearance Availability
+                                                Appearance & Features
                                             </p>
-                                            <p class="des mb-0">Control when your appearance widget is visible and available
-                                                to
-                                                visitors</p>
+                                            <p class="des mb-0">Appearance Availability allows users to adjust what initializes within the chat when visitors interact with it and adjust what visitors may have access to. This includes displaying the chat dashboard, restricting access to what visitors may send, language translation settings, and whether or not to show active agents.</p>
                                         </div>
 
                                         <?php sb_populate_settings("chat", $sb_settings, true, 'chat-appearance-and-features'); ?>
@@ -5915,11 +5942,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Management Availability
+                                                Management Settings
                                             </p>
-                                            <p class="des mb-0">Control when your management widget is visible and available
-                                                to
-                                                visitors</p>
+                                            <p class="des mb-0">Management controls access to the management widget’s availability to visitors and their ability to archive conversations with agents.</p>
                                         </div>
 
                                         <?php sb_populate_settings("chat", $sb_settings, true, 'chat-management'); ?>
@@ -6056,8 +6081,8 @@ function sb_component_admin()
 
                                     <div class="sb-top-bar settings-header">
                                         <div>
-                                            <p class="head">Admin</p>
-                                            <p class="des mb-0">Manage your admin widget availability and appearance</p>
+                                            <p class="head">Admin Settings</p>
+                                            <p class="des mb-0">The Admin Settings provides access to customization options regarding modification or restrictions an admin may use for the platform. There are various different settings that can be altered to meet the admin’s needs, including creation of departments, adjusting themes, setting restrictions, and more.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -6309,10 +6334,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Panel Availability
+                                                Panel Setting
                                             </p>
-                                            <p class="des mb-0">Control when your panel widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">In Panel Setting you can adjust what information and features may be available for display in the conversation panel for the agent. This includes Filters, Tags, Notes, Attachment Lists, and Profile Pictures. Further customization may also include admin privy details such as Locations, Languages, or the visitor’s Site Origin.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'panel-setting'); ?>
                                     </div>
@@ -6338,10 +6362,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Language Availability
+                                                Language
                                             </p>
-                                            <p class="des mb-0">Control when your language widget is visible and available
-                                                to visitors</p>
+                                            <p class="des mb-0">The Language Settings allows the admin to turn the automatic language in conversations translation on or off.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'language'); ?>
                                     </div>
@@ -6367,10 +6390,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Management Availability
+                                                Chat Management
                                             </p>
-                                            <p class="des mb-0">Control when your chat management widget is visible and
-                                                available to visitors</p>
+                                            <p class="des mb-0">The Chat Management Settings provides settings that allow one to properly sort through chats by date and adjust whether or not they wish to automatically archive conversations after 24 hours.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'admin-chat-management'); ?>
                                     </div>
@@ -6396,10 +6418,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Permission Availability
+                                                Permission Settings
                                             </p>
-                                            <p class="des mb-0">Control when your permission widget is visible and available
-                                                to visitors</p>
+                                            <p class="des mb-0">The Permission Settings controls permissions and restrictions regarding how much access Agents and Supervisors may be granted authority to with their privileges and whether or not they are privy to certain information or admin control to customer settings.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'permission-setting'); ?>
                                     </div>
@@ -6425,10 +6446,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Settings Customization Availability
+                                                Settings Customization
                                             </p>
-                                            <p class="des mb-0">Control when your settings customization widget is visible
-                                                and available to visitors</p>
+                                            <p class="des mb-0">Settings Customization provides access to creation of multiple Conversation Tags as well as to adjust Tag and Notes availability. Chat Transcript settings and its download format can also be adjusted here.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'settings-customization'); ?>
                                     </div>
@@ -6454,10 +6474,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Customer Availability
+                                                Customer
                                             </p>
-                                            <p class="des mb-0">Control when your customer widget is visible and available
-                                                to visitors</p>
+                                            <p class="des mb-0">The Customer Settings allows for the creation of extra columns to customer information depending on what is needed.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'customer'); ?>
                                     </div>
@@ -6483,10 +6502,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Auto Saved Message Inbox Availability
+                                                Auto Saved Message Inbox
                                             </p>
-                                            <p class="des mb-0">Control when your auto saved message inbox widget is visible
-                                                and available to visitors</p>
+                                            <p class="des mb-0">The Auto Saved Message Inbox allows users to create automated replies and store them for instant use. Automated responses will be available for use in the agent’s chatbox and can be sorted through using the #.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'auto-saved-message-inbox'); ?>
                                     </div>
@@ -6512,10 +6530,12 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Customization & Themes Availability
+                                                Customization & Themes
                                             </p>
-                                            <p class="des mb-0">Control when your customization & Themes widget is visible
-                                                and available to visitors</p>
+                                            <p class="des mb-0">Customization and Themes allows customization of the chatbox appearance.
+                                                This can be done with either a .js file, CSS, or by adjusting the color themes. 
+                                                Adjustments to the admin logo, title, icon, and login message can be adjusted here as well.
+                                            </p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'customization-and-themes'); ?>
                                     </div>
@@ -6541,10 +6561,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Switch Accounts Availability
+                                                Switch Accounts
                                             </p>
-                                            <p class="des mb-0">Control when your switch accounts widget is visible and
-                                                available to visitors</p>
+                                            <p class="des mb-0">The Switch Accounts settings allows the admin to adjust settings for switching accounts.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'switch-accounts'); ?>
                                     </div>
@@ -6570,10 +6589,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Department Availability
+                                                Department
                                             </p>
-                                            <p class="des mb-0">Control when your Department widget is visible and available
-                                                to visitors</p>
+                                            <p class="des mb-0">Department settings allow the creation of Departments for specific areas that agents can be assigned and sorted into for easier appointment of tickets depending on what is needed.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'department'); ?>
                                     </div>
@@ -6583,7 +6601,7 @@ function sb_component_admin()
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Notification Settings</p>
-                                            <p class="des mb-0">Configure your notification settings.</p>
+                                            <p class="des mb-0">The Notification Settings provides modifiers that allow customization of alerts agents or users may receive with regards to emails, messages, or user availability. Feature settings such as tab notifications and push notifications can also be found here.</p>
                                         </div>
 
                                         <div class="d-flex align-items-center">
@@ -6825,8 +6843,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Panel Setting
                                             </p>
-                                            <p class="des mb-0">Control when your message widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">Panel Settings allows you to activate or deactivate sound notifications for messages. Here, you are also allowed to change the notification sounds to your liking.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-panel-setting'); ?>
@@ -6856,8 +6873,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Availability
                                             </p>
-                                            <p class="des mb-0">Control when your email widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">The availability settings allows control over notifications received regarding any user going online, as well as the option to set your status offline when you are idle.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-availability'); ?>
@@ -6895,8 +6911,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Chat Management
                                             </p>
-                                            <p class="des mb-0">Control when your form widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">Chat management provides push notification settings for both Desktop and Texts when receiving messages.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-chat-management'); ?>
@@ -6923,10 +6938,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Appearance and Features Settings
+                                                Appearance and Features 
                                             </p>
-                                            <p class="des mb-0">Control when your message widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">Appearance and Features Settings allows you to set flash notifications for received messages, as well as set automated Email signatures and headers for direct emails.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-appearance-features'); ?>
@@ -6954,10 +6968,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Availability
+                                                Management
                                             </p>
-                                            <p class="des mb-0">Control when your email widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">Management settings allow for automated emails to be set up as notifications for users and agents when either receives a message. They can be adjusted accordingly depending on what is needed.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-management'); ?>
@@ -6993,10 +7006,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Management
+                                                Email
                                             </p>
-                                            <p class="des mb-0">Control when your form widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">The Email Settings allow you to provide email details to be prepared for automated responses.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-email'); ?>
@@ -7032,10 +7044,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Management
+                                                Setting Customizations
                                             </p>
-                                            <p class="des mb-0">Control when your form widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">The settings customization allows you to set up a mobile account for automated text responses.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-settings-customization'); ?>
@@ -7046,7 +7057,7 @@ function sb_component_admin()
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
                                             <p class="head mb-4">Users Settings</p>
-                                            <p class="des mb-0">Configure your users settings.</p>
+                                            <p class="des mb-0">User Settings allow you to configure user related settings such as requiring registration for the chat and adjusting the required fields. Access to registration can also be restricted from here depending on office hours or active agents.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7092,8 +7103,8 @@ function sb_component_admin()
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Messages Settings</p>
-                                            <p class="des mb-0">Configure your message settings.</p>
+                                            <p class="head mb-4">Message & Forms</p>
+                                            <p class="des mb-0">The Message Settings enables customization of pop up messages depending on visitor activity, such as first entry, closing, agent ratings, and prompts to let the user know that all agents are offline. Email templates and Registration form details can also be edited here.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7214,8 +7225,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Message
                                             </p>
-                                            <p class="des mb-0">Control when your message widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">The Message Settings allow you to set up messages for visitors who may be exploring your website for the first time, if they are idle, or if a situation arises where no agent can respond to them. Rating settings can be adjusted here as well.</p>
                                         </div>
 
                                         <?php sb_populate_settings("messages", $sb_settings, true, 'messages-text'); ?>
@@ -7245,8 +7255,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Email
                                             </p>
-                                            <p class="des mb-0">Control when your email widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">The Email provides a form you can fill up to send an automated follow up to registered visitors who use the Chat.</p>
                                         </div>
 
                                         <?php sb_populate_settings("messages", $sb_settings, true, 'messages-email'); ?>
@@ -7284,8 +7293,7 @@ function sb_component_admin()
                                                 </svg>
                                                 Form
                                             </p>
-                                            <p class="des mb-0">Control when your form widget is visible and available to
-                                                visitors</p>
+                                            <p class="des mb-0">The Form settings provides a customizable set of messages for the registration and login forms that is sent to the user when it is properly filled up.</p>
                                         </div>
 
                                         <?php sb_populate_settings("messages", $sb_settings, true, 'messages-form'); ?>
@@ -7316,8 +7324,8 @@ function sb_component_admin()
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Articles Settings</p>
-                                            <p class="des mb-0">Configure articles settings.</p>
+                                            <p class="head mb-4">Articles</p>
+                                            <p class="des mb-0">The Articles settings allow the user to configure the visibility of the articles on the chat dashboard and adjust its properties.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7406,8 +7414,7 @@ function sb_component_admin()
                                                     </svg>
                                                     Display
                                                 </p>
-                                                <p class="des mb-0">Control when your display widget is visible and available to
-                                                    visitors</p>
+                                                <p class="des mb-0">The Display allows you to control when the article panels and categories can be displayed on the dashboard.</p>
                                             </div>
 
                                             <?php sb_populate_settings("articles", $sb_settings, true, 'articles-display'); ?>
@@ -7437,8 +7444,7 @@ function sb_component_admin()
                                                     </svg>
                                                     Setting
                                                 </p>
-                                                <p class="des mb-0">Control when your email widget is visible and available to
-                                                    visitors</p>
+                                                <p class="des mb-0">The Articles Settings allow you to adjust certain features on the articles, such as the panel title or the Articles Landing Page URL.</p>
                                             </div>
 
                                             <?php sb_populate_settings("articles", $sb_settings, true, 'articles-settings'); ?>
@@ -7690,7 +7696,7 @@ function sb_apps_area($apps, $cloud_active_apps)
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
                             <p class="head mb-4">Tickets Settings</p>
-                            <p class="des mb-0">Configure tickets settings.</p>
+                            <p class="des mb-0">The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets.</p>
                         </div>
                         
                                         <div class="d-flex align-items-center">
