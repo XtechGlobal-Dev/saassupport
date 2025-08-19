@@ -6572,6 +6572,7 @@ textarea {
   color: #1E293B;
   font-size: 16px;
   font-weight: 600;
+  min-width: 75px;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time {
   margin-left: auto;
