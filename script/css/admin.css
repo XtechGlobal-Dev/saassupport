@@ -6549,6 +6549,9 @@ textarea {
   align-items: flex-start;
   padding-left: 58px;
 }
+.sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile svg {
+  min-width: 20px;
+}
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile img {
   width: 45px;
   height: 45px;
@@ -13435,8 +13438,9 @@ li.menu_head:hover {
 }
 .settings-header .des {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 15px;
   color: #475367;
+  line-height: 1.5;
 }
 .settings-header div {
   height: fit-content;
@@ -13476,6 +13480,7 @@ li.menu_head:hover {
 .settings-tab .settings-head p:nth-child(2) {
   font-size: 14px;
   color: #717182;
+  line-height: 1.5;
 }
 .settings-tab .sb-repeater .repeater-item input {
   width: fit-content;
