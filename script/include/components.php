@@ -1891,6 +1891,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             <div>
                 <div data-type="select" class="sb-input">
                     <select id="selected_ticket_id" style="width:100%;"></select>
+                    <input type="hidden" id="selected_conversation_id">
                     <button id="link-ticket" class="sb-btn">Submit</button>
                 </div>
                 <a class="sb-close sb-btn">
@@ -3698,7 +3699,7 @@ function sb_component_admin()
                                                     <g id="Layer_3" />
                                                     <g id="Layer_2" />
                                                 </svg>
-                                                <span class="d-none d-xl-block">Convert to ticket</span>
+                                                <span class="d-none d-xl-block">Link to ticket</span>
                                             </a>
                                         </li>
                                         <li id="view-profile-list" class="">
