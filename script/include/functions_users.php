@@ -861,9 +861,22 @@ function sb_search_get_users($input = null,$type = null) {
     return $users;
 }
 
-function link_conversation_to_ticket($ticket_id = null) 
+function link_conversation_to_ticket($ticket_id = null,$conversation_id = null) 
 {
-    
+    if($ticket_id && $conversation_id)
+    {
+        $ticket_id = sb_db_escape($ticket_id,true);
+        $conversation_id = sb_db_escape($conversation_id,true);
+        $query = "UPDATE sb_tickets SET conversation_id = '$conversation_id' WHERE id = $ticket_id";
+        $query2 = "UPDATE sb_conversations SET converted_to_ticket = '1' WHERE id = $conversation_id";
+        sb_db_query($query);
+        sb_db_query($query2);
+        return ['success'=>true,'msg'=>'Conversation linked to ticket sucessfully'];
+    }
+    else
+    {
+         return ['success'=>false,'msg'=>'Invalid Ticket or Conversation ID'];
+    }
 }
 
 function search_get_tickets($input = null,$type = null)
