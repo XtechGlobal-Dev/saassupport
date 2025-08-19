@@ -368,6 +368,17 @@ function sb_otp($email = false, $otp = false) {
  */
 
 function sb_add_user($settings = [], $settings_extra = [], $hash_password = true, $skip_otp = true) {
+    require_once(SB_CLOUD_PATH . '/account/functions.php');
+    $membership = membership_get_active(false);
+    $membership["count_agents"].'|'.$membership["quota_agents"];
+    if(isset($settings['user_type']) && ($settings['user_type'] == 'agent' || $settings['user_type'] == 'admin'))
+    {
+        if($membership["count_agents"] >= $membership["quota_agents"])
+        {
+            return new SBValidationError('agent-limit-reached');
+        }
+    }
+
     $keys = ['profile_image', 'first_name', 'last_name', 'email', 'user_type', 'password', 'department'];
     for ($i = 0; $i < count($keys); $i++) {
         $settings[$keys[$i]] = sb_isset($settings, $keys[$i], '');
@@ -892,13 +903,15 @@ function search_get_tickets($input = null,$type = null)
     $where = '';
     if($input)
     {
-        $where = 'Where id = "'.$input.'"  OR subject like "%'.$input.'%"';
+        $where .= 'Where (id = "'.$input.'"  OR subject like "%'.$input.'%")';
     }
     if ($type != 'all') {
-        $where = ' AND status_id IN ("'.$type.'")';
+        $where .= ' AND status_id IN ("'.$type.'")';
     }
 
-   $query = 'SELECT id, subject, status_id FROM sb_tickets '.$where.'  ORDER BY id DESC LIMIT 20';
+    $where .= " AND conversation_id IS NULL";
+
+    $query = 'SELECT id, subject, status_id FROM sb_tickets '.$where.'  ORDER BY id DESC LIMIT 20';
     $tickets = sb_db_get($query, false);
     return $tickets;
 }
