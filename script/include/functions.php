@@ -1711,7 +1711,7 @@ function sb_clean_data() {
     return true;
 }
 
-function sb_component_editor($admin = false) {
+function sb_component_editor($admin = true) {
     $enabled = [$admin || !sb_get_setting('disable-uploads'), !sb_get_setting('disable-voice-messages')];
     ?>
     <div class="sb-editor<?php echo !$enabled[0] || !$enabled[1] ? ' sb-disabled-' . (!$enabled[0] && !$enabled[1] ? '2' : '1') : '' ?>">
