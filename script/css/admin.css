@@ -8643,6 +8643,7 @@ ul.pagination li.active a.page-link {
 .sb-area-ticket-detail .tc_bg .tc_back .sub_title {
   font-weight: 600;
   font-size: 20px;
+  margin-top: 0 !important;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .label {
   font-weight: 500;
@@ -9341,6 +9342,13 @@ span.initials.avatar_name {
 .sb-select-checkbox > div > label.custom-switch,
 #open-ai-prompt > label.custom-switch {
   height: 23px;
+}
+
+#view-ticket-attachments {
+  background: #ededed;
+  padding: 5px 5px !important;
+  border-radius: 4px;
+  margin-bottom: 15px;
 }
 
 #open-ai-prompt {

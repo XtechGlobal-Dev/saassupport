@@ -5550,6 +5550,7 @@ ul.pagination {
             .sub_title {
                 font-weight: 600;
                 font-size: 20px;
+                margin-top: 0 !important;
             }
 
             .label {
@@ -6405,6 +6406,13 @@ span.initials.avatar_name {
             height: 23px;
         }
     }
+}
+
+#view-ticket-attachments {
+    background: #ededed;
+    padding: 5px 5px !important;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 #open-ai-prompt {
