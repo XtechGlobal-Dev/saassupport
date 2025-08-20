@@ -914,14 +914,16 @@
                             }
                             setUserProfile();
                             if (is_edit_profile) {
+                                
                                 SBTickets.showPanel();
                             } else {
                                 SBF.event('SBRegistrationForm', { user: settings });
                                 SBF.event('SBNewEmailAddress', { name: activeUser().name, email: activeUser().get('email') });
-                                SBTickets.showPanel('new-ticket');
+                                //SBTickets.showPanel('new-ticket');
+                                SBTickets.showPanel();
+                                $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                             }
                             if (SBF.setting('wp_registration') && 'email' in settings && 'password' in settings) {
-                                console.log(settings);
                                 SBApps.wordpress.ajax('wp_registration', { user_id: response[0].id, first_name: response[0].first_name, last_name: response[0].last_name, password: settings.password[0], email: settings.email[0] });
                             } else if (SBF.setting('wp_users_system') == 'wp') {
                                 SBApps.wordpress.ajax('wp_login', { user: settings.email[0], password: settings.password[0] });

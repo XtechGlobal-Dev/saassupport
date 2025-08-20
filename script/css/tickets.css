@@ -5529,9 +5529,6 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-tickets.sb-panel-form .ticket-login .tickets-form textarea {
   overflow-y: scroll;
 }
-.sb-tickets.sb-panel-form .ticket-login .sb-info:nth-child(4) {
-  display: none;
-}
 
 .tickets-list-area {
   max-height: calc(100vh - 87px);
