@@ -9455,7 +9455,6 @@
 }(jQuery));
 
 $('.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li').each(function () {
-        console.log("PPPPPPPPP")
         const hasClass = $(this).attr('class')?.trim() !== "";
         const hasDataId = $(this).data('id')?.toString().trim() !== "";
 
