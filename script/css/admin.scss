@@ -6400,6 +6400,10 @@ span.initials.avatar_name {
 
     >label {
         margin: 0 15px 0 0;
+        height: fit-content;
+        &.custom-switch {
+            height: 23px;
+        }
     }
 }
 
@@ -13076,6 +13080,22 @@ main {
     // }
 }
 
+@media (1024px < width < 1600px) {
+    .sb-admin {
+        main {
+            .recent {
+                .recent-messages {
+                    li {
+                        .col-8 {
+                            width: 9vw!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     .settings-header {
         flex-direction: column;
@@ -13508,10 +13528,10 @@ main {
 
             .recent {
                 .recent-messages {
-                    overflow-x: scroll;
-
-                    &::-webkit-scrollbar {
-                        height: 0;
+                    li {
+                        .col-8 {
+                            width: fit-content !important;
+                        }
                     }
 
                 }
