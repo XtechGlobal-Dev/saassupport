@@ -491,6 +491,8 @@
             .sb-btn {
                 padding-block: 3px !important;
                 font-size: 12px;
+                white-space: normal;
+                height: fit-content;
             }
 
             // .sb-search-btn {
@@ -1279,6 +1281,7 @@ ul.sb-user-conversations.sb-scroll-area {
             .tickets-form {
                 textarea {
                     overflow-y: scroll;
+
                     &::-webkit-scrollbar {
                         width: 0;
                     }
@@ -1415,6 +1418,7 @@ ul.sb-user-conversations.sb-scroll-area {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background: #edf2f9;
 
             .sb-top {
                 width: 100%;
@@ -1452,12 +1456,6 @@ ul.sb-user-conversations.sb-scroll-area {
                     overflow-y: scroll;
                 }
             }
-
-            .sb-info {
-                &:nth-child(4) {
-                    display: none;
-                }
-            }
         }
     }
 }
@@ -1490,6 +1488,12 @@ ul.sb-user-conversations.sb-scroll-area {
                 margin-right: auto;
             }
         }
+
+        .ticket-login {
+            background: #fff;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, .2);
+        }
     }
 
     .tickets-list {
@@ -1504,6 +1508,11 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-main.sb-tickets.sb-panel-active {
     .sb-top {
         display: flex !important;
+        background: #ffffff;
+        padding-left: 20px;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, .2);
+        border: 0;
     }
 }
 
