@@ -105,6 +105,7 @@
                 case 'edit-profile':
                 case 'login':
                 case 'registration':
+                    const panel2 = $('.sb-panel.ticket-login');
                     $('.user_header').addClass('d-none');
                     $('.user_header .header_left h2').removeClass('sb-active');
                     $('.user_header .header_left h2:first').addClass('sb-active');
@@ -113,27 +114,28 @@
                     this.showSidePanels(false);
                     main.addClass('sb-panel-form');
                     if (name in cache_account) {
-                        panel.html(cache_account[name]);
-                        setTitle(sb_(panel.find('.sb-top').html()));
+                        panel2.html(cache_account[name]);
+                        setTitle(sb_(panel2.find('.sb-top').html()));
                     } else {
                         SBF.ajax({
                             function: 'get-rich-message',
                             name: (is_edit_profile ? 'registration' : name) + '-tickets'
                         }, (response) => {
-                            panel.html(response);
-                            let title = panel.find('.sb-top').html();
+                            //panel.html(response);
+                            panel2.html(response);  // Append form only in .sb-panel.ticket-login not in all .sb-panel
+                            let title = panel2.find('.sb-top').html();
                             if (is_edit_profile) {
-                                panel.find('.sb-top').html(sb_('Edit profile'));
+                                panel2.find('.sb-top').html(sb_('Edit profile'));
                             }
                             setTitle(sb_(title));
                             setTimeout(function () {
                                 setTitle(sb_(title));
                             }, 300);
-                            panel.find('.sb-link-area').insertAfter('.sb-buttons');
-                            panel.find('.sb-info').insertBefore('.sb-buttons');
-                            cache_account[name] = panel.html();
+                            panel2.find('.sb-link-area').insertAfter('.sb-buttons');
+                            panel2.find('.sb-info').insertBefore('.sb-buttons');
+                            cache_account[name] = panel2.html();
                         });
-                        panel.html('<div class="sb-loading"></div>');
+                        panel2.html('<div class="sb-loading"></div>');
                     }
                     break;
                 case 'new-ticket':

@@ -6343,7 +6343,8 @@ textarea {
   position: fixed;
 }
 
-.choices__list--dropdown, .choices__list[aria-expanded] {
+.choices__list--dropdown,
+.choices__list[aria-expanded] {
   z-index: 6 !important;
 }
 
@@ -7844,7 +7845,7 @@ body .daterangepicker td.active:hover {
 
 .users-tab {
   overflow-y: scroll;
-  max-height: 64vh;
+  max-height: 75vh;
 }
 .users-tab::-webkit-scrollbar {
   width: 0;
@@ -8175,6 +8176,7 @@ ul.pagination li a.page-link {
 }
 ul.pagination li.active a.page-link {
   color: #fff;
+  border-color: #dee2e6;
 }
 
 .sb-main main .sb-board > .sb-admin-list .sb-scroll-area li:hover {
@@ -8214,6 +8216,9 @@ ul.pagination li.active a.page-link {
   overflow-y: scroll;
   height: calc(100vh - 123px);
   background: #edf2f9;
+}
+.sb-area-dashboard main .new_container::-webkit-scrollbar {
+  width: 0;
 }
 .sb-area-dashboard main .new_container .chart-placeholder {
   height: 200px;
@@ -13439,7 +13444,7 @@ li.menu_head:hover {
 }
 .settings-header .des {
   font-weight: 300;
-  font-size: 15px;
+  font-size: 14px;
   color: #475367;
   line-height: 1.5;
 }
@@ -13917,7 +13922,6 @@ div#messaging-channels {
   border-radius: 40px;
   width: fit-content;
   position: relative;
-  min-width: 600px;
   overflow: hidden;
   overflow-x: scroll;
 }
@@ -13939,7 +13943,6 @@ div#messaging-channels {
   gap: 6px;
   position: relative;
   z-index: 2;
-  width: 33%;
   margin: 0;
   min-width: fit-content;
   display: flex;
@@ -14732,6 +14735,33 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .settings-header {
     top: -24px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .settings-header {
+    flex-direction: column;
+    padding-bottom: 18px !important;
+  }
+  .settings-header p {
+    margin-bottom: 5px !important;
+  }
+  .settings-header .d-flex {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .settings-header .sb-search-dropdown {
+    min-width: 65.5%;
+    margin-right: auto;
+  }
+  .settings-header .sb-search-dropdown input {
+    min-width: fit-content;
+  }
+  .settings-header .sb-search-dropdown .sb-search-dropdown-items {
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+    left: 0;
   }
 }
 @media only screen and (max-width: 1024px) {
