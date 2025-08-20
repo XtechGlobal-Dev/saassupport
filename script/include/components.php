@@ -8113,7 +8113,7 @@ function ticket_custom_field_settings($id = "", $class = "sb-docs")
                                     <input class="form-control" type="checkbox" name="required" value="">
                             </div>
 
-                            <div id="add_to_frontend_form" data-type="checkbox" class="sb-input sb-input-checkbox">
+                            <div id="add_to_frontend_form" data-type="checkbox" class="sb-input sb-input-checkbox" style="display:none">
                                 <span>Add to frontend form?</span>
                                 <input class="form-control" type="checkbox" name="add_to_frontend_form" value="">
                             </div>
