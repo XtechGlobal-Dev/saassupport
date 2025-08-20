@@ -491,8 +491,11 @@
             .sb-btn {
                 padding-block: 3px !important;
                 font-size: 12px;
-                white-space: normal;
+                white-space: nowrap;
                 height: fit-content;
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             // .sb-search-btn {

@@ -9334,6 +9334,13 @@ span.initials.avatar_name {
 .sb-select-checkbox > div > label,
 #open-ai-prompt > label {
   margin: 0 15px 0 0;
+  height: fit-content;
+}
+.sb-type-multi-input > .input > div:not(.multi-input-textarea) > label.custom-switch,
+.sb-setting .sb-language-switcher-cnt > label.custom-switch,
+.sb-select-checkbox > div > label.custom-switch,
+#open-ai-prompt > label.custom-switch {
+  height: 23px;
 }
 
 #open-ai-prompt {
@@ -14737,6 +14744,11 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     top: -24px;
   }
 }
+@media (1024px < width < 1600px) {
+  .sb-admin main .recent .recent-messages li .col-8 {
+    width: 9vw !important;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .settings-header {
     flex-direction: column;
@@ -15008,11 +15020,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .sb-menu-wide.sb-menu-tickets.sb-menu-wide_new div {
     padding-right: 15px;
   }
-  .sb-admin main .recent .recent-messages {
-    overflow-x: scroll;
-  }
-  .sb-admin main .recent .recent-messages::-webkit-scrollbar {
-    height: 0;
+  .sb-admin main .recent .recent-messages li .col-8 {
+    width: fit-content !important;
   }
   .sb-admin .header_new .sidebar .powered-by .all-reserved {
     font-size: 12px !important;
