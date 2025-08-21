@@ -5573,7 +5573,7 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 
 .sb-main.sb-tickets.sb-no-conversations.sb-panel-active .tickets-list-area {
-  max-height: calc(100vh - 1px);
+  max-height: calc(100vh - 2px);
 }
 
 .sb-panel-form .sb-form {

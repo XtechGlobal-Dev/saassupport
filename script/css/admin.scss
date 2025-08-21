@@ -5056,6 +5056,7 @@ ul.pagination {
                         .active_users_chart,
                         .ticket_created_chart,
                         .ticket_resolved_chart,
+                        .ticket_pending_chart,
                         .avg_response_chart,
                         .total_conversations_chart,
                         .agent_chart {
@@ -5521,6 +5522,10 @@ ul.pagination {
             }
         }
     }
+}
+
+#tickets-height,#tickets-height-offset,#tickets-hide,#close-ticket,#tickets-conversations-title-user,#tickets-names-title,#tickets-names-message,#tickets-names-panel,#tickets-welcome-message,#tickets-first-ticket,#tickets-edit-profile,#tickets-left-panel,#tickets-right-panel,#tickets-arrows,#tickets-top-bar,#tickets-profile-image,#tickets-department,#tickets-agent,#tickets-agent-details,#tickets-email-notification,#tickets-email,#tickets-manual-init {
+    display: none;
 }
 
 .sb-area-ticket-detail {
