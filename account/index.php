@@ -42,8 +42,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <script id="sbinit"
         src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
     <link rel="stylesheet" href="../script/css/admin.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
-    <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>"
-        media="(max-width: 767px)" />
+    <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>" media="(max-width: 767px)" />
     <!-- Manrope font cdn link  -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
         rel="stylesheet">
