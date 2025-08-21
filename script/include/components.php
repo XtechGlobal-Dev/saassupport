@@ -5732,7 +5732,7 @@ function sb_component_admin()
                                         ?>
                                     </li> -->
                                 </ul>
-                                <a id="sb-accout" href="http://localhost/saassupport/account/?tab=membership" data-tooltip="Account">
+                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership" data-tooltip="Account">
                                     Account
                                 </a>
                             </div>
