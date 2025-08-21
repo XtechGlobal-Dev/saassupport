@@ -4800,8 +4800,11 @@ div ul.sb-menu .li:hover,
 .sb-tickets .sb-panel-left .sb-top .sb-btn {
   padding-block: 3px !important;
   font-size: 12px;
-  white-space: normal;
+  white-space: nowrap;
   height: fit-content;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sb-tickets .sb-user-conversations > li.sb-active {
   background: #EEF2FF;
@@ -5570,7 +5573,7 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 
 .sb-main.sb-tickets.sb-no-conversations.sb-panel-active .tickets-list-area {
-  max-height: calc(100vh - 1px);
+  max-height: calc(100vh - 2px);
 }
 
 .sb-panel-form .sb-form {

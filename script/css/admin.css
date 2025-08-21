@@ -8619,6 +8619,10 @@ ul.pagination li.active a.page-link {
   text-decoration: unset;
 }
 
+#tickets-height, #tickets-height-offset, #tickets-hide, #close-ticket, #tickets-conversations-title-user, #tickets-names-title, #tickets-names-message, #tickets-names-panel, #tickets-welcome-message, #tickets-first-ticket, #tickets-edit-profile, #tickets-left-panel, #tickets-right-panel, #tickets-arrows, #tickets-top-bar, #tickets-profile-image, #tickets-department, #tickets-agent, #tickets-agent-details, #tickets-email-notification, #tickets-email, #tickets-manual-init {
+  display: none;
+}
+
 .sb-area-ticket-detail {
   background-color: #edf2f9;
 }
@@ -8644,6 +8648,7 @@ ul.pagination li.active a.page-link {
 .sb-area-ticket-detail .tc_bg .tc_back .sub_title {
   font-weight: 600;
   font-size: 20px;
+  margin-top: 0 !important;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .label {
   font-weight: 500;
@@ -9335,6 +9340,20 @@ span.initials.avatar_name {
 .sb-select-checkbox > div > label,
 #open-ai-prompt > label {
   margin: 0 15px 0 0;
+  height: fit-content;
+}
+.sb-type-multi-input > .input > div:not(.multi-input-textarea) > label.custom-switch,
+.sb-setting .sb-language-switcher-cnt > label.custom-switch,
+.sb-select-checkbox > div > label.custom-switch,
+#open-ai-prompt > label.custom-switch {
+  height: 23px;
+}
+
+#view-ticket-attachments {
+  background: #ededed;
+  padding: 5px 5px !important;
+  border-radius: 4px;
+  margin-bottom: 15px;
 }
 
 #open-ai-prompt {
@@ -14738,6 +14757,11 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     top: -24px;
   }
 }
+@media (1024px < width < 1600px) {
+  .sb-admin main .recent .recent-messages li .col-8 {
+    width: 9vw !important;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .settings-header {
     flex-direction: column;
@@ -15009,11 +15033,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin main .sb-area-tickets .sb-top-bar.new-ticket-button .sb-menu-wide.sb-menu-tickets.sb-menu-wide_new div {
     padding-right: 15px;
   }
-  .sb-admin main .recent .recent-messages {
-    overflow-x: scroll;
-  }
-  .sb-admin main .recent .recent-messages::-webkit-scrollbar {
-    height: 0;
+  .sb-admin main .recent .recent-messages li .col-8 {
+    width: fit-content !important;
   }
   .sb-admin .header_new .sidebar .powered-by .all-reserved {
     font-size: 12px !important;
