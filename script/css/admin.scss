@@ -2540,6 +2540,9 @@ textarea {
                     li {
                         margin-bottom: 15px;
                         position: relative;
+                        &:last-child {
+                            display: none;
+                        }
 
                         &:hover a {
                             color: #212528;
@@ -5524,6 +5527,10 @@ ul.pagination {
     }
 }
 
+#tickets-height,#tickets-height-offset,#tickets-hide,#close-ticket,#tickets-conversations-title-user,#tickets-names-title,#tickets-names-message,#tickets-names-panel,#tickets-welcome-message,#tickets-first-ticket,#tickets-edit-profile,#tickets-left-panel,#tickets-right-panel,#tickets-arrows,#tickets-top-bar,#tickets-profile-image,#tickets-department,#tickets-agent,#tickets-agent-details,#tickets-email-notification,#tickets-email,#tickets-manual-init {
+    display: none;
+}
+
 .sb-area-ticket-detail {
     background-color: $background-gray;
 
@@ -5551,6 +5558,7 @@ ul.pagination {
             .sub_title {
                 font-weight: 600;
                 font-size: 20px;
+                margin-top: 0 !important;
             }
 
             .label {
@@ -5641,6 +5649,24 @@ ul.pagination {
             }
         }
     }
+}
+
+a#sb-accout {
+    color: #000000;
+    margin: 0 10px 0 0;
+    transition: all 0.4s;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    text-decoration: none;
+    align-items: flex-start;
+    padding: 12px 1rem !important;
+    line-height: 1.2 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 
 #ticket-selector {
@@ -6401,7 +6427,18 @@ span.initials.avatar_name {
 
     >label {
         margin: 0 15px 0 0;
+        height: fit-content;
+        &.custom-switch {
+            height: 23px;
+        }
     }
+}
+
+#view-ticket-attachments {
+    background: #ededed;
+    padding: 5px 5px !important;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 #open-ai-prompt {
@@ -13077,6 +13114,22 @@ main {
     // }
 }
 
+@media (1024px < width < 1600px) {
+    .sb-admin {
+        main {
+            .recent {
+                .recent-messages {
+                    li {
+                        .col-8 {
+                            width: 9vw!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     .settings-header {
         flex-direction: column;
@@ -13509,10 +13562,10 @@ main {
 
             .recent {
                 .recent-messages {
-                    overflow-x: scroll;
-
-                    &::-webkit-scrollbar {
-                        height: 0;
+                    li {
+                        .col-8 {
+                            width: fit-content !important;
+                        }
                     }
 
                 }

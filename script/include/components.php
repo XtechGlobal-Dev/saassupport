@@ -5732,6 +5732,9 @@ function sb_component_admin()
                                         ?>
                                     </li> -->
                                 </ul>
+                                <a id="sb-accout" href="http://localhost/saassupport/account/?tab=membership" data-tooltip="Account">
+                                    Account
+                                </a>
                             </div>
                             <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
