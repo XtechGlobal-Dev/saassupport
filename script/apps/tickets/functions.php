@@ -70,7 +70,9 @@ function sb_component_tickets()
                     <div class="sb-top p-4">
                         <div>
                             <?php if (!sb_isset($disable_fields, 'tickets-button'))
-                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+                                echo '<div class="sb-btn sb-icon sb-new-ticket"title="'
+                                    . sb_($button_name ? $button_name : 'Create New Ticket')
+                                    . '"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
                             else
                                 echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>';
                             ?>
@@ -142,62 +144,62 @@ function sb_component_tickets()
             </div>
             <div class="sb-panel-right">
                 <!-- <div class="right-side-wrapper d-none"> -->
-                    <div class="sb-top">
-                        <?php if (sb_get_setting('tickets-registration-required')) { ?>
-                            <div class="sb-profile-menu">
-                                <div
-                                    class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
-                                    <img src="" />
-                                    <span class="sb-name"></span>
-                                </div>
-                                <div>
-                                    <ul class="sb-menu">
-                                        <?php
-                                        if (!sb_isset($disable_fields, 'tickets-edit-profile')) {
-                                            echo '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>';
-                                        }
-                                        if (!sb_get_setting('tickets-registration-disable-password')) {
-                                            echo '<li data-value="logout">' . sb_('Logout') . '</li>';
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
+                <div class="sb-top">
+                    <?php if (sb_get_setting('tickets-registration-required')) { ?>
+                        <div class="sb-profile-menu">
+                            <div
+                                class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
+                                <img src="" />
+                                <span class="sb-name"></span>
                             </div>
-                            <?php
-                        } else {
-                            echo '<div class="sb-title">' . sb_('Details') . '</div>';
-                        }
-                        ?>
-                    </div>
-                    <!-- <div class="mb-2 text-muted small user-name"></div> -->
-                    <div class="mb-2 right-details">
-                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            class="me-1">
-                            <path
-                                d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
-                                stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"></path>
-                            <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>Ticket ID <span class="ticket-id"></span>
-                    </div>
+                            <div>
+                                <ul class="sb-menu">
+                                    <?php
+                                    if (!sb_isset($disable_fields, 'tickets-edit-profile')) {
+                                        echo '<li data-value="edit-profile">' . sb_('Edit profile') . '</li>';
+                                    }
+                                    if (!sb_get_setting('tickets-registration-disable-password')) {
+                                        echo '<li data-value="logout">' . sb_('Logout') . '</li>';
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php
+                    } else {
+                        echo '<div class="sb-title">' . sb_('Details') . '</div>';
+                    }
+                    ?>
+                </div>
+                <!-- <div class="mb-2 text-muted small user-name"></div> -->
+                <div class="mb-2 right-details">
+                    <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="me-1">
+                        <path
+                            d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z"
+                            stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"></path>
+                        <path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>Ticket ID <span class="ticket-id"></span>
+                </div>
 
-                    <div class="mb-2 right-details">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="me-1"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M18.9809 9.25283C18.2198 7.32031 16.6794 5.77999 14.7469 5.01897C14.5229 5.27358 14.3413 5.56647 14.2133 5.88656C16.0226 6.54172 17.4581 7.97718 18.1133 9.7864C18.4334 9.6584 18.7263 9.47685 18.9809 9.25283ZM12.2276 5.50391C12.1521 5.50131 12.0762 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 11.9237 18.4987 11.8478 18.4961 11.7721C18.8387 11.6648 19.1655 11.5216 19.472 11.347C19.4905 11.5622 19.5 11.78 19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C12.2199 4.5 12.4376 4.50946 12.6527 4.52801C12.4781 4.83451 12.3349 5.16128 12.2276 5.50391Z"
-                                fill="#222222" />
-                            <circle cx="17" cy="7" r="3" fill="#222222" />
-                        </svg>
-                        Status <span class="badge bg-secondary ticket-status"></span>
-                    </div>
+                <div class="mb-2 right-details">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="me-1"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.9809 9.25283C18.2198 7.32031 16.6794 5.77999 14.7469 5.01897C14.5229 5.27358 14.3413 5.56647 14.2133 5.88656C16.0226 6.54172 17.4581 7.97718 18.1133 9.7864C18.4334 9.6584 18.7263 9.47685 18.9809 9.25283ZM12.2276 5.50391C12.1521 5.50131 12.0762 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 11.9237 18.4987 11.8478 18.4961 11.7721C18.8387 11.6648 19.1655 11.5216 19.472 11.347C19.4905 11.5622 19.5 11.78 19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C12.2199 4.5 12.4376 4.50946 12.6527 4.52801C12.4781 4.83451 12.3349 5.16128 12.2276 5.50391Z"
+                            fill="#222222" />
+                        <circle cx="17" cy="7" r="3" fill="#222222" />
+                    </svg>
+                    Status <span class="badge bg-secondary ticket-status"></span>
+                </div>
 
-                    <div class="sb-ticket-attachments">
-                        <div class="sb-title">Attachments</div>
-                        <div class="row ticket-attachments"></div>
-                    </div>
+                <div class="sb-ticket-attachments">
+                    <div class="sb-title">Attachments</div>
+                    <div class="row ticket-attachments"></div>
+                </div>
                 <!-- </div> -->
                 <div class="sb-scroll-area">
 
@@ -236,9 +238,9 @@ function sb_component_tickets()
                         <!--div class="sb-top">
                             <div>
                                 <?php /*if (!sb_isset($disable_fields, 'tickets-button'))
-                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
-            else
-                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
+           echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
+       else
+           echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; */ ?>
                             </div>
                             <div class="sb-search-btn">
                                 <i class="sb-icon sb-icon-search"></i>
