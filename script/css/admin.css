@@ -8250,6 +8250,7 @@ ul.pagination li.active a.page-link {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
+.sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
@@ -8616,6 +8617,10 @@ ul.pagination li.active a.page-link {
 .sb-area-dashboard main .label_blue > a {
   color: #fff;
   text-decoration: unset;
+}
+
+#tickets-height, #tickets-height-offset, #tickets-hide, #close-ticket, #tickets-conversations-title-user, #tickets-names-title, #tickets-names-message, #tickets-names-panel, #tickets-welcome-message, #tickets-first-ticket, #tickets-edit-profile, #tickets-left-panel, #tickets-right-panel, #tickets-arrows, #tickets-top-bar, #tickets-profile-image, #tickets-department, #tickets-agent, #tickets-agent-details, #tickets-email-notification, #tickets-email, #tickets-manual-init {
+  display: none;
 }
 
 .sb-area-ticket-detail {

@@ -105,6 +105,7 @@
                 case 'edit-profile':
                 case 'login':
                 case 'registration':
+                    const panel2 = $('.sb-panel.ticket-login');
                     $('.user_header').addClass('d-none');
                     $('.user_header .header_left h2').removeClass('sb-active');
                     $('.user_header .header_left h2:first').addClass('sb-active');
@@ -113,27 +114,28 @@
                     this.showSidePanels(false);
                     main.addClass('sb-panel-form');
                     if (name in cache_account) {
-                        panel.html(cache_account[name]);
-                        setTitle(sb_(panel.find('.sb-top').html()));
+                        panel2.html(cache_account[name]);
+                        setTitle(sb_(panel2.find('.sb-top').html()));
                     } else {
                         SBF.ajax({
                             function: 'get-rich-message',
                             name: (is_edit_profile ? 'registration' : name) + '-tickets'
                         }, (response) => {
-                            panel.html(response);
-                            let title = panel.find('.sb-top').html();
+                            //panel.html(response);
+                            panel2.html(response);  // Append form only in .sb-panel.ticket-login not in all .sb-panel
+                            let title = panel2.find('.sb-top').html();
                             if (is_edit_profile) {
-                                panel.find('.sb-top').html(sb_('Edit profile'));
+                                panel2.find('.sb-top').html(sb_('Edit profile'));
                             }
                             setTitle(sb_(title));
                             setTimeout(function () {
                                 setTitle(sb_(title));
                             }, 300);
-                            panel.find('.sb-link-area').insertAfter('.sb-buttons');
-                            panel.find('.sb-info').insertBefore('.sb-buttons');
-                            cache_account[name] = panel.html();
+                            panel2.find('.sb-link-area').insertAfter('.sb-buttons');
+                            panel2.find('.sb-info').insertBefore('.sb-buttons');
+                            cache_account[name] = panel2.html();
                         });
-                        panel.html('<div class="sb-loading"></div>');
+                        panel2.html('<div class="sb-loading"></div>');
                     }
                     break;
                 case 'new-ticket':
@@ -912,14 +914,16 @@
                             }
                             setUserProfile();
                             if (is_edit_profile) {
+                                
                                 SBTickets.showPanel();
                             } else {
                                 SBF.event('SBRegistrationForm', { user: settings });
                                 SBF.event('SBNewEmailAddress', { name: activeUser().name, email: activeUser().get('email') });
-                                SBTickets.showPanel('new-ticket');
+                                //SBTickets.showPanel('new-ticket');
+                                SBTickets.showPanel();
+                                $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                             }
                             if (SBF.setting('wp_registration') && 'email' in settings && 'password' in settings) {
-                                console.log(settings);
                                 SBApps.wordpress.ajax('wp_registration', { user_id: response[0].id, first_name: response[0].first_name, last_name: response[0].last_name, password: settings.password[0], email: settings.email[0] });
                             } else if (SBF.setting('wp_users_system') == 'wp') {
                                 SBApps.wordpress.ajax('wp_login', { user: settings.email[0], password: settings.password[0] });

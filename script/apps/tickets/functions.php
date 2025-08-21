@@ -284,7 +284,7 @@ function sb_component_tickets()
                         <source src="<?php echo SB_URL ?>/media/sound.mp3" type="audio/mpeg">
                     </audio>
                 </div>
-                <div class="sb-panel sb-scroll-area"></div>
+                <div class="sb-panel sb-scroll-area chat-login"></div>
             </div>
             <?php if (!sb_isset($disable_fields, 'tickets-right-panel')) { ?>
                 <div class="sb-panel-right">

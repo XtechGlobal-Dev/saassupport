@@ -2928,40 +2928,7 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #f4941e;">
-                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
-                                                            <img src="./script/media/total-conversations.svg"
-                                                                alt="Total Conversations">
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3>Total Conversation</h3>
-                                                            <p class="total-tickets-created">3,200</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="ticket_created_chart">
-                                                            <canvas class="mt-0" id="ticket_created_chart"></canvas>
-                                                        </div>
-                                                        <!-- <script>
-                                                            
-                                                        </script> -->
-                                                    </div>
-                                                </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% in last 7 days</div-->
-                                                <!-- code update -->
-                                                <div class="metric-increase">
-                                                    Increase by
-                                                    <span class="increase-pill">
-                                                        <span class="total-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
-                                                </div>
-                                                <!-- code update -->
-                                            </div>
-                                            <!--  -->
+                                            
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #F3EEFF 100%);">
                                                 <div class="graph_tabs">
@@ -2987,7 +2954,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Tickets Created</h3>
+                                                            <h3>Total Conversations</h3>
                                                             <p class="total-conversations"></p>
                                                         </div>
                                                     </div>
@@ -3005,6 +2972,40 @@ function sb_component_admin()
                                                     Increase by
                                                     <span class="increase-pill">
                                                         <span class="total-conversations-increase"></span><span>%</span>
+                                                    </span>&nbsp;in last 7 days
+                                                </div>
+                                                <!-- code update -->
+                                            </div>
+                                            <!--  -->
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF5E9 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #f4941e;">
+                                                            <!--i class="fa-solid fa-ticket" style="color: #ffffff;"></i-->
+                                                            <img src="./script/media/total-conversations.svg"
+                                                                alt="Total Tickets">
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3>Total Tickets</h3>
+                                                            <p class="total-tickets-created">3,200</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_created_chart">
+                                                            <canvas class="mt-0" id="ticket_created_chart"></canvas>
+                                                        </div>
+                                                        <!-- <script>
+                                                            
+                                                        </script> -->
+                                                    </div>
+                                                </div>
+                                                <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% in last 7 days</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                    Increase by
+                                                    <span class="increase-pill">
+                                                        <span class="total-tickets-increase"></span><span>%</span>
                                                     </span>&nbsp;in last 7 days
                                                 </div>
                                                 <!-- code update -->
@@ -3037,7 +3038,7 @@ function sb_component_admin()
 
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Tickets Pending</h3>
+                                                            <h3>Tickets Resolved</h3>
                                                             <p class="ticket-resolved"></p>
                                                         </div>
                                                     </div>
@@ -3080,13 +3081,13 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Tickets Resolved</h3>
-                                                            <p class="total-conversations"></p>
+                                                            <h3>Tickets Pending</h3>
+                                                            <p class="tickets-pending"></p>
                                                         </div>
                                                     </div>
                                                     <div class="w-100">
-                                                        <div class="total_conversations_chart">
-                                                            <canvas class="mt-0" id="conversations_chart"></canvas>
+                                                        <div class="ticket_pending_chart">
+                                                            <canvas class="mt-0" id="ticket_pending_chart"></canvas>
                                                         </div>
                                                         <script>
                                                         </script>
@@ -3095,7 +3096,7 @@ function sb_component_admin()
                                                 <div class="metric-increase">
                                                     Increase by
                                                     <span class="increase-pill">
-                                                        <span class="total-conversations-increase"></span><span>%</span>
+                                                        <span class="total-pending-tickets-increase"></span><span>%</span>
                                                     </span>&nbsp;in last 7 days
                                                 </div>
 
@@ -8113,7 +8114,7 @@ function ticket_custom_field_settings($id = "", $class = "sb-docs")
                                     <input class="form-control" type="checkbox" name="required" value="">
                             </div>
 
-                            <div id="add_to_frontend_form" data-type="checkbox" class="sb-input sb-input-checkbox">
+                            <div id="add_to_frontend_form" data-type="checkbox" class="sb-input sb-input-checkbox" style="display:none">
                                 <span>Add to frontend form?</span>
                                 <input class="form-control" type="checkbox" name="add_to_frontend_form" value="">
                             </div>
