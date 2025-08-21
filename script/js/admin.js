@@ -7875,6 +7875,10 @@
                             let index = $(this).parent().index();
                             code += `<div data-tab-index="${index}" data-setting="${$(this).attr('id')}">${navs[index]} > ${$(this).find('h2').text()}</div>`;
                         }
+                        let str = "installation";
+                        if (str.includes(search)) {
+                            code += `<div data-tab-index="0" data-sub-tab-index="0" link="http://localhost/saassupport/account/?tab=installation" data-setting="">Account &gt; Installation</div>`;
+                        }
                     });
                 }
                 dropdown.html(code);
