@@ -4821,6 +4821,11 @@ td.sb-offline:after {
   font-size: 14px;
   padding: 5px 20px;
   border-radius: 800px;
+  min-width: 74px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sb-profile {
@@ -6423,7 +6428,8 @@ textarea {
   font-family: "InterSemiBold";
   display: flex;
   align-items: center;
-  padding-right: 13px;
+  padding-right: 16px;
+  max-width: fit-content;
 }
 .sb-board > .sb-admin-list > .sb-top .sb-select p span {
   color: #1653FD;
@@ -8217,7 +8223,7 @@ ul.pagination li.active a.page-link {
 }
 .sb-area-dashboard main .new_container {
   overflow-y: scroll;
-  height: calc(100vh - 123px);
+  height: calc(100vh - 110px);
   background: #edf2f9;
 }
 .sb-area-dashboard main .new_container::-webkit-scrollbar {
@@ -8623,7 +8629,28 @@ ul.pagination li.active a.page-link {
   text-decoration: unset;
 }
 
-#tickets-height, #tickets-height-offset, #tickets-hide, #close-ticket, #tickets-conversations-title-user, #tickets-names-title, #tickets-names-message, #tickets-names-panel, #tickets-welcome-message, #tickets-first-ticket, #tickets-edit-profile, #tickets-left-panel, #tickets-right-panel, #tickets-arrows, #tickets-top-bar, #tickets-profile-image, #tickets-department, #tickets-agent, #tickets-agent-details, #tickets-email-notification, #tickets-email, #tickets-manual-init {
+#tickets-height,
+#tickets-height-offset,
+#tickets-hide,
+#close-ticket,
+#tickets-conversations-title-user,
+#tickets-names-title,
+#tickets-names-message,
+#tickets-names-panel,
+#tickets-welcome-message,
+#tickets-first-ticket,
+#tickets-edit-profile,
+#tickets-left-panel,
+#tickets-right-panel,
+#tickets-arrows,
+#tickets-top-bar,
+#tickets-profile-image,
+#tickets-department,
+#tickets-agent,
+#tickets-agent-details,
+#tickets-email-notification,
+#tickets-email,
+#tickets-manual-init {
   display: none;
 }
 
@@ -9385,6 +9412,23 @@ span.initials.avatar_name {
 .sb-type-multi-input > .input > div input,
 .sb-type-multi-input > .input > div select {
   min-width: 170px;
+}
+
+.sb-menu-wide.sb-menu-users.sb-menu-wide_new ul {
+  position: relative;
+}
+.sb-menu-wide.sb-menu-users.sb-menu-wide_new ul::before {
+  content: "";
+  position: absolute;
+  right: 145px;
+  background: #a1a1a1;
+  height: 100%;
+  width: 1.5px;
+}
+.sb-menu-wide.sb-menu-users.sb-menu-wide_new ul li:last-child {
+  margin-left: 10px !important;
+  background: #5B5B61;
+  color: #fff;
 }
 
 @media (max-width: 1490px) {
@@ -14831,6 +14875,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   main .new_table.sb-area-tickets-dash .sb-scroll-area table {
     table-layout: unset;
   }
+  .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul::before {
+    content: none;
+  }
 }
 @media only screen and (max-width: 767px) {
   .sb-admin-box_new .right_section {
@@ -15081,23 +15128,40 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-board .sb-conversation .sb-menu-mobile ul {
     background: #fff;
-    top: 91px;
+    top: 131px;
     right: 0;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
+    width: 100%;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li a {
     padding-inline: 3px;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1), .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) {
-    width: 48%;
+    width: fit-content;
+    min-width: unset;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: unset;
+    padding: 0 15px !important;
+    background: none !important;
+    height: fit-content;
+  }
+  .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a svg, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a svg {
+    width: 20px;
+    height: 20px;
+  }
+  .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a svg path, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a svg path {
+    stroke: #fff;
+    fill: #fff;
+  }
+  .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a span, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a span {
+    display: none;
   }
   .sb-board .sb-admin-list .sb-top {
     height: fit-content !important;

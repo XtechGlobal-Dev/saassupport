@@ -923,6 +923,11 @@ td.sb-offline:after {
             font-size: 14px;
             padding: 5px 20px;
             border-radius: 800px;
+            min-width: 74px;
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
@@ -2540,6 +2545,7 @@ textarea {
                     li {
                         margin-bottom: 15px;
                         position: relative;
+
                         &:last-child {
                             display: none;
                         }
@@ -2927,7 +2933,8 @@ textarea {
                     font-family: 'InterSemiBold';
                     display: flex;
                     align-items: center;
-                    padding-right: 13px;
+                    padding-right: 16px;
+                    max-width: fit-content;
 
                     span {
                         color: #1653FD;
@@ -5022,8 +5029,9 @@ ul.pagination {
 
         .new_container {
             overflow-y: scroll;
-            height: calc(100vh - 123px);
+            height: calc(100vh - 110px);
             background: $background-gray;
+
             &::-webkit-scrollbar {
                 width: 0;
             }
@@ -5528,7 +5536,28 @@ ul.pagination {
     }
 }
 
-#tickets-height,#tickets-height-offset,#tickets-hide,#close-ticket,#tickets-conversations-title-user,#tickets-names-title,#tickets-names-message,#tickets-names-panel,#tickets-welcome-message,#tickets-first-ticket,#tickets-edit-profile,#tickets-left-panel,#tickets-right-panel,#tickets-arrows,#tickets-top-bar,#tickets-profile-image,#tickets-department,#tickets-agent,#tickets-agent-details,#tickets-email-notification,#tickets-email,#tickets-manual-init {
+#tickets-height,
+#tickets-height-offset,
+#tickets-hide,
+#close-ticket,
+#tickets-conversations-title-user,
+#tickets-names-title,
+#tickets-names-message,
+#tickets-names-panel,
+#tickets-welcome-message,
+#tickets-first-ticket,
+#tickets-edit-profile,
+#tickets-left-panel,
+#tickets-right-panel,
+#tickets-arrows,
+#tickets-top-bar,
+#tickets-profile-image,
+#tickets-department,
+#tickets-agent,
+#tickets-agent-details,
+#tickets-email-notification,
+#tickets-email,
+#tickets-manual-init {
     display: none;
 }
 
@@ -6429,6 +6458,7 @@ span.initials.avatar_name {
     >label {
         margin: 0 15px 0 0;
         height: fit-content;
+
         &.custom-switch {
             height: 23px;
         }
@@ -6451,6 +6481,29 @@ span.initials.avatar_name {
     input,
     select {
         min-width: 170px;
+    }
+}
+
+.sb-menu-wide.sb-menu-users.sb-menu-wide_new {
+    ul {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: 145px;
+            background: #a1a1a1;
+            height: 100%;
+            width: 1.5px;
+        }
+
+        li {
+            &:last-child {
+                margin-left: 10px !important;
+                background: #5B5B61;
+                color: #fff;
+            }
+        }
     }
 }
 
@@ -13122,7 +13175,7 @@ main {
                 .recent-messages {
                     li {
                         .col-8 {
-                            width: 9vw!important;
+                            width: 9vw !important;
                         }
                     }
                 }
@@ -13200,6 +13253,15 @@ main {
                 table {
                     table-layout: unset;
                 }
+            }
+        }
+    }
+
+    .sb-menu-wide.sb-menu-users.sb-menu-wide_new {
+        ul {
+
+            &::before {
+                content: none;
             }
         }
     }
@@ -13615,13 +13677,14 @@ main {
             .sb-menu-mobile {
                 ul {
                     background: #fff;
-                    top: 91px;
+                    top: 131px;
                     right: 0;
                     // display: flex;
                     align-items: center;
                     flex-wrap: wrap;
                     gap: 8px;
                     justify-content: center;
+                    width: 100%;
 
                     li {
                         a {
@@ -13630,12 +13693,31 @@ main {
 
                         &:nth-child(1),
                         &:nth-child(2) {
-                            width: 48%;
+                            width: fit-content;
+                            min-width: unset;
 
                             a {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
+                                min-width: unset;
+                                padding: 0 15px !important;
+                                background: none !important;
+                                height: fit-content;
+
+                                svg {
+                                    width: 20px;
+                                    height: 20px;
+
+                                    path {
+                                        stroke: #fff;
+                                        fill: #fff;
+                                    }
+                                }
+
+                                span {
+                                    display: none;
+                                }
                             }
                         }
                     }
@@ -14061,7 +14143,6 @@ main {
         }
     }
 }
-
 
 @media only screen and (min-width: 465px) and (max-width: 730px) {
     .ab-admin {
