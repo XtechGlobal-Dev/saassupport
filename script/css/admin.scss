@@ -2053,6 +2053,18 @@ textarea {
     opacity: 1;
 }
 
+.sb-language-switcher-cnt {
+    label {
+        min-width: fit-content !important;
+    }
+}
+
+.multi-input-checkbox {
+    .custom-switch {
+        max-width: 46px;
+    }
+}
+
 
 .sb-tooltip {
     position: absolute;
@@ -5305,7 +5317,7 @@ ul.pagination {
                         }
                     }
 
-                    .tickets-pending {
+                    .tickets-pending, .tickets-resolved, .tickets-created {
                         color: #111827;
                         font-family: "InterBold";
                     }
@@ -12967,8 +12979,17 @@ main {
 
     .sb-area-conversations {
         .sb-admin-list {
-            max-width: 215px;
-            min-width: 215px;
+            max-width: 265px;
+            min-width: 265px;
+
+            .sb-top {
+                .sb-flex {
+                    gap: 20px;
+                    .sb-filter-btn {
+                        padding-top: 0;
+                    }
+                }
+            }
 
             .sb-scroll-area {
                 li {
