@@ -5293,7 +5293,7 @@ ul.pagination {
                         }
                     }
 
-                    .tickets-pending, .tickets-resolved, .tickets-created {
+                    .tickets-pending {
                         color: #111827;
                         font-family: "InterBold";
                     }
@@ -10846,6 +10846,7 @@ table {
 }
 
 .choices {
+
     .choices__inner,
     .choices__input {
         background-color: #fff;
@@ -10854,15 +10855,6 @@ table {
 
 }
 
-.remember-me.sb-error {
-    box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
-    margin-top: 8px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    input {
-        margin-top: 0 !important;
-    }
-}
 
 // Color picker for tag color selection
 .tag-palette {
@@ -11004,7 +10996,7 @@ table {
     .field-label {
         text-transform: capitalize;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 14px;
         color: #111111;
         font-family: Manrope;
         margin-bottom: 4px;
