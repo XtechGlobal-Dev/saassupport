@@ -5109,7 +5109,7 @@ div ul.sb-menu .li:hover,
   height: fit-content;
   line-height: 1;
   color: #fff;
-  min-width: 23px;
+  min-width: 45px;
   display: flex;
 }
 .sb-tickets .tickets-chat-area #ticket-comments #comments-section .comment-row .comment-bubble .comment-meta button {
