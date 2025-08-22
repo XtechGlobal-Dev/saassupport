@@ -4252,6 +4252,18 @@ textarea {
         display: flex;
         align-items: center;
         padding-right: 10px;
+        overflow: hidden;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            height: 2px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d5d5d5;
+            height: 3px;
+            border-radius: 40px;
+        }
 
         >i {
             line-height: 8px;
@@ -11787,9 +11799,18 @@ i {
 // custom responsive
 @media (max-width: 1540px) {
 
+    .sb-menu-wide_new {
+        ul {
+            max-width: 330px;
+            overflow-x: scroll;
+
+            li {
+                min-width: fit-content;
+            }
+        }
+    }
 
     .new-ticket-button {
-        overflow-x: auto;
         white-space: nowrap;
         padding: 10px 15px;
         gap: 10px;
@@ -12768,8 +12789,8 @@ main {
         top: unset !important;
         bottom: unset !important;
         display: block !important;
-        max-width: 270px;
-        min-width: 270px;
+        max-width: 300px;
+        min-width: 300px;
     }
 
     .sb-area-dashboard {
@@ -13270,6 +13291,17 @@ main {
             }
         }
     }
+
+
+    .sb-conversation.sb-active {
+        .sb-admin-list {
+            display: block;
+
+            i.sb-btn-collapse.sb-right.sb-icon-arrow-right.sb-active {
+                top: 119px;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -13433,18 +13465,21 @@ main {
     .sb-admin {
         .sb-area-users {
             .sb-top-bar {
+                overflow: visible;
                 div {
                     .sb-btn.sb-icon {
                         text-indent: unset;
                         background: #0069f0;
                         height: fit-content;
                         width: fit-content;
-                        font-size: 12px;
+                        font-size: 0px;
+                        max-width: 40px;
+                        min-width: 40px !important;
 
                         i {
                             color: #fff;
                             font-size: 13px;
-                            line-height: 13px;
+                            line-height: 49px;
                         }
                     }
                 }
@@ -13580,7 +13615,8 @@ main {
                     height: fit-content;
                     justify-content: flex-start;
                     gap: 10px;
-                    overflow: hidden;
+                    // overflow: hidden;
+                    overflow: visible;
                     position: relative;
                     padding-block: 10px;
 
@@ -13734,6 +13770,7 @@ main {
             .sb-top {
                 height: fit-content !important;
                 padding-inline: 10px !important;
+                padding-bottom: 15px !important;
 
                 .search-input {
                     i {
