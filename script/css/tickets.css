@@ -5104,13 +5104,12 @@ div ul.sb-menu .li:hover,
 }
 .sb-tickets .tickets-chat-area #ticket-comments #comments-section .comment-row .comment-bubble .comment-meta span {
   position: absolute;
-  top: 3.5px;
+  top: 5px;
   right: 5px;
   height: fit-content;
   line-height: 1;
   color: #fff;
-  min-width: 23px;
-  display: flex;
+  min-width: max-content;
 }
 .sb-tickets .tickets-chat-area #ticket-comments #comments-section .comment-row .comment-bubble .comment-meta button {
   line-height: 1.5;
