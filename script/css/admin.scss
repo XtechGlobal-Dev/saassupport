@@ -13043,6 +13043,11 @@ main {
             }
         }
     }
+
+    .sb-area-conversations > i.sb-btn-collapse.sb-right.sb-icon-arrow-right {
+        display: none;
+    }
+
 }
 
 @media (min-width: 1024px) {
