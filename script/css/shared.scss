@@ -1988,7 +1988,7 @@ a.sb-btn {
 
         &.sb-error {
             border: 1px solid $color-red;
-            box-shadow: 0 0 5px rgba(202, 52, 52, 0.4);
+            box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
         }
     }
 
@@ -2110,9 +2110,12 @@ a.sb-btn {
     }
 }
 
-.remember-me {
-    .checkbox.sb-error {
-        box-shadow: 0 0 5px rgba(202, 52, 52, 0.4);
+
+.remember-me.sb-error {
+    margin-top: 10px;
+    .checkbox {
+        box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
+        margin-top: 0 !important;
     }
 }
 
