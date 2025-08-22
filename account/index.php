@@ -689,7 +689,7 @@ function box_chart()
                             <div class="sb-errors-area m-0 text-end"></div>
                             <div class="auth-options mt-2">
                                 <label class="remember-me">
-                                    <input type="checkbox" class="checkbox" checked style="margin-top:5px;" />
+                                    <input type="checkbox" id="terms" class="checkbox form-input" checked style="margin-top:5px;" />
                                     <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And
                                         Privacy Policy</span>
                                 </label>
