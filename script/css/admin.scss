@@ -13462,6 +13462,14 @@ main {
     // }
     // }
 
+    .tickts-scroll-area {
+        .row.dt-row {
+            .col-sm-12 {
+                overflow: auto;
+            }
+        }
+    }
+
     .sb-admin {
         .sb-area-users {
             .sb-top-bar {
