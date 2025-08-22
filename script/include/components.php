@@ -2691,7 +2691,7 @@ function sb_component_admin()
                             if ($is_admin && $is_cloud) {
                                 ?>
                                 <li>
-                                    <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership">
+                                    <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation">
                                         <i>
                                             <div class="icon-wrapper">
                                                 <span class="icon-tooltip" data-tooltip="Inbox">
@@ -3650,7 +3650,7 @@ function sb_component_admin()
                                 </div>
                             </div>
                             <div class="sb-scroll-area">
-                                <ul></ul>
+                                <ul id="inbox-list"></ul>
                             </div>
                         </div>
                         <div class="sb-conversation">
@@ -3939,7 +3939,7 @@ function sb_component_admin()
                                     </div>
                                     <ul>
                                         <li data-type="all" class="sb-active">
-                                            <?php sb_e("All"); ?>
+                                            <?php sb_e("All Customers"); ?>
                                             <span data-count="0">(0)</span>
                                         </li>
                                         <li data-type="user">
@@ -5738,7 +5738,7 @@ function sb_component_admin()
                                         ?>
                                     </li> -->
                                 </ul>
-                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=membership" data-tooltip="Account">
+                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation" data-tooltip="Account">
                                     Account
                                 </a>
                             </div>
