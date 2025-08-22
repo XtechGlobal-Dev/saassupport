@@ -8919,7 +8919,7 @@ span.initials.avatar_name {
   overflow: hidden;
   overflow-y: scroll;
   padding: 15px 15px 0;
-  height: calc(100vh - 85px);
+  height: calc(100vh - 163px);
 }
 .sb-area-users .sb-scroll-area:hover + .sb-scroll-bar {
   opacity: 0.1 !important;
@@ -9420,15 +9420,18 @@ span.initials.avatar_name {
 .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul::before {
   content: "";
   position: absolute;
-  right: 145px;
+  right: 152px;
   background: #a1a1a1;
   height: 100%;
   width: 1.5px;
 }
 .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul li:last-child {
   margin-left: 10px !important;
-  background: #5B5B61;
+  background: #0069f0;
   color: #fff;
+  border-radius: 40px;
+  border: 0;
+  padding-inline: 14px;
 }
 
 @media (max-width: 1490px) {
@@ -14745,6 +14748,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;
+  }
+  #view-ticket-attachments {
+    max-width: 74.6%;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1900px) {
