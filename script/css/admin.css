@@ -15009,6 +15009,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .settings-tab .sb-setting {
     flex-wrap: wrap;
   }
+  .tickts-scroll-area .row.dt-row .col-sm-12 {
+    overflow: auto;
+  }
   .sb-admin .sb-area-users .sb-top-bar {
     overflow: visible;
   }
