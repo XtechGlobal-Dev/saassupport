@@ -13224,7 +13224,7 @@ table thead {
   font-size: 16px;
   font-weight: 400;
   color: #666666;
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
   font-family: Manrope;
 }
 .sb-admin-box_new .form-fields {
@@ -13232,7 +13232,7 @@ table thead {
   flex-direction: column;
 }
 .sb-admin-box_new .sb-errors-area {
-  font-size: 12px;
+  font-size: 15px;
   line-height: unset;
 }
 .sb-admin-box_new .field-label {
