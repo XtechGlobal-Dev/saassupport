@@ -3453,7 +3453,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <div class="px-3 ps-md-2 mt-3 mt-md-0 clmn-gap">
+                                    <div class="px-3 ps-xl-2 mt-3 mt-xl-0 clmn-gap">
                                         <section class="main-charts mb-3">
                                             <div class="card p-3 tickets_activity_card">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -3982,7 +3982,7 @@ function sb_component_admin()
                                 </div>
                                 <div class="sb-menu-mobile">
                                     <i class="sb-icon-menu"></i>
-                                    <ul>
+                                    <ul style="background: #fff;">
                                         <?php if ($is_admin) {
                                             echo '<li><a data-value="csv" class="sb-btn-icon" data-sb-tooltip="' .
                                                 sb_("Download CSV") .
