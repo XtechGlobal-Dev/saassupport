@@ -1571,16 +1571,15 @@ function get_total_conversations_count($start_date = null,$end_date = null)
     $query2 = 'SELECT count(*) as total_conversations_count FROM sb_conversations';
     $totalConversations = sb_db_get($query2,true);
 
-    $query3 = 'SELECT count(*) as total_unread_conversations_count FROM sb_conversations where status_code = 2';
+    $query3 = "SELECT count(*) as total_unread_conversations_count FROM sb_conversations where status_code = '2'";
     $totalUnreadConversations = sb_db_get($query3,true);
 
 
         // Query to get count of tickets per day
     $query4 = "SELECT DATE(creation_time) as date, COUNT(*) as count
         FROM sb_conversations
-        WHERE  status_code = 2 AND DATE(creation_time) BETWEEN '$start_date' AND '$end_date'
-        GROUP BY DATE(creation_time)
-    ";
+        WHERE  status_code = '2' AND (DATE(creation_time) BETWEEN '$start_date' AND '$end_date') 
+        GROUP BY DATE(creation_time)";
     $result2 = sb_db_get($query4,false);
 
     
