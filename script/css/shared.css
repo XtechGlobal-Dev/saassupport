@@ -2684,8 +2684,12 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 .remember-me.sb-error {
   box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
   margin-top: 8px;
-  padding: 2px 6px 3px;
+  padding: 3px 6px;
   border-radius: 4px;
+}
+
+.remember-me.sb-error input {
+  margin-top: 0 !important;
 }
 
 .sb-input-image .image {

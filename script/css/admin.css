@@ -2694,8 +2694,11 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 .remember-me.sb-error {
   box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
   margin-top: 8px;
-  padding: 2px 6px 3px;
+  padding: 3px 6px;
   border-radius: 4px;
+}
+.remember-me.sb-error input {
+  margin-top: 0 !important;
 }
 
 .sb-input-image .image {
@@ -8445,7 +8448,7 @@ ul.pagination li.active a.page-link {
   color: #666;
   font-weight: normal;
 }
-.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending {
+.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-resolved, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-created {
   color: #111827;
   font-family: "InterBold";
 }
@@ -13125,8 +13128,11 @@ table thead {
 .remember-me.sb-error {
   box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
   margin-top: 8px;
-  padding: 2px 6px 3px;
+  padding: 3px 6px;
   border-radius: 4px;
+}
+.remember-me.sb-error input {
+  margin-top: 0 !important;
 }
 
 .tag-palette {
