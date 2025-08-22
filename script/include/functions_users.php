@@ -1202,7 +1202,8 @@ function add_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '',$conta
     }
 
     // Insert the comment into the database
-    $query = "INSERT INTO comments (ticket_id, user_id, user_role, comment, created_at) VALUES ($ticketId, $userId,'$userRole', '$comment', NOW())";
+    $now = sb_gmt_now();
+    $query = "INSERT INTO comments (ticket_id, user_id, user_role, comment, created_at) VALUES ($ticketId, $userId,'$userRole', '$comment', '$now')";
     $result = sb_db_query($query);
 
     // Insert the comment into the database
@@ -1243,8 +1244,9 @@ function update_ticket_comment($ticketId = 0, $commentId = 0 , $comment = '') {
         return ['success' => false, 'message' => 'Ticket not found.'];
     }
 
+    $now = sb_gmt_now();
     // Update the comment in the database
-    $query = "UPDATE comments SET comment = '$comment', is_edited = 1, updated_at = NOW() WHERE id = $commentId AND ticket_id = $ticketId";
+    $query = "UPDATE comments SET comment = '$comment', is_edited = 1, updated_at = '$now' WHERE id = $commentId AND ticket_id = $ticketId";
     $result = sb_db_query($query);
 
     if ($result) {
@@ -2472,7 +2474,8 @@ function sb_add_edit_ticket_status($inputs)
         $sql = '';
         if($statusId == 0 || $statusId == "")
         {
-            $sql = "INSERT INTO ticket_status (`name`, `color`, `created_at`) VALUES ('$title', '$statusColor',NOW())";
+            $now = sb_gmt_now();
+            $sql = "INSERT INTO ticket_status (`name`, `color`, `created_at`) VALUES ('$title', '$statusColor','$now')";
             $msg = "Status created successfully";
         }
         else // don't allow update function for first 5 default statuses
