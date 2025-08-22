@@ -2589,7 +2589,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 .sb-input > select.sb-error,
 .sb-input > textarea.sb-error {
   border: 1px solid rgb(202, 52, 52);
-  box-shadow: 0 0 5px rgba(202, 52, 52, 0.4);
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
 }
 .sb-input > select {
   min-height: 37px;
@@ -2691,8 +2691,14 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
   color: rgb(248, 248, 249);
 }
 
-.remember-me .checkbox.sb-error {
-  box-shadow: 0 0 5px rgba(202, 52, 52, 0.4);
+.remember-me.sb-error {
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
+  margin-top: 8px;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+.remember-me.sb-error input {
+  margin-top: 0 !important;
 }
 
 .sb-input-image .image {
@@ -8442,7 +8448,7 @@ ul.pagination li.active a.page-link {
   color: #666;
   font-weight: normal;
 }
-.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending {
+.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-resolved, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-created {
   color: #111827;
   font-family: "InterBold";
 }
@@ -13117,6 +13123,16 @@ table thead {
 .choices .choices__input {
   background-color: #fff;
   border-radius: 4px;
+}
+
+.remember-me.sb-error {
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
+  margin-top: 8px;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+.remember-me.sb-error input {
+  margin-top: 0 !important;
 }
 
 .tag-palette {
