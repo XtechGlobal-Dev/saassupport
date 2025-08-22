@@ -5862,7 +5862,7 @@ span.initials.avatar_name {
         overflow: hidden;
         overflow-y: scroll;
         padding: 15px 15px 0;
-        height: calc(100vh - 85px);
+        height: calc(100vh - 163px);
 
         &:hover+.sb-scroll-bar {
             opacity: 0.1 !important;
@@ -6491,7 +6491,7 @@ span.initials.avatar_name {
         &::before {
             content: '';
             position: absolute;
-            right: 145px;
+            right: 152px;
             background: #a1a1a1;
             height: 100%;
             width: 1.5px;
@@ -6500,8 +6500,11 @@ span.initials.avatar_name {
         li {
             &:last-child {
                 margin-left: 10px !important;
-                background: #5B5B61;
+                background: #0069f0;
                 color: #fff;
+                border-radius: 40px;
+                border: 0;
+                padding-inline: 14px;
             }
         }
     }
@@ -13037,6 +13040,10 @@ main {
                 padding-top: 16px;
             }
         }
+    }
+
+    #view-ticket-attachments {
+        max-width: 74.6%;
     }
 }
 
