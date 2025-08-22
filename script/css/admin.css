@@ -14770,6 +14770,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-conversations .sb-admin-list .sb-filter-btn.sb-active .sb-select p {
     font-size: 11px !important;
   }
+  .sb-area-conversations > i.sb-btn-collapse.sb-right.sb-icon-arrow-right {
+    display: none;
+  }
 }
 @media (min-width: 1024px) {
   .sb-area-dashboard main .new_container .main-charts.recent-message .messages-list .recent.card {
