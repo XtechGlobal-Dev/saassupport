@@ -2589,7 +2589,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 .sb-input > select.sb-error,
 .sb-input > textarea.sb-error {
   border: 1px solid rgb(202, 52, 52);
-  box-shadow: 0 0 5px rgba(202, 52, 52, 0.25);
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.4);
 }
 .sb-input > select {
   min-height: 37px;
@@ -2689,6 +2689,10 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 .sb-input.sb-loading select {
   color: rgb(248, 248, 249);
+}
+
+.remember-me .checkbox.sb-error {
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.4);
 }
 
 .sb-input-image .image {
@@ -13065,14 +13069,12 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar {
   background: none;
-  height: 4px;
-  width: 4px;
+  width: 0px;
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar-thumb {
-  height: 4px;
   background: #e5e5e5;
   border-radius: 20px;
-  width: 4px;
+  width: 0px;
 }
 
 .sb-area-tickets .tags-filter {
@@ -13219,7 +13221,7 @@ table thead {
   font-family: Manrope;
 }
 .sb-admin-box_new .login-description {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   color: #666666;
   margin-bottom: 20px;
@@ -13266,7 +13268,7 @@ table thead {
 }
 .sb-admin-box_new .remember-me {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   cursor: pointer;
   user-select: none;
 }
@@ -13302,7 +13304,7 @@ table thead {
 .sb-admin-box_new .remember-text {
   text-transform: capitalize;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   color: #666666;
   font-family: Manrope, sans-serif;
 }
