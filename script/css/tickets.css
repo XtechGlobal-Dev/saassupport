@@ -2588,7 +2588,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 .sb-input > select.sb-error,
 .sb-input > textarea.sb-error {
   border: 1px solid rgb(202, 52, 52);
-  box-shadow: 0 0 5px rgba(202, 52, 52, 0.25);
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
 }
 .sb-input > select {
   min-height: 37px;
@@ -2688,6 +2688,14 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 .sb-input.sb-loading select {
   color: rgb(248, 248, 249);
+}
+
+.remember-me.sb-error {
+  margin-top: 10px;
+}
+.remember-me.sb-error .checkbox {
+  box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
+  margin-top: 0 !important;
 }
 
 .sb-input-image .image {
@@ -5096,11 +5104,13 @@ div ul.sb-menu .li:hover,
 }
 .sb-tickets .tickets-chat-area #ticket-comments #comments-section .comment-row .comment-bubble .comment-meta span {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 3.5px;
+  right: 5px;
   height: fit-content;
   line-height: 1;
   color: #fff;
+  min-width: 23px;
+  display: flex;
 }
 .sb-tickets .tickets-chat-area #ticket-comments #comments-section .comment-row .comment-bubble .comment-meta button {
   line-height: 1.5;
