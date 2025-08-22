@@ -7469,6 +7469,16 @@ textarea {
   display: flex;
   align-items: center;
   padding-right: 10px;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.sb-board .sb-tags-area::-webkit-scrollbar {
+  height: 2px;
+}
+.sb-board .sb-tags-area::-webkit-scrollbar-thumb {
+  background: #d5d5d5;
+  height: 3px;
+  border-radius: 40px;
 }
 .sb-board .sb-tags-area > i {
   line-height: 8px;
@@ -13844,8 +13854,14 @@ i.fa-solid.fa-x.delete-attachment {
 }
 
 @media (max-width: 1540px) {
+  .sb-menu-wide_new ul {
+    max-width: 330px;
+    overflow-x: scroll;
+  }
+  .sb-menu-wide_new ul li {
+    min-width: fit-content;
+  }
   .new-ticket-button {
-    overflow-x: auto;
     white-space: nowrap;
     padding: 10px 15px;
     gap: 10px;
@@ -14599,8 +14615,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     top: unset !important;
     bottom: unset !important;
     display: block !important;
-    max-width: 270px;
-    min-width: 270px;
+    max-width: 300px;
+    min-width: 300px;
   }
   .sb-area-dashboard main .new_container .dashboard-metrics {
     grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
@@ -14890,6 +14906,12 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul::before {
     content: none;
   }
+  .sb-conversation.sb-active .sb-admin-list {
+    display: block;
+  }
+  .sb-conversation.sb-active .sb-admin-list i.sb-btn-collapse.sb-right.sb-icon-arrow-right.sb-active {
+    top: 119px;
+  }
 }
 @media only screen and (max-width: 767px) {
   .sb-admin-box_new .right_section {
@@ -14987,17 +15009,22 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .settings-tab .sb-setting {
     flex-wrap: wrap;
   }
+  .sb-admin .sb-area-users .sb-top-bar {
+    overflow: visible;
+  }
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon {
     text-indent: unset;
     background: #0069f0;
     height: fit-content;
     width: fit-content;
-    font-size: 12px;
+    font-size: 0px;
+    max-width: 40px;
+    min-width: 40px !important;
   }
   .sb-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon i {
     color: #fff;
     font-size: 13px;
-    line-height: 13px;
+    line-height: 49px;
   }
   .toggle-btn,
   .account-toggle-btn {
@@ -15079,7 +15106,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     height: fit-content;
     justify-content: flex-start;
     gap: 10px;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     padding-block: 10px;
   }
@@ -15178,6 +15205,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-board .sb-admin-list .sb-top {
     height: fit-content !important;
     padding-inline: 10px !important;
+    padding-bottom: 15px !important;
   }
   .sb-board .sb-admin-list .sb-top .search-input i {
     top: 26px !important;
