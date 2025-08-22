@@ -1543,9 +1543,11 @@ function get_total_conversations_count($start_date = null,$end_date = null)
     );
 
     $date_labels = [];
+    $date_labels2 = [];
 
     foreach ($period as $date) {
         $date_labels[$date->format('d/m/Y')] = 0;
+        $date_labels2[$date->format('d/m/Y')] = 0;
     }
 
     // Query to get count of tickets per day
@@ -1569,13 +1571,35 @@ function get_total_conversations_count($start_date = null,$end_date = null)
     $query2 = 'SELECT count(*) as total_conversations_count FROM sb_conversations';
     $totalConversations = sb_db_get($query2,true);
 
+    $query3 = "SELECT count(*) as total_unread_conversations_count FROM sb_conversations where status_code = '2'";
+    $totalUnreadConversations = sb_db_get($query3,true);
+
+
+        // Query to get count of tickets per day
+    $query4 = "SELECT DATE(creation_time) as date, COUNT(*) as count
+        FROM sb_conversations
+        WHERE  status_code = '2' AND (DATE(creation_time) BETWEEN '$start_date' AND '$end_date') 
+        GROUP BY DATE(creation_time)";
+    $result2 = sb_db_get($query4,false);
+
+    
+    // Fill result into date_labels
+    foreach ($result2 as $row) {
+        $date_key = date('d/m/Y', strtotime($row['date']));
+        if (array_key_exists($date_key, $date_labels2)) {
+            $date_labels2[$date_key] = (int)$row['count'];
+        }
+    }
+
     return $response = [
         "success",
         [
             "title" => "Total conversations count",
             "description" => "Count of total conversations.",
             "total_conversations_count" => $totalConversations['total_conversations_count'],
+            "total_unread_conversations_count" => $totalUnreadConversations['total_unread_conversations_count'],
             "data" => $date_labels,
+            "unread_conversations_data" =>  $date_labels2
         ]
     ];
 }
