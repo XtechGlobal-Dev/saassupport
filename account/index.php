@@ -686,7 +686,7 @@ function box_chart()
                                     </div>
                                 </div>
                             </div>
-                            <div class="sb-errors-area m-0 text-end"></div>
+                            
                             <div class="auth-options mt-2">
                                 <label class="remember-me">
                                     <input type="checkbox" id="terms" class="checkbox form-input" checked style="margin-top:5px;" />
@@ -694,6 +694,7 @@ function box_chart()
                                         Privacy Policy</span>
                                 </label>
                             </div>
+                            <div class="sb-errors-area m-0 mb-2 text-end"></div>
                             <button class="login-button btn-register">Sign Up</button>
                             <div class="register-prompt">
                                 <div class="no-account">Already have an account?</div>
