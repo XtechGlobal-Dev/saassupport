@@ -5742,6 +5742,14 @@ textarea {
   opacity: 1;
 }
 
+.sb-language-switcher-cnt label {
+  min-width: fit-content !important;
+}
+
+.multi-input-checkbox .custom-switch {
+  max-width: 46px;
+}
+
 .sb-tooltip {
   position: absolute;
   top: 0;
@@ -8456,7 +8464,7 @@ ul.pagination li.active a.page-link {
   color: #666;
   font-weight: normal;
 }
-.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending {
+.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-resolved, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-created {
   color: #111827;
   font-family: "InterBold";
 }
@@ -14722,8 +14730,14 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     line-height: 45px;
   }
   .sb-area-conversations .sb-admin-list {
-    max-width: 215px;
-    min-width: 215px;
+    max-width: 265px;
+    min-width: 265px;
+  }
+  .sb-area-conversations .sb-admin-list .sb-top .sb-flex {
+    gap: 20px;
+  }
+  .sb-area-conversations .sb-admin-list .sb-top .sb-flex .sb-filter-btn {
+    padding-top: 0;
   }
   .sb-area-conversations .sb-admin-list .sb-scroll-area li .sb-profile {
     padding-left: 38px;
@@ -15008,6 +15022,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .settings-tab .sb-setting {
     flex-wrap: wrap;
+  }
+  .tickts-scroll-area .row.dt-row .col-sm-12 {
+    overflow: auto;
   }
   .sb-admin .sb-area-users .sb-top-bar {
     overflow: visible;
