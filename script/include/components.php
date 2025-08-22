@@ -3650,7 +3650,7 @@ function sb_component_admin()
                                 </div>
                             </div>
                             <div class="sb-scroll-area">
-                                <ul></ul>
+                                <ul id="inbox-list"></ul>
                             </div>
                         </div>
                         <div class="sb-conversation">
