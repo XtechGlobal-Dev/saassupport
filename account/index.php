@@ -888,7 +888,7 @@ function box_chart()
                                     <div class="field-label"><label class="required-label" for="email">Business
                                             Email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-                                        <input type="email" placeholder="Business Email" id="email-forgot"
+                                        <input type="email" placeholder="Business Email" id="reset-password-email"
                                             class="form-input" />
                                     </div>
                                 </div>
