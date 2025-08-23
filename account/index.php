@@ -63,7 +63,6 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <?php account_js() ?>
     <script>
         jQuery(document).ready(function ($) {
-            console.log("PPPPPPwwe")
             $(".account-toggle-btn").click(function () {
                 $(".sb-tab .sb-nav").toggleClass("side-open");
             })
@@ -877,7 +876,7 @@ function box_chart()
                     </div>
                 </div>
                 <div class="col-md-6 top_right">
-                    <div class="right_section">
+                    <div class="right_section forgot-password-section">
                         <div class="login-form sb-main">
                             <h1 class="login-title">Forget Password?</h1>
                             <p class="login-description">
@@ -903,11 +902,11 @@ function box_chart()
             </div>
         </div>
     </div>
-    <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset']))
-        echo ' active' ?>">
-            <div class="sb-info"></div>
-            <div class="sb-top-bar">
-                <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
+    <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset'])) echo ' active' ?>">
+        <div class="sb-info"></div>
+        <div class="sb-top-bar">
+                <!-- <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" /> -->
+                <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
             <div class="sb-title">
                 <?php sb_e('Reset password') ?>
             </div>
@@ -934,6 +933,7 @@ function box_chart()
                 </div>
             </div>
         </div>
+
     </div>
 
 <?php } ?>
