@@ -322,9 +322,9 @@ function account_save($details) {
 function account_reset_password($email = false, $token = false, $password = false) {
     if ($email && !$password) {
         $email = db_escape($email);
-        $token = db_get('SELECT token FROM users WHERE email = "' . $email . '" LIMIT 1');
+        $token = db_get('SELECT token,first_name,last_name FROM users WHERE email = "' . $email . '" LIMIT 1');
         if (!$token) {
-            $token = db_get('SELECT token,first_name,last_name FROM users A, agents B WHERE A.id = B.admin_id AND B.email = "' . $email . '" LIMIT 1');
+            $token = db_get('SELECT token FROM users A, agents B WHERE A.id = B.admin_id AND B.email = "' . $email . '" LIMIT 1');
         }
         if ($token) {
             $full_name = $token['first_name'].' '.$token['last_name'];
