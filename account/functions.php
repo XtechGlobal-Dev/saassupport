@@ -324,10 +324,12 @@ function account_reset_password($email = false, $token = false, $password = fals
         $email = db_escape($email);
         $token = db_get('SELECT token FROM users WHERE email = "' . $email . '" LIMIT 1');
         if (!$token) {
-            $token = db_get('SELECT token FROM users A, agents B WHERE A.id = B.admin_id AND B.email = "' . $email . '" LIMIT 1');
+            $token = db_get('SELECT token,first_name,last_name FROM users A, agents B WHERE A.id = B.admin_id AND B.email = "' . $email . '" LIMIT 1');
         }
         if ($token) {
-            send_email($email, super_get_setting('email_subject_reset_password'), str_replace('{link}', CLOUD_URL . '/account?reset=' . sb_encryption($token['token']) . '&email=' . sb_encryption($email), super_get_setting('email_template_reset_password')));
+            $full_name = $token['first_name'].' '.$token['last_name'];
+            $email_template = str_replace('{user_name}',$full_name,super_get_setting('email_template_reset_password'));
+            send_email($email, super_get_setting('email_subject_reset_password'), str_replace('{link}', CLOUD_URL . '/account?reset=' . sb_encryption($token['token']) . '&email=' . sb_encryption($email), $email_template));
         }
     } else if ($token && $password) {
         $password = db_escape(password_hash($password, PASSWORD_DEFAULT));

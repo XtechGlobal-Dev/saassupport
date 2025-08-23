@@ -102,7 +102,7 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('email_template_membership_100', 'Hi {user_name},\nYour account has been suspended due to exceeded usage limits or an expired membership. Please log in to upgrade or renew your plan.'),
 ('email_template_membership_90', 'Hello {user_name},\nYou’ve used 90% of your allowed messages for this period. Please consider upgrading your plan or monitoring your usage to avoid service interruptions.'),
 ('email_template_no_credits', 'Hi {user_name},\nYour message credits are depleted. Please top up or upgrade your plan to continue communicating with your users.'),
-('email_template_reset_password', 'Hi {user_name},\nTo reset your password, click the link below:\n{link}\nIf you didn’t request this, you can safely ignore it.'),
+('email_template_reset_password', 'Hi {user_name},\nTo reset your password, click here <a href="{link}">Reset Passoword</a>\nIf you didn’t request this, you can safely ignore it.'),
 ('email_template_verification_code_email', 'Your email verification code is: {code}\nEnter this in the Nexleon Helpdesk app to complete your verification.'),
 ('email_template_welcome', 'Hi {user_name},\nThanks for signing up with Nexleon Helpdesk. We’re here to help — feel free to explore your dashboard or reach out for assistance.'),
 ('last_cron', '1746460803'),
