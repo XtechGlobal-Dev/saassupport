@@ -74,7 +74,7 @@ function sb_component_tickets()
                                     . sb_($button_name ? $button_name : 'Create New Ticket')
                                     . '"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create New Ticket') . '</div>';
                             else
-                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>';
+                                //echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>';
                             ?>
                         </div>
                         <div class="sb-search-btn">
