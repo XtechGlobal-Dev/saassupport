@@ -298,7 +298,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                             <span class="required-label pb-2"><?php sb_e(
                                 "Customer"
                             ); ?></span>
-                            <select id="select-customer" style="width:100%;"></select>
+                            <select id="select-customer" style="width:100%;" required></select>
                         </div>
 
                         <div class="sb-input two-divs d-flex">
@@ -309,7 +309,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                                 <input type="text" name="name" value="" disabled="">
                             </div>
                             <div id="cust_email" data-type="text" class="sb-input">
-                                <span class="required-label"><?php sb_e(
+                                <span ><?php sb_e(
                                     "Email"
                                 ); ?></span>
                                 <input type="email" name="email" value="">
