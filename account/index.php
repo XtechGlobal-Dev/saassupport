@@ -919,13 +919,13 @@ function box_chart()
                 <span>
                     <?php sb_e('Password') ?>
                 </span>
-                <input id="reset-password-1" type="password" required />
+                <input id="reset-password-1" type="password" required autocomplete="off"/>
             </div>
             <div class="sb-input">
                 <span>
                     <?php sb_e('Repeat password') ?>
                 </span>
-                <input id="reset-password-2" type="password" required />
+                <input id="reset-password-2" type="password" required autocomplete="off"/>
             </div>
             <div class="sb-bottom">
                 <div class="sb-btn btn-reset-password-2">
