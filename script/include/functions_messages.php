@@ -1109,7 +1109,8 @@ function sb_get_rich_message($name, $settings = false) {
             case 'login':
                 $settings = sb_get_setting('login');
                 $title = sb_(sb_isset($settings, 'login-title', 'Login'));
-                $message = sb_(sb_isset($settings['login-msg'],'Logout'));
+                
+                $message = isset($settings['login-msg']) ? sb_('Login'): '';
                 $code = '<div class="sb-form"><div id="email" class="sb-input"><span>' . sb_('Email') . '</span><input autocomplete="false" type="email"></div><div id="password" class="sb-input"><span>' . sb_('Password') . '</span><input autocomplete="false" type="password"></div></div><div class="sb-buttons"><div class="sb-btn sb-submit-login">' . sb_('Sign in') . '</div>' . (sb_get_setting('registration-required') == 'login' ? '' : '<div class="sb-btn-text sb-registration-area">' . sb_('Create new account') . '</div>') . '</div>';
                 break;
             case 'timetable':
