@@ -686,7 +686,7 @@ div ul.sb-menu,
         }
 
         i {
-            padding-left: 10px;
+            padding-left: 5px;
         }
     }
 
@@ -1829,10 +1829,6 @@ a.sb-btn {
 
 .sb-btn.sb-btn-red {
     background-color: $color-red;
-
-    &:hover {
-        background-color: $color-black;
-    }
 }
 
 .sb-btn-icon {
@@ -3293,6 +3289,20 @@ div ul.sb-menu,
 
     &.sb-rich-card {
         padding: 0;
+    }
+}
+
+
+#ticket-comments {
+    #comments-section {
+        &::-webkit-scrollbar {
+            background: none;
+            width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #d5d5d5;
+            border-radius: 40px;
+        }
     }
 }
 
