@@ -6763,6 +6763,9 @@ textarea {
 .sb-board .sb-conversation .sb-list::-webkit-scrollbar-track {
   background: none;
 }
+.sb-board .sb-conversation .sb-list .sb-thumb img {
+  object-fit: cover;
+}
 .sb-board .sb-conversation .sb-list .sb-message-attachments a {
   color: #1E293B;
   font-weight: 500;
@@ -7200,6 +7203,7 @@ textarea {
 }
 .sb-board .sb-user-details .sb-profile-list ul li img {
   min-height: 19px;
+  min-height: unset;
 }
 .sb-board .sb-user-details .sb-profile-list [data-id=telegram_bcid],
 .sb-board .sb-user-details .sb-profile-list [data-id=token],
@@ -7723,9 +7727,18 @@ ul.pagination li.disabled a {
 
 .sb-area-reports.sb-area-reports_new .sb-top-bar {
   border-bottom: 0;
+  display: block;
+  height: fit-content;
+}
+.sb-area-reports.sb-area-reports_new .sb-top-bar .top-bar-search {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  justify-content: flex-end;
 }
 .sb-area-reports.sb-area-reports_new .sb-top-bar .sb-setting.sb-type-text {
   border-bottom: 0;
+  padding-block: 0 !important;
 }
 .sb-area-reports.sb-area-reports_new .sb-tab {
   gap: 20px;
@@ -15020,6 +15033,11 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-admin .sb-area-reports > .sb-tab > .sb-nav:not(.sb-active) {
     height: fit-content !important;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+  }
+  .sb-area-reports.sb-area-reports_new .sb-top-bar .top-bar-search {
+    padding: 10px 15px;
   }
   .new_container .clmn-gap {
     padding-inline: 10px !important;
@@ -15429,7 +15447,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-chart,
   .sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-sidebar {
-    padding-inline: 10px;
+    padding-inline: 15px;
     border: 1px solid rgba(213, 213, 213, 0.4705882353);
   }
   .sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-sidebar {
@@ -15480,6 +15498,18 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-admin .header_new .sidebar .powered-by {
     flex-direction: column;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back {
+    padding-inline: 15px;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back .tablet-sizee .row div a.sb-btn {
+    min-width: fit-content;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back .tablet-sizee .row .table-rightside {
+    margin-bottom: 0;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 0;
   }
   .sb-account-box.sb-admin .sb-nav {
     position: fixed;
