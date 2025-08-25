@@ -4539,9 +4539,19 @@ ul.pagination {
 .sb-area-reports.sb-area-reports_new {
     .sb-top-bar {
         border-bottom: 0;
+        display: block;
+        height: fit-content;
+
+        .top-bar-search {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            justify-content: flex-end;
+        }
 
         .sb-setting.sb-type-text {
             border-bottom: 0;
+            padding-block: 0 !important;
         }
     }
 
@@ -4918,10 +4928,12 @@ span.badge {
         .sb-td-tags {
             max-width: 373px;
             overflow-x: auto !important;
+
             &::-webkit-scrollbar {
                 background: none;
                 height: 6px;
             }
+
             &::-webkit-scrollbar-thumb {
                 background: #d5d5d5;
                 border-radius: 40px;
@@ -11753,6 +11765,7 @@ i {
         ul {
             max-width: 330px;
             overflow-x: scroll;
+
             &::-webkit-scrollbar {
                 background: none;
                 height: 6px;
@@ -13355,8 +13368,14 @@ main {
         }
     }
 
-    .sb-admin .sb-area-reports > .sb-tab > .sb-nav:not(.sb-active) {
+    .sb-admin .sb-area-reports>.sb-tab>.sb-nav:not(.sb-active) {
         height: fit-content !important;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+    }
+
+    .sb-area-reports.sb-area-reports_new .sb-top-bar .top-bar-search {
+        padding: 10px 15px;
     }
 
     .new_container {
@@ -13457,6 +13476,7 @@ main {
         .row.dt-row {
             .col-sm-12 {
                 overflow: auto;
+
                 &::-webkit-scrollbar-track {
                     height: 6px;
                 }
