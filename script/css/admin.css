@@ -15495,6 +15495,18 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin .header_new .sidebar .powered-by {
     flex-direction: column;
   }
+  .sb-area-ticket-detail .tc_bg .tc_back {
+    padding-inline: 15px;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back .tablet-sizee .row div a.sb-btn {
+    min-width: fit-content;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back .tablet-sizee .row .table-rightside {
+    margin-bottom: 0;
+  }
+  .sb-area-ticket-detail .tc_bg .tc_back .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 0;
+  }
   .sb-account-box.sb-admin .sb-nav {
     position: fixed;
     top: 0%;
