@@ -5695,12 +5695,12 @@ function sb_component_admin()
                                             : sb_("Articles"); ?>
                                     </li>
                                     <?php /*
-                                                                                                                                                           <li id="tab-various">
-                                                                                                                                                               <?php echo $disable_translations
-                                                                                                                                                                   ? "Miscellaneous"
-                                                                                                                                                                   : sb_("Miscellaneous"); ?>
-                                                                                                                                                           </li>
-                                                                                                                                                           */ ?>
+                                        <li id="tab-various">
+                                            <?php echo $disable_translations
+                                                ? "Miscellaneous"
+                                                : sb_("Miscellaneous"); ?>
+                                        </li>
+                                        */ ?>
                                     <?php for (
                                         $i = 0;
                                         $i < count($apps);
