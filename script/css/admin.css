@@ -7532,9 +7532,6 @@ textarea {
   overflow: hidden;
   overflow-y: scroll;
 }
-.tickts-scroll-area .row.dt-row .col-sm-12::-webkit-scrollbar {
-  width: 0;
-}
 
 #customerTable thead tr th.sb-active {
   border-bottom: 1px solid #d5d5d5;
@@ -15021,6 +15018,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin-box_new .register-prompt {
     margin-bottom: 30px;
   }
+  .sb-admin .sb-area-reports > .sb-tab > .sb-nav:not(.sb-active) {
+    height: fit-content !important;
+  }
   .new_container .clmn-gap {
     padding-inline: 10px !important;
   }
@@ -15077,6 +15077,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .tickts-scroll-area .row.dt-row .col-sm-12 {
     overflow: auto;
   }
+  .tickts-scroll-area .row.dt-row .col-sm-12::-webkit-scrollbar-track {
+    height: 6px;
+  }
   .sb-admin .sb-area-users .sb-top-bar {
     overflow: visible;
   }
@@ -15100,6 +15103,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   header .title {
     font-size: 14px !important;
+  }
+  .sb-area-reports .sb-top-bar {
+    height: fit-content !important;
   }
   .sb-setting > .input {
     width: fit-content;

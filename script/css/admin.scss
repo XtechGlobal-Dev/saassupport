@@ -4278,10 +4278,6 @@ textarea {
             max-height: calc(100vh - 290px);
             overflow: hidden;
             overflow-y: scroll;
-
-            &::-webkit-scrollbar {
-                width: 0;
-            }
         }
     }
 }
@@ -13359,6 +13355,10 @@ main {
         }
     }
 
+    .sb-admin .sb-area-reports > .sb-tab > .sb-nav:not(.sb-active) {
+        height: fit-content !important;
+    }
+
     .new_container {
         .clmn-gap {
             padding-inline: 10px !important;
@@ -13457,6 +13457,9 @@ main {
         .row.dt-row {
             .col-sm-12 {
                 overflow: auto;
+                &::-webkit-scrollbar-track {
+                    height: 6px;
+                }
             }
         }
     }
@@ -13495,6 +13498,12 @@ main {
     header {
         .title {
             font-size: 14px !important;
+        }
+    }
+
+    .sb-area-reports {
+        .sb-top-bar {
+            height: fit-content !important;
         }
     }
 
