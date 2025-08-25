@@ -2818,7 +2818,7 @@ textarea {
 
 .choices__list--dropdown,
 .choices__list[aria-expanded] {
-    z-index: 6 !important;
+    z-index: 12 !important;
 }
 
 /*
@@ -3290,6 +3290,10 @@ textarea {
             height: 100%;
             padding: 10px 0 5px 0;
             overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 0;
+            }
 
             &::-webkit-scrollbar-track {
                 background: none;
@@ -4913,6 +4917,23 @@ span.badge {
     }
 }
 
+.table-responsive {
+    #ticketTable {
+        .sb-td-tags {
+            max-width: 373px;
+            overflow-x: auto !important;
+            &::-webkit-scrollbar {
+                background: none;
+                height: 4px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #d5d5d5;
+                border-radius: 40px;
+            }
+        }
+    }
+}
+
 ul.pagination {
     li {
         a.page-link {
@@ -5272,7 +5293,9 @@ ul.pagination {
                         }
                     }
 
-                    .tickets-pending, .tickets-resolved, .tickets-created {
+                    .tickets-pending,
+                    .tickets-resolved,
+                    .tickets-created {
                         color: #111827;
                         font-family: "InterBold";
                     }
@@ -7103,7 +7126,8 @@ span.initials.avatar_name {
     left: 1px;
 }
 
-#tickets-statuses-fields, #tickets-custom-fields {
+#tickets-statuses-fields,
+#tickets-custom-fields {
     .card-body {
         padding-inline: 0;
     }
@@ -10767,6 +10791,7 @@ table {
 
     &.table.dataTable {
         margin-top: 0 !important;
+
         tbody {
             tr {
                 td {
@@ -12913,6 +12938,7 @@ main {
             .sb-top {
                 .sb-flex {
                     gap: 20px;
+
                     .sb-filter-btn {
                         padding-top: 0;
                     }
@@ -12972,7 +12998,7 @@ main {
         }
     }
 
-    .sb-area-conversations > i.sb-btn-collapse.sb-right.sb-icon-arrow-right {
+    .sb-area-conversations>i.sb-btn-collapse.sb-right.sb-icon-arrow-right {
         display: none;
     }
 
@@ -13430,6 +13456,7 @@ main {
         .sb-area-users {
             .sb-top-bar {
                 overflow: visible;
+
                 div {
                     .sb-btn.sb-icon {
                         text-indent: unset;

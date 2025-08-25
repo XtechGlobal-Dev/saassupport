@@ -6375,7 +6375,7 @@ textarea {
 
 .choices__list--dropdown,
 .choices__list[aria-expanded] {
-  z-index: 6 !important;
+  z-index: 12 !important;
 }
 
 /*
@@ -6756,6 +6756,9 @@ textarea {
   height: 100%;
   padding: 10px 0 5px 0;
   overflow-y: scroll;
+}
+.sb-board .sb-conversation .sb-list::-webkit-scrollbar {
+  width: 0;
 }
 .sb-board .sb-conversation .sb-list::-webkit-scrollbar-track {
   background: none;
@@ -8210,6 +8213,19 @@ span.badge[data-color=gray] {
   margin-right: 0;
 }
 
+.table-responsive #ticketTable .sb-td-tags {
+  max-width: 373px;
+  overflow-x: auto !important;
+}
+.table-responsive #ticketTable .sb-td-tags::-webkit-scrollbar {
+  background: none;
+  height: 4px;
+}
+.table-responsive #ticketTable .sb-td-tags::-webkit-scrollbar-thumb {
+  background: #d5d5d5;
+  border-radius: 40px;
+}
+
 ul.pagination li a.page-link {
   color: #696969;
   font-weight: 400;
@@ -8470,7 +8486,9 @@ ul.pagination li.active a.page-link {
   color: #666;
   font-weight: normal;
 }
-.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-resolved, .sb-area-dashboard main .new_container .main-charts .button_ext .tickets-created {
+.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-pending,
+.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-resolved,
+.sb-area-dashboard main .new_container .main-charts .button_ext .tickets-created {
   color: #111827;
   font-family: "InterBold";
 }
@@ -9990,7 +10008,8 @@ span.initials.avatar_name {
   left: 1px;
 }
 
-#tickets-statuses-fields .card-body, #tickets-custom-fields .card-body {
+#tickets-statuses-fields .card-body,
+#tickets-custom-fields .card-body {
   padding-inline: 0;
 }
 
