@@ -288,7 +288,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <?php sb_e('Manage profile') ?>
                     </h2>
                     <p>
-                        <?php sb_e('Update here your profile information.') ?>
+                        <?php sb_e('Update your Profile Information here.') ?>
                     </p>
                     <div id="first_name" data-type="text" class="sb-input">
                         <span>
