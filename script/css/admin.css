@@ -8219,7 +8219,7 @@ span.badge[data-color=gray] {
 }
 .table-responsive #ticketTable .sb-td-tags::-webkit-scrollbar {
   background: none;
-  height: 4px;
+  height: 6px;
 }
 .table-responsive #ticketTable .sb-td-tags::-webkit-scrollbar-thumb {
   background: #d5d5d5;
@@ -13123,6 +13123,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar {
   background: none;
   width: 0px;
+  max-height: 8px;
 }
 #ticketTable_wrapper .row:nth-child(2) .col-sm-12::-webkit-scrollbar-thumb {
   background: #e5e5e5;
@@ -13899,6 +13900,13 @@ i.fa-solid.fa-x.delete-attachment {
   .sb-menu-wide_new ul {
     max-width: 330px;
     overflow-x: scroll;
+  }
+  .sb-menu-wide_new ul::-webkit-scrollbar {
+    background: none;
+    height: 6px;
+  }
+  .sb-menu-wide_new ul::-webkit-scrollbar-thumb {
+    background: #d5d5d5;
   }
   .sb-menu-wide_new ul li {
     min-width: fit-content;
