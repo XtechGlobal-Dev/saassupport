@@ -2179,7 +2179,8 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Agent ratings';
             $description = 'Ratings assigned to agents.';
             $table = [sb_('Agent name'), sb_('Ratings')];
-            $chart_type = 'horizontalBar';
+            //$chart_type = 'horizontalBar';
+            $chart_type = 'bar';
             $time_range = false;
             $label_type = 3;
             break;
@@ -2236,7 +2237,8 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Article ratings';
             $description = 'Ratings assigned to articles by users.';
             $table = [sb_('Article name'), sb_('Ratings')];
-            $chart_type = 'horizontalBar';
+            //$chart_type = 'horizontalBar';
+            $chart_type = 'bar';
             $time_range = false;
             $label_type = 3;
             break;
@@ -2246,7 +2248,8 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Article views';
             $description = 'Number of times articles have been viewed by users.';
             if ($report_name == 'articles-views-single') {
-                $chart_type = 'horizontalBar';
+                //$chart_type = 'horizontalBar';
+                $chart_type = 'bar';
                 $time_range = false;
                 $table = [sb_('Article'), sb_('Count')];
             }
