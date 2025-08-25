@@ -14128,6 +14128,31 @@ main {
         }
     }
 
+    .sb-area-ticket-detail {
+        .tc_bg {
+            .tc_back {
+                padding-inline: 15px;
+                .tablet-sizee {
+                    .row {
+                        div {
+                            a.sb-btn {
+                                min-width: fit-content;
+                            }
+                        }
+                        .table-rightside {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                .ql-toolbar.ql-snow {
+                    .ql-formats {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
     .sb-account-box.sb-admin {
         .sb-nav {
             position: fixed;
