@@ -6763,6 +6763,9 @@ textarea {
 .sb-board .sb-conversation .sb-list::-webkit-scrollbar-track {
   background: none;
 }
+.sb-board .sb-conversation .sb-list .sb-thumb img {
+  object-fit: cover;
+}
 .sb-board .sb-conversation .sb-list .sb-message-attachments a {
   color: #1E293B;
   font-weight: 500;
@@ -7200,6 +7203,7 @@ textarea {
 }
 .sb-board .sb-user-details .sb-profile-list ul li img {
   min-height: 19px;
+  min-height: unset;
 }
 .sb-board .sb-user-details .sb-profile-list [data-id=telegram_bcid],
 .sb-board .sb-user-details .sb-profile-list [data-id=token],
