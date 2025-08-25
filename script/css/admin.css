@@ -15260,12 +15260,13 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     height: fit-content;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a svg, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a svg {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a svg path, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a svg path {
-    stroke: #fff;
-    fill: #fff;
+    stroke: #5e5e5e;
+    fill: #ffffff;
+    stroke-width: 1.5px;
   }
   .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(1) a span, .sb-board .sb-conversation .sb-menu-mobile ul li:nth-child(2) a span {
     display: none;
