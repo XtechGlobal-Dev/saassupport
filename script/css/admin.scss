@@ -3299,6 +3299,12 @@ textarea {
                 background: none;
             }
 
+            .sb-thumb {
+                img {
+                    object-fit: cover;
+                }
+            }
+
             .sb-message-attachments {
                 a {
                     color: #1E293B;
@@ -3857,6 +3863,7 @@ textarea {
 
                     img {
                         min-height: 19px;
+                        min-height: unset;
                     }
                 }
             }
