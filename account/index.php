@@ -920,12 +920,16 @@ function box_chart()
                     <?php sb_e('Password') ?>
                 </span>
                 <input id="reset-password-1" type="password" required autocomplete="off"/>
+                <i class="far fa-eye" id="togglePassword"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
             </div>
             <div class="sb-input">
                 <span>
                     <?php sb_e('Repeat password') ?>
                 </span>
                 <input id="reset-password-2" type="password" required autocomplete="off"/>
+                <i class="far fa-eye" id="togglePassword"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
             </div>
             <div class="sb-bottom">
                 <div class="sb-btn btn-reset-password-2">
