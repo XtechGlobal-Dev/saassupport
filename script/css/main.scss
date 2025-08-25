@@ -120,6 +120,31 @@
     }
 }
 
+#registration {
+    .sb-content {
+        max-height: 440px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 3px;
+            background: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d5d5d5;
+            border-radius: 40px;
+        }
+    }
+    #phone {
+        .sb-select-phone {
+            .sb-scroll-area {
+                right: -54px;
+                top: 36px;
+            }
+        }
+    }
+}
+
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active {
     .wave-bg {
         margin-top: 108px !important;
