@@ -9234,7 +9234,7 @@
                     infoPanel('The changes will be lost.', 'alert', () => {
                         let id = item.attr('data-id');
                         if (!id && !active) {
-                            // SBArticles.clear();
+                            SBArticles.clear();
                         } else {
                             SBArticles.show(id && !active ? id : SBArticles.activeID(true));
                         }
