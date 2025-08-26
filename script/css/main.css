@@ -4894,10 +4894,14 @@ div ul.sb-menu li:hover,
   min-height: 200px;
   box-sizing: border-box;
   max-height: 350px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .sb-chat .sb-scroll-area > .sb-list::-webkit-scrollbar {
-  width: 0;
+  width: 4px;
+}
+.sb-chat .sb-scroll-area > .sb-list::-webkit-scrollbar-thumb {
+  background: #d5d5d5;
+  border-radius: 40px;
 }
 .sb-chat .sb-scroll-area > .sb-list .sb-notify-message {
   position: absolute;
