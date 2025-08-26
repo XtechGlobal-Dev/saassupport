@@ -6446,7 +6446,7 @@ textarea {
 }
 .sb-board > .sb-admin-list > .sb-top .sb-select p {
   color: #1E293B;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-family: "InterSemiBold";
   display: flex;
   align-items: center;
@@ -7505,6 +7505,37 @@ textarea {
   line-height: 8px;
   font-weight: 400;
   background: none;
+}
+
+#banner-we-sent-you-a-secret-code {
+  width: 100%;
+}
+#banner-we-sent-you-a-secret-code > div {
+  padding-top: 20px;
+}
+#banner-we-sent-you-a-secret-code #btn-verify-code {
+  line-height: 36px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  border-radius: 8px;
+  min-width: 0;
+  background-color: #006ff9;
+  text-decoration: none;
+  color: #fff;
+  height: 35px;
+  padding: 0 25px;
+  position: relative;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.4s;
+  user-select: none;
+  font-size: 14px;
+  margin-left: 0;
+  margin-top: 20px;
 }
 
 #add-conversation-to-ticket {
@@ -8965,6 +8996,10 @@ span.initials.avatar_name {
 
 #ticket-comments .col-md-12 {
   padding: 0;
+}
+
+#test-sms-user, #test-sms-agent {
+  display: none;
 }
 
 /*
