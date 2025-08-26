@@ -8998,6 +8998,10 @@ span.initials.avatar_name {
   padding: 0;
 }
 
+#test-sms-user, #test-sms-agent {
+  display: none;
+}
+
 /*
  * -----------------------------------------------------------
  * USERS AREA
