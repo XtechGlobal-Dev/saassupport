@@ -2896,7 +2896,7 @@ textarea {
             .sb-select {
                 p {
                     color: #1E293B;
-                    font-size: 14px !important;
+                    font-size: 13px !important;
                     font-family: 'InterSemiBold';
                     display: flex;
                     align-items: center;
@@ -4248,6 +4248,38 @@ textarea {
             font-weight: 400;
             background: none;
         }
+    }
+}
+
+#banner-we-sent-you-a-secret-code {
+    width: 100%;
+    > div {
+        padding-top: 20px;
+    }
+
+    #btn-verify-code {
+        line-height: 36px;
+        letter-spacing: 0.3px;
+        font-weight: 500;
+        border-radius: 8px;
+        min-width: 0;
+        background-color: #006ff9;
+        text-decoration: none;
+        color: #fff;
+        height: 35px;
+        padding: 0 25px;
+        position: relative;
+        display: inline-block;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        box-shadow: none;
+        transition: all 0.4s;
+        user-select: none;
+        font-size: 14px;
+        margin-left: 0;
+        margin-top: 20px;
     }
 }
 
@@ -14139,6 +14171,7 @@ main {
         .tc_bg {
             .tc_back {
                 padding-inline: 15px;
+
                 .tablet-sizee {
                     .row {
                         div {
@@ -14146,11 +14179,13 @@ main {
                                 min-width: fit-content;
                             }
                         }
+
                         .table-rightside {
                             margin-bottom: 0;
                         }
                     }
                 }
+
                 .ql-toolbar.ql-snow {
                     .ql-formats {
                         margin-right: 0;

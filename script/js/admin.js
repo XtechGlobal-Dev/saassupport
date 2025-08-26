@@ -3318,7 +3318,7 @@
                 translations.push([language_code, false]);
                 this.list[article_id] = translations;
                 articles_content.sbLanguageSwitcher(translations, 'articles', language_code);
-                SBArticles.clear();
+                // SBArticles.clear();
             },
 
             delete: function (language_code, article_id = false) {
@@ -9234,7 +9234,7 @@
                     infoPanel('The changes will be lost.', 'alert', () => {
                         let id = item.attr('data-id');
                         if (!id && !active) {
-                            SBArticles.clear();
+                            // SBArticles.clear();
                         } else {
                             SBArticles.show(id && !active ? id : SBArticles.activeID(true));
                         }
