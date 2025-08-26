@@ -427,6 +427,14 @@ td.sb-offline:after {
 }
 
 .settings_new {
+    .sb-tab {
+        height: calc(100vh - 78px) !important;
+        .sb-content {
+            height: calc(100vh - 130px);
+            overflow: hidden;
+        }
+    }
+
     .sb-scroll-area {
         .setting_sidebar {
             li {
@@ -471,10 +479,7 @@ td.sb-offline:after {
     }
 
     .sb-content {
-        height: calc(100vh - 128px);
-
-
-
+        height: calc(100vh - 138px);
 
         .users-tab {
             border: 1px solid rgb(209, 213, 219);
@@ -671,6 +676,20 @@ td.sb-offline:after {
 
     [data-value="panel"]:not(.sb-active) {
         display: none;
+    }
+}
+
+.sb-area-users {
+    .sb-top-bar {
+        .sb-menu-mobile {
+            ul {
+                li {
+                    a {
+                        display: flex;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -947,6 +966,12 @@ td.sb-offline:after {
         height: 45px;
         min-width: 45px;
         border-radius: 50%;
+    }
+
+    .avatar_img {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
     }
 
     >span {
@@ -1895,7 +1920,18 @@ textarea {
             .col-sm-12 {
                 padding: 0 !important;
 
+                &::-webkit-scrollbar {
+                    background: none;
+                    width: 6px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: #d5d5d5;
+                    border-radius: 40px;
+                }
+
                 table {
+                    margin-bottom: 0 !important;
 
                     thead,
                     tbody {
@@ -3760,6 +3796,20 @@ textarea {
         }
     }
 
+    .sb-conversation[data-conversation-status="3"] {
+        .sb-top {
+            .sb-menu-mobile {
+                ul {
+                    li {
+                        &:nth-child(3) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .sb-user-details {
         min-width: 400px;
         width: 400px;
@@ -3815,8 +3865,8 @@ textarea {
 
             img,
             .user-initials {
-                min-width: 45px;
-                min-height: 45px;
+                min-width: 40px;
+                min-height: 40px;
             }
 
             .user-initials {
@@ -4251,9 +4301,23 @@ textarea {
     }
 }
 
+.form-select:focus {
+    box-shadow: none !important;
+    border-color: #dee2e6 !important;
+}
+
+.sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active {
+    .sb-profile {
+        .sb-name {
+            padding-left: 35px;
+        }
+    }
+}
+
 #banner-we-sent-you-a-secret-code {
     width: 100%;
-    > div {
+
+    >div {
         padding-top: 20px;
     }
 
@@ -5895,10 +5959,25 @@ span.initials.avatar_name {
 #ticket-comments {
     .col-md-12 {
         padding: 0;
+
+        #comments-section {
+            .comment-row.customer {
+                .comment-bubble {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .comment-text {
+                        min-width: fit-content;
+                    }
+                }
+            }
+        }
     }
 }
 
-#test-sms-user, #test-sms-agent {
+#test-sms-user,
+#test-sms-agent {
     display: none;
 }
 
@@ -11403,7 +11482,7 @@ li.menu_head:hover {
     flex-direction: column;
     gap: 15px;
     overflow-y: scroll;
-    max-height: 64vh;
+    max-height: calc(100vh - 363px);
 
     &::-webkit-scrollbar {
         width: 0;
@@ -12030,7 +12109,7 @@ div#messaging-channels {
 }
 
 .my-tabs {
-    padding: 6px 8px 6px;
+    padding: 6px 8px 7px;
     background: #ECECF0;
     border-radius: 40px;
     width: fit-content;
@@ -13450,12 +13529,11 @@ main {
         }
     }
 
-    // .main-content {
-    // .settings-card {
     .my-tabs {
         overflow-x: scroll;
-        min-width: 67%;
+        min-width: 62%;
         max-width: 95%;
+        max-height: 34px;
 
         .my-tab {
             min-width: fit-content;
@@ -13512,9 +13590,6 @@ main {
         }
     }
 
-    // }
-    // }
-
     .tickts-scroll-area {
         .row.dt-row {
             .col-sm-12 {
@@ -13524,6 +13599,12 @@ main {
                     height: 6px;
                 }
             }
+        }
+    }
+
+    .settings_new {
+        .settings-tab {
+            max-height: calc(100vh - 592px);
         }
     }
 
