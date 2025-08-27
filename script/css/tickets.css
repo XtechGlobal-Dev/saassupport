@@ -1467,7 +1467,7 @@ div ul.sb-menu,
   display: none;
 }
 .sb-list .sb-time i {
-  padding-left: 10px;
+  padding-left: 5px;
 }
 .sb-list .sb-message-media {
   margin: -12px;
@@ -2440,9 +2440,6 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 
 .sb-btn.sb-btn-red {
   background-color: rgb(202, 52, 52);
-}
-.sb-btn.sb-btn-red:hover {
-  background-color: #000000;
 }
 
 .sb-btn-icon {
@@ -3710,6 +3707,15 @@ div ul.sb-menu .li:hover,
 }
 .sb-rich-message.sb-rich-card {
   padding: 0;
+}
+
+#ticket-comments #comments-section::-webkit-scrollbar {
+  background: none;
+  width: 6px;
+}
+#ticket-comments #comments-section::-webkit-scrollbar-thumb {
+  background: #d5d5d5;
+  border-radius: 40px;
 }
 
 .sb-list .sb-rich-registration .sb-buttons,
@@ -5401,7 +5407,7 @@ ul.sb-user-conversations.sb-scroll-area {
   font-weight: 500;
   position: relative;
   margin: 0;
-  padding: 20px;
+  padding: 15px 0;
   cursor: default;
   text-decoration: none;
   line-height: 30px;
