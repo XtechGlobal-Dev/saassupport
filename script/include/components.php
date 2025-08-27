@@ -3627,7 +3627,7 @@ function sb_component_admin()
                                     <!-- <p data-value="0" data-sb-tooltip="Unread Conversations"> -->
                                     <p data-value="0">
 
-                                        <?php sb_e("Inbox"); ?><span data-sb-tooltip="Unread Conversations"></span>
+                                        <?php sb_e("Inbox"); ?><span data-sb-tooltip="Unread Conversations" style="background: #fff;height: 20px;width:20px;display:flex;justify-content: center;align-items:center;border-radius:50%;padding:0;margin-left:4px;"></span>
                                     </p>
                                     <ul>
                                         <li data-value="0" class="sb-active">
