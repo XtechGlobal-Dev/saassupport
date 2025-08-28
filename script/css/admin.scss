@@ -6413,10 +6413,8 @@ span.initials.avatar_name {
                 padding: 10px;
                 border-radius: 8px;
                 min-height: 300px;
-
                 .codex-editor {
                     min-height: 300px;
-
                     &::after {
                         font-size: 20px;
                         bottom: 0;
@@ -6426,6 +6424,7 @@ span.initials.avatar_name {
                         margin: auto;
                         justify-content: center;
                         align-items: center;
+                        display: none;
                     }
 
                     .ce-toolbar__actions {
