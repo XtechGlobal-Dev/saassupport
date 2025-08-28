@@ -4075,7 +4075,7 @@ function sb_component_admin()
                                             <?php sb_e("Last activity"); ?>
                                         </th>
                                         <th data-field="creation_time" class="sb-active">
-                                            <?php sb_e("Registration date"); ?>
+                                            <?php sb_e("Registration date/time"); ?>
                                         </th>
                                     </tr>
                                 </thead>
