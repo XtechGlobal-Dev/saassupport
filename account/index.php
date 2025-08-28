@@ -43,7 +43,8 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         src="../script/js/<?php echo sb_is_debug() ? 'main' : 'min/main.min' ?>.js?v=<?php echo SB_VERSION ?>"></script>
     <link rel="stylesheet" href="../script/css/admin.css?v=<?php echo SB_VERSION ?>" type="text/css" media="all" />
 
-    <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>" media="(max-width: 767px)" />
+    <link rel="stylesheet" href="../script/css/responsive-admin.css?v=<?php echo SB_VERSION ?>"
+        media="(max-width: 767px)" />
     <!-- Manrope font cdn link  -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap"
         rel="stylesheet">
@@ -657,8 +658,18 @@ function box_chart()
                                     <div id="password" class="input-wrapper sb-input">
                                         <input type="password" placeholder="8 Characters or more" class="form-input"
                                             id="password-field-signup" />
-                                        <i class="far fa-eye" id="togglePasswordsignup"
-                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                            color="#000000" fill="none"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"
+                                            id="togglePasswordsignup">
+                                            <path
+                                                d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                            <path
+                                                d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                        </svg>
+
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -674,8 +685,18 @@ function box_chart()
                                     <div id="password_2" class="input-wrapper sb-input">
                                         <input type="password" placeholder="Enter confirm password" class="form-input"
                                             id="password-field-confirm" />
-                                        <i class="far fa-eye" id="togglePasswordconfirm"
-                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                            color="#000000" fill="none"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"
+                                            id="togglePasswordconfirm">
+                                            <path
+                                                d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                            <path
+                                                d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                        </svg>
+
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -686,10 +707,11 @@ function box_chart()
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="auth-options mt-2">
                                 <label class="remember-me">
-                                    <input type="checkbox" id="terms" class="checkbox form-input" checked style="margin-top:5px;" />
+                                    <input type="checkbox" id="terms" class="checkbox form-input" checked
+                                        style="margin-top:5px;" />
                                     <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And
                                         Privacy Policy</span>
                                 </label>
@@ -793,8 +815,18 @@ function box_chart()
                                     <div id="password" class="input-wrapper sb-input">
                                         <input type="password" placeholder="8 Characters or more" minlength="8"
                                             class="form-input" id="passwordfield" />
-                                        <i class="far fa-eye" id="togglePassword"
-                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                            color="#000000" fill="none"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"
+                                            id="togglePassword">
+                                            <path
+                                                d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                            <path
+                                                d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                        </svg>
+
                                         <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
                                             <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
                                                 <path
@@ -902,11 +934,12 @@ function box_chart()
             </div>
         </div>
     </div>
-    <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset'])) echo ' active' ?>">
-        <div class="sb-info"></div>
-        <div class="sb-top-bar">
+    <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset']))
+        echo ' active' ?>">
+            <div class="sb-info"></div>
+            <div class="sb-top-bar">
                 <!-- <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" /> -->
-                <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
+            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
             <div class="sb-title">
                 <?php sb_e('Reset password') ?>
             </div>
@@ -919,15 +952,32 @@ function box_chart()
                 <span>
                     <?php sb_e('Password') ?>
                 </span>
-                <input id="reset-password-1" type="password" required autocomplete="off"/>
-                <i class="far fa-eye" id="toggleResetPassword" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                <input id="reset-password-1" type="password" required autocomplete="off" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                    fill="none" style="margin-left: -30px;margin-right: 10px; cursor: pointer;" id="toggleResetPassword">
+                    <path
+                        d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                        stroke="#141B34" stroke-width="1.5" />
+                    <path
+                        d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                        stroke="#141B34" stroke-width="1.5" />
+                </svg>
             </div>
             <div class="sb-input">
                 <span>
                     <?php sb_e('Repeat password') ?>
                 </span>
-                <input id="reset-password-2" type="password" required autocomplete="off"/>
-                <i class="far fa-eye" id="toggleResetRepeatPassword" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"></i>
+                <input id="reset-password-2" type="password" required autocomplete="off" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                    fill="none" style="margin-left: -30px;margin-right: 10px; cursor: pointer;"
+                    id="toggleResetRepeatPassword">
+                    <path
+                        d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                        stroke="#141B34" stroke-width="1.5" />
+                    <path
+                        d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                        stroke="#141B34" stroke-width="1.5" />
+                </svg>
             </div>
             <div class="sb-bottom">
                 <div class="sb-btn btn-reset-password-2">
