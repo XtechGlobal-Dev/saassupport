@@ -4886,7 +4886,7 @@ div ul.sb-menu li:hover,
   background-size: cover;
   margin: 0;
   overflow-y: hidden;
-  max-height: 480px;
+  max-height: 526px;
   overflow-y: auto;
 }
 .sb-chat .sb-scroll-area > .sb-list {
