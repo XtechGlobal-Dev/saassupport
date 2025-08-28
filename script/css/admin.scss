@@ -2302,12 +2302,13 @@ textarea {
                 padding: 5px 0;
 
                 >a {
-                    height: 50px;
+                    height: 36px;
                     display: block;
                     cursor: pointer;
                     position: relative;
                     transition: $transition;
                     color: $color-black;
+                    padding-top: 0 !important;
 
                     &:before {
                         content: "";
@@ -2514,7 +2515,7 @@ textarea {
         background: $background-gray;
 
         .sidebar {
-            padding: 20px 24px;
+            padding: 20px 9px;
             display: flex;
             flex-direction: column;
 
@@ -2608,6 +2609,7 @@ textarea {
                                 color: #000;
                                 width: 100%;
                                 min-width: 50px;
+                                background-color: #e5eaf0;
 
                                 span {
                                     font-weight: 500;
@@ -3788,7 +3790,7 @@ textarea {
 
             &:hover {
                 border-color: $color-green;
-                background-color: #d8ece3;
+                // background-color: #d8ece3;
             }
         }
 
@@ -6180,6 +6182,9 @@ span.initials.avatar_name {
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
+                &.initials {
+                    padding-left: 0;
+                }
             }
         }
 
@@ -11427,7 +11432,7 @@ li.menu_head:hover {
     z-index: 1002;
 
     &.collapsed {
-        width: 50px;
+        width: 80px;
 
         .logo-text,
         .label,
@@ -11937,7 +11942,7 @@ i {
 
     .sb-menu-wide_new {
         ul {
-            max-width: 330px;
+            max-width: 372px;
             overflow-x: scroll;
 
             &::-webkit-scrollbar {
@@ -12001,7 +12006,7 @@ i {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10px;
+    padding: 10px 6px;
 }
 
 #sb-dashboard .icon-wrapper,
@@ -12029,6 +12034,7 @@ i {
     margin-top: 6px;
     display: block;
     font-size: 11px;
+    word-break: break-all;
 }
 
 .sidebar nav ul li {
@@ -13467,8 +13473,9 @@ main {
 
     .sb-menu-wide_new {
         ul {
-            max-width: 304px;
+            max-width: 242px;
             overflow-x: scroll;
+            padding-right: 31px;
 
             li {
                 min-width: fit-content;

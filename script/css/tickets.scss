@@ -1238,6 +1238,15 @@ ul.sb-user-conversations.sb-scroll-area {
 */
 
 .sb-tickets {
+    .user_header {
+        .header_left {
+            h2 {
+                &:nth-child(2) {
+                    display: none;
+                }
+            }
+        }
+    }
     .sb-panel-main {
         position: relative;
         padding: 0 !important;
