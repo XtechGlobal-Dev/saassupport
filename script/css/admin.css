@@ -9193,6 +9193,7 @@ span.initials.avatar_name {
   font-size: 20px;
   line-height: 45px;
   white-space: nowrap;
+  padding-left: 35px;
 }
 .sb-profile-box .sb-top-bar > div > [data-value] + .sb-btn {
   margin-left: 15px;
