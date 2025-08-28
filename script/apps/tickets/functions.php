@@ -271,7 +271,7 @@ function sb_component_tickets()
                 </div>
                 <div class="sb-conversation">
                     <div class="sb-list"></div>
-                    <?php sb_component_editor(true); ?>
+                    <?php sb_component_editor(false); ?>
                     <div class="sb-no-conversation-message">
                         <div>
                             <label>
