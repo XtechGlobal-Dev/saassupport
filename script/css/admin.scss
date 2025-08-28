@@ -3912,10 +3912,10 @@ textarea {
                         left: 0;
                     }
 
-                    img {
-                        min-height: 19px;
-                        min-height: unset;
-                    }
+                    // img {
+                    //     min-height: 19px;
+                    //     min-height: unset;
+                    // }
                 }
             }
 
@@ -5162,7 +5162,7 @@ ul.pagination {
             .dashboard-metrics {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
+                gap: 10px;
                 margin-bottom: 15px;
 
                 .metric-card {
@@ -5544,6 +5544,14 @@ ul.pagination {
                     border-radius: 0;
                     overflow-y: scroll;
                     padding: 1rem 1.5rem 1.5rem !important;
+                    ul.recent-messages {
+                        li {
+
+                            &:last-child {
+                                margin-bottom: 0 !important;
+                            }
+                        }
+                    }
 
                     .avatar {
                         width: 45px;
@@ -5697,6 +5705,9 @@ ul.pagination {
                 font-weight: 700;
                 font-size: 16px;
                 color: $color-black;
+                span.tno {
+                    min-width: fit-content;
+                }
             }
 
             .sub_title {
@@ -6165,6 +6176,10 @@ span.initials.avatar_name {
                 line-height: 45px;
                 white-space: nowrap;
                 padding-left: 35px;
+                max-width: 350px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
         }
 
@@ -6283,6 +6298,16 @@ span.initials.avatar_name {
     &.sb-type-agent .sb-agent-area,
     &.sb-type-admin .sb-agent-area {
         display: block;
+    }
+}
+
+.sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active {
+    .sb-top-bar {
+        .sb-profile {
+            img {
+                position: absolute;
+            }
+        }
     }
 }
 
@@ -6413,8 +6438,10 @@ span.initials.avatar_name {
                 padding: 10px;
                 border-radius: 8px;
                 min-height: 300px;
+
                 .codex-editor {
                     min-height: 300px;
+
                     &::after {
                         font-size: 20px;
                         bottom: 0;
@@ -12949,12 +12976,15 @@ main {
                 .articles_bg {
                     .input_container {
                         width: 48%;
+
                         textarea {
                             min-height: 140px;
                         }
+
                         &:nth-child(2) {
                             margin-bottom: 0 !important;
                         }
+
                         &:nth-child(4) {
                             h2 {
                                 margin-bottom: 0 !important;
@@ -13212,7 +13242,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 188px !important;
+                            height: 183px !important;
                         }
                     }
                 }
