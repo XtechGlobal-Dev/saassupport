@@ -5952,12 +5952,13 @@ textarea {
   padding: 5px 0;
 }
 .sb-admin > .sb-header > .sb-admin-nav > div > a {
-  height: 50px;
+  height: 36px;
   display: block;
   cursor: pointer;
   position: relative;
   transition: all 0.4s;
   color: #000000;
+  padding-top: 0 !important;
 }
 .sb-admin > .sb-header > .sb-admin-nav > div > a:before {
   content: "";
@@ -6132,7 +6133,7 @@ textarea {
   background: #edf2f9;
 }
 .sb-admin .header_new .sidebar {
-  padding: 20px 24px;
+  padding: 20px 9px;
   display: flex;
   flex-direction: column;
 }
@@ -6211,6 +6212,7 @@ textarea {
   color: #000;
   width: 100%;
   min-width: 50px;
+  background-color: #e5eaf0;
 }
 .sb-admin .header_new .sidebar nav ul li a.sb-active span {
   font-weight: 500;
@@ -7138,7 +7140,6 @@ textarea {
 }
 .sb-board .sb-conversation [data-value=archive]:hover {
   border-color: rgb(26, 146, 96);
-  background-color: #d8ece3;
 }
 .sb-board .sb-conversation [data-value=delete]:hover i {
   color: rgb(202, 52, 52) !important;
@@ -9200,6 +9201,9 @@ span.initials.avatar_name {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.sb-profile-box .sb-top-bar .sb-profile span.initials {
+  padding-left: 0;
 }
 .sb-profile-box .sb-top-bar > div > [data-value] + .sb-btn {
   margin-left: 15px;
@@ -13657,7 +13661,7 @@ li.menu_head:hover {
   z-index: 1002;
 }
 .sidebar.collapsed {
-  width: 50px;
+  width: 80px;
 }
 .sidebar.collapsed .logo-text,
 .sidebar.collapsed .label,
@@ -14023,7 +14027,7 @@ i.fa-solid.fa-x.delete-attachment {
 
 @media (max-width: 1540px) {
   .sb-menu-wide_new ul {
-    max-width: 330px;
+    max-width: 372px;
     overflow-x: scroll;
   }
   .sb-menu-wide_new ul::-webkit-scrollbar {
@@ -14069,7 +14073,7 @@ i.fa-solid.fa-x.delete-attachment {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px;
+  padding: 10px 6px;
 }
 
 #sb-dashboard .icon-wrapper,
@@ -14097,6 +14101,7 @@ i.fa-solid.fa-x.delete-attachment {
   margin-top: 6px;
   display: block;
   font-size: 11px;
+  word-break: break-all;
 }
 
 .sidebar nav ul li {
@@ -15093,8 +15098,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     bottom: 4px;
   }
   .sb-menu-wide_new ul {
-    max-width: 304px;
+    max-width: 242px;
     overflow-x: scroll;
+    padding-right: 31px;
   }
   .sb-menu-wide_new ul li {
     min-width: fit-content;
