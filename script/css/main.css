@@ -4886,6 +4886,8 @@ div ul.sb-menu li:hover,
   background-size: cover;
   margin: 0;
   overflow-y: hidden;
+  max-height: 480px;
+  overflow-y: auto;
 }
 .sb-chat .sb-scroll-area > .sb-list {
   float: left;
@@ -4893,8 +4895,6 @@ div ul.sb-menu li:hover,
   width: 100%;
   min-height: 200px;
   box-sizing: border-box;
-  max-height: 350px;
-  overflow-y: auto;
 }
 .sb-chat .sb-scroll-area > .sb-list::-webkit-scrollbar {
   width: 4px;
