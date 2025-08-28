@@ -2531,7 +2531,7 @@ textarea {
                 &::before {
                     position: absolute;
                     bottom: 0;
-                    left: -24px;
+                    left: -8px;
                     right: 0;
                     content: "";
                     height: 1.3px;
@@ -5546,6 +5546,7 @@ ul.pagination {
                     border-radius: 0;
                     overflow-y: scroll;
                     padding: 1rem 1.5rem 1.5rem !important;
+
                     ul.recent-messages {
                         li {
 
@@ -5707,6 +5708,7 @@ ul.pagination {
                 font-weight: 700;
                 font-size: 16px;
                 color: $color-black;
+
                 span.tno {
                     min-width: fit-content;
                 }
@@ -6182,6 +6184,7 @@ span.initials.avatar_name {
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
+
                 &.initials {
                     padding-left: 0;
                 }
@@ -6397,6 +6400,26 @@ span.initials.avatar_name {
     }
 }
 
+.ql-editor li[data-list="bullet"] {
+  list-style-type: disc;
+  &::before {
+    content: none !important;
+  }
+}
+.ql-editor li[data-list="ordered"] {
+  list-style-type: decimal;
+  &::before {
+    content: none !important;
+  }
+}
+
+.codex-editor {
+    ul {
+        list-style-type: disc !important;
+        margin-left: 30px;
+    }
+}
+
 .sb-tab {
 
     .sb-content-articles,
@@ -6414,6 +6437,9 @@ span.initials.avatar_name {
 
         .input_container {
             width: 48%;
+            .sb-language-switcher {
+                display: none;
+            }
 
             select {
                 option {
@@ -12682,18 +12708,6 @@ main {
     }
 }
 
-.sb-board {
-    .sb-admin-list {
-        .sb-top {
-            .sb-select {
-                ul.sb-active {
-                    top: -10%;
-                }
-            }
-        }
-    }
-}
-
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
         max-width: 200px;
@@ -13001,6 +13015,19 @@ main {
             }
         }
     }
+
+    .sb-board {
+        .sb-admin-list {
+            .sb-top {
+                .sb-select {
+                    ul.sb-active {
+                        top: -10%;
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 @media (min-width: 1020px) {
