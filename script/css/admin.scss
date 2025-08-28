@@ -2515,7 +2515,7 @@ textarea {
         background: $background-gray;
 
         .sidebar {
-            padding: 20px 24px;
+            padding: 20px 9px;
             display: flex;
             flex-direction: column;
 
@@ -11429,7 +11429,7 @@ li.menu_head:hover {
     z-index: 1002;
 
     &.collapsed {
-        width: 50px;
+        width: 80px;
 
         .logo-text,
         .label,
@@ -12003,7 +12003,7 @@ i {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10px;
+    padding: 10px 6px;
 }
 
 #sb-dashboard .icon-wrapper,
@@ -12031,6 +12031,7 @@ i {
     margin-top: 6px;
     display: block;
     font-size: 11px;
+    word-break: break-all;
 }
 
 .sidebar nav ul li {
