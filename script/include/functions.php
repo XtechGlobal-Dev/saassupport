@@ -35,7 +35,7 @@ global $SB_LOGIN;
 global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
-const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image,
+const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image, CONCAT_WS(" ", c.first_name, c.last_name) as customer_name,
             p.name as priority_name, p.color as priority_color,u.user_type,
             ts.name as status_name, ts.color as status_color,
             (
