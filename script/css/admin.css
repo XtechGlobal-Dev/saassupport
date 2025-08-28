@@ -9401,6 +9401,7 @@ span.initials.avatar_name {
   margin: auto;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 .sb-tab .sb-content-articles .input_container #editorjs .codex-editor .ce-toolbar__actions,
 .sb-tab .sb-content-categories .input_container #editorjs .codex-editor .ce-toolbar__actions {
