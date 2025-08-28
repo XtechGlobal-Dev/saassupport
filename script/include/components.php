@@ -2537,9 +2537,10 @@ function sb_component_admin()
                                     fill="#000000"></path>
                             </svg>
                         </button>
-                        <img width="35"
-                            src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>"
+                       <a id="sb-dashboard">
+                         <img width="35" src="<?php echo $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting('admin-icon', SB_URL . '/media/icon.svg') ?>"
                             alt="Logo" class="logo-icon d-none d-md-flex">
+                       </a>
                         <div class="logo-text">
                             <h1>Nexleon Helpdesk</h1>
                             <p>Agent Admin</p>
@@ -2613,7 +2614,7 @@ function sb_component_admin()
                             <?php if ($active_areas['users']) { ?>
                                 <li><a id="sb-users"><i>
                                             <div class="icon-wrapper">
-                                                <span class="icon-tooltip" data-tooltip="Customers">
+                                                <span class="icon-tooltip" data-tooltip="Customers & Agents">
                                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -2629,7 +2630,7 @@ function sb_component_admin()
                                                     </svg>
                                                 </span>
                                             </div>
-                                        </i><span class="label">Customers</span></a></li>
+                                        </i><span class="label">Customers & Agents</span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
@@ -3546,7 +3547,7 @@ function sb_component_admin()
                                                 <div class="seprator"></div>
                                                 <div class="recent card p-3">
                                                     <ul class="recent-messages list-unstyled" style="min-height:254px;">
-                                                        No massge found
+                                                        No message found
                                                     </ul>
                                                 </div>
                                                 <div class="div"></div>
