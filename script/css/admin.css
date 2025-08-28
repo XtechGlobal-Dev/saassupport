@@ -8370,7 +8370,7 @@ ul.pagination li.active a.page-link {
 .sb-area-dashboard main .new_container .dashboard-metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  gap: 10px;
   margin-bottom: 15px;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card {
@@ -8675,6 +8675,9 @@ ul.pagination li.active a.page-link {
   overflow-y: scroll;
   padding: 1rem 1.5rem 1.5rem !important;
 }
+.sb-area-dashboard main .new_container .main-charts .recent.card ul.recent-messages li:last-child {
+  margin-bottom: 0 !important;
+}
 .sb-area-dashboard main .new_container .main-charts .recent.card .avatar {
   width: 45px;
   height: 45px;
@@ -8805,6 +8808,9 @@ ul.pagination li.active a.page-link {
   font-weight: 700;
   font-size: 16px;
   color: #000000;
+}
+.sb-area-ticket-detail .tc_bg .tc_back .title span.tno {
+  min-width: fit-content;
 }
 .sb-area-ticket-detail .tc_bg .tc_back .sub_title {
   font-weight: 600;
@@ -9194,6 +9200,10 @@ span.initials.avatar_name {
   line-height: 45px;
   white-space: nowrap;
   padding-left: 35px;
+  max-width: 350px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .sb-profile-box .sb-top-bar > div > [data-value] + .sb-btn {
   margin-left: 15px;
@@ -9282,6 +9292,10 @@ span.initials.avatar_name {
 }
 .sb-profile-box.sb-type-agent .sb-agent-area, .sb-profile-box.sb-type-admin .sb-agent-area {
   display: block;
+}
+
+.sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active .sb-top-bar .sb-profile img {
+  position: absolute;
 }
 
 .sb-profile-edit-box .sb-top-bar .sb-profile {
@@ -14956,7 +14970,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 188px !important;
+    height: 183px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;
