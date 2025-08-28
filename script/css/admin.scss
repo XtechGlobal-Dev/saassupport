@@ -2302,12 +2302,13 @@ textarea {
                 padding: 5px 0;
 
                 >a {
-                    height: 50px;
+                    height: 36px;
                     display: block;
                     cursor: pointer;
                     position: relative;
                     transition: $transition;
                     color: $color-black;
+                    padding-top: 0 !important;
 
                     &:before {
                         content: "";
@@ -2608,6 +2609,7 @@ textarea {
                                 color: #000;
                                 width: 100%;
                                 min-width: 50px;
+                                background-color: #e5eaf0;
 
                                 span {
                                     font-weight: 500;
@@ -3788,7 +3790,7 @@ textarea {
 
             &:hover {
                 border-color: $color-green;
-                background-color: #d8ece3;
+                // background-color: #d8ece3;
             }
         }
 
@@ -11937,7 +11939,7 @@ i {
 
     .sb-menu-wide_new {
         ul {
-            max-width: 330px;
+            max-width: 372px;
             overflow-x: scroll;
 
             &::-webkit-scrollbar {
@@ -13467,8 +13469,9 @@ main {
 
     .sb-menu-wide_new {
         ul {
-            max-width: 304px;
+            max-width: 242px;
             overflow-x: scroll;
+            padding-right: 31px;
 
             li {
                 min-width: fit-content;

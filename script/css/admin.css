@@ -5952,12 +5952,13 @@ textarea {
   padding: 5px 0;
 }
 .sb-admin > .sb-header > .sb-admin-nav > div > a {
-  height: 50px;
+  height: 36px;
   display: block;
   cursor: pointer;
   position: relative;
   transition: all 0.4s;
   color: #000000;
+  padding-top: 0 !important;
 }
 .sb-admin > .sb-header > .sb-admin-nav > div > a:before {
   content: "";
@@ -6211,6 +6212,7 @@ textarea {
   color: #000;
   width: 100%;
   min-width: 50px;
+  background-color: #e5eaf0;
 }
 .sb-admin .header_new .sidebar nav ul li a.sb-active span {
   font-weight: 500;
@@ -7138,7 +7140,6 @@ textarea {
 }
 .sb-board .sb-conversation [data-value=archive]:hover {
   border-color: rgb(26, 146, 96);
-  background-color: #d8ece3;
 }
 .sb-board .sb-conversation [data-value=delete]:hover i {
   color: rgb(202, 52, 52) !important;
@@ -14023,7 +14024,7 @@ i.fa-solid.fa-x.delete-attachment {
 
 @media (max-width: 1540px) {
   .sb-menu-wide_new ul {
-    max-width: 330px;
+    max-width: 372px;
     overflow-x: scroll;
   }
   .sb-menu-wide_new ul::-webkit-scrollbar {
@@ -15093,8 +15094,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     bottom: 4px;
   }
   .sb-menu-wide_new ul {
-    max-width: 304px;
+    max-width: 242px;
     overflow-x: scroll;
+    padding-right: 31px;
   }
   .sb-menu-wide_new ul li {
     min-width: fit-content;
