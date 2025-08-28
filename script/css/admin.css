@@ -9202,6 +9202,9 @@ span.initials.avatar_name {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.sb-profile-box .sb-top-bar .sb-profile span.initials {
+  padding-left: 0;
+}
 .sb-profile-box .sb-top-bar > div > [data-value] + .sb-btn {
   margin-left: 15px;
 }

@@ -6182,6 +6182,9 @@ span.initials.avatar_name {
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
+                &.initials {
+                    padding-left: 0;
+                }
             }
         }
 
