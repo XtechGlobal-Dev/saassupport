@@ -35,7 +35,7 @@ global $SB_LOGIN;
 global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
-const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image,
+const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image, CONCAT_WS(" ", c.first_name, c.last_name) as customer_name,
             p.name as priority_name, p.color as priority_color,u.user_type,
             ts.name as status_name, ts.color as status_color,
             (
@@ -2179,7 +2179,8 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Agent ratings';
             $description = 'Ratings assigned to agents.';
             $table = [sb_('Agent name'), sb_('Ratings')];
-            $chart_type = 'horizontalBar';
+            //$chart_type = 'horizontalBar';
+            $chart_type = 'bar';
             $time_range = false;
             $label_type = 3;
             break;
@@ -2236,7 +2237,8 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Article ratings';
             $description = 'Ratings assigned to articles by users.';
             $table = [sb_('Article name'), sb_('Ratings')];
-            $chart_type = 'horizontalBar';
+            //$chart_type = 'horizontalBar';
+            $chart_type = 'bar';
             $time_range = false;
             $label_type = 3;
             break;
@@ -2246,7 +2248,8 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Article views';
             $description = 'Number of times articles have been viewed by users.';
             if ($report_name == 'articles-views-single') {
-                $chart_type = 'horizontalBar';
+                //$chart_type = 'horizontalBar';
+                $chart_type = 'bar';
                 $time_range = false;
                 $table = [sb_('Article'), sb_('Count')];
             }

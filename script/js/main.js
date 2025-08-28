@@ -763,8 +763,16 @@
         },
 
         // Escape a string
-        escape: function (string) {
-            return string ? string.replace(/</ig, '&lt;').replace(/javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup/ig, '') : '';
+        // escape: function (string) {
+        //     return string ? string.replace(/</ig, '&lt;').replace(/javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup/ig, '') : '';
+        // },
+
+            escape: function (string) {
+            return string
+            ? string
+                .replace(/</ig, '&lt;')
+                .replace(/\b(?:javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup)\b/ig, '')
+            : '';
         },
 
         // Remove the Support Board syntax from a string

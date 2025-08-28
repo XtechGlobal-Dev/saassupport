@@ -525,6 +525,44 @@ function sb_delete_users($user_ids) {
     $query = substr($query, 0, -1);
     $ids = array_column(sb_db_get('SELECT id FROM sb_conversations WHERE user_id IN (' . $query . ')', false), 'id');
     $profile_images = sb_db_get('SELECT profile_image FROM sb_users WHERE id IN (' . $query . ')', false);
+    ////////////// Close tickets after deleting the custom ////////////////////////////
+    $ticket_ids = array_column(sb_db_get('SELECT id FROM sb_tickets WHERE contact_id IN (' . $query . ')', false), 'id');
+    $active_user = sb_get_active_user();
+    for ($i = 0; $i < count($ticket_ids); $i++) {
+        sb_db_query('UPDATE sb_tickets SET status_id = "5" WHERE id = '.$ticket_ids[$i]);
+        $reporter = sb_db_get('SELECT contact_id from sb_tickets WHERE id = '.$ticket_ids[$i],true);
+
+        $query2 = "UPDATE sb_tickets
+        SET notes = CASE
+            WHEN notes IS NULL OR notes = '' THEN
+                JSON_OBJECT(
+                    'ops',
+                    JSON_ARRAY(
+                        JSON_OBJECT(
+                            'insert', 'This ticket has been closed on ".sb_gmt_now()." as customer #".$reporter['contact_id']." has been deleted by agent/admin #".$active_user['id']."\n',
+                            'attributes', JSON_OBJECT('italic', TRUE)
+                        )
+                    )
+                )
+            ELSE
+                JSON_OBJECT(
+                    'ops',
+                    JSON_ARRAY_APPEND(
+                        JSON_EXTRACT(notes, '$.ops'),
+                        '$',
+                        JSON_OBJECT(
+                            'insert', 'This ticket has been closed on ".sb_gmt_now()." as customer #".$reporter['contact_id']." has been deleted by agent/admin #".$active_user['id']."\n',
+                            'attributes', JSON_OBJECT('italic', TRUE)
+                        )
+                    )
+                )
+        END
+        WHERE id =".$ticket_ids[$i]; 
+
+        sb_db_query($query2);
+    }
+
+
     for ($i = 0; $i < count($ids); $i++) {
         sb_delete_attachments($ids[$i]);
     }
@@ -2254,6 +2292,7 @@ function update_ticket_detail($inputs,$ticket_id =0){
             //'service_id' => sb_db_escape($inputs['service_id'][0],true),
             'department_id' => isset($inputs['department']) ?  sb_db_escape($inputs['department'],true) : 0,
             'description' => sb_db_escape($inputs['description']),
+            'reporter' => sb_db_escape($inputs['reporter'])
         ];
 
     $customFields = array();
@@ -2272,6 +2311,14 @@ function update_ticket_detail($inputs,$ticket_id =0){
     {
         $assigned_to = "'".$data['assigned_to']."'";
     }
+    if($data['reporter'] == 0)
+    {
+        $reporter ="NULL";
+    }
+    else    
+    {
+        $reporter = "'".$data['reporter']."'";
+    }
     if($data['department_id'] == 0)
     {
         $department_id ="NULL";
@@ -2289,7 +2336,7 @@ function update_ticket_detail($inputs,$ticket_id =0){
     //     $data['conversation_id'] = "'".$data['conversation_id']."'";
     // }
 
-    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."',updated_by= '".sb_get_active_user_ID()."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
+    $sql = "UPDATE sb_tickets SET assigned_to = $assigned_to,contact_id = $reporter, priority_id = '".$data['priority_id']."', department_id = $department_id, description = '".$data['description']."',updated_by= '".sb_get_active_user_ID()."', updated_at = '".sb_gmt_now()."' WHERE id = '".$ticket_id."'";
     sb_db_query($sql);
 
     ///// Update ticket custom fields

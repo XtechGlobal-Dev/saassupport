@@ -4878,9 +4878,9 @@ function sb_component_admin()
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <div class="field-label required-label">Reporter</div>
+                                                                <div class="field-label required-label">Customer</div>
                                                                 <div class="d-flex align-items-center gap-2 ticket-reporter">
-                                                                    <img class="reporter-img" src="" alt="Reporter"
+                                                                    <img class="reporter-img" src="" alt="Customer"
                                                                         style="width: 40px;">
                                                                     <span class="user-initials avatar_initials"
                                                                         style="display:none;">
