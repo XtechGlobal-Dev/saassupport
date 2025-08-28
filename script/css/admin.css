@@ -7231,10 +7231,6 @@ textarea {
   position: absolute;
   left: 0;
 }
-.sb-board .sb-user-details .sb-profile-list ul li img {
-  min-height: 19px;
-  min-height: unset;
-}
 .sb-board .sb-user-details .sb-profile-list [data-id=telegram_bcid],
 .sb-board .sb-user-details .sb-profile-list [data-id=token],
 .sb-board .sb-user-details .sb-profile-list [data-id=woocommerce_session_key],
