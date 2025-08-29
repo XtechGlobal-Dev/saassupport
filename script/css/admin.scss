@@ -11172,6 +11172,23 @@ table {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        .login-form {
+            .form-fields {
+                .field-container {
+                    .input-wrapper {
+                        flex-direction: column;
+                        position: relative;
+                        align-items: flex-start;
+                        svg {
+                            position: absolute;
+                            right: 0px;
+                            top: 16px;
+                            z-index: 3;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .login-title {
