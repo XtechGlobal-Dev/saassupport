@@ -1723,7 +1723,8 @@ function get_recent_messages()
     $query = "
         SELECT m.message, m.creation_time, m.conversation_id, u.id AS user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS user_name, u.profile_image
         FROM  sb_messages AS m
-        INNER JOIN  sb_users AS u ON m.user_id = u.id
+        INNER JOIN sb_users AS u ON m.user_id = u.id
+        INNER JOIN sb_conversations as c ON m.conversation_id = c.id
         INNER JOIN 
         (
             SELECT 
@@ -1734,7 +1735,8 @@ function get_recent_messages()
             GROUP BY 
                 conversation_id
         ) AS latest
-    ON  m.conversation_id = latest.conversation_id  AND m.creation_time = latest.latest_time
+    ON  m.conversation_id = latest.conversation_id  AND m.creation_time = latest.latest_time  
+    Where c.status_code NOT IN (3,4) 
     ORDER BY m.creation_time DESC LIMIT 5;
     ";
     $result = sb_db_get($query,false);
