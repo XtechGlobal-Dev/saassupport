@@ -845,7 +845,7 @@
       "type": "repeater",
       "id": "user-table-extra-columns",
       "title": "Users table additional columns",
-      "content": "Displays additional columns in the user table. Enter the name of the fields to add.",
+      "content": "Displays additional columns in the user table. Enter the name of the fields to add. You can add the following fields: phone, os, creation_time, current_url, browser_language, browser",
       "help": "https://board.support/docs/#user-table-extra-columns",
       "items": [
         {
