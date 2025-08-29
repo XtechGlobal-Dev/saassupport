@@ -5504,8 +5504,8 @@ div ul.sb-menu li:hover,
   position: relative;
   z-index: 2;
   margin-top: 210px;
-  min-height: 305px;
-  max-height: 305px;
+  min-height: 350px;
+  max-height: 350px;
   background: none;
   overflow-y: scroll;
 }
