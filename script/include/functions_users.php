@@ -522,14 +522,15 @@ function sb_delete_users($user_ids) {
             }
         }
     }
+
     $query = substr($query, 0, -1);
     $ids = array_column(sb_db_get('SELECT id FROM sb_conversations WHERE user_id IN (' . $query . ')', false), 'id');
     $profile_images = sb_db_get('SELECT profile_image FROM sb_users WHERE id IN (' . $query . ')', false);
     ////////////// Close tickets after deleting the custom ////////////////////////////
-    $ticket_ids = array_column(sb_db_get('SELECT id FROM sb_tickets WHERE contact_id IN (' . $query . ')', false), 'id');
+    $ticket_ids = array_column(sb_db_get('SELECT id FROM sb_tickets WHERE contact_id IN (' . implode(",",$user_ids) . ')', false), 'id');
     $active_user = sb_get_active_user();
     for ($i = 0; $i < count($ticket_ids); $i++) {
-        sb_db_query('UPDATE sb_tickets SET status_id = "5" WHERE id = '.$ticket_ids[$i]);
+        sb_db_query('UPDATE sb_tickets SET status_id = 5, contact_id = NULL, conversation_id = NULL WHERE id = '.$ticket_ids[$i]);
         $reporter = sb_db_get('SELECT contact_id from sb_tickets WHERE id = '.$ticket_ids[$i],true);
 
         $query2 = "UPDATE sb_tickets
@@ -562,6 +563,11 @@ function sb_delete_users($user_ids) {
         sb_db_query($query2);
     }
 
+    ///// unlink user conversations from ticket as conversations will be deleted along with user
+    if(count($ids))
+    {
+        sb_db_query('UPDATE sb_tickets SET conversation_id = NULL WHERE conversation_id IN (' . implode(",",$ids) . ')');
+    }
 
     for ($i = 0; $i < count($ids); $i++) {
         sb_delete_attachments($ids[$i]);
@@ -1717,7 +1723,8 @@ function get_recent_messages()
     $query = "
         SELECT m.message, m.creation_time, m.conversation_id, u.id AS user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS user_name, u.profile_image
         FROM  sb_messages AS m
-        INNER JOIN  sb_users AS u ON m.user_id = u.id
+        INNER JOIN sb_users AS u ON m.user_id = u.id
+        INNER JOIN sb_conversations as c ON m.conversation_id = c.id
         INNER JOIN 
         (
             SELECT 
@@ -1728,7 +1735,8 @@ function get_recent_messages()
             GROUP BY 
                 conversation_id
         ) AS latest
-    ON  m.conversation_id = latest.conversation_id  AND m.creation_time = latest.latest_time
+    ON  m.conversation_id = latest.conversation_id  AND m.creation_time = latest.latest_time  
+    Where c.status_code NOT IN (3,4) 
     ORDER BY m.creation_time DESC LIMIT 5;
     ";
     $result = sb_db_get($query,false);
