@@ -13441,6 +13441,17 @@ table thead {
   justify-content: center;
   align-items: center;
 }
+.sb-admin-box_new .right_section .login-form .form-fields .field-container .input-wrapper {
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+}
+.sb-admin-box_new .right_section .login-form .form-fields .field-container .input-wrapper svg {
+  position: absolute;
+  right: 0px;
+  top: 16px;
+  z-index: 3;
+}
 .sb-admin-box_new .login-title {
   font-size: 36px;
   font-weight: 500;
