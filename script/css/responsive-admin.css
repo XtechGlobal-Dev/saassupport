@@ -880,6 +880,9 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 .sb-lightbox.sb-dialog-box.sb-active {
   display: flex;
 }
+.sb-lightbox#sb-export-report-close.sb-active {
+  display: block;
+}
 .sb-lightbox .sb-main > .sb-bottom {
   display: block;
 }
