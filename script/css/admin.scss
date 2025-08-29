@@ -3552,6 +3552,12 @@ textarea {
                     color: #fff;
                 }
 
+                &.attachment {
+                    .sb-message-attachments {
+                        width: fit-content;
+                    }
+                }
+
                 &.media-item,
                 &.attachment {
                     background: #fff !important;
@@ -3559,7 +3565,7 @@ textarea {
                     padding: 4px 12px;
 
                     .sb-time {
-                        padding: 0 10px 5px;
+                        padding: 5px 10px;
                     }
 
                     .sb-cnt {
