@@ -6949,7 +6949,7 @@ textarea {
 .sb-board .sb-conversation .sb-list div.sb-right.media-item, .sb-board .sb-conversation .sb-list div.sb-right.attachment {
   background: #fff !important;
   border: 0.93px solid #E2E8F0;
-  padding: 4px 12px;
+  padding: 6px 12px 5px;
 }
 .sb-board .sb-conversation .sb-list div.sb-right.media-item .sb-time, .sb-board .sb-conversation .sb-list div.sb-right.attachment .sb-time {
   padding: 5px 10px;
