@@ -1014,6 +1014,11 @@ a.sb-btn {
             display: flex;
         }
     }
+    &#sb-export-report-close {
+        &.sb-active {
+            display: block;
+        }
+    }
 
     .sb-main>.sb-bottom {
         display: block;

@@ -3552,14 +3552,20 @@ textarea {
                     color: #fff;
                 }
 
+                &.attachment {
+                    .sb-message-attachments {
+                        width: fit-content;
+                    }
+                }
+
                 &.media-item,
                 &.attachment {
                     background: #fff !important;
                     border: 0.93px solid #E2E8F0;
-                    padding: 4px 12px;
+                    padding: 6px 12px 5px;
 
                     .sb-time {
-                        padding: 0 10px 5px;
+                        padding: 5px 10px;
                     }
 
                     .sb-cnt {
@@ -4664,6 +4670,7 @@ ul.pagination {
     .sb-tab {
         gap: 20px;
         padding: 0px 1rem 10px;
+        height: calc(100vh - 194px) !important;
 
         .sb-nav.sb-nav-only {
             background: #fff;
@@ -4727,6 +4734,16 @@ ul.pagination {
                 padding: 20px 20px;
             }
         }
+    }
+}
+
+li#agents-ratings {
+    display: none;
+}
+
+#user-additional-fields {
+    i {
+        top: 21%;
     }
 }
 
@@ -6544,6 +6561,17 @@ span.initials.avatar_name {
                         max-height: 200px;
                     }
                 }
+            }
+        }
+    }
+}
+
+.tickts-scroll-area {
+    .row.dt-row {
+        .col-sm-12 {
+            overflow: auto;
+            &::-webkit-scrollbar {
+                height: 0px;
             }
         }
     }

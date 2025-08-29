@@ -274,7 +274,7 @@
   "Display the user's profile image within the chat.": "",
   "Display user name in header": "",
   "Display user's profile image": "",
-  "Displays additional columns in the user table. Enter the name of the fields to add.": "",
+  "Displays additional columns in the user table. Enter the name of the fields to add. You can add the following fields: phone, os, creation_time, current_url, browser_language, browser": "",
   "Distribute conversations proportionately between agents and notify visitors of their position within the queue. Response time is in minutes. You can use the following merge fields in the message: {position}, {minutes}. They will be replaced by the real values in real-time.": "",
   "Distribute conversations proportionately between agents, and block an agent from viewing the conversations of the other agents.": "",
   "Do not send email notifications to admins": "",
