@@ -2809,7 +2809,7 @@ function sb_component_admin()
                 $header .= '</ul>
                                 </div>
                                 <!-- Logout Button -->
-                                <div data-value="logout" class="logout">
+                                <div data-value="logout" class="logout" title="Logout">
                                     <img src="./script/media/logout-icon.svg" alt="logout">
                                 </div>
                             </div>
@@ -3539,7 +3539,7 @@ function sb_component_admin()
                                         <section class="main-charts recent-message">
                                             <div class="card p-3 messages-list">
                                                 <div class="bg-white d-flex align-items-center justify-content-between">
-                                                    <h6 class="head">Recent Active Conversations</h6>
+                                                    <h6 class="head">Recent Messages</h6>
                                                     <p class="label_blue mb-0">
                                                         <a id="view-all-conversations" class="mr-2" href="">View
                                                             All</a>
