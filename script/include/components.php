@@ -2809,7 +2809,7 @@ function sb_component_admin()
                 $header .= '</ul>
                                 </div>
                                 <!-- Logout Button -->
-                                <div data-value="logout" class="logout">
+                                <div data-value="logout" class="logout" title="Logout">
                                     <img src="./script/media/logout-icon.svg" alt="logout">
                                 </div>
                             </div>

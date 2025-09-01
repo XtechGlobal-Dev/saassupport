@@ -5186,7 +5186,7 @@ ul.pagination {
 
                 .metric-card {
                     border-radius: 10px;
-                    padding: 31px 17px;
+                    padding: 32px 17px;
                     box-shadow: 0px 4px 30px 0px #2E2D740D;
                     border: 1px solid #D1D5DB;
 
@@ -6418,16 +6418,19 @@ span.initials.avatar_name {
 }
 
 .ql-editor li[data-list="bullet"] {
-  list-style-type: disc;
-  &::before {
-    content: none !important;
-  }
+    list-style-type: disc;
+
+    &::before {
+        content: none !important;
+    }
 }
+
 .ql-editor li[data-list="ordered"] {
-  list-style-type: decimal;
-  &::before {
-    content: none !important;
-  }
+    list-style-type: decimal;
+
+    &::before {
+        content: none !important;
+    }
 }
 
 .codex-editor {
@@ -6454,6 +6457,7 @@ span.initials.avatar_name {
 
         .input_container {
             width: 48%;
+
             .sb-language-switcher {
                 display: none;
             }
@@ -6570,6 +6574,7 @@ span.initials.avatar_name {
     .row.dt-row {
         .col-sm-12 {
             overflow: auto;
+
             &::-webkit-scrollbar {
                 height: 0px;
             }
@@ -11172,6 +11177,7 @@ table {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .login-form {
             .form-fields {
                 .field-container {
@@ -11179,6 +11185,7 @@ table {
                         flex-direction: column;
                         position: relative;
                         align-items: flex-start;
+
                         svg {
                             position: absolute;
                             right: 0px;
@@ -11369,6 +11376,12 @@ table {
 .header-right {
     .logout {
         cursor: pointer;
+
+        &:hover {
+            img {
+                filter: brightness(0.1);
+            }
+        }
     }
 }
 
@@ -13075,7 +13088,7 @@ main {
 
 }
 
-@media (min-width: 1020px) {
+@media (min-width: 1440px) {
     .sb-area-dashboard {
         main {
             .new_container {
@@ -13320,7 +13333,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 183px !important;
+                            height: 186px !important;
                         }
                     }
                 }
@@ -13484,6 +13497,7 @@ main {
             }
         }
     }
+
 }
 
 @media only screen and (max-width: 1540px) {
