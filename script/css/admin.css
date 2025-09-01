@@ -8384,7 +8384,7 @@ ul.pagination li.active a.page-link {
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card {
   border-radius: 10px;
-  padding: 31px 17px;
+  padding: 32px 17px;
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
   border: 1px solid #D1D5DB;
 }
@@ -13605,6 +13605,9 @@ table thead {
 .header-right .logout {
   cursor: pointer;
 }
+.header-right .logout:hover img {
+  filter: brightness(0.1);
+}
 
 .sb-profile {
   display: flex;
@@ -14876,7 +14879,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     top: -10%;
   }
 }
-@media (min-width: 1020px) {
+@media (min-width: 1440px) {
   .sb-area-dashboard main .new_container .dashboard-metrics {
     grid-template-columns: repeat(auto-fit, minmax(32.2%, 1fr));
   }
@@ -15023,7 +15026,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 183px !important;
+    height: 186px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;
