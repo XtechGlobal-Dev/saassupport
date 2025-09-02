@@ -2107,6 +2107,7 @@ div ul.sb-menu,
   padding-bottom: 25px;
   letter-spacing: 0.5px;
   position: relative;
+  word-wrap: break-word;
 }
 .sb-article .sb-title .sb-icon-close {
   position: absolute;
@@ -5516,6 +5517,8 @@ textarea {
 
 .sb-tags-cnt > span {
   border: 1px dashed transparent;
+  word-wrap: break-word;
+  max-width: 271px;
 }
 .sb-tags-cnt > span:not(.sb-active):not(:hover) {
   background: none;
@@ -5685,6 +5688,10 @@ textarea {
 .sb-area-users .sb-table-users tr a.sb-profile span {
   font-weight: normal;
   font-size: 14px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: calc(100% - 50px);
 }
 .sb-area-users .sb-table-users tr th {
   pointer-events: none;
@@ -5705,6 +5712,13 @@ textarea {
   min-height: 40px;
 }
 
+td.sb-td-contact p {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: calc(100% - 50px);
+}
+
 .sb-area-articles .sb-tab.sb-inner-tab {
   gap: 20px;
   margin-top: 15px;
@@ -5719,6 +5733,7 @@ textarea {
 }
 .sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li:not(:empty) {
   display: block;
+  max-width: 300px;
 }
 .sb-area-articles .sb-tab.sb-inner-tab .sb-content.sb-scroll-area {
   margin-top: 0 !important;
@@ -6761,7 +6776,10 @@ textarea {
   font-size: 20px;
   transition: all 0.4s;
   position: relative;
+  max-width: 250px;
+  overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .sb-board .sb-conversation > .sb-top > a:hover {
   color: #155CFD;
@@ -7213,6 +7231,10 @@ textarea {
 .sb-board .sb-user-details .sb-profile .sb-name {
   padding-left: 0;
   transition: all 0.4s;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }
 .sb-board .sb-user-details .sb-profile:hover {
   transition: all 0.4s;
@@ -7873,6 +7895,12 @@ li#agents-ratings {
 
 #user-additional-fields i {
   top: 21%;
+}
+
+#chat-timetable-disable,
+#registration-timetable,
+#chat-timetable {
+  display: none;
 }
 
 body .sb-btn,
@@ -11541,11 +11569,14 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   display: none;
 }
 
-#category-image {
+#category-image-container {
   max-width: 100%;
   border: 1px dashed #d5d5d5;
   min-height: 150px;
   background-size: 60px;
+}
+#category-image-container input {
+  display: none;
 }
 
 .sb-menu-articles .sb-docs,
@@ -11949,6 +11980,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   font-size: 16px;
   line-height: 30px;
   margin: 0 0 20px 0;
+  word-wrap: break-word;
 }
 .sb-dialog-box a {
   margin: 0 7px;
@@ -14423,6 +14455,10 @@ div#messaging-channels {
 }
 .sb-scroll-area .sb-type-textarea textarea {
   min-height: 100px;
+}
+
+#sb-article-id {
+  display: none !important;
 }
 
 /*
