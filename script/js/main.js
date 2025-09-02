@@ -7269,4 +7269,22 @@
         //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
     }
 
+     $(document).on('click', '#ticketRegPass', function (e) {
+        console.log("EEEEEE")
+        e.preventDefault();
+        const $input = $(this).prev('input[type="password"], input[type="text"]');
+        if (!$input.length) return;
+        $input.attr('type', $input.attr('type') === 'password' ? 'text' : 'password');
+        // optional: toggle a class if you want to style the icon differently
+        $(this).toggleClass('is-visible');
+    });
+
+    // Keyboard support (Enter/Space on the SVG)
+    $(document).on('keydown', '#ticketRegPass', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $(this).trigger('click');
+        }
+    });
+
 }(jQuery));
