@@ -6730,6 +6730,10 @@ textarea {
   color: #fff;
   border-radius: 40px;
 }
+.sb-board .sb-conversation > .sb-top #convert-to-ticket-list #convert-to-ticket.converted,
+.sb-board .sb-conversation > .sb-top #view-profile-list #convert-to-ticket.converted {
+  text-decoration: underline;
+}
 .sb-board .sb-conversation > .sb-top #view-profile-list #view-profile-button {
   background: #1653FD;
 }

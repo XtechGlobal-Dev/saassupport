@@ -3257,6 +3257,11 @@ textarea {
                     color: #fff;
                     border-radius: 40px;
                 }
+
+                #convert-to-ticket
+                {
+                    &.converted {text-decoration:underline}
+                }
             }
 
             #view-profile-list {
