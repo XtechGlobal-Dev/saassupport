@@ -1747,6 +1747,8 @@ textarea {
 .sb-tags-cnt {
     >span {
         border: 1px dashed transparent;
+        word-wrap: break-word;
+        max-width: 271px;
 
         &:not(.sb-active):not(:hover) {
             background: none;
@@ -1775,6 +1777,9 @@ textarea {
         cursor: default;
         letter-spacing: 0.3px;
         font-size: 12px;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     [data-color=""] {
@@ -1966,6 +1971,10 @@ textarea {
                 span {
                     font-weight: normal;
                     font-size: 14px;
+                    max-width: 200px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    min-width: calc(100% - 50px);
                 }
             }
 
@@ -2004,6 +2013,15 @@ textarea {
     }
 }
 
+td.sb-td-contact {
+    p {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: calc(100% - 50px);
+    }
+}
+
 .sb-area-articles {
     .sb-tab.sb-inner-tab {
         gap: 20px;
@@ -2020,6 +2038,7 @@ textarea {
 
                     &:not(:empty) {
                         display: block;
+                        max-width: 300px;
                     }
                 }
             }
@@ -3257,6 +3276,11 @@ textarea {
                     color: #fff;
                     border-radius: 40px;
                 }
+
+                #convert-to-ticket
+                {
+                    &.converted {text-decoration:underline}
+                }
             }
 
             #view-profile-list {
@@ -3298,7 +3322,10 @@ textarea {
                 font-size: 20px;
                 transition: $transition;
                 position: relative;
+                max-width: 250px;
+                overflow: hidden;
                 white-space: nowrap;
+                text-overflow: ellipsis;
 
                 &:hover {
                     color: $color-blue;
@@ -3892,6 +3919,10 @@ textarea {
             .sb-name {
                 padding-left: 0;
                 transition: all 0.4s;
+                max-width: 150px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
             }
 
             &:hover {
@@ -4745,6 +4776,12 @@ li#agents-ratings {
     i {
         top: 21%;
     }
+}
+
+#chat-timetable-disable,
+#registration-timetable,
+#chat-timetable {
+    display: none;
 }
 
 body {
@@ -8988,11 +9025,15 @@ ul.status-list.dropdown-menu {
     display: none;
 }
 
-#category-image {
+#category-image-container {
     max-width: 100%;
     border: 1px dashed #d5d5d5;
     min-height: 150px;
     background-size: 60px;
+
+    input {
+        display: none;
+    }
 }
 
 .sb-menu-articles .sb-docs,
@@ -9470,6 +9511,7 @@ ul.status-list.dropdown-menu {
         font-size: 16px;
         line-height: 30px;
         margin: 0 0 20px 0;
+        word-wrap: break-word;
     }
 
     a {
@@ -12443,6 +12485,10 @@ div#messaging-channels {
             min-height: 100px;
         }
     }
+}
+
+#sb-article-id {
+    display: none !important;
 }
 
 // custom css end
