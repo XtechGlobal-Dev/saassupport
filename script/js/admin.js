@@ -6967,7 +6967,7 @@
         tags_panel.on('click', '> i', function (e) {
             let code = SBConversations.tags.getAll(SBChat.conversation.details.tags);;
             let tags = SBChat.conversation.details.tags;
-            SBAdmin.genericPanel('tags', 'Manage tags', code ? '<div class="sb-tags-cnt">' + code + '</div>' : '<p>' + sb_('Add tags from Settings > Admin > Tags.') + '</p>', ['Save tags']);
+            SBAdmin.genericPanel('tags', 'Manage tags', code ? '<div class="sb-tags-cnt">' + code + '</div>' : '<p>' + sb_('Add tags from Settings > Admin > Settings Customization > Tags.') + '</p>', ['Save tags']);
             e.preventDefault();
             return false;
         });
