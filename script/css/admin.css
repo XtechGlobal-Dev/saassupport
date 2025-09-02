@@ -15056,7 +15056,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 176px !important;
+    height: 188px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;
