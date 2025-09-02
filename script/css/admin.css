@@ -5538,6 +5538,9 @@ textarea {
   cursor: default;
   letter-spacing: 0.3px;
   font-size: 12px;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sb-panel-tags > div [data-color=""] {
   background-color: #155CFD;
