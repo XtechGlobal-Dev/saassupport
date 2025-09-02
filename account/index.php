@@ -232,7 +232,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     if ($shopify) {
                         echo '<p>' . str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('Customize your store and enable {R} in the app embeds section.')) . '</p><a class="sb-btn sb-btn-white" href="https://' . $shopify . '/admin/themes/current/editor?context=apps&activateAppId=' . SHOPIFY_APP_ID . '/sb" target="_blank">' . sb_('Preview in theme') . '</a>';
                     } else {
-                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>Chatbot embed code</p><textarea id="embed-code" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>Ticket panel embed code</p><textarea id="embed-code2" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div>';
+                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>' .sb_("Chatbot embed code") . '</p><textarea id="embed-code" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>' .sb_("Ticket panel embed code") . '</p><textarea id="embed-code2" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div>';
                     }
                     if (defined('DIRECT_CHAT_URL')) {
                         $link = DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']);
@@ -401,7 +401,8 @@ function box_membership($membership)
 function box_membership_plans($active_membership_id, $expired = false)
 {
     $plans = memberships();
-    $code = '<h2 class="addons-title">Current Plan</h2><div id="plans" class="plans-box">';
+    $currentPlanText = sb_("Current") ." ". sb_("Plan");
+    $code = '<h2 class="addons-title">' . $currentPlanText . '</h2><div id="plans" class="plans-box">';
     $menu_items = [];
     $membership_type = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages');
     $membership_type_ma = $membership_type == 'messages-agents';

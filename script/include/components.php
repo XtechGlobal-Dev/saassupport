@@ -2027,13 +2027,13 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             </div> -->
 
             <div class="mt-3 bulk-users-container">
-                <label class="form-label select-user">Select Users (Max 10)</label>
+                <label class="form-label select-user"><?php sb_e("Select"); ?> <?php sb_e("Users"); ?> (<?php sb_e(string: "Max"); ?> 10)</label>
                 <div class="form-check d-flex align-items-center">
                     <input class="form-check-input" type="checkbox" id="selectAll">
-                    <label class="form-check-label" for="selectAll">Select All</label>
+                    <label class="form-check-label" for="selectAll"><?php sb_e("Select"); ?> <?php sb_e("All"); ?></label>
                 </div>
 
-                <div id="selectedCount" class="text-muted small mb-2">0 / 10 selected</div>
+                <div id="selectedCount" class="text-muted small mb-2">0 / 10 <?php sb_e("Selected"); ?></div>
 
                 <div class="border rounded p-2 bulk-users-wrapper" style="max-height: 200px; overflow-y: auto;">
                     <!-- Example Users -->
@@ -2046,12 +2046,12 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 <label class="form-label"><?php sb_e("Subject"); ?></label>
                 <div class="sb-setting sb-type-text sb-direct-message-subject">
                     <input type="text" placeholder="<?php sb_e(
-                        "Email subject"
+                        "Email Subject"
                     ); ?>" />
                 </div>
             </div>
             <div class="mt-3 sb-setting sb-type-textarea">
-                <label class="form-label">Message</label>
+                <label class="form-label"><?php sb_e("Message"); ?></label>
                 <div class="sb-setting sb-type-textarea">
                     <textarea class="form-control" rows="3" placeholder="<?php sb_e("Write here your message..."); ?>"
                         required></textarea>
@@ -2060,7 +2060,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             <div class="mt-3 text-end">
                 <a class="sb-send-direct-message sb-btn sb-icon">
                     <i class="sb-icon-plane"></i>
-                    Send email now
+                    <?php sb_e("Send email"); ?> <?php sb_e("now"); ?>
                 </a>
                 <div>
                     <?php sb_docs_link("#direct-messages", "sb-btn-text"); ?>
@@ -2075,8 +2075,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             function updateSelected() {
                 const checked = $('.user-checkbox:checked');
                 const count = checked.length;
+                const selectedText = <?php sb_e("Selected"); ?>
 
-                $('#selectedCount').text(`${count} / ${maxSelection} selected`);
+                $('#selectedCount').text(`${count} / ${maxSelection} ${selectedText}`);
 
                 // Update hidden field with selected IDs
                 const ids = checked.map(function () {
@@ -2573,7 +2574,9 @@ function sb_component_admin()
                                                 </svg></span>
                                         </div>
                                     </i>
-                                    <span class="label">Dashboard</span></a></li>
+                                    <span class="label"><?php sb_e(
+                                            "Dashboard"
+                                        ); ?></span></a></li>
 
                             <li><a id="sb-conversations"><i>
                                         <div class="icon-wrapper">
@@ -2593,7 +2596,9 @@ function sb_component_admin()
                                                         stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round" />
                                                 </svg></span>
                                         </div>
-                                    </i><span class="label"> Inbox</span></a></li>
+                                    </i><span class="label"> <?php sb_e(
+                                            "Inbox"
+                                        ); ?></span></a></li>
                             <?php //if ($active_areas['tickets']) { ?>
                             <li><a id="sb-tickets"><i>
                                         <div class="icon-wrapper">
@@ -2610,7 +2615,12 @@ function sb_component_admin()
                                                 </svg>
                                             </span>
                                         </div>
-                                    </i><span class="label">Tickets</span></a></li>
+                                    </i><span class="label">
+                                        <?php sb_e(
+                                            "Tickets"
+                                        ); ?>
+                                        </span>
+                                        </a></li>
                             <?php //} ?>
                             <?php if ($active_areas['users']) { ?>
                                 <li><a id="sb-users"><i>
@@ -2631,7 +2641,9 @@ function sb_component_admin()
                                                     </svg>
                                                 </span>
                                             </div>
-                                        </i><span class="label">Customers & Agents</span></a></li>
+                                        </i><span class="label"><?php sb_e(
+                                            "Customer and Agents"
+                                        ); ?></span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
                             <?php if ($active_areas['articles']) { ?>
@@ -2652,7 +2664,9 @@ function sb_component_admin()
                                                     </svg>
                                                 </span>
                                             </div>
-                                        </i><span class="label">Articles</span></a></li>
+                                        </i><span class="label"><?php sb_e(
+                                            "Articles"
+                                        ); ?></span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['reports']) { ?>
                                 <li><a id="sb-reports"><i>
@@ -2671,7 +2685,9 @@ function sb_component_admin()
                                                     </svg>
                                                 </span>
                                             </div>
-                                        </i><span class="label"> Reports</span></a></li>
+                                        </i><span class="label"><?php sb_e(
+                                            "Reports"
+                                        ); ?> </span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['settings']) { ?>
                                 <li><a id="sb-settings"><i>
@@ -2687,7 +2703,9 @@ function sb_component_admin()
 
                                                 </span>
                                             </div>
-                                        </i><span class="label">Settings</span></a></li>
+                                        </i><span class="label"><?php sb_e(
+                                            "Settings"
+                                        ); ?></span></a></li>
                             <?php } ?>
                             <?php
                             if ($is_admin && $is_cloud) {
@@ -2747,6 +2765,8 @@ function sb_component_admin()
                 $imgSrc = $is_cloud ? SB_CLOUD_BRAND_ICON : sb_get_setting("admin-icon", SB_URL . "/media/icon.svg");
                 $ticketUrl = dirname(SB_URL) . "?area=tickets";
                 $inboxUrl = dirname(SB_URL) . "?area=conversations";
+                $onlineText = sb_("Online");
+                $backToTicketText = sb_("Back") . " " . sb_("to") . " " . sb_("Tickets");
                 $header =
                     '<header>
                             <div class="header-left" style="gap: 2px;">
@@ -2758,7 +2778,7 @@ function sb_component_admin()
                                 <img width="35" src="' . SB_URL . '/media/nexleon-favicon-n.png" alt="Logo" class="logo-icon d-md-none">
                                 <a class="sb-btn sb-icon ticket-back-btn sb_btn_new m-0 me-3 d-none" href="' . $ticketUrl . '" >
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                    Back to Tickets
+                                    ' . $backToTicketText . '
                                 </a>
                                 <h2 class="title mb-0">Setting</h2>
                             </div>
@@ -2798,7 +2818,7 @@ function sb_component_admin()
                     '</span>
                                                 </div>
                                             </li>
-                                        <li data-value="status" class="sb-online">Online</li>';
+                                        <li data-value="status" class="sb-online">' . $onlineText . '</li>';
                 if ($is_admin) {
                     $header .=
                         '<li data-value="edit-profile">' .
@@ -2880,10 +2900,10 @@ function sb_component_admin()
                                                     <div class="metric-card-upper">
                                                         <div class="metric-icon" style="background-color: #45b369;">
                                                             <!--i class="fa-solid fa-user-plus" style="color: #ffffff;"></i-->
-                                                            <img src="./script/media/total-user.svg" alt="Total User">
+                                                            <img src="./script/media/total-user.svg" alt="<?php sb_e("Total Users"); ?>">
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Total Users</h3>
+                                                            <h3><?php sb_e("Total Users"); ?></h3>
                                                             <p class="total-users"></p>
                                                         </div>
                                                     </div>
@@ -2898,10 +2918,10 @@ function sb_component_admin()
                                                 <!--div class="metric-increase">Increase by <span class="total-users-increase"></span>% in last 7 days</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
-                                                    Increase by
+                                                    <?php sb_e("Increase by"); ?>
                                                     <span class="increase-pill">
                                                         <span class="total-users-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -2916,7 +2936,7 @@ function sb_component_admin()
                                                                 alt="Total Tickets">
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Total Conversations</h3>
+                                                            <h3><?php sb_e("Total Conversations"); ?></h3>
                                                             <p class="total-conversations"></p>
                                                         </div>
                                                     </div>
@@ -2928,13 +2948,13 @@ function sb_component_admin()
                                                         </script>
                                                     </div>
                                                 </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% in last 7 days</div-->
+                                                <!--div class="metric-increase">Increase by <span class="total-conversations-increase"></span>% in last 7 <?php sb_e("days"); ?></div-->
                                                 <!-- code update  -->
                                                 <div class="metric-increase">
-                                                    Increase by
+                                                    <?php sb_e("Increase by"); ?>
                                                     <span class="increase-pill">
                                                         <span class="total-conversations-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -2958,7 +2978,7 @@ function sb_component_admin()
 
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Unread Conversation</h3>
+                                                            <h3><?php sb_e("Unread Conversation"); ?></h3>
                                                             <p class="total-unread-conversations"></p>
                                                         </div>
                                                     </div>
@@ -2969,10 +2989,10 @@ function sb_component_admin()
                                                     </div>
                                                 </div>
                                                 <div class="metric-increase">
-                                                    Increase by
+                                                    <?php sb_e("Increase by"); ?>
                                                     <span class="increase-pill">
                                                         <span class="total-unread-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
                                             </div>
                                             <!--  -->
@@ -3001,7 +3021,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Total Tickets</h3>
+                                                            <h3><?php sb_e("Total Tickets"); ?></h3>
                                                             <p class="total-tickets-created">3,200</p>
                                                         </div>
                                                     </div>
@@ -3017,10 +3037,10 @@ function sb_component_admin()
                                                 <!--div class="metric-increase">Increase by <span class="total-tickets-increase"></span>% in last 7 days</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
-                                                    Increase by
+                                                    <?php sb_e("Increase by"); ?>
                                                     <span class="increase-pill">
                                                         <span class="total-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -3046,7 +3066,7 @@ function sb_component_admin()
 
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Tickets Resolved</h3>
+                                                            <h3><?php sb_e("Tickets Resolved"); ?></h3>
                                                             <p class="ticket-resolved"></p>
                                                         </div>
                                                     </div>
@@ -3061,10 +3081,10 @@ function sb_component_admin()
                                                 <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% in last 7 days</div-->
                                                 <!-- code update -->
                                                 <div class="metric-increase">
-                                                    Increase by
+                                                    <?php sb_e("Increase by"); ?>
                                                     <span class="increase-pill">
                                                         <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
                                                 <!-- code update -->
                                             </div>
@@ -3095,7 +3115,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3>Tickets Pending</h3>
+                                                            <h3><?php sb_e("Tickets Pending"); ?></h3>
                                                             <p class="tickets-pending"></p>
                                                         </div>
                                                     </div>
@@ -3108,10 +3128,10 @@ function sb_component_admin()
                                                     </div>
                                                 </div>
                                                 <div class="metric-increase">
-                                                    Increase by
+                                                    <?php sb_e("Increase by"); ?>
                                                     <span class="increase-pill">
                                                         <span class="total-pending-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;in last 7 days
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
 
                                             </div>
@@ -3309,8 +3329,8 @@ function sb_component_admin()
                                             <div class="card p-3 main-charts-card">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <div>
-                                                        <h6 class="head mb-1">Monthly Ticket Activity</h6>
-                                                        <p class="sub_head">Monthly overview of support ticket activity</p>
+                                                        <h6 class="head mb-1"><?php sb_e("Monthly Ticket Activity"); ?></h6>
+                                                        <p class="sub_head"><?php sb_e("Monthly overview of support ticket activity"); ?></p>
                                                     </div>
                                                     <!-- <select class="form-select form-select-sm w-auto">
                                                         <option>Yearly</option>
@@ -3320,25 +3340,25 @@ function sb_component_admin()
                                                 <div class="d-flex justify-content-center gap-3 mb-3 flex-wrap flex-md-nowrap">
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/created.svg" alt="Created">
+                                                        <img src="./script/media/created.svg" alt="<?php sb_e("Created"); ?>">
                                                         <div>
-                                                            <div><strong>Created</strong></div>
+                                                            <div><strong><?php sb_e("Created"); ?></strong></div>
                                                             <div class="tickets-created"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/resolved.svg" alt="Resolved">
+                                                        <img src="./script/media/resolved.svg" alt="<?php sb_e("Resolved"); ?>">
                                                         <div>
-                                                            <div><strong>Resolved</strong></div>
+                                                            <div><strong><?php sb_e("Resolved"); ?></strong></div>
                                                             <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/pending.svg" alt="Pending">
+                                                        <img src="./script/media/pending.svg" alt="<?php sb_e("Pending"); ?>">
                                                         <div>
-                                                            <div><strong>Pending</strong></div>
+                                                            <div><strong><?php sb_e("Pending"); ?></strong></div>
                                                             <div class="tickets-pending"></div>
                                                         </div>
                                                     </div>
@@ -3358,11 +3378,10 @@ function sb_component_admin()
                                                     <div class="main-charts tables clmn-gap">
                                                         <div class="bg-white d-flex justify-content-between align-items-center">
                                                             <div>
-                                                                <h6 class="head mb-1">All Tickets</h6>
+                                                                <h6 class="head mb-1"><?php sb_e("All tickets"); ?></h6>
                                                             </div>
                                                             <p class="label_blue mb-0"><a class="mr-2"
-                                                                    href="<?php echo $ticketUrl; ?>">View
-                                                                    All</a>
+                                                                    href="<?php echo $ticketUrl; ?>"><?php sb_e("View all"); ?></a>
                                                             </p>
                                                         </div>
                                                         <div class="seprator"></div>
@@ -3416,16 +3435,16 @@ function sb_component_admin()
                                                                     <thead>
                                                                         <tr>
                                                                             <th data-field="title">
-                                                                                ID
+                                                                                <?php sb_e("ID"); ?>
                                                                             </th>
                                                                             <th data-field="title">
-                                                                                Subject
+                                                                                <?php sb_e("Subject"); ?>
                                                                             </th>
                                                                             <th data-field="assigned-to">
-                                                                                Assigned To
+                                                                                <?php sb_e("Assigned"); ?> <?php sb_e("to"); ?>
                                                                             </th>
                                                                             <th data-field="creation-date">
-                                                                                Creation Date
+                                                                                <?php sb_e("Creation"); ?> <?php sb_e("Date"); ?>
                                                                             </th>
                                                                             <th data-field="status">
                                                                                 <?php sb_e(
@@ -3441,7 +3460,7 @@ function sb_component_admin()
                                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
                                                                             <td class="sb-td-status"><span class="span-border"
-                                                                                    style="color:#FF0000;border:1px solid #FF0000;">Open</span>
+                                                                                    style="color:#FF0000;border:1px solid #FF0000;"><?php sb_e("Open"); ?></span>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -3461,11 +3480,11 @@ function sb_component_admin()
                                             <div class="card p-3 tickets_activity_card">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <div>
-                                                        <h6 class="head mb-1">Weekly Ticket Activity</h6>
-                                                        <p class="sub_head">Week support summary</p>
+                                                        <h6 class="head mb-1"><?php sb_e("Weekly"); ?> <?php sb_e("Ticket"); ?> <?php sb_e("Activity"); ?></h6>
+                                                        <p class="sub_head"><?php sb_e("Week"); ?> <?php sb_e("Support"); ?> <?php sb_e("Summary"); ?></p>
                                                     </div>
                                                     <div class="d-flex flex-column align-items-end">
-                                                        <h6 class="head mb-1 total-tickets"><span>0</span> Tickets</h6>
+                                                        <h6 class="head mb-1 total-tickets"><span>0</span> <?php sb_e("Tickets"); ?></h6>
                                                         <p class="green_badge new-tickets">+<span>0</span> new</p>
                                                     </div>
                                                 </div>
@@ -3539,16 +3558,15 @@ function sb_component_admin()
                                         <section class="main-charts recent-message">
                                             <div class="card p-3 messages-list">
                                                 <div class="bg-white d-flex align-items-center justify-content-between">
-                                                    <h6 class="head">Recent Messages</h6>
+                                                    <h6 class="head"><?php sb_e("Recent"); ?> <?php sb_e("Messages"); ?></h6>
                                                     <p class="label_blue mb-0">
-                                                        <a id="view-all-conversations" class="mr-2" href="">View
-                                                            All</a>
+                                                        <a id="view-all-conversations" class="mr-2" href=""><?php sb_e("View all"); ?></a>
                                                     </p>
                                                 </div>
                                                 <div class="seprator"></div>
                                                 <div class="recent card p-3">
                                                     <ul class="recent-messages list-unstyled" style="min-height:254px;">
-                                                        No message found
+                                                        <?php sb_e("No"); ?><?php sb_e("Message"); ?><?php sb_e("found"); ?>
                                                     </ul>
                                                 </div>
                                                 <div class="div"></div>
@@ -3557,10 +3575,10 @@ function sb_component_admin()
 
                                         <div class="customer-overview-card card p-4 customer-overview-chart">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h6 class="fw-bold">Customer Overview</h6>
+                                                <h6 class="fw-bold"><?php sb_e("Customer"); ?> <?php sb_e("Overview"); ?></h6>
                                                 <select id="customer-overview" class="form-select form-select-sm w-auto">
-                                                    <option value="month" selected>Last Month</option>
-                                                    <option value="year">Last Year</option>
+                                                    <option value="month" selected><?php sb_e("Last"); ?> <?php sb_e("Month"); ?></option>
+                                                    <option value="year"><?php sb_e("Last"); ?> <?php sb_e(string: "Year"); ?></option>
                                                     <!-- <option>Monthly</option> -->
                                                 </select>
                                             </div>
@@ -3577,7 +3595,7 @@ function sb_component_admin()
                                                     <canvas id="donutChart"
                                                         style="max-height: 150px; max-width: 300px;"></canvas>
                                                     <div class="chart-center">
-                                                        <p class="mb-1"><strong>Customer Report</strong></p>
+                                                        <p class="mb-1"><strong><?php sb_e("Customer"); ?> <?php sb_e("Reports"); ?></strong></p>
                                                         <pre></pre>
                                                     </div>
                                                 </div>
@@ -3715,12 +3733,16 @@ function sb_component_admin()
                                                     <g id="Layer_3" />
                                                     <g id="Layer_2" />
                                                 </svg>
-                                                <span class="d-none d-xl-block">Link to ticket</span>
+                                                <span class="d-none d-xl-block"><?php sb_e(
+                                            "Link to Ticket"
+                                        ); ?></span>
                                             </a>
                                         </li>
                                         <li id="view-profile-list" class="">
                                             <a id="view-profile-button" data-value="view-profile" class="sb-btn sb-icon"
-                                                data-sb-tooltip="View Profile">
+                                                data-sb-tooltip="<?php sb_e(
+                                            "View Profile"
+                                        ); ?>">
                                                 <svg id="Layer" height="512" class="d-xl-none" viewBox="0 0 24 24" width="512"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <g id="user-eye">
@@ -3729,7 +3751,9 @@ function sb_component_admin()
                                                             fill="#5e5e5e" />
                                                     </g>
                                                 </svg>
-                                                <span class="d-none d-xl-block">View Profile</span>
+                                                <span class="d-none d-xl-block"><?php sb_e(
+                                            "View Profile"
+                                        ); ?></span>
                                             </a>
                                         </li>
                                         <li>
@@ -3937,7 +3961,7 @@ function sb_component_admin()
                             <div>
                                 <a class="sb-btn sb-icon sb-new-user sb_btn_new">
                                     <i class="hgi hgi-stroke hgi-user-add-02"></i>
-                                    <?php sb_e("New Customer"); ?>
+                                    <?php sb_e("New"); ?> <?php sb_e("Customer"); ?>
                                 </a>
                             </div>
                             <div>
@@ -4246,10 +4270,10 @@ function sb_component_admin()
                                                     <?php sb_e("Priority"); ?>
                                                 </th>
                                                 <th data-field="last_reply">
-                                                    <?php sb_e("Assigned To"); ?>
+                                                    <?php sb_e("Assigned"); ?> <?php sb_e("to"); ?>
                                                 </th>
                                                 <th data-field="creation_time">
-                                                    <?php sb_e("Created At"); ?>
+                                                    <?php sb_e("Created"); ?> <?php sb_e("at"); ?>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -4423,18 +4447,18 @@ function sb_component_admin()
 
                                                     <a class="sb-btn sb-icon sb-save-ticket sb_btn_new">
                                                         <i class="fa-solid fa-check mr-1"></i>
-                                                        Save changes
+                                                        <?php sb_e("Save changes"); ?>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 p-0 mt-3 d-flex align-items-center"
                                                 id="view-ticket-attachments">
                                                 <i class="fas fa-paperclip fs-4 mr-2"></i>
-                                                <span class="label">Attachments (<span
+                                                <span class="label"><?php sb_e("Attachments"); ?> (<span
                                                         class="attachments-count">0</span>)</span>
                                             </div>
                                             <div class="col-md-9 p-0 table-align">
-                                                <h2 class="sub_title mt-4 mb-2">Description</h2>
+                                                <h2 class="sub_title mt-4 mb-2"><?php sb_e("Description"); ?></h2>
                                                 <div id="description-d" class="description" data-type="textarea"
                                                     style="margin: 10px 0 0 0;display: block;">
                                                     <div style="display: inline-block;padding:0;width:100%;">
@@ -4450,11 +4474,11 @@ function sb_component_admin()
                                                 <ul class="nav nav-tabs mt-4" id="myTab">
                                                     <li class="nav-item">
                                                         <a class="nav-link active" data-target="#tab1"
-                                                            href="javascript:void(0)">Comments</a>
+                                                            href="javascript:void(0)"><?php sb_e("Comments"); ?></a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-target="#tab2"
-                                                            href="javascript:void(0)">Internal Note</a>
+                                                            href="javascript:void(0)"><?php sb_e("Internal"); ?> <?php sb_e("Notes"); ?></a>
                                                     </li>
                                                 </ul>
 
@@ -4483,7 +4507,7 @@ function sb_component_admin()
                                                                             data-comment-id="" id="oldComment"></textarea>
 
                                                                         <button id="addComment"
-                                                                            class="btn btn-primary">Send</button>
+                                                                            class="btn btn-primary"><?php sb_e("Send"); ?></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -4842,8 +4866,8 @@ function sb_component_admin()
                                             <div class="col-md-3 p-0 table-rightside">
                                                 <div class="ps-md-5">
                                                     <div class="sidepanel">
-                                                        <h4 class="sub_title mb-3 col-4 d-inline-block">Details</h4>
-                                                        <span class="conversation-id d-none">Linked Conversation ID :
+                                                        <h4 class="sub_title mb-3 col-4 d-inline-block"><?php sb_e("Details"); ?></h4>
+                                                        <span class="conversation-id d-none"><?php sb_e("Linked"); ?> <?php sb_e("Conversation"); ?> <?php sb_e("ID"); ?> :
                                                             <span></span></span>
                                                         <div class="ticket-fields">
                                                             <!-- <div class="mb-3 without-contact">
@@ -4856,7 +4880,7 @@ function sb_component_admin()
                                                                 </div>
                                                             </div> -->
                                                             <div class="mb-3">
-                                                                <div class="field-label required-label">Assignee</div>
+                                                                <div class="field-label required-label"><?php sb_e("Assignee"); ?></div>
                                                                 <div class="d-flex align-items-center justify-content-between">
                                                                     <div
                                                                         class="d-flex align-items-center gap-2 ticket-assignee">
@@ -4878,7 +4902,7 @@ function sb_component_admin()
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <div class="field-label required-label">Customer</div>
+                                                                <div class="field-label required-label"><?php sb_e("Customer"); ?></div>
                                                                 <div class="d-flex align-items-center gap-2 ticket-reporter">
                                                                     <img class="reporter-img" src="" alt="Customer"
                                                                         style="width: 40px;">
@@ -4949,7 +4973,7 @@ function sb_component_admin()
                                                                 $count > 0
                                                             ) { ?>
                                                                 <div class="mb-3">
-                                                                    <div class="field-label">Tags</div>
+                                                                    <div class="field-label"><?php sb_e("Tags"); ?></div>
                                                                     <div class="mb-2">
                                                                         <!-- <input type="text" style="max-width: 220px;height:35px;padding:0 5px" class="form-control form-control-sm" placeholder="Add a tag..."> -->
                                                                         <div class="mr-5 tags-filter" style="">
@@ -5013,7 +5037,7 @@ function sb_component_admin()
                                                             ?>
 
                                                             <div class="mb-3 sb-input d-block">
-                                                                <div class="field-label required-label">Priority</div>
+                                                                <div class="field-label required-label"><?php sb_e("Priority"); ?></div>
                                                                 <!-- <div class="ticket-priority">
                                                                         High
                                                                     </div>
@@ -5042,7 +5066,7 @@ function sb_component_admin()
                                                             </div>
                                                         </div>
                                                         <div class="divider"></div>
-                                                        <h5 class="field-label">More Fields
+                                                        <h5 class="field-label"><?php sb_e("More"); ?> <?php sb_e("Fields"); ?>
                                                             <!-- <i class="fas fa-chevron-down"></i> -->
                                                         </h5>
                                                         <div id="custom-fields" class="sb-input d-block"></div>
@@ -5460,8 +5484,8 @@ function sb_component_admin()
                                 <div class="content_article">
                                     <div class="articleHEad">
                                         <div class="">
-                                            <p class="head mb-4">Categories Settings</p>
-                                            <p class="des mb-0">Manage article display, categories, and publishing options.</p>
+                                            <p class="head mb-4"><?php sb_e("Categories"); ?> <?php sb_e("Settings"); ?></p>
+                                            <p class="des mb-0"><?php sb_e("Manage"); ?> <?php sb_e("Article"); ?> <?php sb_e("Display"); ?> , <?php sb_e("Categories"); ?>, <?php sb_e("and"); ?> <?php sb_e("Publishing"); ?> <?php sb_e("options"); ?>.</p>
                                         </div>
                                     </div>
                                     <div class="articles_bg">
@@ -5788,10 +5812,9 @@ function sb_component_admin()
                                     <!-- chat settings -->
                                     <div class="sb-top-bar settings-header">
                                         <div>
-                                            <p class="head">Chat Settings</p>
-                                            <p class="des mb-0">The Chat settings contain modifiers for the chat widget that can be
-                                                adjusted according to user preferences. Here, you may update the chat Availability,
-                                                Features, and Management settings.</p>
+                                            <p class="head"><?php sb_e("Chat"); ?> <?php sb_e("Settings"); ?></p>
+                                            <p class="des mb-0"><?php sb_e("The"); ?> <?php sb_e("Chat"); ?> <?php sb_e("Settings"); ?> <?php sb_e("Contain"); ?> <?php sb_e("Modifiers"); ?> <?php sb_e("for"); ?> <?php sb_e("widget"); ?> <?php sb_e("that"); ?> <?php sb_e("can"); ?> <?php sb_e("be"); ?> <?php sb_e("adjusted"); ?> <?php sb_e("according"); ?>  <?php sb_e("to"); ?> <?php sb_e("user"); ?> <?php sb_e("preferences"); ?>. <?php sb_e("here"); ?>, <?php sb_e("you"); ?> <?php sb_e("may"); ?> <?php sb_e("update"); ?> <?php sb_e("the"); ?> <?php sb_e("Chat"); ?> <?php sb_e("availability"); ?>, <?php sb_e("features"); ?>
+                                                , <?php sb_e("and"); ?> <?php sb_e("management"); ?> <?php sb_e("Settings"); ?> .</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -5804,7 +5827,7 @@ function sb_component_admin()
                                             </div>
 
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
-                                                <i class="sb-icon-check"></i>Save changes</a>
+                                                <i class="sb-icon-check"></i><?php sb_e("Save changes"); ?></a>
                                         </div>
                                     </div>
 
@@ -5839,7 +5862,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Availability
+                                                <?php sb_e("availability"); ?>
                                             </div>
                                             <div class="my-tab" data-target="appearance-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -5860,7 +5883,7 @@ function sb_component_admin()
                                                                 transform="translate(0.203125 0.75)" />
                                                         </clipPath>
                                                     </defs>
-                                                </svg>Appearance & Features
+                                                </svg><?php sb_e("Appearance & Features"); ?>
                                             </div>
                                             <div class="my-tab" data-target="management-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -5890,7 +5913,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Management
+                                                <?php sb_e("management"); ?>
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -5927,12 +5950,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Availability
+                                                <?php sb_e("availability"); ?> <?php sb_e("Chat"); ?> 
                                             </p>
-                                            <p class="des mb-0">Chat Availability allows the admin to adjust the visibility of the
-                                                chat widget in accordance to the workplace’s office hours and agent availability. If
-                                                these modifiers are turned on, the chat will be disabled and hidden if it is outside
-                                                work hours or if there are no agents online.</p>
+                                            <p class="des mb-0"><?php sb_e("Chat Availability allows the admin to adjust the visibility of the chat widget in accordance with the workplace's office hours and agent availability"); ?>. <?php sb_e("If these modifiers are turned on, the chat will be disabled and hidden if it is outside work hours or if there are no agents online"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
@@ -5960,13 +5980,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Appearance & Features
+                                                <?php sb_e("Appearance & Features"); ?>
                                             </p>
-                                            <p class="des mb-0">Appearance Availability allows users to adjust what initializes
-                                                within the chat when visitors interact with it and adjust what visitors may have
-                                                access to. This includes displaying the chat dashboard, restricting access to what
-                                                visitors may send, language translation settings, and whether or not to show active
-                                                agents.</p>
+                                            <p class="des mb-0"><?php sb_e("Appearance Availability allows users to adjust what initializes within the chat when visitors interact with it and adjust what visitors may have access to"); ?>. <?php sb_e("This includes displaying the chat dashboard, restricting access to what visitors may send, language translation settings, and whether or not to show active agents"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("chat", $sb_settings, true, 'chat-appearance-and-features'); ?>
@@ -6002,10 +6018,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Management Settings
+                                                <?php sb_e("management"); ?> <?php sb_e("Settings"); ?>
                                             </p>
-                                            <p class="des mb-0">Management controls access to the management widget’s availability
-                                                to visitors and their ability to archive conversations with agents.</p>
+                                            <p class="des mb-0"><?php sb_e("Management controls access to the management widget’s availability to visitors and their ability to archive conversations with agents"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("chat", $sb_settings, true, 'chat-management'); ?>
@@ -6142,11 +6157,8 @@ function sb_component_admin()
 
                                     <div class="sb-top-bar settings-header">
                                         <div>
-                                            <p class="head">Admin Settings</p>
-                                            <p class="des mb-0">The Admin Settings provides access to customization options
-                                                regarding modification or restrictions an admin may use for the platform. There are
-                                                various different settings that can be altered to meet the admin’s needs, including
-                                                creation of departments, adjusting themes, setting restrictions, and more.</p>
+                                            <p class="head"><?php sb_e("Admin"); ?> <?php sb_e("Settings"); ?></p>
+                                            <p class="des mb-0"><?php sb_e("The Admin Settings provides access to customization options regarding modification or restrictions an admin may use for the platform"); ?>. <?php sb_e("There are various different settings that can be altered to meet the admin’s needs, including creation of departments, adjusting themes, setting restrictions, and more"); ?>.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -6183,7 +6195,7 @@ function sb_component_admin()
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                Panel Settings
+                                                <?php sb_e("Panel"); ?> <?php sb_e("Settings"); ?> 
                                             </div>
                                             <div class="my-tab" data-target="language">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -6198,7 +6210,7 @@ function sb_component_admin()
                                                 </svg>
 
 
-                                                Language
+                                                <?php sb_e("Language"); ?>
                                             </div>
                                             <div class="my-tab" data-target="admin-chat-management-content">
                                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -6208,7 +6220,7 @@ function sb_component_admin()
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                Chat Management
+                                                <?php sb_e("management"); ?> <?php sb_e("Chat"); ?>
                                             </div>
                                             <div class="my-tab" data-target="permission-setting-content">
                                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
@@ -6218,7 +6230,7 @@ function sb_component_admin()
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                Permission Settings
+                                                <?php sb_e("Permission"); ?> <?php sb_e("Settings"); ?>
                                             </div>
                                             <div class="my-tab" data-target="settings-customization-content">
                                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
@@ -6256,7 +6268,7 @@ function sb_component_admin()
                                                     <path d="M1.24609 7.08325H8.84608" stroke="black" stroke-width="1.18257"
                                                         stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                                Settings Customization
+                                                <?php sb_e("Settings"); ?> <?php sb_e("Customization"); ?>
                                             </div>
                                             <div class="my-tab" data-target="customer-content">
                                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -6267,7 +6279,7 @@ function sb_component_admin()
                                                         stroke-linejoin="round" />
                                                 </svg>
 
-                                                Customer
+                                                <?php sb_e("Customer"); ?>
                                             </div>
                                             <div class="my-tab" data-target="auto-saved-message-inbox-content">
                                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
@@ -6287,8 +6299,7 @@ function sb_component_admin()
                                                         d="M19.7511 5.03376C19.7511 7.12348 18.0571 8.81752 15.9673 8.81752C13.8777 8.81752 12.1836 7.12348 12.1836 5.03376C12.1836 2.94405 13.8777 1.25 15.9673 1.25C18.0571 1.25 19.7511 2.94405 19.7511 5.03376Z"
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round" />
                                                 </svg>
-
-                                                Auto Saved Message Inbox
+                                                <?php sb_e("Auto Saved Message Inbox"); ?>
                                             </div>
                                             <div class="my-tab" data-target="customization-and-themes-content">
                                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
@@ -6298,7 +6309,7 @@ function sb_component_admin()
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                Customization & Themes
+                                                <?php sb_e("Customization & Themes"); ?>
                                             </div>
                                             <div class="my-tab" data-target="switch-accounts-content">
                                                 <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
@@ -6332,8 +6343,7 @@ function sb_component_admin()
                                                             stroke-linejoin="round" />
                                                     </g>
                                                 </svg>
-
-                                                Switch Accounts
+                                                <?php sb_e("Switch Accounts"); ?>
                                             </div>
                                             <div class="my-tab" data-target="department-content">
                                                 <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
@@ -6378,8 +6388,7 @@ function sb_component_admin()
                                                             stroke-miterlimit="10" />
                                                     </g>
                                                 </svg>
-
-                                                Department
+                                                <?php sb_e("Department"); ?>
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -6416,13 +6425,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Panel Setting
+                                                <?php sb_e("Panel"); ?> <?php sb_e("Settings"); ?>
                                             </p>
-                                            <p class="des mb-0">In Panel Setting you can adjust what information and features may be
-                                                available for display in the conversation panel for the agent. This includes
-                                                Filters, Tags, Notes, Attachment Lists, and Profile Pictures. Further customization
-                                                may also include admin privy details such as Locations, Languages, or the visitor’s
-                                                Site Origin.</p>
+                                            <p class="des mb-0"><?php sb_e("In Panel Setting you can adjust the information and features may be available for display in the conversation panel for the agent"); ?>. <?php sb_e("This includes Filters, Tags, Notes, Attachment Lists, and Profile Pictures. Further customization may also include admin privy details such as Locations, Languages, or the visitor’s Site Origin"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'panel-setting'); ?>
                                     </div>
@@ -6448,10 +6453,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Language
+                                                <?php sb_e("Language"); ?>
                                             </p>
-                                            <p class="des mb-0">The Language Settings allows the admin to turn the automatic
-                                                language in conversations translation on or off.</p>
+                                            <p class="des mb-0"><?php sb_e("The Language Settings allows the admin to turn the automatic language in conversations translation on or off"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'language'); ?>
                                     </div>
@@ -6477,11 +6481,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Management
+                                                <?php sb_e("management"); ?> <?php sb_e("Chat"); ?>
                                             </p>
-                                            <p class="des mb-0">The Chat Management Settings provides settings that allow one to
-                                                properly sort through chats by date and adjust whether or not they wish to
-                                                automatically archive conversations after 24 hours.</p>
+                                            <p class="des mb-0"><?php sb_e("The Chat Management Settings provides settings that allow one to properly sort through chats by date and adjust whether or not they wish to automatically archive conversations after 24 hours"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'admin-chat-management'); ?>
                                     </div>
@@ -6507,12 +6509,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Permission Settings
+                                                <?php sb_e("Permission"); ?> <?php sb_e("Settings"); ?> 
                                             </p>
-                                            <p class="des mb-0">The Permission Settings controls permissions and restrictions
-                                                regarding how much access Agents and Supervisors may be granted authority to with
-                                                their privileges and whether or not they are privy to certain information or admin
-                                                control to customer settings.</p>
+                                            <p class="des mb-0"><?php sb_e("The Permission Settings controls permissions and restrictions regarding how much access Agents and Supervisors may be granted authority to with their privileges and whether or not they are privy to certain information or admin control to customer settings"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'permission-setting'); ?>
                                     </div>
@@ -6538,11 +6537,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Settings Customization
+                                                <?php sb_e("Settings"); ?> <?php sb_e("Customization"); ?>
                                             </p>
-                                            <p class="des mb-0">Settings Customization provides access to creation of multiple
-                                                Conversation Tags as well as to adjust Tag and Notes availability. Chat Transcript
-                                                settings and its download format can also be adjusted here.</p>
+                                            <p class="des mb-0"><?php sb_e("Settings Customization provides access to creation of multiple Conversation Tags as well as to adjust Tag and Notes availability. Chat Transcript settings and its download format can also be adjusted here"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'settings-customization'); ?>
                                     </div>
@@ -6568,10 +6565,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Customer
+                                                <?php sb_e("Customer"); ?>
                                             </p>
-                                            <p class="des mb-0">The Customer Settings allows for the creation of extra columns to
-                                                customer information depending on what is needed.</p>
+                                            <p class="des mb-0"><?php sb_e("The Customer Settings allows for the creation of extra columns to customer information depending on what is needed"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'customer'); ?>
                                     </div>
@@ -6597,11 +6593,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Auto Saved Message Inbox
+                                                <?php sb_e("Auto Saved Message Inbox"); ?>
                                             </p>
-                                            <p class="des mb-0">The Auto Saved Message Inbox allows users to create automated
-                                                replies and store them for instant use. Automated responses will be available for
-                                                use in the agent’s chatbox and can be sorted through using the #.</p>
+                                            <p class="des mb-0"><?php sb_e("The Auto Saved Message Inbox allows users to create automated replies and store them for instant use. Automated responses will be available for use in the agent’s chatbox and can be sorted through using the #"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'auto-saved-message-inbox'); ?>
                                     </div>
@@ -6627,14 +6621,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Customization & Themes
+                                                <?php sb_e("Customization & Themes"); ?>
                                             </p>
-                                            <p class="des mb-0">Customization and Themes allows customization of the chatbox
-                                                appearance.
-                                                This can be done with either a .js file, CSS, or by adjusting the color themes.
-                                                Adjustments to the admin logo, title, icon, and login message can be adjusted here
-                                                as well.
-                                            </p>
+                                            <p class="des mb-0"><?php sb_e("Customization and Themes allows customization of the chatbox appearance. This can be done with either a .js file, CSS, or by adjusting the color themes. Adjustments to the admin logo, title, icon, and login message can be adjusted here as well"); ?></p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'customization-and-themes'); ?>
                                     </div>
@@ -6660,10 +6649,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Switch Accounts
+                                                <?php sb_e("Switch Accounts"); ?>
                                             </p>
-                                            <p class="des mb-0">The Switch Accounts settings allows the admin to adjust settings for
-                                                switching accounts.</p>
+                                            <p class="des mb-0"><?php sb_e("The Switch Accounts settings allows the admin to adjust settings for switching accounts"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'switch-accounts'); ?>
                                     </div>
@@ -6689,11 +6677,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Department
+                                                <?php sb_e("Department"); ?>
                                             </p>
-                                            <p class="des mb-0">Department settings allow the creation of Departments for specific
-                                                areas that agents can be assigned and sorted into for easier appointment of tickets
-                                                depending on what is needed.</p>
+                                            <p class="des mb-0"><?php sb_e("Department settings allow the creation of Departments for specific areas that agents can be assigned and sorted into for easier appointment of tickets depending on what is needed"); ?>.</p>
                                         </div>
                                         <?php sb_populate_settings("admin", $sb_settings, true, 'department'); ?>
                                     </div>
@@ -6702,11 +6688,8 @@ function sb_component_admin()
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Notification Settings</p>
-                                            <p class="des mb-0">The Notification Settings provides modifiers that allow
-                                                customization of alerts agents or users may receive with regards to emails,
-                                                messages, or user availability. Feature settings such as tab notifications and push
-                                                notifications can also be found here.</p>
+                                            <p class="head mb-4"><?php sb_e(string: "Notification"); ?> <?php sb_e("Settings"); ?></p>
+                                            <p class="des mb-0"><?php sb_e("The Notification Settings provides modifiers that allow customization of alerts agents or users may receive with regards to emails, messages, or user availability"); ?>. <?php sb_e("Feature settings such as tab notifications and push notifications can also be found here"); ?>.</p>
                                         </div>
 
                                         <div class="d-flex align-items-center">
@@ -6756,7 +6739,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Panel Setting
+                                                <?php sb_e("Panel"); ?> <?php sb_e("Settings"); ?> 
                                             </div>
                                             <div class="my-tab" data-target="notifications-availability">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6777,7 +6760,7 @@ function sb_component_admin()
                                                                 transform="translate(0.203125 0.75)" />
                                                         </clipPath>
                                                     </defs>
-                                                </svg>Availability
+                                                </svg><?php sb_e("availability"); ?>
                                             </div>
                                             <div class="my-tab" data-target="chat-management">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6807,7 +6790,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Management
+                                                <?php sb_e(string: "Chat"); ?> <?php sb_e("management"); ?>
                                             </div>
                                             <div class="my-tab" data-target="appearance-feature">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6837,7 +6820,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Appearance & Features
+                                                <?php sb_e("Appearance & Features"); ?>
                                             </div>
                                             <div class="my-tab" data-target="notifications-management">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6867,7 +6850,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Management
+                                                <?php sb_e("management"); ?>
                                             </div>
                                             <div class="my-tab" data-target="notifications-email">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6897,7 +6880,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Email
+                                                <?php sb_e(string: "Email"); ?>
                                             </div>
                                             <div class="my-tab" data-target="settings-customization">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6927,7 +6910,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Settings Customization
+                                                <?php sb_e(string: "Settings"); ?> <?php sb_e(string: "Customization"); ?> 
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -8039,19 +8022,20 @@ function sb_conversations_filter($cloud_active_apps)
         ["za", "Zalo", "SB_ZALO"],
         ["tm", "Text message", true],
     ];
+    $filterText = sb_("Filter chat with tags");
     $tags = sb_get_multi_setting("disable", "disable-tags")
         ? []
         : sb_get_setting("tags", []);
     $count = is_array($departments) ? count($departments) : 0;
     $code =
         (count($tags) && sb_get_multi_setting("tags-settings", "tags-starred")
-            ? '<i class="sb-icon sb-icon-tag-line sb-filter-star" title="Filter chat with tags" data-color-text="' .
+            ? '<i class="sb-icon sb-icon-tag-line sb-filter-star" title="' . $filterText . '" data-color-text="' .
             $tags[0]["tag-color"] .
             '" data-value="' .
             $tags[0]["tag-name"] .
             '"></i>'
             : "") .
-        '<div class="sb-filter-btn"><svg class="toggle-filter" data-sb-tooltip="Filters" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        '<div class="sb-filter-btn"><svg class="toggle-filter" data-sb-tooltip="'. sb_("Filters") .'" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M20.7801 8.25167L18.2506 5.72294L18.2673 14.5714C18.2673 15.0452 17.8839 15.4286 17.4101 15.4286C16.938 15.4286 16.553 15.0452 16.553 14.5714L16.5363 5.7832L14.0687 8.25167C13.7338 8.58566 13.1914 8.58566 12.8566 8.25167C12.5218 7.91685 12.5218 7.37361 12.8566 7.03878L16.3839 3.51144C16.6183 3.2009 16.9916 3 17.4101 3C17.7366 3 18.0329 3.12053 18.2589 3.31976C18.2924 3.34486 18.3242 3.37249 18.3544 3.40263L21.9922 7.03878C22.327 7.37361 22.327 7.91685 21.9922 8.25167C21.6574 8.58566 21.115 8.58566 20.7801 8.25167Z" fill="black"/>
 <path d="M1.71484 6.25708C1.71484 5.87873 2.0212 5.57153 2.40123 5.57153H9.1713C9.33536 5.57153 9.48604 5.62846 9.60322 5.72387C9.75896 5.84944 9.8577 6.04196 9.8577 6.25708V6.60028C9.8577 6.97862 9.55136 7.28582 9.1713 7.28582H2.40123C2.20201 7.28582 2.02288 7.20211 1.89732 7.06735C1.82701 6.99285 1.77511 6.90244 1.74498 6.802C1.72489 6.73839 1.71484 6.67059 1.71484 6.60028V6.25708Z" fill="black"/>
 <path d="M2.14844 12.477C2.08315 12.503 2.02288 12.5381 1.96931 12.5816C1.81361 12.7072 1.71484 12.8989 1.71484 13.114V13.4572C1.71484 13.8356 2.0212 14.1428 2.40123 14.1428H13.0284C13.4085 14.1428 13.7148 13.8356 13.7148 13.4572V13.114C13.7148 12.7357 13.4085 12.4285 13.0284 12.4285H2.40123C2.3125 12.4285 2.22712 12.446 2.14844 12.477Z" fill="black"/>

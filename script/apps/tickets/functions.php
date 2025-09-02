@@ -40,8 +40,8 @@ function sb_component_tickets()
         data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
         <header class="user_header d-none">
             <div class="header_left">
-                <h2 class="tab  sb-active" data-id="tickets-list-area">Tickets</h2>
-                <h2 class="tab" data-id="sb-tickets-area">Conversations</h2>
+                <h2 class="tab  sb-active" data-id="tickets-list-area"><?php sb_e("Tickets"); ?></h2>
+                <h2 class="tab" data-id="sb-tickets-area"><?php sb_e("Conversations"); ?></h2>
             </div>
             <div class="header_right">
                 <div class="user_profile">
@@ -52,7 +52,7 @@ function sb_component_tickets()
                     </span>
                     <div class="user_info">
                         <p class="sb_name"></p>
-                        <span class="user_type">User</span>
+                        <span class="user_type"><?php sb_e("User"); ?></span>
                     </div>
                 </div>
                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
