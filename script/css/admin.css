@@ -8436,7 +8436,7 @@ ul.pagination li.active a.page-link {
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
-  height: 60px;
+  max-height: 60px;
   display: flex;
   justify-content: end;
 }
@@ -8586,6 +8586,9 @@ ul.pagination li.active a.page-link {
   font-size: 12px;
   color: #000;
   font-family: "InterRegular";
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .sb-area-dashboard main .new_container .main-charts .text-muted {
   color: #7e7e7e !important;
@@ -9438,10 +9441,6 @@ span.initials.avatar_name {
 .sb-tab .sb-content-categories .input_container {
   width: 48%;
 }
-.sb-tab .sb-content-articles .input_container .sb-language-switcher,
-.sb-tab .sb-content-categories .input_container .sb-language-switcher {
-  display: none;
-}
 .sb-tab .sb-content-articles .input_container select option,
 .sb-tab .sb-content-categories .input_container select option {
   display: none;
@@ -9652,14 +9651,6 @@ span.initials.avatar_name {
 
 .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul {
   position: relative;
-}
-.sb-menu-wide.sb-menu-users.sb-menu-wide_new ul::before {
-  content: "";
-  position: absolute;
-  right: 152px;
-  background: #a1a1a1;
-  height: 100%;
-  width: 1.5px;
 }
 .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul li:last-child {
   margin-left: 10px !important;
@@ -15069,7 +15060,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 186px !important;
+    height: 188px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;

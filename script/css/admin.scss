@@ -5240,7 +5240,8 @@ ul.pagination {
                         .avg_response_chart,
                         .total_conversations_chart,
                         .agent_chart {
-                            height: 60px;
+                            // height: 60px;
+                            max-height: 60px;
                             display: flex;
                             justify-content: end;
                         }
@@ -5431,6 +5432,9 @@ ul.pagination {
                     font-size: 12px;
                     color: #000;
                     font-family: 'InterRegular';
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
                 }
 
                 .text-muted {
@@ -6495,9 +6499,9 @@ span.initials.avatar_name {
         .input_container {
             width: 48%;
 
-            .sb-language-switcher {
-                display: none;
-            }
+            // .sb-language-switcher {
+            //     display: none;
+            // }
 
             select {
                 option {
@@ -6739,14 +6743,14 @@ span.initials.avatar_name {
     ul {
         position: relative;
 
-        &::before {
-            content: '';
-            position: absolute;
-            right: 152px;
-            background: #a1a1a1;
-            height: 100%;
-            width: 1.5px;
-        }
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     right: 152px;
+        //     background: #a1a1a1;
+        //     height: 100%;
+        //     width: 1.5px;
+        // }
 
         li {
             &:last-child {
@@ -13379,7 +13383,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 186px !important;
+                            height: 188px !important;
                         }
                     }
                 }

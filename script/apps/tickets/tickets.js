@@ -52,7 +52,7 @@
                     .substring(0, 2)
                     .toUpperCase();
 
-                
+
                 const span = container.find(".initials");
                 const userInitials = container.find('.user-initials');
 
@@ -66,7 +66,7 @@
                 }
 
                 // Attach error event
-                img.on('error', function(){
+                img.on('error', function () {
                     showInitialsFallback();
                 });
 
@@ -163,7 +163,7 @@
                             </div>
                         </div>`);
 
-                        //// <div id="ticketCustomFieldsContainer" style="margin: 10px 0;">${main.find('.ticket-custom-fields').html()}</div>
+                    //// <div id="ticketCustomFieldsContainer" style="margin: 10px 0;">${main.find('.ticket-custom-fields').html()}</div>
                     ticket_main_panel.find('.sb-editor-cnt').append(editor);
                     if (SBF.setting('tickets_recaptcha')) {
                         if (recaptcha) {
@@ -178,16 +178,16 @@
                 default:
                     $('.user_header').removeClass('d-none');
                     const pImg = activeUser().details?.profile_image ?? '';
-                    
+
                     main.find('.user_profile .sb_name').html(activeUser()?.name);
                     main.find('.user_profile .user_type').html(activeUser()?.type);
-                    main.find('.user_profile .avatar').attr('src',pImg).attr('data-name',activeUser()?.name);
+                    main.find('.user_profile .avatar').attr('src', pImg).attr('data-name', activeUser()?.name);
                     this.showSidePanels(true);
 
-                    setTimeout(function(){
-                        SBTickets.showInitials('user_header','user_profile');
-                    },30)
-                    	
+                    setTimeout(function () {
+                        SBTickets.showInitials('user_header', 'user_profile');
+                    }, 30)
+
                     if (previous == 'new-ticket') {
                         editor.find('textarea').val('');
                         editor.sbActive(false).removeClass('sb-error');
@@ -337,8 +337,7 @@
 
         // Initialize the tickets area
         init: function () {
-            if(activeUser())
-            {
+            if (activeUser()) {
                 $('.user_header').removeClass('d-none');
             }
             main = $('body').find('.sb-tickets');
@@ -357,20 +356,19 @@
             cache_agents[SBF.setting('bot_id')] = { name: SBF.setting('bot_name'), image: SBF.setting('bot_image') };
             ticketsInit();
 
-            if(activeUser())
-            {
+            if (activeUser()) {
                 const img = activeUser().details?.profile_image ?? '';
-                main.find('.user_profile .avatar').attr('src',img).attr('data-name',activeUser()?.name);
+                main.find('.user_profile .avatar').attr('src', img).attr('data-name', activeUser()?.name);
                 main.find('.user_profile .sb_name').html(activeUser()?.name);
                 main.find('.user_profile .user_type').html(activeUser()?.type);
-                this.showInitials('user_header','user_profile');
+                this.showInitials('user_header', 'user_profile');
             }
 
 
             if (!main.length) {
                 return;
             }
-            
+
             if (SBF.setting('tickets_registration_required') && (!activeUser() || ['visitor', 'lead'].includes(activeUser().type))) {
                 let redirect = SBF.setting('tickets_registration_redirect');
                 if (redirect) {
@@ -381,16 +379,15 @@
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
             } else {
-                
+
                 if (activeUser() && activeUser().conversations.length) {
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
                     }
 
                     $(document).find('.header_left h2:first').trigger('click');  // load list of tickets
-                } 
-                else if(activeUser())
-                {
+                }
+                else if (activeUser()) {
 
                 }
                 else {
@@ -418,8 +415,8 @@
                 main.addClass('sb-1300');
             }
             setUserProfile();
-            
-            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset }px;display:none`);
+
+            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset}px;display:none`);
             setTimeout(function () {
                 main.removeClass('sb-load');
             }, 300);
@@ -574,11 +571,11 @@
         });
 
         const customer_id = activeUser().details.id ?? 0;
-        const customer_name = activeUser().details.first_name ? activeUser().details.first_name +' '+ activeUser().details.last_name: '';
+        const customer_name = activeUser().details.first_name ? activeUser().details.first_name + ' ' + activeUser().details.last_name : '';
         const customer_email = activeUser().details.email ?? '';
 
 
-        let new_ticket =  true;
+        let new_ticket = true;
         let ticket_id = 0;
         let data = {};
 
@@ -696,7 +693,7 @@
             ticket_id: ticket_id,
             data1: ticketData,
         }, (response) => {
-            
+
             $(this).sbLoading(false);
 
             //admin.sbHideLightbox();
@@ -704,13 +701,13 @@
             //SBTicket.updateRow(response);
 
             //SBTickets.updateRow(ticketData);
-           // infoBottom(new_ticket ? 'New Ticket Created' : 'Ticket updated');
+            // infoBottom(new_ticket ? 'New Ticket Created' : 'Ticket updated');
 
             setTimeout(function () {
                 location.reload();
             }, 1500);
 
-           // $(header).find('.sb-admin-nav #sb-tickets').click();
+            // $(header).find('.sb-admin-nav #sb-tickets').click();
 
         });
     }
@@ -803,7 +800,7 @@
                     });
                     return;
                 }
-               // submitTicketPartial();
+                // submitTicketPartial();
                 createTicket();
             }
         });
@@ -914,7 +911,7 @@
                             }
                             setUserProfile();
                             if (is_edit_profile) {
-                                
+
                                 SBTickets.showPanel();
                             } else {
                                 SBF.event('SBRegistrationForm', { user: settings });
@@ -965,4 +962,21 @@
         $('.tickets-list-area .sb-panel-main .sb-top').show();
         $('.tickets-list-area .sb-panel-main .sb-scroll-area').addClass('text-middle');
     }
+
+    $(document).on('click', '#ticketRegPass', function (e) {
+        e.preventDefault();
+        const $input = $(this).prev('input[type="password"], input[type="text"]');
+        if (!$input.length) return;
+        $input.attr('type', $input.attr('type') === 'password' ? 'text' : 'password');
+        // optional: toggle a class if you want to style the icon differently
+        $(this).toggleClass('is-visible');
+    });
+
+    // Keyboard support (Enter/Space on the SVG)
+    $(document).on('keydown', '#ticketRegPass', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $(this).trigger('click');
+        }
+    });
 }(jQuery));
