@@ -11600,6 +11600,16 @@ li.menu_head:hover {
     }
 }
 
+.sb-area-reports.sb-area-reports_new.sb-active.sb-report-users {
+    .sb-tab {
+        display: flex;
+        flex-direction: column;
+        .sb-content.sb-scroll-area.sb-no-results-active {
+            margin: auto;
+        }
+    }
+}
+
 .row.tablet-sizee {
     .nav-tabs {
         .nav-item {
