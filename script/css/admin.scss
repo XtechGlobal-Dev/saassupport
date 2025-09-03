@@ -2548,13 +2548,13 @@ td.sb-td-contact {
                 justify-content: center;
 
                 &::before {
+                    content: '';
                     position: absolute;
                     bottom: 0;
-                    left: -8px;
+                    left: -10px;
                     right: 0;
-                    content: "";
                     height: 1.3px;
-                    width: 100px;
+                    width: 102px;
                     background: #EAEDF4;
                 }
 
@@ -2700,9 +2700,9 @@ td.sb-td-contact {
     height: 100%;
     min-height: 100vh;
     // width: calc(100% - 280px);
-    width: calc(100% - 100px);
+    width: calc(100% - 102px);
     // padding-left: 280px;
-    padding-left: 99px;
+    padding-left: 101px;
     // position: fixed;
     font-size: 14px;
     line-height: 17px;
@@ -3277,9 +3277,10 @@ td.sb-td-contact {
                     border-radius: 40px;
                 }
 
-                #convert-to-ticket
-                {
-                    &.converted {text-decoration:underline}
+                #convert-to-ticket {
+                    &.converted {
+                        text-decoration: underline
+                    }
                 }
             }
 
@@ -11562,7 +11563,7 @@ li.menu_head:hover {
     z-index: 1002;
 
     &.collapsed {
-        width: 80px;
+        width: 82px;
 
         .logo-text,
         .label,
@@ -11590,6 +11591,14 @@ li.menu_head:hover {
                     text-decoration: none;
                 }
             }
+        }
+    }
+}
+
+.row.tablet-sizee {
+    .nav-tabs {
+        .nav-item {
+            width: fit-content;
         }
     }
 }
@@ -12895,6 +12904,10 @@ main {
                 max-width: 100%;
             }
         }
+    }
+
+    .sb-content.sb-scroll-area.sb-no-results-active {
+        display: flex;
     }
 
     .sb-repeater-block-data .sb-setting+.sb-setting,

@@ -2642,7 +2642,7 @@ function sb_component_admin()
                                                 </span>
                                             </div>
                                         </i><span class="label"><?php sb_e(
-                                            "Customer and Agents"
+                                            "Customer & Agents"
                                         ); ?></span></a></li>
                             <?php } ?>
                             <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
