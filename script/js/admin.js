@@ -5596,7 +5596,7 @@
                         away_mode = false;
                     }
                 }, 'agents');
-                 SBPusher.event('updates-ticket-comments', (response) => {
+                SBPusher.event('updates-ticket-comments', (response) => {
                     console.log('agent ticket comments');
                     /// sync ticket comment via pusher
                     SBTicket.loadComments(response.ticket_id);
@@ -9456,16 +9456,29 @@
             });
         }, 3600000);
     }
+
+
 }(jQuery));
 
-$('.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li').each(function () {
-        const hasClass = $(this).attr('class')?.trim() !== "";
-        const hasDataId = $(this).data('id')?.toString().trim() !== "";
+$('#ticketRegPass').click(function () {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    let input = $("#ticketRegInput");
+    let currentType = input.prop('type');
+    if (currentType === 'password') {
+        input.prop('type', 'text');
+    } else {
+        input.prop('type', 'password');
+    }
+});
 
-        if (!hasClass && !hasDataId) {
-            $(this).hide();
-        }
-    });
+$('.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li').each(function () {
+    const hasClass = $(this).attr('class')?.trim() !== "";
+    const hasDataId = $(this).data('id')?.toString().trim() !== "";
+
+    if (!hasClass && !hasDataId) {
+        $(this).hide();
+    }
+});
 
 // tinyColorPicker v1.1.1 2016-08-30 
 
