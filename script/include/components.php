@@ -2075,7 +2075,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             function updateSelected() {
                 const checked = $('.user-checkbox:checked');
                 const count = checked.length;
-                const selectedText = <?php sb_e("Selected"); ?>
+                const selectedText = '<?php sb_e("Selected"); ?>';
 
                 $('#selectedCount').text(`${count} / ${maxSelection} ${selectedText}`);
 
