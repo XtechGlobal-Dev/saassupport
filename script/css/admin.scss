@@ -2548,13 +2548,13 @@ td.sb-td-contact {
                 justify-content: center;
 
                 &::before {
+                    content: '';
                     position: absolute;
                     bottom: 0;
-                    left: -8px;
+                    left: -10px;
                     right: 0;
-                    content: "";
                     height: 1.3px;
-                    width: 100px;
+                    width: 102px;
                     background: #EAEDF4;
                 }
 
@@ -2700,9 +2700,9 @@ td.sb-td-contact {
     height: 100%;
     min-height: 100vh;
     // width: calc(100% - 280px);
-    width: calc(100% - 100px);
+    width: calc(100% - 102px);
     // padding-left: 280px;
-    padding-left: 99px;
+    padding-left: 101px;
     // position: fixed;
     font-size: 14px;
     line-height: 17px;
@@ -3145,6 +3145,7 @@ td.sb-td-contact {
                         font-size: 14px;
                         font-weight: 600;
                         min-width: 75px;
+                        max-width: 75px;
                     }
 
                     .sb-time {
@@ -3277,9 +3278,10 @@ td.sb-td-contact {
                     border-radius: 40px;
                 }
 
-                #convert-to-ticket
-                {
-                    &.converted {text-decoration:underline}
+                #convert-to-ticket {
+                    &.converted {
+                        text-decoration: underline
+                    }
                 }
             }
 
@@ -5226,6 +5228,7 @@ ul.pagination {
                     padding: 32px 17px;
                     box-shadow: 0px 4px 30px 0px #2E2D740D;
                     border: 1px solid #D1D5DB;
+                    min-height: 85px;
 
                     .graph_tabs {
                         display: flex;
@@ -11562,7 +11565,7 @@ li.menu_head:hover {
     z-index: 1002;
 
     &.collapsed {
-        width: 80px;
+        width: 82px;
 
         .logo-text,
         .label,
@@ -11588,8 +11591,19 @@ li.menu_head:hover {
                     padding: 10px;
                     color: #333;
                     text-decoration: none;
+                    span {
+                        word-break: break-word !important;
+                    }
                 }
             }
+        }
+    }
+}
+
+.row.tablet-sizee {
+    .nav-tabs {
+        .nav-item {
+            width: fit-content;
         }
     }
 }
@@ -12897,6 +12911,10 @@ main {
         }
     }
 
+    .sb-content.sb-scroll-area.sb-no-results-active {
+        display: flex;
+    }
+
     .sb-repeater-block-data .sb-setting+.sb-setting,
     .sb-repeater-block-actions .sb-setting+.sb-setting,
     .sb-repeater-block-rest-api .sb-setting+.sb-setting {
@@ -13383,7 +13401,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 188px !important;
+                            height: 194px !important;
                         }
                     }
                 }
