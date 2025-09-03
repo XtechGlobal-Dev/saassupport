@@ -6165,13 +6165,13 @@ td.sb-td-contact p {
   justify-content: center;
 }
 .sb-admin .header_new .sidebar .logo::before {
+  content: "";
   position: absolute;
   bottom: 0;
-  left: -8px;
+  left: -10px;
   right: 0;
-  content: "";
   height: 1.3px;
-  width: 100px;
+  width: 102px;
   background: #EAEDF4;
 }
 .sb-admin .header_new .sidebar .logo .logo-icon {
@@ -6282,8 +6282,8 @@ td.sb-td-contact p {
 .sb-admin {
   height: 100%;
   min-height: 100vh;
-  width: calc(100% - 100px);
-  padding-left: 99px;
+  width: calc(100% - 102px);
+  padding-left: 101px;
   font-size: 14px;
   line-height: 17px;
   background: #edf2f9;
@@ -6652,6 +6652,7 @@ td.sb-td-contact p {
   font-size: 14px;
   font-weight: 600;
   min-width: 75px;
+  max-width: 75px;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time {
   margin-left: auto;
@@ -8422,6 +8423,7 @@ ul.pagination li.active a.page-link {
   padding: 32px 17px;
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
   border: 1px solid #D1D5DB;
+  min-height: 85px;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
   display: flex;
@@ -13747,7 +13749,7 @@ li.menu_head:hover {
   z-index: 1002;
 }
 .sidebar.collapsed {
-  width: 80px;
+  width: 82px;
 }
 .sidebar.collapsed .logo-text,
 .sidebar.collapsed .label,
@@ -13764,6 +13766,13 @@ li.menu_head:hover {
   padding: 10px;
   color: #333;
   text-decoration: none;
+}
+.sidebar nav ul li a span {
+  word-break: break-word !important;
+}
+
+.row.tablet-sizee .nav-tabs .nav-item {
+  width: fit-content;
 }
 
 .toggle-btn,
@@ -14746,6 +14755,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-reports > .sb-tab > .sb-content .sb-reports-sidebar {
     max-width: 100%;
   }
+  .sb-content.sb-scroll-area.sb-no-results-active {
+    display: flex;
+  }
   .sb-repeater-block-data .sb-setting + .sb-setting,
   .sb-repeater-block-actions .sb-setting + .sb-setting,
   .sb-repeater-block-rest-api .sb-setting + .sb-setting {
@@ -15060,7 +15072,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 188px !important;
+    height: 194px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;
