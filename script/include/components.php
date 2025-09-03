@@ -6171,7 +6171,7 @@ function sb_component_admin()
                                             </div>
 
                                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new" style="float: right;">
-                                                <i class="sb-icon-check"></i>Save changes</a>
+                                                <i class="sb-icon-check"></i><?php sb_e("Save changes"); ?></a>
                                         </div>
                                     </div>
                                     <!-- <div class="settings-card"> -->
@@ -7839,7 +7839,7 @@ function sb_apps_area($apps, $cloud_active_apps)
 
                             <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
                                 <i class="sb-icon-check"></i>
-                                Save changes
+                                '.sb_('Save changes').'
                             </a>
                                         </div>
         
