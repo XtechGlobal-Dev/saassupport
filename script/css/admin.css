@@ -13771,14 +13771,6 @@ li.menu_head:hover {
   word-break: break-word !important;
 }
 
-.sb-area-reports.sb-area-reports_new.sb-active.sb-report-users .sb-tab {
-  display: flex;
-  flex-direction: column;
-}
-.sb-area-reports.sb-area-reports_new.sb-active.sb-report-users .sb-tab .sb-content.sb-scroll-area.sb-no-results-active {
-  margin: auto;
-}
-
 .row.tablet-sizee .nav-tabs .nav-item {
   width: fit-content;
 }
