@@ -5200,7 +5200,7 @@ function sb_component_admin()
                         window.tagsFilterChoices = new Choices(tagsFilter, {
                             removeItemButton: true,
                             placeholder: true,
-                            placeholderValue: 'Select tags...',
+                            placeholderValue: '<?php sb_e("Select Tags"); ?>',
                             allowHTML: true,
                             itemSelectText: '',
                             callbackOnCreateTemplates: function (template) {
@@ -6947,11 +6947,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Panel Setting
+                                                <?php sb_e(string: "Panel"); ?> <?php sb_e(string: "Settings"); ?>
                                             </p>
-                                            <p class="des mb-0">Panel Settings allows you to activate or deactivate sound
-                                                notifications for messages. Here, you are also allowed to change the notification
-                                                sounds to your liking.</p>
+                                            <p class="des mb-0"><?php sb_e(string: "Panel"); ?> <?php sb_e(string: "Settings"); ?> <?php sb_e(string: "allows you to activate or deactivate sound notifications for messages. Here, you are also allowed to change the notification sounds to your liking."); ?></p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-panel-setting'); ?>
@@ -6979,11 +6977,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Availability
+                                                <?php sb_e(string: "availability"); ?>
                                             </p>
-                                            <p class="des mb-0">The availability settings allows control over notifications received
-                                                regarding any user going online, as well as the option to set your status offline
-                                                when you are idle.</p>
+                                            <p class="des mb-0"><?php sb_e("The availability settings allows control over notifications received regarding any user going online, as well as the option to set your status offline when you are idle") ?></p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-availability'); ?>
@@ -7019,10 +7015,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Chat Management
+                                                <?php sb_e(string: "Chat"); ?> <?php sb_e(string: "management"); ?>
                                             </p>
-                                            <p class="des mb-0">Chat management provides push notification settings for both Desktop
-                                                and Texts when receiving messages.</p>
+                                            <p class="des mb-0"><?php sb_e(string: "Chat management provides push notification settings for both Desktop and Texts when receiving messages"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-chat-management'); ?>
@@ -7049,11 +7044,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Appearance and Features
+                                                <?php sb_e(string: "Appearance & Features"); ?>
                                             </p>
-                                            <p class="des mb-0">Appearance and Features Settings allows you to set flash
-                                                notifications for received messages, as well as set automated Email signatures and
-                                                headers for direct emails.</p>
+                                            <p class="des mb-0"><?php sb_e(string: "Appearance and Features Settings allows you to set flash notifications for received messages, as well as set automated Email signatures and headers for direct emails"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-appearance-features'); ?>
@@ -7081,11 +7074,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Management
+                                                <?php sb_e(string: "management"); ?>
                                             </p>
-                                            <p class="des mb-0">Management settings allow for automated emails to be set up as
-                                                notifications for users and agents when either receives a message. They can be
-                                                adjusted accordingly depending on what is needed.</p>
+                                            <p class="des mb-0"><?php sb_e(string: "Management settings allow for automated emails to be set up as notifications for users and agents when either receives a message. They can be adjusted accordingly depending on what is needed"); ?></p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-management'); ?>
@@ -7121,10 +7112,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Email
+                                                <?php sb_e(string: "Email"); ?>
                                             </p>
-                                            <p class="des mb-0">The Email Settings allow you to provide email details to be prepared
-                                                for automated responses.</p>
+                                            <p class="des mb-0"><?php sb_e(string: "The Email Settings allow you to provide email details to be prepared for automated responses"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-email'); ?>
@@ -7160,10 +7150,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Setting Customizations
+                                                <?php sb_e(string: "Settings"); ?> <?php sb_e(string: "Customization"); ?> 
                                             </p>
-                                            <p class="des mb-0">The settings customization allows you to set up a mobile account for
-                                                automated text responses.</p>
+                                            <p class="des mb-0"><?php sb_e(string: "The settings customization allows you to set up a mobile account for automated text responses"); ?></p>
                                         </div>
 
                                         <?php sb_populate_settings("notifications", $sb_settings, true, 'notifications-settings-customization'); ?>
@@ -7173,11 +7162,8 @@ function sb_component_admin()
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Users Settings</p>
-                                            <p class="des mb-0">User Settings allow you to configure user related settings such as
-                                                requiring registration for the chat and adjusting the required fields. Access to
-                                                registration can also be restricted from here depending on office hours or active
-                                                agents.</p>
+                                            <p class="head mb-4"><?php sb_e(string: "Users"); ?> <?php sb_e(string: "Settings"); ?></p>
+                                            <p class="des mb-0"><?php sb_e(string: "User Settings allow you to configure user related settings such as requiring registration for the chat and adjusting the required fields"); ?>. <?php sb_e(string: "Access to registration can also be restricted from here depending on office hours or active agents"); ?>.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7223,11 +7209,8 @@ function sb_component_admin()
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Message & Forms</p>
-                                            <p class="des mb-0">The Message Settings enables customization of pop up messages
-                                                depending on visitor activity, such as first entry, closing, agent ratings, and
-                                                prompts to let the user know that all agents are offline. Email templates and
-                                                Registration form details can also be edited here.</p>
+                                            <p class="head mb-4"><?php sb_e("Messages & Forms"); ?></p>
+                                            <p class="des mb-0"><?php sb_e("The Message Settings enables customization of pop up messages depending on visitor activity, such as first entry, closing, agent ratings, and prompts to let the user know that all agents are offline") ?>. <?php sb_e("Email templates and Registration form details can also be edited here"); ?>.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7276,7 +7259,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Message
+                                                <?php sb_e("Message"); ?>
                                             </div>
                                             <div class="my-tab" data-target="email-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -7297,7 +7280,8 @@ function sb_component_admin()
                                                                 transform="translate(0.203125 0.75)" />
                                                         </clipPath>
                                                     </defs>
-                                                </svg>Email
+                                                </svg>
+                                                <?php sb_e(string: "Email"); ?>
                                             </div>
                                             <div class="my-tab" data-target="form-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -7327,7 +7311,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Form
+                                                <?php sb_e(string: "Form"); ?>
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -7364,12 +7348,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Message
+                                                <?php sb_e("Message"); ?>
                                             </p>
-                                            <p class="des mb-0">The Message Settings allow you to set up messages for visitors who
-                                                may be exploring your website for the first time, if they are idle, or if a
-                                                situation arises where no agent can respond to them. Rating settings can be adjusted
-                                                here as well.</p>
+                                            <p class="des mb-0"><?php sb_e("The Message Settings allow you to set up messages for visitors who may be exploring your website for the first time, if they are idle, or if a situation arises where no agent can respond to them"); ?>. <?php sb_e("Rating settings can be adjusted here as well"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("messages", $sb_settings, true, 'messages-text'); ?>
@@ -7397,10 +7378,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Email
+                                                <?php sb_e("Email"); ?>
                                             </p>
-                                            <p class="des mb-0">The Email provides a form you can fill up to send an automated
-                                                follow up to registered visitors who use the Chat.</p>
+                                            <p class="des mb-0"><?php sb_e("The Email provides a form you can fill up to send an automated follow up to registered visitors who use the Chat"); ?>.</p>
                                         </div>
 
                                         <?php sb_populate_settings("messages", $sb_settings, true, 'messages-email'); ?>
@@ -7436,10 +7416,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Form
+                                                <?php sb_e("Form"); ?>
                                             </p>
-                                            <p class="des mb-0">The Form settings provides a customizable set of messages for the
-                                                registration and login forms that is sent to the user when it is properly filled up.
+                                            <p class="des mb-0"><?php sb_e("The Form settings provides a customizable set of messages for the registration and login forms that is sent to the user when it is properly filled up"); ?>.
                                             </p>
                                         </div>
 
@@ -7448,32 +7427,32 @@ function sb_component_admin()
                                     <!-- </div> -->
 
                                 </div>
-                                <?php /*<div>
-                                                                                                                                       <div class="sb-top-bar save_settings settings-header">
-                                                                                                                                           <div class="">
-                                                                                                                                               <p class="head mb-4">Miscellaneous Settings</p>
-                                                                                                                                               <p class="des mb-0">Configure additional options and preferences.</p>
-                                                                                                                                           </div>
-                                                                                                                                           <div>
-                                                                                                                                               <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
-                                                                                                                                                   <i class="sb-icon-check"></i>
-                                                                                                                                                   <?php sb_e("Save changes"); ?>
-                                                                                                                                               </a>
-                                                                                                                                           </div>
-                                                                                                                                       </div>
-                                                                                                                                       <div class="users-tab">
-                                                                                                                                           <?php sb_populate_settings(
-                                                                                                                                               "miscellaneous",
-                                                                                                                                               $sb_settings
-                                                                                                                                           ); ?>
-                                                                                                                                       </div>
-                                                                                                                                   </div>*/ ?>
+                                <?php 
+                                /*<div>
+                                    <div class="sb-top-bar save_settings settings-header">
+                                        <div class="">
+                                            <p class="head mb-4">Miscellaneous Settings</p>
+                                            <p class="des mb-0">Configure additional options and preferences.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e("Save changes"); ?>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "miscellaneous",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
+                                </div>*/ ?>
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
-                                            <p class="head mb-4">Articles</p>
-                                            <p class="des mb-0">The Articles settings allow the user to configure the visibility of
-                                                the articles on the chat dashboard and adjust its properties.</p>
+                                            <p class="head mb-4"><?php sb_e("Articles"); ?></p>
+                                            <p class="des mb-0"><?php sb_e("The Articles settings allow the user to configure the visibility of the articles on the chat dashboard and adjust its properties"); ?>.</p>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
@@ -7511,7 +7490,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Display
+                                                <?php sb_e("Display"); ?>
                                             </div>
                                             <div class="my-tab" data-target="articles-setting">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -7533,7 +7512,8 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                Settings
+                                                <?php sb_e("Settings"); ?>
+                                                
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -7560,10 +7540,9 @@ function sb_component_admin()
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
-                                                    Display
+                                                    <?php sb_e("Display"); ?>
                                                 </p>
-                                                <p class="des mb-0">The Display allows you to control when the article panels and
-                                                    categories can be displayed on the dashboard.</p>
+                                                <p class="des mb-0"><?php sb_e("The Display allows you to control when the article panels and categories can be displayed on the dashboard"); ?>.</p>
                                             </div>
 
                                             <?php sb_populate_settings("articles", $sb_settings, true, 'articles-display'); ?>
@@ -7591,10 +7570,9 @@ function sb_component_admin()
                                                             </clipPath>
                                                         </defs>
                                                     </svg>
-                                                    Setting
+                                                    <?php sb_e("Settings"); ?>
                                                 </p>
-                                                <p class="des mb-0">The Articles Settings allow you to adjust certain features on
-                                                    the articles, such as the panel title or the Articles Landing Page URL.</p>
+                                                <p class="des mb-0"><?php sb_e("The Articles Settings allow you to adjust certain features on the articles, such as the panel title or the Articles Landing Page URL"); ?>.</p>
                                             </div>
 
                                             <?php sb_populate_settings("articles", $sb_settings, true, 'articles-settings'); ?>
@@ -7845,8 +7823,8 @@ function sb_apps_area($apps, $cloud_active_apps)
                 '<div class="' . $apps[$i][1] . '">
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
-                            <p class="head mb-4">Tickets Settings</p>
-                            <p class="des mb-0">The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets.</p>
+                            <p class="head mb-4">'.sb_('Tickets').' '.sb_('Settings').'</p>
+                            <p class="des mb-0">'.sb_('The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets').'.</p>
                         </div>
                         
                                         <div class="d-flex align-items-center">
