@@ -5589,7 +5589,7 @@ function sb_component_admin()
                                 <div>
                                     <?php sb_e("Reports"); ?>
                                 </div>
-                                <ul>
+                                <ul class="reports-list">
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL; ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
 

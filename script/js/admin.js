@@ -4782,6 +4782,7 @@
 
         mobileCloseConversation: function () {
             conversations_admin_list_ul.find('li.sb-active').sbActive(false);
+            console.log("LLLLLLLLLLLLLL");
             conversations_area.find('.sb-admin-list').sbActive(true);
             conversations_area.find('.sb-conversation,.sb-user-details').removeClass('sb-active');
             admin.find('.sb-menu-mobile [data-value="panel"]').sbActive(false);
