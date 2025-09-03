@@ -977,7 +977,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         const capitalizedType = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         $('#select-agent').select2({
-            placeholder: <?php sb_e("Type and search..."); ?>,
+            placeholder: '<?php sb_e("Type and search..."); ?>',
             ajax: {
                 url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
                 method: 'POST',
@@ -5326,7 +5326,7 @@ function sb_component_admin()
 
 
                     $('#select-ticket-agent').select2({
-                        placeholder: <?php sb_e("Type and search..."); ?>,
+                        placeholder: '<?php sb_e("Type and search..."); ?>',
                         ajax: {
                             url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
                             method: 'POST',
@@ -5360,7 +5360,7 @@ function sb_component_admin()
                     });
 
                     $('#select-ticket-reporter').select2({
-                        placeholder: <?php sb_e("Type and search..."); ?>,
+                        placeholder: '<?php sb_e("Type and search..."); ?>',
                         ajax: {
                             url: '<?php echo SB_URL; ?>/include/ajax.php', // Your endpoint
                             method: 'POST',
