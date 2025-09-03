@@ -8423,6 +8423,7 @@ ul.pagination li.active a.page-link {
   padding: 32px 17px;
   box-shadow: 0px 4px 30px 0px rgba(46, 45, 116, 0.0509803922);
   border: 1px solid #D1D5DB;
+  min-height: 85px;
 }
 .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
   display: flex;
@@ -13766,6 +13767,9 @@ li.menu_head:hover {
   color: #333;
   text-decoration: none;
 }
+.sidebar nav ul li a span {
+  word-break: break-word !important;
+}
 
 .row.tablet-sizee .nav-tabs .nav-item {
   width: fit-content;
@@ -15068,7 +15072,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 188px !important;
+    height: 194px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;

@@ -5228,6 +5228,7 @@ ul.pagination {
                     padding: 32px 17px;
                     box-shadow: 0px 4px 30px 0px #2E2D740D;
                     border: 1px solid #D1D5DB;
+                    min-height: 85px;
 
                     .graph_tabs {
                         display: flex;
@@ -11590,6 +11591,9 @@ li.menu_head:hover {
                     padding: 10px;
                     color: #333;
                     text-decoration: none;
+                    span {
+                        word-break: break-word !important;
+                    }
                 }
             }
         }
@@ -13397,7 +13401,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 188px !important;
+                            height: 194px !important;
                         }
                     }
                 }
