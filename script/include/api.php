@@ -5,7 +5,7 @@
  * API.PHP
  * ==========================================================
  *
- * API. This file listens the POST queries and return the result. © 2017-2025 board.support. All rights reserved.
+ * API. This file listens the POST queries and return the result. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
@@ -458,11 +458,7 @@ function sb_process_api() {
             $extra = sb_isset($_POST, $function_name == 'update-user' ? 'settings_extra' : 'extra', []);
             for ($i = 0; $i < count($values); $i++) {
                 if (isset($_POST[$values[$i]])) {
-<<<<<<< HEAD
-                    $settings[$values[$i]] = [$_POST[$values[$i]]];
-=======
                     $settings[$values[$i]] = $_POST[$values[$i]];
->>>>>>> vendor-update
                 }
             }
             die(sb_api_success($function_name == 'add-user' ? sb_add_user($settings, $extra) : sb_update_user($_POST['user_id'], $settings, $extra)));

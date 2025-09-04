@@ -226,11 +226,7 @@ function sb_set_cookie_login($value) {
 
 function sb_get_cookie_login() {
     $cookie = isset($_COOKIE['sb-login']) ? $_COOKIE['sb-login'] : sb_isset($_POST, 'login-cookie');
-<<<<<<< HEAD
-    if ($cookie) {
-=======
     if ($cookie && $cookie != 'false') {
->>>>>>> vendor-update
         $response = json_decode(sb_encryption($cookie, false), true);
         return empty($response) ? false : $response;
     }
@@ -372,7 +368,6 @@ function sb_otp($email = false, $otp = false) {
  */
 
 function sb_add_user($settings = [], $settings_extra = [], $hash_password = true, $skip_otp = true) {
-<<<<<<< HEAD
     require_once(SB_CLOUD_PATH . '/account/functions.php');
     $membership = membership_get_active(false);
     $membership["count_agents"].'|'.$membership["quota_agents"];
@@ -384,8 +379,6 @@ function sb_add_user($settings = [], $settings_extra = [], $hash_password = true
         }
     }
 
-=======
->>>>>>> vendor-update
     $keys = ['profile_image', 'first_name', 'last_name', 'email', 'user_type', 'password', 'department'];
     for ($i = 0; $i < count($keys); $i++) {
         $settings[$keys[$i]] = sb_isset($settings, $keys[$i], '');
@@ -475,11 +468,7 @@ function sb_add_user($settings = [], $settings_extra = [], $hash_password = true
             sb_cloud_set_agent($email);
         }
     }
-<<<<<<< HEAD
-    if (sb_is_agent(false, true, false, true) && (sb_get_multi_setting('routing', 'routing-active') || sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active'))) {
-=======
     if (sb_is_agent(false, true, false, true) && (sb_routing_is_active() || sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active'))) {
->>>>>>> vendor-update
         sb_new_conversation($user_id, 3, '', sb_get_agent_department(), sb_get_active_user_ID());
     }
     return $user_id;
@@ -533,12 +522,11 @@ function sb_delete_users($user_ids) {
             }
         }
     }
-<<<<<<< HEAD
 
     $query = substr($query, 0, -1);
     $ids = array_column(sb_db_get('SELECT id FROM sb_conversations WHERE user_id IN (' . $query . ')', false), 'id');
     $profile_images = sb_db_get('SELECT profile_image FROM sb_users WHERE id IN (' . $query . ')', false);
-    ////////////// Close tickets after deleting the custom ////////////////////////////
+    ////////////// Close tickets after deleting the customer ////////////////////////////
     $ticket_ids = array_column(sb_db_get('SELECT id FROM sb_tickets WHERE contact_id IN (' . implode(",",$user_ids) . ')', false), 'id');
     $active_user = sb_get_active_user();
     for ($i = 0; $i < count($ticket_ids); $i++) {
@@ -581,11 +569,6 @@ function sb_delete_users($user_ids) {
         sb_db_query('UPDATE sb_tickets SET conversation_id = NULL WHERE conversation_id IN (' . implode(",",$ids) . ')');
     }
 
-=======
-    $query = substr($query, 0, -1);
-    $ids = array_column(sb_db_get('SELECT id FROM sb_conversations WHERE user_id IN (' . $query . ')', false), 'id');
-    $profile_images = sb_db_get('SELECT profile_image FROM sb_users WHERE id IN (' . $query . ')', false);
->>>>>>> vendor-update
     for ($i = 0; $i < count($ids); $i++) {
         sb_delete_attachments($ids[$i]);
     }
@@ -747,14 +730,9 @@ function sb_update_user_value($user_id, $slug, $value, $name = false) {
         return sb_db_query('DELETE FROM sb_users_data WHERE user_id = ' . $user_id . ' AND slug = "' . sb_db_escape($slug) . '"');
     }
     if (in_array($slug, ['profile_image', 'first_name', 'last_name', 'email', 'password', 'department', 'user_type', 'last_activity', 'typing'])) {
-<<<<<<< HEAD
-        if ($slug == 'password')
-            $value = password_hash($value, PASSWORD_DEFAULT);
-=======
         if ($slug == 'password') {
             $value = password_hash($value, PASSWORD_DEFAULT);
         }
->>>>>>> vendor-update
         if ($slug == 'email') {
             sb_newsletter($value);
         }
@@ -816,7 +794,6 @@ function sb_get_user($user_id, $extra = false) {
     return false;
 }
 
-<<<<<<< HEAD
 function get_users_list($sorting = ['creation_time', 'DESC'])
 {
     $sorting_field = $sorting[0];
@@ -831,8 +808,6 @@ function get_users_list($sorting = ['creation_time', 'DESC'])
     }
 }
 
-=======
->>>>>>> vendor-update
 function sb_get_users($sorting = ['creation_time', 'DESC'], $user_types = [], $search = '', $pagination = 0, $extra = false, $user_ids = false, $department = false, $tag = false, $source = false) {
     $query = '';
     $query_search = '';
@@ -923,7 +898,6 @@ function sb_get_users($sorting = ['creation_time', 'DESC'], $user_types = [], $s
     }
 }
 
-<<<<<<< HEAD
 function sb_search_get_users($input = null,$type = null) {
 
     $input = sb_db_escape($input);
@@ -2776,8 +2750,6 @@ function update_ticket_priority($ticket_id = null, $priority = null)
 }
 
 
-=======
->>>>>>> vendor-update
 function sb_get_new_users($datetime) {
     $datetime = sb_db_escape($datetime);
     $users = sb_db_get(SELECT_FROM_USERS . ' FROM sb_users WHERE user_type <> "bot" AND ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . sb_routing_and_department_db('sb_conversations', true) . ' ORDER BY id DESC', false);
@@ -3347,18 +3319,11 @@ function sb_import_users($url) {
  * 4. Assigne all unassigned conversations to the active agent
  * 5. Route conversations to agents
  * 6. Find the best agent to assign a conversation
-<<<<<<< HEAD
- *
- */
-
-function sb_queue($conversation_id, $department = false) {
-=======
  * 7. Check if routing is active
  *
  */
 
 function sb_queue($conversation_id, $department = false, $is_send = true) {
->>>>>>> vendor-update
     $position = 0;
     $queue_db = sb_get_external_setting('queue', []);
     $settings = sb_get_setting('queue');
@@ -3368,10 +3333,7 @@ function sb_queue($conversation_id, $department = false, $is_send = true) {
     $unix_min = strtotime('-1 minutes');
     $conversation = sb_db_get('SELECT user_id, agent_id, source FROM sb_conversations WHERE id = ' . sb_db_escape($conversation_id, true));
     $show_progress = !sb_execute_bot_message('offline', 'check');
-<<<<<<< HEAD
-=======
     $message = false;
->>>>>>> vendor-update
     if (!empty(sb_isset($conversation, 'agent_id'))) {
         return 0;
     }
@@ -3392,22 +3354,14 @@ function sb_queue($conversation_id, $department = false, $is_send = true) {
         }
     }
     if (count($queue) == 0 || $position == 1) {
-<<<<<<< HEAD
-        $agent_id = sb_routing_find_best_agent($department, sb_isset($settings, 'queue-concurrent-chats', 5), false);
-=======
         $agent_id = sb_routing_find_best_agent($department, sb_isset($settings, 'queue-concurrent-chats', 5));
->>>>>>> vendor-update
         if ($agent_id !== false) {
             sb_routing_assign_conversation($agent_id, $conversation_id);
             array_shift($queue);
             $position = 0;
             $user_id = $conversation['user_id'];
             $message = sb_t(sb_isset($settings, 'queue-message-success', 'It\'s your turn! An agent will reply to you shortly.'));
-<<<<<<< HEAD
-            sb_send_message(sb_get_bot_id(), $conversation_id, $message, [], 2)['id'];
-=======
             $message = $is_send ? [$message, sb_send_message(sb_get_bot_id(), $conversation_id, $message, [], 2)['id']] : false;
->>>>>>> vendor-update
             sb_send_agents_notifications(sb_isset(sb_get_last_message($conversation_id, false, $user_id), 'message'), false, $conversation_id);
         } else if ($position == 0) {
             array_push($queue, [$conversation_id, $unix_now, $department]);
@@ -3418,9 +3372,6 @@ function sb_queue($conversation_id, $department = false, $is_send = true) {
         $position = $index + 1;
     }
     sb_save_external_setting('queue', $queue);
-<<<<<<< HEAD
-    return [$position, $show_progress];
-=======
     return [$position, $show_progress, $message];
 }
 
@@ -3436,16 +3387,11 @@ function sb_queue_check_and_run($conversation_id, $department, $source = false) 
         }
     }
     return false;
->>>>>>> vendor-update
 }
 
 function sb_routing_and_department_db($table_name = 'sb_conversations', $users = false) {
     $hide = sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active');
-<<<<<<< HEAD
-    $routing = sb_is_agent(false, true, false, true) && (sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') || $hide);
-=======
     $routing = sb_is_agent(false, true, false, true) && (sb_routing_is_active() || $hide);
->>>>>>> vendor-update
     $routing_unassigned = $routing && $hide && sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-view');
     $department = sb_get_agent_department();
     $query = ($routing ? (' AND (' . $table_name . '.agent_id = ' . sb_get_active_user_ID() . ($routing_unassigned ? (' OR (' . $table_name . '.agent_id IS NULL OR ' . $table_name . '.agent_id = 0))') : ')')) : '') . ($department !== false ? ' AND ' . $table_name . '.department = ' . $department : '');
@@ -3476,20 +3422,12 @@ function sb_routing($conversation_id = false, $department = false, $unassigned =
 }
 
 function sb_routing_find_best_agent($department = false, $is_ignore_count = false) {
-<<<<<<< HEAD
-    $department = sb_db_escape($department);
-=======
     $department = $department == -1 ? false : sb_db_escape($department, true);
->>>>>>> vendor-update
     $online_agents_ids = sb_get_multi_setting('routing', 'routing-disable-status-check') ? sb_get_agents_ids(false) : sb_get_online_user_ids('agent');
     $is_queue = sb_get_multi_setting('queue', 'queue-active');
     $concurrent_chats = $is_queue && !$is_ignore_count ? sb_get_multi_setting('queue', 'queue-concurrent-chats') : 9999;
     if (!empty($online_agents_ids)) {
-<<<<<<< HEAD
-        $best_online_agent = sb_db_get('SELECT u.id, COUNT(c.id) AS count FROM sb_users u LEFT JOIN sb_conversations c ON c.agent_id = u.id  AND c.status_code IN (0, 1, 2)' . ($department ? ' AND c.department = ' . intval($department) : '') . ' WHERE u.id IN (' . implode(', ', $online_agents_ids) . ') GROUP BY u.id ORDER BY count LIMIT 1');
-=======
         $best_online_agent = sb_db_get('SELECT u.id, COUNT(c.id) AS count FROM sb_users u LEFT JOIN sb_conversations c ON c.agent_id = u.id  AND c.status_code IN (0, 1, 2)' . ($department ? ' AND c.department = ' . $department : '') . ' WHERE u.id IN (' . implode(', ', $online_agents_ids) . ') GROUP BY u.id ORDER BY count LIMIT 1');
->>>>>>> vendor-update
         if (!empty($best_online_agent) && $best_online_agent['count'] < $concurrent_chats) {
             return $best_online_agent['id'];
         }
@@ -3497,11 +3435,8 @@ function sb_routing_find_best_agent($department = false, $is_ignore_count = fals
     return false;
 }
 
-<<<<<<< HEAD
-=======
 function sb_routing_is_active() {
     return sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active'); 
 }
 
->>>>>>> vendor-update
 ?>

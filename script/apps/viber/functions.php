@@ -14,11 +14,7 @@
  *
  */
 
-<<<<<<< HEAD
-define('SB_VIBER', '1.0.0');
-=======
 define('SB_VIBER', '1.0.1');
->>>>>>> vendor-update
 
 function sb_viber_send_message($viber_id, $message = '', $attachments = []) {
     if (empty($message) && empty($attachments)) return false;
