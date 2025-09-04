@@ -5599,6 +5599,9 @@ div ul.sb-menu li:hover,
   z-index: 9;
   text-align: left;
 }
+.sb-chat .sb-init-form [id=otp]:not(.sb-active) {
+  display: none;
+}
 .sb-chat .sb-init-form .sb-title {
   text-align: center;
 }
