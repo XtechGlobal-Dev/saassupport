@@ -10,7 +10,11 @@ use Swoole\Http\Response;
  *
  */
 
+<<<<<<< HEAD
 define('SB_VERSION', '3.8.1');
+=======
+define('SB_VERSION', '3.8.3');
+>>>>>>> vendor-update
 
 if (!defined('SB_PATH')) {
     $path = dirname(__DIR__, 1);
@@ -35,6 +39,7 @@ global $SB_LOGIN;
 global $SB_LANGUAGE;
 global $SB_TRANSLATIONS;
 const SELECT_FROM_USERS = 'SELECT id, first_name, last_name, email, profile_image, user_type, creation_time, last_activity, department, token';
+<<<<<<< HEAD
 const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_name) as assigned_to_name,c.profile_image, CONCAT_WS(" ", c.first_name, c.last_name) as customer_name,
             p.name as priority_name, p.color as priority_color,u.user_type,
             ts.name as status_name, ts.color as status_color,
@@ -49,6 +54,8 @@ const SELECT_FROM_TICKETS = 'SELECT t.*, CONCAT_WS(" ", u.first_name, u.last_nam
     LEFT JOIN priorities p ON t.priority_id = p.id
     LEFT JOIN ticket_status ts ON t.status_id = ts.id
     LEFT JOIN ticket_tags tt_filter ON t.id = tt_filter.ticket_id';
+=======
+>>>>>>> vendor-update
 
 class SBError {
     public $error;
@@ -138,10 +145,13 @@ function sb_db_connect() {
             echo 'Connection error. Visit the admin area for more details or open the config.php file and check the database information. Message: ' . $SB_CONNECTION->connect_error . '.';
             return false;
         }
+<<<<<<< HEAD
 
         // ADD THIS LINE — Sets charset to utf8mb4 for emoji support
         $SB_CONNECTION->set_charset('utf8mb4');
 
+=======
+>>>>>>> vendor-update
     } catch (Exception $exception) {
         if (isset($_COOKIE['sb-cloud'])) {
             setcookie('sb-cloud', '', 0, '/');
@@ -215,12 +225,16 @@ function sb_db_escape($value, $numeric = -1) {
     if ($SB_CONNECTION && $value) {
         $value = $SB_CONNECTION->real_escape_string($value);
     }
+<<<<<<< HEAD
    // $value = str_replace(['\"', '"'], ['"', '\"'], $value);
    if ($value !== null) {
         $value = str_replace(['\"', '"'], ['"', '\"'], $value);
     } else {
         $value = ''; // or handle it as per your requirement
     }
+=======
+    $value = str_replace(['\"', '"'], ['"', '\"'], $value);
+>>>>>>> vendor-update
     $value = sb_sanatize_string($value);
     $value = htmlspecialchars($value, ENT_NOQUOTES | ENT_SUBSTITUTE, 'utf-8');
     $value = str_replace('&amp;lt;', '&lt;', $value);
@@ -662,7 +676,11 @@ function sb_restore_user_translations() {
 }
 
 function sb_get_user_language($user_id = false, $allow_browser_language = false) {
+<<<<<<< HEAD
     $setting_language = sb_get_setting('front-auto-translations');
+=======
+    $setting_language = sb_is_agent() && (!$user_id || sb_get_active_user_ID() == $user_id) ? false : sb_get_setting('front-auto-translations');
+>>>>>>> vendor-update
     if ($setting_language && $setting_language != 'auto') {
         return $setting_language;
     }
@@ -705,9 +723,18 @@ function sb_language_code($language_code_full) {
     return substr($language_code_full, 0, 2);
 }
 
+<<<<<<< HEAD
 function sb_get_language_code_by_name($language_name, &$language_codes = false) {
     $language_codes = $language_codes ? $language_codes : sb_get_json_resource('languages/language-codes.json');
     if (strlen($language_name) > 2) {
+=======
+function sb_get_language_code_by_name($language_name, &$language_codes = false, $is_name_by_code = false) {
+    $language_codes = empty($language_codes) ? sb_get_json_resource('languages/language-codes.json') : $language_codes;
+    if (strlen($language_name) > 2) {
+        if ($is_name_by_code) {
+            return sb_isset($language_codes, strtolower($language_name));
+        }
+>>>>>>> vendor-update
         $language_code = ucfirst($language_name);
         foreach ($language_codes as $key => $value) {
             if ($language_code == $value) {
@@ -718,8 +745,18 @@ function sb_get_language_code_by_name($language_name, &$language_codes = false) 
     return $language_name;
 }
 
+<<<<<<< HEAD
 function sb_is_rtl($language_code = false) {
     return in_array($language_code ? $language_code : sb_get_user_language((sb_is_agent() && sb_get_setting('admin-auto-translations')) || (!sb_is_agent() && sb_get_setting('front-auto-translations') == 'auto') ? sb_get_active_user_ID() : false), ['ar', 'he', 'ku', 'fa', 'ur']);
+=======
+function sb_get_language_name_by_code($language_code) {
+    $false = false;
+    return sb_get_language_code_by_name($language_code, $false, true);
+}
+
+function sb_is_rtl($language_code = false) {
+    return in_array($language_code ? $language_code : sb_get_user_language(sb_get_active_user_ID()), ['ar', 'he', 'ku', 'fa', 'ur']);
+>>>>>>> vendor-update
 }
 
 /*
@@ -877,6 +914,10 @@ function sb_updates_validation() {
     // Temp. Deprecated
     try {
         if (!sb_is_debug()) {
+<<<<<<< HEAD
+=======
+            sb_db_query('CREATE TABLE IF NOT EXISTS sb_archive (id int NOT NULL, user_id INT NOT NULL, message TEXT NOT NULL, creation_time DATETIME NOT NULL, status_code TINYINT DEFAULT 0, attachments TEXT, payload TEXT, conversation_id INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE, FOREIGN KEY (conversation_id) REFERENCES sb_conversations(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin');
+>>>>>>> vendor-update
             sb_db_query('ALTER TABLE sb_conversations ADD COLUMN extra_3 varchar(191) AFTER extra_2');
             sb_db_query('CREATE TABLE IF NOT EXISTS sb_articles (id INT NOT NULL AUTO_INCREMENT, title VARCHAR(191) NOT NULL, content TEXT NOT NULL, editor_js TEXT NOT NULL, nav TEXT, link VARCHAR(191), category VARCHAR(191), parent_category VARCHAR(191), language VARCHAR(2), parent_id INT, slug VARCHAR(191), update_time DATE NOT NULL, PRIMARY KEY (id), FOREIGN KEY (parent_id) REFERENCES sb_articles(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         }
@@ -958,21 +999,37 @@ function sb_installation($details, $force = false) {
     if (sb_db_check_connection() === true && !$force) {
         return true;
     }
+<<<<<<< HEAD
     if (!isset($details['db-name']) || !isset($details['db-user']) || !isset($details['db-password']) || !isset($details['db-host'])) {
         return new SBValidationError('missing-details');
+=======
+    if (empty($details['envato-purchase-code']) && defined('SB_WP')) {
+        return false;
+    }
+    if (!isset($details['db-name']) || !isset($details['db-user']) || !isset($details['db-password']) || !isset($details['db-host'])) {
+        return ['error' => 'Missing database details.'];
+>>>>>>> vendor-update
     } else {
         $database = ['name' => $details['db-name'][0], 'user' => $details['db-user'][0], 'password' => $details['db-password'][0], 'host' => $details['db-host'][0], 'port' => (isset($details['db-port']) && $details['db-port'][0] ? intval($details['db-port'][0]) : ini_get('mysqli.default_port'))];
     }
     if ($not_cloud) {
         if (!isset($details['url'])) {
+<<<<<<< HEAD
             return new SBValidationError('missing-url');
+=======
+            return ['error' => 'Support Board cannot get the plugin URL.'];
+>>>>>>> vendor-update
         } else if (substr($details['url'], -1) == '/') {
             $details['url'] = substr($details['url'], 0, -1);
         }
     }
     $connection_check = sb_db_check_connection($database['name'], $database['user'], $database['password'], $database['host'], $database['port']);
+<<<<<<< HEAD
     $db_respones = [];
     $success = '';
+=======
+    $response = [];
+>>>>>>> vendor-update
     if ($connection_check === true) {
 
         // Create the database
@@ -980,6 +1037,7 @@ function sb_installation($details, $force = false) {
         if ($not_cloud) {
             $connection->set_charset('utf8mb4');
         }
+<<<<<<< HEAD
         $db_respones['users'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_users (id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(100) NOT NULL, last_name VARCHAR(100) NOT NULL, password VARCHAR(100), email VARCHAR(191) UNIQUE, profile_image VARCHAR(191), user_type VARCHAR(10) NOT NULL, creation_time DATETIME NOT NULL, token VARCHAR(50) NOT NULL UNIQUE, last_activity DATETIME, typing INT DEFAULT -1, department TINYINT, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         $db_respones['users_data'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_users_data (id INT NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, slug VARCHAR(191) NOT NULL, name VARCHAR(191) NOT NULL, value TEXT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE, UNIQUE INDEX sb_users_data_index (user_id, slug)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
         $db_respones['conversations'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_conversations (id int NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, title VARCHAR(191), creation_time DATETIME NOT NULL, status_code TINYINT DEFAULT 0, department TINYINT, agent_id INT, source VARCHAR(2), extra VARCHAR(191), extra_2 VARCHAR(191), extra_3 VARCHAR(191), tags VARCHAR(191),`converted_to_ticket` tinyint(4) DEFAULT NULL, PRIMARY KEY (id), FOREIGN KEY (agent_id) REFERENCES sb_users(id) ON DELETE CASCADE, FOREIGN KEY (user_id) REFERENCES sb_users(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
@@ -1017,12 +1075,36 @@ function sb_installation($details, $force = false) {
     /// Insert Default Settings
         //$settingsStr = '{"chat-login-init":[false,"checkbox"],"init-dashboard":[false,"checkbox"],"disable-dashboard":[false,"checkbox"],"force-one-conversation":[false,"checkbox"],"chat-timetable-disable":[false,"checkbox"],"chat-offline-disable":[false,"checkbox"],"front-auto-translations":["","select"],"auto-open":[false,"checkbox"],"disable-uploads":[false,"checkbox"],"disable-voice-messages":[false,"checkbox"],"close-chat":[false,"checkbox"],"chat-manual-init":[false,"checkbox"],"agents-menu":[{"agents-menu-active":[false,"checkbox"],"agents-menu-force-one":[false,"checkbox"],"agents-menu-online-only":[false,"checkbox"],"agents-menu-title":["","text"]},"multi-input"],"messaging-channels":[{"messaging-channels-active":[false,"checkbox"],"messaging-channels-title":["","text"],"messaging-channels-wa":["","text"],"messaging-channels-fb":["","text"],"messaging-channels-ig":["","text"],"messaging-channels-tw":["","text"],"messaging-channels-tg":["","text"],"messaging-channels-vb":["","text"],"messaging-channels-za":["","text"],"messaging-channels-ln":["","text"],"messaging-channels-wc":["","text"],"messaging-channels-em":["","text"],"messaging-channels-tk":["","text"]},"multi-input"],"collapse":[false,"checkbox"],"hide-conversation-details":[false,"checkbox"],"admin-title":["","text"],"login-icon":["","upload-image"],"admin-icon":["","upload-image"],"login-message":["","text"],"admin-auto-translations":[false,"checkbox"],"admin-disable-settings-translations":[false,"checkbox"],"admin-auto-archive":[false,"checkbox"],"order-by-date":[false,"checkbox"],"agents":[{"agents-users-area":[false,"checkbox"],"agents-articles-area":[false,"checkbox"],"agents-edit-user":[false,"checkbox"],"agents-tab":[false,"checkbox"],"agents-delete-conversation":[false,"checkbox"],"agents-delete-message":[false,"checkbox"],"agents-update-department":[false,"checkbox"]},"multi-input"],"supervisors":[[],"repeater"],"show-profile-images-admin":[false,"checkbox"],"disable":[{"disable-channels-filter":[false,"checkbox"],"disable-filters":[false,"checkbox"],"disable-attachments":[false,"checkbox"],"disable-tags":[false,"checkbox"],"disable-notes":[false,"checkbox"]},"multi-input"],"notes-settings":[{"notes-hide-name":[false,"checkbox"]},"multi-input"],"tags-settings":[{"tags-show":[false,"checkbox"],"tags-starred":[false,"checkbox"]},"multi-input"],"tags":[[],"repeater"],"transcript":[{"transcript-type":["csv","select"],"transcript-action":["download","select"],"transcript-message":["","textarea"]},"multi-input"],"user-table-extra-columns":[[],"repeater"],"saved-replies":[[],"repeater"],"custom-js":["","text"],"custom-css":["","text"],"manifest-url":["","text"],"color-admin-1":["","color"],"color-admin-2":["","color"],"cloud-switch":[[],"repeater"],"sound-settings":[{"sound-settings-active":[false,"checkbox"],"sound-settings-active-admin":[false,"checkbox"],"sound-settings-volume":["","select"],"sound-settings-volume-admin":["","select"],"sound-settings-repeat":["","select"],"sound-settings-repeat-admin":["","select"],"sound-settings-file-admin":["","text"]},"multi-input"],"online-users-notification":[false,"checkbox"],"away-mode":[false,"checkbox"],"desktop-notifications":["","select"],"flash-notifications":["","select"],"push-notifications":[{"push-notifications-provider":["pusher","select"],"push-notifications-active":[false,"checkbox"],"push-notifications-users-active":[false,"checkbox"],"push-notifications-id":["","text"],"push-notifications-key":["","password"],"push-notifications-sw-url":["","text"],"push-notifications-onesignal-app-id":["","text"],"push-notifications-onesignal-api-key":["","password"]},"multi-input"],"notify-agent-email":[false,"checkbox"],"notify-user-email":[false,"checkbox"],"stop-notify-admins":[false,"checkbox"],"notify-email-cron":[false,"checkbox"],"email-server":[{"email-server-host":["","text"],"email-server-user":["","text"],"email-server-password":["","password"],"email-server-port":["","number"],"email-server-from":["","text"],"email-sender-name":["","text"]},"multi-input"],"email-piping":[[{"email-piping-active":false,"email-piping-host":"","email-piping-user":"","email-piping-password":"","email-piping-port":"993","email-piping-delimiter":false,"email-piping-all":false,"email-piping-one-conversation":false,"email-piping-disable-cron":false,"email-piping-department":"","email-piping-filters":"","email-piping-sync":""}],"repeater"],"sms":[{"sms-active-agents":[false,"checkbox"],"sms-active-users":[false,"checkbox"],"sms-user":["","text"],"sms-token":["","password"],"sms-sender":["","text"],"sms-message-agent":["","textarea"],"sms-message-user":["","textarea"]},"multi-input"],"notifications-icon":["","upload-image"],"registration-required":["registration-login","select"],"registration-timetable":[false,"checkbox"],"registration-offline":[false,"checkbox"],"registration-link":["","text"],"login-verification-url":["","text"],"registration":[{"registration-title":["","text"],"registration-msg":["","textarea"],"registration-success":["","textarea"],"registration-btn-text":["","text"],"registration-terms-link":["","text"],"registration-privacy-link":["","text"]},"multi-input"],"login":[{"login-title":["","text"],"login-msg":["","textarea"]},"multi-input"],"registration-fields":[{"reg-email":[true,"checkbox"],"reg-required-email":[false,"checkbox"],"reg-phone":[false,"checkbox"],"reg-required-phone":[false,"checkbox"],"reg-last-name":[false,"checkbox"],"reg-required-last-name":[false,"checkbox"],"reg-profile-img":[false,"checkbox"],"reg-required-profile-img":[false,"checkbox"],"reg-city":[false,"checkbox"],"reg-required-city":[false,"checkbox"],"reg-country":[false,"checkbox"],"reg-required-country":[false,"checkbox"],"reg-language":[false,"checkbox"],"reg-required-language":[false,"checkbox"],"reg-birthday":[false,"checkbox"],"reg-required-birthday":[false,"checkbox"],"reg-company":[false,"checkbox"],"reg-required-company":[false,"checkbox"],"reg-website":[false,"checkbox"],"reg-required-website":[false,"checkbox"]},"multi-input"],"user-additional-fields":[[],"repeater"],"registration-extra":[false,"checkbox"],"registration-user-details-success":[false,"checkbox"],"registration-otp":[false,"checkbox"],"visitors-registration":[false,"checkbox"],"envato-validation":[{"envato-validation-active":[false,"checkbox"],"envato-validation-token":["","password"],"envato-validation-product-ids":["","text"],"envato-validation-extended-license-only":[false,"checkbox"]},"multi-input"],"phone-code":["","select"],"visitor-prefix":["","text"],"visitor-default-name":["","text"],"visitor-autodata":[false,"checkbox"],"display-users-thumb":[false,"checkbox"],"hide-agents-thumb":[false,"checkbox"],"sender-name":["","select"],"bot-name":["","text"],"bot-image":["","upload-image"],"welcome-message":[{"welcome-active":[false,"checkbox"],"welcome-open":[false,"checkbox"],"welcome-sound":[false,"checkbox"],"welcome-disable-office-hours":[false,"checkbox"],"welcome-trigger":["load","select"],"welcome-delay":["","number"],"welcome-msg":["","textarea"]},"multi-input"],"follow-message":[{"follow-active":[false,"checkbox"],"follow-disable-office-hours":[false,"checkbox"],"follow-disable-channels":[false,"checkbox"],"follow-name":[false,"checkbox"],"follow-last-name":[false,"checkbox"],"follow-phone":[false,"checkbox"],"follow-phone-required":[false,"checkbox"],"follow-title":["","text"],"follow-delay":["","number"],"follow-sound":[false,"checkbox"],"follow-msg":["","textarea"],"follow-success":["","textarea"],"follow-placeholder":["","text"]},"multi-input"],"rating-message":[{"rating-active":[false,"checkbox"],"rating-message-area":[false,"checkbox"]},"multi-input"],"chat-timetable":[{"chat-timetable-active":[false,"checkbox"],"chat-timetable-hide":[false,"checkbox"],"chat-timetable-agents":[false,"checkbox"],"chat-timetable-type":["","select"],"chat-timetable-title":["","text"],"chat-timetable-msg":["","textarea"]},"multi-input"],"close-message":[{"close-active":[false,"checkbox"],"close-transcript":[false,"checkbox"],"close-msg":["","textarea"]},"multi-input"],"popup-message":[{"popup-active":[false,"checkbox"],"popup-mobile-hidden":[false,"checkbox"],"popup-image":["","upload-image"],"popup-title":["","text"],"popup-msg":["","textarea"]},"multi-input"],"privacy":[{"privacy-active":[false,"checkbox"],"privacy-disable-channels":[false,"checkbox"],"privacy-title":["","text"],"privacy-msg":["","textarea"],"privacy-msg-decline":["","textarea"],"privacy-link":["","text"],"privacy-link-text":["","text"],"privacy-btn-approve":["","text"],"privacy-btn-decline":["","text"]},"multi-input"],"webhooks":[{"webhooks-active":[false,"checkbox"],"webhooks-url":["","text"],"webhooks-key":["","password"],"webhooks-allowed":["","text"]},"multi-input"],"envato-purchase-code":["","password"],"auto-updates":[false,"checkbox"],"pusher":[{"pusher-active":[false,"checkbox"],"pusher-id":["","text"],"pusher-key":["","text"],"pusher-secret":["","password"],"pusher-cluster":["","text"]},"multi-input"],"newsletter":[{"newsletter-active":[false,"checkbox"],"newsletter-service":["mailchimp","select"],"newsletter-list-id":["","text"],"newsletter-key":["","password"]},"multi-input"],"timetable":[{"monday":[["",""],["",""],["",""],["",""]],"tuesday":[["",""],["",""],["",""],["",""]],"wednesday":[["",""],["",""],["",""],["",""]],"thursday":[["",""],["",""],["",""],["",""]],"friday":[["",""],["",""],["",""],["",""]],"saturday":[["",""],["",""],["",""],["",""]],"sunday":[["",""],["",""],["",""],["",""]]},"timetable"],"timetable-utc":["","number"],"departments-settings":[{"departments-dashboard":[false,"checkbox"],"departments-images":[false,"checkbox"],"departments-show-list":[false,"checkbox"],"departments-force-one":[false,"checkbox"],"departments-label":["","text"],"departments-single-label":["","text"],"departments-title":["","text"]},"multi-input"],"departments":[[],"repeater"],"queue":[{"queue-active":[false,"checkbox"],"queue-concurrent-chats":["","number"],"queue-response-time":["","number"],"queue-sound":[false,"checkbox"],"queue-message":["","textarea"],"queue-message-success":["","textarea"]},"multi-input"],"routing":[{"routing-active":[false,"checkbox"],"routing-disable-status-check":[false,"checkbox"]},"multi-input"],"agent-hide-conversations":[{"agent-hide-conversations-active":[false,"checkbox"],"agent-hide-conversations-menu":[false,"checkbox"],"agent-hide-conversations-routing":[false,"checkbox"],"agent-hide-conversations-view":[false,"checkbox"]},"multi-input"],"cookie-domain":["","text"],"performance":[{"performance-minify":[false,"checkbox"],"performance-reports":[false,"checkbox"],"performance-articles":[false,"checkbox"]},"multi-input"],"amazon-s3":[{"amazon-s3-active":[false,"checkbox"],"amazon-s3-access-key":["","password"],"amazon-s3-secret-access-key":["","password"],"amazon-s3-bucket-name":["","text"],"amazon-s3-region":["","text"]},"multi-input"],"logs":[false,"checkbox"],"ip-ban":["","text"],"open-ai":[{"open-ai-sync-mode":["manual","select"],"open-ai-key":["","password"],"open-ai-mode":["","select"],"open-ai-model":["","select"],"open-ai-assistant-id":["","text"],"open-ai-fallback-message":["","text"],"open-ai-prompt":["","textarea"],"open-ai-prompt-message-rewrite":["","text"],"open-ai-tokens":["","number"],"open-ai-temperature":["","number"],"open-ai-presence-penalty":["","number"],"open-ai-frequency-penalty":["","number"],"open-ai-logit-bias":["","text"],"open-ai-custom-model":["","text"],"open-ai-training-data-language":["","select"],"open-ai-active":[false,"checkbox"],"open-ai-spelling-correction":[false,"checkbox"],"open-ai-smart-reply":[false,"checkbox"],"open-ai-spelling-correction-dialogflow":[false,"checkbox"],"open-ai-rewrite":[false,"checkbox"],"open-ai-user-expressions":[false,"checkbox"],"open-ai-speech-recognition":[false,"checkbox"],"open-ai-vision":[false,"checkbox"],"open-ai-source-links":[false,"checkbox"],"open-ai-note-scraping":[false,"checkbox"],"open-ai-training-cron-job":[false,"checkbox"],"open-ai-user-train-conversations":[false,"checkbox"],"open-ai-context-awareness":[false,"checkbox"]},"multi-input"],"open-ai-assistants":[[],"repeater"],"google":[{"google-sync-mode":["manual","select"],"google-client-id":["","text"],"google-client-secret":["","password"],"google-refresh-token":["","text"],"google-project-id":["","text"],"dialogflow-location":["","select"],"dialogflow-edition":["es","select"],"dialogflow-confidence":["","number"],"dialogflow-active":[false,"checkbox"],"google-multilingual":[false,"checkbox"],"google-multilingual-translation":[false,"checkbox"],"google-translation":[false,"checkbox"],"google-language-detection":[false,"checkbox"],"google-language-detection-message":["","text"],"dialogflow-welcome":[false,"checkbox"],"dialogflow-send-user-details":[false,"checkbox"]},"multi-input"],"dialogflow-departments":[[],"repeater"],"dialogflow-google-search":[{"dialogflow-google-search-active":[false,"checkbox"],"dialogflow-google-search-spelling-active":[false,"checkbox"],"dialogflow-google-search-id":["","text"],"dialogflow-google-search-key":["","password"]},"multi-input"],"dialogflow-timetable":[false,"checkbox"],"dialogflow-disable-tickets":[false,"checkbox"],"dialogflow-human-takeover":[{"dialogflow-human-takeover-active":[false,"checkbox"],"dialogflow-human-takeover-auto":[false,"checkbox"],"dialogflow-human-takeover-disable-chatbot":[false,"checkbox"],"dialogflow-human-takeover-message":["","textarea"],"dialogflow-human-takeover-message-confirmation":["","textarea"],"dialogflow-human-takeover-message-fallback":["","textarea"],"dialogflow-human-takeover-confirm":["","text"],"dialogflow-human-takeover-cancel":["","text"]},"multi-input"],"dialogflow-bot-delay":["","number"],"ai-smart-reply":[false,"checkbox"],"dialogflow-email-piping":[false,"checkbox"],"dialogflow-sms":[false,"checkbox"],"chatbot-usage-limit":[{"chatbot-usage-limit-quota":["","number"],"chatbot-usage-limit-interval":["","number"],"chatbot-usage-limit-message":["","textarea"]},"multi-input"],"tickets-height":["","number"],"tickets-height-offset":["","number"],"tickets-articles":[false,"checkbox"],"tickets-hide":[false,"checkbox"],"close-ticket":[false,"checkbox"],"tickets-conversations-title-user":[false,"checkbox"],"tickets-conversation-name":["","text"],"tickets-names":[{"tickets-names-title":["","text"],"tickets-names-message":["","text"],"tickets-names-panel":["","text"],"tickets-names-button":["","text"]},"multi-input"],"tickets-registration-required":[false,"checkbox"],"tickets-registration-disable-password":[false,"checkbox"],"tickets-registration-redirect":["","text"],"tickets-default-form":["login","select"],"tickets-fields":[{"tickets-field-departments":[false,"checkbox"],"tickets-field-priority":[false,"checkbox"]},"multi-input"],"tickets-custom-fields":[[],"multi-input"],"tickets-statuses-fields":[[],"multi-input"],"tickets-disable-features":[{"tickets-first-ticket":[false,"checkbox"],"tickets-edit-profile":[false,"checkbox"],"tickets-left-panel":[false,"checkbox"],"tickets-right-panel":[false,"checkbox"],"tickets-arrows":[false,"checkbox"],"tickets-top-bar":[false,"checkbox"],"tickets-profile-image":[false,"checkbox"],"tickets-department":[false,"checkbox"],"tickets-button":[false,"checkbox"],"tickets-agent":[false,"checkbox"],"tickets-agent-details":[false,"checkbox"]},"multi-input"],"tickets-default-department":["","text"],"tickets-welcome-message":[{"tickets-welcome-message-active":[false,"checkbox"],"tickets-welcome-message-msg":["","textarea"]},"multi-input"],"tickets-email-notification":["","select"],"tickets-enter-button":[false,"checkbox"],"tickets-recaptcha":[{"tickets-recaptcha-active":[false,"checkbox"],"tickets-recaptcha-key":["","text"],"tickets-recaptcha-secret":["","password"]},"multi-input"],"tickets-manual-init":[false,"checkbox"],"whatsapp-cloud":[{"whatsapp-cloud-sync-mode":["manual","select"],"whatsapp-cloud-key":["","password"]},"multi-input"],"whatsapp-cloud-numbers":[[],"repeater"],"whatsapp-template-cloud":[{"whatsapp-template-cloud-name":["","text"],"whatsapp-template-cloud-languages":["","text"],"whatsapp-template-cloud-parameters-header":["","text"],"whatsapp-template-cloud-parameters-body":["","text"],"whatsapp-template-cloud-parameters-button":["","text"]},"multi-input"],"whatsapp-sms":[{"whatsapp-sms-active":[false,"checkbox"],"whatsapp-sms-template":["","textarea"]},"multi-input"],"whatsapp-order-webhook":["","text"],"whatsapp-catalog":[{"whatsapp-catalog-id":["","text"],"whatsapp-catalog-head":["","text"],"whatsapp-catalog-body":["","text"]},"multi-input"],"whatsapp-twilio":[{"whatsapp-twilio-user":["","text"],"whatsapp-twilio-token":["","password"],"whatsapp-twilio-sender":["","text"]},"multi-input"],"whatsapp-twilio-template":[{"whatsapp-twilio-template-content-sid":["","text"],"whatsapp-twilio-template-parameters":["","text"]},"multi-input"],"whatsapp-360":[{"whatsapp-360-key":["","password"]},"multi-input"],"whatsapp-template-360":[{"whatsapp-template-360-namespace":["","text"],"whatsapp-template-360-name":["","text"],"whatsapp-template-360-language":["","text"],"whatsapp-template-360-parameters":["","text"]},"multi-input"],"wa-disable-chatbot":[false,"checkbox"]}';
         //$connection->query("INSERT INTO `sb_settings` (`name`, `value`) VALUES ('settings', '$settingsStr')");
+=======
+        $sql_database = sb_get('https://board.support/synch/updates.php?db=' . $details['envato-purchase-code'][0] . '&domain=' . urlencode($details['url']));
+        if (!empty($sql_database) && strpos($sql_database, 'CREATE TABLE') !== false) {
+            $sql_database = explode(';', $sql_database);
+            foreach ($sql_database as $query) {
+                if (strpos($query, 'CREATE TABLE') !== false) {
+                    $response_ = $connection->query($query);
+                    if ($response_ !== true) {
+                        $response['error'] = $response_;
+                    }
+                }
+            }
+            $response['cv'] = password_hash('VGC' . 'KME' . 'N' . 'S', PASSWORD_DEFAULT);
+        } else {
+            return ['error' => 'Invalid Envato purchase code.'];
+        }
+>>>>>>> vendor-update
 
         // Create the admin user
         if (isset($details['first-name']) && isset($details['last-name']) && isset($details['email']) && isset($details['password'])) {
             $now = sb_gmt_now();
             $token = bin2hex(openssl_random_pseudo_bytes(20));
+<<<<<<< HEAD
             $db_respones['admin'] = $connection->query('INSERT IGNORE INTO sb_users(first_name, last_name, password, email, profile_image, user_type, creation_time, token, last_activity) VALUES ("' . sb_db_escape($details['first-name'][0]) . '", "' . sb_db_escape($details['last-name'][0]) . '", "' . (defined('SB_WP') ? $details['password'][0] : password_hash($details['password'][0], PASSWORD_DEFAULT)) . '", "' . sb_db_escape($details['email'][0]) . '", "' . sb_db_escape($details['url']) . '/media/user.svg' . '", "admin", "' . $now . '", "' . $token . '", "' . $now . '")');
+=======
+            $response_ = $connection->query('INSERT IGNORE INTO sb_users(first_name, last_name, password, email, profile_image, user_type, creation_time, token, last_activity) VALUES ("' . sb_db_escape($details['first-name'][0]) . '", "' . sb_db_escape($details['last-name'][0]) . '", "' . (defined('SB_WP') ? $details['password'][0] : password_hash($details['password'][0], PASSWORD_DEFAULT)) . '", "' . sb_db_escape($details['email'][0]) . '", "' . sb_db_escape($details['url']) . '/media/user.svg' . '", "admin", "' . $now . '", "' . $token . '", "' . $now . '")');
+            if ($response_ !== true) {
+                $response['error'] = $response_;
+            }
+>>>>>>> vendor-update
         }
 
         // Create the config.php file and other files
@@ -1040,6 +1122,7 @@ function sb_installation($details, $force = false) {
         }
 
         // Return
+<<<<<<< HEAD
         sb_get('https://board.support/synch/index.php?site=' . $details['url']);
         foreach ($db_respones as $key => $value) {
             if ($value !== true) {
@@ -1053,6 +1136,12 @@ function sb_installation($details, $force = false) {
         }
     } else {
         return $connection_check;
+=======
+        sb_get('https://board.support/synch/index.php?site=' . urlencode($details['url']));
+        return $response;
+    } else {
+        return ['error' => $connection_check == 'connection-error' ? 'Support Board cannot connect to the database. Please check the database information and try again.' : $connection_check];
+>>>>>>> vendor-update
     }
 }
 
@@ -1218,14 +1307,20 @@ function sb_pusher_trigger($channel, $event, $data = []) {
             case 'client-typing':
             case 'close-notifications':
             case 'close-notifications-received':
+<<<<<<< HEAD
             case 'new-ticket-comment':
             case 'new-customer-ticket':
+=======
+>>>>>>> vendor-update
             case 'typing':
                 $security = sb_is_agent() || $channel == ('private-user-' . $user_id);
                 break;
             case 'update-conversations':
+<<<<<<< HEAD
             case 'updates-ticket-comments':
             case 'updates-new-ticket':
+=======
+>>>>>>> vendor-update
                 if ($user_id) {
                     $security = true;
                 }
@@ -1407,13 +1502,25 @@ function sb_defined($name, $default = false) {
 function sb_encryption($string, $encrypt = true) {
     $output = false;
     $encrypt_method = 'AES-256-CBC';
+<<<<<<< HEAD
+=======
+    if (defined('SB_WP')) {
+        sb_load_wp_auth_key();
+    }
+>>>>>>> vendor-update
     $key = hash('sha256', defined('SB_CLOUD_KEY') && !empty(SB_CLOUD_KEY) ? SB_CLOUD_KEY : (defined('SB_DB_PASSWORD') && !empty(SB_DB_PASSWORD) ? SB_DB_PASSWORD : sb_defined('AUTH_KEY', 'supportboard')));
     $iv = substr(hash('sha256', 'supportboard_iv'), 0, 16);
     if ($encrypt) {
         $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
         $output = base64_encode($output);
+<<<<<<< HEAD
         if (substr($output, -1) == '=')
             $output = substr($output, 0, -1);
+=======
+        if (substr($output, -1) == '=') {
+            $output = substr($output, 0, -1);
+        }
+>>>>>>> vendor-update
     } else {
         $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
         if ($output === false) {
@@ -1423,11 +1530,22 @@ function sb_encryption($string, $encrypt = true) {
     return $output;
 }
 
+<<<<<<< HEAD
 function sb_string_slug($string, $action = 'slug') {
+=======
+function sb_string_slug($string, $action = 'slug', $is_alphanumeric = false) {
+>>>>>>> vendor-update
     $string = trim($string);
     if ($action == 'slug') {
         $string = mb_strtolower(str_replace([' ', ' '], '-', $string), 'UTF-8');
         $string = preg_replace('/[^\p{L}\p{N}._\-]/u', '', sb_sanatize_string($string, true));
+<<<<<<< HEAD
+=======
+        if ($is_alphanumeric) {
+            $string_ = preg_replace('/[^a-z0-9\-]/', '', $string);
+            $string = empty($string_) ? 'slug-' . strlen($string) : $string_;
+        }
+>>>>>>> vendor-update
     } else if ($action == 'string') {
         return ucfirst(strtolower(str_replace(['-', '_'], ' ', $string)));
     }
@@ -1592,9 +1710,15 @@ function sb_is_allowed_extension($extension) {
     return in_array($extension, $allowed_extensions) || (defined('SB_FILE_EXTENSIONS') && in_array($extension, SB_FILE_EXTENSIONS));
 }
 
+<<<<<<< HEAD
 function sb_get($url, $json = false) {
     $response = sb_curl($url, '', '', 'GET');
     return $json ? json_decode($response, true) : $response;
+=======
+function sb_get($url, $is_json = false) {
+    $response = sb_curl($url, '', '', 'GET');
+    return $is_json ? json_decode($response, true) : $response;
+>>>>>>> vendor-update
 }
 
 function sb_csv($items, $header, $filename, $return_url = true) {
@@ -1699,6 +1823,7 @@ function sb_get_server_max_file_size() {
 function sb_clean_data() {
     $time_24h = sb_gmt_now(86400);
     $time_30d = sb_gmt_now(2592000);
+<<<<<<< HEAD
     $ids = sb_db_get('SELECT id FROM sb_conversations WHERE status_code = 4 AND creation_time < "' . $time_30d . '"', false);
     sb_db_query('DELETE FROM sb_users WHERE user_type = "visitor" AND creation_time < "' . $time_24h . '"');
     for ($i = 0; $i < count($ids); $i++) {
@@ -1707,11 +1832,53 @@ function sb_clean_data() {
     sb_db_query('DELETE FROM sb_conversations WHERE status_code = 4 AND creation_time < "' . $time_30d . '"');
     if (sb_get_setting('admin-auto-archive')) {
         sb_db_query('UPDATE sb_conversations SET status_code = 3 WHERE (status_code = 1 OR status_code = 0) AND id IN (SELECT conversation_id FROM sb_messages WHERE id IN (SELECT max(id) FROM sb_messages GROUP BY conversation_id) AND creation_time < "' . $time_24h . '")');
+=======
+    try {
+        $ids = sb_db_get('SELECT id FROM sb_conversations WHERE status_code = 4 AND creation_time < "' . $time_30d . '"', false);
+        sb_db_query('DELETE FROM sb_users WHERE user_type = "visitor" AND creation_time < "' . $time_24h . '"');
+        for ($i = 0; $i < count($ids); $i++) {
+            try {
+                sb_delete_attachments($ids[$i]['id']);
+            } catch (Exception $exception) {
+            }
+        }
+    } catch (Exception $exception) {
+    }
+    try {
+        sb_db_query('DELETE FROM sb_conversations WHERE status_code = 4 AND creation_time < "' . $time_30d . '"');
+        if (sb_get_setting('admin-auto-archive')) {
+            try {
+                sb_db_query('UPDATE sb_conversations SET status_code = 3 WHERE (status_code = 1 OR status_code = 0) AND id IN (SELECT conversation_id FROM sb_messages WHERE id IN (SELECT max(id) FROM sb_messages GROUP BY conversation_id) AND creation_time < "' . $time_24h . '")');
+            } catch (Exception $exception) {
+            }
+        }
+    } catch (Exception $exception) {
+    }
+    try {
+        $interval = sb_get_multi_setting('performance', 'performance-messages');
+        if ($interval) {
+            $seconds = ['1w' => 604800, '2w' => 1209600, '3w' => 1814400, '1m' => 2592000, '2m' => 5184000, '3m' => 7776000, '6m' => 15552000, '1y' => 31536000];
+            sb_db_query('DROP TEMPORARY TABLE IF EXISTS sb_latest_messages');
+            sb_db_query('CREATE TEMPORARY TABLE sb_latest_messages (id BIGINT PRIMARY KEY) ENGINE=MEMORY AS SELECT MAX(id) AS id FROM sb_messages GROUP BY conversation_id');
+            $conversation_ids = array_column(sb_db_get('SELECT m.conversation_id FROM sb_latest_messages l, sb_messages m WHERE l.id = m.id AND m.creation_time < "' . sb_gmt_now($seconds[$interval]) . '"', false), 'conversation_id');
+            foreach ($conversation_ids as $conversation_id) {
+                try {
+                    sb_messages_archiviation($conversation_id);
+                } catch (Exception $exception) {
+                }
+            }
+        }
+    } catch (Exception $exception) {
+>>>>>>> vendor-update
     }
     return true;
 }
 
+<<<<<<< HEAD
 function sb_component_editor($admin = true) {
+=======
+function sb_component_editor($admin = false) {
+>>>>>>> vendor-update
     $enabled = [$admin || !sb_get_setting('disable-uploads'), !sb_get_setting('disable-voice-messages')];
     ?>
     <div class="sb-editor<?php echo !$enabled[0] || !$enabled[1] ? ' sb-disabled-' . (!$enabled[0] && !$enabled[1] ? '2' : '1') : '' ?>">
@@ -2050,8 +2217,11 @@ function sb_gmt_now($less_seconds = 0, $is_unix = false) {
 }
 
 function sb_gmt_date_to_local($date_string, $utc_offset) {
+<<<<<<< HEAD
     $date = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, new DateTimeZone('UTC'));
     $date = $date->getTimestamp();
+=======
+>>>>>>> vendor-update
     return date('d/m/Y H:i:s', strtotime($date_string) + ($utc_offset * -1 * 3600));
 }
 
@@ -2106,6 +2276,10 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
     $time_range = true;
     $label_type = 1;
     $chart_type = 'line';
+<<<<<<< HEAD
+=======
+    $utc_offset = sb_get_setting('timetable-utc', 0) * -1 * 3600;
+>>>>>>> vendor-update
 
     // Set up date range
     if ($date_start) {
@@ -2179,8 +2353,12 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Agent ratings';
             $description = 'Ratings assigned to agents.';
             $table = [sb_('Agent name'), sb_('Ratings')];
+<<<<<<< HEAD
             //$chart_type = 'horizontalBar';
             $chart_type = 'bar';
+=======
+            $chart_type = 'horizontalBar';
+>>>>>>> vendor-update
             $time_range = false;
             $label_type = 3;
             break;
@@ -2237,8 +2415,12 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Article ratings';
             $description = 'Ratings assigned to articles by users.';
             $table = [sb_('Article name'), sb_('Ratings')];
+<<<<<<< HEAD
             //$chart_type = 'horizontalBar';
             $chart_type = 'bar';
+=======
+            $chart_type = 'horizontalBar';
+>>>>>>> vendor-update
             $time_range = false;
             $label_type = 3;
             break;
@@ -2248,8 +2430,12 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $title = 'Article views';
             $description = 'Number of times articles have been viewed by users.';
             if ($report_name == 'articles-views-single') {
+<<<<<<< HEAD
                 //$chart_type = 'horizontalBar';
                 $chart_type = 'bar';
+=======
+                $chart_type = 'horizontalBar';
+>>>>>>> vendor-update
                 $time_range = false;
                 $table = [sb_('Article'), sb_('Count')];
             }
@@ -2284,7 +2470,11 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $rows = sb_db_get($query . ($date ? ' AND ' . $date : '') . ' ORDER BY STR_TO_DATE(A.creation_time, "%Y-%m-%d %T")', false);
             $sum = !in_array($report_name, ['visitors', 'follow-up', 'registrations', 'message-automations', 'email-automations', 'sms-automations']);
             for ($i = 0; $i < count($rows); $i++) {
+<<<<<<< HEAD
                 $date_row = date('d/m/Y', strtotime($rows[$i]['creation_time']));
+=======
+                $date_row = date('d/m/Y', strtotime($rows[$i]['creation_time']) + $utc_offset);
+>>>>>>> vendor-update
                 $data[$date_row] = $sum ? [empty($data[$date_row]) ? 1 : $data[$date_row][0] + 1] : [$rows[$i]['value']];
             }
             break;
@@ -2378,10 +2568,13 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
                     $skip = true;
                 }
             }
+<<<<<<< HEAD
             if (empty($agents)) {
                 return false;
             }
 
+=======
+>>>>>>> vendor-update
             $rows = sb_db_get('SELECT id, first_name, last_name FROM sb_users WHERE id IN (' . substr($agents_ids, 0, -1) . ')', false);
             $agent_names = [];
             for ($i = 0; $i < count($rows); $i++) {
@@ -2450,7 +2643,11 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
             $rows = sb_db_get($query . ($date ? ' AND ' . $date : '') . ' ORDER BY STR_TO_DATE(A.creation_time, "%Y-%m-%d %T")', false);
             $single = $report_name == 'articles-views-single';
             for ($i = 0; $i < count($rows); $i++) {
+<<<<<<< HEAD
                 $date_row = $single ? $rows[$i]['extra'] : date('d/m/Y', strtotime($rows[$i]['creation_time']));
+=======
+                $date_row = $single ? $rows[$i]['extra'] : date('d/m/Y', strtotime($rows[$i]['creation_time']) + $utc_offset);
+>>>>>>> vendor-update
                 $data[$date_row] = [intval($rows[$i]['value']) + (empty($data[$date_row]) ? 0 : $data[$date_row][0])];
             }
             if ($single) {
@@ -2553,7 +2750,11 @@ function sb_reports($report_name, $date_start = false, $date_end = false, $timez
         case 'articles-searches':
             $rows = sb_db_get($query . ($date ? ' AND ' . $date : '') . ' ORDER BY STR_TO_DATE(A.creation_time, "%Y-%m-%d %T")', false);
             for ($i = 0; $i < count($rows); $i++) {
+<<<<<<< HEAD
                 $date_row = date('d/m/Y', strtotime($rows[$i]['creation_time']));
+=======
+                $date_row = date('d/m/Y', strtotime($rows[$i]['creation_time']) + $utc_offset);
+>>>>>>> vendor-update
                 $search = '<div>' . $rows[$i]['value'] . '</div>';
                 $data[$date_row] = empty($data[$date_row]) ? [1, $search] : [$data[$date_row][0] + 1, $data[$date_row][1] . $search];
             }
@@ -2758,7 +2959,11 @@ function sb_automations_validate($automation, $is_flow = false) {
     if (empty($conditions)) {
         return true;
     }
+<<<<<<< HEAD
     $invalid_conditions = [];
+=======
+    $return_conditions = [];
+>>>>>>> vendor-update
     $repeat_id = false;
     $valid = false;
     $active_user = sb_get_active_user();
@@ -2768,6 +2973,10 @@ function sb_automations_validate($automation, $is_flow = false) {
         $valid = false;
         $criteria = $conditions[$i][1];
         $type = $conditions[$i][0];
+<<<<<<< HEAD
+=======
+        $check = in_array($type, $custom_fields) || in_array($type, ['url', 'website', 'email', 'phone']);
+>>>>>>> vendor-update
         switch ($type) {
             case 'birthdate':
                 if ($active_user) {
@@ -2789,7 +2998,11 @@ function sb_automations_validate($automation, $is_flow = false) {
                     }
                 } else {
                     $valid = true;
+<<<<<<< HEAD
                     array_push($invalid_conditions, $conditions[$i]);
+=======
+                    array_push($return_conditions, $conditions[$i]);
+>>>>>>> vendor-update
                 }
                 break;
             case 'creation_time':
@@ -2797,6 +3010,7 @@ function sb_automations_validate($automation, $is_flow = false) {
                 $user_value = $type == 'datetime' ? time() : strtotime(sb_get_user(sb_get_active_user_ID())[$type]);
                 $offset = intval(sb_get_setting('timetable-utc', 0)) * 3600;
                 if ($criteria == 'is-between') {
+<<<<<<< HEAD
                     $dates = explode('-', str_replace(' ', '', $conditions[$i][2]));
                     if (count($dates) == 2) {
                         $unix = date_timestamp_get(DateTime::createFromFormat('d/m/Y H:i', $dates[0] . (strpos($dates[0], ':') ? '' : ' 00:00'))) + (strpos($dates[0], ':') ? $offset : 0);
@@ -2808,6 +3022,26 @@ function sb_automations_validate($automation, $is_flow = false) {
                     $is_time = strpos($conditions[$i][2], ':');
                     $unix = date_timestamp_get(DateTime::createFromFormat('d/m/Y H:i', $conditions[$i][2] . ($is_time ? '' : ' 00:00'))) + $offset;
                     $valid = $user_value == $unix || (!$is_time && $user_value > $unix && $user_value < $unix + 86400);
+=======
+                    $dates = array_map('trim', explode('-', $conditions[$i][2]));
+                    if (count($dates) == 2) {
+                        $unix = DateTime::createFromFormat('d/m/Y H:i', $dates[0] . (strpos($dates[0], ':') ? '' : ' 00:00'));
+                        $unix_end = DateTime::createFromFormat('d/m/Y H:i', $dates[1] . (strpos($dates[1], ':') ? '' : ' 23:59'));
+                        if ($unix && $unix_end) {
+                            $unix = date_timestamp_get($unix) + (strpos($dates[0], ':') ? $offset : 0);
+                            $unix_end = date_timestamp_get($unix_end) + (strpos($dates[1], ':') ? $offset : 0);
+                            $valid = ($user_value >= $unix) && ($user_value <= $unix_end);
+                            $continue = true;
+                        }
+                    }
+                } else {
+                    $is_time = strpos($conditions[$i][2], ':');
+                    $unix = DateTime::createFromFormat('d/m/Y H:i', $conditions[$i][2] . ($is_time ? '' : ' 00:00'));
+                    if ($unix) {
+                        $unix = date_timestamp_get($unix) + $offset;
+                        $valid = $user_value == $unix || (!$is_time && $user_value > $unix && $user_value < $unix + 86400);
+                    }
+>>>>>>> vendor-update
                 }
                 if (!$valid) {
                     for ($j = 0; $j < count($conditions); $j++) {
@@ -2879,7 +3113,11 @@ function sb_automations_validate($automation, $is_flow = false) {
                     $valid = ($criteria == 'is-visitor' && $user_type == 'visitor') || ($criteria == 'is-lead' && $user_type == 'is-lead') || ($criteria == 'is-user' && $user_type == 'user') || ($criteria == 'is-not-visitor' && $user_type != 'visitor') || ($criteria == 'is-not-lead' && $user_type != 'lead') || ($criteria == 'is-not-user' && $user_type != 'user');
                 } else {
                     $valid = true;
+<<<<<<< HEAD
                     array_push($invalid_conditions, $conditions[$i]);
+=======
+                    array_push($return_conditions, $conditions[$i]);
+>>>>>>> vendor-update
                 }
                 break;
             case 'postal_code':
@@ -2932,7 +3170,11 @@ function sb_automations_validate($automation, $is_flow = false) {
                     }
                 } else {
                     $valid = true;
+<<<<<<< HEAD
                     array_push($invalid_conditions, $conditions[$i]);
+=======
+                    array_push($return_conditions, $conditions[$i]);
+>>>>>>> vendor-update
                 }
                 break;
             case 'returning_visitor':
@@ -2947,11 +3189,23 @@ function sb_automations_validate($automation, $is_flow = false) {
                     $valid = true;
                 }
                 break;
+<<<<<<< HEAD
             case 'repeat':
                 $valid = true;
                 break;
         }
         if (in_array($type, $custom_fields) || in_array($type, ['url', 'website', 'email', 'phone'])) {
+=======
+            default:
+                if (!$check) {
+                    $valid = true;
+                    array_push($return_conditions, $conditions[$i]);
+                }
+                break;
+        }
+        if ($check) {
+            $valid = false;
+>>>>>>> vendor-update
             if ($active_user) {
                 $user_value = strtolower($type == 'email' ? $active_user['email'] : ($type == 'url' ? sb_isset($_POST, 'current_url', $_SERVER['HTTP_REFERER']) : sb_get_user_extra($active_user_id, $type)));
                 if ($type == 'url' || $type == 'website') {
@@ -2972,7 +3226,11 @@ function sb_automations_validate($automation, $is_flow = false) {
                 }
             } else {
                 $valid = true;
+<<<<<<< HEAD
                 array_push($invalid_conditions, $conditions[$i]);
+=======
+                array_push($return_conditions, $conditions[$i]);
+>>>>>>> vendor-update
             }
         }
         if (!$valid) {
@@ -2980,12 +3238,17 @@ function sb_automations_validate($automation, $is_flow = false) {
         }
     }
     if ($is_flow) {
+<<<<<<< HEAD
         return $valid && empty($invalid_conditions);
+=======
+        return $valid && empty($return_conditions);
+>>>>>>> vendor-update
     }
     if ($valid && !sb_automations_is_sent($active_user_id, $automation, $repeat_id)) {
 
         // Check user details conditions
         if ($automation['type'] == 'emails' && (!$active_user || empty($active_user['email']))) {
+<<<<<<< HEAD
             array_push($invalid_conditions, ['email']);
         } else if ($automation['type'] == 'sms' && !sb_get_user_extra($active_user_id, 'phone')) {
             array_push($invalid_conditions, ['phone']);
@@ -2993,6 +3256,15 @@ function sb_automations_validate($automation, $is_flow = false) {
 
         // Return the result
         return ['conditions' => $invalid_conditions, 'repeat_id' => $repeat_id];
+=======
+            array_push($return_conditions, ['email']);
+        } else if ($automation['type'] == 'sms' && !sb_get_user_extra($active_user_id, 'phone')) {
+            array_push($return_conditions, ['phone']);
+        }
+
+        // Return the result
+        return ['conditions' => $return_conditions, 'repeat_id' => $repeat_id];
+>>>>>>> vendor-update
     }
     return false;
 }

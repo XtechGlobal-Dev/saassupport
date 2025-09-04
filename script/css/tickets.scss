@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> vendor-update
 /*
 * 
 * ==========================================================
@@ -8,8 +12,12 @@
 *
 */
 
+<<<<<<< HEAD
 @use "shared.scss" as *;
 @use "rtl.scss" as *;
+=======
+@import "shared.scss";
+>>>>>>> vendor-update
 
 @keyframes sb-collapse-btn-right {
     0% {
@@ -86,6 +94,7 @@
     color: #a5aeb6;
 }
 
+<<<<<<< HEAD
 .user_header {
     display: flex;
     justify-content: space-between;
@@ -164,6 +173,8 @@
     }
 }
 
+=======
+>>>>>>> vendor-update
 .sb-tickets {
     font-size: 15px;
     line-height: 27px;
@@ -172,6 +183,7 @@
     background: $white;
     color: $color-black;
 
+<<<<<<< HEAD
     >.sb-tickets-area {
         display: flex;
         justify-content: space-between;
@@ -198,14 +210,23 @@
     }
 
     >.tickets-list-area {
+=======
+    > .sb-tickets-area {
+>>>>>>> vendor-update
         display: flex;
         justify-content: space-between;
         height: 100%;
         position: relative;
+<<<<<<< HEAD
         box-shadow: 0px 0px 1px 0px $color-black;
     }
 
     &.sb-loading>.sb-tickets-area {
+=======
+    }
+
+    &.sb-loading > .sb-tickets-area {
+>>>>>>> vendor-update
         visibility: hidden;
         opacity: 0;
     }
@@ -216,7 +237,11 @@
         list-style: none;
     }
 
+<<<<<<< HEAD
     >div>div>.sb-top {
+=======
+    > div > div > .sb-top {
+>>>>>>> vendor-update
         display: flex;
         align-items: center;
         border-bottom: 1px solid $border-color;
@@ -255,8 +280,12 @@
         }
     }
 
+<<<<<<< HEAD
     .sb-panel-left,
     .sb-panel-right {
+=======
+    .sb-panel-left, .sb-panel-right {
+>>>>>>> vendor-update
         transition: width .5s, min-width .5s;
         overflow: hidden;
 
@@ -266,14 +295,19 @@
             border-width: 0 !important;
             transition: width .5s, min-width .5s, border-width .5s !important;
 
+<<<<<<< HEAD
             >div,
             >ul {
+=======
+            > div, > ul {
+>>>>>>> vendor-update
                 opacity: 0 !important;
                 transition: .5s;
             }
         }
     }
 
+<<<<<<< HEAD
     .sb-top .sb-btn,
     .sb-create-ticket,
     .sb-panel-right .sb-btn {
@@ -289,12 +323,35 @@
 
         &:hover {
             background-color: $color-dark-blue;
+=======
+    .sb-top .sb-btn, .sb-create-ticket, .sb-panel-right .sb-btn {
+        font-weight: 500;
+        font-size: 13px;
+        background: $white;
+        color: rgb(86, 96, 105);
+        border: 1px solid rgb(204, 210, 213);
+        border-radius: 4px;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.12);
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        white-space: nowrap;
+
+        &:hover {
+            border-color: $color-blue;
+            background-color: $color-blue;
+            color: $white;
+>>>>>>> vendor-update
         }
 
         &.sb-icon {
             padding-left: 30px;
 
+<<<<<<< HEAD
             >i {
+=======
+            > i {
+>>>>>>> vendor-update
                 left: 10px;
                 font-size: 10px;
                 line-height: 33px;
@@ -313,6 +370,7 @@
     }
 }
 
+<<<<<<< HEAD
 .sb-load div,
 .sb-load span,
 .sb-load input,
@@ -330,19 +388,39 @@
 
     >div,
     >ul {
+=======
+.sb-load div, .sb-load span, .sb-load input, .sb-load textarea {
+    transition: none !important;
+}
+
+.sb-overflow-hidden, .sb-collapsing {
+    overflow: hidden !important;
+}
+
+.sb-collapsing .sb-panel-right, .sb-collapsing .sb-panel-left {
+    > div, > ul {
+>>>>>>> vendor-update
         min-width: 360px;
         opacity: 1 !important;
         transition: .5s;
     }
 }
 
+<<<<<<< HEAD
 .sb-ticket-fields,
 .sb-popup-message {
+=======
+.sb-ticket-fields, .sb-popup-message {
+>>>>>>> vendor-update
     display: none !important;
 }
 
 .sb-tickets-area {
+<<<<<<< HEAD
     .sb-input>span {
+=======
+    .sb-input > span {
+>>>>>>> vendor-update
         font-weight: 500;
         font-size: 13px;
     }
@@ -352,13 +430,21 @@
             z-index: 10;
         }
 
+<<<<<<< HEAD
         >input {
+=======
+        > input {
+>>>>>>> vendor-update
             z-index: 9;
         }
     }
 
     .sb-form {
+<<<<<<< HEAD
         .sb-input>span {
+=======
+        .sb-input > span {
+>>>>>>> vendor-update
             padding-right: 15px;
         }
 
@@ -371,7 +457,11 @@
 [data-panel="registration"] .sb-input-select-input {
     position: relative;
 
+<<<<<<< HEAD
     span+div {
+=======
+    span + div {
+>>>>>>> vendor-update
         margin-left: 165px;
         opacity: 1;
     }
@@ -390,6 +480,7 @@
         width: 400px;
         min-width: 400px;
         border-right: 1px solid rgb(212, 212, 212);
+<<<<<<< HEAD
         position: relative;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
@@ -400,12 +491,19 @@
         flex-direction: column;
         justify-content: flex-start;
         background: #D9D9D94D;
+=======
+        background-color: $white;
+        position: relative;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+>>>>>>> vendor-update
 
         .sb-scroll-bar {
             opacity: 0.2 !important;
         }
 
         .sb-scroll-area {
+<<<<<<< HEAD
             height: calc(100vh - 150px);
             border-bottom-left-radius: 6px;
 
@@ -432,6 +530,15 @@
         >ul {
 
             >li {
+=======
+            height: calc(100% - 59px);
+            border-bottom-left-radius: 6px;
+        }
+
+        > ul {
+
+            > li {
+>>>>>>> vendor-update
                 background: $white;
 
                 .sb-message {
@@ -452,25 +559,42 @@
                 }
             }
 
+<<<<<<< HEAD
             >p {
+=======
+            > p {
+>>>>>>> vendor-update
                 margin: 30px 20px;
                 color: $color-gray;
             }
 
+<<<<<<< HEAD
             &[data-profile-image="false"]>li>div {
                 padding-left: 0;
 
                 >img {
+=======
+            &[data-profile-image="false"] > li > div {
+                padding-left: 0;
+
+                > img {
+>>>>>>> vendor-update
                     display: none;
                 }
             }
         }
 
         li:not([data-conversation-status="1"]) {
+<<<<<<< HEAD
             background: rgba(245, 245, 245, 0.75);
 
             .sb-name,
             .sb-message {
+=======
+            background: rgba(245,245,245,0.75);
+
+            .sb-name, .sb-message {
+>>>>>>> vendor-update
                 font-weight: 400;
             }
 
@@ -484,6 +608,7 @@
             align-items: center;
             justify-content: space-between;
             padding-left: 60px;
+<<<<<<< HEAD
             padding-left: 40px !important;
             padding-block: 14px !important;
             // border-bottom: 1px solid #d5d5d5;
@@ -549,6 +674,17 @@
 
 
 
+=======
+        }
+    }
+
+    .sb-user-conversations > li > [data-count] {
+        left: 10px;
+        top: 38px;
+    }
+}
+
+>>>>>>> vendor-update
 /*
 
 # RIGHT PANEL
@@ -561,9 +697,14 @@
     .sb-panel-right {
         min-width: 400px;
         width: 400px;
+<<<<<<< HEAD
         // border-left: 1px solid rgb(212, 212, 212);
         box-shadow: 0px 0px 2.4px 0px #00000040;
         background-color: #D9D9D94D;
+=======
+        border-left: 1px solid rgb(212, 212, 212);
+        background-color: rgb(245, 247, 250);
+>>>>>>> vendor-update
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -571,6 +712,7 @@
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
 
+<<<<<<< HEAD
         .sb-top {
             margin-bottom: 15px;
         }
@@ -722,6 +864,13 @@
         }
 
         >.sb-top {
+=======
+        & > .sb-scroll-area {
+            padding: 20px;
+        }
+
+        > .sb-top {
+>>>>>>> vendor-update
             padding-right: 60px;
 
             .sb-profile {
@@ -744,32 +893,48 @@
             line-height: 21px;
         }
 
+<<<<<<< HEAD
         .sb-btn,
         .sb-input.sb-input-btn>div {
+=======
+        .sb-btn, .sb-input.sb-input-btn > div {
+>>>>>>> vendor-update
             background: rgb(245, 247, 250);
             box-shadow: none;
         }
 
+<<<<<<< HEAD
         .sb-btn.sb-btn-all-articles {
             background: #0069f0;
             color: #fff;
         }
 
         .sb-input.sb-input-btn>div {
+=======
+        .sb-input.sb-input-btn > div {
+>>>>>>> vendor-update
             color: $color-black;
             border: 1px solid rgb(204, 210, 213);
             height: 40px;
         }
 
+<<<<<<< HEAD
         .sb-input.sb-input-btn>div:hover,
         .sb-input.sb-input-btn input:focus+div {
+=======
+        .sb-input.sb-input-btn > div:hover, .sb-input.sb-input-btn input:focus + div {
+>>>>>>> vendor-update
             background: $color-blue;
             border-color: $color-blue;
             color: $white;
         }
 
+<<<<<<< HEAD
         .sb-agent-label,
         .sb-department {
+=======
+        .sb-agent-label, .sb-department {
+>>>>>>> vendor-update
             display: none;
             align-items: center;
             font-size: 13px;
@@ -795,24 +960,40 @@
         .sb-department {
             font-size: 13px;
 
+<<<<<<< HEAD
             >div {
+=======
+            > div {
+>>>>>>> vendor-update
                 display: flex;
                 align-items: center;
                 margin: 0;
                 border-radius: 15px;
                 padding-right: 20px;
 
+<<<<<<< HEAD
                 >div {
+=======
+                > div {
+>>>>>>> vendor-update
                     font-weight: 500;
                     color: #4a5056;
                 }
             }
 
+<<<<<<< HEAD
             >span {
                 padding-right: 15px;
             }
 
             >div span {
+=======
+            > span {
+                padding-right: 15px;
+            }
+
+            > div span {
+>>>>>>> vendor-update
                 display: none;
             }
 
@@ -838,6 +1019,7 @@
         }
     }
 
+<<<<<<< HEAD
     .tickets-header,
     .ticket-subject {
         padding: 15px;
@@ -966,15 +1148,22 @@
     .sb-department,
     .sb-conversation-attachments,
     .sb-panel-right .sb-dashboard-articles {
+=======
+    .sb-agent-label, .sb-ticket-details, .sb-department, .sb-conversation-attachments, .sb-panel-right .sb-dashboard-articles {
+>>>>>>> vendor-update
         border-top: 1px solid rgb(212, 212, 212);
         margin-top: 15px;
         padding-top: 15px;
     }
 
+<<<<<<< HEAD
     .sb-profile-empty+div:empty+div,
     .sb-profile-empty+div:empty+div:empty+div,
     .sb-profile-empty+div:empty+div:empty+div:empty+div,
     .sb-profile-empty+div:empty+div:empty+div:empty+div:empty+div {
+=======
+    .sb-profile-empty + div:empty + div, .sb-profile-empty + div:empty + div:empty + div, .sb-profile-empty + div:empty + div:empty + div:empty + div, .sb-profile-empty + div:empty + div:empty + div:empty + div:empty + div {
+>>>>>>> vendor-update
         border-top: none;
         margin-top: 0;
         padding-top: 0;
@@ -983,7 +1172,11 @@
     .sb-ticket-details {
         padding: 12px 0 0 7px;
 
+<<<<<<< HEAD
         >div {
+=======
+        > div {
+>>>>>>> vendor-update
             padding-left: 36px;
             position: relative;
             font-size: 13px;
@@ -993,13 +1186,21 @@
             text-overflow: ellipsis;
             overflow: hidden;
 
+<<<<<<< HEAD
             >span {
+=======
+            > span {
+>>>>>>> vendor-update
                 font-weight: 500;
                 padding-right: 10px;
                 font-size: 13px;
             }
 
+<<<<<<< HEAD
             >div {
+=======
+            > div {
+>>>>>>> vendor-update
                 display: inline;
             }
 
@@ -1073,7 +1274,11 @@
         text-align: left;
         display: none;
 
+<<<<<<< HEAD
         >div>span {
+=======
+        > div > span {
+>>>>>>> vendor-update
             display: block;
         }
 
@@ -1145,13 +1350,18 @@
             display: flex;
         }
 
+<<<<<<< HEAD
         &:not(.sb-active)+.sb-agent-label:not(.sb-active)+.sb-ticket-details {
+=======
+        &:not(.sb-active) + .sb-agent-label:not(.sb-active) + .sb-ticket-details {
+>>>>>>> vendor-update
             padding-top: 0;
             padding-left: 0;
             margin-top: 0;
             border-top: 0;
         }
     }
+<<<<<<< HEAD
 
     .sb-conversation {
         .sb-list {
@@ -1229,12 +1439,15 @@
 ul.sb-user-conversations.sb-scroll-area {
     margin-top: 59px;
     border-top: 1px solid #d5d5d5;
+=======
+>>>>>>> vendor-update
 }
 
 /*
 
 # MAIN PANEL
 ==========================================================
+<<<<<<< HEAD
 */
 
 .sb-tickets {
@@ -1260,6 +1473,23 @@ ul.sb-user-conversations.sb-scroll-area {
                 // padding: 0 15px 0 0;
                 margin: 0;
                 padding: 15px 0;
+=======
+
+*/
+
+.sb-tickets {
+    .sb-panel-main {
+        width: 100%;
+        position: relative;
+
+        > .sb-top {
+            .sb-title {
+                font-weight: 500;
+                position: relative;
+                padding: 0 15px 0 0;
+                margin: 0;
+                padding: 0;
+>>>>>>> vendor-update
                 cursor: default;
                 text-decoration: none;
                 line-height: 30px;
@@ -1269,8 +1499,12 @@ ul.sb-user-conversations.sb-scroll-area {
                 white-space: nowrap;
             }
 
+<<<<<<< HEAD
             .sb-btn-back,
             .sb-close {
+=======
+            .sb-btn-back, .sb-close {
+>>>>>>> vendor-update
                 display: none;
             }
 
@@ -1289,6 +1523,7 @@ ul.sb-user-conversations.sb-scroll-area {
                 top: 54px;
             }
         }
+<<<<<<< HEAD
 
         .ticket-login {
             .tickets-form {
@@ -1301,6 +1536,8 @@ ul.sb-user-conversations.sb-scroll-area {
                 }
             }
         }
+=======
+>>>>>>> vendor-update
     }
 
     .sb-panel {
@@ -1309,6 +1546,7 @@ ul.sb-user-conversations.sb-scroll-area {
         box-sizing: border-box;
         display: none;
 
+<<<<<<< HEAD
         >.sb-top {
             display: none;
         }
@@ -1325,6 +1563,13 @@ ul.sb-user-conversations.sb-scroll-area {
         // }
 
         >.sb-loading {
+=======
+        > .sb-top {
+            display: none;
+        }
+
+        > .sb-loading {
+>>>>>>> vendor-update
             width: 30px;
             height: 30px;
         }
@@ -1345,36 +1590,60 @@ ul.sb-user-conversations.sb-scroll-area {
             }
         }
 
+<<<<<<< HEAD
         .sb-text,
         .sb-link-area,
         .sb-privacy a:not([class]) {
+=======
+        .sb-text, .sb-link-area, .sb-privacy a:not([class]) {
+>>>>>>> vendor-update
             font-size: 15px;
             line-height: 27px;
             color: $color-gray;
         }
 
         .sb-article {
+<<<<<<< HEAD
             >.sb-title {
+=======
+            > .sb-title {
+>>>>>>> vendor-update
                 font-weight: 500;
                 font-size: 18px;
                 margin-bottom: 15px;
 
+<<<<<<< HEAD
                 >.sb-close {
+=======
+                > .sb-close {
+>>>>>>> vendor-update
                     display: none !important;
                 }
             }
 
+<<<<<<< HEAD
             >.sb-btn-text {
+=======
+            > .sb-btn-text {
+>>>>>>> vendor-update
                 margin-top: 20px;
             }
         }
     }
 
+<<<<<<< HEAD
     &:not(.sb-panel-active) .sb-collapsed+.sb-panel-main>.sb-top {
         padding-left: 65px;
     }
 
     &.sb-no-arrows .sb-panel-left>.sb-top {
+=======
+    &:not(.sb-panel-active) .sb-collapsed + .sb-panel-main > .sb-top {
+        padding-left: 65px;
+    }
+
+    &.sb-no-arrows .sb-panel-left > .sb-top {
+>>>>>>> vendor-update
         padding-left: 15px;
     }
 
@@ -1385,13 +1654,18 @@ ul.sb-user-conversations.sb-scroll-area {
         }
 
         .sb-panel-main {
+<<<<<<< HEAD
             >.sb-top .sb-close {
+=======
+            > .sb-top .sb-close {
+>>>>>>> vendor-update
                 display: block;
             }
 
             .sb-conversation {
                 display: none;
             }
+<<<<<<< HEAD
 
             .tickets-area {
                 display: none;
@@ -1415,10 +1689,28 @@ ul.sb-user-conversations.sb-scroll-area {
             max-height: 100%;
 
             >.sb-collapsed {
+=======
+        }
+    }
+
+    &.sb-no-conversations .sb-panel-main > .sb-top .sb-close, &[data-panel="registration"] .sb-panel-main > .sb-top .sb-close,
+    &[data-panel="login"] .sb-panel-main > .sb-top .sb-close, &[data-panel="edit-profile"] .sb-login-area, &[data-panel="edit-profile"] .sb-panel .sb-text,
+    &[data-panel="privacy"] .sb-panel-main > .sb-top .sb-close {
+        display: none !important;
+    }
+
+    &[data-panel="registration"], &[data-panel="login"] {
+        > .sb-tickets-area {
+            height: auto !important;
+            max-height: 100%;
+
+            > .sb-collapsed {
+>>>>>>> vendor-update
                 height: 0;
             }
         }
     }
+<<<<<<< HEAD
 
     &.sb-panel-form {
         .tickets-list-area {
@@ -1533,6 +1825,8 @@ ul.sb-user-conversations.sb-scroll-area {
     .tickets-list-area {
         max-height: calc(100vh - 2px);
     }
+=======
+>>>>>>> vendor-update
 }
 
 .sb-panel-form {
@@ -1567,12 +1861,20 @@ ul.sb-user-conversations.sb-scroll-area {
         display: flex;
         align-items: center;
 
+<<<<<<< HEAD
         div+div {
             margin-left: 15px;
         }
 
         .sb-btn-text.sb-registration-area,
         .sb-btn-text.sb-login-area {
+=======
+        div + div {
+            margin-left: 15px;
+        }
+
+        .sb-btn-text.sb-registration-area, .sb-btn-text.sb-login-area {
+>>>>>>> vendor-update
             font-size: 13px;
             letter-spacing: .3px;
         }
@@ -1587,8 +1889,12 @@ ul.sb-user-conversations.sb-scroll-area {
     }
 
 
+<<<<<<< HEAD
     .sb-top+.sb-form,
     &[data-panel="edit-profile"] .sb-form-main {
+=======
+    .sb-top + .sb-form, &[data-panel="edit-profile"] .sb-form-main {
+>>>>>>> vendor-update
         margin-top: 10px;
     }
 }
@@ -1603,8 +1909,12 @@ ul.sb-user-conversations.sb-scroll-area {
     min-height: 0 !important;
     padding: 0 !important;
 
+<<<<<<< HEAD
     .sb-profile,
     .sb-title {
+=======
+    .sb-profile, .sb-title {
+>>>>>>> vendor-update
         display: none;
     }
 
@@ -1612,7 +1922,11 @@ ul.sb-user-conversations.sb-scroll-area {
         top: -6px !important;
     }
 
+<<<<<<< HEAD
     &+.sb-conversation {
+=======
+    & + .sb-conversation {
+>>>>>>> vendor-update
         height: 100%;
     }
 }
@@ -1637,7 +1951,11 @@ ul.sb-user-conversations.sb-scroll-area {
             padding: 0 0 5px 0;
             overflow-y: scroll;
 
+<<<<<<< HEAD
             >div:last-child {
+=======
+            > div:last-child {
+>>>>>>> vendor-update
                 animation: none;
             }
         }
@@ -1670,8 +1988,13 @@ ul.sb-user-conversations.sb-scroll-area {
                 color: $white;
                 border-color: $color-blue;
                 font-size: 12px;
+<<<<<<< HEAD
                 line-height: 36px;
                 height: 35px;
+=======
+                line-height: 27px;
+                height: 25px;
+>>>>>>> vendor-update
                 transition: $transition;
 
                 &:hover {
@@ -1706,9 +2029,13 @@ ul.sb-user-conversations.sb-scroll-area {
         }
 
         &.sb-audio-message-active {
+<<<<<<< HEAD
 
             .sb-textarea,
             .sb-bar-icons {
+=======
+            .sb-textarea, .sb-bar-icons {
+>>>>>>> vendor-update
                 display: none;
             }
 
@@ -1723,7 +2050,11 @@ ul.sb-user-conversations.sb-scroll-area {
         align-items: flex-start;
     }
 
+<<<<<<< HEAD
     &.sb-no-conversations>div>.sb-collapsed {
+=======
+    &.sb-no-conversations > div > .sb-collapsed {
+>>>>>>> vendor-update
         transition: none !important;
     }
 }
@@ -1731,12 +2062,20 @@ ul.sb-user-conversations.sb-scroll-area {
 [data-panel="new-ticket"] {
     .sb-panel {
 
+<<<<<<< HEAD
         input,
         select {
             padding: 10px;
         }
 
         >div {
+=======
+        input, select {
+            padding: 15px;
+        }
+
+        > div {
+>>>>>>> vendor-update
             max-width: 800px;
         }
     }
@@ -1744,7 +2083,11 @@ ul.sb-user-conversations.sb-scroll-area {
     .sb-input-select {
         justify-content: flex-start;
 
+<<<<<<< HEAD
         >span {
+=======
+        > span {
+>>>>>>> vendor-update
             flex-grow: 0;
         }
 
@@ -1754,7 +2097,11 @@ ul.sb-user-conversations.sb-scroll-area {
         }
     }
 
+<<<<<<< HEAD
     .sb-input>div {
+=======
+    .sb-input > div {
+>>>>>>> vendor-update
         padding-right: 0;
     }
 
@@ -1790,8 +2137,12 @@ ul.sb-user-conversations.sb-scroll-area {
         display: inline-block;
     }
 
+<<<<<<< HEAD
     .sb-label-date-top,
     .sb-btn-audio-clip {
+=======
+    .sb-label-date-top, .sb-btn-audio-clip {
+>>>>>>> vendor-update
         display: none;
     }
 }
@@ -1828,7 +2179,11 @@ ul.sb-user-conversations.sb-scroll-area {
         left: 0;
     }
 
+<<<<<<< HEAD
     >span {
+=======
+    > span {
+>>>>>>> vendor-update
         font-size: 16px;
         line-height: 19px;
         font-weight: 500;
@@ -1949,7 +2304,11 @@ ul.sb-user-conversations.sb-scroll-area {
         border-right: 1px solid rgb(212, 212, 212);
         border-left: none;
 
+<<<<<<< HEAD
         >.sb-top {
+=======
+        > .sb-top {
+>>>>>>> vendor-update
             padding-right: 20px;
             padding-left: 60px;
 
@@ -1974,7 +2333,11 @@ ul.sb-user-conversations.sb-scroll-area {
         border-right: none;
         border-left: 1px solid rgb(212, 212, 212);
 
+<<<<<<< HEAD
         >.sb-top {
+=======
+        > .sb-top {
+>>>>>>> vendor-update
             padding-left: 20px;
             padding-right: 60px;
         }
@@ -2010,7 +2373,11 @@ ul.sb-user-conversations.sb-scroll-area {
         transform: rotate(180deg);
     }
 
+<<<<<<< HEAD
     &:not(.sb-panel-active) .sb-collapsed+.sb-panel-main>.sb-top {
+=======
+    &:not(.sb-panel-active) .sb-collapsed + .sb-panel-main > .sb-top {
+>>>>>>> vendor-update
         padding-left: 20px;
         padding-right: 65px;
     }
@@ -2058,54 +2425,84 @@ ul.sb-user-conversations.sb-scroll-area {
 */
 
 .sb-1300 {
+<<<<<<< HEAD
 
     .sb-panel-left,
     .sb-panel-right {
+=======
+    .sb-panel-left, .sb-panel-right {
+>>>>>>> vendor-update
         min-width: 310px;
         width: 310px;
     }
 
+<<<<<<< HEAD
     &.sb-collapsing .sb-panel-right,
     &.sb-collapsing .sb-panel-left {
 
         >div,
         >ul {
+=======
+    &.sb-collapsing .sb-panel-right, &.sb-collapsing .sb-panel-left {
+        > div, > ul {
+>>>>>>> vendor-update
             min-width: 270px;
         }
     }
 
+<<<<<<< HEAD
     .sb-panel-left .sb-search-btn>input {
+=======
+    .sb-panel-left .sb-search-btn > input {
+>>>>>>> vendor-update
         min-width: 205px;
     }
 }
 
 .sb-1000 {
+<<<<<<< HEAD
 
     .sb-panel-left,
     .sb-panel-right {
+=======
+    .sb-panel-left, .sb-panel-right {
+>>>>>>> vendor-update
         min-width: 230px;
         width: 230px;
     }
 
+<<<<<<< HEAD
     &.sb-collapsing .sb-panel-right,
     &.sb-collapsing .sb-panel-left {
 
         >div,
         >ul {
+=======
+    &.sb-collapsing .sb-panel-right, &.sb-collapsing .sb-panel-left {
+        > div, > ul {
+>>>>>>> vendor-update
             min-width: 190px;
         }
     }
 
+<<<<<<< HEAD
     .sb-panel-left .sb-search-btn>input {
+=======
+    .sb-panel-left .sb-search-btn > input {
+>>>>>>> vendor-update
         min-width: 60px;
         width: 125px;
     }
 }
 
 .sb-800 {
+<<<<<<< HEAD
 
     .sb-panel-left,
     .sb-panel-right {
+=======
+    .sb-panel-left, .sb-panel-right {
+>>>>>>> vendor-update
         min-width: 260px;
         width: 260px;
         position: absolute;
@@ -2119,16 +2516,25 @@ ul.sb-user-conversations.sb-scroll-area {
         right: 0;
     }
 
+<<<<<<< HEAD
     &.sb-collapsing .sb-panel-right,
     &.sb-collapsing .sb-panel-left {
 
         >div,
         >ul {
+=======
+    &.sb-collapsing .sb-panel-right, &.sb-collapsing .sb-panel-left {
+        > div, > ul {
+>>>>>>> vendor-update
             min-width: 220px;
         }
     }
 
+<<<<<<< HEAD
     .sb-panel-left .sb-search-btn>input {
+=======
+    .sb-panel-left .sb-search-btn > input {
+>>>>>>> vendor-update
         min-width: 60px;
         width: 125px;
     }
@@ -2137,6 +2543,7 @@ ul.sb-user-conversations.sb-scroll-area {
         z-index: 95;
     }
 
+<<<<<<< HEAD
     .sb-btn-collapse:not(.sb-active)+.sb-right,
     .sb-panel-right:not(.sb-collapsed)+.sb-left {
         display: none;
@@ -2146,6 +2553,13 @@ ul.sb-user-conversations.sb-scroll-area {
     &[data-panel="new-ticket"] .sb-input,
     &.sb-panel-form .sb-select,
     &[data-panel="new-ticket"] .sb-select {
+=======
+    .sb-btn-collapse:not(.sb-active) + .sb-right, .sb-panel-right:not(.sb-collapsed) + .sb-left {
+        display: none;
+    }
+
+    &.sb-panel-form .sb-input, &[data-panel="new-ticket"] .sb-input, &.sb-panel-form .sb-select, &[data-panel="new-ticket"] .sb-select {
+>>>>>>> vendor-update
         display: block;
     }
 
@@ -2163,26 +2577,48 @@ ul.sb-user-conversations.sb-scroll-area {
         margin-left: 0;
     }
 
+<<<<<<< HEAD
     .sb-article>.sb-rating {
+=======
+    .sb-article > .sb-rating {
+>>>>>>> vendor-update
         margin-left: 0 !important;
         padding-left: 0 !important;
         border-left: 0 !important;
         display: flex;
     }
 
+<<<<<<< HEAD
     &.sb-panel-form .sb-input-select-input span+div {
+=======
+    &.sb-panel-form .sb-input-select-input span + div {
+>>>>>>> vendor-update
         margin-left: 0;
         top: 40px;
     }
 
+<<<<<<< HEAD
     .sb-tickets-area .sb-form .sb-input>span {
+=======
+    .sb-tickets-area .sb-form .sb-input > span {
+>>>>>>> vendor-update
         padding-right: 0;
     }
 }
 
+<<<<<<< HEAD
 @media (max-width: 767px) {
+=======
+@media (max-width: 464px) {
+>>>>>>> vendor-update
 
     .sb-btn-emoji {
         display: none;
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+@import "rtl.scss";
+>>>>>>> vendor-update

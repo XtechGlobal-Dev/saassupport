@@ -5,11 +5,18 @@
  * UPLOAD.PHP
  * ==========================================================
  *
+<<<<<<< HEAD
  * Manage all uploads of front-end and admin. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+=======
+ * Manage all uploads of front-end and admin. © 2017-2025 board.support. All rights reserved.
+ *
+ */
+
+>>>>>>> vendor-update
 require_once('../include/functions.php');
 if (sb_is_cloud()) {
     $data = json_decode(openssl_decrypt(base64_decode(isset($_POST['cloud']) ? $_POST['cloud'] : $_COOKIE['sb-cloud']), 'AES-256-CBC', hash('sha256', SB_CLOUD_KEY), 0, substr(hash('sha256', 'supportboard_iv'), 0, 16)), true);
@@ -19,6 +26,7 @@ if (defined('SB_CROSS_DOMAIN') && SB_CROSS_DOMAIN) {
     header('Access-Control-Allow-Origin: *');
 }
 if (isset($_FILES['file'])) {
+<<<<<<< HEAD
         $fileError = $_FILES['file']['error'];
         //if (0 < $_FILES['file']['error']) {
         if ($fileError !== UPLOAD_ERR_OK) {
@@ -35,6 +43,10 @@ if (isset($_FILES['file'])) {
             $message = $errorMessages[$fileError] ?? 'Unknown upload error.';
             die(json_encode(['error' => true, 'message' => $message]));
             //die(json_encode(['error', 'Error into upload.php file.']));
+=======
+    if (0 < $_FILES['file']['error']) {
+        die(json_encode(['error', 'Error into upload.php file.']));
+>>>>>>> vendor-update
     } else {
         $file_name = sb_sanatize_file_name($_FILES['file']['name']);
         $infos = pathinfo($file_name);
@@ -53,10 +65,13 @@ if (isset($_FILES['file'])) {
             $file_name = rand(1000, 99999) . '_' . sb_string_slug($file_name);
             $path = $path . '/' . $file_name;
             $url = $url . '/' . $file_name;
+<<<<<<< HEAD
 
             $file_size = $_FILES['file']['size']; // bytes
             $file_size_mb = round($file_size / (1024 * 1024), 2); // MB
 
+=======
+>>>>>>> vendor-update
             $response = ['success', ''];
             move_uploaded_file($_FILES['file']['tmp_name'], $path);
             if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
@@ -70,8 +85,11 @@ if (isset($_FILES['file'])) {
                 }
             }
             $response[1] = $url;
+<<<<<<< HEAD
             $response['size_bytes'] = $file_size;
             $response['size_mb'] = $file_size_mb;
+=======
+>>>>>>> vendor-update
             die(json_encode($response));
         } else {
             die(json_encode(['success', 'extension_error']));
