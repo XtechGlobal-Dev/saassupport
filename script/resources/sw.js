@@ -1,19 +1,19 @@
 'use strict';
 
 /*
- * ==========================================================
+ * ==
  * SERVICE WORKER
- * ==========================================================
+ * ==
  *
  * Service Worker of Support Board admin area
  *
 */
 
-<<<<<<< HEAD
+
 const SB_CACHE_NAME = 'sb-3-8-1';
-=======
+
 const SB_CACHE_NAME = 'sb-3-8-3';
->>>>>>> vendor-update
+
 const SB_OFFLINE = 'resources/pwa/offline.html';
 var sb_push_link;
 var sb_push_conversation_id;

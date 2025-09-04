@@ -1,8 +1,8 @@
 /*
 * 
-* ==========================================================
+* ==
 * ADMIN.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the administration page. Written in SCSS. 
 *
@@ -3159,6 +3159,7 @@ td.sb-td-contact {
 
                         span {
                             color: #3c3c3c;
+                            font-size: 10px;
                         }
                     }
                 }
@@ -3924,6 +3925,7 @@ td.sb-td-contact {
                 max-width: 150px;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                line-clamp: 2;
                 -webkit-line-clamp: 2;
             }
 
@@ -4141,6 +4143,12 @@ td.sb-td-contact {
 
                     ul {
                         top: 0;
+
+                        li {
+                            &[data-value="gray"] {
+                                color: #fff;
+                            }
+                        }
                     }
 
                     p {
@@ -9205,6 +9213,12 @@ ul.status-list.dropdown-menu {
     }
 }
 
+.sb-admin.sb-main {
+    .sb-input {
+        display: flex;
+    }
+}
+
 /*
  *
  * -----------------------------------------------------------
@@ -10827,6 +10841,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     margin-right: 6px;
     vertical-align: middle;
+    min-width: 10px;
+    min-height: 10px;
 }
 
 // Dropdown cleanup
@@ -10843,8 +10859,11 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: $tag-bg !important;
         color: $tag-text !important;
         font-weight: 500 !important;
-        display: flex !important;
         align-items: center !important;
+        max-width: 80px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         &[data-color]::before {
             @include tag-dot(12px);
@@ -11591,24 +11610,16 @@ li.menu_head:hover {
                     padding: 10px;
                     color: #333;
                     text-decoration: none;
+
                     span {
                         word-break: break-word !important;
+                        font-size: 13px !important;
                     }
                 }
             }
         }
     }
 }
-
-// .sb-area-reports.sb-area-reports_new.sb-active {
-//     .sb-tab {
-//         display: flex;
-//         flex-direction: column;
-//         .sb-content.sb-scroll-area.sb-no-results-active {
-//             margin: auto;
-//         }
-//     }
-// }
 
 .row.tablet-sizee {
     .nav-tabs {
@@ -12840,6 +12851,14 @@ main {
     }
 }
 
+.main-content {
+    #bot-image {
+        .input {
+            width: 100% !important;
+        }
+    }
+}
+
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
         max-width: 200px;
@@ -13411,7 +13430,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 194px !important;
+                            height: 193px !important;
                         }
                     }
                 }
@@ -13629,6 +13648,8 @@ main {
                 .logo {
                     &::before {
                         bottom: 4px;
+                        width: 118px;
+                        left: -14px;
                     }
                 }
             }
@@ -14431,6 +14452,7 @@ main {
                     border: 1px solid #d5d5d5;
                     border-radius: 6px;
                     box-shadow: none;
+                    padding-inline: 10px;
                 }
             }
         }
@@ -14492,10 +14514,16 @@ main {
                     left: 0;
                     transition: .5s ease-in-out;
                     overflow-y: scroll !important;
+                    width: 95px;
+
+                    &::-webkit-scrollbar {
+                        width: 0;
+                    }
                 }
 
                 .powered-by {
                     flex-direction: column;
+                    text-align: center;
                 }
             }
         }
@@ -14615,6 +14643,83 @@ main {
             padding-inline: 15px;
         }
     }
+
+    .users-tab {
+        max-height: 52vh;
+    }
+
+    .sb-setting {
+        .repeater-item {
+            textarea {
+                min-width: fit-content;
+            }
+        }
+    }
+
+    .sb-nav {
+        a#sb-accout {
+            padding-inline: 0 !important;
+            margin: 0 !important;
+            padding-bottom: 0 !important;
+        }
+    }
+
+    .sb-area-dashboard main {
+        .new_container {
+            .dashboard-metrics {
+                .metric-card {
+                    .graph_tabs {
+                        justify-content: space-between;
+                        .w-100 {
+                            width: fit-content !important;
+                        }
+                        .new_users_chart,
+                        .active_users_chart,
+                        .ticket_created_chart,
+                        .ticket_resolved_chart,
+                        .unread_conversation_chart,
+                        .ticket_pending_chart,
+                        .avg_response_chart,
+                        .total_conversations_chart,
+                        .agent_chart {
+                            width: fit-content;
+                            canvas {
+                                width: 100% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .sb-admin-box_new {
+        .right_section {
+            .login-form {
+                .form-fields {
+                    .field-container {
+                        .input-wrapper {
+                            svg {
+                                top: 26px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active {
+        .sb-profile {
+            .sb-name {
+                padding-left: 50px;
+            }
+            img {
+                min-height: 40px;
+            }
+        }
+    }
+
 }
 
 @media only screen and (min-width: 465px) and (max-width: 730px) {

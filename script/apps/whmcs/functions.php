@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * WHMCS APP
- * ==========================================================
+ * ==
  *
- * WHMCS app. © 2017-2025 board.support. All rights reserved.
+ * WHMCS app. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 

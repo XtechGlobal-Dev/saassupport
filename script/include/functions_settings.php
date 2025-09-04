@@ -2,9 +2,9 @@
 use UI\Draw\Color;
 
 /*
- * ==========================================================
+ * ==
  * FUNCTIONS_SETTINGS.PHP
- * ==========================================================
+ * ==
  *
  * Settings functions file. © 2017-2025 board.support. All rights reserved.
  *

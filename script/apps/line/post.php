@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * LINE POST.PHP
- * ==========================================================
+ * ==
  *
  * Line response listener. This file receive the messages sent to the Line bot. This file requires the Line App.
  * © 2017-2025 board.support. All rights reserved.

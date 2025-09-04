@@ -1,8 +1,8 @@
 ﻿
 /*
- * ==========================================================
+ * ==
  * MAIN SCRIPT
- * ==========================================================
+ * ==
  *
  * Main JavaScript file. This file is shared by frond-end and back-end. © 2017-2025 board.support. All rights reserved.
  * 
@@ -12,11 +12,7 @@
 
 (function ($) {
 
-<<<<<<< HEAD
-    var version = '3.8.1';
-=======
     var version = '3.8.3';
->>>>>>> vendor-update
     var main;
     var global;
     var upload_target;
@@ -24,10 +20,6 @@
     var tickets = false;
     var timeout = false;
     var timeout_typing = false;
-<<<<<<< HEAD
-
-=======
->>>>>>> vendor-update
     var interval = false;
     var timeout_debounce = [];
     var previous_search;
@@ -468,11 +460,7 @@
         },
 
         // Login
-<<<<<<< HEAD
-        loginForm: function (button, area = false, onSuccess = false) {
-=======
         loginForm: function (button, area = false, onSuccess = false, isRecursion = true) {
->>>>>>> vendor-update
             button = $(button);
             if (!button.sbLoading()) {
                 if (area === false) {
@@ -507,8 +495,6 @@
                             if (SBF.setting('wp-users-system') == 'wp') {
                                 SBApps.wordpress.ajax('wp-login', { user: email, password: password });
                             }
-<<<<<<< HEAD
-=======
                         } else if (admin && SBApps.is('wordpress')) {
                             return SBApps.wordpress.ajax('wp-login-admin', { user: email, password: password }, () => {
                                 button.sbLoading(false);
@@ -518,7 +504,6 @@
                                     area.find('.sb-info').html(sb_(response === 'ip-ban' ? 'Too many login attempts. Please retry again in a few hours.' : 'Invalid email or password.')).sbActive(true);
                                 }
                             });
->>>>>>> vendor-update
                         } else {
                             area.find('.sb-info').html(sb_(response === 'ip-ban' ? 'Too many login attempts. Please retry again in a few hours.' : 'Invalid email or password.')).sbActive(true);
                             if (!admin) {
@@ -786,21 +771,17 @@
         },
 
         // Escape a string
-<<<<<<< HEAD
+
         // escape: function (string) {
         //     return string ? string.replace(/</ig, '&lt;').replace(/javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup/ig, '') : '';
         // },
 
-            escape: function (string) {
+        escape: function (string) {
             return string
-            ? string
+        ? string
                 .replace(/</ig, '&lt;')
                 .replace(/\b(?:javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup)\b/ig, '')
             : '';
-=======
-        escape: function (string) {
-            return string ? string.replace(/</ig, '&lt;').replace(/javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup/ig, '') : '';
->>>>>>> vendor-update
         },
 
         // Remove the Support Board syntax from a string
@@ -1098,7 +1079,7 @@
                                 SBChat.update();
                             }
                         });
-<<<<<<< HEAD
+
                         /// sync ticket comment via pusher
                         this.event('new-ticket-comment', (response) => {
                             SBChat.loadComments(response.ticket_id, response.last_updated_at);
@@ -1177,8 +1158,7 @@
                         });
 
 
-=======
->>>>>>> vendor-update
+
                         this.presence(1, () => {
                             this.started = true;
                             SBChat.automations.runAll();
@@ -1586,11 +1566,11 @@
                     extra: true
                 }, (response) => {
                     this.processArray(response);
-<<<<<<< HEAD
+
                     onSuccess();
-=======
+
                     onSuccess(response);
->>>>>>> vendor-update
+
                     SBF.event('SBGetUser', this);
                 });
             } else {
@@ -1625,7 +1605,7 @@
             }
         }
 
-<<<<<<< HEAD
+
         conversationsMenuNotificationCounter() {
             //// Refresh Tab counter
             $('.user_header .header_left h2').eq(1).find('.notification-counter').remove();
@@ -1633,8 +1613,7 @@
                 $('.user_header .header_left h2').eq(1).append(`<span data-count="${SBChat.notifications.length}" class="notification-counter">${SBChat.notifications.length}</span>`);
         }
 
-=======
->>>>>>> vendor-update
+
         // Get conversations code
         getConversationsCode(conversations = false) {
             let code = '';
@@ -1642,10 +1621,9 @@
             if (!conversations) {
                 conversations = this.conversations;
             }
-<<<<<<< HEAD
+
             const notificationCounter = 0;
-=======
->>>>>>> vendor-update
+
             for (var i = 0; i < conversations.length; i++) {
                 if (conversations[i] instanceof SBConversation) {
                     if (!admin && !SBChat.isConversationAllowed(conversations[i].get('source'), conversations[i].status_code)) {
@@ -1665,7 +1643,7 @@
                     SBF.error('Conversation not of type SBConversation', 'SBUser.getConversationsCode');
                 }
             }
-<<<<<<< HEAD
+
             this.conversationsMenuNotificationCounter();
             return code;
         }
@@ -1763,11 +1741,11 @@
 
 
 
-=======
+
             return code;
         }
 
->>>>>>> vendor-update
+
         // Get single conversation
         getFullConversation(conversation_id = false, onSuccess = false) {
             if (conversation_id !== false) {
@@ -1948,11 +1926,11 @@
             let message = this.message;
             let attachments = this.attachments;
             let reply = this.payload('reply');
-<<<<<<< HEAD
+
             let admin_menu = admin ? SBAdmin.conversations.messageMenu(agent, message, !reply) : '';
-=======
+
             let admin_menu = admin ? SBAdmin.conversations.messageMenu(agent, message, !reply && !agent) : '';
->>>>>>> vendor-update
+
             let attachments_code = '';
             let media_code = '';
             let thumb = (admin && SB_ADMIN_SETTINGS.show_profile_images) || (!admin && ((agent && !CHAT_SETTINGS.hide_agents_thumb) || (!agent && CHAT_SETTINGS.display_users_thumb))) ? `<div class="sb-thumb"><img loading="lazy" src="${this.details['profile_image']}"><div class="sb-tooltip"><div>${this.details['full_name']}</div></div></div>` : '';
@@ -2049,11 +2027,11 @@
             }
 
             // Message creation
-<<<<<<< HEAD
+
             return `<div data-id="${this.details.id}" class="${css} ${media_code && !message ? ' media-item' : ''}" ${type}>${thumb}${reply}<div class="sb-cnt"><div class="sb-message${media_code && !message ? ' sb-message-media' : ''}"${delivery_failed ? ' style="opacity:.7"' : ''}>${delivery_failed ? SBAdmin.conversations.getDeliveryFailedMessage(delivery_failed) : ''}${(name + message + media_code).trim()}</div>${attachments_code}<div class="sb-time">${SBF.beautifyTime(this.details.creation_time, true)}${admin && agent && this.details.status_code == 2 ? '<i class="sb-icon-check"></i>' : ''}</div></div>${admin_menu}</div>`;
-=======
+
             return `<div data-id="${this.details.id}" class="${css}" ${type}>${thumb}${reply}<div class="sb-cnt"><div class="sb-message${media_code && !message ? ' sb-message-media' : ''}"${delivery_failed ? ' style="opacity:.7"' : ''}>${delivery_failed ? SBAdmin.conversations.getDeliveryFailedMessage(delivery_failed) : ''}${(name + message + media_code).trim()}</div>${attachments_code}<div class="sb-time">${SBF.beautifyTime(this.details.creation_time, true)}${admin && agent && this.details.status_code == 2 ? '<i class="sb-icon-check"></i>' : ''}</div></div>${admin_menu}</div>`;
->>>>>>> vendor-update
+
         }
 
         render(message = false) {
@@ -2443,13 +2421,10 @@
         offline_message_set: false,
         label_date: false,
         label_date_show: false,
-<<<<<<< HEAD
         last_comment_date: '',
         datetime_last_comment: false,
         new_comment_count: [],
         new_ticket_count: [],
-=======
->>>>>>> vendor-update
 
         // Send a message
         sendMessage: function (user_id = -1, message = '', attachments = [], onSuccess = false, payload = false, conversation_status_code = false) {
@@ -2538,11 +2513,8 @@
 
             // Send message
             if (message || attachments.length || payload) {
-<<<<<<< HEAD
                 let message_response = { user_id: user_id, user: activeUser(), conversation_id: conversation.id, conversation: conversation, conversation_status_code: conversation_status_code, attachments: attachments };
-=======
                 let message_response = { user_id: user_id, user: activeUser(), conversation_id: conversation.id, conversation: conversation, conversation_status_code: conversation_status_code, attachments: attachments, payload: payload };
->>>>>>> vendor-update
                 SBF.ajax({
                     function: 'send-message',
                     user_id: user_id,
@@ -2641,12 +2613,9 @@
                     if (this.skip) {
                         this.skip = false;
                     }
-<<<<<<< HEAD
-=======
                     if (admin) {
                         SBAdmin.conversations.previous_editor_text = false;
                     }
->>>>>>> vendor-update
                     this.busy(false);
                 });
 
@@ -2787,10 +2756,7 @@
         initChat: function () {
             if (admin) return;
             SBF.getActiveUser(true, () => {
-<<<<<<< HEAD
                 console.log("Chat")
-=======
->>>>>>> vendor-update
                 let active = activeUser() !== false;
                 let user_type = active ? activeUser().type : false;
                 if (!tickets && CHAT_SETTINGS.popup && !storage('popup') && (!mobile || !CHAT_SETTINGS.popup_mobile_hidden)) {
@@ -2958,11 +2924,11 @@
                 this.hideDashboard();
                 this.populate();
                 this.main_header = false;
-<<<<<<< HEAD
+
                 if (storage('chat-open')) {
-=======
+
                 if (storage('chat-open') && !mobile) {
->>>>>>> vendor-update
+
                     SBChat.open();
                 }
                 if (storage('queue') == conversation_id) {
@@ -2979,7 +2945,7 @@
             });
         },
 
-<<<<<<< HEAD
+
         formatDateLabel: function (dateString) {
             const date = new Date(dateString.replace(' ', 'T'));
             const today = new Date();
@@ -3211,8 +3177,7 @@
             });
         },
 
-=======
->>>>>>> vendor-update
+
         // Update the active conversation with the latest messages
         update: function () {
             if (this.conversation) {
@@ -3557,10 +3522,9 @@
                     if (user_id != bot_id) {
                         setTimeout(() => { this.queue(conversation.id) }, 1000);
                     }
-<<<<<<< HEAD
+
                     activeUser().conversations.push(conversation);
-=======
->>>>>>> vendor-update
+
                     if (onSuccess) {
                         onSuccess(conversation);
                     }
@@ -3575,10 +3539,7 @@
         setConversation: function (conversation) {
             if (conversation instanceof SBConversation) {
                 let conversations = activeUser().conversations;
-<<<<<<< HEAD
-=======
                 let is_new = true;
->>>>>>> vendor-update
                 this.conversation = conversation;
                 this.id_last_message_conversation = !this.conversation.getLastMessage() ? 0 : this.conversation.getLastMessage().id;
                 this.datetime_last_message_conversation = this.conversation.getLastMessage() == false ? '2000-01-01 00:00:00' : this.conversation.getLastMessage().get('creation_time');
@@ -3588,13 +3549,12 @@
                 for (var i = 0; i < conversations.length; i++) {
                     if (conversations[i].id == conversation.id) {
                         conversations[i] = conversation;
-<<<<<<< HEAD
+
                         break;
                     }
                 }
                 storage('open-conversation', conversation.id);
                 SBApps.dialogflow.typing_enabled = true;
-=======
                         is_new = false;
                         break;
                     }
@@ -3605,7 +3565,6 @@
                 storage('open-conversation', conversation.id);
                 SBApps.dialogflow.typing_enabled = true;
                 this.headerAgent();
->>>>>>> vendor-update
                 SBF.event('SBActiveConversationChanged', conversation);
             } else {
                 SBF.error('Value not of type SBConversation', 'SBChat.setConversation');
@@ -3726,15 +3685,15 @@
                 if (!agent && is_default_chatbot) {
                     agent = { user_id: CHAT_SETTINGS.bot_id, full_name: CHAT_SETTINGS.bot_name, profile_image: CHAT_SETTINGS.bot_image };
                 }
-<<<<<<< HEAD
+
                 if (agent) {
                     this.agent_id = agent.user_id;
                     this.headerReset();
-=======
+
                 this.headerReset();
                 if (agent) {
                     this.agent_id = agent.user_id;
->>>>>>> vendor-update
+
                     chat_header.addClass('sb-header-agent').attr('data-agent-id', this.agent_id).html(`<div class="sb-dashboard-btn sb-icon-arrow-left"></div><div class="sb-profile"><img loading="lazy" src="${agent['profile_image']}" /><div><span class="sb-name">${agent['full_name']}</span><span class="sb-status">${sb_('Away')}</span></div><i class="sb-icon sb-icon-close ${CHAT_SETTINGS.close_chat ? 'sb-close-chat' : 'sb-responsive-close-btn'}"></i></div><div class="sb-label-date-top"></div>`);
                     chat_status = chat_header.find('.sb-status');
                     this.updateUsersActivity();
@@ -3742,11 +3701,11 @@
                     if (SBF.storageTime('header-animation', 1)) {
                         this.headerAnimation();
                     }
-<<<<<<< HEAD
-=======
+
+
                 } else {
                     chat_header.html(this.start_header[0]).addClass(this.start_header[1]);
->>>>>>> vendor-update
+
                 }
             }
         },
@@ -3779,18 +3738,17 @@
 
         // Scroll the chat to the bottom
         scrollBottom: function (top = false) {
-<<<<<<< HEAD
             requestAnimationFrame(() => {
                 const el = chat_scroll_area[0];
                 el.scrollTop = top ? 0 : el.scrollHeight;
                 this.scrollHeader();
             });
-=======
+
             setTimeout(() => {
                 chat_scroll_area.scrollTop(top ? 0 : chat_scroll_area[0].scrollHeight);
                 this.scrollHeader();
             }, 20);
->>>>>>> vendor-update
+
         },
 
         // Check if the chat is at bottom
@@ -3814,13 +3772,13 @@
                 main.addClass('sb-dashboard-active');
                 chat_header.removeClass('sb-header-agent');
                 this.hidePanel()
-<<<<<<< HEAD
+
                 if (this.start_header) chat_header.html(this.start_header[0]).addClass(this.start_header[1]);
-=======
+
                 if (this.start_header) {
                     chat_header.html(this.start_header[0]).addClass(this.start_header[1]);
                 }
->>>>>>> vendor-update
+
                 chat_scroll_area.find(' > div').sbActive(false);
                 main.find('.sb-dashboard').sbActive(true);
                 this.populateConversations();
@@ -3851,30 +3809,30 @@
 
         // Show a chat panel
         showPanel: function (name, title) {
-<<<<<<< HEAD
+
             if (tickets) return SBTickets.showPanel(name, title);
-=======
+
             if (tickets) {
                 return SBTickets.showPanel(name, title);
             }
->>>>>>> vendor-update
+
             let panel = chat_scroll_area.find(' > .sb-panel-' + name);
             if (panel.length) {
                 chat_scroll_area.find(' > div').sbActive(false);
                 panel.sbActive(true);
-<<<<<<< HEAD
+
                 if (!this.start_header) this.start_header = [chat_header.html(), chat_header.attr('class')];
                 chat_header.attr('class', 'sb-header sb-header-panel').html(`<svg class="sb-icon-close <?php echo $disable_dashboard ? 'sb-responsive-close-btn' : 'sb-dashboard-btn' ?> sb-dashboard-btn sb-icon-close"
                         style="right: unset; left: 10px; top: 15px; width: 26px; height: 26px;" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg><span style="padding-left: 15px;">${sb_(title)}</span>`);
-=======
+
                 if (!this.start_header) {
                     this.start_header = [chat_header.html(), chat_header.attr('class')];
                 }
                 chat_header.attr('class', 'sb-header sb-header-panel').html(`<span>${sb_(title)}</span><div class="sb-dashboard-btn sb-icon-close"></div>`);
->>>>>>> vendor-update
+
                 main.addClass('sb-panel-active');
                 this.dashboard = true;
             }
@@ -3925,11 +3883,10 @@
             storage('notifications', this.notifications);
             main.find('.sb-chat-btn span').attr('data-count', count).html(count > -1 ? count : 0);
             SBF.event('SBNotificationsUpdate', { conversation_id: conversation_id, message_id: message_id });
-<<<<<<< HEAD
+
 
             activeUser().conversationsMenuNotificationCounter();
-=======
->>>>>>> vendor-update
+
         },
 
         // Set the active conversation status
@@ -4595,10 +4552,9 @@
 
         // Upload response
         uploadResponse: function (response) {
-<<<<<<< HEAD
 
-=======
->>>>>>> vendor-update
+
+
             response = JSON.parse(response);
             if (response[0] == 'success') {
                 if (response[1] == 'extension_error') {
@@ -4621,7 +4577,7 @@
                     }, 500);
                 } else {
                     let name = SBF.beautifyAttachmentName(response[1].substr(response[1].lastIndexOf('/') + 1));
-<<<<<<< HEAD
+
                     //chat_editor.find('.sb-attachments').append(`<div data-name="${name}" data-value="${response[1]}"${response.length > 2 ? ' data-size="' + response[2][0] + '|' + response[2][1] + '"' : ''} ${response.length > 2 ? ' data-type="' + response[2]['mime'] +'"' : ''} ${response.length > 2 ? ' data-memory-size="' + response['size_bytes'] +'"' : ''}>${name}<i class="sb-icon-close"></i></div>`);
                     chat_editor.find('.sb-attachments').append(`
                         <div 
@@ -4633,9 +4589,9 @@
                     >${name}<i class="sb-icon-close"></i>
                     </div>
                     `);
-=======
+
                     chat_editor.find('.sb-attachments').append(`<div data-name="${name}" data-value="${response[1]}"${response.length > 2 ? ' data-size="' + response[2][0] + '|' + response[2][1] + '"' : ''}>${name}<i class="sb-icon-close"></i></div>`);
->>>>>>> vendor-update
+
                     chat_editor.sbActive(true);
                 }
             } else {
@@ -4845,7 +4801,7 @@
                         break;
                     case 'popups':
                         if (!storage('popup' + automation.id)) {
-<<<<<<< HEAD
+
                             setTimeout(() => {
                                 if (!SBChat.chat_open) {
                                     SBChat.popup(false, { id: automation.id, image: automation.profile_image, title: automation.title, message: automation.message });
@@ -4859,7 +4815,7 @@
                                     }
                                 }
                             }, 1000);
-=======
+
                             if (!SBChat.chat_open) {
                                 setTimeout(() => {
                                     SBChat.popup(false, { id: automation.id, image: automation.profile_image, title: automation.title, message: automation.message });
@@ -4873,7 +4829,7 @@
                                     this.history.push(automation.id);
                                 }
                             }
->>>>>>> vendor-update
+
                         }
                         break;
                     case 'design':
@@ -5844,13 +5800,13 @@
         wordpress: {
 
             ajax: function (action, data, onSuccess = false) {
-<<<<<<< HEAD
+
                 if (typeof SB_WP_AJAX_URL == ND) return;
-=======
+
                 if (typeof SB_WP_AJAX_URL == ND) {
                     return onSuccess ? onSuccess(false) : false;
                 };
->>>>>>> vendor-update
+
                 $.ajax({
                     method: 'POST',
                     url: SB_WP_AJAX_URL,
@@ -6538,6 +6494,54 @@
             SBF.event('SBReady');
         }
 
+        $(document).on('click keydown', '#chatRegPass', function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+
+            const $input = $('#chatRegInput');
+            if (!$input.length) return;
+
+            const show = $input.attr('type') === 'password';
+            $input.attr('type', show ? 'text' : 'password');
+
+            // Optional a11y label update
+            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+                .attr('data-visible', show ? 'true' : 'false');
+        });
+
+        $(document).on('click keydown', '#chatRegRepeatPass', function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+
+            const $input = $('#chatRegRepeatInput');
+            if (!$input.length) return;
+
+            const show = $input.attr('type') === 'password';
+            $input.attr('type', show ? 'text' : 'password');
+
+            // Optional a11y label update
+            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+                .attr('data-visible', show ? 'true' : 'false');
+        });
+
+        $(document).on('click keydown', '#ticketRegPass', function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+
+            const $input = $('#ticketRegInput');
+            if (!$input.length) return;
+
+            const show = $input.attr('type') === 'password';
+            $input.attr('type', show ? 'text' : 'password');
+
+            // Optional a11y label update
+            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+                .attr('data-visible', show ? 'true' : 'false');
+        });
+
+
+        console.log("lllll")
+
         // Disable real-time if browser tab not active
         document.addEventListener('visibilitychange', function () {
             SBF.visibilityChange(document.visibilityState);
@@ -6665,7 +6669,7 @@
             SBChat.openConversation($(this).attr('data-conversation-id'));
         });
 
-<<<<<<< HEAD
+
         // Open a ticket from the dashboard
         $(main).on('click', '.sb-user-tickets li', function () {
             SBChat.openTicket($(this).attr('data-ticket-id'));
@@ -6751,8 +6755,7 @@
             });
         });
 
-=======
->>>>>>> vendor-update
+
         // Start a new conversation from the dashboard
         $(main).on('click', '.sb-btn-new-conversation, .sb-departments-list > div, .sb-agents-list > div', function () {
             let id = $(this).data('id');
@@ -7399,7 +7402,7 @@
             e.preventDefault();
             return false;
         });
-<<<<<<< HEAD
+
 
 
 
@@ -7440,19 +7443,10 @@
         //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
     }
 
-     $('#ticketRegPass').click(function () {
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            let input = $("#ticketRegInput");
-            let currentType = input.prop('type');
-            if (currentType === 'password') {
-                input.prop('type', 'text');
-            } else {
-                input.prop('type', 'password');
-            }
-        });
 
-=======
+
+
     }
 
->>>>>>> vendor-update
+
 }(jQuery));

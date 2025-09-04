@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * WECHAT APP POST FILE
- * ==========================================================
+ * ==
  *
  * WeChat app post file to receive messages sent by WeChat. � 2017-2025 board.support. All rights reserved.
  *
