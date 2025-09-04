@@ -2106,6 +2106,7 @@ div ul.sb-menu,
   padding-bottom: 25px;
   letter-spacing: 0.5px;
   position: relative;
+  word-wrap: break-word;
 }
 .sb-article .sb-title .sb-icon-close {
   position: absolute;
@@ -5597,9 +5598,6 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-panel-form .sb-form {
   margin: 22px 0 30px 0;
   max-width: 500px;
-}
-.sb-panel-form [id=otp]:not(.sb-active) {
-  display: none;
 }
 .sb-panel-form .sb-form-extra {
   margin: -20px 0 30px 0;

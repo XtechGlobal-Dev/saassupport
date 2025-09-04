@@ -5848,8 +5848,8 @@ function sb_component_admin()
                                                 <?php sb_e("according"); ?>             <?php sb_e("to"); ?>             <?php sb_e("user"); ?>
                                                 <?php sb_e("preferences"); ?>. <?php sb_e("here"); ?>, <?php sb_e("you"); ?>
                                                 <?php sb_e("may"); ?>             <?php sb_e("update"); ?>             <?php sb_e("the"); ?>
-                                                <?php sb_e("Chat"); ?>             <?php sb_e("availability"); ?>, <?php sb_e("features"); ?>
-                                                , <?php sb_e("and"); ?>             <?php sb_e("management"); ?>             <?php sb_e("Settings"); ?> .
+                                                <?php sb_e("Chat"); ?>             <?php sb_e("Availability"); ?>, <?php sb_e("features"); ?>
+                                                , <?php sb_e("and"); ?>             <?php sb_e("Management"); ?>             <?php sb_e("Settings"); ?> .
                                             </p>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -5898,7 +5898,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("availability"); ?>
+                                                <?php sb_e("Availability"); ?>
                                             </div>
                                             <div class="my-tab" data-target="appearance-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -5949,7 +5949,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>
+                                                <?php sb_e("Management"); ?>
                                             </div>
                                             <div class="tab-slider"></div>
                                         </div>
@@ -5986,7 +5986,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("availability"); ?>             <?php sb_e("Chat"); ?>
+                                                <?php sb_e("Availability"); ?>             <?php sb_e("Chat"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("Chat Availability allows the admin to adjust the visibility of the chat widget in accordance with the workplace's office hours and agent availability"); ?>.
@@ -6060,7 +6060,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>             <?php sb_e("Settings"); ?>
+                                                <?php sb_e("Management"); ?>             <?php sb_e("Settings"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("Management controls access to the management widget’s availability to visitors and their ability to archive conversations with agents"); ?>.
@@ -6267,7 +6267,7 @@ function sb_component_admin()
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                <?php sb_e("management"); ?>             <?php sb_e("Chat"); ?>
+                                                <?php sb_e("Management"); ?>             <?php sb_e("Chat"); ?>
                                             </div>
                                             <div class="my-tab" data-target="permission-setting-content">
                                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
@@ -6533,7 +6533,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>             <?php sb_e("Chat"); ?>
+                                                <?php sb_e("Management"); ?>             <?php sb_e("Chat"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("The Chat Management Settings provides settings that allow one to properly sort through chats by date and adjust whether or not they wish to automatically archive conversations after 24 hours"); ?>.
@@ -6832,7 +6832,7 @@ function sb_component_admin()
                                                                 transform="translate(0.203125 0.75)" />
                                                         </clipPath>
                                                     </defs>
-                                                </svg><?php sb_e("availability"); ?>
+                                                </svg><?php sb_e("Availability"); ?>
                                             </div>
                                             <div class="my-tab" data-target="chat-management">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6862,7 +6862,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e(string: "Chat"); ?>             <?php sb_e("management"); ?>
+                                                <?php sb_e(string: "Chat"); ?>             <?php sb_e("Management"); ?>
                                             </div>
                                             <div class="my-tab" data-target="appearance-feature">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6922,7 +6922,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>
+                                                <?php sb_e("Management"); ?>
                                             </div>
                                             <div class="my-tab" data-target="notifications-email">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -7051,7 +7051,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e(string: "availability"); ?>
+                                                <?php sb_e(string: "Availability"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("The availability settings allows control over notifications received regarding any user going online, as well as the option to set your status offline when you are idle") ?>
@@ -7091,7 +7091,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e(string: "Chat"); ?>             <?php sb_e(string: "management"); ?>
+                                                <?php sb_e(string: "Chat"); ?>             <?php sb_e(string: "Management"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e(string: "Chat management provides push notification settings for both Desktop and Texts when receiving messages"); ?>.
@@ -7154,7 +7154,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e(string: "management"); ?>
+                                                <?php sb_e(string: "Management"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e(string: "Management settings allow for automated emails to be set up as notifications for users and agents when either receives a message. They can be adjusted accordingly depending on what is needed"); ?>

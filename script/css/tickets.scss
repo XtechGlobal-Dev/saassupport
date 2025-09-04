@@ -1536,15 +1536,14 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 
 .sb-panel-form {
-
     .sb-form {
         margin: 22px 0 30px 0;
         max-width: 500px;
     }
-
-    [id="otp"]:not(.sb-active) {
-        display: none;
-    }
+    
+    // [id="otp"]:not(.sb-active) {
+    //     display: none;
+    // }
 
     .sb-form-extra {
         margin: -20px 0 30px 0;
