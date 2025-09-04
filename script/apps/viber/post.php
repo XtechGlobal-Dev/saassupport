@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * VIBER POST.PHP
- * ==========================================================
+ * ==
  *
  * Viber response listener. This file receive the messages sent to the Viber bot. This file requires the Viber App.
  * © 2017-2025 board.support. All rights reserved.

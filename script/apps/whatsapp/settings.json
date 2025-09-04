@@ -2,23 +2,23 @@
   {
     "type": "multi-input",
     "id": "whatsapp-cloud",
-<<<<<<< HEAD
+
     "title": "WhatsApp Cloud API Settings",
     "content": "Synchronize your WhatsApp Cloud API account with the configuration settings.",
-=======
+
     "title": "Cloud API settings",
     "content": "Synchronize your WhatsApp Cloud API account.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp",
     "value": [
       {
         "type": "select",
         "id": "whatsapp-cloud-sync-mode",
-<<<<<<< HEAD
+
         "title": "Sync Mode",
-=======
+
         "title": "Sync mode",
->>>>>>> vendor-update
+
         "value": [
           [ "", "Automatic" ],
           [ "manual", "Manual" ]
@@ -27,33 +27,33 @@
       {
         "type": "password",
         "id": "whatsapp-cloud-key",
-<<<<<<< HEAD
+
         "title": "API Secret Key"
-=======
+
         "title": "Secret key"
->>>>>>> vendor-update
+
       },
       {
         "type": "button",
         "id": "whatsapp-twilio-btn",
         "title": "Configuration URL",
-<<<<<<< HEAD
+
         "button-text": "Get Configuration URL",
-=======
+
         "button-text": "Get configuration URL",
->>>>>>> vendor-update
+
         "button-url": "#"
       },
       {
         "type": "button",
         "id": "whatsapp-cloud-sync-btn",
-<<<<<<< HEAD
+
         "title": "Sync Now",
         "button-text": "Synchronize Now",
-=======
+
         "title": "Synchronize now",
         "button-text": "Synchronize now",
->>>>>>> vendor-update
+
         "button-url": "#"
       },
       {
@@ -68,13 +68,13 @@
   {
     "type": "repeater",
     "id": "whatsapp-cloud-numbers",
-<<<<<<< HEAD
+
     "title": "WhatsApp Cloud Numbers",
     "content": "Add and manage the details of WhatsApp phone numbers for API integration.",
-=======
+
     "title": "Cloud API numbers",
     "content": "Add WhatsApp phone number details here.",
->>>>>>> vendor-update
+
     "items": [
       {
         "type": "text",
@@ -84,11 +84,11 @@
       {
         "type": "text",
         "id": "whatsapp-cloud-numbers-phone-id",
-<<<<<<< HEAD
+
         "name": "Phone Number ID"
-=======
+
         "name": "Phone number ID"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
@@ -98,11 +98,11 @@
       {
         "type": "password",
         "id": "whatsapp-cloud-numbers-token",
-<<<<<<< HEAD
+
         "name": "API Token"
-=======
+
         "name": "Token"
->>>>>>> vendor-update
+
       },
       {
         "type": "number",
@@ -119,208 +119,208 @@
   {
     "type": "multi-input",
     "id": "whatsapp-template-cloud",
-<<<<<<< HEAD
+
     "title": "WhatsApp Cloud Template Fallback",
     "content": "Set up a WhatsApp Template notification to be sent in case the WhatsApp message fails. Use merge fields such as {conversation_url_parameter}, {recipient_name}, and {recipient_email}.",
-=======
+
     "title": "Cloud API template fallback",
     "content": "Sends a WhatsApp Template notification if sending of the WhatsApp message fails. You can use text and the following merge fields: {conversation_url_parameter}, {recipient_name}, {recipient_email}.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp-templates",
     "value": [
       {
         "type": "text",
         "id": "whatsapp-template-cloud-name",
-<<<<<<< HEAD
+
         "title": "Template Name"
-=======
+
         "title": "Template name"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-cloud-languages",
-<<<<<<< HEAD
+
         "title": "Supported Languages"
-=======
+
         "title": "Template languages"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-cloud-parameters-header",
-<<<<<<< HEAD
+
         "title": "Header Variables"
-=======
+
         "title": "Header variables"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-cloud-parameters-body",
-<<<<<<< HEAD
+
         "title": "Body Variables"
-=======
+
         "title": "Body variables"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-cloud-parameters-button",
-<<<<<<< HEAD
+
         "title": "Button Variables"
-=======
+
         "title": "Button variables"
->>>>>>> vendor-update
+
       }
     ]
   },
   {
     "type": "input-button",
     "id": "whatsapp-test-template",
-<<<<<<< HEAD
+
     "title": "Test WhatsApp Template",
     "content": "Send a WhatsApp message template to a phone number for testing.",
     "button-text": "Send Message",
-=======
+
     "title": "Test template",
     "content": "Send the message template to a WhatsApp number.",
     "button-text": "Send message",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp-templates"
   },
   {
     "type": "multi-input",
     "id": "whatsapp-sms",
-<<<<<<< HEAD
+
     "title": "SMS Fallback for WhatsApp",
     "content": "Send a fallback SMS if the WhatsApp message sending fails. Use merge fields like {conversation_url_parameter}, {message}, {recipient_name}, and {recipient_email}.",
-=======
+
     "title": "Text message fallback",
     "content": "Sends a text message if sending of the WhatsApp message fails. You can use text and the following merge fields: {conversation_url_parameter}, {message}, {recipient_name}, {recipient_email}.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp-templates",
     "value": [
       {
         "type": "checkbox",
         "id": "whatsapp-sms-active",
-<<<<<<< HEAD
+
         "title": "Activate SMS Fallback"
-=======
+
         "title": "Active"
->>>>>>> vendor-update
+
       },
       {
         "type": "textarea",
         "id": "whatsapp-sms-template",
-<<<<<<< HEAD
+
         "title": "SMS Message Template"
-=======
+
         "title": "Message template"
->>>>>>> vendor-update
+
       }
     ]
   },
   {
     "type": "text",
     "id": "whatsapp-order-webhook",
-<<<<<<< HEAD
+
     "title": "Order Webhook URL",
     "content": "Specify the URL to which WhatsApp order details will be sent."
-=======
+
     "title": "Order webhook",
     "content": "Send the WhatsApp order details to the URL provided."
->>>>>>> vendor-update
+
   },
   {
     "type": "multi-input",
     "id": "whatsapp-catalog",
-<<<<<<< HEAD
+
     "title": "WhatsApp Catalog Configuration",
     "content": "Set up your WhatsApp catalog details for products and services.",
-=======
+
     "title": "Catalogue details",
     "content": "Your WhatsApp catalogue details.",
->>>>>>> vendor-update
+
     "value": [
       {
         "type": "text",
         "id": "whatsapp-catalog-id",
-<<<<<<< HEAD
+
         "title": "Catalog ID"
-=======
+
         "title": "Catalogue ID"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-catalog-head",
-<<<<<<< HEAD
+
         "title": "Default Header Text"
-=======
+
         "title": "Default header text"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-catalog-body",
-<<<<<<< HEAD
+
         "title": "Default Body Text"
-=======
+
         "title": "Default body text"
->>>>>>> vendor-update
+
       }
     ]
   },
   {
     "type": "multi-input",
     "id": "whatsapp-twilio",
-<<<<<<< HEAD
+
     "title": "Twilio Settings for WhatsApp",
     "content": "Enter your Twilio account details to configure WhatsApp integration.",
-=======
+
     "title": "Twilio settings",
     "content": "Enter your Twilio account settings information.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp",
     "value": [
       {
         "type": "text",
         "id": "whatsapp-twilio-user",
-<<<<<<< HEAD
+
         "title": "Twilio Account SID"
-=======
+
         "title": "Account SID"
->>>>>>> vendor-update
+
       },
       {
         "type": "password",
         "id": "whatsapp-twilio-token",
-<<<<<<< HEAD
+
         "title": "Twilio Auth Token"
-=======
+
         "title": "Token"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-twilio-sender",
-<<<<<<< HEAD
+
         "title": "Sender Phone Number"
-=======
+
         "title": "Sender"
->>>>>>> vendor-update
+
       },
       {
         "type": "button",
         "id": "whatsapp-twilio-get-configuartion-btn",
-<<<<<<< HEAD
+
         "title": "Get Configuration URL",
         "button-text": "Get Configuration URL",
-=======
+
         "title": "Configuration URL",
         "button-text": "Get configuration URL",
->>>>>>> vendor-update
+
         "button-url": "#"
       }
     ]
@@ -328,65 +328,65 @@
   {
     "type": "multi-input",
     "id": "whatsapp-twilio-template",
-<<<<<<< HEAD
+
     "title": "Twilio WhatsApp Template Settings",
     "content": "Configure WhatsApp Template notifications for Twilio integration. Use merge fields like {conversation_url_parameter}, {recipient_name}, and {recipient_email}.",
-=======
+
     "title": "Twilio template",
     "content": "Sends a WhatsApp Template notification if sending of the WhatsApp message fails. You can use text and the following merge fields: {conversation_url_parameter}, {recipient_name}, {recipient_email}.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp-templates",
     "value": [
       {
         "type": "text",
         "id": "whatsapp-twilio-template-content-sid",
-<<<<<<< HEAD
+
         "title": "Template Content SID"
-=======
+
         "title": "Content template SID"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-twilio-template-parameters",
-<<<<<<< HEAD
+
         "title": "Template Parameters"
-=======
+
         "title": "Variables"
->>>>>>> vendor-update
+
       }
     ]
   },
   {
     "type": "multi-input",
     "id": "whatsapp-360",
-<<<<<<< HEAD
+
     "title": "360dialog WhatsApp Settings",
     "content": "Configure your 360dialog account to manage WhatsApp integration.",
-=======
+
     "title": "360dialog settings",
     "content": "Enter your 360dialog account settings information.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp",
     "value": [
       {
         "type": "password",
         "id": "whatsapp-360-key",
-<<<<<<< HEAD
+
         "title": "360dialog API Key"
-=======
+
         "title": "API key"
->>>>>>> vendor-update
+
       },
       {
         "type": "button",
         "id": "whatsapp-360-button",
         "title": "Synchronize",
-<<<<<<< HEAD
+
         "button-text": "Synchronize Now",
-=======
+
         "button-text": "Synchronize now",
->>>>>>> vendor-update
+
         "button-url": "#"
       }
     ]
@@ -394,76 +394,76 @@
   {
     "type": "multi-input",
     "id": "whatsapp-template-360",
-<<<<<<< HEAD
+
     "title": "360dialog Template Configuration",
     "content": "Set up WhatsApp templates for 360dialog integration. Merge fields like {conversation_url_parameter}, {recipient_name}, {recipient_email} are supported.",
-=======
+
     "title": "360dialog template",
     "content": "Sends a WhatsApp Template notification if sending of the WhatsApp message fails. You can use text and the following merge fields: {conversation_url_parameter}, {recipient_name}, {recipient_email}.",
->>>>>>> vendor-update
+
     "help": "https://board.support/docs/#whatsapp-templates",
     "value": [
       {
         "type": "text",
         "id": "whatsapp-template-360-namespace",
-<<<<<<< HEAD
+
         "title": "Template Namespace"
-=======
+
         "title": "Namespace"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-360-name",
-<<<<<<< HEAD
+
         "title": "Template Name"
-=======
+
         "title": "Template name"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-360-language",
-<<<<<<< HEAD
+
         "title": "Default Language"
-=======
+
         "title": "Template default language"
->>>>>>> vendor-update
+
       },
       {
         "type": "text",
         "id": "whatsapp-template-360-parameters",
-<<<<<<< HEAD
+
         "title": "Custom Parameters"
-=======
+
         "title": "Custom parameters"
->>>>>>> vendor-update
+
       }
     ]
   },
   {
     "type": "checkbox",
     "id": "wa-disable-chatbot",
-<<<<<<< HEAD
+
     "title": "Disable Chatbot for WhatsApp",
     "content": "Disable the chatbot specifically for the WhatsApp channel."
-=======
+
     "title": "Disable chatbot",
     "content": "Disable the chatbot for this channel only."
->>>>>>> vendor-update
+
   },
   {
     "type": "button",
     "id": "whatsapp-clear-flows",
-<<<<<<< HEAD
+
     "title": "Clear WhatsApp Flows",
     "content": "Delete all built-in WhatsApp flows from the system.",
     "button-text": "Clear Flows",
-=======
+
     "title": "Clear flows",
     "content": "Delete the built-in flows.",
     "button-text": "Clear flows",
->>>>>>> vendor-update
+
     "button-url": "#"
   }
 ]

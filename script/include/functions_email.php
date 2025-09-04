@@ -5,9 +5,9 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 /*
- * ==========================================================
+ * ==
  * FUNCTIONS_EMAIL.PHP
- * ==========================================================
+ * ==
  *
  * Email functions file. © 2017-2025 board.support. All rights reserved.
  *

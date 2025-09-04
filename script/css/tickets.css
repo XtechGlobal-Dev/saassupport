@@ -1,17 +1,17 @@
 /*
 * 
-* ==========================================================
+* ==
 * TICKETS.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the Tickets App. Written in SCSS.
 *
 */
 /*
 *  
-* ==========================================================
+* ==
 * SHARED.SCSS
-* ==========================================================
+* ==
 *
 * Shared CSS used on both admin and front end. This file is imported only.
 *
@@ -1130,7 +1130,7 @@ div ul.sb-menu,
 /*
 
 # USER CONVERSATIONS
-==========================================================
+==
 
 */
 .sb-user-conversations > li {
@@ -1246,7 +1246,7 @@ div ul.sb-menu,
 /*
 
 # MESSAGES LIST AND CHAT
-==========================================================
+==
 */
 .sb-chat .sb-btn-text:hover,
 .sb-list .sb-btn-text:hover {
@@ -1587,7 +1587,7 @@ div ul.sb-menu,
 /*
 
 # CHAT HTML COMPONENTS
-==========================================================
+==
 
 */
 .sb-list .sb-form + .sb-btn {
@@ -1843,7 +1843,7 @@ div ul.sb-menu,
 /*
 
 # EDITOR
-==========================================================
+==
 
 */
 .sb-editor {
@@ -2091,7 +2091,7 @@ div ul.sb-menu,
 /*
 
 # ARTICLES 
-==========================================================
+==
 
 */
 .sb-article h1,
@@ -2294,7 +2294,7 @@ div ul.sb-menu,
 /*
 
 # LOADING
-==========================================================
+==
 
 */
 @keyframes sb-loading {
@@ -2358,7 +2358,7 @@ div ul.sb-menu,
 /*
 
 # BUTTONS
-==========================================================
+==
 
 */
 .sb_btn_new {
@@ -2532,7 +2532,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # INPUT
-==========================================================
+==
 
 */
 .sb-input {
@@ -2891,7 +2891,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # LIGHTBOX
-==========================================================
+==
 
 */
 .sb-lightbox-media {
@@ -2955,7 +2955,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # OVERLAY PANEL
-==========================================================
+==
 
 */
 .sb-overlay-panel {
@@ -3010,7 +3010,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # IMAGE LIGHTBOX
-==========================================================
+==
 
 */
 .sb-image {
@@ -3039,7 +3039,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # UPLOAD INPUT
-==========================================================
+==
 
 */
 .sb-upload-form-admin {
@@ -3054,7 +3054,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SEARCH BUTTON
-==========================================================
+==
 
 */
 .sb-search-btn,
@@ -3112,7 +3112,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # POPUP
-==========================================================
+==
 
 */
 .sb-popup {
@@ -3172,7 +3172,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # EMOJI
-==========================================================
+==
 
 */
 .sb-popup.sb-emoji {
@@ -3240,7 +3240,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SELECT AND MENU
-==========================================================
+==
 
 */
 .sb-select {
@@ -3365,7 +3365,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RICH MESSAGES
-==========================================================
+==
 
 */
 .sb-rich-message {
@@ -4059,7 +4059,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # MISCELLANEOUS
-==========================================================
+==
 
 */
 .sb-grid {
@@ -4077,9 +4077,9 @@ div ul.sb-menu .li:hover,
 
 /*
 * 
-* ==========================================================
+* ==
 * RTL.SCSS
-* ==========================================================
+* ==
 *
 * Front-end RTL CSS. This file is imported only.
 *
@@ -4445,7 +4445,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # GLOBAL
-==========================================================
+==
 
 */
 .sb-main ::-webkit-input-placeholder {
@@ -4726,7 +4726,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # LEFT PANEL
-==========================================================
+==
 
 */
 .sb-tickets .sb-panel-left {
@@ -4857,7 +4857,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RIGHT PANEL
-==========================================================
+==
 
 */
 .sb-tickets .sb-panel-right {
@@ -5396,7 +5396,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # MAIN PANEL
-==========================================================
+==
 */
 .sb-tickets .user_header .header_left h2:nth-child(2) {
   display: none;
@@ -5599,9 +5599,6 @@ ul.sb-user-conversations.sb-scroll-area {
   margin: 22px 0 30px 0;
   max-width: 500px;
 }
-.sb-panel-form [id=otp]:not(.sb-active) {
-  display: none;
-}
 .sb-panel-form .sb-form-extra {
   margin: -20px 0 30px 0;
 }
@@ -5661,7 +5658,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # CONVERSATIONS AREA
-==========================================================
+==
 
 */
 .sb-tickets .sb-conversation {
@@ -5809,7 +5806,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # COMPONENTS
-==========================================================
+==
 
 */
 .sb-profile {
@@ -5925,7 +5922,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RTL
-==========================================================
+==
 
 */
 .sb-tickets.sb-rtl .sb-panel-right {
@@ -6015,7 +6012,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RESPONSIVE
-==========================================================
+==
 
 */
 .sb-1300 .sb-panel-left,

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * ZALO POST.PHP
- * ==========================================================
+ * ==
  *
  * ZALO response listener. This file receive the messages sent to the Line bot. This file requires the Zalo App.
  * © 2017-2025 board.support. All rights reserved.

@@ -90,6 +90,7 @@ hr.hr-border {
   width: 170px;
   position: absolute;
   left: 0;
+  height: inherit;
 }
 .sb-content .banner h2 {
   margin: 0 0 5px 0;

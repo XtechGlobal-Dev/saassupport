@@ -2,9 +2,9 @@
 use Swoole\Http\Response;
 
 /*
- * ==========================================================
+ * ==
  * FUNCTIONS.PHP
- * ==========================================================
+ * ==
  *
  * Main PHP functions file. © 2017-2025 board.support. All rights reserved.
  *

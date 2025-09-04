@@ -1,5 +1,5 @@
 {
-<<<<<<< HEAD
+
   "chat": {
     "chat-appearance-and-features": [
       {
@@ -1877,7 +1877,7 @@
       }
     ]
   },
-=======
+
   "chat": [
     {
       "type": "checkbox",
@@ -3271,7 +3271,7 @@
       "background-size": "auto 64px"
     }
   ],
->>>>>>> vendor-update
+
   "users": [
     {
       "type": "select",
@@ -3279,7 +3279,7 @@
       "title": "Require registration",
       "content": "Require the user registration or login before start a chat. To enable the login area the password field must be included.",
       "value": [
-<<<<<<< HEAD
+
         [
           "",
           "Disabled"
@@ -3296,12 +3296,12 @@
           "login",
           "Login form"
         ]
-=======
+
         [ "", "Disabled" ],
         [ "registration-login", "Registration and login form" ],
         [ "registration", "Registration form" ],
         [ "login", "Login form" ]
->>>>>>> vendor-update
+
       ],
       "help": "https://board.support/docs/#registration"
     },
@@ -3332,8 +3332,8 @@
     },
     {
       "type": "multi-input",
-<<<<<<< HEAD
-=======
+
+
       "id": "registration",
       "title": "Registration form",
       "content": "User registration form information.",
@@ -3390,7 +3390,7 @@
     },
     {
       "type": "multi-input",
->>>>>>> vendor-update
+
       "id": "registration-fields",
       "title": "Registration fields",
       "content": "Choose which fields to include in the registration form. The name field is included by default.",
@@ -3598,7 +3598,7 @@
       "title": "Single phone country code",
       "content": "Force users to use only one phone country code.",
       "value": [
-<<<<<<< HEAD
+
         [
           "",
           ""
@@ -4527,7 +4527,7 @@
           "+358-18",
           "+358-18"
         ]
-=======
+
         [ "", "" ],
         [ "+1", "+1" ],
         [ "+7", "+7" ],
@@ -4760,7 +4760,7 @@
         [ "+44-1534", "+44-1534" ],
         [ "+44-1624", "+44-1624" ],
         [ "+358-18", "+358-18" ]
->>>>>>> vendor-update
+
       ]
     },
     {
@@ -4799,7 +4799,7 @@
       "title": "Show sender's name",
       "content": "Show the sender's name in every message.",
       "value": [
-<<<<<<< HEAD
+
         [
           "",
           "Disabled"
@@ -4812,11 +4812,11 @@
           "chat-admin",
           "Chat and admin"
         ]
-=======
+
         [ "", "Disabled" ],
         [ "chat", "Chat" ],
         [ "chat-admin", "Chat and admin" ]
->>>>>>> vendor-update
+
       ]
     },
     {
@@ -4875,7 +4875,7 @@
       "title": "Chat position",
       "content": "Set the position of the chat widget.",
       "value": [
-<<<<<<< HEAD
+
         [
           "right",
           "Right"
@@ -4884,10 +4884,10 @@
           "left",
           "Left"
         ]
-=======
+
         [ "right", "Right" ],
         [ "left", "Left" ]
->>>>>>> vendor-update
+
       ]
     },
     {
@@ -4908,7 +4908,7 @@
       "title": "Header type",
       "content": "Set the header appearance.",
       "value": [
-<<<<<<< HEAD
+
         [
           "agents",
           "Agents"
@@ -4921,11 +4921,11 @@
           "minimal",
           "Minimal"
         ]
-=======
+
         [ "agents", "Agents" ],
         [ "brand", "Brand" ],
         [ "minimal", "Minimal" ]
->>>>>>> vendor-update
+
       ]
     },
     {
@@ -4959,23 +4959,23 @@
       "id": "chat-sb-icons",
       "title": "Built-in chat button icons",
       "content": "Change the chat button image with a custom one.",
-<<<<<<< HEAD
+
       "images": [
         "button-chat-2.svg",
         "button-chat-3.svg",
         "button-chat-4.svg",
         "button-chat-5.svg"
       ]
-=======
+
       "images": [ "button-chat-2.svg", "button-chat-3.svg", "button-chat-4.svg", "button-chat-5.svg" ]
->>>>>>> vendor-update
+
     },
     {
       "type": "select-images",
       "id": "chat-background",
       "title": "Chat background",
       "content": "Choose a background texture for the chat header and conversation area.",
-<<<<<<< HEAD
+
       "images": [
         "textures/square/texture-1.png",
         "textures/square/texture-2.png",
@@ -4987,9 +4987,9 @@
         "textures/square/texture-8.png",
         "textures/square/texture-9.png"
       ]
-=======
+
       "images": [ "textures/square/texture-1.png", "textures/square/texture-2.png", "textures/square/texture-3.png", "textures/square/texture-4.png", "textures/square/texture-5.png", "textures/square/texture-6.png", "textures/square/texture-7.png", "textures/square/texture-8.png", "textures/square/texture-9.png" ]
->>>>>>> vendor-update
+
     },
     {
       "type": "multi-input",
@@ -5022,7 +5022,7 @@
           "id": "chat-button-offset-mobile",
           "title": "Apply to",
           "value": [
-<<<<<<< HEAD
+
             [
               "all",
               "All"
@@ -5035,11 +5035,11 @@
               "mobile",
               "Only mobile devices"
             ]
-=======
+
             [ "all", "All" ],
             [ "desktop", "Only desktop" ],
             [ "mobile", "Only mobile devices" ]
->>>>>>> vendor-update
+
           ]
         }
       ]
@@ -5139,7 +5139,7 @@
           "id": "newsletter-service",
           "title": "Service",
           "value": [
-<<<<<<< HEAD
+
             [
               "mailchimp",
               "Mailchimp"
@@ -5196,7 +5196,7 @@
               "sendfox",
               "SendFox"
             ]
-=======
+
             [ "mailchimp", "Mailchimp" ],
             [ "sendinblue", "Brevo" ],
             [ "sendgrid", "SendGrid" ],
@@ -5211,7 +5211,7 @@
             [ "mailjet", "Mailjet" ],
             [ "sendy", "Sendy" ],
             [ "sendfox", "SendFox" ]
->>>>>>> vendor-update
+
           ]
         },
         {
@@ -5259,11 +5259,11 @@
         {
           "type": "checkbox",
           "id": "departments-show-list",
-<<<<<<< HEAD
+
           "title": "Display in conversation list & tickets"
-=======
+
           "title": "Display in conversation list"
->>>>>>> vendor-update
+
         },
         {
           "type": "checkbox",
@@ -5288,8 +5288,8 @@
       ]
     },
     {
-<<<<<<< HEAD
-=======
+
+
       "type": "repeater",
       "id": "departments",
       "title": "Departments",
@@ -5317,7 +5317,7 @@
       ]
     },
     {
->>>>>>> vendor-update
+
       "type": "multi-input",
       "id": "queue",
       "title": "Queue",
@@ -5434,12 +5434,12 @@
       "type": "multi-input",
       "id": "performance",
       "title": "Performance optimization",
-<<<<<<< HEAD
+
       "content": "Disable features you don't use and improve the chat performance.",
-=======
+
       "content": "Enhance system performance by disabling unused features and optimizing key processes.",
       "help": "https://board.support/docs/#performance",
->>>>>>> vendor-update
+
       "value": [
         {
           "type": "checkbox",
@@ -5449,18 +5449,18 @@
         {
           "type": "checkbox",
           "id": "performance-reports",
-<<<<<<< HEAD
+
           "title": "Reports"
-=======
+
           "title": "Disable reports"
->>>>>>> vendor-update
+
         },
         {
           "type": "checkbox",
           "id": "performance-articles",
-<<<<<<< HEAD
+
           "title": "Articles"
-=======
+
           "title": "Disable articles"
         },
         {
@@ -5478,7 +5478,7 @@
             [ "6m", "After 6 months" ],
             [ "1y", "After 1 year" ]
           ]
->>>>>>> vendor-update
+
         }
       ]
     },
@@ -5571,7 +5571,7 @@
       "button-url": "#"
     }
   ],
-<<<<<<< HEAD
+
   "articles": {
     "articles-display": [
       {
@@ -5615,7 +5615,7 @@
       }
     ]
   }
-=======
+
   "articles": [
     {
       "type": "checkbox",
@@ -5655,5 +5655,5 @@
       "help": "https://board.support/docs/#articles-url-rewrite"
     }
   ]
->>>>>>> vendor-update
+
 }

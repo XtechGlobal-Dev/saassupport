@@ -41,10 +41,10 @@
   "Agents & Admins": "",
   "Albanian": "",
   "All": "",
-<<<<<<< HEAD
-=======
+
+
   "All agents": "",
->>>>>>> vendor-update
+
   "All channels": "",
   "All departments": "",
   "All messages": "",
@@ -89,11 +89,11 @@
   "Average time for agents to send the first reply after the user sends the first message.": "",
   "Bank details": "",
   "Bank Transfer": "",
-<<<<<<< HEAD
-=======
+
+
   "Bengali": "",
   "Billing details": "",
->>>>>>> vendor-update
+
   "Birthdate": "",
   "Brasilian Portugase": "",
   "Browser": "",
@@ -112,20 +112,20 @@
   "Chatbot": "",
   "Chatbot Training": "",
   "Chinese": "",
-<<<<<<< HEAD
-=======
+
+
   "Chinese - Traditional": "",
->>>>>>> vendor-update
+
   "Choose file": "",
   "City": "",
   "Client side admin": "",
   "Close": "",
   "Closed": "",
   "Company": "",
-<<<<<<< HEAD
+
   "Company details": "",
-=======
->>>>>>> vendor-update
+
+
   "Complete installation": "",
   "Conditions": "",
   "Confirm": "",
@@ -199,10 +199,10 @@
   "Extract URLs": "",
   "Febraury": "",
   "Files": "",
-<<<<<<< HEAD
-=======
+
+
   "Filipino": "",
->>>>>>> vendor-update
+
   "Finnish": "",
   "First name": "",
   "Flows": "",
@@ -249,10 +249,10 @@
   "Leads count. Leads are users who have started at least one conversation but who are not registered.": "",
   "License key": "",
   "Links and URLs": "",
-<<<<<<< HEAD
-=======
+
+
   "Lithuanian": "",
->>>>>>> vendor-update
+
   "Login": "",
   "Login information": "",
   "Logout": "",
@@ -281,10 +281,10 @@
   "Monthly usage in": "",
   "More": "",
   "Name": "",
-<<<<<<< HEAD
-=======
+
+
   "Name": "",
->>>>>>> vendor-update
+
   "New order": "",
   "New translation": "",
   "No data found.": "",
@@ -316,11 +316,11 @@
   "Polish": "",
   "Pop-ups": "",
   "Portuguese": "",
-<<<<<<< HEAD
-=======
+
+
   "Portuguese - Brasilian": "",
   "Postal code": "",
->>>>>>> vendor-update
+
   "Postal code": "",
   "Preview": "",
   "Preview in theme": "",
@@ -390,13 +390,13 @@
   "Subject": "",
   "Subscribe": "",
   "Subscribe emails count": "",
-<<<<<<< HEAD
+
   "Sundanese": "",
   "Sunday": "",
   "Swedish": "",
   "Synchronization completed.": "",
   "Tags": "",
-=======
+
   "Summary": "",
   "Sundanese": "",
   "Sunday": "",
@@ -405,7 +405,7 @@
   "Synchronization completed.": "",
   "Tags": "",
   "Tax ID": "",
->>>>>>> vendor-update
+
   "Text messages": "",
   "Thai": "",
   "The API token is a required for using the {R} WEB API.": "",

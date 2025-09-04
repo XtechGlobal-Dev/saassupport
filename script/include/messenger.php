@@ -1,12 +1,12 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * MESSENGER.PHP
- * ==========================================================
+ * ==
  *
  * Facebook Messenger response listener. This file receive the messages sent by the Facebook users to your Facebook pages forwarded by board.support. This file requires the Messenger App.
- * © 2017-2024 board.support. All rights reserved.
+ * ï¿½ 2017-2024 board.support. All rights reserved.
  *
  */
 
