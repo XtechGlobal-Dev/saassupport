@@ -46,8 +46,13 @@ if ($raw) {
     }
     $is_echo = isset($response_message['is_echo']);
     $postback = sb_isset($response_messaging, 'postback');
+<<<<<<< HEAD
     $instagram = sb_isset($response, 'object') == 'instagram';
     $platform_code = $instagram ? 'ig' : 'fb';
+=======
+    $is_instagram = sb_isset($response, 'object') == 'instagram';
+    $platform_code = $is_instagram ? 'ig' : 'fb';
+>>>>>>> vendor-update
     $user = false;
     $is_deleted = $response_message && !empty($response_message['is_deleted']);
     if ($response_message) {
@@ -87,7 +92,11 @@ if ($raw) {
         // User
         $user = sb_db_get('SELECT A.id, A.first_name, A.last_name, A.profile_image, A.email, A.user_type FROM sb_users A, sb_users_data B WHERE A.user_type <> "agent" AND A.user_type <> "admin" AND A.id = B.user_id AND B.slug = "facebook-id" AND B.value = "' . sb_db_escape($sender_id) . '" LIMIT 1');
         if (!$user) {
+<<<<<<< HEAD
             $user_id = sb_messenger_add_user($sender_id, $page_settings['messenger-page-token'], 'lead', $instagram, $message);
+=======
+            $user_id = sb_messenger_add_user($sender_id, $page_settings['messenger-page-token'], 'lead', $is_instagram, $message);
+>>>>>>> vendor-update
             $user = sb_get_user($user_id);
         } else {
             $user_id = $user['id'];
@@ -107,6 +116,7 @@ if ($raw) {
                 return $message_id ? sb_delete_message($message_id['id']) : false;
             }
 
+<<<<<<< HEAD
             if (!$conversation_id) {
                 $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, $platform_code, $page_id, false, false, sb_isset($page_settings, 'messenger-page-tags')), 'details', [])['id'];
             } else if ($is_echo && $page_sender && $response_message) {
@@ -125,6 +135,34 @@ if ($raw) {
                 if ($message_previous && ($message_previous_text == $message || $rich_message == $message_previous_text || $message_previous_rich_message == $rich_message || ($count_attachments && ($count_attachments == $message_previous_count || $message_previous_count > 1) && strtotime($previous_message['creation_time']) > sb_gmt_now(60, true)))) {
                     $GLOBALS['SB_FORCE_ADMIN'] = false;
                     return false;
+=======
+            $is_routing = sb_routing_is_active();
+            if (!$conversation_id) {
+                $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, $platform_code, $page_id, false, false, sb_isset($page_settings, 'messenger-page-tags')), 'details', [])['id'];
+            } else {
+                if ($is_echo && $page_sender && $response_message) {
+                    if (empty($message) || (isset($response_message['metadata']) && !empty(sb_db_get('SELECT id FROM sb_messages WHERE id = ' . explode('|', $response_message['metadata'])[0])))) {
+                        $GLOBALS['SB_FORCE_ADMIN'] = false;
+                        return false;
+                    }
+                    $messages_previous = sb_db_get('SELECT message, attachments, creation_time FROM sb_messages WHERE conversation_id = ' . $conversation_id . ' ORDER BY id DESC LIMIT 3', false);
+                    foreach ($messages_previous as $message_previous) {
+                        $message_previous_text = html_entity_decode(trim(sb_messaging_platforms_text_formatting(sb_isset($message_previous, 'message'))));
+                        $message_previous_count = count(json_decode(sb_isset($previous_message, 'attachments', '[]'), true));
+                        $rich_message = html_entity_decode(trim(sb_isset(sb_messenger_rich_messages($message), 0)));
+                        $message_previous_rich_message = html_entity_decode(trim(sb_isset(sb_messenger_rich_messages($message_previous_text), 0)));
+                        if ($is_instagram) {
+                            $message_previous_text = sb_clear_text_formatting($message);
+                        }
+                        if ($message_previous && (preg_replace("/\r\n|\r|\n/", '', $message_previous_text) == preg_replace("/\r\n|\r|\n/", '', $message) || $rich_message == $message_previous_text || preg_replace("/\r\n|\r|\n/", '', $message_previous_rich_message) == preg_replace("/\r\n|\r|\n/", '', $rich_message) || ($count_attachments && ($count_attachments == $message_previous_count || $message_previous_count > 1) && strtotime($previous_message['creation_time']) < sb_gmt_now(60, true)))) {
+                            $GLOBALS['SB_FORCE_ADMIN'] = false;
+                            return false;
+                        }
+                    }
+                }
+                if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
+                    sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
+>>>>>>> vendor-update
                 }
             }
 
@@ -162,9 +200,13 @@ if ($raw) {
             }
 
             // Queue
+<<<<<<< HEAD
             if (sb_get_multi_setting('queue', 'queue-active')) {
                 sb_queue($conversation_id, $department);
             }
+=======
+            sb_queue_check_and_run($conversation_id, $department, $is_instagram ? 'ig' : 'fb');
+>>>>>>> vendor-update
 
             // Online status
             if (!$page_sender) {

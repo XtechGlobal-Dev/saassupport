@@ -16,15 +16,21 @@
     var main_panel;
     var conversation_area;
     var panel;
+<<<<<<< HEAD
     var ticket_panel;
     var ticket_main_panel;
+=======
+>>>>>>> vendor-update
     var editor;
     var active_panel;
     var left_conversations;
     var cache_agents = {};
     var cache_account = {};
     var main_title;
+<<<<<<< HEAD
     var ticket_main_title;
+=======
+>>>>>>> vendor-update
     var agent_profile;
     var user_profile;
     var width;
@@ -39,6 +45,7 @@
 
     var SBTickets = {
 
+<<<<<<< HEAD
         showInitials: function (container, className) {
             const containers = $('.' + container + ' .' + className);
             containers.each(function () {
@@ -81,12 +88,20 @@
                 }
             });
         },
+=======
+>>>>>>> vendor-update
         // Display the conversation area or a panel
         showPanel: function (name = '', title = false) {
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
+<<<<<<< HEAD
             if (recaptcha) recaptcha.hide();
+=======
+            if (recaptcha) {
+                recaptcha.hide();
+                }
+>>>>>>> vendor-update
             switch (name) {
                 case 'privacy':
                     SBF.ajax({
@@ -105,41 +120,65 @@
                 case 'edit-profile':
                 case 'login':
                 case 'registration':
+<<<<<<< HEAD
                     const panel2 = $('.sb-panel.ticket-login');
                     $('.user_header').addClass('d-none');
                     $('.user_header .header_left h2').removeClass('sb-active');
                     $('.user_header .header_left h2:first').addClass('sb-active');
 
+=======
+>>>>>>> vendor-update
                     let is_edit_profile = name == 'edit-profile';
                     this.showSidePanels(false);
                     main.addClass('sb-panel-form');
                     if (name in cache_account) {
+<<<<<<< HEAD
                         panel2.html(cache_account[name]);
                         setTitle(sb_(panel2.find('.sb-top').html()));
+=======
+                        panel.html(cache_account[name]);
+                        setTitle(sb_(panel.find('.sb-top').html()));
+>>>>>>> vendor-update
                     } else {
                         SBF.ajax({
                             function: 'get-rich-message',
                             name: (is_edit_profile ? 'registration' : name) + '-tickets'
                         }, (response) => {
+<<<<<<< HEAD
                             //panel.html(response);
                             panel2.html(response);  // Append form only in .sb-panel.ticket-login not in all .sb-panel
                             let title = panel2.find('.sb-top').html();
                             if (is_edit_profile) {
                                 panel2.find('.sb-top').html(sb_('Edit profile'));
+=======
+                            panel.html(response);
+                            let title = panel.find('.sb-top').html();
+                            if (is_edit_profile) {
+                                panel.find('.sb-top').html(sb_('Edit profile'));
+>>>>>>> vendor-update
                             }
                             setTitle(sb_(title));
                             setTimeout(function () {
                                 setTitle(sb_(title));
                             }, 300);
+<<<<<<< HEAD
                             panel2.find('.sb-link-area').insertAfter('.sb-buttons');
                             panel2.find('.sb-info').insertBefore('.sb-buttons');
                             cache_account[name] = panel2.html();
                         });
                         panel2.html('<div class="sb-loading"></div>');
+=======
+                            panel.find('.sb-link-area').insertAfter('.sb-buttons');
+                            panel.find('.sb-info').insertBefore('.sb-buttons');
+                            cache_account[name] = panel.html();
+                        });
+                        panel.html('<div class="sb-loading"></div>');
+>>>>>>> vendor-update
                     }
                     break;
                 case 'new-ticket':
                     let names = { 'title': 'Title', 'message': 'Message', 'panel': 'Create a new ticket', 'button': 'Create a new ticket' };
+<<<<<<< HEAD
                     //this.showSidePanels(true); // Show the side panels by default
                     // if (SBF.setting('tickets_names')) {
                     //     let names_new = SBF.setting('tickets_names');
@@ -165,6 +204,18 @@
 
                     //// <div id="ticketCustomFieldsContainer" style="margin: 10px 0;">${main.find('.ticket-custom-fields').html()}</div>
                     ticket_main_panel.find('.sb-editor-cnt').append(editor);
+=======
+                    this.showSidePanels(false);
+                    if (SBF.setting('tickets_names')) {
+                        let names_new = SBF.setting('tickets_names');
+                        for (var key in names_new) {
+                            if (names_new[key]) names[key.replace('tickets-names-', '')] = names_new[key];
+                        }
+                    }
+                    setTitle(sb_(names.panel));
+                    panel.html(`<div class="sb-info"></div><div class="sb-input sb-input-text sb-ticket-title"><span>${sb_(names.title)}</span><input type="text" required></div>${main.find('.sb-ticket-fields').html()}<div class="sb-input sb-editor-cnt"><span>${sb_(names.message)}</span></div><div class="sb-btn sb-icon sb-create-ticket"><i class="sb-icon-plus"></i>${sb_(names.button)}</div>`);
+                    main_panel.find('.sb-editor-cnt').append(editor);
+>>>>>>> vendor-update
                     if (SBF.setting('tickets_recaptcha')) {
                         if (recaptcha) {
                             recaptcha.show();
@@ -176,6 +227,7 @@
                     }
                     break;
                 default:
+<<<<<<< HEAD
                     $('.user_header').removeClass('d-none');
                     const pImg = activeUser().details?.profile_image ?? '';
 
@@ -188,6 +240,9 @@
                         SBTickets.showInitials('user_header', 'user_profile');
                     }, 30)
 
+=======
+                    this.showSidePanels(true);
+>>>>>>> vendor-update
                     if (previous == 'new-ticket') {
                         editor.find('textarea').val('');
                         editor.sbActive(false).removeClass('sb-error');
@@ -337,6 +392,7 @@
 
         // Initialize the tickets area
         init: function () {
+<<<<<<< HEAD
             if (activeUser()) {
                 $('.user_header').removeClass('d-none');
             }
@@ -348,6 +404,14 @@
             editor = main_panel.find('.sb-editor');
             main_title = main_panel.find(' > .sb-top .sb-title');
             ticket_main_title = ticket_main_panel.find(' > .sb-top .sb-title');
+=======
+
+            main = $('body').find('.sb-tickets');
+            main_panel = main.find(' > div > .sb-panel-main');
+            panel = main_panel.find('.sb-panel');
+            editor = main_panel.find('.sb-editor');
+            main_title = main_panel.find(' > .sb-top .sb-title');
+>>>>>>> vendor-update
             left_conversations = main.find('.sb-user-conversations');
             conversation_area = main_panel.find('.sb-list');
             agent_profile = main.find('.sb-profile-agent');
@@ -356,6 +420,7 @@
             cache_agents[SBF.setting('bot_id')] = { name: SBF.setting('bot_name'), image: SBF.setting('bot_image') };
             ticketsInit();
 
+<<<<<<< HEAD
             if (activeUser()) {
                 const img = activeUser().details?.profile_image ?? '';
                 main.find('.user_profile .avatar').attr('src', img).attr('data-name', activeUser()?.name);
@@ -369,6 +434,11 @@
                 return;
             }
 
+=======
+            if (!main.length) {
+                return;
+            }
+>>>>>>> vendor-update
             if (SBF.setting('tickets_registration_required') && (!activeUser() || ['visitor', 'lead'].includes(activeUser().type))) {
                 let redirect = SBF.setting('tickets_registration_redirect');
                 if (redirect) {
@@ -379,11 +449,15 @@
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
             } else {
+<<<<<<< HEAD
 
+=======
+>>>>>>> vendor-update
                 if (activeUser() && activeUser().conversations.length) {
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
                     }
+<<<<<<< HEAD
 
                     $(document).find('.header_left h2:first').trigger('click');  // load list of tickets
                 }
@@ -391,19 +465,29 @@
 
                 }
                 else {
+=======
+                } else {
+>>>>>>> vendor-update
                     main.addClass('sb-no-conversations');
                     if (SBF.setting('privacy') && !SBF.storage('privacy_approved')) {
                         SBTickets.showPanel('privacy');
                     } else if (!SBF.setting('tickets_disable_first')) {
                         SBTickets.showPanel('new-ticket');
+<<<<<<< HEAD
                         console.log();
+=======
+>>>>>>> vendor-update
                     } else {
                         setConversationName();
                     }
                 }
             }
+<<<<<<< HEAD
             //let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
             let height = parseInt(window.innerHeight) ? (window.innerHeight) : main.data('height');
+=======
+            let height = parseInt(SBF.null(main.data('height')) ? ($(window).height()) : main.data('height'));
+>>>>>>> vendor-update
             let height_offset = parseInt(SBF.null(main.data('offset')) ? 0 : main.data('offset'));
             if (width <= 800) {
                 main.addClass('sb-800');
@@ -415,8 +499,12 @@
                 main.addClass('sb-1300');
             }
             setUserProfile();
+<<<<<<< HEAD
 
             main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset}px;display:none`);
+=======
+            main.removeClass('sb-loading').find('.sb-tickets-area').attr('style', `height: ${height - height_offset}px`);
+>>>>>>> vendor-update
             setTimeout(function () {
                 main.removeClass('sb-load');
             }, 300);
@@ -511,6 +599,7 @@
         setTitle(!name || name == -1 ? activeUser().name : name);
     }
 
+<<<<<<< HEAD
     // function submitTicketPartial() {
     //     let message = '';
     //     let settings = SBForm.getAll(panel);
@@ -710,6 +799,31 @@
             // $(header).find('.sb-admin-nav #sb-tickets').click();
 
         });
+=======
+    function submitTicketPartial() {
+        let message = '';
+        let settings = SBForm.getAll(panel);
+        let department = 'department' in settings ? settings['department'][0] : null;
+        let attachments = [];
+        SBChat.clear();
+        editor.sbActive(false);
+        for (var key in settings) {
+            if (settings[key][1] && settings[key][0]) {
+                message += `*${sb_(settings[key][1])}*\n${key == 'department' ? panel.find('#department li.sb-active').html() : settings[key][0]}\n\n`;
+            }
+        }
+        message += editor.find('textarea').val().trim();
+        panel.find('.sb-attachments > div').each(function () {
+            attachments.push([$(this).attr('data-name'), $(this).attr('data-value')]);
+        });
+        if (!activeUser()) {
+            SBChat.addUserAndLogin(() => {
+                SBChat.newConversation(2, -1, message, attachments, department, null, function () { SBTickets.welcome() });
+            });
+        } else {
+            SBChat.newConversation(2, -1, message, attachments, department, null, function () { SBTickets.welcome() });
+        }
+>>>>>>> vendor-update
     }
 
     function ticketsInit() {
@@ -757,9 +871,12 @@
 
         main_panel.on('click', '> .sb-top .sb-close', function () {
             SBTickets.showPanel();
+<<<<<<< HEAD
             $('.tickets-list-area .sb-panel-main .sb-top').hide();
             $('.tickets-list-area .sb-panel-main').addClass('p-5');
             $('.tickets-list-area .sb-panel-main .sb-scroll-area').removeClass('text-middle');
+=======
+>>>>>>> vendor-update
         });
 
         /*
@@ -767,6 +884,10 @@
         * # CONVERSATION AREA
         * ----------------------------------------------------------
         */
+<<<<<<< HEAD
+=======
+
+>>>>>>> vendor-update
         main_panel.on('click', '.sb-create-ticket', function () {
             let errors = false;
             editor.removeClass('sb-error');
@@ -791,8 +912,12 @@
                                 token: token
                             }, (response) => {
                                 if (response === true) {
+<<<<<<< HEAD
                                     //submitTicketPartial();
                                     createTicket();
+=======
+                                    submitTicketPartial();
+>>>>>>> vendor-update
                                     $('.grecaptcha-badge').hide();
                                 } else SBChat.busy(false);
                             });
@@ -800,8 +925,12 @@
                     });
                     return;
                 }
+<<<<<<< HEAD
                 // submitTicketPartial();
                 createTicket();
+=======
+                submitTicketPartial();
+>>>>>>> vendor-update
             }
         });
 
@@ -836,7 +965,11 @@
                                 conversations.push(new SBConversation([new SBMessage(response[i])], response[i]));
                             }
                         }
+<<<<<<< HEAD
                         left_conversations.html(count ? activeUser().getConversationsCode(conversations) : '<p>' + sb_('No results found1.') + '</p>');
+=======
+                        left_conversations.html(count ? activeUser().getConversationsCode(conversations) : '<p>' + sb_('No results found.') + '</p>');
+>>>>>>> vendor-update
                     });
                 } else {
                     SBChat.populateConversations();
@@ -866,12 +999,18 @@
             SBTickets.showPanel('edit-profile');
         });
 
+<<<<<<< HEAD
         main.on('click', '.logout', function () {
             SBF.logout(false);
             SBTickets.showPanel('login');
             $('.user_header').addClass('d-none');
             $('.tickets-list-area').show();
             $('.sb-tickets-area').hide();
+=======
+        main.on('click', '.sb-profile-menu [data-value="logout"]', function () {
+            SBF.logout(false);
+            SBTickets.showPanel('login');
+>>>>>>> vendor-update
         });
 
         panel.on('click', '> .sb-buttons .sb-submit', function () {
@@ -911,16 +1050,26 @@
                             }
                             setUserProfile();
                             if (is_edit_profile) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> vendor-update
                                 SBTickets.showPanel();
                             } else {
                                 SBF.event('SBRegistrationForm', { user: settings });
                                 SBF.event('SBNewEmailAddress', { name: activeUser().name, email: activeUser().get('email') });
+<<<<<<< HEAD
                                 //SBTickets.showPanel('new-ticket');
                                 SBTickets.showPanel();
                                 $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
                             }
                             if (SBF.setting('wp_registration') && 'email' in settings && 'password' in settings) {
+=======
+                                SBTickets.showPanel('new-ticket');
+                            }
+                            if (SBF.setting('wp_registration') && 'email' in settings && 'password' in settings) {
+                                console.log(settings);
+>>>>>>> vendor-update
                                 SBApps.wordpress.ajax('wp_registration', { user_id: response[0].id, first_name: response[0].first_name, last_name: response[0].last_name, password: settings.password[0], email: settings.email[0] });
                             } else if (SBF.setting('wp_users_system') == 'wp') {
                                 SBApps.wordpress.ajax('wp_login', { user: settings.email[0], password: settings.password[0] });
@@ -941,12 +1090,19 @@
                 SBChat.populateConversations((response) => {
                     if (response.length == 0) {
                         main.addClass('sb-no-conversations');
+<<<<<<< HEAD
                         SBTickets.showPanel('default');
+=======
+                        SBTickets.showPanel('new-ticket');
+>>>>>>> vendor-update
                     } else {
                         SBChat.openConversation(response[0].id);
                         SBTickets.showPanel();
                     }
+<<<<<<< HEAD
                     $('.header_left h2[data-id="tickets-list-area"]').trigger('click');
+=======
+>>>>>>> vendor-update
                 });
             });
         });
@@ -955,6 +1111,7 @@
     function setTitle(title) {
         $(main_title).html(title).sbActive(title);
     }
+<<<<<<< HEAD
 
     function setTicketTitle(title) {
         $(ticket_main_title).html(title).sbActive(title);
@@ -973,4 +1130,6 @@
             input.prop('type', 'password');
         }
     });
+=======
+>>>>>>> vendor-update
 }(jQuery));

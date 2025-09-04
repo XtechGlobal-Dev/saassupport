@@ -72,6 +72,7 @@ function sb_email_create($recipient_id, $sender_name, $sender_profile_image, $me
     if (defined('SB_DIALOGFLOW') && strpos($message, '<div style') === false) {
         $message = sb_google_translate_auto($message, $recipient_id);
     }
+<<<<<<< HEAD
     $subject_and_body = sb_email_get_subject_and_body($recipient_user_type, $recipient_id);
     $email = sb_email_create_content($subject_and_body[0], $subject_and_body[1], $attachments, ['conversation_url_parameter' => ($recipient && $conversation_id ? ('?conversation=' . $conversation_id . '&token=' . $recipient['token']) : ''), 'message' => $message, 'recipient_name' => $recipient_name, 'sender_name' => $sender_name, 'sender_profile_image' => str_replace('user.svg', 'user.png', $sender_profile_image), 'conversation_id' => $conversation_id]);
     $piping = sb_email_piping_suffix($conversation_id);
@@ -82,6 +83,30 @@ function sb_email_create($recipient_id, $sender_name, $sender_profile_image, $me
 }
 
 function sb_email_get_subject_and_body($recipient_user_type, $recipient_id = false) {
+=======
+    $subject_and_body = sb_email_get_subject_and_body($recipient_user_type, $recipient_id, $conversation_id);
+    $email = sb_email_create_content($subject_and_body[0], $subject_and_body[1], $attachments, ['conversation_url_parameter' => ($recipient && $conversation_id ? ('?conversation=' . $conversation_id . '&token=' . $recipient['token']) : ''), 'message' => $message, 'recipient_name' => $recipient_name, 'sender_name' => $sender_name, 'sender_profile_image' => str_replace('user.svg', 'user.png', $sender_profile_image), 'conversation_id' => $conversation_id]);
+    $piping = sb_email_piping_suffix($conversation_id);
+    $piping_delimiter = '';
+    $reply_to = false;
+    if ($piping) {
+        $piping_index = 0;
+        if ($conversation_id) {
+            $piping_index = sb_isset(sb_db_get('SELECT extra_2 FROM sb_conversations WHERE id = ' . sb_db_escape($conversation_id, true) . ' AND source = "em"'), 'extra_2', 0);
+        }
+        $piping_settings = sb_get_setting('email-piping')[$piping_index];
+        if (!sb_is_agent($recipient_user_type)) {
+            $reply_to = $piping_settings['email-piping-user'];
+        }
+        $delimiter_text = 'Please type your reply above this line';
+        $piping_delimiter = $piping_settings['email-piping-delimiter'] ? '<div style="color:#b5b5b5">### ' . (is_numeric($recipient_id) ? sb_t($delimiter_text, sb_get_user_language($recipient_id)) : sb_($delimiter_text)) . ' ###</div><br><br>' : '';
+    }
+    sb_webhooks('SBEmailSent', ['recipient_id' => $recipient_id, 'message' => $message, 'attachments' => $attachments]);
+    return sb_email_send($recipient_email, ($piping ? 'Re: ' . $conversation_id . ' | ' : '') . $email[0], $piping_delimiter . $email[1], $piping, $cc, $reply_to);
+}
+
+function sb_email_get_subject_and_body($recipient_user_type, $recipient_id = false, $conversation_id = false) {
+>>>>>>> vendor-update
     $is_agent = sb_is_agent($recipient_user_type);
     $suffix = $is_agent ? 'agent' : 'user';
     $settings = sb_get_multilingual_setting('emails', 'email-' . $suffix, sb_get_user_language(is_numeric($recipient_id) ? $recipient_id : false));
@@ -90,7 +115,11 @@ function sb_email_get_subject_and_body($recipient_user_type, $recipient_id = fal
         $body = $is_agent ? SB_CLOUD_EMAIL_BODY_AGENTS : SB_CLOUD_EMAIL_BODY_USERS;
         if (!$is_agent && defined('DIRECT_CHAT_URL')) {
             require_once SB_CLOUD_PATH . '/account/functions.php';
+<<<<<<< HEAD
             $body = str_replace('{conversation_link}', DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']) . '?chat=open', $body);
+=======
+            $body = str_replace('{conversation_link}', DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']) . '?chat=open' . ($conversation_id ? '&conversation=' . $conversation_id : ''), $body);
+>>>>>>> vendor-update
         }
     }
     return [$settings['email-' . $suffix . '-subject'], $body];
@@ -111,7 +140,11 @@ function sb_email_create_content($subject, $body, $attachments, $replacements) {
     return [$subject, $body];
 }
 
+<<<<<<< HEAD
 function sb_email_send($to, $subject, $body, $sender_suffix = '', $cc = false) {
+=======
+function sb_email_send($to, $subject, $body, $sender_suffix = '', $cc = false, $reply_to = false) {
+>>>>>>> vendor-update
     $settings = sb_get_setting('email-server');
     $host = sb_isset($settings, 'email-server-host');
     if (!$host && sb_is_cloud()) {
@@ -144,6 +177,12 @@ function sb_email_send($to, $subject, $body, $sender_suffix = '', $cc = false) {
         $mail->Body = $body;
         $mail->AltBody = $body;
         $mail->SMTPOptions = ['ssl' => ['verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true]];
+<<<<<<< HEAD
+=======
+        if ($reply_to && strpos($reply_to, '@') && $reply_to != $settings['email-server-from']) {
+            $mail->addReplyTo($reply_to);
+        }
+>>>>>>> vendor-update
         if (sb_is_cloud()) {
             $mail->addCustomHeader('List-Unsubscribe', '<' . SB_URL . '?setting=notifications>');
             if ($settings['email-server-host'] == CLOUD_SMTP_HOST) {
@@ -231,6 +270,7 @@ function sb_email_piping($force = false) {
     sb_save_external_setting('cron-email-piping', date('i'));
     $settings_repeater = sb_get_setting('email-piping');
     $error = false;
+<<<<<<< HEAD
     $settings_repeater = is_array($settings_repeater) ? $settings_repeater : [$settings_repeater]; // Deprecated
     for ($j = 0; $j < count($settings_repeater); $j++) {
         $settings = $settings_repeater[$j];
@@ -239,6 +279,15 @@ function sb_email_piping($force = false) {
             $host = $settings['email-piping-host'];
             $all_emails = sb_isset($settings, 'email-piping-all');
             $today = date('d F Y', strtotime('-1 day'));
+=======
+    for ($j = 0; $j < count($settings_repeater); $j++) {
+        $settings = sb_isset($settings_repeater, $j);
+        if ($settings && !empty($settings['email-piping-active'])) {
+            $port = $settings['email-piping-port'];
+            $host = $settings['email-piping-host'];
+            $all_emails = sb_isset($settings, 'email-piping-all');
+            $yesterday = date('d F Y', strtotime('-1 day'));
+>>>>>>> vendor-update
             $last_check = sb_get_external_setting('email-piping-check');
             $filters = explode(',', sb_isset($settings, 'email-piping-filters'));
             ini_set('default_socket_timeout', 5);
@@ -252,7 +301,11 @@ function sb_email_piping($force = false) {
             $is_s3 = sb_get_multi_setting('amazon-s3', 'amazon-s3-active') || defined('SB_CLOUD_AWS_S3');
             if ($inbox) {
                 set_time_limit(sb_is_cloud() ? 100 : 1000);
+<<<<<<< HEAD
                 $emails = imap_search($inbox, 'ALL SINCE "' . (empty($last_check) ? $today : $last_check) . '"');
+=======
+                $emails = imap_search($inbox, 'ALL SINCE "' . (empty($last_check) ? $yesterday : $last_check) . '"');
+>>>>>>> vendor-update
                 if ($emails) {
                     $department_id = sb_isset($settings, 'email-piping-department');
                     $history = sb_get_external_setting('email-piping-history', []);
@@ -514,7 +567,11 @@ function sb_email_piping($force = false) {
                                                 return $item->mailbox . '@' . $item->host;
                                             }, $cc)) : '';
                                             $user_conversations = sb_isset($settings, 'email-piping-one-conversation') ? sb_get_user_conversations($sender['id']) : false;
+<<<<<<< HEAD
                                             $conversation_id = empty($user_conversations) ? sb_isset(sb_new_conversation($sender['id'], 2, $subject, $department_id, -1, 'em', $cc), 'details', [])['id'] : $user_conversations[0]['conversation_id'];
+=======
+                                            $conversation_id = empty($user_conversations) ? sb_isset(sb_new_conversation($sender['id'], 2, $subject, $department_id, -1, 'em', $cc, $j), 'details', [])['id'] : $user_conversations[0]['conversation_id'];
+>>>>>>> vendor-update
                                         }
                                         sb_send_message($sender['id'], $conversation_id, $message, $attachments_2, ($agent ? 1 : 2));
 
@@ -551,13 +608,22 @@ function sb_email_piping($force = false) {
                             }
                         }
                     }
+<<<<<<< HEAD
                     if ($last_check != $today) {
+=======
+                    if (strtotime($last_check) < strtotime('-3 days')) {
+>>>>>>> vendor-update
                         $history = [];
                     }
                     sb_save_external_setting('email-piping-history', array_merge($history, $history_new));
                 }
+<<<<<<< HEAD
                 if ($last_check != $today) {
                     sb_save_external_setting('email-piping-check', $today);
+=======
+                if (strtotime($last_check) != $yesterday) {
+                    sb_save_external_setting('email-piping-check', $yesterday);
+>>>>>>> vendor-update
                 }
                 imap_close($inbox);
             } else {
@@ -680,8 +746,13 @@ function sb_email_get_conversation_code($conversation_id, $count = false, $is_re
     for ($i = $start; $i < $count_messages; $i++) {
         $message = $messages[$i];
         $message_text = $message['message'];
+<<<<<<< HEAD
         $attachments = sb_isset($message, 'attachments', []);
         if (!empty($message_text) || count($attachments)) {
+=======
+        $attachments = sb_isset($message, 'attachments');
+        if (!empty($message_text) || $attachments) {
+>>>>>>> vendor-update
             if ($translate && $message_text) {
                 $message = sb_google_get_message_translation($message);
                 if ($message['message'] != $message_text) {

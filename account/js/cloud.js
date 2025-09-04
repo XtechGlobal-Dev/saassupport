@@ -2,7 +2,7 @@
 /*
 * 
 * ===================================================================
-* CLOUD MAIN JS FILE
+* CLOUD MAIN JS FILE 
 * ===================================================================
 *
 * © 2017-2025 board.support. All rights reserved.
@@ -129,8 +129,10 @@
                     box_account.find(`#plans > [data-menu="${$(this).attr('data-type')}"]`).addClass('sb-visible');
                     $(this).sbActive(true);
                 });
-                if (box_account.find('#membership-appsumo').length) {
-                    menu.find('ul').append(`<li><a href="https://appsumo.com/account/products/" target="_blank" style="color:#028be5;text-decoration:none">AppSumo</a></li>`);
+                if (box_account.find('#membership-markeplace').length) {
+                    let markeplace = { appsumo: ['AppSumo', 'https://appsumo.com/account/products/'], tw: ['Tools World', ''] };
+                    markeplace = markeplace[box_account.find('#membership-markeplace').attr('data-markeplace')];
+                    menu.find('ul').append(`<li><a href="${markeplace[1]}" target="_blank" style="color:#028be5;text-decoration:none">${markeplace[0]}</a></li>`);
                 }
             } else {
                 box_account.find('#plans > div').addClass('sb-visible');
@@ -476,7 +478,6 @@
             });
 
             $(box_login).on('click', '.btn-login', function (e) {
-                alert('here');
                 let email = box_login.find('#email input').val();
                 let password = box_login.find('#password input').val();
                 let errors_area = box_login.find('.sb-errors-area');
@@ -595,7 +596,7 @@
 
             $(box_super).on('click', '.table-customers td', function (e) {
                 box_loading.sbActive(true);
-                ajax('super-get-customer', { 'customer_id': $(this).parent().attr('data-customer-id') }, (response) => {
+                ajax('super-get-customer', { customer_id: $(this).parent().attr('data-customer-id') }, (response) => {
                     let fields_editable = ['first_name', 'last_name', 'email', 'phone', 'password', 'credits'];
                     let fields_readonly = ['id', 'lifetime_value', 'token', 'creation_time', 'customer_id', 'database', 'count_users', 'count_agents', 'membership_expiration'];
                     let code = '';
@@ -608,14 +609,14 @@
                         if (!['payment', 'active_membership_cache', 'notifications_credits_count', 'marketing_email_30', 'marketing_email_7', 'email_limit'].includes(item.slug)) {
                             code += `<div data-type="${item.slug == 'white-label' ? 'select' : 'text'}" class="sb-input"><span>${slugToString(item.slug)}</span>`;
                             if (item.slug == 'white-label') {
-                                code += `<select id="white_label" data-extra="true"><option>${item.value}</option><option value="renew">Manual renewal</option><option value="disable">Disable</option></select></div>`;
+                                code += `<select id="white-label" data-extra="true"><option>${item.value}</option><option value="renew">Manual renewal</option><option value="disable">Disable</option></select></div>`;
                             } else {
                                 code += `<input id="${item.slug}" type="text" value="${item.value}" data-extra="true" /></div>`;
                             }
                         }
                     }
-                    if (!code.includes('white_label')) {
-                        code += `<div data-type="select" class="sb-input"><span>White label</span><select id="white_label" data-extra="true"><option></option><option value="activate">Activate</option></select></div>`;
+                    if (IS_WHITE_LABEL && !code.includes('white-label')) {
+                        code += `<div data-type="select" class="sb-input"><span>White label</span><select id="white-label" data-extra="true"><option></option><option value="activate">Activate</option></select></div>`;
                     }
                     code += `<div data-type="text" class="sb-input"><span>Membership</span><select id="membership" required>`;
                     for (var i = 0; i < MEMBERSHIPS.length; i++) {
@@ -938,7 +939,7 @@
     function banners(type) {
         switch (type) {
             case 'suspended':
-                let agents_quota_exceeded = 'quota_agents' in membership && membership.count_agents > membership.quota_agents;
+                let agents_quota_exceeded = ['agents', 'messages-agents'].includes(membership.type) && membership.count_agents > membership.quota_agents;
                 if (membership.count > membership.quota || membership.expired || agents_quota_exceeded) {
                     banner(SETTINGS.text_suspended_title ? SETTINGS.text_suspended_title : 'Your account has been suspended', (SETTINGS.text_suspended ? SETTINGS.text_suspended : sb_('Your website visitors can still use the chat but you are not able to view the messages and reply to your visitors because you can not enter the administration area. Please renew your subscription below or upgrade to a higher plan to reactivate your account again.')) + (agents_quota_exceeded ? ' ' + sb_('You can also delete newly created agents or admins and reactivate your account by clicking {R}.').replace('{R}', '<a id="delete-agents-quota">' + sb_('here') + '</a>') : ''), '', false, true);
                 }

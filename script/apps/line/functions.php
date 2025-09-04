@@ -13,7 +13,11 @@
  *
  */
 
+<<<<<<< HEAD
 define('SB_LINE', '1.0.4');
+=======
+define('SB_LINE', '1.0.5');
+>>>>>>> vendor-update
 
 function sb_line_send_message($line_id, $message = '', $attachments = [], $conversation_id = false) {
     if (empty($message) && empty($attachments)) {

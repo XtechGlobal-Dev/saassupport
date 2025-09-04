@@ -43,10 +43,16 @@
  *
  */
 
+<<<<<<< HEAD
 const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags, C.converted_to_ticket FROM sb_messages A, sb_users B, sb_conversations C ';
 
 function sb_get_conversations_users($conversations)
 {
+=======
+const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags ';
+
+function sb_get_conversations_users($conversations) {
+>>>>>>> vendor-update
     if (count($conversations) > 0) {
         $code = '(';
         for ($i = 0; $i < count($conversations); $i++) {
@@ -71,8 +77,12 @@ function sb_get_conversations_users($conversations)
     return $conversations;
 }
 
+<<<<<<< HEAD
 function sb_get_conversations($pagination = 0, $status_code = 0, $department = false, $source = false, $tag = false)
 {
+=======
+function sb_get_conversations($pagination = 0, $status_code = 0, $department = false, $source = false, $tag = false, $agent_id = false) {
+>>>>>>> vendor-update
     $exclude_visitors = '';
     if ($status_code == 3) {
         $ids = sb_db_get('SELECT A.id FROM sb_conversations A, sb_users B WHERE B.user_type <> "visitor" AND A.user_id = B.id', false);
@@ -80,7 +90,11 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
             $exclude_visitors .= $ids[$i]['id'] . ',';
         }
         if ($exclude_visitors) {
+<<<<<<< HEAD
             $exclude_visitors = 'AND C.id IN (' . substr($exclude_visitors, 0, -1) . ')';
+=======
+            $exclude_visitors = ' AND C.id IN (' . substr($exclude_visitors, 0, -1) . ')';
+>>>>>>> vendor-update
         }
     }
     if (!$pagination) {
@@ -89,8 +103,30 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
     if (!$status_code) {
         $status_code = 0;
     }
+<<<<<<< HEAD
     $query = SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id ' . ($status_code === 'all' ? '' : ($status_code == 0 ? ' AND C.status_code <> 3 AND C.status_code <> 4' : ' AND C.status_code = ' . sb_db_escape($status_code))) . ' AND C.id = A.conversation_id' . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . (sb_get_agent_department() === false && $department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . sb_routing_and_department_db('C') . ' AND A.id IN (SELECT max(id) FROM sb_messages WHERE message <> "" OR attachments <> "" GROUP BY conversation_id) ' . $exclude_visitors . ' GROUP BY conversation_id ORDER BY ' . (sb_get_setting('order-by-date') ? '' : 'FIELD(C.status_code, 2) DESC,') . 'A.id DESC LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100';
     $result = sb_db_get($query, false);
+=======
+    sb_db_query('DROP TEMPORARY TABLE IF EXISTS sb_latest_messages');
+    sb_db_query('CREATE TEMPORARY TABLE sb_latest_messages (id BIGINT PRIMARY KEY) ENGINE=MEMORY AS SELECT MAX(id) AS id FROM sb_messages GROUP BY conversation_id');
+    $query = SELECT_CONVERSATIONS . 'FROM sb_latest_messages L JOIN sb_messages A ON A.id = L.id JOIN sb_users B ON B.id = A.user_id JOIN sb_conversations C ON C.id = A.conversation_id WHERE 1=1 ' . ($status_code === 'all' ? '' : ($status_code == 0 ? ' AND C.status_code NOT IN (3,4)' : ' AND C.status_code = ' . sb_db_escape($status_code))) . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($agent_id ? ' AND C.agent_id = ' . sb_db_escape($agent_id, true) : '') . (sb_get_agent_department() === false && $department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . sb_routing_and_department_db('C') . $exclude_visitors . ' ORDER BY ' . (sb_get_setting('order-by-date') ? '' : 'FIELD(C.status_code, 2) DESC,') . 'A.id DESC LIMIT ' . ($pagination * 100) . ', 100';
+    $result = sb_db_get($query, false);
+    foreach ($result as &$conversation) {
+        if (empty($conversation['message']) && empty($conversation['attachments']) && !strpos($conversation['payload'], 'preview')) {
+            $message = sb_db_get('SELECT * FROM sb_messages WHERE conversation_id = ' . $conversation['conversation_id'] . ' AND (message <> "" OR attachments <> "") ORDER BY id DESC LIMIT 1');
+            if ($message) {
+                $conversation['message'] = $message['message'];
+                $conversation['attachments'] = $message['attachments'];
+                $conversation['message_id'] = $message['id'];
+                $conversation['message_user_id'] = $message['user_id'];
+                $conversation['message_status_code'] = $message['status_code'];
+                $conversation['payload'] = $message['payload'];
+            }
+        } else {
+            $conversation['payload'] = json_decode($conversation['payload'], true);
+        }
+    }
+>>>>>>> vendor-update
     if (isset($result) && is_array($result)) {
         return sb_get_conversations_users($result);
     } else {
@@ -98,10 +134,16 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
     }
 }
 
+<<<<<<< HEAD
 function sb_get_new_conversations($datetime, $department = false, $source = false, $tag = false)
 {
     $datetime = sb_db_escape($datetime);
     $result = sb_db_get(SELECT_CONVERSATIONS . 'WHERE A.id IN (SELECT max(id) FROM sb_messages WHERE ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' GROUP BY conversation_id) AND B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
+=======
+function sb_get_new_conversations($datetime, $department = false, $source = false, $tag = false, $agent_id = false) {
+    $datetime = sb_db_escape($datetime);
+    $result = sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE A.id IN (SELECT max(id) FROM sb_messages WHERE ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' GROUP BY conversation_id) AND B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($agent_id ? ' AND C.agent_id = ' . sb_db_escape($agent_id, true) : '') . ($department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
+>>>>>>> vendor-update
     if (isset($result) && is_array($result)) {
         return count($result) ? sb_get_conversations_users($result) : [];
     } else {
@@ -109,6 +151,7 @@ function sb_get_new_conversations($datetime, $department = false, $source = fals
     }
 }
 
+<<<<<<< HEAD
 function sb_get_new_user_conversations($user_id, $datetime)
 {
     $datetime = sb_db_escape($datetime);
@@ -120,12 +163,37 @@ function sb_search_conversations($search)
 {
     $search = trim(sb_db_escape(mb_strtolower($search)));
     $search_first = explode(' ', $search);
+=======
+function sb_get_new_user_conversations($user_id, $datetime) {
+    $datetime = sb_db_escape($datetime);
+    $user_id = sb_db_escape($user_id, true);
+    return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE B.id = A.user_id AND A.conversation_id = C.id AND A.id IN (SELECT MAX(A.id) FROM sb_messages A, sb_conversations B WHERE A.' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' AND A.conversation_id = B.id AND B.user_id = ' . $user_id . ' GROUP BY A.conversation_id) GROUP BY conversation_id ORDER BY C.id DESC', false);
+}
+
+function sb_search_conversations($search) {
+    $search = trim(sb_db_escape(mb_strtolower($search)));
+    $search_first = explode(' ', $search);
+    $numeric_filters = '';
+    $tags_filter = '';
+>>>>>>> vendor-update
     if (count($search_first) < 4 && strlen($search_first[0]) > 2) {
         $search_first = $search_first[0];
     } else {
         $search_first = $search;
     }
+<<<<<<< HEAD
     $result = sb_db_get(SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ' AND (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(B.first_name) LIKE "%' . $search_first . '%" OR LOWER(B.last_name) LIKE "%' . $search_first . '%" OR LOWER(B.email) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%"' . (is_numeric($search) ? ' OR C.id = ' . $search . ' OR C.department = ' . $search . ' OR C.agent_id = ' . $search : '') . (sb_get_setting('disable-tags') ? '' : ' OR LOWER(C.tags) LIKE "%' . $search . '%"') . ') GROUP BY A.conversation_id ORDER BY A.creation_time DESC', false);
+=======
+    if (is_numeric($search)) {
+        $search_int = intval($search);
+        $numeric_filters = " OR C.id = $search_int OR C.department = $search_int OR C.agent_id = $search_int";
+    }
+    if (!sb_get_setting('disable-tags')) {
+        $tags_filter = ' OR LOWER(C.tags) LIKE "%' . $search . '%"';
+    }
+    $query = SELECT_CONVERSATIONS . 'FROM sb_messages A JOIN sb_users B ON B.id = A.user_id JOIN sb_conversations C ON C.id = A.conversation_id' . sb_routing_and_department_db('C') . ' WHERE (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(B.first_name) LIKE "%' . $search_first . '%" OR LOWER(B.last_name) LIKE "%' . $search_first . '%" OR LOWER(B.email) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%"' . $numeric_filters . $tags_filter . ') GROUP BY A.conversation_id ORDER BY A.creation_time DESC';
+    $result = sb_db_get($query, false);
+>>>>>>> vendor-update
     if (isset($result) && is_array($result)) {
         return sb_get_conversations_users($result);
     } else {
@@ -133,6 +201,7 @@ function sb_search_conversations($search)
     }
 }
 
+<<<<<<< HEAD
 function sb_search_user_conversations($search, $user_id = false)
 {
     $search = trim(sb_db_escape(mb_strtolower($search)));
@@ -141,6 +210,14 @@ function sb_search_user_conversations($search, $user_id = false)
 
 function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false)
 {
+=======
+function sb_search_user_conversations($search, $user_id = false) {
+    $search = trim(sb_db_escape(mb_strtolower($search)));
+    return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE A.conversation_id = C.id AND B.id = C.user_id AND B.id = ' . ($user_id === false ? sb_get_active_user_ID() : sb_db_escape($user_id, true)) . ' AND (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%") GROUP BY A.conversation_id ORDER BY A.creation_time DESC', false);
+}
+
+function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false) {
+>>>>>>> vendor-update
     $exclude = $exclude_id != -1 ? ' AND A.conversation_id <> ' . sb_db_escape($exclude_id) : '';
     $user_id = sb_db_escape($user_id, true);
     $ids = sb_db_get($agent ? 'SELECT conversation_id AS `id` FROM sb_messages WHERE user_id = ' . $user_id . ' GROUP BY conversation_id' : 'SELECT id FROM sb_conversations WHERE user_id = ' . $user_id . ' GROUP BY id', false);
@@ -150,11 +227,16 @@ function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false)
         for ($i = 0; $i < $count; $i++) {
             $ids_string .= $ids[$i]['id'] . ',';
         }
+<<<<<<< HEAD
         return sb_db_get(SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id' . sb_routing_and_department_db('C') . ' AND A.conversation_id = C.id AND A.id IN (SELECT max(A.id) FROM sb_messages A, sb_conversations C WHERE (A.message <> "" OR A.attachments <> "") AND A.conversation_id = C.id' . ($agent ? '' : ' AND C.user_id = ' . $user_id) . $exclude . ' GROUP BY conversation_id)' . ($ids_string ? ' AND A.conversation_id IN (' . substr($ids_string, 0, -1) . ')' : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
+=======
+        return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE B.id = A.user_id' . sb_routing_and_department_db('C') . ' AND A.conversation_id = C.id AND A.id IN (SELECT max(A.id) FROM sb_messages A, sb_conversations C WHERE (A.message <> "" OR A.attachments <> "") AND A.conversation_id = C.id' . ($agent ? '' : ' AND C.user_id = ' . $user_id) . $exclude . ' GROUP BY conversation_id)' . ($ids_string ? ' AND A.conversation_id IN (' . substr($ids_string, 0, -1) . ')' : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
+>>>>>>> vendor-update
     }
     return [];
 }
 
+<<<<<<< HEAD
 function get_user_tickets($user_id)
 {
 
@@ -162,20 +244,31 @@ function get_user_tickets($user_id)
 
 function sb_get_last_conversation_id_or_create($user_id, $status_code = 1)
 {
+=======
+function sb_get_last_conversation_id_or_create($user_id, $status_code = 1) {
+>>>>>>> vendor-update
     $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE user_id = ' . sb_db_escape($user_id, true) . ' ORDER BY id DESC LIMIT 1'), 'id');
     return $conversation_id ? $conversation_id : sb_isset(sb_isset(sb_new_conversation($user_id, $status_code), 'details'), 'id');
 }
 
+<<<<<<< HEAD
 function sb_get_new_messages($user_id, $conversation_id, $last_datetime, $last_id = false)
 {
+=======
+function sb_get_new_messages($user_id, $conversation_id, $last_datetime, $last_id = false) {
+>>>>>>> vendor-update
     $last_datetime = sb_db_escape($last_datetime);
     $last_id = $last_id ? sb_db_escape($last_id, true) : false;
     $result = sb_db_get('SELECT sb_messages.*, sb_users.first_name, sb_users.last_name, sb_users.profile_image, sb_users.user_type FROM sb_messages, sb_users, sb_conversations WHERE (sb_messages.creation_time > "' . $last_datetime . '"' . ($last_id ? (' OR sb_messages.id > ' . $last_id) : '') . ') AND sb_messages.conversation_id = ' . sb_db_escape($conversation_id, true) . ' AND sb_users.id = sb_messages.user_id AND sb_conversations.user_id = ' . sb_db_escape($user_id, true) . ' AND sb_messages.conversation_id = sb_conversations.id ORDER BY sb_messages.id ASC', false);
     return isset($result) && is_array($result) ? $result : sb_error('db-error', 'sb_get_new_messages', $result);
 }
 
+<<<<<<< HEAD
 function sb_get_conversation($user_id = false, $conversation_id = false)
 {
+=======
+function sb_get_conversation($user_id = false, $conversation_id = false) {
+>>>>>>> vendor-update
     $user_id = $user_id ? sb_db_escape($user_id, true) : sb_get_active_user_ID();
     $conversation_id = sb_db_escape($conversation_id, true);
     $messages = sb_db_get('SELECT sb_messages.*, sb_users.first_name, sb_users.last_name, sb_users.profile_image, sb_users.user_type FROM sb_messages, sb_users, sb_conversations WHERE sb_messages.conversation_id = ' . $conversation_id . (sb_is_agent() ? '' : ' AND sb_conversations.user_id = ' . $user_id) . ' AND sb_messages.conversation_id = sb_conversations.id AND sb_users.id = sb_messages.user_id ORDER BY sb_messages.id ASC', false);
@@ -213,7 +306,11 @@ function sb_get_conversation($user_id = false, $conversation_id = false)
                     $details['rating'] = $rating;
                 }
             } else {
+<<<<<<< HEAD
                 if ($details['status_code'] == 1) {
+=======
+                if ($details['status_code'] == 1 && $details['status_code'] != 5) {
+>>>>>>> vendor-update
                     sb_update_conversation_status($conversation_id, 0);
                     $details['status_code'] == 0;
                 }
@@ -239,8 +336,12 @@ function sb_get_conversation($user_id = false, $conversation_id = false)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_new_conversation($user_id, $status_code = 1, $title = '', $department = -1, $agent_id = -1, $source = false, $extra = false, $extra_2 = false, $extra_3 = false, $tags = false)
 {
+=======
+function sb_new_conversation($user_id, $status_code = 1, $title = '', $department = -1, $agent_id = -1, $source = false, $extra = false, $extra_2 = false, $extra_3 = false, $tags = false) {
+>>>>>>> vendor-update
     if (!sb_isset_num($agent_id)) {
         if (sb_get_multi_setting('routing', 'routing-active') && !sb_get_multi_setting('queue', 'queue-active')) {
             $agent_id = sb_routing(-1, $department);
@@ -266,8 +367,12 @@ function sb_new_conversation($user_id, $status_code = 1, $title = '', $departmen
     return $conversation_id;
 }
 
+<<<<<<< HEAD
 function sb_update_conversation_status($conversation_id, $status)
 {
+=======
+function sb_update_conversation_status($conversation_id, $status) {
+>>>>>>> vendor-update
     $response = false;
     $conversation_id = sb_db_escape($conversation_id, true);
     $agent = sb_is_agent();
@@ -313,8 +418,12 @@ function sb_update_conversation_status($conversation_id, $status)
     return $response;
 }
 
+<<<<<<< HEAD
 function sb_update_conversation_department($conversation_id, $department, $message = false)
 {
+=======
+function sb_update_conversation_department($conversation_id, $department, $message = false) {
+>>>>>>> vendor-update
     if (sb_conversation_security_error($conversation_id) || (!sb_get_multi_setting('agents', 'agents-update-department') && sb_is_agent(false, true, false, true))) {
         return sb_error('security-error', 'sb_update_conversation_department');
     }
@@ -333,8 +442,12 @@ function sb_update_conversation_department($conversation_id, $department, $messa
     return sb_error('department-update-error', 'sb_update_conversation_department', $response);
 }
 
+<<<<<<< HEAD
 function sb_update_conversation_agent($conversation_id, $agent_id, $message = false)
 {
+=======
+function sb_update_conversation_agent($conversation_id, $agent_id, $message = false) {
+>>>>>>> vendor-update
     if (sb_conversation_security_error($conversation_id)) {
         return sb_error('security-error', 'sb_update_conversation_agent');
     }
@@ -362,8 +475,12 @@ function sb_update_conversation_agent($conversation_id, $agent_id, $message = fa
     return sb_error('agent-update-error', 'sb_update_conversation_agent', $response);
 }
 
+<<<<<<< HEAD
 function sb_update_conversation_event($payload_event, $conversation_id, $message_preview = false)
 {
+=======
+function sb_update_conversation_event($payload_event, $conversation_id, $message_preview = false) {
+>>>>>>> vendor-update
     $payload = ['event' => $payload_event];
     if ($message_preview) {
         $payload['preview'] = $message_preview;
@@ -374,8 +491,12 @@ function sb_update_conversation_event($payload_event, $conversation_id, $message
     }
 }
 
+<<<<<<< HEAD
 function sb_transcript($conversation_id, $type = false)
 {
+=======
+function sb_transcript($conversation_id, $type = false) {
+>>>>>>> vendor-update
     if (sb_conversation_security_error($conversation_id)) {
         return sb_error('security-error', 'sb_transcript');
     }
@@ -422,6 +543,7 @@ function sb_transcript($conversation_id, $type = false)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_get_notes($conversation_id)
 {
     return sb_get_external_setting('notes-' . $conversation_id, []);
@@ -429,6 +551,13 @@ function sb_get_notes($conversation_id)
 
 function sb_add_note($conversation_id, $user_id, $name, $message)
 {
+=======
+function sb_get_notes($conversation_id) {
+    return sb_get_external_setting('notes-' . $conversation_id, []);
+}
+
+function sb_add_note($conversation_id, $user_id, $name, $message) {
+>>>>>>> vendor-update
     $notes = sb_get_notes($conversation_id);
     $id = rand(0, 99999);
     array_push($notes, ['id' => $id, 'user_id' => $user_id, 'name' => $name, 'message' => sb_sanatize_string($message), 'date' => sb_gmt_now()]);
@@ -436,8 +565,12 @@ function sb_add_note($conversation_id, $user_id, $name, $message)
     return $response ? $id : $response;
 }
 
+<<<<<<< HEAD
 function sb_update_note($conversation_id, $user_id, $note_id, $message)
 {
+=======
+function sb_update_note($conversation_id, $user_id, $note_id, $message) {
+>>>>>>> vendor-update
     $notes = sb_get_notes($conversation_id);
     for ($i = 0; $i < count($notes); $i++) {
         if ($notes[$i]['id'] == $note_id) {
@@ -450,8 +583,12 @@ function sb_update_note($conversation_id, $user_id, $note_id, $message)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_delete_note($conversation_id, $note_id)
 {
+=======
+function sb_delete_note($conversation_id, $note_id) {
+>>>>>>> vendor-update
     $notes = sb_get_notes($conversation_id);
     for ($i = 0; $i < count($notes); $i++) {
         if ($notes[$i]['id'] == $note_id) {
@@ -462,8 +599,12 @@ function sb_delete_note($conversation_id, $note_id)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_direct_message($user_ids, $message)
 {
+=======
+function sb_direct_message($user_ids, $message) {
+>>>>>>> vendor-update
     $sources = ['whatsapp' => 'wa', 'messenger' => 'fb', 'telegram' => 'tg', 'viber' => 'vb', 'twitter' => 'tw', 'instagram' => 'ig', 'line' => 'ln', 'wechat' => 'wc', 'zalo' => 'za', 'google' => 'bm', 'tickets' => 'tk'];
     if (is_string($user_ids) && ($user_ids == 'all' || isset($sources[$user_ids]))) {
         $items = sb_db_get($user_ids == 'all' ? 'SELECT id FROM sb_users WHERE user_type <> "agent" AND user_type <> "admin" AND user_type <> "bot"' : 'SELECT A.id FROM sb_users A, sb_conversations B WHERE B.source = "' . sb_db_escape($sources[$user_ids]) . '" AND B.user_id = A.id GROUP BY A.id', false);
@@ -528,8 +669,12 @@ function sb_direct_message($user_ids, $message)
     return $response;
 }
 
+<<<<<<< HEAD
 function sb_get_agents_in_conversation($conversation_id)
 {
+=======
+function sb_get_agents_in_conversation($conversation_id) {
+>>>>>>> vendor-update
     $rows = sb_db_get('SELECT A.id, first_name, last_name, profile_image, B.conversation_id FROM sb_users A, sb_messages B WHERE (A.user_type = "agent" OR A.user_type = "admin") AND A.id = B.user_id AND conversation_id ' . (is_array($conversation_id) ? ('IN (' . sb_db_escape(implode(',', $conversation_id)) . ')') : ('= ' . sb_db_escape($conversation_id, true))) . (sb_is_agent() ? '' : ' AND conversation_id in (SELECT id FROM sb_conversations WHERE user_id = ' . sb_get_active_user_ID() . ')') . ' GROUP BY A.id, B.conversation_id', false);
     $response = [];
     for ($i = 0; $i < count($rows); $i++) {
@@ -541,6 +686,7 @@ function sb_get_agents_in_conversation($conversation_id)
     return $response;
 }
 
+<<<<<<< HEAD
 function sb_conversation_security_error($conversation_id)
 {
     return !sb_is_agent() && empty($GLOBALS['SB_FORCE_ADMIN']) && sb_isset(sb_db_get('SELECT user_id FROM sb_conversations WHERE id = ' . $conversation_id), 'user_id') != sb_get_active_user_ID();
@@ -548,6 +694,13 @@ function sb_conversation_security_error($conversation_id)
 
 function sb_set_agent_active_conversation($conversation_id, $agent_id = false)
 {
+=======
+function sb_conversation_security_error($conversation_id) {
+    return !sb_is_agent() && empty($GLOBALS['SB_FORCE_ADMIN']) && sb_isset(sb_db_get('SELECT user_id FROM sb_conversations WHERE id = ' . $conversation_id), 'user_id') != sb_get_active_user_ID();
+}
+
+function sb_set_agent_active_conversation($conversation_id, $agent_id = false) {
+>>>>>>> vendor-update
     $agent_id = $agent_id ? $agent_id : sb_get_active_user_ID();
     $active_agents_conversations = sb_get_external_setting('active_agents_conversations', []);
     $previous_conversation_id = sb_isset($active_agents_conversations, $agent_id, [false]);
@@ -557,8 +710,12 @@ function sb_set_agent_active_conversation($conversation_id, $agent_id = false)
         sb_pusher_trigger('agents', 'agent-active-conversation-changed', ['agent_id' => $agent_id, 'previous_conversation_id' => $previous_conversation_id[0], 'conversation_id' => $conversation_id]);
 }
 
+<<<<<<< HEAD
 function sb_is_active_conversation_busy($conversation_id, $skip = -1)
 {
+=======
+function sb_is_active_conversation_busy($conversation_id, $skip = -1) {
+>>>>>>> vendor-update
     $items = sb_get_external_setting('active_agents_conversations', []);
     $time = time();
     if (empty($items)) {
@@ -572,6 +729,7 @@ function sb_is_active_conversation_busy($conversation_id, $skip = -1)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_count_conversations($status_code = false)
 {
     return sb_isset(sb_db_get('SELECT COUNT(*) AS count FROM sb_conversations' . ($status_code ? ' WHERE status_code = ' . sb_db_escape($status_code) . sb_routing_and_department_db() : '')), 'count');
@@ -579,6 +737,13 @@ function sb_count_conversations($status_code = false)
 
 function sb_send_agents_notifications($message, $bottom_message = false, $conversation_id = false, $attachments = false, $user = false, $extra = false)
 {
+=======
+function sb_count_conversations($status_code = false) {
+    return sb_isset(sb_db_get('SELECT COUNT(*) AS count FROM sb_conversations' . ($status_code ? ' WHERE status_code = ' . sb_db_escape($status_code) . sb_routing_and_department_db() : '')), 'count');
+}
+
+function sb_send_agents_notifications($message, $bottom_message = false, $conversation_id = false, $attachments = false, $user = false, $extra = false) {
+>>>>>>> vendor-update
     $user = $user ? $user : (sb_is_agent() ? sb_get_user_from_conversation($conversation_id) : sb_get_active_user());
     $user_name = sb_get_user_name($user);
     $recipients = 'agents';
@@ -610,8 +775,12 @@ function sb_send_agents_notifications($message, $bottom_message = false, $conver
     return true;
 }
 
+<<<<<<< HEAD
 function sb_check_conversations_assignment($conversation_ids, $agent_id = false, $department = false)
 {
+=======
+function sb_check_conversations_assignment($conversation_ids, $agent_id = false, $department = false) {
+>>>>>>> vendor-update
     if (empty($conversation_ids)) {
         return [];
     }
@@ -622,12 +791,17 @@ function sb_check_conversations_assignment($conversation_ids, $agent_id = false,
     return $conversation_ids;
 }
 
+<<<<<<< HEAD
 function sb_get_last_agent_in_conversation($conversation_id)
 {
+=======
+function sb_get_last_agent_in_conversation($conversation_id) {
+>>>>>>> vendor-update
     $agent = sb_db_get('SELECT B.id, B.first_name, B.last_name, B.email, B.user_type, B.token, B.department  FROM sb_messages A, sb_users B WHERE A.conversation_id = ' . sb_db_escape($conversation_id, true) . ' AND A.user_id = B.id AND (B.user_type = "agent" OR B.user_type = "admin") ORDER BY A.id LIMIT 1');
     return isset($agent['id']) ? $agent : false;
 }
 
+<<<<<<< HEAD
 function sb_get_last_message($conversation_id, $exclude_message = false, $user_id = false)
 {
     return sb_db_get('SELECT message, attachments, payload FROM sb_messages WHERE (message <> "" || attachments <> "")' . ($exclude_message ? (' AND message <> "' . sb_db_escape($exclude_message) . '"') : '') . ' AND conversation_id = ' . sb_db_escape($conversation_id, true) . ($user_id ? (' AND user_id = ' . sb_db_escape($user_id, true)) : '') . ' ORDER BY id DESC LIMIT 1');
@@ -635,6 +809,13 @@ function sb_get_last_message($conversation_id, $exclude_message = false, $user_i
 
 function sb_delete_attachments($conversation_id = false, $message_id = false)
 {
+=======
+function sb_get_last_message($conversation_id, $exclude_message = false, $user_id = false) {
+    return sb_db_get('SELECT message, attachments, payload FROM sb_messages WHERE (message <> "" || attachments <> "")' . ($exclude_message ? (' AND message <> "' . sb_db_escape($exclude_message) . '"') : '') . ' AND conversation_id = ' . sb_db_escape($conversation_id, true) . ($user_id ? (' AND user_id = ' . sb_db_escape($user_id, true)) : '') . ' ORDER BY id DESC LIMIT 1');
+}
+
+function sb_delete_attachments($conversation_id = false, $message_id = false) {
+>>>>>>> vendor-update
     $attachments_all = sb_db_get('SELECT attachments FROM sb_messages WHERE user_id <> ' . sb_get_bot_id() . '  AND ' . ($conversation_id ? 'conversation_id' : 'id') . ' = ' . sb_db_escape($conversation_id ? $conversation_id : $message_id, true), false);
     for ($i = 0; $i < count($attachments_all); $i++) {
         $attachments = sb_isset($attachments_all[$i], 'attachments');
@@ -648,8 +829,12 @@ function sb_delete_attachments($conversation_id = false, $message_id = false)
     return true;
 }
 
+<<<<<<< HEAD
 function sb_update_messages_status($message_ids, $user_id = false)
 {
+=======
+function sb_update_messages_status($message_ids, $user_id = false) {
+>>>>>>> vendor-update
     $response = sb_db_query('UPDATE sb_messages SET status_code = 2 WHERE id IN (' . sb_db_escape(implode(',', $message_ids)) . ')');
     if ($user_id && sb_pusher_active()) {
         sb_pusher_trigger('private-user-' . $user_id, 'message-status-update', ['message_ids' => $message_ids]);
@@ -657,8 +842,12 @@ function sb_update_messages_status($message_ids, $user_id = false)
     return $response;
 }
 
+<<<<<<< HEAD
 function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2 = false, $extra_3 = false)
 {
+=======
+function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2 = false, $extra_3 = false) {
+>>>>>>> vendor-update
     if (!$extra && !$extra_2 && !$extra_3) {
         return false;
     } else {
@@ -687,11 +876,19 @@ function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2
  * 5. Convert the merge fields to the final values
  * 6. Update the tags assigned to a conversation
  * 7. Save a voice message
+<<<<<<< HEAD
  *
  */
 
 function sb_send_message($sender_id, $conversation_id, $message = '', $attachments = [], $conversation_status_code = -1, $payload = false, $queue = false, $recipient_id = false)
 {
+=======
+ * 8. Archive or restore messages
+ *
+ */
+
+function sb_send_message($sender_id, $conversation_id, $message = '', $attachments = [], $conversation_status_code = -1, $payload = false, $queue = false, $recipient_id = false) {
+>>>>>>> vendor-update
     $pusher = sb_pusher_active();
     $conversation_id = sb_db_escape($conversation_id, true);
     $user_id = $sender_id;
@@ -788,6 +985,12 @@ function sb_send_message($sender_id, $conversation_id, $message = '', $attachmen
                 }
                 if ($conversation_status_code != $conversation['status_code']) {
                     sb_db_query('UPDATE sb_conversations SET status_code = ' . sb_db_escape($conversation_status_code) . ' WHERE id = ' . $conversation_id);
+<<<<<<< HEAD
+=======
+                    if ($conversation['status_code'] == 5) {
+                        sb_messages_archiviation($conversation_id, true);
+                    }
+>>>>>>> vendor-update
                     sb_webhooks('SBActiveConversationStatusUpdated', ['conversation_id' => $conversation_id, 'status_code' => $conversation_status_code]);
                 }
             }
@@ -874,6 +1077,7 @@ function sb_send_message($sender_id, $conversation_id, $message = '', $attachmen
     }
 }
 
+<<<<<<< HEAD
 function sb_update_message($message_id, $message = false, $attachments = false, $payload = false)
 {
     return sb_update_or_delete_message('update', $message_id, $message, $attachments, $payload);
@@ -886,14 +1090,30 @@ function sb_delete_message($message_id)
 
 function sb_update_or_delete_message($action, $message_id, $message = false, $attachments = false, $payload = false)
 {
+=======
+function sb_update_message($message_id, $message = false, $attachments = false, $payload = false) {
+    return sb_update_or_delete_message('update', $message_id, $message, $attachments, $payload);
+}
+
+function sb_delete_message($message_id) {
+    return sb_update_or_delete_message('delete', $message_id);
+}
+
+function sb_update_or_delete_message($action, $message_id, $message = false, $attachments = false, $payload = false) {
+>>>>>>> vendor-update
     $pusher = sb_pusher_active();
     $security = sb_is_agent() || !empty($GLOBALS['SB_FORCE_ADMIN']);
     $conversation = false;
     $user_id = false;
     $response = false;
     $message_id = sb_db_escape($message_id, true);
+<<<<<<< HEAD
     if (!$security || $pusher) {
         $conversation = sb_db_get('SELECT id, user_id FROM sb_conversations WHERE id = (SELECT conversation_id FROM sb_messages WHERE id = ' . $message_id . ')');
+=======
+    $conversation = sb_db_get('SELECT id, user_id, source, extra, extra_2, extra_3 FROM sb_conversations WHERE id = (SELECT conversation_id FROM sb_messages WHERE id = ' . $message_id . ')');
+    if (!$security) {
+>>>>>>> vendor-update
         $user_id = sb_isset($conversation, 'user_id');
         if ($user_id == sb_get_active_user_ID()) {
             $security = true;
@@ -916,8 +1136,25 @@ function sb_update_or_delete_message($action, $message_id, $message = false, $at
             $response = sb_db_query('UPDATE sb_messages SET ' . ($message !== false ? 'message = "' . sb_db_escape($message) . '",' : '') . ' creation_time = "' . sb_gmt_now() . '"' . ($payload !== false ? ', payload = "' . sb_db_json_escape($payload) . '"' : '') . ($attachments !== false ? ', attachments = "' . sb_db_json_escape($attachments) . '"' : '') . ' WHERE id = ' . $message_id);
         }
         if ($action == 'delete') {
+<<<<<<< HEAD
             sb_delete_attachments(false, $message_id);
             $response = sb_db_query('DELETE FROM sb_messages WHERE id = ' . $message_id);
+=======
+            if (in_array($conversation['source'], ['tg'])) {
+                $payload = json_decode(sb_isset(sb_db_get('SELECT payload FROM sb_messages WHERE id = ' . $message_id), 'payload'), true);
+            }
+            $response = sb_db_query('DELETE FROM sb_messages WHERE id = ' . $message_id);
+            if ($response === true) {
+                sb_delete_attachments(false, $message_id);
+                switch ($conversation['source']) {
+                    case 'tg':
+                        if ($payload && isset($payload['tgid']) && isset($conversation['extra']) && isset($conversation['extra_3'])) {
+                            sb_telegram_delete_message($conversation['extra'], $payload['tgid'], $conversation['extra_3']);
+                        }
+                        break;
+                }
+            }
+>>>>>>> vendor-update
         }
         if (sb_is_agent() && sb_get_setting('logs')) {
             sb_logs($action . 'd the message #' . $message_id);
@@ -932,8 +1169,12 @@ function sb_update_or_delete_message($action, $message_id, $message = false, $at
     return sb_error('security-error', 'sb_' . $action . '_message');
 }
 
+<<<<<<< HEAD
 function sb_close_message($conversation_id, $bot_id = false)
 {
+=======
+function sb_close_message($conversation_id, $bot_id = false) {
+>>>>>>> vendor-update
     $message = sb_get_multi_setting('close-message', 'close-msg');
     if ($message) {
         if (!$bot_id) {
@@ -945,8 +1186,12 @@ function sb_close_message($conversation_id, $bot_id = false)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_merge_fields($message, $marge_fields_values = [])
 {
+=======
+function sb_merge_fields($message, $marge_fields_values = []) {
+>>>>>>> vendor-update
     $replace = '';
     $marge_fields = ['user_name', 'user_email', 'agent_name', 'agent_email'];
     $marge_field = '';
@@ -981,8 +1226,12 @@ function sb_merge_fields($message, $marge_fields_values = [])
     return $message;
 }
 
+<<<<<<< HEAD
 function sb_tags_update($conversation_id, $tags, $add = false)
 {
+=======
+function sb_tags_update($conversation_id, $tags, $add = false) {
+>>>>>>> vendor-update
     if (sb_conversation_security_error($conversation_id)) {
         return sb_error('security-error', 'sb_tags_update');
     }
@@ -1007,8 +1256,12 @@ function sb_tags_update($conversation_id, $tags, $add = false)
     return sb_db_query('UPDATE sb_conversations SET tags = "' . sb_db_escape($tags) . '" WHERE id = ' . sb_db_escape($conversation_id, true));
 }
 
+<<<<<<< HEAD
 function sb_audio_clip($audio)
 {
+=======
+function sb_audio_clip($audio) {
+>>>>>>> vendor-update
     $file_name = '/audio-' . rand(1000000, 999999999) . '.webm';
     $path = sb_upload_path(false, true) . $file_name;
     $url = false;
@@ -1025,6 +1278,27 @@ function sb_audio_clip($audio)
     return $url;
 }
 
+<<<<<<< HEAD
+=======
+function sb_messages_archiviation($conversation_id, $is_restore = false) {
+    $messages = sb_db_get('SELECT * FROM ' . ($is_restore ? 'sb_archive' : 'sb_messages') . ' WHERE conversation_id = ' . $conversation_id, false);
+    $count = count($messages);
+    if ($count) {
+        $query = 'INSERT IGNORE INTO ' . ($is_restore ? 'sb_messages' : 'sb_archive') . '(id, user_id, message, creation_time, status_code, attachments, payload, conversation_id) VALUES ';
+        for ($i = 0; $i < $count; $i++) {
+            $query .= '(' . $messages[$i]['id'] . ', ' . $messages[$i]['user_id'] . ', "' . sb_db_escape($messages[$i]['message']) . '", "' . $messages[$i]['creation_time'] . '", ' . $messages[$i]['status_code'] . ', "' . sb_db_escape($messages[$i]['attachments']) . '", "' . sb_db_escape($messages[$i]['payload']) . '", ' . $conversation_id . '),';
+        }
+        $response = sb_db_query(substr($query, 0, -1));
+        if ($response === true) {
+            if (!$is_restore) {
+                sb_db_query('UPDATE sb_conversations SET status_code = 5 WHERE id = ' . $conversation_id);
+            }
+            sb_db_query('DELETE FROM ' . ($is_restore ? 'sb_archive' : 'sb_messages') . ' WHERE conversation_id = ' . $conversation_id);
+        }
+    }
+}
+
+>>>>>>> vendor-update
 /*
  * -----------------------------------------------------------
  * RICH MESSAGES
@@ -1039,8 +1313,12 @@ function sb_audio_clip($audio)
  *
  */
 
+<<<<<<< HEAD
 function sb_get_rich_messages_ids($include_custom = true)
 {
+=======
+function sb_get_rich_messages_ids($include_custom = true) {
+>>>>>>> vendor-update
     $result = sb_get_external_setting('rich-messages');
     $ids = ['chips', 'buttons', 'select', 'inputs', 'card', 'slider-images', 'slider', 'list-image', 'list', 'button', 'video', 'image', 'rating', 'email', 'phone', 'registration', 'login', 'timetable', 'articles', 'table', 'share'];
     if ($include_custom && is_array($result) && isset($result['rich-messages']) && is_array($result['rich-messages'][0])) {
@@ -1055,8 +1333,12 @@ function sb_get_rich_messages_ids($include_custom = true)
     return $ids;
 }
 
+<<<<<<< HEAD
 function sb_get_rich_message($name, $settings = false)
 {
+=======
+function sb_get_rich_message($name, $settings = false) {
+>>>>>>> vendor-update
     if (in_array($name, ['registration', 'registration-tickets', 'login', 'login-tickets', 'timetable', 'articles', 'woocommerce-cart'])) {
         $title = '';
         $message = '';
@@ -1152,6 +1434,7 @@ function sb_get_rich_message($name, $settings = false)
             case 'login':
                 $settings = sb_get_setting('login');
                 $title = sb_(sb_isset($settings, 'login-title', 'Login'));
+<<<<<<< HEAD
 
                 $message = isset($settings['login-msg']) ? sb_('Login') : '';
                 $code = '<div class="sb-form"><div id="email" class="sb-input"><span>' . sb_('Email') . '</span><input autocomplete="false" type="email"> </div><div id="password" class="sb-input"><span>' . sb_('Password') . '</span><input autocomplete="off" type="password" id="ticketRegInput">
@@ -1163,6 +1446,10 @@ function sb_get_rich_message($name, $settings = false)
   <path d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z" stroke="#141B34" stroke-width="1.5"></path>
 </svg>
 </div></div><div class="sb-buttons"><div class="sb-btn sb-submit-login">' . sb_('Sign in') . '</div>' . (sb_get_setting('registration-required') == 'login' ? '' : '<div class="sb-btn-text sb-registration-area">' . sb_('Create new account') . '</div>') . '</div>';
+=======
+                $message = sb_($settings['login-msg']);
+                $code = '<div class="sb-form"><div id="email" class="sb-input"><span>' . sb_('Email') . '</span><input autocomplete="false" type="email"></div><div id="password" class="sb-input"><span>' . sb_('Password') . '</span><input autocomplete="false" type="password"></div></div><div class="sb-buttons"><div class="sb-btn sb-submit-login">' . sb_('Sign in') . '</div>' . (sb_get_setting('registration-required') == 'login' ? '' : '<div class="sb-btn-text sb-registration-area">' . sb_('Create new account') . '</div>') . '</div>';
+>>>>>>> vendor-update
                 break;
             case 'timetable':
                 $settings = sb_get_settings();
@@ -1215,8 +1502,12 @@ function sb_get_rich_message($name, $settings = false)
     return false;
 }
 
+<<<<<<< HEAD
 function sb_rich_value($value, $merge_fields = true, $translate = true, $shortcodes = false)
 {
+=======
+function sb_rich_value($value, $merge_fields = true, $translate = true, $shortcodes = false) {
+>>>>>>> vendor-update
     if ($translate) {
         $value = sb_t($value);
     }
@@ -1228,8 +1519,12 @@ function sb_rich_value($value, $merge_fields = true, $translate = true, $shortco
     return trim($merge_fields ? sb_merge_fields($value) : $value);
 }
 
+<<<<<<< HEAD
 function sb_get_shortcode($message, $name = false, $merge_field = false)
 {
+=======
+function sb_get_shortcode($message, $name = false, $merge_field = false) {
+>>>>>>> vendor-update
     $separator = $merge_field ? ['{', '}'] : ['[', ']'];
     $response = [];
     $position = false;
@@ -1283,8 +1578,12 @@ function sb_get_shortcode($message, $name = false, $merge_field = false)
     return $is_name && !empty($response) ? $response[0] : $response;
 }
 
+<<<<<<< HEAD
 function sb_execute_bot_message($name, $conversation_id, $last_user_message = false, $check = true)
 {
+=======
+function sb_execute_bot_message($name, $conversation_id, $last_user_message = false, $check = true) {
+>>>>>>> vendor-update
     $valid = false;
     $settings = false;
     $message = '';
@@ -1338,8 +1637,12 @@ function sb_execute_bot_message($name, $conversation_id, $last_user_message = fa
     return false;
 }
 
+<<<<<<< HEAD
 function sb_is_rich_message($string)
 {
+=======
+function sb_is_rich_message($string) {
+>>>>>>> vendor-update
     $ids = sb_get_rich_messages_ids();
     for ($i = 0; $i < count($ids); $i++) {
         if (strpos($string, '[' . $ids[$i]) !== false) {
@@ -1361,8 +1664,12 @@ function sb_is_rich_message($string)
  *
  */
 
+<<<<<<< HEAD
 function sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, $source)
 {
+=======
+function sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, $source) {
+>>>>>>> vendor-update
     if (is_numeric($user)) {
         $user = sb_get_user($user);
         if (!$user) {
@@ -1539,8 +1846,12 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
     return $human_takeover ? 'human_takeover' : true;
 }
 
+<<<<<<< HEAD
 function sb_messaging_platforms_send_message($message, $conversation, $message_id = false, $attachments = [])
 {
+=======
+function sb_messaging_platforms_send_message($message, $conversation, $message_id = false, $attachments = []) {
+>>>>>>> vendor-update
     $conversation = is_numeric($conversation) ? sb_db_get('SELECT id, user_id, source, extra FROM sb_conversations WHERE id = ' . $conversation) : $conversation;
     $platform_value = sb_isset($conversation, 'platform_value');
     $user_id = $conversation['user_id'];
@@ -1570,8 +1881,12 @@ function sb_messaging_platforms_send_message($message, $conversation, $message_i
     return false;
 }
 
+<<<<<<< HEAD
 function sb_send_sms($message, $to, $template = true, $conversation_id = true, $attachments = false)
 {
+=======
+function sb_send_sms($message, $to, $template = true, $conversation_id = true, $attachments = false) {
+>>>>>>> vendor-update
     $settings = sb_get_setting('sms');
     $to_agents = $to == 'agents' || $to == 'all-agents' || strpos($to, 'department-') !== false;
 
@@ -1698,8 +2013,12 @@ function sb_send_sms($message, $to, $template = true, $conversation_id = true, $
     return $response;
 }
 
+<<<<<<< HEAD
 function sb_messaging_platforms_text_formatting($message)
 {
+=======
+function sb_messaging_platforms_text_formatting($message) {
+>>>>>>> vendor-update
     preg_match_all('/#sb-[a-zA-Z0-9-_]+/', $message, $matches);
     if (!empty($matches[0])) {
         for ($i = 0; $i < count($matches[0]); $i++) {

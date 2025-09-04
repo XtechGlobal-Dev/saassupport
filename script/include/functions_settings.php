@@ -383,6 +383,7 @@ function sb_get_block_setting($value) {
     return false;
 }
 
+<<<<<<< HEAD
 // function sb_populate_settings($category, $settings, $echo = true) {
 //     if (!isset($settings) && file_exists(SB_PATH . '/resources/json/settings.json')) {
 //         $settings = sb_get_json_resource('json/settings.json');
@@ -433,6 +434,17 @@ function sb_populate_settings($category, $settings, $echo = true, $subcategory =
         //     $code .= sb_get_setting_code($setting);
     }
 
+=======
+function sb_populate_settings($category, $settings, $echo = true) {
+    if (!isset($settings) && file_exists(SB_PATH . '/resources/json/settings.json')) {
+        $settings = sb_get_json_resource('json/settings.json');
+    }
+    $settings = $settings[$category];
+    $code = '';
+    for ($i = 0; $i < count($settings); $i++) {
+        $code .= sb_get_setting_code($settings[$i]);
+    }
+>>>>>>> vendor-update
     if ($echo) {
         echo $code;
         return true;
@@ -441,10 +453,13 @@ function sb_populate_settings($category, $settings, $echo = true, $subcategory =
     }
 }
 
+<<<<<<< HEAD
 function sb_is_assoc(array $arr) {
     return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
+=======
+>>>>>>> vendor-update
 function sb_populate_app_settings($app_name) {
     $file = SB_PATH . '/apps/' . $app_name . '/settings.json';
     $settings = [$app_name => []];
@@ -644,6 +659,7 @@ function sb_get_setting_code($setting) {
         if (isset($setting['setting']) && ($type == 'multi-input' || !empty($setting['multilingual']))) {
             $content .= '<div class="sb-language-switcher-cnt"><label>' . sb_('Languages') . '</label></div>';
         }
+<<<<<<< HEAD
         
          $content .= '</div></div>';
 
@@ -863,6 +879,9 @@ function sb_get_chat_setting_code($setting) {
         } else {
             return $content;
         }
+=======
+        return $content . '</div></div>';
+>>>>>>> vendor-update
     }
     return '';
 }
@@ -976,18 +995,25 @@ function sb_get_setting($id, $default = false) {
 
 function sb_get_multi_setting($id, $sub_id, $default = false) {
     $setting = sb_get_setting($id);
+<<<<<<< HEAD
     if ($setting && !empty($setting[$sub_id])) {
+=======
+    if ($setting && !sb_is_error($setting) && !empty($setting[$sub_id])) {
+>>>>>>> vendor-update
         return $setting[$sub_id];
     }
     return $default;
 }
 
+<<<<<<< HEAD
 function get_ticket_custom_fields()
 {
     $query = "SELECT * FROM custom_fields ORDER BY `order_no`";
     return sb_db_get($query, false);
 }
 
+=======
+>>>>>>> vendor-update
 function sb_get_external_setting($name, $default = false) {
     $result = sb_db_get('SELECT value FROM sb_settings WHERE name = "' . sb_db_escape($name) . '"', false);
     $settings = [];

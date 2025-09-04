@@ -17,7 +17,11 @@
  *
  */
 
+<<<<<<< HEAD
 define('SB_MESSENGER', '1.2.0');
+=======
+define('SB_MESSENGER', '1.2.3');
+>>>>>>> vendor-update
 
 function sb_messenger_send_message($psid, $facebook_page_id, $message = '', $attachments = [], $metadata = false, $message_id = false) {
     if (empty($message) && empty($attachments)) {
@@ -190,21 +194,33 @@ function sb_messenger_rich_messages($message, $extra = false) {
                 $facebook = ['quick_replies' => [['content_type' => 'user_phone_number', 'payload' => $shortcode_id]]];
                 break;
             case 'button':
+<<<<<<< HEAD
                 $facebook = ['attachment' => ['type' => 'template', 'payload' => ['template_type' => 'button', 'text' => $message, 'buttons' => [['type' => 'web_url', 'url' => $shortcode['link'], 'title' => sb_($shortcode['name'])]]]]];
+=======
+                $facebook = ['attachment' => ['type' => 'template', 'payload' => ['template_type' => 'button', 'text' => str_replace('{R}', '', $message), 'buttons' => [['type' => 'web_url', 'url' => $shortcode['link'], 'title' => sb_($shortcode['name'])]]]]];
+>>>>>>> vendor-update
                 $message = '';
                 break;
             case 'video':
                 $message = ($shortcode['type'] == 'youtube' ? 'https://www.youtube.com/embed/' : 'https://player.vimeo.com/video/') . $shortcode['id'];
                 break;
             case 'image':
+<<<<<<< HEAD
                 $extra_values = ['attachments' => [[$shortcode['url'], $shortcode['url']]], 'message' => $message];
+=======
+                $extra_values = ['attachments' => [[$shortcode['url'], $shortcode['url']]], 'message' => str_replace('{R}', '', $message)];
+>>>>>>> vendor-update
                 $facebook = false;
                 $message = '';
                 break;
             case 'list-image':
             case 'list':
                 $index = $shortcode_name == 'list-image' ? 1 : 0;
+<<<<<<< HEAD
                 $shortcode['values'] = str_replace(['://', '\:', "\n,-"], ['{R2}', '{R4}', ' '], $shortcode['values']);
+=======
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R4}', ' '], $shortcode['values']);
+>>>>>>> vendor-update
                 $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
@@ -216,11 +232,20 @@ function sb_messenger_rich_messages($message, $extra = false) {
                         $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
+<<<<<<< HEAD
                 $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', $message_inner . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'rating':
                 if (!$instagram) {
                     $facebook = ['attachment' => ['type' => 'template', 'payload' => ['template_type' => 'button', 'text' => $message, 'buttons' => [['type' => 'postback', 'title' => sb_($shortcode['label-positive']), 'payload' => 'rating-positive'], ['type' => 'postback', 'title' => sb_($shortcode['label-negative']), 'payload' => 'rating-negative']]]]];
+=======
+                $message = str_replace('{R}', $message_inner . PHP_EOL . PHP_EOL, $message);
+                $message = trim(str_replace(['{R2}', "\r\n\r\n\r\n", '{R4}'], ['://', "\r\n\r\n", ':'], $message));
+                break;
+            case 'rating':
+                if (!$instagram) {
+                    $facebook = ['attachment' => ['type' => 'template', 'payload' => ['template_type' => 'button', 'text' => str_replace('{R}', '', $message), 'buttons' => [['type' => 'postback', 'title' => sb_($shortcode['label-positive']), 'payload' => 'rating-positive'], ['type' => 'postback', 'title' => sb_($shortcode['label-negative']), 'payload' => 'rating-negative']]]]];
+>>>>>>> vendor-update
                     $message = '';
                 }
                 if (defined('SB_DIALOGFLOW')) {
@@ -264,7 +289,11 @@ function sb_messenger_add_user($fb_user_id, $token, $user_type = 'lead', $instag
     if (defined('SB_DIALOGFLOW')) {
         $extra['language'] = sb_google_language_detection_get_user_extra($message);
     }
+<<<<<<< HEAD
     sb_update_user($user_id, $user_details, $extra);
+=======
+    sb_update_user($user_id, $user_details, $extra, true, true);
+>>>>>>> vendor-update
     return $user_id;
 }
 
