@@ -9213,6 +9213,12 @@ ul.status-list.dropdown-menu {
     }
 }
 
+.sb-admin.sb-main {
+    .sb-input {
+        display: flex;
+    }
+}
+
 /*
  *
  * -----------------------------------------------------------
@@ -14674,6 +14680,22 @@ main {
                         .total_conversations_chart,
                         .agent_chart {
                             width: 68px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .sb-admin-box_new {
+        .right_section {
+            .login-form {
+                .form-fields {
+                    .field-container {
+                        .input-wrapper {
+                            svg {
+                                top: 26px;
+                            }
                         }
                     }
                 }

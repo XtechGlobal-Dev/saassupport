@@ -11707,6 +11707,10 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   margin: 5px 0;
 }
 
+.sb-admin.sb-main .sb-input {
+  display: flex;
+}
+
 /*
  *
  * -----------------------------------------------------------
@@ -15846,6 +15850,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
     width: 68px;
+  }
+  .sb-admin-box_new .right_section .login-form .form-fields .field-container .input-wrapper svg {
+    top: 26px;
   }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {
