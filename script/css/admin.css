@@ -13134,6 +13134,8 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   border-radius: 50%;
   margin-right: 6px;
   vertical-align: middle;
+  min-width: 10px;
+  min-height: 10px;
 }
 
 .choices__list--dropdown .choices__item--selectable::before {
@@ -13147,8 +13149,11 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   background-color: #f8f9fa !important;
   color: #222 !important;
   font-weight: 500 !important;
-  display: flex !important;
   align-items: center !important;
+  max-width: 80px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .choices__list--dropdown .choices__item[data-color]::before {
   content: "";
@@ -15830,6 +15835,17 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     padding-inline: 0 !important;
     margin: 0 !important;
     padding-bottom: 0 !important;
+  }
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .unread_conversation_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
+    width: 68px;
   }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {

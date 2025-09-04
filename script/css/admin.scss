@@ -4143,6 +4143,7 @@ td.sb-td-contact {
 
                     ul {
                         top: 0;
+
                         li {
                             &[data-value="gray"] {
                                 color: #fff;
@@ -10834,6 +10835,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     margin-right: 6px;
     vertical-align: middle;
+    min-width: 10px;
+    min-height: 10px;
 }
 
 // Dropdown cleanup
@@ -10850,8 +10853,11 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: $tag-bg !important;
         color: $tag-text !important;
         font-weight: 500 !important;
-        display: flex !important;
         align-items: center !important;
+        max-width: 80px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         &[data-color]::before {
             @include tag-dot(12px);
@@ -11598,6 +11604,7 @@ li.menu_head:hover {
                     padding: 10px;
                     color: #333;
                     text-decoration: none;
+
                     span {
                         word-break: break-word !important;
                         font-size: 13px !important;
@@ -14502,6 +14509,7 @@ main {
                     transition: .5s ease-in-out;
                     overflow-y: scroll !important;
                     width: 95px;
+
                     &::-webkit-scrollbar {
                         width: 0;
                     }
@@ -14643,12 +14651,36 @@ main {
     }
 
     .sb-nav {
-            a#sb-accout {
+        a#sb-accout {
             padding-inline: 0 !important;
             margin: 0 !important;
             padding-bottom: 0 !important;
         }
     }
+
+    .sb-area-dashboard main {
+        .new_container {
+            .dashboard-metrics {
+                .metric-card {
+                    .graph_tabs {
+
+                        .new_users_chart,
+                        .active_users_chart,
+                        .ticket_created_chart,
+                        .ticket_resolved_chart,
+                        .unread_conversation_chart,
+                        .ticket_pending_chart,
+                        .avg_response_chart,
+                        .total_conversations_chart,
+                        .agent_chart {
+                            width: 68px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 @media only screen and (min-width: 465px) and (max-width: 730px) {
