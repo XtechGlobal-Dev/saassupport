@@ -15826,6 +15826,11 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-setting .repeater-item textarea {
     min-width: fit-content;
   }
+  .sb-nav a#sb-accout {
+    padding-inline: 0 !important;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {
   .ab-admin .sb-area-users .sb-top-bar div .sb-btn.sb-icon {
