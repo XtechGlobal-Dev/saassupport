@@ -34,10 +34,7 @@ if ($response) {
         $token = $get_token ? $get_token : sb_get_multi_setting('telegram', 'telegram-token'); // Deprecated
         $user_id = false;
         $department = false;
-<<<<<<< HEAD
-=======
         $conversation_id = false;
->>>>>>> vendor-update
 
         // User and conversation
         $username = isset($from['username']) ? $from['username'] : $from['id'];
@@ -69,10 +66,7 @@ if ($response) {
             $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "tg" AND user_id = ' . $user_id . ' AND (extra_2 = "' . $token . '" OR extra_3 = "' . $token . '") ORDER BY id DESC LIMIT 1'), 'id'); // Deprecated. Remove extra_2. Use only extra_3 = "' . $token . '"
         }
         $GLOBALS['SB_LOGIN'] = $user;
-<<<<<<< HEAD
-=======
         $is_routing = sb_routing_is_active();
->>>>>>> vendor-update
         if (!$conversation_id) {
             $tags = false;
             $numbers = sb_get_setting('telegram-numbers');
@@ -84,11 +78,6 @@ if ($response) {
                     }
                 }
             }
-<<<<<<< HEAD
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'tg', $chat_id, false, $token, $tags), 'details', [])['id'];
-        } else if ($telegram_message_id && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages A, sb_conversations B WHERE A.conversation_id =  ' . $conversation_id . ' AND A.payload LIKE "%' . sb_db_escape($telegram_message_id) . '%" AND B.id = A.conversation_id AND (B.extra_2 = "' . $token . '" OR B.extra_3 = "' . $token . '")'), 'count') != 0) { // Deprecated. Use only extra_3 = "' . $token . '"
-            die();
-=======
             $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'tg', $chat_id, false, $token, $tags), 'details', [])['id'];
         } else {
             if ($telegram_message_id && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages A, sb_conversations B WHERE A.conversation_id =  ' . $conversation_id . ' AND A.payload LIKE "%' . sb_db_escape($telegram_message_id) . '%" AND B.id = A.conversation_id AND (B.extra_2 = "' . $token . '" OR B.extra_3 = "' . $token . '")'), 'count') != 0) { // Deprecated. Use only extra_3 = "' . $token . '"
@@ -97,7 +86,6 @@ if ($response) {
             if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
                 sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
             }
->>>>>>> vendor-update
         }
 
         // Attachments
@@ -115,10 +103,6 @@ if ($response) {
             array_push($attachments, [substr($url, strripos($url, '/') + 1), $url]);
         }
 
-<<<<<<< HEAD
-        // Send message
-        $response = sb_send_message($user_id, $conversation_id, $message, $attachments, false, $telegram_message_id ? json_encode(['tgid' => $telegram_message_id]) : '');
-=======
         // Payload
         $payload = [];
         if ($telegram_message_id) {
@@ -134,19 +118,12 @@ if ($response) {
 
         // Send message
         $response = sb_send_message($user_id, $conversation_id, $message, $attachments, false, $payload);
->>>>>>> vendor-update
 
         // Dialogflow, Notifications, Bot messages
         $response_external = sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, ['source' => 'tg', 'platform_value' => $chat_id]);
 
         // Queue
-<<<<<<< HEAD
-        if (sb_get_multi_setting('queue', 'queue-active')) {
-            sb_queue($conversation_id, $department);
-        }
-=======
         sb_queue_check_and_run($conversation_id, $department, 'tg');
->>>>>>> vendor-update
 
         // Online status
         sb_update_users_last_activity($user_id);

@@ -5,11 +5,7 @@
  * TICKETS APP
  * ==========================================================
  *
-<<<<<<< HEAD
  * Tickets app. ï¿½ 2017-2025 board.support. All rights reserved.
-=======
- * Tickets app. © 2017-2025 board.support. All rights reserved.
->>>>>>> vendor-update
  *
  * 1. The tickets main block that render the whole tickets panel code.
  * 2. Generate the CSS for the ticketswith values setted in the settings area
@@ -19,12 +15,7 @@
 
 define('SB_TICKETS', '1.2.5');
 
-<<<<<<< HEAD
-function sb_component_tickets()
-{
-=======
 function sb_component_tickets() {
->>>>>>> vendor-update
     sb_js_global();
     sb_css();
     sb_tickets_css();
@@ -41,7 +32,6 @@ function sb_component_tickets() {
         $css .= ' sb-rtl';
     }
     ?>
-<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>"
@@ -95,31 +85,10 @@ function sb_component_tickets() {
                     <ul class="sb-user-tickets sb-scroll-area"
                         data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
                         <p class="p-4">
-=======
-    <div class="sb-main sb-tickets sb-loading sb-load<?php echo $css ?>" data-height="<?php echo sb_get_setting('tickets-height') ?>" data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
-        <div class="sb-tickets-area" style="visibility: hidden; opacity: 0;">
-            <?php if (!sb_isset($disable_fields, 'tickets-left-panel')) { ?>
-                <div class="sb-panel-left">
-                    <div class="sb-top">
-                        <div>
-                            <?php if (!sb_isset($disable_fields, 'tickets-button'))
-                                echo '<div class="sb-btn sb-icon sb-new-ticket"><i class="sb-icon-plus"></i>' . sb_($button_name ? $button_name : 'Create Ticket') . '</div>';
-                            else
-                                echo '<div class="sb-title">' . sb_($button_name ? $button_name : 'Tickets') . '</div>'; ?>
-                        </div>
-                        <div class="sb-search-btn">
-                            <i class="sb-icon sb-icon-search"></i>
-                            <input type="text" autocomplete="false" placeholder="<?php sb_e('Search for keywords or users...') ?>" />
-                        </div>
-                    </div>
-                    <ul class="sb-user-conversations sb-scroll-area" data-profile-image="<?php echo sb_isset($disable_fields, 'tickets-profile-image') ? 'false' : 'true' ?>">
-                        <p>
->>>>>>> vendor-update
                             <?php sb_e('No results found.') ?>
                         </p>
                     </ul>
                 </div>
-<<<<<<< HEAD
             </div>
             <div class="sb-panel-main">
                 <div class="sb-top" style="display:none">
@@ -285,8 +254,6 @@ function sb_component_tickets() {
                         </ul>
                     </div>
                 </div>
-=======
->>>>>>> vendor-update
             <?php } ?>
             <div class="sb-panel-main">
                 <div class="sb-top<?php echo sb_isset($disable_fields, 'tickets-top-bar') ? ' sb-top-hide' : '' ?>">
@@ -303,11 +270,7 @@ function sb_component_tickets() {
                 </div>
                 <div class="sb-conversation">
                     <div class="sb-list"></div>
-<<<<<<< HEAD
                     <?php sb_component_editor(false); ?>
-=======
-                    <?php sb_component_editor(); ?>
->>>>>>> vendor-update
                     <div class="sb-no-conversation-message">
                         <div>
                             <label>
@@ -322,23 +285,14 @@ function sb_component_tickets() {
                         <source src="<?php echo SB_URL ?>/media/sound.mp3" type="audio/mpeg">
                     </audio>
                 </div>
-<<<<<<< HEAD
                 <div class="sb-panel sb-scroll-area chat-login"></div>
-=======
-                <div class="sb-panel sb-scroll-area"></div>
->>>>>>> vendor-update
             </div>
             <?php if (!sb_isset($disable_fields, 'tickets-right-panel')) { ?>
                 <div class="sb-panel-right">
                     <div class="sb-top">
                         <?php if (sb_get_setting('tickets-registration-required')) { ?>
                             <div class="sb-profile-menu">
-<<<<<<< HEAD
-                                <div
-                                    class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
-=======
                                 <div class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
->>>>>>> vendor-update
                                     <img src="" />
                                     <span class="sb-name"></span>
                                 </div>
@@ -391,10 +345,6 @@ function sb_component_tickets() {
             }
             ?>
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> vendor-update
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -405,7 +355,6 @@ function sb_component_tickets() {
             $code = '';
             if (sb_get_multi_setting('tickets-fields', 'tickets-field-departments')) {
                 $departments = sb_get_departments();
-<<<<<<< HEAD
 
                 ?>
                 <div id="department_id" data-type="select" class="sb-input">
@@ -447,16 +396,6 @@ function sb_component_tickets() {
                     </select>
                 </div>
                 <?php
-=======
-                $code .= '<div id="department" class="sb-input sb-input-select"><span>' . sb_(sb_isset(sb_get_setting('departments-settings'), 'departments-label', 'Department')) . '</span><div class="sb-select"><p data-value="" data-required="true">' . sb_('Select a value') . '</p><ul>';
-                foreach ($departments as $key => $value) {
-                    $code .= '<li data-value="' . $key . '">' . sb_($value['name']) . '</li>';
-                }
-                $code .= '</ul></div></div>';
-            }
-            if (sb_get_multi_setting('tickets-fields', 'tickets-field-priority')) {
-                $code .= '<div id="priority" class="sb-input sb-input-select"><span>' . sb_('Priority') . '</span><div class="sb-select"><p data-value="" data-required="true">' . sb_('Select a value') . '</p><ul><li data-value="' . sb_('General issue') . '">' . sb_('General issue') . '</li><li data-value="' . sb_('Medium') . '">' . sb_('Medium') . '</li><li data-value="' . sb_('Critical') . '">' . sb_('Critical') . '</li></ul></div></div>';
->>>>>>> vendor-update
             }
             if (sb_get_multi_setting('wc-tickets-products', 'wc-tickets-products-active')) {
                 $products = sb_woocommerce_get_products([], false, sb_get_user_language());
@@ -481,7 +420,6 @@ function sb_component_tickets() {
             echo $code;
             ?>
         </div>
-<<<<<<< HEAD
         <div class="ticket-custom-fields" style="display:none">
             <?php
 
@@ -546,12 +484,6 @@ function sb_component_tickets() {
 
 function sb_tickets_css()
 {
-=======
-    </div>
-<?php }
-
-function sb_tickets_css() {
->>>>>>> vendor-update
     $css = '';
     $color_1 = sb_get_setting('color-1');
     if ($color_1 != '') {
@@ -561,7 +493,6 @@ function sb_tickets_css() {
         $css .= '.sb-search-btn>input:focus,[data-panel="new-ticket"] .sb-editor.sb-focus { border-color: ' . $color_1 . '; }';
         $css .= '.sb-btn-icon:hover { border-color: ' . $color_1 . '; color: ' . $color_1 . '; }';
     }
-<<<<<<< HEAD
 
     /* Timeline chat style for comments */
     $css .= '
@@ -696,19 +627,12 @@ function sb_tickets_css() {
     .user_profile{position: relative;padding-left: 58px;}
     ';
 
-=======
->>>>>>> vendor-update
     if ($css != '') {
         echo '<style>' . $css . '</style>';
     }
 }
 
-<<<<<<< HEAD
-function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false)
-{
-=======
 function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false) {
->>>>>>> vendor-update
     if (empty($message) && empty($attachments)) {
         return false;
     }
@@ -724,12 +648,7 @@ function sb_tickets_email($user, $message = false, $attachments = false, $conver
     return false;
 }
 
-<<<<<<< HEAD
-function sb_tickets_recaptcha($token)
-{
-=======
 function sb_tickets_recaptcha($token) {
->>>>>>> vendor-update
     return sb_isset(sb_curl('https://www.google.com/recaptcha/api/siteverify', ['response' => $token, 'secret' => sb_get_multi_setting('tickets-recaptcha', 'tickets-recaptcha-secret')]), 'success');
 }
 

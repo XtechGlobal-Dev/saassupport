@@ -67,16 +67,11 @@ if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNA
             $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "ln" AND user_id = ' . $user_id . ' AND (extra_2 = "' . $token . '" OR extra_3 = "' . $token . '") ORDER BY id DESC LIMIT 1'), 'id'); // Deprecated. Remove extra_2. Use only extra_3 = "' . $token . '"
         }
         $GLOBALS['SB_LOGIN'] = $user;
-<<<<<<< HEAD
-        if (!$conversation_id) {
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'ln', $line_id, $token, $tags), 'details', [])['id'];
-=======
         $is_routing = sb_routing_is_active();
         if (!$conversation_id) {
             $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'ln', $line_id, $token, $tags), 'details', [])['id'];
         } else if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
             sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
->>>>>>> vendor-update
         }
 
         // Attachments
@@ -111,12 +106,9 @@ if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNA
         // Dialogflow, Notifications, Bot messages
         $response_external = sb_messaging_platforms_functions($conversation_id, $message_text, $attachments, $user, ['source' => 'ln', 'line_id' => $line_id]);
 
-<<<<<<< HEAD
-=======
         // Queue
         sb_queue_check_and_run($conversation_id, $department, 'ln');
 
->>>>>>> vendor-update
         // Online status
         sb_update_users_last_activity($user_id);
 

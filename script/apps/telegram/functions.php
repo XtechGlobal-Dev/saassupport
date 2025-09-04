@@ -16,15 +16,9 @@
  *
  */
 
-<<<<<<< HEAD
-define('SB_TELEGRAM', '1.0.7');
-
-function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $conversation_id = false) {
-=======
 define('SB_TELEGRAM', '1.0.9');
 
 function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $conversation_id = false, $reply = false, $message_id = false) {
->>>>>>> vendor-update
     if (empty($message) && empty($attachments)) {
         return false;
     }
@@ -75,9 +69,6 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
     if ($business_connection_id) {
         $query['business_connection_id'] = $business_connection_id;
     }
-<<<<<<< HEAD
-    $response = sb_curl('https://api.telegram.org/bot' . $token . '/' . $method, $query);
-=======
     if ($reply) {
         $reply = sb_isset(sb_db_get('SELECT payload FROM sb_messages WHERE id = ' . sb_db_escape($reply, true)), 'payload');
         if ($reply) {
@@ -98,7 +89,6 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
         $message_payload['tgid'] = $response['result']['message_id'];
         sb_update_message($message_id, false, false, $message_payload);
     }
->>>>>>> vendor-update
 
     // Attachments
     if ($count > 1) {
@@ -111,11 +101,7 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
             $attachment_type = sb_telegram_get_attachment_type($attachments[$i][1]);
             $method = $attachment_type[0];
             $query[$attachment_type[1]] = $attachments[$i][1];
-<<<<<<< HEAD
-            array_push($responses, sb_curl('https://api.telegram.org/bot' . $token . '/' . $method, $query));
-=======
             array_push($responses, sb_curl($method, $query, $token));
->>>>>>> vendor-update
         }
         $response['attachments'] = $responses;
     }
@@ -220,19 +206,11 @@ function sb_telegram_rich_messages($message, $extra = false) {
 }
 
 function sb_telegram_synchronization($token, $cloud = '', $is_additional_number = false) {
-<<<<<<< HEAD
-    return json_decode(sb_get('https://api.telegram.org/bot' . $token . '/setWebhook?url=' . SB_URL . '/apps/telegram/post.php' . ($is_additional_number ? '%3Ftg_token%3D' . $token : '') . str_replace(['&', '='], [$is_additional_number ? '%26' : '%3F', '%3D'], $cloud)), true);
-}
-
-function sb_telegram_download_file($file_id, $token) {
-    $file = sb_get('https://api.telegram.org/bot' . $token . '/getFile?file_id=' . $file_id, true);
-=======
     return sb_telegram_get('setWebhook?url=' . SB_URL . '/apps/telegram/post.php' . ($is_additional_number ? '%3Ftg_token%3D' . $token : '') . str_replace(['&', '='], [$is_additional_number ? '%26' : '%3F', '%3D'], $cloud), $token, true);
 }
 
 function sb_telegram_download_file($file_id, $token) {
     $file = sb_telegram_get('getFile?file_id=' . $file_id, $token, true);
->>>>>>> vendor-update
     $path = $file['result']['file_path'];
     if (!empty($file['ok'])) {
         return sb_download_file('https://api.telegram.org/file/bot' . $token . '/' . $path, rand(1000, 99999) . '_' . (strpos($path, '/') ? substr($path, strripos($path, '/') + 1) : $path));
@@ -241,9 +219,6 @@ function sb_telegram_download_file($file_id, $token) {
 }
 
 function sb_telegram_set_typing($chat_id, $token) {
-<<<<<<< HEAD
-    return sb_get('https://api.telegram.org/bot' . $token . '/sendChatAction?action=typing&chat_id=' . $chat_id);
-=======
     return sb_telegram_get('sendChatAction?action=typing&chat_id=' . $chat_id, $token);
 }
 
@@ -257,7 +232,6 @@ function sb_telegram_curl($url_part, $query, $token) {
 
 function sb_telegram_get($url_part, $token, $is_json = false) {
     return sb_get('https://api.telegram.org/bot' . $token . '/' . $url_part, $is_json);
->>>>>>> vendor-update
 }
 
 ?>

@@ -106,14 +106,9 @@ if ($raw) {
             $conversation_id = sb_whatsapp_get_conversation_id($user_id, $phone_number_id);
         }
         $GLOBALS['SB_LOGIN'] = $user;
-<<<<<<< HEAD
-        if (!$conversation_id) {
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'wa', $phone_number_id, false, false, $tags), 'details', [])['id'];
-=======
         $is_routing = sb_routing_is_active();
         if (!$conversation_id) {
             $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'wa', $phone_number_id, false, false, $tags), 'details', [])['id'];
->>>>>>> vendor-update
             $new_conversation = true;
             if (empty($user['email']) && in_array(sb_get_setting('registration-required'), ['registration', 'registration-login'])) {
                 $response_wa = sb_whatsapp_cloud_flow_send_builtin($phone, $phone_number_id, 'registration');
@@ -121,10 +116,6 @@ if ($raw) {
                     $delayed_message = '[registration]';
                 }
             }
-<<<<<<< HEAD
-        } else if ($payload && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages WHERE conversation_id =  ' . $conversation_id . ' AND payload LIKE "%' . sb_db_escape($payload) . '%"'), 'count') != 0) {
-            die();
-=======
         } else {
             if ($payload && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages WHERE conversation_id =  ' . $conversation_id . ' AND payload LIKE "%' . sb_db_escape($payload) . '%"'), 'count') != 0) {
                 die();
@@ -132,7 +123,6 @@ if ($raw) {
             if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
                 sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
             }
->>>>>>> vendor-update
         }
         if ($is_new_user) {
             sb_update_user($user_id, ['profile_image' => sb_get_avatar($name[0], $name[1])]);
@@ -150,11 +140,7 @@ if ($raw) {
                     array_push($attachments, [$file_name, sb_download_file($response['MediaUrl0'], $file_name, false, ['Authorization: Basic ' . base64_encode($settings['whatsapp-twilio-user'] . ':' . $settings['whatsapp-twilio-token'])])]);
                 }
             }
-<<<<<<< HEAD
-        } else if ($message_type != 'text') {
-=======
         } else if ($message_type != 'text' && $message_type != 'unsupported') {
->>>>>>> vendor-update
             $file_data = $message_2[$message_type];
             switch ($message_type) {
                 case 'location':
@@ -197,10 +183,7 @@ if ($raw) {
                     $mime = sb_isset($file_data, 'mime_type');
                     $is_audio = $mime == 'audio/ogg; codecs=opus';
                     $file_name = sb_isset($file_data, 'filename', $file_data['id']) . ($is_audio ? '_voice_message.ogg' : ($sticker ? '.webp' : ''));
-<<<<<<< HEAD
-=======
                     $url = false;
->>>>>>> vendor-update
                     if ($provider == '360') {
                         $url = sb_download_file('https://waba-v2.360dialog.io/media/' . $file_data['id'], rand(9999999, 99999999999) . '_' . $file_name, $mime, ['D360-API-KEY: ' . sb_get_multi_setting('whatsapp-360', 'whatsapp-360-key')]);
                     } else {
@@ -209,13 +192,9 @@ if ($raw) {
                             $url = sb_download_file($media_url, ($sticker ? 'sticker_' : '') . rand(9999999, 99999999999) . '_' . $file_name, $mime, ['Authorization: Bearer ' . sb_whatsapp_cloud_get_token($phone_number_id)]);
                         }
                     }
-<<<<<<< HEAD
-                    array_push($attachments, [sb_string_slug(basename($url)), $url]);
-=======
                     if ($url) {
                         array_push($attachments, [sb_string_slug(basename($url)), $url]);
                     }
->>>>>>> vendor-update
                     if (isset($file_data['caption']) && $file_data['caption'] != $file_name) {
                         $message = $file_data['caption'];
                     }
@@ -227,11 +206,7 @@ if ($raw) {
             unset($flow['flow_token']);
             unset($flow['sb_type']);
             $flow = array_merge($user, $flow);
-<<<<<<< HEAD
-            sb_update_user($user_id, $flow, $flow);
-=======
             sb_update_user($user_id, $flow, $flow, true, true);
->>>>>>> vendor-update
         }
 
         // Send message
@@ -241,13 +216,7 @@ if ($raw) {
         $response_extarnal = sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, ['source' => 'wa', 'platform_value' => $phone, 'new_conversation' => $new_conversation, 'extra' => $phone_number_id]);
 
         // Queue
-<<<<<<< HEAD
-        if (sb_get_multi_setting('queue', 'queue-active')) {
-            sb_queue($conversation_id, $department);
-        }
-=======
         sb_queue_check_and_run($conversation_id, $department, 'wa');
->>>>>>> vendor-update
 
         // Miscellaneous
         sb_update_users_last_activity($user_id);

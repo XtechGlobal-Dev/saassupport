@@ -1,11 +1,7 @@
 <?php
-<<<<<<< HEAD
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-=======
-
->>>>>>> vendor-update
 /*
  * ==========================================================
  * AJAX.PHP
@@ -129,11 +125,8 @@ function sb_ajax_execute() {
             return sb_json_response(sb_get_user($_POST['user_id'], sb_post('extra')));
         case 'get-users':
             return sb_json_response(sb_get_users(sb_post('sorting', ['creation_time', 'DESC']), sb_post('user_types', []), sb_post('search', ''), sb_post('pagination'), sb_post('extra'), sb_post('users_id'), sb_post('department'), sb_post('tag'), sb_post('source')));
-<<<<<<< HEAD
         case 'get-users-list':
             return sb_json_response(get_users_list(sb_post('sorting')));
-=======
->>>>>>> vendor-update
         case 'get-new-users':
             return sb_json_response(sb_get_new_users($_POST['datetime']));
         case 'get-user-extra':
@@ -162,7 +155,6 @@ function sb_ajax_execute() {
             return sb_json_response(sb_get_users_with_details($_POST['details'], sb_post('user_ids')));
         case 'update-user-to-lead':
             return sb_json_response(sb_update_user_to_lead($_POST['user_id']));
-<<<<<<< HEAD
         case 'get-dashboard-data':
             return sb_json_response(sb_get_dashboad_data());
         case 'fetch-customer-overview':
@@ -247,12 +239,6 @@ function sb_ajax_execute() {
             return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag')));
         case 'get-new-conversations':
             return sb_json_response(sb_get_new_conversations($_POST['datetime'], sb_post('department'), sb_post('source'), sb_post('tag')));
-=======
-        case 'get-conversations':
-            return sb_json_response(sb_get_conversations(sb_post('pagination', 0), sb_post('status_code', 0), sb_post('department'), sb_post('source'), sb_post('tag'), sb_post('agent_id')));
-        case 'get-new-conversations':
-            return sb_json_response(sb_get_new_conversations($_POST['datetime'], sb_post('department'), sb_post('source'), sb_post('tag'), sb_post('agent_id')));
->>>>>>> vendor-update
         case 'get-conversation':
             return sb_json_response(sb_get_conversation(sb_post('user_id'), $_POST['conversation_id']));
         case 'search-conversations':
@@ -524,11 +510,7 @@ function sb_ajax_execute() {
         case 'whatsapp-360-synchronization':
             return sb_json_response(sb_whatsapp_360_synchronization($_POST['token'], sb_post('cloud_token')));
         case 'telegram-send-message':
-<<<<<<< HEAD
-            return sb_json_response(sb_telegram_send_message($_POST['chat_id'], sb_post('message', ''), sb_post('attachments', []), sb_post('conversation_id')));
-=======
             return sb_json_response(sb_telegram_send_message($_POST['chat_id'], sb_post('message', ''), sb_post('attachments', []), sb_post('conversation_id'), sb_post('reply'), sb_post('message_id')));
->>>>>>> vendor-update
         case 'telegram-synchronization':
             return sb_json_response(sb_telegram_synchronization($_POST['token'], sb_post('cloud_token'), sb_post('is_additional_number')));
         case 'viber-send-message':
