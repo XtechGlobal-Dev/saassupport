@@ -60,6 +60,16 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
     <link rel="apple-touch-icon" href="<?php echo SB_CLOUD_BRAND_ICON_PNG ?>" />
     <link rel="manifest" href="<?php echo SB_CLOUD_MANIFEST_URL ?>" />
     <?php account_js() ?>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".account-toggle-btn").click(function () {
+                $(".sb-tab .sb-nav").toggleClass("side-open");
+            })
+            $(".ul_account li").click(function () {
+                $(".sb-tab .sb-nav").removeClass("side-open")
+            })
+        })
+    </script>
 </head>
 <body class="on-load<?php echo $rtl ? ' sb-rtl' : '' ?>">
     <div id="preloader"></div>
@@ -792,10 +802,96 @@ function box_chart() {
                     <?php sb_e('Sign up free') ?>
                 </div>
             </div>
-            <div class="sb-errors-area"></div>
+            <div class="sb-errors-area"></div></div> -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 top_left">
+                    <div class="left_section">
+                        <div class="logo-container">
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
+                            <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
+                        </div>
+                        <div class="laptop-image">
+                            <img src="../account/media/Group.png" alt="dash">
+                        </div>
+                        <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
+                        <div class="welcome-description">Effortless, AI-powered support. Track tickets, get updates, and
+                            resolve issues fast. Log in to begin.</div>
+                    </div>
+                </div>
+                <div class="col-md-6 top_right">
+                    <div class="right_section">
+                        <div class="login-form sb-main">
+                            <h1 class="login-title">Sign In</h1>
+                            <p class="login-description">
+                                Enter the Business Email Address and Password to log in to your account
+                            </p>
+                            <div class="form-fields">
+                                <div class="field-container mb-2">
+                                    <div class="field-label"><label class="required-label" for="email">Business
+                                            Email</label></div>
+                                    <div id="email" class="input-wrapper sb-input">
+                                        <input type="email" placeholder="name@work-email.com" id="businessemail"
+                                            class="form-input" />
+                                    </div>
+                                </div>
+                                <div class="sb-errors-area m-0 text-end emailerror"></div>
+                                <div class="field-container mb-2">
+                                    <div class="field-label"> <label class="required-label" id="password-field"
+                                            for="password-field">Password</label></div>
+                                    <div id="password" class="input-wrapper sb-input">
+                                        <input type="password" placeholder="8 Characters or more" minlength="8"
+                                            class="form-input" id="passwordfield" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                            color="#000000" fill="none"
+                                            style="margin-left: -30px;margin-right: 10px; cursor: pointer;"
+                                            id="togglePassword">
+                                            <path
+                                                d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                            <path
+                                                d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                                                stroke="#141B34" stroke-width="1.5" />
+                                        </svg>
+
+                                        <!-- <div class="eye-icon" onclick="togglePasswordVisibility()">
+                                            <svg width="24" height="24" fill="none" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M10 0C12.787 0 15.263 1.257 17.026 2.813C17.911 3.594 18.64 4.471 19.154 5.344C19.659 6.201 20 7.13 20 8C20 8.87 19.66 9.799 19.154 10.656C18.64 11.529 17.911 12.406 17.026 13.187C15.263 14.743 12.786 16 10 16C7.213 16 4.737 14.743 2.974 13.187C2.089 12.406 1.36 11.529 0.846 10.656C0.34 9.799 0 8.87 0 8C0 7.13 0.34 6.201 0.846 5.344C1.36 4.471 2.089 3.594 2.974 2.813C4.737 1.257 7.214 0 10 0ZM10 2C7.816 2 5.792 2.993 4.298 4.312C3.554 4.968 2.966 5.685 2.569 6.359C2.163 7.049 2 7.62 2 8C2 8.38 2.163 8.951 2.569 9.641C2.966 10.315 3.554 11.031 4.298 11.688C5.792 13.007 7.816 14 10 14C12.184 14 14.208 13.007 15.702 11.688C16.446 11.031 17.034 10.315 17.431 9.641C17.837 8.951 18 8.38 18 8C18 7.62 17.837 7.049 17.431 6.359C17.034 5.685 16.446 4.969 15.702 4.312C14.208 2.993 12.184 2 10 2ZM10 5C10.088 5 10.175 5.00367 10.261 5.011C10.0439 5.39185 9.95792 5.8335 10.0163 6.26798C10.0747 6.70246 10.2743 7.10572 10.5843 7.41571C10.8943 7.7257 11.2975 7.92525 11.732 7.98366C12.1665 8.04208 12.6081 7.95611 12.989 7.739C13.0416 8.34117 12.911 8.94518 12.6145 9.47189C12.3179 9.9986 11.8692 10.4234 11.327 10.6907C10.7849 10.958 10.1746 11.0553 9.57622 10.9699C8.97784 10.8844 8.41922 10.6202 7.97357 10.2118C7.52792 9.80343 7.21603 9.26995 7.07876 8.68129C6.94149 8.09262 6.98524 7.47621 7.20429 6.91284C7.42334 6.34946 7.80746 5.8654 8.30633 5.52407C8.8052 5.18275 9.39554 5.00008 10 5Z"
+                                                    fill="#194BC1" />
+                                            </svg>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="sb-errors-area m-0 text-end passworderror"></div>
+                                <div class="sb-errors-area m-0 text-end error"></div>
+                            </div>
+                            <div class="auth-options">
+                                <label class="remember-me">
+                                    <input type="checkbox" class="checkbox" checked />
+                                    <span class="remember-text">Remember Me</span>
+                                </label>
+                                <div class="forgot-password btn-forgot-password">
+                                    Forgot Password?
+                                </div>
+                            </div>
+                            <button class="login-button btn-login">Login</button>
+                            <div class="register-prompt">
+                                <div class="no-account">Don't have an account?</div>
+                                <div class="register-link btn-registration-box">Register</div>
+                            </div>
+                            <p class="disclaimer mt-2">
+                                <?php sb_e(sb_isset($cloud_settings, 'disclaimer', 'By creating an account you agree to our <a target="_blank" href="">Terms Of Service</a> and <a target="_blank" href="">Privacy Policy</a>.<br />&copy; 2025 Nexleon. All rights reserved.')) ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="sb-reset-password-box sb-cloud-box sb-admin-box">
+    <div class="sb-reset-password-box sb-cloud-box sb-admin-box sb-admin-box_new">
+        <!-- <div class="sb-info"></div>
         <div class="sb-info"></div>
         <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
@@ -821,7 +917,50 @@ function box_chart() {
                     <?php sb_e('Cancel') ?>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 top_left">
+                    <div class="left_section">
+                        <div class="logo-container">
+                            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
+                            <!-- <div class="logo-text">Nexleon Helpdesk</div> -->
+                        </div>
+                        <div class="laptop-image">
+                            <img src="../account/media/Group.png" alt="dash">
+                        </div>
+                        <div class="welcome-title">Welcome to Nexleon Helpdesk</div>
+                        <div class="welcome-description">
+                            No worries — reset it here to regain access to your tickets, track progress, and reconnect with
+                            our support team.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 top_right">
+                    <div class="right_section forgot-password-section">
+                        <div class="login-form sb-main">
+                            <h1 class="login-title">Forget Password?</h1>
+                            <p class="login-description">
+                                No worries! Just enter your email and we’ll send you login instructions
+                            </p>
+                            <div class="form-fields">
+                                <div class="field-container">
+                                    <div class="field-label"><label class="required-label" for="email">Business
+                                            Email</label></div>
+                                    <div id="email" class="input-wrapper sb-input">
+                                        <input type="email" placeholder="Business Email" id="reset-password-email"
+                                            class="form-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="forgot-password btn-cancel-reset-password mt-2">
+                                Back to Sign In
+                            </div>
+                            <button class="login-button sb-btn btn-reset-password">Send Reset Email</button>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
     </div>
     <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset']))
         echo ' active' ?>">

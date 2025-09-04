@@ -43,7 +43,8 @@
  *
  */
 
-const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags, C.converted_to_ticket FROM sb_messages A, sb_users B, sb_conversations C ';
+const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags, C.converted_to_ticket ';
+//const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags ';
 
 function sb_get_conversations_users($conversations)
 {
