@@ -14669,7 +14669,10 @@ main {
             .dashboard-metrics {
                 .metric-card {
                     .graph_tabs {
-
+                        justify-content: space-between;
+                        .w-100 {
+                            width: fit-content !important;
+                        }
                         .new_users_chart,
                         .active_users_chart,
                         .ticket_created_chart,
@@ -14679,7 +14682,10 @@ main {
                         .avg_response_chart,
                         .total_conversations_chart,
                         .agent_chart {
-                            width: 68px;
+                            width: fit-content;
+                            canvas {
+                                width: 100% !important;
+                            }
                         }
                     }
                 }
@@ -14699,6 +14705,17 @@ main {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active {
+        .sb-profile {
+            .sb-name {
+                padding-left: 50px;
+            }
+            img {
+                min-height: 40px;
             }
         }
     }

@@ -15840,6 +15840,12 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     margin: 0 !important;
     padding-bottom: 0 !important;
   }
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
+    justify-content: space-between;
+  }
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .w-100 {
+    width: fit-content !important;
+  }
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart,
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
@@ -15849,10 +15855,27 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
   .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
-    width: 68px;
+    width: fit-content;
+  }
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .unread_conversation_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart canvas,
+  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart canvas {
+    width: 100% !important;
   }
   .sb-admin-box_new .right_section .login-form .form-fields .field-container .input-wrapper svg {
     top: 26px;
+  }
+  .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active .sb-profile .sb-name {
+    padding-left: 50px;
+  }
+  .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active .sb-profile img {
+    min-height: 40px;
   }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {
