@@ -3159,6 +3159,7 @@ td.sb-td-contact {
 
                         span {
                             color: #3c3c3c;
+                            font-size: 10px;
                         }
                     }
                 }
@@ -4142,6 +4143,11 @@ td.sb-td-contact {
 
                     ul {
                         top: 0;
+                        li {
+                            &[data-value="gray"] {
+                                color: #fff;
+                            }
+                        }
                     }
 
                     p {
@@ -11594,6 +11600,7 @@ li.menu_head:hover {
                     text-decoration: none;
                     span {
                         word-break: break-word !important;
+                        font-size: 13px !important;
                     }
                 }
             }
@@ -13620,6 +13627,8 @@ main {
                 .logo {
                     &::before {
                         bottom: 4px;
+                        width: 118px;
+                        left: -14px;
                     }
                 }
             }
@@ -14484,10 +14493,15 @@ main {
                     left: 0;
                     transition: .5s ease-in-out;
                     overflow-y: scroll !important;
+                    width: 95px;
+                    &::-webkit-scrollbar {
+                        width: 0;
+                    }
                 }
 
                 .powered-by {
                     flex-direction: column;
+                    text-align: center;
                 }
             }
         }

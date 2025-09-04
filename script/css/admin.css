@@ -6665,6 +6665,7 @@ td.sb-td-contact p {
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time span {
   color: #3c3c3c;
+  font-size: 10px;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li p {
   font-size: 13px;
@@ -7416,6 +7417,9 @@ td.sb-td-contact p {
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select ul {
   top: 0;
+}
+.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select ul li[data-value=gray] {
+  color: #fff;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p {
   padding: 0 15px;
@@ -13770,6 +13774,7 @@ li.menu_head:hover {
 }
 .sidebar nav ul li a span {
   word-break: break-word !important;
+  font-size: 13px !important;
 }
 
 .row.tablet-sizee .nav-tabs .nav-item {
@@ -15198,6 +15203,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
 @media only screen and (max-width: 1024px) {
   .sb-admin .header_new .sidebar .logo::before {
     bottom: 4px;
+    width: 118px;
+    left: -14px;
   }
   .sb-menu-wide_new ul {
     max-width: 242px;
@@ -15735,9 +15742,14 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     left: 0;
     transition: 0.5s ease-in-out;
     overflow-y: scroll !important;
+    width: 95px;
+  }
+  .sb-admin .header_new .sidebar.side-open::-webkit-scrollbar {
+    width: 0;
   }
   .sb-admin .header_new .sidebar .powered-by {
     flex-direction: column;
+    text-align: center;
   }
   .sb-area-ticket-detail .tc_bg .tc_back {
     padding-inline: 15px;
