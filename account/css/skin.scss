@@ -1,8 +1,8 @@
-/*
+ /*
 
-===================================================================
+====
 CLOUD MAIN CSS FILE
-===================================================================
+====
 
 */
 
@@ -27,7 +27,7 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 /*
      
 GLOBAL
-==========================================================
+==
 
 */
 
@@ -218,7 +218,7 @@ hr.hr-border {
 /*
      
 REGISTRATION AND LOGIN
-==========================================================
+==
 
 */
 
@@ -305,8 +305,10 @@ REGISTRATION AND LOGIN
 }
 
 /*
+     
 ACCOUNT
-==========================================================
+==
+
 */
 
 .sb-account-box .sb-top-bar, .sb-super-box .sb-admin .sb-top-bar {
@@ -315,7 +317,7 @@ ACCOUNT
     align-items: center;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #eaedf4;
+    border-bottom: 1px solid $border-color;
 
     h2 {
         display: flex;
@@ -574,7 +576,7 @@ ACCOUNT
 /*
      
 MEMBERSHIP
-==========================================================
+==
 
 */
 
@@ -734,7 +736,7 @@ MEMBERSHIP
 /*
      
 SUPER ADMIN
-==========================================================
+==
 
 */
 
@@ -926,7 +928,7 @@ td[data-id="name"], th[data-field="name"] {
 /*
      
 RTL
-==========================================================
+==
 
 */
 
@@ -975,14 +977,15 @@ RTL
 /*
      
 RESPONSIVE
-==========================================================
+==
 
 */
 
-@media (max-width: 767px) {
+@media (max-width: 464px) {
     .sb-admin {
         width: auto;
         position: static;
+        height: auto;
     }
 
     .sb-account-box {
@@ -1053,5 +1056,62 @@ RESPONSIVE
 
     .sb-admin-box .sb-top-bar img {
         max-width: 100%;
+    }
+
+    .sb-super-box {
+        > div > .sb-tab {
+            display: block;
+            height: auto;
+
+            .sb-nav {
+                border-right: none;
+                border-bottom: 1px solid #d4d4d4;
+
+                > ul {
+                    max-width: 100%;
+                }
+
+                li {
+                    line-height: 20px;
+                    display: block;
+                    font-size: 17px;
+                }
+            }
+        }
+
+        .sb-setting {
+            display: block;
+
+            > .sb-setting-content {
+                max-width: 100%;
+                width: auto;
+            }
+        }
+
+        .sb-tab .sb-content {
+            width: auto;
+        }
+    }
+
+    #membership-plans > div {
+        h5 {
+            margin: 15px 0 15px 0 !important;
+            font-size: 16px;
+        }
+
+        > div {
+            display: block;
+        }
+
+        & + div {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #d4d4d4;
+        }
+    }
+
+    .table-affiliates {
+        display: block;
+        overflow-x: scroll;
     }
 }

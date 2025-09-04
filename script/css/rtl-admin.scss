@@ -1,9 +1,9 @@
 
 /*
 * 
-* ==========================================================
+* ==
 * RTL-ADMIN.SCSS
-* ==========================================================
+* ==
 *
 * Back-end RTL CSS. This file is imported only.
 *
@@ -666,6 +666,14 @@
         }
     }
 
+
+
+    .sb-menu [data-value="switch"] > div {
+        right: calc(100% - 1px);
+        left: auto;
+    }
+
+
     .sb-panel-aecommerce .sb-list-items > a > span:first-child {
         margin-right: 0;
         margin-left: 5px;
@@ -1055,7 +1063,11 @@
     }
 }
 
+
 @media (max-width: 767px) {
+
+@media (max-width: 464px) {
+
     .sb-rtl {
 
         .sb-menu-wide > ul li, .sb-nav > ul li {

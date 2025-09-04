@@ -3,9 +3,9 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 /*
- * ==========================================================
+ * ==
  * AJAX.PHP
- * ==========================================================
+ * ==
  *
  * AJAX functions. This file must be executed only via AJAX. © 2017-2025 board.support. All rights reserved.
  *
@@ -510,7 +510,7 @@ function sb_ajax_execute() {
         case 'whatsapp-360-synchronization':
             return sb_json_response(sb_whatsapp_360_synchronization($_POST['token'], sb_post('cloud_token')));
         case 'telegram-send-message':
-            return sb_json_response(sb_telegram_send_message($_POST['chat_id'], sb_post('message', ''), sb_post('attachments', []), sb_post('conversation_id')));
+            return sb_json_response(sb_telegram_send_message($_POST['chat_id'], sb_post('message', ''), sb_post('attachments', []), sb_post('conversation_id'), sb_post('reply'), sb_post('message_id')));
         case 'telegram-synchronization':
             return sb_json_response(sb_telegram_synchronization($_POST['token'], sb_post('cloud_token'), sb_post('is_additional_number')));
         case 'viber-send-message':

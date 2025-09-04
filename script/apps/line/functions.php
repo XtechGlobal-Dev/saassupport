@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * LINE APP
- * ==========================================================
+ * ==
  *
  * Line app. © 2017-2025 board.support. All rights reserved.
  *
@@ -13,7 +13,7 @@
  *
  */
 
-define('SB_LINE', '1.0.4');
+define('SB_LINE', '1.0.5');
 
 function sb_line_send_message($line_id, $message = '', $attachments = [], $conversation_id = false) {
     if (empty($message) && empty($attachments)) {

@@ -41,6 +41,10 @@
   "Agents & Admins": "",
   "Albanian": "",
   "All": "",
+
+
+  "All agents": "",
+
   "All channels": "",
   "All departments": "",
   "All messages": "",
@@ -85,6 +89,11 @@
   "Average time for agents to send the first reply after the user sends the first message.": "",
   "Bank details": "",
   "Bank Transfer": "",
+
+
+  "Bengali": "",
+  "Billing details": "",
+
   "Birthdate": "",
   "Brasilian Portugase": "",
   "Browser": "",
@@ -103,13 +112,20 @@
   "Chatbot": "",
   "Chatbot Training": "",
   "Chinese": "",
+
+
+  "Chinese - Traditional": "",
+
   "Choose file": "",
   "City": "",
   "Client side admin": "",
   "Close": "",
   "Closed": "",
   "Company": "",
+
   "Company details": "",
+
+
   "Complete installation": "",
   "Conditions": "",
   "Confirm": "",
@@ -183,6 +199,10 @@
   "Extract URLs": "",
   "Febraury": "",
   "Files": "",
+
+
+  "Filipino": "",
+
   "Finnish": "",
   "First name": "",
   "Flows": "",
@@ -229,6 +249,10 @@
   "Leads count. Leads are users who have started at least one conversation but who are not registered.": "",
   "License key": "",
   "Links and URLs": "",
+
+
+  "Lithuanian": "",
+
   "Login": "",
   "Login information": "",
   "Logout": "",
@@ -257,6 +281,10 @@
   "Monthly usage in": "",
   "More": "",
   "Name": "",
+
+
+  "Name": "",
+
   "New order": "",
   "New translation": "",
   "No data found.": "",
@@ -288,6 +316,11 @@
   "Polish": "",
   "Pop-ups": "",
   "Portuguese": "",
+
+
+  "Portuguese - Brasilian": "",
+  "Postal code": "",
+
   "Postal code": "",
   "Preview": "",
   "Preview in theme": "",
@@ -357,11 +390,22 @@
   "Subject": "",
   "Subscribe": "",
   "Subscribe emails count": "",
+
   "Sundanese": "",
   "Sunday": "",
   "Swedish": "",
   "Synchronization completed.": "",
   "Tags": "",
+
+  "Summary": "",
+  "Sundanese": "",
+  "Sunday": "",
+  "Swedish": "",
+  "Switch accounts": "",
+  "Synchronization completed.": "",
+  "Tags": "",
+  "Tax ID": "",
+
   "Text messages": "",
   "Thai": "",
   "The API token is a required for using the {R} WEB API.": "",

@@ -1,5 +1,5 @@
 <?php
-
+ 
 use parallel\Events\Event\Type;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -7,9 +7,9 @@ use PHPMailer\PHPMailer\Exception;
 
 /*
  *
- * ===================================================================
+ * ====
  * CLOUD FUNCTIONS FILE
- * ===================================================================
+ * ====
  *
  * © 2017-2025 board.support. All rights reserved.
  *
@@ -273,7 +273,7 @@ function account_save($details) {
     $query = '';
     $query_sb = '';
     $main_ids = ['first_name', 'last_name', 'email', 'password', 'password_2', 'phone', 'credits', 'membership', 'membership_expiration'];
-    $query_users_data = '';
+    $company_details = [];
     if (!super_admin()) {
         unset($details['credits']);
         unset($details['membership']);
@@ -295,16 +295,16 @@ function account_save($details) {
                 $query_sb .= $key . ' = "' . $value . '",';
             }
             $query .= $key . ' = "' . $value . '",';
-        } else {
-            $query_users_data .= '(' . $user_id . ', "' . $key . '", "' . $value . '"),';
+        } else if (strpos($key, 'company_') !== false) {
+            $company_details[$key] = $value;
         }
     }
     $response = sb_db_query('UPDATE sb_users SET ' . substr($query_sb, 0, -1) . ' WHERE email = "' . $email . '"');
     if ($response === true) {
         $response = db_query('UPDATE users SET ' . substr($query, 0, -1) . ' WHERE id = ' . $user_id);
-        if ($query_users_data) {
+        if ($company_details) {
             super_delete_user_data($user_id, 'company_details');
-            $query_users_data ? super_insert_user_data(substr($query_users_data, 0, -1)) : false;
+            super_insert_user_data('(' . $user_id . ', "company_details", "' . sb_db_json_escape($company_details) . '")');
         }
         if ($response === true) {
             if (isset($details['email']) && $details['email'] != $email) {
@@ -359,7 +359,7 @@ function account_delete() {
 function account_get_user_details() {
     $account = account();
     if ($account) {
-        $account['company_details'] = sb_isset(db_get('SELECT value FROM users_data WHERE slug = "company_details" AND user_id = ' . db_escape($account['user_id'], true)), 'value', '');
+        $account = array_merge($account, json_decode(sb_isset(db_get('SELECT value FROM users_data WHERE slug = "company_details" AND user_id = ' . db_escape($account['user_id'], true)), 'value', '[]'), true));
     }
     return $account;
 }
@@ -738,7 +738,7 @@ function membership_custom_payment($amount, $metadata_id) {
 }
 
 function membership_use_credits($spending_source, $extra = false) {
-    // $spending_sources cost based on the highest cost between the input and the output / 1.000.000
+    // $spending_sources cost based on the highest cost between input and output / 1.000.000
     $spending_sources = [
         'es' => 0.002,
         'cx' => 0.007,
@@ -749,10 +749,13 @@ function membership_use_credits($spending_source, $extra = false) {
         'gpt-3.5-turbo' => 0.000002,
         'gpt-3.5-turbo-0125' => 0.000001,
         'gpt-3.5-turbo-1106' => 0.000002,
+        'gpt-5' => 0.00001,
+        'gpt-5-mini' => 0.000002,
+        'gpt-5-nano' => 0.0000004,
         'gpt-4' => 0.00003,
         'gpt-4-32k' => 0.00006,
         'gpt-4-turbo' => 0.00003,
-        'gpt-4o' => 0.000015,
+        'gpt-4o' => 0.00001,
         'gpt-4o-mini' => 0.00000015,
         'gpt-4.1-nano' => 0.0000004,
         'gpt-4.1-mini' => 0.0000016,
@@ -786,6 +789,9 @@ function membership_use_credits($spending_source, $extra = false) {
         case 'o1-mini':
         case 'o3-mini':
         case 'o4-mini':
+        case 'gpt-5':
+        case 'gpt-5-mini':
+        case 'gpt-5-nano':
         case 'gpt-4-turbo':
         case 'gpt-4o':
         case 'gpt-4.1-nano':
@@ -865,7 +871,7 @@ function membership_set_purchased_credits($amount, $currency_code, $user_id, $pa
 }
 
 function membership_currency() {
-    if (PAYMENT_PROVIDER == 'stripe' && defined('STRIPE_CURRENCY')) { // Deprecated. Remove  && defined('STRIPE_CURRENCY')
+    if (PAYMENT_PROVIDER == 'stripe') {
         return STRIPE_CURRENCY;
     }
     if (PAYMENT_PROVIDER == 'rapyd') {
@@ -904,7 +910,13 @@ function stripe_create_session($price_id, $cloud_user_id, $client_reference_id =
         $client_reference_id .= '|sb';
     }
     $stripe_id = account_get_payment_id();
-    $response = stripe_curl('checkout/sessions?cancel_url=' . CLOUD_URL . '/account%3Ftab=membership&success_url=' . CLOUD_URL . '/account/%3Ftab=membership%26payment=success' . (explode('|', $client_reference_id)[0] == 'credits' ? '%26payment_type=credits' : '') . ($price_id ? '&line_items[0][price]=' . $price_id . '&line_items[0][quantity]=1' : '&currency=' . $extra) . '&mode=' . ($subscription ? 'subscription' : ($price_id ? 'payment' : 'setup')) . '&client_reference_id=' . $client_reference_id . ($stripe_id && strpos($stripe_id, 'cus_') !== false ? ('&customer=' . $stripe_id) : ('&customer_email=' . account()['email'])));
+    if (!$stripe_id || strpos($stripe_id, 'cus_') === false) {
+        $stripe_id = stripe_update_customer($cloud_user_id);
+        if (sb_is_error($stripe_id)) {
+            return $stripe_id;
+        }
+    }
+    $response = stripe_curl('checkout/sessions?cancel_url=' . CLOUD_URL . '/account%3Ftab=membership&success_url=' . CLOUD_URL . '/account/%3Ftab=membership%26payment=success' . (explode('|', $client_reference_id)[0] == 'credits' ? '%26payment_type=credits' : '') . ($price_id ? '&line_items[0][price]=' . $price_id . '&line_items[0][quantity]=1' : '&currency=' . $extra) . '&mode=' . ($subscription ? 'subscription' : ($price_id ? 'payment' : 'setup')) . '&client_reference_id=' . $client_reference_id . '&customer=' . $stripe_id);
     return $response;
 }
 
@@ -926,8 +938,8 @@ function stripe_cancel_subscription() {
     return false;
 }
 
-function stripe_curl($url_part, $type = 'POST') {
-    $response = sb_curl('https://api.stripe.com/v1/' . $url_part, '', ['Authorization: Basic ' . base64_encode(STRIPE_SECRET_KEY)], $type);
+function stripe_curl($url_part, $type = 'POST', $post_fields = '') {
+    $response = sb_curl('https://api.stripe.com/v1/' . $url_part, $post_fields, ['Authorization: Basic ' . base64_encode(STRIPE_SECRET_KEY)], $type);
     return $type == 'POST' || $type == 'PATCH' ? $response : json_decode($response, true);
 }
 
@@ -945,6 +957,30 @@ function stripe_get_price($price_amount, $product_id, $currency_code) {
         }
     }
     return stripe_curl('prices?unit_amount=' . $price_amount . '&currency=' . $currency_code . '&product=' . $product_id);
+}
+
+function stripe_update_customer($cloud_user_id, $stripe_id = false, $is_tax_id = true) {
+    $company_details = json_decode(super_get_user_data('company_details', $cloud_user_id, '[]'), true);
+    $email = account()['email'];
+    $post_fields = [
+        'email' => $email,
+        'name' => $company_details['company_name'] ?? '',
+        'address[line1]' => $company_details['company_address'] ?? '',
+        'address[line2]' => $company_details['company_address2'] ?? '',
+        'address[city]' => $company_details['company_city'] ?? '',
+        'address[postal_code]' => $company_details['company_postal_code'] ?? '',
+        'address[country]' => $company_details['company_country'] ?? ''
+    ];
+    if ($is_tax_id && !empty($company_details['company_tax_id']) && !empty($company_details['company_country'])) {
+        $post_fields['tax_id_data[0][type]'] = $company_details['company_country'] === 'gb' ? 'gb_vat' : 'eu_vat';
+        $post_fields['tax_id_data[0][value]'] = $company_details['company_tax_id'];
+    }
+    $response = stripe_curl('customers' . ($stripe_id ? '/' . $stripe_id : ''), 'POST', $post_fields);
+    $error = sb_isset($response, 'error');
+    if ($error) {
+        return $error['code'] == 'tax_id_invalid' && $is_tax_id ? stripe_update_customer($cloud_user_id, $stripe_id, false) : sb_error('stripe-error', 'stripe_update_customer', $error);
+    }
+    return sb_isset($response, 'id', $response);
 }
 
 /*
@@ -1150,7 +1186,11 @@ function yoomoney_curl($url_part, $body = false, $type = 'POST') {
 }
 
 function yoomoney_create_payment($amount, $currency_code, $return_url, $description = false, $metadata = false, $recurring = true) {
-    $query = ['amount' => ['value' => $amount, 'currency' => strtoupper($currency_code)], 'capture' => true, 'confirmation' => ['type' => 'redirect', 'return_url' => $return_url]];
+    $account = account();
+    if (!$account) {
+        return sb_error('account-not-found', 'yoomoney_create_payment');
+    }
+    $query = ['amount' => ['value' => number_format($amount, 2, '.', ''), 'currency' => strtoupper($currency_code)], 'capture' => true, 'confirmation' => ['type' => 'redirect', 'return_url' => $return_url]];
     if ($description) {
         $query['description'] = $description;
     }
@@ -1160,6 +1200,25 @@ function yoomoney_create_payment($amount, $currency_code, $return_url, $descript
     if ($metadata) {
         $query['metadata'] = $metadata;
     }
+    $query['receipt'] = [
+        'customer' => [
+            'full_name' => $account['first_name'] . ' ' . $account['last_name'],
+            'email' => $account['email']
+        ],
+        'items' => [
+            [
+                'description' => SB_CLOUD_BRAND_NAME . ' - ' . $description,
+                'quantity' => '1.00',
+                'amount' => [
+                    'value' => number_format($amount, 2, '.', ''),
+                    'currency' => strtoupper($currency_code),
+                ],
+                'payment_mode' => 'full_payment',
+                'payment_subject' => 'payment',
+                'vat_code' => 1
+            ]
+        ]
+    ];
     return yoomoney_curl('payments', $query);
 }
 
@@ -1355,9 +1414,16 @@ function super_save_customer($customer_id, $details, $extra_details = false) {
     if ($extra_details) {
         foreach ($extra_details as $key => $value) {
             $value = trim($value);
-            if ($key == 'white_label' && $value == 'activate') {
-                $query_users_data .= '(' . $customer_id . ', "white-label", "' . gmdate('d-m-y', time() + 31536000) . '"),';
-                membership_add_reseller_sale(false, 'white-label', super_get_white_label());
+            if ($key == 'white-label' || $key == 'white_label') {
+                if ($value == 'activate' || $value == 'renew') {
+                    $amount = super_get_white_label();
+                    if ($amount) {
+                        $query_users_data .= '(' . $customer_id . ', "white-label", "' . gmdate('d-m-y', time() + 31536000) . '"),';
+                        membership_add_reseller_sale(false, 'white-label', $amount);
+                    }
+                } else {
+                    $query_users_data .= '(' . $customer_id . ', "white-label", "' . super_get_user_data('white-label', $customer_id, '') . '"),';
+                }
             } else if (!empty($value)) {
                 $query_users_data .= '(' . $customer_id . ', "' . $key . '", "' . $value . '"),';
             }
@@ -1561,7 +1627,7 @@ function super_membership_plans() {
         $prices = sb_isset(stripe_curl('prices?limit=99&active=true&product=' . STRIPE_PRODUCT_ID, 'GET'), 'data', []);
         for ($i = 0; $i < count($prices); $i++) {
             $period = sb_isset($prices[$i]['recurring'], 'interval');
-            if ($period) {
+            if ($period && sb_isset($prices[$i]['recurring'], 'interval_count') == 1) {
                 $membership = membership_get($prices[$i]['id']);
                 $price = $prices[$i]['unit_amount'] / currency_get_divider($prices[$i]['currency']);
                 $quota_agents = $membership_type_ma ? '<h5>Quota agents</h5><input type="number" class="quota-agents" placeholder="0" value="' . sb_isset($membership, 'quota_agents', '') . '" />' : '';
@@ -1621,6 +1687,9 @@ function super_save_membership_plans($plans) {
         }
         $price = $plan['price'];
         $period = empty($plan['period']) ? 'month' : str_replace(['monthly', 'yearly'], ['month', 'year'], $plan['period']);
+        if ($period != 'month' && $period != 'year') {
+            continue;
+        }
         $messages_agents = SB_CLOUD_MEMBERSHIP_TYPE == 'messages-agents';
         for ($y = 0; $y < $count_minimum_quota; $y++) {
             if ($price >= sb_usd_get_amount($max_quotas[$y]['price'][$period], $currency_code) && $price < sb_usd_get_amount($max_quotas[$y + 1]['price'][$period], $currency_code)) {
@@ -1655,6 +1724,9 @@ function super_save_membership_plans($plans) {
 }
 
 function super_save_white_label($price) {
+    if ($price < sb_usd_get_amount(50, membership_currency())) {
+        return false;
+    }
     return db_query('INSERT INTO settings(name, value) VALUES ("white-label", "' . $price . '") ON DUPLICATE KEY UPDATE value = "' . $price . '"');
 }
 
@@ -1679,16 +1751,16 @@ function super_admin_config() {
         require_once(SB_PATH . '/config.php');
         $ec = sb_defined('ENVA' . 'TO_PUR' . 'CHASE' . '_CO' . 'DE');
         $m = 'Env' . 'ato purc' . 'hase c' . 'ode inv' . 'alid or mi' . 'ss' . 'ing.';
-        // if ($ec) {
-        //     $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
-        //     if ($response == 'veri' . 'ficat' . 'ion-success') {
-        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 2592000, '/');
-        //     } else {
-        //         die($m);
-        //     }
-        // } else {
-        //     die($m);
-        // }
+        if ($ec) {
+            $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
+            if ($response == 'veri' . 'ficat' . 'ion-success') {
+                setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 2592000, '/');
+            } else {
+                die($m);
+            }
+        } else {
+            die($m);
+        }
     }
 }
 
@@ -2236,8 +2308,8 @@ function shopify_ai_function_calling($function_name, $id, $arguments, $query_too
 function cloud_get_max_quotas() {
     $max_quotas = [
         [
-            'price' => ['month' => 1, 'year' => 1],
-            'quota' => ['month' => ['messages' => 100, 'agents' => 1, 'users' => 10], 'year' => ['messages' => 1000, 'agents' => 5, 'users' => 20], 'embeddings' => 100000]
+            'price' => ['month' => 0, 'year' => 0],
+            'quota' => ['month' => ['messages' => 100, 'agents' => 1, 'users' => 10], 'year' => ['messages' => 100, 'agents' => 1, 'users' => 10], 'embeddings' => 100000]
         ],
         [
             'price' => ['month' => 5, 'year' => 50],
@@ -2964,6 +3036,11 @@ function cloud_invoice($cloud_user_id, $amount, $type, $unix_time) {
     $invoice_number = 'inv-' . $cloud_user_id . '-' . $unix_time;
     $file_name = $invoice_number . '.pdf';
     $path = SB_CLOUD_PATH . '/script/uploads/invoices/';
+    $company_details = '';
+    $lines = array_filter([$account['company_name'] ?? '', $account['company_address'] ?? '', trim(($account['company_postal_code'] ?? '') . ' ' . ($data['company_city'] ?? '')), $account['company_country'] ?? '', $account['company_tax_id'] ?? '']);
+    if (!empty($lines)) {
+        $company_details = PHP_EOL . implode(PHP_EOL, $lines);
+    }
     if (!file_exists($path)) {
         mkdir($path, 0777, true);
     }
@@ -2987,7 +3064,7 @@ function cloud_invoice($cloud_user_id, $amount, $type, $unix_time) {
     $pdf->Cell(50, 1, sb_('To'));
     $pdf->SetFont('Arial', '', 13);
     $pdf->SetXY(20, 70);
-    $pdf->Multicell(168, 7, strip_tags(trim(iconv('UTF-8', 'ASCII//TRANSLIT', $account['first_name'] . ' ' . $account['last_name'] . PHP_EOL . $account['email'] . ($account['company_details'] ? PHP_EOL . str_replace(',', ',' . PHP_EOL, $account['company_details']) : '')))));
+    $pdf->Multicell(168, 7, strip_tags(trim(iconv('UTF-8', 'ASCII//TRANSLIT', $account['first_name'] . ' ' . $account['last_name'] . PHP_EOL . $account['email'] . $company_details))));
 
     $pdf->SetXY(130, 60);
     $pdf->SetFont('Arial', 'B', 13);

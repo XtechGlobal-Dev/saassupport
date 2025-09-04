@@ -1,14 +1,14 @@
-/*
+ /*
 
-===================================================================
+====
 CLOUD MAIN CSS FILE
-===================================================================
+====
 
 */
 /*
      
 GLOBAL
-==========================================================
+==
 
 */
 @keyframes pulse {
@@ -121,8 +121,7 @@ hr.hr-border {
       color: #ca3434;
       background: rgba(202, 52, 52, 0.1); }
   .sb-content .banner.banner-success {
-    background: #e6f1ec; 
-        width: 100%; }
+    background: #e6f1ec; }
     .sb-content .banner.banner-success h2, .sb-content .banner.banner-success p, .sb-content .banner.banner-success i, .sb-content .banner.banner-success a {
       color: #1a9260; }
     .sb-content .banner.banner-success .sb-icon-close:hover {
@@ -133,7 +132,7 @@ hr.hr-border {
 /*
      
 REGISTRATION AND LOGIN
-==========================================================
+==
 
 */
 .sb-admin-box .sb-top-bar img {
@@ -194,7 +193,7 @@ REGISTRATION AND LOGIN
 /*
      
 ACCOUNT
-==========================================================
+==
 
 */
 .sb-account-box .sb-top-bar, .sb-super-box .sb-admin .sb-top-bar {
@@ -370,7 +369,7 @@ ACCOUNT
 /*
      
 MEMBERSHIP
-==========================================================
+==
 
 */
 .plans-box {
@@ -481,7 +480,7 @@ MEMBERSHIP
 /*
      
 SUPER ADMIN
-==========================================================
+==
 
 */
 #tab-customers {
@@ -602,7 +601,7 @@ td[data-id="name"], th[data-field="name"] {
 /*
      
 RTL
-==========================================================
+==
 
 */
 .sb-rtl .sb-admin {
@@ -633,13 +632,14 @@ RTL
 /*
      
 RESPONSIVE
-==========================================================
+==
 
 */
-@media (max-width: 767px) {
+@media (max-width: 464px) {
   .sb-admin {
     width: auto;
-    position: static; }
+    position: static;
+    height: auto; }
 
   .sb-account-box .sb-top-bar {
     padding: 0 15px 0 15px; }
@@ -685,6 +685,40 @@ RESPONSIVE
     text-indent: -9999px; }
 
   .sb-admin-box .sb-top-bar img {
-    max-width: 100%; } }
+    max-width: 100%; }
+
+  .sb-super-box > div > .sb-tab {
+    display: block;
+    height: auto; }
+    .sb-super-box > div > .sb-tab .sb-nav {
+      border-right: none;
+      border-bottom: 1px solid #d4d4d4; }
+      .sb-super-box > div > .sb-tab .sb-nav > ul {
+        max-width: 100%; }
+      .sb-super-box > div > .sb-tab .sb-nav li {
+        line-height: 20px;
+        display: block;
+        font-size: 17px; }
+  .sb-super-box .sb-setting {
+    display: block; }
+    .sb-super-box .sb-setting > .sb-setting-content {
+      max-width: 100%;
+      width: auto; }
+  .sb-super-box .sb-tab .sb-content {
+    width: auto; }
+
+  #membership-plans > div h5 {
+    margin: 15px 0 15px 0 !important;
+    font-size: 16px; }
+  #membership-plans > div > div {
+    display: block; }
+  #membership-plans > div + div {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #d4d4d4; }
+
+  .table-affiliates {
+    display: block;
+    overflow-x: scroll; } }
 
 /*# sourceMappingURL=skin.min.css.map */

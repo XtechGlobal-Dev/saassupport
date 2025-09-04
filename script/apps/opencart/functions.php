@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * OPENCART APP
- * ==========================================================
+ * ==
  *
- * OpenCart app. © 2017-2025 board.support. All rights reserved.
+ * OpenCart app. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 

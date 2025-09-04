@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * ARMEMBER APP
- * ==========================================================
+ * ==
  *
- * ARMember App main file. © 2021 board.support. All rights reserved.
+ * ARMember App main file. ï¿½ 2021 board.support. All rights reserved.
  *
  */
 

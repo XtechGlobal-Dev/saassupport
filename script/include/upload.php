@@ -1,15 +1,14 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * UPLOAD.PHP
- * ==========================================================
+ * ==
  *
  * Manage all uploads of front-end and admin. � 2017-2025 board.support. All rights reserved.
  *
  */
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
 require_once('../include/functions.php');
 if (sb_is_cloud()) {
     $data = json_decode(openssl_decrypt(base64_decode(isset($_POST['cloud']) ? $_POST['cloud'] : $_COOKIE['sb-cloud']), 'AES-256-CBC', hash('sha256', SB_CLOUD_KEY), 0, substr(hash('sha256', 'supportboard_iv'), 0, 16)), true);

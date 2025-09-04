@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * INIT.PHP
- * ==========================================================
+ * ==
  *
  * This file loads the chat code and initilize the chat
  *
@@ -55,8 +55,7 @@ if (sb_isset($_GET, 'mode') == 'tickets') {
 echo sb_is_cloud() ? '<!-- ' . SB_CLOUD_BRAND_NAME . ' - ' . CLOUD_URL . ' -->' : '<!-- Support Board - https://board.support -->';
 die();
 
-function sb_component_chat()
-{
+function sb_component_chat() {
     sb_js_global();
     sb_css();
     $header_headline = sb_get_setting('header-headline');
@@ -144,9 +143,7 @@ function sb_component_chat()
                         <div class="sb-title">
                             <?php sb_e('Conversations') ?>
                         </div>
-                        <ul
-                            class="sb-user-conversations<?php echo sb_get_setting('force-one-conversation') ? ' sb-one-conversation' : '' ?>">
-                        </ul>
+                        <ul class="sb-user-conversations<?php echo sb_get_setting('force-one-conversation') ? ' sb-one-conversation' : '' ?>"></ul>
                         <?php
                         if (!$agents_menu && !$disable_dashboard) {
                             echo (!$departments_menu ? '<div class="sb-btn sb-btn-new-conversation">' . sb_('New conversation') . '</div>' : '') . '<div class="sb-btn sb-btn-all-conversations">' . sb_('View all') . '</div>';
@@ -197,8 +194,7 @@ function sb_component_chat()
     </div>
 <?php }
 
-function sb_cross_site_init()
-{
+function sb_cross_site_init() {
     if (defined('SB_CROSS_DOMAIN') && defined('SB_CROSS_DOMAIN_URL') && SB_CROSS_DOMAIN) {
         $domains = [];
         $current_domain = false;
@@ -239,8 +235,7 @@ function sb_cross_site_init()
     }
 }
 
-function sb_agents_menu()
-{
+function sb_agents_menu() {
     $online_agent_ids = sb_get_multi_setting('agents-menu', 'agents-menu-online-only') ? sb_get_online_user_ids(true) : false;
     $agents = sb_db_get('SELECT id, first_name, last_name, profile_image FROM sb_users WHERE ' . ($online_agent_ids !== false ? 'id IN (' . (count($online_agent_ids) ? implode(', ', $online_agent_ids) : '""') . ')' : 'user_type = "agent"'), false);
     $code = '<div class="sb-dashboard-agents"><div class="sb-title">' . sb_(sb_get_multi_setting('agents-menu', 'agents-menu-title', 'Agents')) . '</div><div class="sb-agents-list"' . (sb_get_multi_setting('agents-menu', 'agents-menu-force-one') ? ' data-force-one="true"' : '') . '>';
@@ -251,8 +246,7 @@ function sb_agents_menu()
     echo $code . ($count ? '' : '<span class="sb-no-results">' . sb_('No online agents available.') . '</span>') . '</div></div>';
 }
 
-function sb_messaging_channels()
-{
+function sb_messaging_channels() {
     $channels = [['wa', 'WhatsApp'], ['fb', 'Messenger'], ['ig', 'Instagram'], ['tw', 'Twitter'], ['tg', 'Telegram'], ['vb', 'Viber'], ['ln', 'LINE'], ['wc', 'WeChat'], ['za', 'Zalo'], ['em', 'Email'], ['tk', 'Ticket'], ['tm', 'Phone']];
     $code = '<div class="sb-messaging-channels"><div class="sb-title">' . sb_(sb_get_multi_setting('messaging-channels', 'messaging-channels-title', 'Channels')) . '</div><div class="sb-channels-list">';
     for ($i = 0; $i < count($channels); $i++) {

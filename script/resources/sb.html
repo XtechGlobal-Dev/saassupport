@@ -4,7 +4,11 @@
         <input type="text" />
     </div>
     <p>
+
         Please enter your Envato Purchase Code to enter the administration area. Restricted to one live domain, a testing secondary domain, or localhost.
+
+        Please enter your Envato Purchase Code to enter the administration area. Restricted to one live domain, or localhost.
+
         Save the code in Settings > Miscellaneous > Envato Purchase Code to to hide this message permanently.
         <a class="btn-text" href="https://help.market.envato.com/hc/en-us/articles/202822600-Where-Is-My-Purchase-Code-" rel="nofollow" target="_blank">Where is my purchase code?</a>
     </p>
@@ -59,6 +63,12 @@
                 }
                 if (response[1][0]) {
                     SBF.cookie('SA_' + 'VGCKMENS', response[1][1], 30, 'set');
+
+
+                    if ($('body').hasClass('wp-admin')) {
+                        SBF.cookie('SB_ENVATO_CODE', code, 1, 'set');
+                    }
+
                     location.reload();
                 } else {
                     if (response[1][1]) {
