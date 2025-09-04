@@ -12838,6 +12838,14 @@ main {
     }
 }
 
+.main-content {
+    #bot-image {
+        .input {
+            width: 100% !important;
+        }
+    }
+}
+
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
         max-width: 200px;
@@ -14619,6 +14627,18 @@ main {
     .sb-area-ticket-detail {
         .tc_bg {
             padding-inline: 15px;
+        }
+    }
+
+    .users-tab {
+        max-height: 52vh;
+    }
+
+    .sb-setting {
+        .repeater-item {
+            textarea {
+                min-width: fit-content;
+            }
         }
     }
 }

@@ -14702,6 +14702,10 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   color: #000 !important;
 }
 
+.main-content #bot-image .input {
+  width: 100% !important;
+}
+
 @media (max-width: 1600px) {
   .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
     max-width: 200px;
@@ -15815,6 +15819,12 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-area-ticket-detail .tc_bg {
     padding-inline: 15px;
+  }
+  .users-tab {
+    max-height: 52vh;
+  }
+  .sb-setting .repeater-item textarea {
+    min-width: fit-content;
   }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {
