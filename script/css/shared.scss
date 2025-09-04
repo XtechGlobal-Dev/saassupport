@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> vendor-update
 /*
 *  
 * ==========================================================
@@ -13,8 +9,7 @@
 */
 
 $transition: all 0.4s;
-<<<<<<< HEAD
-//$color-blue: #028be5;
+//$color-blue: #028be5; 
 $color-blue: #155CFD;
 //$color-dark-blue: rgb(0, 76, 125);
 $color-dark-blue: #033bbe;
@@ -27,24 +22,12 @@ $color-yellow: rgb(246, 158, 0);
 $background-gray: #edf2f9;
 //$background-color-2: rgba(39, 156, 255, 0.08);
 $background-color-2: rgba(243, 245, 249, 0.5019607843);
-=======
-$color-blue: #028be5;
-$color-dark-blue: rgb(0, 76, 125);
-$color-black: rgb(36, 39, 42);
-$color-gray: rgb(86, 96, 105);
-$color-red: rgb(202, 52, 52);
-$color-green: rgb(26, 146, 96);
-$color-yellow: rgb(246, 158, 0);
-$background-gray: rgb(245, 247, 250);
-$background-color-2: rgba(39, 156, 255, 0.08);
->>>>>>> vendor-update
 $background-color-red: rgba(202, 52, 52, 0.1);
 $background-color-yellow: rgb(242, 227, 124);
 $border-color: rgb(212, 212, 212);
 $white: #fff;
 $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 
-<<<<<<< HEAD
 @use "../media/icons/icons.scss" as *;
 
 @for $i from 1 through 10 {
@@ -124,24 +107,14 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 @font-face {
     //font-family: "Support Board Font";
     font-family: Manrope;
-=======
-@import "../media/icons/icons.scss";
-
-@font-face {
-    font-family: "Support Board Font";
->>>>>>> vendor-update
     src: url("../media/fonts/regular.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-<<<<<<< HEAD
     // font-family: "Support Board Font";
     font-family: Manrope;
-=======
-    font-family: "Support Board Font";
->>>>>>> vendor-update
     src: url("../media/fonts/medium.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
@@ -181,7 +154,6 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
 }
 
-<<<<<<< HEAD
 .sb-main,
 .sb-articles-page,
 .sb-main input,
@@ -193,27 +165,16 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 
 .sb-main *,
 .sb-articles-page * {
-=======
-.sb-main, .sb-articles-page, .sb-main input, .sb-main textarea, .sb-main select {
-    font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
-}
-
-.sb-main *, .sb-articles-page * {
->>>>>>> vendor-update
     box-sizing: content-box;
     outline: none;
 }
 
-<<<<<<< HEAD
 .sb-main input,
 .sb-articles-page input,
 .sb-articles-page input[text],
 .sb-main input[text],
 .sb-main textarea,
 .sb-main input[email] {
-=======
-.sb-main input, .sb-articles-page input, .sb-articles-page input[text], .sb-main input[text], .sb-main textarea, .sb-main input[email] {
->>>>>>> vendor-update
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -233,16 +194,11 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
     opacity: 0.7;
 }
 
-<<<<<<< HEAD
 .sb-no-results-active>.sb-no-results {
-=======
-.sb-no-results-active > .sb-no-results {
->>>>>>> vendor-update
     display: block !important;
     opacity: 1;
 }
 
-<<<<<<< HEAD
 .sb-no-results-active>div:not(.sb-no-results) {
     display: none !important;
 }
@@ -259,18 +215,6 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 .sb-admin .sb-top-bar>div:first-child>ul,
 .sb-dialog-box pre,
 .sb-horizontal-scroll {
-=======
-.sb-no-results-active > div:not(.sb-no-results) {
-    display: none !important;
-}
-
-.sb-hide, .sb-grid.sb-hide {
-    display: none !important;
-}
-
-.sb-scroll-area, .sb-conversation .sb-list, .sb-list .sb-message pre, .sb-rich-table .sb-content, .sb-admin .sb-top-bar > div:first-child > ul,
-.sb-dialog-box pre, .sb-horizontal-scroll {
->>>>>>> vendor-update
     overflow: hidden;
     overflow-y: scroll;
 
@@ -293,16 +237,12 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
 }
 
-<<<<<<< HEAD
 .sb-list .sb-message pre,
 .sb-rich-table .sb-content,
 .sb-admin .sb-top-bar>div:first-child>ul,
 .sb-dialog-box pre,
 .sb-horizontal-scroll,
 [data-id="flows"]>.sb-content {
-=======
-.sb-list .sb-message pre, .sb-rich-table .sb-content, .sb-admin .sb-top-bar > div:first-child > ul, .sb-dialog-box pre, .sb-horizontal-scroll, [data-id="flows"] > .sb-content {
->>>>>>> vendor-update
     overflow-y: hidden;
 
     &::-webkit-scrollbar {
@@ -310,7 +250,6 @@ $box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
 }
 
-<<<<<<< HEAD
 div ul.sb-menu,
 .sb-select ul,
 .sb-popup,
@@ -318,9 +257,6 @@ div ul.sb-menu,
 .sb-menu-mobile .sb-mobile,
 .sb-area-users .sb-filter-btn>div,
 .sb-menu li ul {
-=======
-div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile .sb-mobile, .sb-area-users .sb-filter-btn > div, .sb-menu li ul {
->>>>>>> vendor-update
     background: $white;
     border-radius: 4px;
     padding: 10px 0;
@@ -342,11 +278,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 */
 
 .sb-user-conversations {
-<<<<<<< HEAD
     >li {
-=======
-    > li {
->>>>>>> vendor-update
         border-bottom: 1px solid $border-color;
         padding: 15px;
         margin: 0;
@@ -354,14 +286,9 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         border-left: 2px solid rgba(255, 255, 255, 0);
         transition: $transition;
         position: relative;
-<<<<<<< HEAD
         margin-top: 55px;
 
         >div {
-=======
-
-        > div {
->>>>>>> vendor-update
             position: relative;
             color: rgb(60, 60, 60);
             font-size: 13px;
@@ -369,11 +296,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             line-height: 25px;
             letter-spacing: 0.3px;
 
-<<<<<<< HEAD
             >img {
-=======
-            > img {
->>>>>>> vendor-update
                 position: absolute;
                 left: 0;
                 top: 5px;
@@ -388,19 +311,11 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
                 justify-content: space-between;
                 opacity: 0.85;
 
-<<<<<<< HEAD
                 >span {
                     white-space: nowrap;
                 }
 
                 >span:first-child {
-=======
-                > span {
-                    white-space: nowrap;
-                }
-
-                > span:first-child {
->>>>>>> vendor-update
                     overflow: hidden;
                     margin-right: 15px;
                 }
@@ -427,16 +342,12 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .sb-user-tickets {
     li {position:relative}
 }
   
 .sb-chat-btn span,
 .sb-user-conversations>li>[data-count] {
-=======
-.sb-chat-btn span, .sb-user-conversations > li > [data-count] {
->>>>>>> vendor-update
     position: absolute;
     width: 20px;
     height: 20px;
@@ -458,30 +369,19 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .sb-user-conversations>li {
 
     &>[data-count] {
-=======
-.sb-user-conversations > li {
-
-    & > [data-count] {
->>>>>>> vendor-update
         left: 20px;
         top: 33px;
         border: 3px solid $white;
     }
 
-<<<<<<< HEAD
     &:hover>[data-count] {
-=======
-    &:hover > [data-count] {
->>>>>>> vendor-update
         border-color: $background-gray;
     }
 }
 
-<<<<<<< HEAD
 .sb-user-tickets {
     li>[data-count] {
     position: absolute;
@@ -506,42 +406,25 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 }
 }
 
-=======
->>>>>>> vendor-update
 /*
 
 # MESSAGES LIST AND CHAT
 ==========================================================
-<<<<<<< HEAD
 */
 
 .sb-chat,
 .sb-list {
-=======
-
-*/
-
-.sb-chat, .sb-list {
->>>>>>> vendor-update
     .sb-btn-text:hover {
         color: $color-blue;
     }
 }
 
 .sb-list {
-<<<<<<< HEAD
     >div {
         float: left;
         clear: both;
         position: relative;
         margin: 2px 10px 15px 20px;
-=======
-    > div {
-        float: left;
-        clear: both;
-        position: relative;
-        margin: 2px 10px 25px 20px;
->>>>>>> vendor-update
         box-shadow: none;
         background-color: rgb(245, 245, 245);
         border-radius: 6px;
@@ -573,20 +456,12 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             }
         }
 
-<<<<<<< HEAD
         &[data-type="slider"],
         &[data-type="slider-images"] {
             width: 100%;
         }
 
         &:first-child>span {
-=======
-        &[data-type="slider"], &[data-type="slider-images"] {
-            width: 100%;
-        }
-
-        &:first-child > span {
->>>>>>> vendor-update
             margin-top: 0 !important;
         }
 
@@ -594,12 +469,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             margin-bottom: 30px !important;
         }
 
-<<<<<<< HEAD
         &:not(.sb-right):last-child,
         >[data-id="sending"] {
-=======
-        &:not(.sb-right):last-child, > [data-id="sending"] {
->>>>>>> vendor-update
             animation: sb-fade-bottom-animation .4s;
         }
 
@@ -619,14 +490,10 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
                 left: auto;
             }
 
-<<<<<<< HEAD
             .sb-message,
             .sb-message a,
             .sb-rich-message .sb-text,
             .sb-rich-message .sb-title {
-=======
-            .sb-message, .sb-message a, .sb-rich-message .sb-text, .sb-rich-message .sb-title {
->>>>>>> vendor-update
                 color: $color-dark-blue;
             }
 
@@ -639,21 +506,13 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
                 left: auto;
             }
 
-<<<<<<< HEAD
             .sb-message:not(:empty)+.sb-message-attachments .sb-player {
-=======
-            .sb-message:not(:empty) + .sb-message-attachments .sb-player {
->>>>>>> vendor-update
                 border-color: rgba(0, 76, 125, .17);
             }
         }
 
-<<<<<<< HEAD
         &:not(.sb-right):not(.sb-label-date)+.sb-right,
         &.sb-right+div:not(.sb-right):not(.sb-label-date) {
-=======
-        &:not(.sb-right):not(.sb-label-date) + .sb-right, &.sb-right + div:not(.sb-right):not(.sb-label-date) {
->>>>>>> vendor-update
             margin-top: 15px;
         }
     }
@@ -665,31 +524,19 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         width: 25px;
         display: none;
 
-<<<<<<< HEAD
         >img {
-=======
-        > img {
->>>>>>> vendor-update
             width: 25px;
             height: 25px;
             border-radius: 50%;
         }
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             display: none;
         }
     }
 
-<<<<<<< HEAD
     .sb-message,
     .sb-message a {
-=======
-    .sb-message, .sb-message a {
->>>>>>> vendor-update
         color: $color-gray;
         font-size: 13px;
         line-height: 21px;
@@ -707,12 +554,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         }
 
         code {
-<<<<<<< HEAD
             //font-family: monospace;
             font-family: Manrope;
-=======
-            font-family: monospace;
->>>>>>> vendor-update
             padding: 2px 7px;
             color: rgb(44, 80, 106);
             background: rgba(238, 238, 238, .5);
@@ -730,12 +573,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         }
 
         pre {
-<<<<<<< HEAD
             //font-family: monospace;
             font-family: Manrope;
-=======
-            font-family: monospace;
->>>>>>> vendor-update
             margin: 0;
             color: rgb(44, 80, 106);
             overflow-x: scroll;
@@ -752,12 +591,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             }
         }
 
-<<<<<<< HEAD
         span+pre,
         pre+span {
-=======
-        span + pre, pre + span {
->>>>>>> vendor-update
             margin-top: 10px;
             display: block;
         }
@@ -782,20 +617,12 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             font-size: 11px;
         }
 
-<<<<<<< HEAD
         &:not(.sb-message-media)>.sb-image {
-=======
-        &:not(.sb-message-media) > .sb-image {
->>>>>>> vendor-update
             margin-bottom: 5px;
         }
     }
 
-<<<<<<< HEAD
     .sb-message:not(:empty)+.sb-message-attachments {
-=======
-    .sb-message:not(:empty) + .sb-message-attachments {
->>>>>>> vendor-update
         padding-top: 15px;
 
         .sb-player {
@@ -832,11 +659,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
                 color: $color-blue;
             }
 
-<<<<<<< HEAD
             &+a {
-=======
-            & + a {
->>>>>>> vendor-update
                 margin-top: 7px;
             }
         }
@@ -858,20 +681,12 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         position: absolute;
         display: flex;
 
-<<<<<<< HEAD
         >span:first-child {
-=======
-        > span:first-child {
->>>>>>> vendor-update
             display: none;
         }
 
         i {
-<<<<<<< HEAD
             padding-left: 5px;
-=======
-            padding-left: 10px;
->>>>>>> vendor-update
         }
     }
 
@@ -890,20 +705,12 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             opacity: .5;
         }
 
-<<<<<<< HEAD
         &.sb-right .sb-time,
         .sb-time {
             right: 19px;
             flex-direction: row;
 
             >i {
-=======
-        &.sb-right .sb-time, .sb-time {
-            right: 19px;
-            flex-direction: row;
-
-            > i {
->>>>>>> vendor-update
                 position: relative;
 
                 &:after {
@@ -962,12 +769,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .sb-list>div.sb-label-date,
 .sb-label-date-top {
-=======
-.sb-list > div.sb-label-date, .sb-label-date-top {
->>>>>>> vendor-update
     text-align: center;
     max-width: 100% !important;
     width: auto;
@@ -990,11 +793,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .sb-list>div.sb-label-date:first-child {
-=======
-.sb-list > div.sb-label-date:first-child {
->>>>>>> vendor-update
     padding-top: 8px;
 }
 
@@ -1016,11 +815,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .sb-label-date+.sb-label-date {
-=======
-.sb-label-date + .sb-label-date {
->>>>>>> vendor-update
     display: none;
 }
 
@@ -1033,19 +828,11 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 
 .sb-list {
     .sb-form {
-<<<<<<< HEAD
         &+.sb-btn {
             margin-top: 25px;
         }
 
         &+.sb-form {
-=======
-        & + .sb-btn {
-            margin-top: 25px;
-        }
-
-        & + .sb-form {
->>>>>>> vendor-update
             margin-top: 15px;
         }
     }
@@ -1076,17 +863,10 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 
     .sb-text-list {
-<<<<<<< HEAD
         >div {
             padding-bottom: 6px;
 
             >div:first-child {
-=======
-        > div {
-            padding-bottom: 6px;
-
-            > div:first-child {
->>>>>>> vendor-update
                 font-weight: 500;
             }
 
@@ -1097,11 +877,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 
     .sb-text-list-single {
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             position: relative;
             padding-left: 15px;
 
@@ -1129,11 +905,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     .sb-text-list-numeric {
         counter-reset: list-number;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             padding-left: 20px;
 
             &:not([data-inner]):before {
@@ -1149,19 +921,11 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 
     .sb-image-list {
-<<<<<<< HEAD
         >div {
             padding: 5px 0 10px 50px;
             position: relative;
 
             >.sb-thumb {
-=======
-        > div {
-            padding: 5px 0 10px 50px;
-            position: relative;
-
-            > .sb-thumb {
->>>>>>> vendor-update
                 display: block;
                 position: absolute;
                 left: 0;
@@ -1189,11 +953,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             }
         }
 
-<<<<<<< HEAD
         &+a {
-=======
-        & + a {
->>>>>>> vendor-update
             margin-top: 15px;
         }
     }
@@ -1220,11 +980,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     align-items: center;
     margin: -6.5px -11px;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         background: transparent;
         width: 20px;
         border-radius: 15px;
@@ -1294,11 +1050,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .sb-right .sb-player>div {
-=======
-.sb-right .sb-player > div {
->>>>>>> vendor-update
     background-color: #E6F2FC;
     color: $color-dark-blue;
 }
@@ -1451,12 +1203,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             display: block;
         }
 
-<<<<<<< HEAD
         .sb-btn-attachment,
         .sb-btn-audio-clip {
-=======
-        .sb-btn-attachment, .sb-btn-audio-clip {
->>>>>>> vendor-update
             display: none;
         }
     }
@@ -1470,11 +1218,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         justify-content: flex-start;
         width: auto;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             width: 30px;
             height: 28px;
             margin-right: 8px;
@@ -1545,11 +1289,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         justify-content: flex-start;
         flex-wrap: wrap;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             margin: 5px 5px 5px 0;
             padding: 0 20px 0 0;
             position: relative;
@@ -1559,11 +1299,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             font-weight: 500;
             cursor: default;
 
-<<<<<<< HEAD
             >i {
-=======
-            > i {
->>>>>>> vendor-update
                 position: absolute;
                 right: 5px;
                 font-size: 8px;
@@ -1578,11 +1314,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
                 transition: $transition;
             }
 
-<<<<<<< HEAD
             &:hover>i {
-=======
-            &:hover > i {
->>>>>>> vendor-update
                 opacity: 1;
             }
         }
@@ -1605,14 +1337,10 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         border-color: $color-blue !important;
         background-color: rgb(224, 236, 246) !important;
 
-<<<<<<< HEAD
         .sb-textarea,
         .sb-bar,
         .sb-attachments,
         .sb-suggestions {
-=======
-        .sb-textarea, .sb-bar, .sb-attachments, .sb-suggestions {
->>>>>>> vendor-update
             opacity: 0 !important;
             z-index: -1 !important;
         }
@@ -1659,11 +1387,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             display: block;
             margin-bottom: 5px;
 
-<<<<<<< HEAD
             &+.sb-icon-clip {
-=======
-            & + .sb-icon-clip {
->>>>>>> vendor-update
                 margin-left: 0;
             }
         }
@@ -1709,14 +1433,10 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 */
 
 .sb-article {
-<<<<<<< HEAD
 
     h1,
     h2,
     h3 {
-=======
-    h1, h2, h3 {
->>>>>>> vendor-update
         font-weight: 500;
     }
 
@@ -1727,10 +1447,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         padding-bottom: 25px;
         letter-spacing: 0.5px;
         position: relative;
-<<<<<<< HEAD
         word-wrap: break-word;
-=======
->>>>>>> vendor-update
 
         .sb-icon-close {
             position: absolute;
@@ -1753,28 +1470,20 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         letter-spacing: 0.3px;
         white-space: break-spaces;
 
-<<<<<<< HEAD
         >img,
         .sb-image {
-=======
-        > img, .sb-image {
->>>>>>> vendor-update
             max-width: 100%;
             margin: 15px 0;
             display: block;
             border-radius: 3px;
         }
 
-<<<<<<< HEAD
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-=======
-        h1, h2, h3, h4, h5, h6 {
->>>>>>> vendor-update
             letter-spacing: .3px;
             margin: 0;
             transition: $transition;
@@ -1789,13 +1498,9 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             line-height: 21px;
         }
 
-<<<<<<< HEAD
         h4,
         h5,
         h6 {
-=======
-        h4, h5, h6 {
->>>>>>> vendor-update
             font-size: 14px;
             line-height: 18px;
             font-weight: 500;
@@ -1830,11 +1535,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             overflow-x: scroll;
         }
 
-<<<<<<< HEAD
         >*:first-child {
-=======
-        > *:first-child {
->>>>>>> vendor-update
             margin-top: 0;
         }
     }
@@ -1851,12 +1552,8 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
             list-style: disc;
         }
 
-<<<<<<< HEAD
         &.sb-ul-ordered,
         &.sb-ul-unordered {
-=======
-        &.sb-ul-ordered, &.sb-ul-unordered {
->>>>>>> vendor-update
             padding-left: 15px;
         }
 
@@ -1869,22 +1566,14 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         }
     }
 
-<<<<<<< HEAD
     a,
     ul a {
-=======
-    a, ul a {
->>>>>>> vendor-update
         color: $color-black;
         text-decoration: underline;
     }
 
-<<<<<<< HEAD
     .sb-rating,
     .sb-btn-text+.sb-article-category-links {
-=======
-    .sb-rating, .sb-btn-text + .sb-article-category-links {
->>>>>>> vendor-update
         display: flex;
         padding-top: 30px;
         margin-top: 30px;
@@ -1921,11 +1610,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 }
 
 .sb-chat .sb-article {
-<<<<<<< HEAD
     >.sb-title:first-child {
-=======
-    > .sb-title:first-child {
->>>>>>> vendor-update
         border-bottom: 1px solid $border-color;
         padding-bottom: 30px;
         margin-bottom: 30px;
@@ -1935,14 +1620,10 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         font-size: 17px;
     }
 
-<<<<<<< HEAD
     h3,
     h4,
     h5,
     h6 {
-=======
-    h3, h4, h5, h6 {
->>>>>>> vendor-update
         font-size: 15px;
     }
 }
@@ -1962,11 +1643,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     margin: 15px 0 15px 0;
     height: auto !important;
 
-<<<<<<< HEAD
     >span {
-=======
-    > span {
->>>>>>> vendor-update
         position: relative;
         display: block;
         font-weight: 500;
@@ -1975,11 +1652,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
         letter-spacing: .3px;
         transition: $transition;
 
-<<<<<<< HEAD
         &+span:before {
-=======
-        & + span:before {
->>>>>>> vendor-update
             content: "";
             position: absolute;
             left: -10px;
@@ -1992,11 +1665,7 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 }
 
-<<<<<<< HEAD
 .bxc-raw-html>img {
-=======
-.bxc-raw-html > img {
->>>>>>> vendor-update
     max-width: 100%;
 }
 
@@ -2027,7 +1696,6 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     }
 
 
-<<<<<<< HEAD
     div,
     ul,
     h1,
@@ -2039,19 +1707,12 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
     table,
     a,
     hr {
-=======
-    div, ul, h1, h2, h3, h4, p, span, table, a, hr {
->>>>>>> vendor-update
         opacity: 0;
     }
 }
 
-<<<<<<< HEAD
 .sb-loading,
 .sb-loader {
-=======
-.sb-loading, .sb-loader {
->>>>>>> vendor-update
     &:before {
         content: "\76";
         font-family: "Support Board Icons";
@@ -2086,7 +1747,6 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 ==========================================================
 
 */
-<<<<<<< HEAD
 .sb_btn_new {
     // border: 1px solid #1F2937 !important;
     font-weight: 500 !important;
@@ -2099,19 +1759,11 @@ div ul.sb-menu, .sb-select ul, .sb-popup, .sb-menu-mobile > ul, .sb-menu-mobile 
 
 .sb-btn,
 a.sb-btn {
-=======
-
-.sb-btn, a.sb-btn {
->>>>>>> vendor-update
     font-size: 13px;
     line-height: 36px;
     letter-spacing: 0.3px;
     font-weight: 500;
-<<<<<<< HEAD
     border-radius: 8px;
-=======
-    border-radius: 30px;
->>>>>>> vendor-update
     min-width: 0;
     background-color: $color-blue;
     text-decoration: none;
@@ -2131,11 +1783,7 @@ a.sb-btn {
     &.sb-icon {
         padding-left: 50px;
 
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             position: absolute;
             left: 25px;
             line-height: 36px;
@@ -2156,11 +1804,7 @@ a.sb-btn {
         color: $white;
     }
 
-<<<<<<< HEAD
     &:not(.sb-hide)+a {
-=======
-    &:not(.sb-hide) + a {
->>>>>>> vendor-update
         margin-left: 15px;
     }
 
@@ -2186,13 +1830,6 @@ a.sb-btn {
 
 .sb-btn.sb-btn-red {
     background-color: $color-red;
-<<<<<<< HEAD
-=======
-
-    &:hover {
-        background-color: $color-black;
-    }
->>>>>>> vendor-update
 }
 
 .sb-btn-icon {
@@ -2305,11 +1942,7 @@ a.sb-btn {
     justify-content: space-between;
     align-items: center;
 
-<<<<<<< HEAD
     >span {
-=======
-    > span {
->>>>>>> vendor-update
         display: inline-block;
         width: 150px;
         min-width: 150px;
@@ -2320,7 +1953,6 @@ a.sb-btn {
         color: $color-gray;
     }
 
-<<<<<<< HEAD
     >input,
     >select,
     >textarea {
@@ -2332,19 +1964,6 @@ a.sb-btn {
         font-weight: 400;
         border: 1px solid #ddd !important;
         background-color: #fff;
-=======
-    > input,
-    > select,
-    > textarea {
-        position: static;
-        border-radius: 4px !important;
-        color: $color-black;
-        font-size: 13px;
-        line-height: 35px;
-        font-weight: 400;
-        border: 1px solid $border-color;
-        background-color: rgb(248, 248, 249);
->>>>>>> vendor-update
         outline: none;
         height: 42px;
         min-height: 42px;
@@ -2355,12 +1974,8 @@ a.sb-btn {
         box-sizing: border-box;
         box-shadow: none;
 
-<<<<<<< HEAD
         &:focus,
         &.sb-focus {
-=======
-        &:focus, &.sb-focus {
->>>>>>> vendor-update
             border: 1px solid $color-blue;
             box-shadow: 0 0 5px rgba(39, 156, 255, 0.2);
             background: $white;
@@ -2370,7 +1985,6 @@ a.sb-btn {
 
         &.sb-error {
             border: 1px solid $color-red;
-<<<<<<< HEAD
             box-shadow: 0 0 5px rgba(202, 52, 52, 0.7);
         }
     }
@@ -2380,36 +1994,17 @@ a.sb-btn {
     }
 
     >textarea {
-=======
-            box-shadow: 0 0 5px rgba(202, 52, 52, 0.25);
-        }
-    }
-
-    > select {
-        min-height: 37px;
-    }
-
-    > textarea {
->>>>>>> vendor-update
         line-height: 20px;
         min-height: 75px;
         padding: 8px 10px;
     }
 
-<<<<<<< HEAD
     >input[type=date]::-webkit-clear-button {
-=======
-    > input[type=date]::-webkit-clear-button {
->>>>>>> vendor-update
         -webkit-appearance: none;
         display: none;
     }
 
-<<<<<<< HEAD
     >input[type="checkbox"] {
-=======
-    > input[type="checkbox"] {
->>>>>>> vendor-update
         background: $white;
         clear: none;
         cursor: pointer;
@@ -2444,11 +2039,7 @@ a.sb-btn {
         }
     }
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         padding-right: 30px;
         max-width: 800px;
 
@@ -2468,20 +2059,12 @@ a.sb-btn {
         }
     }
 
-<<<<<<< HEAD
     >input[type="date"]::-webkit-inner-spin-button {
-=======
-    > input[type="date"]::-webkit-inner-spin-button {
->>>>>>> vendor-update
         -webkit-appearance: none;
         display: none;
     }
 
-<<<<<<< HEAD
     &+.sb-input {
-=======
-    & + .sb-input {
->>>>>>> vendor-update
         margin-top: 10px;
     }
 
@@ -2490,11 +2073,7 @@ a.sb-btn {
             line-height: 40px;
         }
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             background-color: $color-blue;
             color: $white;
             height: 42px;
@@ -2528,7 +2107,6 @@ a.sb-btn {
     }
 }
 
-<<<<<<< HEAD
 
 .remember-me.sb-error {
     margin-top: 10px;
@@ -2543,22 +2121,12 @@ a.sb-btn {
     .image {
         border-radius: 4px;
         border: 1px solid #ddd;
-=======
-.sb-input-image {
-    .image {
-        border-radius: 4px;
-        border: 1px solid $border-color;
->>>>>>> vendor-update
         width: 100%;
         height: 100px;
         padding: 0;
         position: relative;
         cursor: pointer;
-<<<<<<< HEAD
         background-color: #fff;
-=======
-        background-color: rgb(248, 248, 249);
->>>>>>> vendor-update
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -2590,11 +2158,7 @@ a.sb-btn {
             }
         }
 
-<<<<<<< HEAD
         >.sb-icon-close {
-=======
-        > .sb-icon-close {
->>>>>>> vendor-update
             position: absolute;
             z-index: 9;
             right: 10px;
@@ -2616,11 +2180,7 @@ a.sb-btn {
                 display: none;
             }
 
-<<<<<<< HEAD
             >.sb-icon-close {
-=======
-            > .sb-icon-close {
->>>>>>> vendor-update
                 display: block;
 
                 &:hover {
@@ -2655,11 +2215,7 @@ a.sb-btn {
 }
 
 .sb-input-select-input {
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         position: absolute;
         background: none;
         left: 6px;
@@ -2697,21 +2253,13 @@ a.sb-btn {
         width: 35px;
     }
 
-<<<<<<< HEAD
     [type="number"]::-webkit-outer-spin-button,
     [type="number"]::-webkit-inner-spin-button {
-=======
-    [type="number"]::-webkit-outer-spin-button, [type="number"]::-webkit-inner-spin-button {
->>>>>>> vendor-update
         -webkit-appearance: none;
         -moz-appearance: textfield;
     }
 
-<<<<<<< HEAD
     .sb-active+div {
-=======
-    .sb-active + div {
->>>>>>> vendor-update
         opacity: 1;
     }
 }
@@ -2732,11 +2280,7 @@ a.sb-btn {
         margin: 0 10px 0 0;
     }
 
-<<<<<<< HEAD
     >div>p {
-=======
-    > div > p {
->>>>>>> vendor-update
         display: flex;
         align-items: center;
         white-space: nowrap;
@@ -2747,22 +2291,13 @@ a.sb-btn {
         z-index: 8;
     }
 
-<<<<<<< HEAD
     &.sb-single-prefix+input {
-=======
-    &.sb-single-prefix + input {
->>>>>>> vendor-update
         padding-left: 50px;
     }
 }
 
-<<<<<<< HEAD
 .sb-input-select-input>div.sb-select-phone {
     &+input {
-=======
-.sb-input-select-input > div.sb-select-phone {
-    & + input {
->>>>>>> vendor-update
         padding: 5px 0 0 100px;
     }
 
@@ -2800,11 +2335,7 @@ a.sb-btn {
         border-top-right-radius: 4px;
     }
 
-<<<<<<< HEAD
     &+.sb-scroll-area {
-=======
-    & + .sb-scroll-area {
->>>>>>> vendor-update
         padding-top: 28px !important;
     }
 
@@ -2827,11 +2358,7 @@ a.sb-btn {
     animation: none;
 
 
-<<<<<<< HEAD
     >div>img {
-=======
-    > div > img {
->>>>>>> vendor-update
         position: fixed;
         top: 50%;
         left: 50%;
@@ -2840,11 +2367,7 @@ a.sb-btn {
         max-width: calc(100% - 30px);
         width: auto;
         border-radius: 6px;
-<<<<<<< HEAD
         box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
-=======
-        box-shadow: 0 4px 14px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.05);
->>>>>>> vendor-update
         animation: sb-fade-animation 0.5s;
         z-index: 9999999995;
     }
@@ -2873,11 +2396,7 @@ a.sb-btn {
         display: none;
     }
 
-<<<<<<< HEAD
     &.sb-active+.sb-lightbox-overlay {
-=======
-    &.sb-active + .sb-lightbox-overlay {
->>>>>>> vendor-update
         display: block;
     }
 }
@@ -2904,11 +2423,7 @@ a.sb-btn {
 */
 
 .sb-overlay-panel {
-<<<<<<< HEAD
     >div:first-child {
-=======
-    > div:first-child {
->>>>>>> vendor-update
         display: none;
         justify-content: center;
         font-size: 14px;
@@ -2926,11 +2441,7 @@ a.sb-btn {
         }
     }
 
-<<<<<<< HEAD
     >div:last-child {
-=======
-    > div:last-child {
->>>>>>> vendor-update
         height: calc(100% - 45px);
     }
 
@@ -2954,11 +2465,7 @@ a.sb-btn {
         height: 100%;
         z-index: 11;
 
-<<<<<<< HEAD
         >div:first-child {
-=======
-        > div:first-child {
->>>>>>> vendor-update
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -2984,11 +2491,7 @@ a.sb-btn {
     border-radius: 4px;
     max-width: 250px;
 
-<<<<<<< HEAD
     >img {
-=======
-    > img {
->>>>>>> vendor-update
         max-width: 100%;
         border-radius: 3px;
         display: block;
@@ -3033,21 +2536,13 @@ a.sb-btn {
 
 */
 
-<<<<<<< HEAD
 .sb-search-btn,
 .sb-filter-btn {
-=======
-.sb-search-btn, .sb-filter-btn {
->>>>>>> vendor-update
     position: relative;
     width: 48px;
     height: 40px;
 
-<<<<<<< HEAD
     >i {
-=======
-    > i {
->>>>>>> vendor-update
         position: absolute;
         width: 20px;
         height: 20px;
@@ -3060,22 +2555,14 @@ a.sb-btn {
         z-index: 3;
     }
 
-<<<<<<< HEAD
     i:hover,
     &.sb-active i {
-=======
-    i:hover, &.sb-active i {
->>>>>>> vendor-update
         color: $color-blue;
     }
 }
 
 .sb-search-btn {
-<<<<<<< HEAD
     >input {
-=======
-    > input {
->>>>>>> vendor-update
         position: absolute !important;
         right: 0;
         height: auto;
@@ -3146,11 +2633,7 @@ a.sb-btn {
         line-height: 35px;
         height: 35px;
 
-<<<<<<< HEAD
         .sb-search-btn>input {
-=======
-        .sb-search-btn > input {
->>>>>>> vendor-update
             min-width: 243px;
         }
 
@@ -3161,22 +2644,14 @@ a.sb-btn {
         .sb-search-btn {
             height: 40px;
 
-<<<<<<< HEAD
             >i {
-=======
-            > i {
->>>>>>> vendor-update
                 top: 7px;
             }
 
             &.sb-active {
                 margin-top: -5px;
 
-<<<<<<< HEAD
                 >i {
-=======
-                > i {
->>>>>>> vendor-update
                     top: 11px;
                 }
             }
@@ -3205,11 +2680,7 @@ a.sb-btn {
         padding-right: 15px;
         margin: 0 0 15px 15px;
 
-<<<<<<< HEAD
         >ul {
-=======
-        > ul {
->>>>>>> vendor-update
             list-style: none;
             padding: 0;
             margin: 0 15px 0 0;
@@ -3217,11 +2688,7 @@ a.sb-btn {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             grid-gap: 8px;
 
-<<<<<<< HEAD
             >li {
-=======
-            > li {
->>>>>>> vendor-update
                 overflow: hidden;
                 min-width: 0;
                 text-align: center;
@@ -3255,11 +2722,7 @@ a.sb-btn {
         border-radius: 5px;
         overflow: hidden;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             width: 4px;
             height: 100%;
             background: rgb(236, 236, 236);
@@ -3274,11 +2737,7 @@ a.sb-btn {
         }
     }
 
-<<<<<<< HEAD
     img+img {
-=======
-    img + img {
->>>>>>> vendor-update
         display: none !important;
     }
 }
@@ -3345,11 +2804,7 @@ a.sb-btn {
         overflow: visible;
     }
 
-<<<<<<< HEAD
     &:not(.sb-hide)+.sb-select {
-=======
-    &:not(.sb-hide) + .sb-select {
->>>>>>> vendor-update
         margin-left: 15px;
     }
 
@@ -3358,26 +2813,17 @@ a.sb-btn {
     }
 
     &.sb-disabled {
-<<<<<<< HEAD
         >p {
             cursor: default !important;
         }
 
         >p:after,
         >ul {
-=======
-        > p {
-            cursor: default !important;
-        }
-
-        > p:after, > ul {
->>>>>>> vendor-update
             display: none !important;
         }
     }
 }
 
-<<<<<<< HEAD
 div ul.sb-menu,
 .sb-select ul {
     position: absolute;
@@ -3385,12 +2831,6 @@ div ul.sb-menu,
     z-index: 10;
     right: 12px;
     top: 50px;
-=======
-div ul.sb-menu, .sb-select ul {
-    position: absolute;
-    margin: 0;
-    z-index: 5;
->>>>>>> vendor-update
 
     &.sb-active {
         display: block;
@@ -3403,7 +2843,6 @@ div ul.sb-menu, .sb-select ul {
         overflow-y: scroll;
     }
 
-<<<<<<< HEAD
     .li {
         display: block;
         width: calc(100% - 37px);
@@ -3411,9 +2850,6 @@ div ul.sb-menu, .sb-select ul {
 
     li,
     .li {
-=======
-    li {
->>>>>>> vendor-update
         cursor: pointer;
         padding: 6px 25px 6px 12px;
         margin: 0;
@@ -3425,11 +2861,8 @@ div ul.sb-menu, .sb-select ul {
         list-style: none;
         user-select: none;
         transition: all 0.1s;
-<<<<<<< HEAD
         text-decoration: none;
         color: rgb(36, 39, 42);
-=======
->>>>>>> vendor-update
 
         &.sb-active {
             color: $color-blue;
@@ -3452,12 +2885,8 @@ div ul.sb-menu, .sb-select ul {
 .sb-rich-message {
     letter-spacing: 0.3px;
 
-<<<<<<< HEAD
     .sb-top,
     .sb-title {
-=======
-    .sb-top, .sb-title {
->>>>>>> vendor-update
         font-weight: 500;
         font-size: 15px;
         line-height: 25px;
@@ -3469,11 +2898,7 @@ div ul.sb-menu, .sb-select ul {
         font-size: 13px;
         line-height: 21px;
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             margin-top: 20px;
         }
     }
@@ -3490,11 +2915,7 @@ div ul.sb-menu, .sb-select ul {
         position: relative;
         box-sizing: content-box;
 
-<<<<<<< HEAD
         >span {
-=======
-        > span {
->>>>>>> vendor-update
             position: absolute;
             top: 0;
             left: 0;
@@ -3528,23 +2949,15 @@ div ul.sb-menu, .sb-select ul {
                 color: rgb(143, 143, 143);
             }
 
-<<<<<<< HEAD
             &+input,
             &+select {
-=======
-            & + input, & + select {
->>>>>>> vendor-update
                 padding-top: 5px;
             }
         }
 
-<<<<<<< HEAD
         >input,
         select,
         textarea {
-=======
-        > input, select, textarea {
->>>>>>> vendor-update
             background: $white;
         }
 
@@ -3553,20 +2966,12 @@ div ul.sb-menu, .sb-select ul {
                 padding-left: 6px;
             }
 
-<<<<<<< HEAD
             >span {
-=======
-            > span {
->>>>>>> vendor-update
                 cursor: default;
             }
         }
 
-<<<<<<< HEAD
         &[data-type=select]>span:not(.sb-filled):not(.sb-active)+select {
-=======
-        &[data-type=select] > span:not(.sb-filled):not(.sb-active) + select {
->>>>>>> vendor-update
             background: none;
             z-index: 2;
         }
@@ -3582,13 +2987,8 @@ div ul.sb-menu, .sb-select ul {
         border: 1px solid $border-color;
         border-radius: 4px;
 
-<<<<<<< HEAD
         >span,
         >span.sb-active {
-=======
-        > span,
-        > span.sb-active {
->>>>>>> vendor-update
             position: relative;
             min-width: 50px;
             top: 0;
@@ -3603,21 +3003,13 @@ div ul.sb-menu, .sb-select ul {
         }
     }
 
-<<<<<<< HEAD
     .sb-input-image>.image {
-=======
-    .sb-input-image > .image {
->>>>>>> vendor-update
         background-color: $white;
         min-width: 65px;
         border: 1px solid $white;
     }
 
-<<<<<<< HEAD
     .sb-input-btn>span {
-=======
-    .sb-input-btn > span {
->>>>>>> vendor-update
         width: calc(100% - 42px);
     }
 
@@ -3662,20 +3054,12 @@ div ul.sb-menu, .sb-select ul {
         }
     }
 
-<<<<<<< HEAD
     .sb-form+.sb-buttons {
         margin-top: 15px;
     }
 
     .sb-card,
     .sb-slider {
-=======
-    .sb-form + .sb-buttons {
-        margin-top: 15px;
-    }
-
-    .sb-card, .sb-slider {
->>>>>>> vendor-update
         .sb-card-img {
             height: 175px;
             background-size: cover;
@@ -3704,11 +3088,7 @@ div ul.sb-menu, .sb-select ul {
             margin-top: 15px;
         }
 
-<<<<<<< HEAD
         .sb-card-img+div+.sb-card-extra {
-=======
-        .sb-card-img + div + .sb-card-extra {
->>>>>>> vendor-update
             position: absolute;
             top: 15px;
             left: 15px;
@@ -3751,19 +3131,11 @@ div ul.sb-menu, .sb-select ul {
         margin: -13px -12px 0 -12px;
         overflow: hidden;
 
-<<<<<<< HEAD
         >div {
             display: flex;
         }
 
         >div>div {
-=======
-        > div {
-            display: flex;
-        }
-
-        > div > div {
->>>>>>> vendor-update
             position: relative;
             min-width: 100%;
             transition: margin-left 1s;
@@ -3773,12 +3145,8 @@ div ul.sb-menu, .sb-select ul {
             margin: 0 0 20px 0;
         }
 
-<<<<<<< HEAD
         .sb-card-header,
         .sb-card-description {
-=======
-        .sb-card-header, .sb-card-description {
->>>>>>> vendor-update
             margin-left: 15px;
             margin-right: 15px;
         }
@@ -3799,11 +3167,7 @@ div ul.sb-menu, .sb-select ul {
 
     .sb-slider-images {
         margin: -12px;
-<<<<<<< HEAD
         border-radius: 4px;
-=======
-        border-radius: 6px;
->>>>>>> vendor-update
         background: #000;
         cursor: pointer;
 
@@ -3929,7 +3293,6 @@ div ul.sb-menu, .sb-select ul {
     }
 }
 
-<<<<<<< HEAD
 
 #ticket-comments {
     #comments-section {
@@ -3946,28 +3309,17 @@ div ul.sb-menu, .sb-select ul {
 
 .sb-list .sb-rich-registration .sb-buttons,
 .sb-list .sb-rich-login .sb-buttons {
-=======
-.sb-list .sb-rich-registration .sb-buttons, .sb-list .sb-rich-login .sb-buttons {
->>>>>>> vendor-update
     text-align: center;
 }
 
 .sb-rich-success {
     display: block;
 
-<<<<<<< HEAD
     &+.sb-rich-success {
         padding-top: 10px;
     }
 
     >span+div {
-=======
-    & + .sb-rich-success {
-        padding-top: 10px;
-    }
-
-    > span + div {
->>>>>>> vendor-update
         padding-top: 12px;
     }
 }
@@ -4014,7 +3366,6 @@ div ul.sb-menu, .sb-select ul {
 }
 
 .sb-timetable {
-<<<<<<< HEAD
     >div {
         >div:first-child {
             font-weight: 500;
@@ -4025,18 +3376,6 @@ div ul.sb-menu, .sb-select ul {
         }
 
         >div:last-child {
-=======
-    > div {
-        > div:first-child {
-            font-weight: 500;
-        }
-
-        > div[data-time] {
-            display: block;
-        }
-
-        > div:last-child {
->>>>>>> vendor-update
             span {
                 padding: 0 5px;
             }
@@ -4045,11 +3384,7 @@ div ul.sb-menu, .sb-select ul {
         margin-bottom: 10px;
     }
 
-<<<<<<< HEAD
     >span {
-=======
-    > span {
->>>>>>> vendor-update
         position: relative;
         padding-left: 20px;
         white-space: nowrap;
@@ -4080,21 +3415,13 @@ div ul.sb-menu, .sb-select ul {
     align-items: center;
     justify-content: center;
 
-<<<<<<< HEAD
     >span {
-=======
-    > span {
->>>>>>> vendor-update
         font-weight: 500;
         font-size: 13px;
         letter-spacing: .3px;
     }
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         display: flex;
         padding-left: 10px;
     }
@@ -4102,11 +3429,7 @@ div ul.sb-menu, .sb-select ul {
     .sb-input-textarea {
         display: none;
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             padding: 0;
         }
     }
@@ -4154,11 +3477,7 @@ div ul.sb-menu, .sb-select ul {
         margin-left: 0;
     }
 
-<<<<<<< HEAD
     div.sb-submit+.sb-submit {
-=======
-    div.sb-submit + .sb-submit {
->>>>>>> vendor-update
         margin-left: 15px;
     }
 
@@ -4188,11 +3507,7 @@ div ul.sb-menu, .sb-select ul {
 }
 
 .sb-rating-message {
-<<<<<<< HEAD
     >div:first-child {
-=======
-    > div:first-child {
->>>>>>> vendor-update
         color: $color-red;
         font-size: 13px;
         letter-spacing: .3px;
@@ -4205,20 +3520,12 @@ div ul.sb-menu, .sb-select ul {
             display: inline-block;
         }
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             margin-top: 10px;
         }
     }
 
-<<<<<<< HEAD
     &.sb-rating-positive>div:first-child {
-=======
-    &.sb-rating-positive > div:first-child {
->>>>>>> vendor-update
         color: $color-green;
     }
 }
@@ -4226,19 +3533,11 @@ div ul.sb-menu, .sb-select ul {
 .sb-articles {
     text-align: left;
 
-<<<<<<< HEAD
     >div {
         letter-spacing: .3px;
         cursor: pointer;
 
         >div {
-=======
-    > div {
-        letter-spacing: .3px;
-        cursor: pointer;
-
-        > div {
->>>>>>> vendor-update
             line-height: 25px;
             max-height: 50px;
             font-weight: 500;
@@ -4247,11 +3546,7 @@ div ul.sb-menu, .sb-select ul {
             transition: $transition;
         }
 
-<<<<<<< HEAD
         >span {
-=======
-        > span {
->>>>>>> vendor-update
             font-weight: 400;
             padding-top: 5px;
             display: block;
@@ -4269,29 +3564,17 @@ div ul.sb-menu, .sb-select ul {
             }
         }
 
-<<<<<<< HEAD
         &:hover>div {
             color: $color-blue;
         }
 
         &+div {
-=======
-        &:hover > div {
-            color: $color-blue;
-        }
-
-        & + div {
->>>>>>> vendor-update
             margin-top: 18px;
             padding-top: 15px;
             border-top: 1px solid rgb(213, 213, 213);
         }
 
-<<<<<<< HEAD
         &+.sb-title {
-=======
-        & + .sb-title {
->>>>>>> vendor-update
             border-top: none;
         }
 
@@ -4301,22 +3584,14 @@ div ul.sb-menu, .sb-select ul {
             color: $color-blue;
             cursor: default;
 
-<<<<<<< HEAD
             &+div {
-=======
-            & + div {
->>>>>>> vendor-update
                 border-top: none;
                 padding-top: 0;
             }
         }
     }
 
-<<<<<<< HEAD
     >p {
-=======
-    > p {
->>>>>>> vendor-update
         font-size: 14px;
         letter-spacing: 0.3px;
         color: $color-gray;
@@ -4388,12 +3663,8 @@ div ul.sb-menu, .sb-select ul {
     }
 }
 
-<<<<<<< HEAD
 .sb-rich-chips .sb-btn,
 .sb-rich-buttons .sb-btn {
-=======
-.sb-rich-chips .sb-btn, .sb-rich-buttons .sb-btn {
->>>>>>> vendor-update
     height: auto;
     line-height: 19px;
     padding: 8px 15px;
@@ -4459,19 +3730,11 @@ div ul.sb-menu, .sb-select ul {
     grid-template-columns: 1fr 1fr;
     grid-gap: 30px;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         margin: 0 !important;
     }
 }
 
 .sb-grid-3 {
     grid-template-columns: 1fr 1fr 1fr;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> vendor-update

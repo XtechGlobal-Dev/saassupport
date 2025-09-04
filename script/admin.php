@@ -67,11 +67,25 @@ require('include/components.php');
     <title>
         <?php echo !$is_cloud && $connection_success && sb_get_setting('admin-title') ? sb_get_setting('admin-title') : ($is_cloud ? SB_CLOUD_BRAND_NAME : 'Support Board') ?>
     </title>
-    <script src="<?php echo $sb_url . 'js/min/jquery.min.js?v=' . SB_VERSION ?>"></script>
+    <script src="<?php echo $sb_url . 'js/min/jquery.min.js?v=' . SB_VERSION ?>"></script>    
+    <!-- Include jQuery Select2 CSS and JS -->
+    <link rel="stylesheet" href="<?php echo $sb_url . 'css/select2.min.css?v=' . SB_VERSION ?>" media="all" />
+    <script src="<?php echo $sb_url . ((($is_cloud || $minify) && !sb_is_debug()) ? 'js/min/select2.min.js?v=' : 'js/select2.min.js?v=') . SB_VERSION ?>"></script>
     <script src="<?php echo $sb_url . ((($is_cloud || $minify) && !sb_is_debug()) ? 'js/min/main.min.js?v=' : 'js/main.js?v=') . SB_VERSION ?>"></script>
     <script src="<?php echo $sb_url . ((($is_cloud || $minify) && !sb_is_debug()) ? 'js/min/admin.min.js?v=' : 'js/admin.js?v=') . SB_VERSION ?>"></script>
     <link rel="stylesheet" href="<?php echo $sb_url . 'css/admin.css?v=' . SB_VERSION ?>" media="all" />
-    <link rel="stylesheet" href="<?php echo $sb_url . 'css/responsive-admin.css?v=' . SB_VERSION ?>" media="(max-width: 464px)" />
+    <link rel="stylesheet" href="<?php echo $sb_url . 'css/responsive-admin.css?v=' . SB_VERSION ?>" media="(max-width: 767px)" />  
+    <!-- Google Fonts ---->  
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/b472bd70ee.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <?php
     if ($connection_success && (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl())) {
         echo '<link rel="stylesheet" href="' . $sb_url . 'css/rtl-admin.css?v=' . SB_VERSION . '" />';
