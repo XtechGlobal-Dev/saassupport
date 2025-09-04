@@ -9461,17 +9461,6 @@
 
 }(jQuery));
 
-$('#ticketRegPass').click(function () {
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    let input = $("#ticketRegInput");
-    let currentType = input.prop('type');
-    if (currentType === 'password') {
-        input.prop('type', 'text');
-    } else {
-        input.prop('type', 'password');
-    }
-});
-
 $('.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li').each(function () {
     const hasClass = $(this).attr('class')?.trim() !== "";
     const hasDataId = $(this).data('id')?.toString().trim() !== "";
