@@ -1,15 +1,15 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * AI APP
- * ==========================================================
+ * ==
  *
  * Artificial Intelligence app. © 2017-2025 board.support. All rights reserved.
  *
  */
 
-define('SB_DIALOGFLOW', '1.5.1');
+define('SB_DIALOGFLOW', '1.5.4');
 
 /*
  * -----------------------------------------------------------
@@ -858,11 +858,13 @@ function sb_dialogflow_get_entity($entity_id = 'all', $language = '') {
  * 11. Add Intents to saved replies
  * 12. Check if unknow answer
  * 13. PDF to text
- * 14. Support Board database embedding
- * 15. Check if manual or automatic sync mode
- * 16. Data scraping
- * 17. Sitemap generation
- * 18. Check if a string terminates with a dot or similar character
+ * 14. JSON to text
+ * 15. CSV to text
+ * 16. Support Board database embedding
+ * 17. Check if manual or automatic sync mode
+ * 18. Data scraping
+ * 19. Sitemap generation
+ * 20. Check if a string terminates with a dot or similar character
  *
  */
 
@@ -1124,6 +1126,33 @@ function sb_pdf_to_text($path) {
     return '';
 }
 
+function sb_json_to_text($path_or_data, $indent = 0) {
+    $text = '';
+    $prefix = str_repeat('  ', $indent);
+    if ($indent === 0 && is_string($path_or_data)) {
+        $path_or_data = json_decode(file_get_contents($path_or_data), true);
+    }
+    foreach ($path_or_data as $key => $value) {
+        $text .= is_array($value) ? $prefix . ucfirst($key) . ':' . PHP_EOL . sb_json_to_text($value, $indent + 1) : $prefix . ucfirst($key) . ': ' . $value . PHP_EOL;
+    }
+    return $text;
+}
+
+function sb_csv_to_text($url) {
+    $data = sb_csv_read($url);
+    $text = '';
+    if ($data) {
+        $keys = array_keys($data[0]);
+        foreach ($data as $row) {
+            foreach ($keys as $key) {
+                $text .= ucfirst($key) . ': ' . (isset($row[$key]) ? $row[$key] : '') . PHP_EOL;
+            }
+            $text .= PHP_EOL;
+        }
+    }
+    return $text;
+}
+
 function sb_get_sitemap_urls($sitemap_url, &$urls = []) {
     $xml = sb_get($sitemap_url);
     $sitemap = new SimpleXmlElement($xml);
@@ -1325,28 +1354,38 @@ function sb_open_ai_curl($url_part, $post_fields = [], $type = 'POST') {
             $tokens = sb_isset(sb_isset($response, 'usage'), 'total_tokens');
             $model = sb_isset($post_fields, 'model', 'gpt-4.1-mini');
             if (!$tokens) {
-                $tokens = sb_open_ai_get_max_tokens($model);
+                return sb_error('no-usage', 'sb_open_ai_curl');
             }
             sb_cloud_membership_use_credits($model, 'open-ai', $tokens);
         }
         return $response;
     }
-    return sb_error('no-credits', 'sb_open_ai_message');
+    return sb_error('no-credits', 'sb_open_ai_curl');
 }
 
 function sb_open_ai_message($message, $max_tokens = false, $model = false, $conversation_id = false, $extra = false, $audio = false, $attachments = [], $context = false) {
     global $SB_OPEN_AI_PLAYGROUND;
     global $SB_OPEN_AI_RECURSION_CHECK;
     global $SB_OPEN_AI_RECURSION_CHECK_2;
+    global $SB_OPEN_AI_RECURSION_CHECK_3;
     $language = strtolower(sb_isset($extra, 'language'));
     $attachments_response = [];
-    if ($audio) {
-        $message = sb_open_ai_audio_to_text($audio, $language, sb_isset($extra, 'user_id'), false, $conversation_id);
-    }
+    $is_google_search = $extra == 'embeddings-search';
+    $is_scraping = $extra == 'scraping';
+    $is_embeddings = sb_isset($extra, 'embeddings') || $is_google_search;
+    $is_rewrite = $extra == 'rewrite';
+    $is_smart_reply = sb_isset($extra, 'smart_reply');
+    $message = $audio ? sb_open_ai_audio_to_text($audio, $language, sb_isset($extra, 'user_id'), false, $conversation_id) : (is_string($message) ? trim($message) : $message);
+    $message_ = '';
     $attachments = sb_json_array($attachments);
-    for ($i = 0; $i < count($attachments); $i++) {
-        if (strpos($attachments[$i][0], 'voice_message') === false) {
-            $message .= ' ' . $attachments[$i][1];
+    if (!$is_embeddings) {
+        for ($i = 0; $i < count($attachments); $i++) {
+            if (strpos($attachments[$i][0], 'voice_message') === false) {
+                $message_ .= $attachments[$i][1] . ', ';
+            }
+        }
+        if ($message_) {
+            $message = trim(str_replace('..', '.', $message . ($message ? '.' : '') . ' ' . substr($message_, 0, -2)));
         }
     }
     if (empty($message)) {
@@ -1367,11 +1406,6 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
     $human_takeover_settings = sb_dialogflow_get_human_takeover_settings();
     $human_takeover_active = $human_takeover_settings['active'];
     $payload = [];
-    $is_google_search = $extra == 'embeddings-search';
-    $is_scraping = $extra == 'scraping';
-    $is_embeddings = sb_isset($extra, 'embeddings') || $is_google_search;
-    $is_rewrite = $extra == 'rewrite';
-    $is_smart_reply = sb_isset($extra, 'smart_reply');
     $unknow_answer = false;
     $open_ai_mode = sb_isset($settings, 'open-ai-mode', '');
     $extra_response = false;
@@ -1384,14 +1418,16 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
     $is_embedding_response = false;
     $is_human_takeover = false;
     $is_multilingual_via_translation = sb_get_setting('dialogflow-multilingual-translation') || sb_get_multi_setting('google', 'google-multilingual-translation'); // Depreacted: sb_get_setting('dialogflow-multilingual-translation')
-    $model = $model ? $model : sb_isset($settings, 'open-ai-custom-model', sb_isset($settings, 'open-ai-model', 'gpt-4.1-mini'));
+    $model = $model ? $model : sb_isset($settings, 'open-ai-custom-model', sb_isset($settings, 'open-ai-model', 'gpt-5-mini'));
     $chat_model = $model != 'gpt-3.5-turbo-instruct';
+    $url_part = $chat_model ? 'chat/completions' : 'completions';
+    $is_human_request = false;
     $query = ['model' => $model, 'temperature' => floatval(sb_isset($settings, 'open-ai-temperature', 1)), 'presence_penalty' => floatval(sb_isset($settings, 'open-ai-presence-penalty', 0)), 'frequency_penalty' => floatval(sb_isset($settings, 'open-ai-frequency-penalty', 0)), 'top_p' => 1, 'tools' => []];
     if ($token == 'false') {
         $token = false;
     }
     if (!$dialogflow_active) {
-        $is_human_takeover = !$is_rewrite && !$is_scraping && !$is_smart_reply && $conversation_id && $SB_OPEN_AI_PLAYGROUND === null && (sb_is_agent(false, true) || sb_dialogflow_is_human_takeover($conversation_id));
+        $is_human_takeover = !$is_rewrite && !$is_scraping && !$is_smart_reply && $conversation_id && $SB_OPEN_AI_PLAYGROUND === null && sb_dialogflow_is_human_takeover($conversation_id);
         if ($is_human_takeover && $count) {
             $time = sb_gmt_now(600, true);
             $message_fallback = $human_takeover_active ? $human_takeover_settings['message_fallback'] : false;
@@ -1411,7 +1447,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                 }
                 if ($message_fallback) {
                     sb_send_message(sb_get_bot_id(), $conversation_id, $message_fallback, $attachments_response, false, ['human-takeover-message-fallback' => true]);
-                    sb_messaging_platforms_send_message($message_fallback, $conversation_id, false, $attachments_response);
+                    return [true, $message_fallback, $token, true];
                 }
             }
             if (sb_isset($human_takeover_settings, 'disable_chatbot')) {
@@ -1420,7 +1456,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
         }
 
         // Human takeover messaging apps
-        if ($extra == 'messaging-app' && $human_takeover_active && !$is_smart_reply) {
+        if (sb_isset($extra, 'messaging-app') && $human_takeover_active && !$is_smart_reply) {
             $is_button_confirm = sb_rich_value($human_takeover_settings['confirm'], false) == $message;
             if ($is_button_confirm) {
                 $last_messages = sb_db_get('SELECT message, payload FROM sb_messages WHERE conversation_id = ' . sb_db_escape($conversation_id, true) . ' ORDER BY id DESC LIMIT 2', false);
@@ -1573,7 +1609,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                     $properties[$entity] = ['type' => 'string', 'description' => $entity_description];
                     $query_['messages'] = [['role' => 'user', 'content' => $message]];
                     $query_['response_format'] = ['type' => 'json_schema', 'json_schema' => ['name' => $entity, 'schema' => ['type' => 'object', 'properties' => $properties, 'required' => [$entity], 'additionalProperties' => false], 'strict' => true]];
-                    $response_json = sb_open_ai_curl($chat_model ? 'chat/completions' : 'completions', $query_);
+                    $response_json = sb_open_ai_curl($url_part, $query_);
                     if ($response_json && !empty($response_json['choices'])) {
                         $response_json = sb_isset(json_decode(sb_isset($response_json['choices'][0]['message'], 'content', '[]'), true), $entity);
                         if ($response_json) {
@@ -1615,7 +1651,8 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
         }
         $is_embedding_response = true;
     }
-    if ($is_chips_response || $flows_structured_output || (!$response && (in_array($open_ai_mode, ['general', 'all', '']) || $is_embeddings || $is_rewrite || $is_scraping))) { // Deprecated. Remove All
+    if ($is_chips_response || $flows_structured_output || !$response) {
+        $is_function_calling_only = !$is_chips_response && !$flows_structured_output && !$response && !$is_embeddings && !$is_rewrite && !$is_scraping && $open_ai_mode == 'sources';
         $max_tokens = intval($max_tokens ? $max_tokens : sb_isset($settings, 'open-ai-tokens', 150));
         $is_translations = sb_get_multi_setting('google', 'google-translation');
         $first_message = false;
@@ -1624,7 +1661,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
         $prompt_real_time = $is_embeddings && !$is_google_search && sb_get_setting('dialogflow-google-search', 'dialogflow-google-search-active') ? ' If the user message is about real-time information, a calendar date or time, recent events, or current information, write exactly "I don\'t know."' : '';
         $prompt_language = sb_get_user_language($is_smart_reply ? sb_get_active_user_ID() : $user_id);
         $prompt_language = $prompt_language && $prompt_language != 'en' ? ' If the answer is included, always answer to the user message in the language of the "' . strtoupper($prompt_language) . '" language code.' : '';
-        $prompt = $is_scraping ? $message : sb_isset($settings, 'open-ai-prompt', $is_embeddings ? 'Provide extensive answers to the user message from the context below. If the answer is not included, write exactly "I don\'t know." in English language and stop after that. Refuse to answer any user message not about the info. Never break character.' . $prompt_language . $prompt_real_time : $prompt_language);
+        $prompt = $is_scraping ? $message : sb_isset($settings, 'open-ai-prompt', $is_embeddings ? 'Provide extensive answers to the user message from the context below. If the answer is not included, write exactly "I don\'t know." in English language and stop after that. Do not provide external knowledge. Do not answer unrelated questions. Never break character.' . $prompt_language . $prompt_real_time : $prompt_language);
         if ($context) {
             $prompt = 'The user\'s message might be about "' . $context . '".' . PHP_EOL . PHP_EOL . $prompt;
         }
@@ -1673,6 +1710,19 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                 break;
             }
         }
+
+        // Vision
+        if (!$is_smart_reply && !$is_rewrite && !$is_google_search && !$is_scraping && in_array($model, ['gpt-5', 'gpt-5-mini', 'gpt-5-nano', 'gpt-4.1-nano', 'gpt-4.1-mini', 'gpt-4.1', 'gpt-4o-mini', 'gpt-4o', 'gpt-4', 'gpt-4-32k']) && sb_isset($settings, 'open-ai-vision')) {
+            foreach ($attachments as $attachment) {
+                if (preg_match('/\.(jpe?g|png|webp|gif|bmp|tiff?)$/i', $attachment[1])) {
+                    array_push($query_messages, ['role' => 'user', 'content' => [['type' => 'image_url', 'image_url' => ['url' => $attachment[1]]]]]);
+                    if (isset($message['user_prompt'])) {
+                        $message['user_prompt'] = str_replace($attachment[1], '', $message['user_prompt']);
+                    }
+                }
+            }
+        }
+
         if (empty($query_messages)) {
             return [false, false];
         }
@@ -1694,7 +1744,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                         $properties[$details[0]] = ['type' => ['string', 'null'], 'description' => sb_isset($details, 1, sb_isset($descriptions, $details[0], sb_string_slug($details[0], 'string')))];
                         array_push($required, $details[0]);
                     }
-                    $query['response_format'] = ['type' => 'json_schema', 'json_schema' => ['name' => 'flow-' . sb_string_slug($flows_structured_output_string), 'schema' => ['type' => 'object', 'properties' => $properties, 'required' => $required, 'additionalProperties' => false], 'strict' => true]];
+                    $query['response_format'] = ['type' => 'json_schema', 'json_schema' => ['name' => 'flow-' . sb_string_slug($flows_structured_output_string, 'slug', true), 'schema' => ['type' => 'object', 'properties' => $properties, 'required' => $required]]];
                     if (count($query_messages) > 1) {
                         array_shift($query_messages);
                     }
@@ -1702,7 +1752,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
             }
 
             // Function calling
-            if (!$is_smart_reply && !$is_rewrite && !$is_google_search && !$is_scraping && in_array($model, ['gpt-4.1-nano', 'gpt-4.1-mini', 'gpt-4.1', 'o3-mini', 'o4-mini', 'o1', 'gpt-4o-mini', 'gpt-4o', 'gpt-4', 'gpt-4-32k'])) {
+            if (!$is_smart_reply && !$is_rewrite && !$is_google_search && !$is_scraping && in_array($model, ['gpt-5', 'gpt-5-mini', 'gpt-5-nano', 'gpt-4.1-nano', 'gpt-4.1-mini', 'gpt-4.1', 'o3-mini', 'o4-mini', 'o1', 'gpt-4o-mini', 'gpt-4o', 'gpt-4', 'gpt-4-32k'])) {
                 if ($human_takeover_active) {
                     $query['tools'] = [['type' => 'function', 'function' => ['name' => 'sb-human-takeover', 'description' => 'I want to contact a human support agent or team member. I want human support. How can I have support?', 'parameters' => ['type' => 'object', 'properties' => json_decode('{}'), 'required' => []]]]];
                 }
@@ -1713,7 +1763,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                             $properties = [];
                             $properties_required = [];
                             foreach ($qea[$i][5] as $value) {
-                                $property_slug = sb_string_slug($value[0]);
+                                $property_slug = sb_string_slug($value[0], 'slug', true);
                                 $properties[$property_slug] = ['type' => 'string', 'description' => $value[1]];
                                 if ($value[2]) {
                                     $properties[$property_slug]['enum'] = explode(',', $value[2]);
@@ -1721,7 +1771,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                                 array_push($properties_required, $property_slug);
                             }
                             array_push($query['tools'], ['type' => 'function', 'function' => [
-                                'name' => substr(sb_string_slug(is_string($qea[$i][0]) ? $qea[$i][0] : $qea[$i][0][0]), 0, 20) . '-' . $i, // Deprecated Replace is_string($qea[$i][0]) ? $qea[$i][0] : $qea[$i][0][0] with $qea[$i][0][0]
+                                'name' => substr(sb_string_slug(is_string($qea[$i][0]) ? $qea[$i][0] : $qea[$i][0][0], 'slug', true), 0, 20) . '-' . $i, // Deprecated Replace is_string($qea[$i][0]) ? $qea[$i][0] : $qea[$i][0][0] with $qea[$i][0][0]
                                 'description' => is_string($qea[$i][0]) ? $qea[$i][0] : $qea[$i][0][0], // Deprecated Replace is_string($qea[$i][0]) ? $qea[$i][0] : $qea[$i][0][0] with $qea[$i][0][0]
                                 'strict' => true,
                                 'parameters' => [
@@ -1739,22 +1789,12 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                             $query['tools'] = array_merge($query['tools'], shopify_open_ai_function());
                         }
                     }
-                    if (defined('SB_WOOCOMMERCE')) {
+                    if (defined('SB_WOOCOMMERCE') && !sb_get_setting('wc-disable-bot-integration')) {
                         $query['tools'] = array_merge($query['tools'], sb_woocommerce_open_ai_function());
                     }
                 }
             }
-
-            // Vision
-            if (!$is_smart_reply && !$is_rewrite && !$is_google_search && !$is_scraping && in_array($model, ['gpt-4.1-nano', 'gpt-4.1-mini', 'gpt-4.1', 'gpt-4o-mini', 'gpt-4o', 'gpt-4', 'gpt-4-32k']) && sb_isset($settings, 'open-ai-vision')) {
-                foreach ($attachments as $attachment) {
-                    if (preg_match('/\.(jpe?g|png|webp|gif|bmp|tiff?)$/i', $attachment[1])) {
-                        array_push($query_messages, ['role' => 'user', 'content' => [['type' => 'image_url', 'image_url' => ['url' => $attachment[1]]]]]);
-                    }
-                }
-            }
-
-            if (isset($message['user_prompt'])) {
+            if (!empty($message['user_prompt']) && is_string($query_messages[count($query_messages) - 1]['content'])) {
                 $query_messages[count($query_messages) - 1]['content'] = $message['user_prompt'];
             }
             $query['messages'] = $query_messages;
@@ -1772,22 +1812,54 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
         // OpenAI response
         if (!$is_chips_response) {
             $continue = true;
-            if (empty($SB_OPEN_AI_RECURSION_CHECK_2) && !empty($query_messages) && sb_isset($query_messages[0], 'role') == 'developer' && !empty($query['tools']) && (count($query['tools']) > 1 || $query['tools'][0]['function']['name'] != 'sb-human-takeover')) {
-                $SB_OPEN_AI_RECURSION_CHECK_2 = true;
-                $human_takeover_tool = $query['tools'][0]['function']['name'] == 'sb-human-takeover' ? $query['tools'][0] : false;
-                $query['messages'][0]['content'] = '';
-                if ($human_takeover_tool) {
-                    array_shift($query['tools']);
+            if (!empty($query_messages) && !empty($query['tools'])) {
+                if (empty($SB_OPEN_AI_RECURSION_CHECK_3) && !empty($query['response_format']) && !$is_function_calling_only) {
+                    $SB_OPEN_AI_RECURSION_CHECK_3 = true;
+                    $tools = $query['tools'];
+                    $query['messages'][0]['content'] = '';
+                    $query['tools'] = [];
+                    $response = sb_open_ai_curl($url_part, $query);
+                    $query['messages'][0]['content'] = $query_messages[0]['content'];
+                    $query['tools'] = $tools;
+                    $continue = empty($response['choices']) || empty($response['choices'][0]['message']);
                 }
-                $response = sb_open_ai_curl($chat_model ? 'chat/completions' : 'completions', $query);
-                if ($human_takeover_tool) {
-                    array_unshift($query['tools'], $human_takeover_tool);
+                if ($continue && empty($SB_OPEN_AI_RECURSION_CHECK_2) && (sb_isset($query_messages[0], 'role') == 'developer' || $is_function_calling_only) && (count($query['tools']) > 1 || $query['tools'][0]['function']['name'] != 'sb-human-takeover')) {
+                    $SB_OPEN_AI_RECURSION_CHECK_2 = true;
+                    $human_takeover_tool = $query['tools'][0]['function']['name'] == 'sb-human-takeover' ? $query['tools'][0] : false;
+                    if ($is_function_calling_only) {
+                        array_unshift($query['messages'], ['role' => 'system', 'content' => 'Only respond when a function call is appropriate. Do not reply to general questions or small talk. If you cannot reply, reply exactly and only "I don\'t know".']);
+                    } else {
+                        $query['messages'][0]['content'] = '';
+                    }
+                    if ($human_takeover_tool) {
+                        array_shift($query['tools']);
+                    }
+                    $response = sb_open_ai_curl($url_part, $query);
+                    $continue = empty($response['choices']);
+                    if (!$continue && empty($response['choices'][0]['message']['tool_calls'])) {
+                        $open_ai_response = $response['choices'][0]['message'];
+                        $continue = empty($open_ai_response['tool_calls']);
+                        if ($continue) {
+                            $open_ai_response_embeddings = sb_open_ai_embeddings_generate($open_ai_response['content']);
+                            if (!empty($open_ai_response_embeddings) && isset($open_ai_response_embeddings[0]['embedding'])) {
+                                foreach ($query['tools'] as $tool) {
+                                    $tool_embeddings = sb_open_ai_embeddings_generate($tool['function']['description']);
+                                    if (!empty($tool_embeddings) && isset($tool_embeddings[0]['embedding']) && sb_open_ai_embeddings_compare($tool_embeddings[0]['embedding'], $open_ai_response_embeddings[0]['embedding'], $tool_embeddings[0]['text'], $open_ai_response_embeddings[0]['text']) > 0.4) {
+                                        $continue = false;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if ($human_takeover_tool) {
+                        $query['tools'] = [$human_takeover_tool];
+                    }
+                    $query['messages'][0]['content'] = $query_messages[0]['content'];
                 }
-                $query['messages'][0]['content'] = $query_messages[0]['content'];
-                $continue = empty($response['choices']) || empty($response['choices'][0]['message']['tool_calls']);
             }
-            if ($continue) {
-                $response = sb_open_ai_curl($chat_model ? 'chat/completions' : 'completions', $query);
+            if ($continue && !$is_function_calling_only) {
+                $response = sb_open_ai_curl($url_part, $query);
             }
         }
         if ($SB_OPEN_AI_PLAYGROUND !== null) {
@@ -1812,6 +1884,10 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                 // Function calling response
                 if ($function_calling[0] == 'sb-human-takeover') {
                     $response = 'sb-human-takeover';
+                    $is_human_request = true;
+                } else if ($function_calling[2] == 'sb-ignore-call') {
+                    $SB_OPEN_AI_RECURSION_CHECK_2 = true;
+                    return sb_open_ai_message(is_string($message) ? $message : sb_isset($message, 'user_prompt', $message), $max_tokens, $model, $conversation_id, $extra);
                 } else if ($chat_model) {
                     unset($query['tools']);
                     if ($is_embeddings) {
@@ -1841,7 +1917,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                                     $message_ = str_replace($response_message_content_shortcode[0]['shortcode'], '', $response_message_content);
                                     $message_ = str_replace(': .', '.', preg_replace('/\s+/', ' ', $message_));
                                     if (substr($message_, -1) === '.') {
-                                        $message_ = substr($string, 0, -1);
+                                        $message_ = substr($message_, 0, -1);
                                     }
                                     $message_ = trim($message_);
                                     sb_send_message(sb_get_bot_id(), $conversation_id, $message_);
@@ -1879,7 +1955,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                             $user_data['last_name'] = $full_name[1];
                             unset($user_data['full_name']);
                         }
-                        sb_update_user(sb_get_active_user_ID(), $user_data, $user_data);
+                        sb_update_user(sb_get_active_user_ID(), $user_data, $user_data, true, true);
                     }
                     $payload['flow_end_so'] = true;
                     if ($SB_OPEN_AI_PLAYGROUND !== null) {
@@ -1902,7 +1978,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                     $response_message_content = sb_isset(sb_open_ai_message($required_missing, false, false, false, 'rewrite'), 1, $required_missing);
                 }
             }
-            if ($chat_model && strpos($response_message_content, '[action ') !== false && !$is_smart_reply && !$is_rewrite && !$is_google_search && !$is_scraping) {
+            if ($chat_model && $response_message_content && strpos($response_message_content, '[action ') !== false && !$is_smart_reply && !$is_rewrite && !$is_google_search && !$is_scraping) {
 
                 // Action response
                 $action = sb_flows_execute($response_message_content, $messages, $language, $conversation_id);
@@ -1910,7 +1986,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                 $client_side_payload = array_merge($client_side_payload, $action[1]);
                 $attachments_response = array_merge($attachments_response, $action[2]);
                 $payload = array_merge($payload, ['action' => $action[3]['shortcode']]);
-            } else if (sb_isset($function_calling, 0) != 'sb-shortcode') {
+            } else if (!$is_human_request && sb_isset($function_calling, 0) != 'sb-shortcode') {
 
                 // Normal response
                 $response = sb_open_ai_text_formatting($chat_model ? $response_message_content : $response['choices'][0]['text']);
@@ -1931,7 +2007,7 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
             return $response && !$unknow_answer ? [true, $response, $token, $extra_response, $SB_OPEN_AI_PLAYGROUND, $client_side_payload, $attachments_response, $payload] : [false, false];
         }
         $message_ = sb_isset($message, 'user_prompt', $message);
-        if (empty($SB_OPEN_AI_RECURSION_CHECK) && !$is_google_search && $unknow_answer && strlen($message_) > 4) {
+        if (empty($SB_OPEN_AI_RECURSION_CHECK) && !$is_google_search && !$is_human_request && $unknow_answer && strlen($message_) > 4) {
             $google_search_settings = sb_get_setting('dialogflow-google-search');
             $SB_OPEN_AI_RECURSION_CHECK = true;
             if (sb_isset($google_search_settings, 'dialogflow-google-search-active')) {
@@ -1957,15 +2033,18 @@ function sb_open_ai_message($message, $max_tokens = false, $model = false, $conv
                 }
             }
         }
-        $human_request = $response == 'sb-human-takeover';
-        $human_takeover = !$is_embeddings && !$dialogflow_active && $human_takeover_active && ($human_request || ($unknow_answer && strlen($message) > 3 && strpos($message, ' ')));
+        $human_takeover = !$is_embeddings && !$dialogflow_active && $human_takeover_active && ($is_human_request || ($unknow_answer && ((strlen($message) > 3 && strpos($message, ' ')) || strlen($message) > 10)));
         if ($human_takeover && $conversation_id) {
             if (!$is_human_takeover) {
+                if (sb_isset($extra, 'messaging-app') == 'em') {
+                    return [true, sb_dialogflow_human_takeover($conversation_id), $token, true];
+                }
                 $human_takeover = sb_chatbot_human_takeover($conversation_id, $human_takeover_settings);
                 return [true, $human_takeover[0], $token, $human_takeover[1]];
             }
             return [true, '', $token];
-        } else if ($human_request && $is_human_takeover) {
+        }
+        if ($is_human_request && $is_human_takeover) {
             $response = $human_takeover_settings['message_fallback'];
             $payload['human-takeover-message-fallback'] = true;
             if ($is_embeddings) {
@@ -2136,17 +2215,29 @@ function sb_open_ai_spelling_correction($message) {
 }
 
 function sb_open_ai_text_formatting($message) {
+    if (empty($message)) {
+        return $message;
+    }
     $message = preg_replace_callback('/\[([^\]]+)\]\(([^)]+)\)/', function ($matches) {
         return $matches[2] . '#sb-' . str_replace(' ', '--', $matches[1]);
     }, str_replace(['**', '- *'], ['*', "\n*"], $message));
     $message = preg_replace('/mailto:([^#]+)#sb-.*?/', '', $message);
     $message = str_replace(['```html', '```php', '```css', '```js', '```javascript', '```c++', '```sql', '```plaintext', '```nginx', '```bash'], '```', $message);
+
+    $is_inner_2 = false;
     if (strpos($message, '- ') || (strpos($message, '1. ') !== false && strpos($message, '2. ') !== false) || (strpos($message, '### ') || strpos($message, '#### '))) {
         $rows = preg_split("/\r\n|\n|\r/", $message);
         $message = '';
         $is_list = false;
         for ($i = 0; $i < count($rows); $i++) {
             $row = $rows[$i];
+            $row_previous = false;
+            for ($j = $i - 1; $j > -1; $j--) {
+                if (!empty($rows[$j])) {
+                    $row_previous = $rows[$j];
+                    break;
+                }
+            }
             if (!empty(trim($row))) {
                 for ($j = 1; $j < 30; $j++) {
                     $row = str_replace('     ' . $j . '. ', '  - ', $row);
@@ -2154,17 +2245,19 @@ function sb_open_ai_text_formatting($message) {
                 $row = str_replace(['     - ', '    - ', '   - '], '  - ', $row);
                 $is_line = strpos($row, '- ') === 0 || strpos($row, ' - ') === 0;
                 $is_inner = strpos($row, '  - ') === 0;
-                if ($is_line || $is_inner || (in_array(strpos($row, '. '), [1, 2]) && is_numeric(substr($row, 0, 1)))) {
+                $is_inner_2 = !$is_inner ? $is_line && $is_list && ($is_inner_2 || (in_array(strpos($row_previous, '. '), [1, 2, 3]) && strpos($row_previous, ':'))) : false;
+                if ($is_line || $is_inner || $is_inner_2 || (in_array(strpos($row, '. '), [1, 2]) && is_numeric(substr($row, 0, 1)))) {
                     $row = trim(str_replace([',', '"', ':', '[', ']'], ['\,', '\'', '\:', '', ''], substr($row, $is_inner ? 4 : 2)));
                     if ($row[0] == '.') {
                         $row = substr($row, 1);
                     }
-                    if ($is_inner) {
+                    if ($is_inner || $is_inner_2) {
                         $row = '- ' . $row;
                     }
                     if (!$is_list) {
                         $message .= '[list' . ($is_line ? '' : ' numeric="true"') . ' values="' . $row . PHP_EOL;
                         $is_list = true;
+                        $is_inner_2 = false;
                     } else {
                         $message .= ',' . $row . PHP_EOL;
                     }
@@ -2173,6 +2266,7 @@ function sb_open_ai_text_formatting($message) {
                         $rows[$i + 1] = '  - ' . $row_next;
                     }
                 } else {
+                    $is_inner_2 = false;
                     if (strpos($row, '### ') === 0 || strpos($row, '#### ') === 0) {
                         $row = '*' . trim(str_replace('#', '', str_replace('*', '', $row))) . '*' . (empty($rows[$i + 1]) ? '' : PHP_EOL);
                     }
@@ -2183,6 +2277,7 @@ function sb_open_ai_text_formatting($message) {
                         $message .= ($is_list ? str_replace([',', '"', ':'], ['\,', '\'', '\:'], $row) : $row) . (strpos($row, '```') !== false ? '' : PHP_EOL);
                     }
                 }
+                $row_previous = $row;
             } else if (!$is_list) {
                 $message .= PHP_EOL . PHP_EOL;
             }
@@ -2279,7 +2374,7 @@ function sb_open_ai_text_formatting($message) {
 }
 
 function sb_open_ai_is_valid($message) {
-    return $message ? ($message == 'I don\'t know.' || $message == 'I don\'t know' || substr($message, -9) == 'don\'t know' || substr($message, -10) == 'don\'t know.' ? false : preg_match('/(Non lo so.|Bilmiyorum.|не знаю|Tôi không biết.|我不知道。|Jeg vet ikke.|Nie wiem.|Nu știu.|ne vem|nuk e di.|не знам.|Abdi henteu terang.|jag vet inte.|ฉันไม่รู้.|hindi ko alam.|Я не знаю.|ja neviem.|わからない。|არ ვიცი.|모르겠습니다.|aš nežinau.|не знам.|Би мэдэхгүй.|saya tak tahu.|ကျွန်တော်မသိပါ။|Ik weet het niet.|Je ne sais pas.|չգիտեմ։|لا أعرف.|аз не знам|Não sei.|Nevím.|Jeg ved det ikke.|Δεν ξέρω.|No sé.|ma ei tea.|من نمی دانم.|En tiedä.|אני לא יודע.|मुझें नहीं पता।|ne znam|Nem tudom.|Aku tidak tahu.|Ég veit það ekki.|Ich weiß nicht.|I can\'t assist with that|provide real-time|Sorry, as an AI model|don\'t have access to real-time|don\'t have real-time|can\'t access the internet or real-time|provide real-time information|access to real-time|don\'t have access to real-time|not included in the context|sb-human-takeover|provide more context|provide a valid text|What was that|I didn\'t get that|I don\'t understand|no text provided|provide the text|I cannot provide|I don\'t have access|I don\'t have any|As a language model|I do not have the capability|I do not have access|modelo de lenguaje de IA|no tengo acceso|no tinc accés|En tant qu\'IA|je n\'ai pas d\'accès|en tant qu\'intelligence artificielle|je n\'ai pas accès|programme d\'IA|স্মার্ট AI কম্পিউটার প্রোগ্রাম|আমি একটি AI|আমি জানি না|我無法回答未來的活動|AI 語言模型|我無法提供|作為AI|我無法得知|作為一名AI|我無法預測|作为AI|我没有未来预测的功能|作為一個AI|我無法預測未來|作为一个AI|我无法预测|我不具备预测|我作为一个人工智能|Как виртуальный помощник|я не могу предоставить|как AI-ассистента|Как ИИ|Как искусственный интеллект|я не имею доступа|я не могу ответить|я не могу предсказать|como um modelo de linguagem|eu não tenho informações|sou um assistente de linguagem|Não tenho acesso|modelo de idioma de AI|não é capaz de fornecer|não tenho a capacidade|como modelo de linguagem de IA|como uma AI|não tenho um|como modelo de linguagem de inteligência artificial|como modelo de linguagem AI|não sou capaz|poiché sono un modello linguistico|non posso fornire informazioni|in quanto intelligenza artificiale|non ho la capacità|non sono in grado|non ho la possibilità|non posso dare|non posso fare previsioni|non posso predire|in quanto sono un\'Intelligenza Artificiale|Come assistente digitale|come assistente virtuale|Si një AI|nuk mund të parashikoj|Si inteligjencë artificiale|nuk kam informacion|Nuk mund të jap parashikime|nuk mund të parashikoj|لا يمكنني توفير|نموذجًا لغة|لا يمكنني التنبؤ|AI भाषा मॉडल हूँ|मैं एक AI|मुझे इसकी जानकारी नहीं है|मैं आपको बता नहीं सकती|AI सहायक|मेरे पास भविष्य के बारे में कोई जानकारी नहीं है|का पता नहीं है|не мога да|Като AI|не разполагам с|нямам достъп|ne mogu pratiti|Nisam u mogućnosti|nisam sposoban|ne mogu prikazivati|ne mogu ti dati|ne mogu pružiti|nemam pristup|nemam sposobnosti|nemam trenutne informacije|nemam sposobnost|ne mogu s preciznošću|nemůžu předpovídat|nemohu s jistotou|Jako AI|nemohu předpovídat|nemohu s jistotou znát|Jako umělá inteligence|nemám informace|nemohu predikovat|Jako NLP AI|nemohu předvídat|nedokážu předvídat|nemám schopnost|som AI|som en AI|har jeg ikke adgang|Jeg kan desværre ikke besvare|jeg ikke har adgang|kan jeg ikke give|jeg har ikke|har jeg ikke mulighed|Jeg er en AI og har ikke|har jeg ikke evnen|Jeg kan desværre ikke hjælpe med|jeg kan ikke svare|Som sprog AI|jeg ikke i stand)/i', $message) !== 1) : false;
+    return $message ? ($message == 'I don\'t know.' || $message == 'I don\'t know' || substr($message, -9) == 'don\'t know' || substr($message, -10) == 'don\'t know.' ? false : preg_match('/(Non lo so.|Bilmiyorum.|не знаю|Tôi không biết.|我不知道。|Jeg vet ikke.|Nie wiem.|Nu știu.|ne vem|nuk e di.|не знам.|Abdi henteu terang.|jag vet inte.|ฉันไม่รู้.|hindi ko alam.|Я не знаю.|ja neviem.|わからない。|არ ვიცი.|모르겠습니다.|aš nežinau.|не знам.|Би мэдэхгүй.|saya tak tahu.|ကျွန်တော်မသိပါ။|Ik weet het niet.|Je ne sais pas.|չգիտեմ։|لا أعرف.|аз не знам|Não sei.|Nevím.|Jeg ved det ikke.|Δεν ξέρω.|No sé.|ma ei tea.|من نمی دانم.|En tiedä.|אני לא יודע.|मुझें नहीं पता।|ne znam|Nem tudom.|Aku tidak tahu.|Ég veit það ekki.|Ich weiß nicht.|I can\'t help|I can\'t assist with that|provide real-time|Sorry, as an AI model|don\'t have access to real-time|don\'t have real-time|can\'t access the internet or real-time|provide real-time information|access to real-time|don\'t have access to real-time|not included in the context|sb-human-takeover|provide more context|provide a valid text|What was that|I didn\'t get that|I don\'t understand|no text provided|provide the text|I cannot provide|I don\'t have access|I don\'t have any|As a language model|I do not have the capability|I do not have access|modelo de lenguaje de IA|no tengo acceso|no tinc accés|En tant qu\'IA|je n\'ai pas d\'accès|en tant qu\'intelligence artificielle|je n\'ai pas accès|programme d\'IA|স্মার্ট AI কম্পিউটার প্রোগ্রাম|আমি একটি AI|আমি জানি না|我無法回答未來的活動|AI 語言模型|我無法提供|作為AI|我無法得知|作為一名AI|我無法預測|作为AI|我没有未来预测的功能|作為一個AI|我無法預測未來|作为一个AI|我无法预测|我不具备预测|我作为一个人工智能|Как виртуальный помощник|я не могу предоставить|как AI-ассистента|Как ИИ|Как искусственный интеллект|я не имею доступа|я не могу ответить|я не могу предсказать|como um modelo de linguagem|eu não tenho informações|sou um assistente de linguagem|Não tenho acesso|modelo de idioma de AI|não é capaz de fornecer|não tenho a capacidade|como modelo de linguagem de IA|como uma AI|não tenho um|como modelo de linguagem de inteligência artificial|como modelo de linguagem AI|não sou capaz|poiché sono un modello linguistico|non posso fornire informazioni|in quanto intelligenza artificiale|non ho la capacità|non sono in grado|non ho la possibilità|non posso dare|non posso fare previsioni|non posso predire|in quanto sono un\'Intelligenza Artificiale|Come assistente digitale|come assistente virtuale|Si një AI|nuk mund të parashikoj|Si inteligjencë artificiale|nuk kam informacion|Nuk mund të jap parashikime|nuk mund të parashikoj|لا يمكنني توفير|نموذجًا لغة|لا يمكنني التنبؤ|AI भाषा मॉडल हूँ|मैं एक AI|मुझे इसकी जानकारी नहीं है|मैं आपको बता नहीं सकती|AI सहायक|मेरे पास भविष्य के बारे में कोई जानकारी नहीं है|का पता नहीं है|не мога да|Като AI|не разполагам с|нямам достъп|ne mogu pratiti|Nisam u mogućnosti|nisam sposoban|ne mogu prikazivati|ne mogu ti dati|ne mogu pružiti|nemam pristup|nemam sposobnosti|nemam trenutne informacije|nemam sposobnost|ne mogu s preciznošću|nemůžu předpovídat|nemohu s jistotou|Jako AI|nemohu předpovídat|nemohu s jistotou znát|Jako umělá inteligence|nemám informace|nemohu predikovat|Jako NLP AI|nemohu předvídat|nedokážu předvídat|nemám schopnost|som AI|som en AI|har jeg ikke adgang|Jeg kan desværre ikke besvare|jeg ikke har adgang|kan jeg ikke give|jeg har ikke|har jeg ikke mulighed|Jeg er en AI og har ikke|har jeg ikke evnen|Jeg kan desværre ikke hjælpe med|jeg kan ikke svare|Som sprog AI|jeg ikke i stand)/i', $message) !== 1) : false;
 }
 
 function sb_open_ai_upload($path, $post_fields = []) {
@@ -2301,6 +2396,9 @@ function sb_open_ai_url_training($url) {
     if (in_array(rtrim($url, '/'), $embedding_urls) || in_array($url . '/', $embedding_urls)) {
         return [true];
     }
+    if (empty($response[0])) {
+        return [false, 'The page at ' . $url . ' has not content or is not accessible.'];
+    }
     return is_array($response) ? sb_open_ai_embeddings_generate($response[0], $url) : $response;
 }
 
@@ -2315,7 +2413,7 @@ function sb_open_ai_qea_training($questions_answers, $language = false, $reset =
     }
 
     // Update an existing question and answer
-    if ($update_index !== false) {
+    if ($update_index !== false && $update_index !== '') {
         $db_embeddings[$update_index] = [$questions_answers[0], $questions_answers[1], sb_isset($questions_answers, 6)];
         $questions_answers_to_save[$update_index] = $questions_answers;
         $questions_answers = [];
@@ -2563,7 +2661,7 @@ function sb_open_ai_embeddings_generate($paragraphs_or_string, $save_source = fa
                 $chars_count += strlen(implode(array_column($embedding_file, 'answer')));
             }
             for ($j = 0; $j < count($texts); $j++) {
-                $texts[$j] = [$texts[$j], $embedding];
+                $texts[$j] = [$texts[$j], $embedding, sb_isset($embedding_file[$j], 'answer')];
             }
             $embedding_texts = array_merge($embedding_texts, $texts);
         }
@@ -2582,7 +2680,7 @@ function sb_open_ai_embeddings_generate($paragraphs_or_string, $save_source = fa
             if (empty(trim($paragraphs_or_string[$i][0]))) {
                 continue;
             }
-            if (isset($paragraphs_or_string[$i][2]) && $paragraphs_or_string[$i][2] != 'qea' && strpos($paragraphs_or_string[$i][2], 'article-') === false && strpos($paragraphs_or_string[$i][2], 'conversation-') === false && strpos($paragraphs_or_string[$i][2], 'flow-') === false && !strpos($paragraphs_or_string[$i][0], 'More details at ')) {
+            if (isset($paragraphs_or_string[$i][2]) && $paragraphs_or_string[$i][2] != 'qea' && strpos($paragraphs_or_string[$i][2], 'article-') === false && strpos($paragraphs_or_string[$i][2], 'conversation-') === false && strpos($paragraphs_or_string[$i][2], 'flow-') === false && !in_array(pathinfo($paragraphs_or_string[$i][2], PATHINFO_EXTENSION), ['csv', 'pdf', 'txt']) && !strpos($paragraphs_or_string[$i][0], 'More details at ')) {
                 $paragraphs_or_string[$i][0] .= (sb_is_string_ends($paragraphs_or_string[$i][0]) ? '' : '.') . ' More details at ' . $paragraphs_or_string[$i][2] . '.';
             }
             $paragraphs_or_string[$i][0] = trim($paragraphs_or_string[$i][0]);
@@ -2598,6 +2696,20 @@ function sb_open_ai_embeddings_generate($paragraphs_or_string, $save_source = fa
                 for ($j = 0; $j < count($embedding_texts); $j++) {
                     if ($embedding_texts[$j][0] == $text) {
                         $duplicate = true;
+                        if (!empty($embedding_texts[$j][2]) && !empty($answers[$i]) && $embedding_texts[$j][2] != $answers[$i]) {
+                            $embedding_file = json_decode(file_get_contents($path . $embedding_texts[$j][1]), true);
+                            $is_updated = false;
+                            for ($k = 0; $k < count($embedding_file); $k++) {
+                                if ($embedding_file[$k]['answer'] == $embedding_texts[$j][2]) {
+                                    $embedding_file[$k]['answer'] = $answers[$i];
+                                    $is_updated = true;
+                                    break;
+                                }
+                            }
+                            if ($is_updated) {
+                                sb_file($path . $embedding_texts[$j][1], json_encode($embedding_file, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_IGNORE));
+                            }
+                        }
                         break;
                     }
                 }
@@ -2794,11 +2906,16 @@ function sb_open_ai_embeddings_split_paragraphs($paragraphs, $last_index, $answe
     return [$response, $last_index + 1, $answers_2];
 }
 
-function sb_open_ai_embeddings_compare($a, $b) {
-    $result = array_map(function ($x, $y) {
-        return $x * $y;
-    }, $a, $b);
-    return array_sum($result);
+function sb_open_ai_embeddings_compare($vector_1, $vector_2, $vector_1_text, $vector_2_text) {
+    $dot_product = 0.0;
+    $norm_query = 0.0;
+    $norm_text = 0.0;
+    for ($i = 0; $i < count($vector_1); $i++) {
+        $dot_product += $vector_1[$i] * $vector_2[$i];
+        $norm_query += $vector_1[$i] ** 2;
+        $norm_text += $vector_2[$i] ** 2;
+    }
+    return min((($norm_query > 0 && $norm_text > 0) ? ($dot_product / (sqrt($norm_query) * sqrt($norm_text))) : 0.0) + (mb_stripos($vector_2_text, $vector_1_text, 0, 'UTF-8') !== false ? 0.2 : 0.0), 1.0);
 }
 
 function sb_open_ai_embeddings_message($user_prompt, $language = false, $extra = false, $min_score = 0.2) {
@@ -2825,7 +2942,7 @@ function sb_open_ai_embeddings_message($user_prompt, $language = false, $extra =
                     }
                 }
                 if (!$language || !$embedding_language || $embedding_language == $language || count(sb_open_ai_embeddings_language()) == 1) {
-                    $score = !empty($user_prompt_embeddings) && !empty($embedding['embedding']) ? sb_open_ai_embeddings_compare($user_prompt_embeddings, $embedding['embedding']) : 0;
+                    $score = !empty($user_prompt_embeddings) && !empty($embedding['embedding']) ? sb_open_ai_embeddings_compare($user_prompt_embeddings, $embedding['embedding'], $user_prompt, $embedding['text']) : 0;
                     if ($score > $min_score && (empty($embedding['extra']) || empty($embedding['extra']['conditions']) || sb_automations_validate($embedding['extra']['conditions'], true))) {
                         array_push($scores, ['score' => $score, 'text' => $embedding['text'], 'answer' => sb_isset($embedding, 'answer'), 'source' => sb_isset($embedding, 'source'), 'extra' => sb_isset($embedding, 'extra')]);
                     }
@@ -2847,7 +2964,23 @@ function sb_open_ai_embeddings_message($user_prompt, $language = false, $extra =
             }
             $context = '';
             $model = sb_open_ai_get_gpt_model();
-            $context_max_length = in_array($model, ['gpt-4.1-nano', 'gpt-4.1-mini', 'gpt-4.1']) ? 500000 : (in_array($model, ['o1-mini', 'gpt-4', 'gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo']) ? 32000 : (in_array($model, ['o3-mini', 'o4-mini', 'o1']) ? 50000 : 4000));
+            $model_context_map = [
+                'gpt-5-nano' => 100000,
+                'gpt-5-mini' => 100000,
+                'gpt-5' => 100000,
+                'gpt-4.1-nano' => 500000,
+                'gpt-4.1-mini' => 500000,
+                'gpt-4.1' => 500000,
+                'o1-mini' => 32000,
+                'gpt-4' => 32000,
+                'gpt-4o' => 32000,
+                'gpt-4o-mini' => 32000,
+                'gpt-4-turbo' => 32000,
+                'o3-mini' => 50000,
+                'o4-mini' => 50000,
+                'o1' => 50000,
+            ];
+            $context_max_length = $model_context_map[$model] ?? 4000;
             for ($i = $count - 1; $i > -1; $i--) {
                 if (mb_strlen($context) < $context_max_length) {
                     $answer = $scores[$i]['answer'];
@@ -3101,34 +3234,46 @@ function sb_open_ai_embeddings_save_conversations($qea) {
     return $response;
 }
 
-function sb_open_ai_source_file_to_paragraphs($url) {
-    $extension = sb_open_ai_is_file($url);
+function sb_open_ai_source_file_to_paragraphs($url, $content = false) {
     $paragraphs = [];
-    if (!$extension) {
-        sb_file_delete($url);
-        return 'invalid-file-extension';
+    if (!$content) {
+        $extension = sb_open_ai_is_file($url);
+        if (!$extension) {
+            sb_file_delete($url);
+            return 'invalid-file-extension';
+        }
+        if (in_array($extension, ['pdf', 'json', 'csv'])) {
+            $upload_url = sb_upload_path(true);
+            $file = strpos($url, $upload_url) === 0 ? sb_upload_path() . str_replace($upload_url, '', $url) : sb_download_file($url, 'sb_open_ai_source_file.' . $extension, false, [], 0, true);
+            switch ($extension) {
+                case 'pdf':
+                    $content = sb_pdf_to_text($file);
+                    break;
+                case 'json':
+                    $content = sb_json_to_text($file);
+                    break;
+                case 'csv':
+                    $content = sb_csv_to_text($file);
+                    break;
+            }
+            sb_file_delete($file);
+        } else {
+            $content = trim(sb_get($url));
+        }
     }
-    if ($extension == '.pdf') {
-        $upload_url = sb_upload_path(true);
-        $file = strpos($url, $upload_url) === 0 ? sb_upload_path() . str_replace($upload_url, '', $url) : sb_download_file($url, 'sb_open_ai_source_file' . $extension, false, [], 0, true);
-        $text = sb_pdf_to_text($file);
-        sb_file_delete($file);
-    } else {
-        $text = trim(sb_get($url));
-    }
-    if ($text) {
-        $encoding = mb_detect_encoding($text);
+    if ($content) {
+        $encoding = mb_detect_encoding($content);
         if (strpos($encoding, 'UTF-16') !== false) {
-            $text = mb_convert_encoding($text, 'UTF-8', 'UTF-16');
+            $content = mb_convert_encoding($content, 'UTF-8', 'UTF-16');
         }
         $separator = ['።', '。', '။', '.', '।'];
         for ($i = 0; $i < count($separator); $i++) {
-            if (strpos($text, $separator[$i])) {
+            if (strpos($content, $separator[$i])) {
                 $separator = $separator[$i];
                 break;
             }
         }
-        $parts = is_string($separator) ? explode($separator . ' ', $text) : [$text];
+        $parts = is_string($separator) ? explode($separator . ' ', $content) : [$content];
         $paragraph = '';
         for ($i = 0; $i < count($parts); $i++) {
             $part = trim($parts[$i]);
@@ -3149,7 +3294,7 @@ function sb_open_ai_source_file_to_paragraphs($url) {
 }
 
 function sb_open_ai_get_gpt_model() {
-    $model = sb_get_multi_setting('open-ai', 'open-ai-model', 'gpt-4.1-mini');
+    $model = sb_get_multi_setting('open-ai', 'open-ai-model', 'gpt-5-mini');
     return $model == 'gpt-3.5-turbo-instruct' ? 'gpt-3.5-turbo' : $model;
 }
 
@@ -3283,7 +3428,8 @@ function sb_open_ai_data_scraping($conversation_id, $prompt_id) {
         foreach ($messages as $message) {
             $text .= (sb_is_agent($message['user_type']) ? 'Agent' : 'User') . ': ' . $message['message'] . PHP_EOL;
         }
-        $response = sb_open_ai_curl('chat/completions', ['model' => sb_open_ai_get_gpt_model(), 'messages' => [['role' => 'developer', 'content' => 'You are a helpful assistant that summarizes conversations between users and agents. Generate a summary of the conversation with the key user questions and agent answers. Only return the summary and nothing else. Do not add any other text. Do not ask questions.'], ['role' => 'user', 'content' => $text]]]);
+        $agent_language = sb_get_admin_language();
+        $response = sb_open_ai_curl('chat/completions', ['model' => sb_open_ai_get_gpt_model(), 'messages' => [['role' => 'developer', 'content' => 'You are a helpful assistant that summarizes conversations between users and agents. Generate a summary of the conversation with the key user questions and agent answers. Only return the summary and nothing else. Do not add any other text. Do not ask questions.' . ($agent_language ? 'The summary language must be ' . sb_get_language_name_by_code($agent_language) . '.' : '')], ['role' => 'user', 'content' => $text]]]);
         $response = sb_isset(sb_isset(sb_isset($response, 'choices', [[]])[0], 'message'), 'content', '');
         $response = [true, $response, false, null, empty($response) ? ['unknow_answer' => true] : []];
     } else {
@@ -3371,7 +3517,7 @@ function sb_open_ai_function_calling($response, $query_tools = false, $conversat
                 return shopify_ai_function_calling($function_name, $id, $arguments, $query_tools);
             }
         }
-        if (defined('SB_WOOCOMMERCE')) {
+        if (defined('SB_WOOCOMMERCE') && !sb_get_setting('wc-disable-bot-integration')) {
             $arguments = json_decode($function['arguments'], true);
             if (sb_woocommerce_open_ai_check_function_name($function_name)) {
                 if ($arguments) {
@@ -3385,7 +3531,7 @@ function sb_open_ai_function_calling($response, $query_tools = false, $conversat
         for ($i = 0; $i < count($qea); $i++) {
             $qea[$i][0] = is_array($qea[$i][0]) ? $qea[$i][0] : [$qea[$i][0]]; // Deprecated;
             for ($j = 0; $j < count($qea[$i][0]); $j++) {
-                if (substr(sb_string_slug($qea[$i][0][$j]), 0, 20) . '-' . $i == $function_name) {
+                if (substr(sb_string_slug($qea[$i][0][$j], 'slug', true), 0, 20) . '-' . $i == $function_name) {
                     $function['user_id'] = sb_get_active_user_ID();
                     $function['conversation_id'] = $conversation_id;
                     $response = sb_curl($qea[$i][2], $function, $qea[$i][4] ? explode(',', $qea[$i][4]) : [], $qea[$i][3], 30);
@@ -3651,6 +3797,11 @@ function sb_open_ai_html_to_paragraphs($url) {
                     $duplicate_check_strings = array_merge($duplicate_check_strings, $temp[1]);
                 }
             }
+        } else {
+            $decoded = json_decode($response, true);
+            if (!empty($decoded) && json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                return [sb_open_ai_source_file_to_paragraphs($url, sb_json_to_text($decoded)), 200];
+            }
         }
 
         // Check for duplicated content
@@ -3753,8 +3904,8 @@ function sb_open_ai_dummy_data($messages) {
 }
 
 function sb_open_ai_is_file($url) {
-    $extension = substr($url, -4);
-    return in_array($extension, ['.pdf', '.txt']) ? $extension : false;
+    $extension = strtolower(pathinfo($url, PATHINFO_EXTENSION));
+    return in_array($extension, ['pdf', 'txt', 'csv', 'json']) ? $extension : false;
 }
 
 function sb_open_ai_execute_set_data($user_data) {
@@ -3767,7 +3918,7 @@ function sb_open_ai_execute_set_data($user_data) {
         $user_data['first_name'] = $full_name[0];
         $user_data['last_name'] = $full_name[1];
     }
-    return sb_update_user(sb_get_active_user_ID(), $user_data, $user_data);
+    return sb_update_user(sb_get_active_user_ID(), $user_data, $user_data, true, true);
 }
 
 function sb_open_ai_execute_actions($data, $conversation_id) {
@@ -3798,7 +3949,7 @@ function sb_open_ai_execute_actions($data, $conversation_id) {
                     }
                     $client_side_payload['event'] = 'conversation-status-update-3';
                 }
-                if ((!$is_archive_conversation || sb_get_multi_setting('close-message', 'close-transcript')) && sb_isset(sb_get_active_user(), 'email')) {
+                if ((!$is_archive_conversation || sb_get_multi_setting('close-message', 'close-transcript')) && (sb_isset(sb_get_active_user(), 'email') || $action[0] == 'send_email_agents')) {
                     $attachments = [];
                     if ($is_transcript) {
                         $transcript = sb_transcript($conversation_id);
@@ -4104,7 +4255,7 @@ function sb_flows_execute($message, $messages, $language, $conversation_id) {
                 $data_item = explode(':', $data[$i]);
                 $user_data[$data_item[0]] = $data_item[1];
             }
-            sb_open_ai_execute_set_data($user_data, $conversation_id);
+            sb_open_ai_execute_set_data($user_data);
         }
         if (isset($action['actions'])) {
             $data = explode(',', $action['actions']);
@@ -4122,7 +4273,9 @@ function sb_flows_execute($message, $messages, $language, $conversation_id) {
                 }, $block['headers']);
                 $body = json_decode(sb_isset($block, 'body', '{}'), true);
                 $body['sb'] = ['user' => sb_get_active_user(), 'user_language' => sb_get_user_language(sb_get_active_user_ID())];
-                $response_rest_api = json_decode(sb_curl($block['url'], $body, $headers, $block['method']), true);
+                $body = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $response_call = sb_curl($block['url'], $body, $headers, $block['method'], false, ['Content-Type: application/json', 'Content-Length: ' . strlen($body)]);
+                $response_rest_api = is_array($response_call) ? $response_call : json_decode($response_call, true);
                 $save_response = sb_isset($block, 'save_response');
                 if ($save_response) {
                     $user_data = [];
@@ -4141,7 +4294,7 @@ function sb_flows_execute($message, $messages, $language, $conversation_id) {
                             $user_data[$save_response[$i][0]] = $response_rest_api_now;
                         }
                         if (!empty($user_data)) {
-                            sb_update_user(sb_get_active_user_ID(), $user_data, $user_data);
+                            sb_update_user(sb_get_active_user_ID(), $user_data, $user_data, true, true);
                         }
                     }
                 }
@@ -4187,7 +4340,24 @@ function sb_flows_get_open_ai_message_response($flow_name, $current_step_index, 
 }
 
 function sb_open_ai_get_max_tokens($model) {
-    $max_tokens_list = ['gpt-3.5-turbo' => 16385, 'gpt-3.5-turbo-instruct' => 4096, 'gpt-4' => 8192, 'gpt-4-turbo' => 128000, 'gpt-4o' => 128000, 'gpt-4o-mini' => 128000, 'o1' => 200000, 'o1-mini' => 128000, 'o3-mini' => 200000, 'o4-mini' => 200000, 'gpt-4.1-nano' => 1047576, 'gpt-4.1-mini' => 1047576, 'gpt-4.1' => 1047576];
+    $max_tokens_list = [
+        'gpt-5-nano' => 400000,
+        'gpt-5-mini' => 400000,
+        'gpt-5' => 400000,
+        'gpt-4.1-nano' => 1047576,
+        'gpt-4.1-mini' => 1047576,
+        'gpt-4.1' => 1047576,
+        'gpt-4' => 8192,
+        'gpt-4-turbo' => 128000,
+        'gpt-4o' => 128000,
+        'gpt-4o-mini' => 128000,
+        'o1' => 200000,
+        'o1-mini' => 128000,
+        'o3-mini' => 200000,
+        'o4-mini' => 200000,
+        'gpt-3.5-turbo' => 16385,
+        'gpt-3.5-turbo-instruct' => 4096
+    ];
     $open_ai_max_tokens = sb_isset($max_tokens_list, $model);
     if (!$open_ai_max_tokens) {
         foreach ($max_tokens_list as $key => $value) {
@@ -4273,7 +4443,7 @@ function sb_google_get_language_name($target_language_code, $token = false) {
 
 function sb_google_translate($strings, $language_code, $token = false, $message_ids = false, $conversation_id = false) {
     if (empty($language_code)) {
-        return $strings;
+        return [$strings, $token];
     }
     $translations = [];
     $token = $token ? $token : sb_dialogflow_get_token(sb_defined('GOOGLE_REFRESH_TOKEN'));
@@ -4321,15 +4491,16 @@ function sb_google_translate($strings, $language_code, $token = false, $message_
                 for ($y = 0; $y < count($skipped_translations[$i]); $y++) {
                     $string = str_replace('"' . $y . '"', $skipped_translations[$i][$y], $string);
                 }
+                $string = str_replace($shortcode_replacements[1], $shortcode_replacements[0], str_replace(['44 =', '{R}'], ['44=', '{RR}'], $string));
                 $shortcodes = sb_get_shortcode($string);
                 foreach ($shortcodes as $shortcode) {
                     if ($shortcode && $shortcode['shortcode_name'] == 'list') {
-                        $string = str_replace($shortcode['values'], str_replace([':', ','], ['\:', '\,'], str_replace(['\\:', '\\,'], [':', ','], $shortcode['values'])), $string);
+                        $string = str_replace(sb_isset($shortcode, 'values', ''), str_replace([':', ','], ['\:', '\,'], str_replace(['\\:', '\\,'], [':', ','], sb_isset($shortcode, 'values', ''))), $string);
                     }
                 }
-                $string = str_replace($shortcode_replacements[1], $shortcode_replacements[0], str_replace('44 =', '44=', $string));
+                $string = str_replace('{RR}', ',', $string);
                 $string = str_replace('="1"', '="true"', $string);
-                $string = str_replace(['{R}', '{T}'], [',', ':'], $string);
+                $string = str_replace(['{R}', '{T}', '\,\,', ',,'], [',', ':', '\,', ','], $string);
                 array_push($translations, $string);
             }
         } else {

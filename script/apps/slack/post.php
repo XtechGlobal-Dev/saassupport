@@ -1,12 +1,12 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * POST.PHP
- * ==========================================================
+ * ==
  *
  * Slack response listener. This file receive the Slack messages of the agents forwarded by board.support. This file requires the Slack App.
- * © 2017-2025 board.support. All rights reserved.
+ * ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 

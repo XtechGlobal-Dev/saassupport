@@ -1,15 +1,15 @@
 <?php
 
 /*
- * ==========================================================
+ * ==
  * WHATSAPP APP
- * ==========================================================
+ * ==
  *
  * WhatsApp app. © 2017-2025 board.support. All rights reserved.
  *
  */
 
-define('SB_WHATSAPP', '1.2.9');
+define('SB_WHATSAPP', '1.3.0');
 
 function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_number_id = false) {
     if (empty($message) && empty($attachments)) {
@@ -146,7 +146,6 @@ function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_
             if ($media_type == 'document') {
                 $query[$media_type]['filename'] = $attachments[$i][0];
             }
-            sb_debug($query);
             $response_2 = $provider == 'official' ? sb_whatsapp_cloud_curl($cloud_phone_id . '/messages', $query, $cloud_phone_id) : sb_whatsapp_360_curl('messages', $query);
             if (!$response) {
                 $response = $response_2;

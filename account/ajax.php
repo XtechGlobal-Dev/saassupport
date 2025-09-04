@@ -2,9 +2,9 @@
 
 /*
  *
- * ===================================================================
+ * ====
  * CLOUD AJAX PHP FILE
- * ===================================================================
+ * ====
  *
  * � 2017-2025 board.support. All rights reserved.
  *
@@ -122,4 +122,5 @@ function ajax_response($response) {
     die($response === true ? '1' : (is_numeric($response) ? $response : json_encode($response, JSON_INVALID_UTF8_IGNORE)));
 }
 
+?>
 ?>
