@@ -106,7 +106,7 @@ define('OPEN_EXCHANGE_RATE_APP_ID', 'AAA');
 //define('SB_CLOUD_DOCS', '');
 //define('STRIPE_PRODUCT_ID_WHITE_LABEL', '');
 //define('CLOUD_IP', '');
-//define('SB_CLOUD_DEFAULT_LANGUAGE_CODE', 'zh');
+// define('SB_CLOUD_DEFAULT_LANGUAGE_CODE', 'ar');
 //define('SB_CLOUD_DEFAULT_RTL', true);
 //define('DIRECT_CHAT_URL', '');
 //define('WEBSITE_URL', '');
