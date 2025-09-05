@@ -86,7 +86,9 @@
             let previous = active_panel;
             active_panel = name;
             main.addClass('sb-panel-active sb-load').removeClass('sb-panel-form').attr('data-panel', name);
-            if (recaptcha) recaptcha.hide();
+            if (recaptcha) {
+                recaptcha.hide();
+                }
             switch (name) {
                 case 'privacy':
                     SBF.ajax({
@@ -379,7 +381,6 @@
                     SBTickets.showPanel(SBF.setting('tickets_default_form'));
                 }
             } else {
-
                 if (activeUser() && activeUser().conversations.length) {
                     if (!SBTickets.getActiveConversation()) {
                         SBChat.openConversation(SBF.getURL('conversation') ? SBF.getURL('conversation') : activeUser().conversations[0].id);
@@ -396,7 +397,6 @@
                         SBTickets.showPanel('privacy');
                     } else if (!SBF.setting('tickets_disable_first')) {
                         SBTickets.showPanel('new-ticket');
-                        console.log();
                     } else {
                         setConversationName();
                     }
@@ -836,7 +836,7 @@
                                 conversations.push(new SBConversation([new SBMessage(response[i])], response[i]));
                             }
                         }
-                        left_conversations.html(count ? activeUser().getConversationsCode(conversations) : '<p>' + sb_('No results found1.') + '</p>');
+                        left_conversations.html(count ? activeUser().getConversationsCode(conversations) : '<p>' + sb_('No results found.') + '</p>');
                     });
                 } else {
                     SBChat.populateConversations();
@@ -911,7 +911,6 @@
                             }
                             setUserProfile();
                             if (is_edit_profile) {
-
                                 SBTickets.showPanel();
                             } else {
                                 SBF.event('SBRegistrationForm', { user: settings });
@@ -962,4 +961,15 @@
         $('.tickets-list-area .sb-panel-main .sb-top').show();
         $('.tickets-list-area .sb-panel-main .sb-scroll-area').addClass('text-middle');
     }
+
+    $('#ticketRegPass').click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $("#ticketRegInput");
+        let currentType = input.prop('type');
+        if (currentType === 'password') {
+            input.prop('type', 'text');
+        } else {
+            input.prop('type', 'password');
+        }
+    });
 }(jQuery));

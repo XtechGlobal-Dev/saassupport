@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * PERFEX CRM APP
- * ==
+ * ==========================================================
  *
- * Perfex CRM app. ï¿½ 2017-2025 board.support. All rights reserved.
+ * Perfex CRM app. © 2017-2025 board.support. All rights reserved.
  *
  */
 

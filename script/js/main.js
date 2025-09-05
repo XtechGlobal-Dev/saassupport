@@ -767,12 +767,12 @@
         //     return string ? string.replace(/</ig, '&lt;').replace(/javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup/ig, '') : '';
         // },
 
-        escape: function (string) {
+            escape: function (string) {
             return string
-                ? string
-                    .replace(/</ig, '&lt;')
-                    .replace(/\b(?:javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup)\b/ig, '')
-                : '';
+            ? string
+                .replace(/</ig, '&lt;')
+                .replace(/\b(?:javascript:|onclick|onerror|ontoggle|onmouseover|onload|oncontextmenu|ondblclick|onmousedown|onmouseenter|onmouseleave|onmousemove|onmouseout|onmouseup)\b/ig, '')
+            : '';
         },
 
         // Remove the Support Board syntax from a string
@@ -1555,7 +1555,7 @@
                     extra: true
                 }, (response) => {
                     this.processArray(response);
-                    onSuccess();
+                    onSuccess(response);
                     SBF.event('SBGetUser', this);
                 });
             } else {
@@ -1901,7 +1901,7 @@
             let message = this.message;
             let attachments = this.attachments;
             let reply = this.payload('reply');
-            let admin_menu = admin ? SBAdmin.conversations.messageMenu(agent, message, !reply) : '';
+            let admin_menu = admin ? SBAdmin.conversations.messageMenu(agent, message, !reply && !agent) : '';
             let attachments_code = '';
             let media_code = '';
             let thumb = (admin && SB_ADMIN_SETTINGS.show_profile_images) || (!admin && ((agent && !CHAT_SETTINGS.hide_agents_thumb) || (!agent && CHAT_SETTINGS.display_users_thumb))) ? `<div class="sb-thumb"><img loading="lazy" src="${this.details['profile_image']}"><div class="sb-tooltip"><div>${this.details['full_name']}</div></div></div>` : '';
@@ -2480,7 +2480,7 @@
 
             // Send message
             if (message || attachments.length || payload) {
-                let message_response = { user_id: user_id, user: activeUser(), conversation_id: conversation.id, conversation: conversation, conversation_status_code: conversation_status_code, attachments: attachments };
+                let message_response = { user_id: user_id, user: activeUser(), conversation_id: conversation.id, conversation: conversation, conversation_status_code: conversation_status_code, attachments: attachments, payload: payload };
                 SBF.ajax({
                     function: 'send-message',
                     user_id: user_id,
@@ -2719,7 +2719,6 @@
         initChat: function () {
             if (admin) return;
             SBF.getActiveUser(true, () => {
-                console.log("Chat")
                 let active = activeUser() !== false;
                 let user_type = active ? activeUser().type : false;
                 if (!tickets && CHAT_SETTINGS.popup && !storage('popup') && (!mobile || !CHAT_SETTINGS.popup_mobile_hidden)) {
@@ -2887,7 +2886,7 @@
                 this.hideDashboard();
                 this.populate();
                 this.main_header = false;
-                if (storage('chat-open')) {
+                if (storage('chat-open') && !mobile) {
                     SBChat.open();
                 }
                 if (storage('queue') == conversation_id) {
@@ -2957,10 +2956,10 @@
             if (comment.is_edited == 1 || comment.is_edited === "1") {
                 html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
             }
-
+ 
             // Show Edit button only if own comment and within 10 minutes
             if (isOwn && this.canEditComment(comment.created_at)) {
-
+ 
                 html += `<button class="edit-comment-btn" data-id="${comment.id}" ticket-id="${comment.ticket_id}">Edit</button>`;
             }
             if (isOwn) {
@@ -2971,7 +2970,7 @@
             </div>`;
             return html;
         },
-
+ 
         loadComments: function (ticket_id, last_update_date = null) {
             SBF.ajax({
                 function: 'get-ticket-comments',
@@ -2980,11 +2979,11 @@
             }, (response) => {
                 const commentsSection = $(document).find(`.tickets-list-area[data-id=${ticket_id}] #comments-section`);
                 if (response.comments && response.comments.length > 0) {
-
+ 
                     if (response.comments[0].last_update_time) {
                         this.datetime_last_comment = response.comments[0].last_update_time;
                     }
-
+ 
                     if (response.server_now) {   /// update window.SERVER_NOW time to use in canEditComment function
                         window.SERVER_NOW = response.server_now;
                     }
@@ -2999,30 +2998,30 @@
                         }
                         html += this.renderComment(comment);
                     });
-
+ 
                     if (last_update_date) {
                         commentsSection.append(html);
                     }
                     else {
                         commentsSection.html(html);
                     }
-
+ 
                     setTimeout(() => {
                         const el = commentsSection[0]; // or get(0)
                         if (el) {
                             el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
                         }
                     }, 20);
-
+ 
                     // showInitials('tc_back','comment-row');
-
+ 
                 }
                 else {
                     commentsSection.innerHTML = '<div class="text-center text-muted">No comments yet.</div>';
                 }
             });
         },
-
+ 
         lightenColor: function (hex, percent = 40) {
             if (!hex || typeof hex !== 'string') return "#cccccc";
             hex = hex.replace('#', '');
@@ -3077,7 +3076,7 @@
             const [lr, lg, lb] = hslToRgb(h, s, l);
             return `rgb(${lr}, ${lg}, ${lb})`;
         },
-
+ 
         openTicket: function (ticket_id) {
             SBF.ajax({
                 function: 'edit-ticket',
@@ -3088,19 +3087,19 @@
                     if (SBChat.new_ticket_count) {
                         delete SBChat.new_ticket_count[ticket_id];
                     }
-
+ 
                     if (SBChat.new_comment_count) {
                         delete SBChat.new_comment_count[ticket_id];
                     }
-
+ 
                     setTimeout(function () {
                         // 2. Refresh ticker menu notification counter
                         activeUser().ticketsMenuNotificationCounter();
                         // 3. Remove the counter span (inside the clicked row)
                         $('.sb-user-tickets li[data-ticket-id="' + ticket_id + '"] .notification-counter').remove();
                     }, 300);
-
-
+ 
+ 
                     $('.tickets-list-area').attr('data-id', ticket_id);
                     $('.sb-tickets .user-name').html(response.contact_name);
                     $('.sb-tickets .ticket-creation-time').html(response.creation_time);
@@ -3117,7 +3116,7 @@
                     $('#addComment').attr('ticket-id', ticket_id);
                     $('.sb-tickets .ticket-id').html(ticket_id);
                     $('.sb-tickets .ticket-status').html(response.status_name);
-
+ 
                     let attachmentsHtml = '';
                     const filesCount = Object.entries(response.attachments).length;
                     Object.entries(response.attachments).forEach(([key, value]) => {
@@ -3125,13 +3124,13 @@
                                                     <i class="sb-icon sb-icon-file"></i>${value.original_filename}
                                                 </a>`;
                     });
-
+ 
                     $('#existing-file-preview-container').removeClass('d-none');
                     $('.tickets-list-area .ticket-attachments').html(attachmentsHtml);
-
+ 
                     SBChat.loadComments(ticket_id);
                 }
-
+ 
             });
         },
 
@@ -3479,7 +3478,6 @@
                     if (user_id != bot_id) {
                         setTimeout(() => { this.queue(conversation.id) }, 1000);
                     }
-                    activeUser().conversations.push(conversation);
                     if (onSuccess) {
                         onSuccess(conversation);
                     }
@@ -3503,11 +3501,16 @@
                 for (var i = 0; i < conversations.length; i++) {
                     if (conversations[i].id == conversation.id) {
                         conversations[i] = conversation;
+                        is_new = false;
                         break;
                     }
                 }
+                if (is_new) {
+                    conversations.push(conversation);
+                }
                 storage('open-conversation', conversation.id);
                 SBApps.dialogflow.typing_enabled = true;
+                this.headerAgent();
                 SBF.event('SBActiveConversationChanged', conversation);
             } else {
                 SBF.error('Value not of type SBConversation', 'SBChat.setConversation');
@@ -3628,9 +3631,9 @@
                 if (!agent && is_default_chatbot) {
                     agent = { user_id: CHAT_SETTINGS.bot_id, full_name: CHAT_SETTINGS.bot_name, profile_image: CHAT_SETTINGS.bot_image };
                 }
+                this.headerReset();
                 if (agent) {
                     this.agent_id = agent.user_id;
-                    this.headerReset();
                     chat_header.addClass('sb-header-agent').attr('data-agent-id', this.agent_id).html(`<div class="sb-dashboard-btn sb-icon-arrow-left"></div><div class="sb-profile"><img loading="lazy" src="${agent['profile_image']}" /><div><span class="sb-name">${agent['full_name']}</span><span class="sb-status">${sb_('Away')}</span></div><i class="sb-icon sb-icon-close ${CHAT_SETTINGS.close_chat ? 'sb-close-chat' : 'sb-responsive-close-btn'}"></i></div><div class="sb-label-date-top"></div>`);
                     chat_status = chat_header.find('.sb-status');
                     this.updateUsersActivity();
@@ -3638,6 +3641,8 @@
                     if (SBF.storageTime('header-animation', 1)) {
                         this.headerAnimation();
                     }
+                } else {
+                    chat_header.html(this.start_header[0]).addClass(this.start_header[1]);
                 }
             }
         },
@@ -3698,7 +3703,9 @@
                 main.addClass('sb-dashboard-active');
                 chat_header.removeClass('sb-header-agent');
                 this.hidePanel()
-                if (this.start_header) chat_header.html(this.start_header[0]).addClass(this.start_header[1]);
+                if (this.start_header) {
+                    chat_header.html(this.start_header[0]).addClass(this.start_header[1]);
+                }
                 chat_scroll_area.find(' > div').sbActive(false);
                 main.find('.sb-dashboard').sbActive(true);
                 this.populateConversations();
@@ -3729,7 +3736,9 @@
 
         // Show a chat panel
         showPanel: function (name, title) {
-            if (tickets) return SBTickets.showPanel(name, title);
+            if (tickets) {
+                return SBTickets.showPanel(name, title);
+            }
             let panel = chat_scroll_area.find(' > .sb-panel-' + name);
             if (panel.length) {
                 chat_scroll_area.find(' > div').sbActive(false);
@@ -4457,7 +4466,6 @@
 
         // Upload response
         uploadResponse: function (response) {
-
             response = JSON.parse(response);
             if (response[0] == 'success') {
                 if (response[1] == 'extension_error') {
@@ -4700,19 +4708,19 @@
                         break;
                     case 'popups':
                         if (!storage('popup' + automation.id)) {
-                            setTimeout(() => {
-                                if (!SBChat.chat_open) {
+                            if (!SBChat.chat_open) {
+                                setTimeout(() => {
                                     SBChat.popup(false, { id: automation.id, image: automation.profile_image, title: automation.title, message: automation.message });
+                                }, 1000);
+                                this.history.push(automation.id);
+                            } else if (automation.fallback) {
+                                let last_message = SBChat.conversation ? SBChat.conversation.getLastUserMessage(false, 'no-bot') : false;
+                                if (!last_message || ((Date.now() - 600000) > SBF.unix(last_message.get('creation_time')))) {
+                                    SBChat.sendMessage(bot_id, (SBF.null(automation.title) ? '' : `*${automation.title}*\n`) + automation.message, [], false, false, 0);
+                                    storage('popup' + automation.id, true);
                                     this.history.push(automation.id);
-                                } else if (automation.fallback) {
-                                    let last_message = SBChat.conversation ? SBChat.conversation.getLastUserMessage(false, 'no-bot') : false;
-                                    if (!last_message || ((Date.now() - 600000) > SBF.unix(last_message.get('creation_time')))) {
-                                        SBChat.sendMessage(bot_id, (SBF.null(automation.title) ? '' : `*${automation.title}*\n`) + automation.message, [], false, false, 0);
-                                        storage('popup' + automation.id, true);
-                                        this.history.push(automation.id);
-                                    }
                                 }
-                            }, 1000);
+                            }
                         }
                         break;
                     case 'design':
@@ -5683,7 +5691,9 @@
         wordpress: {
 
             ajax: function (action, data, onSuccess = false) {
-                if (typeof SB_WP_AJAX_URL == ND) return;
+                if (typeof SB_WP_AJAX_URL == ND) {
+                    return onSuccess ? onSuccess(false) : false;
+                };
                 $.ajax({
                     method: 'POST',
                     url: SB_WP_AJAX_URL,
@@ -6370,54 +6380,6 @@
         } else {
             SBF.event('SBReady');
         }
-
-        $(document).on('click keydown', '#chatRegPass', function (e) {
-            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-            e.preventDefault();
-
-            const $input = $('#chatRegInput');
-            if (!$input.length) return;
-
-            const show = $input.attr('type') === 'password';
-            $input.attr('type', show ? 'text' : 'password');
-
-            // Optional a11y label update
-            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
-                .attr('data-visible', show ? 'true' : 'false');
-        });
-
-        $(document).on('click keydown', '#chatRegRepeatPass', function (e) {
-            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-            e.preventDefault();
-
-            const $input = $('#chatRegRepeatInput');
-            if (!$input.length) return;
-
-            const show = $input.attr('type') === 'password';
-            $input.attr('type', show ? 'text' : 'password');
-
-            // Optional a11y label update
-            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
-                .attr('data-visible', show ? 'true' : 'false');
-        });
-
-        $(document).on('click keydown', '#ticketRegPass', function (e) {
-            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-            e.preventDefault();
-
-            const $input = $('#ticketRegInput');
-            if (!$input.length) return;
-
-            const show = $input.attr('type') === 'password';
-            $input.attr('type', show ? 'text' : 'password');
-
-            // Optional a11y label update
-            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
-                .attr('data-visible', show ? 'true' : 'false');
-        });
-
-
-        console.log("lllll")
 
         // Disable real-time if browser tab not active
         document.addEventListener('visibilitychange', function () {
@@ -7317,6 +7279,15 @@
         //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
     }
 
-
+     $('#ticketRegPass').click(function () {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            let input = $("#ticketRegInput");
+            let currentType = input.prop('type');
+            if (currentType === 'password') {
+                input.prop('type', 'text');
+            } else {
+                input.prop('type', 'password');
+            }
+        });
 
 }(jQuery));

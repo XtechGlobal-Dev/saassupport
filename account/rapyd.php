@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * RAPYD.PHP
- * ==
+ * ==========================================================
  *
- * Process Rapyd payments. ï¿½ 2017-2025 board.support. All rights reserved.
+ * Process Rapyd payments. © 2017-2025 board.support. All rights reserved.
  *
  */
 

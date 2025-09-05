@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * WHATSAPP CLOUD POST FILE
- * ==
+ * ==========================================================
  *
  * WhatsApp cloud post file to forward WhatsApp messages to the right account. © 2017-2024 board.support. All rights reserved.
  *

@@ -1,8 +1,8 @@
 /*
 * 
-* ==
+* ==========================================================
 * RESPONSIVE-ADMIN.SCSS
-* ==
+* ==========================================================
 *
 * Back-end responsive CSS. This file is imported only.
 *
@@ -10,7 +10,7 @@
 /*
 
 # GENERAL
-==
+==========================================================
 
 */
 @keyframes sb-lightbox-animation {
@@ -356,7 +356,7 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
 /*
 
 # FONT SIZE
-==
+==========================================================
 
 */
 div ul.sb-menu li,
@@ -508,7 +508,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # TOP HEADER
-==
+==========================================================
 
 */
 .sb-admin {
@@ -592,7 +592,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # COMPONENTS
-==
+==========================================================
 
 */
 .sb-admin .sb-select-checkbox {
@@ -826,7 +826,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # LIGHTBOX AND POPUP
-==
+==========================================================
 
 */
 .sb-lightbox:not(.sb-loading):not(.sb-loading-global) {
@@ -944,7 +944,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # CONVERSATIONS AREA
-==
+==========================================================
 
 */
 .sb-board {
@@ -1184,7 +1184,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # USERS AREA
-==
+==========================================================
 
 */
 .sb-area-users .sb-top-bar {
@@ -1346,7 +1346,7 @@ td.sb-offline:after {
 /*
 
 # SETTINGS AREA
-==
+==========================================================
 
 */
 .sb-setting input,
@@ -1452,7 +1452,7 @@ td.sb-offline:after {
 /*
 
 # REPORTS AREA
-==
+==========================================================
 
 */
 .sb-area-reports > .sb-tab .sb-nav > ul li:not(.sb-tab-nav-title) {
@@ -1504,7 +1504,7 @@ td.sb-offline:after {
 /*
 
 # CHATBOT AREA
-==
+==========================================================
 
 */
 .sb-area-chatbot > .sb-tab {
@@ -1649,7 +1649,7 @@ td.sb-offline:after {
 /*
 
 # ARTICLES AREA
-==
+==========================================================
 
 */
 .sb-area-articles > .sb-tab {

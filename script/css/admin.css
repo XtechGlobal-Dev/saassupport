@@ -1,18 +1,18 @@
 @charset "UTF-8";
 /*
 * 
-* ==
+* ==========================================================
 * ADMIN.SCSS
-* ==
+* ==========================================================
 *
 * Main style file of the administration page. Written in SCSS. 
 *
 */
 /*
 *  
-* ==
+* ==========================================================
 * SHARED.SCSS
-* ==
+* ==========================================================
 *
 * Shared CSS used on both admin and front end. This file is imported only.
 *
@@ -1131,7 +1131,7 @@ div ul.sb-menu,
 /*
 
 # USER CONVERSATIONS
-==
+==========================================================
 
 */
 .sb-user-conversations > li {
@@ -1247,7 +1247,7 @@ div ul.sb-menu,
 /*
 
 # MESSAGES LIST AND CHAT
-==
+==========================================================
 */
 .sb-chat .sb-btn-text:hover,
 .sb-list .sb-btn-text:hover {
@@ -1588,7 +1588,7 @@ div ul.sb-menu,
 /*
 
 # CHAT HTML COMPONENTS
-==
+==========================================================
 
 */
 .sb-list .sb-form + .sb-btn {
@@ -1844,7 +1844,7 @@ div ul.sb-menu,
 /*
 
 # EDITOR
-==
+==========================================================
 
 */
 .sb-editor {
@@ -2092,7 +2092,7 @@ div ul.sb-menu,
 /*
 
 # ARTICLES 
-==
+==========================================================
 
 */
 .sb-article h1,
@@ -2295,7 +2295,7 @@ div ul.sb-menu,
 /*
 
 # LOADING
-==
+==========================================================
 
 */
 @keyframes sb-loading {
@@ -2359,7 +2359,7 @@ div ul.sb-menu,
 /*
 
 # BUTTONS
-==
+==========================================================
 
 */
 .sb_btn_new {
@@ -2533,7 +2533,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # INPUT
-==
+==========================================================
 
 */
 .sb-input {
@@ -2892,7 +2892,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # LIGHTBOX
-==
+==========================================================
 
 */
 .sb-lightbox-media {
@@ -2956,7 +2956,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # OVERLAY PANEL
-==
+==========================================================
 
 */
 .sb-overlay-panel {
@@ -3011,7 +3011,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # IMAGE LIGHTBOX
-==
+==========================================================
 
 */
 .sb-image {
@@ -3040,7 +3040,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # UPLOAD INPUT
-==
+==========================================================
 
 */
 .sb-upload-form-admin {
@@ -3055,7 +3055,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SEARCH BUTTON
-==
+==========================================================
 
 */
 .sb-search-btn,
@@ -3113,7 +3113,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # POPUP
-==
+==========================================================
 
 */
 .sb-popup {
@@ -3173,7 +3173,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # EMOJI
-==
+==========================================================
 
 */
 .sb-popup.sb-emoji {
@@ -3241,7 +3241,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SELECT AND MENU
-==
+==========================================================
 
 */
 .sb-select {
@@ -3366,7 +3366,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RICH MESSAGES
-==
+==========================================================
 
 */
 .sb-rich-message {
@@ -4060,7 +4060,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # MISCELLANEOUS
-==
+==========================================================
 
 */
 .sb-grid {
@@ -6665,7 +6665,6 @@ td.sb-td-contact p {
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li .sb-profile .sb-time span {
   color: #3c3c3c;
-  font-size: 10px;
 }
 .sb-board > .sb-admin-list > .sb-scroll-area li p {
   font-size: 13px;
@@ -7243,7 +7242,6 @@ td.sb-td-contact p {
   max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-clamp: 2;
   -webkit-line-clamp: 2;
 }
 .sb-board .sb-user-details .sb-profile:hover {
@@ -7417,9 +7415,6 @@ td.sb-td-contact p {
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select ul {
   top: 0;
-}
-.sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select ul li[data-value=gray] {
-  color: #fff;
 }
 .sb-board .sb-user-details .sb-inline.sb-inline-departments .sb-select p {
   padding: 0 15px;
@@ -11713,10 +11708,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   margin: 5px 0;
 }
 
-.sb-admin.sb-main .sb-input {
-  display: flex;
-}
-
 /*
  *
  * -----------------------------------------------------------
@@ -13144,8 +13135,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   border-radius: 50%;
   margin-right: 6px;
   vertical-align: middle;
-  min-width: 10px;
-  min-height: 10px;
 }
 
 .choices__list--dropdown .choices__item--selectable::before {
@@ -13159,11 +13148,8 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   background-color: #f8f9fa !important;
   color: #222 !important;
   font-weight: 500 !important;
+  display: flex !important;
   align-items: center !important;
-  max-width: 80px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 .choices__list--dropdown .choices__item[data-color]::before {
   content: "";
@@ -13789,7 +13775,6 @@ li.menu_head:hover {
 }
 .sidebar nav ul li a span {
   word-break: break-word !important;
-  font-size: 13px !important;
 }
 
 .row.tablet-sizee .nav-tabs .nav-item {
@@ -14726,10 +14711,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   color: #000 !important;
 }
 
-.main-content #bot-image .input {
-  width: 100% !important;
-}
-
 @media (max-width: 1600px) {
   .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
     max-width: 200px;
@@ -15106,7 +15087,7 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     width: 0px;
   }
   .sb-area-dashboard main .new_container .main-charts .ticket_activity_chart #ticket_activity_chart {
-    height: 193px !important;
+    height: 194px !important;
   }
   .sb-admin .header_new .sidebar {
     padding-top: 16px;
@@ -15231,8 +15212,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
 @media only screen and (max-width: 1024px) {
   .sb-admin .header_new .sidebar .logo::before {
     bottom: 4px;
-    width: 118px;
-    left: -14px;
   }
   .sb-menu-wide_new ul {
     max-width: 242px;
@@ -15739,7 +15718,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     border: 1px solid #d5d5d5;
     border-radius: 6px;
     box-shadow: none;
-    padding-inline: 10px;
   }
   .sb-area-dashboard main .new_container .dashboard-metrics {
     grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
@@ -15774,14 +15752,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     left: 0;
     transition: 0.5s ease-in-out;
     overflow-y: scroll !important;
-    width: 95px;
-  }
-  .sb-admin .header_new .sidebar.side-open::-webkit-scrollbar {
-    width: 0;
   }
   .sb-admin .header_new .sidebar .powered-by {
     flex-direction: column;
-    text-align: center;
   }
   .sb-area-ticket-detail .tc_bg .tc_back {
     padding-inline: 15px;
@@ -15847,54 +15820,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-area-ticket-detail .tc_bg {
     padding-inline: 15px;
-  }
-  .users-tab {
-    max-height: 52vh;
-  }
-  .sb-setting .repeater-item textarea {
-    min-width: fit-content;
-  }
-  .sb-nav a#sb-accout {
-    padding-inline: 0 !important;
-    margin: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs {
-    justify-content: space-between;
-  }
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .w-100 {
-    width: fit-content !important;
-  }
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .unread_conversation_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart {
-    width: fit-content;
-  }
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .new_users_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .active_users_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_created_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_resolved_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .unread_conversation_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .ticket_pending_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .avg_response_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .total_conversations_chart canvas,
-  .sb-area-dashboard main .new_container .dashboard-metrics .metric-card .graph_tabs .agent_chart canvas {
-    width: 100% !important;
-  }
-  .sb-admin-box_new .right_section .login-form .form-fields .field-container .input-wrapper svg {
-    top: 26px;
-  }
-  .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active .sb-profile .sb-name {
-    padding-left: 50px;
-  }
-  .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active .sb-profile img {
-    min-height: 40px;
   }
 }
 @media only screen and (min-width: 465px) and (max-width: 730px) {

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * COMPONENTS.PHP
- * ==
+ * ==========================================================
  *
  * Library of static html components for the Artificial Intelligence area. This file must not be executed directly. © 2017-2025 board.support. All rights reserved.
  *
