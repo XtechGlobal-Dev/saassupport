@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * API.PHP
- * ==
+ * ==========================================================
  *
  * API. This file listens the POST queries and return the result. � 2017-2025 board.support. All rights reserved.
  *

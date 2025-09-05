@@ -1,29 +1,21 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> vendor-update
 /*
 * 
-* ==
+* ==========================================================
 * MAIN.SCSS
-* ==
+* ==========================================================
 *
 * Main style file of the plugin written in SCSS.
 *
 */
 
-<<<<<<< HEAD
 @use "shared.scss" as *;
 @use "rtl.scss" as *;
 @use "responsive.scss" as *;
-=======
-@import "shared.scss";
->>>>>>> vendor-update
 
 /*
      
 # GLOBAL
-==
+==========================================================
 
 */
 
@@ -93,14 +85,10 @@
 }
 
 .sb-shopify {
-<<<<<<< HEAD
 
     [class*="sb-icon-"],
     .sb-bar-icons>div,
     .sb-dashboard-btn:empty {
-=======
-    [class*="sb-icon-"], .sb-bar-icons > div, .sb-dashboard-btn:empty {
->>>>>>> vendor-update
         display: block;
     }
 
@@ -117,17 +105,12 @@
     border-radius: 12px;
     background: rgba(144, 154, 165, 0.35);
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         height: 2px;
         background: rgb(144, 154, 165);
     }
 }
 
-<<<<<<< HEAD
 .sb-main.sb-chat.sb-cloud.sb-active {
     .wave-bg {
         margin-top: 55px !important;
@@ -197,14 +180,10 @@
 
 div ul.sb-menu li:hover,
 .sb-select ul li:hover {
-=======
-div ul.sb-menu li:hover, .sb-select ul li:hover {
->>>>>>> vendor-update
     color: $white !important;
 }
 
 .sb-main {
-<<<<<<< HEAD
 
     ::-webkit-input-placeholder,
     .sb-articles-page ::-webkit-input-placeholder {
@@ -223,21 +202,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 
     :-moz-placeholder,
     .sb-articles-page :-moz-placeholder {
-=======
-    ::-webkit-input-placeholder, .sb-articles-page ::-webkit-input-placeholder {
-        color: #a5aeb6;
-    }
-
-    ::-moz-placeholder, .sb-articles-page ::-moz-placeholder {
-        color: #a5aeb6;
-    }
-
-    :-ms-input-placeholder, .sb-articles-page :-ms-input-placeholder {
-        color: #a5aeb6;
-    }
-
-    :-moz-placeholder, .sb-articles-page :-moz-placeholder {
->>>>>>> vendor-update
         color: #a5aeb6;
     }
 
@@ -274,11 +238,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 }
 
-<<<<<<< HEAD
 .sb-ul>span {
-=======
-.sb-ul > span {
->>>>>>> vendor-update
     position: relative;
     display: block;
     padding-left: 20px;
@@ -296,14 +256,11 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> vendor-update
 /*
 
 # CHAT
-==
+==========================================================
 
 */
 
@@ -319,23 +276,17 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         min-height: 450px;
         background-size: cover;
         margin: 0;
-<<<<<<< HEAD
         overflow-y: hidden;
         max-height: 526px;
         overflow-y: auto;
 
         >.sb-list {
-=======
-
-        > .sb-list {
->>>>>>> vendor-update
             float: left;
             clear: both;
             width: 100%;
             min-height: 200px;
             box-sizing: border-box;
 
-<<<<<<< HEAD
             &::-webkit-scrollbar {
                 width: 4px;
             }
@@ -345,8 +296,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 border-radius: 40px;
             }
 
-=======
->>>>>>> vendor-update
             .sb-notify-message {
                 position: absolute;
                 top: 95px;
@@ -364,12 +313,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-<<<<<<< HEAD
     b,
     strong {
-=======
-    b, strong {
->>>>>>> vendor-update
         font-weight: 500;
     }
 
@@ -422,11 +367,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             font-weight: 400;
             font-size: 13px;
             letter-spacing: 0.5px;
-<<<<<<< HEAD
             line-height: 20px;
-=======
-            line-height: 25px;
->>>>>>> vendor-update
             height: 50px;
             overflow: hidden;
             color: rgba(255, 255, 255, 0.8);
@@ -435,7 +376,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         .sb-profiles {
             display: flex;
             justify-content: center;
-<<<<<<< HEAD
             transition: $transition;
 
             .chatbot-images {
@@ -451,16 +391,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 position: relative;
 
                 >img {
-=======
-            margin-top: 20px;
-            transition: $transition;
-
-            > div {
-                margin: 0 10px;
-                position: relative;
-
-                > img {
->>>>>>> vendor-update
                     width: 45px;
                     height: 45px;
                     border-radius: 50%;
@@ -469,11 +399,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
                 }
 
-<<<<<<< HEAD
                 >span {
-=======
-                > span {
->>>>>>> vendor-update
                     display: block;
                     text-align: center;
                     overflow: hidden;
@@ -481,11 +407,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     right: -35px;
                     height: 28px;
                     top: -25px;
-<<<<<<< HEAD
                     font-size: 12px;
-=======
-                    font-size: 13px;
->>>>>>> vendor-update
                     letter-spacing: 0.3px;
                     padding: 0 15px;
                     line-height: 29px;
@@ -494,16 +416,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     box-shadow: 0 2px 7px 0px rgba(0, 0, 0, 0.2);
                     opacity: 0;
                     position: absolute;
-<<<<<<< HEAD
                     width: fit-content;
                 }
 
                 &:hover>span {
-=======
-                }
-
-                &:hover > span {
->>>>>>> vendor-update
                     top: -40px;
                     opacity: 1;
                     transition: all 0.4s;
@@ -566,11 +482,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             padding: 5px 60px 5px 30px;
             z-index: 9;
 
-<<<<<<< HEAD
             >span:first-child {
-=======
-            > span:first-child {
->>>>>>> vendor-update
                 display: block;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -594,11 +506,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-<<<<<<< HEAD
             +div+.sb-editor {
-=======
-            + div + .sb-editor {
->>>>>>> vendor-update
                 display: none;
             }
         }
@@ -612,43 +520,26 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         right: 0;
         z-index: 9;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             position: relative;
             bottom: auto;
         }
 
-<<<<<<< HEAD
         >.sb-dashboard-btn {
-=======
-        > .sb-dashboard-btn {
->>>>>>> vendor-update
             top: 10px;
             right: 14px;
             left: auto !important;
             background: none !important;
             font-size: 10px;
-<<<<<<< HEAD
             width: 26px !important;
             height: 26px !important;
-=======
-            width: 20px !important;
-            height: 23px !important;
->>>>>>> vendor-update
             line-height: 23px !important;
             text-align: right !important;
             display: block;
             z-index: 9;
 
             &:hover {
-<<<<<<< HEAD
                 background: rgba(0, 0, 0, 0.25) !important;
-=======
-                opacity: 1;
->>>>>>> vendor-update
             }
 
             &:before {
@@ -657,7 +548,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         .sb-title {
-<<<<<<< HEAD
             padding: 15px 0 8px 0;
         }
 
@@ -670,20 +560,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         &:hover>.sb-icon-close:not(:hover) {
-=======
-            padding: 30px 0 15px 0;
-        }
-
-        .sb-brand + .sb-title {
-            padding-top: 22px;
-        }
-
-        & + .sb-list {
-            margin-top: 218px;
-        }
-
-        &:hover > .sb-icon-close:not(:hover) {
->>>>>>> vendor-update
             opacity: .5;
         }
 
@@ -695,11 +571,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     .sb-header-hide {
         display: none;
 
-<<<<<<< HEAD
         &+.sb-scroll-area {
-=======
-        & + .sb-scroll-area {
->>>>>>> vendor-update
             border-top: 2px solid $color-blue;
         }
     }
@@ -815,11 +687,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             display: inline-block !important;
         }
 
-<<<<<<< HEAD
         >ul>li:nth-of-type(1n+4) {
-=======
-        > ul > li:nth-of-type(1n+4) {
->>>>>>> vendor-update
             display: none;
         }
     }
@@ -854,11 +722,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         opacity: 1 !important;
         z-index: 11;
 
-<<<<<<< HEAD
         &+.sb-list {
-=======
-        & + .sb-list {
->>>>>>> vendor-update
             padding-top: 90px;
             margin-top: 0;
         }
@@ -900,11 +764,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 display: block;
             }
 
-<<<<<<< HEAD
             >div {
-=======
-            > div {
->>>>>>> vendor-update
                 height: 40px;
 
                 span {
@@ -979,10 +839,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 
         .sb-header-main {
             padding: 0 20px 65px 20px;
-<<<<<<< HEAD
-=======
-            z-index: 0;
->>>>>>> vendor-update
         }
 
         .sb-header-type-minimal {
@@ -990,11 +846,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-<<<<<<< HEAD
     &:not(.sb-dashboard-active) .sb-header-main>div {
-=======
-    &:not(.sb-dashboard-active) .sb-header-main > div {
->>>>>>> vendor-update
         opacity: 1 !important;
         top: 0 !important;
     }
@@ -1005,11 +857,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-<<<<<<< HEAD
     >.sb-body {
-=======
-    > .sb-body {
->>>>>>> vendor-update
         display: none;
         position: absolute;
         width: 385px;
@@ -1017,11 +865,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         background: $white;
         right: 0;
         bottom: 0;
-<<<<<<< HEAD
         border-radius: 26px;
-=======
-        border-radius: 6px;
->>>>>>> vendor-update
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06), 0 3px 32px rgba(0, 0, 0, 0.16);
         z-index: 99995;
         text-align: left;
@@ -1030,29 +874,20 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         transition: height .4s;
     }
 
-<<<<<<< HEAD
     &.sb-active>.sb-body {
-=======
-    &.sb-active > .sb-body {
->>>>>>> vendor-update
         display: flex;
         animation: sb-chat-open-animation 0.4s;
     }
 
     &.sb-notify-active {
         .sb-header-agent {
-<<<<<<< HEAD
             &+.sb-list {
-=======
-            & + .sb-list {
->>>>>>> vendor-update
                 padding-top: 170px !important;
             }
         }
 
         &:not(.sb-dashboard-active) {
             .sb-header-main {
-<<<<<<< HEAD
 
                 .sb-profiles,
                 .sb-brand+div+.sb-text {
@@ -1060,13 +895,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
 
                 &+.sb-list {
-=======
-                .sb-profiles, .sb-brand + div + .sb-text {
-                    visibility: hidden;
-                }
-
-                & + .sb-list {
->>>>>>> vendor-update
 
                     .sb-notify-message {
                         top: 130px;
@@ -1074,11 +902,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-<<<<<<< HEAD
             .sb-header-type-minimal+.sb-list {
-=======
-            .sb-header-type-minimal + .sb-list {
->>>>>>> vendor-update
                 padding-top: 30px;
             }
         }
@@ -1093,12 +917,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             display: none;
         }
 
-<<<<<<< HEAD
         .sb-dashboard-btn,
         .sb-profile {
-=======
-        .sb-dashboard-btn, .sb-profile {
->>>>>>> vendor-update
             animation: none !important;
         }
     }
@@ -1138,11 +958,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             }
         }
 
-<<<<<<< HEAD
         .sb-bar-icons>div:not(:hover) {
-=======
-        .sb-bar-icons > div:not(:hover) {
->>>>>>> vendor-update
             opacity: 0.5;
         }
 
@@ -1157,11 +973,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         &.sb-active {
-<<<<<<< HEAD
             .sb-bar+.sb-popup.sb-emoji:after {
-=======
-            .sb-bar + .sb-popup.sb-emoji:after {
->>>>>>> vendor-update
                 right: 40px;
             }
 
@@ -1173,11 +985,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 padding-right: 80px;
             }
 
-<<<<<<< HEAD
             .sb-bar-icons>div {
-=======
-            .sb-bar-icons > div {
->>>>>>> vendor-update
                 margin-right: 0;
             }
         }
@@ -1218,11 +1026,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
     }
 
-<<<<<<< HEAD
     .sb-dashboard>div,
-=======
-    .sb-dashboard > div,
->>>>>>> vendor-update
     .sb-init-form {
         text-align: center;
         color: $color-gray;
@@ -1231,17 +1035,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.2);
         border-radius: 4px;
 
-<<<<<<< HEAD
         >.sb-title,
         >.sb-top,
         >div>.sb-title,
         >div>.sb-top {
-=======
-        > .sb-title,
-        > .sb-top,
-        > div > .sb-title,
-        > div > .sb-top {
->>>>>>> vendor-update
             font-weight: 500;
             font-size: 15px;
             letter-spacing: .3px;
@@ -1257,7 +1054,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         z-index: 2;
         margin-top: 210px;
         min-height: 350px;
-<<<<<<< HEAD
         max-height: 350px;
         background: none;
         overflow-y: scroll;
@@ -1270,22 +1066,13 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             background: #d5d5d5;
             border-radius: 40px;
         }
-=======
-        background: none;
->>>>>>> vendor-update
 
         &.sb-active {
             animation: sb-fade-animation 0.5s;
         }
 
-<<<<<<< HEAD
         >div {
             .sb-user-conversations {
-=======
-        > div {
-            .sb-user-conversations {
-                padding: 10px 0;
->>>>>>> vendor-update
 
                 li {
                     border: none;
@@ -1300,11 +1087,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                     }
                 }
 
-<<<<<<< HEAD
                 >p {
-=======
-                > p {
->>>>>>> vendor-update
                     padding: 25px;
                 }
 
@@ -1313,11 +1096,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-<<<<<<< HEAD
             >.sb-btn {
-=======
-            > .sb-btn {
->>>>>>> vendor-update
                 width: auto;
                 margin: 13px auto;
                 font-weight: 500;
@@ -1334,12 +1113,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 }
             }
 
-<<<<<<< HEAD
             .sb-one-conversation:not(:empty)+.sb-btn-new-conversation,
             .sb-btn-all-conversations {
-=======
-            .sb-one-conversation:not(:empty) + .sb-btn-new-conversation, .sb-btn-all-conversations {
->>>>>>> vendor-update
                 display: none;
             }
         }
@@ -1359,7 +1134,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 
     .sb-header-type-minimal:not(.sb-header-agent) {
-<<<<<<< HEAD
         &+.sb-list {
             margin-top: 160px;
         }
@@ -1369,17 +1143,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         &+div+div+div+.sb-init-form {
-=======
-        & + .sb-list {
-            margin-top: 160px;
-        }
-
-        & + div + .sb-dashboard {
-            margin-top: 170px;
-        }
-
-        & + div + div + div + .sb-init-form {
->>>>>>> vendor-update
             margin-top: 150px;
         }
     }
@@ -1394,14 +1157,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 
     &.sb-init-form-active {
-<<<<<<< HEAD
 
         .sb-editor,
         .sb-scroll-area .sb-list,
         .sb-scroll-area .sb-dashboard {
-=======
-        .sb-editor, .sb-scroll-area .sb-list, .sb-scroll-area .sb-dashboard {
->>>>>>> vendor-update
             display: none;
         }
 
@@ -1442,13 +1201,9 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         }
 
         .sb-input-btn {
-<<<<<<< HEAD
 
             input,
             .sb-btn {
-=======
-            input, .sb-btn {
->>>>>>> vendor-update
                 margin: 0;
                 width: auto;
                 flex-grow: 1;
@@ -1481,40 +1236,24 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 border-bottom-right-radius: 0 !important;
                 position: relative;
 
-<<<<<<< HEAD
                 &:focus+.sb-btn {
-=======
-                &:focus + .sb-btn {
->>>>>>> vendor-update
                     z-index: 0;
                 }
             }
         }
 
-<<<<<<< HEAD
         .sb-top+.sb-form {
-=======
-        .sb-top + .sb-form {
->>>>>>> vendor-update
             padding-top: 10px;
         }
 
         .sb-form {
             padding: 0 25px;
 
-<<<<<<< HEAD
             &+.sb-btn {
                 margin-top: 25px;
             }
 
             &+.sb-form {
-=======
-            & + .sb-btn {
-                margin-top: 25px;
-            }
-
-            & + .sb-form {
->>>>>>> vendor-update
                 margin-top: 10px;
             }
 
@@ -1523,11 +1262,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             }
         }
 
-<<<<<<< HEAD
         .sb-input>span.sb-active {
-=======
-        .sb-input > span.sb-active {
->>>>>>> vendor-update
             background: $white !important;
         }
 
@@ -1546,40 +1281,24 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             margin: 0;
             text-align: center;
 
-<<<<<<< HEAD
             >div {
                 margin: 0;
                 border-radius: 30px;
 
                 &+div {
-=======
-            > div {
-                margin: 0;
-                border-radius: 30px;
-
-                & + div {
->>>>>>> vendor-update
                     margin-top: 15px;
                 }
             }
         }
 
-<<<<<<< HEAD
         >div>.sb-loading {
-=======
-        > div > .sb-loading {
->>>>>>> vendor-update
             left: 50%;
             margin: 15px 15px 15px -15px;
         }
     }
 
     .sb-privacy {
-<<<<<<< HEAD
         >a {
-=======
-        > a {
->>>>>>> vendor-update
             padding: 0 25px 25px 25px;
             display: block;
             text-decoration: none;
@@ -1602,12 +1321,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             margin: 0 10px;
         }
 
-<<<<<<< HEAD
         .sb-title,
         .sb-buttons {
-=======
-        .sb-title, .sb-buttons {
->>>>>>> vendor-update
             text-align: left;
         }
     }
@@ -1650,11 +1365,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             border-right-color: rgb(255, 255, 255);
         }
 
-<<<<<<< HEAD
         .sb-top+.sb-text {
-=======
-        .sb-top + .sb-text {
->>>>>>> vendor-update
             margin-top: 5px;
         }
 
@@ -1686,11 +1397,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             }
         }
 
-<<<<<<< HEAD
         >img {
-=======
-        > img {
->>>>>>> vendor-update
             width: 50px;
             height: 50px;
             left: -70px;
@@ -1709,11 +1416,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             right: auto;
         }
 
-<<<<<<< HEAD
         >.sb-body {
-=======
-        > .sb-body {
->>>>>>> vendor-update
             right: auto;
             left: 0;
         }
@@ -1734,30 +1437,19 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 transform: rotate(35deg);
             }
 
-<<<<<<< HEAD
             >img {
-=======
-            > img {
->>>>>>> vendor-update
                 right: -70px;
                 left: auto;
             }
         }
     }
 
-<<<<<<< HEAD
     .sb-departments-list,
     .sb-agents-list,
     .sb-channels-list {
         padding: 10px 0;
 
         >div {
-=======
-    .sb-departments-list, .sb-agents-list, .sb-channels-list {
-        padding: 10px 0;
-
-        > div {
->>>>>>> vendor-update
             display: flex;
             align-items: center;
             position: relative;
@@ -1766,15 +1458,10 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
             text-align: left;
             cursor: pointer;
             transition: all 0.4s;
-<<<<<<< HEAD
             background: #FFF;
 
             img,
             div {
-=======
-
-            img, div {
->>>>>>> vendor-update
                 width: 30px;
                 height: 30px;
             }
@@ -1795,11 +1482,8 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
                 background-color: $background-gray;
             }
         }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> vendor-update
     }
 
     .sb-agents-list {
@@ -1820,7 +1504,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
     }
 }
 
-<<<<<<< HEAD
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-dashboard.sb-active {
     margin-top: 175px;
 }
@@ -1837,9 +1520,6 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 }
 
 .sb-input>span:not(.sb-filled):not(.sb-active)+input[type=date]:not(:focus)::-webkit-datetime-edit {
-=======
-.sb-input > span:not(.sb-filled):not(.sb-active) + input[type=date]:not(:focus)::-webkit-datetime-edit {
->>>>>>> vendor-update
     color: transparent;
 }
 
@@ -1892,11 +1572,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 }
 
 .sb-cloud {
-<<<<<<< HEAD
     >.sb-body {
-=======
-    > .sb-body {
->>>>>>> vendor-update
         padding-bottom: 28px;
     }
 
@@ -1934,11 +1610,7 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         display: none !important;
     }
 
-<<<<<<< HEAD
     >.sb-body {
-=======
-    > .sb-body {
->>>>>>> vendor-update
         padding-bottom: 0 !important;
     }
 }
@@ -1946,21 +1618,17 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
 /*
 
 # RESPONSIVE
-==
+==========================================================
 
 */
 
 @media (max-height: 678px) {
-<<<<<<< HEAD
 
-=======
->>>>>>> vendor-update
     .sb-chat .sb-body .sb-scroll-area,
     .sb-chat .sb-body .sb-dashboard {
         min-height: 200px;
     }
 
-<<<<<<< HEAD
     .sb-chat .sb-scroll-area>.sb-list {
         min-height: 100%;
     }
@@ -1969,16 +1637,3 @@ div ul.sb-menu li:hover, .sb-select ul li:hover {
         min-height: 50px;
     }
 }
-=======
-    .sb-chat .sb-scroll-area > .sb-list {
-        min-height: 100%;
-    }
-
-    .sb-chat .sb-scroll-area .sb-header-main + .sb-list {
-        min-height: 50px;
-    }
-}
-
-@import "rtl.scss";
-@import "responsive.scss";
->>>>>>> vendor-update

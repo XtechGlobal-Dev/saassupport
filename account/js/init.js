@@ -1,9 +1,9 @@
 
 /*
 * 
-* ====
+* ===================================================================
 * CLOUD CHAT LOADING FILE
-* ====
+* ===================================================================
 *
 */
 
@@ -65,5 +65,4 @@ if (typeof String.prototype.replaceAll === 'undefined') {
         script.src = source;
         prior.parentNode.insertBefore(script, prior);
     }
-
 }()); 

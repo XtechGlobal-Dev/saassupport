@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * UPLOAD.PHP
- * ==
+ * ==========================================================
  *
  * Manage all uploads of front-end and admin. � 2017-2025 board.support. All rights reserved.
  *

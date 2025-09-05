@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * WHMCS APP
- * ==
+ * ==========================================================
  *
- * Martfury app main file. ï¿½ 2017-2025 board.support. All rights reserved.
+ * Martfury app main file. © 2017-2025 board.support. All rights reserved.
  *
  */
 

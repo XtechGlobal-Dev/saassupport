@@ -1,9 +1,9 @@
 ﻿
 /*
 * 
-* ====
+* ===================================================================
 * CLOUD FILE FOR SUPPORT BOARD ADMIN AREA
-* ====
+* ===================================================================
 *
 */
 
@@ -428,5 +428,14 @@
         });
     });
 
-
+    $('#ticketRegPass').click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $("#ticketRegInput");
+        let currentType = input.prop('type');
+        if (currentType === 'password') {
+            input.prop('type', 'text');
+        } else {
+            input.prop('type', 'password');
+        }
+    });
 }(jQuery));

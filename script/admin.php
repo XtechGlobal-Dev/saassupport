@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * ADMINISTRATION PAGE
- * ==
+ * ==========================================================
  *
  * Administration page to manage the settings and reply to the users. © 2017-2025 board.support. All rights reserved.
  *

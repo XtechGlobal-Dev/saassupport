@@ -1,16 +1,12 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * ARTICLES.PHP
- * ==
+ * ==========================================================
  *
  * Articles page.
-
  * � 2017-2025 board.support. All rights reserved.
-
- * � 2017-2025 board.support. All rights reserved.
-
  *
  */
 
