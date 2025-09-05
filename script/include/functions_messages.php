@@ -43,7 +43,7 @@
  *
  */
 
-const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags, C.converted_to_ticket FROM sb_messages A, sb_users B, sb_conversations C ';
+const SELECT_CONVERSATIONS = 'SELECT A.message, A.id AS `message_id`, A.attachments, A.payload, A.status_code AS `message_status_code`, A.creation_time AS `last_update_time`, B.id AS `message_user_id`, B.first_name AS `message_first_name`, B.last_name AS `message_last_name`, B.profile_image AS `message_profile_image`, B.user_type AS `message_user_type`, C.id AS `conversation_id`, C.user_id AS `conversation_user_id`, C.status_code AS `conversation_status_code`, C.creation_time AS `conversation_creation_time`, C.department, C.agent_id, C.title, C.source, C.extra, C.tags, C.converted_to_ticket ';
 
 function sb_get_conversations_users($conversations)
 {
@@ -71,7 +71,7 @@ function sb_get_conversations_users($conversations)
     return $conversations;
 }
 
-function sb_get_conversations($pagination = 0, $status_code = 0, $department = false, $source = false, $tag = false)
+function sb_get_conversations($pagination = 0, $status_code = 0, $department = false, $source = false, $tag = false, $agent_id = false)
 {
     $exclude_visitors = '';
     if ($status_code == 3) {
@@ -80,7 +80,7 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
             $exclude_visitors .= $ids[$i]['id'] . ',';
         }
         if ($exclude_visitors) {
-            $exclude_visitors = 'AND C.id IN (' . substr($exclude_visitors, 0, -1) . ')';
+            $exclude_visitors = ' AND C.id IN (' . substr($exclude_visitors, 0, -1) . ')';
         }
     }
     if (!$pagination) {
@@ -89,8 +89,25 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
     if (!$status_code) {
         $status_code = 0;
     }
-    $query = SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id ' . ($status_code === 'all' ? '' : ($status_code == 0 ? ' AND C.status_code <> 3 AND C.status_code <> 4' : ' AND C.status_code = ' . sb_db_escape($status_code))) . ' AND C.id = A.conversation_id' . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . (sb_get_agent_department() === false && $department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . sb_routing_and_department_db('C') . ' AND A.id IN (SELECT max(id) FROM sb_messages WHERE message <> "" OR attachments <> "" GROUP BY conversation_id) ' . $exclude_visitors . ' GROUP BY conversation_id ORDER BY ' . (sb_get_setting('order-by-date') ? '' : 'FIELD(C.status_code, 2) DESC,') . 'A.id DESC LIMIT ' . (intval(sb_db_escape($pagination, true)) * 100) . ',100';
+    sb_db_query('DROP TEMPORARY TABLE IF EXISTS sb_latest_messages');
+    sb_db_query('CREATE TEMPORARY TABLE sb_latest_messages (id BIGINT PRIMARY KEY) ENGINE=MEMORY AS SELECT MAX(id) AS id FROM sb_messages GROUP BY conversation_id');
+    $query = SELECT_CONVERSATIONS . 'FROM sb_latest_messages L JOIN sb_messages A ON A.id = L.id JOIN sb_users B ON B.id = A.user_id JOIN sb_conversations C ON C.id = A.conversation_id WHERE 1=1 ' . ($status_code === 'all' ? '' : ($status_code == 0 ? ' AND C.status_code NOT IN (3,4)' : ' AND C.status_code = ' . sb_db_escape($status_code))) . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($agent_id ? ' AND C.agent_id = ' . sb_db_escape($agent_id, true) : '') . (sb_get_agent_department() === false && $department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . sb_routing_and_department_db('C') . $exclude_visitors . ' ORDER BY ' . (sb_get_setting('order-by-date') ? '' : 'FIELD(C.status_code, 2) DESC,') . 'A.id DESC LIMIT ' . ($pagination * 100) . ', 100';
     $result = sb_db_get($query, false);
+    foreach ($result as &$conversation) {
+        if (empty($conversation['message']) && empty($conversation['attachments']) && !strpos($conversation['payload'], 'preview')) {
+            $message = sb_db_get('SELECT * FROM sb_messages WHERE conversation_id = ' . $conversation['conversation_id'] . ' AND (message <> "" OR attachments <> "") ORDER BY id DESC LIMIT 1');
+            if ($message) {
+                $conversation['message'] = $message['message'];
+                $conversation['attachments'] = $message['attachments'];
+                $conversation['message_id'] = $message['id'];
+                $conversation['message_user_id'] = $message['user_id'];
+                $conversation['message_status_code'] = $message['status_code'];
+                $conversation['payload'] = $message['payload'];
+            }
+        } else {
+            $conversation['payload'] = json_decode($conversation['payload'], true);
+        }
+    }
     if (isset($result) && is_array($result)) {
         return sb_get_conversations_users($result);
     } else {
@@ -98,10 +115,10 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
     }
 }
 
-function sb_get_new_conversations($datetime, $department = false, $source = false, $tag = false)
+function sb_get_new_conversations($datetime, $department = false, $source = false, $tag = false, $agent_id = false)
 {
     $datetime = sb_db_escape($datetime);
-    $result = sb_db_get(SELECT_CONVERSATIONS . 'WHERE A.id IN (SELECT max(id) FROM sb_messages WHERE ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' GROUP BY conversation_id) AND B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
+    $result = sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE A.id IN (SELECT max(id) FROM sb_messages WHERE ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' GROUP BY conversation_id) AND B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($agent_id ? ' AND C.agent_id = ' . sb_db_escape($agent_id, true) : '') . ($department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
     if (isset($result) && is_array($result)) {
         return count($result) ? sb_get_conversations_users($result) : [];
     } else {
@@ -113,19 +130,29 @@ function sb_get_new_user_conversations($user_id, $datetime)
 {
     $datetime = sb_db_escape($datetime);
     $user_id = sb_db_escape($user_id, true);
-    return sb_db_get(SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id AND A.conversation_id = C.id AND A.id IN (SELECT MAX(A.id) FROM sb_messages A, sb_conversations B WHERE A.' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' AND A.conversation_id = B.id AND B.user_id = ' . $user_id . ' GROUP BY A.conversation_id) GROUP BY conversation_id ORDER BY C.id DESC', false);
+    return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE B.id = A.user_id AND A.conversation_id = C.id AND A.id IN (SELECT MAX(A.id) FROM sb_messages A, sb_conversations B WHERE A.' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' AND A.conversation_id = B.id AND B.user_id = ' . $user_id . ' GROUP BY A.conversation_id) GROUP BY conversation_id ORDER BY C.id DESC', false);
 }
 
 function sb_search_conversations($search)
 {
     $search = trim(sb_db_escape(mb_strtolower($search)));
     $search_first = explode(' ', $search);
+    $numeric_filters = '';
+    $tags_filter = '';
     if (count($search_first) < 4 && strlen($search_first[0]) > 2) {
         $search_first = $search_first[0];
     } else {
         $search_first = $search;
     }
-    $result = sb_db_get(SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ' AND (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(B.first_name) LIKE "%' . $search_first . '%" OR LOWER(B.last_name) LIKE "%' . $search_first . '%" OR LOWER(B.email) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%"' . (is_numeric($search) ? ' OR C.id = ' . $search . ' OR C.department = ' . $search . ' OR C.agent_id = ' . $search : '') . (sb_get_setting('disable-tags') ? '' : ' OR LOWER(C.tags) LIKE "%' . $search . '%"') . ') GROUP BY A.conversation_id ORDER BY A.creation_time DESC', false);
+    if (is_numeric($search)) {
+        $search_int = intval($search);
+        $numeric_filters = " OR C.id = $search_int OR C.department = $search_int OR C.agent_id = $search_int";
+    }
+    if (!sb_get_setting('disable-tags')) {
+        $tags_filter = ' OR LOWER(C.tags) LIKE "%' . $search . '%"';
+    }
+    $query = SELECT_CONVERSATIONS . 'FROM sb_messages A JOIN sb_users B ON B.id = A.user_id JOIN sb_conversations C ON C.id = A.conversation_id' . sb_routing_and_department_db('C') . ' WHERE (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(B.first_name) LIKE "%' . $search_first . '%" OR LOWER(B.last_name) LIKE "%' . $search_first . '%" OR LOWER(B.email) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%"' . $numeric_filters . $tags_filter . ') GROUP BY A.conversation_id ORDER BY A.creation_time DESC';
+    $result = sb_db_get($query, false);
     if (isset($result) && is_array($result)) {
         return sb_get_conversations_users($result);
     } else {
@@ -136,7 +163,7 @@ function sb_search_conversations($search)
 function sb_search_user_conversations($search, $user_id = false)
 {
     $search = trim(sb_db_escape(mb_strtolower($search)));
-    return sb_db_get(SELECT_CONVERSATIONS . 'WHERE A.conversation_id = C.id AND B.id = C.user_id AND B.id = ' . ($user_id === false ? sb_get_active_user_ID() : sb_db_escape($user_id, true)) . ' AND (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%") GROUP BY A.conversation_id ORDER BY A.creation_time DESC', false);
+    return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE A.conversation_id = C.id AND B.id = C.user_id AND B.id = ' . ($user_id === false ? sb_get_active_user_ID() : sb_db_escape($user_id, true)) . ' AND (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%") GROUP BY A.conversation_id ORDER BY A.creation_time DESC', false);
 }
 
 function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false)
@@ -150,7 +177,7 @@ function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false)
         for ($i = 0; $i < $count; $i++) {
             $ids_string .= $ids[$i]['id'] . ',';
         }
-        return sb_db_get(SELECT_CONVERSATIONS . 'WHERE B.id = A.user_id' . sb_routing_and_department_db('C') . ' AND A.conversation_id = C.id AND A.id IN (SELECT max(A.id) FROM sb_messages A, sb_conversations C WHERE (A.message <> "" OR A.attachments <> "") AND A.conversation_id = C.id' . ($agent ? '' : ' AND C.user_id = ' . $user_id) . $exclude . ' GROUP BY conversation_id)' . ($ids_string ? ' AND A.conversation_id IN (' . substr($ids_string, 0, -1) . ')' : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
+        return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE B.id = A.user_id' . sb_routing_and_department_db('C') . ' AND A.conversation_id = C.id AND A.id IN (SELECT max(A.id) FROM sb_messages A, sb_conversations C WHERE (A.message <> "" OR A.attachments <> "") AND A.conversation_id = C.id' . ($agent ? '' : ' AND C.user_id = ' . $user_id) . $exclude . ' GROUP BY conversation_id)' . ($ids_string ? ' AND A.conversation_id IN (' . substr($ids_string, 0, -1) . ')' : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
     }
     return [];
 }
@@ -213,7 +240,7 @@ function sb_get_conversation($user_id = false, $conversation_id = false)
                     $details['rating'] = $rating;
                 }
             } else {
-                if ($details['status_code'] == 1) {
+                if ($details['status_code'] == 1 && $details['status_code'] != 5) {
                     sb_update_conversation_status($conversation_id, 0);
                     $details['status_code'] == 0;
                 }
@@ -687,6 +714,7 @@ function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2
  * 5. Convert the merge fields to the final values
  * 6. Update the tags assigned to a conversation
  * 7. Save a voice message
+ * 8. Archive or restore messages
  *
  */
 
@@ -788,6 +816,9 @@ function sb_send_message($sender_id, $conversation_id, $message = '', $attachmen
                 }
                 if ($conversation_status_code != $conversation['status_code']) {
                     sb_db_query('UPDATE sb_conversations SET status_code = ' . sb_db_escape($conversation_status_code) . ' WHERE id = ' . $conversation_id);
+                    if ($conversation['status_code'] == 5) {
+                        sb_messages_archiviation($conversation_id, true);
+                    }
                     sb_webhooks('SBActiveConversationStatusUpdated', ['conversation_id' => $conversation_id, 'status_code' => $conversation_status_code]);
                 }
             }
@@ -892,8 +923,8 @@ function sb_update_or_delete_message($action, $message_id, $message = false, $at
     $user_id = false;
     $response = false;
     $message_id = sb_db_escape($message_id, true);
-    if (!$security || $pusher) {
-        $conversation = sb_db_get('SELECT id, user_id FROM sb_conversations WHERE id = (SELECT conversation_id FROM sb_messages WHERE id = ' . $message_id . ')');
+    $conversation = sb_db_get('SELECT id, user_id, source, extra, extra_2, extra_3 FROM sb_conversations WHERE id = (SELECT conversation_id FROM sb_messages WHERE id = ' . $message_id . ')');
+    if (!$security) {
         $user_id = sb_isset($conversation, 'user_id');
         if ($user_id == sb_get_active_user_ID()) {
             $security = true;
@@ -916,8 +947,20 @@ function sb_update_or_delete_message($action, $message_id, $message = false, $at
             $response = sb_db_query('UPDATE sb_messages SET ' . ($message !== false ? 'message = "' . sb_db_escape($message) . '",' : '') . ' creation_time = "' . sb_gmt_now() . '"' . ($payload !== false ? ', payload = "' . sb_db_json_escape($payload) . '"' : '') . ($attachments !== false ? ', attachments = "' . sb_db_json_escape($attachments) . '"' : '') . ' WHERE id = ' . $message_id);
         }
         if ($action == 'delete') {
-            sb_delete_attachments(false, $message_id);
+            if (in_array($conversation['source'], ['tg'])) {
+                $payload = json_decode(sb_isset(sb_db_get('SELECT payload FROM sb_messages WHERE id = ' . $message_id), 'payload'), true);
+            }
             $response = sb_db_query('DELETE FROM sb_messages WHERE id = ' . $message_id);
+            if ($response === true) {
+                sb_delete_attachments(false, $message_id);
+                switch ($conversation['source']) {
+                    case 'tg':
+                        if ($payload && isset($payload['tgid']) && isset($conversation['extra']) && isset($conversation['extra_3'])) {
+                            sb_telegram_delete_message($conversation['extra'], $payload['tgid'], $conversation['extra_3']);
+                        }
+                        break;
+                }
+            }
         }
         if (sb_is_agent() && sb_get_setting('logs')) {
             sb_logs($action . 'd the message #' . $message_id);
@@ -1025,6 +1068,25 @@ function sb_audio_clip($audio)
     return $url;
 }
 
+function sb_messages_archiviation($conversation_id, $is_restore = false)
+{
+    $messages = sb_db_get('SELECT * FROM ' . ($is_restore ? 'sb_archive' : 'sb_messages') . ' WHERE conversation_id = ' . $conversation_id, false);
+    $count = count($messages);
+    if ($count) {
+        $query = 'INSERT IGNORE INTO ' . ($is_restore ? 'sb_messages' : 'sb_archive') . '(id, user_id, message, creation_time, status_code, attachments, payload, conversation_id) VALUES ';
+        for ($i = 0; $i < $count; $i++) {
+            $query .= '(' . $messages[$i]['id'] . ', ' . $messages[$i]['user_id'] . ', "' . sb_db_escape($messages[$i]['message']) . '", "' . $messages[$i]['creation_time'] . '", ' . $messages[$i]['status_code'] . ', "' . sb_db_escape($messages[$i]['attachments']) . '", "' . sb_db_escape($messages[$i]['payload']) . '", ' . $conversation_id . '),';
+        }
+        $response = sb_db_query(substr($query, 0, -1));
+        if ($response === true) {
+            if (!$is_restore) {
+                sb_db_query('UPDATE sb_conversations SET status_code = 5 WHERE id = ' . $conversation_id);
+            }
+            sb_db_query('DELETE FROM ' . ($is_restore ? 'sb_archive' : 'sb_messages') . ' WHERE conversation_id = ' . $conversation_id);
+        }
+    }
+}
+
 /*
  * -----------------------------------------------------------
  * RICH MESSAGES
@@ -1080,7 +1142,15 @@ function sb_get_rich_message($name, $settings = false)
                 $message = sb_(sb_isset($settings, 'registration-msg', ''));
                 $success = sb_(sb_isset($settings, 'registration-success', ''));
                 $profile_image = sb_get_setting('registration-profile-img') || sb_isset($registration_fields, 'reg-profile-img') ? '<div id="profile_image" data-type="image" class="sb-input sb-input-image sb-profile-image"><span>' . sb_('Profile image') . '</span><div' . ($user['profile_image'] && strpos($user['profile_image'], 'media/user.svg') == false ? ' data-value="' . $user['profile_image'] . '" style="background-image:url(\'' . $user['profile_image'] . '\')"' : '') . ' class="image">' . ($user['profile_image'] && strpos($user['profile_image'], 'media/user.svg') == false ? '<i class="sb-icon-close"></i>' : '') . '</div></div>' : ''; // Deprecated. Remove sb_get_setting('registration-profile-img')
-                $password = (!$registration_tickets && sb_get_setting('registration-required') == 'registration-login') || ($registration_tickets && !sb_get_setting('tickets-registration-disable-password')) ? '<div id="password" data-type="text" class="sb-input sb-input-password"><span>' . sb_('Password') . '</span><input value="' . ($user && $user['password'] ? '********' : '') . '" autocomplete="false" type="password" required></div><div id="password-check" data-type="text" class="sb-input sb-input-password"><span>' . sb_('Repeat password') . '</span><input value="' . ($user && $user['password'] ? '********' : '') . '" autocomplete="false" type="password" required></div>' : '';
+                $password = (!$registration_tickets && sb_get_setting('registration-required') == 'registration-login') || ($registration_tickets && !sb_get_setting('tickets-registration-disable-password')) ? '<div id="password" data-type="text" class="sb-input sb-input-password"><span>' . sb_('Password') . '</span>
+                <svg id="chatRegPass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none" style="position:absolute; right: 10px;cursor:pointer;" role="button" tabindex="0" aria-label="Toggle password visibility">
+                    <path d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z" stroke="#141B34" stroke-width="1.5"></path>
+                    <path d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z" stroke="#141B34" stroke-width="1.5"></path>
+                </svg>
+                <input value="' . ($user && $user['password'] ? '********' : '') . '" autocomplete="false" type="password" id="chatRegInput" required> </div><div id="password-check" data-type="text" class="sb-input sb-input-password"><span>' . sb_('Repeat password') . '</span><svg id="chatRegRepeatPass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none" style="position:absolute; right: 10px;cursor:pointer;" role="button" tabindex="0" aria-label="Toggle password visibility">
+                    <path d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z" stroke="#141B34" stroke-width="1.5"></path>
+                    <path d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z" stroke="#141B34" stroke-width="1.5"></path>
+                </svg><input value="' . ($user && $user['password'] ? '********' : '') . '" autocomplete="false" type="password" required id="chatRegRepeatInput"></div>' : '';
                 $link = $settings['registration-terms-link'] || $settings['registration-privacy-link'] ? '<div class="sb-link-area">' . sb_('By clicking the button below, you agree to our') . ' <a target="_blank" href="' . sb_isset($settings, 'registration-terms-link', $settings['registration-privacy-link']) . '">' . sb_($settings['registration-terms-link'] ? 'Terms of service' : 'Privacy Policy') . '</a>' . ($settings['registration-privacy-link'] && $settings['registration-terms-link'] ? ' ' . sb_('and') . ' <a target="_blank" href="' . $settings['registration-privacy-link'] . '">' . sb_('Privacy Policy') . '</a>' : '') . '.</div>' : '';
                 $email = $is_email ? '<div id="email" data-type="text" class="sb-input sb-input-text"><span>' . sb_('Email') . '</span><input value="' . $user['email'] . '" autocomplete="off" type="email"' . (sb_isset($registration_fields, 'reg-required-email') ? ' required' : '') . '></div><div id="otp" class="sb-input"><span>' . sb_('One-time code') . '</span><input autocomplete="false" type="text"></div>' : '';
                 $code = '<div class="sb-form-main sb-form">' . $profile_image . '<div id="first_name" data-type="text" class="sb-input sb-input-text"><span>' . sb_($is_last_name ? 'First name' : 'Name') . '</span><input value="' . ($visitor ? '' : $user['first_name']) . '" autocomplete="false" type="text" required></div>' . ($is_last_name ? '<div id="last_name" data-type="text" class="sb-input sb-input-text"><span>' . sb_('Last name') . '</span><input value="' . ($visitor ? '' : $user['last_name']) . '" autocomplete="false" type="text" ' . (sb_isset($registration_fields, 'reg-required-last-name') ? ' required' : '') . '></div>' : '') . $email . $password . '</div><div class="sb-form-extra sb-form">';
@@ -1154,15 +1224,31 @@ function sb_get_rich_message($name, $settings = false)
                 $title = sb_(sb_isset($settings, 'login-title', 'Login'));
 
                 $message = isset($settings['login-msg']) ? sb_('Login') : '';
-                $code = '<div class="sb-form"><div id="email" class="sb-input"><span>' . sb_('Email') . '</span><input autocomplete="false" type="email"> </div><div id="password" class="sb-input"><span>' . sb_('Password') . '</span><input autocomplete="off" type="password" id="ticketRegInput">
-<svg id="ticketRegPass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-     width="24" height="24" color="#000000" fill="none"
-     style="margin-left:-30px;margin-right:10px;cursor:pointer;"
-     role="button" tabindex="0" aria-label="Toggle password visibility">
-  <path d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z" stroke="#141B34" stroke-width="1.5"></path>
-  <path d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z" stroke="#141B34" stroke-width="1.5"></path>
-</svg>
-</div></div><div class="sb-buttons"><div class="sb-btn sb-submit-login">' . sb_('Sign in') . '</div>' . (sb_get_setting('registration-required') == 'login' ? '' : '<div class="sb-btn-text sb-registration-area">' . sb_('Create new account') . '</div>') . '</div>';
+                $code = '<div class="sb-form">
+                            <div id="email" class="sb-input"><span>' . sb_('Email') . '</span><input autocomplete="false"
+                                    type="email"> </div>
+                            <div id="password" class="sb-input">
+                                <span>' . sb_('Password') . '</span>
+                                <svg id="ticketRegPass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                    height="24" color="#000000" fill="none"
+                                    style="position:absolute; right: 10px;" role="button" tabindex="0"
+                                    aria-label="Toggle password visibility">
+                                    <path
+                                        d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
+                                        stroke="#141B34" stroke-width="1.5"></path>
+                                    <path
+                                        d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z"
+                                        stroke="#141B34" stroke-width="1.5"></path>
+                                </svg>
+                                <input autocomplete="off" type="password" id="ticketRegInput">
+                                
+                            </div>
+                        </div>
+                        <div class="sb-buttons">
+                            <div class="sb-btn sb-submit-login">' . sb_('Sign in') . '</div>' .
+                    (sb_get_setting('registration-required') == 'login' ? '' : '<div
+                                class="sb-btn-text sb-registration-area">' . sb_('Create new account') . '</div>') . '
+                        </div>';
                 break;
             case 'timetable':
                 $settings = sb_get_settings();

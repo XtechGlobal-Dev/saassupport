@@ -13,7 +13,7 @@
  *
  */
 
-define('SB_ZALO', '1.0.1');
+define('SB_ZALO', '1.0.2');
 
 function sb_zalo_send_message($zalo_id, $message = '', $attachments = [], $conversation_id = false) {
     if (empty($message) && empty($attachments)) {

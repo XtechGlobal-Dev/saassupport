@@ -976,7 +976,7 @@ function sb_get_setting($id, $default = false) {
 
 function sb_get_multi_setting($id, $sub_id, $default = false) {
     $setting = sb_get_setting($id);
-    if ($setting && !empty($setting[$sub_id])) {
+    if ($setting && !sb_is_error($setting) && !empty($setting[$sub_id])) {
         return $setting[$sub_id];
     }
     return $default;
