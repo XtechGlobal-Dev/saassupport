@@ -961,15 +961,4 @@
         $('.tickets-list-area .sb-panel-main .sb-top').show();
         $('.tickets-list-area .sb-panel-main .sb-scroll-area').addClass('text-middle');
     }
-
-    $('#ticketRegPass').click(function () {
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        let input = $("#ticketRegInput");
-        let currentType = input.prop('type');
-        if (currentType === 'password') {
-            input.prop('type', 'text');
-        } else {
-            input.prop('type', 'password');
-        }
-    });
 }(jQuery));
