@@ -13,7 +13,7 @@
  *
  */
 
-define('SB_WECHAT', '1.0.1');
+define('SB_WECHAT', '1.0.2');
 
 function sb_wechat_send_message($open_id, $message = '', $attachments = [], $access_token = false) {
     if (empty($message) && empty($attachments)) {

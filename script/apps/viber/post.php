@@ -50,9 +50,12 @@ if ($response) {
             $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "vb" AND user_id = ' . $user_id . ' ORDER BY id DESC LIMIT 1'), 'id');
         }
         $GLOBALS['SB_LOGIN'] = $user;
+        $is_routing = sb_routing_is_active();
         if (!$conversation_id) {
             $department = sb_get_setting('viber-department');
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'vb', $chat_id), 'details', [])['id'];
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'vb', $chat_id), 'details', [])['id'];
+        } else if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
+            sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
         }
 
         // Attachments
@@ -77,9 +80,7 @@ if ($response) {
         $response_external = sb_messaging_platforms_functions($conversation_id, $message_text, $attachments, $user, ['source' => 'vb', 'viber_id' => $viber_id]);
 
         // Queue
-        if (sb_get_multi_setting('queue', 'queue-active')) {
-            sb_queue($conversation_id, sb_get_setting('viber-department'));
-        }
+        sb_queue_check_and_run($conversation_id, $department, 'vi');
 
         // Online status
         sb_update_users_last_activity($user_id);

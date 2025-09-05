@@ -65,15 +65,4 @@ if (typeof String.prototype.replaceAll === 'undefined') {
         script.src = source;
         prior.parentNode.insertBefore(script, prior);
     }
-
-    $('#ticketRegPass').click(function () {
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            let input = $("#ticketRegInput");
-            let currentType = input.prop('type');
-            if (currentType === 'password') {
-                input.prop('type', 'text');
-            } else {
-                input.prop('type', 'password');
-            }
-        });
 }()); 

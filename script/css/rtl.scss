@@ -7,11 +7,11 @@
 *
 * Front-end RTL CSS. This file is imported only.
 *
-*/
+*/  
 
 .sb-rtl {
     direction: rtl;
-    text-align: right;
+    text-align: right; 
 
     textarea, .sb-panel, ul, ul li {
         direction: rtl;

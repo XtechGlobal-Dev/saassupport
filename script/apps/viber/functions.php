@@ -14,7 +14,7 @@
  *
  */
 
-define('SB_VIBER', '1.0.0');
+define('SB_VIBER', '1.0.1');
 
 function sb_viber_send_message($viber_id, $message = '', $attachments = []) {
     if (empty($message) && empty($attachments)) return false;

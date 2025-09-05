@@ -60,8 +60,7 @@ function sb_profile_box()
                     <i class="sb-icon-message"></i>
                     <?php sb_e("Start a conversation"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
-                    data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -69,14 +68,14 @@ function sb_profile_box()
         <div class="sb-main sb-scroll-area">
             <div>
                 <div class="sb-title">
-                    <?php sb_e("Details"); ?>
+                    <?php sb_e('Details') ?>
                 </div>
                 <div class="sb-profile-list"></div>
                 <div class="sb-agent-area"></div>
             </div>
             <div>
                 <div class="sb-title">
-                    <?php sb_e("User conversations"); ?>
+                    <?php sb_e('User conversations') ?>
                 </div>
                 <ul class="sb-user-conversations"></ul>
             </div>
@@ -91,7 +90,7 @@ function sb_profile_box()
         <div class="sb-info"></div>
         <div class="sb-top-bar">
             <div class="sb-profile">
-                <img src="<?php echo SB_URL; ?>/media/user.svg" />
+                <img src="<?php echo SB_URL ?>/media/user.svg" />
                 <span class="sb-name"></span>
             </div>
             <div>
@@ -99,8 +98,7 @@ function sb_profile_box()
                     <i class="sb-icon-check"></i>
                     <?php sb_e("Save changes"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
-                    data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -1746,6 +1744,19 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         window.initTabSlider = initTabSlider;
 
 
+        $(document).on('click', function (e) {
+            const $parent = $('.sb-nav.sb-nav-only.sb-scroll-area');
+            console.log("parent", $parent)
+
+            if (
+                $parent.hasClass('sb-active') &&
+                !$(e.target).closest('.reports-list').length &&
+                !$(e.target).closest('.sb-nav.sb-nav-only.sb-scroll-area').length
+            ) {
+                $parent.removeClass('sb-active');
+            }
+        });
+
         $(".sidebar li a").on("click", function () {
             setTimeout(() => {
                 initTabSlider();
@@ -1829,8 +1840,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             </div>
         </div>
     </form>
-    <img id="sb-error-check" style="display:none" src="<?php echo SB_URL .
-        "/media/logo.svg"; ?>" />
+    <img id="sb-error-check" style="display:none" src="<?php echo SB_URL . '/media/logo.svg' ?>" />
     <script>
         (function ($) {
             $(document).ready(function () {
@@ -1930,11 +1940,11 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             <div class="sb-bottom">
                 <a class="sb-update sb-btn sb-icon">
                     <i class="sb-icon-reload"></i>
-                    <?php sb_e("Update now"); ?>
+                    <?php sb_e('Update now') ?>
                 </a>
                 <a href="https://board.support/changes" target="_blank" class="sb-btn-text">
                     <i class="sb-icon-clock"></i>
-                    <?php sb_e("Change Log"); ?>
+                    <?php sb_e('Change Log') ?>
                 </a>
             </div>
         </div>
@@ -1957,7 +1967,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         <div class="sb-main">
             <p></p>
             <div class="sb-title">
-                <?php sb_e("License key"); ?>
+                <?php sb_e('License key') ?>
             </div>
             <div class="sb-setting sb-type-text">
                 <input type="text" required />
@@ -1965,23 +1975,23 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             <div class="sb-bottom">
                 <a class="sb-btn sb-icon sb-btn-app-setting">
                     <i class="sb-icon-settings"></i>
-                    <?php sb_e("Settings"); ?>
+                    <?php sb_e('Settings') ?>
                 </a>
                 <a class="sb-activate sb-btn sb-icon">
                     <i class="sb-icon-check"></i>
-                    <?php sb_e("Activate"); ?>
+                    <?php sb_e('Activate') ?>
                 </a>
                 <a class="sb-btn-red sb-btn sb-icon sb-btn-app-disable">
                     <i class="sb-icon-close"></i>
-                    <?php sb_e("Disable"); ?>
+                    <?php sb_e('Disable') ?>
                 </a>
                 <a class="sb-btn sb-icon sb-btn-app-puchase" target="_blank" href="#">
                     <i class="sb-icon-plane"></i>
-                    <?php sb_e("Purchase license"); ?>
+                    <?php sb_e('Purchase license') ?>
                 </a>
                 <a class="sb-btn-text sb-btn-app-details" target="_blank" href="#">
                     <i class="sb-icon-help"></i>
-                    <?php sb_e("Read more"); ?>
+                    <?php sb_e('Read more') ?>
                 </a>
             </div>
         </div>
@@ -2210,25 +2220,25 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             <div class="sb-main">
                 <div id="db-name" class="sb-input">
                     <span>
-                        <?php sb_e("Database Name"); ?>
+                        <?php sb_e('Database Name') ?>
                     </span>
                     <input type="text" required />
                 </div>
                 <div id="db-user" class="sb-input">
                     <span>
-                        <?php sb_e("Username"); ?>
+                        <?php sb_e('Username') ?>
                     </span>
                     <input type="text" required />
                 </div>
                 <div id="db-password" class="sb-input">
                     <span>
-                        <?php sb_e("Password"); ?>
+                        <?php sb_e('Password') ?>
                     </span>
                     <input type="text" />
                 </div>
                 <div id="db-host" class="sb-input">
                     <span>
-                        <?php sb_e("Host"); ?>
+                        <?php sb_e('Host') ?>
                     </span>
                     <input type="text" required />
                 </div>
@@ -2252,32 +2262,32 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                     </div>
                     <div id="last-name" class="sb-input">
                         <span>
-                            <?php sb_e("Last name"); ?>
+                            <?php sb_e('Last name') ?>
                         </span>
                         <input type="text" required />
                     </div>
                     <div id="email" class="sb-input">
                         <span>
-                            <?php sb_e("Email"); ?>
+                            <?php sb_e('Email') ?>
                         </span>
                         <input type="email" required />
                     </div>
                     <div id="password" class="sb-input">
                         <span>
-                            <?php sb_e("Password"); ?>
+                            <?php sb_e('Password') ?>
                         </span>
                         <input type="password" required />
                     </div>
                     <div id="password-check" class="sb-input">
                         <span>
-                            <?php sb_e("Repeat password"); ?>
+                            <?php sb_e('Repeat password') ?>
                         </span>
                         <input type="password" required />
                     </div>
                 <?php } ?>
                 <div class="sb-bottom">
                     <div class="sb-btn sb-submit-installation">
-                        <?php sb_e("Complete installation"); ?>
+                        <?php sb_e('Complete installation') ?>
                     </div>
                 </div>
             </div>
@@ -3692,7 +3702,7 @@ function sb_component_admin()
                                 <div class="sb-search-btn search-input">
                                     <i class="sb-icon sb-icon-search"></i>
                                     <input type="text" autocomplete="false" placeholder="<?php sb_e(
-                                        "Search..."
+                                        "Search for keywords or users..."
                                     ); ?>" />
                                 </div>
                             </div>
@@ -5437,16 +5447,16 @@ function sb_component_admin()
                         </div>
                         <div class="sb-tab sb-inner-tab px-3">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
-                                <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon">
+                                <div class="sb-add-article sb-btn sb-icon mb-3">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new article"); ?>
                                 </div>
-                                <ul class="ul-categories"></ul>
+                                <ul class="ul-articles"></ul>
                                 <div class="sb-add-category sb-btn sb-icon">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new category"); ?>
                                 </div>
+                                <ul class="ul-categories"></ul>
                             </div>
 
                             <!-- <div class="articleHEad">
@@ -5572,7 +5582,7 @@ function sb_component_admin()
                         <div class="sb-top-bar p-3">
                             <div>
                                 <!-- <h2>
-                                    <?php sb_e("Reports"); ?>
+                                    <?php sb_e('Reports'); ?>
                                 </h2> -->
                             </div>
                             <div class="top-bar-search">
@@ -5589,7 +5599,7 @@ function sb_component_admin()
                                 <div>
                                     <?php sb_e("Reports"); ?>
                                 </div>
-                                <ul>
+                                <ul class="reports-list">
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL; ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
 
@@ -5713,7 +5723,7 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <p class="sb-no-results">
-                                    <?php echo sb_("No data found."); ?>
+                                    <?php echo sb_('No data found.') ?>
                                 </p>
                             </div>
                         </div>
@@ -7842,7 +7852,7 @@ function sb_component_admin()
             sb_direct_message_box();
             sb_app_box();
             if (defined("SB_DIALOGFLOW")) {
-                require_once SB_PATH . "/apps/dialogflow/components.php";
+                require_once(SB_PATH . '/apps/dialogflow/components.php');
                 sb_dialogflow_intent_box();
             }
             if (defined("SB_WHATSAPP")) {
@@ -7853,9 +7863,7 @@ function sb_component_admin()
             }
             ?>
             <div id="sb-generic-panel"></div>
-            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string(
-                $_SERVER["PHP_SELF"]
-            ); ?>" method="post" enctype="multipart/form-data">
+            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
