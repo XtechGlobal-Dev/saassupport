@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * STRIPE.PHP
- * ==
+ * ==========================================================
  *
- * Process Stripe payments. ï¿½ 2017-2025 board.support. All rights reserved.
+ * Process Stripe payments. © 2017-2025 board.support. All rights reserved.
  *
  */
 

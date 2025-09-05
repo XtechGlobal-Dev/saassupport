@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * TELEGRAM POST.PHP
- * ==
+ * ==========================================================
  *
  * Telegram response listener. This file receive the messages sent to the Telegram bot. This file requires the Telegram App.
  * © 2017-2025 board.support. All rights reserved.

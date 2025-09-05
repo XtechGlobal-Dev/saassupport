@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * TWITTER POST.PHP
- * ==
+ * ==========================================================
  *
  * Twitter response listener. This file receive the messages from Twitter. This file requires the Twitter App.
  * © 2017-2025 board.support. All rights reserved.

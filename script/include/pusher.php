@@ -1,12 +1,12 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * PUSHER.PHP
- * ==
+ * ==========================================================
  *
  * Pusher authentication file.
- * ï¿½ 2017-2025 board.support. All rights reserved.
+ * © 2017-2025 board.support. All rights reserved.
  *
  */
 

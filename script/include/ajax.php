@@ -3,9 +3,9 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 /*
- * ==
+ * ==========================================================
  * AJAX.PHP
- * ==
+ * ==========================================================
  *
  * AJAX functions. This file must be executed only via AJAX. © 2017-2025 board.support. All rights reserved.
  *

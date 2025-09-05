@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * POST.PHP
- * ==
+ * ==========================================================
  *
  * Messenger response listener. This file receive the Facebook Messenger messages of the agents forwarded by board.support. This file requires the Messenger App.
  * © 2017-2025 board.support. All rights reserved.

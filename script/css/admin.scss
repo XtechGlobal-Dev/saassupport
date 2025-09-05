@@ -1,30 +1,22 @@
 /*
 * 
-* ==
+* ==========================================================
 * ADMIN.SCSS
-* ==
+* ==========================================================
 *
 * Main style file of the administration page. Written in SCSS. 
 *
 */
 
-<<<<<<< HEAD
 @use "shared.scss" as *;
 
 @font-face {
     font-family: "Manrope";
-=======
-@import "shared.scss";
-
-@font-face {
-    font-family: "Support Board Font";
->>>>>>> vendor-update
     src: url("../media/fonts/bold.woff2") format("woff2"), url("../media/fonts/bold.woff") format("woff");
     font-weight: 600;
     font-style: normal;
 }
 
-<<<<<<< HEAD
 @font-face {
     font-family: 'InterItalic';
     src: url('../media/fonts/Inter18pt-Italic.woff2') format('woff2'),
@@ -34,7 +26,7 @@
     font-display: swap;
 }
 
-@font-face {
+@font-face { 
     font-family: 'InterExtraBold';
     src: url('../media/fonts/Inter18pt-ExtraBold.woff2') format('woff2'),
         url('../media/fonts/Inter18pt-ExtraBold.woff') format('woff');
@@ -124,8 +116,6 @@
     font-display: swap;
 }
 
-=======
->>>>>>> vendor-update
 @keyframes sb-fade-out {
     0% {
         opacity: 1;
@@ -181,19 +171,14 @@
  *
 */
 
-<<<<<<< HEAD
 body,
 html {
-=======
-body, html {
->>>>>>> vendor-update
     margin: 0;
     padding: 0;
     min-height: 100%;
     background: rgb(245, 247, 250);
 }
 
-<<<<<<< HEAD
 .sb-admin,
 .sb-admin input,
 .sb-admin textarea,
@@ -207,14 +192,6 @@ body, html {
 
 .sb-admin,
 .sb-admin * {
-=======
-.sb-admin, .sb-admin input, .sb-admin textarea, .sb-admin select, .sb-title, .daterangepicker, .ct__content {
-    font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
-    color: $color-black;
-}
-
-.sb-admin, .sb-admin * {
->>>>>>> vendor-update
     box-sizing: content-box;
 }
 
@@ -248,27 +225,18 @@ body, html {
     z-index: 9;
 }
 
-<<<<<<< HEAD
 .sb-tooltip>div,
 .sb-admin>.sb-header>.sb-admin-nav>div>a>span,
 .sb-admin>.sb-header>.sb-admin-nav-right .sb-account>div,
 .sb-lightbox,
 .sb-color-palette ul,
 .sb-flows-blocks-nav-box .sb-close {
-=======
-.sb-tooltip > div, .sb-admin > .sb-header > .sb-admin-nav > div > a > span, .sb-admin > .sb-header > .sb-admin-nav-right .sb-account > div,
-.sb-lightbox, .sb-color-palette ul, .sb-flows-blocks-nav-box .sb-close {
->>>>>>> vendor-update
     background: $white;
     border-radius: 4px;
     padding: 10px 0;
     box-shadow: $box-shadow;
-<<<<<<< HEAD
     // z-index: 99995;
     z-index: 1050;
-=======
-    z-index: 99995;
->>>>>>> vendor-update
     list-style: none;
 }
 
@@ -279,13 +247,9 @@ hr {
     margin: 30px 0;
 }
 
-<<<<<<< HEAD
 .sb-admin-nav-right [data-value="status"],
 td.sb-online,
 td.sb-offline {
-=======
-.sb-admin-nav-right [data-value="status"], td.sb-online, td.sb-offline {
->>>>>>> vendor-update
     position: relative;
 
     &:before {
@@ -330,22 +294,14 @@ td.sb-offline:after {
     align-items: center;
     align-content: center;
 
-<<<<<<< HEAD
     .sb-btn+.sb-btn,
     .sb-btn+.sb-btn-icon {
-=======
-    .sb-btn + .sb-btn, .sb-btn + .sb-btn-icon {
->>>>>>> vendor-update
         margin-left: 15px;
     }
 }
 
-<<<<<<< HEAD
 .sb-menu-wide ul,
 .sb-tab>.sb-nav>ul {
-=======
-.sb-menu-wide ul, .sb-tab > .sb-nav > ul {
->>>>>>> vendor-update
     display: flex;
 
     li {
@@ -353,11 +309,7 @@ td.sb-offline:after {
         color: $color-black;
         font-size: 15px;
         line-height: 38px;
-<<<<<<< HEAD
         margin: 0 10px 0 0;
-=======
-        margin: 0 30px 0 0;
->>>>>>> vendor-update
         transition: $transition;
         letter-spacing: 0.3px;
         cursor: pointer;
@@ -376,12 +328,8 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     li.sb-active,
     li:hover {
-=======
-    li.sb-active, li:hover {
->>>>>>> vendor-update
         color: $color-blue;
     }
 
@@ -397,11 +345,7 @@ td.sb-offline:after {
         color: $color-black;
     }
 
-<<<<<<< HEAD
     li+li.sb-tab-nav-title {
-=======
-    li + li.sb-tab-nav-title {
->>>>>>> vendor-update
         margin-top: 10px;
         padding-top: 10px;
         border-top: 1px solid #e1e1e1;
@@ -409,11 +353,7 @@ td.sb-offline:after {
 }
 
 .sb-menu-wide {
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         display: none;
     }
 }
@@ -436,7 +376,6 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .sb-menu-wide_new {
     ul {
         font-weight: 400;
@@ -562,26 +501,11 @@ td.sb-offline:after {
 
             &.sb-active,
             &.sb-menu-wide {
-=======
-.sb-tab {
-    display: flex;
-
-    > div {
-
-        > div, .sb-nav > div {
-            display: none;
-
-            &.sb-active, &.sb-menu-wide {
->>>>>>> vendor-update
                 display: block;
             }
         }
 
-<<<<<<< HEAD
         &.sb-nav-only+div>div {
-=======
-        &.sb-nav-only + div > div {
->>>>>>> vendor-update
             display: block;
 
             &.sb-tab {
@@ -590,7 +514,6 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     >.sb-nav {
         min-width: 200px;
         min-width: 220px;
@@ -601,16 +524,6 @@ td.sb-offline:after {
         >ul {
             display: block;
             max-width: 100%;
-=======
-    > .sb-nav {
-        min-width: 200px;
-        border-right: 1px solid $border-color;
-        padding: 15px 20px 20px 20px;
-
-        > ul {
-            display: block;
-            max-width: 200px;
->>>>>>> vendor-update
 
             li {
                 margin-right: 0;
@@ -622,22 +535,16 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     >.sb-nav.sb-scroll-area {
         border-right: none;
 
         &::-webkit-scrollbar {
             width: 0px;
         }
-=======
-    > .sb-nav.sb-scroll-area {
-        border-right: none;
->>>>>>> vendor-update
     }
 
     .sb-content {
         width: 100%;
-<<<<<<< HEAD
         padding: 20px 15px 30px 15px !important;
 
         >.sb-active {
@@ -645,25 +552,12 @@ td.sb-offline:after {
         }
 
         >div:last-child {
-=======
-        padding: 20px 15px 30px 30px;
-
-        > .sb-active {
-            animation: sb-fade-animation 0.4s;
-        }
-
-        > div:last-child {
->>>>>>> vendor-update
             margin-bottom: 0;
         }
     }
 
     h2 {
-<<<<<<< HEAD
         font-size: 25px;
-=======
-        font-size: 15px;
->>>>>>> vendor-update
         letter-spacing: .3px;
         line-height: 27px;
         margin: 2px 0 15px;
@@ -672,36 +566,23 @@ td.sb-offline:after {
         align-items: center;
     }
 
-<<<<<<< HEAD
     >.sb-nav>.sb-menu-wide {
-=======
-    > .sb-nav > .sb-menu-wide {
->>>>>>> vendor-update
         margin-bottom: 15px;
     }
 }
 
-<<<<<<< HEAD
 #sb-table-chatbot-files,
 #sb-table-chatbot-website {
 
     &:empty,
     &:empty+hr {
-=======
-#sb-table-chatbot-files, #sb-table-chatbot-website {
-    &:empty, &:empty + hr {
->>>>>>> vendor-update
         display: none;
     }
 }
 
-<<<<<<< HEAD
 #sb-table-chatbot-files td:last-child i,
 #sb-table-chatbot-website td:last-child i,
 .sb-inner-tab .sb-nav>ul li i {
-=======
-#sb-table-chatbot-files td:last-child i, #sb-table-chatbot-website td:last-child i, .sb-inner-tab .sb-nav > ul li i {
->>>>>>> vendor-update
     width: 30px;
     height: 30px;
     line-height: 35px;
@@ -715,34 +596,22 @@ td.sb-offline:after {
     top: 4px;
 }
 
-<<<<<<< HEAD
 #sb-table-chatbot-files tr:hover td:last-child i,
 #sb-table-chatbot-website tr:hover td:last-child i,
 .sb-inner-tab .sb-nav>ul li:hover i {
-=======
-#sb-table-chatbot-files tr:hover td:last-child i, #sb-table-chatbot-website tr:hover td:last-child i, .sb-inner-tab .sb-nav > ul li:hover i {
->>>>>>> vendor-update
     display: block;
     animation: sb-fade-animation 0.5s;
 }
 
-<<<<<<< HEAD
 #sb-table-chatbot-files td:last-child i.sb-loading,
 #sb-table-chatbot-website td:last-child i.sb-loading,
 .sb-inner-tab .sb-nav>ul li i.sb-loading {
-=======
-#sb-table-chatbot-files td:last-child i.sb-loading, #sb-table-chatbot-website td:last-child i.sb-loading, .sb-inner-tab .sb-nav > ul li i.sb-loading {
->>>>>>> vendor-update
     display: block;
 }
 
 .sb-inner-tab {
     .sb-nav {
-<<<<<<< HEAD
         >ul {
-=======
-        > ul {
->>>>>>> vendor-update
             li {
                 position: relative;
                 padding-right: 25px;
@@ -764,11 +633,7 @@ td.sb-offline:after {
                 }
             }
 
-<<<<<<< HEAD
             >.sb-no-results {
-=======
-            > .sb-no-results {
->>>>>>> vendor-update
                 opacity: 0.6;
                 font-weight: 400;
                 font-size: 13px;
@@ -781,24 +646,16 @@ td.sb-offline:after {
         .sb-btn {
             display: inline-block;
             margin-top: 15px;
-<<<<<<< HEAD
             background: #0069f0;
-=======
->>>>>>> vendor-update
         }
     }
 }
 
 .sb-menu-mobile {
 
-<<<<<<< HEAD
     >ul {
         display: flex;
         background: transparent;
-=======
-    > ul {
-        display: flex;
->>>>>>> vendor-update
 
         li a {
             margin: 0 3px;
@@ -813,12 +670,8 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     >i,
     .sb-mobile {
-=======
-    > i, .sb-mobile {
->>>>>>> vendor-update
         display: none;
     }
 
@@ -827,7 +680,6 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .sb-area-users {
     .sb-top-bar {
         .sb-menu-mobile {
@@ -842,19 +694,13 @@ td.sb-offline:after {
     }
 }
 
-=======
->>>>>>> vendor-update
 .sb-list-thumbs li {
     display: flex;
     cursor: pointer;
     transition: $transition;
     padding: 5px 15px;
 
-<<<<<<< HEAD
     >div.sb-image {
-=======
-    > div.sb-image {
->>>>>>> vendor-update
         background-size: cover;
         width: 40px;
         min-width: 40px;
@@ -864,11 +710,7 @@ td.sb-offline:after {
         border: 1px solid $border-color;
     }
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         min-width: 0;
 
         span {
@@ -899,7 +741,6 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .status-dropdown {
     .dropdown {
         .dropdown-toggle {
@@ -910,8 +751,6 @@ td.sb-offline:after {
     }
 }
 
-=======
->>>>>>> vendor-update
 .sb-table {
     margin: 0 0 20px 0;
     width: 100%;
@@ -972,11 +811,7 @@ td.sb-offline:after {
         line-height: 0;
         outline: 0;
         padding: 0;
-<<<<<<< HEAD
         //margin: 8px 0;
-=======
-        margin: 8px 0;
->>>>>>> vendor-update
         text-align: center;
         vertical-align: middle;
         width: 20px;
@@ -985,10 +820,7 @@ td.sb-offline:after {
         border-radius: 3px;
         outline: none;
         box-shadow: none;
-<<<<<<< HEAD
         appearance: none;
-=======
->>>>>>> vendor-update
         -webkit-appearance: none;
     }
 
@@ -1020,19 +852,12 @@ td.sb-offline:after {
     .sb-no-results {
         position: absolute;
         white-space: nowrap;
-<<<<<<< HEAD
         margin: 30px 0px;
         width: 100%;
         text-align: center;
     }
 
     tr+p {
-=======
-        margin: 30px 15px;
-    }
-
-    tr + p {
->>>>>>> vendor-update
         display: none;
     }
 
@@ -1040,18 +865,13 @@ td.sb-offline:after {
         text-indent: unset;
         height: 175px;
 
-<<<<<<< HEAD
         tbody:empty,
         thead {
-=======
-        tbody:empty, thead {
->>>>>>> vendor-update
             display: none;
         }
     }
 }
 
-<<<<<<< HEAD
 .new_table {
     // padding: 20px;
     padding: 1rem 1rem;
@@ -1132,24 +952,17 @@ td.sb-offline:after {
     }
 }
 
-=======
->>>>>>> vendor-update
 .sb-profile {
     position: relative;
     color: $color-black;
     line-height: 30px;
-<<<<<<< HEAD
     padding-left: 30px;
     border-left: 1px solid #eee;
-=======
-    padding-left: 45px;
->>>>>>> vendor-update
     text-decoration: none;
     display: flex;
     align-items: center;
 
     img {
-<<<<<<< HEAD
         width: 45px;
         height: 45px;
         min-width: 45px;
@@ -1163,25 +976,12 @@ td.sb-offline:after {
     }
 
     >span {
-=======
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    > span {
->>>>>>> vendor-update
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 0.3px;
     }
 }
 
-<<<<<<< HEAD
 .sb-td-profile,
 .sb-user-details {
 
@@ -1198,18 +998,11 @@ td.sb-offline:after {
 
 .sb-profile-list>ul>li>span,
 .sb-panel-details .sb-title {
-=======
-.sb-profile-list > ul > li > span, .sb-panel-details .sb-title {
->>>>>>> vendor-update
     font-weight: 500;
     padding-right: 10px;
     font-size: 11px;
     letter-spacing: .3px;
-<<<<<<< HEAD
     color: #414141;
-=======
-    color: #88969e;
->>>>>>> vendor-update
     text-transform: uppercase;
     transition: $transition;
 
@@ -1218,7 +1011,6 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .sb-profile-list>ul>li:hover>span,
 .sb-panel-details .sb-split>div:hover>.sb-title {
     color: #2a3a43;
@@ -1227,37 +1019,22 @@ td.sb-offline:after {
 .sb-profile-list>ul>li,
 .sb-panel-details .sb-list-items>div,
 .sb-panel-details .sb-list-items>a {
-=======
-.sb-profile-list > ul > li:hover > span, .sb-panel-details .sb-split > div:hover > .sb-title {
-    color: #2a3a43;
-}
-
-.sb-profile-list > ul > li, .sb-panel-details .sb-list-items > div, .sb-panel-details .sb-list-items > a {
->>>>>>> vendor-update
     position: relative;
     font-size: 13px;
     line-height: 27px;
     letter-spacing: 0.3px;
     white-space: nowrap;
     text-overflow: ellipsis;
-<<<<<<< HEAD
     // overflow: hidden;
 }
 
 .sb-list-items:not(:empty)+.sb-btn {
-=======
-    overflow: hidden;
-}
-
-.sb-list-items:not(:empty) + .sb-btn {
->>>>>>> vendor-update
     margin-top: 15px;
 }
 
 .sb-profile-list {
     padding: 0;
 
-<<<<<<< HEAD
     >ul {
         margin-top: 15px;
 
@@ -1270,19 +1047,6 @@ td.sb-offline:after {
                 left: 0;
                 top: 7px;
                 font-size: 19px;
-=======
-    > ul {
-        margin-top: 15px;
-
-        > li {
-            padding-left: 30px;
-
-            .sb-icon, > img {
-                position: absolute;
-                left: 0;
-                top: 7px;
-                font-size: 14px;
->>>>>>> vendor-update
                 color: $color-dark-blue;
 
                 &:before {
@@ -1293,21 +1057,12 @@ td.sb-offline:after {
                 }
             }
 
-<<<<<<< HEAD
             >img {
                 width: 19px;
                 min-height: 17px;
             }
 
             >span {
-=======
-            > img {
-                width: 15px;
-                height: 15px;
-            }
-
-            > span {
->>>>>>> vendor-update
                 position: relative;
                 top: 1px;
 
@@ -1317,7 +1072,6 @@ td.sb-offline:after {
             }
 
             label {
-<<<<<<< HEAD
                 font-weight: 500;
                 margin: 0;
                 color: #000;
@@ -1332,10 +1086,6 @@ td.sb-offline:after {
                     max-width: calc(100% - 90px);
                     text-overflow: ellipsis;
                 }
-=======
-                font-weight: 400;
-                margin: 0;
->>>>>>> vendor-update
             }
 
             &:first-child span {
@@ -1360,12 +1110,8 @@ td.sb-offline:after {
         cursor: pointer;
     }
 
-<<<<<<< HEAD
     [data-id="browser_language"] img,
     [data-id="language"] img {
-=======
-    [data-id="browser_language"] img, [data-id="language"] img {
->>>>>>> vendor-update
         border-radius: 50%;
     }
 
@@ -1411,12 +1157,8 @@ td.sb-offline:after {
                 opacity: .7;
             }
 
-<<<<<<< HEAD
             p,
             li {
-=======
-            p, li {
->>>>>>> vendor-update
                 font-weight: 400;
             }
 
@@ -1431,7 +1173,6 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     >div {
         position: relative;
 
@@ -1439,15 +1180,6 @@ td.sb-offline:after {
             margin: 15px 15px 0 15px;
 
             >i {
-=======
-    > div {
-        position: relative;
-
-        > .sb-title {
-            margin: 15px 15px 0 15px;
-
-            > i {
->>>>>>> vendor-update
                 position: absolute;
                 right: 12px;
                 font-size: 14px;
@@ -1462,20 +1194,12 @@ td.sb-offline:after {
                 }
             }
 
-<<<<<<< HEAD
             &+.sb-list-items {
-=======
-            & + .sb-list-items {
->>>>>>> vendor-update
                 margin: 5px 0 -3px 0;
             }
         }
 
-<<<<<<< HEAD
         .sb-list-items:last-child>p {
-=======
-        .sb-list-items:last-child > p {
->>>>>>> vendor-update
             margin-bottom: 5px;
         }
     }
@@ -1485,17 +1209,10 @@ td.sb-offline:after {
         display: flex;
         justify-content: space-between;
 
-<<<<<<< HEAD
         >div {
             width: 50%;
 
             &+div {
-=======
-        > div {
-            width: 50%;
-
-            & + div {
->>>>>>> vendor-update
                 border-left: 1px solid $border-color;
                 padding-left: 15px;
             }
@@ -1511,40 +1228,24 @@ td.sb-offline:after {
     .sb-list-names {
         margin: -5px 0;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             padding: 5px 15px;
             display: flex;
             justify-content: space-between;
             overflow: hidden;
 
-<<<<<<< HEAD
             >span {
-=======
-            > span {
->>>>>>> vendor-update
                 white-space: nowrap;
                 font-size: 13px;
                 font-weight: 500;
             }
 
-<<<<<<< HEAD
             >span:last-child {
-=======
-            > span:last-child {
->>>>>>> vendor-update
                 opacity: .6;
                 font-weight: 400;
             }
 
-<<<<<<< HEAD
             &.sb-expired>span:last-child {
-=======
-            &.sb-expired > span:last-child {
->>>>>>> vendor-update
                 opacity: 1;
                 color: $color-red;
             }
@@ -1552,19 +1253,13 @@ td.sb-offline:after {
     }
 
     .sb-list-links {
-<<<<<<< HEAD
         >a {
             padding: 0 30px;
-=======
-        > a {
-            padding: 0 15px;
->>>>>>> vendor-update
             cursor: pointer;
             display: block;
             text-decoration: none;
             color: $color-black;
             transition: $transition;
-<<<<<<< HEAD
             overflow: hidden;
             max-width: 85%;
             white-space: nowrap;
@@ -1575,14 +1270,6 @@ td.sb-offline:after {
             }
 
             >span:last-child {
-=======
-
-            > span span {
-                display: inline-block;
-            }
-
-            > span:last-child {
->>>>>>> vendor-update
                 color: #7e8c98;
             }
 
@@ -1630,11 +1317,7 @@ td.sb-offline:after {
             }
         }
 
-<<<<<<< HEAD
         >p {
-=======
-        > p {
->>>>>>> vendor-update
             font-size: 13px;
             padding: 0 0 0 15px;
             margin: 0;
@@ -1642,30 +1325,18 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     .sb-list-icon>a {
-=======
-    .sb-list-icon > a {
->>>>>>> vendor-update
         padding-right: 40px;
     }
 
     .sb-accordion {
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             position: relative;
             overflow: hidden;
 
 
-<<<<<<< HEAD
             >span {
-=======
-            > span {
->>>>>>> vendor-update
                 padding: 0 15px;
                 cursor: pointer;
                 white-space: nowrap;
@@ -1674,7 +1345,6 @@ td.sb-offline:after {
                 text-overflow: ellipsis;
                 transition: $transition;
 
-<<<<<<< HEAD
                 >span:first-child {
                     opacity: .6;
                 }
@@ -1684,17 +1354,6 @@ td.sb-offline:after {
                 }
 
                 >a {
-=======
-                > span:first-child {
-                    opacity: .6;
-                }
-
-                > span + span {
-                    margin-left: 15px;
-                }
-
-                > a {
->>>>>>> vendor-update
                     position: absolute;
                     right: 15px;
                     line-height: 30px;
@@ -1714,19 +1373,11 @@ td.sb-offline:after {
                 }
             }
 
-<<<<<<< HEAD
             >div {
                 height: 0;
                 overflow: hidden;
 
                 >a {
-=======
-            > div {
-                height: 0;
-                overflow: hidden;
-
-                > a {
->>>>>>> vendor-update
                     display: block;
                     text-decoration: none;
                     overflow: hidden;
@@ -1748,11 +1399,7 @@ td.sb-offline:after {
                 }
             }
 
-<<<<<<< HEAD
             &.sb-active>div {
-=======
-            &.sb-active > div {
->>>>>>> vendor-update
                 padding: 15px;
                 height: auto;
             }
@@ -1764,11 +1411,7 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     >i {
-=======
-    > i {
->>>>>>> vendor-update
         position: absolute;
         right: 12px;
         top: 22px;
@@ -1789,20 +1432,12 @@ td.sb-offline:after {
             opacity: 1;
         }
 
-<<<<<<< HEAD
         &+.sb-list-names {
-=======
-        & + .sb-list-names {
->>>>>>> vendor-update
             padding-top: 15px;
         }
     }
 
-<<<<<<< HEAD
     >.sb-title {
-=======
-    > .sb-title {
->>>>>>> vendor-update
         padding: 15px 15px 0 15px;
         display: block;
 
@@ -1821,11 +1456,7 @@ td.sb-offline:after {
         background-color: $white;
         color: $color-gray;
         border: 1px solid #ccd2d5;
-<<<<<<< HEAD
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-=======
-        box-shadow: 0 1px 1px rgba(0,0,0,0.12);
->>>>>>> vendor-update
         padding: 0 10px;
         white-space: nowrap;
         border-radius: 4px;
@@ -1850,21 +1481,12 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     >.sb-btn:first-child {
         margin: 15px 15px 0 15px;
     }
 
     &.sb-collapse>.sb-collapse-btn {
         margin-left: 30px;
-=======
-    > .sb-btn:first-child {
-        margin: 15px 15px 0 15px;
-    }
-
-    &.sb-collapse > .sb-collapse-btn {
-        margin-left: 15px;
->>>>>>> vendor-update
     }
 
     &:empty {
@@ -1872,7 +1494,6 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 @keyframes nx-left-right-animation {
     0% {
         right: 0px;
@@ -1901,13 +1522,10 @@ td.sb-offline:after {
     gap: 4px;
 }
 
-=======
->>>>>>> vendor-update
 .sb-panel-attachments {
     overflow: visible;
 }
 
-<<<<<<< HEAD
 textarea {
     resize: none !important;
 }
@@ -1917,21 +1535,11 @@ textarea {
     top: 10px;
     right: 10px;
     border-radius: 4px;
-=======
-.sb-info-card {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    left: 10px;
-    border-radius: 4px;
-    padding: 10px 30px;
->>>>>>> vendor-update
     background: $color-green;
     color: $white;
     text-align: center;
     box-shadow: $box-shadow;
     cursor: pointer;
-<<<<<<< HEAD
     z-index: 9999995;
     width: fit-content;
     transition: .6s ease-in-out;
@@ -1941,26 +1549,13 @@ textarea {
     &.sb-active {
         animation: nx-left-right-animation 0.6s linear normal;
         visibility: visible;
-=======
-    display: none;
-    z-index: 9999995;
-
-    &.sb-active {
-        display: block;
-        animation: sb-fade-bottom-animation .5s;
->>>>>>> vendor-update
     }
 
     h3 {
         margin: 0;
         padding: 0;
-<<<<<<< HEAD
         font-size: 13px;
         line-height: 23px;
-=======
-        font-size: 15px;
-        line-height: 25px;
->>>>>>> vendor-update
         white-space: nowrap;
         letter-spacing: 0.5px;
         color: $white;
@@ -2014,7 +1609,6 @@ textarea {
     }
 }
 
-<<<<<<< HEAD
 .sb-panel-notes>div {
     >div {
         margin: 0 30px;
@@ -2027,19 +1621,6 @@ textarea {
         color: #fff;
 
         >span:first-child {
-=======
-.sb-panel-notes > div {
-    > div {
-        margin: 0 15px;
-        background: #ffeab0;
-        padding: 15px;
-        border-radius: 4px;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        overflow: hidden;
-
-        > span:first-child {
->>>>>>> vendor-update
             display: block;
             font-weight: 500;
             position: relative;
@@ -2067,11 +1648,7 @@ textarea {
                     right: 17px;
                     font-size: 16px;
                     line-height: 26px;
-<<<<<<< HEAD
                     // background: #ffeab0;
-=======
-                    background: #ffeab0;
->>>>>>> vendor-update
 
                     &:hover {
                         color: $color-blue;
@@ -2079,39 +1656,23 @@ textarea {
                 }
             }
 
-<<<<<<< HEAD
             >span {
                 font-weight: 400;
                 font-size: 12px;
                 float: right;
-=======
-            > span {
-                font-weight: 400;
-                font-size: 12px;
-                float: right;
-                opacity: .7;
->>>>>>> vendor-update
                 transition-delay: 1s;
             }
 
             &.sb-note-hide-info {
                 margin-bottom: 0;
 
-<<<<<<< HEAD
                 &+span {
-=======
-                & + span {
->>>>>>> vendor-update
                     padding-right: 35px;
                 }
             }
         }
 
-<<<<<<< HEAD
         >span:last-child {
-=======
-        > span:last-child {
->>>>>>> vendor-update
             font-size: 13px;
             line-height: 21px;
             display: block;
@@ -2119,29 +1680,17 @@ textarea {
         }
 
         &:hover {
-<<<<<<< HEAD
             >span i {
                 opacity: 1;
             }
 
             >span>span {
-=======
-            > span i {
-                opacity: 1;
-            }
-
-            > span > span {
->>>>>>> vendor-update
                 opacity: 0;
                 transition: none;
             }
         }
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             margin-top: 10px;
         }
     }
@@ -2156,13 +1705,7 @@ textarea {
     text-decoration: underline;
 }
 
-<<<<<<< HEAD
 .sb-panel-tags>div {
-=======
-.sb-panel-tags > div {
-    > div {
-    }
->>>>>>> vendor-update
 
     &:empty {
         margin-bottom: -15px;
@@ -2174,7 +1717,6 @@ textarea {
     width: calc(100% - 40px);
 }
 
-<<<<<<< HEAD
 .status-list {
     .dropdown-menu {
         transform: translate(0) !important;
@@ -2187,12 +1729,6 @@ textarea {
     margin: -5px;
 
     >span {
-=======
-.sb-tags-cnt, .sb-panel-tags > div {
-    margin: -5px;
-
-    > span {
->>>>>>> vendor-update
         padding: 5px 10px;
         margin: 5px;
         letter-spacing: .3px;
@@ -2209,15 +1745,10 @@ textarea {
 }
 
 .sb-tags-cnt {
-<<<<<<< HEAD
     >span {
         border: 1px dashed transparent;
         word-wrap: break-word;
         max-width: 271px;
-=======
-    > span {
-        border: 1px dashed transparent;
->>>>>>> vendor-update
 
         &:not(.sb-active):not(:hover) {
             background: none;
@@ -2229,38 +1760,26 @@ textarea {
 
 
     [data-color=""] {
-<<<<<<< HEAD
 
         &.sb-active,
         &:hover {
-=======
-        &.sb-active, &:hover {
->>>>>>> vendor-update
             background-color: $color-blue;
             color: $white !important;
         }
     }
 }
 
-<<<<<<< HEAD
 .sb-panel-tags>div {
     margin: 10px 0;
     padding-inline: 30px;
-=======
-.sb-panel-tags > div {
-    margin: 10px;
->>>>>>> vendor-update
 
     span {
         cursor: default;
         letter-spacing: 0.3px;
         font-size: 12px;
-<<<<<<< HEAD
         max-width: 140px;
         overflow: hidden;
         text-overflow: ellipsis;
-=======
->>>>>>> vendor-update
     }
 
     [data-color=""] {
@@ -2286,16 +1805,10 @@ textarea {
     bottom: 70px;
 
     .sb-scroll-area {
-<<<<<<< HEAD
         height: calc(100vh - 65px);
 
         >p,
         ul>p {
-=======
-        height: calc(100% - 65px);
-
-        > p, ul > p {
->>>>>>> vendor-update
             padding: 0 30px 15px 15px;
         }
 
@@ -2342,15 +1855,12 @@ textarea {
     }
 }
 
-<<<<<<< HEAD
 .sb-save-articles.sb-btn,
 .sb-main main .sb-btn {
     background: #0069f0;
     min-width: 88px;
 }
 
-=======
->>>>>>> vendor-update
 .sb-popup.sb-replies .sb-replies-list ul {
 
     li {
@@ -2400,11 +1910,7 @@ textarea {
         &:hover {
             cursor: pointer;
 
-<<<<<<< HEAD
             >div {
-=======
-            > div {
->>>>>>> vendor-update
                 color: $color-blue;
                 opacity: 1;
             }
@@ -2412,7 +1918,6 @@ textarea {
     }
 }
 
-<<<<<<< HEAD
 .sb-area-users {
     #customerTable_wrapper {
         .dt-row {
@@ -2617,8 +2122,6 @@ td.sb-td-contact {
 }
 
 
-=======
->>>>>>> vendor-update
 .sb-tooltip {
     position: absolute;
     top: 0;
@@ -2646,11 +2149,7 @@ td.sb-td-contact {
         transform: translateX(-50%);
     }
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         font-size: 13px;
         line-height: 20px;
         padding: 8px 12px;
@@ -2664,21 +2163,13 @@ td.sb-td-contact {
 
 .sb-collapse {
 
-<<<<<<< HEAD
     >div,
     >ul {
-=======
-    > div, > ul {
->>>>>>> vendor-update
         overflow: hidden;
         position: relative;
     }
 
-<<<<<<< HEAD
     >.sb-collapse-btn {
-=======
-    > .sb-collapse-btn {
->>>>>>> vendor-update
         margin: 15px 0 -5px 0;
         text-transform: uppercase;
         font-weight: 500;
@@ -2703,18 +2194,13 @@ td.sb-td-contact {
         }
     }
 
-<<<<<<< HEAD
     .sb-btn+.sb-collapse-btn {
-=======
-    .sb-btn + .sb-collapse-btn {
->>>>>>> vendor-update
         transform: translateY(10px);
     }
 }
 
 .sb-filter-btn {
     i {
-<<<<<<< HEAD
         z-index: 3;
         position: relative;
         top: 0 !important;
@@ -2722,12 +2208,6 @@ td.sb-td-contact {
     }
 
     >div {
-=======
-        z-index: 0;
-    }
-
-    > div {
->>>>>>> vendor-update
         display: none;
         position: absolute;
         right: 0;
@@ -2736,7 +2216,6 @@ td.sb-td-contact {
         background: #FFF;
         z-index: 4;
         padding: 15px;
-<<<<<<< HEAD
         height: 38px;
     }
 
@@ -2745,17 +2224,6 @@ td.sb-td-contact {
 
         &:last-child {
             margin-right: 30px;
-=======
-        padding-right: 60px
-    }
-
-    .sb-select {
-        display: block;
-        margin: 0 !important;
-
-        ul {
-            width: 100%;
->>>>>>> vendor-update
         }
     }
 
@@ -2768,17 +2236,11 @@ td.sb-td-contact {
             right: 15px;
         }
 
-<<<<<<< HEAD
         >div {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
             height: fit-content;
-=======
-        > div {
-            display: block;
-            border-bottom: 1px solid $border-color;
->>>>>>> vendor-update
         }
 
         &:after {
@@ -2789,15 +2251,10 @@ td.sb-td-contact {
     &[data-badge]:after {
         content: attr(data-badge);
         position: absolute;
-<<<<<<< HEAD
         // right: -17px;
         // top: 5px;
         right: -7px;
         top: -3px;
-=======
-        right: -17px;
-        top: 5px;
->>>>>>> vendor-update
         background: $color-red;
         color: $white;
         font-size: 10px;
@@ -2826,25 +2283,16 @@ td.sb-td-contact {
 }
 
 .sb-admin {
-<<<<<<< HEAD
     >.sb-header {
         position: fixed;
         background: $background-gray;
         border-right: 1px solid $border-color;
         // width: 65px;
-=======
-    > .sb-header {
-        position: fixed;
-        background: $background-gray;
-        border-right: 1px solid $border-color;
-        width: 65px;
->>>>>>> vendor-update
         top: 0;
         left: 0;
         bottom: 0;
         z-index: 9;
 
-<<<<<<< HEAD
         >.sb-admin-nav {
 
             .sb-notification-counter {
@@ -2865,36 +2313,21 @@ td.sb-td-contact {
             }
 
             >img {
-=======
-        > .sb-admin-nav {
-            > img {
->>>>>>> vendor-update
                 height: 35px;
                 margin: 18px 15px;
             }
 
-<<<<<<< HEAD
             >div {
                 padding: 5px 0;
 
                 >a {
                     height: 36px;
-=======
-            > div {
-                padding: 5px 0;
-
-                > a {
-                    height: 50px;
->>>>>>> vendor-update
                     display: block;
                     cursor: pointer;
                     position: relative;
                     transition: $transition;
                     color: $color-black;
-<<<<<<< HEAD
                     padding-top: 0 !important;
-=======
->>>>>>> vendor-update
 
                     &:before {
                         content: "";
@@ -2927,13 +2360,8 @@ td.sb-td-contact {
             }
         }
 
-<<<<<<< HEAD
         >.sb-admin-nav>div>a>span,
         >.sb-admin-nav-right .sb-account>div {
-=======
-        > .sb-admin-nav > div > a > span,
-        > .sb-admin-nav-right .sb-account > div {
->>>>>>> vendor-update
             margin: 8px 0px;
             font-size: 15px;
             line-height: 20px;
@@ -2972,11 +2400,7 @@ td.sb-td-contact {
             }
         }
 
-<<<<<<< HEAD
         >.sb-admin-nav-right {
-=======
-        > .sb-admin-nav-right {
->>>>>>> vendor-update
             align-items: center;
             padding: 15px 0;
             width: 65px;
@@ -2985,11 +2409,7 @@ td.sb-td-contact {
             position: fixed;
             text-align: center;
 
-<<<<<<< HEAD
             >div a {
-=======
-            > div a {
->>>>>>> vendor-update
                 font-size: 13px;
                 line-height: 20px;
                 cursor: pointer;
@@ -3011,11 +2431,7 @@ td.sb-td-contact {
                     }
                 }
 
-<<<<<<< HEAD
                 >i {
-=======
-                > i {
->>>>>>> vendor-update
                     font-size: 16px;
                     opacity: 0.8;
 
@@ -3030,11 +2446,7 @@ td.sb-td-contact {
                 cursor: pointer;
                 text-align: center;
 
-<<<<<<< HEAD
                 >img {
-=======
-                > img {
->>>>>>> vendor-update
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
@@ -3042,11 +2454,7 @@ td.sb-td-contact {
                     margin: 0 auto;
                 }
 
-<<<<<<< HEAD
                 >div {
-=======
-                > div {
->>>>>>> vendor-update
                     position: absolute;
                     bottom: 30px;
                     text-align: left;
@@ -3076,11 +2484,7 @@ td.sb-td-contact {
                     }
                 }
 
-<<<<<<< HEAD
                 &:hover>div {
-=======
-                &:hover > div {
->>>>>>> vendor-update
                     visibility: visible;
                     opacity: 1;
                     left: 65px;
@@ -3119,19 +2523,13 @@ td.sb-td-contact {
                 }
             }
 
-<<<<<<< HEAD
             >div>a+a,
             >div>div+a {
-=======
-            > div > a + a,
-            > div > div + a {
->>>>>>> vendor-update
                 margin-top: 10px;
             }
         }
     }
 
-<<<<<<< HEAD
     .header_new {
         background: $background-gray;
 
@@ -3262,43 +2660,11 @@ td.sb-td-contact {
                 }
             }
         }
-=======
-    #sb-conversations:before {
-        content: "\64";
-    }
-
-    #sb-users:before {
-        content: "\6e";
-    }
-
-    #sb-settings:before {
-        content: "\6d";
-    }
-
-    #sb-automations:before {
-        content: "\e915";
-    }
-
-    #sb-reports:before {
-        content: "\59";
-    }
-
-    #sb-articles:before {
-        content: "\e908";
-    }
-
-    #sb-chatbot:before {
-        content: "\e90a";
->>>>>>> vendor-update
     }
 }
 
 @media(min-width: 465px) and (max-height: 475px) {
-<<<<<<< HEAD
     .sb-admin>.sb-header>.sb-admin-nav>div>a {
-=======
-    .sb-admin > .sb-header > .sb-admin-nav > div > a {
->>>>>>> vendor-update
         height: 35px;
 
         &:before {
@@ -3312,11 +2678,7 @@ td.sb-td-contact {
         cursor: pointer;
         position: relative;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             display: none !important;
         }
 
@@ -3336,18 +2698,12 @@ td.sb-td-contact {
 
 .sb-admin {
     height: 100%;
-<<<<<<< HEAD
     min-height: 100vh;
     // width: calc(100% - 280px);
     width: calc(100% - 102px);
     // padding-left: 280px;
     padding-left: 101px;
     // position: fixed;
-=======
-    width: calc(100% - 65px);
-    padding-left: 65px;
-    position: fixed;
->>>>>>> vendor-update
     font-size: 14px;
     line-height: 17px;
     background: $background-gray;
@@ -3364,7 +2720,6 @@ td.sb-td-contact {
         position: static;
     }
 
-<<<<<<< HEAD
     >main {
         width: 100%;
         // padding: 0;
@@ -3377,36 +2732,16 @@ td.sb-td-contact {
         }
 
         >div {
-=======
-    > main {
-        padding: 0;
-        background: $white;
-        height: 100%;
-        overflow: hidden;
-
-        > div:not(.sb-active) {
-            display: none;
-        }
-
-        > div {
->>>>>>> vendor-update
             height: 100%;
 
             &.sb-active {
                 animation: sb-fade-animation 0.4s;
             }
 
-<<<<<<< HEAD
             >.sb-top-bar {
                 height: 40px;
                 margin: 0;
                 padding: 15px;
-=======
-            > .sb-top-bar {
-                height: 40px;
-                margin: 0;
-                padding: 15px 20px;
->>>>>>> vendor-update
                 align-items: center;
                 display: flex;
                 justify-content: space-between;
@@ -3422,11 +2757,7 @@ td.sb-td-contact {
                     text-overflow: ellipsis;
                 }
 
-<<<<<<< HEAD
                 >div {
-=======
-                > div {
->>>>>>> vendor-update
                     display: flex;
                     align-items: center;
 
@@ -3434,11 +2765,7 @@ td.sb-td-contact {
                         margin-right: 60px;
                     }
 
-<<<<<<< HEAD
                     h3+.sb-setting {
-=======
-                    h3 + .sb-setting {
->>>>>>> vendor-update
                         margin-left: 15px;
                     }
 
@@ -3446,11 +2773,7 @@ td.sb-td-contact {
                         overflow: hidden;
                         padding-right: 30px;
 
-<<<<<<< HEAD
                         >ul li {
-=======
-                        > ul li {
->>>>>>> vendor-update
                             flex-shrink: 0;
                         }
                     }
@@ -3460,26 +2783,17 @@ td.sb-td-contact {
                             margin-right: 30px;
                         }
 
-<<<<<<< HEAD
                         .sb-btn+.sb-btn,
                         .sb-btn-icon+.sb-btn,
                         .sb-btn+.sb-btn-icon {
-=======
-                        .sb-btn + .sb-btn, .sb-btn-icon + .sb-btn, .sb-btn + .sb-btn-icon {
->>>>>>> vendor-update
                             margin-left: 15px;
                         }
                     }
                 }
             }
 
-<<<<<<< HEAD
             >.sb-tab {
                 height: calc(100vh - 78px);
-=======
-            > .sb-tab {
-                height: calc(100% - 70px);
->>>>>>> vendor-update
             }
         }
     }
@@ -3496,7 +2810,6 @@ td.sb-td-contact {
         input {
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
-<<<<<<< HEAD
             box-shadow: none;
             border: 1px solid #d5d5d5;
 
@@ -3504,9 +2817,6 @@ td.sb-td-contact {
                 box-shadow: none !important;
                 border-color: #d5d5d5 !important;
             }
-=======
-            box-shadow: 0 0px 5px rgba(39, 156, 255, 0.5);
->>>>>>> vendor-update
         }
     }
 
@@ -3549,7 +2859,6 @@ td.sb-td-contact {
         }
     }
 
-<<<<<<< HEAD
     .sb-active+.sb-search-dropdown-items {
         display: block;
         box-shadow: none;
@@ -3570,13 +2879,6 @@ td.sb-td-contact {
     z-index: 12 !important;
 }
 
-=======
-    .sb-active + .sb-search-dropdown-items {
-        display: block;
-    }
-}
-
->>>>>>> vendor-update
 /*
  *
  * -----------------------------------------------------------
@@ -3588,21 +2890,13 @@ td.sb-td-contact {
 .sb-board {
     display: flex;
     justify-content: space-between;
-<<<<<<< HEAD
     height: calc(100vh - 91px);
 
     >div>.sb-top {
-=======
-    height: 100%;
-
-    > div > .sb-top {
-        border-bottom: 1px solid $border-color;
->>>>>>> vendor-update
         padding: 15px 20px;
         height: 70px;
         min-height: 70px;
         box-sizing: border-box;
-<<<<<<< HEAD
         background: #edf2f9;
 
         .sb-flex {
@@ -3698,27 +2992,6 @@ td.sb-td-contact {
             }
 
             >.sb-select>p span {
-=======
-
-        .sb-flex {
-            justify-content: flex-end;
-        }
-    }
-
-    > .sb-admin-list {
-        max-width: 400px;
-        min-width: 400px;
-        border-right: 1px solid $border-color;
-        position: relative;
-
-
-        > .sb-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            > .sb-select > p span {
->>>>>>> vendor-update
                 padding-left: 5px;
             }
         }
@@ -3727,18 +3000,13 @@ td.sb-td-contact {
             opacity: 0.2 !important;
         }
 
-<<<<<<< HEAD
         >.sb-loading {
-=======
-        > .sb-loading {
->>>>>>> vendor-update
             position: absolute;
             bottom: 10px;
             left: 50%;
             z-index: 9;
         }
 
-<<<<<<< HEAD
         >.sb-scroll-area {
             height: calc(100vh - 223px);
             padding: 0;
@@ -3798,25 +3066,6 @@ td.sb-td-contact {
                 }
 
                 >.sb-notification-counter {
-=======
-        > .sb-scroll-area {
-            height: calc(100% - 90px);
-            padding: 10px 0;
-
-            li {
-                position: relative;
-                padding: 18px 20px 15px 20px;
-                max-height: 85px;
-                opacity: 0.8;
-                cursor: pointer;
-                margin: 0 10px;
-                border-radius: 6px;
-                z-index: 3;
-                background: transparent;
-                transition: $transition;
-
-                > .sb-notification-counter {
->>>>>>> vendor-update
                     position: absolute;
                     right: 19px;
                     bottom: 17px;
@@ -3842,28 +3091,12 @@ td.sb-td-contact {
                 }
 
                 &.sb-active {
-<<<<<<< HEAD
                     // opacity: 1;
                     background-color: #EEF2FF !important;
-=======
-                    opacity: 1;
-                    background-color: #f0f4f9 !important;
-
-                    .sb-name {
-                        color: rgb(0, 43, 73);
-                    }
->>>>>>> vendor-update
 
                     &:before {
                         background-color: $color-blue;
                     }
-<<<<<<< HEAD
-=======
-
-                    &:after {
-                        opacity: 0;
-                    }
->>>>>>> vendor-update
                 }
 
                 &:before {
@@ -3871,7 +3104,6 @@ td.sb-td-contact {
                     position: absolute;
                     left: 0;
                     bottom: 10px;
-<<<<<<< HEAD
                     top: 0px;
                     width: 2px;
                     background-color: transparent;
@@ -3890,77 +3122,36 @@ td.sb-td-contact {
                     svg {
                         min-width: 20px;
                     }
-=======
-                    top: 10px;
-                    width: 2px;
-                    background-color: transparent;
-                    border-radius: 3px;
-                    transition: $transition;
-                    z-index: 2;
-                }
-
-                &:after {
-                    content: "";
-                    position: absolute;
-                    left: 20px;
-                    right: 20px;
-                    bottom: -1px;
-                    height: 1px;
-                    background-color: $border-color;
-                    transition: $transition;
-                    z-index: 2;
-                }
-
-                &:last-child:after {
-                    display: none;
-                }
-
-                .sb-profile {
-                    align-items: flex-start;
-                    padding-left: 58px;
->>>>>>> vendor-update
 
                     img {
                         width: 45px;
                         height: 45px;
                         transform: none;
                         top: 0;
-<<<<<<< HEAD
                         position: absolute;
                         left: 0;
                         object-fit: cover;
-=======
->>>>>>> vendor-update
                     }
 
                     .sb-name {
                         height: 23px;
                         line-height: 23px;
                         padding-right: 10px;
-<<<<<<< HEAD
-=======
-                        font-size: 15px;
-                        font-weight: 400;
->>>>>>> vendor-update
                         white-space: nowrap;
                         letter-spacing: 0.3px;
                         overflow: hidden;
                         text-overflow: ellipsis;
-<<<<<<< HEAD
                         color: #1E293B;
                         font-size: 14px;
                         font-weight: 600;
                         min-width: 75px;
                         max-width: 75px;
-=======
->>>>>>> vendor-update
                     }
 
                     .sb-time {
                         margin-left: auto;
                         font-size: 13px;
                         line-height: 13px;
-<<<<<<< HEAD
                         font-weight: 500;
                         white-space: nowrap;
                         opacity: 0.8;
@@ -3968,13 +3159,7 @@ td.sb-td-contact {
 
                         span {
                             color: #3c3c3c;
-                            font-size: 10px;
                         }
-=======
-                        font-weight: 400;
-                        white-space: nowrap;
-                        opacity: 0.8;
->>>>>>> vendor-update
                     }
                 }
 
@@ -3987,26 +3172,16 @@ td.sb-td-contact {
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     letter-spacing: 0.3px;
-<<<<<<< HEAD
                     padding-left: 52px;
                     margin: 0;
                     color: #475569;
-=======
-                    padding-left: 58px;
-                    margin: 0;
-                    color: $color-black;
->>>>>>> vendor-update
                 }
 
                 b {
                     font-weight: 400;
                 }
 
-<<<<<<< HEAD
                 .sb-notification-counter+div+p {
-=======
-                .sb-notification-counter + div + p {
->>>>>>> vendor-update
                     margin-right: 30px;
                 }
 
@@ -4017,19 +3192,6 @@ td.sb-td-contact {
                     &:not(.sb-active) {
                         background-color: transparent;
                     }
-<<<<<<< HEAD
-=======
-
-                    .sb-name {
-                        font-size: 16px;
-                        font-weight: 600;
-                    }
-
-                    .sb-time {
-                        font-weight: 500;
-                        color: $color-blue;
-                    }
->>>>>>> vendor-update
                 }
 
                 &[data-conversation-status="-1"] {
@@ -4039,19 +3201,11 @@ td.sb-td-contact {
                 }
             }
 
-<<<<<<< HEAD
             >ul>p {
                 margin: 20px;
             }
 
             >ul>li+p {
-=======
-            > ul > p {
-                margin: 20px;
-            }
-
-            > ul > li + p {
->>>>>>> vendor-update
                 display: none;
             }
 
@@ -4064,11 +3218,7 @@ td.sb-td-contact {
                 overflow: hidden;
                 overflow-y: scroll;
 
-<<<<<<< HEAD
                 >ul {
-=======
-                > ul {
->>>>>>> vendor-update
                     opacity: 0;
                 }
             }
@@ -4079,7 +3229,6 @@ td.sb-td-contact {
         }
     }
 
-<<<<<<< HEAD
     .sb-admin-list.sb-departments-show {
         .sb-top {
             padding-bottom: 20px;
@@ -4101,28 +3250,20 @@ td.sb-td-contact {
         }
     }
 
-=======
->>>>>>> vendor-update
     .sb-conversation {
         width: 100%;
         min-width: 0;
         position: relative;
         display: flex;
         flex-direction: column;
-<<<<<<< HEAD
         background: #F8FAFC;
 
         >.sb-top {
-=======
-
-        > .sb-top {
->>>>>>> vendor-update
             width: auto;
             display: flex;
             align-items: center;
             flex-grow: 0;
             justify-content: flex-start;
-<<<<<<< HEAD
             border-bottom: 1px solid #CBD5E1;
             background: #F8FAFC;
 
@@ -4149,13 +3290,10 @@ td.sb-td-contact {
                     background: #1653FD;
                 }
             }
-=======
->>>>>>> vendor-update
 
             .sb-menu-mobile {
                 position: absolute;
                 right: 15px;
-<<<<<<< HEAD
 
                 ul {
                     align-items: center;
@@ -4178,18 +3316,6 @@ td.sb-td-contact {
                 font-weight: 600;
                 position: relative;
                 padding: 0 0px 0 0;
-=======
-            }
-
-            > .sb-btn-back {
-                display: none;
-            }
-
-            > a {
-                font-weight: 600;
-                position: relative;
-                padding: 0 15px 0 0;
->>>>>>> vendor-update
                 margin: 0;
                 cursor: pointer;
                 text-decoration: none;
@@ -4198,21 +3324,16 @@ td.sb-td-contact {
                 font-size: 20px;
                 transition: $transition;
                 position: relative;
-<<<<<<< HEAD
                 max-width: 250px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-=======
-                white-space: nowrap;
->>>>>>> vendor-update
 
                 &:hover {
                     color: $color-blue;
                 }
             }
 
-<<<<<<< HEAD
             .sb-labels {
                 padding-left: 5px;
 
@@ -4223,8 +3344,6 @@ td.sb-td-contact {
                 }
             }
 
-=======
->>>>>>> vendor-update
             i {
                 color: $color-gray;
                 transition: color .5s
@@ -4240,7 +3359,6 @@ td.sb-td-contact {
             padding: 10px 0 5px 0;
             overflow-y: scroll;
 
-<<<<<<< HEAD
             &::-webkit-scrollbar {
                 width: 0;
             }
@@ -4326,10 +3444,6 @@ td.sb-td-contact {
                         margin-inline: auto;
                     }
                 }
-=======
-            > div {
-                max-width: calc(100% - 275px);
->>>>>>> vendor-update
 
                 .sb-menu {
                     width: 170px;
@@ -4372,7 +3486,6 @@ td.sb-td-contact {
                     }
                 }
 
-<<<<<<< HEAD
                 .sb-cnt {
                     display: flex;
                     align-items: center;
@@ -4387,9 +3500,6 @@ td.sb-td-contact {
 
                 &[data-type="slider"],
                 &[data-type="card"] {
-=======
-                &[data-type="slider"], &[data-type="card"] {
->>>>>>> vendor-update
                     max-width: 380px;
                 }
 
@@ -4423,7 +3533,6 @@ td.sb-td-contact {
                 }
 
                 .sb-image {
-<<<<<<< HEAD
 
                     // max-width: 500px;
                     img {
@@ -4431,9 +3540,6 @@ td.sb-td-contact {
                         min-width: 240px;
                         // padding-inline: 12px;
                     }
-=======
-                    max-width: 500px;
->>>>>>> vendor-update
                 }
 
                 &:last-child {
@@ -4441,7 +3547,6 @@ td.sb-td-contact {
                 }
             }
 
-<<<<<<< HEAD
             .sb-label-date {
                 background: none !important;
                 border-radius: 0;
@@ -4507,10 +3612,6 @@ td.sb-td-contact {
                         }
                     }
                 }
-=======
-            .sb-highlight {
-                text-decoration: underline;
->>>>>>> vendor-update
             }
 
             .sb-highlight:after {
@@ -4541,33 +3642,20 @@ td.sb-td-contact {
                     transition: $transition;
                 }
 
-<<<<<<< HEAD
                 &:hover>div {
-=======
-                &:hover > div {
->>>>>>> vendor-update
                     opacity: .5;
                     transition: $transition;
                 }
 
-<<<<<<< HEAD
                 .sb-card-img+div+.sb-card-extra {
                     left: 0;
                 }
 
                 .sb-slider .sb-card-img+div+.sb-card-extra {
-=======
-                .sb-card-img + div + .sb-card-extra {
-                    left: 0;
-                }
-
-                .sb-slider .sb-card-img + div + .sb-card-extra {
->>>>>>> vendor-update
                     left: 15px;
                     top: 15px;
                 }
 
-<<<<<<< HEAD
                 .sb-input-btn>div,
                 .sb-btn,
                 .sb-select p {
@@ -4577,22 +3665,11 @@ td.sb-td-contact {
                 input,
                 textarea,
                 select {
-=======
-                .sb-input-btn > div, .sb-btn, .sb-select p {
-                    transition: none;
-                }
-
-                input, textarea, select {
->>>>>>> vendor-update
                     color: #E6F2FC;
                     background-color: #E6F2FC;
                 }
 
-<<<<<<< HEAD
                 .sb-input>span.sb-active {
-=======
-                .sb-input > span.sb-active {
->>>>>>> vendor-update
                     background: transparent !important;
                     top: 0;
                     left: 0;
@@ -4627,28 +3704,19 @@ td.sb-td-contact {
         .sb-editor {
             flex-shrink: 0;
             margin: 1px 15px 15px 15px;
-<<<<<<< HEAD
             border: 1px solid #E2E8F0;
             border-radius: 16px;
             box-shadow: 0px 4px 6px -2px #10182808, 0px 12px 16px -4px #10182814;
-=======
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
->>>>>>> vendor-update
             transition: box-shadow linear 40ms, border-color linear 0.2s;
             background-color: $white;
 
             .sb-textarea {
                 border: none;
                 padding: 0 !important;
-<<<<<<< HEAD
 
                 textarea {
                     min-height: 66px !important;
                 }
-=======
->>>>>>> vendor-update
             }
 
             .sb-bar {
@@ -4716,15 +3784,11 @@ td.sb-td-contact {
             }
 
             &.sb-audio-message-active {
-<<<<<<< HEAD
 
                 .sb-textarea,
                 .sb-bar-icons,
                 .sb-suggestions,
                 .sb-attachments {
-=======
-                .sb-textarea, .sb-bar-icons, .sb-suggestions, .sb-attachments {
->>>>>>> vendor-update
                     display: none;
                 }
 
@@ -4735,7 +3799,6 @@ td.sb-td-contact {
             }
         }
 
-<<<<<<< HEAD
         &[data-conversation-status="4"] [data-value="delete"],
         [data-value="inbox"],
         [data-value="empty-trash"],
@@ -4748,13 +3811,6 @@ td.sb-td-contact {
         &[data-conversation-status="4"] [data-value="inbox"],
         &[data-conversation-status="4"] [data-value="empty-trash"],
         [data-value="read"].sb-active {
-=======
-        &[data-conversation-status="4"] [data-value="delete"], [data-value="inbox"], [data-value="empty-trash"], &[data-conversation-status="3"] [data-value="archive"], [data-value="read"] {
-            display: none;
-        }
-
-        &[data-conversation-status="3"] [data-value="inbox"], &[data-conversation-status="4"] [data-value="inbox"], &[data-conversation-status="4"] [data-value="empty-trash"], [data-value="read"].sb-active {
->>>>>>> vendor-update
             display: block;
         }
 
@@ -4769,11 +3825,7 @@ td.sb-td-contact {
 
             &:hover {
                 border-color: $color-green;
-<<<<<<< HEAD
                 // background-color: #d8ece3;
-=======
-                background-color: #d8ece3;
->>>>>>> vendor-update
             }
         }
 
@@ -4782,7 +3834,6 @@ td.sb-td-contact {
         }
     }
 
-<<<<<<< HEAD
     .sb-conversation[data-conversation-status="3"] {
         .sb-top {
             .sb-menu-mobile {
@@ -4797,8 +3848,6 @@ td.sb-td-contact {
         }
     }
 
-=======
->>>>>>> vendor-update
     .sb-user-details {
         min-width: 400px;
         width: 400px;
@@ -4809,7 +3858,6 @@ td.sb-td-contact {
         overflow: hidden;
         position: relative;
         transition: width .3s;
-<<<<<<< HEAD
         background: #F8FAFC;
 
         .sb-profile {
@@ -4817,15 +3865,12 @@ td.sb-td-contact {
                 padding-left: 16px;
             }
         }
-=======
->>>>>>> vendor-update
 
         .sb-top {
             line-height: 42px;
             font-size: 18px;
             font-weight: 600;
             display: flex;
-<<<<<<< HEAD
             border-bottom: 1px solid $border-color;
             background: #F8FAFC;
             padding: 15px 30px;
@@ -4834,47 +3879,27 @@ td.sb-td-contact {
         h3 {
             margin: 15px 0;
             padding-inline: 30px;
-=======
-        }
-
-        h3 {
-            margin: 15px;
->>>>>>> vendor-update
             font-size: 15px;
             line-height: 25px;
             font-weight: 600;
         }
 
-<<<<<<< HEAD
         >div>h3 {
             margin: 0;
             padding: 15px 30px;
-=======
-        > div > h3 {
-            margin: 0;
-            padding: 15px;
->>>>>>> vendor-update
             border-top: 1px solid $border-color;
         }
 
         .sb-profile {
-<<<<<<< HEAD
             cursor: pointer;
             line-height: 17px;
             transition: opacity .3s;
             padding: 0;
             transition: all 0.4s;
-=======
-            margin-left: -10px;
-            cursor: pointer;
-            line-height: 17px;
-            transition: opacity .3s;
->>>>>>> vendor-update
 
             &:hover {
                 opacity: .7;
             }
-<<<<<<< HEAD
 
             img,
             .user-initials {
@@ -4899,7 +3924,6 @@ td.sb-td-contact {
                 max-width: 150px;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                line-clamp: 2;
                 -webkit-line-clamp: 2;
             }
 
@@ -4951,18 +3975,6 @@ td.sb-td-contact {
             [data-id="line-id"],
             [data-id="opencart_id"],
             [data-id="shopify_id"] {
-=======
-        }
-
-        .sb-profile-list {
-            padding: 15px;
-
-            ul {
-                margin-top: 0;
-            }
-
-            [data-id="telegram_bcid"], [data-id="token"], [data-id="woocommerce_session_key"], [data-id="perfex-id"], [data-id="whmcs-id"], [data-id="aecommerce-id"], [data-id="facebook-id"], [data-id="viber-id"], [data-id="zalo-id"], [data-id="telegram-id"], [data-id="wechat-id"], [data-id="martfury-session"], [data-id="line-id"], [data-id="opencart_id"], [data-id="shopify_id"] {
->>>>>>> vendor-update
                 display: none;
             }
 
@@ -4970,12 +3982,8 @@ td.sb-td-contact {
                 margin-left: 15px;
             }
 
-<<<<<<< HEAD
             [data-id="cc"],
             [data-em] {
-=======
-            [data-id="cc"], [data-em] {
->>>>>>> vendor-update
                 transition: $transition;
 
                 label {
@@ -5018,7 +4026,6 @@ td.sb-td-contact {
         }
 
         .sb-scroll-area {
-<<<<<<< HEAD
             height: calc(100vh - 70px);
         }
 
@@ -5029,18 +4036,6 @@ td.sb-td-contact {
                 border-left: 1px solid #d4d4d4;
 
                 >div {
-=======
-            height: calc(100% - 70px);
-        }
-
-        .sb-user-conversations {
-            margin: 0 0 15px 15px;
-
-            li {
-                border-left: 1px solid $border-color;
-
-                > div {
->>>>>>> vendor-update
                     padding-left: 45px;
 
                     .sb-message {
@@ -5048,30 +4043,19 @@ td.sb-td-contact {
                     }
                 }
 
-<<<<<<< HEAD
                 &:hover,
                 &.sb-active {
-=======
-                &:hover, &.sb-active {
->>>>>>> vendor-update
                     background-color: rgb(238, 241, 246);
                 }
 
                 &:first-child {
-<<<<<<< HEAD
                     border-top: 1px solid #d4d4d4;
-=======
-                    border-top: 1px solid $border-color;
->>>>>>> vendor-update
                     border-top-left-radius: 6px;
                 }
 
                 &:last-child {
                     border-bottom-left-radius: 6px;
-<<<<<<< HEAD
                     border-bottom: 1px solid #d4d4d4;
-=======
->>>>>>> vendor-update
                 }
             }
 
@@ -5083,11 +4067,8 @@ td.sb-td-contact {
 
             span {
                 line-height: 21px;
-<<<<<<< HEAD
                 color: #1E293B;
                 font-family: 'InterSemiBold';
-=======
->>>>>>> vendor-update
             }
 
             .sb-message {
@@ -5100,32 +4081,19 @@ td.sb-td-contact {
             display: flex;
             align-content: center;
             align-items: center;
-<<<<<<< HEAD
             padding: 20px 15px;
             border-top: 1px solid #CBD5E1;
-=======
-            padding: 15px;
-            border-top: 1px solid $border-color;
->>>>>>> vendor-update
 
             h3 {
                 margin-right: 15px;
                 line-height: 55px;
-<<<<<<< HEAD
             }
 
             >* {
-=======
-                white-space: nowrap;
-            }
-
-            > * {
->>>>>>> vendor-update
                 margin: 0;
                 padding: 0;
             }
 
-<<<<<<< HEAD
             >.sb-select {
                 width: 100%;
                 height: 45px;
@@ -5136,17 +4104,6 @@ td.sb-td-contact {
                     line-height: 45px !important;
                     border-radius: 0;
                     color: #fff !important;
-=======
-            > .sb-select {
-                width: 100%;
-                height: 55px;
-
-                > p {
-                    font-weight: 400;
-                    font-size: 13px !important;
-                    line-height: 55px !important;
-                    border-radius: 0;
->>>>>>> vendor-update
 
                     &:after {
                         line-height: 55px;
@@ -5154,16 +4111,11 @@ td.sb-td-contact {
                     }
                 }
 
-<<<<<<< HEAD
                 >ul {
-=======
-                > ul {
->>>>>>> vendor-update
                     width: 100%;
                 }
             }
 
-<<<<<<< HEAD
             &.sb-inline-departments,
             &.sb-inline-agents {
                 padding: 0 30px;
@@ -5189,12 +4141,6 @@ td.sb-td-contact {
 
                     ul {
                         top: 0;
-
-                        li {
-                            &[data-value="gray"] {
-                                color: #fff;
-                            }
-                        }
                     }
 
                     p {
@@ -5245,10 +4191,6 @@ td.sb-td-contact {
                         }
                     }
                 }
-=======
-            &.sb-inline-departments, &.sb-inline-agents {
-                padding: 0 0 0 15px;
->>>>>>> vendor-update
             }
         }
     }
@@ -5265,16 +4207,10 @@ td.sb-td-contact {
         background: $white;
         padding: 15px;
         display: none;
-<<<<<<< HEAD
         // z-index: 9;
         z-index: 4;
 
         >div {
-=======
-        z-index: 9;
-
-        > div {
->>>>>>> vendor-update
             max-width: 650px;
         }
 
@@ -5346,22 +4282,14 @@ td.sb-td-contact {
         top: -45px;
         z-index: 95;
 
-<<<<<<< HEAD
         >span {
-=======
-        > span {
->>>>>>> vendor-update
             animation: sb-fade-bottom-animation .5s;
         }
     }
 
     .sb-list {
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             &:not(.sb-right) {
                 .sb-thumb {
                     .sb-tooltip {
@@ -5393,7 +4321,6 @@ td.sb-td-contact {
     .sb-tags-area {
         display: flex;
         align-items: center;
-<<<<<<< HEAD
         padding-right: 5px;
         overflow: hidden;
         overflow-x: scroll;
@@ -5409,11 +4336,6 @@ td.sb-td-contact {
         }
 
         >i {
-=======
-        padding-right: 10px;
-
-        > i {
->>>>>>> vendor-update
             line-height: 8px;
             font-weight: 400;
             background: none;
@@ -5421,7 +4343,6 @@ td.sb-td-contact {
     }
 }
 
-<<<<<<< HEAD
 .form-select:focus {
     box-shadow: none !important;
     border-color: #dee2e6 !important;
@@ -6984,9 +5905,6 @@ a#sb-accout {
 }
 
 .sb-area-conversations>.sb-btn-collapse {
-=======
-.sb-area-conversations > .sb-btn-collapse {
->>>>>>> vendor-update
     display: none;
     position: fixed;
     left: 70px;
@@ -7042,19 +5960,11 @@ a#sb-accout {
     }
 }
 
-<<<<<<< HEAD
 .sb-list .sb-select-phone>div>p {
     display: none;
 }
 
 .sb-cc-box .sb-setting .repeater-item+.repeater-item {
-=======
-.sb-list .sb-select-phone > div > p {
-    display: none;
-}
-
-.sb-cc-box .sb-setting .repeater-item + .repeater-item {
->>>>>>> vendor-update
     border-top: none;
     padding-top: 0;
     margin-top: 10px;
@@ -7065,17 +5975,10 @@ a#sb-accout {
 }
 
 .sb-shopify-orders {
-<<<<<<< HEAD
     >div>span {
         display: flex !important;
 
         >span+span+span {
-=======
-    > div > span {
-        display: flex !important;
-
-        > span + span + span {
->>>>>>> vendor-update
             margin-right: 35px;
             margin-left: auto !important;
         }
@@ -7098,22 +6001,14 @@ a#sb-accout {
     [data-product-id] {
         cursor: pointer;
 
-<<<<<<< HEAD
         &+.sb-title {
-=======
-        & + .sb-title {
->>>>>>> vendor-update
             margin-top: 5px;
         }
     }
 }
 
-<<<<<<< HEAD
 .sb-shopify-cart>a>span:first-child,
 .sb-shopify-orders [data-product-id]>span:first-child {
-=======
-.sb-shopify-cart > a > span:first-child, .sb-shopify-orders [data-product-id] > span:first-child {
->>>>>>> vendor-update
     padding: 3px 5px;
     background: #00000012;
     font-size: 11px;
@@ -7122,25 +6017,16 @@ a#sb-accout {
     border-radius: 4px;
 }
 
-<<<<<<< HEAD
 .sb-shopify-cart>a>span:last-child {
     float: right;
 }
 
 .sb-editor .sb-bar-icons>.sb-btn-shopify:before {
-=======
-.sb-shopify-cart > a > span:last-child {
-    float: right;
-}
-
-.sb-editor .sb-bar-icons > .sb-btn-shopify:before {
->>>>>>> vendor-update
     content: "\e900";
     font-size: 25px;
     left: 5px;
 }
 
-<<<<<<< HEAD
 span.initials.avatar_name {
     display: flex;
     justify-content: center;
@@ -7176,15 +6062,6 @@ span.initials.avatar_name {
  * -----------------------------------------------------------
  * USERS AREA
  * -----------------------------------------------------------
-=======
-
-/*
- *
- * -----------------------------------------------------------
- * USERS AREA
- * -----------------------------------------------------------
- *
->>>>>>> vendor-update
 */
 
 .sb-area-users {
@@ -7193,34 +6070,21 @@ span.initials.avatar_name {
     .sb-scroll-area {
         overflow: hidden;
         overflow-y: scroll;
-<<<<<<< HEAD
         padding: 15px 15px 0;
         height: calc(100vh - 163px);
 
         &:hover+.sb-scroll-bar {
-=======
-        margin: 15px 0 0 15px;
-        padding-right: 15px;
-        height: calc(100% - 85px);
-
-        &:hover + .sb-scroll-bar {
->>>>>>> vendor-update
             opacity: 0.1 !important;
         }
     }
 
-<<<<<<< HEAD
     >.sb-loading-pagination {
-=======
-    > .sb-loading-pagination {
->>>>>>> vendor-update
         position: absolute;
         bottom: 10px;
         left: 50%;
     }
 
     .sb-filter-btn {
-<<<<<<< HEAD
         >div {
             left: auto;
             right: 0;
@@ -7228,20 +6092,10 @@ span.initials.avatar_name {
             width: auto;
             padding: 15px;
             z-index: 11;
-=======
-        > div {
-            left: auto;
-            right: 0;
-            top: 56px;
-            width: auto;
-            padding: 15px;
-            z-index: 5;
->>>>>>> vendor-update
 
             .sb-select:last-child {
                 margin-right: 0;
             }
-<<<<<<< HEAD
 
             .sb-select {
                 margin-left: 0;
@@ -7263,8 +6117,6 @@ span.initials.avatar_name {
                     }
                 }
             }
-=======
->>>>>>> vendor-update
         }
 
         &.sb-active {
@@ -7281,11 +6133,7 @@ span.initials.avatar_name {
         display: none;
     }
 
-<<<<<<< HEAD
     .sb-top-bar>div:first-child {
-=======
-    .sb-top-bar > div:first-child {
->>>>>>> vendor-update
         overflow: visible !important;
     }
 }
@@ -7332,24 +6180,16 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
     td:not(:first-child),
     th:not(:first-child) {
-=======
-    td:not(:first-child), th:not(:first-child) {
->>>>>>> vendor-update
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     &.sb-loading {
-<<<<<<< HEAD
 
         tbody,
         thead {
-=======
-        tbody, thead {
->>>>>>> vendor-update
             display: none;
         }
     }
@@ -7358,7 +6198,6 @@ span.initials.avatar_name {
 .sb-profile-box {
     .sb-profile-list {
         padding-right: 30px;
-<<<<<<< HEAD
 
         ul {
             display: flex;
@@ -7383,11 +6222,6 @@ span.initials.avatar_name {
     }
 
     .sb-user-conversations>p {
-=======
-    }
-
-    .sb-user-conversations > p {
->>>>>>> vendor-update
         padding: 10px 15px 8px 15px;
     }
 
@@ -7406,7 +6240,6 @@ span.initials.avatar_name {
                 font-size: 20px;
                 line-height: 45px;
                 white-space: nowrap;
-<<<<<<< HEAD
                 padding-left: 35px;
                 max-width: 350px;
                 overflow: hidden;
@@ -7422,14 +6255,6 @@ span.initials.avatar_name {
         >div>[data-value] {
 
             &+.sb-btn {
-=======
-            }
-        }
-
-        > div > [data-value] {
-
-            & + .sb-btn {
->>>>>>> vendor-update
                 margin-left: 15px;
             }
 
@@ -7444,11 +6269,7 @@ span.initials.avatar_name {
         border: 1px solid $border-color;
         border-radius: 4px;
 
-<<<<<<< HEAD
         >li {
-=======
-        > li {
->>>>>>> vendor-update
             padding: 15px;
             border-left: none;
 
@@ -7492,31 +6313,19 @@ span.initials.avatar_name {
         .sb-rating-area {
             min-height: 30px;
 
-<<<<<<< HEAD
             >div {
-=======
-            > div {
->>>>>>> vendor-update
                 display: flex;
                 height: 35px;
                 align-items: center;
 
-<<<<<<< HEAD
                 >div:first-child {
-=======
-                > div:first-child {
->>>>>>> vendor-update
                     font-weight: 500;
                     padding-right: 10px;
                     font-size: 13px;
                     width: 80px;
                 }
 
-<<<<<<< HEAD
                 >span {
-=======
-                > span {
->>>>>>> vendor-update
                     height: 3px;
                     background-color: $color-green;
                     margin-right: 10px;
@@ -7526,19 +6335,11 @@ span.initials.avatar_name {
                     }
                 }
 
-<<<<<<< HEAD
                 &+div>span {
                     background-color: $color-red;
                 }
 
                 >div:last-child {
-=======
-                & + div > span {
-                    background-color: $color-red;
-                }
-
-                > div:last-child {
->>>>>>> vendor-update
                     font-size: 13px;
                 }
             }
@@ -7556,7 +6357,6 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
     &.sb-type-agent .sb-start-conversation,
     &.sb-type-admin .sb-start-conversation,
     .sb-agent-area,
@@ -7566,18 +6366,10 @@ span.initials.avatar_name {
 
     &.sb-type-agent .sb-agent-area,
     &.sb-type-admin .sb-agent-area {
-=======
-    &.sb-type-agent .sb-start-conversation, &.sb-type-admin .sb-start-conversation, .sb-agent-area, .sb-hide + .sb-user-conversations {
-        display: none;
-    }
-
-    &.sb-type-agent .sb-agent-area, &.sb-type-admin .sb-agent-area {
->>>>>>> vendor-update
         display: block;
     }
 }
 
-<<<<<<< HEAD
 .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active {
     .sb-top-bar {
         .sb-profile {
@@ -7588,8 +6380,6 @@ span.initials.avatar_name {
     }
 }
 
-=======
->>>>>>> vendor-update
 .sb-profile-edit-box {
     .sb-top-bar .sb-profile {
         font-weight: 600;
@@ -7611,17 +6401,10 @@ span.initials.avatar_name {
     .sb-main {
         justify-content: flex-start;
 
-<<<<<<< HEAD
         >div {
             width: 50%;
 
             &+div {
-=======
-        > div {
-            width: 50%;
-
-            & + div {
->>>>>>> vendor-update
                 margin-left: 30px;
             }
         }
@@ -7669,7 +6452,6 @@ span.initials.avatar_name {
     display: none;
 }
 
-<<<<<<< HEAD
 #open-ai-assistants,
 #dialogflow-departments {
     .sb-repeater {
@@ -7844,8 +6626,6 @@ span.initials.avatar_name {
     }
 }
 
-=======
->>>>>>> vendor-update
 /*
  *
  * -----------------------------------------------------------
@@ -7861,7 +6641,6 @@ span.initials.avatar_name {
         margin-bottom: 30px;
     }
 
-<<<<<<< HEAD
     >.sb-tab {
 
         >.sb-content {
@@ -7872,19 +6651,6 @@ span.initials.avatar_name {
                 // max-width: 1000px;
 
                 >.sb-setting+.sb-setting {
-=======
-
-
-    > .sb-tab {
-
-        > .sb-content {
-            padding-left: 30px;
-
-            > div {
-                max-width: 1000px;
-
-                > .sb-setting + .sb-setting {
->>>>>>> vendor-update
                     margin-top: 15px;
                     padding-top: 15px;
                     border-top: 1px solid rgb(230, 230, 230);
@@ -7892,20 +6658,12 @@ span.initials.avatar_name {
             }
 
             .sb-inner-tab {
-<<<<<<< HEAD
                 >.sb-nav {
-=======
-                > .sb-nav {
->>>>>>> vendor-update
                     border: none;
                     padding: 0;
                 }
 
-<<<<<<< HEAD
                 >.sb-content {
-=======
-                > .sb-content {
->>>>>>> vendor-update
                     margin-top: -37px;
                     padding: 0;
                 }
@@ -7914,7 +6672,6 @@ span.initials.avatar_name {
     }
 }
 
-<<<<<<< HEAD
 #registration-fields .input>div:nth-child(2n) {
     margin-top: -10px;
 }
@@ -7926,17 +6683,6 @@ span.initials.avatar_name {
 #messenger-path-btn,
 #messenger-key,
 #open-ai-assistant-id {
-=======
-#registration-fields .input > div:nth-child(2n) {
-    margin-top: -10px;
-}
-
-#user-additional-fields .repeater-item > div:nth-child(2) {
-    display: none !important;
-}
-
-#messenger-path-btn, #messenger-key, #open-ai-assistant-id {
->>>>>>> vendor-update
     &:not(.sb-active) {
         display: none !important
     }
@@ -7948,11 +6694,7 @@ span.initials.avatar_name {
         margin-right: 50px;
     }
 
-<<<<<<< HEAD
     .repeater-item div+div {
-=======
-    .repeater-item div + div {
->>>>>>> vendor-update
         position: absolute;
         bottom: 0;
         right: 0;
@@ -7964,7 +6706,6 @@ span.initials.avatar_name {
     }
 }
 
-<<<<<<< HEAD
 .sb-type-multi-input>.input>div:not(.multi-input-textarea),
 .sb-setting .sb-language-switcher-cnt,
 .sb-select-checkbox>div,
@@ -7989,22 +6730,10 @@ span.initials.avatar_name {
     margin-bottom: 15px;
 }
 
-=======
-.sb-type-multi-input > .input > div:not(.multi-input-textarea), .sb-setting .sb-language-switcher-cnt, .sb-select-checkbox > div, #open-ai-prompt {
-    display: flex;
-    align-items: center;
-
-    > label {
-        margin: 0 15px 0 0;
-    }
-}
-
->>>>>>> vendor-update
 #open-ai-prompt {
     align-items: baseline;
 }
 
-<<<<<<< HEAD
 .sb-type-multi-input>.input>div {
 
     input,
@@ -8036,33 +6765,20 @@ span.initials.avatar_name {
                 padding-inline: 14px;
             }
         }
-=======
-.sb-type-multi-input > .input > div {
-    input, select {
-        min-width: 285px;
->>>>>>> vendor-update
     }
 }
 
 @media (max-width: 1490px) {
-<<<<<<< HEAD
 
     .sb-type-multi-input>.input>div:not(.multi-input-textarea),
     .sb-setting .sb-language-switcher-cnt,
     .sb-select-checkbox>div {
-=======
-    .sb-type-multi-input > .input > div:not(.multi-input-textarea), .sb-setting .sb-language-switcher-cnt, .sb-select-checkbox > div {
->>>>>>> vendor-update
         display: block;
     }
 }
 
-<<<<<<< HEAD
 .sb-type-select-checkbox>.input,
 .multi-input-select-checkbox {
-=======
-.sb-type-select-checkbox > .input, .multi-input-select-checkbox {
->>>>>>> vendor-update
     position: relative;
 }
 
@@ -8070,11 +6786,7 @@ span.initials.avatar_name {
     opacity: 1;
     cursor: pointer;
 
-<<<<<<< HEAD
     &.sb-active+div {
-=======
-    &.sb-active + div {
->>>>>>> vendor-update
         display: block;
     }
 }
@@ -8092,11 +6804,7 @@ span.initials.avatar_name {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     display: none;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         margin: 5px 0;
     }
 
@@ -8106,11 +6814,7 @@ span.initials.avatar_name {
 }
 
 .sb-select.sb-select-colors {
-<<<<<<< HEAD
     >p {
-=======
-    > p {
->>>>>>> vendor-update
         border-radius: 4px;
         transition: none;
         background: none !important;
@@ -8132,39 +6836,23 @@ span.initials.avatar_name {
             color: $color-gray;
         }
 
-<<<<<<< HEAD
         &:not([data-value]),
         &[data-value=""],
         &[data-value="-1"] {
-=======
-        &:not([data-value]), &[data-value=""], &[data-value="-1"] {
->>>>>>> vendor-update
             background-color: $white
         }
     }
 
-<<<<<<< HEAD
     >ul {
         padding: 0 !important;
     }
 
     &:not(.sb-disabled)>p:hover span {
-=======
-    > ul {
-        padding: 0 !important;
-    }
-
-    &:not(.sb-disabled) > p:hover span {
->>>>>>> vendor-update
         background-color: $color-blue;
     }
 
     &.sb-loading {
-<<<<<<< HEAD
         >ul {
-=======
-        > ul {
->>>>>>> vendor-update
             display: none;
         }
 
@@ -8178,7 +6866,6 @@ span.initials.avatar_name {
     }
 }
 
-<<<<<<< HEAD
 #user-table-extra-columns,
 #saved-replies {
     .repeater-item {
@@ -8194,55 +6881,33 @@ span.initials.avatar_name {
     }
 }
 
-=======
->>>>>>> vendor-update
 .sb-setting .sb-language-switcher-cnt {
     margin-top: 10px;
 }
 
-<<<<<<< HEAD
 .sb-setting p,
 .sb-text-gray {
     font-size: 13px;
     line-height: 22px;
     letter-spacing: 0.3px;
     margin: 0;
-=======
-.sb-setting p, .sb-text-gray {
-    font-size: 13px;
-    line-height: 22px;
-    letter-spacing: 0.3px;
-    margin: 5px 0 0 0;
->>>>>>> vendor-update
     color: rgb(120, 134, 146);
 }
 
 .sb-setting {
     display: flex;
-<<<<<<< HEAD
     // justify-content: space-between;
     padding: 20px 0px 20px 0px !important;
 
     >.sb-setting-content {
-=======
-    justify-content: flex-start;
-
-    > .sb-setting-content {
->>>>>>> vendor-update
         max-width: 420px;
         width: 420px;
         padding-right: 60px;
         flex-shrink: 0;
-<<<<<<< HEAD
         margin-bottom: auto;
     }
 
     >.input {
-=======
-    }
-
-    > .input {
->>>>>>> vendor-update
         width: 100%;
     }
 
@@ -8254,11 +6919,7 @@ span.initials.avatar_name {
         font-size: 15px;
         letter-spacing: 0.3px;
         margin: 0;
-<<<<<<< HEAD
         color: #111827;
-=======
-        color: $color-gray;
->>>>>>> vendor-update
     }
 
     .sb-icon-help {
@@ -8273,13 +6934,9 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
     input,
     select,
     textarea {
-=======
-    input, select, textarea {
->>>>>>> vendor-update
         border-radius: 4px;
         border: 1px solid $border-color;
         outline: none;
@@ -8293,10 +6950,7 @@ span.initials.avatar_name {
         box-sizing: border-box;
         color: rgb(36, 39, 42);
         background-color: $white;
-<<<<<<< HEAD
         resize: none;
-=======
->>>>>>> vendor-update
 
         &:focus {
             border: 1px solid $color-blue;
@@ -8313,10 +6967,7 @@ span.initials.avatar_name {
 
     select {
         padding: 0 5px;
-<<<<<<< HEAD
         min-width: fit-content;
-=======
->>>>>>> vendor-update
     }
 
     textarea {
@@ -8341,18 +6992,11 @@ span.initials.avatar_name {
         margin: 0;
         text-align: center;
         vertical-align: middle;
-<<<<<<< HEAD
         width: 46px;
         min-width: 46px !important;
         outline: none;
         box-shadow: none;
         appearance: none;
-=======
-        width: 35px;
-        min-width: 35px !important;
-        outline: none;
-        box-shadow: none;
->>>>>>> vendor-update
         -webkit-appearance: none;
 
         &:checked:before {
@@ -8376,7 +7020,6 @@ span.initials.avatar_name {
         font-weight: 600;
         font-size: 14px;
         line-height: 23px;
-<<<<<<< HEAD
         margin: 0;
         display: block;
         min-width: 220px;
@@ -8390,34 +7033,21 @@ span.initials.avatar_name {
                 width: 19px;
             }
         }
-=======
-        margin: 0 30px 15px 0;
-        display: block;
-        min-width: 220px;
-        letter-spacing: 0.3px;
->>>>>>> vendor-update
 
         &:empty {
             display: none !important;
         }
-<<<<<<< HEAD
 
         &.custom-switch {
             margin-right: 0 !important;
         }
-=======
->>>>>>> vendor-update
     }
 
     input[type="number"] {
         padding-right: 0;
     }
 
-<<<<<<< HEAD
     .input>.sb-loading:not(.sb-btn):not(.image) {
-=======
-    .input > .sb-loading:not(.sb-btn):not(.image) {
->>>>>>> vendor-update
         width: 30px;
         height: 30px;
     }
@@ -8427,11 +7057,7 @@ span.initials.avatar_name {
         width: 100%;
     }
 
-<<<<<<< HEAD
     &.sb-type-multi-input .input>div {
-=======
-    &.sb-type-multi-input .input > div {
->>>>>>> vendor-update
         margin-bottom: 15px;
     }
 
@@ -8450,12 +7076,8 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
     &.sb-type-upload-image,
     [data-type="upload-image"] {
-=======
-    &.sb-type-upload-image, [data-type="upload-image"] {
->>>>>>> vendor-update
         .image {
             border-radius: 4px;
             border: 1px solid $border-color;
@@ -8492,11 +7114,7 @@ span.initials.avatar_name {
                 }
             }
 
-<<<<<<< HEAD
             >i {
-=======
-            > i {
->>>>>>> vendor-update
                 position: absolute;
                 z-index: 9;
                 right: 10px;
@@ -8518,11 +7136,7 @@ span.initials.avatar_name {
                     display: none;
                 }
 
-<<<<<<< HEAD
                 >i {
-=======
-                > i {
->>>>>>> vendor-update
                     display: block;
 
                     &:hover {
@@ -8532,11 +7146,7 @@ span.initials.avatar_name {
             }
 
             &[data-value=""] {
-<<<<<<< HEAD
                 >i {
-=======
-                > i {
->>>>>>> vendor-update
                     display: none;
                 }
 
@@ -8586,11 +7196,7 @@ span.initials.avatar_name {
     }
 
     &.sb-type-double-select .input {
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             display: flex;
             align-items: center;
             margin: 0 0 8px 0;
@@ -8608,13 +7214,6 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
-=======
-    &.sb-type-repeater > .input {
-        width: 100%;
-    }
-
->>>>>>> vendor-update
     .sb-repeater {
         margin-bottom: 15px;
         display: block;
@@ -8629,27 +7228,16 @@ span.initials.avatar_name {
             width: 30px;
         }
 
-<<<<<<< HEAD
         &+.repeater-item {
-=======
-        & + .repeater-item {
->>>>>>> vendor-update
             border-top: 1px solid rgb(226, 226, 226);
             padding-top: 20px;
             margin-top: 20px;
         }
 
-<<<<<<< HEAD
         >div {
             display: flex;
 
             &+div {
-=======
-        > div {
-            display: flex;
-
-            & + div {
->>>>>>> vendor-update
                 margin-top: 10px;
             }
 
@@ -8674,31 +7262,20 @@ span.initials.avatar_name {
             label {
                 margin: 0 15px 0 0;
 
-<<<<<<< HEAD
                 &+div {
-=======
-                & + div {
->>>>>>> vendor-update
                     flex-grow: 1;
                 }
             }
         }
 
-<<<<<<< HEAD
         input,
         select {
-=======
-        input, select {
->>>>>>> vendor-update
             min-width: 285px;
         }
 
         textarea {
             min-width: 260px;
-<<<<<<< HEAD
             max-width: fit-content;
-=======
->>>>>>> vendor-update
         }
 
         .sb-enlarger {
@@ -8713,11 +7290,7 @@ span.initials.avatar_name {
             }
         }
 
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             position: absolute;
             right: -30px;
             top: 50%;
@@ -8734,20 +7307,12 @@ span.initials.avatar_name {
             }
         }
 
-<<<<<<< HEAD
         &:first-child>i {
-=======
-        &:first-child > i {
->>>>>>> vendor-update
             margin-top: -6px;
         }
     }
 
-<<<<<<< HEAD
     .sb-repeater-add+.sb-btn-icon {
-=======
-    .sb-repeater-add + .sb-btn-icon {
->>>>>>> vendor-update
         transform: translate(11px, 13px);
         margin-top: -35px;
 
@@ -8756,11 +7321,7 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
     input+input {
-=======
-    input + input {
->>>>>>> vendor-update
         margin-top: 8px;
     }
 
@@ -8769,11 +7330,7 @@ span.initials.avatar_name {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-gap: 27px;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             width: 80px;
             height: 80px;
             background-size: contain;
@@ -8796,12 +7353,8 @@ span.initials.avatar_name {
                 opacity: 1;
             }
 
-<<<<<<< HEAD
             &:hover,
             &.sb-active:not(.sb-icon-close) {
-=======
-            &:hover, &.sb-active:not(.sb-icon-close) {
->>>>>>> vendor-update
                 color: $color-blue;
                 border-color: $color-blue;
                 box-shadow: 0 0 5px rgba(39, 156, 255, 0.2);
@@ -8824,7 +7377,6 @@ span.initials.avatar_name {
         }
     }
 
-<<<<<<< HEAD
     &:last-child {
         border-bottom: 0 !important;
     }
@@ -8844,12 +7396,6 @@ span.initials.avatar_name {
 #tickets-custom-fields {
     .card-body {
         padding-inline: 0;
-=======
-    #push-notifications-onesignal-app-id, #push-notifications-onesignal-api-key, #push-notifications-sw-path {
-        &:not(.sb-active) {
-            display: none !important;
-        }
->>>>>>> vendor-update
     }
 }
 
@@ -8862,17 +7408,11 @@ span.initials.avatar_name {
     }
 
     .repeater-item {
-<<<<<<< HEAD
         >div {
 
             input,
             select,
             textarea {
-=======
-        > div {
-
-            input, select, textarea {
->>>>>>> vendor-update
                 &:last-child {
                     margin-bottom: -1px;
                     border-bottom-right-radius: 0;
@@ -8881,19 +7421,12 @@ span.initials.avatar_name {
             }
 
 
-<<<<<<< HEAD
             &+div {
                 margin-top: 0;
 
                 input,
                 select,
                 textarea {
-=======
-            & + div {
-                margin-top: 0;
-
-                input, select, textarea {
->>>>>>> vendor-update
                     &:first-child {
                         border-top-right-radius: 0;
                         border-top-left-radius: 0;
@@ -8902,27 +7435,19 @@ span.initials.avatar_name {
             }
 
             &:last-of-type {
-<<<<<<< HEAD
 
                 input,
                 select,
                 textarea {
-=======
-                input, select, textarea {
->>>>>>> vendor-update
                     border-bottom-right-radius: 4px;
                     border-bottom-left-radius: 4px;
                 }
             }
         }
 
-<<<<<<< HEAD
         input:focus,
         select:focus,
         textarea:focus {
-=======
-        input:focus, select:focus, textarea:focus {
->>>>>>> vendor-update
             z-index: 2;
         }
 
@@ -8934,32 +7459,20 @@ span.initials.avatar_name {
             z-index: 9;
         }
 
-<<<<<<< HEAD
         &+.repeater-item {
-=======
-        & + .repeater-item {
->>>>>>> vendor-update
             border-top: none;
             padding-top: 0;
             margin-top: 10px;
 
-<<<<<<< HEAD
             >i {
-=======
-            > i {
->>>>>>> vendor-update
                 margin-top: -6px;
             }
         }
     }
 }
 
-<<<<<<< HEAD
 .sb-translations,
 .sb-automations-area {
-=======
-.sb-translations, .sb-automations-area {
->>>>>>> vendor-update
     .sb-setting {
         display: block;
         margin-bottom: 15px;
@@ -8971,7 +7484,6 @@ span.initials.avatar_name {
     transition: none;
 }
 
-<<<<<<< HEAD
 span.user-initials {
     width: 36px;
     height: 36px;
@@ -8995,33 +7507,14 @@ a.sb-btn-white,
     width: fit-content;
     min-width: 140px;
     background: #0069f0;
-=======
-.sb-area-settings .sb-tab .sb-btn, .sb-btn-white, a.sb-btn-white, .sb-lightbox .sb-btn-white {
-    background-color: $white;
-    color: rgb(86, 96, 105);
-    border: 1px solid rgb(204, 210, 213);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
-    padding: 0 10px;
-    white-space: nowrap;
-    border-radius: 4px;
-    height: 33px;
-    line-height: 33px;
->>>>>>> vendor-update
 
     &.sb-icon {
         padding-left: 30px;
 
-<<<<<<< HEAD
         >i {
             left: 10px;
             font-size: 14px;
             line-height: 14px;
-=======
-        > i {
-            left: 10px;
-            font-size: 10px;
-            line-height: 33px;
->>>>>>> vendor-update
 
             &:before {
                 line-height: 33px;
@@ -9042,12 +7535,8 @@ a.sb-btn-white,
         border-color: #ccd2d5;
         cursor: default;
 
-<<<<<<< HEAD
         &:before,
         &:hover:before {
-=======
-        &:before, &:hover:before {
->>>>>>> vendor-update
             color: rgb(38, 67, 92);
         }
     }
@@ -9069,11 +7558,7 @@ a.sb-btn-white,
     .sb-content {
         padding: 0;
 
-<<<<<<< HEAD
         >div:first-child {
-=======
-        > div:first-child {
->>>>>>> vendor-update
             display: flex;
             justify-content: space-between;
         }
@@ -9086,11 +7571,7 @@ a.sb-btn-white,
     .sb-translations-list {
         padding-top: 30px;
 
-<<<<<<< HEAD
         >div:not(.sb-active) {
-=======
-        > div:not(.sb-active) {
->>>>>>> vendor-update
             display: none;
         }
     }
@@ -9120,11 +7601,7 @@ a.sb-btn-white,
 }
 
 .sb-automations-area {
-<<<<<<< HEAD
     >.sb-tab>.sb-content {
-=======
-    > .sb-tab > .sb-content {
->>>>>>> vendor-update
         margin-top: -35px;
     }
 
@@ -9134,21 +7611,16 @@ a.sb-btn-white,
 }
 
 .sb-automation-values {
-<<<<<<< HEAD
 
     [data-id="profile_image"],
     [data-id="icon"],
     [data-id="brand"] {
-=======
-    [data-id="profile_image"], [data-id="icon"], [data-id="brand"] {
->>>>>>> vendor-update
         width: 70px;
         height: 70px;
         max-height: 70px;
     }
 }
 
-<<<<<<< HEAD
 #ticketTable_wrapper {
     min-height: calc(100vh - 240px);
     overflow: hidden;
@@ -9184,35 +7656,19 @@ ul.status-list.dropdown-menu {
 .sb-conditions,
 .sb-flow-conditions {
     >div {
-=======
-[data-automation-type="more"] .sb-automation-values > h2 + div + h2, [data-automation-type="more"] .sb-automation-values > h2 + div + h2 + div {
-    display: none;
-}
-
-.sb-conditions, .sb-flow-conditions {
-    > div {
->>>>>>> vendor-update
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 15px;
     }
 
-<<<<<<< HEAD
     select,
     input {
-=======
-    select, input {
->>>>>>> vendor-update
         min-width: 50px;
     }
 }
 
 .sb-timetable {
-<<<<<<< HEAD
     >div>div {
-=======
-    > div > div {
->>>>>>> vendor-update
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -9223,11 +7679,7 @@ ul.status-list.dropdown-menu {
             font-size: 12px;
         }
 
-<<<<<<< HEAD
         &>div {
-=======
-        & > div {
->>>>>>> vendor-update
             font-size: 13px;
             line-height: 30px;
             height: 30px;
@@ -9257,11 +7709,7 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     >div+div {
-=======
-    > div + div {
->>>>>>> vendor-update
         margin-top: 12px;
     }
 
@@ -9310,11 +7758,7 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     >.sb-custom-select {
-=======
-    > .sb-custom-select {
->>>>>>> vendor-update
         display: none;
     }
 }
@@ -9330,20 +7774,13 @@ ul.status-list.dropdown-menu {
         display: block;
         transition: $transition;
         position: relative;
-<<<<<<< HEAD
         border: 1px solid rgb(212, 212, 212);
-=======
->>>>>>> vendor-update
 
         &:hover {
             opacity: 0.7;
         }
 
-<<<<<<< HEAD
         &.sb-active+ul {
-=======
-        &.sb-active + ul {
->>>>>>> vendor-update
             display: block;
         }
     }
@@ -9381,66 +7818,42 @@ ul.status-list.dropdown-menu {
 
 [data-color="red"],
 [data-value="red"],
-<<<<<<< HEAD
 [data-value="red"]>span {
-=======
-[data-value="red"] > span {
->>>>>>> vendor-update
     background-color: #e22424;
     color: $white;
 }
 
 [data-color="yellow"],
 [data-value="yellow"],
-<<<<<<< HEAD
 [data-value="yellow"]>span {
-=======
-[data-value="yellow"] > span {
->>>>>>> vendor-update
     background-color: #f5a212;
     color: $white;
 }
 
 [data-color="green"],
 [data-value="green"],
-<<<<<<< HEAD
 [data-value="green"]>span {
-=======
-[data-value="green"] > span {
->>>>>>> vendor-update
     background-color: #1fa839;
     color: $white;
 }
 
 [data-color="pink"],
 [data-value="pink"],
-<<<<<<< HEAD
 [data-value="pink"]>span {
-=======
-[data-value="pink"] > span {
->>>>>>> vendor-update
     background-color: #5b31f1;
     color: $white;
 }
 
 [data-color="gray"],
 [data-value="gray"],
-<<<<<<< HEAD
 [data-value="gray"]>span {
-=======
-[data-value="gray"] > span {
->>>>>>> vendor-update
     background-color: #282828;
     color: $white;
 }
 
-<<<<<<< HEAD
 [data-color="blue"],
 [data-value="blue"],
 [data-value="blue"]>span {
-=======
-[data-color="blue"], [data-value="blue"], [data-value="blue"] > span {
->>>>>>> vendor-update
     background-color: #008db5;
     color: $white;
 }
@@ -9470,7 +7883,6 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-select-colors {
-<<<<<<< HEAD
     &>[data-value="red"] {
         color: #e22424;
     }
@@ -9492,38 +7904,11 @@ ul.status-list.dropdown-menu {
     }
 
     &>[data-value="blue"] {
-=======
-    & > [data-value="red"] {
-        color: #e22424;
-    }
-
-    & > [data-value="yellow"] {
-        color: #f5a212;
-    }
-
-    & > [data-value="green"] {
-        color: #1fa839;
-    }
-
-    & > [data-value="pink"] {
-        color: #5b31f1;
-    }
-
-    & > [data-value="gray"] {
-        color: #282828;
-    }
-
-    & > [data-value="blue"] {
->>>>>>> vendor-update
         color: #008db5;
     }
 }
 
-<<<<<<< HEAD
 .sb-board>.sb-admin-list .sb-scroll-area {
-=======
-.sb-board > .sb-admin-list .sb-scroll-area {
->>>>>>> vendor-update
     li[data-color="red"]:before {
         background-color: #e22424;
     }
@@ -9550,11 +7935,7 @@ ul.status-list.dropdown-menu {
 }
 
 #departments {
-<<<<<<< HEAD
     >.input {
-=======
-    > .input {
->>>>>>> vendor-update
         width: 100%;
     }
 
@@ -9563,19 +7944,11 @@ ul.status-list.dropdown-menu {
         border: none;
         padding-top: 0;
 
-<<<<<<< HEAD
         >div {
             margin: 0;
         }
 
         >div:first-child {
-=======
-        > div {
-            margin: 0;
-        }
-
-        > div:first-child {
->>>>>>> vendor-update
             min-width: calc(100% - 128px);
         }
 
@@ -9583,11 +7956,7 @@ ul.status-list.dropdown-menu {
             min-width: 100px !important;
         }
 
-<<<<<<< HEAD
         >div+div {
-=======
-        > div + div {
->>>>>>> vendor-update
             padding-left: 15px;
 
             label {
@@ -9595,11 +7964,7 @@ ul.status-list.dropdown-menu {
             }
         }
 
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             top: 50%;
             margin-top: -7px;
         }
@@ -9628,21 +7993,13 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 #chat-sb-icons .input>div:not(.sb-icon-close) {
-=======
-#chat-sb-icons .input > div:not(.sb-icon-close) {
->>>>>>> vendor-update
     background-color: $border-color;
     border-radius: 50%;
 }
 
-<<<<<<< HEAD
 #chat-sb-icons .input>.sb-active:not(.sb-icon-close),
 #chat-sb-icons .input>div:not(.sb-icon-close):hover {
-=======
-#chat-sb-icons .input > .sb-active:not(.sb-icon-close), #chat-sb-icons .input > div:not(.sb-icon-close):hover {
->>>>>>> vendor-update
     background-color: $color-blue !important;
 }
 
@@ -9666,30 +8023,17 @@ ul.status-list.dropdown-menu {
 */
 
 .sb-area-reports {
-<<<<<<< HEAD
     >.sb-tab {
         >.sb-content {
             display: flex;
             padding-left: 0;
 
             >.sb-reports-chart {
-=======
-    > .sb-tab {
-        > .sb-content {
-            display: flex;
-            padding-left: 0;
-
-            > .sb-reports-chart {
->>>>>>> vendor-update
                 width: 80%;
                 padding-left: 15px;
             }
 
-<<<<<<< HEAD
             >.sb-reports-sidebar {
-=======
-            > .sb-reports-sidebar {
->>>>>>> vendor-update
                 flex: 1 1 auto;
                 max-width: 280px;
                 padding: 5px 0 0 15px;
@@ -9705,20 +8049,12 @@ ul.status-list.dropdown-menu {
                 align-items: center;
             }
 
-<<<<<<< HEAD
             >.sb-no-results {
-=======
-            > .sb-no-results {
->>>>>>> vendor-update
                 display: none;
             }
         }
 
-<<<<<<< HEAD
         .sb-nav>ul li:not(.sb-tab-nav-title) {
-=======
-        .sb-nav > ul li:not(.sb-tab-nav-title) {
->>>>>>> vendor-update
             font-weight: 400;
             font-size: 14px;
             line-height: 30px;
@@ -9733,12 +8069,8 @@ ul.status-list.dropdown-menu {
         color: rgb(120, 134, 146);
     }
 
-<<<<<<< HEAD
     .sb-table th,
     .sb-table td {
-=======
-    .sb-table th, .sb-table td {
->>>>>>> vendor-update
         padding: 9px 0;
     }
 
@@ -9760,27 +8092,19 @@ ul.status-list.dropdown-menu {
     }
 
     td {
-<<<<<<< HEAD
 
         .sb-icon-check,
         .sb-icon-close,
         .sb-icon-like,
         .sb-icon-dislike {
-=======
-        .sb-icon-check, .sb-icon-close, .sb-icon-like, .sb-icon-dislike {
->>>>>>> vendor-update
             color: $color-green;
             font-size: 13px;
             transform: translateY(1px);
             display: inline-block;
         }
 
-<<<<<<< HEAD
         .sb-icon-close,
         .sb-icon-dislike {
-=======
-        .sb-icon-close, .sb-icon-dislike {
->>>>>>> vendor-update
             color: $color-red;
         }
 
@@ -9803,11 +8127,7 @@ ul.status-list.dropdown-menu {
             }
         }
 
-<<<<<<< HEAD
         &:first-child>div {
-=======
-        &:first-child > div {
->>>>>>> vendor-update
             margin: 0 15px 0 0;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -9826,7 +8146,6 @@ ul.status-list.dropdown-menu {
     min-width: 255px;
 }
 
-<<<<<<< HEAD
 .sb-report-agents-ratings,
 .sb-report-articles-ratings {
 
@@ -9837,14 +8156,6 @@ ul.status-list.dropdown-menu {
 
     td .sb-icon-close,
     td .sb-icon-dislike {
-=======
-.sb-report-agents-ratings, .sb-report-articles-ratings {
-    td .sb-icon-check, td .sb-icon-like {
-        margin: 0 10px 0 0;
-    }
-
-    td .sb-icon-close, td .sb-icon-dislike {
->>>>>>> vendor-update
         margin: 0 10px 0 15px;
     }
 }
@@ -9857,11 +8168,7 @@ ul.status-list.dropdown-menu {
  *
 */
 .sb-qea-repeater-answer {
-<<<<<<< HEAD
     >label {
-=======
-    > label {
->>>>>>> vendor-update
         position: relative;
 
         i {
@@ -9890,16 +8197,11 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     >[data-id]:not(.sb-active) {
-=======
-    > [data-id]:not(.sb-active) {
->>>>>>> vendor-update
         display: none;
     }
 }
 
-<<<<<<< HEAD
 #sb-table-chatbot-files,
 #sb-table-chatbot-website {
     letter-spacing: .3px;
@@ -9908,13 +8210,6 @@ ul.status-list.dropdown-menu {
 
         &:first-child,
         &:last-child {
-=======
-#sb-table-chatbot-files, #sb-table-chatbot-website {
-    letter-spacing: .3px;
-
-    td {
-        &:first-child, &:last-child {
->>>>>>> vendor-update
             max-width: 25px;
             width: 25px;
         }
@@ -9948,21 +8243,13 @@ ul.status-list.dropdown-menu {
         margin: 0 15px;
     }
 
-<<<<<<< HEAD
     &:empty+div .sb-btn-red {
-=======
-    &:empty + div .sb-btn-red {
->>>>>>> vendor-update
         display: none;
     }
 }
 
-<<<<<<< HEAD
 .sb-enlarger-function-calling.sb-active>div,
 .sb-enlarger-rest-api.sb-active>div {
-=======
-.sb-enlarger-function-calling.sb-active > div, .sb-enlarger-rest-api.sb-active > div {
->>>>>>> vendor-update
     display: flex;
 
     &:not(:last-child) {
@@ -9974,22 +8261,14 @@ ul.status-list.dropdown-menu {
     .sb-setting {
         width: 50%;
 
-<<<<<<< HEAD
         &+.sb-setting {
-=======
-        & + .sb-setting {
->>>>>>> vendor-update
             margin-left: 10px;
         }
     }
 }
 
 #sb-chatbot-info {
-<<<<<<< HEAD
     min-height: calc(100vh - 2px);
-=======
-    min-height: calc(100% - 2px);
->>>>>>> vendor-update
 
     p {
         line-height: 30px;
@@ -10001,21 +8280,12 @@ ul.status-list.dropdown-menu {
     height: 100%;
 }
 
-<<<<<<< HEAD
 [data-id="playground"]>div {
     height: calc(100vh - 70px);
 }
 
 [data-id="playground"]>div>div {
     height: calc(100vh - 35px);
-=======
-[data-id="playground"] > div {
-    height: calc(100% - 70px);
-}
-
-[data-id="playground"] > div > div {
-    height: calc(100% - 35px);
->>>>>>> vendor-update
     padding: 15px 20px 20px 20px;
     position: relative;
 }
@@ -10024,26 +8294,15 @@ ul.status-list.dropdown-menu {
     flex-grow: 1;
 
     .sb-scroll-area {
-<<<<<<< HEAD
         height: calc(100vh - 110px);
         letter-spacing: .3px;
 
         >div {
-=======
-        height: calc(100% - 110px);
-        letter-spacing: .3px;
-
-        > div {
->>>>>>> vendor-update
             margin: 0 15px 0 0;
             min-width: 70px;
             animation: none !important;
 
-<<<<<<< HEAD
             >div:first-child {
-=======
-            > div:first-child {
->>>>>>> vendor-update
                 font-weight: 500;
                 font-size: 13px;
                 text-transform: uppercase;
@@ -10070,12 +8329,8 @@ ul.status-list.dropdown-menu {
                 }
             }
 
-<<<<<<< HEAD
             >div:last-child,
             >div a:not(.sb-btn) {
-=======
-            > div:last-child, > div a:not(.sb-btn) {
->>>>>>> vendor-update
                 color: $color-gray;
                 font-size: 13px;
                 line-height: 21px;
@@ -10086,33 +8341,21 @@ ul.status-list.dropdown-menu {
                 opacity: 1;
             }
 
-<<<<<<< HEAD
             &+div {
-=======
-            & + div {
->>>>>>> vendor-update
                 margin-top: 15px;
             }
         }
 
-<<<<<<< HEAD
         .sb-menu-btn,
         .sb-menu,
         .sb-time {
-=======
-        .sb-menu-btn, .sb-menu, .sb-time {
->>>>>>> vendor-update
             display: none !important;
         }
 
         &:empty {
             height: 0;
 
-<<<<<<< HEAD
             +.sb-no-results {
-=======
-            + .sb-no-results {
->>>>>>> vendor-update
                 display: block;
             }
         }
@@ -10122,11 +8365,7 @@ ul.status-list.dropdown-menu {
                 margin: 0;
             }
 
-<<<<<<< HEAD
             .sb-card .sb-card-img+div+.sb-card-extra {
-=======
-            .sb-card .sb-card-img + div + .sb-card-extra {
->>>>>>> vendor-update
                 top: 45px;
                 left: 25px;
             }
@@ -10172,11 +8411,7 @@ ul.status-list.dropdown-menu {
     span {
         display: block;
 
-<<<<<<< HEAD
         &+span {
-=======
-        & + span {
->>>>>>> vendor-update
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid $border-color;
@@ -10204,11 +8439,7 @@ ul.status-list.dropdown-menu {
         text-decoration: underline;
         margin-top: 15px;
 
-<<<<<<< HEAD
         &+.sb-btn-text {
-=======
-        & + .sb-btn-text {
->>>>>>> vendor-update
             margin-left: 15px;
         }
     }
@@ -10220,11 +8451,7 @@ ul.status-list.dropdown-menu {
     left: 20px;
     right: 20px;
 
-<<<<<<< HEAD
     >.sb-flex {
-=======
-    > .sb-flex {
->>>>>>> vendor-update
         justify-content: space-between;
         margin: 15px 0 0 0;
 
@@ -10244,11 +8471,7 @@ ul.status-list.dropdown-menu {
 
 [data-id="flows"] {
 
-<<<<<<< HEAD
     >.sb-content {
-=======
-    > .sb-content {
->>>>>>> vendor-update
         overflow: hidden;
         overflow-x: scroll;
         position: relative;
@@ -10256,11 +8479,7 @@ ul.status-list.dropdown-menu {
         padding-top: 0;
         padding-bottom: 0;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             width: 200px;
             min-width: 200px;
             margin-right: 50px;
@@ -10271,11 +8490,7 @@ ul.status-list.dropdown-menu {
             position: relative;
 
 
-<<<<<<< HEAD
             >div:not(.sb-flow-add-step) {
-=======
-            > div:not(.sb-flow-add-step) {
->>>>>>> vendor-update
                 overflow-y: scroll;
                 -ms-overflow-style: none;
                 scrollbar-width: none;
@@ -10283,12 +8498,8 @@ ul.status-list.dropdown-menu {
                 width: 100%;
             }
 
-<<<<<<< HEAD
             &:first-child .sb-flow-add-block,
             &:last-child .sb-flow-add-step {
-=======
-            &:first-child .sb-flow-add-block, &:last-child .sb-flow-add-step {
->>>>>>> vendor-update
                 display: none;
             }
         }
@@ -10337,11 +8548,7 @@ ul.status-list.dropdown-menu {
     cursor: pointer;
     letter-spacing: .3px;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         padding: 10px;
         font-size: 13px;
         line-height: 23px;
@@ -10359,11 +8566,7 @@ ul.status-list.dropdown-menu {
             user-select: none;
         }
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             transition: $transition;
             border-top: 1px solid $border-color;
 
@@ -10373,11 +8576,7 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     &+div {
-=======
-    & + div {
->>>>>>> vendor-update
         margin-top: 10px;
     }
 
@@ -10385,26 +8584,17 @@ ul.status-list.dropdown-menu {
         border-color: $color-blue;
     }
 
-<<<<<<< HEAD
     &[data-type="video"]>div+div {
-=======
-    &[data-type="video"] > div + div {
->>>>>>> vendor-update
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-<<<<<<< HEAD
     &[data-type="set_data"]>div,
     &[data-type="action"]>div,
     &[data-type="rest_api"],
     &[data-type="condition"]>div {
         >div {
-=======
-    &[data-type="set_data"] > div, &[data-type="action"] > div, &[data-type="rest_api"], &[data-type="condition"] > div {
-        > div {
->>>>>>> vendor-update
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -10415,11 +8605,7 @@ ul.status-list.dropdown-menu {
 .sb-flow-connectors {
     padding: 0 !important;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         padding: 5px 50px 5px 10px;
         position: relative;
         white-space: nowrap;
@@ -10428,20 +8614,12 @@ ul.status-list.dropdown-menu {
         line-height: 30px;
         transition: $transition;
 
-<<<<<<< HEAD
         &:hover,
         &.sb-active {
             color: $color-blue;
         }
 
         &+div {
-=======
-        &:hover, &.sb-active {
-            color: $color-blue;
-        }
-
-        & + div {
->>>>>>> vendor-update
             border-top: 1px solid $border-color;
         }
     }
@@ -10451,12 +8629,8 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 .sb-flow-connectors>div>span,
 .sb-flow-block-cnt-name {
-=======
-.sb-flow-connectors > div > span, .sb-flow-block-cnt-name {
->>>>>>> vendor-update
     position: absolute;
     right: 0;
     top: 0;
@@ -10485,11 +8659,7 @@ ul.status-list.dropdown-menu {
     position: relative;
     transition: $transition;
 
-<<<<<<< HEAD
     &+.sb-flow-block-cnt {
-=======
-    & + .sb-flow-block-cnt {
->>>>>>> vendor-update
         margin-top: 15px;
     }
 
@@ -10555,7 +8725,6 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-flow-block-box {
-<<<<<<< HEAD
     height: calc(100vh - 50px) !important;
 
     .sb-setting+.sb-setting {
@@ -10564,24 +8733,11 @@ ul.status-list.dropdown-menu {
 
     .sb-setting .repeater-item+.repeater-item,
     .sb-flow-conditions>div+div {
-=======
-    height: calc(100% - 50px) !important;
-
-    .sb-setting + .sb-setting {
-        margin-top: 30px;
-    }
-
-    .sb-setting .repeater-item + .repeater-item, .sb-flow-conditions > div + div {
->>>>>>> vendor-update
         border-top: none;
         padding-top: 10px;
         margin-top: 0;
 
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             margin-top: -1px;
         }
     }
@@ -10591,11 +8747,7 @@ ul.status-list.dropdown-menu {
         font-weight: 500;
         letter-spacing: .3px;
 
-<<<<<<< HEAD
         &.sb-hide+.sb-setting {
-=======
-        &.sb-hide + .sb-setting {
->>>>>>> vendor-update
             display: none;
         }
     }
@@ -10605,7 +8757,6 @@ ul.status-list.dropdown-menu {
             margin-top: 0;
         }
 
-<<<<<<< HEAD
         &:empty+div {
             margin-top: 0;
         }
@@ -10614,13 +8765,6 @@ ul.status-list.dropdown-menu {
         [value="repeat"],
         [value="browsing_time"],
         [value="scroll_position"] {
-=======
-        &:empty + div {
-            margin-top: 0;
-        }
-
-        [value="custom_variable"], [value="repeat"], [value="browsing_time"], [value="scroll_position"] {
->>>>>>> vendor-update
             display: none !important;
         }
     }
@@ -10633,19 +8777,11 @@ ul.status-list.dropdown-menu {
 
 .sb-repeater-block-user-details {
     .repeater-item {
-<<<<<<< HEAD
         >div {
             display: block;
         }
 
         &+.repeater-item {
-=======
-        > div {
-            display: block;
-        }
-
-        & + .repeater-item {
->>>>>>> vendor-update
             padding-top: 20px !important;
         }
     }
@@ -10659,11 +8795,7 @@ ul.status-list.dropdown-menu {
             font-size: 13px;
         }
 
-<<<<<<< HEAD
         &+.sb-setting {
-=======
-        & + .sb-setting {
->>>>>>> vendor-update
             margin: 10px 0 0 0;
             align-items: center;
         }
@@ -10682,15 +8814,10 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 .sb-repeater-block-data,
 .sb-repeater-block-actions,
 .sb-repeater-block-rest-api {
     .sb-setting+.sb-setting {
-=======
-.sb-repeater-block-data, .sb-repeater-block-actions, .sb-repeater-block-rest-api {
-    .sb-setting + .sb-setting {
->>>>>>> vendor-update
         margin: 0 0 0 15px;
     }
 }
@@ -10751,11 +8878,7 @@ ul.status-list.dropdown-menu {
 
 .sb-area-articles {
 
-<<<<<<< HEAD
     >.sb-tab>.sb-content {
-=======
-    > .sb-tab > .sb-content {
->>>>>>> vendor-update
 
         .sb-loading:before {
             left: 20px;
@@ -10768,12 +8891,8 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     .sb-add-category,
     .ul-categories {
-=======
-    .sb-add-category, .ul-categories {
->>>>>>> vendor-update
         display: none !important;
     }
 
@@ -10792,7 +8911,6 @@ ul.status-list.dropdown-menu {
                 display: block !important;
             }
 
-<<<<<<< HEAD
             .ul-articles,
             .sb-add-article,
             &+.sb-content-articles {
@@ -10800,13 +8918,6 @@ ul.status-list.dropdown-menu {
             }
 
             &+div+.sb-content-categories:not(.sb-hide) {
-=======
-            .ul-articles, .sb-add-article, & + .sb-content-articles {
-                display: none !important;
-            }
-
-            & + div + .sb-content-categories:not(.sb-hide) {
->>>>>>> vendor-update
                 display: block !important;
             }
         }
@@ -10834,13 +8945,9 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     .sb-setting+h2,
     .sb-article-categories,
     #sb-article-id {
-=======
-    .sb-setting + h2, .sb-article-categories, #sb-article-id {
->>>>>>> vendor-update
         margin-top: 30px;
     }
 }
@@ -10849,7 +8956,6 @@ ul.status-list.dropdown-menu {
     display: none;
 }
 
-<<<<<<< HEAD
 .sb-content-articles,
 .sb-content-categories {
     background: $background-gray;
@@ -10919,11 +9025,6 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-article-categories .sb-setting>div {
-=======
-
-
-.sb-article-categories .sb-setting > div {
->>>>>>> vendor-update
     width: 100%;
 }
 
@@ -10931,7 +9032,6 @@ ul.status-list.dropdown-menu {
     display: none;
 }
 
-<<<<<<< HEAD
 #category-image-container {
     max-width: 100%;
     border: 1px dashed #d5d5d5;
@@ -10945,21 +9045,12 @@ ul.status-list.dropdown-menu {
 
 .sb-menu-articles .sb-docs,
 .sb-menu-chatbot .sb-docs {
-=======
-#category-image {
-    max-width: 100px;
-    background-size: 60px;
-}
-
-.sb-menu-articles .sb-docs, .sb-menu-chatbot .sb-docs {
->>>>>>> vendor-update
     text-decoration: none;
     color: $color-gray;
     line-height: 42px;
     opacity: .8;
 }
 
-<<<<<<< HEAD
 .sb-area-articles {
     .sb-menu-articles {
         >ul {
@@ -11114,17 +9205,6 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
-.sb-admin.sb-main {
-    .sb-input {
-        display: flex;
-    }
-}
-
-=======
-=======
->>>>>>> vendor-update
->>>>>>> parent of 9c50c3e (Upgraded code to latest version on 04-09-2025)
 /*
  *
  * -----------------------------------------------------------
@@ -11160,12 +9240,8 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 [data-provider="twilio"] .sb-whatsapp-box-header,
 [data-provider="twilio"] .sb-whatsapp-box-header+div {
-=======
-[data-provider="twilio"] .sb-whatsapp-box-header, [data-provider="twilio"] .sb-whatsapp-box-header + div {
->>>>>>> vendor-update
     display: none;
 }
 
@@ -11189,14 +9265,9 @@ ul.status-list.dropdown-menu {
         animation: sb-lightbox-animation 0.5s;
     }
 
-<<<<<<< HEAD
     &.sb-dialogflow-intent-box,
     &.sb-updates-box {
         height: calc(100vh - 100px);
-=======
-    &.sb-dialogflow-intent-box, &.sb-updates-box {
-        height: calc(100% - 100px);
->>>>>>> vendor-update
     }
 
     .sb-top-bar {
@@ -11207,11 +9278,7 @@ ul.status-list.dropdown-menu {
         border-bottom: 1px solid $border-color;
         margin-bottom: 30px;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             display: flex;
             align-items: center;
 
@@ -11222,10 +9289,7 @@ ul.status-list.dropdown-menu {
                 white-space: nowrap;
                 overflow: hidden;
                 margin-right: 15px;
-<<<<<<< HEAD
                 padding-left: 0;
-=======
->>>>>>> vendor-update
 
                 a {
                     text-decoration: none;
@@ -11250,22 +9314,14 @@ ul.status-list.dropdown-menu {
         justify-content: space-between;
         height: calc(100% - 145px);
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             height: auto;
             width: 100%;
         }
 
-<<<<<<< HEAD
         >.sb-title+*,
         >div>.sb-title+*,
         p+.sb-title {
-=======
-        > .sb-title + *, > div > .sb-title + *, p + .sb-title {
->>>>>>> vendor-update
             margin-top: 27px;
 
             *:first-child {
@@ -11273,12 +9329,8 @@ ul.status-list.dropdown-menu {
             }
         }
 
-<<<<<<< HEAD
         >.sb-setting+.sb-title,
         >div>.sb-setting+.sb-title {
-=======
-        > .sb-setting + .sb-title, > div > .sb-setting + .sb-title {
->>>>>>> vendor-update
             margin-top: 30px;
         }
 
@@ -11299,11 +9351,7 @@ ul.status-list.dropdown-menu {
             }
         }
 
-<<<<<<< HEAD
         >.sb-bottom {
-=======
-        > .sb-bottom {
->>>>>>> vendor-update
             padding-top: 30px;
             display: flex;
             align-items: center;
@@ -11359,20 +9407,12 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 .sb-lightbox-media.sb-active+.sb-lightbox-overlay {
     background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .sb-profile-edit-box,
 .sb-profile-box {
-=======
-.sb-lightbox-media.sb-active + .sb-lightbox-overlay {
-    background-color: rgba(0,0,0,0.6) !important;
-}
-
-.sb-profile-edit-box, .sb-profile-box {
->>>>>>> vendor-update
     height: calc(100% - 50px);
     max-width: 1000px;
 
@@ -11380,18 +9420,13 @@ ul.status-list.dropdown-menu {
         display: flex;
         padding: 0 20px;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             height: 100%;
             width: 50%;
         }
     }
 }
 
-<<<<<<< HEAD
 .sb-ticket-edit-box,
 .sb-ticket-custom-fields-edit-box {
     height: calc(100% - 50px);
@@ -11419,18 +9454,6 @@ ul.status-list.dropdown-menu {
         }
 
         >div {
-=======
-.sb-direct-message-box, #sb-whatsapp-send-template-box {
-    height: calc(100% - 50px);
-    max-width: 1000px;
-
-    .sb-bottom {
-        div + a {
-            margin-left: 15px;
-        }
-
-        > div {
->>>>>>> vendor-update
             font-weight: 500;
             margin: 0 15px;
             color: $color-blue;
@@ -11442,29 +9465,17 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 .sb-updates-box,
 .sb-requirements-box {
     .sb-input {
         justify-content: flex-start;
 
         >span {
-=======
-.sb-updates-box, .sb-requirements-box {
-    .sb-input {
-        justify-content: flex-start;
-
-        > span {
->>>>>>> vendor-update
             max-width: 200px;
             min-width: 200px;
         }
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             font-size: 13px;
             letter-spacing: 0.3px;
             background: rgba(255, 196, 88, 0.15);
@@ -11483,21 +9494,13 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-requirements-box {
-<<<<<<< HEAD
     .sb-input>div {
-=======
-    .sb-input > div {
->>>>>>> vendor-update
         display: inline-block;
         padding: 5px 10px;
         width: auto;
     }
 
-<<<<<<< HEAD
     .sb-main>p {
-=======
-    .sb-main > p {
->>>>>>> vendor-update
         margin-top: 30px;
     }
 }
@@ -11515,10 +9518,7 @@ ul.status-list.dropdown-menu {
         font-size: 16px;
         line-height: 30px;
         margin: 0 0 20px 0;
-<<<<<<< HEAD
         word-wrap: break-word;
-=======
->>>>>>> vendor-update
     }
 
     a {
@@ -11552,12 +9552,8 @@ ul.status-list.dropdown-menu {
     }
 
     pre {
-<<<<<<< HEAD
         //font-family: monospace;
         font-family: Manrope;
-=======
-        font-family: monospace;
->>>>>>> vendor-update
         margin: 10px 0 0 0;
         overflow-x: scroll;
         padding: 5px 5px 7px 5px;
@@ -11589,11 +9585,7 @@ ul.status-list.dropdown-menu {
             margin: 0;
         }
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             position: absolute;
             z-index: 9;
             top: 10px;
@@ -11603,13 +9595,9 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-dialogflow-intent-box {
-<<<<<<< HEAD
 
     .sb-intent-add,
     .sb-bot-response {
-=======
-    .sb-intent-add, .sb-bot-response {
->>>>>>> vendor-update
         position: relative;
 
         i {
@@ -11636,29 +9624,17 @@ ul.status-list.dropdown-menu {
             margin-left: 15px;
             top: -10px;
 
-<<<<<<< HEAD
             &+i {
                 margin-left: 50px;
             }
 
             &+i+i {
-=======
-            & + i {
-                margin-left: 50px;
-            }
-
-            & + i + i {
->>>>>>> vendor-update
                 margin-left: 85px;
             }
         }
     }
 
-<<<<<<< HEAD
     .sb-type-text+.sb-type-text {
-=======
-    .sb-type-text + .sb-type-text {
->>>>>>> vendor-update
         margin-top: 5px;
     }
 
@@ -11689,12 +9665,8 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 #sb-intent-preview,
 #sb-qea-preview {
-=======
-#sb-intent-preview, #sb-qea-preview {
->>>>>>> vendor-update
     position: absolute;
     top: -1px;
     right: 0;
@@ -11707,12 +9679,8 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 #sb-envato-box,
 .sb-bold-list {
-=======
-#sb-envato-box, .sb-bold-list {
->>>>>>> vendor-update
     p {
         font-weight: 400;
         text-align: left;
@@ -11746,11 +9714,7 @@ ul.status-list.dropdown-menu {
     .sb-list-links {
         text-align: left;
 
-<<<<<<< HEAD
         >a {
-=======
-        > a {
->>>>>>> vendor-update
             padding: 0;
             margin: 0;
             font-weight: 400;
@@ -11774,21 +9738,13 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 #intent-preview-box,
 #qea-preview-box {
-=======
-#intent-preview-box, #qea-preview-box {
->>>>>>> vendor-update
     max-width: 350px;
     padding: 30px;
     text-align: left;
 
-<<<<<<< HEAD
     >p {
-=======
-    > p {
->>>>>>> vendor-update
         font-weight: 400;
         font-size: 13px;
         text-align: left;
@@ -11798,11 +9754,7 @@ ul.status-list.dropdown-menu {
             line-height: 20px;
             overflow: hidden;
 
-<<<<<<< HEAD
             &+span {
-=======
-            & + span {
->>>>>>> vendor-update
                 margin-top: 8px;
             }
         }
@@ -11889,12 +9841,8 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     .sb-text+.sb-input,
     .sb-input+.sb-text {
-=======
-    .sb-text + .sb-input, .sb-input + .sb-text {
->>>>>>> vendor-update
         margin-top: 30px;
     }
 }
@@ -11934,12 +9882,8 @@ ul.status-list.dropdown-menu {
     display: flex;
     align-items: center;
 
-<<<<<<< HEAD
     img,
     >i {
-=======
-    img, > i {
->>>>>>> vendor-update
         display: block;
         opacity: .5;
         transition: $transition;
@@ -11990,18 +9934,13 @@ ul.status-list.dropdown-menu {
         }
     }
 
-<<<<<<< HEAD
     >i {
-=======
-    > i {
->>>>>>> vendor-update
         font-size: 12px;
         line-height: 12px;
         height: 12px;
         margin-left: 10px;
     }
 
-<<<<<<< HEAD
     .sb-active img,
     span:hover i,
     span:hover img {
@@ -12009,13 +9948,6 @@ ul.status-list.dropdown-menu {
     }
 
     &>i:hover {
-=======
-    .sb-active img, span:hover i, span:hover img {
-        opacity: 1;
-    }
-
-    & > i:hover {
->>>>>>> vendor-update
         opacity: 1;
         color: $color-blue;
     }
@@ -12029,11 +9961,7 @@ ul.status-list.dropdown-menu {
     margin-bottom: 30px;
     padding-bottom: 0;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         display: flex;
         align-items: center;
         font-size: 14px;
@@ -12041,11 +9969,7 @@ ul.status-list.dropdown-menu {
         cursor: pointer;
         transition: $transition;
 
-<<<<<<< HEAD
         >img {
-=======
-        > img {
->>>>>>> vendor-update
             margin-right: 15px;
             border-radius: 3px;
             width: 26px;
@@ -12063,11 +9987,7 @@ ul.status-list.dropdown-menu {
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         min-height: 0;
         min-width: 0;
         position: relative;
@@ -12108,11 +10028,7 @@ ul.status-list.dropdown-menu {
         }
 
         &:hover {
-<<<<<<< HEAD
             //border-color: $color-blue;
-=======
-            border-color: $color-blue;
->>>>>>> vendor-update
             box-shadow: 0 0 5px rgba(39, 156, 255, 0.2);
         }
 
@@ -12130,40 +10046,24 @@ ul.status-list.dropdown-menu {
     margin: 0 15px 0 15px;
 }
 
-<<<<<<< HEAD
 .sb-panel-aecommerce,
 .sb-panel-martfury,
 .sb-panel-opencart {
     .sb-list-items>a>span:first-child {
-=======
-.sb-panel-aecommerce, .sb-panel-martfury, .sb-panel-opencart {
-    .sb-list-items > a > span:first-child {
->>>>>>> vendor-update
         opacity: .6;
         margin-right: 5px;
     }
 
-<<<<<<< HEAD
     .sb-list-links>a>span:last-child {
-=======
-    .sb-list-links > a > span:last-child {
->>>>>>> vendor-update
         float: right;
     }
 }
 
 .sb-panel-zendesk {
-<<<<<<< HEAD
     .sb-list-items>a {
         margin-bottom: 5px;
 
         >span:first-child {
-=======
-    .sb-list-items > a {
-        margin-bottom: 5px;
-
-        > span:first-child {
->>>>>>> vendor-update
             display: block;
             line-height: 15px;
             padding-left: 22px;
@@ -12228,39 +10128,23 @@ ul.status-list.dropdown-menu {
     position: absolute;
     width: 2px;
     background: $color-blue;
-<<<<<<< HEAD
     height: calc(100vh - 7px);
-=======
-    height: calc(100% - 7px);
->>>>>>> vendor-update
     left: 0;
     top: 0;
 }
 
-<<<<<<< HEAD
 .sb-aecommerce-orders>a>span:last-child {
     margin-left: 15px;
 }
 
 .sb-panel-details .sb-woocommerce-cart>a {
-=======
-.sb-aecommerce-orders > a > span:last-child {
-    margin-left: 15px;
-}
-
-.sb-panel-details .sb-woocommerce-cart > a {
->>>>>>> vendor-update
     padding-right: 35px;
 }
 
 .sb-btn-app-setting:not(.sb-active) {
     display: none;
 
-<<<<<<< HEAD
     &+.sb-btn {
-=======
-    & + .sb-btn {
->>>>>>> vendor-update
         margin-left: 0;
     }
 }
@@ -12278,11 +10162,7 @@ ul.status-list.dropdown-menu {
             margin: 10px 0 0 0;
         }
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             display: none !important;
         }
     }
@@ -12315,12 +10195,8 @@ ul.status-list.dropdown-menu {
     line-height: 1em;
 }
 
-<<<<<<< HEAD
 .daterangepicker.single .daterangepicker .ranges,
 .daterangepicker.single .drp-calendar {
-=======
-.daterangepicker.single .daterangepicker .ranges, .daterangepicker.single .drp-calendar {
->>>>>>> vendor-update
     float: none;
 }
 
@@ -12357,7 +10233,6 @@ ul.status-list.dropdown-menu {
     border: none;
 }
 
-<<<<<<< HEAD
 .sb-list .sb-right .sb-reply-message {
     color: #fff !important;
     border: 0 !important;
@@ -12366,9 +10241,6 @@ ul.status-list.dropdown-menu {
 
 .daterangepicker .calendar-table .next span,
 .daterangepicker .calendar-table .prev span {
-=======
-.daterangepicker .calendar-table .next span, .daterangepicker .calendar-table .prev span {
->>>>>>> vendor-update
     color: #fff;
     border: solid black;
     border-width: 0 2px 2px 0;
@@ -12387,12 +10259,8 @@ ul.status-list.dropdown-menu {
     -webkit-transform: rotate(135deg);
 }
 
-<<<<<<< HEAD
 .daterangepicker .calendar-table th,
 .daterangepicker .calendar-table td {
-=======
-.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
->>>>>>> vendor-update
     white-space: nowrap;
     text-align: center;
     vertical-align: middle;
@@ -12426,35 +10294,23 @@ ul.status-list.dropdown-menu {
     border-collapse: collapse;
 }
 
-<<<<<<< HEAD
 .daterangepicker td.available:hover,
 .daterangepicker th.available:hover {
-=======
-.daterangepicker td.available:hover, .daterangepicker th.available:hover {
->>>>>>> vendor-update
     background-color: #eee;
     border-color: transparent;
     color: inherit;
 }
 
-<<<<<<< HEAD
 .daterangepicker td.week,
 .daterangepicker th.week {
-=======
-.daterangepicker td.week, .daterangepicker th.week {
->>>>>>> vendor-update
     font-size: 80%;
     color: #ccc;
 }
 
-<<<<<<< HEAD
 .daterangepicker td.off,
 .daterangepicker td.off.in-range,
 .daterangepicker td.off.start-date,
 .daterangepicker td.off.end-date {
-=======
-.daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
->>>>>>> vendor-update
     background-color: #fff;
     border-color: transparent;
     color: #999;
@@ -12479,12 +10335,8 @@ ul.status-list.dropdown-menu {
     border-radius: 4px;
 }
 
-<<<<<<< HEAD
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
-=======
-.daterangepicker td.active, .daterangepicker td.active:hover {
->>>>>>> vendor-update
     background-color: $color-blue;
     border-color: transparent;
     color: #fff;
@@ -12497,23 +10349,15 @@ ul.status-list.dropdown-menu {
     letter-spacing: .3px;
 }
 
-<<<<<<< HEAD
 .daterangepicker td.disabled,
 .daterangepicker option.disabled {
-=======
-.daterangepicker td.disabled, .daterangepicker option.disabled {
->>>>>>> vendor-update
     color: #999;
     cursor: not-allowed;
     text-decoration: line-through;
 }
 
-<<<<<<< HEAD
 .daterangepicker select.monthselect,
 .daterangepicker select.yearselect {
-=======
-.daterangepicker select.monthselect, .daterangepicker select.yearselect {
->>>>>>> vendor-update
     font-size: 12px;
     padding: 1px;
     height: auto;
@@ -12530,14 +10374,10 @@ ul.status-list.dropdown-menu {
     width: 40%;
 }
 
-<<<<<<< HEAD
 .daterangepicker select.hourselect,
 .daterangepicker select.minuteselect,
 .daterangepicker select.secondselect,
 .daterangepicker select.ampmselect {
-=======
-.daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
->>>>>>> vendor-update
     width: 50px;
     margin: 0 auto;
     background: #eee;
@@ -12630,7 +10470,6 @@ ul.status-list.dropdown-menu {
     color: #fff;
 }
 
-<<<<<<< HEAD
 .select2-container--default .select2-selection--single {
     display: inline-block;
     vertical-align: top;
@@ -12643,8 +10482,6 @@ ul.status-list.dropdown-menu {
     overflow: hidden;
 }
 
-=======
->>>>>>> vendor-update
 @media (min-width: 564px) {
     .daterangepicker {
         width: auto;
@@ -12662,12 +10499,8 @@ ul.status-list.dropdown-menu {
         clear: none;
     }
 
-<<<<<<< HEAD
     .daterangepicker.single .ranges,
     .daterangepicker.single .drp-calendar {
-=======
-    .daterangepicker.single .ranges, .daterangepicker.single .drp-calendar {
->>>>>>> vendor-update
         float: left;
     }
 
@@ -12702,12 +10535,8 @@ ul.status-list.dropdown-menu {
         padding-right: 8px;
     }
 
-<<<<<<< HEAD
     .daterangepicker .ranges,
     .daterangepicker .drp-calendar {
-=======
-    .daterangepicker .ranges, .daterangepicker .drp-calendar {
->>>>>>> vendor-update
         float: left;
     }
 }
@@ -12756,12 +10585,8 @@ ul.status-list.dropdown-menu {
     padding-right: 15px;
 }
 
-<<<<<<< HEAD
 .ce-block__content,
 .ce-toolbar__content {
-=======
-.ce-block__content, .ce-toolbar__content {
->>>>>>> vendor-update
     max-width: 100% !important;
     margin: 0;
 }
@@ -12799,17 +10624,12 @@ ul.status-list.dropdown-menu {
  *
 */
 
-<<<<<<< HEAD
 #whatsapp-cloud-sync-btn,
 #whatsapp-cloud-reconnect-btn {
-=======
-#whatsapp-cloud-sync-btn, #whatsapp-cloud-reconnect-btn {
->>>>>>> vendor-update
     display: none;
 }
 
 .sb-cloud-admin {
-<<<<<<< HEAD
 
     [id="user_type"],
     [id="first_name"],
@@ -12817,52 +10637,17 @@ ul.status-list.dropdown-menu {
     [id="password"],
     [id="email"],
     .sb-delete {
-=======
-    [id="user_type"], [id="first_name"], [id="last_name"], [id="password"], [id="email"], .sb-delete {
->>>>>>> vendor-update
         display: none !important;
     }
 }
 
 .sb-cloud {
-<<<<<<< HEAD
 
     #whatsapp-cloud-sync-btn,
     #whatsapp-cloud-reconnect-btn {
         display: flex;
     }
 
-=======
-    #whatsapp-cloud-sync-btn, #whatsapp-cloud-reconnect-btn {
-        display: flex;
-    }
-
-    #admin-title, #login-icon, #login-message, #envato-purchase-code, #envato-validation, #email-piping-disable-cron,
-    #auto-updates, #pusher, #cookie-domain, #system-requirements, #sb-path, #tab-aecommerce, #admin-icon, #push-notifications-provider, #push-notifications-id, #push-notifications-key,
-    #tab-whmcs, #tab-perfex, #tab-ump, #tab-armember, #tab-martfury, #logs, .sb-version, #amazon-s3, #whatsapp-twilio-btn.sb-active + #whatsapp-cloud-sync-btn,
-    #whatsapp-twilio-btn.sb-active + #whatsapp-cloud-sync-btn + #whatsapp-cloud-reconnect-btn {
-        display: none !important;
-    }
-
-    #google-client-id, #google-client-secret, #google-refresh-token, #open-ai-key {
-        &:not(.sb-active) {
-            display: none !important;
-        }
-    }
-
-    #whatsapp-cloud-key, #whatsapp-twilio-btn {
-        &:not(.sb-active) {
-            display: none !important;
-        }
-    }
-
-    .sb-app-box {
-        .sb-setting, .sb-main .sb-title, .sb-btn-app-puchase {
-            display: none !important;
-        }
-    }
-
->>>>>>> vendor-update
     .sb-active-app {
         .sb-btn-app-disable {
             display: block !important;
@@ -12874,7 +10659,6 @@ ul.status-list.dropdown-menu {
     }
 }
 
-<<<<<<< HEAD
 .sidebar-notification-icon {
     position: absolute;
     height: 16px;
@@ -12898,10 +10682,6 @@ ul.status-list.dropdown-menu {
     #open-ai-sync-mode,
     #whatsapp-cloud-sync-mode,
     #open-ai-training-cron-job {
-=======
-.sb-main:not(.sb-cloud) {
-    #google-sync-mode, #open-ai-sync-mode, #whatsapp-cloud-sync-mode, #open-ai-training-cron-job {
->>>>>>> vendor-update
         display: none !important;
     }
 }
@@ -12911,29 +10691,17 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-onboarding-box {
-<<<<<<< HEAD
     height: calc(100vh - 50px);
-=======
-    height: calc(100% - 50px);
->>>>>>> vendor-update
 
     .sb-setting {
         align-items: center;
 
-<<<<<<< HEAD
         >div:first-child {
-=======
-        > div:first-child {
->>>>>>> vendor-update
             padding-right: 30px;
             width: 100%;
         }
 
-<<<<<<< HEAD
         >div:last-child {
-=======
-        > div:last-child {
->>>>>>> vendor-update
             flex: 1;
         }
 
@@ -12943,12 +10711,8 @@ ul.status-list.dropdown-menu {
             display: flex;
             align-items: center;
 
-<<<<<<< HEAD
             img,
             i {
-=======
-            img, i {
->>>>>>> vendor-update
                 font-size: 18px;
                 line-height: 20px;
                 margin-left: 15px;
@@ -12981,27 +10745,18 @@ ul.status-list.dropdown-menu {
             }
         }
 
-<<<<<<< HEAD
         &+div {
-=======
-        & + div {
->>>>>>> vendor-update
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid rgb(230, 230, 230);
         }
     }
 
-<<<<<<< HEAD
     .sb-main>p {
-=======
-    .sb-main > p {
->>>>>>> vendor-update
         margin-bottom: 30px;
     }
 }
 
-<<<<<<< HEAD
 
 .sb-menu [data-value="switch"] {
     position: static !important;
@@ -13014,16 +10769,6 @@ ul.status-list.dropdown-menu {
         left: -50px;
         top: 75%;
         height: fit-content;
-=======
-.sb-menu [data-value="switch"] {
-    position: static !important;
-
-    > div {
-        position: absolute;
-        left: calc(100% - 1px);
-        top: -61px;
-        height: calc(100% + 45px);
->>>>>>> vendor-update
         padding: 8px 15px;
         background: #FFF;
         box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -13031,7 +10776,6 @@ ul.status-list.dropdown-menu {
         opacity: 0;
         transition: all 0.4s linear .2s;
 
-<<<<<<< HEAD
         &::-webkit-scrollbar {
             height: 0;
             width: 0;
@@ -13050,20 +10794,10 @@ ul.status-list.dropdown-menu {
     }
 
     &:hover>div {
-=======
-        a {
-            display: block;
-            padding: 6px 0;
-        }
-    }
-
-    &:hover > div {
->>>>>>> vendor-update
         opacity: 1;
     }
 }
 
-<<<<<<< HEAD
 // Variables
 $primary-color: #0d6efd;
 $danger-color: #d32f2f;
@@ -13093,8 +10827,6 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     margin-right: 6px;
     vertical-align: middle;
-    min-width: 10px;
-    min-height: 10px;
 }
 
 // Dropdown cleanup
@@ -13111,11 +10843,8 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         background-color: $tag-bg !important;
         color: $tag-text !important;
         font-weight: 500 !important;
+        display: flex !important;
         align-items: center !important;
-        max-width: 80px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
 
         &[data-color]::before {
             @include tag-dot(12px);
@@ -13862,16 +11591,24 @@ li.menu_head:hover {
                     padding: 10px;
                     color: #333;
                     text-decoration: none;
-
                     span {
                         word-break: break-word !important;
-                        font-size: 13px !important;
                     }
                 }
             }
         }
     }
 }
+
+// .sb-area-reports.sb-area-reports_new.sb-active {
+//     .sb-tab {
+//         display: flex;
+//         flex-direction: column;
+//         .sb-content.sb-scroll-area.sb-no-results-active {
+//             margin: auto;
+//         }
+//     }
+// }
 
 .row.tablet-sizee {
     .nav-tabs {
@@ -14783,8 +12520,6 @@ div#messaging-channels {
 }
 
 // custom css end
-=======
->>>>>>> vendor-update
 /*
  *
  * -----------------------------------------------------------
@@ -14793,7 +12528,6 @@ div#messaging-channels {
  *
 */
 
-<<<<<<< HEAD
 
 .sb-account-box.sb-admin {
     .sb-scroll-area {
@@ -15106,31 +12840,15 @@ main {
     }
 }
 
-.main-content {
-    #bot-image {
-        .input {
-            width: 100% !important;
-        }
-    }
-}
-
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
-=======
-@media (max-width: 1600px) {
-    .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
->>>>>>> vendor-update
         max-width: 200px;
         margin-right: 30px;
     }
 }
 
 @media (max-width: 1300px) {
-<<<<<<< HEAD
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
-=======
-    .sb-admin > main > .sb-area-users > .sb-top-bar h2 {
->>>>>>> vendor-update
         max-width: 100px;
     }
 
@@ -15139,7 +12857,6 @@ main {
     }
 
     .sb-setting {
-<<<<<<< HEAD
         .repeater-item>div label {
             margin: 0 0 15px 0;
         }
@@ -15164,34 +12881,11 @@ main {
         input,
         select,
         textarea {
-=======
-        .repeater-item > div label {
-            margin: 0 0 15px 0;
-        }
-
-        .repeater-item > div, .repeater-item > div, .input > div:not([data-type="textarea"]):not(.sb-repeater-add) {
-            display: block;
-        }
-
-        .input > div:not([data-type="textarea"]):not(.sb-repeater-add) > label {
-            margin: 0 30px 10px 0;
-        }
-
-        > .sb-setting-content {
-            flex-shrink: 1;
-        }
-
-        input, select, textarea, input, select, textarea {
->>>>>>> vendor-update
             min-width: 0;
         }
     }
 
-<<<<<<< HEAD
     [data-id="open-ai-faq-set-data"] .repeater-item>div {
-=======
-    [data-id="open-ai-faq-set-data"] .repeater-item > div {
->>>>>>> vendor-update
         display: flex;
     }
 
@@ -15200,19 +12894,11 @@ main {
     }
 
     .sb-type-timetable {
-<<<<<<< HEAD
         >.input {
             overflow: hidden;
         }
 
         .sb-timetable>div>div {
-=======
-        > .input {
-            overflow: hidden;
-        }
-
-        .sb-timetable > div > div {
->>>>>>> vendor-update
             flex-wrap: wrap;
 
             [data-day] {
@@ -15222,11 +12908,7 @@ main {
     }
 
     .sb-area-reports {
-<<<<<<< HEAD
         >.sb-tab>.sb-content {
-=======
-        > .sb-tab > .sb-content {
->>>>>>> vendor-update
             display: block;
 
             .sb-reports-chart {
@@ -15239,7 +12921,6 @@ main {
         }
     }
 
-<<<<<<< HEAD
     .sb-content.sb-scroll-area.sb-no-results-active {
         display: flex;
     }
@@ -15247,29 +12928,18 @@ main {
     .sb-repeater-block-data .sb-setting+.sb-setting,
     .sb-repeater-block-actions .sb-setting+.sb-setting,
     .sb-repeater-block-rest-api .sb-setting+.sb-setting {
-=======
-    .sb-repeater-block-data .sb-setting + .sb-setting, .sb-repeater-block-actions .sb-setting + .sb-setting, .sb-repeater-block-rest-api .sb-setting + .sb-setting {
->>>>>>> vendor-update
         margin: 5px 0 0 0;
     }
 }
 
 @media (min-width: 465px) {
-<<<<<<< HEAD
     .sb-menu-mobile>ul {
-=======
-    .sb-menu-mobile > ul {
->>>>>>> vendor-update
         box-shadow: none;
     }
 }
 
 @media (min-width: 465px) and (max-width: 1200px) {
-<<<<<<< HEAD
     .sb-board>.sb-admin-list {
-=======
-    .sb-board > .sb-admin-list {
->>>>>>> vendor-update
         min-width: 300px;
     }
 
@@ -15292,48 +12962,31 @@ main {
         background: none;
     }
 
-<<<<<<< HEAD
     .sb-board .sb-conversation .sb-list>div {
-=======
-    .sb-board .sb-conversation .sb-list > div {
->>>>>>> vendor-update
         max-width: calc(100% - 100px);
     }
 }
 
 @media (min-width: 465px) and (max-width: 1366px) {
-<<<<<<< HEAD
 
     .sb-board>.sb-admin-list,
     .sb-board .sb-user-details {
-=======
-    .sb-board > .sb-admin-list, .sb-board .sb-user-details {
->>>>>>> vendor-update
         max-width: 330px;
         min-width: 330px;
     }
 
-<<<<<<< HEAD
     .sb-admin-list .sb-search-btn>input {
-=======
-    .sb-admin-list .sb-search-btn > input {
->>>>>>> vendor-update
         min-width: 225px;
     }
 }
 
 @media (min-width: 465px) and (max-width: 1140px) {
-<<<<<<< HEAD
     .sb-admin>main>div>.sb-top-bar>div:first-child>ul {
-=======
-    .sb-admin > main > div > .sb-top-bar > div:first-child > ul {
->>>>>>> vendor-update
         overflow-x: scroll;
     }
 }
 
 @media (min-width: 465px) and (max-width: 1024px) {
-<<<<<<< HEAD
 
     .screen-size {
         .row {
@@ -15348,23 +13001,15 @@ main {
 
     .sb-board>.sb-admin-list,
     .sb-board .sb-user-details {
-=======
-    .sb-board > .sb-admin-list, .sb-board .sb-user-details {
->>>>>>> vendor-update
         max-width: 250px;
         min-width: 250px;
     }
 
-<<<<<<< HEAD
     .sb-admin-list .sb-search-btn>input {
-=======
-    .sb-admin-list .sb-search-btn > input {
->>>>>>> vendor-update
         min-width: 145px;
         max-width: 145px;
     }
 
-<<<<<<< HEAD
     .sb-setting,
     .sb-setting {
         display: block;
@@ -15372,25 +13017,14 @@ main {
 
     .sb-setting>.sb-setting-content,
     .sb-setting>.sb-setting-content {
-=======
-    .sb-setting, .sb-setting {
-        display: block;
-    }
-
-    .sb-setting > .sb-setting-content, .sb-setting > .sb-setting-content {
->>>>>>> vendor-update
         max-width: 100%;
         width: auto;
         padding-right: 0;
         padding-bottom: 15px;
     }
 
-<<<<<<< HEAD
     .sb-area-settings>.sb-tab>.sb-nav>ul,
     .sb-area-reports>.sb-tab>.sb-nav>ul {
-=======
-    .sb-area-settings > .sb-tab > .sb-nav > ul, .sb-area-reports > .sb-tab > .sb-nav > ul {
->>>>>>> vendor-update
         min-width: 180px;
     }
 
@@ -15398,12 +13032,8 @@ main {
         display: none;
     }
 
-<<<<<<< HEAD
     .sb-menu-wide ul li,
     .sb-tab>.sb-nav>ul li {
-=======
-    .sb-menu-wide ul li, .sb-tab > .sb-nav > ul li {
->>>>>>> vendor-update
         margin: 0 10px 0 0;
     }
 }
@@ -15411,12 +13041,8 @@ main {
 @media (min-width: 465px) and (max-width: 912px) {
     .sb-board {
 
-<<<<<<< HEAD
         >.sb-admin-list,
         .sb-user-details {
-=======
-        > .sb-admin-list, .sb-user-details {
->>>>>>> vendor-update
             position: fixed;
             z-index: 2;
             background: $white;
@@ -15428,20 +13054,12 @@ main {
             display: none;
         }
 
-<<<<<<< HEAD
         >.sb-admin-list.sb-active,
         .sb-user-details.sb-active {
             display: block;
         }
 
         >.sb-admin-list .sb-top {
-=======
-        > .sb-admin-list.sb-active, .sb-user-details.sb-active {
-            display: block;
-        }
-
-        > .sb-admin-list .sb-top {
->>>>>>> vendor-update
             padding-left: 45px;
         }
 
@@ -15450,46 +13068,28 @@ main {
             right: 0;
         }
 
-<<<<<<< HEAD
         .sb-conversation>.sb-top {
             padding-left: 20px;
         }
 
         .sb-conversation>.sb-top .sb-menu-mobile {
             right: 8px;
-=======
-        .sb-conversation > .sb-top {
-            padding-left: 45px;
-        }
-
-        .sb-conversation > .sb-top .sb-menu-mobile {
-            right: 35px;
->>>>>>> vendor-update
         }
     }
 
     .sb-admin-list {
-<<<<<<< HEAD
         .sb-search-btn>input {
-=======
-        .sb-search-btn > input {
->>>>>>> vendor-update
             min-width: 200px;
             max-width: 200px;
         }
 
-<<<<<<< HEAD
         .sb-filter-btn.sb-active>div {
-=======
-        .sb-filter-btn.sb-active > div {
->>>>>>> vendor-update
             min-width: 265px;
             max-width: 265px;
             left: auto;
         }
     }
 
-<<<<<<< HEAD
     .sb-area-conversations>.sb-btn-collapse {
         display: block;
     }
@@ -15811,7 +13411,7 @@ main {
                 .main-charts {
                     .ticket_activity_chart {
                         #ticket_activity_chart {
-                            height: 193px !important;
+                            height: 194px !important;
                         }
                     }
                 }
@@ -16029,8 +13629,6 @@ main {
                 .logo {
                     &::before {
                         bottom: 4px;
-                        width: 118px;
-                        left: -14px;
                     }
                 }
             }
@@ -16833,7 +14431,6 @@ main {
                     border: 1px solid #d5d5d5;
                     border-radius: 6px;
                     box-shadow: none;
-                    padding-inline: 10px;
                 }
             }
         }
@@ -16895,16 +14492,10 @@ main {
                     left: 0;
                     transition: .5s ease-in-out;
                     overflow-y: scroll !important;
-                    width: 95px;
-
-                    &::-webkit-scrollbar {
-                        width: 0;
-                    }
                 }
 
                 .powered-by {
                     flex-direction: column;
-                    text-align: center;
                 }
             }
         }
@@ -17024,83 +14615,6 @@ main {
             padding-inline: 15px;
         }
     }
-
-    .users-tab {
-        max-height: 52vh;
-    }
-
-    .sb-setting {
-        .repeater-item {
-            textarea {
-                min-width: fit-content;
-            }
-        }
-    }
-
-    .sb-nav {
-        a#sb-accout {
-            padding-inline: 0 !important;
-            margin: 0 !important;
-            padding-bottom: 0 !important;
-        }
-    }
-
-    .sb-area-dashboard main {
-        .new_container {
-            .dashboard-metrics {
-                .metric-card {
-                    .graph_tabs {
-                        justify-content: space-between;
-                        .w-100 {
-                            width: fit-content !important;
-                        }
-                        .new_users_chart,
-                        .active_users_chart,
-                        .ticket_created_chart,
-                        .ticket_resolved_chart,
-                        .unread_conversation_chart,
-                        .ticket_pending_chart,
-                        .avg_response_chart,
-                        .total_conversations_chart,
-                        .agent_chart {
-                            width: fit-content;
-                            canvas {
-                                width: 100% !important;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .sb-admin-box_new {
-        .right_section {
-            .login-form {
-                .form-fields {
-                    .field-container {
-                        .input-wrapper {
-                            svg {
-                                top: 26px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .sb-profile-box.sb-lightbox.sb-agent-admin.sb-type-user.sb-active {
-        .sb-profile {
-            .sb-name {
-                padding-left: 50px;
-            }
-            img {
-                min-height: 40px;
-            }
-        }
-    }
-
 }
 
 @media only screen and (min-width: 465px) and (max-width: 730px) {
@@ -17177,9 +14691,3 @@ main {
         }
     }
 }
-=======
-    .sb-area-conversations > .sb-btn-collapse {
-        display: block;
-    }
-}
->>>>>>> vendor-update

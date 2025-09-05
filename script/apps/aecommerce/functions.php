@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * WHMCS APP
- * ==
+ * ==========================================================
  *
- * Active eCommerce CMS app main file. ï¿½ 2017-2025 board.support. All rights reserved.
+ * Active eCommerce CMS app main file. © 2017-2025 board.support. All rights reserved.
  *
  */
 

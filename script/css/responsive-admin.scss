@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> vendor-update
 /*
 * 
-* ==
+* ==========================================================
 * RESPONSIVE-ADMIN.SCSS
-* ==
+* ==========================================================
 *
 * Back-end responsive CSS. This file is imported only.
 *
@@ -14,12 +10,8 @@
 
 $transition: all 0.4s;
 $white: #fff;
-<<<<<<< HEAD
 // $color-blue: #028be5;
-$color-blue: #033bbe;
-=======
-$color-blue: #028be5;
->>>>>>> vendor-update
+$color-blue: #033bbe; 
 $color-dark-blue: rgb(0, 76, 125);
 $color-black: rgb(36, 39, 42);
 $color-gray: rgb(86, 96, 105);
@@ -30,7 +22,7 @@ $border-color: rgb(212, 212, 212);
 /*
 
 # GENERAL
-==
+==========================================================
 
 */
 
@@ -78,7 +70,6 @@ $border-color: rgb(212, 212, 212);
     }
 }
 
-<<<<<<< HEAD
 .sb-menu-mobile>i.sb-active+ul,
 .sb-menu-mobile>i.sb-active+div+.sb-mobile {
     animation: sb-open .3s;
@@ -86,13 +77,6 @@ $border-color: rgb(212, 212, 212);
 
 body,
 html {
-=======
-.sb-menu-mobile > i.sb-active + ul, .sb-menu-mobile > i.sb-active + div + .sb-mobile {
-    animation: sb-open .3s;
-}
-
-body, html {
->>>>>>> vendor-update
     background: $white;
 }
 
@@ -100,13 +84,9 @@ body {
     overscroll-behavior-y: contain;
 }
 
-<<<<<<< HEAD
 .sb-tooltip,
 .sb-btn-emoji,
 .sb-menu-buttons {
-=======
-.sb-tooltip, .sb-btn-emoji, .sb-menu-buttons {
->>>>>>> vendor-update
     display: none !important;
 }
 
@@ -130,12 +110,8 @@ body {
         }
     }
 
-<<<<<<< HEAD
     &.sb-rich-login,
     &.sb-cloud-box {
-=======
-    &.sb-rich-login, &.sb-cloud-box {
->>>>>>> vendor-update
         .sb-input {
             display: block;
 
@@ -161,17 +137,10 @@ body {
     -webkit-tap-highlight-color: rgba(150, 194, 227, 0.44);
     user-select: auto;
 
-<<<<<<< HEAD
     >main {
         padding-top: 60px;
 
         .sb-top-bar>div h2 {
-=======
-    > main {
-        padding-top: 60px;
-
-        .sb-top-bar > div h2 {
->>>>>>> vendor-update
             display: none;
         }
     }
@@ -186,12 +155,8 @@ body {
         user-select: none;
     }
 
-<<<<<<< HEAD
     .sb-profile-edit-box .sb-btn,
     .sb-profile-box .sb-btn {
-=======
-    .sb-profile-edit-box .sb-btn, .sb-profile-box .sb-btn {
->>>>>>> vendor-update
         user-select: auto;
         -webkit-tap-highlight-color: rgba(150, 194, 227, 0.44);
     }
@@ -221,7 +186,6 @@ body {
         }
     }
 
-<<<<<<< HEAD
     .sb-updates-box .sb-input>div {
         width: auto;
     }
@@ -230,20 +194,10 @@ body {
     .sb-area-reports {
 
         >.sb-tab {
-=======
-    .sb-updates-box .sb-input > div {
-        width: auto;
-    }
-
-    .sb-area-settings, .sb-area-reports {
-
-        > .sb-tab {
->>>>>>> vendor-update
             display: block;
             height: 100%;
             max-height: 100%;
 
-<<<<<<< HEAD
             >.sb-nav {
                 padding: 0;
                 position: unset;
@@ -252,16 +206,6 @@ body {
                 overflow: visible;
 
                 >ul {
-=======
-            > .sb-nav {
-                padding: 0;
-                position: absolute;
-                top: 68px;
-                left: 15px;
-                overflow: visible;
-
-                > ul {
->>>>>>> vendor-update
                     padding-left: 0;
                 }
 
@@ -270,29 +214,17 @@ body {
                 }
             }
 
-<<<<<<< HEAD
             >.sb-content>div {
-=======
-            > .sb-content > div {
->>>>>>> vendor-update
                 padding: 15px;
             }
         }
 
-<<<<<<< HEAD
         .sb-top-bar>div:first-child {
-=======
-        .sb-top-bar > div:first-child {
->>>>>>> vendor-update
             width: 100%;
             overflow-x: visible;
         }
 
-<<<<<<< HEAD
         >.sb-scroll-area {
-=======
-        > .sb-scroll-area {
->>>>>>> vendor-update
             padding: 20px 15px;
         }
     }
@@ -302,24 +234,16 @@ body {
     display: none;
 }
 
-<<<<<<< HEAD
 .sb-board>.sb-admin-list,
 .sb-area-users,
 .sb-area-settings {
-=======
-.sb-board > .sb-admin-list, .sb-area-users, .sb-area-settings {
->>>>>>> vendor-update
     .sb-scroll-area {
         height: calc(100% - 110px);
         width: auto;
         margin: 0 !important;
         padding: 0 !important;
 
-<<<<<<< HEAD
         >ul>p {
-=======
-        > ul > p {
->>>>>>> vendor-update
             margin: 15px;
         }
     }
@@ -329,11 +253,7 @@ body {
     height: 180px;
 }
 
-<<<<<<< HEAD
 .sb-mobile [data-value="switch"]+div {
-=======
-.sb-mobile [data-value="switch"] + div {
->>>>>>> vendor-update
     max-height: 78px;
     background: #edeef0;
 
@@ -343,32 +263,20 @@ body {
     }
 }
 
-<<<<<<< HEAD
 .sb-lightbox .sb-top-bar .sb-btn,
 .sb-lightbox .sb-top-bar a.sb-btn {
-=======
-.sb-lightbox .sb-top-bar .sb-btn, .sb-lightbox .sb-top-bar a.sb-btn {
->>>>>>> vendor-update
     height: 35px;
     line-height: 35px;
 }
 
-<<<<<<< HEAD
 .sb-lightbox .sb-top-bar,
 .sb-admin>main>div>.sb-top-bar {
-=======
-.sb-lightbox .sb-top-bar, .sb-admin > main > div > .sb-top-bar {
->>>>>>> vendor-update
     padding: 0;
     margin-bottom: 0;
     height: 50px;
     overflow: hidden;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         font-size: 17px;
 
         &:first-child {
@@ -376,12 +284,8 @@ body {
         }
     }
 
-<<<<<<< HEAD
     .sb-btn-icon,
     .sb-search-btn {
-=======
-    .sb-btn-icon, .sb-search-btn {
->>>>>>> vendor-update
         width: 45px;
         height: 45px;
         overflow: hidden;
@@ -399,19 +303,11 @@ body {
     }
 
     .sb-search-btn {
-<<<<<<< HEAD
         >input {
             line-height: 45px;
         }
 
         >i:before {
-=======
-        > input {
-            line-height: 45px;
-        }
-
-        > i:before {
->>>>>>> vendor-update
             font-size: 21px;
         }
     }
@@ -435,22 +331,14 @@ body {
         }
     }
 
-<<<<<<< HEAD
     a+a {
-=======
-    a + a {
->>>>>>> vendor-update
         margin-left: 0;
     }
 }
 
 
 .sb-admin {
-<<<<<<< HEAD
     >main>div>.sb-top-bar {
-=======
-    > main > div > .sb-top-bar {
->>>>>>> vendor-update
         border-bottom: 1px solid $border-color;
     }
 
@@ -463,11 +351,7 @@ body {
             height: 45px;
             right: 5px !important;
 
-<<<<<<< HEAD
             >i {
-=======
-            > i {
->>>>>>> vendor-update
                 line-height: 52px;
                 height: 45px;
                 width: 45px;
@@ -476,11 +360,7 @@ body {
     }
 }
 
-<<<<<<< HEAD
 main>div .sb-top-bar .sb-menu-mobile>ul {
-=======
-main > div .sb-top-bar .sb-menu-mobile > ul {
->>>>>>> vendor-update
     top: 73px;
 }
 
@@ -493,11 +373,7 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
 }
 
 .sb-automations-area {
-<<<<<<< HEAD
     >.sb-select>p {
-=======
-    > .sb-select > p {
->>>>>>> vendor-update
         padding-left: 0;
     }
 
@@ -506,19 +382,11 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
     }
 }
 
-<<<<<<< HEAD
 .sb-area-settings>.sb-tab>.sb-content .sb-inner-tab>.sb-content {
     margin-top: 30px;
 }
 
 .sb-conditions>div {
-=======
-.sb-area-settings > .sb-tab > .sb-content .sb-inner-tab > .sb-content {
-    margin-top: 30px;
-}
-
-.sb-conditions > div {
->>>>>>> vendor-update
     display: block;
     margin-bottom: 15px;
     border-bottom: 1px solid $border-color;
@@ -529,20 +397,12 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
     }
 }
 
-<<<<<<< HEAD
 .sb-tab>.sb-nav {
-=======
-.sb-tab > .sb-nav {
->>>>>>> vendor-update
     min-width: 0;
     padding: 5px 15px 15px 15px;
     border: none;
 
-<<<<<<< HEAD
     >ul {
-=======
-    > ul {
->>>>>>> vendor-update
         max-width: none;
     }
 }
@@ -550,28 +410,20 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
 /*
 
 # FONT SIZE
-==
+==========================================================
 
 */
 
-<<<<<<< HEAD
 div ul.sb-menu li,
 .sb-select ul li {
-=======
-div ul.sb-menu li, .sb-select ul li {
->>>>>>> vendor-update
     font-size: 17px;
     line-height: 27px;
     padding: 6px 25px 6px 15px;
 }
 
-<<<<<<< HEAD
 .sb-select p,
 .sb-board>.sb-admin-list .sb-scroll-area li p,
 .sb-board>.sb-admin-list .sb-scroll-area>ul>p {
-=======
-.sb-select p, .sb-board > .sb-admin-list .sb-scroll-area li p, .sb-board > .sb-admin-list .sb-scroll-area > ul > p {
->>>>>>> vendor-update
     font-size: 17px !important;
 }
 
@@ -588,7 +440,6 @@ div ul.sb-menu li, .sb-select ul li {
     line-height: 30px;
 }
 
-<<<<<<< HEAD
 .sb-board>.sb-admin-list .sb-scroll-area li[data-conversation-status="2"] .sb-name,
 .sb-board>.sb-admin-list .sb-scroll-area li .sb-profile .sb-name,
 .sb-dialog-box p {
@@ -617,21 +468,6 @@ div ul.sb-menu li, .sb-select ul li {
 .daterangepicker th.month,
 .daterangepicker .calendar-table th,
 .daterangepicker .calendar-table th {
-=======
-.sb-board > .sb-admin-list .sb-scroll-area li[data-conversation-status="2"] .sb-name,
-.sb-board > .sb-admin-list .sb-scroll-area li .sb-profile .sb-name, .sb-dialog-box p {
-    font-size: 18px;
-}
-
-.sb-user-conversations > li > div, .sb-profile-list > ul > li .sb-icon, .sb-table td .sb-profile span,
-.sb-input > input, .sb-input > select, .sb-input > textarea, .sb-setting h2, .sb-setting h2, .sb-setting label,
-.sb-setting label, .sb-popup.sb-replies .sb-replies-list ul li div {
-    font-size: 17px;
-}
-
-.sb-lightbox .sb-info, .sb-btn-text, .sb-updates-box .sb-input > div, .sb-requirements-box .sb-input > div, .daterangepicker .ranges li,
-.daterangepicker th.month, .daterangepicker .calendar-table th, .daterangepicker .calendar-table th {
->>>>>>> vendor-update
     font-size: 17px;
     line-height: 26px;
 }
@@ -641,7 +477,6 @@ div ul.sb-menu li, .sb-select ul li {
     line-height: 35px;
 }
 
-<<<<<<< HEAD
 .sb-user-conversations>li>div .sb-message {
     font-size: 16px;
 }
@@ -662,31 +497,12 @@ div ul.sb-menu li, .sb-select ul li {
 .sb-setting p,
 .sb-setting p,
 .sb-rich-message .sb-text {
-=======
-.sb-user-conversations > li > div .sb-message {
-    font-size: 16px;
-}
-
-.sb-profile-list > ul > li > span, .sb-profile-list .sb-panel-details .sb-title {
-    font-size: 14px;
-}
-
-.sb-list .sb-time, .sb-user-conversations li .sb-time {
-    font-size: 13px;
-}
-
-.sb-list .sb-message, .sb-list .sb-message a, .sb-editor textarea, .sb-setting p, .sb-setting p, .sb-rich-message .sb-text {
->>>>>>> vendor-update
     font-size: 16px;
     line-height: 25px;
 }
 
-<<<<<<< HEAD
 .sb-list .sb-btn.sb-rich-btn,
 .sb-list a.sb-btn.sb-rich-btn {
-=======
-.sb-list .sb-btn.sb-rich-btn, .sb-list a.sb-btn.sb-rich-btn {
->>>>>>> vendor-update
     font-size: 16px;
     padding: 0 30px;
     height: 40px;
@@ -704,12 +520,8 @@ div ul.sb-menu li, .sb-select ul li {
     line-height: 40px;
 }
 
-<<<<<<< HEAD
 .sb-btn,
 a.sb-btn {
-=======
-.sb-btn, a.sb-btn {
->>>>>>> vendor-update
     font-size: 16px;
     padding: 0 30px;
     height: 40px;
@@ -737,13 +549,9 @@ a.sb-btn {
     }
 }
 
-<<<<<<< HEAD
 .sb-profile-list>ul>li,
 .sb-panel-details .sb-list-items>div,
 .sb-panel-details .sb-list-items>a {
-=======
-.sb-profile-list > ul > li, .sb-panel-details .sb-list-items > div, .sb-panel-details .sb-list-items > a {
->>>>>>> vendor-update
     font-size: 16px;
     line-height: 35px;
 }
@@ -755,58 +563,36 @@ a.sb-btn {
 /*
 
 # TOP HEADER
-==
+==========================================================
 
 */
 
 .sb-admin {
     width: 100%;
     padding: 0 !important;
-<<<<<<< HEAD
     background: #edf2f9;
 
     >.sb-header {
-=======
-    background: $white;
-
-    > .sb-header {
->>>>>>> vendor-update
         width: 100%;
         height: 60px;
         right: 0;
         bottom: auto;
         display: flex;
         z-index: 96;
-<<<<<<< HEAD
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 
         >.sb-admin-nav {
             display: flex;
 
             >img {
-=======
-        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-
-        > .sb-admin-nav {
-            display: flex;
-
-            > img {
->>>>>>> vendor-update
                 height: 30px;
                 margin: 15px 15px;
             }
 
-<<<<<<< HEAD
             >div {
                 display: flex;
 
                 >a {
-=======
-            > div {
-                display: flex;
-
-                > a {
->>>>>>> vendor-update
                     width: 42px;
                     border-radius: 4px;
                     overflow: hidden;
@@ -822,23 +608,14 @@ a.sb-btn {
             }
         }
 
-<<<<<<< HEAD
         >.sb-admin-nav-right {
             >.sb-icon-menu {
-=======
-        > .sb-admin-nav-right {
-            > .sb-icon-menu {
->>>>>>> vendor-update
                 height: 60px;
                 line-height: 70px;
             }
         }
 
-<<<<<<< HEAD
         &.sb-hide+main {
-=======
-        &.sb-hide + main {
->>>>>>> vendor-update
             padding-top: 0;
         }
 
@@ -869,7 +646,6 @@ a.sb-btn {
             top: -75px;
         }
 
-<<<<<<< HEAD
         >main {
             padding-top: 0;
         }
@@ -878,13 +654,6 @@ a.sb-btn {
         .sb-area-users,
         .sb-area-settings,
         .sb-area-reports {
-=======
-        > main {
-            padding-top: 0;
-        }
-
-        .sb-board > .sb-admin-list, .sb-area-users, .sb-area-settings, .sb-area-reports {
->>>>>>> vendor-update
             height: 100%;
 
             .sb-scroll-area {
@@ -901,7 +670,7 @@ a.sb-btn {
 /*
 
 # COMPONENTS
-==
+==========================================================
 
 */
 
@@ -911,13 +680,9 @@ a.sb-btn {
         top: 80px;
     }
 
-<<<<<<< HEAD
     .sb-menu-wide>div:after,
     .sb-table-users th:first-child:after,
     .sb-nav>div:after {
-=======
-    .sb-menu-wide > div:after, .sb-table-users th:first-child:after, .sb-nav > div:after {
->>>>>>> vendor-update
         content: "\61";
         font-family: "Support Board Icons";
         position: absolute;
@@ -929,14 +694,10 @@ a.sb-btn {
         line-height: 35px;
     }
 
-<<<<<<< HEAD
     .sb-menu-wide>ul,
     .sb-nav>ul,
     .sb-top .sb-select ul,
     .sb-area-users .sb-top-bar .sb-filter-btn ul {
-=======
-    .sb-menu-wide > ul, .sb-nav > ul, .sb-top .sb-select ul, .sb-area-users .sb-top-bar .sb-filter-btn ul {
->>>>>>> vendor-update
         background: $white;
         left: 0;
         right: 0;
@@ -953,7 +714,6 @@ a.sb-btn {
         border-radius: 0;
     }
 
-<<<<<<< HEAD
     .sb-nav>.sb-btn:after {
         display: none;
     }
@@ -961,14 +721,6 @@ a.sb-btn {
     .sb-menu-wide,
     .sb-nav {
         >div:not(.sb-btn) {
-=======
-    .sb-nav > .sb-btn:after {
-        display: none;
-    }
-
-    .sb-menu-wide, .sb-nav {
-        > div:not(.sb-btn) {
->>>>>>> vendor-update
             display: block;
             position: relative;
             font-weight: 600;
@@ -984,19 +736,11 @@ a.sb-btn {
             }
         }
 
-<<<<<<< HEAD
         &.sb-active>ul {
             display: block;
         }
 
         >ul {
-=======
-        &.sb-active > ul {
-            display: block;
-        }
-
-        > ul {
->>>>>>> vendor-update
             padding: 10px 0;
             display: none;
 
@@ -1025,11 +769,7 @@ a.sb-btn {
         justify-content: flex-end;
         z-index: 95;
 
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             display: block;
             line-height: 60px;
             height: 55px;
@@ -1045,23 +785,15 @@ a.sb-btn {
             &.sb-active {
                 color: $color-blue;
 
-<<<<<<< HEAD
                 &+div+.sb-mobile,
                 &+ul {
-=======
-                & + div + .sb-mobile, & + ul {
->>>>>>> vendor-update
                     display: block;
                 }
             }
         }
 
-<<<<<<< HEAD
         >div,
         >ul {
-=======
-        > div, > ul {
->>>>>>> vendor-update
             display: none;
             position: fixed;
             padding: 7px 0;
@@ -1086,13 +818,8 @@ a.sb-btn {
     .sb-inner-tab {
         display: block;
 
-<<<<<<< HEAD
         >.sb-nav {
             >ul {
-=======
-        > .sb-nav {
-            > ul {
->>>>>>> vendor-update
                 display: block;
 
                 i {
@@ -1101,12 +828,8 @@ a.sb-btn {
                 }
             }
 
-<<<<<<< HEAD
             >ul,
             >.sb-menu-wide>ul {
-=======
-            > ul, > .sb-menu-wide > ul {
->>>>>>> vendor-update
                 position: static;
                 box-shadow: none;
                 width: auto;
@@ -1119,18 +842,13 @@ a.sb-btn {
                 }
             }
 
-<<<<<<< HEAD
             >.sb-menu-wide>div:after {
-=======
-            > .sb-menu-wide > div:after {
->>>>>>> vendor-update
                 display: none;
             }
         }
     }
 
     &.sb-header-hidden {
-<<<<<<< HEAD
         main>div>.sb-tab>.sb-nav {
             top: 8px;
         }
@@ -1138,13 +856,6 @@ a.sb-btn {
         .sb-menu-wide>ul,
         main>div>.sb-tab>.sb-nav>ul,
         .sb-top .sb-select ul {
-=======
-        main > div > .sb-tab > .sb-nav {
-            top: 8px;
-        }
-
-        .sb-menu-wide > ul, main > div > .sb-tab > .sb-nav > ul, .sb-top .sb-select ul {
->>>>>>> vendor-update
             top: 50px;
             max-height: calc(100% - 71px);
         }
@@ -1158,16 +869,10 @@ a.sb-btn {
         font-size: 22px;
     }
 
-<<<<<<< HEAD
     .sb-search-btn,
     .sb-filter-btn {
 
         >i {
-=======
-    .sb-search-btn, .sb-filter-btn {
-
-        > i {
->>>>>>> vendor-update
             font-size: 21px;
             width: 45px;
             height: 100%;
@@ -1194,11 +899,7 @@ a.sb-btn {
 
     .sb-search-btn {
 
-<<<<<<< HEAD
         >input {
-=======
-        > input {
->>>>>>> vendor-update
             left: 0;
             right: 0;
             width: calc(100% - 73px);
@@ -1209,11 +910,7 @@ a.sb-btn {
     }
 
     .sb-filter-btn {
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             padding: 3px 15px 0 15px;
             height: auto;
         }
@@ -1222,31 +919,19 @@ a.sb-btn {
     .sb-input {
         display: block;
 
-<<<<<<< HEAD
         >span {
-=======
-        > span {
->>>>>>> vendor-update
             margin-bottom: 10px;
             font-size: 17px;
         }
 
-<<<<<<< HEAD
         +.sb-input {
-=======
-        + .sb-input {
->>>>>>> vendor-update
             margin-top: 15px;
         }
 
         &.sb-input-btn {
             display: flex;
 
-<<<<<<< HEAD
             >span {
-=======
-            > span {
->>>>>>> vendor-update
                 margin-bottom: 0;
             }
         }
@@ -1258,11 +943,7 @@ a.sb-btn {
         border: none;
     }
 
-<<<<<<< HEAD
     #departments .repeater-item>div:not(:first-child) {
-=======
-    #departments .repeater-item > div:not(:first-child) {
->>>>>>> vendor-update
         padding-top: 35px;
     }
 }
@@ -1270,7 +951,7 @@ a.sb-btn {
 /*
 
 # LIGHTBOX AND POPUP
-==
+==========================================================
 
 */
 
@@ -1288,12 +969,8 @@ a.sb-btn {
 
 .sb-lightbox {
 
-<<<<<<< HEAD
     .sb-scroll-area,
     .sb-main {
-=======
-    .sb-scroll-area, .sb-main {
->>>>>>> vendor-update
         height: calc(100% - 54px);
         padding: 30px 15px;
         box-sizing: border-box;
@@ -1305,12 +982,8 @@ a.sb-btn {
         border-radius: 0;
     }
 
-<<<<<<< HEAD
     .sb-btn.sb-icon.sb-btn-white,
     a.sb-btn.sb-icon.sb-btn-white {
-=======
-    .sb-btn.sb-icon.sb-btn-white, a.sb-btn.sb-icon.sb-btn-white {
->>>>>>> vendor-update
         padding-left: 35px;
 
         i {
@@ -1341,7 +1014,6 @@ a.sb-btn {
             display: flex;
         }
     }
-<<<<<<< HEAD
     &#sb-export-report-close {
         &.sb-active {
             display: block;
@@ -1353,13 +1025,6 @@ a.sb-btn {
 
         .sb-btn,
         .sb-btn-text {
-=======
-
-    .sb-main > .sb-bottom {
-        display: block;
-
-        .sb-btn, .sb-btn-text {
->>>>>>> vendor-update
             margin: 0 0 15px 0;
             display: block;
             text-align: left;
@@ -1375,19 +1040,11 @@ a.sb-btn {
         bottom: 15px;
         min-height: 0;
 
-<<<<<<< HEAD
         >div {
             max-height: 100%;
         }
 
         >i {
-=======
-        > div {
-            max-height: 100%;
-        }
-
-        > i {
->>>>>>> vendor-update
             right: 30px;
             top: 30px;
         }
@@ -1399,32 +1056,20 @@ a.sb-btn {
     .sb-header .sb-search-btn {
         width: auto;
 
-<<<<<<< HEAD
         &:not(.sb-active)>i {
-=======
-        &:not(.sb-active) > i {
->>>>>>> vendor-update
             right: -10px;
             top: -5px !important;
         }
     }
 
-<<<<<<< HEAD
     &.sb-replies,
     &.sb-woocommerce-products {
-=======
-    &.sb-replies, &.sb-woocommerce-products {
->>>>>>> vendor-update
         left: 0 !important;
         right: 0;
         bottom: 90px;
         margin: 0px;
         box-shadow: none;
-<<<<<<< HEAD
         border: 1px solid rgba(0, 0, 0, 0.2);
-=======
-        border: 1px solid rgba(0,0,0,0.2);
->>>>>>> vendor-update
         border-right: none;
         border-left: none;
         border-radius: 0;
@@ -1450,39 +1095,27 @@ a.sb-btn {
 /*
 
 # CONVERSATIONS AREA
-==
+==========================================================
 
 */
 
 .sb-board {
     display: block;
 
-<<<<<<< HEAD
     >.sb-admin-list:not(.sb-active),
     .sb-conversation:not(.sb-active),
     .sb-user-details:not(.sb-active) {
-=======
-    > .sb-admin-list:not(.sb-active), .sb-conversation:not(.sb-active), .sb-user-details:not(.sb-active) {
->>>>>>> vendor-update
         display: none;
     }
 
     .sb-conversation .sb-editor {
         border: none;
-<<<<<<< HEAD
         border-top: 1px solid rgba(0, 0, 0, 0.2);
-=======
-        border-top: 1px solid rgba(0,0,0,0.2);
->>>>>>> vendor-update
         margin: 0;
         border-radius: 0;
     }
 
-<<<<<<< HEAD
     >.sb-admin-list {
-=======
-    > .sb-admin-list {
->>>>>>> vendor-update
         min-width: 100%;
         height: 100%;
 
@@ -1503,11 +1136,7 @@ a.sb-btn {
                 margin: 0;
                 border-radius: 0;
 
-<<<<<<< HEAD
                 >span {
-=======
-                > span {
->>>>>>> vendor-update
                     right: 10px;
                 }
 
@@ -1516,11 +1145,7 @@ a.sb-btn {
                 }
 
                 &:after {
-<<<<<<< HEAD
                     // left: 15px;
-=======
-                    left: 15px;
->>>>>>> vendor-update
                     right: 15px;
                 }
             }
@@ -1534,11 +1159,7 @@ a.sb-btn {
             min-height: 46px;
             padding: 0;
 
-<<<<<<< HEAD
             >a {
-=======
-            > a {
->>>>>>> vendor-update
                 line-height: 45px;
                 font-size: 19px;
                 padding: 10px;
@@ -1548,11 +1169,7 @@ a.sb-btn {
             }
 
             .sb-menu-mobile {
-<<<<<<< HEAD
                 >i {
-=======
-                > i {
->>>>>>> vendor-update
                     height: 50px;
                 }
 
@@ -1612,11 +1229,7 @@ a.sb-btn {
             }
         }
 
-<<<<<<< HEAD
         .sb-list>div {
-=======
-        .sb-list > div {
->>>>>>> vendor-update
             margin: 2px 10px 25px 15px;
             max-width: calc(100% - 55px);
             box-sizing: border-box;
@@ -1697,7 +1310,6 @@ a.sb-btn {
     }
 }
 
-<<<<<<< HEAD
 
 .sb-conversation.sb-active {
     .sb-admin-list {
@@ -1705,17 +1317,11 @@ a.sb-btn {
     }
 }
 
-=======
->>>>>>> vendor-update
 #note-ai-scraping {
     max-width: 100px;
 }
 
-<<<<<<< HEAD
 .sb-area-conversations .sb-search-btn>input {
-=======
-.sb-area-conversations .sb-search-btn > input {
->>>>>>> vendor-update
     top: 2px;
 }
 
@@ -1727,33 +1333,21 @@ a.sb-btn {
     display: none !important;
 }
 
-<<<<<<< HEAD
 .sb-title-search .sb-search-btn>input {
-=======
-.sb-title-search .sb-search-btn > input {
->>>>>>> vendor-update
     left: 0;
     right: 0;
 }
 
-<<<<<<< HEAD
 #sb-intent-preview,
 #sb-qea-preview {
-=======
-#sb-intent-preview, #sb-qea-preview {
->>>>>>> vendor-update
     font-size: 20px;
     line-height: 0;
     top: -1px;
     right: 0;
 }
 
-<<<<<<< HEAD
 #intent-preview-box.sb-active,
 #qea-preview-box.sb-active {
-=======
-#intent-preview-box.sb-active, #qea-preview-box.sb-active {
->>>>>>> vendor-update
     max-width: 100%;
     width: auto;
     min-height: 0;
@@ -1775,51 +1369,20 @@ a.sb-btn {
     }
 }
 
-<<<<<<< HEAD
 .sb-area-conversations>.sb-btn-collapse {
     display: none;
 }
 
 .sb-tags-cnt>span:not(.sb-active) {
-=======
-.sb-area-conversations > .sb-btn-collapse {
-    display: none;
-}
-
-.sb-tags-cnt > span:not(.sb-active) {
->>>>>>> vendor-update
     background: none;
     color: #24272a;
     border-color: #566069;
 }
 
-<<<<<<< HEAD
-=======
-.sb-editor {
-    .sb-submit {
-        font-size: 21px;
-    }
-
-    .sb-bar-icons {
-        > div {
-            width: 35px;
-
-            &:before {
-                font-size: 23px;
-            }
-
-            &.sb-btn-saved-replies:before, &.sb-btn-audio-clip:before {
-                font-size: 26px;
-            }
-        }
-    }
-}
-
->>>>>>> vendor-update
 /*
 
 # USERS AREA
-==
+==========================================================
 
 */
 
@@ -1828,30 +1391,18 @@ a.sb-btn {
     .sb-top-bar {
         border-bottom: 1px solid $border-color;
 
-<<<<<<< HEAD
         >div:first-child {
             padding-right: 0 !important;
         }
 
         >div:last-child {
-=======
-        > div:first-child {
-            padding-right: 0 !important;
-        }
-
-        > div:last-child {
->>>>>>> vendor-update
             padding-right: 45px;
         }
 
         .sb-filter-btn {
             margin-left: 15px;
 
-<<<<<<< HEAD
             >div {
-=======
-            > div {
->>>>>>> vendor-update
                 left: 0;
                 top: 51px;
                 right: 0;
@@ -1866,22 +1417,14 @@ a.sb-btn {
                 top: 106px !important;
             }
 
-<<<<<<< HEAD
             &.sb-active>i {
-=======
-            &.sb-active > i {
->>>>>>> vendor-update
                 right: 20px;
             }
         }
     }
 
     .sb-menu-users {
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1889,14 +1432,10 @@ a.sb-btn {
     }
 
     .sb-table-users {
-<<<<<<< HEAD
 
         th:first-child input,
         th:not(:first-child),
         th:not(:first-child):after {
-=======
-        th:first-child input, th:not(:first-child), th:not(:first-child):after {
->>>>>>> vendor-update
             display: none;
         }
 
@@ -1967,15 +1506,11 @@ a.sb-btn {
         }
     }
 
-<<<<<<< HEAD
     .sb-table-users,
     .sb-table-users tbody,
     .sb-table-users thead,
     .sb-table-users tr,
     .sb-table-users th {
-=======
-    .sb-table-users, .sb-table-users tbody, .sb-table-users thead, .sb-table-users tr, .sb-table-users th {
->>>>>>> vendor-update
         display: block;
         width: 100%;
         box-sizing: border-box;
@@ -1986,30 +1521,18 @@ a.sb-btn {
     }
 }
 
-<<<<<<< HEAD
 .sb-profile-edit-box,
 .sb-profile-box {
-=======
-.sb-profile-edit-box, .sb-profile-box {
->>>>>>> vendor-update
 
     .sb-main {
         display: block;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             width: auto;
             height: auto;
             margin: 0 !important;
 
-<<<<<<< HEAD
             &+div {
-=======
-            & + div {
->>>>>>> vendor-update
                 margin-top: 30px !important;
             }
         }
@@ -2021,11 +1544,7 @@ a.sb-btn {
         font-size: 23px;
     }
 
-<<<<<<< HEAD
     >div>[data-value]+.sb-btn {
-=======
-    > div > [data-value] + .sb-btn {
->>>>>>> vendor-update
         margin-left: 0;
     }
 }
@@ -2036,29 +1555,17 @@ a.sb-btn {
 
 .sb-profile-list {
 
-<<<<<<< HEAD
     >ul>li>img {
-=======
-    > ul > li > img {
->>>>>>> vendor-update
         width: 17px;
         height: 17px;
     }
 
-<<<<<<< HEAD
     >ul>li .sb-icon:before,
     >ul>li>img:before {
         line-height: 23px;
     }
 
     >ul>li>img {
-=======
-    > ul > li .sb-icon:before, > ul > li > img:before {
-        line-height: 23px;
-    }
-
-    > ul > li > img {
->>>>>>> vendor-update
         top: 10px;
     }
 
@@ -2067,7 +1574,6 @@ a.sb-btn {
     }
 }
 
-<<<<<<< HEAD
 .sb-admin-nav-right [data-value="status"]:before,
 td.sb-online:before,
 td.sb-offline:before {
@@ -2077,33 +1583,22 @@ td.sb-offline:before {
 .sb-admin-nav-right [data-value="status"]:after,
 td.sb-online:after,
 td.sb-offline:after {
-=======
-.sb-admin-nav-right [data-value="status"]:before, td.sb-online:before, td.sb-offline:before {
-    right: 15px;
-}
-
-.sb-admin-nav-right [data-value="status"]:after, td.sb-online:after, td.sb-offline:after {
->>>>>>> vendor-update
     right: 12px;
 }
 
 /*
 
 # SETTINGS AREA
-==
+==========================================================
 
 */
 
-<<<<<<< HEAD
 .sb-setting input,
 .sb-setting select,
 .sb-setting textarea,
 .sb-setting input,
 .sb-setting select,
 .sb-setting textarea {
-=======
-.sb-setting input, .sb-setting select, .sb-setting textarea, .sb-setting input, .sb-setting select, .sb-setting textarea {
->>>>>>> vendor-update
     min-width: 0;
     font-size: 17px;
     line-height: 26px;
@@ -2113,11 +1608,7 @@ td.sb-offline:after {
 .sb-language-switcher-cnt {
     display: flex !important;
 
-<<<<<<< HEAD
     >label {
-=======
-    > label {
->>>>>>> vendor-update
         margin-bottom: 0 !important;
         min-width: 0;
     }
@@ -2133,23 +1624,15 @@ td.sb-offline:after {
     height: calc(100% - 50px);
 }
 
-<<<<<<< HEAD
 .sb-setting,
 .sb-setting {
-=======
-.sb-setting, .sb-setting {
->>>>>>> vendor-update
     display: block;
 
     p {
         margin: 5px 0 10px 0;
     }
 
-<<<<<<< HEAD
     >.sb-setting-content {
-=======
-    > .sb-setting-content {
->>>>>>> vendor-update
         width: auto;
         min-width: 0;
         padding: 0;
@@ -2165,7 +1648,6 @@ td.sb-offline:after {
         }
     }
 
-<<<<<<< HEAD
     .repeater-item>div+div {
         margin-top: 15px;
     }
@@ -2174,13 +1656,6 @@ td.sb-offline:after {
     [data-type="upload-image"] .image,
     &.sb-type-upload-image .image,
     [data-type="upload-image"] .image {
-=======
-    .repeater-item > div + div {
-        margin-top: 15px;
-    }
-
-    &.sb-type-upload-image .image, [data-type="upload-image"] .image, &.sb-type-upload-image .image, [data-type="upload-image"] .image {
->>>>>>> vendor-update
         min-width: 100%;
     }
 }
@@ -2195,11 +1670,7 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .sb-timetable>div>div>div {
-=======
-.sb-timetable > div > div > div {
->>>>>>> vendor-update
     margin: 5px 0;
     width: calc(100% - 80px);
 }
@@ -2207,7 +1678,6 @@ td.sb-offline:after {
 .sb-translations {
     display: block;
 
-<<<<<<< HEAD
     >.sb-nav {
         margin-bottom: 15px;
 
@@ -2216,16 +1686,6 @@ td.sb-offline:after {
         }
 
         >div img {
-=======
-    > .sb-nav {
-        margin-bottom: 15px;
-
-        > ul {
-            padding: 10px 15px;
-        }
-
-        > div img {
->>>>>>> vendor-update
             margin-right: 15px;
             border-radius: 2px;
             box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
@@ -2243,37 +1703,24 @@ td.sb-offline:after {
 /*
 
 # REPORTS AREA
-==
+==========================================================
 
 */
 
 .sb-area-reports {
 
-<<<<<<< HEAD
     >.sb-tab {
         .sb-nav>ul li:not(.sb-tab-nav-title) {
-=======
-    > .sb-tab {
-        .sb-nav > ul li:not(.sb-tab-nav-title) {
->>>>>>> vendor-update
             font-size: 17px;
             line-height: 25px;
         }
 
-<<<<<<< HEAD
         >.sb-content {
-=======
-        > .sb-content {
->>>>>>> vendor-update
             padding: 0;
             max-height: calc(100% - 110px);
             padding-bottom: 30px;
 
-<<<<<<< HEAD
             >div {
-=======
-            > div {
->>>>>>> vendor-update
                 margin: 0;
             }
         }
@@ -2318,25 +1765,17 @@ td.sb-offline:after {
 /*
 
 # CHATBOT AREA
-==
+==========================================================
 
 */
 
 .sb-area-chatbot {
-<<<<<<< HEAD
     >.sb-tab {
-=======
-    > .sb-tab {
->>>>>>> vendor-update
         overflow: scroll;
         height: calc(100% - 110px) !important;
         padding-bottom: 30px;
 
-<<<<<<< HEAD
         >.sb-content {
-=======
-        > .sb-content {
->>>>>>> vendor-update
             padding: 15px 15px 30px 15px;
             width: auto;
             overflow: visible;
@@ -2349,20 +1788,12 @@ td.sb-offline:after {
     }
 
     .sb-setting .repeater-item {
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             right: 0;
             top: 28px;
         }
 
-<<<<<<< HEAD
         &:first-child>i {
-=======
-        &:first-child > i {
->>>>>>> vendor-update
             top: 8px;
         }
     }
@@ -2393,21 +1824,13 @@ td.sb-offline:after {
 .sb-playground-editor {
     position: static;
 
-<<<<<<< HEAD
     >.sb-flex {
-=======
-    > .sb-flex {
->>>>>>> vendor-update
         display: block;
 
         .sb-flex:last-child {
             display: block;
 
-<<<<<<< HEAD
             >div {
-=======
-            > div {
->>>>>>> vendor-update
                 display: block;
                 margin: 10px 0;
                 padding-left: 30px;
@@ -2420,20 +1843,12 @@ td.sb-offline:after {
     height: calc(100% - 70px);
     overflow: scroll;
 
-<<<<<<< HEAD
     >div {
-=======
-    > div {
->>>>>>> vendor-update
         display: block;
         height: 100%;
         align-content: baseline;
 
-<<<<<<< HEAD
         >div {
-=======
-        > div {
->>>>>>> vendor-update
             height: auto;
             padding: 15px 15px 30px 15px;
             border: none;
@@ -2441,12 +1856,8 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 #sb-table-chatbot-files,
 #sb-table-chatbot-website {
-=======
-#sb-table-chatbot-files, #sb-table-chatbot-website {
->>>>>>> vendor-update
     td {
 
         &:first-child {
@@ -2467,7 +1878,6 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .sb-enlarger-function-calling.sb-active>div {
     display: block;
 }
@@ -2479,57 +1889,29 @@ td.sb-offline:after {
 .sb-area-chatbot [data-id="open-ai-faq-function-calling-properties"] .repeater-item,
 .sb-area-chatbot [data-id="open-ai-faq-set-data"] .repeater-item {
     &+.repeater-item {
-=======
-.sb-enlarger-function-calling.sb-active > div {
-    display: block;
-}
-
-.sb-enlarger-function-calling.sb-active > div:not(:last-child) {
-    margin-bottom: 15px;
-}
-
-.sb-area-chatbot [data-id="open-ai-faq-function-calling-properties"] .repeater-item, .sb-area-chatbot [data-id="open-ai-faq-set-data"] .repeater-item {
-    & + .repeater-item {
->>>>>>> vendor-update
         border-top: 1px solid $border-color;
         padding-top: 20px;
         margin-top: 20px;
 
-<<<<<<< HEAD
         >i {
-=======
-        > i {
->>>>>>> vendor-update
             top: 0px;
         }
     }
 
-<<<<<<< HEAD
     &:first-child>i {
-=======
-    &:first-child > i {
->>>>>>> vendor-update
         top: -28px;
     }
 }
 
 [data-id="open-ai-faq-set-data"] {
-<<<<<<< HEAD
     .repeater-item>div {
-=======
-    .repeater-item > div {
->>>>>>> vendor-update
         display: block;
     }
 
     .sb-setting {
         width: auto;
 
-<<<<<<< HEAD
         &+.sb-setting {
-=======
-        & + .sb-setting {
->>>>>>> vendor-update
             margin-left: 0;
             margin-top: 5px;
         }
@@ -2542,11 +1924,7 @@ td.sb-offline:after {
         padding-bottom: 30px;
     }
 
-<<<<<<< HEAD
     >.sb-content {
-=======
-    > .sb-content {
->>>>>>> vendor-update
         border-top: 1px solid $border-color;
         overflow: hidden !important;
         overflow-x: scroll !important;
@@ -2564,26 +1942,18 @@ td.sb-offline:after {
 /*
 
 # ARTICLES AREA
-==
+==========================================================
 
 */
 
 .sb-area-articles {
-<<<<<<< HEAD
     >.sb-tab {
-=======
-    > .sb-tab {
->>>>>>> vendor-update
         overflow: hidden;
         overflow-y: scroll;
         max-height: 100%;
         height: calc(100% - 110px) !important;
 
-<<<<<<< HEAD
         >.sb-content {
-=======
-        > .sb-content {
->>>>>>> vendor-update
             padding: 0 15px;
             width: auto;
             padding: 30px 15px 15px 15px;
@@ -2592,11 +1962,7 @@ td.sb-offline:after {
             overflow: auto;
         }
 
-<<<<<<< HEAD
         >.sb-nav {
-=======
-        > .sb-nav {
->>>>>>> vendor-update
             overflow: auto;
             max-height: none;
         }
@@ -2607,13 +1973,7 @@ td.sb-offline:after {
     }
 }
 
-<<<<<<< HEAD
 .sb-menu-articles .sb-docs,
 .sb-menu-chatbot .sb-docs {
     padding: 15px;
 }
-=======
-.sb-menu-articles .sb-docs, .sb-menu-chatbot .sb-docs {
-    padding: 15px;
-}
->>>>>>> vendor-update
