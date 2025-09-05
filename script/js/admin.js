@@ -9478,15 +9478,19 @@
 
 }(jQuery));
 
-$('#ticketRegPass').click(function () {
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    let input = $("#ticketRegInput");
-    let currentType = input.prop('type');
-    if (currentType === 'password') {
-        input.prop('type', 'text');
-    } else {
-        input.prop('type', 'password');
-    }
+$(document).on('click keydown', '#ticketRegPass', function (e) {
+    if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+
+    const $input = $('#ticketRegInput');
+    if (!$input.length) return;
+
+    const show = $input.attr('type') === 'password';
+    $input.attr('type', show ? 'text' : 'password');
+
+    // Optional a11y label update
+    $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+        .attr('data-visible', show ? 'true' : 'false');
 });
 
 $('.sb-area-articles .sb-tab.sb-inner-tab .sb-nav.sb-nav-only.sb-scroll-area ul li').each(function () {
