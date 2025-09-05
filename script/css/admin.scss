@@ -6542,6 +6542,11 @@ span.initials.avatar_name {
                 padding: 10px;
                 border-radius: 8px;
                 min-height: 300px;
+                max-height: 400px;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
 
                 .codex-editor {
                     min-height: 300px;
@@ -12332,7 +12337,7 @@ div#messaging-channels {
 }
 
 .my-tabs {
-    padding: 6px 8px 7px;
+    padding: 6px 8px;
     background: #ECECF0;
     border-radius: 40px;
     width: fit-content;
@@ -12395,6 +12400,11 @@ div#messaging-channels {
     }
 }
 
+.form-control:focus {
+    box-shadow: none !important;
+    border-color: #dee2e6 !important;
+}
+
 .articles-card .my-tabs {
     min-width: fit-content;
 }
@@ -12419,6 +12429,12 @@ div#messaging-channels {
             width: 0px;
             height: 0;
         }
+    }
+}
+
+.sb-area-articles.sb-active {
+    .sb-tab.sb-inner-tab {
+        height: calc(100vh - 185px);
     }
 }
 
@@ -14336,6 +14352,7 @@ main {
                 ul {
                     position: unset;
                     display: flex;
+                    padding-inline: 10px;
 
                     li {
                         padding: 10px 15px;
@@ -14347,7 +14364,10 @@ main {
 
         .sb-tab.sb-inner-tab {
             .sb-nav.sb-nav-only.sb-scroll-area {
-                padding: 1rem 0;
+                padding: 1rem;
+                .sb-add-article {
+                    margin-top: 0;
+                }
 
                 ul {
                     li {

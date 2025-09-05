@@ -5458,16 +5458,16 @@ function sb_component_admin()
                         </div>
                         <div class="sb-tab sb-inner-tab px-3">
                             <div class="sb-nav sb-nav-only sb-scroll-area">
-                                <ul class="ul-articles"></ul>
-                                <div class="sb-add-article sb-btn sb-icon">
+                                <div class="sb-add-article sb-btn sb-icon mb-3">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new article"); ?>
                                 </div>
-                                <ul class="ul-categories"></ul>
+                                <ul class="ul-articles"></ul>
                                 <div class="sb-add-category sb-btn sb-icon">
                                     <i class="sb-icon-plus"></i>
                                     <?php sb_e("Add new category"); ?>
                                 </div>
+                                <ul class="ul-categories"></ul>
                             </div>
 
                             <!-- <div class="articleHEad">
