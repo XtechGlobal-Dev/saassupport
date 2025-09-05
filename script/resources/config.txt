@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * INITIAL CONFIGURATION FILE
- * ==
+ * ==========================================================
  *
  * Insert here the information for the database connection and more.
  *

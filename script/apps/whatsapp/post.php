@@ -1,9 +1,9 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * WHATSAPP APP POST FILE
- * ==
+ * ==========================================================
  *
  * WhatsApp app post file to receive messages sent by Twilio. © 2017-2025 board.support. All rights reserved.
  *

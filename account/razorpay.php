@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ==
+ * ==========================================================
  * RAZORPAY.PHP
- * ==
+ * ==========================================================
  *
- * Process Razorpay payments. ï¿½ 2017-2025 board.support. All rights reserved.
+ * Process Razorpay payments. © 2017-2025 board.support. All rights reserved.
  *
  */
 
