@@ -9476,7 +9476,7 @@ span.initials.avatar_name {
   padding: 10px;
   border-radius: 8px;
   min-height: 300px;
-  max-height: 400px;
+  max-height: 450px;
   overflow-y: scroll;
 }
 .sb-tab .sb-content-articles .input_container #editorjs::-webkit-scrollbar,
