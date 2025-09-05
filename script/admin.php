@@ -85,7 +85,7 @@ require('include/components.php');
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
     <?php
     if ($connection_success && (($is_cloud && defined('SB_CLOUD_DEFAULT_RTL')) || sb_is_rtl())) {
         echo '<link rel="stylesheet" href="' . $sb_url . 'css/rtl-admin.css?v=' . SB_VERSION . '" />';
