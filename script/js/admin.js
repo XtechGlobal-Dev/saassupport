@@ -3320,7 +3320,7 @@
                 translations.push([language_code, false]);
                 this.list[article_id] = translations;
                 articles_content.sbLanguageSwitcher(translations, 'articles', language_code);
-                // SBArticles.clear();
+                SBArticles.clear();
             },
 
             delete: function (language_code, article_id = false) {
