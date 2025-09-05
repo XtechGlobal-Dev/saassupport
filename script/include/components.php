@@ -1744,6 +1744,19 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         window.initTabSlider = initTabSlider;
 
 
+        $(document).on('click', function (e) {
+            const $parent = $('.sb-nav.sb-nav-only.sb-scroll-area');
+            console.log("parent", $parent)
+
+            if (
+                $parent.hasClass('sb-active') &&
+                !$(e.target).closest('.reports-list').length &&
+                !$(e.target).closest('.sb-nav.sb-nav-only.sb-scroll-area').length
+            ) {
+                $parent.removeClass('sb-active');
+            }
+        });
+
         $(".sidebar li a").on("click", function () {
             setTimeout(() => {
                 initTabSlider();
@@ -5586,7 +5599,7 @@ function sb_component_admin()
                                 <div>
                                     <?php sb_e("Reports"); ?>
                                 </div>
-                                <ul>
+                                <ul class="reports-list">
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL; ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
 

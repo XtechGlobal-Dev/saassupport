@@ -6381,6 +6381,51 @@
             SBF.event('SBReady');
         }
 
+         $(document).on('click keydown', '#chatRegPass', function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+
+            const $input = $('#chatRegInput');
+            if (!$input.length) return;
+
+            const show = $input.attr('type') === 'password';
+            $input.attr('type', show ? 'text' : 'password');
+
+            // Optional a11y label update
+            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+                .attr('data-visible', show ? 'true' : 'false');
+        });
+
+        $(document).on('click keydown', '#chatRegRepeatPass', function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+
+            const $input = $('#chatRegRepeatInput');
+            if (!$input.length) return;
+
+            const show = $input.attr('type') === 'password';
+            $input.attr('type', show ? 'text' : 'password');
+
+            // Optional a11y label update
+            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+                .attr('data-visible', show ? 'true' : 'false');
+        });
+
+        $(document).on('click keydown', '#ticketRegPass', function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+
+            const $input = $('#ticketRegInput');
+            if (!$input.length) return;
+
+            const show = $input.attr('type') === 'password';
+            $input.attr('type', show ? 'text' : 'password');
+
+            // Optional a11y label update
+            $(this).attr('aria-label', show ? 'Hide password' : 'Show password')
+                .attr('data-visible', show ? 'true' : 'false');
+        });
+
         // Disable real-time if browser tab not active
         document.addEventListener('visibilitychange', function () {
             SBF.visibilityChange(document.visibilityState);
@@ -7278,16 +7323,5 @@
 
         //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
     }
-
-     $('#ticketRegPass').click(function () {
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            let input = $("#ticketRegInput");
-            let currentType = input.prop('type');
-            if (currentType === 'password') {
-                input.prop('type', 'text');
-            } else {
-                input.prop('type', 'password');
-            }
-        });
 
 }(jQuery));

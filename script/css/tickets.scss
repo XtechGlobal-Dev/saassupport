@@ -1,8 +1,8 @@
 /*
 * 
-* ==========================================================
+* ==
 * TICKETS.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the Tickets App. Written in SCSS.
 *
@@ -11,7 +11,7 @@
 @use "shared.scss" as *;
 @use "rtl.scss" as *;
 
-@keyframes sb-collapse-btn-right {
+@keyframes sb-collapse-btn-right { 
     0% {
         opacity: 0;
     }
@@ -66,7 +66,7 @@
 /*
 
 # GLOBAL
-==========================================================
+==
 
 */
 
@@ -380,7 +380,7 @@
 /*
 
 # LEFT PANEL
-==========================================================
+==
 
 */
 
@@ -552,7 +552,7 @@
 /*
 
 # RIGHT PANEL
-==========================================================
+==
 
 */
 
@@ -1234,7 +1234,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # MAIN PANEL
-==========================================================
+==
 */
 
 .sb-tickets {
@@ -1536,15 +1536,14 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 
 .sb-panel-form {
-
     .sb-form {
         margin: 22px 0 30px 0;
         max-width: 500px;
     }
-
-    [id="otp"]:not(.sb-active) {
-        display: none;
-    }
+    
+    // [id="otp"]:not(.sb-active) {
+    //     display: none;
+    // }
 
     .sb-form-extra {
         margin: -20px 0 30px 0;
@@ -1620,7 +1619,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # CONVERSATIONS AREA
-==========================================================
+==
 
 */
 
@@ -1808,7 +1807,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # COMPONENTS
-==========================================================
+==
      
 */
 
@@ -1940,7 +1939,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RTL
-==========================================================
+==
 
 */
 
@@ -2053,7 +2052,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RESPONSIVE
-==========================================================
+==
 
 */
 
