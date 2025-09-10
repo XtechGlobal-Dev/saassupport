@@ -4474,7 +4474,7 @@ td.sb-offline:after {
   display: none;
 }
 .settings_new .sb-scroll-area .setting_sidebar #tab-dialogflow {
-  display: none;
+  /*display: none;*/
 }
 .settings_new .sb-content {
   height: calc(100vh - 138px);
@@ -9476,7 +9476,7 @@ span.initials.avatar_name {
   padding: 10px;
   border-radius: 8px;
   min-height: 300px;
-  max-height: 400px;
+  max-height: 450px;
   overflow-y: scroll;
 }
 .sb-tab .sb-content-articles .input_container #editorjs::-webkit-scrollbar,
@@ -14213,7 +14213,8 @@ i.fa-solid.fa-x.delete-attachment {
 #sb-articles .label,
 #sb-reports .label,
 #sb-settings .label,
-#sb-accout .label {
+#sb-accout .label,
+#sb-chatbot .label {
   margin-top: 6px;
   display: block;
   font-size: 11px;
@@ -14689,10 +14690,10 @@ div#messaging-channels {
   font-size: 15px;
   height: 44px;
 }
-#tab-membership #plans .sb-visible {
+#tab-membership #plans .sb-visible[data-active-membership=true] {
   position: relative;
 }
-#tab-membership #plans .sb-visible::before {
+#tab-membership #plans .sb-visible[data-active-membership=true]::before {
   content: "Current";
   position: absolute;
   top: 20px;
