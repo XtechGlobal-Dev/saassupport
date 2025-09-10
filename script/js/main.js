@@ -3498,6 +3498,7 @@
                 if (conversation.id != this.conversation.id) {
                     this.queue(conversation.id);
                 }
+                let is_new = true;
                 for (var i = 0; i < conversations.length; i++) {
                     if (conversations[i].id == conversation.id) {
                         conversations[i] = conversation;
