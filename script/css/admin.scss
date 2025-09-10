@@ -474,7 +474,7 @@ td.sb-offline:after {
             }
 
             #tab-dialogflow {
-                display: none;
+                /*display: none;*/
             }
         }
     }
@@ -6542,7 +6542,7 @@ span.initials.avatar_name {
                 padding: 10px;
                 border-radius: 8px;
                 min-height: 300px;
-                max-height: 400px;
+                max-height: 450px;
                 overflow-y: scroll;
                 &::-webkit-scrollbar {
                     width: 0;
@@ -12200,7 +12200,8 @@ i {
 #sb-articles .label,
 #sb-reports .label,
 #sb-settings .label,
-#sb-accout .label {
+#sb-accout .label,
+#sb-chatbot .label{
     margin-top: 6px;
     display: block;
     font-size: 11px;
@@ -12786,7 +12787,7 @@ div#messaging-channels {
     }
 
     #plans {
-        .sb-visible {
+        .sb-visible[data-active-membership="true"] {
             position: relative;
 
             &::before {
