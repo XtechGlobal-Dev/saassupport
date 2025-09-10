@@ -2665,7 +2665,21 @@ function sb_component_admin()
                                             "Customer & Agents"
                                         ); ?></span></a></li>
                             <?php } ?>
-                            <!-- <li><a id="sb-chatbot"><i class="fa-solid fa-robot"></i><span> Chatbot</span></a></li> -->
+                            <li><a id="sb-chatbot">
+                                <i>
+                                    <div class="icon-wrapper">
+                                        <span class="icon-tooltip" data-tooltip="<?php sb_e("Chatbot"); ?>">
+                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 5V20.7929C3 21.2383 3.53857 21.4614 3.85355 21.1464L7.70711 17.2929C7.89464 17.1054 8.149 17 8.41421 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M15 12C14.2005 12.6224 13.1502 13 12 13C10.8498 13 9.79952 12.6224 9 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M9 8.01953V8" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M15 8.01953V8" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </i><span class="label"> <?php sb_e(
+                                            "Chatbot"
+                                        ); ?></span></a></li>
                             <?php if ($active_areas['articles']) { ?>
                                 <li><a id="sb-articles"><i>
                                             <div class="icon-wrapper">
@@ -5774,13 +5788,13 @@ function sb_component_admin()
                                             : sb_("Articles"); ?>
                                     </li>
                                     <?php /*
-                                                                                                                     <li id="tab-various">
-                                                                                                                         <?php echo $disable_translations
-                                                                                                                             ? "Miscellaneous"
-                                                                                                                             : sb_("Miscellaneous"); ?>
-                                                                                                                     </li>
-                                                                                                                     */ ?>
-                                    <?php for (
+                                    <li id="tab-various">
+                                        <?php echo $disable_translations
+                                            ? "Miscellaneous"
+                                            : sb_("Miscellaneous"); ?>
+                                    </li>*/?>
+                                      
+                                <?php for (
                                         $i = 0;
                                         $i < count($apps);
                                         $i++
@@ -7535,27 +7549,7 @@ function sb_component_admin()
                                     <!-- </div> -->
 
                                 </div>
-                                <?php
-                                /*<div>
-                                    <div class="sb-top-bar save_settings settings-header">
-                                        <div class="">
-                                            <p class="head mb-4">Miscellaneous Settings</p>
-                                            <p class="des mb-0">Configure additional options and preferences.</p>
-                                        </div>
-                                        <div>
-                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
-                                                <i class="sb-icon-check"></i>
-                                                <?php sb_e("Save changes"); ?>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="users-tab">
-                                        <?php sb_populate_settings(
-                                            "miscellaneous",
-                                            $sb_settings
-                                        ); ?>
-                                    </div>
-                                </div>*/ ?>
+                                
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
@@ -7693,6 +7687,27 @@ function sb_component_admin()
                                         </div>
                                     </div>
                                 </div>
+                                <?php /*
+                                <div>
+                                    <div class="sb-top-bar save_settings settings-header">
+                                        <div class="">
+                                            <p class="head mb-4">Miscellaneous Settings</p>
+                                            <p class="des mb-0">Configure additional options and preferences.</p>
+                                        </div>
+                                        <div>
+                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                <i class="sb-icon-check"></i>
+                                                <?php sb_e("Save changes"); ?>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="users-tab">
+                                        <?php sb_populate_settings(
+                                            "miscellaneous",
+                                            $sb_settings
+                                        ); ?>
+                                    </div>
+                                </div>*/?>
                                 <?php
                                 sb_apps_area(
                                     $apps,
@@ -7935,9 +7950,10 @@ function sb_apps_area($apps, $cloud_active_apps)
                 '<div class="' . $apps[$i][1] . '">
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
-                            <p class="head mb-4">' . sb_('Tickets') . ' ' . sb_('Settings') . '</p>
-                            <p class="des mb-0">' . sb_('The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets') . '.</p>
-                        </div>
+                            <p class="head mb-4">' . sb_(ucfirst($apps[$i][1])) . ' ' . sb_('Settings') . '</p>';
+                            if($apps[$i][1] == 'tickets') $code .= '
+                            <p class="des mb-0">' . sb_('The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets') . '.</p>';
+                        $code .= '</div>
                         
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
