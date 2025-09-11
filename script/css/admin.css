@@ -4507,7 +4507,7 @@ td.sb-offline:after {
   min-width: 200px;
   min-width: 220px;
   border-right: 1px solid rgb(212, 212, 212);
-  padding: 15px 0px 0px 0px;
+  padding: 15px 0px 0px 10px;
 }
 .sb-tab > .sb-nav > ul {
   display: block;
