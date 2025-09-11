@@ -2602,9 +2602,7 @@ td.sb-td-contact {
                         margin-bottom: 15px;
                         position: relative;
 
-                        &:last-child {
-                            display: none;
-                        }
+                        &.account-menu{ display: none;}
 
                         &:hover a {
                             color: #212528;
