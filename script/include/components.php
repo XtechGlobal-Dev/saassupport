@@ -2665,6 +2665,7 @@ function sb_component_admin()
                                             "Customer & Agents"
                                         ); ?></span></a></li>
                             <?php } ?>
+                            <?php if ($active_areas['chatbot']) { ?>
                             <li><a id="sb-chatbot">
                                 <i>
                                     <div class="icon-wrapper">
@@ -2680,6 +2681,7 @@ function sb_component_admin()
                                 </i><span class="label"> <?php sb_e(
                                             "Chatbot"
                                         ); ?></span></a></li>
+                            <?php } ?>
                             <?php if ($active_areas['articles']) { ?>
                                 <li><a id="sb-articles"><i>
                                             <div class="icon-wrapper">
