@@ -6206,7 +6206,7 @@ td.sb-td-contact p {
   margin-bottom: 15px;
   position: relative;
 }
-.sb-admin .header_new .sidebar nav ul li:last-child {
+.sb-admin .header_new .sidebar nav ul li.account-menu {
   display: none;
 }
 .sb-admin .header_new .sidebar nav ul li:hover a {

@@ -2746,7 +2746,7 @@ function sb_component_admin()
                             <?php
                             if ($is_admin && $is_cloud) {
                                 ?>
-                                <li>
+                                <li class="account-menu">
                                     <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation">
                                         <i>
                                             <div class="icon-wrapper">
