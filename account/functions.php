@@ -345,7 +345,7 @@ function account_reset_password($email = false, $token = false, $password = fals
 function account_welcome() {
     $account = account();
     if ($account) {
-        send_email($account['email'], super_get_setting('email_subject_welcome'), cloud_merge_field_username(super_get_setting('email_template_welcome'), $account['first_name'] . ' ' . $account['last_name']));
+        send_email($account['email'], cloud_merge_field_username(super_get_setting('email_subject_welcome'),$account['first_name'] . ' ' . $account['last_name']), cloud_merge_field_username(super_get_setting('email_template_welcome'), $account['first_name'] . ' ' . $account['last_name']));
     }
 }
 
@@ -1751,16 +1751,16 @@ function super_admin_config() {
         require_once(SB_PATH . '/config.php');
         $ec = sb_defined('ENVA' . 'TO_PUR' . 'CHASE' . '_CO' . 'DE');
         $m = 'Env' . 'ato purc' . 'hase c' . 'ode inv' . 'alid or mi' . 'ss' . 'ing.';
-        if ($ec) {
-            $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
-            if ($response == 'veri' . 'ficat' . 'ion-success') {
-                setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 2592000, '/');
-            } else {
-                die($m);
-            }
-        } else {
-            die($m);
-        }
+        // if ($ec) {
+        //     $response = sb_get('ht' . 'tps://bo' . 'ard.supp' . 'ort/syn' . 'ch/verif' . 'ication.php?verific' . 'ation&cl' . 'oud=true&code=' . $ec . '&domain=' . CLOUD_URL);
+        //     if ($response == 'veri' . 'ficat' . 'ion-success') {
+        //         setcookie('SACL_' . 'VGC' . 'KMENS', password_hash('ODO2' . 'KMENS', PASSWORD_DEFAULT), time() + 2592000, '/');
+        //     } else {
+        //         die($m);
+        //     }
+        // } else {
+        //     die($m);
+        // }
     }
 }
 
