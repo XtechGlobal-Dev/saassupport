@@ -169,7 +169,7 @@ function account_registration($details) {
                 $db_password = '';
             } else {
                 $mysql_user = "'" . $user_slug . "'@'" . (defined('CLOUD_IP') ? CLOUD_IP : 'localhost') . "'";
-                db_query('USER ' . $mysql_user . ' IDENTIFIED BY \'' . $db_password . '\'');
+                db_query('CREATE USER ' . $mysql_user . ' IDENTIFIED BY \'' . $db_password . '\'');
                 db_query('GRANT ALL PRIVILEGES ON ' . $user_slug . '.* TO ' . $mysql_user . ' WITH GRANT OPTION');
                 db_query('GRANT select, update, delete, insert, create, drop, index, alter, lock tables, execute, create temporary tables, execute, trigger, create view, show view, references, event ON ' . $user_slug . '.* TO ' . $mysql_user);
             }
