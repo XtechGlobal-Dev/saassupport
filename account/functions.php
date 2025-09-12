@@ -2782,6 +2782,7 @@ function sb_usd_get_amount($amount, $currency_code) {
     if (!$currency_code) {
         $currency_code = membership_currency();
     }
+    //echo $currency_code.'|||'.sb_usd_rates($currency_code);
     return strtolower($currency_code) == 'usd' ? $amount : $amount * sb_usd_rates($currency_code);
 }
 
