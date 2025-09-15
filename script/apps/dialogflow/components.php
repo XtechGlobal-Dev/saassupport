@@ -9,8 +9,9 @@
  *
  */
 
-function sb_dialogflow_chatbot_area() { ?>
+function sb_dialogflow_chatbot_area($header) { ?>
     <div class="sb-area-chatbot">
+        <?php echo $header; ?>
         <div class="sb-top-bar">
             <div>
                 <h2>
