@@ -8029,6 +8029,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header,
 .sb-area-tickets header,
 .sb-area-users header,
+.sb-area-chatbot header,
 .sb-area-articles header,
 .sb-area-reports header,
 .sb-area-settings header,
@@ -8048,6 +8049,8 @@ body .daterangepicker td.active:hover {
 .sb-area-tickets header .header-right,
 .sb-area-users header .header-left,
 .sb-area-users header .header-right,
+.sb-area-chatbot header .header-left,
+.sb-area-chatbot header .header-right,
 .sb-area-articles header .header-left,
 .sb-area-articles header .header-right,
 .sb-area-reports header .header-left,
@@ -8064,6 +8067,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .title,
 .sb-area-tickets header .title,
 .sb-area-users header .title,
+.sb-area-chatbot header .title,
 .sb-area-articles header .title,
 .sb-area-reports header .title,
 .sb-area-settings header .title,
@@ -8076,6 +8080,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .notification,
 .sb-area-tickets header .notification,
 .sb-area-users header .notification,
+.sb-area-chatbot header .notification,
 .sb-area-articles header .notification,
 .sb-area-reports header .notification,
 .sb-area-settings header .notification,
@@ -8087,6 +8092,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .notification .badge,
 .sb-area-tickets header .notification .badge,
 .sb-area-users header .notification .badge,
+.sb-area-chatbot header .notification .badge,
 .sb-area-articles header .notification .badge,
 .sb-area-reports header .notification .badge,
 .sb-area-settings header .notification .badge,
@@ -8105,6 +8111,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .user_menu .sb-menu,
 .sb-area-tickets header .user_menu .sb-menu,
 .sb-area-users header .user_menu .sb-menu,
+.sb-area-chatbot header .user_menu .sb-menu,
 .sb-area-articles header .user_menu .sb-menu,
 .sb-area-reports header .user_menu .sb-menu,
 .sb-area-settings header .user_menu .sb-menu,
@@ -8119,6 +8126,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .user_menu .sb-menu .menu_head,
 .sb-area-tickets header .user_menu .sb-menu .menu_head,
 .sb-area-users header .user_menu .sb-menu .menu_head,
+.sb-area-chatbot header .user_menu .sb-menu .menu_head,
 .sb-area-articles header .user_menu .sb-menu .menu_head,
 .sb-area-reports header .user_menu .sb-menu .menu_head,
 .sb-area-settings header .user_menu .sb-menu .menu_head,
@@ -8133,6 +8141,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .user_menu .sb-menu .menu_head > img,
 .sb-area-tickets header .user_menu .sb-menu .menu_head > img,
 .sb-area-users header .user_menu .sb-menu .menu_head > img,
+.sb-area-chatbot header .user_menu .sb-menu .menu_head > img,
 .sb-area-articles header .user_menu .sb-menu .menu_head > img,
 .sb-area-reports header .user_menu .sb-menu .menu_head > img,
 .sb-area-settings header .user_menu .sb-menu .menu_head > img,
@@ -8153,6 +8162,9 @@ body .daterangepicker td.active:hover {
 .sb-area-users header .user_menu .sb-menu li[data-value=status],
 .sb-area-users header .user_menu .sb-menu li.sb-online,
 .sb-area-users header .user_menu .sb-menu li.sb-offline,
+.sb-area-chatbot header .user_menu .sb-menu li[data-value=status],
+.sb-area-chatbot header .user_menu .sb-menu li.sb-online,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-offline,
 .sb-area-articles header .user_menu .sb-menu li[data-value=status],
 .sb-area-articles header .user_menu .sb-menu li.sb-online,
 .sb-area-articles header .user_menu .sb-menu li.sb-offline,
@@ -8180,6 +8192,9 @@ body .daterangepicker td.active:hover {
 .sb-area-users header .user_menu .sb-menu li[data-value=status]::before,
 .sb-area-users header .user_menu .sb-menu li.sb-online::before,
 .sb-area-users header .user_menu .sb-menu li.sb-offline::before,
+.sb-area-chatbot header .user_menu .sb-menu li[data-value=status]::before,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-online::before,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-offline::before,
 .sb-area-articles header .user_menu .sb-menu li[data-value=status]::before,
 .sb-area-articles header .user_menu .sb-menu li.sb-online::before,
 .sb-area-articles header .user_menu .sb-menu li.sb-offline::before,
@@ -8215,6 +8230,9 @@ body .daterangepicker td.active:hover {
 .sb-area-users header .user_menu .sb-menu li[data-value=status]::after,
 .sb-area-users header .user_menu .sb-menu li.sb-online::after,
 .sb-area-users header .user_menu .sb-menu li.sb-offline::after,
+.sb-area-chatbot header .user_menu .sb-menu li[data-value=status]::after,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-online::after,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-offline::after,
 .sb-area-articles header .user_menu .sb-menu li[data-value=status]::after,
 .sb-area-articles header .user_menu .sb-menu li.sb-online::after,
 .sb-area-articles header .user_menu .sb-menu li.sb-offline::after,
@@ -8250,6 +8268,9 @@ body .daterangepicker td.active:hover {
 .sb-area-users header .user_menu .sb-menu li[data-value=status].sb-offline::before,
 .sb-area-users header .user_menu .sb-menu li.sb-online.sb-offline::before,
 .sb-area-users header .user_menu .sb-menu li.sb-offline.sb-offline::before,
+.sb-area-chatbot header .user_menu .sb-menu li[data-value=status].sb-offline::before,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-online.sb-offline::before,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-offline.sb-offline::before,
 .sb-area-articles header .user_menu .sb-menu li[data-value=status].sb-offline::before,
 .sb-area-articles header .user_menu .sb-menu li.sb-online.sb-offline::before,
 .sb-area-articles header .user_menu .sb-menu li.sb-offline.sb-offline::before,
@@ -8276,6 +8297,9 @@ body .daterangepicker td.active:hover {
 .sb-area-users header .user_menu .sb-menu li[data-value=status].sb-offline::after,
 .sb-area-users header .user_menu .sb-menu li.sb-online.sb-offline::after,
 .sb-area-users header .user_menu .sb-menu li.sb-offline.sb-offline::after,
+.sb-area-chatbot header .user_menu .sb-menu li[data-value=status].sb-offline::after,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-online.sb-offline::after,
+.sb-area-chatbot header .user_menu .sb-menu li.sb-offline.sb-offline::after,
 .sb-area-articles header .user_menu .sb-menu li[data-value=status].sb-offline::after,
 .sb-area-articles header .user_menu .sb-menu li.sb-online.sb-offline::after,
 .sb-area-articles header .user_menu .sb-menu li.sb-offline.sb-offline::after,
@@ -8294,6 +8318,7 @@ body .daterangepicker td.active:hover {
 .sb-area-conversations header .user_menu:hover .sb-menu,
 .sb-area-tickets header .user_menu:hover .sb-menu,
 .sb-area-users header .user_menu:hover .sb-menu,
+.sb-area-chatbot header .user_menu:hover .sb-menu,
 .sb-area-articles header .user_menu:hover .sb-menu,
 .sb-area-reports header .user_menu:hover .sb-menu,
 .sb-area-settings header .user_menu:hover .sb-menu,
@@ -10881,6 +10906,9 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   margin-right: 0;
 }
 .sb-area-chatbot > [data-id]:not(.sb-active) {
+  display: none;
+}
+.sb-area-chatbot .sb-top-bar h2 {
   display: none;
 }
 
@@ -13746,6 +13774,8 @@ li.menu_head:hover {
 #sb-reports.sb-active path,
 #sb-settings:hover path,
 #sb-settings.sb-active path,
+#sb-chatbot:hover path,
+#sb-chatbot.sb-active path,
 #sb-accout:hover path,
 #sb-accout.sb-active path {
   stroke: black;
@@ -14183,6 +14213,7 @@ i.fa-solid.fa-x.delete-attachment {
 #sb-articles,
 #sb-reports,
 #sb-settings,
+#sb-chatbot,
 #sb-accout {
   display: flex !important;
   flex-direction: column;
