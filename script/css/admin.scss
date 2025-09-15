@@ -4922,6 +4922,7 @@ body {
 .sb-area-conversations,
 .sb-area-tickets,
 .sb-area-users,
+.sb-area-chatbot,
 .sb-area-articles,
 .sb-area-reports,
 .sb-area-settings,
@@ -8210,6 +8211,12 @@ ul.status-list.dropdown-menu {
 
     >[data-id]:not(.sb-active) {
         display: none;
+    }
+
+    .sb-top-bar {
+        h2 {
+            display: none;
+         }
     }
 }
 
@@ -11560,6 +11567,7 @@ li.menu_head:hover {
 #sb-articles,
 #sb-reports,
 #sb-settings,
+#sb-chatbot,
 #sb-accout {
 
     &:hover path,
@@ -12168,6 +12176,7 @@ i {
 #sb-articles,
 #sb-reports,
 #sb-settings,
+#sb-chatbot,
 #sb-accout {
     display: flex !important;
     flex-direction: column;
