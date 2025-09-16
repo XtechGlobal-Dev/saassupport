@@ -16,7 +16,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
     </title>
     <link rel="stylesheet" href="../script/css/admin.css?v=1" type="text/css" media="all" />
     <link rel="stylesheet" href="css/skin.min.css?v=1" type="text/css" media="all" />
-    <link rel="shortcut icon" href="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : 'media/icon.svg' ?>" />
+    <link rel="shortcut icon" href="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : 'media/nexleon-favicon-n.png' ?>" />
 </head>
 <body class="on-load">
     <div id="preloader"></div>
