@@ -6858,7 +6858,7 @@ function sb_component_admin()
                                                                 transform="translate(0.203125 0.75)" />
                                                         </clipPath>
                                                     </defs>
-                                                </svg><?php sb_e("availability"); ?>
+                                                </svg><?php sb_e("Availability"); ?>
                                             </div>
                                             <div class="my-tab" data-target="chat-management">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6948,7 +6948,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>
+                                                <?php sb_e("Management"); ?>
                                             </div>
                                             <div class="my-tab" data-target="notifications-email">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -7077,7 +7077,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e(string: "availability"); ?>
+                                                <?php sb_e(string: "Availability"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("The availability settings allows control over notifications received regarding any user going online, as well as the option to set your status offline when you are idle") ?>
@@ -7116,7 +7116,7 @@ function sb_component_admin()
                                                                 transform="translate(0.765625 0.75)"></rect>
                                                         </clipPath>
                                                     </defs>
-                                                </svg>
+                                                </svg>                  
                                                 <?php sb_e(string: "Chat"); ?>             <?php sb_e(string: "management"); ?>
                                             </p>
                                             <p class="des mb-0">
@@ -7180,7 +7180,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e(string: "management"); ?>
+                                                <?php sb_e(string: "Management"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e(string: "Management settings allow for automated emails to be set up as notifications for users and agents when either receives a message. They can be adjusted accordingly depending on what is needed"); ?>
