@@ -6234,6 +6234,9 @@
             if (tickets && $('#sb-tickets').length) {
                 target = '#sb-tickets';
             }
+            if (tickets && $('#nh-tickets').length) {
+                target = '#sb-tickets';
+            }
             $(target).append(response);
             SBF.loadResource(url + '/css/' + (tickets ? 'tickets' : 'main') + '.css');
             if (tickets) {
@@ -6250,7 +6253,7 @@
     });
 
     function initialize() {
-        main = $('.sb-admin, .sb-chat, .sb-tickets, .nh-tickets');
+        main = $('.sb-admin, .sb-chat, .sb-tickets');
 
         // Initialize the chat and the user
         if (main.length && typeof SB_AJAX_URL != ND) {
