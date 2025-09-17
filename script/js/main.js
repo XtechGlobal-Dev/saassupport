@@ -6250,7 +6250,7 @@
     });
 
     function initialize() {
-        main = $('.sb-admin, .sb-chat, .sb-tickets');
+        main = $('.sb-admin, .sb-chat, .sb-tickets, .nh-tickets');
 
         // Initialize the chat and the user
         if (main.length && typeof SB_AJAX_URL != ND) {
