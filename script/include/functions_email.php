@@ -246,6 +246,7 @@ function sb_email_piping($force = false) {
     sb_save_external_setting('cron-email-piping', date('i'));
     $settings_repeater = sb_get_setting('email-piping');
     $error = false;
+    $settings_repeater = is_array($settings_repeater) ? $settings_repeater : [$settings_repeater]; // Deprecated
     for ($j = 0; $j < count($settings_repeater); $j++) {
         $settings = sb_isset($settings_repeater, $j);
         if ($settings && !empty($settings['email-piping-active'])) {
