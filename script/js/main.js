@@ -6173,6 +6173,7 @@
     */
 
     $(document).ready(function () {
+         console.log('target 0');
         main = $('.sb-admin, .sb-admin-start');
         if (main.length) {
             admin = true;
