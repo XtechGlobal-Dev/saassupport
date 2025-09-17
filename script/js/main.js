@@ -6235,7 +6235,7 @@
                 target = '#sb-tickets';
             }
             if (tickets && $('#nh-tickets').length) {
-                target = '#sb-tickets';
+                target = '#nh-tickets';
             }
             $(target).append(response);
             SBF.loadResource(url + '/css/' + (tickets ? 'tickets' : 'main') + '.css');
