@@ -6237,6 +6237,7 @@
             if (tickets && $('#nh-tickets').length) {
                 target = '#nh-tickets';
             }
+            console.log('target', target);
             $(target).append(response);
             SBF.loadResource(url + '/css/' + (tickets ? 'tickets' : 'main') + '.css');
             if (tickets) {
