@@ -287,19 +287,19 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <?php sb_e('Update your Profile Information here.') ?>
                     </p>
                     <div id="first_name" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('First name') ?>
                         </span>
                         <input type="text" placeholder="First name" />
                     </div>
                     <div id="last_name" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Last name') ?>
                         </span>
                         <input type="text" placeholder="Last name" />
                     </div>
                     <div id="email" data-type="text" class="sb-input sb-type-input-button">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Email') ?>
                         </span>
                         <input type="email" readonly placeholder="Email" />
@@ -308,7 +308,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         </a>
                     </div>
                     <div id="phone" data-type="text" class="sb-input sb-type-input-button">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Phone') ?>
                         </span>
                         <input type="tel" placeholder="Phone number" />
@@ -317,44 +317,48 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         </a>
                     </div>
                     <div id="password" data-type="text" class="sb-input sb-type-input-button">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Password') ?>
                         </span>
                         <input type="password" value="12345678" placeholder="Password" />
                     </div>
-                    <h2 class="addons-title"><?php sb_e('Billing details') ?></h2>
+                    <h2 class="addons-title" style="width: 100%;"><?php sb_e('Billing details') ?></h2>
+                    <style>.required-label::after{
+    content: " *";
+    color: red;
+}</style>
                     <div id="company_name" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Name') ?>
                         </span>
                         <input type="text" />
                     </div>
                     <div id="company_address" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Address') ?>
                         </span>
                         <input type="text" />
                     </div>
                     <div id="company_postal_code" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Postal code') ?>
                         </span>
                         <input type="text" />
                     </div>
                     <div id="company_city" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('City') ?>
                         </span>
                         <input type="text" />
                     </div>
                     <div id="company_country" data-type="select" class="sb-input">
-                        <span>
+                        <span >
                             <?php sb_e('Country') ?>
                         </span>
                         <?php echo sb_select_html('countries') ?>
                     </div>
                     <div id="company_tax_id" data-type="text" class="sb-input">
-                        <span>
+                        <span class="required-label">
                             <?php sb_e('Tax ID') ?>
                         </span>
                         <input type="text" />
