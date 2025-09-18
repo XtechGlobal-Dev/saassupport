@@ -924,6 +924,12 @@
         body.find(`#banner-${id}`).remove();
         body.find('.sb-tab > .sb-content > .sb-active').prepend(`<div id="banner-${id}" class="banner${image ? ' banner-img' : ''}${error ? ' banner-error' : ''}${success ? ' banner-success' : ''}">${image ? `<img src="${image}" />` : ''}<h2>${sb_(title)}</h2><p>${sb_(message)}</p><div>${code}</div><i class="sb-btn-icon sb-icon sb-icon-close"></i></div>`);
 
+                console.log('success message');
+        setTimeout(() => {
+            body.find(`#banner-${id} .sb-icon-close`).click(() => {
+                body.find(`#banner-${id}`).remove();
+            });
+        },1500);
     }
 
     function banner_success(message) {
