@@ -247,7 +247,6 @@ function sb_email_piping($force = false) {
     $settings_repeater = sb_get_setting('email-piping');
     $error = false;
     $settings_repeater = is_array($settings_repeater) ? $settings_repeater : [$settings_repeater]; // Deprecated
-    print_r($settings_repeater);
     for ($j = 0; $j < count($settings_repeater); $j++) {
         $settings = sb_isset($settings_repeater, $j);
         if ($settings && !empty($settings['email-piping-active'])) {
