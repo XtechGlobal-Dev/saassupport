@@ -4437,7 +4437,7 @@ function sb_component_admin()
                         .sb-scroll-area.scroll-table {
                             height: 700px !important;
                         }
-                        .sb-admin.sb-main .sb-edit-box .sb-input {
+                        .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {
             display: inline;
         }
                     </style>
