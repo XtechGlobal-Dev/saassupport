@@ -55,7 +55,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
         <div class="sb-top-bar">
             <div>
                 <h2>
-                    <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : '../script/media/icon.svg' ?>" />
+                    <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : 'media/nexleon-favicon-n.png' ?>" />
                     Super Admin
                 </h2>
             </div>
@@ -520,7 +520,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
             <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_LOGO : '/script/media/nexleon-favicon-n.png' ?>" />
             <div class="sb-title">Sign in</div>
             <div class="sb-text">
-                To enter the <?php echo $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board' ?> Super Admin area
+                To enter the <?php echo $super_branding ? SB_CLOUD_BRAND_NAME : 'Nexleon Helpdesk' ?> Super Admin area
             </div>
         </div>
         <div class="sb-main">
