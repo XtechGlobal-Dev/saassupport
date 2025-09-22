@@ -4444,7 +4444,6 @@ function sb_component_admin()
                     <!--  -->
 
 
-
                 </div>
                 <div class="sb-area-ticket-detail">
                     <?php echo $header; ?>

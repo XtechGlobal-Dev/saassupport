@@ -517,7 +517,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
     <div class="sb-super-login-box sb-admin-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
-            <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_LOGO : 'media/logo-cloud.svg' ?>" />
+            <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_LOGO : '/script/media/nexleon-favicon-n.png' ?>" />
             <div class="sb-title">Sign in</div>
             <div class="sb-text">
                 To enter the <?php echo $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board' ?> Super Admin area
