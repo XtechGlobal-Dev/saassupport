@@ -971,7 +971,7 @@ function box_chart() {
             <div class="sb-info"></div>
             <div class="sb-top-bar">
                 <!-- <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" /> -->
-            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
+            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo"> 
             <div class="sb-title">
                 <?php sb_e('Reset password') ?>
             </div>
