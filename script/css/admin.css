@@ -10911,6 +10911,49 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .sb-area-chatbot .sb-top-bar h2 {
   display: none;
 }
+.sb-area-chatbot .sb-menu-wide.sb-menu-chatbot ul li {
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-weight: 400;
+  font-size: 12.8px;
+  line-height: 30px;
+  background: #fff;
+}
+.sb-area-chatbot .sb-menu-wide.sb-menu-chatbot ul li:hover {
+  background: #1653FD;
+  color: #fff;
+}
+.sb-area-chatbot .sb-menu-wide.sb-menu-chatbot ul li.sb-active {
+  background: #1653FD;
+  color: #fff !important;
+  border: 1px solid #1653FD !important;
+}
+.sb-area-chatbot .sb-nav {
+  background: #fff;
+  border-radius: 8px;
+  margin: 16px;
+  padding: 15px;
+  border: none !important;
+}
+.sb-area-chatbot .sb-nav ul li {
+  font-size: 14px !important;
+  color: #000;
+}
+.sb-area-chatbot .sb-nav ul li.sb-active, .sb-area-chatbot .sb-nav ul li:hover {
+  color: #1653FD;
+}
+.sb-area-chatbot .sb-content.sb-scroll-area {
+  padding: 20px 15px 30px 15px !important;
+  background: #ffffff;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-sidebar {
+  overflow-y: auto;
+  overflow: hidden;
+}
 
 #sb-table-chatbot-files,
 #sb-table-chatbot-website {
@@ -14125,6 +14168,14 @@ section.main-charts.recent-message .user-initials {
 }
 .icon-tooltip:hover::after {
   opacity: 1;
+}
+
+.tags.icon-tooltip::after {
+  right: 0;
+  left: 0;
+  text-align: center;
+  margin: 0 auto;
+  overflow-x: auto;
 }
 
 .sidebar,
