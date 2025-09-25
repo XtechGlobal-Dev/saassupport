@@ -1069,6 +1069,12 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             // This listens for change events on any current or future select inside #parent-container
             // Trigger change
 
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
             $('#without_contact input').on('change', function () {
 
                 const isChecked = $(this).is(':checked');
@@ -2671,10 +2677,10 @@ function sb_component_admin()
                                     <div class="icon-wrapper">
                                         <span class="icon-tooltip" data-tooltip="<?php sb_e("Chatbot"); ?>">
                                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 5V20.7929C3 21.2383 3.53857 21.4614 3.85355 21.1464L7.70711 17.2929C7.89464 17.1054 8.149 17 8.41421 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5Z" stroke="#5F6465" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M15 12C14.2005 12.6224 13.1502 13 12 13C10.8498 13 9.79952 12.6224 9 12" stroke="#5F6465" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9 8.01953V8" stroke="#5F6465" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M15 8.01953V8" stroke="#5F6465" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M3 5V20.7929C3 21.2383 3.53857 21.4614 3.85355 21.1464L7.70711 17.2929C7.89464 17.1054 8.149 17 8.41421 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M15 12C14.2005 12.6224 13.1502 13 12 13C10.8498 13 9.79952 12.6224 9 12" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M9 8.01953V8" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M15 8.01953V8" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </span>
                                     </div>
@@ -8215,9 +8221,9 @@ function sb_conversations_filter($cloud_active_apps)
             "</li>";
         for ($i = 0; $i < $count; $i++) {
             $code .=
-                '<li class="icon-tooltip tags" data-tooltip="' .
+                '<li data-bs-toggle="tooltip" data-bs-placement="left" title="' .
                 $tags[$i]["tag-name"] .
-                '" data-value="' .
+                '" class="filter-tags" data-value="' .
                 $tags[$i]["tag-name"] .
                 '">' .
                 $tags[$i]["tag-name"] .
