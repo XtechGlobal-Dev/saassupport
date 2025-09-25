@@ -8201,22 +8201,94 @@ ul.status-list.dropdown-menu {
 }
 
 .sb-area-chatbot {
+  .sb-repeater {
+    margin-right: 30px;
+
     .sb-repeater {
-        margin-right: 30px;
+      margin-right: 0; 
+    }
+  }
 
-        .sb-repeater {
-            margin-right: 0;
+  > [data-id]:not(.sb-active) {
+    display: none;
+  }
+
+  .sb-top-bar {
+    h2 {
+      display: none;
+    }
+  }
+
+  .sb-menu-wide {
+    &.sb-menu-chatbot { // ✅ fixed selector nesting
+      ul {
+        li {
+          border: 1px solid #D1D5DB;
+          border-radius: 8px;
+          padding: 0 10px;
+          font-weight: 400;
+          font-size: 12.8px;
+          line-height: 30px;
+          background: #fff;
+
+          // ✅ hover works on normal state too
+          &:hover {
+            background: #1653FD;
+            color: #fff;
+          }
+
+          &.sb-active {
+            background: #1653FD;
+            color: #fff !important;
+            border: 1px solid #1653FD !important;
+          }
         }
+      }
     }
+  }
 
-    >[data-id]:not(.sb-active) {
-        display: none;
+  .sb-nav {
+    background: #fff;
+    border-radius: 8px;
+    margin: 16px;
+    padding: 15px;
+    border: none !important;
+
+    ul {
+      li {
+        font-size: 14px !important;
+        color: #000;
+
+        &.sb-active,
+        &:hover {
+          color: #1653FD;
+        }
+      }
     }
+  }
 
-    .sb-top-bar {
-        h2 {
-            display: none;
-         }
+  .sb-content {
+    &.sb-scroll-area {
+      padding: 20px 15px 30px 15px !important;
+      background: #ffffff;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+  }
+}
+ 
+.sb-area-reports {
+    &.sb-area-reports_new {
+        .sb-tab {
+            .sb-content { 
+                &.sb-scroll-area {
+                    .sb-reports-sidebar {
+                        overflow-y: auto;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -12047,6 +12119,14 @@ section {
     &:hover::after {
         opacity: 1;
     }
+}
+
+.tags.icon-tooltip::after {
+    right: 0;
+    left: 0;
+    text-align: center;
+    margin: 0 auto;
+    overflow-x: auto;
 }
 
 .sidebar,
