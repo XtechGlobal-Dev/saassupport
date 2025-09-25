@@ -8283,7 +8283,7 @@ ul.status-list.dropdown-menu {
             .sb-content { 
                 &.sb-scroll-area {
                     .sb-reports-sidebar {
-                        overflow-y: auto;
+                        overflow-y: auto !important;
                         overflow: hidden;
                     }
                 }
