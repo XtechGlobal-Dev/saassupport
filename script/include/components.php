@@ -8215,7 +8215,9 @@ function sb_conversations_filter($cloud_active_apps)
             "</li>";
         for ($i = 0; $i < $count; $i++) {
             $code .=
-                '<li data-value="' .
+                '<li class="icon-tooltip tags" data-tooltip="' .
+                $tags[$i]["tag-name"] .
+                '" data-value="' .
                 $tags[$i]["tag-name"] .
                 '">' .
                 $tags[$i]["tag-name"] .
