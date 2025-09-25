@@ -14170,12 +14170,14 @@ section.main-charts.recent-message .user-initials {
   opacity: 1;
 }
 
-.tags.icon-tooltip::after {
-  right: 0;
-  left: 0;
-  text-align: center;
-  margin: 0 auto;
-  overflow-x: auto;
+li.filter-tags {
+  width: 100%;
+  max-width: 100px;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 
 .sidebar,
