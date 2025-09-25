@@ -922,7 +922,7 @@
     function banner(title, message, code = '', image = false, error = false, success = false) {
         let id = stringToSlug(title);
         body.find(`#banner-${id}`).remove();
-        body.find('.sb-tab > .sb-content > .sb-active').prepend(`<div id="banner-${id}" class="banner${image ? ' banner-img' : ''}${error ? ' banner-error' : ''}${success ? ' banner-success' : ''}">${image ? `<img src="${image}" />` : ''}<h2>${sb_(title)}</h2><p>${sb_(message)}</p><div>${code}</div><i class="sb-btn-icon sb-icon sb-icon-close"></i></div>`);
+        body.find('.sb-tab > .sb-content > .sb-active').prepend(`<div 1 id="banner-${id}" ${id == 'welcome-aboard' ? 'style="height: 171px;"' : ''} class="banner${image ? ' banner-img' : ''}${error ? ' banner-error' : ''}${success ? ' banner-success' : ''}">${image ? `<img src="${image}" />` : ''}<h2>${sb_(title)}</h2><p>${sb_(message)}</p><div>${code}</div><i class="sb-btn-icon sb-icon sb-icon-close"></i></div>`);
 
                 console.log('success message');
         setTimeout(() => {
