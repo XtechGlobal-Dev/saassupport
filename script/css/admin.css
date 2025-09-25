@@ -10951,7 +10951,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 
 .sb-area-reports.sb-area-reports_new .sb-tab .sb-content.sb-scroll-area .sb-reports-sidebar {
-  overflow-y: auto;
+  overflow-y: auto !important;
   overflow: hidden;
 }
 
