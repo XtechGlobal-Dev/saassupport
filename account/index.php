@@ -402,12 +402,26 @@ function box_membership($membership)
             $markeplace = 'tw';
         }
     }
+
+    if(isset($membership['expiration']) && $membership['expiration'] != '')
+    {
+        $date = $membership['expiration']; // original date in dd-mm-yy format
+        // Convert to DateTime object
+        $dateObj = DateTime::createFromFormat('d-m-y', $date);
+        // Format to "10 October 2025"
+        $formattedDate = $dateObj->format('d F Y');
+    }
+
+
     $price_string = $membership['price'] == 0 ? '' : ($markeplace ? '<span id="membership-markeplace" data-markeplace="' . $markeplace . '" data-id="' . account_get_payment_id() . '"></span>' : (mb_strtoupper($membership['currency']) . ' ' . $membership['price'] . ' ' . membership_get_period_string($membership['period'])));
     echo '
     <div class="box-maso box-membership">
-        <div class="box-black">
-            <h2>' . sb_(date('F')) . ', ' . date('Y') . '</h2>
-            <div class="membership-detail-list">
+        <div class="box-black">';
+            if(isset($formattedDate ))
+            {
+                echo '<h2>' . sb_('Next renewal date') . ': '.$formattedDate. '</h2>';
+            }
+            echo '<div class="membership-detail-list">
                 <div class="detail-box">
                     <span>' . sb_($name) . '</span>
                     <span>' . $membership['count'] . ' / <span class="membership-quota">' . $membership['quota'] . '</span></span>
