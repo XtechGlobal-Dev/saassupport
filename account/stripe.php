@@ -5,7 +5,7 @@
  * STRIPE.PHP
  * ==========================================================
  *
- * Process Stripe payments. © 2017-2025 board.support. All rights reserved.
+ * Process Stripe payments. ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
@@ -24,6 +24,7 @@ if ($response && isset($response['id']) && empty($response['error'])) {
                 $error = sb_isset($response, 'error');
                 if (!$error) {
                     $data = $response['data']['object'];
+                    print_r($data);
                     $data_customer = sb_isset($data, 'customer');
                     $membership_data = explode('|', $data['client_reference_id']);
                     if (defined('STRIPE_PRODUCT_ID_WHITE_LABEL') && $membership_data[0] == 'white_label') {
