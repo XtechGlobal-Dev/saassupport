@@ -1130,6 +1130,7 @@ function sb_get_rich_message($name, $settings = false)
                 $active_user = sb_get_active_user();
                 $registration_fields = sb_get_setting('registration-fields');
                 $is_email = sb_isset($registration_fields, 'reg-email');
+                $is_otp = sb_get_setting('registration-otp');
                 $is_last_name = sb_get_setting('registration-last-name') || sb_isset($registration_fields, 'reg-last-name'); // Deprecated. Remove sb_get_setting('registration-last-name')
                 $default = ['profile_image' => '', 'first_name' => '', 'last_name' => '', 'email' => '', 'password' => '', 'user_type' => 'visitor', 'details' => []];
                 $user = $active_user && !sb_is_agent($active_user['user_type']) ? sb_get_user($active_user['id'], true) : $default;
@@ -1152,7 +1153,9 @@ function sb_get_rich_message($name, $settings = false)
                     <path d="M15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12Z" stroke="#141B34" stroke-width="1.5"></path>
                 </svg><input value="' . ($user && $user['password'] ? '********' : '') . '" autocomplete="false" type="password" required id="chatRegRepeatInput"></div>' : '';
                 $link = $settings['registration-terms-link'] || $settings['registration-privacy-link'] ? '<div class="sb-link-area">' . sb_('By clicking the button below, you agree to our') . ' <a target="_blank" href="' . sb_isset($settings, 'registration-terms-link', $settings['registration-privacy-link']) . '">' . sb_($settings['registration-terms-link'] ? 'Terms of service' : 'Privacy Policy') . '</a>' . ($settings['registration-privacy-link'] && $settings['registration-terms-link'] ? ' ' . sb_('and') . ' <a target="_blank" href="' . $settings['registration-privacy-link'] . '">' . sb_('Privacy Policy') . '</a>' : '') . '.</div>' : '';
-                $email = $is_email ? '<div id="email" data-type="text" class="sb-input sb-input-text"><span>' . sb_('Email') . '</span><input value="' . $user['email'] . '" autocomplete="off" type="email"' . (sb_isset($registration_fields, 'reg-required-email') ? ' required' : '') . '></div><div id="otp" class="sb-input"><span>' . sb_('One-time code') . '</span><input autocomplete="false" type="text"></div>' : '';
+                $otp = $is_otp ? '<div id="otp" class="sb-input"><span>' . sb_('One-time code') . '</span><input autocomplete="false" type="text"></div>' : '';
+                $email = $is_email ? '<div id="email" data-type="text" class="sb-input sb-input-text"><span>' . sb_('Email') . '</span><input value="' . $user['email'] . '" autocomplete="off" type="email"' . (sb_isset($registration_fields, 'reg-required-email') ? ' required' : '') . '></div>'.$otp : '';
+                
                 $code = '<div class="sb-form-main sb-form">' . $profile_image . '<div id="first_name" data-type="text" class="sb-input sb-input-text"><span>' . sb_($is_last_name ? 'First name' : 'Name') . '</span><input value="' . ($visitor ? '' : $user['first_name']) . '" autocomplete="false" type="text" required></div>' . ($is_last_name ? '<div id="last_name" data-type="text" class="sb-input sb-input-text"><span>' . sb_('Last name') . '</span><input value="' . ($visitor ? '' : $user['last_name']) . '" autocomplete="false" type="text" ' . (sb_isset($registration_fields, 'reg-required-last-name') ? ' required' : '') . '></div>' : '') . $email . $password . '</div><div class="sb-form-extra sb-form">';
                 $extra = [];
                 if (isset($user['details'])) {
