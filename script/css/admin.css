@@ -6354,7 +6354,7 @@ td.sb-td-contact p {
   margin-left: 15px;
 }
 .sb-admin > main > div > .sb-tab {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 148px);
 }
 
 .sb-search-dropdown {
@@ -6649,7 +6649,7 @@ td.sb-td-contact p {
   overflow: hidden;
   text-overflow: ellipsis;
   color: #1E293B;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   min-width: 75px;
   max-width: 75px;
@@ -6917,13 +6917,13 @@ td.sb-td-contact p {
   opacity: 1;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu-btn {
-  right: auto;
-  left: -24px;
-  text-align: left;
+  left: auto;
+  right: -15px;
+  text-align: right;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu {
   right: auto;
-  left: -181px;
+  left: -70px;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu:empty {
   display: none;
@@ -7089,6 +7089,7 @@ td.sb-td-contact p {
 .sb-board .sb-conversation .sb-editor .sb-bar {
   margin-top: 10px;
   position: relative;
+  justify-content: end;
 }
 .sb-board .sb-conversation .sb-editor .sb-bar .sb-btn-attachment {
   display: block !important;
@@ -9126,9 +9127,6 @@ span.initials.avatar_name {
   align-items: center;
   justify-content: space-between;
 }
-#ticket-comments .col-md-12 #comments-section .comment-row.customer .comment-bubble .comment-text {
-  min-width: fit-content;
-}
 
 #test-sms-user,
 #test-sms-agent {
@@ -11014,9 +11012,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   margin-left: 10px;
 }
 
-#sb-chatbot-info {
-  min-height: calc(100vh - 2px);
-}
 #sb-chatbot-info p {
   line-height: 30px;
   font-size: 13px;
@@ -11027,11 +11022,11 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 
 [data-id=playground] > div {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 148px);
 }
 
 [data-id=playground] > div > div {
-  height: calc(100vh - 35px);
+  height: calc(100vh - 183px);
   padding: 15px 20px 20px 20px;
   position: relative;
 }
@@ -11040,7 +11035,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   flex-grow: 1;
 }
 .sb-playground .sb-scroll-area {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 320px);
   letter-spacing: 0.3px;
 }
 .sb-playground .sb-scroll-area > div {
@@ -11092,7 +11087,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   height: 0;
 }
 .sb-playground .sb-scroll-area:empty + .sb-no-results {
-  display: block;
+  display: none;
 }
 .sb-playground .sb-scroll-area .sb-rich-message .sb-slider {
   margin: 0;
@@ -12694,9 +12689,10 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 
 .sb-list .sb-right .sb-reply-message {
-  color: #fff !important;
-  border: 0 !important;
-  background: none;
+  border-left-color: #fff;
+  color: #fff;
+  background: rgba(3, 59, 190, 0.5490196078);
+  margin: 0 0 0 0;
 }
 
 .daterangepicker .calendar-table .next span,
@@ -12940,6 +12936,15 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   border-radius: 2.5px;
   font-size: 14px;
   overflow: hidden;
+}
+
+.sb-rich-message[disabled] .sb-input-text {
+  background: #fff;
+}
+
+.sb-list > div.sb-right.sb-rich-cnt .sb-text {
+  background-color: #E6F2FC;
+  padding: 0 5px;
 }
 
 @media (min-width: 564px) {
@@ -13231,7 +13236,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   color: #222 !important;
   font-weight: 500 !important;
   align-items: center !important;
-  max-width: 80px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -13254,6 +13258,10 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .choices__list--dropdown .choices__item:hover::before {
   transform: scale(1.1);
   transition: transform 0.2s ease;
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded] {
+  box-sizing: border-box;
 }
 
 .choices__list--multiple {
@@ -13398,6 +13406,14 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   border: none;
   color: red;
 }
+.choices__list.choices__list--multiple > div.undefined.undefined span.tag-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 140px;
+  word-wrap: revert !important;
+  white-space: nowrap;
+  justify-content: start;
+}
 
 .table-responsive::-webkit-scrollbar,
 #ticketTable_wrapper::-webkit-scrollbar {
@@ -13431,7 +13447,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   width: fit-content;
 }
 .sb-area-tickets .tags-filter .choices__inner {
-  padding: 0 0 0 6px;
   width: 200px;
   min-height: 34px;
 }
@@ -14042,7 +14057,7 @@ li.menu_head:hover {
 }
 
 .choices .choices__inner {
-  padding: 3px 0px 3px 10px;
+  padding: 3px 10px 3px 10px;
   min-height: 30px;
   max-width: 97%;
 }
