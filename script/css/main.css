@@ -4077,9 +4077,9 @@ div ul.sb-menu .li:hover,
 
 /*
 * 
-* ==
+* ==========================================================
 * RTL.SCSS
-* ==
+* ==========================================================
 *
 * Front-end RTL CSS. This file is imported only.
 *
@@ -4402,9 +4402,9 @@ div ul.sb-menu .li:hover,
 
 /*
 * 
-* ==
+* ==========================================================
 * RESPONSIVE.SCSS
-* ==
+* ==========================================================
 *
 * Front-end responsive CSS. This file is imported only.
 *
@@ -4756,7 +4756,7 @@ div ul.sb-menu .li:hover,
 }
 
 .sb-main.sb-chat.sb-cloud.sb-active .wave-bg {
-  margin-top: 55px !important;
+  margin-top: 130px !important;
 }
 .sb-main.sb-chat.sb-cloud.sb-active .sb-list.sb-active {
   margin-top: 128px !important;
