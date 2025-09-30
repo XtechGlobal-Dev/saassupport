@@ -2791,7 +2791,7 @@ td.sb-td-contact {
             }
 
             >.sb-tab {
-                height: calc(100vh - 78px);
+                height: calc(100vh - 148px);
             }
         }
     }
@@ -3040,7 +3040,7 @@ td.sb-td-contact {
                 &:last-child {
                     border-bottom: none;
                 }
-
+          
                 &[data-conversation-status="2"] {
                     background: #c9c9c94d !important;
                 }
@@ -3140,7 +3140,7 @@ td.sb-td-contact {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         color: #1E293B;
-                        font-size: 14px;
+                        font-size: 17px;
                         font-weight: 600;
                         min-width: 75px;
                         max-width: 75px;
@@ -8358,7 +8358,7 @@ ul.status-list.dropdown-menu {
 }
 
 #sb-chatbot-info {
-    min-height: calc(100vh - 2px);
+    // min-height: calc(100vh - 2px);
 
     p {
         line-height: 30px;
@@ -8371,11 +8371,11 @@ ul.status-list.dropdown-menu {
 }
 
 [data-id="playground"]>div {
-    height: calc(100vh - 70px);
+    height: calc(100vh - 184px);
 }
 
 [data-id="playground"]>div>div {
-    height: calc(100vh - 35px);
+    height: calc(100vh - 148px);
     padding: 15px 20px 20px 20px;
     position: relative;
 }
@@ -8446,7 +8446,7 @@ ul.status-list.dropdown-menu {
             height: 0;
 
             +.sb-no-results {
-                display: block;
+                display: none;
             }
         }
 
@@ -10578,6 +10578,21 @@ ul.status-list.dropdown-menu {
     font-size: 14px;
     overflow: hidden;
 }
+.sb-rich-message[disabled] {
+  .sb-input-text {
+    background: #fff;
+  }
+}
+
+.sb-list {
+  > div.sb-right.sb-rich-cnt {
+    .sb-text {
+      background-color: #E6F2FC;
+      padding: 0 5px;
+    }
+  }
+}
+
 
 @media (min-width: 564px) {
     .daterangepicker {
@@ -11107,14 +11122,19 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         border: none;
         color: red;
     }
-    &.undefined.undefined {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 200px;
-    word-wrap: revert !important;
-    white-space: nowrap;
-    justify-content: start;
-}
+    &.undefined.undefined 
+    {
+     span{
+        &.tag-label   {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 140px;
+            word-wrap: revert !important;
+            white-space: nowrap;
+            justify-content: start;
+        }
+     }
+    }
 }
 
 .table-responsive,
@@ -11122,7 +11142,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     &::-webkit-scrollbar {
         height: 0;
         width: 0;
-    }
+    }   
 }
 
 #ticketTable_wrapper {
