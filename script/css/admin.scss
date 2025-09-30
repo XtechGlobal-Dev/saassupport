@@ -8371,11 +8371,11 @@ ul.status-list.dropdown-menu {
 }
 
 [data-id="playground"]>div {
-    height: calc(100vh - 184px);
+    height: calc(100vh - 148px);
 }
 
 [data-id="playground"]>div>div {
-    height: calc(100vh - 148px);
+    height: calc(100vh - 183px);
     padding: 15px 20px 20px 20px;
     position: relative;
 }
@@ -8384,7 +8384,7 @@ ul.status-list.dropdown-menu {
     flex-grow: 1;
 
     .sb-scroll-area {
-        height: calc(100vh - 110px);
+        height: calc(100vh - 320px);
         letter-spacing: .3px;
 
         >div {
