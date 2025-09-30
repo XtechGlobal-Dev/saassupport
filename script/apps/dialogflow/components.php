@@ -25,9 +25,9 @@ function sb_dialogflow_chatbot_area($header) { ?>
                         <li data-type="training" class="sb-active">
                             <?php sb_e('Training') ?>
                         </li>
-                        <li data-type="flows">
-                            <?php sb_e('Flows') ?>
-                        </li>
+                        <!-- <li data-type="flows">
+                            <?php //sb_e('Flows') ?>
+                        </li> -->
                         <li data-type="playground">
                             <?php sb_e('Playground') ?>
                         </li>
@@ -144,7 +144,7 @@ function sb_dialogflow_chatbot_area($header) { ?>
                                         </label>
                                         <textarea data-id="open-ai-faq-answer"></textarea>
                                     </div>
-                                    <div>
+                                    <div class="d-none">
                                         <label>
                                             <?php sb_e('Function calling') ?>
                                         </label>
@@ -199,7 +199,7 @@ function sb_dialogflow_chatbot_area($header) { ?>
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="d-none">
                                         <label>
                                             <?php sb_e('Set data and actions') ?>
                                         </label>
