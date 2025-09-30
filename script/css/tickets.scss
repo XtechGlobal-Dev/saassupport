@@ -221,7 +221,7 @@
         align-items: center;
         border-bottom: 1px solid $border-color;
         padding: 15px 20px;
-        height: 60px;
+        // height: 60px;
         min-height: 60px;
         box-sizing: border-box;
         justify-content: space-between;
@@ -1264,9 +1264,9 @@ ul.sb-user-conversations.sb-scroll-area {
                 text-decoration: none;
                 line-height: 30px;
                 color: $color-black;
-                font-size: 17px;
-                letter-spacing: .4px;
-                white-space: nowrap;
+                font-size: 20px;
+                // letter-spacing: .4px;
+                // white-space: nowrap;
             }
 
             .sb-btn-back,

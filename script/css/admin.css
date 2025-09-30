@@ -6917,13 +6917,13 @@ td.sb-td-contact p {
   opacity: 1;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu-btn {
-  right: auto;
-  left: -24px;
-  text-align: left;
+  left: auto;
+  right: -15px;
+  text-align: right;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu {
   right: auto;
-  left: -181px;
+  left: -70px;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu:empty {
   display: none;
@@ -7089,6 +7089,7 @@ td.sb-td-contact p {
 .sb-board .sb-conversation .sb-editor .sb-bar {
   margin-top: 10px;
   position: relative;
+  justify-content: end;
 }
 .sb-board .sb-conversation .sb-editor .sb-bar .sb-btn-attachment {
   display: block !important;
@@ -9125,9 +9126,6 @@ span.initials.avatar_name {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-#ticket-comments .col-md-12 #comments-section .comment-row.customer .comment-bubble .comment-text {
-  min-width: fit-content;
 }
 
 #test-sms-user,
@@ -12694,9 +12692,10 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 
 .sb-list .sb-right .sb-reply-message {
-  color: #fff !important;
-  border: 0 !important;
-  background: none;
+  border-left-color: #fff;
+  color: #fff;
+  background: rgba(3, 59, 190, 0.5490196078);
+  margin: 0 0 0 0;
 }
 
 .daterangepicker .calendar-table .next span,
@@ -13231,7 +13230,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   color: #222 !important;
   font-weight: 500 !important;
   align-items: center !important;
-  max-width: 80px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -13254,6 +13252,10 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .choices__list--dropdown .choices__item:hover::before {
   transform: scale(1.1);
   transition: transform 0.2s ease;
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded] {
+  box-sizing: border-box;
 }
 
 .choices__list--multiple {
@@ -13398,6 +13400,14 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   border: none;
   color: red;
 }
+.choices__list.choices__list--multiple > div.undefined.undefined {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+  word-wrap: revert !important;
+  white-space: nowrap;
+  justify-content: start;
+}
 
 .table-responsive::-webkit-scrollbar,
 #ticketTable_wrapper::-webkit-scrollbar {
@@ -13431,7 +13441,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   width: fit-content;
 }
 .sb-area-tickets .tags-filter .choices__inner {
-  padding: 0 0 0 6px;
   width: 200px;
   min-height: 34px;
 }
@@ -14042,7 +14051,7 @@ li.menu_head:hover {
 }
 
 .choices .choices__inner {
-  padding: 3px 0px 3px 10px;
+  padding: 3px 10px 3px 10px;
   min-height: 30px;
   max-width: 97%;
 }
