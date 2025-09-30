@@ -12993,7 +12993,7 @@ main {
             width: 100% !important;
         }
     }
-}
+}   
 
 @media (max-width: 1600px) {
     .sb-admin>main>.sb-area-users>.sb-top-bar h2 {
@@ -13833,6 +13833,11 @@ main {
 }
 
 @media only screen and (max-width: 767px) {
+    .sb-input{
+         svg {
+            margin-left: -23px !important;
+        }
+    }
     .sb-admin-box_new {
         .right_section {
             max-height: fit-content;
