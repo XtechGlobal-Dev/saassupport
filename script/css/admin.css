@@ -6354,7 +6354,7 @@ td.sb-td-contact p {
   margin-left: 15px;
 }
 .sb-admin > main > div > .sb-tab {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 148px);
 }
 
 .sb-search-dropdown {
@@ -6649,7 +6649,7 @@ td.sb-td-contact p {
   overflow: hidden;
   text-overflow: ellipsis;
   color: #1E293B;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   min-width: 75px;
   max-width: 75px;
@@ -11012,9 +11012,6 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   margin-left: 10px;
 }
 
-#sb-chatbot-info {
-  min-height: calc(100vh - 2px);
-}
 #sb-chatbot-info p {
   line-height: 30px;
   font-size: 13px;
@@ -11025,11 +11022,11 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 
 [data-id=playground] > div {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 184px);
 }
 
 [data-id=playground] > div > div {
-  height: calc(100vh - 35px);
+  height: calc(100vh - 148px);
   padding: 15px 20px 20px 20px;
   position: relative;
 }
@@ -11090,7 +11087,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   height: 0;
 }
 .sb-playground .sb-scroll-area:empty + .sb-no-results {
-  display: block;
+  display: none;
 }
 .sb-playground .sb-scroll-area .sb-rich-message .sb-slider {
   margin: 0;
@@ -12941,6 +12938,15 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   overflow: hidden;
 }
 
+.sb-rich-message[disabled] .sb-input-text {
+  background: #fff;
+}
+
+.sb-list > div.sb-right.sb-rich-cnt .sb-text {
+  background-color: #E6F2FC;
+  padding: 0 5px;
+}
+
 @media (min-width: 564px) {
   .daterangepicker {
     width: auto;
@@ -13400,10 +13406,10 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   border: none;
   color: red;
 }
-.choices__list.choices__list--multiple > div.undefined.undefined {
+.choices__list.choices__list--multiple > div.undefined.undefined span.tag-label {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 200px;
+  max-width: 140px;
   word-wrap: revert !important;
   white-space: nowrap;
   justify-content: start;
