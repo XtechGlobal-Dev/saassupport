@@ -15359,6 +15359,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
 }
 @media only screen and (max-width: 767px) {
+  .sb-input svg {
+    margin-left: -23px !important;
+  }
   .sb-admin-box_new .right_section {
     max-height: fit-content;
     margin-top: 30px;
