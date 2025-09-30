@@ -5914,7 +5914,7 @@ function sb_component_admin()
                                             </svg>
                                         </button>
                                         <div class="my-tabs">
-                                            <div class="my-tab active" data-target="availability-content">
+                                            <!-- <div class="my-tab active" data-target="availability-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_1833_2783)">
@@ -5932,9 +5932,9 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("availability"); ?>
-                                            </div>
-                                            <div class="my-tab" data-target="appearance-content">
+                                                <?php //sb_e("availability"); ?>
+                                            </div> -->
+                                            <div class="my-tab active" data-target="appearance-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_1833_2786)">
@@ -5955,7 +5955,7 @@ function sb_component_admin()
                                                     </defs>
                                                 </svg><?php sb_e("Appearance & Features"); ?>
                                             </div>
-                                            <div class="my-tab" data-target="management-content">
+                                            <!-- <div class="my-tab" data-target="management-content">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_1833_2789)">
@@ -5983,8 +5983,8 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>
-                                            </div>
+                                                <?php sb_e("Management"); ?>
+                                            </div> -->
                                             <div class="tab-slider"></div>
                                         </div>
                                         <button class="tab-arrow right">
@@ -5999,7 +5999,7 @@ function sb_component_admin()
                                         </button>
                                     </div>
 
-                                    <div id="availability-content" class="settings-tab">
+                                    <!-- <div id="availability-content" class="settings-tab">
                                         <div class="settings-head">
                                             <p class="head">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6028,10 +6028,10 @@ function sb_component_admin()
                                             </p>
                                         </div>
 
-                                        <?php sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
-                                    </div>
+                                        <?php //sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
+                                    </div> -->
 
-                                    <div id="appearance-content" style="display: none;" class="settings-tab">
+                                    <div id="appearance-content"  class="settings-tab">
                                         <div class="settings-head">
                                             <p class="head">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -6094,7 +6094,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>             <?php sb_e("Settings"); ?>
+                                                <?php sb_e("Management"); ?>             <?php sb_e("Settings"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("Management controls access to the management widget’s availability to visitors and their ability to archive conversations with agents"); ?>.
@@ -6301,7 +6301,7 @@ function sb_component_admin()
                                                         stroke="black" stroke-width="1.5" stroke-linecap="round"
                                                         stroke-linejoin="round" />
                                                 </svg>
-                                                <?php sb_e("management"); ?>             <?php sb_e("Chat"); ?>
+                                                <?php sb_e("Management"); ?>             <?php sb_e("Chat"); ?>
                                             </div>
                                             <div class="my-tab" data-target="permission-setting-content">
                                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
@@ -6567,7 +6567,7 @@ function sb_component_admin()
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
-                                                <?php sb_e("management"); ?>             <?php sb_e("Chat"); ?>
+                                                <?php sb_e("Management"); ?>             <?php sb_e("Chat"); ?>
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("The Chat Management Settings provides settings that allow one to properly sort through chats by date and adjust whether or not they wish to automatically archive conversations after 24 hours"); ?>.
