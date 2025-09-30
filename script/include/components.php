@@ -900,7 +900,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                                     <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                          data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                         <span class="tag-dot" style="background-color:${color}"></span>
-                                        ${data.label}
+                                        <span class="tag-label">${data.label}</span>
                                         <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                     </div>
                                 `);
@@ -5271,7 +5271,7 @@ function sb_component_admin()
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                                 data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
-                                                ${data.label}
+                                                <span class="tag-label">${data.label}</span>
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                             </div>
                                         `);
@@ -5324,7 +5324,7 @@ function sb_component_admin()
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
                                                 data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
-                                                ${data.label}
+                                                <span class="tag-label">${data.label}</span>
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
                                             </div>
                                         `);
