@@ -811,76 +811,76 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                                                                                                                                                                                                                                        position: relative;
-                                                                                                                                                                                                                                                                                        overflow: visible !important;
-            
-                                                                                                                                                                                                                                                                                    }
+            position: relative;
+            overflow: visible !important;
 
-                                                                                                                                                                                                                                                                                    .status-btn {
-                                                                                                                                                                                                                                                                                        border: none;
-                                                                                                                                                                                                                                                                                        border-radius: 8px;
-                                                                                                                                                                                                                                                                                        padding: 3px 12px;
-                                                                                                                                                                                                                                                                                        font-weight: 500;
-                                                                                                                                                                                                                                                                                        cursor: pointer;
-                                                                                                                                                                                                                                                                                        display: flex;
-                                                                                                                                                                                                                                                                                        align-items: center;
-                                                                                                                                                                                                                                                                                        gap: 4px;
-                                                                                                                                                                                                                                                                                        font-size: 14px;
-                                                                                                                                                                                                                                                                                    }
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list li,
-                                                                                                                                                                                                                                                                                    .priority-list li {
-                                                                                                                                                                                                                                                                                        font-size: 14px;
-                                                                                                                                                                                                                                                                                    }
+        .status-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 3px 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-dot {
-                                                                                                                                                                                                                                                                                        width: 10px !important;
-                                                                                                                                                                                                                                                                                        height: 10px !important;
-                                                                                                                                                                                                                                                                                    }
+        .status-list li,
+        .priority-list li {
+            font-size: 14px;
+        }
 
-                                                                                                                                                                                                                                                                                    .arrow {
-                                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                                    }
+        .status-dot {
+            width: 10px !important;
+            height: 10px !important;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list,
-                                                                                                                                                                                                                                                                                    .priority-list {
-                                                                                                                                                                                                                                                                                        display: none;
-                                                                                                                                                                                                                                                                                        position: absolute;
-                                                                                                                                                                                                                                                                                        top: 75%;
-                                                                                                                                                                                                                                                                                        left: 0;
-                                                                                                                                                                                                                                                                                        min-width: 170px;
-                                                                                                                                                                                                                                                                                        background: #fff;
-                                                                                                                                                                                                                                                                                        border: 1px solid #ddd;
-                                                                                                                                                                                                                                                                                        border-radius: 8px;
-                                                                                                                                                                                                                                                                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                                                                                                                                                                                                                                        z-index: 9999;
-                                                                                                                                                                                                                                                                                        padding: 6px 0;
-                                                                                                                                                                                                                                                                                        margin: 0;
-                                                                                                                                                                                                                                                                                        list-style: none;
-                                                                                                                                                                                                                                                                                    }
+        .arrow {
+            font-size: 12px;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list li,
-                                                                                                                                                                                                                                                                                    .priority-list li {
-                                                                                                                                                                                                                                                                                        padding: 8px 16px;
-                                                                                                                                                                                                                                                                                        cursor: pointer;
-                                                                                                                                                                                                                                                                                        display: flex;
-                                                                                                                                                                                                                                                                                        align-items: center;
-                                                                                                                                                                                                                                                                                        gap: 4px;
-                                                                                                                                                                                                                                                                                        font-size: 15px;
-                                                                                                                                                                                                                                                                                        transition: background 0.15s;
-                                                                                                                                                                                                                                                                                    }
+        .status-list,
+        .priority-list {
+            display: none;
+            position: absolute;
+            top: 75%;
+            left: 0;
+            min-width: 170px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+            z-index: 9999;
+            padding: 6px 0;
+            margin: 0;
+            list-style: none;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list li:hover,
-                                                                                                                                                                                                                                                                                    .priority-list li:hover {
-                                                                                                                                                                                                                                                                                        background: #f5f5f5;
-                                                                                                                                                                                                                                                                                    }
+        .status-list li,
+        .priority-list li {
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 15px;
+            transition: background 0.15s;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-dot {
-                                                                                                                                                                                                                                                                                        width: 12px;
-                                                                                                                                                                                                                                                                                        height: 12px;
-                                                                                                                                                                                                                                                                                        border-radius: 50%;
-                                                                                                                                                                                                                                                                                        display: inline-block;
-                                                                                                                                                                                                                                                                                    } */
+        .status-list li:hover,
+        .priority-list li:hover {
+            background: #f5f5f5;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -898,7 +898,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                                 const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
                                 return template(`
                                     <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
-                                         data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                         data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  data-bs-toggle="tooltip" title="${data.label}" style="border: 1px solid ${color};">
                                         <span class="tag-dot" style="background-color:${color}"></span>
                                         <span class="tag-label">${data.label}</span>
                                         <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
@@ -928,48 +928,18 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 });
             }
 
+            // Re-init tooltips after Choices renders
+            function initTooltips() {
+                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                new bootstrap.Tooltip(el);
+                });
+            }
 
+            // 1. Run once after initial render
+            initTooltips();
 
-            // Code to display applied tags in a palette
-            // const paletteContainer = document.getElementById('selected-tags-palette');
-            // document.getElementById('tags-filter').addEventListener('change', function () {
-            // const selected = tagsFilterChoices.getValue();
-            //     const selectedValues = $(this).val(); // Gets array of selected values
-            //     paletteContainer.innerHTML = ''; // clear old circles
-            //     selected.forEach(item => {
-            //         const color = item.customProperties?.color || '#ccc';
-            //         const li = document.createElement('div');
-            //         li.className = 'is-selected';
-            //         li.setAttribute('data-item', '');
-            //         li.setAttribute('data-id', item.id);
-            //         li.setAttribute('data-value', item.value);
-            //         li.setAttribute('aria-selected', 'true');
-            //         li.setAttribute('data-color1', color);
-            //         li.style.border = `1px solid ${color}`;
-
-            //         const span = document.createElement('span');
-            //         span.className = 'tag-dot';
-            //         span.style.backgroundColor = color;
-
-            //         const text = document.createTextNode(item.label);
-
-            //         const button = document.createElement('button');
-            //         button.type = 'button';
-            //         button.className = 'choices__button';
-            //         button.setAttribute('aria-label', `Remove item: ${item.value}`);
-            //         button.dataset.button = '';
-
-            //         const icon = document.createElement('i');
-            //         icon.className = 'fa-solid fa-xmark choice-remove';
-            //         icon.setAttribute('aria-hidden', 'true');
-
-            //         button.appendChild(icon);
-            //         li.appendChild(span);
-            //         li.appendChild(text);
-            //         li.appendChild(button);
-            //         paletteContainer.appendChild(li);
-            //     });
-            // });
+            // 2. Run again every time choices changes (e.g., item added/removed)
+            tagsSelect.addEventListener('change', initTooltips);
         });
 
 
@@ -4445,7 +4415,10 @@ function sb_component_admin()
                         }
                         .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {display: inline;}
 
-                        #agents-menu-title, #collapse, #show-profile-images-admin, #hide-conversation-details, #notes-settings, #tags-starred, #push-notifications, #welcome-trigger, #welcome-delay, #follow-delay {display: none;}
+                        #agents-menu-title, #collapse, #show-profile-images-admin, #hide-conversation-details, #notes-settings, #tags-starred, #push-notifications, #welcome-trigger, #welcome-delay, #follow-delay,
+                        #sb-import-users,#sender-name,#visitor-autodata,#visitor-autodata, #visitor-default-name,#envato-validation,#registration-user-details-success,#registration-link,#login-verification-url,#tickets-default-department,#tickets-registration-redirect,#tickets-conversation-name,
+							#follow-disable-office-hours,#follow-disable-channels,#welcome-disable-office-hours,#popup-message,
+							#login-message,#login-icon,admin-title,#custom-js,#custom-css,#manifest-url,#color-admin-2,#admin-title{display: none;}
                     </style>
                     <!--  -->
 
@@ -5269,7 +5242,7 @@ function sb_component_admin()
                                         const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
                                         return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
-                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}" data-bs-toggle="tooltip" title="${data.label}" style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
                                                 <span class="tag-label">${data.label}</span>
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
@@ -5322,7 +5295,7 @@ function sb_component_admin()
                                         const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
                                         return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
-                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  data-bs-toggle="tooltip" title="${data.label}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
                                                 <span class="tag-label">${data.label}</span>
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
@@ -5332,6 +5305,23 @@ function sb_component_admin()
                                 };
                             }
                         });
+
+
+                        // Re-init tooltips after Choices renders
+                        function initTooltips() {
+                            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                            new bootstrap.Tooltip(el);
+                            });
+                        }
+
+                        // 1. Run once after initial render
+                        initTooltips();
+
+                        // 2. Run again every time choices changes (e.g., item added/removed)
+                        tagsSelect.addEventListener('change', initTooltips);
+
+
+
 
                         refreshTagDots();
                         ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
@@ -7922,6 +7912,16 @@ function sb_component_admin()
     if ($is_cloud) {
         sb_cloud_css_js();
     }
+    ?>
+    <script>
+    jQuery(document).ready(function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+    </script>
+    <?php
 }
 /*
  * ----------------------------------------------------------
