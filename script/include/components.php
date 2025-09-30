@@ -4211,7 +4211,7 @@ function sb_component_admin()
                                             $tagsHtml .=
                                                 '<option value="' .
                                                 $tags[$i]["tag-name"] .
-                                                '"  class="tag-option" data-color="' .
+                                                '"  class="tag-option" data-bs-toggle="tooltip" title="'.$tags[$i]["tag-name"].'" data-color="' .
                                                 $tags[$i]["tag-color"] .
                                                 '" data-custom-properties={"color":"' .
                                                 $tags[$i]["tag-color"] .

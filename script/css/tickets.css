@@ -4077,9 +4077,9 @@ div ul.sb-menu .li:hover,
 
 /*
 * 
-* ==
+* ==========================================================
 * RTL.SCSS
-* ==
+* ==========================================================
 *
 * Front-end RTL CSS. This file is imported only.
 *
@@ -4582,7 +4582,6 @@ div ul.sb-menu .li:hover,
   align-items: center;
   border-bottom: 1px solid rgb(212, 212, 212);
   padding: 15px 20px;
-  height: 60px;
   min-height: 60px;
   box-sizing: border-box;
   justify-content: space-between;
@@ -5416,9 +5415,7 @@ ul.sb-user-conversations.sb-scroll-area {
   text-decoration: none;
   line-height: 30px;
   color: #000000;
-  font-size: 17px;
-  letter-spacing: 0.4px;
-  white-space: nowrap;
+  font-size: 20px;
 }
 .sb-tickets .sb-panel-main > .sb-top .sb-btn-back,
 .sb-tickets .sb-panel-main > .sb-top .sb-close {
