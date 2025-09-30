@@ -4443,9 +4443,9 @@ function sb_component_admin()
                         .sb-scroll-area.scroll-table {
                             height: 700px !important;
                         }
-                        .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {
-            display: inline;
-        }
+                        .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {display: inline;}
+
+                        #agents-menu-title, #collapse, #show-profile-images-admin, #hide-conversation-details, #notes-settings, #tags-starred, #push-notifications, #welcome-trigger, #welcome-delay, #follow-delay {display: none;}
                     </style>
                     <!--  -->
 
