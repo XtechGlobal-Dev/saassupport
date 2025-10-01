@@ -9122,7 +9122,7 @@ span.initials.avatar_name {
 #ticket-comments .col-md-12 {
   padding: 0;
 }
-#ticket-comments .col-md-12 #comments-section .comment-row .comment-bubble {
+#ticket-comments .col-md-12 #comments-section .comment-row.customer .comment-bubble {
   display: grid;
   align-items: center;
   justify-content: space-between;
