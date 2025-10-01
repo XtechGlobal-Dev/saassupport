@@ -12783,7 +12783,11 @@ div#messaging-channels {
             }
         }
     }
-
+p.first-p {
+    margin: 0 0 37px 0 !important;
+    font-size: 20px;
+    color: #4B5563;
+}
     .plans-box-menu {
         ul {
             background: #F3F4F6;
@@ -12808,11 +12812,13 @@ div#messaging-channels {
 
     .addons-title {
         border-bottom: 0;
-        font-size: 30px;
+        font-size: 32px;
         color: #000;
-        font-weight: 700;
-        padding-bottom: 15px;
-        margin-top: 40px;
+        font-weight: 700;   
+        margin: 37px 0;
+        padding: 0;
+      
+       
     }
 
     .plans-box {
