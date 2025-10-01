@@ -5401,6 +5401,13 @@ div ul.sb-menu li:hover,
   padding: 15px 120px 15px 15px;
   border-top: 1px solid rgb(222, 229, 236);
 }
+.sb-chat .sb-editor .sb-textarea textarea {
+  overflow-y: auto;
+  max-height: 176px;
+}
+.sb-chat .sb-editor .sb-textarea textarea::-webkit-scrollbar {
+  width: 0;
+}
 .sb-chat .sb-editor .sb-attachments {
   padding: 0 15px 10px 15px;
 }
