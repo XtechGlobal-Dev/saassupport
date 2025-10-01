@@ -6922,8 +6922,8 @@ td.sb-td-contact p {
   text-align: right;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu {
-  right: auto;
-  left: -70px;
+  right: 20px;
+  left: auto;
 }
 .sb-board .sb-conversation .sb-list > div.sb-right .sb-menu:empty {
   display: none;
@@ -9123,9 +9123,11 @@ span.initials.avatar_name {
   padding: 0;
 }
 #ticket-comments .col-md-12 #comments-section .comment-row.customer .comment-bubble {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: space-between;
+  grid-template-columns: auto auto;
+  gap: 10px;
 }
 
 #test-sms-user,
