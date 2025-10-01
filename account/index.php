@@ -253,9 +253,10 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     </div>
                 </div>
                 <div id="tab-membership">
-                    <h2 class="addons-title first-title">
+                    <h2 class="addons-title first-title ">
                         <?php sb_e('Membership') ?>
                     </h2>
+                    <p class="first-p">Manage your subscription and billing</p>
                     <?php box_membership($membership) ?>
                     <hr />
                     <?php box_membership_plans($membership['id'], $expired) ?>
