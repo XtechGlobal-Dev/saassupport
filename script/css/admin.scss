@@ -3514,8 +3514,8 @@ td.sb-td-contact {
                     }
 
                     .sb-menu {
-                        right: auto;
-                        left: -70px;
+                        right: 20px;
+                        left: auto;
 
                         &:empty {
                             display: none;
@@ -6045,15 +6045,17 @@ span.initials.avatar_name {
         padding: 0;
 
         #comments-section {
-            .comment-row.customer {
+            .comment-row {
                 .comment-bubble {
-                    display: flex;
+                    display: grid;
                     align-items: center;
                     justify-content: space-between;
+                    grid-template-columns: auto auto;
+                    gap: 10px;
 
-                    // .comment-text {
-                    //     min-width: fit-content;
-                    // }
+                        // .comment-text {
+                            
+                        // }
                 }
             }
         }
