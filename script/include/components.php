@@ -3057,50 +3057,7 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                            <!--  -->
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
-                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                            <svg width="24" height="18" viewBox="0 0 24 18" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M19.5312 0.290039H2.34375C1.05467 0.290039 0 1.34471 0 2.63379V13.5713C0 14.8603 1.05467 15.915 2.34375 15.915H16.7031C16.6406 15.7197 16.6016 15.5166 16.5859 15.3056C15.3594 15.2275 14.3828 14.2197 14.3828 12.9775C14.3828 11.7353 15.3594 10.7275 16.5859 10.6494C16.6563 9.42285 17.6641 8.45411 18.9141 8.45411C20.1562 8.45411 21.1641 9.42285 21.2422 10.6494C21.4609 10.665 21.6719 10.7041 21.875 10.7822V2.63379C21.875 1.34471 20.8203 0.290039 19.5312 0.290039ZM5.85938 13.1807H3.51562C3.08595 13.1807 2.73438 12.8291 2.73438 12.3994C2.73438 11.9697 3.08595 11.6182 3.51562 11.6182H5.85938C6.28905 11.6182 6.64062 11.9697 6.64062 12.3994C6.64062 12.8291 6.28905 13.1807 5.85938 13.1807ZM2.73438 9.66504C2.73438 9.23536 3.08595 8.88379 3.51562 8.88379H4.6875C5.11718 8.88379 5.46875 9.23536 5.46875 9.66504C5.46875 10.0947 5.11718 10.4463 4.6875 10.4463H3.51562C3.08595 10.4463 2.73438 10.0947 2.73438 9.66504ZM18.3594 6.14941H3.51562C3.08595 6.14941 2.73438 5.79784 2.73438 5.36816C2.73438 4.93849 3.08595 4.58691 3.51562 4.58691H18.3594C18.7891 4.58691 19.1406 4.93849 19.1406 5.36816C19.1406 5.79784 18.7891 6.14941 18.3594 6.14941Z"
-                                                                    fill="white" />
-                                                                <path
-                                                                    d="M19 18C21.7614 18 24 15.7614 24 13C24 10.2386 21.7614 8 19 8C16.2386 8 14 10.2386 14 13C14 15.7614 16.2386 18 19 18Z"
-                                                                    fill="#868686" />
-                                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                    d="M18.2904 13.6607L20.6449 11.3055C20.9138 11.0365 21.3511 11.0365 21.62 11.3055C21.889 11.5751 21.889 12.0117 21.62 12.2813L18.778 15.1234C18.509 15.3924 18.0718 15.3924 17.8028 15.1234L16.3814 13.702C16.1124 13.4331 16.1124 12.9958 16.3814 12.7269C16.6504 12.4579 17.0876 12.4579 17.3566 12.7269L18.2904 13.6607Z"
-                                                                    fill="white" />
-                                                            </svg>
-
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3><?php sb_e("Tickets Resolved"); ?></h3>
-                                                            <p class="ticket-resolved"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="ticket_resolved_chart">
-                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% in last 7 days</div-->
-                                                <!-- code update -->
-                                                <div class="metric-increase">
-                                                    <?php sb_e("Increase by"); ?>
-                                                    <span class="increase-pill">
-                                                        <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
-                                                </div>
-                                                <!-- code update -->
-                                            </div>
+                                            
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
                                                 <div class="graph_tabs">
@@ -3128,7 +3085,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3><?php sb_e("Tickets Pending"); ?></h3>
+                                                            <h3><?php sb_e("Active Tickets"); ?></h3>
                                                             <p class="tickets-pending"></p>
                                                         </div>
                                                     </div>
@@ -3147,6 +3104,51 @@ function sb_component_admin()
                                                     </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
 
+                                            </div>
+
+                                            <!--  -->
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                            <svg width="24" height="18" viewBox="0 0 24 18" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M19.5312 0.290039H2.34375C1.05467 0.290039 0 1.34471 0 2.63379V13.5713C0 14.8603 1.05467 15.915 2.34375 15.915H16.7031C16.6406 15.7197 16.6016 15.5166 16.5859 15.3056C15.3594 15.2275 14.3828 14.2197 14.3828 12.9775C14.3828 11.7353 15.3594 10.7275 16.5859 10.6494C16.6563 9.42285 17.6641 8.45411 18.9141 8.45411C20.1562 8.45411 21.1641 9.42285 21.2422 10.6494C21.4609 10.665 21.6719 10.7041 21.875 10.7822V2.63379C21.875 1.34471 20.8203 0.290039 19.5312 0.290039ZM5.85938 13.1807H3.51562C3.08595 13.1807 2.73438 12.8291 2.73438 12.3994C2.73438 11.9697 3.08595 11.6182 3.51562 11.6182H5.85938C6.28905 11.6182 6.64062 11.9697 6.64062 12.3994C6.64062 12.8291 6.28905 13.1807 5.85938 13.1807ZM2.73438 9.66504C2.73438 9.23536 3.08595 8.88379 3.51562 8.88379H4.6875C5.11718 8.88379 5.46875 9.23536 5.46875 9.66504C5.46875 10.0947 5.11718 10.4463 4.6875 10.4463H3.51562C3.08595 10.4463 2.73438 10.0947 2.73438 9.66504ZM18.3594 6.14941H3.51562C3.08595 6.14941 2.73438 5.79784 2.73438 5.36816C2.73438 4.93849 3.08595 4.58691 3.51562 4.58691H18.3594C18.7891 4.58691 19.1406 4.93849 19.1406 5.36816C19.1406 5.79784 18.7891 6.14941 18.3594 6.14941Z"
+                                                                    fill="white" />
+                                                                <path
+                                                                    d="M19 18C21.7614 18 24 15.7614 24 13C24 10.2386 21.7614 8 19 8C16.2386 8 14 10.2386 14 13C14 15.7614 16.2386 18 19 18Z"
+                                                                    fill="#868686" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M18.2904 13.6607L20.6449 11.3055C20.9138 11.0365 21.3511 11.0365 21.62 11.3055C21.889 11.5751 21.889 12.0117 21.62 12.2813L18.778 15.1234C18.509 15.3924 18.0718 15.3924 17.8028 15.1234L16.3814 13.702C16.1124 13.4331 16.1124 12.9958 16.3814 12.7269C16.6504 12.4579 17.0876 12.4579 17.3566 12.7269L18.2904 13.6607Z"
+                                                                    fill="white" />
+                                                            </svg>
+
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3><?php sb_e("Resolved Tickets"); ?></h3>
+                                                            <p class="ticket-resolved"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% in last 7 days</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                    <?php sb_e("Increase by"); ?>
+                                                    <span class="increase-pill">
+                                                        <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
+                                                </div>
+                                                <!-- code update -->
                                             </div>
                                         </section>
                                         <!--section class="dashboard-metrics">
@@ -3362,18 +3364,18 @@ function sb_component_admin()
                                                     </div>
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/resolved.svg" alt="<?php sb_e("Resolved"); ?>">
+                                                        <img src="./script/media/pending.svg" alt="<?php sb_e("Active"); ?>">
                                                         <div>
-                                                            <div><strong><?php sb_e("Resolved"); ?></strong></div>
-                                                            <div class="tickets-resolved"></div>
+                                                            <div><strong><?php sb_e("Active"); ?></strong></div>
+                                                            <div class="tickets-pending"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/pending.svg" alt="<?php sb_e("Pending"); ?>">
+                                                        <img src="./script/media/resolved.svg" alt="<?php sb_e("Resolved"); ?>">
                                                         <div>
-                                                            <div><strong><?php sb_e("Pending"); ?></strong></div>
-                                                            <div class="tickets-pending"></div>
+                                                            <div><strong><?php sb_e("Resolved"); ?></strong></div>
+                                                            <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                 </div>
