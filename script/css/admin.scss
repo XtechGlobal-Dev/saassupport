@@ -14201,6 +14201,11 @@ main {
                                 color: #fff;
                             }
                         }
+                        span{
+                            &.tag-label{
+                                max-width: 40px;
+                            }
+                        }
                     }
 
                     .tags-filter {
