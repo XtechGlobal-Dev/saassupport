@@ -260,7 +260,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     <hr />
                     <?php box_membership_plans($membership['id'], $expired) ?>
                     <?php box_credits(!$shopify) ?>
-                    <?php box_addons() ?>
+                    <?php //box_addons() ?>
                     <?php box_chart() ?>
                     <hr />
                     <hr />
