@@ -15395,6 +15395,9 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
 }
 @media only screen and (max-width: 767px) {
+  .sb-area-dashboard main .new_container .main-charts .sub_head2 {
+    max-width: 150px;
+  }
   #tab-membership .box-membership .box-black .membership-detail-list .detail-box .check {
     width: 55px !important;
     height: 55px;
