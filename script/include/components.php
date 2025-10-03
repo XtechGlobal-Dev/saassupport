@@ -7937,7 +7937,7 @@ function sb_component_admin()
         var agents = <?php echo json_encode($agents); ?>;
 
         // STEP 2: Build the <select> HTML
-        var $select = $('<select id="agent-select"><option value="">-- Select Agent --</option></select>');
+        var $select = $('<select id="agent-select" multiple><option value="">-- Select Agent --</option></select>');
         $.each(agents, function(id, name) {
             $select.append('<option value="'+id+'">'+name+'</option>');
         });
@@ -7946,15 +7946,24 @@ function sb_component_admin()
         $select.insertBefore($('input[data-id="supervisor-id"]'));
 
 
-        // STEP 4: Show current value in the <select>
-        const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
-        if(currentVal) {
-            $('#agent-select').val(currentVal);  /// Show current value
-        }
-
+        setTimeout(() => {
+             // STEP 4: Show current value in the <select>
+            const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
+            if(currentVal) {
+                var ids = currentVal.split(',').map(v => v.trim());
+                $('#agent-select').val(ids);
+            }
+        }, 1500);
+       
         // STEP 5: Auto-fill input when selection changes
         $('#supervisors').on('change', '#agent-select', function() {
-            $('input[data-id="supervisor-id"]').val($(this).val());
+            var selectedIds = $(this).val(); // array of selected values
+            if(selectedIds) {
+                $('input[data-id="supervisor-id"]').val(selectedIds.join(',')); // save as comma-separated
+            } else {
+                $('input[data-id="supervisor-id"]').val('');
+            }
+
         });
     });
     </script>
