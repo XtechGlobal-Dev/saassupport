@@ -13870,6 +13870,17 @@ main {
 }
 
 @media only screen and (max-width: 767px) {
+    .sb-area-dashboard {
+        main{
+             .new_container {
+                .main-charts {
+                    .sub_head2 {
+                        max-width: 150px;
+                    }
+                }
+             }
+        }
+    }
     #tab-membership{
         .box-membership {
             .box-black {
