@@ -7948,7 +7948,6 @@ function sb_component_admin()
 
         // STEP 4: Show current value in the <select>
         const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
-        alert(currentVal);
         if(currentVal) {
             $('#agent-select').val(currentVal);  /// Show current value
         }
