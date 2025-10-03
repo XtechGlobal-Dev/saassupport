@@ -5515,6 +5515,11 @@ textarea {
   transition: all 0.4s;
 }
 
+.sb-tags-cnt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
 .sb-tags-cnt > span {
   border: 1px dashed transparent;
   word-wrap: break-word;
@@ -5900,8 +5905,8 @@ td.sb-td-contact p {
   right: 15px;
 }
 .sb-filter-btn.sb-active > div {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 5px;
   height: fit-content;
 }
@@ -6491,6 +6496,10 @@ td.sb-td-contact p {
   border-radius: 40px;
   box-shadow: none;
 }
+.sb-board > .sb-admin-list > .sb-top .sb-select ul li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .sb-board > .sb-admin-list > .sb-top .sb-select p {
   color: #1E293B;
   font-size: 13px !important;
@@ -6519,6 +6528,9 @@ td.sb-td-contact p {
 .sb-board > .sb-admin-list > .sb-top .sb-flex .sb-filter-btn.sb-active svg {
   transform: rotate(180deg);
   transition: 0.5s all;
+}
+.sb-board > .sb-admin-list > .sb-top .sb-flex .sb-filter-btn .sb-select p {
+  display: block;
 }
 .sb-board > .sb-admin-list > .sb-top > .sb-select > p span {
   padding-left: 5px;
@@ -7438,6 +7450,11 @@ td.sb-td-contact p {
 }
 .sb-board .sb-user-details .sb-inline-departments #conversation-department {
   display: block;
+}
+.sb-board .sb-user-details .sb-inline-departments #conversation-department ul li {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sb-board .sb-user-details .sb-inline-departments #conversation-department p {
   position: relative !important;
@@ -14686,11 +14703,16 @@ div#messaging-channels {
   width: 12px;
   border-bottom: 4px solid #fff;
   border-right: 4px solid #fff;
+  position: absolute;
+  top: 17px;
 }
 #tab-membership p.first-p {
   margin: 0 0 37px 0 !important;
   font-size: 20px;
   color: #4B5563;
+}
+#tab-membership .plans-box-menu {
+  margin: 7px 0 37px;
 }
 #tab-membership .plans-box-menu ul {
   background: #F3F4F6;
@@ -14720,6 +14742,9 @@ div#messaging-channels {
 #tab-membership .plans-box {
   grid-template-columns: 1fr;
 }
+#tab-membership .plans-box p {
+  font-size: 21px;
+}
 #tab-membership .plans-box div {
   background: #fff;
   border: 1.33px solid #E5E7EB;
@@ -14731,17 +14756,21 @@ div#messaging-channels {
 #tab-membership .plans-box div.sb-visible {
   display: flex;
 }
+#tab-membership .plans-box div.sb-visible p {
+  margin-top: 21px !important;
+}
 #tab-membership .plans-box div h3 span {
   font-size: 12px;
   color: #4B5563;
 }
 #tab-membership .plans-box div h4 {
-  font-size: 16px;
+  font-size: 26px;
   color: #111827;
-  margin-bottom: 5px;
+  line-height: 37px;
+  margin-bottom: 10px;
 }
 #tab-membership .plans-box div h3 {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
 }
 #tab-membership .plans-box div h3 span {
@@ -14751,15 +14780,15 @@ div#messaging-channels {
 #tab-membership .plans-box div ul {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   margin-top: 30px;
 }
 #tab-membership .plans-box div ul li {
   color: #374151;
-  font-size: 15px;
+  font-size: 21px;
   font-weight: 400;
   position: relative;
-  padding-left: 20px;
+  padding-left: 24px;
 }
 #tab-membership .plans-box div ul li::before {
   content: "";
@@ -15366,6 +15395,34 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
 }
 @media only screen and (max-width: 767px) {
+  #tab-membership .box-membership .box-black .membership-detail-list .detail-box .check {
+    width: 55px !important;
+    height: 55px;
+  }
+  #tab-membership .box-membership .box-black .membership-detail-list .detail-box .check::before {
+    top: 12px;
+  }
+  #tab-membership p.first-p {
+    font-size: 18px;
+  }
+  #tab-membership .addons-title {
+    font-size: 30px;
+  }
+  #tab-membership .plans-box p {
+    font-size: 16px;
+  }
+  #tab-membership .plans-box div ul {
+    gap: 20px;
+  }
+  #tab-membership .plans-box div ul li {
+    font-size: 16px;
+  }
+  #tab-membership .plans-box div h3 {
+    font-size: 32px;
+  }
+  #tab-membership .plans-box div h4 {
+    font-size: 18px;
+  }
   .sb-input svg {
     margin-left: -23px !important;
   }
