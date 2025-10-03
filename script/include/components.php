@@ -939,7 +939,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             initTooltips();
 
             // 2. Run again every time choices changes (e.g., item added/removed)
-            tagsSelect.addEventListener('change', initTooltips);
+            tagsElement.addEventListener('change', initTooltips);
         });
 
 
@@ -5320,7 +5320,7 @@ function sb_component_admin()
                         initTooltips();
 
                         // 2. Run again every time choices changes (e.g., item added/removed)
-                        tagsSelect.addEventListener('change', initTooltips);
+                       // window.ticketTagsFilterChoices.addEventListener('change', initTooltips);
 
 
 
@@ -7922,8 +7922,44 @@ function sb_component_admin()
         return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     });
+
     </script>
     <?php
+    // Example: Fetch agents as an associative array: id => name
+    $agents = get_agents(false);
+    ?>
+
+    <script>
+    $(document).ready(function() {
+        $('input[data-id="supervisor-id"]').hide();
+
+        // STEP 1: Pass PHP agents to JS
+        var agents = <?php echo json_encode($agents); ?>;
+
+        // STEP 2: Build the <select> HTML
+        var $select = $('<select id="agent-select"><option value="">-- Select Agent --</option></select>');
+        $.each(agents, function(id, name) {
+            $select.append('<option value="'+id+'">'+name+'</option>');
+        });
+
+        // STEP 3: Append the <select> after the input field
+        $select.insertBefore($('input[data-id="supervisor-id"]'));
+
+
+        // STEP 4: Show current value in the <select>
+        const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
+        if(currentVal) {
+            $('#agent-select').val(currentVal);  /// Show current value
+        }
+
+        // STEP 5: Auto-fill input when selection changes
+        $('#supervisors').on('change', '#agent-select', function() {
+            $('input[data-id="supervisor-id"]').val($(this).val());
+        });
+    });
+    </script>
+
+<?php
 }
 /*
  * ----------------------------------------------------------
