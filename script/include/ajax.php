@@ -706,7 +706,14 @@ function sb_security($function) {
     ];
     $user_id = sb_post('user_id');
     $active_user = sb_get_active_user(sb_post('login-cookie'));
+    $supervisor = sb_supervisor();
 
+    // echo 'supervisor print start';
+    // print_r($supervisor);
+    // echo 'supervisor print end';
+
+    //print_r($function);
+   // echo '||';
     // No check
     $no_check = true;
     foreach ($security as $key => $value) {
@@ -719,6 +726,7 @@ function sb_security($function) {
         return true;
     }
 
+    //print_r($active_user);
     // Check
     if ($active_user && isset($active_user['user_type'])) {
         $user_type = $active_user['user_type'];
@@ -727,6 +735,8 @@ function sb_security($function) {
             $user_id = $current_user_id;
             $_POST['user_id'] = $current_user_id;
         }
+
+       // print_r($security['agent']);
 
         // Admin db
         if (sb_is_agent($active_user, true) && in_array($function, $security['admin_db'])) {
@@ -744,6 +754,21 @@ function sb_security($function) {
         if (in_array($function, $security['agent']) && sb_is_agent($user_type)) {
             return true;
         }
+
+        // Supervisor check
+
+        if(isset($supervisor['supervisor-id']) && in_array($current_user_id,explode(',',$supervisor['supervisor-id'])))
+        {
+            if(($function == 'get-all-settings' || $function == 'save-settings' || $function == 'reports' || $function == 'reports-export' || $function == 'open-ai-get-training-files' || $function == 'open-ai-articles-training' || $function == 'open-ai-file-training' || $function == 'open-ai-get-information' || $function == 'open-ai-url-training' || $function == 'open-ai-embeddings-delete' || $function == 'open-ai-playground-message') && $supervisor['supervisor-reports-area'] == 1)
+            {
+                return true;
+            }
+        }
+
+        if (in_array($function, $security['agent']) && $supervisor && sb_is_agent($user_type)) {
+            return true;
+        }
+
 
         // Admin check
         if (in_array($function, $security['admin']) && $user_type == 'admin') {
