@@ -42,19 +42,21 @@ function sb_profile_box()
                         sb_("Send a WhatsApp message template") .
                         '"><i class="sb-icon-social-wa"></i></a>'; // Deprecated: remove function_exists('sb_whatsapp_active')
                 }
+                $supervisor = sb_supervisor();
                 if (
                     (sb_is_agent(false, true, true) && !sb_supervisor()) ||
                     sb_get_multi_setting("agents", "agents-edit-user") ||
-                    (sb_supervisor() &&
-                        sb_get_multi_setting(
-                            "supervisor",
-                            "supervisor-edit-user"
-                        ))
+                    (sb_supervisor() && $supervisor['supervisor-edit-user'] == 1)
+                        
                 ) {
                     echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' .
                         sb_("Edit user") .
                         "</a>";
                 }
+                        print_r(sb_get_multi_setting(
+                            "supervisor",
+                            "supervisor-edit-user"
+                        ));
                 ?>
                 <a class="sb-start-conversation sb-btn sb-icon">
                     <i class="sb-icon-message"></i>
