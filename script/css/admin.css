@@ -6362,6 +6362,9 @@ td.sb-td-contact p {
 .sb-admin > main > div > .sb-top-bar > div:last-child .sb-btn + .sb-btn-icon {
   margin-left: 15px;
 }
+.sb-admin > main > div > .sb-top-bar .choices__list.choices__list--multiple {
+  display: block !important;
+}
 .sb-admin > main > div > .sb-tab {
   height: calc(100vh - 148px);
 }
@@ -13431,6 +13434,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 5px 0;
 }
 .choices__list.choices__list--multiple > div > button {
   border: none;

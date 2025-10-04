@@ -811,76 +811,76 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-                                                                                                                                                                                                                                                                                        position: relative;
-                                                                                                                                                                                                                                                                                        overflow: visible !important;
-            
-                                                                                                                                                                                                                                                                                    }
+            position: relative;
+            overflow: visible !important;
 
-                                                                                                                                                                                                                                                                                    .status-btn {
-                                                                                                                                                                                                                                                                                        border: none;
-                                                                                                                                                                                                                                                                                        border-radius: 8px;
-                                                                                                                                                                                                                                                                                        padding: 3px 12px;
-                                                                                                                                                                                                                                                                                        font-weight: 500;
-                                                                                                                                                                                                                                                                                        cursor: pointer;
-                                                                                                                                                                                                                                                                                        display: flex;
-                                                                                                                                                                                                                                                                                        align-items: center;
-                                                                                                                                                                                                                                                                                        gap: 4px;
-                                                                                                                                                                                                                                                                                        font-size: 14px;
-                                                                                                                                                                                                                                                                                    }
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list li,
-                                                                                                                                                                                                                                                                                    .priority-list li {
-                                                                                                                                                                                                                                                                                        font-size: 14px;
-                                                                                                                                                                                                                                                                                    }
+        .status-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 3px 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-dot {
-                                                                                                                                                                                                                                                                                        width: 10px !important;
-                                                                                                                                                                                                                                                                                        height: 10px !important;
-                                                                                                                                                                                                                                                                                    }
+        .status-list li,
+        .priority-list li {
+            font-size: 14px;
+        }
 
-                                                                                                                                                                                                                                                                                    .arrow {
-                                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                                    }
+        .status-dot {
+            width: 10px !important;
+            height: 10px !important;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list,
-                                                                                                                                                                                                                                                                                    .priority-list {
-                                                                                                                                                                                                                                                                                        display: none;
-                                                                                                                                                                                                                                                                                        position: absolute;
-                                                                                                                                                                                                                                                                                        top: 75%;
-                                                                                                                                                                                                                                                                                        left: 0;
-                                                                                                                                                                                                                                                                                        min-width: 170px;
-                                                                                                                                                                                                                                                                                        background: #fff;
-                                                                                                                                                                                                                                                                                        border: 1px solid #ddd;
-                                                                                                                                                                                                                                                                                        border-radius: 8px;
-                                                                                                                                                                                                                                                                                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-                                                                                                                                                                                                                                                                                        z-index: 9999;
-                                                                                                                                                                                                                                                                                        padding: 6px 0;
-                                                                                                                                                                                                                                                                                        margin: 0;
-                                                                                                                                                                                                                                                                                        list-style: none;
-                                                                                                                                                                                                                                                                                    }
+        .arrow {
+            font-size: 12px;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list li,
-                                                                                                                                                                                                                                                                                    .priority-list li {
-                                                                                                                                                                                                                                                                                        padding: 8px 16px;
-                                                                                                                                                                                                                                                                                        cursor: pointer;
-                                                                                                                                                                                                                                                                                        display: flex;
-                                                                                                                                                                                                                                                                                        align-items: center;
-                                                                                                                                                                                                                                                                                        gap: 4px;
-                                                                                                                                                                                                                                                                                        font-size: 15px;
-                                                                                                                                                                                                                                                                                        transition: background 0.15s;
-                                                                                                                                                                                                                                                                                    }
+        .status-list,
+        .priority-list {
+            display: none;
+            position: absolute;
+            top: 75%;
+            left: 0;
+            min-width: 170px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+            z-index: 9999;
+            padding: 6px 0;
+            margin: 0;
+            list-style: none;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-list li:hover,
-                                                                                                                                                                                                                                                                                    .priority-list li:hover {
-                                                                                                                                                                                                                                                                                        background: #f5f5f5;
-                                                                                                                                                                                                                                                                                    }
+        .status-list li,
+        .priority-list li {
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 15px;
+            transition: background 0.15s;
+        }
 
-                                                                                                                                                                                                                                                                                    .status-dot {
-                                                                                                                                                                                                                                                                                        width: 12px;
-                                                                                                                                                                                                                                                                                        height: 12px;
-                                                                                                                                                                                                                                                                                        border-radius: 50%;
-                                                                                                                                                                                                                                                                                        display: inline-block;
-                                                                                                                                                                                                                                                                                    } */
+        .status-list li:hover,
+        .priority-list li:hover {
+            background: #f5f5f5;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -898,7 +898,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                                 const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
                                 return template(`
                                     <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
-                                         data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                         data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  data-bs-toggle="tooltip" title="${data.label}" style="border: 1px solid ${color};">
                                         <span class="tag-dot" style="background-color:${color}"></span>
                                         <span class="tag-label">${data.label}</span>
                                         <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
@@ -928,48 +928,18 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 });
             }
 
+            // Re-init tooltips after Choices renders
+            function initTooltips() {
+                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                new bootstrap.Tooltip(el);
+                });
+            }
 
+            // 1. Run once after initial render
+            initTooltips();
 
-            // Code to display applied tags in a palette
-            // const paletteContainer = document.getElementById('selected-tags-palette');
-            // document.getElementById('tags-filter').addEventListener('change', function () {
-            // const selected = tagsFilterChoices.getValue();
-            //     const selectedValues = $(this).val(); // Gets array of selected values
-            //     paletteContainer.innerHTML = ''; // clear old circles
-            //     selected.forEach(item => {
-            //         const color = item.customProperties?.color || '#ccc';
-            //         const li = document.createElement('div');
-            //         li.className = 'is-selected';
-            //         li.setAttribute('data-item', '');
-            //         li.setAttribute('data-id', item.id);
-            //         li.setAttribute('data-value', item.value);
-            //         li.setAttribute('aria-selected', 'true');
-            //         li.setAttribute('data-color1', color);
-            //         li.style.border = `1px solid ${color}`;
-
-            //         const span = document.createElement('span');
-            //         span.className = 'tag-dot';
-            //         span.style.backgroundColor = color;
-
-            //         const text = document.createTextNode(item.label);
-
-            //         const button = document.createElement('button');
-            //         button.type = 'button';
-            //         button.className = 'choices__button';
-            //         button.setAttribute('aria-label', `Remove item: ${item.value}`);
-            //         button.dataset.button = '';
-
-            //         const icon = document.createElement('i');
-            //         icon.className = 'fa-solid fa-xmark choice-remove';
-            //         icon.setAttribute('aria-hidden', 'true');
-
-            //         button.appendChild(icon);
-            //         li.appendChild(span);
-            //         li.appendChild(text);
-            //         li.appendChild(button);
-            //         paletteContainer.appendChild(li);
-            //     });
-            // });
+            // 2. Run again every time choices changes (e.g., item added/removed)
+            tagsElement.addEventListener('change', initTooltips);
         });
 
 
@@ -3087,50 +3057,7 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                            <!--  -->
-                                            <div class="metric-card"
-                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
-                                                <div class="graph_tabs">
-                                                    <div class="metric-card-upper">
-                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
-                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
-                                                            <svg width="24" height="18" viewBox="0 0 24 18" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M19.5312 0.290039H2.34375C1.05467 0.290039 0 1.34471 0 2.63379V13.5713C0 14.8603 1.05467 15.915 2.34375 15.915H16.7031C16.6406 15.7197 16.6016 15.5166 16.5859 15.3056C15.3594 15.2275 14.3828 14.2197 14.3828 12.9775C14.3828 11.7353 15.3594 10.7275 16.5859 10.6494C16.6563 9.42285 17.6641 8.45411 18.9141 8.45411C20.1562 8.45411 21.1641 9.42285 21.2422 10.6494C21.4609 10.665 21.6719 10.7041 21.875 10.7822V2.63379C21.875 1.34471 20.8203 0.290039 19.5312 0.290039ZM5.85938 13.1807H3.51562C3.08595 13.1807 2.73438 12.8291 2.73438 12.3994C2.73438 11.9697 3.08595 11.6182 3.51562 11.6182H5.85938C6.28905 11.6182 6.64062 11.9697 6.64062 12.3994C6.64062 12.8291 6.28905 13.1807 5.85938 13.1807ZM2.73438 9.66504C2.73438 9.23536 3.08595 8.88379 3.51562 8.88379H4.6875C5.11718 8.88379 5.46875 9.23536 5.46875 9.66504C5.46875 10.0947 5.11718 10.4463 4.6875 10.4463H3.51562C3.08595 10.4463 2.73438 10.0947 2.73438 9.66504ZM18.3594 6.14941H3.51562C3.08595 6.14941 2.73438 5.79784 2.73438 5.36816C2.73438 4.93849 3.08595 4.58691 3.51562 4.58691H18.3594C18.7891 4.58691 19.1406 4.93849 19.1406 5.36816C19.1406 5.79784 18.7891 6.14941 18.3594 6.14941Z"
-                                                                    fill="white" />
-                                                                <path
-                                                                    d="M19 18C21.7614 18 24 15.7614 24 13C24 10.2386 21.7614 8 19 8C16.2386 8 14 10.2386 14 13C14 15.7614 16.2386 18 19 18Z"
-                                                                    fill="#868686" />
-                                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                    d="M18.2904 13.6607L20.6449 11.3055C20.9138 11.0365 21.3511 11.0365 21.62 11.3055C21.889 11.5751 21.889 12.0117 21.62 12.2813L18.778 15.1234C18.509 15.3924 18.0718 15.3924 17.8028 15.1234L16.3814 13.702C16.1124 13.4331 16.1124 12.9958 16.3814 12.7269C16.6504 12.4579 17.0876 12.4579 17.3566 12.7269L18.2904 13.6607Z"
-                                                                    fill="white" />
-                                                            </svg>
-
-                                                        </div>
-                                                        <div class="metric-info">
-                                                            <h3><?php sb_e("Tickets Resolved"); ?></h3>
-                                                            <p class="ticket-resolved"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="w-100">
-                                                        <div class="ticket_resolved_chart">
-                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
-                                                        </div>
-                                                        <script>
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% in last 7 days</div-->
-                                                <!-- code update -->
-                                                <div class="metric-increase">
-                                                    <?php sb_e("Increase by"); ?>
-                                                    <span class="increase-pill">
-                                                        <span class="total-resolved-tickets-increase"></span><span>%</span>
-                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
-                                                </div>
-                                                <!-- code update -->
-                                            </div>
+                                            
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
                                                 <div class="graph_tabs">
@@ -3158,7 +3085,7 @@ function sb_component_admin()
                                                             </svg>
                                                         </div>
                                                         <div class="metric-info">
-                                                            <h3><?php sb_e("Tickets Pending"); ?></h3>
+                                                            <h3><?php sb_e("Active Tickets"); ?></h3>
                                                             <p class="tickets-pending"></p>
                                                         </div>
                                                     </div>
@@ -3177,6 +3104,51 @@ function sb_component_admin()
                                                     </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
                                                 </div>
 
+                                            </div>
+
+                                            <!--  -->
+                                            <div class="metric-card"
+                                                style="background: linear-gradient(90deg, #FFFFFF 0%, #FFF2FE 100%);">
+                                                <div class="graph_tabs">
+                                                    <div class="metric-card-upper">
+                                                        <div class="metric-icon" style="background-color: #DE3ACE;">
+                                                            <!--i class="fa-solid fa-calendar-check" style="color: #ffffff;"></i-->
+                                                            <svg width="24" height="18" viewBox="0 0 24 18" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M19.5312 0.290039H2.34375C1.05467 0.290039 0 1.34471 0 2.63379V13.5713C0 14.8603 1.05467 15.915 2.34375 15.915H16.7031C16.6406 15.7197 16.6016 15.5166 16.5859 15.3056C15.3594 15.2275 14.3828 14.2197 14.3828 12.9775C14.3828 11.7353 15.3594 10.7275 16.5859 10.6494C16.6563 9.42285 17.6641 8.45411 18.9141 8.45411C20.1562 8.45411 21.1641 9.42285 21.2422 10.6494C21.4609 10.665 21.6719 10.7041 21.875 10.7822V2.63379C21.875 1.34471 20.8203 0.290039 19.5312 0.290039ZM5.85938 13.1807H3.51562C3.08595 13.1807 2.73438 12.8291 2.73438 12.3994C2.73438 11.9697 3.08595 11.6182 3.51562 11.6182H5.85938C6.28905 11.6182 6.64062 11.9697 6.64062 12.3994C6.64062 12.8291 6.28905 13.1807 5.85938 13.1807ZM2.73438 9.66504C2.73438 9.23536 3.08595 8.88379 3.51562 8.88379H4.6875C5.11718 8.88379 5.46875 9.23536 5.46875 9.66504C5.46875 10.0947 5.11718 10.4463 4.6875 10.4463H3.51562C3.08595 10.4463 2.73438 10.0947 2.73438 9.66504ZM18.3594 6.14941H3.51562C3.08595 6.14941 2.73438 5.79784 2.73438 5.36816C2.73438 4.93849 3.08595 4.58691 3.51562 4.58691H18.3594C18.7891 4.58691 19.1406 4.93849 19.1406 5.36816C19.1406 5.79784 18.7891 6.14941 18.3594 6.14941Z"
+                                                                    fill="white" />
+                                                                <path
+                                                                    d="M19 18C21.7614 18 24 15.7614 24 13C24 10.2386 21.7614 8 19 8C16.2386 8 14 10.2386 14 13C14 15.7614 16.2386 18 19 18Z"
+                                                                    fill="#868686" />
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M18.2904 13.6607L20.6449 11.3055C20.9138 11.0365 21.3511 11.0365 21.62 11.3055C21.889 11.5751 21.889 12.0117 21.62 12.2813L18.778 15.1234C18.509 15.3924 18.0718 15.3924 17.8028 15.1234L16.3814 13.702C16.1124 13.4331 16.1124 12.9958 16.3814 12.7269C16.6504 12.4579 17.0876 12.4579 17.3566 12.7269L18.2904 13.6607Z"
+                                                                    fill="white" />
+                                                            </svg>
+
+                                                        </div>
+                                                        <div class="metric-info">
+                                                            <h3><?php sb_e("Resolved Tickets"); ?></h3>
+                                                            <p class="ticket-resolved"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-100">
+                                                        <div class="ticket_resolved_chart">
+                                                            <canvas class="mt-0" id="ticket_resolved_chart"></canvas>
+                                                        </div>
+                                                        <script>
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <!--div class="metric-increase">Increase by <span class="total-resolved-tickets-increase"></span>% in last 7 days</div-->
+                                                <!-- code update -->
+                                                <div class="metric-increase">
+                                                    <?php sb_e("Increase by"); ?>
+                                                    <span class="increase-pill">
+                                                        <span class="total-resolved-tickets-increase"></span><span>%</span>
+                                                    </span>&nbsp;<?php sb_e("in last"); ?> 7 <?php sb_e("days"); ?>
+                                                </div>
+                                                <!-- code update -->
                                             </div>
                                         </section>
                                         <!--section class="dashboard-metrics">
@@ -3392,18 +3364,18 @@ function sb_component_admin()
                                                     </div>
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/resolved.svg" alt="<?php sb_e("Resolved"); ?>">
+                                                        <img src="./script/media/pending.svg" alt="<?php sb_e("Active"); ?>">
                                                         <div>
-                                                            <div><strong><?php sb_e("Resolved"); ?></strong></div>
-                                                            <div class="tickets-resolved"></div>
+                                                            <div><strong><?php sb_e("Active"); ?></strong></div>
+                                                            <div class="tickets-pending"></div>
                                                         </div>
                                                     </div>
                                                     <div class="button_ext">
                                                         <!--i class="fa-solid fa-ticket" style="color: #000;"></i-->
-                                                        <img src="./script/media/pending.svg" alt="<?php sb_e("Pending"); ?>">
+                                                        <img src="./script/media/resolved.svg" alt="<?php sb_e("Resolved"); ?>">
                                                         <div>
-                                                            <div><strong><?php sb_e("Pending"); ?></strong></div>
-                                                            <div class="tickets-pending"></div>
+                                                            <div><strong><?php sb_e("Resolved"); ?></strong></div>
+                                                            <div class="tickets-resolved"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4445,7 +4417,10 @@ function sb_component_admin()
                         }
                         .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {display: inline;}
 
-                        #agents-menu-title, #collapse, #show-profile-images-admin, #hide-conversation-details, #notes-settings, #tags-starred, #push-notifications, #welcome-trigger, #welcome-delay, #follow-delay {display: none;}
+                        #agents-menu-title, #collapse, #show-profile-images-admin, #hide-conversation-details, #notes-settings, #tags-starred, #push-notifications, #welcome-trigger, #welcome-delay, #follow-delay,
+                        #sb-import-users,#sender-name,#visitor-autodata,#visitor-autodata, #visitor-default-name,#envato-validation,#registration-user-details-success,#registration-link,#login-verification-url,#tickets-default-department,#tickets-registration-redirect,#tickets-conversation-name,
+							#follow-disable-office-hours,#follow-disable-channels,#welcome-disable-office-hours,#popup-message,
+							#login-message,#login-icon,admin-title,#custom-js,#custom-css,#manifest-url,#color-admin-2,#admin-title{display: none;}
                     </style>
                     <!--  -->
 
@@ -5269,7 +5244,7 @@ function sb_component_admin()
                                         const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
                                         return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
-                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}" data-bs-toggle="tooltip" title="${data.label}" style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
                                                 <span class="tag-label">${data.label}</span>
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
@@ -5322,7 +5297,7 @@ function sb_component_admin()
                                         const color = data.customProperties && data.customProperties.color ? data.customProperties.color : '';
                                         return template(`
                                             <div class="${classNames.item} ${data.highlighted ? classNames.highlightedState : classNames.itemSelectable} ${data.placeholder ? classNames.placeholder : ''}"
-                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  style="border: 1px solid ${color};">
+                                                data-item data-id="${data.id}" data-value="${data.value}" ${data.active ? 'aria-selected="true"' : ''} ${data.disabled ? 'aria-disabled="true"' : ''} data-color1="${color}"  data-bs-toggle="tooltip" title="${data.label}"  style="border: 1px solid ${color};">
                                                 <span class="tag-dot" style="background-color:${color}"></span>
                                                 <span class="tag-label">${data.label}</span>
                                                 <button type="button" class="choices__button" aria-label="Remove item: ${data.value}" data-button><i class="fa-solid fa-xmark choice-remove"></i></button>
@@ -5332,6 +5307,23 @@ function sb_component_admin()
                                 };
                             }
                         });
+
+
+                        // Re-init tooltips after Choices renders
+                        function initTooltips() {
+                            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                            new bootstrap.Tooltip(el);
+                            });
+                        }
+
+                        // 1. Run once after initial render
+                        initTooltips();
+
+                        // 2. Run again every time choices changes (e.g., item added/removed)
+                       // window.ticketTagsFilterChoices.addEventListener('change', initTooltips);
+
+
+
 
                         refreshTagDots();
                         ticketDetailTagsFilter.addEventListener('change', refreshTagDots);
@@ -7922,6 +7914,61 @@ function sb_component_admin()
     if ($is_cloud) {
         sb_cloud_css_js();
     }
+    ?>
+    <script>
+    jQuery(document).ready(function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+
+    </script>
+    <?php
+    // Example: Fetch agents as an associative array: id => name
+    $agents = get_agents(false);
+    ?>
+
+    <script>
+    $(document).ready(function() {
+        $('input[data-id="supervisor-id"]').hide();
+
+        // STEP 1: Pass PHP agents to JS
+        var agents = <?php echo json_encode($agents); ?>;
+
+        // STEP 2: Build the <select> HTML
+        var $select = $('<select id="agent-select" multiple><option value="">-- Select Agent --</option></select>');
+        $.each(agents, function(id, name) {
+            $select.append('<option value="'+id+'">'+name+'</option>');
+        });
+
+        // STEP 3: Append the <select> after the input field
+        $select.insertBefore($('input[data-id="supervisor-id"]'));
+
+
+        setTimeout(() => {
+             // STEP 4: Show current value in the <select>
+            const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
+            if(currentVal) {
+                var ids = currentVal.split(',').map(v => v.trim());
+                $('#agent-select').val(ids);
+            }
+        }, 1500);
+       
+        // STEP 5: Auto-fill input when selection changes
+        $('#supervisors').on('change', '#agent-select', function() {
+            var selectedIds = $(this).val(); // array of selected values
+            if(selectedIds) {
+                $('input[data-id="supervisor-id"]').val(selectedIds.join(',')); // save as comma-separated
+            } else {
+                $('input[data-id="supervisor-id"]').val('');
+            }
+
+        });
+    });
+    </script>
+
+<?php
 }
 /*
  * ----------------------------------------------------------
