@@ -3038,6 +3038,15 @@ function sb_get_agents_ids($admins = true) {
     return $agents_ids;
 }
 
+function get_agents($admins = true) {
+    $agents = sb_db_get('SELECT id, concat(first_name,last_name) as agent_name FROM sb_users WHERE user_type = "agent"' . ($admins ? ' OR user_type = "admin"' : ''), false);
+     $agents_array = [];
+    for ($i = 0; $i < count($agents); $i++) {
+        $agents_array[$agents[$i]['id']] = $agents[$i]['agent_name'];
+    }
+    return $agents_array;
+}
+
 function sb_get_avatar($first_name, $last_name = '') {
     $picture_url = SB_URL . '/media/user.svg';
     $first_char_last_name = mb_substr($last_name, 0, 1);

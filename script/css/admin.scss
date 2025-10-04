@@ -2795,6 +2795,11 @@ td.sb-td-contact {
                         }
                     }
                 }
+                .choices__list{
+                        &.choices__list--multiple {
+                                display: block !important;
+                            }
+                }
             }
 
             >.sb-tab {
@@ -11150,6 +11155,7 @@ $tag-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 5px 0;
 
     >button {
         border: none;
