@@ -6173,7 +6173,7 @@
     */
 
     $(document).ready(function () {
-         console.log('target 0');
+         console.log('target88888');
         main = $('.sb-admin, .sb-admin-start');
         if (main.length) {
             admin = true;
@@ -7325,9 +7325,32 @@
 
             $('.tickets-area').css('visibility', 'visible');
 
-        }, 400); // small delay so activeUser() is ready
+
+             
+
+        }, 1400); // small delay so activeUser() is ready
 
         //$('.header_left h2[data-id="tickets-list-area"]').trigger('click');
+
+        const setChatbotHeight = () =>
+        {
+            const chatWindowHeight = parseInt($('.sb-scroll-area  > .sb-header').outerHeight(),10);
+            $('.wave-bg').css('margin-top',chatWindowHeight - 23 + 'px !important')
+        }
+
+        $('.sb-scroll-area').on('click','.sb-header .sb-icon-close, .sb-user-conversations li,.sb-btn-new-conversation',function()
+        {
+            setTimeout(function()
+            {
+                setChatbotHeight();
+            },400);
+        });
+
+        setTimeout(function()
+        {
+            setChatbotHeight();
+        },1200);
+       
     }
 
 }(jQuery));

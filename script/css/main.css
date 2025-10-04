@@ -4755,8 +4755,10 @@ div ul.sb-menu .li:hover,
   background: rgb(144, 154, 165);
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active .wave-bg {
-  margin-top: 60px !important;
+.sb-main.sb-chat.sb-cloud.sb-active {
+  /*.wave-bg {
+      margin-top: 60px !important; 
+  }*/
 }
 .sb-main.sb-chat.sb-cloud.sb-active .sb-list.sb-active {
   margin-top: 128px !important;
@@ -4779,17 +4781,10 @@ div ul.sb-menu .li:hover,
   top: 36px;
 }
 
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .wave-bg {
-  margin-top: 108px !important;
-}
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-list.sb-active {
   margin-top: 188px !important;
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active .wave-bg,
-.sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active .wave-bg {
-  margin-top: 108px !important;
-}
 .sb-main.sb-chat.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active .sb-list.sb-active,
 .sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active .sb-list.sb-active {
   margin-top: 188px !important;
