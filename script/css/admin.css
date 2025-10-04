@@ -5907,8 +5907,12 @@ td.sb-td-contact p {
 .sb-filter-btn.sb-active > div {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px;
+  gap: 15px;
   height: fit-content;
+}
+.sb-filter-btn.sb-active > div .sb-select {
+  width: 100%;
+  margin: 0;
 }
 .sb-filter-btn.sb-active:after {
   display: none;
@@ -11558,6 +11562,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 }
 .sb-area-articles[data-type=categories] .sb-nav .ul-categories {
   display: block !important;
+  margin-top: 15px;
 }
 .sb-area-articles[data-type=categories] .sb-nav .ul-articles,
 .sb-area-articles[data-type=categories] .sb-nav .sb-add-article, .sb-area-articles[data-type=categories] .sb-nav + .sb-content-articles {
@@ -11900,6 +11905,12 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .sb-lightbox .sb-main > div {
   height: auto;
   width: 100%;
+}
+.sb-lightbox .sb-main > div .sb-details {
+  flex: 100%;
+}
+.sb-lightbox .sb-main > div .sb-edit-box {
+  flex: 100%;
 }
 .sb-lightbox .sb-main > .sb-title + *,
 .sb-lightbox .sb-main > div > .sb-title + *,
@@ -14079,6 +14090,7 @@ li.menu_head:hover {
   padding: 3px 10px 3px 10px;
   min-height: 30px;
   max-width: 97%;
+  box-sizing: border-box;
 }
 
 .ticket-fields .tags-filter {
@@ -14531,6 +14543,19 @@ div#messaging-channels {
 .sb-area-users .sb-scroll-area {
   overflow: hidden;
   overflow-x: scroll;
+}
+.sb-area-users.sb-active .sb-filter-btn.sb-active > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.sb-area-users.sb-active .sb-filter-btn.sb-active > div .sb-select {
+  position: relative;
+}
+.sb-area-users.sb-active .sb-filter-btn.sb-active > div .sb-select ul li {
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  width: 170px;
 }
 
 .sb-scroll-area .bulk-users-container {
