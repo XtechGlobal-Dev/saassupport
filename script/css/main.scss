@@ -112,9 +112,9 @@
 }
 
 .sb-main.sb-chat.sb-cloud.sb-active {
-    .wave-bg {
-        margin-top: 60px !important;
-    }
+    /*.wave-bg {
+        margin-top: 60px !important; 
+    }*/
     .sb-list.sb-active {
         margin-top: 128px !important;
     }
@@ -140,15 +140,15 @@
             .sb-scroll-area {
                 right: -54px;
                 top: 36px;
-            }
+            } 
         }
     }
 }
 
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active {
-    .wave-bg {
-        margin-top: 108px !important;
-    }
+    // .wave-bg {
+    //     margin-top: 108px !important;
+    // }
     .sb-list.sb-active {
         margin-top: 188px !important;
     }
@@ -156,9 +156,9 @@
 
 .sb-main.sb-chat.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active,
 .sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active {
-    .wave-bg {
-        margin-top: 108px !important;
-    }
+    // .wave-bg {
+    //     margin-top: 108px !important;
+    // }
     .sb-list.sb-active {
         margin-top: 188px !important;
     }
