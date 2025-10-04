@@ -4757,6 +4757,7 @@ div ul.sb-menu .li:hover,
 
 .sb-main.sb-chat.sb-cloud.sb-active .wave-bg {
   margin-top: 60px !important;
+  z-index: 99;
 }
 .sb-main.sb-chat.sb-cloud.sb-active .sb-list.sb-active {
   margin-top: 128px !important;

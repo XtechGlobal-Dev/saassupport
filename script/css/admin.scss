@@ -2242,8 +2242,12 @@ td.sb-td-contact {
         >div {
                display: grid;
                grid-template-columns: 1fr 1fr;
-            gap: 5px;
-            height: fit-content;
+                gap: 15px;
+                height: fit-content;
+                .sb-select{
+                    width: 100%;
+                    margin: 0;
+                }
         }
 
         &:after {
@@ -9021,6 +9025,7 @@ ul.status-list.dropdown-menu {
 
             .ul-categories {
                 display: block !important;
+                margin-top: 15px;
             }
 
             .ul-articles,
@@ -9435,6 +9440,12 @@ ul.status-list.dropdown-menu {
         >div {
             height: auto;
             width: 100%;
+           .sb-details{
+            flex: 100%;
+           }
+           .sb-edit-box{
+            flex: 100%;
+           }
         }
 
         >.sb-title+*,
@@ -12000,6 +12011,7 @@ li.menu_head:hover {
         padding: 3px 10px 3px 10px;
         min-height: 30px;
         max-width: 97%;
+        box-sizing: border-box;
     }
 }
 
@@ -12584,6 +12596,25 @@ div#messaging-channels {
     .sb-scroll-area {
         overflow: hidden;
         overflow-x: scroll;
+    }
+    &.sb-active {
+        .sb-filter-btn.sb-active{
+             > div{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                    .sb-select{
+                        position: relative ;
+                        ul{
+                            li{
+                                text-overflow: ellipsis;
+                                overflow-x: hidden;
+                                width: 170px;
+                            }
+                        }
+                    }
+             }
+        }
     }
 }
 
