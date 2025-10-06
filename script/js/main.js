@@ -7342,13 +7342,13 @@
         {
             setTimeout(function()
             {
-                setChatbotHeight();
+               // setChatbotHeight();
             },400);
         });
 
         setTimeout(function()
         {
-            setChatbotHeight();
+           // setChatbotHeight();
         },1200);
        
     }
