@@ -25,9 +25,9 @@ function sb_dialogflow_chatbot_area($header) { ?>
                         <li data-type="training" class="sb-active">
                             <?php sb_e('Training') ?>
                         </li>
-                        <!-- <li data-type="flows">
-                            <?php //sb_e('Flows') ?>
-                        </li> -->
+                        <li data-type="flows">
+                            <?php sb_e('Flows') ?>
+                        </li>
                         <li data-type="playground">
                             <?php sb_e('Playground') ?>
                         </li>
