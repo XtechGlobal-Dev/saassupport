@@ -24,7 +24,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
             die();
         }
     }
-}
+} 
 ?>
 <html lang="en-US">
 <head>
