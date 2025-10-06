@@ -112,16 +112,6 @@
 }
 
 .sb-main.sb-chat.sb-cloud.sb-active {
-<<<<<<< HEAD
-    /*.wave-bg {
-        margin-top: 60px !important; 
-    }*/
-=======
-    .wave-bg {
-        margin-top: 60px !important;
-        z-index: 99;
-    }
->>>>>>> 122aa68b3c67b25a61129d066046e602905eddae
     .sb-list.sb-active {
         margin-top: 128px !important;
     }
@@ -519,12 +509,8 @@ div ul.sb-menu li:hover,
         }
     }
 
-    .sb-header-main {
+    .sb-header-main { 
         padding: 0 20px 25px 20px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
         z-index: 9;
 
         >div {
@@ -722,10 +708,6 @@ div ul.sb-menu li:hover,
 
     .sb-header-agent {
         padding: 20px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0 !important;
         opacity: 1 !important;
         z-index: 11;
 
@@ -733,7 +715,7 @@ div ul.sb-menu li:hover,
             padding-top: 90px;
             margin-top: 0;
         }
-
+ 
         &:hover {
             .sb-profile {
                 margin-left: 60px !important;
