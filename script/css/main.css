@@ -4755,10 +4755,6 @@ div ul.sb-menu .li:hover,
   background: rgb(144, 154, 165);
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active .wave-bg {
-  /*margin-top: 60px !important;*/
-  z-index: 99;
-}
 .sb-main.sb-chat.sb-cloud.sb-active .sb-list.sb-active {
   margin-top: 128px !important;
 }
@@ -5086,10 +5082,6 @@ div ul.sb-menu li:hover,
 }
 .sb-chat .sb-header-main {
   padding: 0 20px 25px 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   z-index: 9;
 }
 .sb-chat .sb-header-main > div {
@@ -5235,10 +5227,6 @@ div ul.sb-menu li:hover,
 }
 .sb-chat .sb-header-agent {
   padding: 20px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0 !important;
   opacity: 1 !important;
   z-index: 11;
 }
