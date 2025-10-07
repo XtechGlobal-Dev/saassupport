@@ -24,7 +24,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
             die();
         }
     }
-}
+} 
 ?>
 <html lang="en-US">
 <head>
@@ -297,7 +297,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <span class="required-label">
                             <?php sb_e('Last name') ?>
                         </span>
-                        <input type="text" placeholder="Last name" />
+                        <input type="text" placeholder="Last name" /> 
                     </div>
                     <div id="email" data-type="text" class="sb-input sb-type-input-button">
                         <span class="required-label">
