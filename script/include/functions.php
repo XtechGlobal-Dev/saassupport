@@ -1762,7 +1762,7 @@ function sb_component_editor($admin = true) {
         }
         ?>
         <div class="sb-textarea">
-            <textarea placeholder="<?php sb_e('Write a message...') ?>"></textarea>
+            <textarea style="min-height: 34px; max-height: 34px;" placeholder="<?php sb_e('Write a message...') ?>"></textarea>
         </div>
         <div class="sb-attachments"></div>
         <?php
