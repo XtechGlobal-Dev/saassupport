@@ -2239,8 +2239,8 @@ div ul.sb-menu,
 
 .sb-chat .sb-article > .sb-title:first-child {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .sb-chat .sb-article h2 {
   font-size: 17px;
@@ -4755,10 +4755,6 @@ div ul.sb-menu .li:hover,
   background: rgb(144, 154, 165);
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active .sb-list.sb-active {
-  margin-top: 128px !important;
-}
-
 #registration .sb-content {
   max-height: 440px;
   overflow-y: scroll;
@@ -5046,7 +5042,7 @@ div ul.sb-menu li:hover,
   font-size: 17px;
   line-height: 46px;
   letter-spacing: 0.1px;
-  position: absolute;
+  position: sticky;
   left: 0;
   right: 0;
   top: 0 !important;
@@ -5493,11 +5489,7 @@ div ul.sb-menu li:hover,
 .sb-chat .sb-dashboard {
   position: relative;
   z-index: 2;
-  margin-top: 210px;
-  min-height: 350px;
-  max-height: 350px;
   background: none;
-  overflow-y: scroll;
 }
 .sb-chat .sb-dashboard::-webkit-scrollbar {
   width: 5px;
@@ -5565,7 +5557,7 @@ div ul.sb-menu li:hover,
   margin-top: 150px;
 }
 .sb-chat .sb-panel {
-  padding: 90px 30px 30px;
+  padding: 15px;
   min-height: calc(100% - 120px);
 }
 .sb-chat .sb-panel.sb-loading:before {
@@ -5583,7 +5575,6 @@ div ul.sb-menu li:hover,
   background: rgb(243, 243, 243);
 }
 .sb-chat .sb-init-form {
-  margin-top: 210px;
   position: relative;
   z-index: 9;
   text-align: left;
@@ -5862,10 +5853,6 @@ div ul.sb-menu li:hover,
 .sb-chat .sb-label-date-top {
   top: 83px;
   height: 0;
-}
-
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-dashboard.sb-active {
-  margin-top: 175px;
 }
 
 .sb-main.sb-chat.sb-cloud.sb-active .sb-scroll-area .sb-header {

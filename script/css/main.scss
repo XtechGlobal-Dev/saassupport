@@ -111,11 +111,11 @@
     }
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active {
-    .sb-list.sb-active {
-        margin-top: 128px !important;
-    }
-}
+// .sb-main.sb-chat.sb-cloud.sb-active {
+//     .sb-list.sb-active {
+//         margin-top: 128px !important;
+//     }
+// }
 
 #registration {
     .sb-content {
@@ -468,7 +468,7 @@ div ul.sb-menu li:hover,
             font-size: 17px;
             line-height: 46px;
             letter-spacing: .1px;
-            position: absolute;
+            position: sticky;
             left: 0;
             right: 0;
             top: 0 !important;
@@ -1048,11 +1048,11 @@ div ul.sb-menu li:hover,
     .sb-dashboard {
         position: relative;
         z-index: 2;
-        margin-top: 210px;
-        min-height: 350px;
-        max-height: 350px;
+        // margin-top: 210px;
+        // min-height: 350px;
+        // max-height: 350px;
         background: none;
-        overflow-y: scroll;
+        // overflow-y: scroll;
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -1144,7 +1144,7 @@ div ul.sb-menu li:hover,
     }
 
     .sb-panel {
-        padding: 90px 30px 30px;
+        padding: 15px;
         min-height: calc(100% - 120px);
 
         &.sb-loading:before {
@@ -1169,8 +1169,7 @@ div ul.sb-menu li:hover,
         }
     }
 
-    .sb-init-form {
-        margin-top: 210px;
+    .sb-init-form { 
         position: relative;
         z-index: 9;
         text-align: left;
@@ -1500,9 +1499,6 @@ div ul.sb-menu li:hover,
     }
 }
 
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-dashboard.sb-active {
-    margin-top: 175px;
-}
 
 .sb-main.sb-chat.sb-cloud.sb-active .sb-scroll-area .sb-header {
     padding-bottom: 20px !important;
