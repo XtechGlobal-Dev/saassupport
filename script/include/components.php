@@ -5884,7 +5884,7 @@ function sb_component_admin()
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="<?php sb_e('Search ...') ?>" />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>
@@ -6239,7 +6239,7 @@ function sb_component_admin()
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="<?php sb_e('Search ...') ?>" />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>
@@ -6796,7 +6796,7 @@ function sb_component_admin()
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="<?php sb_e('Search ...') ?>" />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>
@@ -7287,7 +7287,7 @@ function sb_component_admin()
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="<?php sb_e('Search ...') ?>" />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>
@@ -7337,7 +7337,7 @@ function sb_component_admin()
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="<?php sb_e('Search ...') ?>" />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>
@@ -7566,7 +7566,7 @@ function sb_component_admin()
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="<?php sb_e('Search ...') ?>" />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>
@@ -8018,7 +8018,7 @@ function sb_apps_area($apps, $cloud_active_apps)
                                             <div class="sb-search-dropdown">
                                                 <div class="sb-search-btn">
                                                     <i class="sb-icon sb-icon-search"></i>
-                                                    <input id="sb-search-settings" type="text" autocomplete="false"
+                                                    <input class="sb-search-settings" type="text" autocomplete="false"
                                                         placeholder="Search ..." />
                                                 </div>
                                                 <div class="sb-search-dropdown-items"></div>

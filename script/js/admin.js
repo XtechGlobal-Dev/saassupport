@@ -7873,7 +7873,7 @@
             return false;
         });
 
-        $(settings_area).on('input', '#sb-search-settings', function () {
+        $(settings_area).on('input', '.sb-search-settings', function () {
             let search = $(this).val().toLowerCase();
             SBF.search(search, () => {
                 let code = '';
