@@ -47,22 +47,23 @@ function sb_profile_box()
                     (sb_is_agent(false, true, true) && !sb_supervisor()) ||
                     sb_get_multi_setting("agents", "agents-edit-user") ||
                     (sb_supervisor() && $supervisor['supervisor-edit-user'] == 1)
-                        
+
                 ) {
                     echo ' <a class="sb-edit sb-btn sb-icon" data-button="toggle" data-hide="sb-profile-area" data-show="sb-edit-area"><i class="sb-icon-user"></i>' .
                         sb_("Edit user") .
                         "</a>";
                 }
-                        print_r(sb_get_multi_setting(
-                            "supervisor",
-                            "supervisor-edit-user"
-                        ));
+                print_r(sb_get_multi_setting(
+                    "supervisor",
+                    "supervisor-edit-user"
+                ));
                 ?>
                 <a class="sb-start-conversation sb-btn sb-icon">
                     <i class="sb-icon-message"></i>
                     <?php sb_e("Start a conversation"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                    data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -100,7 +101,8 @@ function sb_profile_box()
                     <i class="sb-icon-check"></i>
                     <?php sb_e("Save changes"); ?>
                 </a>
-                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area" data-show="sb-table-area">
+                <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
+                    data-show="sb-table-area">
                     <i class="sb-icon-close"></i>
                 </a>
             </div>
@@ -150,8 +152,9 @@ function sb_profile_box()
                             <?php sb_e("Password"); ?>
                         </span>
                         <input type="password" id="edit-profile-password" />
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="toggleEditProfilePassword" width="24" height="24" color="#000000"
-                            fill="none" style="margin-left: -26px;margin-right: 10px; cursor: pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="toggleEditProfilePassword"
+                            width="24" height="24" color="#000000" fill="none"
+                            style="margin-left: -26px;margin-right: 10px; cursor: pointer;">
                             <path
                                 d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
                                 stroke="#141B34" stroke-width="1.5" />
@@ -775,10 +778,10 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         }
 
         /* .sb-td-tags span {
-                                                                                                                                                                         margin: 3px 5px 0 0;
-                                                                                                                                                                        padding: .45em .75em;
-                                                                                                                                                                        font-size: 13px
-                                                                                                                                                                    } */
+                                                                                                                                                                                 margin: 3px 5px 0 0;
+                                                                                                                                                                                padding: .45em .75em;
+                                                                                                                                                                                font-size: 13px
+                                                                                                                                                                            } */
 
         .sb_table_new tbody td.sb-td-tags {
             white-space: unset;
@@ -813,76 +816,76 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
         /*********  Statuses list CSS ***********/
         /* .status-dropdown {
-            position: relative;
-            overflow: visible !important;
+                    position: relative;
+                    overflow: visible !important;
 
-        }
+                }
 
-        .status-btn {
-            border: none;
-            border-radius: 8px;
-            padding: 3px 12px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 14px;
-        }
+                .status-btn {
+                    border: none;
+                    border-radius: 8px;
+                    padding: 3px 12px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 14px;
+                }
 
-        .status-list li,
-        .priority-list li {
-            font-size: 14px;
-        }
+                .status-list li,
+                .priority-list li {
+                    font-size: 14px;
+                }
 
-        .status-dot {
-            width: 10px !important;
-            height: 10px !important;
-        }
+                .status-dot {
+                    width: 10px !important;
+                    height: 10px !important;
+                }
 
-        .arrow {
-            font-size: 12px;
-        }
+                .arrow {
+                    font-size: 12px;
+                }
 
-        .status-list,
-        .priority-list {
-            display: none;
-            position: absolute;
-            top: 75%;
-            left: 0;
-            min-width: 170px;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
-            z-index: 9999;
-            padding: 6px 0;
-            margin: 0;
-            list-style: none;
-        }
+                .status-list,
+                .priority-list {
+                    display: none;
+                    position: absolute;
+                    top: 75%;
+                    left: 0;
+                    min-width: 170px;
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+                    z-index: 9999;
+                    padding: 6px 0;
+                    margin: 0;
+                    list-style: none;
+                }
 
-        .status-list li,
-        .priority-list li {
-            padding: 8px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 15px;
-            transition: background 0.15s;
-        }
+                .status-list li,
+                .priority-list li {
+                    padding: 8px 16px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 15px;
+                    transition: background 0.15s;
+                }
 
-        .status-list li:hover,
-        .priority-list li:hover {
-            background: #f5f5f5;
-        }
+                .status-list li:hover,
+                .priority-list li:hover {
+                    background: #f5f5f5;
+                }
 
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        } */
+                .status-dot {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    display: inline-block;
+                } */
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -933,7 +936,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             // Re-init tooltips after Choices renders
             function initTooltips() {
                 document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
-                new bootstrap.Tooltip(el);
+                    new bootstrap.Tooltip(el);
                 });
             }
 
@@ -1043,9 +1046,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
 
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
 
             $('#without_contact input').on('change', function () {
 
@@ -2644,19 +2647,28 @@ function sb_component_admin()
                                         ); ?></span></a></li>
                             <?php } ?>
                             <?php if ($active_areas['chatbot']) { ?>
-                            <li><a id="sb-chatbot">
-                                <i>
-                                    <div class="icon-wrapper">
-                                        <span class="icon-tooltip" data-tooltip="<?php sb_e("Chatbot"); ?>">
-                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 5V20.7929C3 21.2383 3.53857 21.4614 3.85355 21.1464L7.70711 17.2929C7.89464 17.1054 8.149 17 8.41421 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5Z" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M15 12C14.2005 12.6224 13.1502 13 12 13C10.8498 13 9.79952 12.6224 9 12" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9 8.01953V8" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M15 8.01953V8" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </i><span class="label"> <?php sb_e(
+                                <li><a id="sb-chatbot">
+                                        <i>
+                                            <div class="icon-wrapper">
+                                                <span class="icon-tooltip" data-tooltip="<?php sb_e("Chatbot"); ?>">
+                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M3 5V20.7929C3 21.2383 3.53857 21.4614 3.85355 21.1464L7.70711 17.2929C7.89464 17.1054 8.149 17 8.41421 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5Z"
+                                                            stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path
+                                                            d="M15 12C14.2005 12.6224 13.1502 13 12 13C10.8498 13 9.79952 12.6224 9 12"
+                                                            stroke="#5F6465" stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path d="M9 8.01953V8" stroke="#5F6465" stroke-width="1.5"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M15 8.01953V8" stroke="#5F6465" stroke-width="1.5"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </i><span class="label"> <?php sb_e(
                                             "Chatbot"
                                         ); ?></span></a></li>
                             <?php } ?>
@@ -2722,7 +2734,7 @@ function sb_component_admin()
                                         ); ?></span></a></li>
                             <?php } ?>
                             <?php
-                            if ($is_admin && $is_cloud) { 
+                            if ($is_admin && $is_cloud) {
                                 ?>
                                 <li class="account-menu">
                                     <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation">
@@ -3059,7 +3071,7 @@ function sb_component_admin()
                                                 </div>
                                                 <!-- code update -->
                                             </div>
-                                            
+
                                             <div class="metric-card"
                                                 style="background: linear-gradient(90deg, #FFFFFF 0%, #EEFBFF 100%);">
                                                 <div class="graph_tabs">
@@ -3348,7 +3360,8 @@ function sb_component_admin()
                                                     <div>
                                                         <h6 class="head mb-1"><?php sb_e("Monthly Ticket Activity"); ?></h6>
                                                         <p class="sub_head">
-                                                            <?php sb_e("Monthly overview of support ticket activity"); ?></p>
+                                                            <?php sb_e("Monthly overview of support ticket activity"); ?>
+                                                        </p>
                                                     </div>
                                                     <!-- <select class="form-select form-select-sm w-auto">
                                                         <option>Yearly</option>
@@ -3447,25 +3460,26 @@ function sb_component_admin()
                                                             </ul>
                                                         </div>
                                                         <div class="new_table sb-area-tickets-dash">
-                                                            <div class="sb-scroll-area">
+                                                            <div
+                                                                style="border: 1px solid #EBECEF; border-right: 0; border-radius: 8px; height: 178px; overflow: auto;">
                                                                 <table
                                                                     class="sb-table sb-table-tickets sb_table_new sb-table-tickets-dash">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th data-field="title">
+                                                                            <th style="text-wrap: nowrap; white-space-collapse: collapse" data-field="title">
                                                                                 <?php sb_e("ID"); ?>
                                                                             </th>
-                                                                            <th data-field="title">
+                                                                            <th style="text-wrap: nowrap; white-space-collapse: collapse" data-field="title">
                                                                                 <?php sb_e("Subject"); ?>
                                                                             </th>
-                                                                            <th data-field="assigned-to">
+                                                                            <th style="text-wrap: nowrap; white-space-collapse: collapse" data-field="assigned-to">
                                                                                 <?php sb_e("Assigned"); ?>         <?php sb_e("to"); ?>
                                                                             </th>
-                                                                            <th data-field="creation-date">
+                                                                            <th style="text-wrap: nowrap; white-space-collapse: collapse" data-field="creation-date">
                                                                                 <?php sb_e("Creation"); ?>
                                                                                 <?php sb_e("Date"); ?>
                                                                             </th>
-                                                                            <th data-field="status">
+                                                                            <th style="text-wrap: nowrap; white-space-collapse: collapse" data-field="status">
                                                                                 <?php sb_e(
                                                                                     "Status"
                                                                                 ); ?>
@@ -3500,9 +3514,11 @@ function sb_component_admin()
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <div>
                                                         <h6 class="head mb-1"><?php sb_e("Weekly"); ?>         <?php sb_e("Ticket"); ?>
-                                                            <?php sb_e("Activity"); ?></h6>
+                                                            <?php sb_e("Activity"); ?>
+                                                        </h6>
                                                         <p class="sub_head"><?php sb_e("Week"); ?>         <?php sb_e("Support"); ?>
-                                                            <?php sb_e("Summary"); ?></p>
+                                                            <?php sb_e("Summary"); ?>
+                                                        </p>
                                                     </div>
                                                     <div class="d-flex flex-column align-items-end">
                                                         <h6 class="head mb-1 total-tickets"><span>0</span>
@@ -3589,7 +3605,7 @@ function sb_component_admin()
                                                 <div class="seprator"></div>
                                                 <div class="recent card p-3">
                                                     <ul class="recent-messages list-unstyled" style="min-height:254px;">
-                                                        <?php sb_e("No"); ?>        <?php sb_e("Message"); ?>        <?php sb_e("found"); ?>
+                                                        <?php sb_e("No"); ?>         <?php sb_e("Message"); ?>         <?php sb_e("found"); ?>
                                                     </ul>
                                                 </div>
                                                 <div class="div"></div>
@@ -3601,7 +3617,8 @@ function sb_component_admin()
                                                 <h6 class="fw-bold"><?php sb_e("Customer"); ?>         <?php sb_e("Overview"); ?></h6>
                                                 <select id="customer-overview" class="form-select form-select-sm w-auto">
                                                     <option value="month" selected><?php sb_e("Last"); ?>
-                                                        <?php sb_e("Month"); ?></option>
+                                                        <?php sb_e("Month"); ?>
+                                                    </option>
                                                     <option value="year"><?php sb_e("Last"); ?>         <?php sb_e(string: "Year"); ?>
                                                     </option>
                                                     <!-- <option>Monthly</option> -->
@@ -4185,7 +4202,7 @@ function sb_component_admin()
                                             $tagsHtml .=
                                                 '<option value="' .
                                                 $tags[$i]["tag-name"] .
-                                                '"  class="tag-option" data-bs-toggle="tooltip" title="'.$tags[$i]["tag-name"].'" data-color="' .
+                                                '"  class="tag-option" data-bs-toggle="tooltip" title="' . $tags[$i]["tag-name"] . '" data-color="' .
                                                 $tags[$i]["tag-color"] .
                                                 '" data-custom-properties={"color":"' .
                                                 $tags[$i]["tag-color"] .
@@ -4417,12 +4434,47 @@ function sb_component_admin()
                         .sb-scroll-area.scroll-table {
                             height: 700px !important;
                         }
-                        .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {display: inline;}
 
-                        #agents-menu-title, #collapse, #show-profile-images-admin, #hide-conversation-details, #notes-settings, #tags-starred, #push-notifications, #welcome-trigger, #welcome-delay, #follow-delay,
-                        #sb-import-users,#sender-name,#visitor-autodata,#visitor-autodata, #visitor-default-name,#envato-validation,#registration-user-details-success,#registration-link,#login-verification-url,#tickets-default-department,#tickets-registration-redirect,#tickets-conversation-name,
-							#follow-disable-office-hours,#follow-disable-channels,#welcome-disable-office-hours,#popup-message,
-							#login-message,#login-icon,admin-title,#custom-js,#custom-css,#manifest-url,#color-admin-2,#admin-title{display: none;}
+                        .sb-ticket-edit-box .sb-main .sb-edit-box .sb-input {
+                            display: inline;
+                        }
+
+                        #agents-menu-title,
+                        #collapse,
+                        #show-profile-images-admin,
+                        #hide-conversation-details,
+                        #notes-settings,
+                        #tags-starred,
+                        #push-notifications,
+                        #welcome-trigger,
+                        #welcome-delay,
+                        #follow-delay,
+                        #sb-import-users,
+                        #sender-name,
+                        #visitor-autodata,
+                        #visitor-autodata,
+                        #visitor-default-name,
+                        #envato-validation,
+                        #registration-user-details-success,
+                        #registration-link,
+                        #login-verification-url,
+                        #tickets-default-department,
+                        #tickets-registration-redirect,
+                        #tickets-conversation-name,
+                        #follow-disable-office-hours,
+                        #follow-disable-channels,
+                        #welcome-disable-office-hours,
+                        #popup-message,
+                        #login-message,
+                        #login-icon,
+                        admin-title,
+                        #custom-js,
+                        #custom-css,
+                        #manifest-url,
+                        #color-admin-2,
+                        #admin-title {
+                            display: none;
+                        }
                     </style>
                     <!--  -->
 
@@ -4899,7 +4951,8 @@ function sb_component_admin()
                                                 <div class="ps-md-5">
                                                     <div class="sidepanel">
                                                         <h4 class="sub_title mb-3 col-4 d-inline-block">
-                                                            <?php sb_e("Details"); ?></h4>
+                                                            <?php sb_e("Details"); ?>
+                                                        </h4>
                                                         <span class="conversation-id d-none"><?php sb_e("Linked"); ?>
                                                             <?php sb_e("Conversation"); ?>         <?php sb_e("ID"); ?> :
                                                             <span></span></span>
@@ -4915,7 +4968,8 @@ function sb_component_admin()
                                                             </div> -->
                                                             <div class="mb-3">
                                                                 <div class="field-label required-label">
-                                                                    <?php sb_e("Assignee"); ?></div>
+                                                                    <?php sb_e("Assignee"); ?>
+                                                                </div>
                                                                 <div class="d-flex align-items-center justify-content-between">
                                                                     <div
                                                                         class="d-flex align-items-center gap-2 ticket-assignee">
@@ -4938,7 +4992,8 @@ function sb_component_admin()
                                                             </div>
                                                             <div class="mb-3">
                                                                 <div class="field-label required-label">
-                                                                    <?php sb_e("Customer"); ?></div>
+                                                                    <?php sb_e("Customer"); ?>
+                                                                </div>
                                                                 <div class="d-flex align-items-center gap-2 ticket-reporter">
                                                                     <img class="reporter-img" src="" alt="Customer"
                                                                         style="width: 40px;">
@@ -5074,7 +5129,8 @@ function sb_component_admin()
 
                                                             <div class="mb-3 sb-input d-block">
                                                                 <div class="field-label required-label">
-                                                                    <?php sb_e("Priority"); ?></div>
+                                                                    <?php sb_e("Priority"); ?>
+                                                                </div>
                                                                 <!-- <div class="ticket-priority">
                                                                         High
                                                                     </div>
@@ -5314,7 +5370,7 @@ function sb_component_admin()
                         // Re-init tooltips after Choices renders
                         function initTooltips() {
                             document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
-                            new bootstrap.Tooltip(el);
+                                new bootstrap.Tooltip(el);
                             });
                         }
 
@@ -5322,7 +5378,7 @@ function sb_component_admin()
                         initTooltips();
 
                         // 2. Run again every time choices changes (e.g., item added/removed)
-                       // window.ticketTagsFilterChoices.addEventListener('change', initTooltips);
+                        // window.ticketTagsFilterChoices.addEventListener('change', initTooltips);
 
 
 
@@ -5541,7 +5597,8 @@ function sb_component_admin()
                                             <p class="head mb-4"><?php sb_e("Categories"); ?>             <?php sb_e("Settings"); ?></p>
                                             <p class="des mb-0"><?php sb_e("Manage"); ?>             <?php sb_e("Article"); ?>
                                                 <?php sb_e("Display"); ?> , <?php sb_e("Categories"); ?>, <?php sb_e("and"); ?>
-                                                <?php sb_e("Publishing"); ?>             <?php sb_e("options"); ?>.</p>
+                                                <?php sb_e("Publishing"); ?>             <?php sb_e("options"); ?>.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="articles_bg">
@@ -5792,13 +5849,13 @@ function sb_component_admin()
                                             : sb_("Articles"); ?>
                                     </li>
                                     <?php /*
-                                    <li id="tab-various">
-                                        <?php echo $disable_translations
-                                            ? "Miscellaneous"
-                                            : sb_("Miscellaneous"); ?>
-                                    </li>*/?>
-                                      
-                                <?php for (
+                                                  <li id="tab-various">
+                                                      <?php echo $disable_translations
+                                                          ? "Miscellaneous"
+                                                          : sb_("Miscellaneous"); ?>
+                                                  </li>*/ ?>
+
+                                    <?php for (
                                         $i = 0;
                                         $i < count($apps);
                                         $i++
@@ -5822,12 +5879,12 @@ function sb_component_admin()
                                         }
                                     } ?>
                                     <?php /*
-                                                                                                                                                                                <li id="tab-apps">
-                                                                                                                                                                                    <?php echo $disable_translations
-                                                                                                                                                                                        ? "Apps"
-                                                                                                                                                                                        : sb_("Apps"); ?>
-                                                                                                                                                                                </li>
-                                                                                                                                                                                */ ?>
+                                                                                                                                                                                              <li id="tab-apps">
+                                                                                                                                                                                                  <?php echo $disable_translations
+                                                                                                                                                                                                      ? "Apps"
+                                                                                                                                                                                                      : sb_("Apps"); ?>
+                                                                                                                                                                                              </li>
+                                                                                                                                                                                              */ ?>
 
                                     <!--<li id="tab-automations">
                                         <?php
@@ -6025,7 +6082,7 @@ function sb_component_admin()
                                         <?php //sb_populate_settings("chat", $sb_settings, true, 'chat-availability'); ?>
                                     </div> -->
 
-                                    <div id="appearance-content"  class="settings-tab">
+                                    <div id="appearance-content" class="settings-tab">
                                         <div class="settings-head">
                                             <p class="head">
                                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
@@ -7118,7 +7175,7 @@ function sb_component_admin()
                                                                 transform="translate(0.765625 0.75)"></rect>
                                                         </clipPath>
                                                     </defs>
-                                                </svg>                  
+                                                </svg>
                                                 <?php sb_e(string: "Chat"); ?>             <?php sb_e(string: "management"); ?>
                                             </p>
                                             <p class="des mb-0">
@@ -7473,7 +7530,8 @@ function sb_component_admin()
                                             </p>
                                             <p class="des mb-0">
                                                 <?php sb_e("The Message Settings allow you to set up messages for visitors who may be exploring your website for the first time, if they are idle, or if a situation arises where no agent can respond to them"); ?>.
-                                                <?php sb_e("Rating settings can be adjusted here as well"); ?>.</p>
+                                                <?php sb_e("Rating settings can be adjusted here as well"); ?>.
+                                            </p>
                                         </div>
 
                                         <?php sb_populate_settings("messages", $sb_settings, true, 'messages-text'); ?>
@@ -7553,7 +7611,7 @@ function sb_component_admin()
                                     <!-- </div> -->
 
                                 </div>
-                                
+
                                 <div>
                                     <div class="sb-top-bar save_settings settings-header">
                                         <div class="">
@@ -7692,26 +7750,26 @@ function sb_component_admin()
                                     </div>
                                 </div>
                                 <?php /*
-                                <div>
-                                    <div class="sb-top-bar save_settings settings-header">
-                                        <div class="">
-                                            <p class="head mb-4">Miscellaneous Settings</p>
-                                            <p class="des mb-0">Configure additional options and preferences.</p>
-                                        </div>
-                                        <div>
-                                            <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
-                                                <i class="sb-icon-check"></i>
-                                                <?php sb_e("Save changes"); ?>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="users-tab">
-                                        <?php sb_populate_settings(
-                                            "miscellaneous",
-                                            $sb_settings
-                                        ); ?>
-                                    </div>
-                                </div>*/?>
+                                              <div>
+                                                  <div class="sb-top-bar save_settings settings-header">
+                                                      <div class="">
+                                                          <p class="head mb-4">Miscellaneous Settings</p>
+                                                          <p class="des mb-0">Configure additional options and preferences.</p>
+                                                      </div>
+                                                      <div>
+                                                          <a class="sb-btn sb-save-changes sb-icon sb_btn_new">
+                                                              <i class="sb-icon-check"></i>
+                                                              <?php sb_e("Save changes"); ?>
+                                                          </a>
+                                                      </div>
+                                                  </div>
+                                                  <div class="users-tab">
+                                                      <?php sb_populate_settings(
+                                                          "miscellaneous",
+                                                          $sb_settings
+                                                      ); ?>
+                                                  </div>
+                                              </div>*/ ?>
                                 <?php
                                 sb_apps_area(
                                     $apps,
@@ -7720,134 +7778,134 @@ function sb_component_admin()
 
                                 ?>
                                 <?php /*<div>
-                                               <div class="sb-automations-area">
-                                                   <div class="sb-select">
-                                                       <p data-value="messages">
-                                                           <?php sb_e("Messages"); ?>
-                                                       </p>
-                                                       <ul>
-                                                           <li data-value="messages" class="sb-active">
-                                                               <?php sb_e("Messages"); ?>
-                                                           </li>
-                                                           <li data-value="emails">
-                                                               <?php sb_e("Emails"); ?>
-                                                           </li>
-                                                           <?php if ($sms) {
-                                                               echo '<li data-value="sms">' .
-                                                                   sb_("Text messages") .
-                                                                   "</li>";
-                                                           } ?>
-                                                           <li data-value="popups">
-                                                               <?php sb_e("Pop-ups"); ?>
-                                                           </li>
-                                                           <li data-value="design">
-                                                               <?php sb_e("Design"); ?>
-                                                           </li>
-                                                           <li data-value="more">
-                                                               <?php sb_e("More"); ?>
-                                                           </li>
-                                                       </ul>
-                                                   </div>
-                                                   <div class="sb-inner-tab sb-tab">
-                                                       <div class="sb-nav sb-nav-only">
-                                                           <ul></ul>
-                                                           <div class="sb-add-automation sb-btn sb-icon">
-                                                               <i class="sb-icon-plus"></i>
-                                                               <?php sb_e(
-                                                                   "Add new automation"
-                                                               ); ?>
-                                                           </div>
-                                                       </div>
-                                                       <div class="sb-content sb-hide">
-                                                           <div class="sb-automation-values">
-                                                               <h2 class="sb-language-switcher-cnt">
-                                                                   <?php sb_e("Name"); ?>
-                                                               </h2>
-                                                               <div class="sb-setting sb-type-text">
-                                                                   <div>
-                                                                       <input data-id="name" type="text" />
-                                                                   </div>
-                                                               </div>
-                                                               <h2>
-                                                                   <?php sb_e(
-                                                                       "Message"
-                                                                   ); ?>
-                                                               </h2>
-                                                               <div class="sb-setting sb-type-textarea">
-                                                                   <div>
-                                                                       <textarea data-id="message"></textarea>
-                                                                   </div>
-                                                               </div>
-                                                               <div class="sb-automation-extra"></div>
-                                                           </div>
-                                                           <div class="sb-automation-conditions">
-                                                               <hr />
-                                                               <h2>
-                                                                   <?php sb_e(
-                                                                       "Conditions"
-                                                                   ); ?>
-                                                               </h2>
-                                                               <div class="sb-conditions"></div>
-                                                               <div class="sb-add-condition sb-btn sb-icon">
-                                                                   <i class="sb-icon-plus"></i>
-                                                                   <?php sb_e(
-                                                                       "Add condition"
-                                                                   ); ?>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                           </div>*/ ?>
+                                                             <div class="sb-automations-area">
+                                                                 <div class="sb-select">
+                                                                     <p data-value="messages">
+                                                                         <?php sb_e("Messages"); ?>
+                                                                     </p>
+                                                                     <ul>
+                                                                         <li data-value="messages" class="sb-active">
+                                                                             <?php sb_e("Messages"); ?>
+                                                                         </li>
+                                                                         <li data-value="emails">
+                                                                             <?php sb_e("Emails"); ?>
+                                                                         </li>
+                                                                         <?php if ($sms) {
+                                                                             echo '<li data-value="sms">' .
+                                                                                 sb_("Text messages") .
+                                                                                 "</li>";
+                                                                         } ?>
+                                                                         <li data-value="popups">
+                                                                             <?php sb_e("Pop-ups"); ?>
+                                                                         </li>
+                                                                         <li data-value="design">
+                                                                             <?php sb_e("Design"); ?>
+                                                                         </li>
+                                                                         <li data-value="more">
+                                                                             <?php sb_e("More"); ?>
+                                                                         </li>
+                                                                     </ul>
+                                                                 </div>
+                                                                 <div class="sb-inner-tab sb-tab">
+                                                                     <div class="sb-nav sb-nav-only">
+                                                                         <ul></ul>
+                                                                         <div class="sb-add-automation sb-btn sb-icon">
+                                                                             <i class="sb-icon-plus"></i>
+                                                                             <?php sb_e(
+                                                                                 "Add new automation"
+                                                                             ); ?>
+                                                                         </div>
+                                                                     </div>
+                                                                     <div class="sb-content sb-hide">
+                                                                         <div class="sb-automation-values">
+                                                                             <h2 class="sb-language-switcher-cnt">
+                                                                                 <?php sb_e("Name"); ?>
+                                                                             </h2>
+                                                                             <div class="sb-setting sb-type-text">
+                                                                                 <div>
+                                                                                     <input data-id="name" type="text" />
+                                                                                 </div>
+                                                                             </div>
+                                                                             <h2>
+                                                                                 <?php sb_e(
+                                                                                     "Message"
+                                                                                 ); ?>
+                                                                             </h2>
+                                                                             <div class="sb-setting sb-type-textarea">
+                                                                                 <div>
+                                                                                     <textarea data-id="message"></textarea>
+                                                                                 </div>
+                                                                             </div>
+                                                                             <div class="sb-automation-extra"></div>
+                                                                         </div>
+                                                                         <div class="sb-automation-conditions">
+                                                                             <hr />
+                                                                             <h2>
+                                                                                 <?php sb_e(
+                                                                                     "Conditions"
+                                                                                 ); ?>
+                                                                             </h2>
+                                                                             <div class="sb-conditions"></div>
+                                                                             <div class="sb-add-condition sb-btn sb-icon">
+                                                                                 <i class="sb-icon-plus"></i>
+                                                                                 <?php sb_e(
+                                                                                     "Add condition"
+                                                                                 ); ?>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>*/ ?>
                                 <?php /*
-                                       <div>
-                                           <div class="sb-translations sb-tab">
-                                               <div class="sb-nav sb-nav-only">
-                                                   <div class="sb-active"></div>
-                                                   <ul></ul>
-                                               </div>
-                                               <div class="sb-content">
-                                                   <div class="sb-hide">
-                                                       <div class="sb-menu-wide">
-                                                           <div>
-                                                               <?php sb_e(
-                                                                   "Front End"
-                                                               ); ?>
-                                                           </div>
-                                                           <ul>
-                                                               <li data-value="front" class="sb-active">
-                                                                   <?php sb_e(
-                                                                       "Front End"
-                                                                   ); ?>
-                                                               </li>
-                                                               <li data-value="admin">
-                                                                   <?php sb_e(
-                                                                       "Admin"
-                                                                   ); ?>
-                                                               </li>
-                                                               <li data-value="admin/js">
-                                                                   <?php sb_e(
-                                                                       "Client side admin"
-                                                                   ); ?>
-                                                               </li>
-                                                               <li data-value="admin/settings">
-                                                                   <?php sb_e(
-                                                                       "Settings"
-                                                                   ); ?>
-                                                               </li>
-                                                           </ul>
-                                                       </div>
-                                                       <a class="sb-btn sb-icon sb-add-translation">
-                                                           <i class="sb-icon-plus"></i>
-                                                           <?php sb_e(
-                                                               "New translation"
-                                                           ); ?>
-                                                       </a>
-                                                   </div>
-                                                   <div class="sb-translations-list"></div>
-                                               </div>
-                                           </div>
-                                       </div>*/ ?>
+                                                     <div>
+                                                         <div class="sb-translations sb-tab">
+                                                             <div class="sb-nav sb-nav-only">
+                                                                 <div class="sb-active"></div>
+                                                                 <ul></ul>
+                                                             </div>
+                                                             <div class="sb-content">
+                                                                 <div class="sb-hide">
+                                                                     <div class="sb-menu-wide">
+                                                                         <div>
+                                                                             <?php sb_e(
+                                                                                 "Front End"
+                                                                             ); ?>
+                                                                         </div>
+                                                                         <ul>
+                                                                             <li data-value="front" class="sb-active">
+                                                                                 <?php sb_e(
+                                                                                     "Front End"
+                                                                                 ); ?>
+                                                                             </li>
+                                                                             <li data-value="admin">
+                                                                                 <?php sb_e(
+                                                                                     "Admin"
+                                                                                 ); ?>
+                                                                             </li>
+                                                                             <li data-value="admin/js">
+                                                                                 <?php sb_e(
+                                                                                     "Client side admin"
+                                                                                 ); ?>
+                                                                             </li>
+                                                                             <li data-value="admin/settings">
+                                                                                 <?php sb_e(
+                                                                                     "Settings"
+                                                                                 ); ?>
+                                                                             </li>
+                                                                         </ul>
+                                                                     </div>
+                                                                     <a class="sb-btn sb-icon sb-add-translation">
+                                                                         <i class="sb-icon-plus"></i>
+                                                                         <?php sb_e(
+                                                                             "New translation"
+                                                                         ); ?>
+                                                                     </a>
+                                                                 </div>
+                                                                 <div class="sb-translations-list"></div>
+                                                             </div>
+                                                         </div>
+                                                     </div>*/ ?>
                             </div>
                         </div>
                     </div>
@@ -7882,7 +7940,8 @@ function sb_component_admin()
             }
             ?>
             <div id="sb-generic-panel"></div>
-            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string($_SERVER["PHP_SELF"]); ?>"
+                method="post" enctype="multipart/form-data">
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
@@ -7918,12 +7977,12 @@ function sb_component_admin()
     }
     ?>
     <script>
-    jQuery(document).ready(function () {
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    });
+        jQuery(document).ready(function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
 
     </script>
     <?php
@@ -7932,45 +7991,45 @@ function sb_component_admin()
     ?>
 
     <script>
-    $(document).ready(function() {
-        $('input[data-id="supervisor-id"]').hide();
+        $(document).ready(function () {
+            $('input[data-id="supervisor-id"]').hide();
 
-        // STEP 1: Pass PHP agents to JS
-        var agents = <?php echo json_encode($agents); ?>;
+            // STEP 1: Pass PHP agents to JS
+            var agents = <?php echo json_encode($agents); ?>;
 
-        // STEP 2: Build the <select> HTML
-        var $select = $('<select id="agent-select" multiple><option value="">-- Select Agent --</option></select>');
-        $.each(agents, function(id, name) {
-            $select.append('<option value="'+id+'">'+name+'</option>');
+            // STEP 2: Build the <select> HTML
+            var $select = $('<select id="agent-select" multiple><option value="">-- Select Agent --</option></select>');
+            $.each(agents, function (id, name) {
+                $select.append('<option value="' + id + '">' + name + '</option>');
+            });
+
+            // STEP 3: Append the <select> after the input field
+            $select.insertBefore($('input[data-id="supervisor-id"]'));
+
+
+            setTimeout(() => {
+                // STEP 4: Show current value in the <select>
+                const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
+                if (currentVal) {
+                    var ids = currentVal.split(',').map(v => v.trim());
+                    $('#agent-select').val(ids);
+                }
+            }, 1500);
+
+            // STEP 5: Auto-fill input when selection changes
+            $('#supervisors').on('change', '#agent-select', function () {
+                var selectedIds = $(this).val(); // array of selected values
+                if (selectedIds) {
+                    $('input[data-id="supervisor-id"]').val(selectedIds.join(',')); // save as comma-separated
+                } else {
+                    $('input[data-id="supervisor-id"]').val('');
+                }
+
+            });
         });
-
-        // STEP 3: Append the <select> after the input field
-        $select.insertBefore($('input[data-id="supervisor-id"]'));
-
-
-        setTimeout(() => {
-             // STEP 4: Show current value in the <select>
-            const currentVal = $('input[data-id="supervisor-id"]').val(); // ← Call .val()
-            if(currentVal) {
-                var ids = currentVal.split(',').map(v => v.trim());
-                $('#agent-select').val(ids);
-            }
-        }, 1500);
-       
-        // STEP 5: Auto-fill input when selection changes
-        $('#supervisors').on('change', '#agent-select', function() {
-            var selectedIds = $(this).val(); // array of selected values
-            if(selectedIds) {
-                $('input[data-id="supervisor-id"]').val(selectedIds.join(',')); // save as comma-separated
-            } else {
-                $('input[data-id="supervisor-id"]').val('');
-            }
-
-        });
-    });
     </script>
 
-<?php
+    <?php
 }
 /*
  * ----------------------------------------------------------
@@ -8010,9 +8069,10 @@ function sb_apps_area($apps, $cloud_active_apps)
                     <div class="sb-top-bar save_settings settings-header">
                         <div class="">
                             <p class="head mb-4">' . sb_(ucfirst($apps[$i][1])) . ' ' . sb_('Settings') . '</p>';
-                            if($apps[$i][1] == 'tickets') $code .= '
+            if ($apps[$i][1] == 'tickets')
+                $code .= '
                             <p class="des mb-0">' . sb_('The Tickets Settings allow you to adjust the ticket features available such as adding ticket status, disabling certain details from the tickets tab, and setting default departments for new tickets') . '.</p>';
-                        $code .= '</div>
+            $code .= '</div>
                         
                                         <div class="d-flex align-items-center">
                                             <div class="sb-search-dropdown">
