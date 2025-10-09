@@ -4755,10 +4755,7 @@ div ul.sb-menu .li:hover,
   background: rgb(144, 154, 165);
 }
 
-#registration .sb-content {
-  /* max-height: 440px; */
-  overflow-y: scroll;
-}
+
 #registration .sb-content::-webkit-scrollbar {
   width: 3px;
   background: none;
