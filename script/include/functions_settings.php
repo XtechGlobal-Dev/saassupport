@@ -1237,9 +1237,6 @@ function sb_select_phone() {
         $phones = sb_get_json_resource('json/phone.json');
         $country_code_ip = strtoupper(sb_isset(sb_ip_info('countryCode'), 'countryCode'));
         $phone_prefix_ip = sb_isset($phones, $country_code_ip);
-<<<<<<< HEAD
-        $code = '<div class="sb-select"><p data-value="' . ($phone_prefix_ip ? '+' . $phone_prefix_ip : '') . '">' . ($phone_prefix_ip ? '<img src="' . SB_URL . '/media/flags/' . strtolower($country_code_ip) . '.png" alt="' . $country_code_ip . '" loading="lazy" />+' . $phone_prefix_ip : 'Cuntory Code') . '</p><div class="sb-select-search"><input type="text" placeholder="' . sb_('Search ...') . '" /></div><ul class="sb-scroll-area">';
-=======
         $code = '<div class="sb-select"><p data-value="' . ($phone_prefix_ip ? '+' . $phone_prefix_ip : '') . '">' . ($phone_prefix_ip ? '<img src="' . SB_URL . '/media/flags/' . strtolower($country_code_ip) . '.png" alt="' . $country_code_ip . '" loading="lazy" />+' . $phone_prefix_ip : '<svg width="28" height="22" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="900" height="600" rx="30" fill="#CDCDCD"/>
 <path d="M658 300.5C658 185.349 564.65 92 449.5 92C334.349 92 241 185.349 241 300.5C241 415.65 334.349 509 449.5 509" stroke="black" stroke-width="20" stroke-linecap="round"/>
@@ -1247,7 +1244,6 @@ function sb_select_phone() {
 <path d="M241 279.65C256.898 293.455 279.165 306.092 305.4 306.092C359.604 306.092 370.445 316.448 370.445 357.875C370.445 399.302 370.444 399.302 381.285 430.37C388.337 450.58 390.801 470.79 376.746 488.15" stroke="black" stroke-width="20" stroke-linejoin="round"/>
 <path d="M614.19 465.816L658 509M639.408 405.707C639.408 452.299 601.563 490.066 554.878 490.066C508.194 490.066 470.35 452.299 470.35 405.707C470.35 359.118 508.194 321.35 554.878 321.35C601.563 321.35 639.408 359.118 639.408 405.707Z" stroke="black" stroke-width="20" stroke-linecap="round"/>
 </svg> &nbsp;+00') . '</p><div class="sb-select-search"><input type="text" placeholder="' . sb_('Search ...') . '" /></div><ul class="sb-scroll-area">';
->>>>>>> 4717b1432dcd6c92383ad373d497ea154f32e62a
         foreach ($phones as $country_code => $phone_prefix) {
             $country_code = strtolower($country_code);
             $code .= ' <li data-value="+' . $phone_prefix . '" data-country="' . $country_code . '"' . ($phone_prefix_ip == $phone_prefix ? ' class="sb-active"' : '') . '><img src="' . SB_URL . '/media/flags/' . $country_code . '.png" alt="' . $country_code . '" loading="lazy" />+' . $phone_prefix . '</li>';
