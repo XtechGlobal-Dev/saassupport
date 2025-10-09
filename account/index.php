@@ -1081,3 +1081,15 @@ function box_chart() {
         </div>
     <?php }
 } ?>
+
+<script>
+window.addEventListener("pageshow", function(event) {
+    if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+        // Force reload to re-run PHP and reset loader
+        window.location.reload();
+    } else {
+        // Ensure loader is hidden normally
+        document.querySelector('.loader')?.classList.add('hidden');
+    }
+});
+</script>

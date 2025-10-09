@@ -2848,7 +2848,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 
 .sb-input-select-input > div.sb-select-phone + input {
-  padding: 5px 0 0 100px;
+  padding: 5px 0 0 90px !important;
 }
 .sb-input-select-input > div.sb-select-phone .sb-select-search input {
   padding: 0 10px;
@@ -4756,7 +4756,7 @@ div ul.sb-menu .li:hover,
 }
 
 #registration .sb-content {
-  max-height: 440px;
+  /* max-height: 440px; */
   overflow-y: scroll;
 }
 #registration .sb-content::-webkit-scrollbar {
