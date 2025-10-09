@@ -5235,7 +5235,6 @@ ul.pagination {
 
         .new_container {
             overflow-y: scroll;
-            height: calc(100vh - 110px);
             background: $background-gray;
 
             &::-webkit-scrollbar {
