@@ -1237,7 +1237,7 @@ function sb_select_phone() {
         $phones = sb_get_json_resource('json/phone.json');
         $country_code_ip = strtoupper(sb_isset(sb_ip_info('countryCode'), 'countryCode'));
         $phone_prefix_ip = sb_isset($phones, $country_code_ip);
-        $code = '<div class="sb-select"><p data-value="' . ($phone_prefix_ip ? '+' . $phone_prefix_ip : '') . '">' . ($phone_prefix_ip ? '<img src="' . SB_URL . '/media/flags/' . strtolower($country_code_ip) . '.png" alt="' . $country_code_ip . '" loading="lazy" />+' . $phone_prefix_ip : '+00') . '</p><div class="sb-select-search"><input type="text" placeholder="' . sb_('Search ...') . '" /></div><ul class="sb-scroll-area">';
+        $code = '<div class="sb-select"><p data-value="' . ($phone_prefix_ip ? '+' . $phone_prefix_ip : '') . '">' . ($phone_prefix_ip ? '<img src="' . SB_URL . '/media/flags/' . strtolower($country_code_ip) . '.png" alt="' . $country_code_ip . '" loading="lazy" />+' . $phone_prefix_ip : 'Cuntory Code') . '</p><div class="sb-select-search"><input type="text" placeholder="' . sb_('Search ...') . '" /></div><ul class="sb-scroll-area">';
         foreach ($phones as $country_code => $phone_prefix) {
             $country_code = strtolower($country_code);
             $code .= ' <li data-value="+' . $phone_prefix . '" data-country="' . $country_code . '"' . ($phone_prefix_ip == $phone_prefix ? ' class="sb-active"' : '') . '><img src="' . SB_URL . '/media/flags/' . $country_code . '.png" alt="' . $country_code . '" loading="lazy" />+' . $phone_prefix . '</li>';
