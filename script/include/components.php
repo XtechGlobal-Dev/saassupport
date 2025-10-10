@@ -5670,11 +5670,11 @@ function sb_component_admin()
                             </div>
                         </div>
                         <div class="sb-tab">
-                            <div class="sb-nav sb-nav-only sb-scroll-area">
+                            <div class="sb-nav sb-nav-only sb-scroll-area" style="padding: 10px 15px !important; margin-bottom: 20px !important;">
                                 <div>
                                     <?php sb_e("Reports"); ?>
                                 </div>
-                                <ul class="reports-list">
+                                <ul class="reports-list" style="top: 222px !important; max-height: calc(100% - 270px) !important;">
                                     <li class="sb-tab-nav-title">
                                         <img src="<?php echo SB_URL; ?>/media/conversation_icon.svg" alt="icon" class="mr-1" />
 
