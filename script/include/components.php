@@ -4467,7 +4467,6 @@ function sb_component_admin()
                         #popup-message,
                         #login-message,
                         #login-icon,
-                        admin-title,
                         #custom-js,
                         #custom-css,
                         #manifest-url,
