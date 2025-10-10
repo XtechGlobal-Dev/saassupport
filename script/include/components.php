@@ -4467,6 +4467,7 @@ function sb_component_admin()
                         #popup-message,
                         #login-message,
                         #login-icon,
+                        admin-title,
                         #custom-js,
                         #custom-css,
                         #manifest-url,
@@ -6248,7 +6249,7 @@ function sb_component_admin()
 
                                         .main-content .sb-setting {
                                             border-bottom: 1px solid rgb(230, 230, 230);
-                                            align-items: center;
+                                            align-items: stretch;
                                             padding: 30px 0px 30px 0px;
                                         }
                                     </style>
