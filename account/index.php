@@ -391,9 +391,11 @@ function box_membership($membership)
     $membership_type = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages');
     $membership_type_ma = $membership_type == 'messages-agents';
     $name = $membership_type_ma ? 'messages' : $membership_type;
+    $agentsQuotaColor = $membership['quota_agents'] < $membership['count_agents'] ? 'background-color:red;' : '';
+    $messageQuotaColor = $membership['quota'] < $membership['count'] ? 'background-color:red;' : '';
     $box_two = $membership_type_ma ? '<div class="detail-box"><span>' . sb_('Agents') . '</span><span>' . $membership['count_agents'] . ' / <span class="membership-quota">' . ($membership['quota_agents'] == 9999 ? '∞' : $membership['quota_agents']) . '</span></span> 
         <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: ' . ($membership["quota_agents"] > 0 ? ($membership["count_agents"] / $membership["quota_agents"]) * 100 : 0) . '%;" aria-valuenow=' . $membership['count_agents'] . ' aria-valuemin=' . $membership['count_agents'] . ' aria-valuemax=' . $membership['quota_agents'] . '></div>
+            <div class="progress-bar" role="progressbar" style="width: ' . ($membership["quota_agents"] > 0 ? ($membership["count_agents"] / $membership["quota_agents"]) * 100 : 0) . '%;'.$agentsQuotaColor.'" aria-valuenow=' . $membership['count_agents'] . ' aria-valuemin=' . $membership['count_agents'] . ' aria-valuemax=' . $membership['quota_agents'] . '></div>
         </div></div>' : '';
     $markeplace = false;
     if (substr($membership['expiration'], -2) == '37') {
@@ -427,7 +429,7 @@ function box_membership($membership)
                     <span>' . sb_($name) . '</span>
                     <span>' . $membership['count'] . ' / <span class="membership-quota">' . $membership['quota'] . '</span></span>
                     <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: ' . ($membership['quota'] > 0 ? ($membership['count'] / $membership['quota']) * 100 : 0) . '%;" aria-valuenow=' . $membership['count'] . ' aria-valuemin=' . $membership['count'] . ' aria-valuemax=' . $membership['quota'] . '></div>
+            <div class="progress-bar" role="progressbar" style="width: ' . ($membership['quota'] > 0 ? ($membership['count'] / $membership['quota']) * 100 : 0) . '%;'.$messageQuotaColor.'" aria-valuenow=' . $membership['count'] . ' aria-valuemin=' . $membership['count'] . ' aria-valuemax=' . $membership['quota'] . '></div>
         </div>
                 </div>' . $box_two .
         '</div>
