@@ -14777,6 +14777,7 @@ div#messaging-channels {
 }
 #tab-membership .plans-box div.sb-visible {
   display: flex;
+  border-color: var(--borderColor);
 }
 #tab-membership .plans-box div.sb-visible p {
   margin-top: 21px !important;

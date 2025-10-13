@@ -12891,6 +12891,7 @@ p.first-p {
 
             &.sb-visible {
                 display: flex;
+                border-color: var(--borderColor);
                 p{
                     margin-top: 21px !important;
                 }
