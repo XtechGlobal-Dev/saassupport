@@ -24,9 +24,10 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
             die();
         }
     }
-} 
+}
 ?>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -71,6 +72,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         })
     </script>
 </head>
+
 <body class="on-load<?php echo $rtl ? ' sb-rtl' : '' ?>">
     <div id="preloader"></div>
     <?php
@@ -91,9 +93,11 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         <?php sb_cloud_css_js() ?>
     </footer>
 </body>
+
 </html>
 
-<?php function box_account() {
+<?php function box_account()
+{
     global $cloud_settings;
     $membership = membership_get_active(false);
     $expiration = DateTime::createFromFormat('d-m-y', $membership['expiration']);
@@ -227,7 +231,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     if ($shopify) {
                         echo '<p>' . str_replace('{R}', SB_CLOUD_BRAND_NAME, sb_('Customize your store and enable {R} in the app embeds section.')) . '</p><a class="sb-btn sb-btn-white" href="https://' . $shopify . '/admin/themes/current/editor?context=apps&activateAppId=' . SHOPIFY_APP_ID . '/sb" target="_blank">' . sb_('Preview in theme') . '</a>';
                     } else {
-                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>' .sb_("Chatbot embed code") . '</p><textarea id="embed-code" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>' .sb_("Ticket panel embed code") . '</p><textarea id="embed-code2" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div>';
+                        echo '<p>' . htmlspecialchars(sb_(sb_isset($cloud_settings, 'text_embed_code', 'To add the chat to your website, paste this code before the closing </body> tag on each page. Then, reload your website to see the chat in the bottom-right corner. Click the dashboard button in the top-right to access the admin area.'))) . '</p><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>' . sb_("Chatbot embed code") . '</p><textarea id="embed-code" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div><div class="sb-setting" style="flex-wrap: wrap;align-items: center;"><p>' . sb_("Ticket panel embed code") . '</p><textarea id="embed-code2" class="embed-code" style="width: calc(100% - 126px);" readonly></textarea><button id="copy-btn" class="copy-button sb-btn ml-2" type="button">Copy</button></div>';
                     }
                     if (defined('DIRECT_CHAT_URL')) {
                         $link = DIRECT_CHAT_URL . '/' . account_chat_id(account()['user_id']);
@@ -297,7 +301,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <span class="required-label">
                             <?php sb_e('Last name') ?>
                         </span>
-                        <input type="text" placeholder="Last name" /> 
+                        <input type="text" placeholder="Last name" />
                     </div>
                     <div id="email" data-type="text" class="sb-input sb-type-input-button">
                         <span class="required-label">
@@ -324,10 +328,12 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <input type="password" value="12345678" placeholder="Password" />
                     </div>
                     <h2 class="addons-title" style="width: 100%;"><?php sb_e('Billing details') ?></h2>
-                    <style>.required-label::after{
-    content: " *";
-    color: red;
-}</style>
+                    <style>
+                        .required-label::after {
+                            content: " *";
+                            color: red;
+                        }
+                    </style>
                     <div id="company_name" data-type="text" class="sb-input">
                         <span class="required-label">
                             <?php sb_e('Name') ?>
@@ -353,7 +359,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                         <input type="text" />
                     </div>
                     <div id="company_country" data-type="select" class="sb-input">
-                        <span >
+                        <span>
                             <?php sb_e('Country') ?>
                         </span>
                         <?php echo sb_select_html('countries') ?>
@@ -395,7 +401,7 @@ function box_membership($membership)
     $messageQuotaColor = $membership['quota'] < $membership['count'] ? 'background-color:red;' : '';
     $box_two = $membership_type_ma ? '<div class="detail-box"><span>' . sb_('Agents') . '</span><span>' . $membership['count_agents'] . ' / <span class="membership-quota">' . ($membership['quota_agents'] == 9999 ? '∞' : $membership['quota_agents']) . '</span></span> 
         <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: ' . ($membership["quota_agents"] > 0 ? ($membership["count_agents"] / $membership["quota_agents"]) * 100 : 0) . '%;'.$agentsQuotaColor.'" aria-valuenow=' . $membership['count_agents'] . ' aria-valuemin=' . $membership['count_agents'] . ' aria-valuemax=' . $membership['quota_agents'] . '></div>
+            <div class="progress-bar" role="progressbar" style="width: ' . ($membership["quota_agents"] > 0 ? ($membership["count_agents"] / $membership["quota_agents"]) * 100 : 0) . '%;' . $agentsQuotaColor . '" aria-valuenow=' . $membership['count_agents'] . ' aria-valuemin=' . $membership['count_agents'] . ' aria-valuemax=' . $membership['quota_agents'] . '></div>
         </div></div>' : '';
     $markeplace = false;
     if (substr($membership['expiration'], -2) == '37') {
@@ -406,8 +412,7 @@ function box_membership($membership)
         }
     }
 
-    if(isset($membership['expiration']) && $membership['expiration'] != '')
-    {
+    if (isset($membership['expiration']) && $membership['expiration'] != '') {
         $date = $membership['expiration']; // original date in dd-mm-yy format
         // Convert to DateTime object
         $dateObj = DateTime::createFromFormat('d-m-y', $date);
@@ -420,16 +425,15 @@ function box_membership($membership)
     echo '
     <div class="box-maso box-membership">
         <div class="box-black">';
-            if(isset($formattedDate ))
-            {
-                echo '<h2>' . sb_('Next renewal date') . ': '.$formattedDate. '</h2>';
-            }
-            echo '<div class="membership-detail-list">
+    if (isset($formattedDate)) {
+        echo '<h2>' . sb_('Next renewal date') . ': ' . $formattedDate . '</h2>';
+    }
+    echo '<div class="membership-detail-list">
                 <div class="detail-box">
                     <span>' . sb_($name) . '</span>
                     <span>' . $membership['count'] . ' / <span class="membership-quota">' . $membership['quota'] . '</span></span>
                     <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: ' . ($membership['quota'] > 0 ? ($membership['count'] / $membership['quota']) * 100 : 0) . '%;'.$messageQuotaColor.'" aria-valuenow=' . $membership['count'] . ' aria-valuemin=' . $membership['count'] . ' aria-valuemax=' . $membership['quota'] . '></div>
+            <div class="progress-bar" role="progressbar" style="width: ' . ($membership['quota'] > 0 ? ($membership['count'] / $membership['quota']) * 100 : 0) . '%;' . $messageQuotaColor . '" aria-valuenow=' . $membership['count'] . ' aria-valuemin=' . $membership['count'] . ' aria-valuemax=' . $membership['quota'] . '></div>
         </div>
                 </div>' . $box_two .
         '</div>
@@ -458,7 +462,7 @@ function box_membership($membership)
 function box_membership_plans($active_membership_id, $expired = false)
 {
     $plans = memberships();
-    $currentPlanText = sb_("Current") ." ". sb_("Plan");
+    $currentPlanText = sb_("Current") . " " . sb_("Plan");
     $code = '<h2 class="addons-title">' . $currentPlanText . '</h2><div id="plans" class="plans-box">';
     $menu_items = [];
     $membership_type = sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages');
@@ -473,12 +477,16 @@ function box_membership_plans($active_membership_id, $expired = false)
         if (!in_array($menu, $menu_items)) {
             array_push($menu_items, $menu);
         }
-        $code .= '<div data-menu="' . $menu . '" data-id="' . $plan['id'] . '"' . ($active_membership_id == $plan['id'] ? ' data-active-membership="true"' : '') . ($active_membership_id == $plan['id'] && $expired ? ' data-expired="true"' : '') . '>' . ($active_membership_id == $plan['id'] ? '<div class="active-membership-info">' . sb_('Active Membership') . ($expired ? ' ' . sb_('Expired') : '') . '</div>' : '') . '<h4>' . $plan['name'] . '</h4><h3>' . mb_strtoupper($plan['currency']) . ' ' . $plan['price'] . ' <span>' . $period_top . '</span></h3>
+        $code .= '<div style=" ' . ($active_membership_id == $plan['id'] ? ' --borderColor: #00c17161 ' : '--borderColor:#E5E7EB') . ' " data-menu="' . $menu . '" data-id="' . $plan['id'] . '"' . ($active_membership_id == $plan['id'] ? ' data-active-membership="true"' : '') . ($active_membership_id == $plan['id'] && $expired ? ' data-expired="true"' : '') . '> <h4>' . $plan['name'] . '</h4><h3>' . mb_strtoupper($plan['currency']) . ' ' . $plan['price'] . ' <span>' . $period_top . '</span></h3>
         <ul>
             <li>' . $plan['quota'] . ' ' . sb_($membership_type_ma ? 'messages' : $membership_type) . ' ' . $period . ' </li>
             <li>' . ($membership_type_ma ? (($plan['quota_agents'] == 9999 ? sb_('unlimited') : $plan['quota_agents']) . ' ' . sb_('agents')) : '') . '</li>
             <li>' . cloud_embeddings_chars_limit($plan) . ' ' . sb_('characters to train the chatbot') . '</li>
-        </ul><button type="button" class="label_blue mb-0">Upgrade Plan</button></div>';
+        </ul> 
+        '
+            . ($active_membership_id == $plan['id'] ? '<button type="button" class="label_blue mb-0" style="background-color: #1a9260;">Current Plan</button>' : '<button type="button" class="label_blue mb-0">Upgrade Plan</button>') .
+            '
+        </div>';
     }
     $code .= '</div>';
     if (count($menu_items) > 1) {
@@ -494,7 +502,8 @@ function box_membership_plans($active_membership_id, $expired = false)
     echo $code;
 }
 
-function box_credits($auto_recharge = true) {
+function box_credits($auto_recharge = true)
+{
     if (!sb_defined('GOOGLE_CLIENT_ID') && !sb_defined('OPEN_AI_KEY') && !sb_defined('WHATSAPP_APP_ID')) {
         return false;
     }
@@ -512,7 +521,8 @@ function box_credits($auto_recharge = true) {
     echo '<h2 id="credits" class="addons-title">' . sb_('Credits') . '</h2><p>' . str_replace('{R}', '<a href="' . (defined('SB_CLOUD_DOCS') ? SB_CLOUD_DOCS : '') . '#cloud-credits" target="_blank" class="sb-link-text">' . sb_('here') . '</a>', sb_('Credits are required to use some features in automatic sync mode. If you don\'t want to buy credits, switch to manual sync mode and use your own API key. For more details click {R}.')) . '</p><div class="box-maso maso-box-credits"><div class="box-black"><h2>' . sb_('Active credits') . '</h2><div>' . ($credits ? $credits : '0') . '</div></div><div><h2>' . sb_('Add credits') . '</h2><div><div id="add-credits" data-type="text" class="sb-input"><select><option></option>' . $code_prices . '</select></div></div></div>' . (in_array(PAYMENT_PROVIDER, ['stripe', 'yoomoney']) && $auto_recharge ? '<div><h2>' . sb_('Auto recharge') . '</h2><div><div id="credits-recharge" data-type="checkbox" class="sb-input"><input type="checkbox"' . $checked . '></div></div></div>' : '') . '</div>';
 }
 
-function box_addons() {
+function box_addons()
+{
     $white_label_price = super_get_white_label();
     $addons = sb_defined('CLOUD_ADDONS');
     if ($white_label_price || $addons) {
@@ -535,7 +545,8 @@ Custom branding options</p></div>';
     }
 }
 
-function button_cancel_membership($membership) {
+function button_cancel_membership($membership)
+{
     if ($membership['price'] != 0) {
         if (super_get_user_data('subscription_cancelation', get_active_account_id())) {
             echo '<p>' . sb_('Your membership renewal has been canceled. Your membership is set to expire on') . ' ' . membership_get_active()['expiration'] . '.</p>';
@@ -545,7 +556,8 @@ function button_cancel_membership($membership) {
     }
 }
 
-function account_js() {
+function account_js()
+{
     global $cloud_settings;
     $account = account();
     $reset_code = '<script>document.cookie="sb-login=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";document.cookie="sb-cloud=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";location.reload();</script>';
@@ -573,7 +585,8 @@ function account_js() {
     echo '<script>var CLOUD_URL = "' . CLOUD_URL . '"; var BRAND_NAME = "' . SB_CLOUD_BRAND_NAME . '"; var PUSHER_KEY = "' . sb_pusher_get_details()[0] . '"; var LANGUAGE = "' . sb_get_admin_language() . '"; var SETTINGS = ' . ($cloud_settings ? json_encode($cloud_settings, JSON_INVALID_UTF8_IGNORE) : '{}') . '; var SB_TRANSLATIONS = ' . ($translations ? $translations : '[]') . '; var PAYMENT_PROVIDER = "' . PAYMENT_PROVIDER . '"; var MEMBERSHIP_TYPE = "' . sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages') . '";' . (defined('PAYMENT_MANUAL_LINK') ? 'var PAYMENT_MANUAL_LINK = "' . PAYMENT_MANUAL_LINK . '"' : '') . '</script>';
 }
 
-function box_chart() {
+function box_chart()
+{
     if (in_array(sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages'), ['messages', 'messages-agents'])) {
         echo '<div class="chart-box"><div><h2 class="addons-title">' . sb_('Monthly usage in') . ' ' . date('Y') . '</h2><p>' . sb_('The number of messages sent monthly, all messages are counted, including messages from agents, administrators and chatbot.') . '</p></div></div><canvas id="chart-usage" class="sb-loading" height="100"></canvas>';
     }
@@ -688,25 +701,25 @@ function box_chart() {
                                     <div class="field-label"><label class="required-label" for="first_name">First
                                             Name</label></div>
                                     <div id="first_name" class="input-wrapper sb-input">
-  <input type="text" placeholder="Enter first name" class="form-input" />
-  <p class="error-msg text-danger small m-0"></p>
-</div>
+                                        <input type="text" placeholder="Enter first name" class="form-input" />
+                                        <p class="error-msg text-danger small m-0"></p>
+                                    </div>
                                 </div>
                                 <div class="field-container mb-3">
                                     <div class="field-label"><label class="required-label" for="first_name">Last
                                             Name</label></div>
                                     <div id="last_name" class="input-wrapper sb-input">
-  <input type="text" placeholder="Enter last name" class="form-input" />
-  <p class="error-msg text-danger small m-0"></p>
-</div>
+                                        <input type="text" placeholder="Enter last name" class="form-input" />
+                                        <p class="error-msg text-danger small m-0"></p>
+                                    </div>
                                 </div>
                                 <div class="field-container mb-3">
                                     <div class="field-label"><label class="required-label" for="first_name">Business
                                             email</label></div>
                                     <div id="email" class="input-wrapper sb-input">
-  <input type="email" placeholder="Business email" class="form-input" />
-  <p class="error-msg text-danger small m-0"></p>
-</div>
+                                        <input type="email" placeholder="Business email" class="form-input" />
+                                        <p class="error-msg text-danger small m-0"></p>
+                                    </div>
                                 </div>
                                 <div class="field-container mb-3">
                                     <div class="field-label"><label class="required-label" for="first_name">Password</label>
@@ -981,14 +994,15 @@ function box_chart() {
                         </div>
                     </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
     </div>
     <div class="sb-reset-password-box-2 sb-cloud-box sb-admin-box<?php if (isset($_GET['reset']))
         echo ' active' ?>">
             <div class="sb-info"></div>
             <div class="sb-top-bar">
                 <!-- <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" /> -->
-            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo"> 
+            <img src="../account/media/logo-new-2.svg" style="width: 100%; alt=" logo">
             <div class="sb-title">
                 <?php sb_e('Reset password') ?>
             </div>
@@ -1051,7 +1065,8 @@ function box_chart() {
                 <?php echo sb_isset($cloud_settings, 'referral-text', '') ?>
             </p>
             <div class="sb-input">
-                <input value="<?php echo CLOUD_URL . '?ref=' . sb_encryption('encrypt', account()['user_id']) ?>" type="text" readonly />
+                <input value="<?php echo CLOUD_URL . '?ref=' . sb_encryption('encrypt', account()['user_id']) ?>" type="text"
+                    readonly />
             </div>
             <hr class="space" />
             <h2 class="addons-title">
@@ -1085,13 +1100,13 @@ function box_chart() {
 } ?>
 
 <script>
-window.addEventListener("pageshow", function(event) {
-    if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
-        // Force reload to re-run PHP and reset loader
-        window.location.reload();
-    } else {
-        // Ensure loader is hidden normally
-        document.querySelector('.loader')?.classList.add('hidden');
-    }
-});
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+            // Force reload to re-run PHP and reset loader
+            window.location.reload();
+        } else {
+            // Ensure loader is hidden normally
+            document.querySelector('.loader')?.classList.add('hidden');
+        }
+    });
 </script>
