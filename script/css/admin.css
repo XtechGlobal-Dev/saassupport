@@ -2240,8 +2240,8 @@ div ul.sb-menu,
 
 .sb-chat .sb-article > .sb-title:first-child {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .sb-chat .sb-article h2 {
   font-size: 17px;
@@ -2849,7 +2849,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 
 .sb-input-select-input > div.sb-select-phone + input {
-  padding: 5px 0 0 100px;
+  padding: 5px 0 0 90px !important;
 }
 .sb-input-select-input > div.sb-select-phone .sb-select-search input {
   padding: 0 10px;
@@ -8451,7 +8451,6 @@ ul.pagination li.active a.page-link {
 }
 .sb-area-dashboard main .new_container {
   overflow-y: scroll;
-  height: calc(100vh - 110px);
   background: #edf2f9;
 }
 .sb-area-dashboard main .new_container::-webkit-scrollbar {
@@ -13962,12 +13961,6 @@ li.menu_head:hover {
   font-size: 14px;
   color: #475367;
   line-height: 1.5;
-}
-.settings-header div {
-  height: fit-content;
-}
-.settings-header .sb-search-dropdown {
-  height: -webkit-fill-available;
 }
 
 .settings-tab {
