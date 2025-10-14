@@ -4454,7 +4454,6 @@ function sb_component_admin()
                         #welcome-trigger,
                         #welcome-delay,
                         #follow-delay,
-                        #sb-import-users,
                         #sender-name,
                         #visitor-autodata,
                         #visitor-autodata,
