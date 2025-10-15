@@ -2108,7 +2108,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                     $('.bulk-users-wrapper').addClass('sb-error');
             });
 
-            $('#selectAll').on('change', function () {
+            $('#selectAll,#selectAll2').on('change', function () {
                 if (this.checked) {
                     let checkedCount = $('.user-checkbox:checked').length;
 
