@@ -900,8 +900,8 @@ function sb_whatsapp_send_template_box() { ?>
                 <label class="form-label select-user"><?php sb_e("Select"); ?>     <?php sb_e("Users"); ?>
                     (<?php sb_e(string: "Max"); ?> 10)</label>
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="checkbox" id="selectAll">
-                    <label class="form-check-label" for="selectAll"><?php sb_e("Select"); ?>     <?php sb_e("All"); ?></label>
+                    <input class="form-check-input" type="checkbox" id="selectAll2">
+                    <label class="form-check-label" for="selectAll2"><?php sb_e("Select"); ?>     <?php sb_e("All"); ?></label>
                 </div>
 
                 <div id="selectedCount" class="text-muted small mb-2">0 / 10 <?php sb_e("Selected"); ?></div>
