@@ -2626,7 +2626,7 @@ function sb_get_tickets_custom_active_fields()
     return sb_db_get($query,false);
 }
 
-function get_ticket_id($conversation_id)
+function get_ticket_id($conversation_id = 0)
 {
     $query = "SELECT id FROM sb_tickets WHERE  conversation_id = $conversation_id";
     return sb_db_get($query,true);
