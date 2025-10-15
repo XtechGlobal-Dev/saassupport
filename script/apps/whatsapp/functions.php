@@ -896,12 +896,27 @@ function sb_whatsapp_send_template_box() { ?>
             </div>
         </div>
         <div class="sb-main sb-scroll-area">
-            <div class="sb-title">
+            <div class="mt-3 bulk-users-container">
+                <label class="form-label select-user"><?php sb_e("Select"); ?>     <?php sb_e("Users"); ?>
+                    (<?php sb_e(string: "Max"); ?> 10)</label>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="selectAll">
+                    <label class="form-check-label" for="selectAll"><?php sb_e("Select"); ?>     <?php sb_e("All"); ?></label>
+                </div>
+
+                <div id="selectedCount" class="text-muted small mb-2">0 / 10 <?php sb_e("Selected"); ?></div>
+
+                <div class="border rounded p-2 bulk-users-wrapper" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Example Users -->
+                </div>
+                <input type="hidden" class="sb-setting sb-direct-message-users" id="selectedUserIds2" name="selectedUserIds" value="">
+            </div>
+            <!-- <div class="sb-title">
                 <?php sb_e('User IDs') ?>
             </div>
             <div class="sb-setting sb-type-text sb-first">
                 <input class="sb-direct-message-users" type="text" placeholder="<?php sb_e('User IDs separated by commas') ?>" required />
-            </div>
+            </div> -->
             <div class="sb-title sb-whatsapp-box-header">
                 <?php sb_e('Header variables') ?>
             </div>
@@ -938,6 +953,72 @@ function sb_whatsapp_send_template_box() { ?>
                 }
                 ?>
             </div>
+            <script>
+        $(document).ready(function () {
+            const maxSelection = 10;
+
+            function updateSelected() {
+                const checked = $('.user-checkbox:checked');
+                const count = checked.length;
+                const selectedText = '<?php sb_e("Selected"); ?>';
+
+                $('#selectedCount').text(`${count} / ${maxSelection} ${selectedText}`);
+
+                // Update hidden field with selected IDs
+                const ids = checked.map(function () {
+                    return $(this).val();
+                }).get().join(',');
+
+                $('#selectedUserIds2').val(ids);
+
+                // Update select all checkbox state
+                // $('#selectAll').prop('checked', $('.user-checkbox').length === count);
+            }
+
+            $('.bulk-users-wrapper').on('change', '.user-checkbox', function () {
+                const checkedCount = $('.user-checkbox:checked').length;
+
+                if (checkedCount > maxSelection) {
+                    this.checked = false;
+                    alert(`You can select up to ${maxSelection} users.`);
+                    return;
+                }
+
+                updateSelected();
+
+                if (checkedCount)
+                    $('.bulk-users-wrapper').removeClass('sb-error');
+                else
+                    $('.bulk-users-wrapper').addClass('sb-error');
+            });
+
+            $('#selectAll').on('change', function () {
+                if (this.checked) {
+                    let checkedCount = $('.user-checkbox:checked').length;
+
+                    $('.user-checkbox').each(function () {
+                        if (!$(this).prop('checked') && checkedCount < maxSelection) {
+                            $(this).prop('checked', true);
+                            checkedCount++;
+                        }
+                    });
+
+                    if (checkedCount)
+                        $('.bulk-users-wrapper').removeClass('sb-error');
+                    else
+                        $('.bulk-users-wrapper').addClass('sb-error');
+
+                } else {
+                    // Allow unchecking all regardless of count
+                    $('.user-checkbox').prop('checked', false);
+                }
+
+                updateSelected();
+            });
+
+            updateSelected(); // Initialize count on load
+        });
+    </script>
         </div>
     </div>
 <?php } ?>
