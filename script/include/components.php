@@ -2042,7 +2042,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 <input type="hidden" class="sb-setting sb-direct-message-users" id="selectedUserIds" name="selectedUserIds"
                     value="">
             </div>
-
+  
             <div class="mt-3 sb-title sb-direct-message-subject">
                 <label class="form-label"><?php sb_e("Subject"); ?></label>
                 <div class="sb-setting sb-type-text sb-direct-message-subject">
