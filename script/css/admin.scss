@@ -12630,7 +12630,7 @@ div#messaging-channels {
         }
 
         .form-check.d-flex,
-        #selectedCount {
+        .selectedCount {
             width: fit-content;
             margin-bottom: 0 !important;
             display: flex;
@@ -12638,7 +12638,7 @@ div#messaging-channels {
             height: fit-content;
         }
 
-        #selectedCount {
+        .selectedCount {
             margin-left: auto;
             background: #eceef2;
             border-radius: 20px;
