@@ -14564,14 +14564,14 @@ div#messaging-channels {
   width: 100%;
 }
 .sb-scroll-area .bulk-users-container .form-check.d-flex,
-.sb-scroll-area .bulk-users-container #selectedCount {
+.sb-scroll-area .bulk-users-container .selectedCount {
   width: fit-content;
   margin-bottom: 0 !important;
   display: flex;
   gap: 10px;
   height: fit-content;
 }
-.sb-scroll-area .bulk-users-container #selectedCount {
+.sb-scroll-area .bulk-users-container .selectedCount {
   margin-left: auto;
   background: #eceef2;
   border-radius: 20px;
