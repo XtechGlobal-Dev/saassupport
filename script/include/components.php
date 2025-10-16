@@ -2030,11 +2030,11 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 <label class="form-label select-user"><?php sb_e("Select"); ?>     <?php sb_e("Users"); ?>
                     (<?php sb_e(string: "Max"); ?> 10)</label>
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="checkbox" id="selectAll">
+                    <input class="form-check-input selectAll" type="checkbox">
                     <label class="form-check-label" for="selectAll"><?php sb_e("Select"); ?>     <?php sb_e("All"); ?></label>
                 </div>
 
-                <div id="selectedCount" class="text-muted small mb-2">0 / 10 <?php sb_e("Selected"); ?></div>
+                <div class="selectedCount" class="text-muted small mb-2">0 / 10 <?php sb_e("Selected"); ?></div>
 
                 <div class="border rounded p-2 bulk-users-wrapper" style="max-height: 200px; overflow-y: auto;">
                     <!-- Example Users -->
@@ -2078,7 +2078,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                 const count = checked.length;
                 const selectedText = '<?php sb_e("Selected"); ?>';
 
-                $('#selectedCount').text(`${count} / ${maxSelection} ${selectedText}`);
+                $('.selectedCount').text(`${count} / ${maxSelection} ${selectedText}`);
 
                 // Update hidden field with selected IDs
                 const ids = checked.map(function () {
@@ -2108,11 +2108,11 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                     $('.bulk-users-wrapper').addClass('sb-error');
             });
 
-            $('#selectAll,#selectAll2').on('change', function () {
+            $('.selectAll').on('change', function () {
                 if (this.checked) {
                     let checkedCount = $('.user-checkbox:checked').length;
 
-                    $('.user-checkbox').each(function () {
+                    $(this).parent().find('.user-checkbox').each(function () {
                         if (!$(this).prop('checked') && checkedCount < maxSelection) {
                             $(this).prop('checked', true);
                             checkedCount++;
