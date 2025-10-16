@@ -6887,7 +6887,7 @@ td.sb-td-contact p {
 .sb-board .sb-conversation .sb-list > div .sb-menu {
   width: 170px;
   right: -183px;
-  top: 0;
+  top: -20px;
   display: none;
   margin-bottom: 15px;
   z-index: 9;
