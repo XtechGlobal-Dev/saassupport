@@ -896,7 +896,7 @@ function sb_whatsapp_send_template_box() { ?>
             </div>
         </div>
         <div class="sb-main sb-scroll-area">
-            <div class="mt-3 bulk-users-container">
+            <div class="mt-3 mb-4 bulk-users-container">
                 <label class="form-label select-user"><?php sb_e("Select"); ?>     <?php sb_e("Users"); ?>
                     (<?php sb_e(string: "Max"); ?> 10)</label>
                 <div class="form-check d-flex align-items-center">
