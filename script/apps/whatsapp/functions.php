@@ -994,9 +994,9 @@ function sb_whatsapp_send_template_box() { ?>
 
             $('.selectAll').on('change', function () {
                 if (this.checked) {
-                    let checkedCount = $(this).parent().find('.user-checkbox:checked').length;
+                    let checkedCount = $(this).parent().parent().find('.user-checkbox:checked').length;
 
-                    $(this).parent().find('.user-checkbox').each(function () {
+                    $(this).parent().parent().find('.user-checkbox').each(function () {
                         if (!$(this).prop('checked') && checkedCount < maxSelection) {
                             $(this).prop('checked', true);
                             checkedCount++;
