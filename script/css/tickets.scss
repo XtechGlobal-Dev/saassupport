@@ -1509,10 +1509,18 @@ ul.sb-user-conversations.sb-scroll-area {
         }
     }
 
-    .tickets-list {
+    .tickets-list { 
         .sb-top {
             .sb-search-btn {
                 display: none;
+            }
+        }
+    }
+
+    .sb-form-main {
+        #otp {
+            &:not(.active) {
+            display: none;
             }
         }
     }
