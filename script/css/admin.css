@@ -9822,7 +9822,7 @@ span.initials.avatar_name {
   color: rgb(120, 134, 146);
 }
 
-.sb-direct-message-box .sb-setting {
+.sb-direct-message-box .sb-setting, #sb-whatsapp-send-template-box .sb-setting {
   padding: 0px 0px 0px 0px !important;
 }
 
