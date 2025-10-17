@@ -897,20 +897,18 @@
                 if (SBForm.errors(panel)) {
                     SBForm.showErrorMessage(panel, SBForm.getRegistrationErrorMessage(panel));
                 } 
-                else if(optRequired){
-                    if (!$(otp).hasClass('active')) {
-                        SBF.ajax({
-                                function: 'otp',
-                                email: settings.email
-                            }, (response) => {
-                            
-                                $(otp).attr('data-otp', response).addClass('active');
-                                $(otp).find('input').attr('required', true).addClass('sb-error');
-                                SBForm.showErrorMessage(panel, sb_('Please check your email for the one-time code.'));
-                                $(this).sbLoading(false);
-                                return;
-                        });
-                    }
+                else if(optRequired && !$(otp).hasClass('active')){
+                    SBF.ajax({
+                            function: 'otp',
+                            email: settings.email
+                        }, (response) => {
+                        
+                            $(otp).attr('data-otp', response).addClass('active');
+                            $(otp).find('input').attr('required', true).addClass('sb-error');
+                            SBForm.showErrorMessage(panel, sb_('Please check your email for the one-time code.'));
+                            $(this).sbLoading(false);
+                            return;
+                    });
                 }
                 else {
                     $(this).sbLoading(true);
