@@ -886,9 +886,12 @@
                 {
                     const otp = $('.tickets-list-area').find('#otp');
                     if ($(otp).hasClass('active')) {
-                        let otp_string = $(otp).attr('data-otp');
+                        const otp_string = $(otp).attr('data-otp');
                         settings.otp = otp_string ? [otp_string, $(otp).val()] : false;
+                        console.log([otp_string, $(otp).val()],otp_string,$(otp).val(),'^^^');
                     }
+
+                    
                 }
                 
                 for (var key in settings) {
