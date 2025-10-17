@@ -1255,7 +1255,7 @@ div ul.sb-menu,
 
 .sb-list > div {
   float: left;
-    clear: both;
+  clear: both;
   position: relative;
   margin: 2px 10px 15px 20px;
   box-shadow: none;
@@ -2239,8 +2239,8 @@ div ul.sb-menu,
 
 .sb-chat .sb-article > .sb-title:first-child {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .sb-chat .sb-article h2 {
   font-size: 17px;
@@ -2848,7 +2848,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 
 .sb-input-select-input > div.sb-select-phone + input {
-  padding: 5px 0 0 100px;
+  padding: 5px 0 0 90px !important;
 }
 .sb-input-select-input > div.sb-select-phone .sb-select-search input {
   padding: 0 10px;
@@ -5576,6 +5576,9 @@ ul.sb-user-conversations.sb-scroll-area {
   box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.2);
 }
 .tickets-list-area .tickets-list .sb-top .sb-search-btn {
+  display: none;
+}
+.tickets-list-area .sb-form-main #otp:not(.active) {
   display: none;
 }
 
