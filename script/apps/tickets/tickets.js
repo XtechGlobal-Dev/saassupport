@@ -875,16 +875,44 @@
         });
 
         panel.on('click', '> .sb-buttons .sb-submit', function () {
+            const optRequired = SBF.setting('registration_otp');
+
             if (!$(this).sbLoading()) {
+                
                 let settings = SBForm.getAll(panel);
                 let settings_extra = SBForm.getAll(panel.find('.sb-form-extra'));
                 let is_edit_profile = active_panel == 'edit-profile';
+                if(optRequired)
+                {
+                    const otp = $('.tickets-list-area').find('#otp');
+                    if ($(otp).hasClass('active')) {
+                        let otp_string = otp.attr('data-otp');
+                        settings.otp = otp_string ? [otp_string, panel.find('#otp input').val()] : false;
+                    }
+                }
+                
                 for (var key in settings) {
                     settings[key] = settings[key][0];
                 }
                 if (SBForm.errors(panel)) {
                     SBForm.showErrorMessage(panel, SBForm.getRegistrationErrorMessage(panel));
-                } else {
+                } 
+                else if(optRequired){
+                    if (!$(otp).hasClass('active')) {
+                        SBF.ajax({
+                                function: 'otp',
+                                email: settings.email
+                            }, (response) => {
+                            
+                                $(otp).attr('data-otp', response).addClass('active');
+                                $(otp).find('input').attr('required', true).addClass('sb-error');
+                                SBForm.showErrorMessage(panel, sb_('Please check your email for the one-time code.'));
+                                $(this).sbLoading(false);
+                                return;
+                        });
+                    }
+                }
+                else {
                     $(this).sbLoading(true);
                     settings.user_type = 'user';
                     SBF.ajax({
