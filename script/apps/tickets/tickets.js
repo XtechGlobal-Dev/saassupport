@@ -888,7 +888,7 @@
                     if ($(otp).hasClass('active')) {
                         const otp_string = $(otp).attr('data-otp');
                         settings.otp = otp_string ? [otp_string, $('.tickets-list-area').find('#otp input').val()] : false;
-                        //console.log([otp_string, $('.tickets-list-area').find('#otp input').val()],otp_string,$('.tickets-list-area').find('#otp input').val(),'^^^');
+                        console.log([otp_string, $('.tickets-list-area').find('#otp input').val()],otp_string,$('.tickets-list-area').find('#otp input').val(),'^^^');
                     }
                 }
                 
