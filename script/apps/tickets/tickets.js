@@ -882,19 +882,18 @@
                 let settings = SBForm.getAll(panel);
                 let settings_extra = SBForm.getAll(panel.find('.sb-form-extra'));
                 let is_edit_profile = active_panel == 'edit-profile';
+                for (var key in settings) {
+                    settings[key] = settings[key][0];
+                }
                 if(optRequired)
                 {
                     const otp = $('.tickets-list-area').find('#otp');
                     if ($(otp).hasClass('active')) {
                         const otp_string = $(otp).attr('data-otp');
-                        settings.otp = otp_string ? [otp_string, $('.tickets-list-area').find('#otp input').val()] : false;
-                        console.log([otp_string, $('.tickets-list-area').find('#otp input').val()],otp_string,$('.tickets-list-area').find('#otp input').val(),'^^^');
+                        settings.otp = otp_string ? [otp_string,$('.tickets-list-area').find('#otp input').val()] : false;
                     }
                 }
                 
-                for (var key in settings) {
-                    settings[key] = settings[key][0];
-                }
                 if (SBForm.errors(panel)) {
                     SBForm.showErrorMessage(panel, SBForm.getRegistrationErrorMessage(panel));
                 } 
