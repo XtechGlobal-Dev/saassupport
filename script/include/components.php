@@ -151,7 +151,7 @@ function sb_profile_box()
                         <span class="required-label">
                             <?php sb_e("Password"); ?>
                         </span>
-                        <input type="password" id="edit-profile-password" />
+                        <input type="password" id="edit-profile-password" style="padding-right: 35px;" />
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="toggleEditProfilePassword"
                             width="24" height="24" color="#000000" fill="none"
                             style="margin-left: -26px;margin-right: 10px; cursor: pointer;">
