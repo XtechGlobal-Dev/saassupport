@@ -4444,6 +4444,7 @@ function sb_component_admin()
                             display: inline;
                         }
 
+                        /* hide unused settings*/
                         #agents-menu-title,
                         #collapse,
                         #show-profile-images-admin,
@@ -4471,12 +4472,15 @@ function sb_component_admin()
                         #popup-message,
                         #login-message,
                         #login-icon,
-                        admin-title,
                         #custom-js,
                         #custom-css,
                         #manifest-url,
                         #color-admin-2,
-                        #admin-title {
+                        #admin-title,
+                        #front-auto-translations,
+                        #admin-auto-translations,
+                        .my-tab[data-target="language"]
+                        {
                             display: none;
                         }
                     </style>
