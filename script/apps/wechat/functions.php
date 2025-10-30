@@ -1,0 +1,163 @@
+<?php
+
+/*
+ * ==========================================================
+ * WECHAT APP
+ * ==========================================================
+ *
+ * WeChat app. © 2017-2025 board.support. All rights reserved.
+ *
+ * 1. Send a message to WeChat
+ * 2. Rich messages
+ * 3. Get access token
+ *
+ */
+
+define('SB_WECHAT', '1.0.3');
+
+function sb_wechat_send_message($open_id, $message = '', $attachments = [], $access_token = false) {
+    if (empty($message) && empty($attachments)) {
+        return false;
+    }
+    $open_id = bin2hex($open_id);
+    if ($open_id[0] == '4') {
+        $open_id = '6' . substr($open_id, 1);
+    }
+    $open_id = hex2bin($open_id);
+    $query = ['touser' => $open_id];
+    $response = false;
+
+    // Get access token
+    if (!$access_token) {
+        $access_token = sb_wechat_get_access_token();
+    }
+
+    // Rich messages
+    $message = sb_messaging_platforms_text_formatting($message);
+    $message = sb_wechat_rich_messages($message, $open_id);
+    if ($message[1]) {
+        $attachments = $message[1];
+    }
+    $message = $message[0];
+
+    // Attachments
+    for ($i = 0; $i < count($attachments); $i++) {
+        $extension = strtolower(sb_isset(pathinfo($attachments[$i][1]), 'extension'));
+        if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+            $link = $attachments[$i][1];
+            $path = substr($link, strrpos(substr($link, 0, strrpos($link, '/')), '/'));
+            $type = 'image';
+            $media_id = sb_isset(sb_curl('https://api.weixin.qq.com/cgi-bin/media/upload?access_token=' . $access_token . '&type=' . $type, ['media' => new CURLFile(sb_upload_path() . $path)], [], 'UPLOAD'), 'media_id');
+            if ($media_id) {
+                $query['msgtype'] = $type;
+                $query[$type] = ['media_id' => $media_id];
+                $response = sb_curl('https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=' . $access_token, json_encode($query, JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE));
+            }
+        } else {
+            $message .= ($message ? PHP_EOL : '') . $attachments[$i][1];
+        }
+    }
+
+    // Send message
+    if ($message) {
+        $query['msgtype'] = 'text';
+        $query['text'] = ['content' => sb_clear_text_formatting($message)];
+        $response = sb_curl('https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=' . $access_token, json_encode($query, JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE));
+        if (in_array(sb_isset($response, 'errcode'), [42001, 40001])) {
+            return sb_wechat_send_message($open_id, $message, $attachments);
+        }
+    }
+
+    return [$response, $access_token];
+}
+
+function sb_wechat_rich_messages($message, $extra = false) {
+    $shortcodes = sb_get_shortcode($message);
+    $attachments = [];
+    for ($j = 0; $j < count($shortcodes); $j++) {
+        $shortcode = $shortcodes[$j];
+        $shortcode_id = sb_isset($shortcode, 'id', '');
+        $shortcode_name = $shortcode['shortcode_name'];
+        $message = trim((isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')) . str_replace($shortcode['shortcode'], '{R}', $message));
+        $message_inner = '';
+        switch ($shortcode_name) {
+            case 'slider-images':
+                $attachments = explode(',', $shortcode['images']);
+                for ($i = 0; $i < count($attachments); $i++) {
+                    $attachments[$i] = [$attachments[$i], $attachments[$i]];
+                }
+                $message = '';
+                break;
+            case 'slider':
+            case 'card':
+                $suffix = $shortcode_name == 'slider' ? '-1' : '';
+                $message = sb_($shortcode['header' . $suffix]) . (isset($shortcode['description' . $suffix]) ? (PHP_EOL . PHP_EOL . $shortcode['description' . $suffix]) : '') . (isset($shortcode['extra' . $suffix]) ? (PHP_EOL . $shortcode['extra' . $suffix]) : '') . (isset($shortcode['link' . $suffix]) ? (PHP_EOL . PHP_EOL . $shortcode['link' . $suffix]) : '');
+                $attachments = [[$shortcode['image' . $suffix], $shortcode['image' . $suffix]]];
+                break;
+            case 'list-image':
+            case 'list':
+                $index = $shortcode_name == 'list-image' ? 1 : 0;
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
+                $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
+                if (strpos($values[0], ':')) {
+                    for ($i = 0; $i < count($values); $i++) {
+                        $value = explode(':', str_replace('{R3}', ',', $values[$i]));
+                        $message_inner .= PHP_EOL . '• *' . trim($value[$index]) . '* ' . trim($value[$index + 1]);
+                    }
+                } else {
+                    for ($i = 0; $i < count($values); $i++) {
+                        $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
+                    }
+                }
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
+                break;
+            case 'select':
+            case 'buttons':
+            case 'chips':
+                $values = explode(',', $shortcode['options']);
+                for ($i = 0; $i < count($values); $i++) {
+                    $message_inner .= PHP_EOL . sb_(explode('|', $values[$i])[0]);
+                }
+                if ($shortcode_id == 'sb-human-takeover' && defined('SB_DIALOGFLOW')) {
+                    sb_dialogflow_set_active_context('human-takeover', [], 2, false, sb_isset(sb_get_user_by('wechat-id', $extra), 'id'));
+                }
+                $message = str_replace('{R}', $message_inner, $message);
+                break;
+            case 'button':
+                $message = $shortcode['link'];
+                break;
+            case 'video':
+                $message = ($shortcode['type'] == 'youtube' ? 'https://www.youtube.com/embed/' : 'https://player.vimeo.com/video/') . $shortcode['id'];
+                break;
+            case 'image':
+                $attachments = [[$shortcode['url'], $shortcode['url']]];
+                break;
+            case 'rating':
+                if (defined('SB_DIALOGFLOW')) {
+                    sb_dialogflow_set_active_context('rating', [], 2, false, sb_isset(sb_get_user_by('wechat-id', $extra), 'id'));
+                }
+                break;
+            case 'articles':
+                if (isset($shortcode['link'])) {
+                    $message = $shortcode['link'];
+                }
+                break;
+            default:
+                $message = '';
+                $attachments = [];
+        }
+    }
+    return [$message, $attachments];
+}
+
+function sb_wechat_get_access_token() {
+    $settings = sb_get_setting('wechat');
+    $response = sb_get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $settings['wechat-app-id'] . '&secret=' . $settings['wechat-app-secret'], true);
+    $token = sb_isset($response, 'access_token');
+    if ($token) {
+        return $token;
+    }
+    return sb_error('wechat-access-token-not-found', 'sb_wechat_get_access_token', $response, true);
+}
+
+?>
