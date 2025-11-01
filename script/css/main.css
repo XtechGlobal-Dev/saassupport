@@ -5971,5 +5971,8 @@ div ul.sb-menu li:hover,
     min-height: 50px;
   }
 }
+.wave-bg {
+  margin-top: 0 !important;
+}
 
 /*# sourceMappingURL=main.css.map */
