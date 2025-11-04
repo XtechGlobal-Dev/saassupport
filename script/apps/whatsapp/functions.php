@@ -9,15 +9,14 @@
  *
  */
 
-define('SB_WHATSAPP', '1.3.0');
+define('SB_WHATSAPP', '1.3.1');
 
-function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_number_id = false) {
+function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_number_id = false, $reply_to = false, $message_id = false) {
     if (empty($message) && empty($attachments)) {
         return false;
     }
     $message_original = $message;
     $provider = sb_whatsapp_provider();
-
     $cloud_phone_id = $provider == 'twilio' ? false : ($phone_number_id ? $phone_number_id : sb_isset(sb_isset(sb_whatsapp_cloud_get_phone_numbers($phone_number_id), 1), 'whatsapp-cloud-numbers-phone-id'));
     $to = trim(str_replace('+', '', $to));
     $user = sb_get_user_by('phone', $to);
@@ -133,6 +132,12 @@ function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_
             } else {
                 $query = array_merge($query, $message);
             }
+            if ($reply_to) {
+                $reply_to = sb_get_message_payload($reply_to, 'waid');
+                if ($reply_to) {
+                    $query['context'] = ['message_id' => $reply_to];
+                }
+            }
             $response = $provider == 'official' ? sb_whatsapp_cloud_curl($cloud_phone_id . '/messages', $query, $cloud_phone_id) : sb_whatsapp_360_curl('messages', $query);
         }
         for ($i = 0; $i < $attachments_count; $i++) {
@@ -156,6 +161,13 @@ function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_
         $message_id = sb_isset(sb_db_get('SELECT id FROM sb_messages WHERE message = "' . sb_db_escape($message_original) . '" AND user_id = ' . sb_get_active_user_ID() . ' ORDER BY id DESC LIMIT 1'), 'id');
         if ($message_id) {
             sb_update_message($message_id, false, false, ['delivery_failed' => 'wa']);
+        }
+    } else if ($message_id) {
+        $waid = sb_isset(sb_isset(sb_isset($response, 'messages'), 0), 'id');
+        if ($waid) {
+            $payload = sb_get_message_payload($message_id);
+            $payload['waid'] = $waid;
+            sb_update_message($message_id, false, false, $payload);
         }
     }
     return $response;
@@ -350,7 +362,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
             case 'list-image':
             case 'list':
                 $index = $shortcode_name == 'list-image' ? 1 : 0;
-                $shortcode['values'] = str_replace(['://', '\:', "\n,-"], ['{R2}', '{R4}', ' '], $shortcode['values']);
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
                 $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
@@ -362,7 +374,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
                         $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', $message_inner . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'select':
             case 'buttons':
@@ -372,7 +384,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
                 if ($twilio) {
                     $message_inner .= PHP_EOL;
                     for ($i = 0; $i < $count; $i++) {
-                        $message_inner .= PHP_EOL . '• ' . trim($values[$i]);
+                        $message_inner .= PHP_EOL . '• ' . trim(explode('|', $values[$i])[0]);
                     }
                     $message = str_replace('{R}', $message_inner, $message);
                 } else {
@@ -386,7 +398,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
                     }
                     $buttons = [];
                     for ($i = 0; $i < $count; $i++) {
-                        $value = trim($values[$i]);
+                        $value = trim(explode('|', $values[$i])[0]);
                         $item = ['id' => sb_string_slug($value), 'title' => $value];
                         array_push($buttons, $is_buttons ? ['type' => 'reply', 'reply' => $item] : $item);
                     }

@@ -52,7 +52,7 @@
             $.ajax({
                 method: 'POST',
                 url: SB_AJAX_URL,
-                data: { function: 'ver' + 'ification-cookie', code: code, domain: SB_URL }
+                data: { function: 'ver' + 'ification-cookie', code: code, domain: SB_URL, user: typeof SB_WP_USER !== 'undefined' ? SB_WP_USER : false }
             }).done((response) => {
                 if (typeof response === 'string' || response instanceof String) {
                     response = JSON.parse(response);

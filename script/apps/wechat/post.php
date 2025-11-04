@@ -26,8 +26,10 @@ flush();
 if (function_exists('fastcgi_finish_request')) {
     fastcgi_finish_request();
 }
-sb_cloud_load_by_url();
-
+if (sb_is_cloud()) {
+    sb_cloud_load_by_url();
+    sb_cloud_membership_validation(true);
+}
 $token = sb_get_multi_setting('wechat', 'wechat-token');
 $signature = check_signature($token);
 if (!$signature) {
@@ -76,10 +78,10 @@ if (!$conversation_id) {
 }
 
 // Emoji
-if (strpos($message, '/:') !== false) {
+if (str_contains($message, '/:')) {
     $emojis = json_decode(file_get_contents(SB_PATH . '/apps/wechat/emoji.json'), true);
     for ($i = 0; $i < count($emojis); $i++) {
-        if (strpos($message, $emojis[$i][0]) !== false) {
+        if (str_contains($message, $emojis[$i][0])) {
             $message = str_replace($emojis[$i][0], $emojis[$i][1], $message);
             if (strpos($message, '/:') === false)
                 break;

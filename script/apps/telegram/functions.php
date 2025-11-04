@@ -16,20 +16,16 @@
  *
  */
 
-define('SB_TELEGRAM', '1.0.9');
+define('SB_TELEGRAM', '1.1.1');
 
-function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $conversation_id = false, $reply = false, $message_id = false) {
+function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $conversation_id = false, $reply_to = false, $message_id = false) {
     if (empty($message) && empty($attachments)) {
         return false;
     }
     if ($attachments === false || $attachments === '') {
         $attachments = [];
     }
-    $token = sb_isset(sb_db_get('SELECT extra_2 FROM sb_conversations WHERE ' . ($conversation_id ? 'id = ' . sb_db_escape($conversation_id) : 'extra = "' . sb_db_escape($chat_id) . '"')), 'extra_2'); // Deprecated.
-    if (empty($token) || !strpos($token, ':')) { // Deprecated. Remove if.
-        $token = sb_isset(sb_db_get('SELECT extra_3 FROM sb_conversations WHERE ' . ($conversation_id ? 'id = ' . sb_db_escape($conversation_id) : 'extra = "' . sb_db_escape($chat_id) . '"')), 'extra_3');
-    } // Deprecated. Remove if.
-    $token = $token ? $token : sb_get_multi_setting('telegram', 'telegram-token'); // Deprecated
+    $token = sb_isset(sb_db_get('SELECT extra_3 FROM sb_conversations WHERE ' . ($conversation_id ? 'id = ' . sb_db_escape($conversation_id) : 'extra = "' . sb_db_escape($chat_id) . '"')), 'extra_3');
     $user_id = sb_isset(sb_db_get('SELECT A.id FROM sb_users A, sb_conversations B WHERE A.id = B.user_id AND B.extra = "' . sb_db_escape($chat_id) . '"'), 'id');
     if (!$user_id) {
         return sb_error('chat-id-not-found', 'sb_telegram_send_message', 'User with chat ID  ' . $chat_id . ' not found.');
@@ -39,11 +35,13 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
     $business_connection_id = sb_get_user_extra($user_id, 'telegram_bcid');
     $query = ['chat_id' => $chat_id, 'parse_mode' => 'MarkdownV2'];
     $method = 'sendMessage';
+    $message = sb_messaging_platforms_text_formatting($message);
     $message = sb_telegram_rich_messages($message, ['user_id' => $user_id]);
     $attachments = array_merge($attachments, $message[1]);
     $count = count($attachments);
     $query = array_merge($query, $message[2]);
     $message = str_replace(['[', ']', '(', ')', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'], ['\\[', '\\]', '\\(', '\\)', '\\>', '\\#', '\\+', '\\-', '\\=', '\\|', '\\{', '\\}', '\\.', '\\!'], $message[0]);
+    $message = preg_replace("/(\r\n|\r|\n){3,}/", "\n\n", $message);
     $special_chars = ['*', '~', '__', '_'];
     for ($i = 0; $i < count($special_chars); $i++) {
         if (substr_count($message, $special_chars[$i]) === 1) {
@@ -57,6 +55,10 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
             $message = str_replace($match[$i], '[' . $match[$i] . '](' . str_replace(['\\.', '\\-'], ['.', '-'], $match[$i]) . ')', $message);
         }
     }
+    while (mb_strlen($message) > 4000) {
+        $pos = mb_strrpos(mb_substr($message, 0, mb_strlen($message) - 2), '.');
+        $message = $pos ? mb_substr($message, 0, $pos + 1) : mb_substr($message, 0, 4000) . '...';
+    }
     $query[$count ? 'caption' : 'text'] = $message;
     if ($count) {
         $query['caption'] = $message;
@@ -69,13 +71,10 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
     if ($business_connection_id) {
         $query['business_connection_id'] = $business_connection_id;
     }
-    if ($reply) {
-        $reply = sb_isset(sb_db_get('SELECT payload FROM sb_messages WHERE id = ' . sb_db_escape($reply, true)), 'payload');
-        if ($reply) {
-            $reply = json_decode($reply, true);
-            if (isset($reply['tgid'])) {
-                $query['reply_to_message_id'] = $reply['tgid'];
-            }
+    if ($reply_to) {
+        $reply_to = sb_get_message_payload($reply_to, 'tgid');
+        if ($reply_to) {
+            $query['reply_to_message_id'] = $reply_to;
         }
     }
     $response = sb_telegram_curl($method, $query, $token);
@@ -87,7 +86,7 @@ function sb_telegram_send_message($chat_id, $message = '', $attachments = [], $c
             $message_payload = json_decode($message_payload, true);
         }
         $message_payload['tgid'] = $response['result']['message_id'];
-        sb_update_message($message_id, false, false, $message_payload);
+        sb_update_message_payload($message_id, $message_payload);
     }
 
     // Attachments
@@ -154,7 +153,7 @@ function sb_telegram_rich_messages($message, $extra = false) {
             case 'list-image':
             case 'list':
                 $index = $shortcode_name == 'list-image' ? 1 : 0;
-                $shortcode['values'] = str_replace(['://', '\:', "\n,-"], ['{R2}', '{R4}', ' '], $shortcode['values']);
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
                 $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
@@ -166,14 +165,14 @@ function sb_telegram_rich_messages($message, $extra = false) {
                         $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', $message_inner . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'select':
             case 'buttons':
             case 'chips':
                 $values = explode(',', $shortcode['options']);
                 for ($i = 0; $i < count($values); $i++) {
-                    array_push($telegram, sb_($values[$i]));
+                    array_push($telegram, sb_(explode('|', $values[$i])[0]));
                 }
                 $telegram = ['reply_markup' => json_encode(['keyboard' => [$telegram], 'one_time_keyboard' => true])];
                 if ($shortcode_id == 'sb-human-takeover' && defined('SB_DIALOGFLOW')) {

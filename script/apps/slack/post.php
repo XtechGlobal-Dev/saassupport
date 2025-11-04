@@ -6,7 +6,7 @@
  * ==========================================================
  *
  * Slack response listener. This file receive the Slack messages of the agents forwarded by board.support. This file requires the Slack App.
- * © 2017-2025 board.support. All rights reserved.
+ * ï¿½ 2017-2025 board.support. All rights reserved.
  *
  */
 
@@ -86,7 +86,7 @@ if ($raw) {
 
                 // Slack notification message
                 if (!empty($response_message['notifications'])) {
-                    sb_send_slack_message(sb_get_bot_id(), sb_get_setting('bot-name'), sb_get_setting('bot-image'), '_' . sb_('The user has been notified by email' . (in_array('sms', $response_message['notifications']) ? ' and text message' : '') . '.') . '_', [], $conversation_id, $response['channel']);
+                    sb_send_slack_message(sb_get_bot_ID(), sb_get_setting('bot-name'), sb_get_setting('bot-image'), '_' . sb_('The user has been notified by email' . (in_array('sms', $response_message['notifications']) ? ' and text message' : '') . '.') . '_', [], $conversation_id, $response['channel']);
                 }
             }
         }

@@ -27,7 +27,6 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
 }
 ?>
 <html lang="en-US">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -185,7 +184,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                     </li>
                     <?php
                     if (!empty($cloud_settings['referral-commission'])) {
-                        echo '<li id="nav-referral">
+                        echo '<li id="nav-referral" style="display:none;">
                             <svg width="28" height="23" viewBox="0 0 28 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_1485_2417)">
                                     <path d="M4.69154 6.23601C4.69154 4.82079 5.25373 3.46353 6.25445 2.46281C7.25516 1.4621 8.61242 0.899902 10.0276 0.899902C11.4429 0.899902 12.8001 1.4621 13.8008 2.46281C14.8016 3.46353 15.3638 4.82079 15.3638 6.23601C15.3638 7.65124 14.8016 9.0085 13.8008 10.0092C12.8001 11.0099 11.4429 11.5721 10.0276 11.5721C8.61242 11.5721 7.25516 11.0099 6.25445 10.0092C5.25373 9.0085 4.69154 7.65124 4.69154 6.23601ZM0.689453 21.0062C0.689453 16.8999 4.01619 13.5732 8.12249 13.5732H11.9328C16.0391 13.5732 19.3658 16.8999 19.3658 21.0062C19.3658 21.6899 18.8114 22.2443 18.1277 22.2443H1.9276C1.24391 22.2443 0.689453 21.6899 0.689453 21.0062ZM21.7004 13.9067V11.2386H19.0323C18.4779 11.2386 18.0318 10.7926 18.0318 10.2381C18.0318 9.68364 18.4779 9.23758 19.0323 9.23758H21.7004V6.56952C21.7004 6.01507 22.1465 5.569 22.7009 5.569C23.2554 5.569 23.7014 6.01507 23.7014 6.56952V9.23758H26.3695C26.9239 9.23758 27.37 9.68364 27.37 10.2381C27.37 10.7926 26.9239 11.2386 26.3695 11.2386H23.7014V13.9067C23.7014 14.4611 23.2554 14.9072 22.7009 14.9072C22.1465 14.9072 21.7004 14.4611 21.7004 13.9067Z" fill="#374151"/>
@@ -502,8 +501,7 @@ function box_membership_plans($active_membership_id, $expired = false)
     echo $code;
 }
 
-function box_credits($auto_recharge = true)
-{
+function box_credits($auto_recharge = true) {
     if (!sb_defined('GOOGLE_CLIENT_ID') && !sb_defined('OPEN_AI_KEY') && !sb_defined('WHATSAPP_APP_ID')) {
         return false;
     }
@@ -521,8 +519,7 @@ function box_credits($auto_recharge = true)
     echo '<h2 id="credits" class="addons-title">' . sb_('Credits') . '</h2><p>' . str_replace('{R}', '<a href="' . (defined('SB_CLOUD_DOCS') ? SB_CLOUD_DOCS : '') . '#cloud-credits" target="_blank" class="sb-link-text">' . sb_('here') . '</a>', sb_('Credits are required to use some features in automatic sync mode. If you don\'t want to buy credits, switch to manual sync mode and use your own API key. For more details click {R}.')) . '</p><div class="box-maso maso-box-credits"><div class="box-black"><h2>' . sb_('Active credits') . '</h2><div>' . ($credits ? $credits : '0') . '</div></div><div><h2>' . sb_('Add credits') . '</h2><div><div id="add-credits" data-type="text" class="sb-input"><select><option></option>' . $code_prices . '</select></div></div></div>' . (in_array(PAYMENT_PROVIDER, ['stripe', 'yoomoney']) && $auto_recharge ? '<div><h2>' . sb_('Auto recharge') . '</h2><div><div id="credits-recharge" data-type="checkbox" class="sb-input"><input type="checkbox"' . $checked . '></div></div></div>' : '') . '</div>';
 }
 
-function box_addons()
-{
+function box_addons() {
     $white_label_price = super_get_white_label();
     $addons = sb_defined('CLOUD_ADDONS');
     if ($white_label_price || $addons) {
@@ -545,8 +542,7 @@ Custom branding options</p></div>';
     }
 }
 
-function button_cancel_membership($membership)
-{
+function button_cancel_membership($membership) {
     if ($membership['price'] != 0) {
         if (super_get_user_data('subscription_cancelation', get_active_account_id())) {
             echo '<p>' . sb_('Your membership renewal has been canceled. Your membership is set to expire on') . ' ' . membership_get_active()['expiration'] . '.</p>';
@@ -556,8 +552,7 @@ function button_cancel_membership($membership)
     }
 }
 
-function account_js()
-{
+function account_js() {
     global $cloud_settings;
     $account = account();
     $reset_code = '<script>document.cookie="sb-login=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";document.cookie="sb-cloud=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";location.reload();</script>';
@@ -585,8 +580,7 @@ function account_js()
     echo '<script>var CLOUD_URL = "' . CLOUD_URL . '"; var BRAND_NAME = "' . SB_CLOUD_BRAND_NAME . '"; var PUSHER_KEY = "' . sb_pusher_get_details()[0] . '"; var LANGUAGE = "' . sb_get_admin_language() . '"; var SETTINGS = ' . ($cloud_settings ? json_encode($cloud_settings, JSON_INVALID_UTF8_IGNORE) : '{}') . '; var SB_TRANSLATIONS = ' . ($translations ? $translations : '[]') . '; var PAYMENT_PROVIDER = "' . PAYMENT_PROVIDER . '"; var MEMBERSHIP_TYPE = "' . sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages') . '";' . (defined('PAYMENT_MANUAL_LINK') ? 'var PAYMENT_MANUAL_LINK = "' . PAYMENT_MANUAL_LINK . '"' : '') . '</script>';
 }
 
-function box_chart()
-{
+function box_chart() {
     if (in_array(sb_defined('SB_CLOUD_MEMBERSHIP_TYPE', 'messages'), ['messages', 'messages-agents'])) {
         echo '<div class="chart-box"><div><h2 class="addons-title">' . sb_('Monthly usage in') . ' ' . date('Y') . '</h2><p>' . sb_('The number of messages sent monthly, all messages are counted, including messages from agents, administrators and chatbot.') . '</p></div></div><canvas id="chart-usage" class="sb-loading" height="100"></canvas>';
     }
@@ -594,13 +588,23 @@ function box_chart()
 
 ?>
 
-<?php function box_registration_login()
-{
+<?php function box_registration_login() {
     $appsumo = base64_decode(sb_isset($_GET, 'appsumo'));
-    global $cloud_settings; ?>
-    <div
-        class="sb-registration-box sb-cloud-box sb-admin-box sb-admin-box_new<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
-        <!-- <div class="sb-info"></div>
+    $apps_login_code = '';
+    if (defined('GOOGLE_LOGIN_CLIENT_ID')) {
+        $apps_login_code = '<div class="sb-apps-login" data-text="' . sb_('Or') . '">
+                <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=' . GOOGLE_LOGIN_CLIENT_ID . '&redirect_uri=' . urlencode(CLOUD_URL . '/account/google.php') . '&response_type=code&scope=openid%20email%20profile&access_type=offline&prompt=select_account" class="sb-btn sb-btn-white" data-app="google">
+                    <img src="' . CLOUD_URL . '/script/media/apps/google.svg" /> ' . sb_('Continue with') . ' Google
+                </a>
+            </div>';
+    }
+    global $cloud_settings;
+    if (isset($_GET['auto_login'])) {
+        echo '<style>body { display: none; }</style>';
+    }
+    ?>
+    <div class="sb-registration-box sb-cloud-box sb-admin-box sb-admin-box_new<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
+        <div class="sb-info"></div>
         <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
@@ -610,6 +614,7 @@ function box_chart()
                 <?php sb_e($appsumo ? 'Complete the AppSumo registration.' : 'Create your free account. No payment information required.') ?>
             </div>
         </div>
+        <?php echo $apps_login_code ?>
         <div class="sb-main">
             <div id="first_name" class="sb-input">
                 <span>
@@ -669,7 +674,7 @@ function box_chart()
             <p>
                 <?php sb_e('We are creating your account...') ?>
             </p>
-        </div> -->
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 top_left">
@@ -809,6 +814,7 @@ function box_chart()
                 <?php echo sb_('To continue to') . ' ' . SB_CLOUD_BRAND_NAME ?>
             </div>
         </div>
+        <?php echo $apps_login_code ?>
         <div class="sb-main">
             <div id="email" class="sb-input">
                 <span>
@@ -1065,8 +1071,7 @@ function box_chart()
                 <?php echo sb_isset($cloud_settings, 'referral-text', '') ?>
             </p>
             <div class="sb-input">
-                <input value="<?php echo CLOUD_URL . '?ref=' . sb_encryption('encrypt', account()['user_id']) ?>" type="text"
-                    readonly />
+                <input value="<?php echo CLOUD_URL . '?ref=' . sb_encryption('encrypt', account()['user_id']) ?>" type="text" readonly />
             </div>
             <hr class="space" />
             <h2 class="addons-title">
