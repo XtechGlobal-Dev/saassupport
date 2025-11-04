@@ -20,7 +20,10 @@ if (isset($_GET['hub_mode']) && $_GET['hub_mode'] == 'subscribe') {
 $raw = file_get_contents('php://input');
 if ($raw) {
     require('../../include/functions.php');
-    sb_cloud_load_by_url();
+    if (sb_is_cloud()) {
+        sb_cloud_load_by_url();
+        sb_cloud_membership_validation(true);
+    }
     $provider = sb_whatsapp_provider();
     $twilio = $provider == 'twilio';
     $response = [];
@@ -58,6 +61,7 @@ if ($raw) {
         $delayed_message = false;
         $payload = '';
         $message = '';
+        $waid = false;
         $new_conversation = false;
         $flow = false;
         $is_new_user = false;
@@ -87,7 +91,18 @@ if ($raw) {
             } else if ($message_type == 'interactive') {
                 $flow = json_decode(sb_isset(sb_isset(sb_isset($message_2, 'interactive'), 'nfm_reply'), 'response_json'), true);
             }
-            $payload = json_encode(['waid' => $message_2['id']]);
+            $waid = $message_2['id'];
+            $payload = ['waid' => $waid];
+            $waids = sb_get_external_setting('waids', []);
+            if (!in_array($waid, $waids)) {
+                array_push($waids, $waid);
+                if (count($waids) > 20) {
+                    array_shift($waids);
+                }
+                sb_save_external_setting('waids', $waids);
+            } else {
+                die();
+            }
         }
 
         // User and conversation
@@ -117,11 +132,18 @@ if ($raw) {
                 }
             }
         } else {
-            if ($payload && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages WHERE conversation_id =  ' . $conversation_id . ' AND payload LIKE "%' . sb_db_escape($payload) . '%"'), 'count') != 0) {
+            if ($payload && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages WHERE conversation_id =  ' . $conversation_id . ' AND payload LIKE "%' . sb_db_json_escape($payload) . '%"'), 'count') != 0) {
                 die();
             }
             if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
                 sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
+            }
+        }
+        $context = sb_isset(sb_isset($message_2, 'context'), 'id');
+        if ($context) {
+            $reply_to_id = sb_db_get('SELECT id FROM sb_messages WHERE conversation_id = ' . $conversation_id . ' AND payload LIKE "%' . sb_db_escape($context) . '%" LIMIT 1');
+            if ($reply_to_id) {
+                $payload['reply'] = $reply_to_id['id'];
             }
         }
         if ($is_new_user) {
@@ -221,7 +243,7 @@ if ($raw) {
         // Miscellaneous
         sb_update_users_last_activity($user_id);
         if ($delayed_message) {
-            sb_send_message(sb_get_bot_id(), $conversation_id, $delayed_message);
+            sb_send_message(sb_get_bot_ID(), $conversation_id, $delayed_message);
         }
 
         $GLOBALS['SB_FORCE_ADMIN'] = false;

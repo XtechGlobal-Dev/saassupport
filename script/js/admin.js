@@ -38,6 +38,7 @@
     var suggestions_area;
     var pagination_count = 1;
     var open_ai_button;
+    var editor_textarea;
 
     // Users
     var users_area;
@@ -50,6 +51,24 @@
     var profile_box;
     var profile_edit_box;
     var away_mode = true;
+    
+    // Dashboard
+    let newUsersChartInstance = null;
+    var tickets_area_dash;
+
+    // Tickets
+    var tickets_area;
+    var tickets_table;
+    var tickets_table_menu;
+    var tickets_filters;
+    var tickets = {};
+    var tickets_pagination = 1;
+    var tickets_pagination_count = 1;
+    var ticket_edit_box;
+    var ticket_detail_area;
+    var ticket_custom_fields_edit_box;
+    var ticket_status_edit_box;
+    var ticket_attachments_box;
 
     // Settings
     var settings_area;
@@ -73,6 +92,7 @@
     var chatbot_website_table;
     var chatbot_qea_repeater;
     var chatbot_playground_editor;
+    var chatbot_playground_history_panel;
     var chatbot_playground_area;
     var flows_nav;
     var flows_area;
@@ -114,8 +134,77 @@
     var active_keydown;
     var reports_area;
     var select_departments;
-    var active_admin_area;
+    var active_admin_area = 'conversations';
 
+    function showInitials(container, className) {
+        const containers = $('.' + container + ' .' + className);
+        containers.each(function () {
+            const container = $(this);
+            const img = container.find('img');
+            const name = img.attr("data-name") || "";
+            const initials = name
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+
+            const span = container.find(".initials");
+            const userInitials = container.find('.user-initials');
+
+            // Fallback: if image is broken, use initials
+            function showInitialsFallback() {
+                img.hide();
+                if (span.length) {
+                    userInitials.css("display", "inline-block");
+                    span.text(initials || "NA");
+                }
+            }
+
+            // Attach error event
+            img.on('error', showInitialsFallback);
+
+            // Trigger fallback if image is already broken (e.g. 404 cached)
+            if (!img.prop('complete') || typeof img[0].naturalWidth === "undefined" || img[0].naturalWidth === 0) {
+                showInitialsFallback();
+            }
+
+            // If the image source is a default user icon, show initials
+            if (img.attr('src') && img.attr('src').includes('user.svg')) {
+                showInitialsFallback();
+            }
+        });
+    }
+    //showInitialsHeader();
+    function showInitialsHeader(className) {
+        const containers = $('.' + className);
+        containers.each(function () {
+            const container = $(this);
+            const img = container.find('img');
+            const name = img.attr("data-name") || "";
+            const initials = name
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+            const span = container.find(".initials");
+            const userInitials = container.find('.user-initials');
+
+            if (!img.attr('src') || img.attr('src').includes('user.svg')) {
+                img.hide();
+                span.text(initials || "NA");
+                userInitials.show();
+            }
+
+            img.on('error', function () {
+                img.hide();
+                span.text(initials || "NA");
+                userInitials.show();
+            });
+        });
+    }
     /*
     * ----------------------------------------------------------
     * External plugins
@@ -334,6 +423,87 @@
                         }
                     }
                 },
+                divider: class {
+                    static get toolbox() {
+                        return {
+                            title: 'Divider',
+                            icon: '<svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M2 7h10v1H2z" /></svg>'
+                        };
+                    }
+
+                    render() {
+                        const hr = document.createElement('hr');
+                        hr.classList.add('ce-divider');
+                        return hr;
+                    }
+
+                    save() {
+                        return;
+                    }
+                },
+                info: class {
+                    static get toolbox() {
+                        return {
+                            title: 'Info',
+                            icon: '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="12" height="8" rx="2" ry="2" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>'
+                        };
+                    }
+                    static get tunes() {
+                        return [
+                            { name: 'ce-yellow' },
+                            { name: 'ce-green' },
+                            { name: 'ce-red' },
+                            { name: 'ce-brown' },
+                            { name: 'ce-blue' },
+                            { name: 'ce-gray' }
+                        ];
+                    }
+
+                    render() {
+                        this.wrapper = document.createElement('div');
+                        this.wrapper.classList.add('ce-info-block');
+                        const input = document.createElement('div');
+                        input.classList.add('editor-box-input');
+                        input.contentEditable = true;
+                        input.innerHTML = this.data && this.data.text ? this.data.text : '';
+                        this.wrapper.classList.add(this.data.color ? this.data.color : 'ce-yellow');
+                        this.wrapper.appendChild(input);
+                        this.input = input;
+                        return this.wrapper;
+                    }
+
+                    save(block) {
+                        return { text: block.querySelector('.editor-box-input').innerHTML.trim(), color: this.color };
+                    }
+
+                    renderSettings() {
+                        const wrapper = document.createElement('div');
+                        ['ce-yellow', 'ce-green', 'ce-black', 'ce-blue', 'ce-red', 'ce-gray'].forEach(color => {
+                            const btn = document.createElement('button');
+                            btn.type = 'button';
+                            btn.classList.add('cdx-settings-button');
+                            if (color === this.color) {
+                                btn.classList.add('cdx-settings-button--active');
+                            }
+                            btn.innerHTML = `<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="12" height="12" rx="3" ry="3" fill="${({ 'ce-yellow': '#fcde66', 'ce-green': '#90c66f', 'ce-red': '#c44837', 'ce-black': '#6e6e6e', 'ce-gray': '#a9a9a9', 'ce-blue': '#8ab2d6' })[color]}" /></svg>`;
+                            btn.addEventListener('click', () => {
+                                this.color = color;
+                                this.wrapper.classList.remove('ce-yellow', 'ce-green', 'ce-red', 'ce-gray', 'ce-black', 'ce-blue');
+                                this.wrapper.classList.add(this.color);
+                                Array.from(wrapper.children).forEach(c => c.classList.remove('cdx-settings-button--active'));
+                                btn.classList.add('cdx-settings-button--active');
+                            });
+                            wrapper.appendChild(btn);
+                        });
+                        return wrapper;
+                    }
+
+                    constructor({ data }) {
+                        this.data = data || {};
+                        this.color = this.data.color || 'ce-yellow';
+
+                    }
+                },
                 header: Header,
                 code: CodeTool,
                 raw: RawTool
@@ -378,7 +548,13 @@
                     code += `<code>${block.data.code}</code>`;
                     break;
                 case 'raw':
-                    code += `<div class="bxc-raw-html">${block.data.html}</div>`;
+                    code += `<div class="sb-raw-html">${block.data.html}</div>`;
+                    break;
+                case 'divider':
+                    code += `<hr class="sb-divider" />`;
+                    break;
+                case 'info':
+                    code += `<p class="sb-info-box ${block.data.color}">${block.data.text}</p>`;
                     break;
             }
         });
@@ -487,6 +663,8 @@
             loadingGlobal(false);
             box.sbShowLightbox();
         });
+        
+        SBConversations.displayUserscheckList();
     }
 
     function dialogDeleteFile(url, id, title) {
@@ -542,7 +720,7 @@
                     if (SBChat.conversation.id && conversation_id === SBChat.conversation.id) {
                         let suggestions = response.suggestions;
                         let code = '';
-                        let is_bottom = conversations_area_list[0].scrollTop === (conversations_area_list[0].scrollHeight - conversations_area_list[0].offsetHeight);
+                        let is_bottom = Math.abs(conversations_area_list[0].scrollTop - (conversations_area_list[0].scrollHeight - conversations_area_list[0].offsetHeight)) <= 1;
                         let last_conversation_message = SBChat.conversation && SBChat.conversation.getLastMessage() ? SBChat.conversation.getLastMessage().message : false;
                         if (response.token) {
                             this.token = response.token;
@@ -761,7 +939,6 @@
             },
 
             getIntent: function (name) {
-                let code = '';
                 for (var i = 0; i < this.intents.length; i++) {
                     if (this.intents[i].name == name) {
                         return this.intents[i];
@@ -781,10 +958,10 @@
                         conversation_id: conversation_id
                     }, (response) => {
                         this.token = response[1]
-                        if (Array.isArray(response[0])) {
-                            onSuccess(response[0]);
+                        if (Array.isArray(response)) {
+                            onSuccess(response);
                         } else {
-                            SBF.error(JSON.stringify(response[0]), 'SBApps.dialogflow.translate');
+                            SBF.error(JSON.stringify(response), 'SBApps.dialogflow.translate');
                             return false;
                         }
                     });
@@ -806,8 +983,8 @@
                 SBF.ajax({
                     function: 'open-ai-message',
                     model: SB_ADMIN_SETTINGS.open_ai_model,
-                    message: (SB_ADMIN_SETTINGS.open_ai_prompt_rewrite ? SB_ADMIN_SETTINGS.open_ai_prompt_rewrite : 'Make the following text more friendly and professional, do no add any additional text or comments, always return the rewritten text only.') + ` The text must be in ${SB_LANGUAGE_CODES[SB_ADMIN_SETTINGS.active_agent_language]} language: ${message}.`,
-                    extra: 'rewrite'
+                    message: message,
+                    extra: { rewrite: true, language: SB_ADMIN_SETTINGS.active_agent_language }
                 }, (response) => {
                     if (!response[0]) {
                         console.error('OpenAI: ' + JSON.stringify(response[1]));
@@ -955,7 +1132,6 @@
                                     code += `<div class="sb-flow-block-cnt-name">${previous_labels[j]}</div>`;
                                 }
                                 for (var y = 0; y < blocks.length; y++) {
-                                    if (blocks[y].type == 'start' && !Array.isArray(blocks[y].message)) blocks[y].message = [{ message: blocks[y].message }]; // Deprecated
                                     let text = blocks[y].message ? (Array.isArray(blocks[y].message) ? (blocks[y].message.length ? blocks[y].message[0].message : '') : blocks[y].message) : '';
                                     if (text) {
                                         text = `<div>${text.length > 45 ? text.substring(0, 45) + '...' : text}</div>`;
@@ -966,7 +1142,8 @@
                                             labels.push(false);
                                             break;
                                         case 'condition':
-                                        case 'button_list':
+                                        case 'choices':
+                                        case 'button_list': // Deprecated
                                             let is_condition = blocks[y].type == 'condition';
                                             let rows = is_condition ? [sb_('True'), sb_('False')] : blocks[y].options;
                                             if (is_condition) {
@@ -980,7 +1157,7 @@
                                             code += `<div class="sb-flow-connectors">`;
                                             for (var x = 0; x < rows.length; x++) {
                                                 labels.push(letters[letters_index] + (x + 1));
-                                                code += `<div>${rows[x]}<span>${labels[labels.length - 1]}</span></div>`;
+                                                code += `<div>${rows[x].replaceAll('\\,', ', ')}<span>${labels[labels.length - 1]}</span></div>`;
                                             }
                                             code += `</div>`;
                                             letters_index++;
@@ -999,6 +1176,9 @@
                                             break;
                                         case 'rest_api':
                                             code += `<div>${blocks[y].url}</div>`;
+                                            break;
+                                        case 'flow_connector':
+                                            code += `<div>${blocks[y].flow_name}</div>`;
                                             break;
                                     }
                                     code += '</div>';
@@ -1114,7 +1294,8 @@
                                         case 'get_user_details':
                                             next_step_block_cnts_count += 1;
                                             break;
-                                        case 'button_list':
+                                        case 'choices':
+                                        case 'button_list': // Deprecated
                                             next_step_block_cnts_count += step[i][j].options.length;
                                             break;
                                         case 'condition':
@@ -1159,7 +1340,7 @@
                     },
 
                     add: function (block_type, flow_name = false, step_index = false, block_cnt_index = false, block_index = false) {
-                        let attributes = { button_list: { message: '', options: [] }, message: { message: '' }, video: { message: '', url: '' }, get_user_details: { message: '', details: [] }, set_data: { data: [] }, action: { actions: [] }, rest_api: { url: '', method: '', headers: [], body: '', save_response: [] }, condition: { conditions: [] } };
+                        let attributes = { button_list: { message: '', options: [] }, choices: { message: '', options: [], conversational_mode: false }, message: { message: '' }, video: { message: '', url: '' }, get_user_details: { message: '', details: [] }, set_data: { data: [] }, action: { actions: [] }, rest_api: { url: '', method: '', headers: [], body: '', save_response: [] }, condition: { conditions: [] }, tools: { message: '', url: '', method: '', headers: [], properties: [] }, flow_connector: { flow_name: '' } }; // Deprecated: remove button_list: { message: '', options: [] }
                         let indexes = this.getIndexes(flow_name, step_index, block_cnt_index, block_index);
                         this.set(Object.assign(attributes[block_type], { type: block_type }), indexes.name, indexes.step, indexes.cnt, indexes.block);
                         SBApps.openAI.flows.show(flow_name);
@@ -1173,7 +1354,7 @@
                         for (var i = 0; i < SBApps.openAI.flows.flows.length; i++) {
                             let flow = SBApps.openAI.flows.flows[i];
                             if (indexes.name == flow.name) {
-                                if (['get_user_details', 'button_list', 'condition'].includes(flow.steps[indexes.step][indexes.cnt][indexes.block].type)) {
+                                if (['get_user_details', 'button_list', 'choices', 'condition', 'tools'].includes(flow.steps[indexes.step][indexes.cnt][indexes.block].type)) { // Deprecated: remove 'button_list'
                                     let block_cnts_to_delete = this.delete_(i, indexes.step, indexes.cnt);
                                     let flow_new = Object.assign({}, flow);
                                     for (var j = 0; j < block_cnts_to_delete.length; j++) {
@@ -1243,7 +1424,7 @@
                             for (var i = 0; i <= current_block_cnt_index; i++) {
                                 let current_blocks = flow.steps[current_step_index][i];
                                 for (var j = 0; j < current_blocks.length; j++) {
-                                    if (current_blocks[j].type == 'button_list') {
+                                    if (current_blocks[j].type == 'button_list' || current_blocks[j].type == 'choices') { // Deprecated: remove 'button_list'
                                         for (var k = 0; k < current_blocks[j].options.length; k++) {
                                             if (i == current_block_cnt_index) {
                                                 next_block_cnt_indexees.push(next_block_cnt_index);
@@ -1276,7 +1457,7 @@
                             for (var i = 0; i < previous_step.length; i++) {
                                 let block_cnt = previous_step[i];
                                 for (var j = 0; j < block_cnt.length; j++) {
-                                    index += block_cnt[j].type == 'button_list' ? block_cnt[j].options.length : (block_cnt[j].type == 'get_user_details' ? 1 : (block_cnt[j].type == 'condition' ? 2 : 0));
+                                    index += block_cnt[j].type == 'button_list' || block_cnt[j].type == 'choices' ? block_cnt[j].options.length : (block_cnt[j].type == 'get_user_details' ? 1 : (block_cnt[j].type == 'condition' ? 2 : 0)); // Deprecated: remove 'button_list'
                                 }
                                 if (index > current_block_cnt_index) {
                                     return i;
@@ -1450,13 +1631,22 @@
             },
 
             playground: {
-                messages: [],
                 last_response: false,
+                history: false,
 
-                addMessage: function (message, user_type = 'user', attachments = []) {
-                    chatbot_playground_area.append(`<div data-type="${user_type}"><div>${sb_(user_type == 'user' ? 'User' : 'Assistant')}<div><i class="sb-icon-close sb-btn-icon sb-btn-red"></i></div></div><div>${(new SBMessage({ id: 1, message: SBF.escape(message), creation_time: '0000-00-00 00:00:00', status_code: 0, user_type: 'agent', attachments: JSON.stringify(attachments) })).getCode()}</div></div>`);
-                    chatbot_playground_area[0].scrollTop = chatbot_playground_area[0].scrollHeight;
-                    this.messages.push([user_type, message]);
+                deleteData: function (action = 'delete', onSuccess = false, extra = false) {
+                    SBF.ajax({
+                        function: 'open-ai-playground-data',
+                        action: action,
+                        extra: extra
+                    }, (response) => {
+                        if (action == 'delete') {
+                            this.last_response = false;
+                        }
+                        if (onSuccess) {
+                            onSuccess(response);
+                        }
+                    });
                 }
             },
 
@@ -1520,7 +1710,7 @@
                 return ['fb', 'ig'].includes(conversation.get('source'));
             },
 
-            send: function (PSID, facebook_page_id, message = '', attachments = [], metadata, message_id = false, onSuccess = false) {
+            send: function (PSID, facebook_page_id, message = '', attachments = [], metadata, message_id = false, reply_to = false, onSuccess = false) {
                 SBF.ajax({
                     function: 'messenger-send-message',
                     psid: PSID,
@@ -1528,7 +1718,8 @@
                     message: message,
                     message_id: message_id,
                     attachments: attachments,
-                    metadata: metadata
+                    metadata: metadata,
+                    reply_to: reply_to
                 }, (response) => {
                     if (onSuccess) onSuccess(response);
                     SBApps.unsupportedRichMessages(message, 'Messenger');
@@ -1542,13 +1733,15 @@
                 return conversation.get('source') == 'wa';
             },
 
-            send: function (to, message = '', attachments = [], phone_id = false, onSuccess = false) {
+            send: function (to, message = '', attachments = [], phone_id = false, reply_to = false, message_id = false, onSuccess = false) {
                 SBF.ajax({
                     function: 'whatsapp-send-message',
                     to: to,
                     message: message,
                     attachments: attachments,
-                    phone_id: phone_id
+                    phone_id: phone_id,
+                    reply_to: reply_to,
+                    message_id: message_id
                 }, (response) => {
                     if (response.error) {
                         infoPanel(response.error.message, 'info', false, 'error-wa');
@@ -1571,7 +1764,7 @@
                 return conversation.get('source') == 'tg';
             },
 
-            send: function (chat_id, message = '', attachments = [], conversation_id = false, reply = false, message_id = false, onSuccess = false) {
+            send: function (chat_id, message = '', attachments = [], conversation_id = false, reply_to = false, message_id = false, onSuccess = false) {
                 SBF.ajax({
                     function: 'telegram-send-message',
                     chat_id: chat_id,
@@ -1579,7 +1772,7 @@
                     message_id: message_id,
                     attachments: attachments,
                     conversation_id: conversation_id,
-                    reply: reply
+                    reply_to: reply_to
                 }, (response) => {
                     if (onSuccess) onSuccess(response);
                     SBApps.unsupportedRichMessages(message, 'Telegram');
@@ -1778,6 +1971,50 @@
             conversationPanel: function () {
                 let perfex_id = activeUser().getExtra('perfex-id');
                 conversations_area.find('.sb-panel-perfex').html(perfex_id ? `<a href="${SB_ADMIN_SETTINGS.perfex_url}/admin/clients/client/${perfex_id.value}" target="_blank" class="sb-btn sb-perfex-link">${sb_('View on Perfex')}</a>` : '');
+            }
+        },
+
+        calendar: {
+
+            conversationPanel: function () {
+                let panel = conversations_area.find('.sb-panel-calendar');
+                panel.addClass('sb-hide');
+                if (panel.length) {
+                    SBF.ajax({
+                        function: 'calendar-panel'
+                    }, (response) => {
+                        panel.find('> div').html(response);
+                        panel.removeClass('sb-hide');
+                    });
+                }
+            },
+
+            cancelBooking: function (booking_id, onSuccess) {
+                SBF.ajax({
+                    function: 'calendar-cancel-booking',
+                    booking_id: booking_id
+                }, (response) => {
+                    onSuccess(response);
+                });
+            },
+
+            getAvailableSlots: function (date, onSuccess, max_days = 1) {
+                SBF.ajax({
+                    function: 'calendar-get-available-slots',
+                    date: date,
+                    max_days: max_days
+                }, (response) => {
+                    onSuccess(response);
+                });
+            },
+
+            addBooking: function (start_date, onSuccess) {
+                SBF.ajax({
+                    function: 'calendar-create-booking',
+                    start_date: start_date
+                }, (response) => {
+                    onSuccess(response);
+                });
             }
         },
 
@@ -2045,9 +2282,21 @@
             }
         },
 
-        getName: function (source) {
-            let names = { fb: 'Facebook', wa: 'WhatsApp', tm: 'Text message', ig: 'Instagram', tg: 'Telegram', tk: 'Tickets', wc: 'WeChat', em: 'Email', tw: 'Twitter', bm: 'Business Messages', vb: 'Viber', ln: 'LINE', za: 'Zalo' };
-            return source in names ? names[source] : source;
+        getMessagingAppName: function (source = false) {
+            let names = { fb: 'Facebook', wa: 'WhatsApp', tm: 'Text message', ig: 'Instagram', tg: 'Telegram', tk: 'Tickets', wc: 'WeChat', em: 'Email', tw: 'Twitter', vb: 'Viber', ln: 'LINE', za: 'Zalo' };
+            return source ? (source in names ? names[source] : source) : names;
+        },
+
+        getSelectMessagingApps: function (active_app_code = false, include_chat = false) {
+            let apps = this.getMessagingAppName();
+            let code = '<select class="sb-select-messaging-apps"><option value=""></option>';
+            if (include_chat) {
+                apps['ch'] = 'Chat';
+            }
+            for (let app_code in apps) {
+                code += `<option value="${app_code}"${active_app_code && active_app_code == app_code ? ' selected' : ''}>${apps[app_code]}</option>`;
+            }
+            return code + '</select>';
         },
 
         itemsPanel: {
@@ -2236,6 +2485,9 @@
                             }
                         }
                     });
+                    if (!settings['timetable-utc'][0]) {
+                        settings['timetable-utc'][0] = (today.getTimezoneOffset() / 60) + '|' + Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    }
                     SBF.ajax({
                         function: 'save-settings',
                         settings: JSON.stringify(settings),
@@ -2245,6 +2497,11 @@
                         if (btn) {
                             infoBottom('Settings saved. Reload to apply the changes.');
                             $(btn).sbLoading(false);
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+
+
                         }
                         SBF.event('SBSettingsSaved', { settings: settings, external_settings: external_settings, external_settings_translations: this.translations.translations });
                     });
@@ -2316,9 +2573,9 @@
                             let name = $(this).html()
                             let value = $(this).attr('data-value');
                             if (SBF.null(value)) {
-                                hours.push(['', '']);
-                            } else if (value == 'closed') {
-                                hours.push(['closed', 'Closed']);
+                                hours.push(['', 'Closed']);
+                            } else if (value == 'closed') { // Deprecated
+                                hours.push(['closed', 'Closed']);  // Deprecated
                             } else {
                                 hours.push([value, name]);
                             }
@@ -2559,6 +2816,76 @@
             });
         },
 
+        loadDatePicker: function (onSuccess) {
+            if (typeof $.fn.daterangepicker === ND) {
+                $.getScript(SB_URL + '/vendor/moment.min.js', () => {
+                    $.getScript(SB_URL + '/vendor/daterangepicker.min.js', () => {
+                        onSuccess();
+                    });
+                });
+            } else {
+                onSuccess();
+            }
+        },
+
+        getDatePickerSettings: function (is_single = false, is_future_only = false) {
+            let settings = {
+                ranges: {},
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    separator: ' - ',
+                    applyLabel: sb_('Apply'),
+                    cancelLabel: sb_('Cancel'),
+                    fromLabel: sb_('From'),
+                    toLabel: sb_('To'),
+                    customRangeLabel: sb_('Custom'),
+                    weekLabel: sb_('W'),
+                    daysOfWeek: [
+                        sb_('Su'),
+                        sb_('Mo'),
+                        sb_('Tu'),
+                        sb_('We'),
+                        sb_('Th'),
+                        sb_('Fr'),
+                        sb_('Sa')
+                    ],
+                    monthNames: [
+                        sb_('January'),
+                        sb_('February'),
+                        sb_('March'),
+                        sb_('April'),
+                        sb_('May'),
+                        sb_('June'),
+                        sb_('July'),
+                        sb_('August'),
+                        sb_('September'),
+                        sb_('October'),
+                        sb_('November'),
+                        sb_('December')
+                    ],
+                    firstDay: 1
+                },
+                showCustomRangeLabel: !is_single,
+                alwaysShowCalendars: true,
+                autoApply: true,
+                opens: admin.hasClass('sb-rtl') ? 'left' : 'right'
+            };
+            if (is_single) {
+                settings.singleDatePicker = true;
+            } else {
+                settings.ranges[sb_('Today')] = [moment(), moment()];
+                settings.ranges[sb_('Yesterday')] = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
+                settings.ranges[sb_('Last 7 Days')] = [moment().subtract(6, 'days'), moment()];
+                settings.ranges[sb_('Last 30 Days')] = [moment().subtract(29, 'days'), moment()];
+                settings.ranges[sb_('This Month')] = [moment().startOf('month'), moment().endOf('month')];
+                settings.ranges[sb_('Last Month')] = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+            }
+            if (is_future_only) {
+                settings.minDate = moment();
+            }
+            return settings;
+        },
+
         getSettingObject: function (setting) {
             return $(setting)[0].hasAttribute('data-setting') ? $(setting) : $(setting).closest('[data-setting]');
         },
@@ -2570,7 +2897,7 @@
         },
 
         open: function (id, scroll = false) {
-            header.find('.sb-admin-nav #sb-settings').click();
+            header.find('#sb-settings').click();
             if (scroll) {
                 setTimeout(() => {
                     settings_area.find('#tab-' + id).click().get(0).scrollIntoView();
@@ -3012,6 +3339,18 @@
                 }
                 return languages;
             }
+        },
+
+        getSelectDepartments: function (active_department_id = false) {
+            if (SB_ADMIN_SETTINGS.departments.length) {
+                let code = '<select class="sb-select-departments"><option value=""></option>';
+                for (let index in SB_ADMIN_SETTINGS.departments) {
+                    let department = SB_ADMIN_SETTINGS.departments[index];
+                    code += `<option value="${department['department-id']}"${active_department_id && active_department_id == department['department-id'] ? ' selected' : ''}>${department['department-name']}</option>`;
+                }
+                return code + '</select>'
+            }
+            return '';
         }
     }
 
@@ -3153,7 +3492,7 @@
         populate: function (items, is_category = false) {
             let code = '';
             for (var i = 0; i < items.length; i++) {
-                code += `<li data-id="${items[i].id}">${items[i].title}<i class="sb-icon-delete"></i></li>`;
+                if (items[i].id) code += `<li data-id="${items[i].id}">${items[i].title}<i class="sb-icon-delete"></i></li>`;
             }
             articles_area.find(is_category ? '.ul-categories' : '.ul-articles').html(code);
             articles_area.find(is_category ? '.ul-categories > li' : '.ul-articles > li').eq(0).click();
@@ -3216,6 +3555,7 @@
                 articles_area.find('.ul-categories').append(code);
                 articles_area.find('.ul-categories li').eq(articles_area.find('.ul-categories li').length - 1).click();
                 articles_content_categories.removeClass('sb-hide');
+                $('.ul-categories li[data-id=""]').remove();
             },
 
             delete: function (category_id) {
@@ -3348,6 +3688,1937 @@
             }
         }
     }
+    
+
+    /*
+    *
+    * ----------------------------------------------------------
+    * Dashboard
+    * 
+    */
+
+
+    var SBDashboard = {
+        page_url: false,
+        ticket_status: 'all',
+
+        lightenColor: function (hex, percent = 40) {
+            if (!hex || typeof hex !== 'string') return "#cccccc";
+            hex = hex.replace('#', '');
+            if (hex.length !== 6) return "#cccccc";
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            const rNorm = r / 255;
+            const gNorm = g / 255;
+            const bNorm = b / 255;
+            const max = Math.max(rNorm, gNorm, bNorm);
+            const min = Math.min(rNorm, gNorm, bNorm);
+            let h, s, l = (max + min) / 2;
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case rNorm: h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0); break;
+                    case gNorm: h = (bNorm - rNorm) / d + 2; break;
+                    case bNorm: h = (rNorm - gNorm) / d + 4; break;
+                }
+                h /= 6;
+            }
+            l = Math.min(1, l + (percent / 100));
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+                if (s === 0) {
+                    r = g = b = l;
+                } else {
+                    const hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1 / 6) return p + (q - p) * 6 * t;
+                        if (t < 1 / 2) return q;
+                        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                        return p;
+                    };
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    r = hue2rgb(p, q, h + 1 / 3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1 / 3);
+                }
+                return [
+                    Math.round(r * 255),
+                    Math.round(g * 255),
+                    Math.round(b * 255)
+                ];
+            }
+            const [lr, lg, lb] = hslToRgb(h, s, l);
+            return `rgb(${lr}, ${lg}, ${lb})`;
+        },
+        getLastWeekRange: function () {
+            const today = new Date();
+            const endDate = today;
+            const startDate = new Date(today);
+            startDate.setDate(today.getDate() - 7);
+            const formatDate = (date) => {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            };
+            return {
+                from: formatDate(startDate),
+                to: formatDate(endDate)
+            };
+        },
+        formatNumber: function (value) {
+            const rounded = parseFloat(value.toFixed(2));
+            return Number.isInteger(rounded) ? Math.floor(rounded) : rounded;
+        },
+        get: function (onSuccess, ticket_id = false, categories = false, full = true, language = false) {
+
+
+            // get tickets
+            SBF.ajax({
+                function: 'get-tickets',
+                id: ticket_id,
+                ticket_status: this.ticket_status,
+                categories: categories,
+                tickets_language: language,
+                full: full,
+                user_id: false
+            }, (response) => {
+                onSuccess(response);
+
+                //// fetch customer overview data
+                this.fetchCustomerOverview();
+                this.populate(response);
+            });
+
+            const { from, to } = this.getLastWeekRange();
+            this.renderNewUsersChart(from, to);
+
+            //get users count
+            // SBF.ajax({
+            //     function: 'get-users-registrations-count',
+            //     date_start: from,
+            //     date_end: to,
+            // }, (response) => {
+            //     onSuccess(response);
+            //     this.populate(response);
+            // });
+
+            SBF.ajax({
+                function: 'get-tickets-count',
+                date_start: from,
+                date_end: to,
+            }, (response) => {
+                const months1 = Object.keys(response[1].resolved_ticket_data);
+                // Get values array
+                const values1 = Object.values(response[1].resolved_ticket_data);
+                $('.ticket-resolved').html(response[1].resolved_tickets_count);
+
+                const lastWeekResolvedSum = values1.reduce((acc, curr) => acc + curr, 0);
+                const resolvedBeforeLasteWeek = response[1].resolved_tickets_count - lastWeekResolvedSum == 0 ? 1 : response[1].resolved_tickets_count - lastWeekResolvedSum;
+                const resolvedTicketspercentageIncrease = (lastWeekResolvedSum / resolvedBeforeLasteWeek) * 100;
+
+                $('.total-resolved-tickets-increase').html(this.formatNumber(resolvedTicketspercentageIncrease));
+
+                const ticket_resolvedCtx = document.getElementById('ticket_resolved_chart').getContext('2d');
+                const gradient4 = ticket_resolvedCtx.createLinearGradient(0, 0, 0, 200);
+                gradient4.addColorStop(0, 'rgba(6, 131, 255, 0.2)');
+                gradient4.addColorStop(1, 'rgba(6, 131, 255, 0)');
+                new Chart(ticket_resolvedCtx, {
+                    type: 'line',
+                    data: {
+                        labels: months1,
+                        datasets: [{
+                            data: values1,
+                            borderColor: '#0684FF',
+                            backgroundColor: gradient4,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+                ///////////////////// Pending Tickets Chart
+                const months3 = Object.keys(response[1].pending_ticket_data);
+                // Get values array
+                const values3 = Object.values(response[1].pending_ticket_data);
+                $('.tickets-pending').html(response[1].pending_tickets_count);
+
+                const lastWeekPendingSum = values3.reduce((acc, curr) => acc + curr, 0);
+                const pendingBeforeLasteWeek = response[1].pending_tickets_count - lastWeekPendingSum == 0 ? 1 : response[1].pending_tickets_count - lastWeekPendingSum;
+                const pendingTicketspercentageIncrease = (lastWeekPendingSum / pendingBeforeLasteWeek) * 100;
+
+                $('.total-pending-tickets-increase').html(this.formatNumber(pendingTicketspercentageIncrease));
+
+                const ticket_pendingCtx = document.getElementById('ticket_pending_chart').getContext('2d');
+                const gradient6 = ticket_pendingCtx.createLinearGradient(0, 0, 0, 200);
+                gradient6.addColorStop(0, 'rgba(6, 131, 255, 0.2)');
+                gradient6.addColorStop(1, 'rgba(6, 131, 255, 0)');
+                new Chart(ticket_pendingCtx, {
+                    type: 'line',
+                    data: {
+                        labels: months3,
+                        datasets: [{
+                            data: values3,
+                            borderColor: '#0684FF',
+                            backgroundColor: gradient6,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+                const lastWeekDates = Object.keys(response[1].tickets_data);
+                // Get values array
+                const ticketsValues = Object.values(response[1].tickets_data);
+                const lastWeekTicketsSum = ticketsValues.reduce((acc, curr) => acc + curr, 0);
+                const ticketBeforeLasteWeek = response[1].total_tickets_count - lastWeekTicketsSum == 0 ? 1 : response[1].total_tickets_count - lastWeekTicketsSum;
+                const percentageIncrease = (lastWeekTicketsSum / ticketBeforeLasteWeek) * 100;
+
+                $('.total-tickets-created').html(response[1].total_tickets_count);
+                $('.total-tickets span').html(response[1].total_tickets_count);
+                $('.total-tickets-increase').html(this.formatNumber(percentageIncrease));
+                $('.green_badge.new-tickets span').html(lastWeekTicketsSum);
+
+                const ticket_createdCtx = document.getElementById('ticket_created_chart').getContext('2d');
+                const gradient3 = ticket_createdCtx.createLinearGradient(0, 0, 0, 200);
+                const ticketsText = sb_("No. of Tickets");
+                gradient3.addColorStop(0, 'rgba(255, 182, 72, 0.2)');
+                gradient3.addColorStop(1, 'rgba(72, 182, 72, 0)');
+                new Chart(ticket_createdCtx, {
+                    type: 'line',
+                    data: {
+                        labels: lastWeekDates,
+                        datasets: [{
+                            data: ticketsValues,
+                            borderColor: '#f4941e',
+                            backgroundColor: gradient3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const lastWeekDay = Object.keys(response[1].tickets_weekday_data);
+                // Get values array
+                const ticketsValuesDaily = Object.values(response[1].tickets_weekday_data);
+
+
+                const ticket_activityCtx = document.getElementById('ticket_activity_chart').getContext('2d');
+                new Chart(ticket_activityCtx, {
+                    type: 'line',
+                    data: {
+                        labels: lastWeekDay,
+                        datasets: [{
+                            label: 'Weekly Activity',
+                            data: ticketsValuesDaily,
+                            borderColor: '#487FFF',
+                            backgroundColor: '#E4ECFF',
+                            pointRadius: 0,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#487FFF'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: true
+                                },
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: true
+                                },
+                                title: {
+                                    display: true,
+                                    text: ticketsText,
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+            });
+
+            //// Get Conversations count
+            SBF.ajax({
+                function: 'get-conversation-count',
+                date_start: from,
+                date_end: to,
+            }, (response) => {
+
+                const months2 = Object.keys(response[1].data);
+                // Get values array
+                const values2 = Object.values(response[1].data);
+                $('.total-conversations').html(response[1].total_conversations_count);
+
+                const lastWeekConversationsSum = values2.reduce((acc, curr) => acc + curr, 0);
+                const conversationsBeforeLasteWeek = response[1].total_conversations_count - lastWeekConversationsSum == 0 ? 1 : response[1].total_conversations_count - lastWeekConversationsSum;
+                const conversationsTicketspercentageIncrease = (lastWeekConversationsSum / conversationsBeforeLasteWeek) * 100;
+
+                $('.total-conversations-increase').html(this.formatNumber(conversationsTicketspercentageIncrease));
+
+                const conversations_chartCtx = document.getElementById('conversations_chart').getContext('2d');
+                const gradient5 = conversations_chartCtx.createLinearGradient(0, 0, 0, 200);
+                gradient5.addColorStop(0, 'rgba(231, 110, 241, 0.2)');
+                gradient5.addColorStop(1, 'rgba(231, 110, 241, 0)');
+                new Chart(conversations_chartCtx, {
+                    type: 'line',
+                    data: {
+                        labels: months2,
+                        datasets: [{
+                            data: values2,
+                            borderColor: '#8252E9',
+                            backgroundColor: gradient5,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+                $('.total-unread-conversations').html(response[1].total_unread_conversations_count);
+
+                const lastWeekDates2 = Object.keys(response[1].unread_conversations_data);
+                // Get values array
+                const userValues2 = Object.values(response[1].unread_conversations_data);
+
+                const lastWeekUnreadConversationSum = userValues2.reduce((acc, curr) => acc + curr, 0);
+                const unreadConversationsBeforeLasteWeek = response[1].total_unread_conversations_count - lastWeekUnreadConversationSum == 0 ? 1 : response[1].total_unread_conversations_count - lastWeekUnreadConversationSum;
+                const unreadConversationsPercentageIncrease = (lastWeekUnreadConversationSum / unreadConversationsBeforeLasteWeek) * 100;
+
+                $('.total-unread-increase').html(this.formatNumber(unreadConversationsPercentageIncrease));
+
+                const active_usersCtx = document.getElementById('unread_conversation_chart').getContext('2d');
+                const gradient7 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
+                gradient7.addColorStop(0, 'rgba(69, 179, 106, 0.2)');
+                gradient7.addColorStop(1, 'rgba(69, 179, 106, 0)');
+                new Chart(active_usersCtx, {
+                    type: 'line',
+                    data: {
+                        labels: lastWeekDates2,
+                        datasets: [{
+                            data: userValues2,
+                            borderColor: '#45B369',
+                            backgroundColor: gradient7,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            ////// Get Yearly tickets count for ticket support board widget
+            SBF.ajax({
+                function: 'get-tickets-yearly-count',
+            }, (response) => {
+
+                const currentYear = new Date().getFullYear();
+                const monthsOrder = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const dataMap = response[1].data;
+
+                const filteredMonths = monthsOrder;
+                const filteredValues = monthsOrder.map(m => dataMap[m] || 0);
+                const ticketsText = sb_("No. of Tickets");
+                const JanText = sb_("January");
+                const DecText = sb_("December");
+
+                $('.main-charts .tickets-created').html(response[1].created);
+                $('.main-charts .tickets-resolved').html(response[1].resolved);
+                $('.main-charts .tickets-pending').html(response[1].pending);
+
+                const barCtx = document.getElementById('monthlyBarChart').getContext('2d');
+                new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: filteredMonths,
+                        datasets: [{
+                            label: 'Tickets',
+                            data: filteredValues,
+                            backgroundColor: '#4285F4',
+                            borderRadius: 4,
+                            barThickness: 17
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return `${context.raw.toLocaleString()} users`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: {
+                                    color: '#888',
+                                    font: { size: 12 },
+                                    autoSkip: false,
+                                    maxRotation: 60,
+                                    minRotation: 30
+                                },
+                                title: {
+                                    display: true,
+                                    text: `${JanText} - ${DecText} ${currentYear}`,
+                                    color: '#555',
+                                    font: { size: 14, weight: 'bold' }
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    drawBorder: false,
+                                    drawOnChartArea: true,
+                                    color: '#eee',
+                                    lineWidth: 1,
+                                    borderDash: [5, 5]
+                                },
+                                ticks: {
+                                    stepSize: 1,
+                                    precision: 0,
+                                    color: '#aaa'
+                                },
+                                title: {
+                                    display: true,
+                                    text: ticketsText,
+                                    color: '#555',
+                                    font: { size: 14, weight: 'bold' }
+                                }
+                            }
+                        }
+                    }
+                });
+
+            });
+
+            /////////// get total registered users count
+
+            // get avg response time 
+            SBF.ajax({
+                function: 'get-total-users-count',
+                date_start: from,
+                date_end: to
+            }, (response) => {
+                $('.total-users').html(response[1].total_users_count);
+
+                const lastWeekDates = Object.keys(response[1].data);
+                // Get values array
+                const userValues = Object.values(response[1].data);
+
+                const lastWeekUsersSum = userValues.reduce((acc, curr) => acc + curr, 0);
+                const usersBeforeLasteWeek = response[1].total_users_count - lastWeekUsersSum == 0 ? 1 : response[1].total_users_count - lastWeekUsersSum;
+                const percentageIncrease = (lastWeekUsersSum / usersBeforeLasteWeek) * 100;
+
+                $('.total-users-increase').html(this.formatNumber(percentageIncrease));
+
+                const active_usersCtx = document.getElementById('active_users_chart').getContext('2d');
+                const gradient7 = active_usersCtx.createLinearGradient(0, 0, 0, 200);
+                gradient7.addColorStop(0, 'rgba(69, 179, 106, 0.2)');
+                gradient7.addColorStop(1, 'rgba(69, 179, 106, 0)');
+                new Chart(active_usersCtx, {
+                    type: 'line',
+                    data: {
+                        labels: lastWeekDates,
+                        datasets: [{
+                            data: userValues,
+                            borderColor: '#45B369',
+                            backgroundColor: gradient7,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            ////// Get latet 5 messages
+            let html = '';
+            SBF.ajax({
+                function: 'get_recent_messages',
+            }, (response) => {
+                $(response[1].data).each(function () {
+                    html += `<li class="msg d-flex g-3 mb-6">
+                        <img src="${this.profile_image}" alt="${this.user_name}" class="avatar" data-name="${this.user_name}"/>
+                        <div class="user-initials" data-value="edit-profile" style="display:none;"><span class="initials"></span></div>
+                        <div class="col-8">
+                            <div class="head2 mb-2">${this.user_name}</div>
+                            <div class="sub_head2 mb-1">${this.message}</div>
+                            <small class="text-muted">${SBF.beautifyTime(this.creation_time, true)}</small>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="?conversation=${this.conversation_id}" target="_blank"><button class="reply-btn">${sb_("Reply")}</button></a>
+                        </div>
+                    </li>`;
+                });
+
+
+                setTimeout(function () {
+                    $('.sb-area-dashboard .recent-messages').html(html !== '' ? html : '<span class="d-block mt-5" style="text-align: center;height: auto;"><strong>No message found</strong></span>');
+                    showInitials('recent-messages', 'msg');
+                }, 1000);
+            });
+
+            // if (SB_ACTIVE_AGENT.user_type == 'admin') {
+            //     //////get avg response time 
+            //     SBF.ajax({
+            //         function: 'reports',
+            //         name: 'agents-response-time',
+            //         date_start: from,
+            //         date_end: to,
+            //         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            //     }, (resTime) => {
+            //         if (resTime && resTime.data) {
+            //             let htmlContent = '';
+            //             for (let agentName in resTime.data) {
+            //                 if (resTime.data.hasOwnProperty(agentName)) {
+            //                     // with agent name
+            //                     // const responseTimeInSeconds = resTime.data[agentName][0];
+            //                     // const hours = Math.floor(responseTimeInSeconds / 3600);
+            //                     // const minutes = Math.floor((responseTimeInSeconds % 3600) / 60);
+            //                     // const seconds = responseTimeInSeconds % 60;
+            //                     // const formattedTime = `${hours}h ${minutes}m ${seconds}s`;
+            //                     // htmlContent += `<p><strong>${agentName}</strong>: ${formattedTime}</p>`;
+
+            //                     // without agent name 
+            //                     const responseTimeInSeconds = resTime.data[agentName][0]; // The response time in seconds
+            //                     const hours = Math.floor(responseTimeInSeconds / 3600);
+            //                     const minutes = Math.floor((responseTimeInSeconds % 3600) / 60);
+            //                     const seconds = responseTimeInSeconds % 60;
+            //                     const formattedTime = `${hours}h ${minutes}m ${seconds}s`;
+            //                     htmlContent += `<p>${formattedTime}</p>`;
+            //                 }
+            //             }
+            //             // document.querySelector('#avg_response_time_container').innerHTML = htmlContent;
+            //         }
+            //     });
+            // }
+        },
+        fetchCustomerOverview: function () {
+            let filter = $(".sb-area-dashboard #customer-overview").val();
+            SBF.ajax({
+                function: 'fetch-customer-overview',
+                filter: filter
+            }, (response) => {
+
+                if (response[1][0] = 'success') {
+                    $('.overview_chart .filter-range').html(`<span>(${response[1].start_date} - ${response[1].end_date})</span>`);
+                    $('.overview_chart .total').next().html(`Total: ${response[1].total_customers}`);
+                    $('.overview_chart .new').next().html(`New: ${response[1].recent_customers}`);
+
+                    // Prepare chart data
+                    const total = parseInt(response[1].total_customers) || 0;
+                    const recent = parseInt(response[1].recent_customers) || 0;
+                    const active = 0;
+
+                    if (total != 0) {
+                        // Destroy existing chart instance if any
+                        if (window.donutChartInstance) {
+                            window.donutChartInstance.destroy();
+                        }
+
+                        // Render chart
+                        const ctx = document.getElementById('donutChart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Total', 'New', 'Active'],
+                                datasets: [{
+                                    data: [total, recent, active],
+                                    backgroundColor: ['#4CAF50', '#FFA726', '#4285F4'],
+                                    borderWidth: 0
+                                }]
+                            },
+                            options: {
+                                cutout: '70%',
+                                rotation: -90,
+                                circumference: 180,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        enabled: true
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $("#chart-container").html('<strong>No data available for graph</strong>');
+                    }
+                }
+
+            });
+        },
+        renderNewUsersChart: function (from, to) {
+            const ctx2 = document.getElementById('unread_conversation_chart');
+            if (!ctx2) {
+                return console.error("Canvas element not found!");
+            }
+
+            if (newUsersChartInstance) {
+                newUsersChartInstance.destroy();
+                newUsersChartInstance = null;
+            }
+
+
+            // SBReports.getData("users", from, to, (response) => {
+            //     if (!response || !response.data) return;
+            //     const labels = Object.keys(response.data);
+            //     const values = Object.values(response.data).map(val => val[0]);
+
+            //     const new_usersCtx = ctx2.getContext('2d');
+            //     const gradient1 = new_usersCtx.createLinearGradient(0, 0, 0, 200);
+            //     gradient1.addColorStop(0, 'rgba(72, 127, 255, 0.2)');
+            //     gradient1.addColorStop(1, 'rgba(72, 127, 255, 0)');
+
+            //     newUsersChartInstance = new Chart(new_usersCtx, {
+            //         type: 'line',
+            //         data: {
+            //             labels: labels,
+            //             datasets: [{
+            //                 data: values,
+            //                 borderColor: '#487FFF',
+            //                 backgroundColor: gradient1,
+            //                 fill: true,
+            //                 tension: 0.4,
+            //                 pointRadius: 0,
+            //                 pointHoverRadius: 0,
+            //                 borderWidth: 2,
+            //                 label: '',
+            //             }]
+            //         },
+            //         options: {
+            //             responsive: true,
+            //             plugins: {
+            //                 legend: { display: false },     // ✅ Remove legend
+            //                 // tooltip: { enabled: false }     // Optional: remove tooltips too
+            //             },
+            //             scales: {
+            //                 x: {
+            //                     display: false,              // ✅ Hide entire X axis (grid, ticks, border)
+            //                 },
+            //                 y: {
+            //                     display: false               // ✅ Hide entire Y axis (grid, ticks, border)
+            //                 }
+            //             }
+            //         }
+            //     });
+            //     // Update text values
+            //     const totalUsers = values.reduce((sum, val) => sum + val, 0);
+            //     const increase = totalUsers - values[0];
+            //     if (increase) {
+            //         document.querySelector('.metric-info p').textContent = totalUsers.toLocaleString();
+            //         document.querySelector('.metric-increase span').textContent = `+${increase}`;
+            //     }
+            // });
+        },
+
+        getRow: function (ticket) {
+            if (ticket) {
+                const status_clr = ticket.status_color || "#bfa195";
+                const status_bg = this.lightenColor(status_clr, 40);
+                console.log("ticket.status_name", ticket.status_name)
+                return `<tr data-ticket-id="${ticket.id}">
+                    <td class="sb-td-id">#T${ticket.id}</td>
+                    <td class="sb-td-subject">${ticket.subject}</td>
+                    <td class="sb-td-tags">${ticket.assigned_to_name || "--"}</td>
+                    <td>${SBF.beautifyTime(ticket.creation_time, true)}</td>
+                    <td class="sb-td-status">
+                        <span class="span-border" style="
+                            color: ${status_clr};
+                            background: ${status_bg};
+                        ">${ticket.status_name == "Open" ? sb_("Open") : ticket.status_name == "Closed" ? sb_("Closed") : ticket.status_name == "Answered" ? sb_("Answered") : ticket.status_name == "In Progress" ? sb_("In Progress") : ticket.status_name == "Hold" ? sb_("Hold") : ticket.status_name}</span>
+                    </td>
+                </tr>`;
+            } else {
+                SBF.error('Ticket not of type SBTicket', 'SBTicket.getRow');
+                return false;
+            }
+        },
+
+        populate: function (response) {
+            let code = '';
+            let count = response.length;
+
+            if (count) {
+                const limit = Math.min(count, 5);
+                for (let i = 0; i < limit; i++) {
+                    code += this.getRow(response[i]);
+                }
+
+            }
+            else {
+                code += `<tr class=""><td colspan="4" style="text-align: center;"><strong>No Ticket found</strong></td></tr>`;
+            }
+            // tickets_table.parent().scrollTop(0);
+            tickets_area_dash.find('tbody').html(code);
+        },
+    }
+
+
+    /*
+    *
+    * ----------------------------------------------------------
+    * Tickets
+    * 
+    */
+
+    var SBTicket = {
+        category_list: [],
+        page_url: false,
+        ticket_status: 'all',
+        quill: false,
+        quillForTicketDetail: false,
+        quillForTicketInternalNote: false,
+        datetime_last_comment: false,
+        new_comment_count: [],
+        new_ticket_count: [],
+        last_comment_date: '',
+
+        // Get all profile settings
+        getAll: function (ticket_area) {
+            return SBForm.getAll(ticket_area);
+        },
+
+
+        get: function (onSuccess, ticket_id = false, categories = false, full = true, language = false) {
+            SBF.ajax({
+                function: 'get-tickets',
+                id: ticket_id,
+                ticket_status: this.ticket_status,
+                categories: categories,
+                tickets_language: language,
+                full: full,
+                user_id: false
+            }, (response) => {
+                onSuccess(response);
+                //SBTicket.populate();
+                this.populate(response);
+            });
+        },
+        getLatestFiveCustomers: function () {
+            return new Promise((resolve, reject) => {
+                SBF.ajax(
+                    { function: 'get-latest-five-customers' },
+                    (response) => {
+                        resolve(response); // Resolve the promise with the response
+                    },
+                    (error) => {
+                        console.error("Error fetching custom fields:", error);
+                        reject(error); // Reject on error
+                    }
+                );
+            });
+        },
+        fetchUsers: async function () {
+            try {
+                // now `users` is ready for use
+                const response = await this.getLatestFiveCustomers();
+
+                // Format and store in `users` variable
+                const users = response.map(user => ({
+                    id: user.id,
+                    first_name: user.first_name || '',
+                    last_name: user.last_name || '',
+                    email: user.email || ''
+                }));
+                return users;
+            } catch (error) {
+                console.error("Error fetching users:", error);
+                return [];
+            }
+        },
+
+
+        getCustomFields: function () {
+            return new Promise((resolve, reject) => {
+                SBF.ajax(
+                    { function: 'get-tickets-custom-fields' },
+                    (response) => {
+                        resolve(response); // Resolve the promise with the response
+                    },
+                    (error) => {
+                        console.error("Error fetching custom fields:", error);
+                        reject(error); // Reject on error
+                    }
+                );
+            });
+        },
+
+        loadCustomFields: async function (action) {
+            try {
+                const fields = await this.getCustomFields(); // Wait for the async response
+                let container;
+                if (action == 'add') {
+                    container = ticket_edit_box.find('#ticketCustomFieldsContainer');
+                }
+                else {
+                    container = $('.sb-area-ticket-detail #custom-fields');
+                }
+                let fieldHtml = '';
+                fields.forEach(field => {
+                    fieldHtml += this.getFieldHtml(field);
+                });
+                // $(container).html('');
+                container.html(fieldHtml);
+            } catch (error) {
+                console.error("Error loading custom fields:", error);
+            }
+        },
+
+        getFieldHtml: function (field) {
+            let html = `<div id="${field.title}" data-type="${field.type}" class="sb-input">`;
+            html += `<span  class="${field.required == '1' ? 'required-label' : ''}">${field.title}</span>`;
+
+            switch (field.type) {
+                case 'text':
+                    html += `<input type="text" class="form-control" id="custom_${field.id}" data-id="custom_${field.id}" 
+                                    name="${field.title}" 
+                                    ${field.required == '1' ? 'required' : ''} 
+                                    placeholder="${field.title}">`;
+                    break;
+
+                case 'textarea':
+                    html += `<textarea class="form-control" id="custom_${field.id}" dataid="custom_${field.id}" 
+                                        name="custom_fields[${field.id}]" 
+                                        rows="3" 
+                                        ${field.required == '1' ? 'required' : ''} 
+                                        placeholder="${field.title}"></textarea>`;
+                    break;
+
+                case 'select':
+                    // Split options by comma and trim whitespace
+                    const options = (field.options || '').split('|').map(opt => opt.trim()).filter(opt => opt);
+                    html += `<select class="form-control" id="custom_${field.id}" dataid="custom_${field.id}" 
+                                    name="custom_fields[${field.id}]" 
+                                    ${field.required == '1' ? 'required' : ''}>`;
+                    html += '<option value="">Select ' + field.title + '</option>';
+                    options.forEach(option => {
+                        html += `<option value="${option}">${option}</option>`;
+                    });
+                    html += '</select>';
+                    break;
+
+                case 'checkbox':
+                    html += `<div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="custom_${field.id}" dataid="custom_${field.id}" 
+                                        name="custom_fields[${field.id}]" 
+                                        value="1" 
+                                        ${field.required == '1' ? 'required' : ''}>
+                                <label class="form-check-label" for="custom_${field.id}">${field.title}</label>
+                            </div>`;
+                    break;
+            }
+            html += '</div>';
+            return html;
+        },
+
+        getTicketID: async function (conversation_id2) {
+            return new Promise((resolve, reject) => {
+                SBF.ajax({
+                    function: 'get-ticket-id-from-conversation-id',
+                    conversation_id: conversation_id2
+                }, (response) => {
+                    if (response && response.id) {
+                        resolve(response.id);
+                    }
+                    else {
+                        resolve('');
+                    }
+                }, (error) => {
+                    reject(error);
+                });
+            });
+        },
+
+        filter: function (ticket_status) {
+            this.ticket_status = ticket_status;
+            tickets_pagination = 1;
+            tickets_pagination_count = 1;
+            this.get((response) => {
+                this.populate(response);
+            }, user_type[0] == 'online');
+        },
+
+
+        show: async function (ticket_id) {
+
+            const container = document.querySelector('#ticketdescription');
+            //  If Quill already exists on this element, destroy it
+            if (!this.quill) {
+                this.quill = new Quill(container, {
+                    theme: 'snow',
+                    placeholder: 'Compose something...',
+                });
+            }
+
+            SBTicket.quill.setContents('');
+
+            loadingGlobal();
+            await this.loadCustomFields('edit');
+
+            ticket_edit_box.find('.sb-top-bar .sb-ticket span').html(sb_('Edit ticket'));
+            ticket_edit_box.find('.sb-top-bar .sb-save').html(`<i class="sb-icon-check"></i>${sb_('Edit Ticket')}`);
+            ticket_edit_box.find('input,select,textara').removeClass('sb-error');
+            ticket_edit_box.removeClass('sb-cloud-admin');
+            SBTicket.clear(ticket_edit_box);
+            //SBTicket.updateRequiredFields('ticket');
+            ticket_edit_box.sbShowLightbox();
+
+            SBF.ajax({
+                function: 'edit-ticket',
+                ticket_id: ticket_id
+            }, (response) => {
+                // Update form fields
+                let parent = document.getElementById("subject");
+                let child = document.querySelector('#subject input');;
+                child.value = response.id;
+
+                // Update form fields
+                document.querySelector('#subject input').value = response.subject;
+                document.querySelector('#contact_id select').value = response.contact_id;
+
+
+                if (response.contact_id == 0) {
+                    document.querySelector('#without_contact input').checked = true;
+                }
+                else {
+                    document.querySelector('#without_contact input').checked = false;
+                    // use your existing data when editing
+                    const selectedContactId = response.contact_id;
+                    const selectedContactName = response.contact_name; // This is what will be shown
+
+                    // Create a new Option and append it to Select2
+                    const contactOption = new Option(selectedContactName, selectedContactId, true, true);
+                    $('#contact_id select').append(contactOption).trigger('change');
+                }
+
+                // use your existing data when editing
+                const selectedUserId = response.assigned_to;
+                const selectedUserName = response.assigned_to_name; // This is what will be shown
+
+                // Create a new Option and append it to Select2
+                const userOption = new Option(selectedUserName, selectedUserId, true, true);
+                $('#assigned_to select').append(userOption).trigger('userOption');
+
+                document.querySelector('#cust_name input').value = response.contact_name;
+                document.querySelector('#cust_email input').value = response.contact_email;
+                document.querySelector('#priority_id select').value = response.priority_id;
+                //document.querySelector('#service_id select').value = response.service_id;
+                if (document.querySelector('#department_id select') && response.department_id) {
+                    document.querySelector('#department_id select').value = response.department_id;
+                }
+                document.querySelector('#status_id select').value = response.status_id;
+                //document.querySelector('#cc select').value = response.status_id;
+                if (document.querySelector('#tags select') && response.tags) {
+                    document.querySelector('#tags select').value = response.tags;
+                }
+
+                const delta = JSON.parse(response.description); // Convert back to object
+                SBTicket.quill.setContents(delta); // 
+                document.querySelector('#ticket_id').value = response.id;
+
+                if (response.conversation_id) {
+                    $('#conversation_id_div').removeClass('d-none');
+                    $('#conversation_id_div label span').html('#' + response.conversation_id);
+                    $('#conversation_id').val(response.conversation_id);
+                }
+                else {
+                    $('#conversation_id_div').addClass('d-none');
+                    $('#conversation_id_div label span').html('');
+                }
+
+
+                Object.entries(response.custom_fields).forEach(([key, value]) => {
+                    const fieldElement = document.querySelector("#ticketCustomFieldsContainer #custom_" + key);
+                    if (fieldElement) {
+                        const type = fieldElement.getAttribute('data-type');
+                        if (type === 'checkbox') {
+                            fieldElement.checked = value === '1';
+                        } else {
+                            fieldElement.value = value;
+                        }
+                    }
+                });
+
+                // let attachmentsHtml = '';
+                // Object.entries(response.attachments).forEach(([key, value]) => {
+                //     attachmentsHtml += `<div class="col-md-2 mb-2">
+                //                             <div class="card">
+                //                                 <div class="card-body p-2">
+                //                                     <div class="text-center mb-2">
+                //                                         <img src="script/${value.file_path}" class="img-thumbnail" style="max-height: 100px;" alt="${value.original_filename}">
+                //                                     </div>
+                //                                     <div class="d-flex align-items-center">
+                //                                         <div class="flex-grow-1 text-truncate">
+                //                                             <div class="text-truncate">${value.original_filename}</div>
+                //                                             <small class="text-muted">${value.file_size}</small>
+                //                                         </div>
+                //                                         <button type="button" class="btn btn-sm btn-danger delete-attachment" data-index="0" data-id="${value.id}" data-ticket-id="${ticket_id}">
+                //                                             <i class="bi bi-x"></i>
+                //                                         </button>
+                //                                     </div>
+                //                                 </div>
+                //                             </div>
+                //                         </div>`;
+
+                // });
+
+                // $('#existing-file-preview-container #current-attachments').html('');
+                // $('#existing-file-preview-container').addClass('d-none');
+                // if (attachmentsHtml != '') {
+                //     $('#existing-file-preview-container').removeClass('d-none');
+                //     $('#existing-file-preview-container #current-attachments').html(attachmentsHtml);
+                // }
+
+                // //// Clear unsaved attachements preview
+                // $('#file-preview-container #file-preview-list').html('');
+                // $('#uploaded_files').val('');
+
+            });
+
+            /*activeUser().update(() => {
+                this.populate(activeUser(), profile_box.find('.sb-profile-list'));
+                profile_box.find('.sb-profile').setProfile();
+                activeUser().getConversations((response) => {
+                    let user_type = activeUser().type;
+                    let html = activeUser().getConversationsCode(response);
+                    if (SBF.isAgent(user_type)) {
+                        this.agentData();
+                    }
+                    profile_box.find('.sb-user-conversations').html(html).prev().setClass('sb-hide', !html);
+                    profile_box.find('.sb-top-bar [data-value]').sbActive(false);
+                    if (!SBF.null(activeUser().get('email'))) {
+                        profile_box.find('.sb-top-bar [data-value="email"]').sbActive(true);
+                    }
+                    if (activeUser().getExtra('phone')) {
+                        if (SB_ADMIN_SETTINGS.sms) {
+                            profile_box.find('.sb-top-bar [data-value="sms"]').sbActive(true);
+                        }
+                        profile_box.find('.sb-top-bar [data-value="whatsapp"]').sbActive(true);
+                    }
+                    this.boxClasses(profile_box, user_type);
+                    profile_box.attr('data-user-id', activeUser().id).sbShowLightbox();
+                    loadingGlobal(false, false);
+                    SBF.event('SBProfileBoxOpened', { user_id: user_id });
+                });
+                users[user_id] = activeUser();
+                if (SBF.getURL('user') != user_id && !SBF.getURL('conversation')) {
+                    pushState('?user=' + user_id);
+                }
+            });*/
+        },
+
+        add: function () {
+            let nav = articles_area.find('.ul-articles');
+            nav.find('.sb-active').sbActive(false);
+            nav.append(`<li class="sb-active"></li>`);
+            articles_content.sbLanguageSwitcher([], 'articles');
+            this.clear();
+        },
+
+        clear: function () {
+            articles_content.removeAttr('data-id').removeClass('sb-hide');
+            articles_content.find('input, textarea, select').val('');
+            articles_content.find('input').prop('checked', false);
+            editorJSLoad();
+            this.viewButton();
+            articles_save_required = false;
+        },
+
+        delete: function (article_id, onSuccess = false) {
+            SBF.ajax({
+                function: 'save-article',
+                article: JSON.stringify({ id: article_id, delete: true })
+            }, (response) => {
+                this.clear();
+                if (onSuccess) {
+                    onSuccess(response);
+                }
+            });
+        },
+        getStatusesList: function () {
+            let statusList = $('#ticket_statues ul').clone();
+            statusList.find('li').each(function () {
+                const color = $(this).data('color');
+                const bgColor = SBDashboard.lightenColor(color, 40);
+
+                $(this).css({
+                    'color': color,
+                    'background-color': bgColor
+                });
+                $(this).find('span').css({
+                    'background-color': color
+                });
+            });
+            return statusList.show().prop('outerHTML');
+        },
+        getPrioritiesList: function () {
+            let statusList = $('#ticket_priorities ul').clone();
+            statusList.find('li').each(function () {
+                const color = $(this).data('color');
+                const bgColor = SBDashboard.lightenColor(color, 40);
+
+                $(this).css({
+                    'color': color,
+                    'background-color': bgColor
+                });
+                $(this).find('span').css({
+                    'background-color': color
+                });
+            });
+            return statusList.show().prop('outerHTML');
+        },
+        updateTicketStatus: function (ticket_id, ticketStatus) {
+            SBF.ajax({
+                function: 'update-ticket-status',
+                ticket_id: ticket_id,
+                ticketStatus: ticketStatus,
+            }, (response) => {
+                if (response.success) {
+                    infoBottom('Ticket status updated successfully.');
+                }
+            });
+        },
+        updateTicketPriority: function (ticket_id, ticketPriority) {
+            SBF.ajax({
+                function: 'update-ticket-priority',
+                ticket_id: ticket_id,
+                ticketPriority: ticketPriority,
+            }, (response) => {
+                if (response.success) {
+                    infoBottom('Ticket priority updated successfully.');
+                }
+            });
+        },
+        ticketRowNotificationCounter: function (ticketId) {
+            const newTicketCount = SBTicket.new_ticket_count[ticketId]?.length || 0;
+            const newCommentsCount = SBTicket.new_comment_count[ticketId]?.length || 0;
+            const totalCount = newTicketCount + newCommentsCount;
+
+            if (totalCount > 0) {
+                const tooltip = `${newTicketCount ? `${newTicketCount} new ticket${newTicketCount > 1 ? 's' : ''}` : ''}${newTicketCount && newCommentsCount ? ', ' : ''}${newCommentsCount ? `${newCommentsCount} new comment${newCommentsCount > 1 ? 's' : ''}` : ''}`;
+
+                return `<span class="sb-notification-counter" title="${tooltip}">${totalCount}</span>`;
+            } else {
+                return '';
+            }
+        },
+        ticketsMenuNotificationCounter: function () {
+            let newTicketCount = 0;
+            let newCommentsCount = 0;
+
+            for (const id in SBTicket.new_ticket_count) {
+                if (Array.isArray(SBTicket.new_ticket_count[id])) {
+                    newTicketCount += SBTicket.new_ticket_count[id].length;
+                }
+            }
+
+            for (const id in SBTicket.new_comment_count) {
+                if (Array.isArray(SBTicket.new_comment_count[id])) {
+                    newCommentsCount += SBTicket.new_comment_count[id].length;
+                }
+            }
+
+            const totalCount = newTicketCount + newCommentsCount;
+
+            $('#sb-tickets').next('.sb-notification-counter').remove();
+
+            if (totalCount > 0) {
+                const tooltip = `${newTicketCount ? `${newTicketCount} new ticket${newTicketCount > 1 ? 's' : ''}` : ''}${newTicketCount && newCommentsCount ? ', ' : ''}${newCommentsCount ? `${newCommentsCount} new comment${newCommentsCount > 1 ? 's' : ''}` : ''}`;
+
+                $('#sb-tickets').after(`<span class="sb-notification-counter" title="${tooltip}">${totalCount}</span>`);
+            }
+        },
+        getRow: function (ticket) {
+            if (ticket) {
+                const status_bg = SBDashboard.lightenColor(ticket.status_color, 40);
+                const priority_bg = SBDashboard.lightenColor(ticket.priority_color, 40);
+                let code = '';
+
+                let rowHtml = `<tr data-ticket-id="${ticket.id}">
+                <td data-order="${ticket.id}">#T${ticket.id}
+                    ${ticket.conversation_id ? `<a class="ml-2" style="text-decoration:underline;" href="?conversation=${ticket.conversation_id}" target="_blank">#C${ticket.conversation_id}</a>` : ''}
+                    ${this.ticketRowNotificationCounter(ticket.id)}
+                </td>
+                <td class="sb-td-subject">${ticket.subject}</td>`;
+                if (tickets_table.find('th[data-field="tags"]').length) {
+                    rowHtml += `<td class="sb-td-tags">`;
+                    ticket.ticket_tags.forEach(tag => {
+                        const ctx = document.createElement("canvas").getContext("2d");
+                        ctx.fillStyle = tag.color;
+                        const validColor = ctx.fillStyle;
+                        const tags_lighten = SBDashboard.lightenColor(validColor, 40);
+                        // const style = `
+                        //     background-color: ${tags_lighten};
+                        //     color: ${validColor === "#ffff00" ? "#FFA500" : validColor};
+                        //     /*border: 1px solid ${validColor === "#ffff00" ? "#FFA500" : validColor};*/
+                        //     margin-right: 5px;
+                        // `;
+                        rowHtml += `<span class="badge badge-tag" data-color=${tag.color}>${tag.name}</span>`;
+
+                    });
+                    rowHtml += `</td>`;
+                }
+
+                if (tickets_table.find('th[data-field="department"]').length) {
+                    rowHtml += `<td class="sb-td-department">${ticket.department ?? 'N/A'}</td>`;
+                }
+                rowHtml += `<td class="sb-td-contact"><p>${ticket.customer_name ?? 'Guest'}</p></td>
+                <td class="sb-td-status1 no-click status-dropdown">
+
+                <div class="dropdown">
+                    <button class="btn btn-sm dropdown-toggle currentStatusBtn" data-id="${ticket.id}" style="background-color: ${SBDashboard.lightenColor(ticket.status_color, 40)};color: ${ticket.status_color}">
+                        ${ticket.status_name}
+                    </button>
+                    ${this.getStatusesList()}
+                </div>
+                    
+                </td>
+                <td class="sb-td-priority no-click status-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-sm dropdown-toggle currentPriorityBtn" data-id="${ticket.id}" style="background-color: ${SBDashboard.lightenColor(ticket.priority_color, 40)};color: ${ticket.priority_name}">${ticket.priority_name}</button>
+                    ${this.getPrioritiesList()}
+                </div>
+                </td>
+                <td class="sb-td-last_reply">${ticket.assigned_to_name ?? ''} ${ticket.user_type ? '(' + ticket.user_type + ')' : ''}</td>
+                <td>${SBF.beautifyTime(ticket.creation_time, true)}</td>
+                </tr>`;
+
+                return rowHtml;
+            } else {
+                SBF.error('Ticket not of type SBTicket', 'SBTicket.getRow');
+                return false;
+            }
+        },
+
+        updateRow: function (ticket) {
+            let row = tickets_table.find(`[data-ticket-id="${ticket.id}"]`);
+            if (row.length) {
+                row.replaceWith(this.getRow(ticket));
+            }
+            else {
+                if (tickets_table.find('.sb-no-results').length) {
+                    tickets_table.find('.sb-no-results').remove();
+                }
+                tickets_table.find('tbody').append(this.getRow(ticket));
+            }
+        },
+
+        updateMenu: function (action = 'all', type = false) {
+            let ticket_status = ['all', 'open', 'in-progress', 'hold', 'answered', 'closed'];
+            if (action == 'all') {
+                SBF.ajax({
+                    function: 'count-tickets',
+                }, (response) => {
+                    for (var i = 0; i < ticket_status.length; i++) {
+                        this.updateMenuItem('set', ticket_status[i] || 0, response[ticket_status[i]] || 0);
+                    }
+                });
+            } else {
+                this.updateMenuItem(action, type);
+            }
+        },
+
+        updateMenuItem: function (action = 'set', type = false, count = 1) {
+            let item = tickets_table_menu.find(`[data-type="${type}"] span`);
+            let ticket_status = ['all', 'open', 'in-progress', 'hold', 'answered', 'closed'];
+            if (action != 'set') {
+                count = parseInt(item.attr('data-count')) + (1 * (action == 'add' ? 1 : -1));
+            }
+            item.html(`(${count})`).attr('data-count', count);
+            count = 0;
+            for (var i = 0; i < ticket_status.length; i++) {
+                count += parseInt(tickets_table_menu.find(`[data-type="${ticket_status[i]}"] span`).attr('data-count'));
+            }
+        },
+
+        populate: function (response) {
+            let code = '';
+            let count = response.length;
+            if (count) {
+                for (var i = 0; i < count; i++) {
+                    code += this.getRow(response[i]);
+                }
+            } else {
+                code = `<p class="sb-no-results">${sb_('No Ticket found.')}</p>`;
+            }
+
+            tickets_table.parent().scrollTop(0);
+
+            // Save current page if DataTable already exists
+            let currentPage = 0;
+            if ($.fn.DataTable.isDataTable(tickets_table)) {
+                currentPage = tickets_table.DataTable().page();
+                tickets_table.DataTable().destroy();
+            }
+
+            tickets_table.find('tbody').html(code);
+
+            // Reinitialize DataTable
+            const dt = tickets_table.DataTable({
+                pageLength: 10,
+                responsive: true,
+                order: [[0, 'desc']],
+                language: {
+                    emptyTable: sb_('No tickets available')
+                },
+                columnDefs: [
+                    { orderable: false, targets: 0 }
+                ]
+            });
+            // Restore previous page (if still valid)
+            if (count > 0) {
+                dt.page(currentPage).draw('page');
+            }
+        },
+        formatDateLabel: function (dateString) {
+            const date = new Date(dateString.replace(' ', 'T'));
+            const today = new Date();
+            const yesterday = new Date();
+            yesterday.setDate(today.getDate() - 1);
+            const isToday = date.toDateString() === today.toDateString();
+            const isYesterday = date.toDateString() === yesterday.toDateString();
+            if (isToday) return 'Today';
+            if (isYesterday) return 'Yesterday';
+            return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        },
+        formatTimeTo12Hour: function (dateString) {
+            const date = new Date(dateString.replace(' ', 'T'));
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            const ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0 => 12
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            return hours + ':' + minutes + ' ' + ampm;
+        },
+        canEditComment: function (createdAt) {
+            // Use server time injected by PHP for accuracy
+            const serverNow = window.SERVER_NOW ? new Date(window.SERVER_NOW) : new Date();
+            const commentTime = new Date(createdAt.replace(' ', 'T'));
+            const diffMs = serverNow - commentTime;
+            const diffMin = diffMs / (1000 * 60);
+            return diffMin >= 0 && diffMin <= 10;
+        },
+        escapeHtml: function (text) {
+            var map = {
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+        },
+        renderComment: function (comment) {
+            const currentUserId = document.getElementById('currentUserId').value;
+            const isAgent = comment.user_role === 'agent';
+            const isOwn = comment.user_id == currentUserId;
+            const rowClass = isAgent ? 'agent' : 'customer';
+            // Avatar
+            const avatarUrl = comment.profile_image;
+            // Bubble
+            let html = `<div class="comment-row ${rowClass}">
+                <img loading="lazy" src="${avatarUrl}" class="comment-avatar" alt="avatar" data-name="${comment.user_name}">
+                <div class="user-initials" data-value="edit-profile" style="display: none;"><span class="initials"></span></div>
+                <div class="comment-bubble">
+                    <div class="comment-text" data-id="${comment.id}">${this.escapeHtml(comment.comment)}</div>
+                    <div class="comment-meta">
+                        <span>${SBF.beautifyTime(comment.created_at)}</span>`;
+            if (comment.is_edited == 1 || comment.is_edited === "1") {
+                html += `<span class="edited-label" title="Edited">&nbsp;✎</span>`;
+            }
+
+            // Show Edit button only if own comment and within 10 minutes
+            if (isOwn && this.canEditComment(comment.created_at)) {
+
+                html += `<button class="edit-comment-btn" data-id="${comment.id}">Edit</button>`;
+            }
+            if (isOwn) {
+                html += `<button class="delete-comment-btn" data-id="${comment.id}">Delete</button>`;
+            }
+            html += `</div>
+                </div>
+            </div>`;
+            return html;
+        },
+
+        loadComments: function (ticket_id, last_update_date = null) {
+            SBF.ajax({
+                function: 'get-ticket-comments',
+                ticket_id: ticket_id,
+                last_update_date: last_update_date
+            }, (response) => {
+                const commentsSection = $(`.sb-area-ticket-detail[data-id=${ticket_id}] #comments-section`);
+                if (response.comments && response.comments.length > 0) {
+
+                    if (response.comments[0].last_update_time) {
+                        this.datetime_last_comment = response.comments[0].last_update_time;
+                    }
+
+                    if (response.server_now) {   /// update window.SERVER_NOW time to use in canEditComment function
+                        window.SERVER_NOW = response.server_now;
+                    }
+                    // Group comments by date
+                    ////let lastDate = '';
+                    let html = '';
+                    response.comments.forEach(comment => {
+                        const commentDate = comment.created_at.split(' ')[0];
+                        if (commentDate !== this.last_comment_date) {
+                            html += `<div class='text-center my-2'><span class='badge bg-secondary' style='font-size:13px;'>${this.formatDateLabel(comment.created_at)}</span></div>`;
+                            this.last_comment_date = commentDate;
+                        }
+                        html += this.renderComment(comment);
+                    });
+
+                    if (last_update_date) {
+                        commentsSection.append(html);
+                    }
+                    else {
+                        commentsSection.html(html);
+                    }
+
+                    setTimeout(() => {
+                        const el = commentsSection[0]; // or get(0)
+                        if(el)
+                            el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+                    }, 0);
+
+                    showInitials('tc_back', 'comment-row');
+                    //scrollToBottom();
+                    // attachEditListeners();
+                }
+                else {
+                    commentsSection.html('<div class="text-center text-muted">No comments yet.</div>');
+                }
+            });
+        },
+
+        openTicket: async function (ticket_id) {
+
+            // 1. Clear notification data
+            if (SBTicket.new_ticket_count) {
+                delete SBTicket.new_ticket_count[ticket_id];
+            }
+            if (SBTicket.new_comment_count) {
+                delete SBTicket.new_comment_count[ticket_id];
+            }
+            // 2. Refresh ticker menu notification counter
+            this.ticketsMenuNotificationCounter();
+            // 3. Remove the counter span (inside the clicked row)
+            $('.sb-table-tickets tr[data-ticket-id="' + ticket_id + '"] td:first .sb-notification-counter').remove();
+
+
+            const container = document.querySelector('#ticketDescriptionTicketDetail');
+            //  If Quill already exists on this element, destroy it
+            if (!this.quillForTicketDetail) {
+                this.quillForTicketDetail = new Quill(container, {
+                    theme: 'snow',
+                    placeholder: 'Compose something...',
+                    modules: {
+                        toolbar: [
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' }], // explicitly separate
+                            ['link', 'image']
+                        ]
+                    }
+                });
+            }
+
+            SBTicket.quillForTicketDetail.setContents('');
+
+
+            const notesContainer = document.querySelector('#internal-note-t');
+            //  If Quill already exists on this element, destroy it
+            if (!this.quillForTicketInternalNote) {
+                this.quillForTicketInternalNote = new Quill(notesContainer, {
+                    theme: 'snow',
+                    placeholder: 'Compose something...',
+                });
+            }
+
+            SBTicket.quillForTicketInternalNote.setContents('');
+
+
+            // loadingGlobal();
+            await this.loadCustomFields('edit');
+
+
+            await SBF.ajax({
+                function: 'edit-ticket',
+                ticket_id: ticket_id
+            }, (response) => {
+                // debzugger
+
+                const encodedStr = response.subject;
+                const temp = document.createElement('textarea');
+                temp.innerHTML = encodedStr;
+                const decodedStr = temp.value;
+
+                document.querySelector('.sb-area-ticket-detail .tc_back .tno').innerHTML = 'TR' + response.id;
+                document.querySelector('.sb-area-ticket-detail .tc_back #ticket-subject').value = decodedStr;
+                document.querySelector('.sb-area-ticket-detail .tc_back .ticket-status-dropdown').value = response.status_id;
+                //document.querySelector('.sb-area-ticket-detail .tc_back .sidepanel .ticket-assignee span').innerHTML = response.assigned_to_name || 'Unassigned';
+                document.querySelector('.sb-area-ticket-detail .tc_back .sidepanel .ticket-reporter .name').innerHTML = response.contact_name || 'Unassigned';
+
+
+
+                // if (!response.contact_id) {
+                //     document.querySelector('.sidepanel .without-contact input').checked = true;
+                // }
+                // else {
+                //     document.querySelector('.sidepanel .without-contact input').checked = false;
+                // }
+
+                document.querySelector('.sb-area-ticket-detail .tc_back .sidepanel .assignee-img').src = response.profile_image || '';
+                $('.sb-area-ticket-detail .tc_back .sidepanel .ticket-assignee .assignee-img').src = response.c_profile_image || '';
+
+                $('.sb-area-ticket-detail .tc_back .sidepanel .ticket-assignee .assignee-img').attr('data-name', response.assigned_to_name);
+                $('.sb-area-ticket-detail .tc_back .sidepanel .ticket-reporter .reporter-img').attr('data-name', response.contact_name);
+                showInitials('sidepanel', 'mb-3');
+
+
+                document.querySelector('.sb-area-ticket-detail .tc_back .sidepanel .conversation-id span').innerHTML = response.conversation_id ? `<a  style="text-decoration:underline;" href="?conversation=${response.conversation_id}" target="_blank">#${response.conversation_id} </a>` : '';
+                if (response.conversation_id)
+                    document.querySelector('.sb-area-ticket-detail .tc_back .sidepanel .conversation-id').classList.remove('d-none')
+
+                const delta = JSON.parse(response.description); // Convert back to object
+                SBTicket.quillForTicketDetail.setContents(delta);
+
+                //const notes = JSON.parse(response.notes); // Convert back to object
+                //SBTicket.quillForTicketInternalNote.setContents(notes);
+
+
+                const notes = JSON.parse(response.notes); // Convert back to object
+
+                if (notes && notes.ops && Array.isArray(notes.ops)) {
+                    const partial = notes.ops.slice(0, 1000); // first 1000 operations
+                    SBTicket.quillForTicketInternalNote.setContents({ ops: partial });
+                } else {
+                    console.warn("Invalid Quill Delta format");
+                }
+
+                // use your existing data when editing
+                const selectedUserId = response.assigned_to;
+                const selectedUserName = response.assigned_to_name; // This is what will be shown
+
+                // Create a new Option and append it to Select2
+                const userOption = new Option(selectedUserName, selectedUserId, true, true);
+                $('#select-ticket-agent').append(userOption).trigger('userOption');
+
+                if (response.contact_id) {
+                    // use your existing data when editing
+                    const selectedReporterId = response.contact_id;
+                    const selectedReporterName = response.reporter_name; // This is what will be shown
+
+                    // Create a new Option and append it to Select2
+                    const reporterOption = new Option(selectedReporterName, selectedReporterId, true, true);
+                    $('#select-ticket-reporter').append(reporterOption).trigger('reporterOption');
+                    $('.sb-area-ticket-detail .tc_back .sidepanel #reporter').removeClass('d-none');
+                    $('.sb-area-ticket-detail .tc_back .sidepanel .ticket-reporter .name').addClass('d-none');
+
+                }
+
+                // Select multiple values programmatically
+                if (response.tag_names)
+                    response.tag_names.split('||').forEach(val => ticketTagsFilterChoices.setChoiceByValue(val));
+
+                if (document.querySelector('.sb-area-ticket-detail #ticket-department') && response.department_id) {
+                    document.querySelector('.sb-area-ticket-detail #ticket-department').value = response.department_id;
+                }
+                document.querySelector('.sb-area-ticket-detail .tc_back #ticket-priority').value = response.priority_id;
+
+                let attachmentsHtml = '';
+                const filesCount = Object.entries(response.attachments).length;
+                Object.entries(response.attachments).forEach(([key, value]) => {
+                    attachmentsHtml += `<div class="col-md-2 mb-2">
+                                            <div class="card">
+                                                <div class="card-body p-2">
+                                                    <div class="text-center mb-2">
+                                                        <img src="script/${value.file_path}" class="img-thumbnail p-0" style="max-height: 100px;" alt="${value.original_filename}">
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-grow-1 text-truncate">
+                                                            <div class="text-truncate">${value.original_filename}</div>
+                                                            <small class="text-muted">${value.file_size}</small>
+                                                        </div>
+                                                        <button type="button" class="btn btn-sm btn-danger delete-attachment" data-index="0" data-id="${value.id}" data-ticket-id="${ticket_id}">
+                                                            <i class="bi bi-x"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+
+                });
+
+                if (attachmentsHtml != '') {
+                    $('#existing-file-preview-container').removeClass('d-none');
+                    $('#existing-file-preview-container #current-attachments').html(attachmentsHtml);
+                    $('#view-ticket-attachments .attachments-count').html(filesCount);
+                }
+
+
+                Object.entries(response.custom_fields).forEach(([key, value]) => {
+                    const fieldElement = document.querySelector("#custom-fields #custom_" + key);
+                    if (fieldElement) {
+                        const type = fieldElement.getAttribute('data-type');
+                        if (type === 'checkbox') {
+                            fieldElement.checked = value === '1';
+                        } else {
+                            fieldElement.value = value;
+                        }
+                    }
+                });
+
+                this.loadComments(ticket_id);
+                loadingGlobal(false);
+
+            });
+        },
+
+        openTicketArea: function (ticket_id) {
+            $('#ticket_id_d').val(ticket_id);
+            SBTicket.openTicket(ticket_id);
+            if (SBF.getURL('ticket') != ticket_id && ticket_id != -1) {
+                pushState('?ticket=' + ticket_id);
+            }
+            admin.find(' > main > div').sbActive(false);
+            $('.sb-area-ticket-detail').sbActive(true);
+            $('.sb-area-ticket-detail').attr('data-id', ticket_id);
+            //// change header title dynamically
+            $('.sb-area-ticket-detail .header-left .title').html(sb_("Ticket") + ' ' + sb_("detail"));
+            $('.sb-area-ticket-detail .header-left .ticket-back-btn').removeClass('d-none');
+        },
+
+        activeID: function (is_parent = false) {
+            return is_parent ? articles_area.find('.ul-articles .sb-active').attr('data-id') : articles_content.attr('data-id');
+        },
+
+        viewButton: function (article_id = false) {
+            if (this.page_url) {
+                let button = articles_area.find('.sb-view-article');
+                button.attr('href', article_id ? this.page_url + (this.is_url_rewrite ? (this.page_url.charAt(this.page_url.length - 1) == '/' ? '' : '/') + (this.cloud_chat_id ? this.cloud_chat_id + '/' : '') : '?article_id=') + article_id : '');
+            }
+        },
+
+        // Clear the profile edit area
+        clear: function (ticket_edit_area) {
+            SBForm.clear(ticket_edit_area);
+        },
+
+        // Check for errors on user input
+        errors: function (ticket_edit_area) {
+            return SBForm.errors(ticket_edit_area.find('.sb-details'));
+        },
+
+        // Display a error message
+        showErrorMessage: function (ticket_edit_area, message) {
+            SBForm.showErrorMessage(ticket_edit_area, message);
+        },
+
+        translations: {
+            list: {},
+
+            add: function (language_code, article_id = false) {
+                if (!article_id) {
+                    article_id = SBArticles.activeID(true);
+                }
+                let translations = this.get(article_id);
+                translations.push([language_code, false]);
+                this.list[article_id] = translations;
+                articles_content.sbLanguageSwitcher(translations, 'articles', language_code);
+                SBArticles.clear();
+            },
+
+            delete: function (language_code, article_id = false) {
+                if (!article_id) {
+                    article_id = SBArticles.activeID(true);
+                }
+                let translations = this.get(article_id);
+                for (var i = 0; i < translations.length; i++) {
+                    if (translations[i][0] == language_code) {
+                        SBArticles.delete(translations[i][1], (response) => {
+                            if (response === true) {
+                                translations.splice(i, 1);
+                                this.list[article_id] = translations;
+                                SBArticles.show(article_id);
+                            }
+                        });
+                        break;
+                    }
+                }
+                return false;
+            },
+
+            get: function (article_id) {
+                return article_id in this.list ? this.list[article_id] : [];
+            }
+        }
+    }
+
+
 
     /*
     * ----------------------------------------------------------
@@ -3376,59 +5647,99 @@
             if (this.chart) {
                 this.chart.destroy();
             }
-            this.chart = new Chart(reports_area.find('canvas'), {
+            const ctx = document.getElementById('canvas');
+            const newCtx = ctx.getContext('2d');
+            const gradient1 = newCtx.createLinearGradient(0, 0, 0, +ctx.height * 3);
+            gradient1.addColorStop(0, '#1158fa');
+            gradient1.addColorStop(1, '#e1e8f7');
+
+            this.chart = new Chart(newCtx, {
                 type: type,
                 data: {
                     labels: labels,
                     datasets: values && Array.isArray(values[0]) ? [
                         {
                             data: values.map(row => row[0]),
-                            backgroundColor: '#13ca7e'
+                            backgroundColor: gradient1,
+                            borderColor: type === 'line' ? (SB_ADMIN_SETTINGS.color ? SB_ADMIN_SETTINGS.color : '#1459C6') : '#FFFFFF',
+                            borderWidth: 0.1,
                         },
                         {
                             data: values.map(row => row[1]),
-                            backgroundColor: '#ca3434'
+                            backgroundColor: gradient1,
+                            borderColor: type === 'line' ? (SB_ADMIN_SETTINGS.color ? SB_ADMIN_SETTINGS.color : '#1459C6') : '#FFFFFF',
+                            borderWidth: 0.1,                       
                         }
                     ] : [{
                         data: values,
-                        backgroundColor: type == 'line' ? (SB_ADMIN_SETTINGS.color ? '#cbcbcb82' : '#028be530') : blues,
-                        borderColor: type == 'line' ? (SB_ADMIN_SETTINGS.color ? SB_ADMIN_SETTINGS.color : '#049CFF') : '#FFFFFF',
-                        borderWidth: 0,
+                        backgroundColor: gradient1,
+                        borderColor: type === 'line' ? (SB_ADMIN_SETTINGS.color ? SB_ADMIN_SETTINGS.color : '#1459C6') : '#FFFFFF',
+                        borderWidth: 0.1,
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.5,
+                        pointBackgroundColor: '#487FFF'
                     }]
                 },
                 options: {
-                    legend: {
-                        display: false
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {   // <-- changed from "tooltips" to "tooltip"
+                            callbacks: {
+                                label: function(context) {
+                                    let index = context.dataIndex;
+                                    let value = context.dataset.data[index];
+                                    switch(label_type) {
+                                        case 1: return value;
+                                        case 2: return new Date(values[index] * 1000).toISOString().substr(11, 8);
+                                        case 3: return value + '%';
+                                        case 4:
+                                            let tds = reports_area.find('.sb-table tbody tr').eq(index).find('td');
+                                            return tds.eq(0).text() + ' ' + tds.eq(1).text();
+                                    }
+                                }
+                            }
+                        }
                     },
                     scales: {
-                        yAxes: [{
-                            ticks: {
-                                callback: function (tickValue, index, ticks) {
-                                    return label_type == 1 ? tickValue : (label_type == 2 ? new Date(tickValue * 1000).toISOString().substr(11, 8) : tickValue);
-                                },
-                                beginAtZero: true
-                            }
-                        }],
-                        xAxes: [{
+                        x: {
+                            grid: {
+                                display: true
+                            },
+                            display: true,
                             ticks: {
                                 beginAtZero: true
-                            }
-                        }],
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem, chartData) {
-                                let index = tooltipItem.index;
-                                let value = chartData.datasets[tooltipItem.datasetIndex].data[index];
-                                switch (label_type) {
-                                    case 1: return value;
-                                    case 2: return new Date(values[index] * 1000).toISOString().substr(11, 8);
-                                    case 3: return value + '%';
-                                    case 4: let tds = reports_area.find('.sb-table tbody tr').eq(index).find('td'); return tds.eq(0).text() + ' ' + tds.eq(1).text();
-                                }
                             },
                         },
-                        displayColors: false
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: true
+                            },
+                            display: true,
+                            ticks: {
+                                callback: function (tickValue, index, ticks) {
+                                    return label_type === 1 ? tickValue : (label_type === 2 ? new Date(tickValue * 1000).toISOString().substr(11, 8) : tickValue);
+                                },
+                            },
+                        }
+                    },
+                    tooltips: {
+                        // callbacks: {
+                        //     label: function (tooltipItem, chartData) {
+                        //         let index = tooltipItem.index;
+                        //         let value = chartData.datasets[tooltipItem.datasetIndex].data[index];
+                        //         switch (label_type) {
+                        //             case 1: return value;
+                        //             case 2: return new Date(values[index] * 1000).toISOString().substr(11, 8);
+                        //             case 3: return value + '%';
+                        //             case 4: let tds = reports_area.find('.sb-table tbody tr').eq(index).find('td'); return tds.eq(0).text() + ' ' + tds.eq(1).text();
+                        //         }
+                        //     },
+                        // }
                     }
                 }
             });
@@ -3496,57 +5807,6 @@
             }, (response) => {
                 onSuccess(response);
             });
-        },
-
-        initDatePicker: function () {
-            let settings = {
-                ranges: {},
-                locale: {
-                    format: 'DD/MM/YYYY',
-                    separator: ' - ',
-                    applyLabel: sb_('Apply'),
-                    cancelLabel: sb_('Cancel'),
-                    fromLabel: sb_('From'),
-                    toLabel: sb_('To'),
-                    customRangeLabel: sb_('Custom'),
-                    weekLabel: sb_('W'),
-                    daysOfWeek: [
-                        sb_('Su'),
-                        sb_('Mo'),
-                        sb_('Tu'),
-                        sb_('We'),
-                        sb_('Th'),
-                        sb_('Fr'),
-                        sb_('Sa')
-                    ],
-                    monthNames: [
-                        sb_('January'),
-                        sb_('February'),
-                        sb_('March'),
-                        sb_('April'),
-                        sb_('May'),
-                        sb_('June'),
-                        sb_('July'),
-                        sb_('August'),
-                        sb_('September'),
-                        sb_('October'),
-                        sb_('November'),
-                        sb_('December')
-                    ],
-                    firstDay: 1
-                },
-                showCustomRangeLabel: true,
-                alwaysShowCalendars: true,
-                autoApply: true,
-                opens: admin.hasClass('sb-rtl') ? 'left' : 'right'
-            };
-            settings.ranges[sb_('Today')] = [moment(), moment()];
-            settings.ranges[sb_('Yesterday')] = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
-            settings.ranges[sb_('Last 7 Days')] = [moment().subtract(6, 'days'), moment()];
-            settings.ranges[sb_('Last 30 Days')] = [moment().subtract(29, 'days'), moment()];
-            settings.ranges[sb_('This Month')] = [moment().startOf('month'), moment().endOf('month')];
-            settings.ranges[sb_('Last Month')] = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
-            reports_area.find('#sb-date-picker').daterangepicker(settings).val('');
         },
 
         export: function (onSuccess) {
@@ -3661,7 +5921,33 @@
                 code = `<p class="sb-no-results">${sb_('No users found.')}</p>`;
             }
             users_table.parent().scrollTop(0);
+            
+
+            // Destroy previous DataTable if exists
+            if ($.fn.DataTable.isDataTable(users_table)) {
+                users_table.DataTable().destroy();
+                users_table.find('tbody').empty(); // Move this AFTER destroy
+            }
+
             users_table.find('tbody').html(code);
+            
+            // Reinitialize DataTable
+            users_table.DataTable({
+                pageLength: 10, // or whatever you want
+                responsive: true,
+                order: [[0, 'desc']],
+                language: {
+                    emptyTable: sb_('No users available')
+                },
+                columnDefs: [
+                    { orderable: false, targets: 0 } // 0 = first column (ID)
+                ]
+                // add more config as needed
+            });
+
+
+
+            // users_table.find('tbody').html(code);
             if (this.user_types.includes('agent')) {
                 SBF.ajax({
                     function: 'get-online-users',
@@ -3723,11 +6009,17 @@
         getRow: function (user) {
             if (user instanceof SBUser) {
                 let code = '';
+                if (user.name.includes('open-ai-temp-user')) {
+                    if (!chatbot_area.sbActive()) {
+                        SBApps.openAI.playground.deleteData();
+                    }
+                    return '';
+                }
                 for (var i = 0; i < this.table_extra.length; i++) {
                     let slug = this.table_extra[i];
                     code += `<td class="sb-td-${slug}">${this.user_main_fields.includes(slug) ? user.get(slug) : user.getExtra(slug)}</td>`;
                 }
-                return `<tr data-user-id="${user.id}" data-user-type="${user.type}"><td><input type="checkbox" /></td><td class="sb-td-profile"><a class="sb-profile"><img loading="lazy" src="${user.image}" /><span>${user.name}</span></a></td>${code}<td class="sb-td-email">${user.get('email')}</td><td class="sb-td-ut">${sb_(user.type)}</td><td>${SBF.beautifyTime(user.get('last_activity'), true)}</td><td>${SBF.beautifyTime(user.get('creation_time'))}</td></tr>`;
+                return `<tr data-user-id="${user.id}" data-user-type="${user.type}"><td><input type="checkbox" /></td><td class="sb-td-profile"><a class="sb-profile"><img loading="lazy" src="${user.image}" data-name="${user.name}"/><div class="user-initials" data-value="edit-profile" style="display: none;"><span class="initials"></span></div><span>${user.name}</span></a></td>${code}<td class="sb-td-email">${user.get('email')}</td><td class="sb-td-ut">${sb_(user.type)}</td><td>${user.get('last_activity') && user.get('last_activity') != 'NULL' ? SBF.beautifyTime(user.get('last_activity'), true) : 'N/A'}</td><td>${SBF.beautifyTime(user.get('creation_time'))}</td></tr>`;
             } else {
                 SBF.error('User not of type SBUser', 'SBUsers.getRow');
                 return false;
@@ -3805,6 +6097,10 @@
                     infoBottom('Users deleted');
                     this.updateMenu();
                     users_table.sbLoading(false);
+                    
+                    setTimeout(function () {
+                        $('#sb-users').parent().trigger('click');
+                    }, 1000);
                 });
             } else {
                 users[user_ids].delete(() => {
@@ -3823,6 +6119,9 @@
                     infoBottom('User deleted');
                     this.updateMenu();
                     users_table.sbLoading(false);
+                    setTimeout(function () {
+                        $('#sb-users').parent().trigger('click');
+                    }, 1000);
                 });
             }
         },
@@ -3857,7 +6156,7 @@
         setActiveAgentStatus: function (online = true) {
             let label = online ? 'online' : 'offline';
             agent_online = online;
-            header.find('[data-value="status"]').html(sb_(SBF.slugToString(label))).attr('class', 'sb-' + label);
+            admin.find('[data-value="status"]').html(sb_(SBF.slugToString(label))).attr('class', 'sb-' + label);
             if (SBPusher.active) {
                 if (online) {
                     SBPusher.presence();
@@ -3934,11 +6233,13 @@
         user_typing: false,
         desktop_notifications: false,
         flash_notifications: false,
+        notifications_list: {},
         busy: false,
         busy_2: false,
         is_search: false,
         menu_count_ajax: false,
         previous_editor_text: false,
+        message_drafts: {},
 
         // Open the conversations tab
         open: function (conversation_id = -1, user_id) {
@@ -3953,6 +6254,26 @@
             this.notes.update([]);
             this.tags.update([]);
             this.startRealTime();
+        },
+        inboxMenuNotificationCounter: function () {
+            const notification_counter = SBF.storage('notifications-counter');
+            let totalCount = 0;
+
+            if (notification_counter && typeof notification_counter === 'object') {
+                for (const id in notification_counter) {
+                    if (Array.isArray(notification_counter[id])) {
+                        totalCount += notification_counter[id].length;
+                    }
+                }
+            }
+
+            // Remove any existing counter next to the inbox menu item
+            $('#sb-conversations').next('.sb-notification-counter').remove();
+
+            if (totalCount > 0) {
+                const tooltip = `${totalCount} new message${totalCount > 1 ? 's' : ''}`;
+                $('#sb-conversations').after(`<span class="sb-notification-counter" title="${tooltip}">${totalCount}</span>`);
+            }
         },
 
         // Open a single conversation
@@ -3979,8 +6300,15 @@
                 let new_user = SBF.null(users[user_id]) || !(users[user_id].details.email);
                 let conversation = conversations_area.find(`[data-conversation-id="${conversation_id}"]`);
                 let conversation_list = conversations_admin_list_ul.find('li');
+                let active_conversation = this.getSelectedConversations();
                 conversations_area_list.html('');
                 conversations_area_list.sbLoading(true);
+                if (active_conversation.length) {
+                    this.message_drafts[active_conversation[0].id] = editor_textarea.val().trim();
+                    SBF.storage('message-drafts', SBConversations.message_drafts);
+                }
+                editor_textarea.val('');
+                SBChat.insertText(this.message_drafts[conversation_id] ? this.message_drafts[conversation_id] : '');
 
                 // Init the user
                 if (new_user) {
@@ -4041,6 +6369,25 @@
                         conversations_area.find('.sb-conversation-busy').remove();
                         this.updateUserDetails();
                         conversations_area.find('.sb-top > a').html(response.get('title'));
+                        
+                        const convert_to_ticket_li = document.getElementById('convert-to-ticket-list');
+                        const converted = conversations_area.find('.sb-scroll-area li.sb-active').attr('data-converted');
+                        if (converted == 1) {
+                            //document.getElementById('sb-icon-refresh').style.color = 'blue';
+                            $('#convert-to-ticket span').html('Linked to a ticket');
+                            document.querySelector('#convert-to-ticket').setAttribute('data-sb-tooltip', 'Linked to a ticket');
+                            $('#convert-to-ticket').addClass('converted');
+                            $(admin).sbInitTooltips();
+
+                        }
+                        else {
+                            //document.getElementById('sb-icon-refresh').style.color = '#566069';
+                            $('#convert-to-ticket span').html(sb_('Link to Ticket'));
+                            document.querySelector('#convert-to-ticket').setAttribute('data-sb-tooltip', sb_('Link to Ticket'));
+                            $('#convert-to-ticket').removeClass('converted');
+                            $(admin).sbInitTooltips();
+
+                        }
 
                         // Automatic translation
                         SBAdmin.must_translate = SB_ADMIN_SETTINGS.translation && activeUser().language && SB_ADMIN_SETTINGS.active_agent_language != activeUser().language;
@@ -4115,6 +6462,7 @@
                         if (!conversation.length && (select_status_code == conversation_status_code || (select_status_code == 0 && conversation_status_code == 1))) {
                             conversations_admin_list_ul.prepend(SBConversations.getListCode(response));
                         }
+                        showInitials('sb-scroll-area', 'sb-profile');  /// Show initials in the conversation list area left sidebar
                         conversations_admin_list_ul.find('li').sbActive(false);
                         conversation.sbActive(true);
                         if (scroll) {
@@ -4163,6 +6511,7 @@
                             }
                             SBCloud.shopify.conversationPanel();
                         }
+                        SBApps.calendar.conversationPanel();
 
                         // Notes and Tags
                         this.notes.update(response.details.notes);
@@ -4174,15 +6523,6 @@
                         // Suggestions
                         if (SB_ADMIN_SETTINGS.smart_reply && !SBAdmin.must_translate) {
                             this.openConversation_1(response, suggestions_area);
-                        }
-
-                        // Rating
-                        for (var i = response.messages.length - 1; i > 0; i--) {
-                            let payload = response.messages[i].get('payload');
-                            if (payload.rating) {
-                                conversations_area.find('.sb-profile-list > ul').append(`<li data-id="rating"><i class="sb-icon sb-icon-${payload.rating == 1 ? 'like' : 'dislike'}"></i><span>${sb_('User rating')}</span><label>${sb_(payload.rating == 1 ? 'Helpful' : 'Not helpful')}${payload.message ? ' - ' + payload.message : ''}</label></li>`);
-                                break;
-                            }
                         }
 
                         // Source tasks
@@ -4198,11 +6538,6 @@
                             }
                         }
 
-                        admin.on('click', '#sb-whatsapp-alert-btn', function () {
-                            SBConversations.showDirectMessageBox('whatsapp', [activeUser().id]);
-                        });
-
-
                         // Populate user conversations on the bottom right area
                         activeUser().getConversations(function (response) {
                             conversations_area.find('.sb-user-conversations').html(response.length == 1 ? '' : activeUser().getConversationsCode(response)).prev().setClass('sb-hide', response.length == 1);
@@ -4213,26 +6548,7 @@
                             let search = conversations_admin_list.find('.sb-search-btn input').val();
                             for (var i = 0; i < response.messages.length; i++) {
                                 if (response.messages[i].message.toLowerCase().includes(search)) {
-                                    let id = response.messages[i].id;
-                                    setTimeout(() => {
-                                        let label = '';
-                                        conversations_area_list.find(`> div`).each(function () {
-                                            let message = $(this);
-                                            if (message.attr('data-id') == id) {
-                                                message.addClass('sb-highlight');
-                                                setTimeout(() => { message.removeClass('sb-highlight') }, 3600);
-                                                SBChat.label_date.html(label);
-                                                SBChat.label_date_show = true;
-                                                if (message.index()) {
-                                                    message.prev()[0].scrollIntoView();
-                                                } else {
-                                                    message[0].scrollIntoView();
-                                                }
-                                            } else if (message.hasClass('sb-label-date')) {
-                                                label = message.html();
-                                            }
-                                        });
-                                    }, 300);
+                                    this.highlightMessage(response.messages[i].id);
                                 }
                             }
                         }
@@ -4279,9 +6595,27 @@
             }
         },
 
-        // [Deprecated] this method is obsolete and it will be removed soon
-        populate: function (conversation_id, user_id, scroll) {
-            this.openConversation(conversation_id, user_id, scroll);
+        // Show a specific message and hightligh it
+        highlightMessage: function (message_id) {
+            setTimeout(() => {
+                let label = '';
+                conversations_area_list.find(`> div`).each(function () {
+                    let message = $(this);
+                    if (message.attr('data-id') == message_id) {
+                        message.addClass('sb-highlight');
+                        setTimeout(() => { message.removeClass('sb-highlight') }, 5000);
+                        SBChat.label_date.html(label);
+                        SBChat.label_date_show = true;
+                        if (message.index()) {
+                            message.prev()[0].scrollIntoView();
+                        } else {
+                            message[0].scrollIntoView();
+                        }
+                    } else if (message.hasClass('sb-label-date')) {
+                        label = message.html();
+                    }
+                });
+            }, 300);
         },
 
         // Populate conversations
@@ -4302,7 +6636,7 @@
 
         // Update the left conversations list with latest conversations or messages 
         update: function () {
-            if (!this.busy && conversations_filters.eq(0).find('p').attr('data-value') == 0 && this.datetime_last_conversation) {
+            if (!this.busy && conversations_filters.eq(0).find('p').attr('data-value') == 0 && this.datetime_last_conversation && active_admin_area == 'conversations') {
                 let filters = SBConversations.filters();
                 this.busy = true;
                 SBF.ajax({
@@ -4342,16 +6676,16 @@
                                     message_text = message.payload('preview');
                                 }
                                 if (is_pending_status_code && (!active_conversation || SBF.visibility_status == 'hidden') && (is_user || message.payload('human-takeover-message-confirmation'))) {
-                                    let notifications_counter = SBF.storage('notifications-counter');
-                                    if (!notifications_counter) {
-                                        notifications_counter = {};
+                                    SBConversations.notifications_list = SBF.storage('notifications-counter');
+                                    if (!SBConversations.notifications_list) {
+                                        SBConversations.notifications_list = {};
                                     }
-                                    if (!notifications_counter[conversation_id]) {
-                                        notifications_counter[conversation_id] = [];
+                                    if (!SBConversations.notifications_list[conversation_id]) {
+                                        SBConversations.notifications_list[conversation_id] = [];
                                     }
-                                    if (!notifications_counter[conversation_id].includes(message.id)) {
-                                        notifications_counter[conversation_id].push(message.id);
-                                        SBF.storage('notifications-counter', notifications_counter);
+                                    if (!SBConversations.notifications_list[conversation_id].includes(message.id)) {
+                                        SBConversations.notifications_list[conversation_id].push(message.id);
+                                        SBF.storage('notifications-counter', SBConversations.notifications_list);
                                     }
                                 }
                                 let conversation_code = this.getListCode(conversation, null);
@@ -4490,7 +6824,7 @@
                     span.html(`(${response})`);
                 });
             } else {
-                span.html(`(${count})`);
+                span.html(`${count}`);
             }
         },
 
@@ -4524,7 +6858,7 @@
                 conversations[getListConversation(conversation_id).index()].set('status_code', status_code);
                 this.setReadIcon(status_code);
                 if (update_left_list) {
-                    conversations_admin_list_ul.find(`[data-conversation-id="${conversation_id}"]`).attr('data-conversation-status', status_code);
+                    getListConversation(conversation_id).attr('data-conversation-status', status_code);
                 }
             }
         },
@@ -4534,11 +6868,18 @@
             if (!(conversation instanceof SBConversation)) {
                 conversation = new SBConversation([new SBMessage(conversation)], conversation);
             }
+            if (conversation.details.title == 'open-ai-temp-conversation') {
+                if (!chatbot_area.sbActive()) {
+                    SBApps.openAI.playground.deleteData();
+                }
+                return '';
+            }
             let message = conversation.getCode(true);
             let label_new = '';
             let tags = SB_ADMIN_SETTINGS.tags_show ? conversation.get('tags') : '';
             let department_id = conversation.get('department');
             let notification_counter = '';
+            let notification_counter_code = '';
             let time = conversation.get('last_update_time');
             let is_active = SBChat.conversation && SBChat.conversation.id == conversation.id;
             if (SBF.null(status)) {
@@ -4548,23 +6889,22 @@
                 tags = SBConversations.tags.codeLeft(tags);
             }
             if (!SBChat.conversation || !is_active || SBF.visibility_status == 'hidden') {
-                notification_counter = SBF.storage('notifications-counter');
+                let notification_counter = SBF.storage('notifications-counter');
                 if (notification_counter && notification_counter[conversation.id] && notification_counter[conversation.id].length) {
                     if (status == 2) {
-                        notification_counter = `<span class="sb-notification-counter">${notification_counter[conversation.id].length}</span>`;
+                        notification_counter_code = `<span class="sb-notification-counter">${notification_counter[conversation.id].length}</span>`;
                     } else {
                         notification_counter[conversation.id] = [];
                         SBF.storage('notifications-counter', notification_counter);
-                        notification_counter = '';
+                        this.notifications_list = notification_counter;
                     }
-                } else {
-                    notification_counter = '';
                 }
             }
             if (!time) {
                 time = conversation.getLastMessage() ? conversation.getLastMessage().get('creation_time') : conversation.get('creation_time');
             }
-            return `<li${is_active ? ' class="sb-active"' : ''} data-user-id="${conversation.get('user_id')}" data-conversation-id="${conversation.id}" data-conversation-status="${status}"${department_id ? ` data-department="${department_id}"${SB_ADMIN_SETTINGS.departments_show ? ' data-color="' + this.getDepartments(department_id)['department-color'] + '"' : ''}` : ''}${!SBF.null(conversation.get('source')) ? ` data-conversation-source="${conversation.get('source')}"` : ''}>${label_new + notification_counter}<div class="sb-profile"><img loading="lazy" src="${conversation.get('profile_image')}"><span class="sb-name">${conversation.get('first_name') + ' ' + conversation.get('last_name')}</span>${tags}<span class="sb-time">${SBF.beautifyTime(time)}</span></div><p>${message}</p></li>`;
+            const ticketSvg = '<svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.6929 9.12895C22.626 7.58687 22.4385 6.58298 21.9132 5.78884C21.611 5.33196 21.2357 4.93459 20.8041 4.61468C19.6376 3.75 17.9919 3.75 14.7007 3.75H10.686C7.39472 3.75 5.74908 3.75 4.58256 4.61468C4.15099 4.93459 3.77561 5.33196 3.47341 5.78884C2.9482 6.58289 2.7607 7.58665 2.69377 9.12843C2.68232 9.39208 2.90942 9.59375 3.15825 9.59375C4.54403 9.59375 5.66743 10.783 5.66743 12.25C5.66743 13.717 4.54403 14.9062 3.15825 14.9062C2.90942 14.9062 2.68232 15.1079 2.69377 15.3716C2.7607 16.9134 2.9482 17.9171 3.47341 18.7112C3.77561 19.168 4.15099 19.5654 4.58256 19.8853C5.74908 20.75 7.39472 20.75 10.686 20.75H14.7007C17.9919 20.75 19.6376 20.75 20.8041 19.8853C21.2357 19.5654 21.611 19.168 21.9132 18.7112C22.4385 17.917 22.626 16.9131 22.6929 15.3711V9.12895Z" stroke="#5F6465" stroke-width="1.5" stroke-linejoin="round"></path><path d="M13.6934 12.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.69336 16.25H17.6934" stroke="#5F6465" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+            return `<li${is_active ? ' class="sb-active"' : ''} data-user-name="${conversation.get('first_name') + ' ' + conversation.get('last_name')}" data-converted="${conversation.get('converted_to_ticket')}" data-user-id="${conversation.get('user_id')}" data-conversation-id="${conversation.id}" data-conversation-status="${status}"${department_id ? ` data-department="${department_id}"${SB_ADMIN_SETTINGS.departments_show ? ' data-color="' + this.getDepartments(department_id)['department-color'] + '"' : ''}` : ''}${!SBF.null(conversation.get('source')) ? ` data-conversation-source="${conversation.get('source')}"` : ''}>${label_new + notification_counter}<div class="sb-profile"><img loading="lazy" src="${conversation.get('profile_image')}" data-name="${conversation.get('first_name') + ' ' + conversation.get('last_name')}"><div class="user-initials" data-value="edit-profile" style="display: none;"><span class="initials"></span></div><span class="sb-name">${conversation.get('first_name') + ' ' + conversation.get('last_name')}</span>${conversation.get('converted_to_ticket') == 1 ? ticketSvg : ''}  ${tags}<span class="sb-time">${SBF.beautifyTime(time)}</span></div><p>${message}</p></li>`;
         },
 
         // Start or stop the real time update of left conversations list and chat 
@@ -4602,7 +6942,15 @@
                     if (onSuccess) {
                         onSuccess(response);
                     }
-                    window.open(response);
+                    let fileUrl = response.replace(/\\/g, ""); // clean slashes
+
+                    // Create a temporary <a> element to trigger download
+                    let a = document.createElement("a");
+                    a.href = fileUrl;
+                    a.download = ""; // let browser use original filename
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
                 }
             });
         },
@@ -4627,7 +6975,7 @@
         scrollTo: function () {
             let active = conversations_admin_list_ul.find('.sb-active');
             let offset = active.length ? active[0].offsetTop : 0;
-            conversations_admin_list_ul.parent().scrollTop(offset - (responsive ? 120 : 80));
+            // conversations_admin_list_ul.parent().scrollTop(offset - (responsive ? 120 : 80));
         },
 
         // Search conversations
@@ -4678,11 +7026,28 @@
                 let span = conversation.find('.sb-notification-counter');
                 notification_counter[conversation_id] = [];
                 SBF.storage('notifications-counter', notification_counter);
+                this.notifications_list = notification_counter;
                 span.addClass('sb-fade-out');
                 setTimeout(() => {
                     span.remove();
                 }, 200);
             }
+            this.inboxMenuNotificationCounter();
+        },
+        getNotificationsCounterCount: function () {
+            let notifications_counter = SBF.storage('notifications-counter');
+            let notifications_counter_ = {};
+            let count = 0;
+            if (notifications_counter) {
+                for (let key in notifications_counter) {
+                    if (notifications_counter[key] && notifications_counter[key].length) {
+                        count += notifications_counter[key].length;
+                        notifications_counter_[key] = notifications_counter[key];
+                    }
+                }
+                SBF.storage('notifications-counter', notifications_counter_);
+            }
+            return count;
         },
 
         // Get the page URL of the user
@@ -4805,7 +7170,7 @@
 
         // Trigger the click event of the first conversation
         clickFirst: function (conversation_li = false) {
-            if (!conversation_li) {
+            if (!conversation_li || !conversation_li.length) {
                 conversation_li = conversations_admin_list_ul.find('li:first-child');
             }
             if (conversation_li.length) {
@@ -4852,9 +7217,28 @@
                 let code = '';
                 let code_filters = '';
                 let file_types = [];
+                let icons = {
+                    audio: ['mp3', 'wav', 'ogg', 'm4a'],
+                    video: ['mp4', 'avi', 'mov', 'mkv', 'webm', 'wmv'],
+                    pdf: ['pdf'],
+                    doc: ['doc', 'docx', 'txt', 'rtf', 'odt'],
+                    ppt: ['ppt', 'pptx', 'key', 'odp'],
+                    xls: ['xls', 'xlsx', 'csv', 'ods'],
+                    archive: ['zip', 'rar', '7z', 'tar', 'gz', 'bz2'],
+                    image: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'tiff', 'heic', 'psd', 'ai'],
+                    text: ['txt', 'log', 'md', 'json']
+                };
                 for (var i = attachments.length - 1; i > -1; i--) {
                     let file_type = SBF.getFileType(attachments[i][1]);
-                    code += `<a href="${attachments[i][1]}" target="_blank"><i class="sb-icon sb-icon-download"></i>${attachments[i][0]}</a>`;
+                    let file_extension = attachments[i][1].split('.').pop().split('?')[0].toLowerCase();
+                    let icon;
+                    for (let key in icons) {
+                        if (icons[key].includes(file_extension)) {
+                            icon = key;
+                            break;
+                        }
+                    }
+                    code += `<a href="${attachments[i][1]}" target="_blank"><img src="${SB_URL}/media/files/${icon ? icon : 'default'}.svg">${attachments[i][0]}</a>`;
                     if (!file_types.includes(file_type)) {
                         file_types.push(file_type);
                     }
@@ -4866,7 +7250,7 @@
                     }
                     code_filters += `</ul></div>`;
                 }
-                $(attachments_panel).html(code ? `<h3${code_filters ? ' class="sb-flex"' : ''}>${sb_('Attachments')}${code_filters}</h3><div class="sb-list-items sb-list-links sb-list-icon">${code}</div>` : '');
+                $(attachments_panel).html(code ? `<h3${code_filters ? ' class="sb-flex"' : ''}>${sb_('Attachments')}${code_filters}</h3><div class="sb-list-items sb-list-links">${code}</div>` : '');
                 collapse(attachments_panel, 160);
             }
         },
@@ -4994,13 +7378,18 @@
 
         // Direct message
         showDirectMessageBox: function (type, user_ids = []) {
+            
+            $('.sb-main').addClass('no-scroll');
+
             if (type == 'whatsapp') {
                 whatsapp_direct_message_box(user_ids);
-            } else {
+            } 
+            else
+            {
                 let email = type == 'custom_email';
                 let names = { sms: 'text message', custom_email: 'email', message: 'chat message' };
                 SBForm.clear(direct_message_box);
-                direct_message_box.find('.sb-direct-message-users').val(user_ids.length ? user_ids.join(',') : 'all');
+                direct_message_box.find('.sb-direct-message-users').val(user_ids.length ? user_ids.join(',') : '');
                 direct_message_box.find('.sb-bottom > div').html('');
                 direct_message_box.find('.sb-top-bar > div:first-child').html(sb_(`Send a ${names[type]}`));
                 direct_message_box.find('.sb-loading').sbLoading(false);
@@ -5008,11 +7397,45 @@
                 direct_message_box.attr('data-type', type);
                 direct_message_box.sbShowLightbox();
             }
+
+            SBConversations.displayUserscheckList();
+        },
+
+        displayUserscheckList: function()
+        {
+            $('.selectedCount').html('0 / 10 selected');
+            $('.selectAll').prop('checked', false);
+
+            SBF.ajax({
+                    function: 'get-users-list',
+                    sorting: ['creation_time', 'DESC']
+            }, (response) => {
+                const users = response;
+
+                let html = '';
+                users.forEach((user) => {
+                    const name = user.first_name + ' ' + user.last_name;
+                    const initials = name.split(" ").map(word => word[0]).join("").substring(0, 2).toUpperCase();
+                    html += `<div class="form-check" data-user-id="${user.id}">
+                        <input class="form-check-input user-checkbox" type="checkbox" data-name="${user.first_name} ${user.last_name}" value="${user.id}" id="user${user.id}">
+                        <label class="form-check-label" for="user${user.id}">
+                        <span class="profile-img">${initials}</span>
+                            <p>
+                                <span>${user.first_name} ${user.last_name}</span>
+                                <span class="sb-email">${user.email}</span>
+                            </p>
+                        </label>
+                </div>`;
+                });
+
+                $('.bulk-users-wrapper').html(html);
+                showInitials('bulk-users-wrapper', 'form-check');
+            });
         },
 
         // Miscellaneous 
         getDeliveryFailedMessage: function (source) {
-            return `<i class="sb-icon-warning sb-delivery-failed" data-sb-tooltip="${sb_('Message not delivered to {R}.').replace('{R}', SBApps.getName(source))}" data-sb-tooltip-init></i>`;
+            return `<i class="sb-icon-warning sb-delivery-failed" data-sb-tooltip="${sb_('Message not delivered to {R}.').replace('{R}', SBApps.getMessagingAppName(source))}" data-sb-tooltip-init></i>`;
         },
 
         cc: function (cc) {
@@ -5141,14 +7564,37 @@
         },
 
         // Populate profile
-        populate: function (user, profile_area) {
+        populate: async function (user, profile_area, is_extra = true) {
             let exclude = ['first_name', 'last_name', 'password', 'profile_image'];
-            let code = '';
+            let code = ['', '', ''];
             if (profile_area.hasClass('sb-profile-list-conversation') && SBChat.conversation) {
                 let source = SBChat.conversation.get('source');
-                code = this.profileRow('conversation-id', SBChat.conversation.id, sb_('Conversation ID'));
+                //code = this.profileRow('conversation-id', SBChat.conversation.id, sb_('Conversation ID'));
+                const ticketID = await SBTicket.getTicketID(SBChat.conversation.id);
+                setTimeout(function () {
+
+                    if (ticketID) {
+
+                        $('#convert-to-ticket.converted').attr('href', SB_URL.replace(/\/script\/?$/, '/') + '?ticket=' + ticketID);
+                        $('#convert-to-ticket.converted>span').html(` Linked to a ticket #T${ticketID}</span>`);
+                    }
+                    else {
+                        $('#convert-to-ticket').removeAttr('href', '');
+                        $('#convert-to-ticket>span').html('Link to a ticket');
+                    }
+                }, 40);
+                //code += this.profileRow('ticket-id', SBChat.conversation.id, sb_('Ticket ID'));
+                code[1] = this.profileRow('conversation-id', SBChat.conversation.id, sb_('Conversation ID'));
                 if (!SBF.null(source)) {
-                    code += this.profileRow('conversation-source', SBApps.getName(source), sb_('Source'));
+                    code[1] += this.profileRow('conversation-source', SBApps.getMessagingAppName(source), sb_('Source'));
+                }
+                let messages = SBChat.conversation.messages;
+                for (var i = messages.length - 1; i > 0; i--) {
+                    let payload = messages[i].get('payload');
+                    if (payload.rating) {
+                        code[1] += `<li data-id="rating" data-message-id="${messages[i].id}"><i class="sb-icon sb-icon-${payload.rating == 1 ? 'like' : 'dislike'}"></i><span>${sb_('User rating')}</span><label>${sb_(payload.rating == 1 ? 'Helpful' : 'Not helpful')}</label></li>`;
+                        break;
+                    }
                 }
             }
             if (SB_ACTIVE_AGENT.user_type != 'admin') {
@@ -5156,31 +7602,25 @@
             }
             for (var key in user.details) {
                 if (!exclude.includes(key)) {
-                    code += this.profileRow(key, user.get(key), key == 'id' ? 'User ID' : key);
+                    code[0] += this.profileRow(key, user.get(key), key == 'id' ? 'User ID' : key);
                 }
             }
-            profile_area.html(`<ul>${code}</ul>`);
-            code = '';
-            if (user.isExtraEmpty()) {
+            if (user.isExtraEmpty() && is_extra) {
                 SBF.ajax({
                     function: 'get-user-extra',
                     user_id: user.id
                 }, (response) => {
                     for (var i = 0; i < response.length; i++) {
-                        let slug = response[i].slug;
-                        user.setExtra(slug, response[i]);
-                        code += this.profileRow(slug, response[i].value, response[i].name);
+                        user.setExtra(response[i].slug, response[i]);
                     }
-                    profile_area.find('ul').append(code);
-                    collapse(profile_area, 145);
-                    SBF.event('SBUserLoaded', user);
+                    return this.populate(user, profile_area, false);
                 });
             } else {
                 for (var key in user.extra) {
                     let info = user.getExtra(key);
-                    code += this.profileRow(key, info.value, info.name);
+                    code[['os', 'ip', 'browser'].includes(key) ? 2 : 0] += this.profileRow(key, info.value, info.name);
                 }
-                profile_area.find('ul').append(code);
+                profile_area.html(`<ul class="ul-user">${code[0]}</ul>${code[1] ? `<div class="sb-title">${sb_('Conversation')}</div><ul class="ul-conversation">${code[1]}</ul>` : ''}${code[2] ? `<div class="sb-title">${sb_('Technology')}</div><ul class="ul-technology">${code[2]}</ul>` : ''}`);
                 collapse(profile_area, 145);
                 SBF.event('SBUserLoaded', user);
             }
@@ -5188,7 +7628,7 @@
 
         profileRow: function (key, value, name = key) {
             if (!value) return '';
-            let icons = { id: 'user-check-02', full_name: 'user-check-01', email: 'mail-send-01', phone: 'phone', user_type: 'user-check-01', last_activity: 'calendar-03', creation_time: 'calendar-03', token: 'shuffle', currency: 'coins-dollar', location: 'pin-location-03', country: 'pin-location-03', address: 'pin-location-03', city: 'pin-location-03', state: 'pin-location-03', postal_code: 'pin-location-03', browser: 'web-design-01', os: 'web-design-01', current_url: 'link-02', timezone: 'time-04' };
+            let icons = { id: 'user-check-02', full_name: 'user-check-01', email: 'mail-send-01', phone: 'call', user_type: 'user-check-01', last_activity: 'calendar-03', creation_time: 'calendar-03', token: 'shuffle', currency: 'coins-dollar', location: 'pin-location-03', country: 'pin-location-03', address: 'pin-location-03', city: 'pin-location-03', state: 'pin-location-03', postal_code: 'pin-location-03', browser: 'web-design-01', os: 'web-design-01', current_url: 'link-02', timezone: 'time-04' };
             let icon = `<i class="hgi hgi-stroke hgi-${key in icons ? icons[key] : 'chatting-01'}"></i>`;
             let lowercase;
             let image = false;
@@ -5208,50 +7648,47 @@
                     if (value == 'ar' && (key == 'language' || key == 'browser_language')) {
                         flag = 'arc';
                     }
-                    icon = `<img src="${SB_URL}/media/flags/${flag.toLowerCase()}.png" />`;
+                    image = `flags/${flag.toLowerCase()}.png`;
                     break;
                 case 'browser':
                     lowercase = value.toLowerCase();
                     if (lowercase.includes('chrome')) {
-                        image = 'chrome';
+                        image = 'devices/chrome.svg';
                     } else if (lowercase.includes('edge')) {
-                        image = 'edge';
+                        image = 'devices/edge.svg';
                     } else if (lowercase.includes('firefox')) {
-                        image = 'firefox';
+                        image = 'devices/firefox.svg';
                     } else if (lowercase.includes('opera')) {
-                        image = 'opera';
+                        image = 'devices/opera.svg';
                     } else if (lowercase.includes('safari')) {
-                        image = 'safari';
+                        image = 'devices/safari.svg';
                     }
                     break;
                 case 'os':
                     lowercase = value.toLowerCase();
                     if (lowercase.includes('windows')) {
-                        image = 'windows';
+                        image = 'devices/windows.svg';
                     } else if (lowercase.includes('mac') || lowercase.includes('apple') || lowercase.includes('ipad') || lowercase.includes('iphone')) {
-                        image = 'apple';
+                        image = 'devices/apple.svg';
                     } else if (lowercase.includes('android')) {
-                        image = 'android';
+                        image = 'devices/android.svg';
                     } else if (lowercase.includes('linux')) {
-                        image = 'linux';
+                        image = 'devices/linux.svg';
                     } else if (lowercase.includes('ubuntu')) {
-                        image = 'ubuntu';
+                        image = 'devices/ubuntu.svg';
                     }
                     break;
                 case 'conversation-source':
-                    image = value.toLowerCase();
-                case 'browser':
-                case 'os':
-                case 'conversation-source':
-                    if (image) {
-                        icon = `<img src="${SB_URL}/media/${key == 'conversation-source' ? 'apps' : 'devices'}/${image}.svg" />`;
-                    }
+                    image = `apps/${value.toLowerCase()}.svg`;
+                    break;
+                case 'location':
+                    image = 'apps/google-maps.svg';
                     break;
                 case 'current_url':
                     value = urlStrip(value);
                     break;
             }
-            return `<li data-id="${key}">${icon}<span>${sb_(SBF.slugToString(name))}</span><label>${value}</label></li>`;
+            return `<li data-id="${key}">${image ? `<img src="${SB_URL}/media/${image}" />` : icon}<span>${sb_(SBF.slugToString(name))}</span><label>${value}</label></li>`;
         },
 
         // Populate profile edit box
@@ -5315,6 +7752,12 @@
         }
     }
 
+    /* 
+    * ----------------------------------------------------------
+    * Admin
+    * ----------------------------------------------------------
+    */
+
     var SBAdmin = {
 
         infoBottom: function (text, type = false) {
@@ -5325,6 +7768,7 @@
                 timeout = setTimeout(() => { card.sbActive(false) }, 5000);
             } else if (type == 'error') {
                 clearTimeout(timeout);
+                card.addClass('sb-info-card-error');
                 timeout = setTimeout(() => { card.removeClass("sb-active") }, 5000);
             } else {
                 clearTimeout(timeout);
@@ -5337,7 +7781,7 @@
             if (skip && onConfirm) {
                 return onConfirm();
             }
-            let box = admin.find('.sb-dialog-box').attr('data-type', type);
+            let box = type == 'convert-ticket' ? admin.find('#add-conversation-to-ticket').attr('data-type', type) : admin.find('.sb-dialog-box').attr('data-type', type);
             let p = box.find('p');
             box.attr('id', id).setClass('sb-scroll-area', scroll).css('height', scroll ? (parseInt($(window).height()) - 200) + 'px' : '');
             box.find('.sb-title').html(sb_(title));
@@ -5472,9 +7916,24 @@
         chatbot_website_table = chatbot_area.find('#sb-table-chatbot-website');
         chatbot_qea_repeater = chatbot_area.find('#sb-chatbot-qea');
         chatbot_playground_editor = chatbot_area.find('.sb-playground-editor');
+        chatbot_playground_history_panel = chatbot_area.find('.sb-playground-history');
         chatbot_playground_area = chatbot_area.find('.sb-playground .sb-scroll-area');
         flows_area = chatbot_area.find('[data-id="flows"] > .sb-content');
         flows_nav = chatbot_area.find('#sb-flows-nav');
+        
+
+        tickets_area = admin.find('.sb-area-tickets');
+        tickets_table = tickets_area.find('.sb-table-tickets');
+        tickets_table_menu = tickets_area.find('.sb-menu-tickets');
+        ticket_edit_box = admin.find('.sb-ticket-edit-box');
+        ticket_detail_area = admin.find('sb-area-ticket-detail');
+        ticket_custom_fields_edit_box = admin.find('.sb-ticket-custom-fields-edit-box');
+        ticket_status_edit_box = admin.find('.sb-ticket-statuses-edit-box');
+        ticket_attachments_box = admin.find('.ticket-attachments');
+
+        tickets_area_dash = $('.sb-table-tickets-dash');
+
+        editor_textarea = conversations_area.find('.sb-editor textarea');
 
         // Browser history
         window.onpopstate = function () {
@@ -5484,31 +7943,31 @@
             }
             if (SBF.getURL('user')) {
                 if (!users_area.sbActive()) {
-                    header.find('.sb-admin-nav #sb-users').click();
+                    header.find('#sb-users').click();
                 }
                 SBProfile.show(SBF.getURL('user'));
             } else if (SBF.getURL('area')) {
-                header.find('.sb-admin-nav #sb-' + SBF.getURL('area')).click();
+                header.find('#sb-' + SBF.getURL('area')).click();
             } else if (SBF.getURL('conversation')) {
                 if (!conversations_area.sbActive()) {
-                    header.find('.sb-admin-nav #sb-conversations').click();
+                    header.find('#sb-conversations').click();
                 }
                 SBConversations.openConversation(SBF.getURL('conversation'));
             } else if (SBF.getURL('setting')) {
                 if (!settings_area.sbActive()) {
-                    header.find('.sb-admin-nav #sb-settings').click();
+                    header.find('#sb-settings').click();
                 }
                 settings_area.find('#tab-' + SBF.getURL('setting')).click();
             } else if (SBF.getURL('report')) {
                 if (!reports_area.sbActive()) {
-                    header.find('.sb-admin-nav #sb-reports').click();
+                    header.find('#sb-reports').click();
                 }
                 reports_area.find('#' + SBF.getURL('report')).click();
             }
         };
 
         if (SBF.getURL('area')) {
-            setTimeout(() => { header.find('.sb-admin-nav #sb-' + SBF.getURL('area')).click() }, 300);
+            setTimeout(() => { header.find('#sb-' + SBF.getURL('area')).click() }, 300);
         }
 
         // Installation
@@ -5584,6 +8043,7 @@
             return;
         }
         SBF.storage('notifications-counter', []);
+        SBConversations.message_drafts = SBF.storage('message-drafts') ? SBF.storage('message-drafts') : {};
         if (SB_ADMIN_SETTINGS.pusher) {
             SBPusher.active = true;
             SBPusher.init(() => {
@@ -5599,11 +8059,60 @@
                         away_mode = false;
                     }
                 }, 'agents');
+
+                ///// sync ticket comments via pusher
                 SBPusher.event('updates-ticket-comments', (response) => {
-                    console.log('agent ticket comments');
-                    /// sync ticket comment via pusher
-                    SBTicket.loadComments(response.ticket_id);
+                    SBTicket.loadComments(response.ticket_id, response.last_updated_at);
+
+                    // Initialize array if it doesn't exist
+                    if (!Array.isArray(SBTicket.new_comment_count[response.ticket_id])) {
+                        SBTicket.new_comment_count[response.ticket_id] = [];
+                    }
+
+                    // Determine next comment count (e.g., 1, 2, 3)
+                    const ticket_comments = SBTicket.new_comment_count[response.ticket_id].length + 1;
+
+                    // Add comment count to the array
+                    SBTicket.new_comment_count[response.ticket_id].push(ticket_comments);
+
+                    // Correctly loop through the object
+                    Object.entries(SBTicket.new_comment_count).forEach(([id, countArray]) => {
+                        $('.sb-table-tickets tr[data-ticket-id="' + id + '"] td:first .sb-notification-counter').remove();
+                        // Append the notification counter to the first cell of the row
+                        $('.sb-table-tickets tr[data-ticket-id="' + id + '"] td:first').append(SBTicket.ticketRowNotificationCounter(id));
+                    });
+
+                    SBTicket.ticketsMenuNotificationCounter();
+
+                    SBChat.playSound();
                 }, 'agents');
+                
+                ///// sync ticket comments via pusher
+                SBPusher.event('updates-new-ticket', (response) => {
+                    // Initialize array if it doesn't exist
+                    if (!Array.isArray(SBTicket.new_ticket_count[response.ticket_id])) {
+                        SBTicket.new_ticket_count[response.ticket_id] = [];
+                    }
+
+                    // Determine next comment count (e.g., 1, 2, 3)
+                    const new_tickets_count = SBTicket.new_ticket_count[response.ticket_id].length + 1;
+
+                    // Add comment count to the array
+                    SBTicket.new_ticket_count[response.ticket_id].push(new_tickets_count);
+
+                    $(header).find('.sb-admin-nav #sb-tickets').trigger('click');
+
+                    // Correctly loop through the object
+                    // Object.entries(SBTicket.new_ticket_count).forEach(([id, countArray]) => {
+                    //     $('.sb-table-tickets tr[data-ticket-id="' + id + '"] td:first .sb-notification-counter').remove();
+                    //     // Append the notification counter to the first cell of the row
+                    //     $('.sb-table-tickets tr[data-ticket-id="' + id + '"] td:first').append(`<span class="sb-notification-counter">${countArray.length}</span>`);
+                    // });
+
+                    SBTicket.ticketsMenuNotificationCounter();
+                    SBChat.playSound();
+                }, 'agents');
+
                 initialization();
             });
         } else {
@@ -5660,7 +8169,7 @@
                         } else if (code == 38) {
                             target.prev().click();
                         } else if (code == 90 && is_editor_focus && SBConversations.previous_editor_text) {
-                            editor.val(SBConversations.previous_editor_text);
+                            editor_textarea.val(SBConversations.previous_editor_text);
                             SBConversations.previous_editor_text = false;
                             valid = true;
                         }
@@ -6079,7 +8588,7 @@
         if ($(window).width() < 913) {
             $(conversations_area).on('click', '> .sb-btn-collapse', function () {
                 $(this).toggleClass('sb-active');
-                conversations_area.find($(this).hasClass('sb-left') ? '.sb-admin-list' : '.sb-user-details').toggleClass('sb-active');
+                conversations_area.find('.sb-admin-list').toggleClass('sb-active');
             });
         }
 
@@ -6088,19 +8597,38 @@
         * Left nav
         * ----------------------------------------------------------
         */
-
-        $(header).on('click', ' .sb-admin-nav a', function () {
+        function capitalizeFirstLetter(str) {
+            if (!str) return "";
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        $(header).on('click', ' .sb-admin-nav a, #sb-settings', function () {
             active_admin_area = $(this).attr('id').substr(3);
             SBAdmin.active_admin_area = active_admin_area;
-            header.find('.sb-admin-nav a').sbActive(false);
+            header.find('.sb-admin-nav a, #sb-settings').sbActive(false);
             admin.find(' > main > div').sbActive(false);
             admin.find('.sb-area-' + active_admin_area).sbActive(true);
             $(this).sbActive(true);
             SBF.deactivateAll();
+            
+          //  window.location.href = SB_URL.replace(/\/script\/?$/, '/')+'?area='+active_admin_area;
+
+            //// change header title dynamically
+            $('.sb-area-' + active_admin_area + ' .header-left .title').html(capitalizeFirstLetter(active_admin_area == 'users' ? 'Customers & Agents' : active_admin_area));
             switch (active_admin_area) {
+                case 'dashboard':
+                    loadingGlobal();
+                    tickets_pagination = 1;
+                    tickets_pagination_count = 1;
+                    // $.getScript('https://cdn.jsdelivr.net/npm/chart.js', () => {
+                    SBDashboard.get((response) => {
+                        loadingGlobal(false);
+                    })
+                    break;
                 case 'conversations':
+                    console.log(SBF.getURL('conversation'));
                     if (!responsive && !SBF.getURL('conversation')) {
                         SBConversations.clickFirst();
+                        console.log('66666 clicked');
                     }
                     SBConversations.update();
                     SBConversations.startRealTime();
@@ -6121,6 +8649,23 @@
                             loadingGlobal(false);
                         });
                     }
+                    break;
+                    case 'tickets':
+                    //SBTicket.startRealTime();
+                    // SBConversations.stopRealTime();
+                    //if (!SBTicket.init) {
+                    loadingGlobal();
+                    tickets_pagination = 1;
+                    tickets_pagination_count = 1;
+                    SBTicket.get((response) => {
+                        //alert(response);
+                        SBTicket.populate(response);
+                        SBTicket.updateMenu();
+                        SBTicket.init = true;
+                        //SBUsers.datetime_last_user = SBF.dateDB('now');
+                        loadingGlobal(false);
+                    });
+                    //}
                     break;
                 case 'settings':
                     if (!SBSettings.init) {
@@ -6171,13 +8716,11 @@
                     break;
                 case 'reports':
                     if (reports_area.sbLoading()) {
-                        $.getScript(SB_URL + '/vendor/moment.min.js', () => {
-                            $.getScript(SB_URL + '/vendor/daterangepicker.min.js', () => {
-                                $.getScript(SB_URL + '/vendor/chart.min.js', () => {
-                                    SBReports.initDatePicker();
-                                    SBReports.initReport('conversations');
-                                    reports_area.sbLoading(false);
-                                });
+                        SBSettings.loadDatePicker(() => {
+                            $.getScript(SB_URL + '/vendor/chart.min.js', () => {
+                                reports_area.find('#sb-date-picker').daterangepicker(SBSettings.getDatePickerSettings()).val('');
+                                SBReports.initReport('conversations');
+                                reports_area.sbLoading(false);
                             });
                         });
                     }
@@ -6214,16 +8757,31 @@
                     SBApps.openAI.troubleshoot();
             }
             let url_area = SBF.getURL('area');
-            if (url_area != active_admin_area && ((active_admin_area == 'conversations' && !SBF.getURL('conversation')) || (active_admin_area == 'users' && !SBF.getURL('user')) || (active_admin_area == 'settings' && !SBF.getURL('setting')) || (active_admin_area == 'reports' && !SBF.getURL('report')) || (active_admin_area == 'articles' && !SBF.getURL('article')) || (active_admin_area == 'chatbot' && !SBF.getURL('chatbot')))) {
+            if (
+                url_area != active_admin_area &&
+                ((active_admin_area == 'conversations' && !SBF.getURL('conversation')) ||
+                    (active_admin_area == 'users' && !SBF.getURL('user')) ||
+                    (active_admin_area == 'settings' && !SBF.getURL('setting')) ||
+                    (active_admin_area == 'reports' && !SBF.getURL('report')) ||
+                    (active_admin_area == 'articles' && !SBF.getURL('article')) ||
+                    (active_admin_area == 'chatbot' && !SBF.getURL('chatbot')) ||
+                    (active_admin_area == 'dashboard' && !SBF.getURL('dashboard')) ||
+                    (active_admin_area == 'tickets' && !SBF.getURL('tickets'))
+                )
+            ) {
                 pushState('?area=' + active_admin_area);
             }
+        });
+        
+        $('#view-all-conversations').on('click', function () {
+            $('.sb-admin-nav #sb-conversations').trigger('click');
         });
 
         $(header).on('click', '.sb-profile', function () {
             $(this).next().toggleClass('sb-active');
         });
 
-        $(header).on('click', '[data-value="logout"],.logout', function () {
+        $(admin).on('click', '[data-value="logout"],.logout', function () {
             SBAdmin.is_logout = true;
             SBF.ajax({ function: 'on-close' });
             SBUsers.stopRealTime();
@@ -6231,9 +8789,9 @@
             setTimeout(() => { SBF.logout() }, 300);
         });
 
-        $(header).on('click', '[data-value="edit-profile"],.edit-profile', function () {
+        $(admin).on('click', '[data-value="edit-profile"],.edit-profile', function () {
             loadingGlobal();
-            let user = new SBUser({ id: SB_ACTIVE_AGENT.id });
+            let user = new SBUser({ 'id': SB_ACTIVE_AGENT.id });
             user.update(() => {
                 activeUser(user);
                 conversations_area.find('.sb-board').addClass('sb-no-conversation');
@@ -6242,19 +8800,27 @@
             });
         });
 
-        $(header).on('click', '[data-value="status"]', function () {
+        $(admin).on('click', '[data-value="status"]', function () {
             let is_offline = !$(this).hasClass('sb-online');
             SBUsers.setActiveAgentStatus(is_offline);
             away_mode = is_offline;
         });
 
-        $(header).find('.sb-account').setProfile(SB_ACTIVE_AGENT['full_name'], SB_ACTIVE_AGENT['profile_image']);
+       $(admin).find('.sb-account').setProfile(SB_ACTIVE_AGENT['full_name'], SB_ACTIVE_AGENT['profile_image']);
 
         /*
         * ----------------------------------------------------------
         * Conversations area
         * ----------------------------------------------------------
         */
+
+        $(editor_textarea).on('focus input click', function () {
+            editor_textarea.parent().parent().addClass('sb-focus');
+        });
+
+        $(editor_textarea).on('focusout', function () {
+            editor_textarea.parent().parent().removeClass('sb-focus');
+        });
 
         // Open the conversation clicked on the left menu
         $(conversations_admin_list_ul).on('click', 'li', function () {
@@ -6322,19 +8888,24 @@
                 case 'panel':
                     $([conversations_user_details, this]).toggleClass('sb-active');
                     break;
+                    case 'convert-to-ticket':
+                    status_code = 6;
+                    message += 'linked to a ticket.';
+                    break;
             }
-            if (status_code) {
+            if (status_code && status_code != 6) {
                 infoPanel(message, 'alert', function () {
                     let active_conversations_filter = conversations_filters.eq(0).find('p').attr('data-value');
                     let last_conversation_id = selected_conversations[selected_conversations_length - 1].id;
                     for (var i = 0; i < selected_conversations_length; i++) {
                         let conversation = selected_conversations[i];
+                        let is_active_conversation = SBChat.conversation && SBChat.conversation.id == conversation.id
                         SBF.ajax({
                             function: 'update-conversation-status',
                             conversation_id: conversation.id,
                             status_code: status_code
                         }, () => {
-                            let conversation_li = conversations_admin_list_ul.find(`[data-conversation-id="${conversation.id}"]`);
+                            let conversation_li = getListConversation(conversation.id);
                             if ([0, 3, 4].includes(status_code)) {
                                 for (var j = 0; j < conversations.length; j++) {
                                     if (conversations[j].id == conversation.id) {
@@ -6343,23 +8914,28 @@
                                     }
                                 }
                             }
-                            if (SB_ADMIN_SETTINGS.close_message && status_code == 3) {
-                                SBF.ajax({ function: 'close-message', conversation_id: conversation.id, bot_id: SB_ADMIN_SETTINGS.bot_id });
-                                if (SB_ADMIN_SETTINGS.close_message_transcript) {
-                                    SBConversations.transcript(conversation.id, conversation.user_id, 'email', (response) => on_success(response));
+                            if (status_code == 3) {
+                                if (SB_ADMIN_SETTINGS.close_message) {
+                                    SBF.ajax({ function: 'close-message', conversation_id: conversation.id });
+                                    if (SB_ADMIN_SETTINGS.close_message_transcript) {
+                                        SBConversations.transcript(conversation.id, conversation.user_id, 'email', (response) => on_success(response));
+                                    }
+                                }
+                                if (SB_ADMIN_SETTINGS.rating && is_active_conversation && SBChat.conversation.get('source')) {
+                                    SBF.ajax({ function: 'rating-message', conversation_id: conversation.id });
                                 }
                             }
                             if ([0, 1, 2].includes(status_code)) {
                                 conversation_li.attr('data-conversation-status', status_code);
                                 SBConversations.updateMenu();
                             }
-                            if (SBChat.conversation && SBApps.is('slack') && [3, 4].includes(status_code)) {
+                            if (is_active_conversation && SBApps.is('slack') && [3, 4].includes(status_code)) {
                                 SBF.ajax({ function: 'archive-slack-channels', conversation_user_id: SBChat.conversation.get('user_id') });
                             }
                             if ((active_conversations_filter == 0 && [3, 4].includes(status_code)) || (active_conversations_filter == 3 && [0, 1, 2, 4].includes(status_code)) || (active_conversations_filter == 4 && status_code != 4)) {
                                 let previous = false;
                                 SBConversations.updateMenu();
-                                if (SBChat.conversation && SBChat.conversation.id == conversation.id) {
+                                if (is_active_conversation) {
                                     previous = conversation_li.prev();
                                     SBChat.conversation = false;
                                 }
@@ -6374,12 +8950,64 @@
                                 SBConversations.clickFirst();
                             }
                         });
-                        if (SBChat.conversation && SBChat.conversation.id == conversation.id) {
+                        if (is_active_conversation) {
                             SBChat.conversation.set('status_code', status_code);
                             SBConversations.setReadIcon(status_code);
                         }
                     }
                 });
+            }
+            if (status_code == 6) {
+                $('#ticket-action-selector').show();
+                $('#ticket-selector').hide();
+                $('#selected_conversation_id').val(selected_conversations[0].id);
+
+                if (!$(this).hasClass('converted')) {
+                    infoPanel(message, 'convert-ticket', function () {
+
+                        const userId = SBChat.conversation.details?.user_id;
+                        const userFirstName = SBChat.conversation.details?.first_name;
+                        const lastName = SBChat.conversation.details?.last_name;
+                        const userEmail = SBChat.conversation.details?.email;
+
+                        $(tickets_area).find('.sb-new-ticket').trigger('click');
+
+                        $('#cust_name input').removeAttr('disabled');
+                        $('#cust_email input').removeAttr('disabled');
+
+                        const userOption = new Option(userFirstName + ' ' + lastName, userId, true, true);
+
+
+                        $(userOption).data('data', {
+                            id: userId,
+                            text: userFirstName + ' ' + lastName,
+                            name: userFirstName + ' ' + lastName,
+                            email: 'testing@aa.com'
+                        });
+
+                        $('.sb-edit-box #contact_id select').append(userOption).trigger('change');
+
+                        //$('.sb-edit-box #contact_id select').trigger('select2:select')
+                        //$('#cust_name input').val(userFirstName+' '+lastName);
+                        //$('#cust_email input').val(userEmail);
+                        $('#conversation_id_div').removeClass('d-none');
+                        $('#conversation_id_div label span').html('#' + selected_conversations[0].id);
+                        $('#conversation_id').val(selected_conversations[0].id);
+
+
+                        // SBF.ajax({
+                        //     function: 'convert-converversion-to-ticket',
+                        //     conversation_id: selected_conversations[0].id
+                        // }, (response) => {
+                        //     // alert(response);
+
+                        //     SBConversations.updateMenu();
+
+                        //     initialization();
+
+                        // });
+                    }, 'add-conversation-to-ticket');
+                }
             }
         });
 
@@ -6402,7 +9030,9 @@
 
         $(conversations_area).on('click', '.sb-btn-saved-replies', function () {
             saved_replies.sbTogglePopup(this);
-            saved_replies.find('.sb-search-btn').sbActive(true).find('input').get(0).focus();
+            if (saved_replies_list.length > 10) {
+                saved_replies.find('.sb-search-btn').sbActive(true).find('input').get(0).focus();
+            }
         });
 
         $(saved_replies).on('click', '.sb-replies-list li', function () {
@@ -6422,7 +9052,7 @@
         $(admin).on('click', '.sb-btn-open-ai', function () {
             if (!SBChat.conversation || loading(this)) return;
             let is_editor = $(this).hasClass('sb-btn-open-ai-editor');
-            let textarea = is_editor ? conversations_area.find('.sb-editor textarea') : dialogflow_intent_box.find('textarea');
+            let textarea = is_editor ? editor_textarea : dialogflow_intent_box.find('textarea');
             SBApps.openAI.rewrite(textarea.val(), (response) => {
                 $(this).sbLoading(false);
                 if (response[0]) {
@@ -6430,6 +9060,37 @@
                     if (is_editor) {
                         SBChat.insertText(response[1]);
                     }
+                }
+            });
+        });
+
+        $(saved_replies).on('click', '.sb-add-saved-reply', function () {
+            $(this).find('i').toggleClass('sb-icon-close');
+            saved_replies.find('.sb-replies-add-area').toggleClass('sb-active');
+        });
+
+        $(saved_replies).on('click', '.sb-replies-add-area a', function () {
+            let values = saved_replies.find('.sb-replies-add-area input').map(function () {
+                return $(this).val();
+            });
+            if (!values[0] || !values[1] || loading(this)) {
+                return;
+            }
+            SBF.ajax({
+                function: 'add-saved-reply',
+                name: values[0],
+                text: values[1]
+            }, (response) => {
+                $(this).sbLoading(false);
+                saved_replies.find('.sb-add-saved-reply i').removeClass('sb-icon-close');
+                saved_replies.find('.sb-replies-add-area').sbActive(false);
+                if (response === true) {
+                    if (!saved_replies_list) {
+                        saved_replies_list = [];
+                        saved_replies.find('.sb-no-results').remove();
+                    }
+                    saved_replies_list.push({ 'reply-name': values[0], 'reply-text': values[1] });
+                    saved_replies.find('.sb-replies-list > ul').prepend(`<li><div>${values[0]}</div><div>${values[1].replace(/\\n/g, '\n')}</div></li>`);
                 }
             });
         });
@@ -6464,6 +9125,7 @@
                     }
                     parent.find(' > .sb-loading').remove();
                     SBF.event('SBAdminConversationsLoaded', { conversations: response });
+                    showInitials('sb-scroll-area', 'sb-profile');
                 });
             }
         });
@@ -6487,12 +9149,14 @@
             let message_part = sb_('Error. Message not sent to');
             let conversation = response.conversation;
             let user = response.user;
-            let reply = response.payload && response.payload.reply ? response.payload.reply : false;
+            let reply_to = response.payload && response.payload.reply ? response.payload.reply : false;
+            delete SBConversations.message_drafts[conversation_id];
+            SBF.storage('message-drafts', SBConversations.message_drafts);
             if (response.conversation_status_code) {
                 SBConversations.updateMenu();
             }
             if (SBApps.messenger.check(conversation)) {
-                SBApps.messenger.send(user.getExtra('facebook-id').value, conversation.get('extra'), response.message, response.attachments, response.message_id, response.message_id, (response) => {
+                SBApps.messenger.send(user.getExtra('facebook-id').value, conversation.get('extra'), response.message, response.attachments, response.message_id, response.message_id, reply_to, (response) => {
                     for (var i = 0; i < response.length; i++) {
                         if (response[i] && response[i].error) {
                             infoPanel(message_part + ' Messenger: ' + response[i].error.message, 'info', false, 'error-fb');
@@ -6501,14 +9165,14 @@
                 });
             }
             if (SBApps.whatsapp.check(conversation)) {
-                SBApps.whatsapp.send(SBApps.whatsapp.activeUserPhone(user), response.message, response.attachments, conversation.get('extra'), (response) => {
+                SBApps.whatsapp.send(SBApps.whatsapp.activeUserPhone(user), response.message, response.attachments, conversation.get('extra'), reply_to, response.message_id, (response) => {
                     if (response.ErrorCode || (response.meta && !response.meta.success)) {
                         infoPanel(message_part + ' WhatsApp: ' + ('ErrorCode' in response ? response.errorMessage : response.meta.developer_message), 'info', false, 'error-wa');
                     }
                 });
             }
             if (SBApps.telegram.check(conversation)) {
-                SBApps.telegram.send(conversation.get('extra'), response.message, response.attachments, conversation_id, reply, response.message_id, (response) => {
+                SBApps.telegram.send(conversation.get('extra'), response.message, response.attachments, conversation_id, reply_to, response.message_id, (response) => {
                     if (!response || !response.ok) {
                         infoPanel(message_part + ' Telegram: ' + JSON.stringify(response), 'info', false, 'error-tg');
                     }
@@ -6594,7 +9258,7 @@
                             if (SB_ADMIN_SETTINGS.smart_reply) {
                                 SBApps.dialogflow.smartReply(response_2[0]);
                             }
-                            conversations_admin_list_ul.find(`[data-conversation-id="${response.conversation_id}"] p`).html(response_2[0]);
+                            getListConversation(response.conversation_id).find('p').html(response_2[0]);
                         }, [message.id], SBChat.conversation.id);
                     }
                 } else if (SB_ADMIN_SETTINGS.smart_reply) {
@@ -6622,6 +9286,17 @@
                 }
             }
             SBConversations.update();
+        });
+        
+        $('#toggleEditProfilePassword').click(function () {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            let input = $("#edit-profile-password");
+            let currentType = input.prop('type');
+            if (currentType === 'password') {
+                input.prop('type', 'text');
+            } else {
+                input.prop('type', 'password');
+            }
         });
 
         // Event: new conversation created 
@@ -6701,12 +9376,13 @@
                     }
                     $(this).closest('.sb-filter-btn').attr('data-badge', conversations_filters.slice(1).toArray().reduce((acc, filter) => acc + !!$(filter).find('li.sb-active').data('value'), 0));
                     parent.sbLoading(false);
+                    showInitials('sb-scroll-area', 'sb-profile');
                 });
             }, 100);
         });
 
         // Display the user details box
-        $(conversations_area).on('click', '.sb-user-details .sb-profile,.sb-top > a', function () {
+        $(conversations_area).on('click', '.sb-user-details .sb-profile,.sb-top > a,.sb-top #view-profile-button', function () {
             let user_id = conversations_admin_list_ul.find('.sb-active').attr('data-user-id');
             if (activeUser().id != user_id) {
                 activeUser(users[user_id]);
@@ -6956,7 +9632,17 @@
             let note_id = textarea.attr('data-id');
             if (message.length == 0) {
                 SBForm.showErrorMessage(admin.find('.sb-notes-box'), 'Please write something...');
-            } else {
+            }
+            else if (!SBChat.conversation.id) {
+                SBForm.showErrorMessage(admin.find('.sb-notes-box'), 'Please start conversation first by sending a message. Then you can add note.');
+                setTimeout(function()
+                {
+                    $(this).sbLoading(false);
+                    textarea.val('');
+                    admin.sbHideLightbox();
+                },2500);
+            } 
+            else {                
                 if (loading(this)) return;
                 message = SBF.escape(message);
                 SBConversations.notes.add(SBChat.conversation.id, SB_ACTIVE_AGENT.id, SB_ACTIVE_AGENT.full_name, message, (response) => {
@@ -7098,7 +9784,8 @@
         });
 
         // Conversations filter
-        $(conversations_area).on('click', '.sb-filter-btn i', function () {
+        //$(conversations_area).on('click', '.sb-filter-btn i', function () {
+        $(conversations_area).on('click', '.sb-filter-btn .toggle-filter', function () {
             $(this).parent().toggleClass('sb-active');
         });
 
@@ -7137,6 +9824,1018 @@
         });
 
         /*
+        *-----------------------------------------------------------
+        *  Tickets Area
+        * ----------------------------------------------------------
+        */
+
+        /* Ticket listing page quick status change code starts */
+
+        // Toggle dropdown on button click
+        $(document).on('click', '.currentStatusBtn, .currentPriorityBtn', function (e) {
+            e.stopPropagation();
+            $('.status-list, .priority-list').not($(this).next()).hide();
+            $(this).next().toggle();
+        });
+
+
+        // Handle status selection
+        $(document).on('click', '.status-list li', function () {
+            $(this).parent().prev()
+            // .html($(this).html() + ' <span class="arrow">&#9660;</span>')
+            // .attr('class', 'currentStatusBtn status-btn ' + $(this).attr('class'))
+            // .attr('style', $(this).attr('style'));
+            const ticket_id = $(this).parent().prev().data('id');
+            const status_id = $(this).val();
+            $(this).parent().hide();
+
+            SBTicket.updateTicketStatus(ticket_id, status_id);
+        });
+
+        // Handle priority selection
+        $(document).on('click', '.priority-list li', function () {
+            $(this).parent().prev()
+            // .html($(this).html() + ' <span class="arrow">&#9660;</span>')
+            // .attr('class', 'currentPriorityBtn status-btn ' + $(this).attr('class'))
+            // .attr('style', $(this).attr('style'));
+            const ticket_id = $(this).parent().prev().data('id');
+            const priority_id = $(this).val();
+            $(this).parent().hide();
+            SBTicket.updateTicketPriority(ticket_id, priority_id);
+        });
+
+
+
+        // Hide dropdown when clicking outside
+        $(document).on('click', function (e) {
+            //if (!$(e.target).closest('.currentStatusBtn, .status-list').length) {
+            $('.sb-area-tickets').find('.status-list').hide();
+            $('.sb-area-tickets').find('.priority-list').hide();
+            // }
+        });
+
+        /* Ticket listing page quick status change code ends */
+
+        const getTicketsFilteredByTag = () => {
+            const ticketStatus = document.querySelector('.sb-menu-tickets li.sb-active')?.getAttribute('data-type');
+            const tags = $('#tags-filter').val() || '';
+
+            SBF.ajax({
+                function: 'get-tickets',
+                id: false,
+                ticket_status: ticketStatus,
+                categories: false,
+                tickets_language: false,
+                full: true,
+                tags: tags,
+                user_id: false
+            }, (response) => {
+                SBTicket.populate(response);
+            });
+        }
+        // Listen for item selection
+
+        const tagsFilterEl = document.getElementById('tags-filter');
+        if (tagsFilterEl) {
+            document.getElementById('tags-filter').addEventListener('addItem', function (event) {
+                getTicketsFilteredByTag();
+            });
+
+            // tagsFilterChoices.passedElement.element.addEventListener('removeItem', function (event) {
+            //     getTicketsFilteredByTag();
+            // });
+        }
+
+        $(settings_area).on('click', '.sb-new-ticket-custom-field', function () {
+            ticket_custom_fields_edit_box.addClass('sb-ticket-new-custom-field');
+            ticket_custom_fields_edit_box.find('.sb-top-bar h2').html(sb_('Create Custom Field'));
+            //ticket_custom_fields_edit_box.find('.sb-top-bar .sb-edit').html(`<i class="sb-icon-check"></i>${sb_('Add Ticket')}`);
+            ticket_custom_fields_edit_box.find('input,select,textara').removeClass('sb-error');
+            ticket_custom_fields_edit_box.removeClass('sb-cloud-admin');
+            SBTicket.clear(ticket_custom_fields_edit_box);
+            ticket_custom_fields_edit_box.sbShowLightbox();
+            ticket_custom_fields_edit_box.find('#optionsContainer').style = 'display:none';
+            ticket_custom_fields_edit_box.find('#optionsContainer textarea').val('');
+        });
+
+        $(settings_area).on('click', '.edit-custom-field', function () {
+            ticket_custom_fields_edit_box.removeClass('sb-ticket-new-custom-field');
+            ticket_custom_fields_edit_box.find('.sb-top-bar h2').html(sb_('Edit Custom Field'));
+            //ticket_custom_fields_edit_box.find('.sb-top-bar .sb-edit').html(`<i class="sb-icon-check"></i>${sb_('Add Ticket')}`);
+            ticket_custom_fields_edit_box.find('input,select,textara').removeClass('sb-error');
+            ticket_custom_fields_edit_box.removeClass('sb-cloud-admin');
+            ticket_custom_fields_edit_box.sbShowLightbox();
+            const custom_field_id = this.getAttribute('data-id');
+
+            SBF.ajax({
+                function: 'edit-ticket-custom-field',
+                custom_field_id: custom_field_id
+            }, (response) => {
+                // Update form fields
+                //ticket_custom_fields_edit_box.find('').value = 'response.subject';
+                document.querySelector('.sb-ticket-custom-fields-edit-box #title input').value = response.title;
+                document.querySelector('.sb-ticket-custom-fields-edit-box #type select').value = response.type;
+                const optionsContainer = document.getElementById("optionsContainer");
+                if (response.type === "select" || response.type === "checkbox") {
+                    optionsContainer.style.display = "flex";
+                } else {
+                    optionsContainer.style.display = "none";
+                }
+                document.querySelector('.sb-ticket-custom-fields-edit-box #optionsContainer textarea').value = response.options;
+                document.querySelector('.sb-ticket-custom-fields-edit-box #required input[type="checkbox"]').checked = response.required == '1';
+                document.querySelector('.sb-ticket-custom-fields-edit-box #add_to_frontend_form input[type="checkbox"]').checked = response.add_to_frontend_form == '1';
+                document.querySelector('.sb-ticket-custom-fields-edit-box #default_value input').value = response.default_value;
+                document.querySelector('.sb-ticket-custom-fields-edit-box #order input').value = response.order_no;
+                document.querySelector('.sb-ticket-custom-fields-edit-box #is_active input[type="checkbox"]').checked = response.is_active == '1';
+                document.querySelector('.sb-ticket-custom-fields-edit-box #custom_field_id').value = response.id;
+
+            });
+        });
+
+        $(settings_area).on('click', '.sb-ticket-add-new-status', function () {
+            ticket_status_edit_box.addClass('sb-ticket-new-status');
+            ticket_status_edit_box.find('.sb-top-bar h2').html(sb_('Add Status'));
+            //ticket_custom_fields_edit_box.find('.sb-top-bar .sb-edit').html(`<i class="sb-icon-check"></i>${sb_('Add Ticket')}`);
+            ticket_status_edit_box.find('input,select,textara').removeClass('sb-error');
+            ticket_status_edit_box.removeClass('sb-cloud-admin');
+            SBTicket.clear(ticket_status_edit_box);
+            ticket_status_edit_box.sbShowLightbox();
+        });
+
+        $(settings_area).on('click', '.edit-ticket-status', function () {
+            ticket_status_edit_box.removeClass('sb-ticket-new-status');
+            ticket_status_edit_box.find('.sb-top-bar h2').html(sb_('Edit Status'));
+            //ticket_custom_fields_edit_box.find('.sb-top-bar .sb-edit').html(`<i class="sb-icon-check"></i>${sb_('Add Ticket')}`);
+            ticket_status_edit_box.find('input,select,textara').removeClass('sb-error');
+            ticket_status_edit_box.removeClass('sb-cloud-admin');
+            ticket_status_edit_box.sbShowLightbox();
+            const custom_status_id = this.getAttribute('data-id');
+
+            SBF.ajax({
+                function: 'edit-ticket-status',
+                custom_field_id: custom_status_id
+            }, (response) => {
+
+                // Update form fields
+                document.querySelector('.sb-ticket-statuses-edit-box #status_title input').value = response.name;
+                const inputEl = document.querySelector('.sb-ticket-statuses-edit-box #status_color input');
+                if (inputEl) {
+                    inputEl.value = response.color; // sets input value
+                    inputEl.style.backgroundColor = response.color; // sets background
+                }
+                document.querySelector('.sb-ticket-statuses-edit-box #status_id').value = custom_status_id;
+            });
+        });
+
+        $('#customer-overview').on("click", async function () {
+            SBDashboard.fetchCustomerOverview();
+        });
+
+        $("#save-ticket-attachments").on("click", async function () {
+            try {
+
+                let attachments = $('#uploaded_files').val() ?? null;
+
+                let attachmentsCount = $('.ticket-attachments .text-center').length;
+
+                let ticket_id = $('#ticket_id_d').val() ?? null;
+
+                SBF.ajax({
+                    function: 'update-ticket-attachments',
+                    ticket_id: ticket_id,
+                    attachments: attachments,
+                }, (response) => {
+                    $(this).sbLoading(false);
+                    admin.sbHideLightbox();
+                    infoBottom('Attachments saved successfully.');
+                    $('#uploaded_files').val('');
+                    $('#view-ticket-attachments .attachments-count').html(attachmentsCount);
+
+                    $('#reopendTicketAttachmentsPopup').val(1);
+                    // let newAttachments = $('#file-preview-list').html();
+
+                    // $('#current-attachments').append(newAttachments);
+                    $('#file-preview-list').html('');
+
+                });
+            }
+            catch (error) {
+                console.error(error);
+                infoBottom(error, "error");
+            }
+        });
+
+        $('#registration-required select').on('change', function () {
+            let requireRegistration = $(this).val();
+            if (requireRegistration) {
+                $('#reg-email input').prop('checked', 'checked');
+                $('#reg-required-email input').prop('checked', 'checked');
+
+            }
+        });
+
+        $('#ticket-status').on('change', function () {
+            let ticketStatus = $(this).val();
+            let ticket_id = $('#ticket_id_d').val() ?? null;
+            SBTicket.updateTicketStatus(ticket_id, ticketStatus);
+        });
+
+
+        $('.sb-save-ticket').on('click', function () {
+            let ticket_id = $('#ticket_id_d').val() ?? null;
+            let data = {};
+            let isValid = true;
+
+            // Get settings
+            let assignee = $('#select-ticket-agent').val();
+            let department = $('#ticket-department').val();
+            let tags = $('#ticket-detail-tags-filter').val();
+            let priority = $('#ticket-priority').val();
+            let reporter = $('#select-ticket-reporter').val();
+
+            let guest = $('#sb-area-ticket-detail').find('#without_contact input').prop('checked') ? 1 : 0;
+
+            const delta = SBTicket.quillForTicketDetail.getContents();
+            const description = JSON.stringify(delta);
+
+            const container = document.getElementById('custom-fields');
+            const fields = container.querySelectorAll('input, select, textarea');
+
+            const customField = {};
+
+            fields.forEach(field => {
+
+                const name = field.id.replace('custom_', '');
+                customField[name] = field.value;
+                if (field.hasAttribute('required') && !field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                    customField[name] = field.value.trim();
+                }
+
+            });
+            if (!isValid) {
+                infoBottom('Please fill all required custom fields.', 'error');
+                return;
+            }
+
+            let ticketData = { assignee, reporter, department, tags, priority, description, customField };
+
+            SBF.ajax({
+                function: 'update-ticket-details',
+                ticket_id: ticket_id,
+                data: ticketData,
+            }, (response) => {
+                if (response.success) {
+                    infoBottom('Ticket updated successfully.');
+                }
+            });
+        });
+
+
+
+        $("#save-ticket-status").on("click", async function () {
+            try {
+
+                const div = document.getElementById('ticketStatusesForm');
+                const inputs = div.querySelectorAll('input, select, textarea'); // more complete
+                const values = {};
+
+                let isFormValid = true;
+                let emptyFields = [];
+
+                inputs.forEach(el => {
+
+                    if (el.type !== 'checkbox' && el.type !== 'hidden') {
+                        // Check for empty text or unselected select
+                        if (el.value.trim() === '') {
+
+                            const labelSpan = el.previousElementSibling;
+                            if (labelSpan && labelSpan.tagName.toLowerCase() === 'span') {
+                                emptyFields.push(labelSpan.textContent.trim());
+                            }
+                            isFormValid = false;
+                            el.style.border = '1px solid red'; // Highlight the empty field
+                        }
+                        else {
+                            el.style.border = 'none'; // Highlight the empty field
+                        }
+                    }
+
+                    if (el.type === "checkbox") {
+                        values[el.name] = el.checked ? 1 : 0;
+                    } else {
+                        values[el.name] = el.value;
+                    }
+                });
+
+
+                if (!isFormValid) {
+                    SBTicket.showErrorMessage($('.sb-ticket-statuses-edit-box'), `${emptyFields.join(', ')} are required.`);
+                    $(this).sbLoading(false);
+                    return;
+                }
+
+                let new_status = (ticket_status_edit_box.hasClass('sb-ticket-new-status') ? true : false);
+
+                // Convert SBF.ajax to a Promise wrapper if it doesn't already return a Promise
+                const response = await new Promise((resolve, reject) => {
+                    SBF.ajax({
+                        function: "add-ticket-status",
+                        data1: values,
+                    }, (res) => {
+                        if (res && res.error) {
+                            reject(res.error.message);
+                        } else {
+                            resolve(res);
+                            admin.sbHideLightbox();
+                            let msg = new_status ? "created" : "updated";
+                            infoBottom('Ticket status ' + msg);
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1200);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error(error);
+                infoBottom(error, "error");
+            }
+        });
+
+        ////// Preview color in input when choose from color picker
+        const colorInput = document.getElementById('statuscolor');
+        if (colorInput) {
+            colorInput.addEventListener('input', function () {
+                this.style.backgroundColor = this.value;
+            });
+        }
+
+        // Show/hide options input based on field type in ticket custom fields popup
+        $(document).on('change', '#type select', function () {
+            const optionsContainer = document.getElementById('optionsContainer');
+            if (this.value === 'select' || this.value === 'checkbox') {
+                optionsContainer.style.display = 'flex';
+            } else {
+                optionsContainer.style.display = 'none';
+            }
+        });
+
+        $("#save-custom-fields").on("click", async function () {
+            try {
+
+                const div = document.getElementById('customFieldForm');
+                const inputs = div.querySelectorAll('input, select, textarea'); // more complete
+                const values = {};
+
+                let isFormValid = true;
+                let emptyFields = [];
+
+                inputs.forEach(el => {
+
+                    if (el.type !== 'checkbox' && el.type !== 'hidden') {
+                        // Check for empty text or unselected select
+                        if (el.value.trim() === '' && el.name !== 'default_value') {
+
+                            if (el.name == 'options' && (document.querySelector('#customFieldForm #type select').value != 'select' && document.querySelector('#customFieldForm #type select').value != 'checkbox')) {
+
+                            }
+                            else {
+                                const labelSpan = el.previousElementSibling;
+                                if (labelSpan && labelSpan.tagName.toLowerCase() === 'span') {
+                                    emptyFields.push(labelSpan.textContent.trim());
+                                }
+                                isFormValid = false;
+                                el.style.border = '1px solid red'; // Highlight the empty field
+                            }
+                        }
+                        else {
+                            // el.style.border = 'none'; // Highlight the empty field
+                            el.style.border = '1px solid #ccc'; // Highlight the empty field
+                        }
+                    }
+
+                    if (el.type === "checkbox") {
+                        values[el.name] = el.checked ? 1 : 0;
+                    } else {
+                        values[el.name] = el.value;
+                    }
+                });
+
+
+                if (!isFormValid) {
+                    SBTicket.showErrorMessage($('.sb-ticket-custom-fields-edit-box'), `${emptyFields.join(', ')} are required.`);
+                    $(this).sbLoading(false);
+                    return;
+                }
+
+                let new_field = (ticket_custom_fields_edit_box.hasClass('sb-ticket-new-custom-field') ? true : false);
+
+                // Convert SBF.ajax to a Promise wrapper if it doesn't already return a Promise
+                const response = await new Promise((resolve, reject) => {
+                    SBF.ajax({
+                        function: "add-ticket-custom-field",
+                        data1: values,
+                    }, (res) => {
+                        if (res && res.error) {
+                            reject(res.error.message);
+                        } else {
+                            resolve(res);
+                            admin.sbHideLightbox();
+                            infoBottom('Custom field created');
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1200);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error(error);
+                infoBottom(error, "error");
+            }
+        });
+
+        $(settings_area).on('click', '.delete-custom-field', async function () {
+            try {
+                const id = parseInt(this.getAttribute('data-id'));
+
+                if (!id || id == 'NaN') {
+                    alert('Invalid ID');
+                    return;
+                }
+
+                const message = 'You want to delete this custom field? This action cannot be undone.';
+
+                infoPanel(message, 'alert', async function () {
+                    // Convert SBF.ajax to a Promise wrapper if it doesn't already return a Promise
+                    const response = await new Promise((resolve, reject) => {
+
+                        SBF.ajax({
+                            function: "delete-ticket-custom-field",
+                            id: id,
+                        }, (res) => {
+                            if (res && res.error) {
+                                reject(res.error.message);
+                            } else {
+
+                                resolve(res);
+
+                                if (!res.success) {
+                                    admin.sbHideLightbox();
+                                    infoBottom(res.message, 'error');
+                                    return;
+                                }
+                                $('.custom-fields-table tr[data-id="custom_field_row_' + id + '"]').remove();
+                            }
+                        });
+                    });
+                });
+
+            }
+            catch (error) {
+                console.error(error);
+                infoBottom(error, "error");
+            }
+        });
+
+        ///// Delete ticket status
+        $(settings_area).on('click', '.delete-ticket-status', async function () {
+            try {
+                const id = parseInt(this.getAttribute('data-id'));
+
+                if (!id || id == 'NaN') {
+                    alert('Invalid ID');
+                    return;
+                }
+
+                const message = 'You want to delete this status? This action cannot be undone.';
+
+                infoPanel(message, 'alert', async function () {
+                    // Convert SBF.ajax to a Promise wrapper if it doesn't already return a Promise
+                    const response = await new Promise((resolve, reject) => {
+
+                        SBF.ajax({
+                            function: "delete-ticket-status",
+                            id: id,
+                        }, (res) => {
+                            if (res && res.error) {
+                                reject(res.error.message);
+                            } else {
+
+                                resolve(res);
+
+                                if (!res.success) {
+                                    admin.sbHideLightbox();
+                                    infoBottom(res.message, 'error');
+                                    return;
+                                }
+                                $('.ticket-status-table tr[data-id="ticket_status_row_' + id + '"]').remove();
+                            }
+                        });
+                    });
+                });
+
+            }
+            catch (error) {
+                console.error(error);
+                infoBottom(error, "error");
+            }
+        });
+
+
+        // Display Ticket Edit box when clicking on a edit button
+        // $(tickets_table).on('click', 'td:not(:first-child)', function () {
+        //     ticket_edit_box.removeClass('sb-ticket-new');
+        //     SBTicket.show($(this).parent().attr('data-ticket-id'));
+        // });
+
+        // Open the ticket clicked on the ticket listing page
+        $(tickets_table).on('click', 'td:not(:first-child):not(.no-click)', function () {
+            let ticket_id = $(this).parent().attr('data-ticket-id');
+            SBTicket.openTicketArea(ticket_id);
+        });
+
+        $('.tsubject').on('click', function () {
+            $('#ticket-subject').addClass('active');
+            $('#ticket-subject').focus();
+        });
+
+        $('#ticket-subject').on('blur', function () {
+            $(this).removeClass('active');
+            let ticket_id = $('#ticket_id_d').val() ?? null;
+            let subject = $(this).val() ?? null;
+
+            SBF.ajax({
+                function: "update-ticket-subject",
+                ticket_id: ticket_id,
+                subject: subject,
+            }, (res) => {
+
+            });
+        });
+
+
+        $('#save-note').on('click', function () {
+            $(this).removeClass('active');
+            let ticket_id = $('#ticket_id_d').val() ?? null;
+            const delta = SBTicket.quillForTicketInternalNote.getContents();
+            const note = JSON.stringify(delta);
+
+            SBF.ajax({
+                function: "update-ticket-note",
+                ticket_id: ticket_id,
+                note: note,
+            }, (res) => {
+                if (res.success)
+                    infoBottom("Notes saved sucessfully.");
+            });
+        });
+
+        // Table menu filter
+        $(tickets_table_menu).on('click', 'li', function () {
+            SBTicket.filter($(this).data('type'));
+        });
+
+        // Display new user box
+        $(tickets_area).on('click', '.sb-new-ticket', function () {
+            ticket_edit_box.addClass('sb-ticket-new');
+            ticket_edit_box.find('.sb-top-bar .sb-ticket span').html(sb_('Add new ticket'));
+            ticket_edit_box.find('.sb-top-bar .sb-save').html(`<i class="sb-icon-check"></i>${sb_('Add Ticket')}`);
+            ticket_edit_box.find('input,select,textara').removeClass('sb-error');
+            ticket_edit_box.removeClass('sb-cloud-admin');
+
+            ///// Clear all inputs wheneve create ticket popup opens
+            SBTicket.clear(ticket_edit_box);
+            //// Clear unsaved attachements preview
+            $('#file-preview-container #file-preview-list').html('');
+            $('#uploaded_files').val('');
+            $('#existing-file-preview-container').addClass('d-none');
+            $('#existing-file-preview-container #current-attachments').html('');
+
+
+            //SBTicket.updateRequiredFields('ticket');
+            ////////////  Create a new Quill editor instance
+            if (!SBTicket.quill) {
+                const container = document.querySelector('#ticketdescription');
+                SBTicket.quill = new Quill(container, {
+                    theme: 'snow',
+                    placeholder: 'Compose something...',
+                });
+            }
+            SBTicket.quill.setContents('');
+
+            ticket_edit_box.sbShowLightbox();
+            SBTicket.loadCustomFields('add');
+
+            // Define variable in outer scope
+            let latestFiveCustomers = [];
+
+            SBTicket.fetchUsers().then(users => {
+                latestFiveCustomers = users;
+            });
+
+            // $('#select-customer').select2({
+            //     placeholder: 'Type and search...',
+            //     ajax: {
+            //         url: SB_URL+'/include/ajax.php', // Your endpoint
+            //         method: 'POST',
+            //         dataType: 'json',
+            //         delay: 250,
+            //         data: function (params) {
+            //             return {
+            //                 function: 'ajax_calls',
+            //                 'calls[0][function]': 'search-get-users',
+            //                 'login-cookie': SBF.loginCookie(),
+            //                 'q': params.term, // ✅ Pass search term
+            //                 'type': 'user'
+            //             };
+            //         },
+            //         processResults: function (response) {
+            //             //response = JSON.parse(response);
+            //             if (response[0][0] == 'success') {
+            //                 const users = response[0][1];
+            //                 // document.querySelector('#name select').value = response.priority_id;
+            //                 return {
+            //                     results: users.map(user => ({
+            //                         id: user.id,
+            //                         text: user.first_name + ' ' + user.last_name,
+            //                         email: user.email,
+            //                         name: user.first_name + ' ' + user.last_name
+            //                     }))
+            //                 };
+            //             }
+            //         },
+            //         cache: true
+            //     },
+            //     minimumInputLength: 0
+            // });
+
+
+            $('#select-customer').select2({
+                placeholder: 'Type and search...',
+                minimumInputLength: 0,
+                ajax: {
+                    transport: function (params, success, failure) {
+                        const term = (params.data.q || '').toLowerCase();
+                        const loginCookie = SBF.loginCookie();
+
+                        $.ajax({
+                            url: SB_URL + '/include/ajax.php',
+                            method: 'POST',
+                            dataType: 'json',
+                            data: {
+                                function: 'ajax_calls',
+                                'calls[0][function]': 'search-get-users',
+                                'login-cookie': loginCookie,
+                                'q': term,
+                                'type': 'user'
+                            },
+                            success: function (response) {
+                                if (response[0][0] === 'success') {
+                                    const users = response[0][1];
+                                    let results;
+
+                                    if (!term) {
+                                        // Show latest 5 users
+                                        results = latestFiveCustomers.slice(-5).reverse().map(user => ({
+                                            id: user.id,
+                                            text: user.first_name + ' ' + user.last_name,
+                                            email: user.email,
+                                            name: user.first_name + ' ' + user.last_name
+                                        }));
+                                    } else {
+                                        results = users
+                                            .filter(user => (user.first_name + ' ' + user.last_name).toLowerCase().includes(term))
+                                            .map(user => ({
+                                                id: user.id,
+                                                text: user.first_name + ' ' + user.last_name,
+                                                email: user.email,
+                                                name: user.first_name + ' ' + user.last_name
+                                            }));
+
+                                        if (results.length === 0) {
+                                            results.push({
+                                                id: '__add__' + term,
+                                                text: '➕ Add "' + term + '" as New Customer',
+                                                name: term,
+                                                email: '',
+                                                isAddNew: true
+                                            });
+                                        }
+                                    }
+
+                                    success({ results });
+                                } else {
+                                    failure();
+                                }
+                            },
+                            error: failure
+                        });
+                    },
+                    cache: true
+                },
+                templateResult: function (data) {
+                    if (data.loading) return data.text;
+                    if (data.isAddNew) {
+                        return $('<div style="color: #fff;"><strong>' + data.text + '</strong></div>');
+                    }
+                    return $('<div><strong>' + data.text + '</strong><br/><small>' + (data.email || '') + '</small></div>');
+                },
+                templateSelection: function (data) {
+                    return data.text;
+                }
+            });
+
+
+
+            $('#select-customer').on('select2:select', function (e) {
+                const selectedCustomer = e.params.data;
+
+                // Now fill other input fields
+                document.querySelector('#cust_name input').value = selectedCustomer.name;
+                document.querySelector('#cust_email input').value = selectedCustomer.email;
+                //$('#user-name').val(selectedCustomer.first_name + ' ' + selectedUser.last_name);
+                if (selectedCustomer.isAddNew) {
+                    $('#new_user').val(1);
+                }
+                else {
+                    $('#new_user').val(0);
+                }
+
+            });
+
+
+        });
+
+        // Display new user box
+        $('.sb-area-ticket-detail').on('click', '#view-ticket-attachments', function () {
+            // ticket_attachments_box.addClass('sb-ticket-new');
+            // ticket_attachments_box.find('.sb-top-bar .sb-ticket span').html(sb_('Add new ticket'));
+            // ticket_attachments_box.find('.sb-top-bar .sb-save').html(`<i class="sb-icon-check"></i>${sb_('Add Ticket')}`);
+            // ticket_attachments_box.find('input,select,textara').removeClass('sb-error');
+            // ticket_attachments_box.removeClass('sb-cloud-admin');
+            $('.ticket-attachments').sbShowLightbox();
+            let ticket_id = $('#ticket_id_d').val() ?? null;
+
+            SBF.ajax({
+                function: 'fecth-ticket-attachments',
+                ticket_id: ticket_id,
+            }, (response) => {
+                if (response) {
+                    let attachmentsHtml = '';
+                    Object.entries(response).forEach(([key, value]) => {
+                        attachmentsHtml += `<div class="col-md-2 mb-2">
+                                            <div class="card">
+                                                <div class="card-body p-2">
+                                                    <i class="fa-solid fa-x delete-attachment" style="color: #dc3545;" data-index="0" data-id="${value.id}" data-ticket-id="${ticket_id}"></i>
+                                                    <div class="text-center mb-2">
+                                                        <img src="script/${value.file_path}" class="img-thumbnail p-0" style="max-height: 100px; margin-top:10px;" alt="${value.original_filename}">
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-grow-1 text-truncate">
+                                                            <div class="text-truncate">${value.original_filename}</div>
+                                                            <small class="text-muted">${value.file_size}</small>
+                                                        </div>
+                                                        <!--button type="button" class="btn btn-sm btn-danger delete-attachment" data-index="0" data-id="${value.id}" data-ticket-id="${ticket_id}">
+                                                            <i class="bi bi-x"></i>
+                                                        </button-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+
+                    });
+
+                    $('#existing-file-preview-container #current-attachments').html('');
+                    $('#existing-file-preview-container').addClass('d-none');
+                    if (attachmentsHtml != '') {
+                        $('#existing-file-preview-container').removeClass('d-none');
+                        $('#existing-file-preview-container #current-attachments').html(attachmentsHtml);
+                    }
+
+                    //// Clear unsaved attachements preview
+                    //$('#file-preview-container #file-preview-list').html('');
+                    //$('#uploaded_files').val('');
+                }
+            });
+
+
+        });
+
+        // Add or update ticket
+        $(ticket_edit_box).on('click', '.sb-save', function () {
+            if (loading(this)) return;
+            let new_ticket = (ticket_edit_box.hasClass('sb-ticket-new') ? true : false);
+            let ticket_id = ticket_edit_box.find('#ticket_id').val();
+            let data = {};
+
+            // Get settings
+            let ticketDataPart1 = SBTicket.getAll(ticket_edit_box.find('.sb-details'));
+            let ticketDataPart2 = SBTicket.getAll(ticket_edit_box.find('.sb-additional-details'));
+            //let ticketCustomFields = SBTicket.getAll(ticket_edit_box.find('#ticketCustomFieldsContainer'));
+
+            let ticketDataPart3 = ticket_edit_box.find('#description textarea').val();
+            let conversationId = ticket_edit_box.find('#conversation_id').val() ?? null;
+            let newUser = ticket_edit_box.find('#new_user').val() == 1 ? 1 : 0;
+            let uploadedFiles = ticket_edit_box.find('#uploaded_files1').val() ?? null;
+            let guest = ticket_edit_box.find('#without_contact input').prop('checked') ? 1 : 0;
+            ticketDataPart3 = SBF.escape(ticketDataPart3);
+            conversationId = SBF.escape(conversationId);
+
+            const delta = SBTicket.quill.getContents();
+            const deltaJSON = JSON.stringify(delta);
+
+            const description = [];
+            description.push(deltaJSON);
+            description.push('Description');
+
+            const conversation_id = [];
+            conversation_id.push(conversationId);
+            conversation_id.push('Conversation ID');
+
+            const new_user = [];
+            new_user.push(newUser);
+            new_user.push('New User');
+
+            const attachments = [];
+            attachments.push(uploadedFiles);
+            attachments.push('Attachments');
+
+            const withoutContact = [];
+            withoutContact.push(guest);
+            withoutContact.push('withoutContact');
+
+            const container = document.getElementById('ticketCustomFieldsContainer');
+            const fields = container.querySelectorAll('input, select, textarea');
+
+            const values = {};
+
+            fields.forEach(field => {
+                const name = field.id.replace('custom_', ''); // fallback if name missing
+                values[name] = field.value;
+            });
+
+            const customField = [];
+            customField.push(values);
+            customField.push('custom_fields');
+
+            let ticketData = { ...ticketDataPart1, ...ticketDataPart2, description, conversation_id, new_user, attachments, withoutContact, customField };
+
+            let output = {};
+            $.map(ticketData, function (value, key) {
+                data[key] = value[0];
+            });
+
+            let isFormValid = true;
+            let emptyFields = [];
+
+            // Validate all inputs, selects, and textareas inside the lightbox
+            document.querySelectorAll('.sb-ticket-edit-box input, .sb-ticket-edit-box select, .sb-ticket-edit-box textarea').forEach(el => {
+                // Skip validation for optional fields (no "required" attribute)
+                //if (el.type != 'file' && el.type !== 'checkbox' && el.type !== 'hidden' && el.parentElement.id !== 'cc') {
+                if (el.hasAttribute('required')) {
+                    // Check for empty text or unselected select
+                    if (el.value.trim() === '') {
+                        const labelSpan = el.previousElementSibling;
+                        if (labelSpan && labelSpan.tagName.toLowerCase() === 'span') {
+                            emptyFields.push(labelSpan.textContent.trim());
+                        }
+                        else if (el.id == 'select-customer') {
+                            emptyFields.push("Customer");
+                            el.nextElementSibling.style.border = '1px solid red'; // Highlight the empty field
+                        }
+                        isFormValid = false;
+                        el.style.border = '1px solid red'; // Highlight the empty field
+                    }
+                    else {
+                        el.style.border = 'none'; // Highlight the empty field
+                        if (el.id == 'select-customer') {
+
+                            el.nextElementSibling.style.border = 'none'; // Highlight the empty field
+                        }
+                    }
+
+                }
+            });
+
+            if (!isFormValid) {
+                SBTicket.showErrorMessage(ticket_edit_box, `${emptyFields.join(', ')} are required.`);
+                $(this).sbLoading(false);
+                return;
+            }
+
+            if (!data.user_type) {
+                data.ticket_type = 'new';
+            }
+
+            // Save the settings
+            SBF.ajax({
+                function: (new_ticket ? 'add-ticket' : 'update-ticket'),
+                ticket_id: ticket_id,
+                data1: ticketData,
+            }, (response) => {
+
+                $(this).sbLoading(false);
+
+                admin.sbHideLightbox();
+                //if(!new_ticket)
+                SBTicket.updateRow(response);
+
+                //SBTickets.updateRow(ticketData);
+                infoBottom(new_ticket ? 'New Ticket Created' : 'Ticket updated');
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
+
+                $(header).find('.sb-admin-nav #sb-tickets').click();
+
+            });
+        });
+
+        // Add or update ticket
+        $('.sb-area-ticket-detail').on('click', '#addComment', function () {
+            let new_comment = $('.sb-area-ticket-detail #newComment').hasClass('d-none') ? false : true;
+            let commentId = $('.sb-area-ticket-detail #oldComment').attr('data-comment-id') || null;
+
+            let ticketId = SBF.getURL('ticket');
+            // Save the settings
+            SBF.ajax({
+                function: (new_comment ? 'add-ticket-comment' : 'update-ticket-comment'),
+                ticket_id: ticketId,
+                comment_id: commentId,
+                comment: new_comment ? $('.sb-area-ticket-detail #newComment').val() : $('.sb-area-ticket-detail #oldComment').val(),
+                contact_id: 0,
+            }, (response) => {
+                if (response.success) {
+                    SBTicket.loadComments(ticketId);
+                    $('.sb-area-ticket-detail #newComment').val('');
+                    $('.sb-area-ticket-detail #oldComment').val('');
+                    $('.sb-area-ticket-detail #newComment').removeClass('d-none');
+                    $('.sb-area-ticket-detail #oldComment').addClass('d-none');
+                }
+            });
+        });
+
+        $('#newComment').on('keydown', function (e) {
+            // Check if Enter is pressed without Shift
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); // Prevent newline
+                $('#addComment').trigger('click'); // Trigger Send button
+            }
+        });
+
+        $('.sb-area-ticket-detail').on('click', '.edit-comment-btn', function () {
+            $('.sb-area-ticket-detail #newComment').removeClass('d-none');
+            const commentId = this.getAttribute('data-id');
+            const commentsSection = document.getElementById('comments-section');
+            const commentDiv = commentsSection.querySelector(`.comment-text[data-id='${commentId}']`);
+            if (!commentDiv) return;
+            const oldText = commentDiv.innerText;
+
+            const textarea = document.getElementById('oldComment');
+            textarea.value = oldText;
+            textarea.classList.remove('d-none');
+            textarea.classList.add('edit-comment-textarea');
+            this.style.display = 'none';
+            textarea.focus();
+            textarea.setAttribute('data-comment-id', commentId);
+            document.getElementById('newComment').classList.add('d-none');
+            textarea.onblur = function () {
+                $('.sb-area-ticket-detail #addComment').trigger('click');
+            };
+            textarea.onkeydown = function (e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    textarea.blur();
+                }
+            };
+        });
+
+        $('.sb-area-ticket-detail').on('click', '.delete-comment-btn', function () {
+            const commentId = this.getAttribute('data-id');
+            let ticketId = SBF.getURL('ticket');
+            // Save the settings
+            SBF.ajax({
+                function: 'delete-ticket-comment',
+                ticket_id: ticketId,
+                comment_id: commentId,
+            }, (response) => {
+                if (response.success) {
+                    SBTicket.loadComments(ticketId);
+                    $('.sb-area-ticket-detail #newComment').val('');
+                    $('.sb-area-ticket-detail #oldComment').val('');
+                    $('.sb-area-ticket-detail #newComment').removeClass('d-none');
+                    $('.sb-area-ticket-detail #oldComment').addClass('d-none');
+                }
+            });
+        });
+        /*
         * ----------------------------------------------------------
         * Users area
         * ----------------------------------------------------------
@@ -7155,10 +10854,16 @@
 
         $(users_table).on('click', ':checkbox', function () {
             let button = users_area.find('[data-value="delete"]');
+            let button_2 = users_area.find('[data-value="merge_users"]');
             if (users_table.find('td input:checked').length) {
                 button.removeAttr('style');
             } else {
                 button.hide();
+            }
+            if (users_table.find('td input:checked').length == 2) {
+                button_2.removeAttr('style');
+            } else {
+                button_2.hide();
             }
         });
 
@@ -7243,17 +10948,23 @@
         // Display new user box
         $(users_area).on('click', '.sb-new-user', function () {
             profile_edit_box.addClass('sb-user-new');
-            profile_edit_box.find('.sb-top-bar .sb-profile span').html(sb_('Add new user'));
-            profile_edit_box.find('.sb-top-bar .sb-save').html(`<i class="sb-icon-check"></i>${sb_('Add user')}`);
+            profile_edit_box.find('.sb-top-bar .sb-profile span').html(sb_('Add new customer'));
+            profile_edit_box.find('.sb-top-bar .sb-save').html(`<i class="sb-icon-check"></i>${sb_('Add customer')}`);
             profile_edit_box.find('input,select,textara').removeClass('sb-error');
             profile_edit_box.removeClass('sb-cloud-admin');
             if (SB_ACTIVE_AGENT.user_type == 'admin') {
-                profile_edit_box.find('#user_type').find('select').html(`<option value="user">${sb_('User')}</option><option value="agent">${sb_('Agent')}</option><option value="admin">${sb_('Admin')}</option>`);
+                profile_edit_box.find('#user_type').find('select').html(`<option value="user">${sb_('Customer')}</option><option value="agent">${sb_('Agent')}</option><option value="admin">${sb_('Admin')}</option>`);
             }
             SBProfile.clear(profile_edit_box);
             SBProfile.boxClasses(profile_edit_box);
             SBProfile.updateRequiredFields('user');
             profile_edit_box.sbShowLightbox();
+        });
+        
+        profile_edit_box.find('#user_type').find('select').on('change', function () {
+            var selectedText = $(this).find('option:selected').text();
+            $('.sb-profile-edit-box .sb-profile .sb-name').html(`Add new ${selectedText.toLowerCase()}`); 
+            profile_edit_box.find('.sb-top-bar .sb-save').html(`<i class="sb-icon-check"></i>Add ${selectedText.toLowerCase()}`);
         });
 
         // Add or update user
@@ -7269,8 +10980,36 @@
             $.map(settings, function (value, key) {
                 settings[key] = value[0];
             });
-
             // Errors check
+                        const firstName = settings.first_name;
+            const email = settings.email;
+            const lastName = settings.last_name;
+            const password = settings.password;
+
+            // Collect validation errors
+            let errorMessages = [];
+
+            if (!firstName.trim()) {
+                errorMessages.push('First name');
+            }
+            if (!lastName.trim()) {
+                errorMessages.push('Last name');
+            }
+            if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) {
+                errorMessages.push('Valid email');
+            }
+            if (!password || password.length < 8) {
+                errorMessages.push('Password (min 8 characters)');
+            }
+
+            // Show all error messages at once
+            if (errorMessages.length) {
+                const message = `${errorMessages.join(', ')} ${errorMessages.length === 1 ? 'is' : 'are'} required.`;
+                SBProfile.showErrorMessage(profile_edit_box, message);
+                $(this).sbLoading(false);
+                return;
+            }
+
             if (SBProfile.errors(profile_edit_box)) {
                 SBProfile.showErrorMessage(profile_edit_box, SBF.isAgent(profile_edit_box.find('#user_type :selected').val()) ? 'First name, last name, password and a valid email are required. Minimum password length is 8 characters.' : (profile_edit_box.find('#password').val().length < 8 ? 'Minimum password length is 8 characters.' : 'First name is required.'));
                 $(this).sbLoading(false);
@@ -7285,7 +11024,12 @@
                 settings.user_type = 'user';
             }
 
-            // Save the data
+            let userType = settings.user_type;
+            let capitalized = userType.charAt(0).toUpperCase() + userType.slice(1);
+
+            var selectedText = settings.user_type == 'user' ? 'Customer' : capitalized;
+
+            // Save the settings
             SBF.ajax({
                 function: (new_user ? 'add-user' : 'update-user'),
                 user_id: user_id,
@@ -7297,9 +11041,14 @@
                     $(this).sbLoading(false);
                     return;
                 }
+                if (SBF.errorValidation(response, 'agent-limit-reached') || SBF.errorValidation(response, 'agent-limit-reached')) {
+                    SBProfile.showErrorMessage(profile_edit_box, `Agent limit reached. Please upgrade your membership to add more agents.`);
+                    $(this).sbLoading(false);
+                    return;
+                }
                 if (new_user) {
                     user_id = response;
-                    activeUser(new SBUser({ id: user_id }));
+                    activeUser(new SBUser({ 'id': user_id }));
                 }
                 activeUser().update(() => {
                     users[user_id] = activeUser();
@@ -7319,13 +11068,19 @@
                         }
                     }
                     if (new_user) {
-                        profile_edit_box.find('.sb-profile').setProfile(sb_('Add new user'));
+                        profile_edit_box.find('.sb-profile').setProfile(sb_('Add new customer'));
                     }
                     $(this).sbLoading(false);
                     if (!new_user) {
                         admin.sbHideLightbox();
                     }
-                    infoBottom(new_user ? 'New user added' : 'User updated');
+                    infoBottom(new_user ? `New ${selectedText} added` : `${selectedText} updated`);
+                    admin.sbHideLightbox();
+
+                    setTimeout(function () {
+                        let siteUrl = SB_URL.replace(/\/script\/?$/, '/');
+                        window.location.href = siteUrl + '?area=users';
+                    }, 1000);
                 });
                 SBF.event('SBUserUpdated', { new_user: new_user, user_id: user_id });
             });
@@ -7357,6 +11112,10 @@
             SBConversations.showDirectMessageBox($(this).attr('data-value'), [activeUser().id]);
         });
 
+        $(admin).on('click', '#sb-whatsapp-alert-btn', function () {
+            SBConversations.showDirectMessageBox('whatsapp', [activeUser().id]);
+        });
+
         // Top icons menu
         $(users_area).on('click', '.sb-top-bar [data-value]', function () {
             let value = $(this).data('value');
@@ -7383,6 +11142,26 @@
                         users_table.find('th:first-child input').prop('checked', false);
                     });
                     break;
+                case 'merge_users':
+                    infoPanel('The selected users will be merged into one user.', 'alert', () => {
+                        let user_ids = users_table.find('td:first-child input:checked').map(function () {
+                            return $(this).closest('tr').attr('data-user-id');
+                        }).get();
+                        SBF.ajax({
+                            function: 'merge-users',
+                            user_id_1: user_ids[0],
+                            user_id_2: user_ids[1]
+                        }, (response) => {
+                            let user = new SBUser(response, response.details);
+                            SBUsers.updateRow(user);
+                            delete users[user_ids[1]];
+                            users[user_ids[0]] = user;
+                            users_table.find(`[data-user-id="${user_ids[1]}"]`).remove();
+                            loadingGlobal(false);
+                        });
+                        loadingGlobal();
+                    });
+                    break;
             }
         });
 
@@ -7405,9 +11184,26 @@
                 phone_number_id = select.find('option:selected').attr('data-phone-id');
                 parameters = ['header', 'body', 'button'].map(id => box.find(`#sb-whatsapp-send-template-${id}`).val());
             }
+            
+            $('.bulk-users-wrapper').removeClass('sb-error');
+            const checked = $('.user-checkbox:checked');
+            const count = checked.length;
+
             if (SBForm.errors(box)) {
                 SBForm.showErrorMessage(box, 'Please complete the mandatory fields.');
-            } else {
+
+                if (!count) {
+                    $('.bulk-users-wrapper').addClass('sb-error');
+                    SBForm.showErrorMessage(box, 'Please complete the mandatory fields.');
+                }
+            }
+            else {
+                if (!count) {
+                    $('.bulk-users-wrapper').addClass('sb-error');
+                    SBForm.showErrorMessage(box, 'Please complete the mandatory fields.');
+                    return;
+                }
+
                 if (loading(this)) {
                     return;
                 }
@@ -7445,7 +11241,8 @@
                                 }
                             });
                         }
-                        infoBottom(`${SBF.slugToString(type)} sent to all users.`);
+                        infoBottom(`${SBF.slugToString(type)} sent to selected users.`);
+                        admin.sbHideLightbox();
                     });
                 } else {
                     let slug = type == 'custom_email' ? 'email' : 'phone';
@@ -7514,7 +11311,8 @@
         }
 
         // User filters
-        $(users_area).on('click', '.sb-filter-btn > i', function () {
+        // $(users_area).on('click', '.sb-filter-btn > i', function () {
+        $(users_area).on('click', '.sb-filter-btn > .toggle-filter', function () {
             $(this).parent().toggleClass('sb-active');
         });
 
@@ -7687,7 +11485,7 @@
         });
 
         $(settings_area).on('click', '#dialogflow-sync-btn a', function (e) {
-            let url = 'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com/auth/dialogflow%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-translation%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-language&response_type=code&access_type=offline&redirect_uri=' + SB_URL + '/apps/dialogflow/functions.php&client_id={client_id}&prompt=consent';
+            let url = 'https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com/auth/dialogflow%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-translation%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-language' + (settings_area.find('#google-calendar-active input').is(':checked') ? '%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar' : '') + '&response_type=code&access_type=offline&redirect_uri=' + SB_URL + '/apps/dialogflow/functions.php&client_id={client_id}&prompt=consent';
             if (SB_ADMIN_SETTINGS.cloud && settings_area.find('#google-sync-mode select').val() == 'auto') {
                 if (SB_ADMIN_SETTINGS.credits) {
                     window.open(url.replace('{client_id}', SB_ADMIN_SETTINGS.google_client_id));
@@ -7880,18 +11678,92 @@
                 let dropdown = settings_area.find('.sb-search-dropdown-items');
                 if (search.length > 2) {
                     let navs = settings_area.find('> .sb-tab > .sb-nav li').map(function () { return $(this).text().trim() }).get();
+                    
+                    const settingsKeys = [
+                        "agents-menu-title",
+                        "collapse",
+                        "show-profile-images-admin",
+                        "hide-conversation-details",
+                        "notes-settings",
+                        "tags-starred",
+                        "push-notifications",
+                        "welcome-trigger",
+                        "welcome-delay",
+                        "follow-delay",
+                        "sender-name",
+                        "visitor-autodata",
+                        "visitor-default-name",
+                        "envato-validation",
+                        "registration-user-details-success",
+                        "registration-link",
+                        "login-verification-url",
+                        "tickets-default-department",
+                        "tickets-registration-redirect",
+                        "tickets-conversation-name",
+                        "follow-disable-office-hours",
+                        "follow-disable-channels",
+                        "welcome-disable-office-hours",
+                        "popup-message",
+                        "login-message",
+                        "login-icon",
+                        "custom-js",
+                        "custom-css",
+                        "manifest-url",
+                        "color-admin-2",
+                        "admin-title",
+                        "front-auto-translations",
+                        "admin-auto-translations",
+                    ];
                     settings_area.find('.sb-setting').each(function () {
-                        let keywords = $(this).attr('data-keywords');
-                        let id = $(this).attr('id');
-                        if ((keywords && keywords.includes(search)) || (id && id.replaceAll('-', '-').includes(search)) || $(this).find('.sb-setting-content').text().toLowerCase().includes(search)) {
-                            let index = $(this).parent().index();
-                            code += `<div data-tab-index="${index}" data-setting="${$(this).attr('id')}">${navs[index]} > ${$(this).find('h2').text()}</div>`;
-                        }
-                        let str = "installation";
-                        if (str.includes(search)) {
-                            code += `<div data-tab-index="0" data-sub-tab-index="0" link="http://localhost/saassupport/account/?tab=installation" data-setting="">Account &gt; Installation</div>`;
+                        let settingId= $(this).attr('id');
+
+                        // If the id exists in the list, skip
+                        if (!settingsKeys.includes(settingId)) {
+                            let keywords = $(this).attr('data-keywords');
+                            let id = $(this).attr('id');
+                            if ((keywords && keywords.includes(search)) || (id && id.replaceAll('-', '-').includes(search)) || $(this).find('.sb-setting-content').text().toLowerCase().includes(search)) {
+                                const index = $(this).parent().parent().index();
+                                const tab_id = $(this).parent().attr('id');
+                                const $tab = $('.my-tab[data-target="' + tab_id + '"]');
+                                const tab_title = $tab.contents()
+                                    .filter(function () {
+                                        return this.nodeType === 3; // text node
+                                    })
+                                    .text()
+                                    .trim();
+
+                                let search_text;
+
+                                if (navs[index] === 'Artificial Intelligence') {
+                                    return true; // skip to the next iteration
+                                }
+
+                                if (tab_title) {
+                                    // if tab_title exists, insert it after first ">"
+                                    search_text = navs[index] + ' > ' + tab_title + ' > ' + $(this).find('h2').text();
+                                } else {
+                                    // if no tab_title, keep original format
+                                    search_text = navs[index] + ' > ' + $(this).find('h2').text();
+                                }
+                                code += `<div data-tab-index="${index}" data-sub-tab-index="${tab_id}" data-setting="${$(this).attr('id')}">${search_text}</div>`;
+                            }
                         }
                     });
+                    
+
+                    console.log(search);
+                    let accountSettings = {
+                        'installation': 'account/?tab=installation',
+                        'script': 'account/?tab=installation',
+                        'membership': 'account/?tab=membership',
+                        'plan': 'account/?tab=membership'
+                    };
+                    let SB_URL2 = SB_URL.replace(/\/script\/?$/, '/');
+                    let match = Object.keys(accountSettings).find(key => key.includes(search));
+                    if (match) {
+                        let link = accountSettings[match];
+                        code += `<div data-tab-index="0" data-sub-tab-index="0" link="${SB_URL2}${link}" data-setting="">Account > ${match.charAt(0).toUpperCase() + match.slice(1)}</div>`;
+                    }
                 }
                 dropdown.html(code);
                 if (dropdown.outerHeight() > $(window).height() - 100) {
@@ -7904,11 +11776,23 @@
         });
 
         $(settings_area).on('click', '.sb-search-dropdown-items div', function () {
+            if ($(this).attr('link')) {
+                // Opens URL in a new tab
+                window.open($(this).attr('link'), "_blank");
+                return;
+            }
             let index = $(this).attr('data-tab-index');
+            let tab_id = $(this).attr('data-sub-tab-index');
             let item = settings_area.find('> .sb-tab > .sb-nav li').eq(index);
             item.click();
-            item.get(0).scrollIntoView();
+            //item.get(0).scrollIntoView();
+            $('.my-tab[data-target="' + tab_id + '"]').trigger('click');
             settings_area.find('#' + $(this).attr('data-setting'))[0].scrollIntoView();
+            setTimeout(function () {
+                const scrollArea = $('.sb-content.sb-scroll-area');
+                const currentScroll = scrollArea.scrollTop();
+                scrollArea.scrollTop(currentScroll - 75);
+            }, 50);
         });
 
         // Slack  
@@ -8279,6 +12163,18 @@
                         infoBottom('This method is not recommended. See the docs for details.', 'info');
                     }
                     break;
+                case 'google-calendar-active':
+                    infoBottom('Sync Google again from Settings > Artificial Intelligence > Google > Synchronization.', 'info');
+                    break;
+                case 'google-calendar-slot-time':
+                    infoBottom('Set the available booking times under Settings > Miscellaneous > Scheduled Office Hours.', 'info');
+                    break;
+                case 'welcome-disable-office-hours':
+                case 'follow-disable-office-hours':
+                    if ((id == 'follow-disable-office-hours' && settings_area.find('#follow-disable-office-hours input').is(':checked')) || (id == 'welcome-disable-office-hours' && settings_area.find('#welcome-disable-office-hours input').is(':checked'))) {
+                        infoBottom('Set office hours in Settings > Miscellaneous > Office Hours.', 'info');
+                    }
+                    break;
             }
         });
 
@@ -8330,16 +12226,22 @@
             let code_select_user_details = SBApps.openAI.getCode.select_user_details();
             switch (type) {
                 case 'start':
-                    code = `<div class="sb-title">${sb_('Start event')}</div><div class="sb-setting"><select class="sb-flow-start-select"><option value="message"${block.start == 'message' ? ' selected' : ''}>${sb_('User message')}</option><option value="conversation"${block.start == 'conversation' ? ' selected' : ''}>${sb_('New conversation started')}</option><option value="load"${block.start == 'load' ? ' selected' : ''}>${sb_('On page load')}</option></select></div><div class="sb-title sb-title-flow-start${block.start == 'message' ? `` : ` sb-hide`}">${sb_('User message')}</div><div data-type="repeater" class="sb-setting sb-flow-start-messages sb-type-repeater"><div class="input"><div class="sb-repeater"><div class="repeater-item"><div class="sb-setting"><textarea data-id="message"></textarea></div><i class="sb-icon-close"></i></div></div><div class="sb-btn sb-btn-white sb-repeater-add sb-icon"><i class="sb-icon-plus"></i>${sb_('Add message')}</div></div></div>${code_conditions}<div class="sb-title">${sb_('Disabled')}</div><div class="sb-setting"><input type="checkbox" id="sb-flow-disabled"${block.disabled ? ' checked' : ''}></div>`;
+                    code_2 = SBSettings.getSelectDepartments(block.department);
+                    if (code_2) {
+                        code_2 = `<div class="sb-title">${sb_('Department')}</div><div class="sb-setting">${code_2}</div>`;
+                    }
+                    code_2 += `<div class="sb-title">${sb_('Source')}</div><div class="sb-setting">${SBApps.getSelectMessagingApps(block.conversation_source, true)}</div>`;
+                    code = `<div class="sb-title">${sb_('Start event')}</div><div class="sb-setting"><select class="sb-flow-start-select"><option value="message"${block.start == 'message' ? ' selected' : ''}>${sb_('User message')}</option><option value="conversation"${block.start == 'conversation' ? ' selected' : ''}>${sb_('New conversation started')}</option><option value="load"${block.start == 'load' ? ' selected' : ''}>${sb_('On page load')}</option></select></div><div class="sb-title sb-title-flow-start${block.start == 'message' ? `` : ` sb-hide`}">${sb_('User message')}</div><div data-type="repeater" class="sb-setting sb-flow-start-messages sb-type-repeater"><div class="input"><div class="sb-repeater"><div class="repeater-item"><div class="sb-setting"><textarea data-id="message" placeholder="${sb_('Enter the message the user must send to start this flow')}"></textarea></div><i class="sb-icon-close"></i></div></div><div class="sb-btn sb-btn-white sb-repeater-add sb-icon"><i class="sb-icon-plus"></i>${sb_('Add message')}</div></div></div>${code_conditions}${code_2}<div class="sb-title">${sb_('Disabled')}</div><div class="sb-setting"><input type="checkbox" id="sb-flow-disabled"${block.disabled ? ' checked' : ''}></div>`;
                     break;
-                case 'button_list':
+                case 'choices':
+                case 'button_list': // Depreceated
                     if (!block.options || !block.options.length) {
                         block.options = [''];
                     }
                     for (var i = 0; i < block.options.length; i++) {
-                        code_2 += `<div class="repeater-item"><div><input data-id type="text" value="${block.options[i]}"></div><i class="sb-icon-close"></i></div>`;
+                        code_2 += `<div class="repeater-item"><div><input data-id type="text" value="${block.options[i].replaceAll('\\,', ', ').replaceAll('  ', ' ')}"></div><i class="sb-icon-close"></i></div>`;
                     }
-                    code = code_message + code_repeater.replace(`{R}`, sb_('Buttons')).replace(`{R2}`, code_2);
+                    code = code_message + code_repeater.replace(`{R}`, sb_('Choices')).replace(`{R2}`, code_2) + `<div class="sb-title">${sb_('Conversational mode')}</div><div class="sb-setting"><input type="checkbox" id="sb-conversational-mode"${block.conversational_mode ? ' checked' : ''}></div>`;
                     break;
                 case 'message':
                     if (!block.attachments || !block.attachments.length) {
@@ -8386,13 +12288,42 @@
                 case 'condition':
                     code = code_conditions;
                     break;
+                case 'tools':
+                    let headers = block.headers;
+                    let properties = block.properties;
+                    code = code_message + `<div class="sb-title">${sb_('URL')}</div><div class="sb-setting"><input type="url" class="sb-tools-url" value="${block.url}"></div><div class="sb-title">${sb_('Method')}</div><div class="sb-setting"><select class="sb-tools-method"><option value="GET"${block.method == 'GET' ? ' selected' : ''}>GET</option><option value="POST"${block.method == 'POST' ? ' selected' : ''}>POST</option><option value="PUT"${block.method == 'PUT' ? ' selected' : ''}>PUT</option><option value="PATH"${block.method == 'PATH' ? ' selected' : ''}>PATH</option><option value="DELETE"${block.method == 'DELETE' ? ' selected' : ''}>DELETE</option></select></div>`;
+                    if (!headers || !headers.length) {
+                        headers = [['', '']];
+                    }
+                    if (!properties || !properties.length) {
+                        properties = [['', '', '']];
+                    }
+                    for (var i = 0; i < headers.length; i++) {
+                        code_2 += `<div class="repeater-item"><div><input type="text" placeholder="${sb_('Key')}" value="${headers[i][0]}" /><input type="text" placeholder="${sb_('Value')}" value="${headers[i][1]}" /></div><i class="sb-icon-close"></i></div>`;
+                    }
+                    code += code_repeater.replace(`{R}`, sb_('Headers')).replace(`{R2}`, code_2).replace('sb-type-repeater', 'sb-type-repeater sb-setting sb-repeater-inputs-h sb-repeater-block-tools-headers');
+                    code_2 = '';
+                    for (var i = 0; i < properties.length; i++) {
+                        code_2 += `<div class="repeater-item"><div><input type="text" placeholder="${sb_('Name')}" value="${properties[i][0]}" /></div><div><input type="text" placeholder="${sb_('Description')}" value="${properties[i][1]}" /></div><div><input type="text" placeholder="${sb_('Allowed values separated by commas')}" value="${properties[i][2]}" /></div><i class="sb-icon-close"></i></div>`;
+                    }
+                    code += code_repeater.replace(`{R}`, sb_('Properties')).replace(`{R2}`, code_2).replace('sb-type-repeater', 'sb-type-repeater sb-setting sb-repeater-inputs-v sb-repeater-block-tools-properties');
+                    break;
+                case 'flow_connector':
+                    code = `<div class="sb-title">${sb_('Flow')}</div><div class="sb-setting"><select class="sb-flows-select">`;
+                    let flows = SBApps.openAI.flows.flows;
+                    for (var i = 0; i < flows.length; i++) {
+                        if (flows[i].name != SBApps.openAI.flows.getActiveName()) {
+                            code += `<option value="${flows[i].name}" ${flows[i].name == block.flow_name ? ' selected' : ''}>${flows[i].name}</option>`;
+                        }
+                    }
+                    code += '</div>';
+                    break;
             }
             if (type != 'start') {
                 code += `<div id="sb-block-delete" class="sb-btn-text"><i class="sb-icon-delete"></i>${sb_('Delete')}</div>`;
             }
             SBAdmin.genericPanel('flow-block', SBF.slugToString(type), code, ['Save changes'], '', true);
             if (type == 'start' || type == 'condition') {
-                if (!Array.isArray(block.message)) block.message = [{ message: block.message }]; // Depreceated
                 let repeater = admin.find('.sb-flow-start-messages .sb-repeater');
                 let code = SBSettings.repeater.set(block.message, repeater.find('.repeater-item:last-child'));
                 SBSettings.automations.setConditions(block.conditions, admin.find('.sb-flow-conditions'));
@@ -8412,16 +12343,20 @@
             block.message = box.find('textarea').val();
             switch (block.type) {
                 case 'start':
-                    block.message = SBSettings.repeater.get(box.find('.sb-flow-start-messages .repeater-item'));
                     block.start = box.find('select').val();
+                    block.message = block.start == 'message' ? SBSettings.repeater.get(box.find('.sb-flow-start-messages .repeater-item')) : '';
                     block.disabled = box.find('#sb-flow-disabled').is(':checked');
+                    block.department = box.find('.sb-select-departments').val();
+                    block.conversation_source = box.find('.sb-select-messaging-apps').val();
                     block.conditions = SBSettings.automations.getConditions(box.find('.sb-flow-conditions'));
                     if (block.message.length && block.message[0].message.trim().split(' ').length < 3) {
                         return box.find('.sb-info').sbActive(true).html(sb_('The message must contain at least 3 words.'));
                     }
                     break;
-                case 'button_list':
-                    block.options = box.find('.sb-repeater input').map(function () { return $(this).val().trim() }).get().filter(function (value) { return value != '' });
+                case 'choices':
+                case 'button_list': // Depreceated
+                    block.options = box.find('.sb-repeater input').map(function () { return $(this).val().trim().replaceAll(',', '\\,') }).get().filter(function (value) { return value != '' });
+                    block.conversational_mode = box.find('#sb-conversational-mode').is(':checked');
                     break;
                 case 'message':
                     block.attachments = box.find('.sb-repeater input').map(function () { return $(this).val().trim() }).get().filter(function (value) { return value != '' });
@@ -8446,6 +12381,21 @@
                     break;
                 case 'condition':
                     block.conditions = SBSettings.automations.getConditions(box.find('.sb-flow-conditions'));
+                    break;
+                case 'tools':
+                    block.url = box.find('.sb-tools-url').val();
+                    block.method = box.find('.sb-tools-method').val();
+                    block.headers = box.find('.sb-repeater-block-tools-headers .repeater-item').map(function () { return [[$(this).find('input').eq(0).val(), $(this).find('input').eq(1).val()]] }).get();
+                    block.properties = box.find('.sb-repeater-block-tools-properties .repeater-item').map(function () { return [[$(this).find('input').eq(0).val(), $(this).find('input').eq(1).val(), $(this).find('input').eq(2).val()]] }).get();
+                    if (block.properties.length == 1 && !block.properties[0][0]) {
+                        block.properties = [];
+                    }
+                    if (block.headers.length == 1 && !block.headers[0][0]) {
+                        block.headers = [];
+                    }
+                    break;
+                case 'flow_connector':
+                    block.flow_name = box.find('.sb-flows-select').val();
                     break;
             }
             SBApps.openAI.flows.blocks.set(block);
@@ -8489,15 +12439,15 @@
             flows_area.find('.sb-flow-block,.sb-flow-add-block').sbActive(false);
             $(this).sbActive(true);
             let active_blocks = SBApps.openAI.flows.steps.get()[SBApps.openAI.flows.blocks.getActiveCntIndex()].map(item => item.type);
-            let all = !active_blocks.some(element => ['message', 'button_list', 'video', 'get_user_details', 'condition'].includes(element));
-            let nav_items = [['set_data', 'Set data'], ['action', 'Action'], ['condition', 'Condition'], ['rest_api', 'REST API']];
+            let all = !active_blocks.some(element => ['message', 'button_list', 'choices', 'video', 'get_user_details', 'condition'].includes(element)); // Depreceated: button_list
+            let nav_items = [['set_data', 'Set data'], ['action', 'Action'], ['condition', 'Condition'], ['tools', 'Tools calling'], ['rest_api', 'REST API'], ['flow_connector', 'Flow connector']];
             let code = '';
             for (var i = 0; i < nav_items.length; i++) {
-                if (!active_blocks.includes(nav_items[i][0])) {
+                if (!active_blocks.includes(nav_items[i][0]) && (nav_items[i][0] != 'condition' || !active_blocks.includes('choices'))) {
                     code += `<li data-value="${nav_items[i][0]}">${sb_(nav_items[i][1])}</li>`;
                 }
             }
-            SBAdmin.genericPanel('flows-blocks-nav', '', `<ul class="sb-menu">${all ? `<li>${sb_('Messages')} <ul><li data-value="message">${sb_('Send message')}</li><li data-value="button_list">${sb_('Send button list')}</li><li data-value="video">${sb_('Send video')}</li></ul></li>` : ``}<li>${sb_('More')} <ul>${all ? `<li data-value="get_user_details">${sb_('Get user details')}</li>` : ``}${code}</ul></li></ul>`);
+            SBAdmin.genericPanel('flows-blocks-nav', '', `<ul class="sb-menu">${all ? `<li>${sb_('Messages')} <ul><li data-value="message">${sb_('Send message')}</li><li data-value="choices">${sb_('Send choices')}</li><li data-value="video">${sb_('Send video')}</li></ul></li>` : ``}<li>${sb_('More')} <ul>${all ? `<li data-value="get_user_details">${sb_('Get user details')}</li>` : ``}${code}</ul></li></ul>`);
         });
 
         $(admin).on('click', '#sb-block-delete', function () {
@@ -8545,7 +12495,7 @@
                 return false;
             }
             if (chatbot_area.find('.sb-menu-chatbot .sb-active').attr('data-type') == 'flows') {
-                SBApps.openAI.flows.save((response) => {
+                SBApps.openAI.flows.save(() => {
                     infoPanel(success_text, 'info', false, false, 'Success');
                 });
                 $(this).sbLoading(false);
@@ -8755,8 +12705,10 @@
             }
         });
 
-        $(chatbot_website_table).on('click', '[data-url]', function () {
-            window.open($(this).attr('data-url'));
+        $(chatbot_website_table).on('click', '[data-url]', function (e) {
+            if (e.target.nodeName != 'I') {
+                window.open($(this).attr('data-url'));
+            }
         });
 
         $(chatbot_qea_repeater).on('click', '.sb-enlarger-function-calling', function () {
@@ -8782,47 +12734,67 @@
             });
         });
 
-        $(chatbot_playground_editor).on('click', '[data-value="add"], [data-value="send"]', function () {
+        $(chatbot_playground_editor).on('click', '[data-value="send"]', function () {
             let textarea = chatbot_playground_editor.find('textarea');
             let message = textarea.val().trim();
-            textarea.val('');
-            if (message) {
-                SBApps.openAI.playground.addMessage(message, chatbot_playground_editor.find('[data-value="user"], [data-value="assistant"]').attr('data-value'));
+            let is_auto_clear = chatbot_playground_editor.find('[data-value="auto-clear"]').is('.sb-active');
+            if(!message)
+            {
+                textarea.addClass('sb-error');
+                return;
             }
-            if ($(this).data('value') == 'send') {
-                let length = SBApps.openAI.playground.messages.length;
-                if (length && !loading(this)) {
-                    SBF.ajax({
-                        function: 'open-ai-playground-message',
-                        messages: SBApps.openAI.playground.messages
-                    }, (response) => {
-                        if (response[0]) {
-                            if (response[1]) {
-                                SBApps.openAI.playground.addMessage(response[1], 'assistant', response[6]);
-                                if (response[4]) {
-                                    let code = '';
-                                    for (var key in response[4].usage) {
-                                        if (['string', 'number'].includes(typeof response[4].usage[key])) {
-                                            code += `<b>${SBF.slugToString(key)}</b>: ${response[4].usage[key]}<br>`;
-                                        }
-                                    }
-                                    SBApps.openAI.playground.last_response = response[4];
-                                    chatbot_area.find('.sb-playground-info').html(code + `<div id="sb-playground-query" class="sb-btn-text">${sb_('View code')}</div>${response[4].embeddings ? `<div id="sb-playground-embeddings" class="sb-btn-text">${sb_('Embeddings')}</div>` : ``}`);
-                                    if (response[4].payload) {
-                                        SBApps.openAI.playground.messages[length - 1].push(response[4].payload);
-                                    }
+            else
+            {
+                textarea.removeClass('sb-error');
+            }
+            textarea.val('');
+            if (!loading(this)) {
+                let code = `<div><div>${sb_('User')}</div><div><div><div class="sb-cnt"><div class="sb-message">${message}</div></div></div></div></div>`;
+                let history = SBF.storage('playground-history');
+                if (!history) {
+                    history = [];
+                }
+                if (!history.includes(message)) {
+                    history.push(message);
+                }
+                SBF.storage('playground-history', history);
+                if (is_auto_clear) {
+                    chatbot_playground_area.html(code);
+                } else {
+                    chatbot_playground_area.append(code);
+                }
+                chatbot_playground_area[0].scrollTop = chatbot_playground_area[0].scrollHeight;
+                SBF.ajax({
+                    function: 'open-ai-playground-message',
+                    message: message,
+                    clear: SBApps.openAI.playground.last_response === false || is_auto_clear
+                }, (response) => {
+                    if (response.conversation) {
+                        let code = '';
+                        for (var key in response.conversation.messages) {
+                            let message = response.conversation.messages[key];
+                            if (message.message) {
+                                code += `<div data-type="${message.user_type}" data-message-id="${message.id}"><div>${sb_(SBF.isAgent(message.user_type) ? 'Assistant' : 'User')}<div><i class="sb-icon-close sb-btn-icon sb-btn-red"></i></div></div><div>${(new SBMessage(message)).getCode()}</div></div>`;
+                            }
+                        }
+                        chatbot_playground_area.html(code);
+                        chatbot_playground_area[0].scrollTop = chatbot_playground_area[0].scrollHeight;
+                        if (response.playground) {
+                            let code = '';
+                            for (var key in response.playground.usage) {
+                                if (['string', 'number'].includes(typeof response.playground.usage[key])) {
+                                    code += `<b>${SBF.slugToString(key)}</b>: ${response.playground.usage[key]}<br>`;
                                 }
                             }
-                            if (response[8]) {
-                                conversations_admin_list_ul.find(`[data-conversation-id="${response[8]}"]`).remove();
-                            }
-                        } else {
-                            infoPanel(response);
-                            console.error(response);
+                            SBApps.openAI.playground.last_response = response.playground;
+                            chatbot_area.find('.sb-playground-info').html(code + `<div id="sb-playground-query" class="sb-btn-text">${sb_('View code')}</div>${response.playground.embeddings ? `<div id="sb-playground-embeddings" class="sb-btn-text">${sb_('Embeddings')}</div>` : ``}`);
                         }
-                        $(this).sbLoading(false);
-                    });
-                }
+                    } else {
+                        infoPanel(response);
+                        console.error(response);
+                    }
+                    $(this).sbLoading(false);
+                });
             }
         });
 
@@ -8840,22 +12812,56 @@
         });
 
         $(chatbot_playground_editor).on('click', '[data-value="clear"]', function () {
-            SBApps.openAI.playground.messages = [];
-            chatbot_playground_area.html('');
-            chatbot_area.find('.sb-playground-info').html('');
+            if (!loading(this)) {
+                SBApps.openAI.playground.deleteData('delete', () => {
+                    $(this).sbLoading(false);
+                    chatbot_playground_area.html('');
+                    chatbot_area.find('.sb-playground-info').html('');
+                });
+            }
+        });
+
+        $(chatbot_playground_editor).on('click', '[data-value="auto-clear"]', function () {
+            $(this).toggleClass('sb-active');
+        });
+
+        $(chatbot_playground_editor).on('click', '[data-value="history"]', function () {
+            let history = SBF.storage('playground-history');
+            let code;
+            if (history && history.length) {
+                code = '<ul>';
+                history.forEach((item) => {
+                    code += `<li>${item}</li>`;
+                });
+                code += '</ul>'
+            } else {
+                code = `<p class="sb-no-results">${sb_('No results found.')}</p>`;
+            }
+            chatbot_playground_history_panel.html(code);
+            chatbot_playground_history_panel.toggleClass('sb-active');
+        });
+
+        $(chatbot_playground_history_panel).on('click', 'li', function () {
+            chatbot_playground_editor.find('textarea').val($(this).text());
+            chatbot_playground_history_panel.sbActive(false);
+            chatbot_playground_editor.find('[data-value="send"]').click();
         });
 
         $(chatbot_playground_area).on('click', '.sb-icon-close', function () {
-            let element = $(this).closest('[data-type]');
-            SBApps.openAI.playground.messages.splice(element.index(), 1);
-            element.remove();
+            if (!loading(this)) {
+                let element = $(this).closest('[data-type]');
+                SBApps.openAI.playground.deleteData('delete-message', () => {
+                    $(this).sbLoading(false);
+                    element.remove();
+                }, element.attr('data-message-id'));
+            }
         });
 
         $(chatbot_playground_area).on('click', '.sb-rich-chips .sb-btn', function () {
             chatbot_playground_editor.find('textarea').val($(this).html());
             chatbot_playground_editor.find('[data-value="send"]').click();
         });
-
+        
         $(chatbot_playground_editor).on('click', '[data-value="user"], [data-value="assistant"]', function () {
             let is_user = $(this).attr('data-value') == 'user';
             $(this).attr('data-value', is_user ? 'assistant' : 'user').html('<i class="sb-icon-reload"></i> ' + sb_(is_user ? 'Assistant' : 'User'));
@@ -8999,7 +13005,7 @@
             let id = $(this).attr('id');
             SBReports.active_report = false;
             reports_area.find('#sb-date-picker').val('');
-            reports_area.attr('class', 'sb-area-reports sb-active sb-report-' + id);
+reports_area.attr('class', 'sb-area-reports sb-area-reports_new sb-active sb-report-' + id);
             SBReports.initReport($(this).attr('id'));
             if (SBF.getURL('report') != id) {
                 pushState('?report=' + id);
@@ -9123,9 +13129,69 @@
 
         /*
         * ----------------------------------------------------------
-        * Apps functions
+        * Apps and integrations
         * ----------------------------------------------------------
         */
+
+        // Calendar
+        $(conversations_area).on('click', '.sb-integration-calendar-cancel', function (e) {
+            infoPanel('The booking will be cancelled.', 'alert', () => {
+                if (loading(this)) return;
+                SBApps.calendar.cancelBooking($(this).parent().attr('data-id'), (response) => {
+                    if (response === true) {
+                        $(this).parent().remove();
+                        infoBottom('Booking cancelled.');
+                    }
+                });
+            });
+            e.preventDefault();
+            return false;
+        });
+
+        $(conversations_area).on('click', '.sb-panel-calendar > i', function () {
+            SBSettings.loadDatePicker(() => {
+                SBAdmin.genericPanel('calendar', 'Booking', '<input type="text"><div class="sb-split"><div id="sb-calendar-cnt"></div><div id="sb-slot-list"></div></div>', ['Add booking'], '', true);
+                admin.find('.sb-calendar-box input').daterangepicker({ ...SBSettings.getDatePickerSettings(true, true), ...{ parentEl: '#sb-calendar-cnt' } }).click();
+            });
+        });
+
+        $(admin).on('change', '.sb-calendar-box input', function () {
+            let list = admin.find('#sb-slot-list');
+            list.html('').sbLoading(true);
+            SBApps.calendar.getAvailableSlots($(this).val(), (response) => {
+                let code = '';
+                if (response) {
+                    response.forEach((slot) => {
+                        code += `<div data-id="${slot}">${slot}</div>`;
+                    });
+                }
+                list.html(code ? code : `<p class="sb-no-results">${sb_('No results found.')}</p>`).sbLoading(false);
+            });
+        });
+
+        $(admin).on('click', '#sb-add-booking', function () {
+            let slot = admin.find('#sb-slot-list .sb-active').attr('data-id');
+            let info = admin.find('.sb-calendar-box .sb-info');
+            info.html('').sbActive(false);
+            if (!slot || loading(this)) {
+                return;
+            }
+            SBApps.calendar.addBooking(admin.find('.sb-calendar-box input').val() + ' ' + slot, (response) => {
+                $(this).sbLoading(false);
+                if (response === true) {
+                    infoBottom('Booking successfully created.');
+                    SBApps.calendar.conversationPanel();
+                    admin.sbHideLightbox();
+                } else {
+                    admin.find('.sb-calendar-box .sb-info').html(response).sbActive(true);
+                }
+            });
+        });
+
+        $(admin).on('click', '#sb-slot-list > div', function () {
+            $(this).siblings().sbActive(false);
+            $(this).toggleClass('sb-active');
+        });
 
         // Ump
         $(conversations_area).on('click', '.sb-panel-ump > i', function () {
@@ -9213,6 +13279,10 @@
         * Miscellaneous
         * ----------------------------------------------------------
         */
+
+        $(admin).on('click', '[data-id="rating"]', function () {
+            SBConversations.highlightMessage($(this).attr('data-message-id'));
+        });
 
         $(admin).on('click', '.sb-enlarger', function () {
             $(this).sbActive(true);
@@ -9349,7 +13419,127 @@
             SBAdmin.open_popup = false;
             lightbox.sbActive(false);
         });
+$(admin).on('click', '#add-conversation-to-ticket a', function () {
+            let lightbox = $(this).closest('.sb-lightbox');
+            if ($(this).hasClass('sb-confirm')) {
+                alertOnConfirmation();
+            }
+            if ($(this).attr('id') == 'link-to-existing-ticket') {
+                $('#ticket-action-selector').hide();
+                $('#ticket-selector').show();
 
+                $('#selected_ticket_id').select2({
+                    placeholder: 'Type and search...',
+                    minimumInputLength: 0,
+                    ajax: {
+                        transport: function (params, success, failure) {
+                            const term = (params.data.q || '').toLowerCase();
+                            const loginCookie = SBF.loginCookie();
+
+                            $.ajax({
+                                url: SB_URL + '/include/ajax.php',
+                                method: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    function: 'ajax_calls',
+                                    'calls[0][function]': 'search-get-tickets',
+                                    'login-cookie': loginCookie,
+                                    'q': term,
+                                    'type': 'all'
+                                },
+                                success: function (response) {
+                                    if (response[0][0] === 'success') {
+                                        const tickets = response[0][1];
+                                        let results;
+
+                                        // if (!term) {
+                                        //     // Show latest 5 users
+                                        //     results = latestFiveCustomers.slice(-5).reverse().map(user => ({
+                                        //         id: user.id,
+                                        //         text: user.first_name + ' ' + user.last_name,
+                                        //         email: user.email,
+                                        //         name: user.first_name + ' ' + user.last_name
+                                        //     }));
+                                        // } else {
+                                        const term = (params.data.q || '').toLowerCase();
+
+                                        // normalize term same as PHP (remove leading t/T if followed by digits)
+                                        const normalizedTerm = term.replace(/^[tT](\d+)/, '$1');
+
+                                        results = tickets
+                                            .filter(ticket =>
+                                                ticket.id.toLowerCase().includes(normalizedTerm) ||
+                                                (ticket.subject && ticket.subject.toLowerCase().includes(normalizedTerm))
+                                            )
+                                            .map(ticket => ({
+                                                id: ticket.id,
+                                                text: 'T' + ticket.id + ': ' + ticket.subject
+                                            }));
+
+                                        // if (results.length === 0) {
+                                        //     results.push({
+                                        //         id: '__add__' + term,
+                                        //         text: '➕ Add "' + term + '" as New Customer',
+                                        //         name: term,
+                                        //         email: '',
+                                        //         isAddNew: true
+                                        //     });
+                                        // }
+                                        //}
+
+                                        success({ results });
+                                    } else {
+                                        failure();
+                                    }
+                                },
+                                error: failure
+                            });
+                        },
+                        cache: true
+                    },
+                    templateResult: function (data) {
+                        if (data.loading) return data.text;
+                        if (data.isAddNew) {
+                            return $('<div style="color: #fff;"><strong>' + data.text + '</strong></div>');
+                        }
+                        return $('<div><strong>' + data.text + '</strong><br/><small>' + (data.email || '') + '</small></div>');
+                    },
+                    templateSelection: function (data) {
+                        return data.text;
+                    }
+                });
+
+            }
+            else {
+                if (admin.find('.sb-lightbox.sb-active').length == 1) {
+                    overlay.sbActive(false);
+                }
+                SBAdmin.open_popup = false;
+                lightbox.sbActive(false);
+            }
+        });
+
+        $(admin).on('click', '#link-ticket', function () {
+            const ticket_id = $('#selected_ticket_id').val();
+            const conversation_id = $('#selected_conversation_id').val();
+
+            SBF.ajax({
+                function: 'link-conversation-to-ticket',
+                ticket_id: ticket_id,
+                conversation_id: conversation_id
+            }, (response) => {
+                if (response.success) {
+                    infoBottom(response.msg);
+                }
+                else {
+                    infoBottom(response.msg, 'error')
+                }
+
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1200);
+            });
+        });
         $(admin).on('click', '.sb-menu-wide li, .sb-nav li', function () {
             $(this).siblings().sbActive(false);
             $(this).sbActive(true);
@@ -9401,7 +13591,6 @@
                             upload_on_success(response[1]);
                         }
                     } else {
-                        console.log(response[1]);
                     }
                 });
             }
@@ -9418,7 +13607,30 @@
         $(admin).on('mousedown', function (e) {
             if ($(SBAdmin.open_popup).length) {
                 let popup = $(SBAdmin.open_popup);
-                if (!popup.is(e.target) && popup.has(e.target).length === 0 && !['sb-btn-saved-replies', 'sb-btn-emoji', 'sb-btn-woocommerce', 'sb-btn-shopify', 'sb-btn-open-ai'].includes($(e.target).attr('class'))) {
+                let target = $(e.target);
+
+                // Add safe classes for Choices.js
+                const safeClasses = [
+                    'sb-btn-saved-replies',
+                    'sb-btn-emoji',
+                    'sb-btn-woocommerce',
+                    'sb-btn-shopify',
+                    'sb-btn-open-ai',
+                    'choices', // container
+                    'choices__inner',
+                    'choices__list',
+                    'choices__item',
+                    'choices__input',
+                    'choices__button',
+                    'is-highlighted',
+                    'choice-remove'
+                ];
+
+                const targetClassList = target.attr('class') || '';
+                const isSafe = safeClasses.some(safe => targetClassList.includes(safe)) || target.closest('.choices').length;
+
+                //if (!popup.is(e.target) && popup.has(e.target).length === 0 && !['sb-btn-saved-replies', 'sb-btn-emoji', 'sb-btn-woocommerce', 'sb-btn-shopify', 'sb-btn-open-ai'].includes($(e.target).attr('class'))) {
+                if (!popup.is(e.target) && popup.has(e.target).length === 0 && !isSafe) {
                     if (popup.hasClass('sb-popup')) {
                         popup.sbTogglePopup();
                     } else if (popup.hasClass('sb-select')) {
@@ -9437,6 +13649,12 @@
     });
 
     function initialization() {
+                
+        let SB_URL_NEW = SB_URL.replace(/\/script\/?$/, '/');
+        const hasSearchParams = window.location.search.length > 1;
+        // const isHome = window.location.pathname === '/' || window.location.href === SB_URL_NEW;
+
+
         SBF.ajax({
             function: 'get-conversations'
         }, (response) => {
@@ -9461,6 +13679,30 @@
             SBConversations.datetime_last_conversation = SB_ADMIN_SETTINGS.now_db;
             loadingGlobal(false);
         });
+        
+        const isHome = window.location.href === SB_URL_NEW;
+        if (isHome && !hasSearchParams) {
+            header.find('.sb-admin-nav #sb-dashboard').click();
+        }
+
+        if (SBF.getURL('ticket')) {
+            let ticketId = SBF.getURL('ticket');
+            header.find('.sb-admin-nav #sb-tickets').click();
+            SBTicket.openTicketArea(ticketId);
+
+            SBF.ajax({
+            function: 'get-conversations'
+            }, (response) => {
+                console.log('get-conversations');
+                if (!response.length) {
+                    conversations_area.find('.sb-board').addClass('sb-no-conversation');
+                }
+                SBConversations.populateList(response);
+            });
+            return;
+        }
+
+        console.log('get-conversations called'); 
         SBF.serviceWorker.init();
         if (SB_ADMIN_SETTINGS.push_notifications) {
             SBF.serviceWorker.initPushNotifications();
@@ -9474,8 +13716,6 @@
             });
         }, 3600000);
     }
-
-
 }(jQuery));
 
 $(document).on('click keydown', '#ticketRegPass', function (e) {

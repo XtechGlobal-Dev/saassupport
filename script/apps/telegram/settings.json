@@ -35,5 +35,11 @@
     "id": "tg-disable-chatbot",
     "title": "Disable chatbot",
     "content": "Disable the chatbot for this channel only."
+  },
+  {
+    "type": "checkbox",
+    "id": "telegram-disable-start",
+    "title": "Ignore start message",
+    "content": "Ignore the automatic start message sent by Telegram when a user begins a chat."
   }
 ]

@@ -24,11 +24,17 @@ if ($response) {
     }
     if ($response_message) {
         $GLOBALS['SB_FORCE_ADMIN'] = true;
-        sb_cloud_load_by_url();
+        if (sb_is_cloud()) {
+            sb_cloud_load_by_url();
+            sb_cloud_membership_validation(true);
+        }
         $from = $response_message['from'];
         $chat_id = $response_message['chat']['id'];
         $telegram_message_id = sb_isset($response_message, 'message_id', '');
         $message = isset($response_message['text']) ? $response_message['text'] : $response_message['caption'];
+        if ($message == '/start' && sb_get_setting('telegram', 'telegram-disable-start')) {
+            return;
+        }
         $attachments = [];
         $get_token = sb_isset($_GET, 'tg_token');
         $token = $get_token ? $get_token : sb_get_multi_setting('telegram', 'telegram-token'); // Deprecated
@@ -37,10 +43,13 @@ if ($response) {
         $conversation_id = false;
 
         // User and conversation
-        $username = isset($from['username']) ? $from['username'] : $from['id'];
-        $user = sb_get_user_by('telegram-id', $username);
+        $telegram_id = isset($from['id']) ? $from['id'] : $from['username'];
+        $user = sb_get_user_by('telegram-id', $telegram_id);
         if (!$user) {
-            $extra = ['telegram-id' => [$username, 'Telegram ID']];
+            $extra = ['telegram-id' => [$telegram_id, 'Telegram ID']];
+            if (isset($from['username']) && isset($from['id'])) {
+                $extra['telegram-username'] = [$from['username'], 'Telegram Username'];
+            }
             $profile_image = sb_get('https://api.telegram.org/bot' . $token . '/getUserProfilePhotos?user_id=' . $from['id'], true);
             $business_connection_id = sb_isset($response_message, 'business_connection_id');
             if (!empty($profile_image['ok']) && count($profile_image['result']['photos'])) {

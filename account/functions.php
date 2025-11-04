@@ -1,5 +1,4 @@
 <?php
- 
 use parallel\Events\Event\Type;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -136,7 +135,7 @@ function account_registration($details) {
     // Cloud user registration
     $membership = defined('SB_CLOUD_API') ? sb_isset($details, 'membership', '0') : '0';
     $membership_expiration = '';
-    $extra = '';
+    $extra = sb_isset($details, 'extra', '');
     $credits = 0.05;
     $response = db_query('INSERT INTO users (first_name, last_name, email, phone, password, membership, membership_expiration, token, last_activity, creation_time, email_confirmed, phone_confirmed, customer_id, extra, credits) VALUES ("' . db_escape($details['first_name']) . '", "' . db_escape($details['last_name']) . '", "' . db_escape($details['email']) . '", NULL, "' . db_escape(password_hash($details['password'], PASSWORD_DEFAULT)) . '", "' . $membership . '", "' . $membership_expiration . '", "' . $token . '", "' . $now . '", "' . $now . '", ' . sb_isset($details, 'email_confirmed', '0') . ', ' . sb_isset($details, 'phone_confirmed', '0') . ', "", "' . $extra . '", ' . $credits . ')', true);
     if (is_int($response)) {
@@ -178,10 +177,15 @@ function account_registration($details) {
             fwrite($file, $raw);
             fclose($file);
 
-            // Support Board installation
-            $response = sb_installation(['db-name' => [$db_name], 'db-user' => [$user_slug], 'db-password' => [$db_password], 'db-host' => [CLOUD_DB_HOST], 'first-name' => [$details['first_name']], 'last-name' => [$details['last_name']], 'password' => [$details['password']], 'email' => [$details['email']], 'url' => CLOUD_URL . '/script']);
-            //db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","whatsapp","telegram","messenger","viber","tickets","line"]\')', false, $token);
-            db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","tickets"]\')', false, $token);
+            // // Support Board installation
+            // $response = sb_installation(['db-name' => [$db_name], 'db-user' => [$user_slug], 'db-password' => [$db_password], 'db-host' => [CLOUD_DB_HOST], 'first-name' => [$details['first_name']], 'last-name' => [$details['last_name']], 'password' => [$details['password']], 'email' => [$details['email']], 'url' => CLOUD_URL . '/script']);
+            // //db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","whatsapp","telegram","messenger","viber","tickets","line"]\')', false, $token);
+            // db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","tickets"]\')', false, $token);
+            $response = sb_installation(['db-name' => [$db_name], 'db-user' => [$user_slug], 'db-password' => [$db_password], 'db-host' => [CLOUD_DB_HOST], 'first-name' => [$details['first_name']], 'last-name' => [$details['last_name']], 'password' => [$details['password']], 'email' => [$details['email']], 'url' => CLOUD_URL . '/script', 'envato-purchase-code' => [ENVATO_PURCHASE_CODE], 'profile_image' => sb_isset($details, 'profile_image')]);
+            db_query('INSERT INTO sb_settings(name, value) VALUES (\'active_apps\', \'["dialogflow","whatsapp","telegram","messenger","viber","tickets","line"]\')', false, $token);
+            if ($response && isset($response['error'])) {
+                return $response;
+            }
 
             // Webhook and return
             cloud_webhook('user-registration', $details);
@@ -295,7 +299,7 @@ function account_save($details) {
                 $query_sb .= $key . ' = "' . $value . '",';
             }
             $query .= $key . ' = "' . $value . '",';
-        } else if (strpos($key, 'company_') !== false) {
+        } else if (str_contains($key, 'company_')) {
             $company_details[$key] = $value;
         }
     }
@@ -346,6 +350,7 @@ function account_welcome() {
     $account = account();
     if ($account) {
         send_email($account['email'], cloud_merge_field_username(super_get_setting('email_subject_welcome'),$account['first_name'] . ' ' . $account['last_name']), cloud_merge_field_username(super_get_setting('email_template_welcome'), $account['first_name'] . ' ' . $account['last_name']));
+       // send_email($account['email'], super_get_setting('email_subject_welcome'), cloud_merge_field_username(super_get_setting('email_template_welcome'), $account['first_name'] . ' ' . $account['last_name']));
     }
 }
 
@@ -359,7 +364,13 @@ function account_delete() {
 function account_get_user_details() {
     $account = account();
     if ($account) {
-        $account = array_merge($account, json_decode(sb_isset(db_get('SELECT value FROM users_data WHERE slug = "company_details" AND user_id = ' . db_escape($account['user_id'], true)), 'value', '[]'), true));
+        $company_deatails = sb_isset(db_get('SELECT value FROM users_data WHERE slug = "company_details" AND user_id = ' . db_escape($account['user_id'], true)), 'value');
+        if (!empty($company_deatails)) {
+            $company_deatails = json_decode($company_deatails, true);
+            if (is_array($company_deatails)) {
+                $account = array_merge($account, $company_deatails);
+            }
+        }
     }
     return $account;
 }
@@ -439,6 +450,9 @@ function membership_get_active($cache = true) {
         return $SB_CLOUD_ACTIVE_MEMBERSHIP;
     }
     $account = account();
+    if (empty($account)) {
+        return sb_error('Account not found', 'membership_get_active');
+    }
     $cloud_user_id = $account['user_id'];
     $cache = $cache ? json_decode(super_get_user_data('active_membership_cache', $cloud_user_id), true) : false;
     if ($cache && $cache[1] > time()) {
@@ -723,7 +737,7 @@ function membership_custom_payment($amount, $metadata_id) {
                 $notes = [];
                 $notes[$metadata_id] = true;
                 $response = razorpay_create_payment_link($amount * currency_get_divider(RAZORPAY_CURRENCY), $notes);
-                return is_string($response) && strpos($response, 'http') !== false ? ['url' => $response] : $response;
+                return is_string($response) && str_contains($response, 'http') ? ['url' => $response] : $response;
             case 'yoomoney':
                 $metadata = ['sb_user_id' => $cloud_user_id];
                 $metadata[$metadata_id] = true;
@@ -774,7 +788,7 @@ function membership_use_credits($spending_source, $extra = false) {
         case 'es-audio':
             $browser = sb_isset($_SERVER, 'HTTP_SEC_CH_UA', '');
             $divider = 18;
-            if (strpos($browser, 'Opera') !== false) {
+            if (str_contains($browser, 'Opera')) {
                 $divider = 8;
             }
             $amount = ($spending_source == 'whisper' ? filesize($extra) : $extra) / 1000 / $divider;
@@ -1573,7 +1587,7 @@ function super_get_emails() {
     $emails = [];
     for ($i = 0; $i < count($rows); $i++) {
         $name = $rows[$i]['name'];
-        if (strpos($name, 'email') !== false || $name == 'template_verification_code_phone') {
+        if (str_contains($name, 'email') || $name == 'template_verification_code_phone') {
             $emails[$name] = $rows[$i]['value'];
         }
     }
@@ -1809,11 +1823,10 @@ function super_update_saas() {
 
 function shopify_curl($url_part, $post_fields = '', $header = [], $method = 'POST', $cloud_user_id = false) {
     global $shopify_token;
-    global $shopify_shop;
     $cloud_user_id = $cloud_user_id ? $cloud_user_id : get_active_account_id();
     if ($cloud_user_id) {
         $shopify_token = $shopify_token ? $shopify_token : super_get_user_data('shopify_token', $cloud_user_id);
-        $shopify_shop = $shopify_shop ? $shopify_shop : shopify_get_shop_name($cloud_user_id);
+        $shopify_shop = shopify_get_shop_name($cloud_user_id);
         if ($shopify_shop) {
             $response = sb_curl('https://' . $shopify_shop . '/admin/' . $url_part, $post_fields, $shopify_token ? array_merge($header, ['X-Shopify-Access-Token: ' . $shopify_token]) : $header, $method);
             return $method == 'GET' ? json_decode($response, true) : $response;
@@ -1978,7 +1991,7 @@ function shopify_get_products($product_ids = false, $key = false, $collection = 
                 for ($j = 0; $j < count($product_variants); $j++) {
                     $options = $product_variants[$j]['selectedOptions'];
                     for ($y = 0; $y < count($options); $y++) {
-                        if ($options[$y]['name'] == $variant[0] && strpos(strtolower(str_replace(' ', '', $options[$y]['value'])), $variant[1]) !== false) {
+                        if ($options[$y]['name'] == $variant[0] && str_contains(strtolower(str_replace(' ', '', $options[$y]['value'])), $variant[1])) {
                             array_push($products_, $products[$i]);
                             break 2;
                         }
@@ -2782,7 +2795,6 @@ function sb_usd_get_amount($amount, $currency_code) {
     if (!$currency_code) {
         $currency_code = membership_currency();
     }
-    //echo $currency_code.'|||'.sb_usd_rates($currency_code);
     return strtolower($currency_code) == 'usd' ? $amount : $amount * sb_usd_rates($currency_code);
 }
 
@@ -2897,7 +2909,7 @@ function get_config($token) {
     $details = [];
     for ($i = 0; $i < count($raw); $i++) {
         $item = $raw[$i];
-        if (strpos($item, '(\'SB_') !== false) {
+        if (str_contains($item, '(\'SB_')) {
             $item = explode(',', $item);
             $details[trim(substr($item[0], 2, -1))] = trim(str_replace('\'', '', substr($item[1], strpos($item[1], ','), strpos($item[1], '\')'))));
         }
