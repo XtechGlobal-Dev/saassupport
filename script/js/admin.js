@@ -2485,6 +2485,11 @@
                             }
                         }
                     });
+                    
+                    if (!settings['timetable-utc']) {
+                        settings['timetable-utc'] = [];
+                    }
+
                     if (!settings['timetable-utc'][0]) {
                         settings['timetable-utc'][0] = (today.getTimezoneOffset() / 60) + '|' + Intl.DateTimeFormat().resolvedOptions().timeZone;
                     }
