@@ -1,0 +1,72 @@
+{
+  "name": "sb-integration-google-calendar",
+  "integration": true,
+  "steps": [
+    [
+      [
+        {
+          "message": "What would you like to do with your booking?",
+          "options": [
+            "Make a new booking|book an appointment",
+            "Update my booking|update my appointment|reschedule booking|reschedule appointment|reschedule it|update it|change it",
+            "Cancel my booking|cancel the appointment|cancel it",
+            "View my bookings|see my appointments|view it|see it",
+            "View available booking times|what times can I book?|show available booking slots"
+          ],
+          "type": "choices"
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "message": "The new booking date and time.",
+          "properties": [
+            [
+              "Booking date",
+              "The date of the booking. E.g., tomorrow, this week, next Monday, this afternoon, 25 June, 9:00 AM, Tuesday at 8.30pm, 25/05/2027, same day at 15:30 PM.",
+              "",
+              true
+            ]
+          ],
+          "type": "tools"
+        }
+      ],
+      [
+        {
+          "message": "The updated booking date and time.",
+          "properties": [
+            [
+              "Booking date",
+              "The date of the booking. E.g., tomorrow, this week, next Monday, this afternoon, 25 June, 9:00 AM, Tuesday at 8.30pm, 25/05/2027, same day at 15:30 PM.",
+              "",
+              true
+            ]
+          ],
+          "type": "tools"
+        }
+      ],
+      [
+        {
+          "message": "Here are your past and upcoming bookings.",
+          "properties": [],
+          "type": "tools"
+        }
+      ],
+      [
+        {
+          "message": "You booking has been cancelled.",
+          "properties": [],
+          "type": "tools"
+        }
+      ],
+      [
+        {
+          "message": "These are the available booking times.",
+          "properties": [],
+          "type": "tools"
+        }
+      ]
+    ]
+  ]
+}

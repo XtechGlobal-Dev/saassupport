@@ -18,7 +18,10 @@ if (function_exists('fastcgi_finish_request')) {
 $response = json_decode($raw, true);
 if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNATURE'])) {
     require('../../include/functions.php');
-    sb_cloud_load_by_url();
+    if (sb_is_cloud()) {
+        sb_cloud_load_by_url();
+        sb_cloud_membership_validation(true);
+    }
     $get_line_secret = sb_isset($_GET, 'line_secret');
     $line_secret = $get_line_secret ? $get_line_secret : sb_get_multi_setting('line', 'line-channel-secret'); // Deprecated
     if ($_SERVER['HTTP_X_LINE_SIGNATURE'] === base64_encode(hash_hmac('sha256', $raw, $line_secret, true))) {

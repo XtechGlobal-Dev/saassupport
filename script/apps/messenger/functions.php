@@ -17,9 +17,9 @@
  *
  */
 
-define('SB_MESSENGER', '1.2.3');
+define('SB_MESSENGER', '1.2.4');
 
-function sb_messenger_send_message($psid, $facebook_page_id, $message = '', $attachments = [], $metadata = false, $message_id = false) {
+function sb_messenger_send_message($psid, $facebook_page_id, $message = '', $attachments = [], $metadata = false, $message_id = false, $reply_to = false) {
     if (empty($message) && empty($attachments)) {
         return sb_error('missing-arguments', 'sb_messenger_send_message');
     }
@@ -45,8 +45,14 @@ function sb_messenger_send_message($psid, $facebook_page_id, $message = '', $att
                     $message[0] = sb_clear_text_formatting($message[0]);
                 }
                 while (($instagram && mb_strlen($message[0]) > 1000) || (!$instagram && mb_strlen($message[0]) > 2000)) {
-                    $pos = mb_strrpos($message[0], '.');
+                    $pos = mb_strrpos(mb_substr($message[0], 0, mb_strlen($message[0]) - 2), '.');
                     $message[0] = $pos ? mb_substr($message[0], 0, $pos + 1) : mb_substr($message[0], 0, $instagram ? 996 : 1996) . '...';
+                }
+                if ($reply_to) {
+                    $reply_to = sb_get_message_payload($reply_to, 'mid');
+                    if ($reply_to) {
+                        $data['reply_to'] = ['mid' => $reply_to];
+                    }
                 }
                 $data['message']['text'] = str_replace(PHP_EOL . PHP_EOL . PHP_EOL, PHP_EOL . PHP_EOL, $message[0]);
                 $data['message'] = array_merge($data['message'], $message[1]);
@@ -123,7 +129,7 @@ function sb_messenger_rich_messages($message, $extra = false) {
         $shortcode = $shortcodes[$j];
         $shortcode_id = sb_isset($shortcode, 'id', '');
         $shortcode_name = $shortcode['shortcode_name'];
-        $message = trim(str_replace($shortcode['shortcode'], '{R}', $message) . (isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')));
+        $message = trim(str_replace($shortcode['shortcode'], '{R}', $message) . (isset($shortcode['title']) ? (empty($shortcode['message']) ? '' : ' *') . sb_($shortcode['title']) . (empty($shortcode['message']) ? '' : '*') : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')));
         $message_inner = '';
         switch ($shortcode_name) {
             case 'slider-images':
@@ -156,18 +162,22 @@ function sb_messenger_rich_messages($message, $extra = false) {
             case 'select':
             case 'buttons':
             case 'chips':
-                $values = explode(',', $shortcode['options']);
-                if ($instagram) {
-                    $elements = [];
-                    for ($i = 0; $i < count($values); $i++) {
-                        array_push($elements, ['type' => 'postback', 'title' => sb_($values[$i]), 'payload' => sb_($values[$i])]);
-                    }
-                    $facebook = ['attachment' => ['type' => 'template', 'payload' => ['template_type' => 'button', 'text' => sb_clear_text_formatting(str_replace('{R}', '', $message)), 'buttons' => $elements]]];
-                    $message = '';
-                } else {
-                    $facebook = ['quick_replies' => []];
-                    for ($i = 0; $i < count($values); $i++) {
-                        array_push($facebook['quick_replies'], ['content_type' => 'text', 'title' => sb_($values[$i]), 'payload' => $shortcode_id]);
+                if (!str_starts_with(sb_isset($shortcode, 'id'), 'flow_')) {
+                    $values = explode(',', $shortcode['options']);
+                    if ($instagram) {
+                        $elements = [];
+                        for ($i = 0; $i < count($values); $i++) {
+                            $value = explode('|', $values[$i])[0];
+                            array_push($elements, ['type' => 'postback', 'title' => sb_($value), 'payload' => sb_($value)]);
+                        }
+                        $facebook = ['attachment' => ['type' => 'template', 'payload' => ['template_type' => 'button', 'text' => sb_clear_text_formatting(str_replace('{R}', '', $message)), 'buttons' => $elements]]];
+                        $message = '';
+                    } else {
+                        $facebook = ['quick_replies' => []];
+                        for ($i = 0; $i < count($values); $i++) {
+                            $value = explode('|', $values[$i])[0];
+                            array_push($facebook['quick_replies'], ['content_type' => 'text', 'title' => sb_($value), 'payload' => $shortcode_id]);
+                        }
                     }
                 }
                 if ($shortcode_id == 'sb-human-takeover' && defined('SB_DIALOGFLOW')) {
@@ -204,7 +214,7 @@ function sb_messenger_rich_messages($message, $extra = false) {
             case 'list-image':
             case 'list':
                 $index = $shortcode_name == 'list-image' ? 1 : 0;
-                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R4}', ' '], $shortcode['values']);
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
                 $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
@@ -216,8 +226,7 @@ function sb_messenger_rich_messages($message, $extra = false) {
                         $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = str_replace('{R}', $message_inner . PHP_EOL . PHP_EOL, $message);
-                $message = trim(str_replace(['{R2}', "\r\n\r\n\r\n", '{R4}'], ['://', "\r\n\r\n", ':'], $message));
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'rating':
                 if (!$instagram) {

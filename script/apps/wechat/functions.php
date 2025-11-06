@@ -13,7 +13,7 @@
  *
  */
 
-define('SB_WECHAT', '1.0.2');
+define('SB_WECHAT', '1.0.3');
 
 function sb_wechat_send_message($open_id, $message = '', $attachments = [], $access_token = false) {
     if (empty($message) && empty($attachments)) {
@@ -33,6 +33,7 @@ function sb_wechat_send_message($open_id, $message = '', $attachments = [], $acc
     }
 
     // Rich messages
+    $message = sb_messaging_platforms_text_formatting($message);
     $message = sb_wechat_rich_messages($message, $open_id);
     if ($message[1]) {
         $attachments = $message[1];
@@ -77,7 +78,7 @@ function sb_wechat_rich_messages($message, $extra = false) {
         $shortcode = $shortcodes[$j];
         $shortcode_id = sb_isset($shortcode, 'id', '');
         $shortcode_name = $shortcode['shortcode_name'];
-        $message = trim(str_replace($shortcode['shortcode'], '{R}', $message) . (isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')));
+        $message = trim((isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')) . str_replace($shortcode['shortcode'], '{R}', $message));
         $message_inner = '';
         switch ($shortcode_name) {
             case 'slider-images':
@@ -95,30 +96,27 @@ function sb_wechat_rich_messages($message, $extra = false) {
                 break;
             case 'list-image':
             case 'list':
-                $index = 0;
-                if ($shortcode_name == 'list-image') {
-                    $shortcode['values'] = str_replace('://', '', $shortcode['values']);
-                    $index = 1;
-                }
-                $values = explode(',', $shortcode['values']);
+                $index = $shortcode_name == 'list-image' ? 1 : 0;
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
+                $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
-                        $value = explode(':', $values[$i]);
-                        $message_inner .= PHP_EOL . trim($value[$index]) . ' ' . trim($value[$index + 1]);
+                        $value = explode(':', str_replace('{R3}', ',', $values[$i]));
+                        $message_inner .= PHP_EOL . '• *' . trim($value[$index]) . '* ' . trim($value[$index + 1]);
                     }
                 } else {
                     for ($i = 0; $i < count($values); $i++) {
-                        $message_inner .= PHP_EOL . trim($values[$i]);
+                        $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = str_replace('{R}', $message_inner, $message);
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'select':
             case 'buttons':
             case 'chips':
                 $values = explode(',', $shortcode['options']);
                 for ($i = 0; $i < count($values); $i++) {
-                    $message_inner .= PHP_EOL . sb_($values[$i]);
+                    $message_inner .= PHP_EOL . sb_(explode('|', $values[$i])[0]);
                 }
                 if ($shortcode_id == 'sb-human-takeover' && defined('SB_DIALOGFLOW')) {
                     sb_dialogflow_set_active_context('human-takeover', [], 2, false, sb_isset(sb_get_user_by('wechat-id', $extra), 'id'));

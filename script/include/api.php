@@ -236,7 +236,7 @@ function sb_process_api() {
         'dialogflow-create-intent' => ['expressions', 'response'],
         'dialogflow-entity' => ['entity_name', 'synonyms'],
         'dialogflow-get-entity' => [],
-        'dialogflow-get-token' => [],
+        'google-get-token' => [],
         'dialogflow-get-agent' => ['context_name', 'user_id'],
         'dialogflow-set-active-context' => ['context_name'],
         'dialogflow-curl' => ['url_part', 'query'],
@@ -342,7 +342,7 @@ function sb_process_api() {
     // Check if the app required by a method is installed
     $apps = [
         'SB_WP' => ['wp-sync'],
-        'SB_DIALOGFLOW' => ['dialogflow-message', 'dialogflow-create-intent', 'dialogflow-intent', 'dialogflow-entity', 'dialogflow-get-entity', 'dialogflow-get-token', 'dialogflow-get-agent', 'dialogflow-set-active-context', 'dialogflow-curl', 'send-bot-message'],
+        'SB_DIALOGFLOW' => ['dialogflow-message', 'dialogflow-create-intent', 'dialogflow-intent', 'dialogflow-entity', 'dialogflow-get-entity', 'google-get-token', 'dialogflow-get-agent', 'dialogflow-set-active-context', 'dialogflow-curl', 'send-bot-message'],
         'SB_SLACK' => ['send-slack-message', 'slack-users', 'archive-slack-channels']
     ];
 
@@ -467,13 +467,13 @@ function sb_process_api() {
         case 'clear-text-formatting':
             die(sb_api_success(sb_clear_text_formatting($_POST['message'])));
         case 'get-bot-id':
-            die(sb_api_success(sb_get_bot_id()));
+            die(sb_api_success(sb_get_bot_ID()));
         case 'open-ai-curl':
             die(sb_api_success(sb_open_ai_curl($_POST['url_part'], sb_isset($_POST, 'post_fields'), sb_isset($_POST, 'type'))));
         case 'init-articles':
             ob_start();
             require('articles.php');
-            $content = (empty($_POST['nojquery']) ? '<script src="' . SB_URL . '/js/min/jquery.min.js"></script>' : '') . (empty($_POST['nojs']) ? '<script id="chat-init" src="' . (sb_is_cloud() ? CLOUD_URL . '/account/js/init.js?id=' . account()['chat_id'] : SB_URL . '/js/min/main.min.js') . '"></script>' : '') . '<link href="' . SB_URL . '/css/main.css" type="text/css" rel="stylesheet"><link href="' . SB_URL . '/css/articles.css" type="text/css" rel="stylesheet">';
+            $content = (empty($_POST['nojquery']) ? '<script src="' . SB_URL . '/js/min/jquery.min.js"></script>' : '') . (empty($_POST['nojs']) ? '<script id="chat-init" src="' . (sb_is_cloud() ? CLOUD_URL . '/account/js/init.js?id=' . account()['chat_id'] : SB_URL . (sb_is_debug() ? '/js/main.js' : '/js/min/main.min.js')) . '"></script>' : '') . '<link href="' . SB_URL . '/css/main.css" type="text/css" rel="stylesheet"><link href="' . SB_URL . '/css/articles.css" type="text/css" rel="stylesheet">';
             $content .= ob_get_clean();
             die($content);
         default:

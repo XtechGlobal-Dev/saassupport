@@ -32,7 +32,7 @@ if (file_exists('config.php')) {
         }
         sb_cloud_load();
         if (!defined('SB_DB_NAME') || !sb_is_agent()) {
-            die('<script>document.location = "' . CLOUD_URL . '/account?login"</script>');
+            die('<script>document.location = "' . CLOUD_URL . '/account?' . (isset($_GET['auto_login']) ? 'auto_login=' . $_GET['auto_login'] . '&sb=' . $_GET['sb'] : 'login') . '"</script>');
         }
         $cloud_code = sb_cloud_membership_validation();
     } else if (!defined('SB_URL')) {
