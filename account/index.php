@@ -605,7 +605,7 @@ function box_chart() {
     ?>
     <div class="sb-registration-box sb-cloud-box sb-admin-box sb-admin-box_new<?php echo !isset($_GET['login']) && !isset($_GET['reset']) ? ' active' : '' ?>">
         <div class="sb-info"></div>
-        <div class="sb-top-bar">
+        <!-- <div class="sb-top-bar">
             <img src="<?php echo SB_CLOUD_BRAND_LOGO ?>" />
             <div class="sb-title">
                 <?php sb_e('New account') ?>
@@ -613,9 +613,9 @@ function box_chart() {
             <div class="sb-text">
                 <?php sb_e($appsumo ? 'Complete the AppSumo registration.' : 'Create your free account. No payment information required.') ?>
             </div>
-        </div>
+        </div> -->
         <?php echo $apps_login_code ?>
-        <div class="sb-main">
+        <!-- <div class="sb-main">
             <div id="first_name" class="sb-input">
                 <span>
                     <?php sb_e('First name') ?>
@@ -646,6 +646,7 @@ function box_chart() {
                 </span>
                 <input type="password" required />
             </div>
+
             <?php
             $code = '';
             for ($i = 1; $i < 5; $i++) {
@@ -656,6 +657,14 @@ function box_chart() {
             }
             echo $code;
             ?>
+                        <div class="auth-options mt-2">
+                                <label class="remember-me">
+                                    <input type="checkbox" id="terms" class="checkbox form-input" checked
+                                        style="margin-top:5px;" />
+                                    <span class="remember-text">Click Here To Accept The Platform’s Terms Of Services And
+                                        Privacy Policy</span>
+                                </label>
+                            </div>
             <div class="sb-bottom">
                 <div class="sb-btn btn-register">
                     <?php sb_e('Create account') ?>
@@ -668,14 +677,14 @@ function box_chart() {
                 </div>
             </div>
             <div class="sb-errors-area"></div>
-        </div>
-        <div class="loading-screen">
+        </div> -->
+        <!-- <div class="loading-screen">
             <i class="sb-loading"></i>
             <p>
                 <?php sb_e('We are creating your account...') ?>
             </p>
-        </div>
-        <!--div class="container">
+        </div> -->
+        <div class="container">
             <div class="row">
                 <div class="col-md-6 top_left">
                     <div class="left_section">
@@ -792,7 +801,7 @@ function box_chart() {
                     </div>
                 </div>
             </div>
-        </div-->
+        </div>
     </div>
     <div class="sb-login-box sb-cloud-box sb-admin-box sb-admin-box_new<?php if (isset($_GET['login']))
         echo ' active' ?>">

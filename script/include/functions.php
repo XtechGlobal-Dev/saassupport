@@ -975,7 +975,7 @@ function sb_installation($details, $force = false) {
 
         // Create the database
         $connection = new mysqli($database['host'], $database['user'], $database['password'], $database['name'], $database['port']);
-        if ($not_cloud) {
+        if (!sb_is_cloud()) {
             $connection->set_charset('utf8mb4');
         }
         $db_respones['users'] = $connection->query('CREATE TABLE IF NOT EXISTS sb_users (id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(100) NOT NULL, last_name VARCHAR(100) NOT NULL, password VARCHAR(100), email VARCHAR(191) UNIQUE, profile_image VARCHAR(191), user_type VARCHAR(10) NOT NULL, creation_time DATETIME NOT NULL, token VARCHAR(50) NOT NULL UNIQUE, last_activity DATETIME, typing INT DEFAULT -1, department TINYINT, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci');
@@ -1027,7 +1027,7 @@ function sb_installation($details, $force = false) {
         }
 
         // Create the config.php file and other files
-        if ($not_cloud) {
+        if (!sb_is_cloud()) {
             $raw = file_get_contents(SB_PATH . '/resources/config-source.php');
             $raw = str_replace(['[url]', '[name]', '[user]', '[password]', '[host]', '[port]'], [$details['url'], $database['name'], $database['user'], $database['password'], $database['host'], (isset($details['db-port']) && $details['db-port'][0] ? $database['port'] : '')], $raw);
             $path = SB_PATH . '/sw.js';
