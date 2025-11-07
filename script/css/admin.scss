@@ -207,8 +207,9 @@ html {
 }
 
 .sb-title {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0px;
 
   &.sb-title-search {
     position: relative;
@@ -427,11 +428,10 @@ td.sb-offline:after {
 
 .settings_new {
   .sb-tab {
-    height: calc(100vh - 78px) !important;
+    min-height: calc(100vh - 78px) !important;
 
     .sb-content {
-      height: calc(100vh - 130px);
-      overflow: hidden;
+      min-height  : calc(100vh - 130px); 
     }
   }
 
@@ -4910,8 +4910,7 @@ body {
 }
 
 .users-tab {
-  overflow-y: scroll;
-  max-height: 75vh;
+  
 
   &::-webkit-scrollbar {
     width: 0;
@@ -5893,7 +5892,7 @@ a#sb-accout {
   user-select: none;
   text-decoration: none;
   align-items: flex-start;
-  padding: 12px 1rem !important;
+  padding: 0rem !important;
   line-height: 1.2 !important;
   font-size: 14px !important;
   font-weight: 500 !important;
@@ -6725,7 +6724,7 @@ span.initials.avatar_name {
   align-items: center;
 
   > label {
-    margin: 0 15px 0 0;
+    margin: 0 15px 5px 0;
     height: fit-content;
 
     &.custom-switch {
@@ -6903,7 +6902,8 @@ span.initials.avatar_name {
   color: rgb(120, 134, 146);
 }
 
-.sb-direct-message-box .sb-setting, #sb-whatsapp-send-template-box .sb-setting   {
+.sb-direct-message-box .sb-setting,
+#sb-whatsapp-send-template-box .sb-setting {
   padding: 0px 0px 0px 0px !important;
 }
 .sb-setting {
@@ -7247,7 +7247,7 @@ span.initials.avatar_name {
     }
 
     > div {
-      display: flex;
+      display: block;
 
       & + div {
         margin-top: 10px;
@@ -7272,7 +7272,7 @@ span.initials.avatar_name {
       }
 
       label {
-        margin: 0 15px 0 0;
+        margin: 0 15px 5px 0;
 
         & + div {
           flex-grow: 1;
@@ -8866,7 +8866,7 @@ ul.status-list.dropdown-menu {
 
   .sb-setting {
     label {
-      margin: 0 15px 0 0;
+      margin: 0 15px 5px 0;
       min-width: 0;
       line-height: 25px;
       font-weight: 400;
@@ -9282,7 +9282,7 @@ ul.status-list.dropdown-menu {
 }
 .sb-setting label {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   color: black !important;
 }
 .sb-admin.sb-main {
@@ -11789,9 +11789,7 @@ li.menu_head:hover {
   padding: 15px 15px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  overflow-y: scroll;
-  max-height: calc(100vh - 363px);
+  gap: 15px; 
 
   &::-webkit-scrollbar {
     width: 0;
@@ -11981,11 +11979,15 @@ li.menu_head:hover {
     }
 
     .select2-selection__arrow {
-      top: 50% !important;
-      transform: translateY(-50%) !important;
+      top: 12% !important;
+      transform: translateY(0%) !important;
       position: absolute;
       right: 8px;
       margin-top: 0;
+
+      b {
+        border-width: 5px 5px 0px 5px;
+      }
     }
   }
 }
@@ -14968,5 +14970,109 @@ main {
         }
       }
     }
+  }
+}
+
+// Ram Saini's CSS Style start <<
+.hd-savedReply {
+  padding: 15px;
+  border-radius: 10px;
+  overflow-y: auto;
+  .hd-savedReply-header {
+    background-color: #e4f1ff;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: space-between;
+
+    .hd-savedReply-searchReplyWrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
+    .hd-savedReply-searchIcon {
+      height: 44px;
+      width: 44px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        position: unset;
+      }
+    }
+  }
+  .hd-savedReply-butn {
+    margin: 10px 0px;
+    display: inline-block;
+  }
+}
+
+.sb-input {
+  display: block !important;
+  margin: 12px 0px !important;
+  .required-label,
+  span {
+    padding-bottom: 5px;
+  }
+}
+
+.hd-viewPassword {
+  position: relative;
+
+  svg,
+  i {
+    position: absolute;
+    bottom: 9px;
+    right: 12px;
+  }
+}
+
+select {
+  -webkit-appearance: none; /* For Chrome, Safari */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none; /* Standard */
+  background: transparent;
+
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 4px),
+    calc(100% - 15px) calc(1em + 4px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding: 0 30px 0 0;
+}
+
+select:focus {
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%) !important;
+  background-position: calc(100% - 20px) calc(1em + 4px),
+    calc(100% - 15px) calc(1em + 4px) !important;
+  background-size: 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+
+.sb-type-multi-input > .input > div:not(.multi-input-checkbox, .multi-input-button),
+.sb-setting .sb-language-switcher-cnt{
+ flex-direction: column;
+ justify-content: flex-start;
+ align-items: stretch;
+
+ label{
+  width: 100%;
+ }
+} 
+
+input[type="color"]{
+  background-color: #00f;
+}
+// Ram Saini's CSS Style end >>
+
+.sb-profile-edit-box.sb-user-new{
+
+  .sb-title, .sb-delete{
+    display: none;
   }
 }

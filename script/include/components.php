@@ -145,14 +145,14 @@ function sb_profile_edit_box() { ?>
                         </span>
                         <input type="text" required />
                     </div>
-                    <div id="password" data-type="text" class="sb-input">
+                    <div id="password" data-type="text" class="sb-input hd-viewPassword">
                         <span class="required-label">
                             <?php sb_e("Password"); ?>
                         </span>
                         <input type="password" id="edit-profile-password" style="padding-right: 35px;" />
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="toggleEditProfilePassword"
                             width="24" height="24" color="#000000" fill="none"
-                            style="margin-left: -26px;margin-right: 10px; cursor: pointer;">
+                            style="cursor: pointer;">
                             <path
                                 d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
                                 stroke="#141B34" stroke-width="1.5" />
@@ -3493,8 +3493,8 @@ function sb_component_admin()
                                                                             <td class="sb-td-subject">Bug fix: Login issue</td>
                                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                                            <td class="sb-td-status"><span class="span-border"
-                                                                                    style="color:#FF0000;border:1px solid #FF0000;"><?php sb_e("Open"); ?></span>
+                                                                            <td class="sb-td-status">
+                                                                                <span class="span-border" style="color:#FF0000;border:1px solid #FF0000;"><?php sb_e("Open"); ?></span>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -5901,11 +5901,15 @@ function sb_component_admin()
                                         //echo $disable_translations ? 'Translations' : sb_('Translations')
                                         ?>
                                     </li> -->
+
+                                    <li>
+                                        <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation"
+                                            data-tooltip="Account">
+                                            Account
+                                        </a>
+                                    </li>
                                 </ul>
-                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation"
-                                    data-tooltip="Account">
-                                    Account
-                                </a>
+                              
                             </div>
                             <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
