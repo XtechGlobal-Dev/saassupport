@@ -35,6 +35,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sb-icon-arrows-in:before {
+  content: "\e90d";
+}
+
+.sb-icon-arrows-out:before {
+  content: "\e90b";
+}
+
+.sb-icon-sidebar:before {
+  content: "\e90c";
+}
+
 .sb-icon-arrow-up:before {
   content: "a";
   transform: rotate(180deg);
@@ -4239,8 +4251,9 @@ html {
 }
 
 .sb-title {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0px;
 }
 .sb-title.sb-title-search {
   position: relative;
@@ -4443,11 +4456,10 @@ td.sb-offline:after {
 }
 
 .settings_new .sb-tab {
-  height: calc(100vh - 78px) !important;
+  min-height: calc(100vh - 78px) !important;
 }
 .settings_new .sb-tab .sb-content {
-  height: calc(100vh - 130px);
-  overflow: hidden;
+  min-height: calc(100vh - 130px);
 }
 .settings_new .sb-scroll-area .setting_sidebar li {
   margin-bottom: 20px;
@@ -8042,10 +8054,6 @@ body .daterangepicker td.active:hover {
   margin: 0;
 }
 
-.users-tab {
-  overflow-y: scroll;
-  max-height: 75vh;
-}
 .users-tab::-webkit-scrollbar {
   width: 0;
 }
@@ -9008,7 +9016,7 @@ a#sb-accout {
   user-select: none;
   text-decoration: none;
   align-items: flex-start;
-  padding: 12px 1rem !important;
+  padding: 0rem !important;
   line-height: 1.2 !important;
   font-size: 14px !important;
   font-weight: 500 !important;
@@ -9684,7 +9692,7 @@ span.initials.avatar_name {
 .sb-setting .sb-language-switcher-cnt > label,
 .sb-select-checkbox > div > label,
 #open-ai-prompt > label {
-  margin: 0 15px 0 0;
+  margin: 0 15px 5px 0;
   height: fit-content;
 }
 .sb-type-multi-input > .input > div:not(.multi-input-textarea) > label.custom-switch,
@@ -9822,7 +9830,8 @@ span.initials.avatar_name {
   color: rgb(120, 134, 146);
 }
 
-.sb-direct-message-box .sb-setting, #sb-whatsapp-send-template-box .sb-setting {
+.sb-direct-message-box .sb-setting,
+#sb-whatsapp-send-template-box .sb-setting {
   padding: 0px 0px 0px 0px !important;
 }
 
@@ -10123,7 +10132,7 @@ span.initials.avatar_name {
   margin-top: 20px;
 }
 .sb-setting .repeater-item > div {
-  display: flex;
+  display: block;
 }
 .sb-setting .repeater-item > div + div {
   margin-top: 10px;
@@ -10144,7 +10153,7 @@ span.initials.avatar_name {
   opacity: 1;
 }
 .sb-setting .repeater-item > div label {
-  margin: 0 15px 0 0;
+  margin: 0 15px 5px 0;
 }
 .sb-setting .repeater-item > div label + div {
   flex-grow: 1;
@@ -11473,7 +11482,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   padding-top: 20px !important;
 }
 .sb-repeater-block-user-details .sb-setting label {
-  margin: 0 15px 0 0;
+  margin: 0 15px 5px 0;
   min-width: 0;
   line-height: 25px;
   font-weight: 400;
@@ -11811,7 +11820,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 
 .sb-setting label {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   color: black !important;
 }
 
@@ -13981,8 +13990,6 @@ li.menu_head:hover {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  overflow-y: scroll;
-  max-height: calc(100vh - 363px);
 }
 .settings-tab::-webkit-scrollbar {
   width: 0;
@@ -14121,11 +14128,14 @@ li.menu_head:hover {
   line-height: 1.5;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow {
-  top: 50% !important;
-  transform: translateY(-50%) !important;
+  top: 12% !important;
+  transform: translateY(0%) !important;
   position: absolute;
   right: 8px;
   margin-top: 0;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-width: 5px 5px 0px 5px;
 }
 
 .sb-input > div {
@@ -16148,6 +16158,96 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-admin .header_new .sidebar .powered-by {
     flex-direction: column;
   }
+}
+.hd-savedReply {
+  padding: 15px;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+.hd-savedReply .hd-savedReply-header {
+  background-color: #e4f1ff;
+  padding: 10px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.hd-savedReply .hd-savedReply-header .hd-savedReply-searchReplyWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+.hd-savedReply .hd-savedReply-header .hd-savedReply-searchIcon {
+  height: 44px;
+  width: 44px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hd-savedReply .hd-savedReply-header .hd-savedReply-searchIcon i {
+  position: unset;
+}
+.hd-savedReply .hd-savedReply-butn {
+  margin: 10px 0px;
+  display: inline-block;
+}
+
+.sb-input {
+  display: block !important;
+  margin: 12px 0px !important;
+}
+.sb-input .required-label,
+.sb-input span {
+  padding-bottom: 5px;
+}
+
+.hd-viewPassword {
+  position: relative;
+}
+.hd-viewPassword svg,
+.hd-viewPassword i {
+  position: absolute;
+  bottom: 9px;
+  right: 12px;
+}
+
+select {
+  -webkit-appearance: none; /* For Chrome, Safari */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none; /* Standard */
+  background: transparent;
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 4px), calc(100% - 15px) calc(1em + 4px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding: 0 30px 0 0;
+}
+
+select:focus {
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%) !important;
+  background-position: calc(100% - 20px) calc(1em + 4px), calc(100% - 15px) calc(1em + 4px) !important;
+  background-size: 5px 5px !important;
+  background-repeat: no-repeat !important;
+}
+
+.sb-type-multi-input > .input > div:not(.multi-input-checkbox, .multi-input-button),
+.sb-setting .sb-language-switcher-cnt {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.sb-type-multi-input > .input > div:not(.multi-input-checkbox, .multi-input-button) label,
+.sb-setting .sb-language-switcher-cnt label {
+  width: 100%;
+}
+
+input[type=color] {
+  background-color: #00f;
+}
+
+.sb-profile-edit-box.sb-user-new .sb-title, .sb-profile-edit-box.sb-user-new .sb-delete {
+  display: none;
 }
 
 /*# sourceMappingURL=admin.css.map */
