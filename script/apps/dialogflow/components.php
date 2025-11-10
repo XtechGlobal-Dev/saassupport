@@ -281,14 +281,22 @@ function sb_dialogflow_chatbot_area($header) { ?>
                             <textarea placeholder="<?php sb_e('Write a message...') ?>"></textarea>
                         </div>
                         <div class="sb-flex">
-                            <div class="sb-flex">
+                            <div class="sb-flex" style="width: 100%; justify-content: space-between;">
                                 <div data-value="send" class="sb-btn sb-btn-white sb-icon" data-sb-tooltip="<?php sb_e('Send message') ?>">
                                     <i class="sb-icon-send"></i>
                                     <?php sb_e('Send') ?>
                                 </div>
-                                <i data-value="clear" class="sb-icon-close sb-btn-icon sb-btn-red"></i>
-                                <i data-value="auto-clear" class="sb-icon-reload sb-btn-icon sb-btn-red" data-sb-tooltip="<?php sb_e('Auto clear') ?>"></i>
-                                <i data-value="history" class="sb-icon-clock sb-btn-icon" data-sb-tooltip="<?php sb_e('History') ?>"></i>
+                                <div class="sb-flex">
+                                    <div class="sb-btn sb-btn-white sb-icon">
+                                        <i data-value="clear" class="sb-icon-close sb-btn-icon sb-btn-red"></i>
+                                    </div>
+                                    <div class="sb-btn sb-btn-white sb-icon">
+                                        <i data-value="auto-clear" class="sb-icon-reload sb-btn-icon sb-btn-red" data-sb-tooltip="<?php sb_e('Auto clear') ?>"></i>
+                                    </div>
+                                    <div class="sb-btn sb-btn-white sb-icon">
+                                        <i data-value="history" class="sb-icon-clock sb-btn-icon" data-sb-tooltip="<?php sb_e('History') ?>"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
