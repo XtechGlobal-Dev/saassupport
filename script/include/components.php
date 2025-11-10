@@ -5902,12 +5902,12 @@ function sb_component_admin()
                                         ?>
                                     </li> -->
 
-                                    <li>
+                                    <div style="padding: 12px 16px;">
                                         <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation"
                                             data-tooltip="Account">
                                             Account
                                         </a>
-                                    </li>
+                                    </div>
                                 </ul>
                               
                             </div>
