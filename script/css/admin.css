@@ -16246,8 +16246,49 @@ input[type=color] {
   background-color: #00f;
 }
 
-.sb-profile-edit-box.sb-user-new .sb-title, .sb-profile-edit-box.sb-user-new .sb-delete {
+.sb-profile-edit-box.sb-user-new .sb-title,
+.sb-profile-edit-box.sb-user-new .sb-delete {
   display: none;
+}
+
+.sb-icon.iconBtns {
+  width: fit-content !important;
+  aspect-ratio: 1/1;
+  min-width: fit-content !important;
+  padding: 0% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sb-icon.iconBtns:has(i.sb-active) {
+  background-color: #22c55e;
+}
+.sb-icon.iconBtns i {
+  position: unset;
+}
+.sb-icon.iconBtns:has(i[data-value=history]) {
+  position: relative;
+}
+.sb-icon.iconBtns:has(i[data-value=history]) .historyPenal {
+  position: absolute;
+  top: auto;
+  bottom: 38px;
+  left: auto;
+  right: 0;
+  transform: unset;
+  padding: 10px;
+  width: 220px;
+  overflow-y: auto;
+}
+.sb-icon.iconBtns:has(i[data-value=history]) .historyPenal:after {
+  left: auto;
+  right: 10px;
+  transform: unset;
+}
+.sb-icon.iconBtns:has(i[data-value=history]) .historyPenal ul li {
+  text-align: left;
+  font-size: 14px;
+  color: #000;
 }
 
 /*# sourceMappingURL=admin.css.map */
