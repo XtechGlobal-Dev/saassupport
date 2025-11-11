@@ -281,20 +281,26 @@ function sb_dialogflow_chatbot_area($header) { ?>
                             <textarea placeholder="<?php sb_e('Write a message...') ?>"></textarea>
                         </div>
                         <div class="sb-flex">
-                            <div class="sb-flex" style="width: 100%; justify-content: space-between;">
+                            <div class="sb-flex" style="width: 100%; gap: 15px;;">
                                 <div data-value="send" class="sb-btn sb-btn-white sb-icon" data-sb-tooltip="<?php sb_e('Send message') ?>">
                                     <i class="sb-icon-send"></i>
                                     <?php sb_e('Send') ?>
                                 </div>
                                 <div class="sb-flex">
-                                    <div class="sb-btn sb-btn-white sb-icon">
-                                        <i data-value="clear" class="sb-icon-close sb-btn-icon sb-btn-red"></i>
+                                    <div class="sb-btn sb-btn-white sb-icon iconBtns">
+                                        <i data-value="clear" class="sb-icon-close"></i>
                                     </div>
-                                    <div class="sb-btn sb-btn-white sb-icon">
-                                        <i data-value="auto-clear" class="sb-icon-reload sb-btn-icon sb-btn-red" data-sb-tooltip="<?php sb_e('Auto clear') ?>"></i>
+                                    <div class="sb-btn sb-btn-white sb-icon iconBtns">
+                                        <i data-value="auto-clear" class="sb-icon-reload" data-sb-tooltip="<?php sb_e('Auto clear') ?>"></i>
                                     </div>
-                                    <div class="sb-btn sb-btn-white sb-icon">
-                                        <i data-value="history" class="sb-icon-clock sb-btn-icon" data-sb-tooltip="<?php sb_e('History') ?>"></i>
+                                    <div class="sb-btn sb-btn-white sb-icon iconBtns">
+                                        <i data-value="history" class="sb-icon-clock" data-sb-tooltip="<?php sb_e('History') ?>"></i>
+
+                                         <div class="sb-popup sb-playground-history historyPenal">
+                                            <div class="sb-replies-list sb-scroll-area">
+                                                <ul></ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -304,11 +310,7 @@ function sb_dialogflow_chatbot_area($header) { ?>
                 <div class="sb-playground-info"></div>
             </div>
         </div>
-        <div class="sb-popup sb-playground-history">
-            <div class="sb-replies-list sb-scroll-area">
-                <ul></ul>
-            </div>
-        </div>
+       
     </div>
 <?php } ?>
 <?php

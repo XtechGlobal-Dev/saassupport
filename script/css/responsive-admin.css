@@ -493,6 +493,15 @@ a.sb-btn.sb-icon.sb-btn-white i {
 a.sb-btn.sb-icon.sb-btn-white i:before {
   line-height: 40px;
 }
+.sb-btn.sb-icon[data-sb-tooltip="Send message"],
+a.sb-btn.sb-icon[data-sb-tooltip="Send message"] {
+  padding: 0px 10px;
+  min-width: unset;
+}
+.sb-btn.sb-icon[data-sb-tooltip="Send message"] i,
+a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
+  position: unset;
+}
 
 .sb-profile-list > ul > li,
 .sb-panel-details .sb-list-items > div,
@@ -622,7 +631,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
   top: 132px;
   position: fixed;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: calc(100% - 130px);
   z-index: 99995;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1215686275);
@@ -1417,7 +1426,7 @@ td.sb-offline:after {
 }
 
 .sb-admin .sb-timetable {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .sb-admin .sb-apps {
   grid-template-columns: 1fr;
@@ -1508,7 +1517,7 @@ td.sb-offline:after {
 
 */
 .sb-area-chatbot > .sb-tab {
-  overflow: scroll;
+  overflow: auto;
   height: calc(100% - 110px) !important;
   padding-bottom: 30px;
 }
@@ -1547,24 +1556,9 @@ td.sb-offline:after {
   overflow: visible;
 }
 
-.sb-playground-editor {
-  position: static;
-}
-.sb-playground-editor > .sb-flex {
-  display: block;
-}
-.sb-playground-editor > .sb-flex .sb-flex:last-child {
-  display: block;
-}
-.sb-playground-editor > .sb-flex .sb-flex:last-child > div {
-  display: block;
-  margin: 10px 0;
-  padding-left: 30px;
-}
-
 [data-id=playground] {
   height: calc(100% - 70px);
-  overflow: scroll;
+  overflow: auto;
 }
 [data-id=playground] > div {
   display: block;
@@ -1572,7 +1566,6 @@ td.sb-offline:after {
   align-content: baseline;
 }
 [data-id=playground] > div > div {
-  height: auto;
   padding: 15px 15px 30px 15px;
   border: none;
 }
@@ -1635,7 +1628,7 @@ td.sb-offline:after {
 [data-id=flows] > .sb-content {
   border-top: 1px solid rgb(212, 212, 212);
   overflow: hidden !important;
-  overflow-x: scroll !important;
+  overflow-x: auto !important;
 }
 
 .sb-flow-scroll {
@@ -1654,7 +1647,7 @@ td.sb-offline:after {
 */
 .sb-area-articles > .sb-tab {
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 100%;
   height: calc(100% - 110px) !important;
 }
