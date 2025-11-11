@@ -431,7 +431,7 @@ td.sb-offline:after {
     min-height: calc(100vh - 78px) !important;
 
     .sb-content {
-      min-height  : calc(100vh - 130px); 
+      min-height: calc(100vh - 130px);
     }
   }
 
@@ -4910,8 +4910,6 @@ body {
 }
 
 .users-tab {
-  
-
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -11789,7 +11787,7 @@ li.menu_head:hover {
   padding: 15px 15px;
   display: flex;
   flex-direction: column;
-  gap: 15px; 
+  gap: 15px;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -15054,25 +15052,72 @@ select:focus {
   background-repeat: no-repeat !important;
 }
 
-.sb-type-multi-input > .input > div:not(.multi-input-checkbox, .multi-input-button),
-.sb-setting .sb-language-switcher-cnt{
- flex-direction: column;
- justify-content: flex-start;
- align-items: stretch;
+.sb-type-multi-input
+  > .input
+  > div:not(.multi-input-checkbox, .multi-input-button),
+.sb-setting .sb-language-switcher-cnt {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 
- label{
-  width: 100%;
- }
-} 
+  label {
+    width: 100%;
+  }
+}
 
-input[type="color"]{
+input[type="color"] {
   background-color: #00f;
 }
 // Ram Saini's CSS Style end >>
 
-.sb-profile-edit-box.sb-user-new{
-
-  .sb-title, .sb-delete{
+.sb-profile-edit-box.sb-user-new {
+  .sb-title,
+  .sb-delete {
     display: none;
+  }
+}
+
+.sb-icon.iconBtns {
+  width: fit-content !important;
+  aspect-ratio: 1/1;
+  min-width: fit-content !important;
+  padding: 0% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:has(i.sb-active) {
+    background-color: #22c55e;
+  }
+  i {
+    position: unset;
+  }
+  &:has(i[data-value="history"]) {
+    position: relative;
+    .historyPenal {
+      position: absolute;
+      top: auto;
+      bottom: 38px;
+      left: auto;
+      right: 0;
+      transform: unset;
+      padding: 10px;
+      width: 220px;
+      overflow-y: auto;
+      &:after {
+        left: auto;
+        right: 10px;
+        transform: unset;
+      }
+
+      ul{
+
+        li{
+          text-align: left;
+          font-size: 14px;
+          color: #000;
+        }
+      }
+    }
   }
 }
