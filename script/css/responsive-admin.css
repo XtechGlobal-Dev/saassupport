@@ -349,9 +349,6 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
   padding: 5px 15px 15px 15px;
   border: none;
 }
-.sb-tab > .sb-nav > ul {
-  max-width: none;
-}
 
 /*
 
@@ -629,10 +626,9 @@ a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
   right: 0;
   margin: 0;
   top: 132px;
-  position: fixed;
   overflow: hidden;
   overflow-y: auto;
-  max-height: calc(100% - 130px);
+  max-height: 100%;
   z-index: 99995;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1215686275);
   border-top: 1px solid rgb(212, 212, 212);
@@ -661,6 +657,7 @@ a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
 .sb-admin .sb-menu-wide.sb-active > ul,
 .sb-admin .sb-nav.sb-active > ul {
   display: block;
+  position: absolute;
 }
 .sb-admin .sb-menu-wide > ul,
 .sb-admin .sb-nav > ul {
@@ -845,7 +842,7 @@ a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
   top: 0;
   bottom: 0;
   margin: 0 !important;
-  min-height: 100%;
+  min-height: 0%;
   border: none;
   border-radius: 0;
 }

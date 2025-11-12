@@ -2010,18 +2010,19 @@ a.sb-btn {
         cursor: pointer;
         display: inline-block;
         line-height: 0;
-        height: 35px;
-        min-height: 35px;
+        height: 20px;
+        min-height: 20px;
         outline: 0;
         padding: 0;
         margin: 0;
         text-align: center;
         vertical-align: middle;
-        width: 35px;
-        min-width: 35px !important;
+        width: 20px;
+        min-width: 20px !important;
         outline: none;
         box-shadow: none;
         -webkit-appearance: none;
+        position: relative;
 
         &:checked:before {
             content: "\77" !important;
@@ -2030,12 +2031,16 @@ a.sb-btn {
             font-weight: normal !important;
             font-variant: normal !important;
             text-transform: none !important;
-            line-height: 35px;
-            font-size: 15px;
+            line-height: 18px;
+            font-size: 10px;
             color: $color-blue;
             margin: 0;
             width: 100%;
             height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
         }
     }
 
