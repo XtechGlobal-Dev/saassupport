@@ -400,9 +400,9 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
   padding: 5px 15px 15px 15px;
   border: none;
 
-  > ul {
-    max-width: none;
-  }
+  // > ul {
+  //   max-width: none;
+  // }
 }
 
 /*
@@ -710,10 +710,9 @@ a.sb-btn {
     right: 0;
     margin: 0;
     top: 132px;
-    position: fixed;
     overflow: hidden;
-    overflow-y:auto;
-    max-height: calc(100% - 130px);
+    overflow-y: auto;
+    max-height: 100%;
     z-index: 99995;
     box-shadow: 0 5px 5px #0000001f;
     border-top: 1px solid $border-color;
@@ -745,6 +744,7 @@ a.sb-btn {
 
     &.sb-active > ul {
       display: block;
+      position: absolute;
     }
 
     > ul {
@@ -967,7 +967,7 @@ a.sb-btn {
   top: 0;
   bottom: 0;
   margin: 0 !important;
-  min-height: 100%;
+  min-height: 0%;
   border: none;
   border-radius: 0;
 }
@@ -1657,7 +1657,7 @@ td.sb-offline:after {
 
 .sb-admin {
   .sb-timetable {
-    overflow-x:auto;
+    overflow-x: auto;
   }
 
   .sb-apps {
@@ -1765,7 +1765,7 @@ td.sb-offline:after {
 
 .sb-area-chatbot {
   > .sb-tab {
-    overflow:auto;
+    overflow: auto;
     height: calc(100% - 110px) !important;
     padding-bottom: 30px;
 
@@ -1922,7 +1922,7 @@ td.sb-offline:after {
   > .sb-content {
     border-top: 1px solid $border-color;
     overflow: hidden !important;
-    overflow-x:auto !important;
+    overflow-x: auto !important;
   }
 }
 
@@ -1944,7 +1944,7 @@ td.sb-offline:after {
 .sb-area-articles {
   > .sb-tab {
     overflow: hidden;
-    overflow-y:auto;
+    overflow-y: auto;
     max-height: 100%;
     height: calc(100% - 110px) !important;
 
