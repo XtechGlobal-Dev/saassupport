@@ -107,7 +107,7 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
         <div class="sb-top-bar py-4">
             <div>
                 <h2>
-                    <button class="account-toggle-btn" type="button">
+                    <button class="account-toggle-btn me-3" type="button">
                         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM7 12C7 11.4477 7.44772 11 8 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H8C7.44772 13 7 12.5523 7 12ZM13 18C13 17.4477 13.4477 17 14 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H14C13.4477 19 13 18.5523 13 18Z"
@@ -301,15 +301,17 @@ if (sb_isset($_GET, 'payment_type') == 'credits' && PAYMENT_PROVIDER == 'stripe'
                             <?php sb_e('Last name') ?>
                         </span>
                         <input type="text" placeholder="Last name" />
-                    </div>
-                    <div id="email" data-type="text" class="sb-input sb-type-input-button">
+                    </div> 
+                    <div id="email" data-type="text" class="sb-input">
                         <span class="required-label">
                             <?php sb_e('Email') ?>
                         </span>
-                        <input type="email" readonly placeholder="Email" />
-                        <a class="sb-btn btn-verify-email">
-                            <?php sb_e('Verify Email') ?>
-                        </a>
+                        <div class="d-flex flex-wrap sb-input w-100 mw-100 flex-row">
+                            <input type="email" readonly placeholder="Email" />
+                            <a class="sb-btn btn-verify-email">
+                                <?php sb_e('Verify Email') ?>
+                            </a> 
+                        </div>
                     </div>
                     <div id="phone" data-type="text" class="sb-input sb-type-input-button">
                         <span class="required-label">

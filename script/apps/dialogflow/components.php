@@ -307,7 +307,7 @@ function sb_dialogflow_chatbot_area($header) { ?>
                         </div>
                     </div>
                 </div>
-                <div class="sb-playground-info"></div>
+                <!-- <div class="sb-playground-info"></div> -->
             </div>
         </div>
        

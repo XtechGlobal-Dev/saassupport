@@ -344,13 +344,13 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                             <span class="mb-2"><?php sb_e(
                                 "Assigned To"
                             ); ?></span>
-                            <div class="">
+                            <div class="w-100 mw-100">
                                 <select id="select-agent" style="width:100%;"></select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sb-additional-details">
+                <div class="sb-additional-details w-100 mw-100 flex-fill">
                     <div class="sb-edit-box">
                         <!--div id="service_id" data-type="select" class="sb-input">
                             <span><?php sb_e("Service"); ?></span>
@@ -371,7 +371,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                         $tagsHtml = "";
                         $count = count($tags);
                         if ($count > 0) { ?>
-                            <div id="tags-div" data-type="select" class="sb-input">
+                            <div id="tags-div" data-type="select" class="sb-input w-100 mw-100">
                                 <span><?php sb_e("Tags"); ?></span>
                                 <select id="ticket-tags" name="tags[]" multiple>
                                     <?php
@@ -2825,7 +2825,7 @@ function sb_component_admin()
                     '</span>
                                         </div>
                                     </a>
-                                    <ul class="sb-menu">
+                                    <ul class="sb-menu" style="border-radius: 10px; ">
                                             <li class="menu_head">
                                                 <img class="avatar_img" src="' . $user_image . '" alt="' . $user_name . '" />
                                                 <span class="user-initials avatar_initials" style="display:none;">
