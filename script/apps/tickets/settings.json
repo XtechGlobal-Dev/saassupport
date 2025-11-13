@@ -285,7 +285,13 @@
       {
         "type": "password",
         "id": "tickets-recaptcha-secret",
-        "title": "Secret key"
+        "title": "Secret key",
+        "content": "Add domains separated by comma(,). Eg. google.com,yahoo.com"
+      },
+      {
+        "type": "text",
+        "id": "tickets-recaptcha-allowed-domains",
+        "title": "Allowed domains(comma separated)"
       }
     ]
   },

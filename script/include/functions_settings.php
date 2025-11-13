@@ -888,6 +888,7 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
             $settings = json_decode($settings, true);
         }
         $settings_encoded = sb_db_json_escape($settings);
+        $allowedHosts = isset($settings['tickets-recaptcha'][0]['tickets-recaptcha-allowed-domains']) ? $settings['tickets-recaptcha'][0]['tickets-recaptcha-allowed-domains'] : '';
         if (isset($settings_encoded) && is_string($settings_encoded)) {
 
             // Save main settings
@@ -923,6 +924,50 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
             }
 
             $SB_SETTINGS = $settings;
+
+
+            //////////////////////////// Google recaptcha /////////////////////////////////////
+            $projectId = "my-project-5655-1762836312979";
+            $keyId = "6LeMAgosAAAAABWEowXbKxqU-bU8lbXLbOuudBRl";
+
+            $token = google_get_access_token();
+
+            $url = "https://recaptchaenterprise.googleapis.com/v1/projects/$projectId/keys/$keyId";
+
+            // Get the current key settings
+            $ch = curl_init("$url?access_token=$token");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = json_decode(curl_exec($ch), true);
+            curl_close($ch);
+
+            $domains = $response["webSettings"]["allowedDomains"];
+
+            if (in_array($domain, $domains)) {
+                return; // already exists
+            }
+
+            $domains[] = $domain;
+
+            // Update allowedDomains
+            $payload = json_encode([
+                "webSettings" => [
+                    "allowedDomains" => $domains
+                ]
+            ]);
+
+            $ch = curl_init("$url?updateMask=webSettings.allowedDomains&access_token=$token");
+            curl_setopt_array($ch, [
+                CURLOPT_CUSTOMREQUEST => "PATCH",
+                CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => [
+                    "Content-Type: application/json",
+                ],
+            ]);
+
+            $result = curl_exec($ch);
+            curl_close($ch);
+
             return true;
         } else {
             return sb_error('json-encode-error', 'sb_save_settings');
@@ -930,6 +975,61 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
     } else {
         return sb_error('settings-not-found', 'sb_save_settings');
     }
+}
+
+function  google_get_access_token() {
+    $jsonKey = json_decode(file_get_contents('../my-project-5655-1762836312979-40656cbc5bef.json'), true);
+
+    // Helper to create Base64 URL-Safe encoding
+    function base64url_encode($data) {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    $header = base64url_encode(json_encode([
+        'alg' => 'RS256',
+        'typ' => 'JWT'
+    ]));
+
+    $iat = time();
+    $exp = $iat + 3600; // 1 hour
+
+    $claim = base64url_encode(json_encode([
+        "iss"   => $jsonKey["client_email"],
+        "scope" => "https://www.googleapis.com/auth/cloud-platform",
+        "aud"   => $jsonKey["token_uri"],
+        "exp"   => $exp,
+        "iat"   => $iat
+    ]));
+
+    // === SIGN JWT WITH PRIVATE KEY ===
+    $jwtUnsigned = $header . "." . $claim;
+    openssl_sign($jwtUnsigned, $signature, $jsonKey["private_key"], OPENSSL_ALGO_SHA256);
+
+    $jwtSigned = $jwtUnsigned . "." . base64url_encode($signature);
+
+    // === EXCHANGE JWT FOR ACCESS TOKEN FROM GOOGLE ===
+    $ch = curl_init();
+    curl_setopt_array($ch, [
+        CURLOPT_URL => $jsonKey["token_uri"],
+        CURLOPT_POST => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => ["Content-Type: application/x-www-form-urlencoded"],
+        CURLOPT_POSTFIELDS => http_build_query([
+            "grant_type" => "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "assertion"  => $jwtSigned
+        ])
+    ]);
+
+    $response = curl_exec($ch);
+
+    if (!$response) {
+        echo "cURL Error: " . curl_error($ch);
+        die();
+    }
+
+    curl_close($ch);
+
+    return json_decode($response, true);
 }
 
 function sb_save_external_setting($name, $value) {
