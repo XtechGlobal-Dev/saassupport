@@ -4692,7 +4692,6 @@ td.sb-offline:after {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
 }
 .sb-table th {
   white-space: nowrap;
