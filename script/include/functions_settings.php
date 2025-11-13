@@ -888,7 +888,9 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
             $settings = json_decode($settings, true);
         }
         $settings_encoded = sb_db_json_escape($settings);
-        $allowedHosts = isset($settings['tickets-recaptcha'][0]['tickets-recaptcha-allowed-domains']) ? $settings['tickets-recaptcha'][0]['tickets-recaptcha-allowed-domains'] : '';
+        $allowedHosts = isset($settings['tickets-recaptcha'][0]['tickets-recaptcha-allowed-domains'][0]) ? $settings['tickets-recaptcha'][0]['tickets-recaptcha-allowed-domains'][0] : '';
+
+        $newDomains = array_filter(array_map('trim', explode(',', $allowedHosts)));
         if (isset($settings_encoded) && is_string($settings_encoded)) {
 
             // Save main settings
@@ -930,32 +932,39 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
             $projectId = "my-project-5655-1762836312979";
             $keyId = "6LeMAgosAAAAABWEowXbKxqU-bU8lbXLbOuudBRl";
 
-            $token = google_get_access_token();
+            $tokenData  = google_get_access_token();
+            $accessToken = $tokenData['access_token']; // Extract the string value
 
             $url = "https://recaptchaenterprise.googleapis.com/v1/projects/$projectId/keys/$keyId";
 
             // Get the current key settings
-            $ch = curl_init("$url?access_token=$token");
+            $ch = curl_init("$url?access_token=$accessToken");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
 
             $domains = $response["webSettings"]["allowedDomains"];
 
-            if (in_array($domain, $domains)) {
+            if (in_array($allowedHosts, $domains)) {
                 return; // already exists
             }
 
-            $domains[] = $domain;
+            // Merge new domains into existing list
+            foreach ($newDomains as $domain) {
+                $domain = trim($domain);
+                if (!in_array($domain, $domains, true)) {
+                    $domains[] = $domain;
+                }
+            }
 
             // Update allowedDomains
             $payload = json_encode([
                 "webSettings" => [
-                    "allowedDomains" => $domains
+                     "allowedDomains" => array_values($domains) // ensure re-indexed array
                 ]
             ]);
 
-            $ch = curl_init("$url?updateMask=webSettings.allowedDomains&access_token=$token");
+            $ch = curl_init("$url?updateMask=webSettings.allowedDomains&access_token=$accessToken");
             curl_setopt_array($ch, [
                 CURLOPT_CUSTOMREQUEST => "PATCH",
                 CURLOPT_POSTFIELDS => $payload,
