@@ -752,7 +752,7 @@ td.sb-offline:after {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
+  // table-layout: fixed;
 
   th {
     white-space: nowrap;
@@ -986,6 +986,7 @@ td.sb-offline:after {
     img {
       width: 40px;
       height: 40px;
+      object-fit: cover;
     }
   }
 }
@@ -1996,6 +1997,7 @@ textarea {
           height: 40px;
           min-width: 40px;
           min-height: 40px;
+          object-fit: cover;
         }
       }
     }
@@ -2792,7 +2794,7 @@ td.sb-td-contact {
       }
     }
   }
-}
+}x
 
 .sb-search-dropdown {
   min-width: 391px;
@@ -6240,6 +6242,7 @@ span.initials.avatar_name {
       img {
         width: 45px;
         height: 45px;
+        object-fit: cover;
       }
 
       span {
@@ -6907,6 +6910,7 @@ span.initials.avatar_name {
 .sb-setting {
   display: flex;
   // justify-content: space-between;
+  // flex-direction: column;
   padding: 20px 0px 20px 0px !important;
 
   > .sb-setting-content {
@@ -6995,19 +6999,19 @@ span.initials.avatar_name {
     cursor: pointer;
     display: inline-block;
     line-height: 0;
-    height: 35px;
-    min-height: 35px;
+    height: 20px !important;
+    min-height: 20px !important;
     outline: 0;
     padding: 0;
     margin: 0;
     text-align: center;
     vertical-align: middle;
-    width: 46px;
-    min-width: 46px !important;
+    width: 20px !important;
+    min-width: 20px !important;
     outline: none;
     box-shadow: none;
-    appearance: none;
     -webkit-appearance: none;
+    position: relative !important;
 
     &:checked:before {
       content: "\77" !important;
@@ -7016,12 +7020,16 @@ span.initials.avatar_name {
       font-weight: normal !important;
       font-variant: normal !important;
       text-transform: none !important;
-      line-height: 35px;
-      font-size: 15px;
+      line-height: 18px !important;
+      font-size: 10px !important;
       color: $color-blue;
       margin: 0;
       width: 100%;
       height: 100%;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(-50%);
     }
   }
 
