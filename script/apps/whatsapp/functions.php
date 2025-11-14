@@ -1004,6 +1004,13 @@ function sb_whatsapp_send_template_box() { ?>
                     $('.bulk-users-wrapper').addClass('sb-error');
             });
 
+            $('.bulk-users-wrapper').on('keyup','#userSearch', function() {
+                var value = $(this).val().toLowerCase();
+                $('.bulk-users-wrapper .form-check').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+
             $('.selectAll').on('change', function () {
                 if (this.checked) {
                     let checkedCount = $(this).parent().parent().find('.user-checkbox:checked').length;
