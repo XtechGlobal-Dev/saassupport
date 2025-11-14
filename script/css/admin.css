@@ -7093,6 +7093,12 @@ x .sb-search-dropdown .sb-active + .sb-search-dropdown-items {
   line-height: 44px;
   color: rgb(86, 96, 105);
 }
+.sb-board .sb-conversation .sb-list .sb-rich-message:not(.sb-rich-list) .sb-input#phone span.sb-active {
+  left: 30px;
+}
+.sb-board .sb-conversation .sb-list .sb-rich-message:not(.sb-rich-list) .sb-input#phone div {
+  top: 11px;
+}
 .sb-board .sb-conversation .sb-list .sb-delivery-failed {
   font-size: 14px;
   transform: translateY(2px);
