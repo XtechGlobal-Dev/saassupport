@@ -625,10 +625,9 @@ a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
   left: 0;
   right: 0;
   margin: 0;
-  top: 132px;
+  top: 65px;
   overflow: hidden;
   overflow-y: auto;
-  max-height: 100%;
   z-index: 99995;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1215686275);
   border-top: 1px solid rgb(212, 212, 212);
