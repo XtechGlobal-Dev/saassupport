@@ -752,8 +752,7 @@ td.sb-offline:after {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
-  // table-layout: fixed; 
-  // Fixed by Ram Saini
+  // table-layout: fixed;
 
   th {
     white-space: nowrap;
@@ -2795,9 +2794,8 @@ td.sb-td-contact {
       }
     }
   }
-}x
-
-.sb-search-dropdown {
+}
+x .sb-search-dropdown {
   min-width: 391px;
   position: relative;
   text-align: right;
@@ -3679,6 +3677,15 @@ td.sb-td-contact {
           font-size: 13px;
           line-height: 44px;
           color: $color-gray;
+        }
+
+        .sb-input#phone {
+          span.sb-active {
+            left: 30px;
+          }
+          div {
+            top: 11px; 
+          }
         }
       }
 
