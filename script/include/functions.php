@@ -1791,7 +1791,7 @@ function sb_component_editor($admin = true) {
         if ($admin && defined('SB_WOOCOMMERCE')) {
             $code .= '<div class="sb-btn-woocommerce" data-sb-tooltip="' . sb_('Add a product') . '"></div>';
         }
-        echo $code . '</div><div class="sb-icon-send sb-submit" data-sb-tooltip="' . sb_('Send message') . '"></div>' . ($admin ? '<div class="sb-icon-close sb-clear-text"></div>' : '') . '<i class="sb-loader"></i></div>';
+        echo $code . '</div><div class="sb-icon-send sb-submit" data-sb-tooltip="' . sb_('Send message') . '"></div> <i class="sb-loader"></i></div>';
         ?>
         <div class="sb-popup sb-emoji">
             <div class="sb-header">
@@ -1840,16 +1840,18 @@ function sb_component_editor($admin = true) {
             <div class="sb-emoji-bar"></div>
         </div>
         <?php if ($admin) { ?>
-            <div class="sb-popup sb-replies">
-                <div class="sb-header">
+            <div class="sb-popup sb-replies hd-savedReply">
+                <div class="sb-header hd-savedReply-header">
                     <div class="sb-title">
-                        <?php sb_e('Saved replies') ?>
+                        <b>
+                            <?php sb_e('Saved replies') ?>
+                        </b>
                     </div>
-                    <div>
-                        <a class="sb-add-saved-reply">
+                    <div class="hd-savedReply-searchReplyWrapper">
+                        <!-- <a class="sb-add-saved-reply">
                             <i class="sb-icon-plus"></i>
-                        </a>
-                        <div class="sb-search-btn">
+                        </a> -->
+                        <div class="sb-search-btn hd-savedReply-searchIcon">
                             <i class="sb-icon sb-icon-search"></i>
                             <input type="text" autocomplete="false" placeholder="<?php sb_e(sb_get_multi_setting('open-ai', 'open-ai-active') || sb_get_setting('ai-smart-reply') ? 'Search replies or ask the chatbot' : 'Search replies') ?>" />
                         </div>
@@ -1862,9 +1864,9 @@ function sb_component_editor($admin = true) {
                     <div class="sb-setting sb-type-text">
                         <input type="text" placeholder="<?php sb_e('Text') ?>" />
                     </div>
-                    <a class="sb-btn sb-btn-white"><?php sb_e('Save changes') ?></a>
+                    <a class="sb-btn sb-btn-white hd-savedReply-butn"><?php sb_e('Save changes') ?></a>
                 </div>
-                <div class="sb-replies-list sb-scroll-area">
+                <div class="sb-replies-list">
                     <ul class="sb-loading"></ul>
                 </div>
             </div>
