@@ -15,8 +15,7 @@
 
 define('SB_TICKETS', '1.2.5');
 
-function sb_component_tickets()
-{
+function sb_component_tickets() {
     sb_js_global();
     sb_css();
     sb_tickets_css();
@@ -40,8 +39,8 @@ function sb_component_tickets()
         data-offset="<?php echo sb_get_setting('tickets-height-offset') ?>">
         <header class="user_header d-none">
             <div class="header_left">
-                <h2 class="tab  sb-active" data-id="tickets-list-area">Tickets</h2>
-                <h2 class="tab" data-id="sb-tickets-area">Conversations</h2>
+                <h2 class="tab  sb-active" data-id="tickets-list-area"><?php sb_e("Tickets"); ?></h2>
+                <h2 class="tab" data-id="sb-tickets-area"><?php sb_e("Conversations"); ?></h2>
             </div>
             <div class="header_right">
                 <div class="user_profile">
@@ -52,7 +51,7 @@ function sb_component_tickets()
                     </span>
                     <div class="user_info">
                         <p class="sb_name"></p>
-                        <span class="user_type">User</span>
+                        <span class="user_type"><?php sb_e("User"); ?></span>
                     </div>
                 </div>
                 <div class="logout" data-value="logout" data-toggle="tooltip" data-placement="right" title="Log Out">
@@ -293,8 +292,7 @@ function sb_component_tickets()
                     <div class="sb-top">
                         <?php if (sb_get_setting('tickets-registration-required')) { ?>
                             <div class="sb-profile-menu">
-                                <div
-                                    class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
+                                <div class="sb-profile<?php echo !sb_get_setting('registration-profile-img') || sb_get_setting('tickets-registration-required') ? ' sb-no-profile-image' : '' ?>">
                                     <img src="" />
                                     <span class="sb-name"></span>
                                 </div>
@@ -347,7 +345,6 @@ function sb_component_tickets()
             }
             ?>
         </div>
-
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -635,8 +632,7 @@ function sb_tickets_css()
     }
 }
 
-function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false)
-{
+function sb_tickets_email($user, $message = false, $attachments = false, $conversation_id = false) {
     if (empty($message) && empty($attachments)) {
         return false;
     }
@@ -652,8 +648,7 @@ function sb_tickets_email($user, $message = false, $attachments = false, $conver
     return false;
 }
 
-function sb_tickets_recaptcha($token)
-{
+function sb_tickets_recaptcha($token) {
     return sb_isset(sb_curl('https://www.google.com/recaptcha/api/siteverify', ['response' => $token, 'secret' => sb_get_multi_setting('tickets-recaptcha', 'tickets-recaptcha-secret')]), 'success');
 }
 

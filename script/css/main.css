@@ -1,17 +1,17 @@
 /*
 * 
-* ==========================================================
+* ==
 * MAIN.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the plugin written in SCSS.
 *
 */
 /*
 *  
-* ==========================================================
+* ==
 * SHARED.SCSS
-* ==========================================================
+* ==
 *
 * Shared CSS used on both admin and front end. This file is imported only.
 *
@@ -1130,7 +1130,7 @@ div ul.sb-menu,
 /*
 
 # USER CONVERSATIONS
-==========================================================
+==
 
 */
 .sb-user-conversations > li {
@@ -1246,7 +1246,7 @@ div ul.sb-menu,
 /*
 
 # MESSAGES LIST AND CHAT
-==========================================================
+==
 */
 .sb-chat .sb-btn-text:hover,
 .sb-list .sb-btn-text:hover {
@@ -1587,7 +1587,7 @@ div ul.sb-menu,
 /*
 
 # CHAT HTML COMPONENTS
-==========================================================
+==
 
 */
 .sb-list .sb-form + .sb-btn {
@@ -1843,7 +1843,7 @@ div ul.sb-menu,
 /*
 
 # EDITOR
-==========================================================
+==
 
 */
 .sb-editor {
@@ -2091,7 +2091,7 @@ div ul.sb-menu,
 /*
 
 # ARTICLES 
-==========================================================
+==
 
 */
 .sb-article h1,
@@ -2106,6 +2106,7 @@ div ul.sb-menu,
   padding-bottom: 25px;
   letter-spacing: 0.5px;
   position: relative;
+  word-wrap: break-word;
 }
 .sb-article .sb-title .sb-icon-close {
   position: absolute;
@@ -2238,8 +2239,8 @@ div ul.sb-menu,
 
 .sb-chat .sb-article > .sb-title:first-child {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .sb-chat .sb-article h2 {
   font-size: 17px;
@@ -2293,7 +2294,7 @@ div ul.sb-menu,
 /*
 
 # LOADING
-==========================================================
+==
 
 */
 @keyframes sb-loading {
@@ -2357,7 +2358,7 @@ div ul.sb-menu,
 /*
 
 # BUTTONS
-==========================================================
+==
 
 */
 .sb_btn_new {
@@ -2531,7 +2532,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # INPUT
-==========================================================
+==
 
 */
 .sb-input {
@@ -2847,7 +2848,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 
 .sb-input-select-input > div.sb-select-phone + input {
-  padding: 5px 0 0 100px;
+  padding: 5px 0 0 90px !important;
 }
 .sb-input-select-input > div.sb-select-phone .sb-select-search input {
   padding: 0 10px;
@@ -2890,7 +2891,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # LIGHTBOX
-==========================================================
+==
 
 */
 .sb-lightbox-media {
@@ -2954,7 +2955,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # OVERLAY PANEL
-==========================================================
+==
 
 */
 .sb-overlay-panel {
@@ -3009,7 +3010,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # IMAGE LIGHTBOX
-==========================================================
+==
 
 */
 .sb-image {
@@ -3038,7 +3039,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # UPLOAD INPUT
-==========================================================
+==
 
 */
 .sb-upload-form-admin {
@@ -3053,7 +3054,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SEARCH BUTTON
-==========================================================
+==
 
 */
 .sb-search-btn,
@@ -3111,7 +3112,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # POPUP
-==========================================================
+==
 
 */
 .sb-popup {
@@ -3171,7 +3172,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # EMOJI
-==========================================================
+==
 
 */
 .sb-popup.sb-emoji {
@@ -3239,7 +3240,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SELECT AND MENU
-==========================================================
+==
 
 */
 .sb-select {
@@ -3364,7 +3365,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RICH MESSAGES
-==========================================================
+==
 
 */
 .sb-rich-message {
@@ -4058,7 +4059,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # MISCELLANEOUS
-==========================================================
+==
 
 */
 .sb-grid {
@@ -4676,7 +4677,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # GLOBAL
-==========================================================
+==
 
 */
 @keyframes sb-chat-open-animation {
@@ -4754,13 +4755,6 @@ div ul.sb-menu .li:hover,
   background: rgb(144, 154, 165);
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active .wave-bg {
-  margin-top: 55px !important;
-}
-.sb-main.sb-chat.sb-cloud.sb-active .sb-list.sb-active {
-  margin-top: 128px !important;
-}
-
 #registration .sb-content {
   max-height: 440px;
   overflow-y: scroll;
@@ -4778,17 +4772,10 @@ div ul.sb-menu .li:hover,
   top: 36px;
 }
 
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .wave-bg {
-  margin-top: 108px !important;
-}
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-list.sb-active {
   margin-top: 188px !important;
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active .wave-bg,
-.sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active .wave-bg {
-  margin-top: 108px !important;
-}
 .sb-main.sb-chat.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active .sb-list.sb-active,
 .sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active .sb-list.sb-active {
   margin-top: 188px !important;
@@ -4870,7 +4857,7 @@ div ul.sb-menu li:hover,
 /*
 
 # CHAT
-==========================================================
+==
 
 */
 .sb-chat {
@@ -5055,7 +5042,7 @@ div ul.sb-menu li:hover,
   font-size: 17px;
   line-height: 46px;
   letter-spacing: 0.1px;
-  position: absolute;
+  position: sticky;
   left: 0;
   right: 0;
   top: 0 !important;
@@ -5091,10 +5078,6 @@ div ul.sb-menu li:hover,
 }
 .sb-chat .sb-header-main {
   padding: 0 20px 25px 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   z-index: 9;
 }
 .sb-chat .sb-header-main > div {
@@ -5240,10 +5223,6 @@ div ul.sb-menu li:hover,
 }
 .sb-chat .sb-header-agent {
   padding: 20px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0 !important;
   opacity: 1 !important;
   z-index: 11;
 }
@@ -5400,6 +5379,13 @@ div ul.sb-menu li:hover,
   padding: 15px 120px 15px 15px;
   border-top: 1px solid rgb(222, 229, 236);
 }
+.sb-chat .sb-editor .sb-textarea textarea {
+  overflow-y: auto;
+  max-height: 176px;
+}
+.sb-chat .sb-editor .sb-textarea textarea::-webkit-scrollbar {
+  width: 0;
+}
 .sb-chat .sb-editor .sb-attachments {
   padding: 0 15px 10px 15px;
 }
@@ -5503,11 +5489,7 @@ div ul.sb-menu li:hover,
 .sb-chat .sb-dashboard {
   position: relative;
   z-index: 2;
-  margin-top: 210px;
-  min-height: 350px;
-  max-height: 350px;
   background: none;
-  overflow-y: scroll;
 }
 .sb-chat .sb-dashboard::-webkit-scrollbar {
   width: 5px;
@@ -5575,7 +5557,7 @@ div ul.sb-menu li:hover,
   margin-top: 150px;
 }
 .sb-chat .sb-panel {
-  padding: 90px 30px 30px;
+  padding: 15px;
   min-height: calc(100% - 120px);
 }
 .sb-chat .sb-panel.sb-loading:before {
@@ -5593,7 +5575,6 @@ div ul.sb-menu li:hover,
   background: rgb(243, 243, 243);
 }
 .sb-chat .sb-init-form {
-  margin-top: 210px;
   position: relative;
   z-index: 9;
   text-align: left;
@@ -5874,10 +5855,6 @@ div ul.sb-menu li:hover,
   height: 0;
 }
 
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-dashboard.sb-active {
-  margin-top: 175px;
-}
-
 .sb-main.sb-chat.sb-cloud.sb-active .sb-scroll-area .sb-header {
   padding-bottom: 20px !important;
   box-shadow: none !important;
@@ -5979,7 +5956,7 @@ div ul.sb-menu li:hover,
 /*
 
 # RESPONSIVE
-==========================================================
+==
 
 */
 @media (max-height: 678px) {

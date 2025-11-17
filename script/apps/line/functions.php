@@ -13,7 +13,7 @@
  *
  */
 
-define('SB_LINE', '1.0.4');
+define('SB_LINE', '1.0.6');
 
 function sb_line_send_message($line_id, $message = '', $attachments = [], $conversation_id = false) {
     if (empty($message) && empty($attachments)) {
@@ -22,12 +22,13 @@ function sb_line_send_message($line_id, $message = '', $attachments = [], $conve
     $user_id = defined('SB_DIALOGFLOW') ? sb_get_user_by('line-id', $line_id)['id'] : false;
     $response = false;
     $token = sb_isset(sb_db_get('SELECT extra_2 FROM sb_conversations WHERE id = ' . sb_db_escape($conversation_id)), 'extra_2'); // Deprecated
-    if (empty($token) || strpos($token, 'thread_') !== false) { // Deprecated. Remove if.
+    if (empty($token) || str_contains($token, 'thread_')) { // Deprecated. Remove if.
         $token = sb_isset(sb_db_get('SELECT extra_3 FROM sb_conversations WHERE id = ' . sb_db_escape($conversation_id)), 'extra_3');
     } // Deprecated. Remove if.
 
     // Send the message
     $query = ['to' => $line_id];
+    $message = sb_messaging_platforms_text_formatting($message);
     $message = sb_line_rich_messages($message, ['user_id' => $user_id]);
     $attachments = array_merge($attachments, $message[1]);
     if ($message[0] || $message[2]) {
@@ -75,7 +76,8 @@ function sb_line_rich_messages($message, $extra = false) {
         $shortcode = $shortcodes[$j];
         $shortcode_id = sb_isset($shortcode, 'id', '');
         $shortcode_name = $shortcode['shortcode_name'];
-        $message = trim(str_replace($shortcode['shortcode'], '', $message) . sb_isset($shortcode, 'title', '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')));
+        $message = trim((isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')) . str_replace($shortcode['shortcode'], '{R}', $message));
+        $message_inner = '';
         switch ($shortcode_name) {
             case 'slider-images':
             case 'slider':
@@ -103,23 +105,20 @@ function sb_line_rich_messages($message, $extra = false) {
                 break;
             case 'list-image':
             case 'list':
-                $index = 0;
-                if ($shortcode_name == 'list-image') {
-                    $shortcode['values'] = str_replace('://', '', $shortcode['values']);
-                    $index = 1;
-                }
-                $values = explode(',', $shortcode['values']);
+                $index = $shortcode_name == 'list-image' ? 1 : 0;
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
+                $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
-                        $value = explode(':', $values[$i]);
-                        $message .= PHP_EOL . '• ' . trim($value[$index]) . ' ' . trim($value[$index + 1]);
+                        $value = explode(':', str_replace('{R3}', ',', $values[$i]));
+                        $message_inner .= PHP_EOL . '• *' . trim($value[$index]) . '* ' . trim($value[$index + 1]);
                     }
                 } else {
                     for ($i = 0; $i < count($values); $i++) {
-                        $message .= PHP_EOL . '• ' . trim($values[$i]);
+                        $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = trim($message);
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'select':
             case 'buttons':
@@ -127,10 +126,12 @@ function sb_line_rich_messages($message, $extra = false) {
                 $values = explode(',', $shortcode['options']);
                 $buttons = [];
                 $count = count($values);
-                if ($count > 13)
+                if ($count > 13) {
                     $count = 13;
+                }
                 for ($i = 0; $i < $count; $i++) {
-                    array_push($buttons, ['type' => 'action', 'action' => ['type' => 'message', 'label' => substr($values[$i], 0, 20), 'text' => $values[$i]]]);
+                    $value = explode('|', $values[$i])[0];
+                    array_push($buttons, ['type' => 'action', 'action' => ['type' => 'message', 'label' => substr($value, 0, 20), 'text' => $value]]);
                 }
                 array_push($messages, ['type' => 'text', 'text' => $message, 'quickReply' => ['items' => $buttons]]);
                 $message = '';

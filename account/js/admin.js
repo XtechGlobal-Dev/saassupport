@@ -10,7 +10,6 @@
 (function ($) {
     var admin;
     var CLOUD_URL;
-    var is_settings_loaded = false;
 
     var SBCloud = {
         shopify_products_box: false,
@@ -201,7 +200,6 @@
         }
 
         $(document).on('SBSettingsLoaded', function (e, settings) {
-            is_settings_loaded = true;
 
             // Credits and sync mode
             let settings_check = [['google', 'client-id'], ['open-ai', 'key'], ['whatsapp-cloud', 'key']];

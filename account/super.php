@@ -16,7 +16,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
     </title>
     <link rel="stylesheet" href="../script/css/admin.css?v=1" type="text/css" media="all" />
     <link rel="stylesheet" href="css/skin.min.css?v=1" type="text/css" media="all" />
-    <link rel="shortcut icon" href="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : 'media/icon.svg' ?>" />
+    <link rel="shortcut icon" href="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : 'media/nexleon-favicon-n.png' ?>" />
 </head>
 <body class="on-load">
     <div id="preloader"></div>
@@ -35,7 +35,12 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
     </main>
     <footer>
         <script>
-            var MEMBERSHIPS = [<?php echo substr(json_encode(memberships()), 1, -1) ?>]; var SB_TRANSLATIONS = false; var PAYMENT_PROVIDER = "<?php echo PAYMENT_PROVIDER ?>"; var CURRENCY = "<?php echo membership_currency() ?>"; var MEMBERSHIP_TYPE = "<?php echo defined('SB_CLOUD_MEMBERSHIP_TYPE') ? SB_CLOUD_MEMBERSHIP_TYPE : '' ?>"
+            var MEMBERSHIPS = [<?php echo substr(json_encode(memberships()), 1, -1) ?>]; 
+            var SB_TRANSLATIONS = false; 
+            var PAYMENT_PROVIDER = "<?php echo PAYMENT_PROVIDER ?>"; 
+            var CURRENCY = "<?php echo membership_currency() ?>"; 
+            var MEMBERSHIP_TYPE = "<?php echo defined('SB_CLOUD_MEMBERSHIP_TYPE') ? SB_CLOUD_MEMBERSHIP_TYPE : '' ?>";
+            var IS_WHITE_LABEL = <?php echo empty(super_get_white_label()) ? 'false' : 'true' ?>;
         </script>
         <script src="../script/js/min/jquery.min.js"></script>
         <script src="js/cloud<?php echo sb_is_debug() ? '.min' : '' ?>.js?v=<?php echo SB_VERSION ?>"></script>
@@ -50,7 +55,7 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
         <div class="sb-top-bar">
             <div>
                 <h2>
-                    <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : '../script/media/icon.svg' ?>" />
+                    <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_ICON : 'media/nexleon-favicon-n.png' ?>" />
                     Super Admin
                 </h2>
             </div>
@@ -512,10 +517,10 @@ $brand_name = $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board';
     <div class="sb-super-login-box sb-admin-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
-            <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_LOGO : 'media/logo-cloud.svg' ?>" />
+            <img src="<?php echo $super_branding ? SB_CLOUD_BRAND_LOGO : '/script/media/nexleon-favicon-n.png' ?>" />
             <div class="sb-title">Sign in</div>
             <div class="sb-text">
-                To enter the <?php echo $super_branding ? SB_CLOUD_BRAND_NAME : 'Support Board' ?> Super Admin area
+                To enter the <?php echo $super_branding ? SB_CLOUD_BRAND_NAME : 'Nexleon Helpdesk' ?> Super Admin area
             </div>
         </div>
         <div class="sb-main">

@@ -55,7 +55,7 @@ function show_info() {
     $code = '<div class="sb-admin"><h2>' . sb_('Synchronization completed.') . '</h2><p>' . sb_('You completed the synchronization. Please copy and paste the information below in the admin area.') . '</p>';
     $parameters = explode('&', $_SERVER['QUERY_STRING']);
     foreach ($parameters as $value)  {
-        if (strpos($value, '=') !== false) {
+        if (str_contains($value, '=')) {
             $item = explode('=', $value);
             $code .= '<div class="sb-setting"><h4>' . strtoupper(sb_(sb_string_slug(urldecode($item[0]), 'string'))) . '</h4><input value="' . urldecode($item[1]) . '" type="text" readonly /></div>';
         }

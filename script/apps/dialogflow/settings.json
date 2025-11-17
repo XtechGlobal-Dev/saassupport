@@ -37,9 +37,12 @@
         "title": "Model",
         "value": [
           [ "", "Default" ],
-          [ "gpt-4.1-nano", "gpt-4.1-nano" ],
-          [ "gpt-4.1-mini", "gpt-4.1-mini" ],
+          [ "gpt-5", "gpt-5" ],
+          [ "gpt-5-mini", "gpt-5-mini" ],
+          [ "gpt-5-nano", "gpt-5-nano" ],
           [ "gpt-4.1", "gpt-4.1" ],
+          [ "gpt-4.1-mini", "gpt-4.1-mini" ],
+          [ "gpt-4.1-nano", "gpt-4.1-nano" ],
           [ "o4-mini", "o4-mini" ],
           [ "o3-mini", "o3-mini" ],
           [ "o1", "o1" ],
@@ -79,17 +82,20 @@
       {
         "type": "number",
         "id": "open-ai-temperature",
-        "title": "Temperature"
+        "title": "Temperature",
+        "placeholder": "1"
       },
       {
         "type": "number",
         "id": "open-ai-presence-penalty",
-        "title": "Presence penalty"
+        "title": "Presence penalty",
+        "placeholder": "0"
       },
       {
         "type": "number",
         "id": "open-ai-frequency-penalty",
-        "title": "Frequency penalty"
+        "title": "Frequency penalty",
+        "placeholder": "0"
       },
       {
         "type": "text",
@@ -357,7 +363,7 @@
         "type": "checkbox",
         "id": "google-multilingual-translation",
         "title": "Multilingual via translation",
-        "help": "https://board.support/docs/#google-translation"
+        "help": "https://board.support/docs/#multilingual-via-translation"
       },
       {
         "type": "checkbox",
@@ -369,7 +375,7 @@
         "type": "checkbox",
         "id": "google-language-detection",
         "title": "Language detection",
-        "help": "https://board.support/docs/#google-translation"
+        "help": "https://board.support/docs/#language-detection"
       },
       {
         "type": "text",
@@ -482,27 +488,32 @@
       {
         "type": "textarea",
         "id": "dialogflow-human-takeover-message",
-        "title": "Message"
+        "title": "Message",
+        "placeholder": "I'm a chatbot. Do you want to get in touch with one of our agents?"
       },
       {
         "type": "textarea",
         "id": "dialogflow-human-takeover-message-confirmation",
-        "title": "Confirmation message"
+        "title": "Confirmation message",
+        "placeholder": "Alright! We will get in touch soon!"
       },
       {
         "type": "textarea",
         "id": "dialogflow-human-takeover-message-fallback",
-        "title": "Fallback message"
+        "title": "Fallback message",
+        "placeholder": "An agent has already been contacted and will respond shortly."
       },
       {
         "type": "text",
         "id": "dialogflow-human-takeover-confirm",
-        "title": "Confirm button text"
+        "title": "Confirm button text",
+        "placeholder": "Yes"
       },
       {
         "type": "text",
         "id": "dialogflow-human-takeover-cancel",
-        "title": "Cancel button text"
+        "title": "Cancel button text",
+        "placeholder": "Cancel"
       }
     ]
   },
@@ -510,7 +521,8 @@
     "type": "number",
     "id": "dialogflow-bot-delay",
     "title": "Bot response delay",
-    "content": "Add a delay (ms) to the bot's responses. Default is 2000."
+    "content": "Add a delay (ms) to the bot's responses.",
+    "placeholder": "2000"
   },
   {
     "type": "checkbox",
@@ -551,6 +563,96 @@
         "type": "textarea",
         "id": "chatbot-usage-limit-message",
         "title": "Message"
+      }
+    ]
+  },
+  {
+    "type": "multi-input",
+    "id": "google-calendar",
+    "title": "Google Calendar integration",
+    "content": "View and manage bookings from the conversations area, and integrate Google Calendar with the chatbot to let users make bookings automatically via the chatbot. Set the available booking times under Settings > Miscellaneous > Scheduled Office Hours.",
+    "help": "https://board.support/docs/#google-calendar-integration",
+    "value": [
+      {
+        "type": "checkbox",
+        "id": "google-calendar-active",
+        "title": "Active"
+      },
+      {
+        "type": "number",
+        "id": "google-calendar-slot-time",
+        "title": "Slot time (minutes)",
+        "placeholder": "30"
+      },
+      {
+        "type": "number",
+        "id": "google-calendar-min-booking-time",
+        "title": "Minimum booking time (minutes)",
+        "placeholder": "120"
+      },
+      {
+        "type": "number",
+        "id": "google-calendar-buffer-time",
+        "title": "Buffer time (minutes)",
+        "placeholder": "0"
+      },
+      {
+        "type": "number",
+        "id": "google-calendar-max-advance-booking",
+        "title": "Max advance booking (days)",
+        "placeholder": "30"
+      },
+      {
+        "type": "text",
+        "id": "google-calendar-id",
+        "title": "Calendar ID",
+        "placeholder": "Default is primary calendar"
+      },
+      {
+        "type": "text",
+        "id": "google-calendar-event-title",
+        "title": "Booking title",
+        "placeholder": ""
+      },
+      {
+        "type": "text",
+        "id": "google-calendar-event-description",
+        "title": "Booking description",
+        "placeholder": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "google-calendar-disable-chatbot",
+        "title": "Disable chatbot"
+      }
+    ]
+  },
+  {
+    "type": "multi-input",
+    "id": "tidycal",
+    "title": "TidyCal integration",
+    "content": "View and manage bookings from the conversations area, and integrate TidyCal with the chatbot to let users make bookings automatically via the chatbot.",
+    "help": "https://board.support/docs/#tidycal-integration",
+    "value": [
+      {
+        "type": "checkbox",
+        "id": "tidycal-active",
+        "title": "Active"
+      },
+      {
+        "type": "password",
+        "id": "tidycal-access-token",
+        "title": "Access token"
+      },
+      {
+        "type": "text",
+        "id": "tidycal-booking-type",
+        "title": "Booking type title"
+      },
+      {
+        "type": "checkbox",
+        "id": "tidycal-disable-chatbot",
+        "title": "Disable chatbot"
       }
     ]
   }

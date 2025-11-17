@@ -1,8 +1,8 @@
 /*
 * 
-* ==========================================================
+* ==
 * MAIN.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the plugin written in SCSS.
 *
@@ -15,7 +15,7 @@
 /*
      
 # GLOBAL
-==========================================================
+==
 
 */
 
@@ -111,14 +111,11 @@
     }
 }
 
-.sb-main.sb-chat.sb-cloud.sb-active {
-    .wave-bg {
-        margin-top: 55px !important;
-    }
-    .sb-list.sb-active {
-        margin-top: 128px !important;
-    }
-}
+// .sb-main.sb-chat.sb-cloud.sb-active {
+//     .sb-list.sb-active {
+//         margin-top: 128px !important;
+//     }
+// }
 
 #registration {
     .sb-content {
@@ -140,15 +137,15 @@
             .sb-scroll-area {
                 right: -54px;
                 top: 36px;
-            }
+            } 
         }
     }
 }
 
 .sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active {
-    .wave-bg {
-        margin-top: 108px !important;
-    }
+    // .wave-bg {
+    //     margin-top: 108px !important;
+    // }
     .sb-list.sb-active {
         margin-top: 188px !important;
     }
@@ -156,9 +153,9 @@
 
 .sb-main.sb-chat.sb-cloud.sb-active.sb-dashboard-active.sb-panel-active,
 .sb-main.sb-chat.sb-no-conversations.sb-cloud.sb-active {
-    .wave-bg {
-        margin-top: 108px !important;
-    }
+    // .wave-bg {
+    //     margin-top: 108px !important;
+    // }
     .sb-list.sb-active {
         margin-top: 188px !important;
     }
@@ -260,7 +257,7 @@ div ul.sb-menu li:hover,
 /*
 
 # CHAT
-==========================================================
+==
 
 */
 
@@ -354,7 +351,7 @@ div ul.sb-menu li:hover,
         background-size: cover;
 
         .sb-title {
-            font-weight: 500;
+            font-weight: 500; 
             font-size: 21px;
             line-height: 25px;
             letter-spacing: 0.3px;
@@ -471,7 +468,7 @@ div ul.sb-menu li:hover,
             font-size: 17px;
             line-height: 46px;
             letter-spacing: .1px;
-            position: absolute;
+            position: sticky;
             left: 0;
             right: 0;
             top: 0 !important;
@@ -512,12 +509,8 @@ div ul.sb-menu li:hover,
         }
     }
 
-    .sb-header-main {
+    .sb-header-main { 
         padding: 0 20px 25px 20px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
         z-index: 9;
 
         >div {
@@ -715,10 +708,6 @@ div ul.sb-menu li:hover,
 
     .sb-header-agent {
         padding: 20px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0 !important;
         opacity: 1 !important;
         z-index: 11;
 
@@ -726,7 +715,7 @@ div ul.sb-menu li:hover,
             padding-top: 90px;
             margin-top: 0;
         }
-
+ 
         &:hover {
             .sb-profile {
                 margin-left: 60px !important;
@@ -929,6 +918,13 @@ div ul.sb-menu li:hover,
         .sb-textarea {
             padding: 15px 120px 15px 15px;
             border-top: 1px solid rgb(222, 229, 236);
+            textarea{
+                overflow-y: auto;
+                max-height: 176px;
+                &::-webkit-scrollbar{
+                    width: 0;
+                }
+            }
         }
 
         .sb-attachments {
@@ -1052,11 +1048,11 @@ div ul.sb-menu li:hover,
     .sb-dashboard {
         position: relative;
         z-index: 2;
-        margin-top: 210px;
-        min-height: 350px;
-        max-height: 350px;
+        // margin-top: 210px;
+        // min-height: 350px;
+        // max-height: 350px;
         background: none;
-        overflow-y: scroll;
+        // overflow-y: scroll;
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -1148,7 +1144,7 @@ div ul.sb-menu li:hover,
     }
 
     .sb-panel {
-        padding: 90px 30px 30px;
+        padding: 15px;
         min-height: calc(100% - 120px);
 
         &.sb-loading:before {
@@ -1173,8 +1169,7 @@ div ul.sb-menu li:hover,
         }
     }
 
-    .sb-init-form {
-        margin-top: 210px;
+    .sb-init-form { 
         position: relative;
         z-index: 9;
         text-align: left;
@@ -1504,9 +1499,6 @@ div ul.sb-menu li:hover,
     }
 }
 
-.sb-main.sb-chat.sb-cloud.sb-dashboard-active.sb-active .sb-dashboard.sb-active {
-    margin-top: 175px;
-}
 
 .sb-main.sb-chat.sb-cloud.sb-active .sb-scroll-area .sb-header {
     padding-bottom: 20px !important;
@@ -1618,7 +1610,7 @@ div ul.sb-menu li:hover,
 /*
 
 # RESPONSIVE
-==========================================================
+==
 
 */
 

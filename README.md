@@ -4,7 +4,7 @@ A modern, responsive ticketing and chat support system built with PHP, MySQL, Bo
 
 ---
 
-## 🧩 Features
+## 🧩 Features  
 
 - Customer Ticketing Portal
 - Admin Dashboard for Ticket Management

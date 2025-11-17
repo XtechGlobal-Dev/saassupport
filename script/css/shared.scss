@@ -1,15 +1,15 @@
 /*
 *  
-* ==========================================================
+* ==
 * SHARED.SCSS
-* ==========================================================
+* ==
 *
 * Shared CSS used on both admin and front end. This file is imported only.
 *
 */
 
 $transition: all 0.4s;
-//$color-blue: #028be5;
+//$color-blue: #028be5; 
 $color-blue: #155CFD;
 //$color-dark-blue: rgb(0, 76, 125);
 $color-dark-blue: #033bbe;
@@ -273,7 +273,7 @@ div ul.sb-menu,
 /*
 
 # USER CONVERSATIONS
-==========================================================
+==
 
 */
 
@@ -302,6 +302,7 @@ div ul.sb-menu,
                 top: 5px;
                 width: 40px;
                 height: 40px;
+                object-fit: cover;
                 border-radius: 50%;
                 display: block;
             }
@@ -409,7 +410,7 @@ div ul.sb-menu,
 /*
 
 # MESSAGES LIST AND CHAT
-==========================================================
+==
 */
 
 .sb-chat,
@@ -822,7 +823,7 @@ div ul.sb-menu,
 /*
 
 # CHAT HTML COMPONENTS
-==========================================================
+==
 
 */
 
@@ -1139,7 +1140,7 @@ div ul.sb-menu,
 /*
 
 # EDITOR
-==========================================================
+==
 
 */
 
@@ -1428,7 +1429,7 @@ div ul.sb-menu,
 /*
 
 # ARTICLES 
-==========================================================
+==
 
 */
 
@@ -1447,6 +1448,7 @@ div ul.sb-menu,
         padding-bottom: 25px;
         letter-spacing: 0.5px;
         position: relative;
+        word-wrap: break-word;
 
         .sb-icon-close {
             position: absolute;
@@ -1611,8 +1613,8 @@ div ul.sb-menu,
 .sb-chat .sb-article {
     >.sb-title:first-child {
         border-bottom: 1px solid $border-color;
-        padding-bottom: 30px;
-        margin-bottom: 30px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
     }
 
     h2 {
@@ -1671,7 +1673,7 @@ div ul.sb-menu,
 /*
 
 # LOADING
-==========================================================
+==
 
 */
 
@@ -1743,7 +1745,7 @@ div ul.sb-menu,
 /*
 
 # BUTTONS
-==========================================================
+==
 
 */
 .sb_btn_new {
@@ -1932,7 +1934,7 @@ a.sb-btn {
 /*
 
 # INPUT
-==========================================================
+==
 
 */
 
@@ -2009,18 +2011,19 @@ a.sb-btn {
         cursor: pointer;
         display: inline-block;
         line-height: 0;
-        height: 35px;
-        min-height: 35px;
+        height: 20px;
+        min-height: 20px;
         outline: 0;
         padding: 0;
         margin: 0;
         text-align: center;
         vertical-align: middle;
-        width: 35px;
-        min-width: 35px !important;
+        width: 20px;
+        min-width: 20px !important;
         outline: none;
         box-shadow: none;
         -webkit-appearance: none;
+        position: relative;
 
         &:checked:before {
             content: "\77" !important;
@@ -2029,12 +2032,16 @@ a.sb-btn {
             font-weight: normal !important;
             font-variant: normal !important;
             text-transform: none !important;
-            line-height: 35px;
-            font-size: 15px;
+            line-height: 18px;
+            font-size: 10px;
             color: $color-blue;
             margin: 0;
             width: 100%;
             height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
         }
     }
 
@@ -2297,7 +2304,7 @@ a.sb-btn {
 
 .sb-input-select-input>div.sb-select-phone {
     &+input {
-        padding: 5px 0 0 100px;
+        padding: 5px 0 0 90px !important;
     }
 
     .sb-select-search input {
@@ -2346,7 +2353,7 @@ a.sb-btn {
 /*
 
 # LIGHTBOX
-==========================================================
+==
 
 */
 
@@ -2417,7 +2424,7 @@ a.sb-btn {
 /*
 
 # OVERLAY PANEL
-==========================================================
+==
 
 */
 
@@ -2481,7 +2488,7 @@ a.sb-btn {
 /*
 
 # IMAGE LIGHTBOX
-==========================================================
+==
 
 */
 
@@ -2515,7 +2522,7 @@ a.sb-btn {
 /*
 
 # UPLOAD INPUT
-==========================================================
+==
 
 */
 
@@ -2531,7 +2538,7 @@ a.sb-btn {
 /*
 
 # SEARCH BUTTON
-==========================================================
+==
 
 */
 
@@ -2595,7 +2602,7 @@ a.sb-btn {
 /*
 
 # POPUP
-==========================================================
+==
 
 */
 
@@ -2665,7 +2672,7 @@ a.sb-btn {
 /*
 
 # EMOJI
-==========================================================
+==
 
 */
 
@@ -2744,7 +2751,7 @@ a.sb-btn {
 /*
 
 # SELECT AND MENU
-==========================================================
+==
 
 */
 
@@ -2877,7 +2884,7 @@ div ul.sb-menu,
 /*
 
 # RICH MESSAGES
-==========================================================
+==
 
 */
 
@@ -3720,7 +3727,7 @@ div ul.sb-menu,
 /*
 
 # MISCELLANEOUS
-==========================================================
+==
 
 */
 

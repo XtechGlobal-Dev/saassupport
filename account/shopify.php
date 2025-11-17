@@ -30,10 +30,10 @@ if ($raw) {
                 $api_id = sb_isset($one_time_purchase, 'admin_graphql_api_id');
                 $api_id = substr($api_id, strrpos($api_id, '/') + 1);
                 if (!db_get('SELECT value FROM users_data WHERE value LIKE "%shopify_' . $api_id . '%" AND user_id = ' . $cloud_user_id . ' LIMIT 1')) {
-                    if (strpos($purchase_name, 'Add credits') !== false) {
+                    if (str_contains($purchase_name, 'Add credits')) {
                         $amount = explode(' ', explode(' - ', $purchase_name)[1]);
                         membership_set_purchased_credits($amount[0], $amount[1], $cloud_user_id, 'shopify_' . $api_id);
-                    } else if (strpos($purchase_name, 'White Label') !== false) {
+                    } else if (str_contains($purchase_name, 'White Label')) {
                         membership_save_white_label($cloud_user_id);
                     }
                 }
@@ -60,8 +60,8 @@ if (isset($_GET['hmac'])) {
         header('Location: ' . $auth_url);
         return;
     }
-    $response = sb_curl($url_part . 'oauth/access_token', ['client_id' => SHOPIFY_CLIENT_ID, 'client_secret' => SHOPIFY_CLIENT_SECRET, 'code' => $code], [], 'GET');
-    $access_token = sb_isset(json_decode($response, true), 'access_token');
+    $response = sb_curl($url_part . 'oauth/access_token', ['client_id' => SHOPIFY_CLIENT_ID, 'client_secret' => SHOPIFY_CLIENT_SECRET, 'code' => $code]);
+    $access_token = sb_isset($response, 'access_token');
     if ($access_token) {
         $chat_id = account_chat_id($cloud_user_id);
         $response = sb_curl($url_part . 'api/2023-07/metafields.json', ['metafield' => ['namespace' => 'support_board', 'key' => 'chat_id', 'value' => $chat_id, 'type' => 'single_line_text_field']], ['X-Shopify-Access-Token: ' . $access_token]);

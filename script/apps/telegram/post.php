@@ -24,22 +24,32 @@ if ($response) {
     }
     if ($response_message) {
         $GLOBALS['SB_FORCE_ADMIN'] = true;
-        sb_cloud_load_by_url();
+        if (sb_is_cloud()) {
+            sb_cloud_load_by_url();
+            sb_cloud_membership_validation(true);
+        }
         $from = $response_message['from'];
         $chat_id = $response_message['chat']['id'];
         $telegram_message_id = sb_isset($response_message, 'message_id', '');
         $message = isset($response_message['text']) ? $response_message['text'] : $response_message['caption'];
+        if ($message == '/start' && sb_get_setting('telegram', 'telegram-disable-start')) {
+            return;
+        }
         $attachments = [];
         $get_token = sb_isset($_GET, 'tg_token');
         $token = $get_token ? $get_token : sb_get_multi_setting('telegram', 'telegram-token'); // Deprecated
         $user_id = false;
         $department = false;
+        $conversation_id = false;
 
         // User and conversation
-        $username = isset($from['username']) ? $from['username'] : $from['id'];
-        $user = sb_get_user_by('telegram-id', $username);
+        $telegram_id = isset($from['id']) ? $from['id'] : $from['username'];
+        $user = sb_get_user_by('telegram-id', $telegram_id);
         if (!$user) {
-            $extra = ['telegram-id' => [$username, 'Telegram ID']];
+            $extra = ['telegram-id' => [$telegram_id, 'Telegram ID']];
+            if (isset($from['username']) && isset($from['id'])) {
+                $extra['telegram-username'] = [$from['username'], 'Telegram Username'];
+            }
             $profile_image = sb_get('https://api.telegram.org/bot' . $token . '/getUserProfilePhotos?user_id=' . $from['id'], true);
             $business_connection_id = sb_isset($response_message, 'business_connection_id');
             if (!empty($profile_image['ok']) && count($profile_image['result']['photos'])) {
@@ -65,6 +75,7 @@ if ($response) {
             $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "tg" AND user_id = ' . $user_id . ' AND (extra_2 = "' . $token . '" OR extra_3 = "' . $token . '") ORDER BY id DESC LIMIT 1'), 'id'); // Deprecated. Remove extra_2. Use only extra_3 = "' . $token . '"
         }
         $GLOBALS['SB_LOGIN'] = $user;
+        $is_routing = sb_routing_is_active();
         if (!$conversation_id) {
             $tags = false;
             $numbers = sb_get_setting('telegram-numbers');
@@ -76,9 +87,14 @@ if ($response) {
                     }
                 }
             }
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'tg', $chat_id, false, $token, $tags), 'details', [])['id'];
-        } else if ($telegram_message_id && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages A, sb_conversations B WHERE A.conversation_id =  ' . $conversation_id . ' AND A.payload LIKE "%' . sb_db_escape($telegram_message_id) . '%" AND B.id = A.conversation_id AND (B.extra_2 = "' . $token . '" OR B.extra_3 = "' . $token . '")'), 'count') != 0) { // Deprecated. Use only extra_3 = "' . $token . '"
-            die();
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'tg', $chat_id, false, $token, $tags), 'details', [])['id'];
+        } else {
+            if ($telegram_message_id && sb_isset(sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages A, sb_conversations B WHERE A.conversation_id =  ' . $conversation_id . ' AND A.payload LIKE "%' . sb_db_escape($telegram_message_id) . '%" AND B.id = A.conversation_id AND (B.extra_2 = "' . $token . '" OR B.extra_3 = "' . $token . '")'), 'count') != 0) { // Deprecated. Use only extra_3 = "' . $token . '"
+                die();
+            }
+            if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
+                sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
+            }
         }
 
         // Attachments
@@ -96,16 +112,27 @@ if ($response) {
             array_push($attachments, [substr($url, strripos($url, '/') + 1), $url]);
         }
 
+        // Payload
+        $payload = [];
+        if ($telegram_message_id) {
+            $payload['tgid'] = $telegram_message_id;
+        }
+        $reply_to_message = sb_isset($response_message, 'reply_to_message');
+        if ($reply_to_message) {
+            $reply_to_message = sb_isset(sb_db_get('SELECT id FROM sb_messages WHERE payload LIKE "%{\"tgid\":' . sb_db_escape($reply_to_message['message_id']) . '}%" AND conversation_id = ' . $conversation_id . ' LIMIT 1'), 'id');
+            if ($reply_to_message) {
+                $payload['reply'] = $reply_to_message;
+            }
+        }
+
         // Send message
-        $response = sb_send_message($user_id, $conversation_id, $message, $attachments, false, $telegram_message_id ? json_encode(['tgid' => $telegram_message_id]) : '');
+        $response = sb_send_message($user_id, $conversation_id, $message, $attachments, false, $payload);
 
         // Dialogflow, Notifications, Bot messages
         $response_external = sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, ['source' => 'tg', 'platform_value' => $chat_id]);
 
         // Queue
-        if (sb_get_multi_setting('queue', 'queue-active')) {
-            sb_queue($conversation_id, $department);
-        }
+        sb_queue_check_and_run($conversation_id, $department, 'tg');
 
         // Online status
         sb_update_users_last_activity($user_id);

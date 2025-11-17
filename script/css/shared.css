@@ -1,8 +1,8 @@
 /*
 *  
-* ==========================================================
+* ==
 * SHARED.SCSS
-* ==========================================================
+* ==
 *
 * Shared CSS used on both admin and front end. This file is imported only.
 *
@@ -23,6 +23,18 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.sb-icon-arrows-in:before {
+  content: "\e90d";
+}
+
+.sb-icon-arrows-out:before {
+  content: "\e90b";
+}
+
+.sb-icon-sidebar:before {
+  content: "\e90c";
 }
 
 .sb-icon-arrow-up:before {
@@ -1121,7 +1133,7 @@ div ul.sb-menu,
 /*
 
 # USER CONVERSATIONS
-==========================================================
+==
 
 */
 .sb-user-conversations > li {
@@ -1148,6 +1160,7 @@ div ul.sb-menu,
   top: 5px;
   width: 40px;
   height: 40px;
+  object-fit: cover;
   border-radius: 50%;
   display: block;
 }
@@ -1237,7 +1250,7 @@ div ul.sb-menu,
 /*
 
 # MESSAGES LIST AND CHAT
-==========================================================
+==
 */
 .sb-chat .sb-btn-text:hover,
 .sb-list .sb-btn-text:hover {
@@ -1578,7 +1591,7 @@ div ul.sb-menu,
 /*
 
 # CHAT HTML COMPONENTS
-==========================================================
+==
 
 */
 .sb-list .sb-form + .sb-btn {
@@ -1834,7 +1847,7 @@ div ul.sb-menu,
 /*
 
 # EDITOR
-==========================================================
+==
 
 */
 .sb-editor {
@@ -2082,7 +2095,7 @@ div ul.sb-menu,
 /*
 
 # ARTICLES 
-==========================================================
+==
 
 */
 .sb-article h1,
@@ -2097,6 +2110,7 @@ div ul.sb-menu,
   padding-bottom: 25px;
   letter-spacing: 0.5px;
   position: relative;
+  word-wrap: break-word;
 }
 .sb-article .sb-title .sb-icon-close {
   position: absolute;
@@ -2229,8 +2243,8 @@ div ul.sb-menu,
 
 .sb-chat .sb-article > .sb-title:first-child {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .sb-chat .sb-article h2 {
   font-size: 17px;
@@ -2284,7 +2298,7 @@ div ul.sb-menu,
 /*
 
 # LOADING
-==========================================================
+==
 
 */
 @keyframes sb-loading {
@@ -2348,7 +2362,7 @@ div ul.sb-menu,
 /*
 
 # BUTTONS
-==========================================================
+==
 
 */
 .sb_btn_new {
@@ -2522,7 +2536,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # INPUT
-==========================================================
+==
 
 */
 .sb-input {
@@ -2596,18 +2610,19 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
   cursor: pointer;
   display: inline-block;
   line-height: 0;
-  height: 35px;
-  min-height: 35px;
+  height: 20px;
+  min-height: 20px;
   outline: 0;
   padding: 0;
   margin: 0;
   text-align: center;
   vertical-align: middle;
-  width: 35px;
-  min-width: 35px !important;
+  width: 20px;
+  min-width: 20px !important;
   outline: none;
   box-shadow: none;
   -webkit-appearance: none;
+  position: relative;
 }
 .sb-input > input[type=checkbox]:checked:before {
   content: "w" !important;
@@ -2616,12 +2631,16 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
   font-weight: normal !important;
   font-variant: normal !important;
   text-transform: none !important;
-  line-height: 35px;
-  font-size: 15px;
+  line-height: 18px;
+  font-size: 10px;
   color: #155CFD;
   margin: 0;
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 .sb-input > div {
   padding-right: 30px;
@@ -2838,7 +2857,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 
 .sb-input-select-input > div.sb-select-phone + input {
-  padding: 5px 0 0 100px;
+  padding: 5px 0 0 90px !important;
 }
 .sb-input-select-input > div.sb-select-phone .sb-select-search input {
   padding: 0 10px;
@@ -2881,7 +2900,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # LIGHTBOX
-==========================================================
+==
 
 */
 .sb-lightbox-media {
@@ -2945,7 +2964,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # OVERLAY PANEL
-==========================================================
+==
 
 */
 .sb-overlay-panel {
@@ -3000,7 +3019,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # IMAGE LIGHTBOX
-==========================================================
+==
 
 */
 .sb-image {
@@ -3029,7 +3048,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # UPLOAD INPUT
-==========================================================
+==
 
 */
 .sb-upload-form-admin {
@@ -3044,7 +3063,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SEARCH BUTTON
-==========================================================
+==
 
 */
 .sb-search-btn,
@@ -3102,7 +3121,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # POPUP
-==========================================================
+==
 
 */
 .sb-popup {
@@ -3162,7 +3181,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # EMOJI
-==========================================================
+==
 
 */
 .sb-popup.sb-emoji {
@@ -3230,7 +3249,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SELECT AND MENU
-==========================================================
+==
 
 */
 .sb-select {
@@ -3355,7 +3374,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RICH MESSAGES
-==========================================================
+==
 
 */
 .sb-rich-message {
@@ -4049,7 +4068,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # MISCELLANEOUS
-==========================================================
+==
 
 */
 .sb-grid {

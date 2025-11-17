@@ -1,17 +1,17 @@
 /*
 * 
-* ==========================================================
+* ==
 * TICKETS.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the Tickets App. Written in SCSS.
 *
 */
 /*
 *  
-* ==========================================================
+* ==
 * SHARED.SCSS
-* ==========================================================
+* ==
 *
 * Shared CSS used on both admin and front end. This file is imported only.
 *
@@ -1130,7 +1130,7 @@ div ul.sb-menu,
 /*
 
 # USER CONVERSATIONS
-==========================================================
+==
 
 */
 .sb-user-conversations > li {
@@ -1246,7 +1246,7 @@ div ul.sb-menu,
 /*
 
 # MESSAGES LIST AND CHAT
-==========================================================
+==
 */
 .sb-chat .sb-btn-text:hover,
 .sb-list .sb-btn-text:hover {
@@ -1587,7 +1587,7 @@ div ul.sb-menu,
 /*
 
 # CHAT HTML COMPONENTS
-==========================================================
+==
 
 */
 .sb-list .sb-form + .sb-btn {
@@ -1843,7 +1843,7 @@ div ul.sb-menu,
 /*
 
 # EDITOR
-==========================================================
+==
 
 */
 .sb-editor {
@@ -2091,7 +2091,7 @@ div ul.sb-menu,
 /*
 
 # ARTICLES 
-==========================================================
+==
 
 */
 .sb-article h1,
@@ -2106,6 +2106,7 @@ div ul.sb-menu,
   padding-bottom: 25px;
   letter-spacing: 0.5px;
   position: relative;
+  word-wrap: break-word;
 }
 .sb-article .sb-title .sb-icon-close {
   position: absolute;
@@ -2238,8 +2239,8 @@ div ul.sb-menu,
 
 .sb-chat .sb-article > .sb-title:first-child {
   border-bottom: 1px solid rgb(212, 212, 212);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 .sb-chat .sb-article h2 {
   font-size: 17px;
@@ -2293,7 +2294,7 @@ div ul.sb-menu,
 /*
 
 # LOADING
-==========================================================
+==
 
 */
 @keyframes sb-loading {
@@ -2357,7 +2358,7 @@ div ul.sb-menu,
 /*
 
 # BUTTONS
-==========================================================
+==
 
 */
 .sb_btn_new {
@@ -2531,7 +2532,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # INPUT
-==========================================================
+==
 
 */
 .sb-input {
@@ -2847,7 +2848,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 }
 
 .sb-input-select-input > div.sb-select-phone + input {
-  padding: 5px 0 0 100px;
+  padding: 5px 0 0 90px !important;
 }
 .sb-input-select-input > div.sb-select-phone .sb-select-search input {
   padding: 0 10px;
@@ -2890,7 +2891,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # LIGHTBOX
-==========================================================
+==
 
 */
 .sb-lightbox-media {
@@ -2954,7 +2955,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # OVERLAY PANEL
-==========================================================
+==
 
 */
 .sb-overlay-panel {
@@ -3009,7 +3010,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # IMAGE LIGHTBOX
-==========================================================
+==
 
 */
 .sb-image {
@@ -3038,7 +3039,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # UPLOAD INPUT
-==========================================================
+==
 
 */
 .sb-upload-form-admin {
@@ -3053,7 +3054,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SEARCH BUTTON
-==========================================================
+==
 
 */
 .sb-search-btn,
@@ -3111,7 +3112,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # POPUP
-==========================================================
+==
 
 */
 .sb-popup {
@@ -3171,7 +3172,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # EMOJI
-==========================================================
+==
 
 */
 .sb-popup.sb-emoji {
@@ -3239,7 +3240,7 @@ a.sb-btn.sb-icon-check:not(.sb-loading):before {
 /*
 
 # SELECT AND MENU
-==========================================================
+==
 
 */
 .sb-select {
@@ -3364,7 +3365,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RICH MESSAGES
-==========================================================
+==
 
 */
 .sb-rich-message {
@@ -4058,7 +4059,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # MISCELLANEOUS
-==========================================================
+==
 
 */
 .sb-grid {
@@ -4444,7 +4445,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # GLOBAL
-==========================================================
+==
 
 */
 .sb-main ::-webkit-input-placeholder {
@@ -4581,7 +4582,6 @@ div ul.sb-menu .li:hover,
   align-items: center;
   border-bottom: 1px solid rgb(212, 212, 212);
   padding: 15px 20px;
-  height: 60px;
   min-height: 60px;
   box-sizing: border-box;
   justify-content: space-between;
@@ -4725,7 +4725,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # LEFT PANEL
-==========================================================
+==
 
 */
 .sb-tickets .sb-panel-left {
@@ -4856,7 +4856,7 @@ div ul.sb-menu .li:hover,
 /*
 
 # RIGHT PANEL
-==========================================================
+==
 
 */
 .sb-tickets .sb-panel-right {
@@ -5395,7 +5395,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # MAIN PANEL
-==========================================================
+==
 */
 .sb-tickets .user_header .header_left h2:nth-child(2) {
   display: none;
@@ -5415,9 +5415,7 @@ ul.sb-user-conversations.sb-scroll-area {
   text-decoration: none;
   line-height: 30px;
   color: #000000;
-  font-size: 17px;
-  letter-spacing: 0.4px;
-  white-space: nowrap;
+  font-size: 20px;
 }
 .sb-tickets .sb-panel-main > .sb-top .sb-btn-back,
 .sb-tickets .sb-panel-main > .sb-top .sb-close {
@@ -5580,6 +5578,9 @@ ul.sb-user-conversations.sb-scroll-area {
 .tickets-list-area .tickets-list .sb-top .sb-search-btn {
   display: none;
 }
+.tickets-list-area .sb-form-main #otp:not(.active) {
+  display: none;
+}
 
 .sb-main.sb-tickets.sb-panel-active .sb-top {
   display: flex !important;
@@ -5597,9 +5598,6 @@ ul.sb-user-conversations.sb-scroll-area {
 .sb-panel-form .sb-form {
   margin: 22px 0 30px 0;
   max-width: 500px;
-}
-.sb-panel-form [id=otp]:not(.sb-active) {
-  display: none;
 }
 .sb-panel-form .sb-form-extra {
   margin: -20px 0 30px 0;
@@ -5660,7 +5658,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # CONVERSATIONS AREA
-==========================================================
+==
 
 */
 .sb-tickets .sb-conversation {
@@ -5808,7 +5806,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # COMPONENTS
-==========================================================
+==
 
 */
 .sb-profile {
@@ -5924,7 +5922,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RTL
-==========================================================
+==
 
 */
 .sb-tickets.sb-rtl .sb-panel-right {
@@ -6014,7 +6012,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RESPONSIVE
-==========================================================
+==
 
 */
 .sb-1300 .sb-panel-left,

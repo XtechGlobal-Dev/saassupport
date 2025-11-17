@@ -18,7 +18,10 @@ if (function_exists('fastcgi_finish_request')) {
 $response = json_decode($raw, true);
 if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNATURE'])) {
     require('../../include/functions.php');
-    sb_cloud_load_by_url();
+    if (sb_is_cloud()) {
+        sb_cloud_load_by_url();
+        sb_cloud_membership_validation(true);
+    }
     $get_line_secret = sb_isset($_GET, 'line_secret');
     $line_secret = $get_line_secret ? $get_line_secret : sb_get_multi_setting('line', 'line-channel-secret'); // Deprecated
     if ($_SERVER['HTTP_X_LINE_SIGNATURE'] === base64_encode(hash_hmac('sha256', $raw, $line_secret, true))) {
@@ -67,8 +70,11 @@ if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNA
             $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "ln" AND user_id = ' . $user_id . ' AND (extra_2 = "' . $token . '" OR extra_3 = "' . $token . '") ORDER BY id DESC LIMIT 1'), 'id'); // Deprecated. Remove extra_2. Use only extra_3 = "' . $token . '"
         }
         $GLOBALS['SB_LOGIN'] = $user;
+        $is_routing = sb_routing_is_active();
         if (!$conversation_id) {
-            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'ln', $line_id, $token, $tags), 'details', [])['id'];
+            $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'ln', $line_id, $token, $tags), 'details', [])['id'];
+        } else if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
+            sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
         }
 
         // Attachments
@@ -102,6 +108,9 @@ if ($response && isset($response['events']) && isset($_SERVER['HTTP_X_LINE_SIGNA
 
         // Dialogflow, Notifications, Bot messages
         $response_external = sb_messaging_platforms_functions($conversation_id, $message_text, $attachments, $user, ['source' => 'ln', 'line_id' => $line_id]);
+
+        // Queue
+        sb_queue_check_and_run($conversation_id, $department, 'ln');
 
         // Online status
         sb_update_users_last_activity($user_id);

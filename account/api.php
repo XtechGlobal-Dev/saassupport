@@ -5,7 +5,7 @@
  * API.PHP
  * ==========================================================
  *
- * Support Board Cloud API file. © 2022-2024 board.support. All rights reserved.
+ * Support Board Cloud API file. ï¿½ 2022-2024 board.support. All rights reserved.
  *
  */
 
@@ -85,6 +85,7 @@ switch ($_GET['action']) {
         $cloud_user_id = (intval($_GET['chat_id']) + 153) / 95675;
         $token = cloud_get_token_by_id($cloud_user_id);
         $cloud_user = db_get('SELECT * FROM users WHERE token = "' . $token . '"');
+        $cloud_user['user_id'] = $cloud_user['id'];
         $_POST['cloud'] = sb_encryption(json_encode($cloud_user));
         ob_start();
         echo '<div id="sb-articles">';

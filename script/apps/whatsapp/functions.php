@@ -9,15 +9,14 @@
  *
  */
 
-define('SB_WHATSAPP', '1.2.9');
+define('SB_WHATSAPP', '1.3.1');
 
-function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_number_id = false) {
+function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_number_id = false, $reply_to = false, $message_id = false) {
     if (empty($message) && empty($attachments)) {
         return false;
     }
     $message_original = $message;
     $provider = sb_whatsapp_provider();
-
     $cloud_phone_id = $provider == 'twilio' ? false : ($phone_number_id ? $phone_number_id : sb_isset(sb_isset(sb_whatsapp_cloud_get_phone_numbers($phone_number_id), 1), 'whatsapp-cloud-numbers-phone-id'));
     $to = trim(str_replace('+', '', $to));
     $user = sb_get_user_by('phone', $to);
@@ -133,6 +132,12 @@ function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_
             } else {
                 $query = array_merge($query, $message);
             }
+            if ($reply_to) {
+                $reply_to = sb_get_message_payload($reply_to, 'waid');
+                if ($reply_to) {
+                    $query['context'] = ['message_id' => $reply_to];
+                }
+            }
             $response = $provider == 'official' ? sb_whatsapp_cloud_curl($cloud_phone_id . '/messages', $query, $cloud_phone_id) : sb_whatsapp_360_curl('messages', $query);
         }
         for ($i = 0; $i < $attachments_count; $i++) {
@@ -146,7 +151,6 @@ function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_
             if ($media_type == 'document') {
                 $query[$media_type]['filename'] = $attachments[$i][0];
             }
-            sb_debug($query);
             $response_2 = $provider == 'official' ? sb_whatsapp_cloud_curl($cloud_phone_id . '/messages', $query, $cloud_phone_id) : sb_whatsapp_360_curl('messages', $query);
             if (!$response) {
                 $response = $response_2;
@@ -157,6 +161,13 @@ function sb_whatsapp_send_message($to, $message = '', $attachments = [], $phone_
         $message_id = sb_isset(sb_db_get('SELECT id FROM sb_messages WHERE message = "' . sb_db_escape($message_original) . '" AND user_id = ' . sb_get_active_user_ID() . ' ORDER BY id DESC LIMIT 1'), 'id');
         if ($message_id) {
             sb_update_message($message_id, false, false, ['delivery_failed' => 'wa']);
+        }
+    } else if ($message_id) {
+        $waid = sb_isset(sb_isset(sb_isset($response, 'messages'), 0), 'id');
+        if ($waid) {
+            $payload = sb_get_message_payload($message_id);
+            $payload['waid'] = $waid;
+            sb_update_message($message_id, false, false, $payload);
         }
     }
     return $response;
@@ -351,7 +362,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
             case 'list-image':
             case 'list':
                 $index = $shortcode_name == 'list-image' ? 1 : 0;
-                $shortcode['values'] = str_replace(['://', '\:', "\n,-"], ['{R2}', '{R4}', ' '], $shortcode['values']);
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
                 $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
@@ -363,7 +374,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
                         $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', $message_inner . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'select':
             case 'buttons':
@@ -373,7 +384,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
                 if ($twilio) {
                     $message_inner .= PHP_EOL;
                     for ($i = 0; $i < $count; $i++) {
-                        $message_inner .= PHP_EOL . '• ' . trim($values[$i]);
+                        $message_inner .= PHP_EOL . '• ' . trim(explode('|', $values[$i])[0]);
                     }
                     $message = str_replace('{R}', $message_inner, $message);
                 } else {
@@ -387,7 +398,7 @@ function sb_whatsapp_rich_messages($message, $extra = false) {
                     }
                     $buttons = [];
                     for ($i = 0; $i < $count; $i++) {
-                        $value = trim($values[$i]);
+                        $value = trim(explode('|', $values[$i])[0]);
                         $item = ['id' => sb_string_slug($value), 'title' => $value];
                         array_push($buttons, $is_buttons ? ['type' => 'reply', 'reply' => $item] : $item);
                     }
@@ -897,12 +908,27 @@ function sb_whatsapp_send_template_box() { ?>
             </div>
         </div>
         <div class="sb-main sb-scroll-area">
-            <div class="sb-title">
+            <div class="mt-3 mb-4 bulk-users-container">
+                <label class="form-label select-user"><?php sb_e("Select"); ?>     <?php sb_e("Users"); ?>
+                    (<?php sb_e(string: "Max"); ?> 10)</label>
+                <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input selectAll" type="checkbox" >
+                    <label class="form-check-label" for="selectAll"><?php sb_e("Select"); ?>     <?php sb_e("All"); ?></label>
+                </div>
+
+                <div class="selectedCount" class="text-muted small mb-2">0 / 10 <?php sb_e("Selected"); ?></div>
+
+                <div class="border rounded p-2 bulk-users-wrapper" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Example Users -->
+                </div>
+                <input type="hidden" class="sb-setting sb-direct-message-users" id="selectedUserIds2" name="selectedUserIds" value="">
+            </div>
+            <!-- <div class="sb-title">
                 <?php sb_e('User IDs') ?>
             </div>
             <div class="sb-setting sb-type-text sb-first">
                 <input class="sb-direct-message-users" type="text" placeholder="<?php sb_e('User IDs separated by commas') ?>" required />
-            </div>
+            </div> -->
             <div class="sb-title sb-whatsapp-box-header">
                 <?php sb_e('Header variables') ?>
             </div>
@@ -939,6 +965,83 @@ function sb_whatsapp_send_template_box() { ?>
                 }
                 ?>
             </div>
+            <script>
+        $(document).ready(function () {
+            const maxSelection = 10;
+
+            function updateSelected() {
+                const checked = $('.user-checkbox:checked');
+                const count = checked.length;
+                const selectedText = '<?php sb_e("Selected"); ?>';
+
+                $('.selectedCount').text(`${count} / ${maxSelection} ${selectedText}`);
+
+                // Update hidden field with selected IDs
+                const ids = checked.map(function () {
+                    return $(this).val();
+                }).get().join(',');
+
+                $('#selectedUserIds2').val(ids);
+
+                // Update select all checkbox state
+                // $('#selectAll').prop('checked', $('.user-checkbox').length === count);
+            }
+
+            $('.bulk-users-wrapper').on('change', '.user-checkbox', function () {
+                const checkedCount = $('.user-checkbox:checked').length;
+
+                if (checkedCount > maxSelection) {
+                    this.checked = false;
+                    alert(`You can select up to ${maxSelection} users.`);
+                    return;
+                }
+
+                updateSelected();
+
+                if (checkedCount)
+                    $('.bulk-users-wrapper').removeClass('sb-error');
+                else
+                    $('.bulk-users-wrapper').addClass('sb-error');
+            });
+
+            $('.bulk-users-wrapper').on('keyup','#userSearch', function() {
+                var value = $(this).val().toLowerCase();
+                $('.bulk-users-wrapper .form-check').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+
+            $('.selectAll').on('change', function () {
+                if (this.checked) {
+                    let checkedCount = $(this).parent().parent().find('.user-checkbox:checked').length;
+
+                    $(this).parent().parent().find('.user-checkbox').each(function () {
+                        if (!$(this).closest('.form-check').is(':hidden'))
+                        {
+                            console.log('checked');
+                            if (!$(this).prop('checked') && checkedCount < maxSelection) {
+                                $(this).prop('checked', true);
+                                checkedCount++;
+                            }
+                        }
+                    });
+
+                    if (checkedCount)
+                        $('.bulk-users-wrapper').removeClass('sb-error');
+                    else
+                        $('.bulk-users-wrapper').addClass('sb-error');
+
+                } else {
+                    // Allow unchecking all regardless of count
+                    $('.user-checkbox').prop('checked', false);
+                }
+
+                updateSelected();
+            });
+
+            updateSelected(); // Initialize count on load
+        });
+    </script>
         </div>
     </div>
 <?php } ?>

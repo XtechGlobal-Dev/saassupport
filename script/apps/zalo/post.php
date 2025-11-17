@@ -17,7 +17,10 @@ if (!$signature) {
     die();
 }
 require('../../include/functions.php');
-sb_cloud_load_by_url();
+if (sb_is_cloud()) {
+    sb_cloud_load_by_url();
+    sb_cloud_membership_validation(true);
+}
 $hash = 'mac=' . hash('sha256', $response['app_id'] . $raw . $response['timestamp'] . trim(sb_get_multi_setting('zalo', 'zalo-oa-secret-key')));
 if (strcmp($hash, $_SERVER['HTTP_X_ZEVENT_SIGNATURE']) === 0 && isset($response['event_name'])) {
     flush();
@@ -57,8 +60,11 @@ if (strcmp($hash, $_SERVER['HTTP_X_ZEVENT_SIGNATURE']) === 0 && isset($response[
                 $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "za" AND user_id = ' . $user_id . ' ORDER BY id DESC LIMIT 1'), 'id');
             }
             $GLOBALS['SB_LOGIN'] = $user;
+            $is_routing = sb_routing_is_active();
             if (!$conversation_id) {
-                $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'za', false, false, $tags), 'details', [])['id'];
+                $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'za', false, false, $tags), 'details', [])['id'];
+            } else if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
+                sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
             }
 
             // Attachments
@@ -83,9 +89,7 @@ if (strcmp($hash, $_SERVER['HTTP_X_ZEVENT_SIGNATURE']) === 0 && isset($response[
                 $response_external = sb_messaging_platforms_functions($conversation_id, $message_text, $attachments, $user, ['source' => 'za', 'zalo_id' => $zalo_id]);
 
                 // Queue
-                if (sb_get_multi_setting('queue', 'queue-active')) {
-                    sb_queue($conversation_id, $department);
-                }
+                sb_queue_check_and_run($conversation_id, $department, 'za');
             }
         } else if ($event_name == 'user_received_message') {
 

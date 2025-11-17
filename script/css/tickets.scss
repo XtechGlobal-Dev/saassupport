@@ -1,8 +1,8 @@
 /*
 * 
-* ==========================================================
+* ==
 * TICKETS.SCSS
-* ==========================================================
+* ==
 *
 * Main style file of the Tickets App. Written in SCSS.
 *
@@ -11,7 +11,7 @@
 @use "shared.scss" as *;
 @use "rtl.scss" as *;
 
-@keyframes sb-collapse-btn-right {
+@keyframes sb-collapse-btn-right { 
     0% {
         opacity: 0;
     }
@@ -66,7 +66,7 @@
 /*
 
 # GLOBAL
-==========================================================
+==
 
 */
 
@@ -221,7 +221,7 @@
         align-items: center;
         border-bottom: 1px solid $border-color;
         padding: 15px 20px;
-        height: 60px;
+        // height: 60px;
         min-height: 60px;
         box-sizing: border-box;
         justify-content: space-between;
@@ -380,7 +380,7 @@
 /*
 
 # LEFT PANEL
-==========================================================
+==
 
 */
 
@@ -552,7 +552,7 @@
 /*
 
 # RIGHT PANEL
-==========================================================
+==
 
 */
 
@@ -1234,7 +1234,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # MAIN PANEL
-==========================================================
+==
 */
 
 .sb-tickets {
@@ -1264,9 +1264,9 @@ ul.sb-user-conversations.sb-scroll-area {
                 text-decoration: none;
                 line-height: 30px;
                 color: $color-black;
-                font-size: 17px;
-                letter-spacing: .4px;
-                white-space: nowrap;
+                font-size: 20px;
+                // letter-spacing: .4px;
+                // white-space: nowrap;
             }
 
             .sb-btn-back,
@@ -1509,10 +1509,18 @@ ul.sb-user-conversations.sb-scroll-area {
         }
     }
 
-    .tickets-list {
+    .tickets-list { 
         .sb-top {
             .sb-search-btn {
                 display: none;
+            }
+        }
+    }
+
+    .sb-form-main {
+        #otp {
+            &:not(.active) {
+            display: none;
             }
         }
     }
@@ -1536,15 +1544,14 @@ ul.sb-user-conversations.sb-scroll-area {
 }
 
 .sb-panel-form {
-
     .sb-form {
         margin: 22px 0 30px 0;
         max-width: 500px;
     }
-
-    [id="otp"]:not(.sb-active) {
-        display: none;
-    }
+    
+    // [id="otp"]:not(.sb-active) {
+    //     display: none;
+    // }
 
     .sb-form-extra {
         margin: -20px 0 30px 0;
@@ -1620,7 +1627,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # CONVERSATIONS AREA
-==========================================================
+==
 
 */
 
@@ -1808,7 +1815,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # COMPONENTS
-==========================================================
+==
      
 */
 
@@ -1940,7 +1947,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RTL
-==========================================================
+==
 
 */
 
@@ -2053,7 +2060,7 @@ ul.sb-user-conversations.sb-scroll-area {
 /*
 
 # RESPONSIVE
-==========================================================
+==
 
 */
 

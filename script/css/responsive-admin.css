@@ -1,8 +1,8 @@
 /*
 * 
-* ==========================================================
+* ==
 * RESPONSIVE-ADMIN.SCSS
-* ==========================================================
+* ==
 *
 * Back-end responsive CSS. This file is imported only.
 *
@@ -10,7 +10,7 @@
 /*
 
 # GENERAL
-==========================================================
+==
 
 */
 @keyframes sb-lightbox-animation {
@@ -349,14 +349,11 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
   padding: 5px 15px 15px 15px;
   border: none;
 }
-.sb-tab > .sb-nav > ul {
-  max-width: none;
-}
 
 /*
 
 # FONT SIZE
-==========================================================
+==
 
 */
 div ul.sb-menu li,
@@ -493,6 +490,15 @@ a.sb-btn.sb-icon.sb-btn-white i {
 a.sb-btn.sb-icon.sb-btn-white i:before {
   line-height: 40px;
 }
+.sb-btn.sb-icon[data-sb-tooltip="Send message"],
+a.sb-btn.sb-icon[data-sb-tooltip="Send message"] {
+  padding: 0px 10px;
+  min-width: unset;
+}
+.sb-btn.sb-icon[data-sb-tooltip="Send message"] i,
+a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
+  position: unset;
+}
 
 .sb-profile-list > ul > li,
 .sb-panel-details .sb-list-items > div,
@@ -508,7 +514,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # TOP HEADER
-==========================================================
+==
 
 */
 .sb-admin {
@@ -592,7 +598,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # COMPONENTS
-==========================================================
+==
 
 */
 .sb-admin .sb-select-checkbox {
@@ -619,11 +625,9 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
   left: 0;
   right: 0;
   margin: 0;
-  top: 110px;
-  position: fixed;
+  top: 65px;
   overflow: hidden;
-  overflow-y: scroll;
-  max-height: calc(100% - 130px);
+  overflow-y: auto;
   z-index: 99995;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1215686275);
   border-top: 1px solid rgb(212, 212, 212);
@@ -652,6 +656,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 .sb-admin .sb-menu-wide.sb-active > ul,
 .sb-admin .sb-nav.sb-active > ul {
   display: block;
+  position: absolute;
 }
 .sb-admin .sb-menu-wide > ul,
 .sb-admin .sb-nav > ul {
@@ -826,7 +831,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # LIGHTBOX AND POPUP
-==========================================================
+==
 
 */
 .sb-lightbox:not(.sb-loading):not(.sb-loading-global) {
@@ -836,7 +841,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
   top: 0;
   bottom: 0;
   margin: 0 !important;
-  min-height: 100%;
+  min-height: 0%;
   border: none;
   border-radius: 0;
 }
@@ -944,7 +949,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # CONVERSATIONS AREA
-==========================================================
+==
 
 */
 .sb-board {
@@ -1184,7 +1189,7 @@ a.sb-btn.sb-icon.sb-btn-white i:before {
 /*
 
 # USERS AREA
-==========================================================
+==
 
 */
 .sb-area-users .sb-top-bar {
@@ -1346,7 +1351,7 @@ td.sb-offline:after {
 /*
 
 # SETTINGS AREA
-==========================================================
+==
 
 */
 .sb-setting input,
@@ -1417,7 +1422,7 @@ td.sb-offline:after {
 }
 
 .sb-admin .sb-timetable {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .sb-admin .sb-apps {
   grid-template-columns: 1fr;
@@ -1452,7 +1457,7 @@ td.sb-offline:after {
 /*
 
 # REPORTS AREA
-==========================================================
+==
 
 */
 .sb-area-reports > .sb-tab .sb-nav > ul li:not(.sb-tab-nav-title) {
@@ -1504,11 +1509,11 @@ td.sb-offline:after {
 /*
 
 # CHATBOT AREA
-==========================================================
+==
 
 */
 .sb-area-chatbot > .sb-tab {
-  overflow: scroll;
+  overflow: auto;
   height: calc(100% - 110px) !important;
   padding-bottom: 30px;
 }
@@ -1547,24 +1552,9 @@ td.sb-offline:after {
   overflow: visible;
 }
 
-.sb-playground-editor {
-  position: static;
-}
-.sb-playground-editor > .sb-flex {
-  display: block;
-}
-.sb-playground-editor > .sb-flex .sb-flex:last-child {
-  display: block;
-}
-.sb-playground-editor > .sb-flex .sb-flex:last-child > div {
-  display: block;
-  margin: 10px 0;
-  padding-left: 30px;
-}
-
 [data-id=playground] {
   height: calc(100% - 70px);
-  overflow: scroll;
+  overflow: auto;
 }
 [data-id=playground] > div {
   display: block;
@@ -1572,7 +1562,6 @@ td.sb-offline:after {
   align-content: baseline;
 }
 [data-id=playground] > div > div {
-  height: auto;
   padding: 15px 15px 30px 15px;
   border: none;
 }
@@ -1635,7 +1624,7 @@ td.sb-offline:after {
 [data-id=flows] > .sb-content {
   border-top: 1px solid rgb(212, 212, 212);
   overflow: hidden !important;
-  overflow-x: scroll !important;
+  overflow-x: auto !important;
 }
 
 .sb-flow-scroll {
@@ -1649,12 +1638,12 @@ td.sb-offline:after {
 /*
 
 # ARTICLES AREA
-==========================================================
+==
 
 */
 .sb-area-articles > .sb-tab {
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 100%;
   height: calc(100% - 110px) !important;
 }

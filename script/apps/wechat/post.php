@@ -26,8 +26,10 @@ flush();
 if (function_exists('fastcgi_finish_request')) {
     fastcgi_finish_request();
 }
-sb_cloud_load_by_url();
-
+if (sb_is_cloud()) {
+    sb_cloud_load_by_url();
+    sb_cloud_membership_validation(true);
+}
 $token = sb_get_multi_setting('wechat', 'wechat-token');
 $signature = check_signature($token);
 if (!$signature) {
@@ -67,16 +69,19 @@ if (!$user) {
     $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE source = "wc" AND user_id = ' . $user_id . ' ORDER BY id DESC LIMIT 1'), 'id');
 }
 $GLOBALS['SB_LOGIN'] = $user;
+$is_routing = sb_routing_is_active();
 if (!$conversation_id) {
     $department = sb_get_setting('wechat-department');
-    $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, sb_get_multi_setting('queue', 'queue-active') || sb_get_multi_setting('routing', 'routing-active') ? sb_routing_find_best_agent($department) : -1, 'wc'), 'details', [])['id'];
+    $conversation_id = sb_isset(sb_new_conversation($user_id, 2, '', $department, $is_routing ? sb_routing_find_best_agent($department) : -1, 'wc'), 'details', [])['id'];
+} else if ($is_routing && sb_isset(sb_db_get('SELECT status_code FROM sb_conversations WHERE id = ' . $conversation_id), 'status_code') == 3) {
+    sb_update_conversation_agent($conversation_id, sb_routing_find_best_agent($department));
 }
 
 // Emoji
-if (strpos($message, '/:') !== false) {
+if (str_contains($message, '/:')) {
     $emojis = json_decode(file_get_contents(SB_PATH . '/apps/wechat/emoji.json'), true);
     for ($i = 0; $i < count($emojis); $i++) {
-        if (strpos($message, $emojis[$i][0]) !== false) {
+        if (str_contains($message, $emojis[$i][0])) {
             $message = str_replace($emojis[$i][0], $emojis[$i][1], $message);
             if (strpos($message, '/:') === false)
                 break;
@@ -106,9 +111,7 @@ $response = sb_send_message($user_id, $conversation_id, $message, $attachments, 
 $response_extarnal = sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, ['source' => 'wc', 'platform_value' => $wechat_open_id]);
 
 // Queue
-if (sb_get_multi_setting('queue', 'queue-active')) {
-    sb_queue($conversation_id, sb_get_setting('wechat-department'));
-}
+sb_queue_check_and_run($conversation_id, $department, 'wc');
 
 // Online status
 sb_update_users_last_activity($user_id);

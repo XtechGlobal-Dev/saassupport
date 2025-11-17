@@ -20,9 +20,6 @@
     let lightbox_profile;
     let URL = document.location.href;
     let URL_NO_PARS = URL;
-    let account;
-    let pusher;
-    let pusher_channel;
     let responsive = $(window).width() < 465;
     let razorpay = PAYMENT_PROVIDER == 'razorpay';
     let stripe = PAYMENT_PROVIDER == 'stripe';
@@ -88,7 +85,6 @@
 
         // Account
         if (box_account.length) {
-            let chart;
             let chart_cnt = box_account.find('#chart-usage');
             let tabs = ['installation', 'membership', 'invoices', 'profile'];
             let encrypted_code;
@@ -102,12 +98,11 @@
             }
 
             ajax('account-user-details', {}, (response) => {
-                account = response;
-                //box_account.find('#embed-code').val(`<!-- ${BRAND_NAME} -->\n<script id="chat-init" src="${CLOUD_URL}/account/js/init.js?id=${response.chat_id}"></script>`);
+                box_account.find('#embed-code').val(`<!-- ${BRAND_NAME} -->\n<script id="chat-init" src="${CLOUD_URL}/account/js/init.js?id=${response.chat_id}"></script>`);
                 box_account.stopLoading();
                 for (var i = 0; i < profile_keys.length; i++) {
                     if (profile_keys[i] in response) {
-                        box_account.find(`#${profile_keys[i]} input`).val(response[profile_keys[i]]);
+                        box_account.find('#' + profile_keys[i]).find('input, select').val(response[profile_keys[i]]);
                     }
                 }
                 for (var i = 0; i < 2; i++) {
@@ -129,8 +124,10 @@
                     box_account.find(`#plans > [data-menu="${$(this).attr('data-type')}"]`).addClass('sb-visible');
                     $(this).sbActive(true);
                 });
-                if (box_account.find('#membership-appsumo').length) {
-                    menu.find('ul').append(`<li><a href="https://appsumo.com/account/products/" target="_blank" style="color:#028be5;text-decoration:none">AppSumo</a></li>`);
+                if (box_account.find('#membership-markeplace').length) {
+                    let markeplace = { appsumo: ['AppSumo', 'https://appsumo.com/account/products/'], tw: ['Tools World', ''] };
+                    markeplace = markeplace[box_account.find('#membership-markeplace').attr('data-markeplace')];
+                    menu.find('ul').append(`<li><a href="${markeplace[1]}" target="_blank" style="color:#028be5;text-decoration:none">${markeplace[0]}</a></li>`);
                 }
             } else {
                 box_account.find('#plans > div').addClass('sb-visible');
@@ -205,7 +202,7 @@
                 if (loading(this)) return;
                 let details = {};
                 let error = false;
-                box_account.find('#tab-profile .sb-input input').each((e, element) => {
+                box_account.find('#tab-profile .sb-input').find('input, select').each((e, element) => {
                     let id = $(element).parent().attr('id');
                     let value = $.trim($(element).val());
                     if (!value) {
@@ -425,6 +422,13 @@
                 }, 300);
             }
 
+            if (SBF.getURL('auto_login')) {
+                let params = new URLSearchParams(window.location.search);
+                setLogin(params.get('auto_login'), params.get('sb'));
+                document.location = SBF.getURL('redirect') ? SBF.getURL('redirect') : CLOUD_URL;
+                return;
+            }
+
             $(box_registration).on('click', '.btn-register', function (e) {
                 if (loading(this)) return;
                 let details = {};
@@ -460,6 +464,8 @@
                     ajax('registration', { 'details': details }, (response) => {
                         if (response == 'duplicate-email') {
                             errors_area.html(sb_('This email is already in use. Please use another email.'));
+                        } else if (response.error) {
+                            alert(response.error);
                         } else {
                             setLogin(response[0], response[1]);
                             ajax('account-welcome');
@@ -476,7 +482,6 @@
             });
 
             $(box_login).on('click', '.btn-login', function (e) {
-                alert('here');
                 let email = box_login.find('#email input').val();
                 let password = box_login.find('#password input').val();
                 let errors_area = box_login.find('.sb-errors-area');
@@ -486,7 +491,7 @@
                 errors_area.html('');
                 ajax('login', { 'email': email, 'password': password }, (response) => {
                     if (response === false) {
-                        errors_area.html(sb_('Invalid email or password.'));
+                        errors_area.html(sb_('Invalid email or password.') + (box_login.find('[data-app]').length ? ' ' + sb_('If you signed up with Google, use the Google login button.') : ''));
                     } else if (response === 'ip-ban') {
                         errors_area.html(sb_('Too many login attempts. Please retry again in a few hours.'));
                     } else {
@@ -595,7 +600,7 @@
 
             $(box_super).on('click', '.table-customers td', function (e) {
                 box_loading.sbActive(true);
-                ajax('super-get-customer', { 'customer_id': $(this).parent().attr('data-customer-id') }, (response) => {
+                ajax('super-get-customer', { customer_id: $(this).parent().attr('data-customer-id') }, (response) => {
                     let fields_editable = ['first_name', 'last_name', 'email', 'phone', 'password', 'credits'];
                     let fields_readonly = ['id', 'lifetime_value', 'token', 'creation_time', 'customer_id', 'database', 'count_users', 'count_agents', 'membership_expiration'];
                     let code = '';
@@ -608,14 +613,14 @@
                         if (!['payment', 'active_membership_cache', 'notifications_credits_count', 'marketing_email_30', 'marketing_email_7', 'email_limit'].includes(item.slug)) {
                             code += `<div data-type="${item.slug == 'white-label' ? 'select' : 'text'}" class="sb-input"><span>${slugToString(item.slug)}</span>`;
                             if (item.slug == 'white-label') {
-                                code += `<select id="white_label" data-extra="true"><option>${item.value}</option><option value="renew">Manual renewal</option><option value="disable">Disable</option></select></div>`;
+                                code += `<select id="white-label" data-extra="true"><option>${item.value}</option><option value="renew">Manual renewal</option><option value="disable">Disable</option></select></div>`;
                             } else {
                                 code += `<input id="${item.slug}" type="text" value="${item.value}" data-extra="true" /></div>`;
                             }
                         }
                     }
-                    if (!code.includes('white_label')) {
-                        code += `<div data-type="select" class="sb-input"><span>White label</span><select id="white_label" data-extra="true"><option></option><option value="activate">Activate</option></select></div>`;
+                    if (IS_WHITE_LABEL && !code.includes('white-label')) {
+                        code += `<div data-type="select" class="sb-input"><span>White label</span><select id="white-label" data-extra="true"><option></option><option value="activate">Activate</option></select></div>`;
                     }
                     code += `<div data-type="text" class="sb-input"><span>Membership</span><select id="membership" required>`;
                     for (var i = 0; i < MEMBERSHIPS.length; i++) {
@@ -921,8 +926,14 @@
     function banner(title, message, code = '', image = false, error = false, success = false) {
         let id = stringToSlug(title);
         body.find(`#banner-${id}`).remove();
-        body.find('.sb-tab > .sb-content > .sb-active').prepend(`<div id="banner-${id}" class="banner${image ? ' banner-img' : ''}${error ? ' banner-error' : ''}${success ? ' banner-success' : ''}">${image ? `<img src="${image}" />` : ''}<h2>${sb_(title)}</h2><p>${sb_(message)}</p><div>${code}</div><i class="sb-btn-icon sb-icon sb-icon-close"></i></div>`);
+        body.find('.sb-tab > .sb-content > .sb-active').prepend(`<div 1 id="banner-${id}" ${id == 'welcome-aboard' ? 'style="height: 171px;"' : ''} class="banner${image ? ' banner-img' : ''}${error ? ' banner-error' : ''}${success ? ' banner-success' : ''}">${image ? `<img src="${image}" />` : ''}<h2>${sb_(title)}</h2><p>${sb_(message)}</p><div>${code}</div><i class="sb-btn-icon sb-icon sb-icon-close"></i></div>`);
 
+                console.log('success message');
+        setTimeout(() => {
+            body.find(`#banner-${id} .sb-icon-close`).click(() => {
+                body.find(`#banner-${id}`).remove();
+            });
+        },1500);
     }
 
     function banner_success(message) {
@@ -938,7 +949,7 @@
     function banners(type) {
         switch (type) {
             case 'suspended':
-                let agents_quota_exceeded = 'quota_agents' in membership && membership.count_agents > membership.quota_agents;
+                let agents_quota_exceeded = ['agents', 'messages-agents'].includes(membership.type) && membership.count_agents > membership.quota_agents;
                 if (membership.count > membership.quota || membership.expired || agents_quota_exceeded) {
                     banner(SETTINGS.text_suspended_title ? SETTINGS.text_suspended_title : 'Your account has been suspended', (SETTINGS.text_suspended ? SETTINGS.text_suspended : sb_('Your website visitors can still use the chat but you are not able to view the messages and reply to your visitors because you can not enter the administration area. Please renew your subscription below or upgrade to a higher plan to reactivate your account again.')) + (agents_quota_exceeded ? ' ' + sb_('You can also delete newly created agents or admins and reactivate your account by clicking {R}.').replace('{R}', '<a id="delete-agents-quota">' + sb_('here') + '</a>') : ''), '', false, true);
                 }

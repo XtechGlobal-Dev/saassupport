@@ -13,7 +13,7 @@
  *
  */
 
-define('SB_ZALO', '1.0.1');
+define('SB_ZALO', '1.0.3');
 
 function sb_zalo_send_message($zalo_id, $message = '', $attachments = [], $conversation_id = false) {
     if (empty($message) && empty($attachments)) {
@@ -23,6 +23,7 @@ function sb_zalo_send_message($zalo_id, $message = '', $attachments = [], $conve
     $response = [];
     $base_url = 'https://openapi.zalo.me/v3.0/oa/message/';
     $query = ['recipient' => ['user_id' => $zalo_id], 'message' => []];
+    $message = sb_messaging_platforms_text_formatting($message);
     $message = sb_zalo_rich_messages($message, ['user_id' => $user_id]);
     $attachments = array_merge($attachments, $message[1]);
     $headers = ['access_token: ' . sb_zalo_get_token(), 'Content-Type: application/json'];
@@ -75,7 +76,8 @@ function sb_zalo_rich_messages($message, $extra = false) {
         $shortcode = $shortcodes[$j];
         $shortcode_id = sb_isset($shortcode, 'id', '');
         $shortcode_name = $shortcode['shortcode_name'];
-        $message = trim(str_replace($shortcode['shortcode'], '', $message) . sb_isset($shortcode, 'title', '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')));
+        $message = trim((isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')) . str_replace($shortcode['shortcode'], '{R}', $message));
+        $message_inner = '';
         switch ($shortcode_name) {
             case 'slider-images':
                 $images = explode(',', $shortcode['images']);
@@ -123,23 +125,20 @@ function sb_zalo_rich_messages($message, $extra = false) {
                 break;
             case 'list-image':
             case 'list':
-                $index = 0;
-                if ($shortcode_name == 'list-image') {
-                    $shortcode['values'] = str_replace('://', '', $shortcode['values']);
-                    $index = 1;
-                }
-                $values = explode(',', $shortcode['values']);
+                $index = $shortcode_name == 'list-image' ? 1 : 0;
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
+                $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
-                        $value = explode(':', $values[$i]);
-                        $message .= PHP_EOL . '• ' . trim($value[$index]) . ' ' . trim($value[$index + 1]);
+                        $value = explode(':', str_replace('{R3}', ',', $values[$i]));
+                        $message_inner .= PHP_EOL . '• *' . trim($value[$index]) . '* ' . trim($value[$index + 1]);
                     }
                 } else {
                     for ($i = 0; $i < count($values); $i++) {
-                        $message .= PHP_EOL . '• ' . trim($values[$i]);
+                        $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = trim($message);
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'rating':
             case 'select':
@@ -158,11 +157,12 @@ function sb_zalo_rich_messages($message, $extra = false) {
                         array_push($elements, ['type' => 'text', 'align' => 'left', 'content' => $shortcode['message']]);
                     }
                     for ($i = 0; $i < $count; $i++) {
+                        $value = explode('|', $values[$i])[0];
                         array_push($buttons, [
-                            'title' => substr($values[$i], 0, 100),
+                            'title' => substr($value, 0, 100),
                             'image_icon' => '',
                             'type' => 'oa.query.show',
-                            'payload' => $values[$i]
+                            'payload' => $value
                         ]);
                     }
                     $attachement_query = [

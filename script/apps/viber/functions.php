@@ -14,18 +14,21 @@
  *
  */
 
-define('SB_VIBER', '1.0.0');
+define('SB_VIBER', '1.0.2');
 
 function sb_viber_send_message($viber_id, $message = '', $attachments = []) {
-    if (empty($message) && empty($attachments)) return false;
+    if (empty($message) && empty($attachments)) {
+        return false;
+    }
     $response = ['status_message' => 'ok'];
     $user_id = defined('SB_DIALOGFLOW') ? sb_get_user_by('viber-id', $viber_id)['id'] : false;
 
     // Send the message
     $query = ['receiver' => $viber_id, 'sender' => ['name' => sb_get_user_name(), 'avatar' => sb_get_active_user()['profile_image']]];
+    $message = sb_messaging_platforms_text_formatting($message);
     $message = sb_viber_rich_messages($message, ['user_id' => $user_id]);
     $attachments = array_merge($attachments, $message[1]);
-    if ($message[0] || $message[2]){
+    if ($message[0] || $message[2]) {
         $query = array_merge($query, $message[2]);
         $response = sb_viber_curl('send_message', $message[0] ? array_merge($query, ['text' => $message[0], 'type' => 'text']) : $query);
     }
@@ -66,7 +69,8 @@ function sb_viber_rich_messages($message, $extra = false) {
         $shortcode = $shortcodes[$j];
         $shortcode_id = sb_isset($shortcode, 'id', '');
         $shortcode_name = $shortcode['shortcode_name'];
-        $message = trim(str_replace($shortcode['shortcode'], '', $message) . (isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')));
+        $message = trim((isset($shortcode['title']) ? ' *' . sb_($shortcode['title']) . '*' : '') . PHP_EOL . sb_(sb_isset($shortcode, 'message', '')) . str_replace($shortcode['shortcode'], '{R}', $message));
+        $message_inner = '';
         switch ($shortcode_name) {
             case 'slider-images':
             case 'slider':
@@ -83,31 +87,28 @@ function sb_viber_rich_messages($message, $extra = false) {
                         $suffix = $index ? '-' . $index : '';
                         $link = sb_isset($shortcode, 'link' . $suffix);
                         array_push($buttons, ['Columns' => 6, 'Rows' => 3, 'ActionType' => $link ? 'open-url' : 'reply', 'ActionBody' => $link, 'Image' => $shortcode['image' . $suffix]]);
-                        array_push($buttons, ['Columns' => 6, 'Rows' => 2, 'ActionType' => $link ? 'open-url' : 'reply', 'ActionBody' => $link, 'Text' => '<font><b>' . $shortcode['header' . $suffix] . '</b></font>' . (isset($shortcode['extra'. $suffix]) ? '<br><font color=#7e7e7e><b>' . $shortcode['extra'. $suffix] . '</b></font>' : '') . (isset($shortcode['description'. $suffix]) ? '<br><font color=#7e7e7e>' . $shortcode['description'. $suffix] . '</font>' : ''), 'TextSize'=> 'medium', 'TextVAlign'=> 'bottom', 'TextHAlign'=> 'left']);
+                        array_push($buttons, ['Columns' => 6, 'Rows' => 2, 'ActionType' => $link ? 'open-url' : 'reply', 'ActionBody' => $link, 'Text' => '<font><b>' . $shortcode['header' . $suffix] . '</b></font>' . (isset($shortcode['extra' . $suffix]) ? '<br><font color=#7e7e7e><b>' . $shortcode['extra' . $suffix] . '</b></font>' : '') . (isset($shortcode['description' . $suffix]) ? '<br><font color=#7e7e7e>' . $shortcode['description' . $suffix] . '</font>' : ''), 'TextSize' => 'medium', 'TextVAlign' => 'bottom', 'TextHAlign' => 'left']);
                         $index++;
                     }
                 }
-                $viber_payload = ['min_api_version' => 7, 'type' => 'rich_media','rich_media' => ['Type' => 'rich_media', 'ButtonsGroupColumns' => 6, 'ButtonsGroupRows' => 5, 'BgColor' => '#FFFFFF', 'Buttons' => $buttons]];
+                $viber_payload = ['min_api_version' => 7, 'type' => 'rich_media', 'rich_media' => ['Type' => 'rich_media', 'ButtonsGroupColumns' => 6, 'ButtonsGroupRows' => 5, 'BgColor' => '#FFFFFF', 'Buttons' => $buttons]];
                 break;
             case 'list-image':
             case 'list':
-                $index = 0;
-                if ($shortcode_name == 'list-image') {
-                    $shortcode['values'] = str_replace('://', '', $shortcode['values']);
-                    $index = 1;
-                }
-                $values = explode(',', $shortcode['values']);
+                $index = $shortcode_name == 'list-image' ? 1 : 0;
+                $shortcode['values'] = str_replace(['\://', '://', '\:', "\n,-"], ['{R2}', '{R2}', '{R4}', ' '], $shortcode['values']);
+                $values = explode(',', str_replace('\,', '{R3}', $shortcode['values']));
                 if (strpos($values[0], ':')) {
                     for ($i = 0; $i < count($values); $i++) {
-                        $value = explode(':', $values[$i]);
-                        $message .= PHP_EOL . '• *' . trim($value[$index]) . '* ' . trim($value[$index + 1]);
+                        $value = explode(':', str_replace('{R3}', ',', $values[$i]));
+                        $message_inner .= PHP_EOL . '• *' . trim($value[$index]) . '* ' . trim($value[$index + 1]);
                     }
                 } else {
                     for ($i = 0; $i < count($values); $i++) {
-                        $message .= PHP_EOL . '• ' . trim($values[$i]);
+                        $message_inner .= PHP_EOL . '• ' . trim(str_replace('{R3}', ',', $values[$i]));
                     }
                 }
-                $message = trim($message);
+                $message = trim(str_replace(['{R2}', '{R}', "\r\n\r\n\r\n", '{R4}'], ['://', str_replace(['{R2}', '{R4}'], ['://', '\:'], $message_inner) . PHP_EOL . PHP_EOL, "\r\n\r\n", ':'], $message));
                 break;
             case 'select':
             case 'buttons':
@@ -115,26 +116,31 @@ function sb_viber_rich_messages($message, $extra = false) {
                 $values = explode(',', $shortcode['options']);
                 $buttons = [];
                 for ($i = 0; $i < count($values); $i++) {
-                    array_push($buttons, ['ActionType' => 'reply', 'ActionBody' => $values[$i], 'Text' => $values[$i], 'TextSize' => 'regular', 'Columns' => 3, 'Rows' => 1]);
+                    $value = explode('|', $values[$i])[0];
+                    array_push($buttons, ['ActionType' => 'reply', 'ActionBody' => $value, 'Text' => $value, 'TextSize' => 'regular', 'Columns' => 3, 'Rows' => 1]);
                 }
                 $viber_payload = ['min_api_versison' => 7, 'keyboard' => ['BgColor' => '#DBDBDB', 'DefaultHeight' => false, 'Type' => 'keyboard', 'Buttons' => $buttons]];
-                if ($shortcode_id == 'sb-human-takeover' && defined('SB_DIALOGFLOW')) sb_dialogflow_set_active_context('human-takeover', [], 2, false, sb_isset($extra, 'user_id'));
+                if ($shortcode_id == 'sb-human-takeover' && defined('SB_DIALOGFLOW'))
+                    sb_dialogflow_set_active_context('human-takeover', [], 2, false, sb_isset($extra, 'user_id'));
                 break;
             case 'share':
             case 'button':
-                $message .= ($message ? PHP_EOL  : '') . $shortcode['link'];
+                $message .= ($message ? PHP_EOL : '') . $shortcode['link'];
                 break;
             case 'video':
-                $message .= ($message ? PHP_EOL  : '') . ($shortcode['type'] == 'youtube' ? 'https://www.youtube.com/embed/' : 'https://player.vimeo.com/video/') . $shortcode['id'];
+                $message .= ($message ? PHP_EOL : '') . ($shortcode['type'] == 'youtube' ? 'https://www.youtube.com/embed/' : 'https://player.vimeo.com/video/') . $shortcode['id'];
                 break;
             case 'image':
                 $attachments = [[$shortcode['url'], $shortcode['url']]];
                 break;
             case 'rating':
-                if (defined('SB_DIALOGFLOW')) sb_dialogflow_set_active_context('rating', [], 2, false, sb_isset($extra, 'user_id'));
+                if (defined('SB_DIALOGFLOW'))
+                    sb_dialogflow_set_active_context('rating', [], 2, false, sb_isset($extra, 'user_id'));
                 break;
             case 'articles':
-                if (isset($shortcode['link'])) $message = $shortcode['link'];
+                if (isset($shortcode['link'])) {
+                    $message = $shortcode['link'];
+                }
                 break;
         }
     }
