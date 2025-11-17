@@ -123,4 +123,3 @@ function ajax_response($response) {
 }
 
 ?>
-?>

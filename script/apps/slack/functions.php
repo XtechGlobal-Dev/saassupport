@@ -56,6 +56,7 @@ function sb_send_slack_message($user_id, $full_name, $profile_image = SB_URL . '
     }
 
     // Send message to Slack
+    $message = sb_messaging_platforms_text_formatting($message);
     $message = sb_slack_rich_messages($message);
     $slack_attachments = array_merge($slack_attachments, $message[2]);
     $data = ['token' => $token, 'channel' => $channel[0], 'text' => $message[0], 'username' => $full_name, 'bot_id' => 'support-board', 'icon_url' => strpos($profile_image, '.svg') ? SB_URL . '/media/user.png' : $profile_image, 'attachments' => json_encode($slack_attachments)];

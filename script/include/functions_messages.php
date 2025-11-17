@@ -71,8 +71,7 @@ function sb_get_conversations_users($conversations)
     return $conversations;
 }
 
-function sb_get_conversations($pagination = 0, $status_code = 0, $department = false, $source = false, $tag = false, $agent_id = false)
-{
+function sb_get_conversations($pagination = 0, $status_code = 0, $department = false, $source = false, $tag = false, $agent_id = false) {
     $exclude_visitors = '';
     if ($status_code == 3) {
         $ids = sb_db_get('SELECT A.id FROM sb_conversations A, sb_users B WHERE B.user_type <> "visitor" AND A.user_id = B.id', false);
@@ -102,7 +101,7 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
                 $conversation['message_id'] = $message['id'];
                 $conversation['message_user_id'] = $message['user_id'];
                 $conversation['message_status_code'] = $message['status_code'];
-                $conversation['payload'] = $message['payload'];
+                $conversation['payload'] = json_decode($message['payload'], true);
             }
         } else {
             $conversation['payload'] = json_decode($conversation['payload'], true);
@@ -115,8 +114,7 @@ function sb_get_conversations($pagination = 0, $status_code = 0, $department = f
     }
 }
 
-function sb_get_new_conversations($datetime, $department = false, $source = false, $tag = false, $agent_id = false)
-{
+function sb_get_new_conversations($datetime, $department = false, $source = false, $tag = false, $agent_id = false) {
     $datetime = sb_db_escape($datetime);
     $result = sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE A.id IN (SELECT max(id) FROM sb_messages WHERE ' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' GROUP BY conversation_id) AND B.id = A.user_id AND C.id = A.conversation_id' . sb_routing_and_department_db('C') . ($source !== false ? ' AND ' . ($source === '' || $source === 'chat' ? '(C.source IS NULL OR C.source = "")' : 'C.source = "' . sb_db_escape($source) . '"') : '') . ($tag ? ' AND C.tags LIKE "%' . sb_db_escape($tag) . '%"' : '') . ($agent_id ? ' AND C.agent_id = ' . sb_db_escape($agent_id, true) : '') . ($department ? ' AND C.department = ' . sb_db_escape($department, true) : '') . ' GROUP BY conversation_id ORDER BY A.id DESC', false);
     if (isset($result) && is_array($result)) {
@@ -126,15 +124,13 @@ function sb_get_new_conversations($datetime, $department = false, $source = fals
     }
 }
 
-function sb_get_new_user_conversations($user_id, $datetime)
-{
+function sb_get_new_user_conversations($user_id, $datetime) {
     $datetime = sb_db_escape($datetime);
     $user_id = sb_db_escape($user_id, true);
     return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE B.id = A.user_id AND A.conversation_id = C.id AND A.id IN (SELECT MAX(A.id) FROM sb_messages A, sb_conversations B WHERE A.' . (is_numeric($datetime) ? ('id > ' . $datetime) : ('creation_time > "' . $datetime . '"')) . ' AND A.conversation_id = B.id AND B.user_id = ' . $user_id . ' GROUP BY A.conversation_id) GROUP BY conversation_id ORDER BY C.id DESC', false);
 }
 
-function sb_search_conversations($search)
-{
+function sb_search_conversations($search) {
     $search = trim(sb_db_escape(mb_strtolower($search)));
     $search_first = explode(' ', $search);
     $numeric_filters = '';
@@ -160,14 +156,12 @@ function sb_search_conversations($search)
     }
 }
 
-function sb_search_user_conversations($search, $user_id = false)
-{
+function sb_search_user_conversations($search, $user_id = false) {
     $search = trim(sb_db_escape(mb_strtolower($search)));
     return sb_db_get(SELECT_CONVERSATIONS . 'FROM sb_messages A, sb_users B, sb_conversations C WHERE A.conversation_id = C.id AND B.id = C.user_id AND B.id = ' . ($user_id === false ? sb_get_active_user_ID() : sb_db_escape($user_id, true)) . ' AND (LOWER(A.message) LIKE "%' . $search . '%" OR LOWER(A.attachments) LIKE "%' . $search . '%" OR LOWER(C.title) LIKE "%' . $search . '%") GROUP BY A.conversation_id ORDER BY A.creation_time DESC', false);
 }
 
-function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false)
-{
+function sb_get_user_conversations($user_id, $exclude_id = -1, $agent = false) {
     $exclude = $exclude_id != -1 ? ' AND A.conversation_id <> ' . sb_db_escape($exclude_id) : '';
     $user_id = sb_db_escape($user_id, true);
     $ids = sb_db_get($agent ? 'SELECT conversation_id AS `id` FROM sb_messages WHERE user_id = ' . $user_id . ' GROUP BY conversation_id' : 'SELECT id FROM sb_conversations WHERE user_id = ' . $user_id . ' GROUP BY id', false);
@@ -187,22 +181,19 @@ function get_user_tickets($user_id)
 
 }
 
-function sb_get_last_conversation_id_or_create($user_id, $status_code = 1)
-{
+function sb_get_last_conversation_id_or_create($user_id, $status_code = 1) {
     $conversation_id = sb_isset(sb_db_get('SELECT id FROM sb_conversations WHERE user_id = ' . sb_db_escape($user_id, true) . ' ORDER BY id DESC LIMIT 1'), 'id');
     return $conversation_id ? $conversation_id : sb_isset(sb_isset(sb_new_conversation($user_id, $status_code), 'details'), 'id');
 }
 
-function sb_get_new_messages($user_id, $conversation_id, $last_datetime, $last_id = false)
-{
+function sb_get_new_messages($user_id, $conversation_id, $last_datetime, $last_id = false) {
     $last_datetime = sb_db_escape($last_datetime);
     $last_id = $last_id ? sb_db_escape($last_id, true) : false;
     $result = sb_db_get('SELECT sb_messages.*, sb_users.first_name, sb_users.last_name, sb_users.profile_image, sb_users.user_type FROM sb_messages, sb_users, sb_conversations WHERE (sb_messages.creation_time > "' . $last_datetime . '"' . ($last_id ? (' OR sb_messages.id > ' . $last_id) : '') . ') AND sb_messages.conversation_id = ' . sb_db_escape($conversation_id, true) . ' AND sb_users.id = sb_messages.user_id AND sb_conversations.user_id = ' . sb_db_escape($user_id, true) . ' AND sb_messages.conversation_id = sb_conversations.id ORDER BY sb_messages.id ASC', false);
     return isset($result) && is_array($result) ? $result : sb_error('db-error', 'sb_get_new_messages', $result);
 }
 
-function sb_get_conversation($user_id = false, $conversation_id = false)
-{
+function sb_get_conversation($user_id = false, $conversation_id = false) {
     $user_id = $user_id ? sb_db_escape($user_id, true) : sb_get_active_user_ID();
     $conversation_id = sb_db_escape($conversation_id, true);
     $messages = sb_db_get('SELECT sb_messages.*, sb_users.first_name, sb_users.last_name, sb_users.profile_image, sb_users.user_type FROM sb_messages, sb_users, sb_conversations WHERE sb_messages.conversation_id = ' . $conversation_id . (sb_is_agent() ? '' : ' AND sb_conversations.user_id = ' . $user_id) . ' AND sb_messages.conversation_id = sb_conversations.id AND sb_users.id = sb_messages.user_id ORDER BY sb_messages.id ASC', false);
@@ -266,8 +257,7 @@ function sb_get_conversation($user_id = false, $conversation_id = false)
     return false;
 }
 
-function sb_new_conversation($user_id, $status_code = 1, $title = '', $department = -1, $agent_id = -1, $source = false, $extra = false, $extra_2 = false, $extra_3 = false, $tags = false)
-{
+function sb_new_conversation($user_id, $status_code = 1, $title = '', $department = -1, $agent_id = -1, $source = false, $extra = false, $extra_2 = false, $extra_3 = false, $tags = false) {
     if (!sb_isset_num($agent_id)) {
         if (sb_get_multi_setting('routing', 'routing-active') && !sb_get_multi_setting('queue', 'queue-active')) {
             $agent_id = sb_routing(-1, $department);
@@ -293,8 +283,7 @@ function sb_new_conversation($user_id, $status_code = 1, $title = '', $departmen
     return $conversation_id;
 }
 
-function sb_update_conversation_status($conversation_id, $status)
-{
+function sb_update_conversation_status($conversation_id, $status) {
     $response = false;
     $conversation_id = sb_db_escape($conversation_id, true);
     $agent = sb_is_agent();
@@ -340,8 +329,7 @@ function sb_update_conversation_status($conversation_id, $status)
     return $response;
 }
 
-function sb_update_conversation_department($conversation_id, $department, $message = false)
-{
+function sb_update_conversation_department($conversation_id, $department, $message = false) {
     if (sb_conversation_security_error($conversation_id) || (!sb_get_multi_setting('agents', 'agents-update-department') && sb_is_agent(false, true, false, true))) {
         return sb_error('security-error', 'sb_update_conversation_department');
     }
@@ -360,8 +348,7 @@ function sb_update_conversation_department($conversation_id, $department, $messa
     return sb_error('department-update-error', 'sb_update_conversation_department', $response);
 }
 
-function sb_update_conversation_agent($conversation_id, $agent_id, $message = false)
-{
+function sb_update_conversation_agent($conversation_id, $agent_id, $message = false) {
     if (sb_conversation_security_error($conversation_id)) {
         return sb_error('security-error', 'sb_update_conversation_agent');
     }
@@ -389,8 +376,7 @@ function sb_update_conversation_agent($conversation_id, $agent_id, $message = fa
     return sb_error('agent-update-error', 'sb_update_conversation_agent', $response);
 }
 
-function sb_update_conversation_event($payload_event, $conversation_id, $message_preview = false)
-{
+function sb_update_conversation_event($payload_event, $conversation_id, $message_preview = false) {
     $payload = ['event' => $payload_event];
     if ($message_preview) {
         $payload['preview'] = $message_preview;
@@ -401,15 +387,13 @@ function sb_update_conversation_event($payload_event, $conversation_id, $message
     }
 }
 
-function sb_transcript($conversation_id, $type = false)
-{
+function sb_transcript($conversation_id, $type = false) {
     if (sb_conversation_security_error($conversation_id)) {
         return sb_error('security-error', 'sb_transcript');
     }
     $messages = sb_db_get('SELECT id, user_id, message, creation_time, attachments, payload FROM sb_messages WHERE conversation_id = ' . sb_db_escape($conversation_id, true), false);
     $count = count($messages);
     $file_name = 'conversation-' . $conversation_id . '-' . rand(100000, 999999999);
-    $utc_offset = sb_get_setting('timetable-utc', 0);
     $users = [];
     if ($count) {
         if ($type === false) {
@@ -417,7 +401,7 @@ function sb_transcript($conversation_id, $type = false)
         }
         if ($type == 'csv') {
             for ($i = 0; $i < $count; $i++) {
-                $messages[$i]['creation_time'] = sb_gmt_date_to_local($messages[$i]['creation_time'], $utc_offset);
+                $messages[$i]['creation_time'] = sb_convert_date($messages[$i]['creation_time']);
             }
             return sb_csv($messages, ['ID', 'User ID', 'Message', 'Creation date', 'Attachments', 'Payload'], $file_name);
         }
@@ -432,7 +416,7 @@ function sb_transcript($conversation_id, $type = false)
                     if (!isset($users[$user_id])) {
                         $users[$user_id] = sb_get_user_name(sb_get_user($user_id)) . ' | ID ' . $user_id . ' | ';
                     }
-                    $date = sb_gmt_date_to_local($message['creation_time'], $utc_offset);
+                    $date = sb_convert_date($message['creation_time']);
                     $code .= $users[$user_id] . $date . PHP_EOL . $message['message'] . PHP_EOL . PHP_EOL;
                     if ($translation_language_code) {
                         $code_translation .= $users[$user_id] . $date . PHP_EOL . sb_google_get_message_translation($message, $translation_language_code)['message'] . PHP_EOL . PHP_EOL;
@@ -449,13 +433,11 @@ function sb_transcript($conversation_id, $type = false)
     return false;
 }
 
-function sb_get_notes($conversation_id)
-{
+function sb_get_notes($conversation_id) {
     return sb_get_external_setting('notes-' . $conversation_id, []);
 }
 
-function sb_add_note($conversation_id, $user_id, $name, $message)
-{
+function sb_add_note($conversation_id, $user_id, $name, $message) {
     $notes = sb_get_notes($conversation_id);
     $id = rand(0, 99999);
     array_push($notes, ['id' => $id, 'user_id' => $user_id, 'name' => $name, 'message' => sb_sanatize_string($message), 'date' => sb_gmt_now()]);
@@ -463,8 +445,7 @@ function sb_add_note($conversation_id, $user_id, $name, $message)
     return $response ? $id : $response;
 }
 
-function sb_update_note($conversation_id, $user_id, $note_id, $message)
-{
+function sb_update_note($conversation_id, $user_id, $note_id, $message) {
     $notes = sb_get_notes($conversation_id);
     for ($i = 0; $i < count($notes); $i++) {
         if ($notes[$i]['id'] == $note_id) {
@@ -477,20 +458,18 @@ function sb_update_note($conversation_id, $user_id, $note_id, $message)
     return false;
 }
 
-function sb_delete_note($conversation_id, $note_id)
-{
+function sb_delete_note($conversation_id, $note_id) {
     $notes = sb_get_notes($conversation_id);
     for ($i = 0; $i < count($notes); $i++) {
         if ($notes[$i]['id'] == $note_id) {
             array_splice($notes, $i, 1);
-            return count($notes) ? sb_save_external_setting('notes-' . $conversation_id, $notes) : sb_db_query('DELETE FROM sb_settings WHERE name = "notes-' . sb_db_escape($conversation_id) . '" LIMIT 1');
+            return count($notes) ? sb_save_external_setting('notes-' . $conversation_id, $notes) : sb_delete_external_setting('notes-' . sb_db_escape($conversation_id));
         }
     }
     return false;
 }
 
-function sb_direct_message($user_ids, $message)
-{
+function sb_direct_message($user_ids, $message) {
     $sources = ['whatsapp' => 'wa', 'messenger' => 'fb', 'telegram' => 'tg', 'viber' => 'vb', 'twitter' => 'tw', 'instagram' => 'ig', 'line' => 'ln', 'wechat' => 'wc', 'zalo' => 'za', 'google' => 'bm', 'tickets' => 'tk'];
     if (is_string($user_ids) && ($user_ids == 'all' || isset($sources[$user_ids]))) {
         $items = sb_db_get($user_ids == 'all' ? 'SELECT id FROM sb_users WHERE user_type <> "agent" AND user_type <> "admin" AND user_type <> "bot"' : 'SELECT A.id FROM sb_users A, sb_conversations B WHERE B.source = "' . sb_db_escape($sources[$user_ids]) . '" AND B.user_id = A.id GROUP BY A.id', false);
@@ -555,8 +534,7 @@ function sb_direct_message($user_ids, $message)
     return $response;
 }
 
-function sb_get_agents_in_conversation($conversation_id)
-{
+function sb_get_agents_in_conversation($conversation_id) {
     $rows = sb_db_get('SELECT A.id, first_name, last_name, profile_image, B.conversation_id FROM sb_users A, sb_messages B WHERE (A.user_type = "agent" OR A.user_type = "admin") AND A.id = B.user_id AND conversation_id ' . (is_array($conversation_id) ? ('IN (' . sb_db_escape(implode(',', $conversation_id)) . ')') : ('= ' . sb_db_escape($conversation_id, true))) . (sb_is_agent() ? '' : ' AND conversation_id in (SELECT id FROM sb_conversations WHERE user_id = ' . sb_get_active_user_ID() . ')') . ' GROUP BY A.id, B.conversation_id', false);
     $response = [];
     for ($i = 0; $i < count($rows); $i++) {
@@ -568,13 +546,11 @@ function sb_get_agents_in_conversation($conversation_id)
     return $response;
 }
 
-function sb_conversation_security_error($conversation_id)
-{
+function sb_conversation_security_error($conversation_id) {
     return !sb_is_agent() && empty($GLOBALS['SB_FORCE_ADMIN']) && sb_isset(sb_db_get('SELECT user_id FROM sb_conversations WHERE id = ' . $conversation_id), 'user_id') != sb_get_active_user_ID();
 }
 
-function sb_set_agent_active_conversation($conversation_id, $agent_id = false)
-{
+function sb_set_agent_active_conversation($conversation_id, $agent_id = false) {
     $agent_id = $agent_id ? $agent_id : sb_get_active_user_ID();
     $active_agents_conversations = sb_get_external_setting('active_agents_conversations', []);
     $previous_conversation_id = sb_isset($active_agents_conversations, $agent_id, [false]);
@@ -584,8 +560,7 @@ function sb_set_agent_active_conversation($conversation_id, $agent_id = false)
         sb_pusher_trigger('agents', 'agent-active-conversation-changed', ['agent_id' => $agent_id, 'previous_conversation_id' => $previous_conversation_id[0], 'conversation_id' => $conversation_id]);
 }
 
-function sb_is_active_conversation_busy($conversation_id, $skip = -1)
-{
+function sb_is_active_conversation_busy($conversation_id, $skip = -1) {
     $items = sb_get_external_setting('active_agents_conversations', []);
     $time = time();
     if (empty($items)) {
@@ -599,13 +574,11 @@ function sb_is_active_conversation_busy($conversation_id, $skip = -1)
     return false;
 }
 
-function sb_count_conversations($status_code = false)
-{
+function sb_count_conversations($status_code = false) {
     return sb_isset(sb_db_get('SELECT COUNT(*) AS count FROM sb_conversations' . ($status_code ? ' WHERE status_code = ' . sb_db_escape($status_code) . sb_routing_and_department_db() : '')), 'count');
 }
 
-function sb_send_agents_notifications($message, $bottom_message = false, $conversation_id = false, $attachments = false, $user = false, $extra = false)
-{
+function sb_send_agents_notifications($message, $bottom_message = false, $conversation_id = false, $attachments = false, $user = false, $extra = false) {
     $user = $user ? $user : (sb_is_agent() ? sb_get_user_from_conversation($conversation_id) : sb_get_active_user());
     $user_name = sb_get_user_name($user);
     $recipients = 'agents';
@@ -637,8 +610,7 @@ function sb_send_agents_notifications($message, $bottom_message = false, $conver
     return true;
 }
 
-function sb_check_conversations_assignment($conversation_ids, $agent_id = false, $department = false)
-{
+function sb_check_conversations_assignment($conversation_ids, $agent_id = false, $department = false) {
     if (empty($conversation_ids)) {
         return [];
     }
@@ -649,8 +621,7 @@ function sb_check_conversations_assignment($conversation_ids, $agent_id = false,
     return $conversation_ids;
 }
 
-function sb_get_last_agent_in_conversation($conversation_id)
-{
+function sb_get_last_agent_in_conversation($conversation_id) {
     $agent = sb_db_get('SELECT B.id, B.first_name, B.last_name, B.email, B.user_type, B.token, B.department  FROM sb_messages A, sb_users B WHERE A.conversation_id = ' . sb_db_escape($conversation_id, true) . ' AND A.user_id = B.id AND (B.user_type = "agent" OR B.user_type = "admin") ORDER BY A.id LIMIT 1');
     return isset($agent['id']) ? $agent : false;
 }
@@ -675,8 +646,7 @@ function sb_delete_attachments($conversation_id = false, $message_id = false)
     return true;
 }
 
-function sb_update_messages_status($message_ids, $user_id = false)
-{
+function sb_update_messages_status($message_ids, $user_id = false) {
     $response = sb_db_query('UPDATE sb_messages SET status_code = 2 WHERE id IN (' . sb_db_escape(implode(',', $message_ids)) . ')');
     if ($user_id && sb_pusher_active()) {
         sb_pusher_trigger('private-user-' . $user_id, 'message-status-update', ['message_ids' => $message_ids]);
@@ -684,8 +654,7 @@ function sb_update_messages_status($message_ids, $user_id = false)
     return $response;
 }
 
-function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2 = false, $extra_3 = false)
-{
+function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2 = false, $extra_3 = false) {
     if (!$extra && !$extra_2 && !$extra_3) {
         return false;
     } else {
@@ -702,6 +671,18 @@ function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2
     return sb_db_query('UPDATE sb_conversations SET ' . str_replace('SET ,', 'SET ', ($extra !== false ? 'extra = "' . sb_db_escape($extra) . '"' : '') . ($extra_2 !== false ? ', extra_2 = "' . sb_db_escape($extra_2) . '"' : '') . ($extra_3 !== false ? ', extra_3 = "' . sb_db_escape($extra_3) . '"' : '') . ' WHERE id = ' . sb_db_escape($conversation_id, true)));
 }
 
+function sb_get_conversation_source($conversation_id) {
+    global $SB_CONVERSATION_SOURCES;
+    if (empty($SB_CONVERSATION_SOURCES)) {
+        $SB_CONVERSATION_SOURCES = [];
+    }
+    if (isset($SB_CONVERSATION_SOURCES[$conversation_id])) {
+        return $SB_CONVERSATION_SOURCES[$conversation_id];
+    }
+    $SB_CONVERSATION_SOURCES[$conversation_id] = sb_isset(sb_db_get('SELECT source FROM sb_conversations WHERE id = ' . sb_db_escape($conversation_id, true)), 'source', '');
+    return $SB_CONVERSATION_SOURCES[$conversation_id];
+}
+
 /*
  * -----------------------------------------------------------
  * MESSAGES
@@ -715,11 +696,11 @@ function sb_update_conversation_extra($conversation_id, $extra = false, $extra_2
  * 6. Update the tags assigned to a conversation
  * 7. Save a voice message
  * 8. Archive or restore messages
+ * 9. Return the messaging platforms message ID
  *
  */
 
-function sb_send_message($sender_id, $conversation_id, $message = '', $attachments = [], $conversation_status_code = -1, $payload = false, $queue = false, $recipient_id = false)
-{
+function sb_send_message($sender_id, $conversation_id, $message = '', $attachments = [], $conversation_status_code = -1, $payload = false, $queue = false, $recipient_id = false) {
     $pusher = sb_pusher_active();
     $conversation_id = sb_db_escape($conversation_id, true);
     $user_id = $sender_id;
@@ -744,7 +725,7 @@ function sb_send_message($sender_id, $conversation_id, $message = '', $attachmen
         $is_sender_bot = sb_isset($sender, 'user_type') == 'bot';
         $is_chatbot_active = sb_chatbot_active(true, true, $conversation_source);
         $is_human_takeover_active = $is_chatbot_active && sb_dialogflow_is_human_takeover($conversation_id);
-        $is_human_takeover = $is_chatbot_active && !$is_human_takeover_active && sb_get_multi_setting('dialogflow-human-takeover', 'dialogflow-human-takeover-active');
+        $is_human_takeover = $is_chatbot_active && !$is_human_takeover_active && $conversation_source != 'tm' && $conversation_source != 'em' && sb_get_multi_setting('dialogflow-human-takeover', 'dialogflow-human-takeover-active');
         $last_agent = false;
         $count_attachments = count($attachments);
         if (!$message && $count_attachments && strpos($attachments[0][0], 'voice_message') && defined('SB_DIALOGFLOW') && !sb_chatbot_active() && sb_get_multi_setting('open-ai', 'open-ai-speech-recognition')) {
@@ -758,14 +739,21 @@ function sb_send_message($sender_id, $conversation_id, $message = '', $attachmen
             }
             if (sb_get_multi_setting('open-ai', 'open-ai-spelling-correction')) {
                 $message = sb_open_ai_spelling_correction($message);
+                if (sb_is_error($message)) {
+                    return $message;
+                }
             }
         }
         if ($count_attachments) {
-            $attachments_json = '[';
+            $attachments_json = '';
             for ($i = 0; $i < $count_attachments; $i++) {
-                $attachments_json .= '[\"' . sb_db_escape($attachments[$i][0]) . '\", \"' . sb_db_escape($attachments[$i][1]) . '\"' . (isset($attachments[$i][2]) ? ', \"' . $attachments[$i][2] . '\"' : '') . '],';
+                if ($attachments[$i] && $attachments[$i][0] && $attachments[$i][1]) {
+                    $attachments_json .= '[\"' . sb_db_escape($attachments[$i][0]) . '\", \"' . sb_db_escape($attachments[$i][1]) . '\"' . (isset($attachments[$i][2]) ? ', \"' . $attachments[$i][2] . '\"' : '') . '],';
+                }
             }
-            $attachments_json = substr($attachments_json, 0, -1) . ']';
+            if ($attachments_json) {
+                $attachments_json = '[' . substr($attachments_json, 0, -1) . ']';
+            }
         }
         if ($security || $user_id == sb_get_active_user_ID() || !empty($GLOBALS['SB_FORCE_ADMIN'])) {
 
@@ -905,18 +893,19 @@ function sb_send_message($sender_id, $conversation_id, $message = '', $attachmen
     }
 }
 
-function sb_update_message($message_id, $message = false, $attachments = false, $payload = false)
-{
+function sb_update_message($message_id, $message = false, $attachments = false, $payload = false) {
     return sb_update_or_delete_message('update', $message_id, $message, $attachments, $payload);
 }
 
-function sb_delete_message($message_id)
-{
+function sb_update_message_payload($message_id, $payload) {
+    return sb_db_query('UPDATE sb_messages SET payload = "' . sb_db_json_escape($payload) . '" WHERE id = ' . sb_db_escape($message_id, true));
+}
+
+function sb_delete_message($message_id) {
     return sb_update_or_delete_message('delete', $message_id);
 }
 
-function sb_update_or_delete_message($action, $message_id, $message = false, $attachments = false, $payload = false)
-{
+function sb_update_or_delete_message($action, $message_id, $message = false, $attachments = false, $payload = false) {
     $pusher = sb_pusher_active();
     $security = sb_is_agent() || !empty($GLOBALS['SB_FORCE_ADMIN']);
     $conversation = false;
@@ -975,21 +964,22 @@ function sb_update_or_delete_message($action, $message_id, $message = false, $at
     return sb_error('security-error', 'sb_' . $action . '_message');
 }
 
-function sb_close_message($conversation_id, $bot_id = false)
-{
+function sb_close_message($conversation_id) {
     $message = sb_get_multi_setting('close-message', 'close-msg');
     if ($message) {
-        if (!$bot_id) {
-            $bot_id = sb_get_bot_id();
-        }
-        $message_id = sb_send_message($bot_id, $conversation_id, $message, [], 3, ['type' => 'close-message'])['id'];
+        $message_id = sb_send_message(sb_get_bot_ID(), $conversation_id, $message, [], 3, ['type' => 'close-message'])['id'];
         return sb_messaging_platforms_send_message($message, $conversation_id, $message_id);
     }
     return false;
 }
 
-function sb_merge_fields($message, $marge_fields_values = [])
-{
+function sb_rating_message($conversation_id) {
+    $message = sb_get_multi_setting('rating-message', 'rating-message-text', 'How satisfied are you with the support you received?');
+    $message_id = sb_send_message(sb_get_bot_ID(), $conversation_id, $message, [], 3, ['rating_message' => true])['id'];
+    return sb_messaging_platforms_send_message($message, $conversation_id, $message_id);
+}
+
+function sb_merge_fields($message, $marge_fields_values = []) {
     $replace = '';
     $marge_fields = ['user_name', 'user_email', 'agent_name', 'agent_email'];
     $marge_field = '';
@@ -1024,8 +1014,7 @@ function sb_merge_fields($message, $marge_fields_values = [])
     return $message;
 }
 
-function sb_tags_update($conversation_id, $tags, $add = false)
-{
+function sb_tags_update($conversation_id, $tags, $add = false) {
     if (sb_conversation_security_error($conversation_id)) {
         return sb_error('security-error', 'sb_tags_update');
     }
@@ -1050,8 +1039,7 @@ function sb_tags_update($conversation_id, $tags, $add = false)
     return sb_db_query('UPDATE sb_conversations SET tags = "' . sb_db_escape($tags) . '" WHERE id = ' . sb_db_escape($conversation_id, true));
 }
 
-function sb_audio_clip($audio)
-{
+function sb_audio_clip($audio) {
     $file_name = '/audio-' . rand(1000000, 999999999) . '.webm';
     $path = sb_upload_path(false, true) . $file_name;
     $url = false;
@@ -1068,8 +1056,7 @@ function sb_audio_clip($audio)
     return $url;
 }
 
-function sb_messages_archiviation($conversation_id, $is_restore = false)
-{
+function sb_messages_archiviation($conversation_id, $is_restore = false) {
     $messages = sb_db_get('SELECT * FROM ' . ($is_restore ? 'sb_archive' : 'sb_messages') . ' WHERE conversation_id = ' . $conversation_id, false);
     $count = count($messages);
     if ($count) {
@@ -1087,6 +1074,15 @@ function sb_messages_archiviation($conversation_id, $is_restore = false)
     }
 }
 
+function sb_get_message_payload($message_id, $slug = false) {
+    $payload = sb_isset(sb_db_get('SELECT payload FROM sb_messages WHERE id = ' . sb_db_escape($message_id, true)), 'payload');
+    if ($payload) {
+        $payload = json_decode($payload, true);
+        return $slug ? sb_isset($payload, $slug) : $payload;
+    }
+    return false;
+}
+
 /*
  * -----------------------------------------------------------
  * RICH MESSAGES
@@ -1101,8 +1097,7 @@ function sb_messages_archiviation($conversation_id, $is_restore = false)
  *
  */
 
-function sb_get_rich_messages_ids($include_custom = true)
-{
+function sb_get_rich_messages_ids($include_custom = true) {
     $result = sb_get_external_setting('rich-messages');
     $ids = ['chips', 'buttons', 'select', 'inputs', 'card', 'slider-images', 'slider', 'list-image', 'list', 'button', 'video', 'image', 'rating', 'email', 'phone', 'registration', 'login', 'timetable', 'articles', 'table', 'share'];
     if ($include_custom && is_array($result) && isset($result['rich-messages']) && is_array($result['rich-messages'][0])) {
@@ -1117,8 +1112,7 @@ function sb_get_rich_messages_ids($include_custom = true)
     return $ids;
 }
 
-function sb_get_rich_message($name, $settings = false)
-{
+function sb_get_rich_message($name, $settings = false) {
     if (in_array($name, ['registration', 'registration-tickets', 'login', 'login-tickets', 'timetable', 'articles', 'woocommerce-cart'])) {
         $title = '';
         $message = '';
@@ -1260,7 +1254,7 @@ function sb_get_rich_message($name, $settings = false)
                 $message = $settings['chat-timetable'][0]['chat-timetable-msg'][0];
                 $title = sb_t($title ? $title : 'Office hours');
                 $message = sb_t($message);
-                $code = '<div class="sb-timetable" data-offset="' . sb_get_setting('timetable-utc') . '">';
+                $code = '<div class="sb-timetable" data-offset="' . sb_utc_offset() . '">';
                 if ($timetable) {
                     foreach ($timetable as $day => $hours) {
                         if ($hours[0][0]) {
@@ -1304,8 +1298,7 @@ function sb_get_rich_message($name, $settings = false)
     return false;
 }
 
-function sb_rich_value($value, $merge_fields = true, $translate = true, $shortcodes = false)
-{
+function sb_rich_value($value, $merge_fields = true, $translate = true, $shortcodes = false) {
     if ($translate) {
         $value = sb_t($value);
     }
@@ -1317,8 +1310,7 @@ function sb_rich_value($value, $merge_fields = true, $translate = true, $shortco
     return trim($merge_fields ? sb_merge_fields($value) : $value);
 }
 
-function sb_get_shortcode($message, $name = false, $merge_field = false)
-{
+function sb_get_shortcode($message, $name = false, $merge_field = false) {
     $separator = $merge_field ? ['{', '}'] : ['[', ']'];
     $response = [];
     $position = false;
@@ -1372,8 +1364,7 @@ function sb_get_shortcode($message, $name = false, $merge_field = false)
     return $is_name && !empty($response) ? $response[0] : $response;
 }
 
-function sb_execute_bot_message($name, $conversation_id, $last_user_message = false, $check = true)
-{
+function sb_execute_bot_message($name, $conversation_id, $last_user_message = false, $check = true) {
     $valid = false;
     $settings = false;
     $message = '';
@@ -1421,17 +1412,16 @@ function sb_execute_bot_message($name, $conversation_id, $last_user_message = fa
         if ($delay) {
             sleep(intval($delay) / 1000);
         }
-        $message_id = sb_send_message(sb_get_bot_id(), $conversation_id, $message, [], false, [$name . '_message' => true, 'preview' => $last_user_message ? $last_user_message : $message])['id'];
+        $message_id = sb_send_message(sb_get_bot_ID(), $conversation_id, $message, [], false, [$name . '_message' => true, 'preview' => $last_user_message ? $last_user_message : $message])['id'];
         return ['message' => $message, 'attachments' => [], 'id' => $message_id, 'settings' => $settings];
     }
     return false;
 }
 
-function sb_is_rich_message($string)
-{
+function sb_is_rich_message($string) {
     $ids = sb_get_rich_messages_ids();
     for ($i = 0; $i < count($ids); $i++) {
-        if (strpos($string, '[' . $ids[$i]) !== false) {
+        if (str_contains($string, '[' . $ids[$i])) {
             return true;
         }
     }
@@ -1450,8 +1440,7 @@ function sb_is_rich_message($string)
  *
  */
 
-function sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, $source)
-{
+function sb_messaging_platforms_functions($conversation_id, $message, $attachments, $user, $source) {
     if (is_numeric($user)) {
         $user = sb_get_user($user);
         if (!$user) {
@@ -1464,7 +1453,7 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
     if (!$attachments) {
         $attachments = [];
     }
-    $last_message = sb_db_get('SELECT message FROM sb_messages WHERE message <> "" AND message <> "' . sb_db_escape($message) . '" AND conversation_id = ' . $conversation_id . ' ORDER BY id DESC LIMIT 1');
+    $last_message = sb_get_last_message($conversation_id, $message);
     $user_id = $user['id'];
     $source_name = $source['source'];
     $bot_messages = true;
@@ -1479,8 +1468,8 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
 
     // Rich messages
     if ($last_message) {
-        $last_message = $last_message['message'];
-        $shortcodes = sb_get_shortcode($last_message);
+        $last_message_text = $last_message['message'];
+        $shortcodes = sb_get_shortcode($last_message_text);
         for ($j = 0; $j < count($shortcodes); $j++) {
             $shortcode = $shortcodes[$j];
             switch ($shortcode['shortcode_name']) {
@@ -1489,11 +1478,11 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
                     if (!in_array($source_name, ['em', 'tm'])) {
                         $valid = false;
                         $is_email = $shortcode['name'] == 'email';
-                        $filter = $is_email ? ['@', 'email'] : (strpos($message, '+') !== false ? ['+', 'phone'] : false);
+                        $filter = $is_email ? ['@', 'email'] : (str_contains($message, '+') ? ['+', 'phone'] : false);
                         if ($filter) {
                             $words = explode(' ', $message);
                             for ($i = 0; $i < count($words); $i++) {
-                                if (strpos($words[$i], $filter[0]) !== false) {
+                                if (str_contains($words[$i], $filter[0])) {
                                     $value = trim($words[$i]);
                                     if (substr($value, -1) == '.')
                                         $value = substr($value, 0, -1);
@@ -1505,7 +1494,7 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
                                             } else {
                                                 $message_new = sb_t(sb_merge_fields($shortcode['success']));
                                             }
-                                            $message_id = sb_send_message(sb_get_bot_id(), $conversation_id, $message_new, [], -1, ['event' => 'update-user'])['id'];
+                                            $message_id = sb_send_message(sb_get_bot_ID(), $conversation_id, $message_new, [], -1, ['event' => 'update-user'])['id'];
                                             sb_messaging_platforms_send_message($message_new, $source, $message_id);
                                             if ($slack)
                                                 sb_send_slack_message($slack[0], $slack[1], $slack[2], $message_new, [], $conversation_id);
@@ -1516,10 +1505,10 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
                             }
                         }
                         if (!$valid && !empty($shortcode['required-messaging-apps'])) {
-                            $message_id = sb_send_message(sb_get_bot_id(), $conversation_id, $last_message)['id'];
-                            sb_messaging_platforms_send_message($last_message, $source, $message_id);
+                            $message_id = sb_send_message(sb_get_bot_ID(), $conversation_id, $last_message_text)['id'];
+                            sb_messaging_platforms_send_message($last_message_text, $source, $message_id);
                             if ($slack) {
-                                sb_send_slack_message($slack[0], $slack[1], $slack[2], $last_message, [], $conversation_id);
+                                sb_send_slack_message($slack[0], $slack[1], $slack[2], $last_message_text, [], $conversation_id);
                             }
                         }
                         $skip_chatbot = true;
@@ -1545,10 +1534,16 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
                 }
             }
             if ($dialogflow_active) {
-                $response = sb_dialogflow_message($conversation_id, $message, -1, [sb_get_user_language($user_id)], $attachments, '', false, false, false, $voice_message);
+                $response = sb_dialogflow_message($conversation_id, $message, [sb_get_user_language($user_id)], $attachments, '', false, false, false, $voice_message);
                 $messages = sb_isset($response, 'messages', []);
                 $human_takeover = isset($response['human_takeover']);
             } else {
+                switch ($source_name) {
+                    case 'fb':
+                        sb_set_typing($user_id, $conversation_id, [$source_name, $source['platform_value'], $source['page_id']]);
+                        sb_worker_run(array_merge($source, ['action' => 'typing', 'user_id' => $user_id, 'conversation_id' => $conversation_id]));
+                        break;
+                }
                 $response_open_ai = sb_open_ai_message($message, false, false, $conversation_id, ['messaging-app' => $source_name], $voice_message, $attachments);
                 if ($response_open_ai[0]) {
                     $messages = is_string($response_open_ai[1]) ? [['message' => $response_open_ai[1], 'attachments' => sb_isset($response_open_ai, 6)]] : (isset($response_open_ai[1]['message']) ? [$response_open_ai[1]] : sb_isset($response_open_ai[1], 'messages', is_array($response_open_ai[1]) ? $response_open_ai[1] : []));
@@ -1576,6 +1571,7 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
                         sleep(intval($delay) / 1000);
                     }
                     sb_messaging_platforms_send_message($message_text, $source, sb_isset($messages[$i], 'id'), $message_attachments);
+                    sb_save_external_setting('stop-worker-' . $conversation_id, 'true');
                 }
                 if ($payload) {
                     $source['attachments'] = $attachments;
@@ -1588,7 +1584,7 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
         }
     }
 
-    // Bot messages
+    // Built-in messages
     if ($bot_messages || $human_takeover) {
         $is_new_conversation = !empty($source['new_conversation']);
         $bot_messages = ['offline', 'welcome'];
@@ -1602,15 +1598,15 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
         $last_user_message = $count ? sb_isset(sb_get_last_message($conversation_id, $message, $user_id), 'message') : false;
         for ($i = 0; $i < $count; $i++) {
             $bot_message = $i == 0 || empty($user['email']) ? sb_execute_bot_message($bot_messages[$i], $conversation_id, $last_user_message) : false;
-            $message_2 = false;
-            if ($i == 3 && $is_new_conversation && sb_get_multi_setting('welcome-message', 'welcome-active') && (!sb_get_multi_setting('welcome-message', 'welcome-disable-office-hours') || sb_office_hours())) {
-                $message_2 = sb_get_multi_setting('welcome-message', 'welcome-msg');
+            $message_ = false;
+            if ($bot_messages[$i] == 'welcome' && $is_new_conversation && sb_get_multi_setting('welcome-message', 'welcome-active') && (!sb_get_multi_setting('welcome-message', 'welcome-disable-office-hours') || sb_office_hours())) {
+                $message_ = sb_get_multi_setting('welcome-message', 'welcome-msg');
             }
-            if ($i == 4 && $is_new_conversation && sb_get_multi_setting('privacy', 'privacy-active')) {
-                $message_2 = sb_get_multi_setting('privacy', 'privacy-msg');
+            if ($bot_messages[$i] == 'privacy' && $is_new_conversation && sb_get_multi_setting('privacy', 'privacy-active')) {
+                $message_ = sb_get_multi_setting('privacy', 'privacy-msg');
             }
-            if ($message_2) {
-                $bot_message = ['id' => sb_send_message(sb_get_bot_id(), $conversation_id, $message_2)['id'], 'message' => $message_2];
+            if ($message_) {
+                $bot_message = ['id' => sb_send_message(sb_get_bot_ID(), $conversation_id, $message_)['id'], 'message' => $message_];
             }
             if ($bot_message) {
                 sb_messaging_platforms_send_message($bot_message['message'], $source, $bot_message['id']);
@@ -1621,6 +1617,14 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
         }
     }
 
+    // Rating
+    if ($open_ai_active && str_contains(sb_isset($last_message, 'payload'), 'rating_message')) {
+        $rating = sb_open_ai_analyze_message('If the last user message is a positive feedback respond exactly "positive", otherwise, if the last user message is a negative feedback, respond exactly "negative", otherwise if the last user message is not a feedback respond exactly "no". Always respond exactly "positive", "negative", or "no" with no additional text.', $message, $conversation_id);
+        if ($rating == 'positive' || $rating == 'negative') {
+            sb_set_rating($conversation_id, $user_id, $rating == 'positive' ? 1 : -1, $message);
+        }
+    }
+
     // Slack
     if ($slack) {
         sb_send_slack_message($slack[0], $slack[1], $slack[2], $message, $attachments, $conversation_id);
@@ -1628,8 +1632,7 @@ function sb_messaging_platforms_functions($conversation_id, $message, $attachmen
     return $human_takeover ? 'human_takeover' : true;
 }
 
-function sb_messaging_platforms_send_message($message, $conversation, $message_id = false, $attachments = [])
-{
+function sb_messaging_platforms_send_message($message, $conversation, $message_id = false, $attachments = []) {
     $conversation = is_numeric($conversation) ? sb_db_get('SELECT id, user_id, source, extra FROM sb_conversations WHERE id = ' . $conversation) : $conversation;
     $platform_value = sb_isset($conversation, 'platform_value');
     $user_id = $conversation['user_id'];
@@ -1642,7 +1645,7 @@ function sb_messaging_platforms_send_message($message, $conversation, $message_i
         case 'fb':
             return sb_messenger_send_message($platform_value ? $platform_value : sb_get_user_extra($user_id, 'facebook-id'), isset($conversation['page_id']) ? $conversation['page_id'] : $conversation['extra'], $message, $attachments, $message_id);
         case 'wa':
-            return sb_whatsapp_send_message($platform_value ? $platform_value : sb_get_user_extra($user_id, 'phone'), $message, $attachments, $conversation['extra']);
+            return sb_whatsapp_send_message($platform_value ? $platform_value : sb_get_user_extra($user_id, 'phone'), $message, $attachments, $conversation['extra'], false, $message_id);
         case 'tg':
             return sb_telegram_send_message($platform_value ? $platform_value : sb_isset($conversation, 'chat_id', $conversation['extra']), $message, $attachments, $conversation['id']);
         case 'wc':
@@ -1659,14 +1662,13 @@ function sb_messaging_platforms_send_message($message, $conversation, $message_i
     return false;
 }
 
-function sb_send_sms($message, $to, $template = true, $conversation_id = true, $attachments = false)
-{
+function sb_send_sms($message, $to, $template = true, $conversation_id = true, $attachments = false) {
     $settings = sb_get_setting('sms');
-    $to_agents = $to == 'agents' || $to == 'all-agents' || strpos($to, 'department-') !== false;
+    $to_agents = $to == 'agents' || $to == 'all-agents' || str_contains($to, 'department-');
 
     // Retrive phone number
     if ($to_agents) {
-        $phones = sb_db_get('SELECT A.id, value FROM sb_users A, sb_users_data B WHERE A.id = B.user_id AND (user_type = "agent" OR user_type = "admin") AND slug = "phone"' . ($to == 'agents' ? ' AND (department IS NULL OR department = "")' : (strpos($to, 'department-') !== false ? ' AND department = ' . substr($to, 11) : '')), false);
+        $phones = sb_db_get('SELECT A.id, value FROM sb_users A, sb_users_data B WHERE A.id = B.user_id AND (user_type = "agent" OR user_type = "admin") AND slug = "phone"' . ($to == 'agents' ? ' AND (department IS NULL OR department = "")' : (str_contains($to, 'department-') ? ' AND department = ' . substr($to, 11) : '')), false);
         $online_agents_ids = sb_get_online_user_ids(true);
         for ($i = 0; $i < count($phones); $i++) {
             if (!in_array($phones[$i]['id'], $online_agents_ids)) {
@@ -1787,8 +1789,7 @@ function sb_send_sms($message, $to, $template = true, $conversation_id = true, $
     return $response;
 }
 
-function sb_messaging_platforms_text_formatting($message)
-{
+function sb_messaging_platforms_text_formatting($message) {
     preg_match_all('/#sb-[a-zA-Z0-9-_]+/', $message, $matches);
     if (!empty($matches[0])) {
         for ($i = 0; $i < count($matches[0]); $i++) {

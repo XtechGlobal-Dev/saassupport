@@ -1,0 +1,503 @@
+[33mcommit 57db67bef201dbf2d482ce56dd268b4309f2a918[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain-new-version[m[33m)[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Nov 14 09:26:03 2025 +0530
+
+    Added user type and search feature in bulk messages window
+
+[33mcommit fe3f6a6ed8c6ac3147763ec635302edc50747313[m
+Merge: 83ec127 623fb31
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Nov 14 09:00:02 2025 +0530
+
+    Merge branch 'main-new-version' of https://github.com/XtechGlobal-Dev/saassupport into main-new-version
+
+[33mcommit 623fb31a2dcc6814a86981187ddc3a17456596e7[m[33m ([m[1;31morigin/main-new-version[m[33m)[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Fri Nov 14 08:54:45 2025 +0530
+
+    ..
+
+[33mcommit 83ec127f4e8cda4540e40e18c3402044dc11dcfb[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 13 17:20:40 2025 +0530
+
+    Added user type and search feature in bulk messages window
+
+[33mcommit ce348b434989141c38c519c50e80938af2675de8[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 13 15:24:57 2025 +0530
+
+    Remove sensitive Google service account file from repository
+
+[33mcommit c940c1d10fffe7d9f53e568023d9e2d56ce73d66[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 13 15:21:25 2025 +0530
+
+    Added allowed domains text field on recaptcha settings
+
+[33mcommit 7b1dafd5604e435e4349fa7a1f9b9341fc297d87[m
+Merge: 7e39265 5a1cd15
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 13 09:55:37 2025 +0530
+
+    Merge branch 'main-new-version' of https://github.com/XtechGlobal-Dev/saassupport into main-new-version
+
+[33mcommit 7e3926564002433ee613b50bc05c802e73e5707c[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 13 09:41:54 2025 +0530
+
+    Add domains dynamically on google recaptcha site settings
+
+[33mcommit 5a1cd151ca83f6563f3a5b6b1960556c2e20a486[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Nov 13 09:36:25 2025 +0530
+
+    ..
+
+[33mcommit 33421a59805da69ee1e72d46d3e371692f994ba1[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Nov 13 09:31:13 2025 +0530
+
+    fixed dashboard's table view on mobile screen.
+
+[33mcommit 82f301ac28ebda6b9c06144f15581135a61fa741[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Wed Nov 12 14:15:18 2025 +0530
+
+    Ui issues fixed in modal and dropmenus on mobile and pc view
+
+[33mcommit dfae8fe4404aeb1238d5418472069569e0dcdbed[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Tue Nov 11 10:02:41 2025 +0530
+
+    Chatbot on dashboard Ui bug fixed
+
+[33mcommit c96cdeaf49c925d0aa6fe527a0c34a484af16f75[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Mon Nov 10 14:54:37 2025 +0530
+
+    Setting side penal buttons setting
+
+[33mcommit 64b87cfcab0a4df92b1deb701a5d6b1b8d4296a7[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Fri Nov 7 16:12:02 2025 +0530
+
+    some Ui issues fixed that mantioned
+
+[33mcommit af93b71ee2c009991aa13c78aea471ba5162c336[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 6 16:37:17 2025 +0530
+
+    Fixed customer registration issue
+
+[33mcommit d9b6ac7ca1fe1c3d906c381f0241f4c5c7086abe[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Nov 6 14:12:13 2025 +0530
+
+    Fixed customer popup issue
+
+[33mcommit 85be6a4dcae036cbdb9b5d066965bae8dd7152a4[m
+Merge: 7fc01ce 011c9c2
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Nov 4 16:55:20 2025 +0530
+
+    updgrade code to new version released on 28-10-2025
+
+[33mcommit 011c9c26f6c4919fecbffbbda47d68483af4c2ea[m[33m ([m[1;31morigin/support-board-new-code[m[33m)[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 30 09:15:49 2025 +0530
+
+    Latest release code
+
+[33mcommit 7fc01ceb8b0f1146c816712a32ab983e466688f1[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 29 12:32:52 2025 +0530
+
+    test changes by Kirandeep Singh
+
+[33mcommit d3fbc0d51278fc84d5a5328dc80522919f30f5df[m
+Merge: f950e20 25d0528
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 28 16:08:18 2025 +0530
+
+    Merge pull request #311 from XtechGlobal-Dev/KirandeepSingh
+    
+    Kirandeep singh
+
+[33mcommit 25d05287f7d2a3f7e09de88a5cd9222396d9a0f9[m
+Merge: 71c2021 b195887
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 28 16:05:34 2025 +0530
+
+    Merge branch 'RamSaini' of https://github.com/XtechGlobal-Dev/saassupport into KirandeepSingh
+
+[33mcommit b195887c3451334038e768444545d19b37f7c2c3[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Tue Oct 28 16:03:59 2025 +0530
+
+    PASSWORD input right space missing isses fixed
+
+[33mcommit f950e20ddb16aa8463d5ad1037c2f99a56c97a93[m
+Merge: 6a2773a 71c2021
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 28 09:26:33 2025 +0530
+
+    Merge pull request #310 from XtechGlobal-Dev/KirandeepSingh
+    
+    Hide language settings
+
+[33mcommit 71c2021ef8ef5916d808cc0e41e6e2c8b92da8f8[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 28 09:25:29 2025 +0530
+
+    Hide language settings
+
+[33mcommit 6a2773aa25d50031cdf27572a0e2b263cd62bcd7[m
+Merge: 23809ea 28525a2
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Sat Oct 18 11:13:34 2025 +0530
+
+    Merge pull request #309 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit 28525a2912f70489baa727e3e0ae52d203cb8929[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Sat Oct 18 11:13:00 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit 23809ea4cec37771d836b8f7cdfd0e7010e7db71[m
+Merge: 2d312a8 470bcc5
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Sat Oct 18 10:08:04 2025 +0530
+
+    Merge pull request #308 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit 470bcc5b46a643c30ee44bd8ceaf904d411d589a[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Sat Oct 18 10:06:22 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit 2d312a813133fec24f0db30efdfd4ae54db2edcc[m
+Merge: bbf2239 bdc77cc
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Sat Oct 18 09:46:31 2025 +0530
+
+    Merge pull request #307 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit bdc77cc022bb1ad32761bc8658f87faf5ba88837[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Sat Oct 18 09:39:59 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit bbf223924d1e03225fc1c4b6bdd36f459aab94e1[m
+Merge: 423af77 eba5227
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 17:11:43 2025 +0530
+
+    Merge pull request #306 from XtechGlobal-Dev/KirandeepSingh
+    
+    Kirandeep singh
+
+[33mcommit eba5227ee347c82d9dfc07d8946c248ec5e1612d[m
+Merge: 8794e2a c8a8468
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 17:10:36 2025 +0530
+
+    Merge branch 'RamSaini' of https://github.com/XtechGlobal-Dev/saassupport into KirandeepSingh
+
+[33mcommit 8794e2a4b021bdd447cab2ed37c5ff5667c544ed[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 17:10:30 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit c8a8468dfa0887911d9cd8103ae94f6ac4152913[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Fri Oct 17 16:59:26 2025 +0530
+
+    whatsapp template issue solved
+
+[33mcommit 423af77e92707efc9baebf09f173d723b5fa0135[m
+Merge: fd74257 2d9164c
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:56:02 2025 +0530
+
+    Merge pull request #305 from XtechGlobal-Dev/KirandeepSingh
+    
+    Kirandeep singh
+
+[33mcommit 2d9164c6ba6cdf4bb26a1d53ffbd1163cbb0f712[m
+Merge: 6a595fd 4699c90
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:55:00 2025 +0530
+
+    Merge branch 'RamSaini' of https://github.com/XtechGlobal-Dev/saassupport into KirandeepSingh
+
+[33mcommit 4699c9004570e2aa78599088ac79129238bc66e5[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Fri Oct 17 16:50:47 2025 +0530
+
+    space adjusted.
+
+[33mcommit fd7425733ac8a22bfeb8776afaa91e3824caccd9[m
+Merge: 3d9e3f0 6a595fd
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:47:44 2025 +0530
+
+    Merge pull request #304 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit 6a595fdaaf2ce0fac6b03383a04b79070418b20b[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:46:47 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit 3d9e3f0c711f5c0e8c14927887f360a896447063[m
+Merge: e7c9386 b5e3d7b
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:15:41 2025 +0530
+
+    Merge pull request #303 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit b5e3d7b34dcfb3d996ea8a939c744d996db8d5fb[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:14:35 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit e7c93869ea4b1f867004bb36eaa3714a22201725[m
+Merge: edd86a4 b6f99f6
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:08:25 2025 +0530
+
+    Merge pull request #302 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit b6f99f6abb1ecabde2298a3d9384f381d4cf33e6[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 16:07:38 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit edd86a44672608dee4135f65e1c97167435acba2[m
+Merge: 0275c0e 27fe454
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 15:34:26 2025 +0530
+
+    Merge pull request #301 from XtechGlobal-Dev/KirandeepSingh
+    
+    Worked on ticket panel OTP for registration
+
+[33mcommit 27fe4542826d58071579ea110e77ca6170c55f99[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Fri Oct 17 15:30:37 2025 +0530
+
+    Worked on ticket panel OTP for registration
+
+[33mcommit 0275c0e6e1af25e0af9274b19eb1147eddebe93e[m
+Merge: 72482fa a4bb967
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 15:55:43 2025 +0530
+
+    Merge pull request #300 from XtechGlobal-Dev/KirandeepSingh
+    
+    bottom space
+
+[33mcommit a4bb96703abb309af0788fef2d3466fc96f405d5[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Oct 16 15:53:44 2025 +0530
+
+    bottom space
+
+[33mcommit 72482fa80593195df53f54684c4c29d2dd823d10[m
+Merge: 0e2cddb 925a071
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 15:50:09 2025 +0530
+
+    Merge pull request #299 from XtechGlobal-Dev/KirandeepSingh
+    
+    demo
+
+[33mcommit 925a071fbafa173954b54d147d6bd280afd27185[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Oct 16 15:48:37 2025 +0530
+
+    demo
+
+[33mcommit 0e2cddb53dee02625178a87eb08c3d3c9b2162be[m
+Merge: b2f3b12 39072b3
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 15:44:59 2025 +0530
+
+    Merge pull request #298 from XtechGlobal-Dev/KirandeepSingh
+    
+    fixed
+
+[33mcommit 39072b3134b3b2ed95f4d98a0b6fac0072f3bbe8[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Oct 16 15:42:04 2025 +0530
+
+    fixed
+
+[33mcommit b2f3b12037315a2b625ff0173d76124739128d72[m
+Merge: 480002e 70febdf
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 15:38:41 2025 +0530
+
+    Merge pull request #297 from XtechGlobal-Dev/KirandeepSingh
+    
+    dropmenu issue now fixed
+
+[33mcommit 70febdfbf566e17dd161710ad0d5ad4d9e0279a1[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Oct 16 15:36:59 2025 +0530
+
+    dropmenu issue now fixed
+
+[33mcommit 480002e96a58677cc83893d526e0dd8c58ac6d15[m
+Merge: 970a1a5 9c89682
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 15:18:38 2025 +0530
+
+    Merge pull request #296 from XtechGlobal-Dev/KirandeepSingh
+    
+    solved spacing issue form whatsap template
+
+[33mcommit 9c896822f7e7162d6254c6beef1d245c5f425166[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Thu Oct 16 15:16:39 2025 +0530
+
+    solved spacing issue form whatsap template
+
+[33mcommit 970a1a5edf83407830aaca233c555fd304dfd722[m
+Merge: e85b2ac e96c7e4
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 10:20:39 2025 +0530
+
+    Merge pull request #295 from XtechGlobal-Dev/KirandeepSingh
+    
+    Kirandeep singh
+
+[33mcommit e96c7e46c5ad81c690301a84bb0be4b10cd8febf[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 10:19:53 2025 +0530
+
+    Send whatsapp bulk message
+
+[33mcommit a3bcb71e8b6266a8a1fb7bc007da77b034f7b48b[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Thu Oct 16 09:30:09 2025 +0530
+
+    Send whatsapp bulk message
+
+[33mcommit e85b2ac99d3b75c6ad60d5ff066e0acf968009b7[m
+Merge: 454a4a8 38cb45f
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 15 16:40:06 2025 +0530
+
+    Merge pull request #294 from XtechGlobal-Dev/KirandeepSingh
+    
+    Send whatsapp bulk message
+
+[33mcommit 38cb45f14da9120e972f3617c18b73216a6f1440[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 15 16:08:02 2025 +0530
+
+    Send whatsapp bulk message
+
+[33mcommit 454a4a813e2db910830a9d410ea987adeb345ad6[m
+Merge: 986e767 ea35fb3
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 15 11:35:50 2025 +0530
+
+    Merge pull request #293 from XtechGlobal-Dev/KirandeepSingh
+    
+    Send whatsapp bulk message
+
+[33mcommit ea35fb379c4f8234ce9ba4a5752ef27193e4054e[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 15 11:32:03 2025 +0530
+
+    Send whatsapp bulk message
+
+[33mcommit 986e767a31d484a9df5fc8c062ef9f55931d7ee5[m
+Merge: 8a5fc8c 253c22f
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 15 09:50:17 2025 +0530
+
+    Merge pull request #291 from XtechGlobal-Dev/KirandeepSingh
+    
+    Completed Bulk Users import via CSV
+
+[33mcommit 253c22f9f7ea177d6cfdb0f9a6a0616580f64ad6[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Wed Oct 15 09:49:37 2025 +0530
+
+    Completed Bulk Users import via CSV
+
+[33mcommit 8a5fc8c2c71353466185002a315c626ee9765397[m
+Merge: 3179b51 658a1bb
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 14 17:27:05 2025 +0530
+
+    Merge pull request #290 from XtechGlobal-Dev/KirandeepSingh
+    
+    Completed Bulk Users import via CSV
+
+[33mcommit 658a1bb1c794c38a4eac6320fd2a4deb083bbc91[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 14 17:26:36 2025 +0530
+
+    Completed Bulk Users import via CSV
+
+[33mcommit 3179b51e02b725ed010059bb47d0488af54de7f5[m
+Merge: da92866 3a0064e
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 14 14:00:17 2025 +0530
+
+    Merge pull request #289 from XtechGlobal-Dev/KirandeepSingh
+    
+    Fixed https://github.com/XtechGlobal-Dev/saassupport/issues/264
+
+[33mcommit 3a0064e6ff4d123803456cea07c20bd08b9abe6c[m
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Tue Oct 14 13:59:33 2025 +0530
+
+    Fixed https://github.com/XtechGlobal-Dev/saassupport/issues/264
+
+[33mcommit da928667949521758bba9dd75eb26aa7b0f65984[m
+Merge: bc13439 2bdf32f
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Mon Oct 13 16:57:43 2025 +0530
+
+    Merge pull request #288 from XtechGlobal-Dev/KirandeepSingh
+    
+    Membership plan active Card design change on active
+
+[33mcommit 2bdf32f813ba6b94112bdc33a221625097284e47[m
+Author: ramsainixtec <ram.saini@xtecglobal.com>
+Date:   Mon Oct 13 16:37:53 2025 +0530
+
+    Membership plan active Card design change on active
+
+[33mcommit bc13439b6cbe5627a037ef63ffe74c72edba43d6[m
+Merge: 33fe89f 0ac8303
+Author: kirandeepsingh44 <kirandeep.singh@xtecglobal.com>
+Date:   Mon Oct 13 10:21:44 2025 +0530
+
+    Merge pull request #286 from XtechGlobal-Dev/KirandeepSingh
+    
+    Kirandeep singh

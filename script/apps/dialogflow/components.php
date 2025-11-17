@@ -144,9 +144,9 @@ function sb_dialogflow_chatbot_area($header) { ?>
                                         </label>
                                         <textarea data-id="open-ai-faq-answer"></textarea>
                                     </div>
-                                    <div class="d-none">
+                                    <div>
                                         <label>
-                                            <?php sb_e('Function calling') ?>
+                                            <?php sb_e('Tools calling') ?>
                                         </label>
                                         <div class="sb-enlarger sb-enlarger-function-calling">
                                             <div>
@@ -281,28 +281,36 @@ function sb_dialogflow_chatbot_area($header) { ?>
                             <textarea placeholder="<?php sb_e('Write a message...') ?>"></textarea>
                         </div>
                         <div class="sb-flex">
-                            <div class="sb-flex">
-                                <div data-value="user" class="sb-btn sb-btn-white sb-icon">
-                                    <i class="sb-icon-reload"></i>
-                                    <?php sb_e('User') ?>
-                                </div>
-                                <i data-value="clear" class="sb-icon-close sb-btn-icon sb-btn-red"></i>
-                            </div>
-                            <div class="sb-flex">
-                                <div data-value="add" class="sb-btn sb-btn-white">
-                                    <?php sb_e('Add') ?>
-                                </div>
+                            <div class="sb-flex" style="width: 100%; gap: 15px;;">
                                 <div data-value="send" class="sb-btn sb-btn-white sb-icon" data-sb-tooltip="<?php sb_e('Send message') ?>">
                                     <i class="sb-icon-send"></i>
                                     <?php sb_e('Send') ?>
+                                </div>
+                                <div class="sb-flex">
+                                    <div class="sb-btn sb-btn-white sb-icon iconBtns">
+                                        <i data-value="clear" class="sb-icon-close"></i>
+                                    </div>
+                                    <div class="sb-btn sb-btn-white sb-icon iconBtns">
+                                        <i data-value="auto-clear" class="sb-icon-reload" data-sb-tooltip="<?php sb_e('Auto clear') ?>"></i>
+                                    </div>
+                                    <div class="sb-btn sb-btn-white sb-icon iconBtns">
+                                        <i data-value="history" class="sb-icon-clock" data-sb-tooltip="<?php sb_e('History') ?>"></i>
+
+                                         <div class="sb-popup sb-playground-history historyPenal">
+                                            <div class="sb-replies-list sb-scroll-area">
+                                                <ul></ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sb-playground-info"></div>
+                <!-- <div class="sb-playground-info"></div> -->
             </div>
         </div>
+       
     </div>
 <?php } ?>
 <?php

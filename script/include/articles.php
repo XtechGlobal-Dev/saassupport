@@ -20,6 +20,7 @@ $query_article_id = sb_sanatize_string(sb_isset($_GET, 'article_id'), true);
 $query_search = sb_sanatize_string(sb_isset($_GET, 'search'), true);
 $language = sb_sanatize_string(sb_isset($_GET, 'lang', sb_get_user_language()), true);
 $code = '<div class="' . ($query_category_id ? 'sb-subcategories' : ($query_search ? 'sb-articles-search' : 'sb-grid sb-grid-3')) . '">';
+$code_nav = '';
 $code_script = '';
 $css = 'sb-articles-parent-categories-cnt';
 $articles_page_url = sb_get_articles_page_url();
@@ -78,8 +79,16 @@ if ($query_category_id) {
         $code .= '<div class="sb-rating sb-rating-ext"><span>' . sb_t('Rate and review', $language) . '</span><div>';
         $code .= '<i data-rating="positive" class="sb-submit sb-icon-like"><span>' . sb_t('Helpful', $language) . '</span></i>';
         $code .= '<i data-rating="negative" class="sb-submit sb-icon-dislike"><span>' . sb_t('Not helpful', $language) . '</span></i>';
-        $code .= '</div></div></div>';
-        $code_script = 'let user_rating = false; $(document).on(\'SBInit\', function () { user_rating = SBF.storage(\'article-rating-' . $article['id'] . '\'); if (user_rating) $(\'.sb-article\').attr(\'data-user-rating\', user_rating); });  $(\'.sb-article\').on(\'click\', \'.sb-rating-ext [data-rating]\', function (e) { SBChat.articleRatingOnClick(this); e.preventDefault(); return false; });';
+        $code .= '</div></div>';
+        $code_script = 'var SB_ARTICLE_ID = "' . $article['id'] . '";';
+        $nav = json_decode($article['nav'], true);
+        if ($nav) {
+            $code_nav = '<div class="sb-articles-nav-mobile-btn">' . sb_('Table of contents') . '<i class="sb-icon-arrow-down"></i></div><div class="sb-scroll-area">';
+            foreach ($nav as $nav_item) {
+                $code_nav .= '<a href="#' . sb_string_slug($nav_item[0]) . '"' . ($nav_item[1] == 2 ? '' : ' class="sb-nav-sub"') . '>' . htmlspecialchars($nav_item[0]) . '</a>';
+            }
+            $code_nav .= '</div>';
+        }
     }
 } else if ($query_search) {
     $css = 'sb-article-search-cnt';
@@ -109,7 +118,12 @@ if ($query_category_id) {
                     $description = sb_isset($translations, 'description', $description);
                 }
             }
-            $code .= '<a href="' . ($url_rewrite ? $articles_page_url_slash . $cloud_url_part . 'category/' . $category['id'] : $articles_page_url . '?category=' . $category['id'] . $cloud_url_part) . '">' . ($image ? '<img src="' . $image . '" />' : '') . '<h2>' . $title . '</h2><p>' . $description . '</p></a>';
+            $code .= '<div><a class="sb-subcategory-title" href="' . ($url_rewrite ? $articles_page_url_slash . $cloud_url_part . 'category/' . $category['id'] : $articles_page_url . '?category=' . $category['id'] . $cloud_url_part) . '">' . ($image ? '<img src="' . $image . '" />' : '') . '<h2>' . $title . '</h2><p>' . $description . '</p></a><div class="sb-subcategory-articles">';
+            $articles = sb_get_articles(false, false, false, $category['id'], $language);
+            foreach ($articles as $article) {
+                $code .= '<a class="sb-icon-arrow-right" href="' . ($url_rewrite ? $articles_page_url_slash . $cloud_url_part . sb_isset($article, 'slug', $article['id']) : $articles_page_url . '?article_id=' . $article['id'] . $cloud_url_part) . '">' . $article['title'] . '</a>';
+            }
+            $code .= '</div></div>';
         }
     } else {
         $code .= '<p>' . sb_t('No results found.', $language) . '</p>';
@@ -130,8 +144,8 @@ function sb_get_article_category_language($category, $language, $category_id) {
             array_push($translations, $category['description']);
         }
         $translations = sb_google_translate($translations, $language);
-        $category['title'] = $translations[0][0];
-        $category['description'] = sb_isset($translations[0], 1, '');
+        $category['title'] = $translations[0];
+        $category['description'] = sb_isset($translations, 1, '');
         $articles_categories = sb_get_articles_categories();
         for ($i = 0; $i < count($articles_categories); $i++) {
             if ($articles_categories[$i]['id'] == $category_id) {
@@ -153,18 +167,19 @@ function sb_get_article_category_language($category, $language, $category_id) {
             </h1>
             <div class="sb-input sb-input-btn">
                 <input placeholder="<?php sb_e('Search for articles...') ?>" autocomplete="off" />
-                <div class="sb-search-articles sb-icon-search"></div>
+                <div class="sb-search-articles sb-icon-search" onclick="document.location.href = '<?php echo ($articles_page_url ? $articles_page_url : '') . (defined('ARTICLES_URL') && isset($_GET['chat_id']) ? (substr($articles_page_url, -1) == '/' ? '' : '/') . $_GET['chat_id'] . '/' : '') . '?search=' ?>' + $(this).prev().val()"></div>
             </div>
         </div>
     </div>
-    <div class="sb-articles-body">
-        <?php echo $code ?>
-    </div>
+    <?php
+    if ($query_article_id) {
+        echo '<div class="sb-articles-cnt"><div class="sb-articles-body">' . $code . '  </div><div class="sb-articles-nav">' . $code_nav . '</div></div>';
+    } else {
+        echo '<div class="sb-articles-body">' . $code . '  </div>';
+    }
+    ?>
 </div>
 <?php sb_js_global() ?>
 <script>
-    $('.sb-search-articles').on('click', function () {
-        document.location.href = '<?php echo ($articles_page_url ? $articles_page_url : '') . (defined('ARTICLES_URL') && isset($_GET['chat_id']) ? (substr($articles_page_url, -1) == '/' ? '' : '/') . $_GET['chat_id'] . '/' : '') . '?search=\' + $(this).prev().val();' ?>
-    });
     <?php echo $code_script ?>
 </script>

@@ -17,7 +17,10 @@ if (!$signature) {
     die();
 }
 require('../../include/functions.php');
-sb_cloud_load_by_url();
+if (sb_is_cloud()) {
+    sb_cloud_load_by_url();
+    sb_cloud_membership_validation(true);
+}
 $hash = 'mac=' . hash('sha256', $response['app_id'] . $raw . $response['timestamp'] . trim(sb_get_multi_setting('zalo', 'zalo-oa-secret-key')));
 if (strcmp($hash, $_SERVER['HTTP_X_ZEVENT_SIGNATURE']) === 0 && isset($response['event_name'])) {
     flush();

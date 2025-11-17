@@ -64,7 +64,10 @@ if ($raw) {
     }
     if ($sender_id && ($message || $attachments || $is_deleted)) {
         $GLOBALS['SB_FORCE_ADMIN'] = true;
-        sb_cloud_load_by_url();
+        if (sb_is_cloud()) {
+            sb_cloud_load_by_url();
+            sb_cloud_membership_validation(true);
+        }
 
         // Page ID
         $page_sender = false;

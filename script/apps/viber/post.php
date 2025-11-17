@@ -20,7 +20,10 @@ if ($response) {
     require('../../include/functions.php');
     if (isset($response['event']) && $response['event'] == 'message') {
         $GLOBALS['SB_FORCE_ADMIN'] = true;
-        sb_cloud_load_by_url();
+        if (sb_is_cloud()) {
+            sb_cloud_load_by_url();
+            sb_cloud_membership_validation(true);
+        }
         $sender = $response['sender'];
         $viber_id = $sender['id'];
         $message = $response['message'];

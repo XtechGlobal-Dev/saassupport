@@ -42,8 +42,7 @@ use UI\Draw\Color;
  *
  */
 
-function sb_get_front_settings()
-{
+function sb_get_front_settings() {
     global $SB_LANGUAGE;
     sb_updates_validation();
     $active_user = sb_get_active_user();
@@ -75,7 +74,7 @@ function sb_get_front_settings()
         'push_notifications_users' => sb_get_multi_setting('push-notifications', 'push-notifications-users-active'),
         'notifications_icon' => sb_is_cloud() ? SB_CLOUD_BRAND_ICON_PNG : sb_get_setting('notifications-icon', SB_URL . '/media/icon.png'),
         'notify_email_cron' => sb_get_setting('notify-email-cron'),
-        'bot_id' => sb_get_bot_id(),
+        'bot_id' => sb_get_bot_ID(),
         'bot_name' => sb_get_setting('bot-name', 'Bot'),
         'bot_image' => sb_get_setting('bot-image', SB_URL . '/media/user.png'),
         'bot_delay' => sb_get_setting('dialogflow-bot-delay', 3000),
@@ -126,6 +125,8 @@ function sb_get_front_settings()
     }
     if ($return['rating']) {
         $return['rating_message'] = sb_get_multi_setting('rating-message', 'rating-message-area');
+        $return['rating_title'] = sb_get_multi_setting('rating-message', 'rating-message-title', 'Rate your experience');
+        $return['rating_text'] = sb_get_multi_setting('rating-message', 'rating-message-text', 'How satisfied are you with the support you received?');
     }
     if ($return['articles']) {
         $return['articles_title'] = sb_get_setting('articles-title', '');
@@ -222,8 +223,7 @@ function sb_get_front_settings()
     return $return;
 }
 
-function sb_js_admin()
-{
+function sb_js_admin() {
     $is_cloud = sb_is_cloud();
     $active_user = sb_get_active_user();
     $active_user_type = sb_isset($active_user, 'user_type');
@@ -231,7 +231,7 @@ function sb_js_admin()
     $language = sb_get_admin_language();
     $routing_type = sb_get_multi_setting('queue', 'queue-active') ? 'queue' : (sb_get_multi_setting('routing', 'routing-active') ? 'routing' : (sb_get_multi_setting('agent-hide-conversations', 'agent-hide-conversations-active') ? 'hide-conversations' : false));
     $settings = [
-        'bot_id' => sb_get_bot_id(),
+        'rating' => sb_get_multi_setting('rating-message', 'rating-active'),
         'close_message' => sb_get_multi_setting('close-message', 'close-active'),
         'close_message_transcript' => sb_get_multi_setting('close-message', 'close-transcript'),
         'routing' => (!$active_user || $is_agent) && $routing_type ? $routing_type : false,
@@ -283,10 +283,9 @@ function sb_js_admin()
     if (defined('SB_DIALOGFLOW')) {
         $settings['dialogflow'] = sb_get_multi_setting('google', 'dialogflow-active');
         $settings['open_ai_user_expressions'] = sb_get_multi_setting('open-ai', 'open-ai-user-expressions');
-        $settings['open_ai_prompt_rewrite'] = sb_get_multi_setting('open-ai', 'open-ai-prompt-message-rewrite');
-        $settings['smart_reply'] = sb_get_multi_setting('dialogflow-smart-reply', 'dialogflow-smart-reply-active') || sb_get_setting('ai-smart-reply'); // Deprecated: sb_get_multi_setting('dialogflow-smart-reply', 'dialogflow-smart-reply-active')
-        $settings['open_ai_model'] = function_exists('sb_open_ai_get_gpt_model') ? sb_open_ai_get_gpt_model() : 'gpt-3.5-turbo'; // Deprecated: function_exists('sb_open_ai_get_gpt_model') ? sb_open_ai_get_gpt_model() : 'gpt-3.5-turbo';
-        $settings['translation'] = sb_get_setting('google-translation') || sb_get_multi_setting('google', 'google-translation'); // Deprecated: sb_get_setting('google-translation')
+        $settings['smart_reply'] = sb_get_setting('ai-smart-reply');
+        $settings['open_ai_model'] = sb_open_ai_get_gpt_model();
+        $settings['translation'] = sb_get_multi_setting('google', 'google-translation');
         $settings['multilingual_translation'] = sb_get_multi_setting('google', 'google-multilingual-translation');
         $settings['speech_recognition'] = sb_get_multi_setting('open-ai', 'open-ai-speech-recognition');
         $settings['note_data_scrape'] = sb_get_multi_setting('open-ai', 'open-ai-note-scraping') ? sb_open_ai_data_scraping_get_prompts('name') : false;
@@ -353,8 +352,7 @@ function sb_js_admin()
     echo $code;
 }
 
-function sb_js_global()
-{
+function sb_js_global() {
     global $SB_LANGUAGE;
     if (!isset($SB_LANGUAGE)) {
         sb_init_translations();
@@ -368,12 +366,11 @@ function sb_js_global()
     echo $code;
 }
 
-function sb_get_block_setting($value)
-{
+function sb_get_block_setting($value) {
     switch ($value) {
         case 'privacy':
             $settings = sb_get_setting('privacy');
-            return $settings && $settings['privacy-active'] ? ['title' => sb_rich_value($settings['privacy-title']), 'message' => sb_rich_value($settings['privacy-msg']), 'decline' => sb_rich_value($settings['privacy-msg-decline']), 'link' => $settings['privacy-link'], 'link-name' => sb_rich_value(sb_isset($settings, 'privacy-link-text', ''), false), 'btn-approve' => sb_rich_value(sb_isset($settings, 'privacy-btn-approve', 'Yes'), false), 'btn-decline' => sb_rich_value(sb_isset($settings, 'privacy-btn-decline', 'Cancel'), false)] : false;
+            return $settings && $settings['privacy-active'] ? ['title' => sb_rich_value($settings['privacy-title']), 'message' => sb_rich_value($settings['privacy-msg']), 'decline' => sb_rich_value($settings['privacy-msg-decline']), 'link' => $settings['privacy-link'], 'link-name' => sb_rich_value(sb_isset($settings, 'privacy-link-text', ''), false), 'btn-approve' => sb_rich_value(sb_isset($settings, 'privacy-btn-approve', 'Accept'), false), 'btn-decline' => sb_rich_value(sb_isset($settings, 'privacy-btn-decline', 'Decline'), false)] : false;
         case 'popup':
             $settings = sb_get_setting('popup-message');
             return $settings && $settings['popup-active'] ? ['title' => sb_rich_value($settings['popup-title']), 'message' => sb_rich_value(nl2br($settings['popup-msg'])), 'image' => $settings['popup-image']] : false;
@@ -464,26 +461,26 @@ function sb_populate_app_settings($app_name)
     return sb_populate_settings($app_name, $settings, false);
 }
 
-function sb_get_setting_code($setting)
-{
+function sb_get_setting_code($setting) {
     if (isset($setting)) {
         $id = $setting['id'];
         $type = $setting['type'];
         $disable_translations = sb_get_setting('admin-disable-settings-translations');
         $keywords = sb_isset($setting, 'keywords');
         $content = '<div id="' . $id . '" data-type="' . $type . '"' . ($keywords ? ' data-keywords="' . $keywords . '"' : '') . (isset($setting['setting']) ? ' data-setting="' . $setting['setting'] . '"' : '') . ' class="sb-setting sb-type-' . $type . '"><div class="sb-setting-content"><h2>' . sb_s($setting['title'], $disable_translations) . '</h2><p>' . sb_s($setting['content'], $disable_translations) . sb_get_setting_code_help($setting) . '</p></div><div class="input">';
+        $placeholder = empty($setting['placeholder']) ? '' : ' placeholder="' . sb_s($setting['placeholder']) . '"';
         switch ($type) {
             case 'color':
                 $content .= '<input type="text"><i class="sb-close sb-icon-close"></i>';
                 break;
             case 'text':
-                $content .= '<input type="text">';
+                $content .= '<input type="text"' . $placeholder . '>';
                 break;
             case 'password':
                 $content .= '<input type="password">';
                 break;
             case 'textarea':
-                $content .= '<textarea></textarea>';
+                $content .= '<textarea' . $placeholder . '></textarea>';
                 break;
             case 'select':
                 $values = $setting['value'];
@@ -503,7 +500,7 @@ function sb_get_setting_code($setting)
                 }
                 break;
             case 'number':
-                $content .= '<input type="number">' . (isset($setting['unit']) ? '<label>' . $setting['unit'] . '</label>' : '');
+                $content .= '<input type="number"' . $placeholder . '>' . (isset($setting['unit']) ? '<label>' . $setting['unit'] . '</label>' : '');
                 break;
             case 'upload':
                 $content .= (empty($setting['text-field']) ? '' : '<input type="url">') . '<a class="sb-btn">' . sb_(sb_isset($setting, 'button-text', 'Choose file')) . '</a>';
@@ -520,20 +517,22 @@ function sb_get_setting_code($setting)
             case 'multi-input':
                 $values = $setting['value'];
                 for ($i = 0; $i < count($values); $i++) {
-                    $sub_type = $values[$i]['type'];
-                    $content .= '<div id="' . $values[$i]['id'] . '" data-type="' . $sub_type . '" class="multi-input-' . $sub_type . '"><label>' . sb_s($values[$i]['title'], $disable_translations) . sb_get_setting_code_help($values[$i]) . '</label>';
+                    $setting_sub = $values[$i];
+                    $sub_type = $setting_sub['type'];
+                    $placeholder = empty($setting_sub['placeholder']) ? '' : ' placeholder="' . sb_($setting_sub['placeholder']) . '"';
+                    $content .= '<div id="' . $setting_sub['id'] . '" data-type="' . $sub_type . '" class="multi-input-' . $sub_type . '"><label>' . sb_s($setting_sub['title'], $disable_translations) . sb_get_setting_code_help($setting_sub) . '</label>';
                     switch ($sub_type) {
                         case 'text':
-                            $content .= '<input type="text">';
+                            $content .= '<input type="text"' . $placeholder . '>';
                             break;
                         case 'password':
                             $content .= '<input type="password">';
                             break;
                         case 'number':
-                            $content .= '<input type="number">';
+                            $content .= '<input type="number"' . $placeholder . '>';
                             break;
                         case 'textarea':
-                            $content .= '<textarea></textarea>';
+                            $content .= '<textarea' . $placeholder . '></textarea>';
                             break;
                         case 'upload':
                             $content .= '<input type="url"><button type="button">' . sb_('Choose file') . '</button>';
@@ -546,17 +545,17 @@ function sb_get_setting_code($setting)
                             break;
                         case 'select':
                             $content .= '<select>';
-                            $items = $values[$i]['value'];
+                            $items = $setting_sub['value'];
                             for ($j = 0; $j < count($items); $j++) {
                                 $content .= '<option value="' . $items[$j][0] . '">' . sb_s($items[$j][1], $disable_translations) . '</option>';
                             }
                             $content .= '</select>';
                             break;
                         case 'button':
-                            $content .= '<a class="sb-btn" href="' . $values[$i]['button-url'] . '" target="_blank">' . sb_s($values[$i]['button-text'], $disable_translations) . '</a>';
+                            $content .= '<a class="sb-btn" href="' . $setting_sub['button-url'] . '" target="_blank">' . sb_s($setting_sub['button-text'], $disable_translations) . '</a>';
                             break;
                         case 'select-checkbox':
-                            $items = $values[$i]['value'];
+                            $items = $setting_sub['value'];
                             $content .= '<input type="text" class="sb-select-checkbox-input" readonly><div class="sb-select-checkbox">';
                             for ($i = 0; $i < count($items); $i++) {
                                 $content .= '<div class="multi-input-checkbox"><input id="' . $items[$i][0] . '" type="checkbox"><label>' . sb_s($items[$i][1], $disable_translations) . '</label></div>';
@@ -623,14 +622,14 @@ function sb_get_setting_code($setting)
                 break;
             case 'timetable':
                 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                $hours = [['', ''], ['00:00', '12:00 am'], ['00:30', '12:30 am'], ['01:00', '1:00 am'], ['01:30', '1:30 am'], ['02:00', '2:00 am'], ['02:30', '2:30 am'], ['03:00', '3:00 am'], ['03:30', '3:30 am'], ['04:00', '4:00 am'], ['04:30', '4:30 am'], ['05:00', '5:00 am'], ['05:30', '5:30 am'], ['06:00', '6:00 am'], ['06:30', '6:30 am'], ['07:00', '7:00 am'], ['07:30', '7:30 am'], ['08:00', '8:00 am'], ['08:30', '8:30 am'], ['09:00', '9:00 am'], ['09:30', '9:30 am'], ['10:00', '10:00 am'], ['10:30', '10:30 am'], ['11:00', '11:00 am'], ['11:30', '11:30 am'], ['12:00', '12:00 pm'], ['12:30', '12:30 pm'], ['13:00', '1:00 pm'], ['13:30', '1:30 pm'], ['14:00', '2:00 pm'], ['14:30', '2:30 pm'], ['15:00', '3:00 pm'], ['15:30', '3:30 pm'], ['16:00', '4:00 pm'], ['16:30', '4:30 pm'], ['17:00', '5:00 pm'], ['17:30', '5:30 pm'], ['18:00', '6:00 pm'], ['18:30', '6:30 pm'], ['19:00', '7:00 pm'], ['19:30', '7:30 pm'], ['20:00', '8:00 pm'], ['20:30', '8:30 pm'], ['21:00', '9:00 pm'], ['21:30', '9:30 pm'], ['22:00', '10:00 pm'], ['22:30', '10:30 pm'], ['23:00', '11:00 pm'], ['23:30', '11:30 pm'], ['closed', sb_('Closed')]];
+                $hours = [['', sb_('Closed')], ['00:00', '12:00 am'], ['00:30', '12:30 am'], ['01:00', '1:00 am'], ['01:30', '1:30 am'], ['02:00', '2:00 am'], ['02:30', '2:30 am'], ['03:00', '3:00 am'], ['03:30', '3:30 am'], ['04:00', '4:00 am'], ['04:30', '4:30 am'], ['05:00', '5:00 am'], ['05:30', '5:30 am'], ['06:00', '6:00 am'], ['06:30', '6:30 am'], ['07:00', '7:00 am'], ['07:30', '7:30 am'], ['08:00', '8:00 am'], ['08:30', '8:30 am'], ['09:00', '9:00 am'], ['09:30', '9:30 am'], ['10:00', '10:00 am'], ['10:30', '10:30 am'], ['11:00', '11:00 am'], ['11:30', '11:30 am'], ['12:00', '12:00 pm'], ['12:30', '12:30 pm'], ['13:00', '1:00 pm'], ['13:30', '1:30 pm'], ['14:00', '2:00 pm'], ['14:30', '2:30 pm'], ['15:00', '3:00 pm'], ['15:30', '3:30 pm'], ['16:00', '4:00 pm'], ['16:30', '4:30 pm'], ['17:00', '5:00 pm'], ['17:30', '5:30 pm'], ['18:00', '6:00 pm'], ['18:30', '6:30 pm'], ['19:00', '7:00 pm'], ['19:30', '7:30 pm'], ['20:00', '8:00 pm'], ['20:30', '8:30 pm'], ['21:00', '9:00 pm'], ['21:30', '9:30 pm'], ['22:00', '10:00 pm'], ['22:30', '10:30 pm'], ['23:00', '11:00 pm'], ['23:30', '11:30 pm']];
                 $select = '<div class="sb-custom-select">';
                 for ($i = 0; $i < count($hours); $i++) {
                     $select .= '<span data-value="' . $hours[$i][0] . '">' . $hours[$i][1] . '</span>';
                 }
                 $content .= '<div class="sb-timetable">';
                 for ($i = 0; $i < 7; $i++) {
-                    $content .= '<div data-day="' . strtolower($days[$i]) . '"><label>' . sb_($days[$i]) . '</label><div><div></div><span>' . sb_('To') . '</span><div></div><span>' . sb_('And') . '</span><div></div><span>' . sb_('To') . '</span><div></div></div></div>';
+                    $content .= '<div data-day="' . strtolower($days[$i]) . '"><label>' . sb_($days[$i]) . '</label><div><div>' . sb_('Closed') . '</div><span>' . sb_('To') . '</span><div>' . sb_('Closed') . '</div><span>' . sb_('And') . '</span><div>' . sb_('Closed') . '</div><span>' . sb_('To') . '</span><div>' . sb_('Closed') . '</div></div></div>';
                 }
                 $content .= $select . '</div></div>';
                 break;
@@ -933,14 +932,16 @@ function sb_save_settings($settings, $external_settings = [], $external_settings
     }
 }
 
-function sb_save_external_setting($name, $value)
-{
+function sb_save_external_setting($name, $value) {
     $settings_encoded = sb_db_json_escape($value);
     return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : sb_db_query('INSERT INTO sb_settings(name, value) VALUES (\'' . sb_db_escape($name) . '\', \'' . $settings_encoded . '\') ON DUPLICATE KEY UPDATE value = \'' . $settings_encoded . '\'');
 }
 
-function sb_get_settings()
-{
+function sb_delete_external_setting($name) {
+    sb_db_query('DELETE FROM sb_settings WHERE name = "' . $name . '" LIMIT 1');
+}
+
+function sb_get_settings() {
     global $SB_SETTINGS;
     if (!isset($SB_SETTINGS)) {
         $SB_SETTINGS = sb_get_external_setting('settings', []);
@@ -951,8 +952,7 @@ function sb_get_settings()
     return $SB_SETTINGS;
 }
 
-function sb_get_all_settings()
-{
+function sb_get_all_settings() {
     $translations = [];
     $settings = [];
     $rows = sb_db_get('SELECT value FROM sb_settings WHERE name="emails" || name="rich-messages" || name="wc-emails"', false);
@@ -966,8 +966,7 @@ function sb_get_all_settings()
     return array_merge(sb_get_settings(), $settings, ['external-settings-translations' => $translations]);
 }
 
-function sb_get_setting($id, $default = false)
-{
+function sb_get_setting($id, $default = false) {
     $settings = sb_get_settings();
     if (!sb_is_error($settings)) {
         if (isset($settings[$id]) && !empty($settings[$id][0])) {
@@ -989,8 +988,7 @@ function sb_get_setting($id, $default = false)
     }
 }
 
-function sb_get_multi_setting($id, $sub_id, $default = false)
-{
+function sb_get_multi_setting($id, $sub_id, $default = false) {
     $setting = sb_get_setting($id);
     if ($setting && !sb_is_error($setting) && !empty($setting[$sub_id])) {
         return $setting[$sub_id];
@@ -1027,8 +1025,7 @@ function sb_get_external_setting($name, $default = false)
     return $settings;
 }
 
-function sb_get_multilingual_setting($name, $sub_name, $language = false)
-{
+function sb_get_multilingual_setting($name, $sub_name, $language = false) {
     $language = $language ? $language : sb_get_user_language();
     $value = $language && $language != 'en' ? sb_isset(sb_get_external_setting('external-settings-translations-' . $language), $sub_name) : false;
     if ($value)
@@ -1045,13 +1042,11 @@ function sb_get_multilingual_setting($name, $sub_name, $language = false)
     return $value;
 }
 
-function sb_color_palette($id = '')
-{
+function sb_color_palette($id = '') {
     return '<div data-type="color-palette" data-value="" data-id="' . $id . '" class="sb-color-palette"><span></span><ul><li data-value=""></li><li data-value="red"></li><li data-value="yellow"></li><li data-value="green"></li><li data-value="pink"></li><li data-value="gray"></li><li data-value="blue"></li></ul></div>';
 }
 
-function sb_export_settings()
-{
+function sb_export_settings() {
     $setting_keys = ['automations', 'emails', 'rich-messages', 'settings', 'app-keys', 'articles', 'articles-categories', 'dialogflow-knowledge', 'open-ai-intents-history', 'slack-channels'];
     $settings = [];
     for ($i = 0; $i < count($setting_keys); $i++) {
@@ -1071,8 +1066,7 @@ function sb_export_settings()
     return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : false;
 }
 
-function sb_import_settings($file_url)
-{
+function sb_import_settings($file_url) {
     $settings = json_decode(sb_download($file_url), true);
     if ($settings) {
         foreach ($settings as $key => $setting) {
@@ -1084,8 +1078,7 @@ function sb_import_settings($file_url)
     return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : false;
 }
 
-function sb_get_departments()
-{
+function sb_get_departments() {
     $items = sb_get_setting('departments');
     $count = is_array($items) ? count($items) : 0;
     $departments = [];
@@ -1095,8 +1088,7 @@ function sb_get_departments()
     return $departments;
 }
 
-function sb_departments($type)
-{
+function sb_departments($type) {
     $items = sb_get_setting('departments');
     $count = is_array($items) ? count($items) : 0;
     if ($count) {
@@ -1131,25 +1123,27 @@ function sb_departments($type)
     }
 }
 
-function sb_office_hours()
-{
+function sb_office_hours($range_start_gmt = false, $range_end_gmt = false) {
     $settings = sb_get_settings();
     $timetable = sb_isset($settings, 'timetable', [[]])[0];
-    $now = time();
-    $utc_offset = intval(sb_get_setting('timetable-utc', 0));
-    $offset = $now - ($utc_offset * 3600);
-    $today = strtolower(gmdate('l', $offset));
-    $today_array = explode('-', gmdate('m-d-y', $offset));
-    $today_array = [intval($today_array[0]), intval($today_array[1]), intval($today_array[2])];
-    if (isset($timetable[$today]) && !empty($timetable[$today][0][0])) {
+    $utc_offset = floatval(sb_utc_offset());
+    if (empty($range_start_gmt)) {
+        $range_start_gmt = time();
+    }
+    $range_end_gmt = $range_end_gmt ?? $range_start_gmt;
+    $offset = $range_start_gmt - ($utc_offset * 3600);
+    $start_day = strtolower(gmdate('l', $offset));
+    $start_day_array = explode('-', gmdate('m-d-y', $offset));
+    $start_day_array = [intval($start_day_array[0]), intval($start_day_array[1]), intval($start_day_array[2])];
+    if (isset($timetable[$start_day]) && !empty($timetable[$start_day][0][0])) {
         $status = false;
         for ($i = 0; $i < 3; $i += 2) {
-            if (!empty($timetable[$today][$i][0]) && $timetable[$today][$i][0] != 'closed') {
-                $start = explode(':', $timetable[$today][$i][0]);
-                $end = explode(':', $timetable[$today][$i + 1][0]);
-                $office_hours_start = gmmktime(intval($start[0]) + $utc_offset, intval($start[1]), 0, $today_array[0], $today_array[1], $today_array[2]);
-                $office_hours_end = gmmktime(intval($end[0]) + $utc_offset, intval($end[1]), 0, $today_array[0], $today_array[1], $today_array[2]);
-                if ($now >= $office_hours_start && $now <= $office_hours_end) {
+            if (!empty($timetable[$start_day][$i][0]) && $timetable[$start_day][$i][0] != 'closed') { // Deprecated. Remove  && $timetable[$start_day][$i][0] != 'closed'
+                $start = explode(':', $timetable[$start_day][$i][0]);
+                $end = explode(':', $timetable[$start_day][$i + 1][0]);
+                $office_hours_start = gmmktime(intval($start[0]) + $utc_offset, intval($start[1]), 0, $start_day_array[0], $start_day_array[1], $start_day_array[2]);
+                $office_hours_end = gmmktime(intval($end[0]) + $utc_offset, intval($end[1]), 0, $start_day_array[0], $start_day_array[1], $start_day_array[2]);
+                if ($range_end_gmt >= $office_hours_start && $range_start_gmt <= $office_hours_end && $range_start_gmt >= $office_hours_start && $range_end_gmt <= $office_hours_end) {
                     $status = true;
                 }
             }
@@ -1159,8 +1153,7 @@ function sb_office_hours()
     return true;
 }
 
-function sb_css($color_1 = false, $color_2 = false, $color_3 = false, $return = false)
-{
+function sb_css($color_1 = false, $color_2 = false, $color_3 = false, $return = false) {
     $css = '';
     $color_1 = $color_1 ? $color_1 : sb_get_setting('color-1');
     $color_2 = $color_2 ? $color_2 : sb_get_setting('color-2');
@@ -1212,8 +1205,7 @@ function sb_css($color_1 = false, $color_2 = false, $color_3 = false, $return = 
     return false;
 }
 
-function sb_system_requirements()
-{
+function sb_system_requirements() {
     $checks = [];
 
     // PHP version
@@ -1245,8 +1237,7 @@ function sb_system_requirements()
     return $checks;
 }
 
-function sb_select_html($type)
-{
+function sb_select_html($type) {
     $code = '<select><option value=""></option>';
     $is_countries = $type == 'countries';
     $items = sb_get_json_resource($is_countries ? 'json/countries.json' : 'languages/language-codes.json');
@@ -1256,8 +1247,7 @@ function sb_select_html($type)
     return $code . '</select>';
 }
 
-function sb_select_phone()
-{
+function sb_select_phone() {
     $single = sb_get_setting('phone-code');
     if ($single) {
         return $single;
@@ -1280,8 +1270,7 @@ function sb_select_phone()
     }
 }
 
-function sb_get_config_details($path)
-{
+function sb_get_config_details($path) {
     $details = [];
     $slugs = ['SB_URL', 'SB_DB_NAME', 'SB_DB_USER', 'SB_DB_PASSWORD', 'SB_DB_HOST', 'SB_DB_PORT'];
     $lines = preg_split("/\r\n|\n|\r/", file_get_contents($path));
@@ -1296,8 +1285,7 @@ function sb_get_config_details($path)
     return $details;
 }
 
-function sb_update_sw($url)
-{
+function sb_update_sw($url) {
     $path = SB_PATH . '/sw.js';
     if (!file_exists($path)) {
         copy(SB_PATH . '/resources/sw.js', $path);
@@ -1306,12 +1294,23 @@ function sb_update_sw($url)
     $code = '';
     $url = str_replace(['importScripts(', ');', '\'', '"'], '', $url);
     for ($i = 0; $i < count($lines); $i++) {
-        if (strpos($lines[$i], 'importScripts') !== false) {
+        if (str_contains($lines[$i], 'importScripts')) {
             $lines[$i] = 'importScripts(\'' . $url . '\');';
         }
         $code .= $lines[$i] . "\n";
     }
     return sb_file(SB_PATH . '/sw.js', $code);
+}
+
+function sb_add_saved_reply($name, $text) {
+    if (empty($name) || empty($text)) {
+        return false;
+    }
+    $settings = sb_get_all_settings();
+    $saved_replies = sb_isset($settings, 'saved-replies', []);
+    array_push($saved_replies[0], ['reply-name' => $name, 'reply-text' => $text]);
+    $settings['saved-replies'] = $saved_replies;
+    return sb_save_settings($settings);
 }
 
 /*
@@ -1335,48 +1334,7 @@ function sb_update_sw($url)
  *
  */
 
-// Deprecated
-function sb_temp_deprecated_articles_migration()
-{
-    $articles = sb_get_external_setting('articles');
-    $articles_translations = sb_db_get('SELECT name, value FROM sb_settings WHERE name LIKE "articles-translations-%"', false);
-    $now = date('Y-m-d H:i:s');
-    $ids = [];
-    if ($articles) {
-        for ($i = 0; $i < count($articles); $i++) {
-            $categories = sb_isset($articles[$i], 'categories');
-            $ids[$articles[$i]['id']] = sb_db_query('INSERT INTO sb_articles (title, content, editor_js, nav, link, category, parent_category, language, slug, update_time) VALUES ( "' . sb_db_escape(sb_sanatize_string($articles[$i]['title'])) . '", "' . str_replace(['\"', '"'], ['"', '\"'], sb_sanatize_string($articles[$i]['content'])) . '", "' . sb_db_escape(sb_sanatize_string(json_encode($articles[$i]['editor_js'], JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE))) . '", "", "' . sb_db_escape(sb_sanatize_string($articles[$i]['link'])) . '", "' . (empty($categories[0]) ? '' : sb_db_escape(sb_sanatize_string($categories[0]))) . '", "' . sb_db_escape(sb_sanatize_string($articles[$i]['parent_category'])) . '", "", "' . sb_db_escape(sb_sanatize_string(sb_string_slug($articles[$i]['title']))) . '", "' . $now . '")', true);
-        }
-        for ($j = 0; $j < count($articles_translations); $j++) {
-            $articles = json_decode($articles_translations[$j]['value'], true);
-            for ($i = 0; $i < count($articles); $i++) {
-                $categories = sb_isset($articles[$i], 'categories');
-                sb_db_query('INSERT INTO sb_articles (title, content, editor_js, nav, link, category, parent_category, language, parent_id, slug, update_time) VALUES ("' . sb_db_escape(sb_sanatize_string($articles[$i]['title'])) . '", "' . str_replace(['\"', '"'], ['"', '\"'], sb_sanatize_string($articles[$i]['content'])) . '", "' . sb_db_escape(sb_sanatize_string(json_encode($articles[$i]['editor_js'], JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE))) . '", "", "' . sb_db_escape(sb_sanatize_string($articles[$i]['link'])) . '", "' . (empty($categories[0]) ? '' : sb_db_escape(sb_sanatize_string($categories[0]))) . '", "' . sb_db_escape(sb_sanatize_string(sb_isset($articles[$i], 'parent_category', ''))) . '", "' . sb_db_escape(sb_sanatize_string(str_replace('articles-translations-', '', $articles_translations[$j]['name']))) . '", "' . $ids[$articles[$i]['id']] . '", "' . sb_db_escape(sb_sanatize_string(sb_string_slug($articles[$i]['title']))) . '", "' . $now . '")');
-            }
-        }
-        $parent_categories = array_column(sb_db_get('SELECT parent_category FROM sb_articles WHERE parent_category <> "" GROUP BY parent_category', false), 'parent_category');
-        $categories = sb_get_articles_categories();
-        for ($i = 0; $i < count($categories); $i++) {
-            for ($j = 0; $j < count($parent_categories); $j++) {
-                if (strtolower($categories[$i]['id']) == strtolower($parent_categories[$j])) {
-                    $categories[$i]['parent'] = true;
-                    break;
-                }
-            }
-            $category_new_id = sb_string_slug($categories[$i]['title']);
-            sb_db_query('UPDATE sb_articles SET category = "' . $category_new_id . '" WHERE category = "' . $categories[$i]['id'] . '"');
-            sb_db_query('UPDATE sb_articles SET parent_category = "' . $category_new_id . '" WHERE parent_category = "' . $categories[$i]['id'] . '"');
-            $categories[$i]['id'] = $category_new_id;
-        }
-        sb_save_articles_categories($categories);
-        sb_db_query('DELETE FROM sb_settings WHERE name = "articles"');
-        sb_db_query('DELETE FROM sb_settings WHERE name LIKE "articles-translations-%"');
-    }
-}
-// Deprecated
-
-function sb_save_article($article)
-{
+function sb_save_article($article) {
     if (is_string($article)) {
         $article = json_decode($article, true);
     }
@@ -1393,10 +1351,28 @@ function sb_save_article($article)
     $article_language = sb_db_escape(sb_sanatize_string(sb_isset($article, 'language', '')));
     $article_parent_id = sb_db_escape(sb_isset($article, 'parent_id', 'NULL'));
     $article_slug = sb_db_escape(sb_sanatize_string(sb_string_slug($article_title)));
+
+    // Nav creation
+    $headings = [];
+    foreach ($article_editor_js['blocks'] as $block) {
+        if ($block['type'] == 'header' && in_array($block['data']['level'], [2, 3])) {
+            array_push($headings, [$block['data']['text'], $block['data']['level']]);
+        }
+    }
+    $article_content = preg_replace_callback('/<(h[23])>(.*?)<\/\1>/i', function ($matches) {
+        $tag = $matches[1];
+        $text = strip_tags($matches[2]);
+        $id = sb_string_slug($text);
+        return '<' . $tag . ' id=\"' . $id . '\">' . $text . '</' . $tag . '>';
+    }, $article_content);
+
+    // Code parts
     preg_match_all('/<code>(.*?)<\/code>/s', $article_content, $matches);
     foreach ($matches[1] as $code) {
         $article_content = str_replace($code, htmlspecialchars($code), $article_content);
     }
+
+    // Save
     if ($article_editor_js) {
         $article_editor_js = sb_db_json_escape($article_editor_js);
     }
@@ -1415,16 +1391,15 @@ function sb_save_article($article)
         $article_title = '#' . $article_id;
     }
     if (!$article_id) {
-        $response = sb_db_query('INSERT INTO sb_articles (title, content, editor_js, nav, link, category, parent_category, language, parent_id, slug, update_time) VALUES ("' . $article_title . '", "' . $article_content . '", "' . $article_editor_js . '", "", "' . $article_link . '", "' . $article_category . '", "' . $article_parent_category . '", "' . $article_language . '", ' . $article_parent_id . ', "' . $article_slug . '", "' . date('Y-m-d H:i:s') . '")', true);
+        $response = sb_db_query('INSERT INTO sb_articles (title, content, editor_js, nav, link, category, parent_category, language, parent_id, slug, update_time) VALUES ("' . $article_title . '", "' . $article_content . '", "' . $article_editor_js . '", "' . sb_db_json_escape($headings) . '", "' . $article_link . '", "' . $article_category . '", "' . $article_parent_category . '", "' . $article_language . '", ' . $article_parent_id . ', "' . $article_slug . '", "' . date('Y-m-d H:i:s') . '")', true);
     } else {
         sb_db_query('UPDATE sb_articles SET category = "' . $article_category . '", parent_category = "' . $article_parent_category . '" WHERE parent_id = ' . $article_id);
-        $response = sb_db_query('UPDATE sb_articles SET title = "' . $article_title . '", content = "' . $article_content . '", editor_js = "' . $article_editor_js . '", link = "' . $article_link . '", category = "' . $article_category . '", parent_category = "' . $article_parent_category . '", language = "' . $article_language . '", parent_id = ' . $article_parent_id . ', slug = "' . $article_slug . '", update_time = "' . date('Y-m-d H:i:s') . '" WHERE id = ' . $article_id);
+        $response = sb_db_query('UPDATE sb_articles SET title = "' . $article_title . '", content = "' . $article_content . '", editor_js = "' . $article_editor_js . '", nav = "' . sb_db_json_escape($headings) . '", link = "' . $article_link . '", category = "' . $article_category . '", parent_category = "' . $article_parent_category . '", language = "' . $article_language . '", parent_id = ' . $article_parent_id . ', slug = "' . $article_slug . '", update_time = "' . date('Y-m-d H:i:s') . '" WHERE id = ' . $article_id);
     }
     return $response;
 }
 
-function sb_save_articles_categories($categories)
-{
+function sb_save_articles_categories($categories) {
     if (is_string($categories)) {
         $categories = json_decode($categories, true);
     }
@@ -1446,8 +1421,7 @@ function sb_save_articles_categories($categories)
     return $response;
 }
 
-function sb_get_articles($article_id = false, $count = false, $full = false, $categories = false, $language = false, $skip_language = false)
-{
+function sb_get_articles($article_id = false, $count = false, $full = false, $categories = false, $language = false, $skip_language = false) {
     $query_part = '';
     if (is_array($language)) {
         $language = $language[0];
@@ -1506,8 +1480,7 @@ function sb_get_articles($article_id = false, $count = false, $full = false, $ca
     return $articles;
 }
 
-function sb_get_articles_categories($category_type = false)
-{
+function sb_get_articles_categories($category_type = false) {
     $categories = sb_isset($GLOBALS, 'SB_ARTICLES_CATEGORIES');
     if (!$categories) {
         $categories = sb_get_external_setting('articles-categories', []);
@@ -1526,8 +1499,7 @@ function sb_get_articles_categories($category_type = false)
     return $categories;
 }
 
-function sb_get_article_category($category_id)
-{
+function sb_get_article_category($category_id) {
     $categories = sb_get_articles_categories();
     for ($i = 0; $i < count($categories); $i++) {
         if ($categories[$i]['id'] == $category_id) {
@@ -1537,8 +1509,7 @@ function sb_get_article_category($category_id)
     return false;
 }
 
-function sb_search_articles($search, $language = false)
-{
+function sb_search_articles($search, $language = false) {
     $search = sb_db_escape($search);
     if (empty($search)) {
         return [];
@@ -1558,8 +1529,7 @@ function sb_search_articles($search, $language = false)
     return $articles;
 }
 
-function sb_article_ratings($article_id, $rating = false)
-{
+function sb_article_ratings($article_id, $rating = false) {
     $article_id = sb_db_escape($article_id);
     $rating = $rating ? sb_db_escape($rating) : false;
     $now = gmdate('Y-m-d');
@@ -1576,12 +1546,7 @@ function sb_article_ratings($article_id, $rating = false)
     return $ratings;
 }
 
-function sb_init_articles_admin()
-{
-    $articles = sb_get_external_setting('articles'); // Deprecated
-    if ($articles) { // Deprecated
-        sb_temp_deprecated_articles_migration(); // Deprecated
-    } // Deprecated
+function sb_init_articles_admin() {
     $articles_all = sb_db_get('SELECT id, title, language, parent_id FROM sb_articles ORDER BY id', false);
     $articles = [];
     $articles_translations = [];
@@ -1603,8 +1568,7 @@ function sb_init_articles_admin()
     return [$articles, sb_get_articles_categories(), $articles_translations, sb_get_articles_page_url(), sb_is_articles_url_rewrite(false), $cloud_chat_id];
 }
 
-function sb_articles_excerpt($articles)
-{
+function sb_articles_excerpt($articles) {
     for ($i = 0; $i < count($articles); $i++) {
         $content = strip_tags(sb_isset($articles[$i], 'content', ''));
         $articles[$i]['editor_js'] = '';
@@ -1613,13 +1577,11 @@ function sb_articles_excerpt($articles)
     return $articles;
 }
 
-function sb_get_articles_page()
-{
+function sb_get_articles_page() {
     require_once(SB_PATH . '/include/articles.php');
 }
 
-function sb_get_article_url($article)
-{
+function sb_get_article_url($article) {
     if (is_numeric($article)) {
         $article = sb_db_get('SELECT slug, id FROM sb_articles WHERE id = ' . sb_db_escape($article, true));
     }
@@ -1632,13 +1594,11 @@ function sb_get_article_url($article)
     return $url_rewrite ? $articles_page_url_slash . sb_isset($article, 'slug', $article['id']) : $articles_page_url . '?article_id=' . $article['id'];
 }
 
-function sb_get_articles_page_url()
-{
+function sb_get_articles_page_url() {
     return trim(sb_get_setting('articles-page-url', sb_defined('ARTICLES_URL')));
 }
 
-function sb_is_articles_url_rewrite($check_referrer = true)
-{
+function sb_is_articles_url_rewrite($check_referrer = true) {
     return sb_get_setting('articles-url-rewrite') || (defined('ARTICLES_URL') && (!$check_referrer || empty($_SERVER['HTTP_REFERER']) || strpos(ARTICLES_URL, $_SERVER['HTTP_REFERER'])) && (!sb_get_setting('articles-page-url') || strpos(ARTICLES_URL, parse_url(sb_get_setting('articles-page-url'), PHP_URL_HOST))));
 }
 

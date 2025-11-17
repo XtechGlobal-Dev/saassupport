@@ -2,7 +2,7 @@
 /*
 * 
 * ===================================================================
-* CLOUD MAIN JS FILE 
+* CLOUD MAIN JS FILE
 * ===================================================================
 *
 * © 2017-2025 board.support. All rights reserved.
@@ -20,9 +20,6 @@
     let lightbox_profile;
     let URL = document.location.href;
     let URL_NO_PARS = URL;
-    let account;
-    let pusher;
-    let pusher_channel;
     let responsive = $(window).width() < 465;
     let razorpay = PAYMENT_PROVIDER == 'razorpay';
     let stripe = PAYMENT_PROVIDER == 'stripe';
@@ -88,7 +85,6 @@
 
         // Account
         if (box_account.length) {
-            let chart;
             let chart_cnt = box_account.find('#chart-usage');
             let tabs = ['installation', 'membership', 'invoices', 'profile'];
             let encrypted_code;
@@ -102,12 +98,11 @@
             }
 
             ajax('account-user-details', {}, (response) => {
-                account = response;
-                //box_account.find('#embed-code').val(`<!-- ${BRAND_NAME} -->\n<script id="chat-init" src="${CLOUD_URL}/account/js/init.js?id=${response.chat_id}"></script>`);
+                box_account.find('#embed-code').val(`<!-- ${BRAND_NAME} -->\n<script id="chat-init" src="${CLOUD_URL}/account/js/init.js?id=${response.chat_id}"></script>`);
                 box_account.stopLoading();
                 for (var i = 0; i < profile_keys.length; i++) {
                     if (profile_keys[i] in response) {
-                        box_account.find(`#${profile_keys[i]} input`).val(response[profile_keys[i]]);
+                        box_account.find('#' + profile_keys[i]).find('input, select').val(response[profile_keys[i]]);
                     }
                 }
                 for (var i = 0; i < 2; i++) {
@@ -207,7 +202,7 @@
                 if (loading(this)) return;
                 let details = {};
                 let error = false;
-                box_account.find('#tab-profile .sb-input input').each((e, element) => {
+                box_account.find('#tab-profile .sb-input').find('input, select').each((e, element) => {
                     let id = $(element).parent().attr('id');
                     let value = $.trim($(element).val());
                     if (!value) {
@@ -427,6 +422,13 @@
                 }, 300);
             }
 
+            if (SBF.getURL('auto_login')) {
+                let params = new URLSearchParams(window.location.search);
+                setLogin(params.get('auto_login'), params.get('sb'));
+                document.location = SBF.getURL('redirect') ? SBF.getURL('redirect') : CLOUD_URL;
+                return;
+            }
+
             $(box_registration).on('click', '.btn-register', function (e) {
                 if (loading(this)) return;
                 let details = {};
@@ -462,6 +464,8 @@
                     ajax('registration', { 'details': details }, (response) => {
                         if (response == 'duplicate-email') {
                             errors_area.html(sb_('This email is already in use. Please use another email.'));
+                        } else if (response.error) {
+                            alert(response.error);
                         } else {
                             setLogin(response[0], response[1]);
                             ajax('account-welcome');
@@ -487,7 +491,7 @@
                 errors_area.html('');
                 ajax('login', { 'email': email, 'password': password }, (response) => {
                     if (response === false) {
-                        errors_area.html(sb_('Invalid email or password.'));
+                        errors_area.html(sb_('Invalid email or password.') + (box_login.find('[data-app]').length ? ' ' + sb_('If you signed up with Google, use the Google login button.') : ''));
                     } else if (response === 'ip-ban') {
                         errors_area.html(sb_('Too many login attempts. Please retry again in a few hours.'));
                     } else {

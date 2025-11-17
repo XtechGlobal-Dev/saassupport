@@ -84,11 +84,9 @@ function sb_profile_box()
             </div>
         </div>
     </div>
-    <?php
-} ?>
-<?php function sb_profile_edit_box()
-{
-    ?>
+<?php } ?>
+<?php
+function sb_profile_edit_box() { ?>
     <div class="sb-profile-edit-box sb-lightbox">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -110,12 +108,12 @@ function sb_profile_box()
         <div class="sb-main sb-scroll-area">
             <div class="sb-details">
                 <div class="sb-title">
-                    <?php sb_e("Edit details"); ?>
+                    <?php sb_e('Edit details') ?>
                 </div>
                 <div class="sb-edit-box">
                     <div id="profile_image" data-type="image" class="sb-input sb-input-image sb-profile-image">
                         <span>
-                            <?php sb_e("Profile image"); ?>
+                            <?php sb_e('Profile image') ?>
                         </span>
                         <div class="image">
                             <div class="sb-icon-close"></div>
@@ -147,14 +145,14 @@ function sb_profile_box()
                         </span>
                         <input type="text" required />
                     </div>
-                    <div id="password" data-type="text" class="sb-input">
+                    <div id="password" data-type="text" class="sb-input hd-viewPassword">
                         <span class="required-label">
                             <?php sb_e("Password"); ?>
                         </span>
                         <input type="password" id="edit-profile-password" style="padding-right: 35px;" />
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="toggleEditProfilePassword"
                             width="24" height="24" color="#000000" fill="none"
-                            style="margin-left: -26px;margin-right: 10px; cursor: pointer;">
+                            style="cursor: pointer;">
                             <path
                                 d="M21.544 11.045C21.848 11.4713 22 11.6845 22 12C22 12.3155 21.848 12.5287 21.544 12.955C20.1779 14.8706 16.6892 19 12 19C7.31078 19 3.8221 14.8706 2.45604 12.955C2.15201 12.5287 2 12.3155 2 12C2 11.6845 2.15201 11.4713 2.45604 11.045C3.8221 9.12944 7.31078 5 12 5C16.6892 5 20.1779 9.12944 21.544 11.045Z"
                                 stroke="#141B34" stroke-width="1.5" />
@@ -172,7 +170,7 @@ function sb_profile_box()
                 </div>
                 <a class="sb-delete sb-btn-text sb-btn-red">
                     <i class="sb-icon-delete"></i>
-                    <?php sb_e("Delete user"); ?>
+                    <?php sb_e('Delete user') ?>
                 </a>
             </div>
             <div class="sb-additional-details">
@@ -346,13 +344,13 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                             <span class="mb-2"><?php sb_e(
                                 "Assigned To"
                             ); ?></span>
-                            <div class="">
+                            <div class="w-100 mw-100">
                                 <select id="select-agent" style="width:100%;"></select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="sb-additional-details">
+                <div class="sb-additional-details w-100 mw-100 flex-fill">
                     <div class="sb-edit-box">
                         <!--div id="service_id" data-type="select" class="sb-input">
                             <span><?php sb_e("Service"); ?></span>
@@ -373,7 +371,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
                         $tagsHtml = "";
                         $count = count($tags);
                         if ($count > 0) { ?>
-                            <div id="tags-div" data-type="select" class="sb-input">
+                            <div id="tags-div" data-type="select" class="sb-input w-100 mw-100">
                                 <span><?php sb_e("Tags"); ?></span>
                                 <select id="ticket-tags" name="tags[]" multiple>
                                     <?php
@@ -916,8 +914,11 @@ id="flexSwitchCheckDefault" style="width: 27px;">
 
 
                 refreshTagDots();
-                tagsElement.addEventListener('change', refreshTagDots);
-                // Listen for any DOM changes in the choices list (item removed/added)
+                if (tagsElement) {
+                    tagsElement.addEventListener('change', refreshTagDots);
+                    // Listen for any DOM changes in the choices list (item removed/added)
+                }
+                
                 const choicesList = document.querySelector('.choices__list--dropdown');
                 if (choicesList) {
                     const observer = new MutationObserver(() => {
@@ -943,8 +944,10 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             // 1. Run once after initial render
             initTooltips();
 
-            // 2. Run again every time choices changes (e.g., item added/removed)
-            tagsElement.addEventListener('change', initTooltips);
+            if(tagsElement){
+                // 2. Run again every time choices changes (e.g., item added/removed)
+                tagsElement.addEventListener('change', initTooltips);
+            }
         });
 
 
@@ -1804,19 +1807,19 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         <div class="sb-main">
             <div id="email" class="sb-input">
                 <span>
-                    <?php sb_e("Email"); ?>
+                    <?php sb_e('Email') ?>
                 </span>
                 <input type="text" />
             </div>
             <div id="password" class="sb-input">
                 <span>
-                    <?php sb_e("Password"); ?>
+                    <?php sb_e('Password') ?>
                 </span>
                 <input type="password" />
             </div>
             <div class="sb-bottom">
                 <div class="sb-btn sb-submit-login">
-                    <?php sb_e("Login"); ?>
+                    <?php sb_e('Login') ?>
                 </div>
             </div>
         </div>
@@ -1850,11 +1853,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             }
         }(jQuery));
     </script>
-    <?php
-} ?>
-<?php function sb_dialog()
-{
-    ?>
+<?php } ?>
+<?php
+function sb_dialog() { ?>
     <div class="sb-dialog-box sb-lightbox">
         <div class="sb-title"></div>
         <p></p>
@@ -1909,7 +1910,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
             <div>
-                <?php sb_e("Update center"); ?>
+                <?php sb_e('Update center') ?>
             </div>
             <div>
                 <a class="sb-close sb-btn-icon sb-btn-red">
@@ -1930,11 +1931,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             </div>
         </div>
     </div>
-    <?php
-} ?>
-<?php function sb_app_box()
-{
-    ?>
+<?php } ?>
+<?php
+function sb_app_box() { ?>
     <div class="sb-lightbox sb-app-box" data-app="">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -1977,11 +1976,9 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             </div>
         </div>
     </div>
-    <?php
-} ?>
-<?php function sb_direct_message_box()
-{
-    ?>
+<?php } ?>
+<?php
+function sb_direct_message_box() { ?>
     <div class="sb-lightbox sb-direct-message-box">
         <div class="sb-info"></div>
         <div class="sb-top-bar">
@@ -2274,8 +2271,7 @@ id="flexSwitchCheckDefault" style="width: 27px;">
             </div>
         </form>
     </div>
-    <?php
-} ?>
+<?php } ?>
 <?php
 /*
  * ----------------------------------------------------------
@@ -2829,7 +2825,7 @@ function sb_component_admin()
                     '</span>
                                         </div>
                                     </a>
-                                    <ul class="sb-menu">
+                                    <ul class="sb-menu" style="border-radius: 10px; ">
                                             <li class="menu_head">
                                                 <img class="avatar_img" src="' . $user_image . '" alt="' . $user_name . '" />
                                                 <span class="user-initials avatar_initials" style="display:none;">
@@ -3497,8 +3493,8 @@ function sb_component_admin()
                                                                             <td class="sb-td-subject">Bug fix: Login issue</td>
                                                                             <td class="sb-td-tags">Kathryn Murphy</td>
                                                                             <td><span>05/15/25</span> <span>10:01 AM</span></td>
-                                                                            <td class="sb-td-status"><span class="span-border"
-                                                                                    style="color:#FF0000;border:1px solid #FF0000;"><?php sb_e("Open"); ?></span>
+                                                                            <td class="sb-td-status">
+                                                                                <span class="span-border" style="color:#FF0000;border:1px solid #FF0000;"><?php sb_e("Open"); ?></span>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -3992,7 +3988,7 @@ function sb_component_admin()
                                 }
                                 ?>
                                 <h3 class="sb-hide">
-                                    <?php sb_e("User conversations"); ?>
+                                    <?php sb_e('User conversations') ?>
                                 </h3>
                                 <ul class="sb-user-conversations"></ul>
                             </div>
@@ -4012,11 +4008,11 @@ function sb_component_admin()
                                     <?php sb_e("New"); ?>             <?php sb_e("Customer"); ?>
                                 </a>
                             </div>
-                            <div>
+                            <div class="align-items-md-start align-items-center">
                                 <!-- <h2>
                                     <?php sb_e("Users list"); ?>
                                 </h2> -->
-                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
+                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new me-2">
                                     <div>
                                         <?php sb_e("All"); ?>
                                         <span data-count="0"></span>
@@ -4134,20 +4130,20 @@ function sb_component_admin()
                                             <input type="checkbox" />
                                         </th>
                                         <th data-field="first_name">
-                                            <?php sb_e("Full name"); ?>
+                                            <?php sb_e('Full name') ?>
                                         </th>
-                                        <?php sb_users_table_extra_fields(); ?>
+                                        <?php sb_users_table_extra_fields() ?>
                                         <th data-field="email">
-                                            <?php sb_e("Email"); ?>
+                                            <?php sb_e('Email') ?>
                                         </th>
                                         <th data-field="user_type">
-                                            <?php sb_e("Type"); ?>
+                                            <?php sb_e('Type') ?>
                                         </th>
                                         <th data-field="last_activity">
-                                            <?php sb_e("Last activity"); ?>
+                                            <?php sb_e('Last activity') ?>
                                         </th>
                                         <th data-field="creation_time" class="sb-active">
-                                            <?php sb_e("Registration date/time"); ?>
+                                            <?php sb_e('Registration date') ?>
                                         </th>
                                     </tr>
                                 </thead>
@@ -5905,11 +5901,15 @@ function sb_component_admin()
                                         //echo $disable_translations ? 'Translations' : sb_('Translations')
                                         ?>
                                     </li> -->
+
+                                    <div style="padding: 12px 16px;">
+                                        <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation"
+                                            data-tooltip="Account">
+                                            Account
+                                        </a>
+                                    </div>
                                 </ul>
-                                <a id="sb-accout" href="<?php echo dirname(SB_URL); ?>/account/?tab=installation"
-                                    data-tooltip="Account">
-                                    Account
-                                </a>
+                              
                             </div>
                             <div class="sb-content sb-scroll-area pt-4">
                                 <div class="sb-active">
@@ -7949,18 +7949,19 @@ function sb_component_admin()
             }
             ?>
             <div id="sb-generic-panel"></div>
-            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string($_SERVER["PHP_SELF"]); ?>"
-                method="post" enctype="multipart/form-data">
+            <form class="sb-upload-form-admin sb-upload-form" action="<?php echo sb_sanatize_string($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
                 <input type="file" name="files[]" class="sb-upload-files" multiple />
             </form>
             <div class="sb-info-card"></div>
-        <?php } else {
+            <?php
+        } else {
             if ($is_cloud) {
                 sb_cloud_reset_login();
             } else {
                 sb_login_box();
             }
-        } ?>
+        }
+        ?>
         <div class="sb-lightbox sb-lightbox-media">
             <div></div>
             <i class="sb-icon-close"></i>
@@ -7971,15 +7972,11 @@ function sb_component_admin()
         <input type="password" name="hidden" style="display:none" autocomplete="new-password" />
     </div>
     <?php
-    if (!empty(sb_get_setting("custom-js")) && !$is_cloud) {
-        echo '<script id="sb-custom-js" src="' .
-            sb_get_setting("custom-js") .
-            '"></script>';
+    if (!empty(sb_get_setting('custom-js'))) {
+        echo '<script id="sb-custom-js" src="' . sb_get_setting('custom-js') . '"></script>';
     }
-    if (!empty(sb_get_setting("custom-css")) && !$is_cloud) {
-        echo '<link id="sb-custom-css" rel="stylesheet" type="text/css" href="' .
-            sb_get_setting("custom-css") .
-            '" media="all">';
+    if (!empty(sb_get_setting('custom-css'))) {
+        echo '<link id="sb-custom-css" rel="stylesheet" type="text/css" href="' . sb_get_setting('custom-css') . '" media="all">';
     }
     if ($is_cloud) {
         sb_cloud_css_js();

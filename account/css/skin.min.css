@@ -1,4 +1,4 @@
- /*
+/*
 
 ===================================================================
 CLOUD MAIN CSS FILE
@@ -29,6 +29,45 @@ body {
 
 body.on-load * {
   transition: none !important; }
+
+.sb-apps-login {
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 30px; }
+  .sb-apps-login a {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .sb-apps-login a img {
+      width: 15px;
+      margin: 0 10px 0 0; }
+    .sb-apps-login a:hover {
+      background-color: #f5f7fa;
+      color: #028be5; }
+  .sb-apps-login:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: #d4d4d4; }
+  .sb-apps-login:after {
+    content: attr(data-text);
+    position: absolute;
+    left: 50%;
+    width: 50px;
+    margin-left: -25px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 50px;
+    bottom: -24px;
+    letter-spacing: 0.3px;
+    color: #566069;
+    background-color: #fff;
+    text-transform: uppercase;
+    text-align: center; }
 
 .disclaimer {
   text-align: center;
