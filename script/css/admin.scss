@@ -392,6 +392,11 @@ td.sb-offline:after {
       line-height: 30px;
       background: #fff;
 
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
       span {
         font-weight: 600;
         font-size: 12.8px;
@@ -418,7 +423,6 @@ td.sb-offline:after {
       background: #1653fd;
       color: #fff !important;
       border: 1px solid #1653fd !important;
-
       span {
         color: #fff !important;
       }
@@ -2731,12 +2735,12 @@ td.sb-td-contact {
       }
 
       > .sb-top-bar {
-        height: 40px;
         margin: 0;
         padding: 15px;
         align-items: center;
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
         border-bottom: 1px solid $border-color;
 
         h2 {
@@ -3684,7 +3688,7 @@ x .sb-search-dropdown {
             left: 30px;
           }
           div {
-            top: 11px; 
+            top: 11px;
           }
         }
       }
@@ -6776,6 +6780,7 @@ span.initials.avatar_name {
     li {
       &:last-child {
         margin-left: 10px !important;
+        margin-right: 0 !important;
         background: #0069f0;
         color: #fff;
         border-radius: 40px;
@@ -12221,15 +12226,19 @@ i {
   .sb-menu-wide_new {
     ul {
       max-width: 372px;
-      overflow-x: scroll;
+      overflow-x: auto;
+      padding-bottom: 3px;
 
       &::-webkit-scrollbar {
-        background: none;
+        background: #d5d5d5;
         height: 6px;
+        border-radius: 10px;
+        border: 1px solid rgb(179, 179, 179);
       }
 
       &::-webkit-scrollbar-thumb {
-        background: #d5d5d5;
+        background: #acacac;
+        border-radius: 10px;
       }
 
       li {
@@ -13021,6 +13030,10 @@ main {
 
   .sb-area-users .sb-menu-wide ul li {
     margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
   }
 
   .sb-setting {
@@ -13793,8 +13806,8 @@ main {
 
   .sb-menu-wide_new {
     ul {
-      max-width: 242px;
-      overflow-x: scroll;
+      max-width: 250px;
+      overflow-x: auto;
       padding-right: 31px;
 
       li {

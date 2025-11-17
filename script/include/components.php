@@ -4008,11 +4008,11 @@ function sb_component_admin()
                                     <?php sb_e("New"); ?>             <?php sb_e("Customer"); ?>
                                 </a>
                             </div>
-                            <div>
+                            <div class="align-items-md-start align-items-center">
                                 <!-- <h2>
                                     <?php sb_e("Users list"); ?>
                                 </h2> -->
-                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new">
+                                <div class="sb-menu-wide sb-menu-users sb-menu-wide_new me-2">
                                     <div>
                                         <?php sb_e("All"); ?>
                                         <span data-count="0"></span>

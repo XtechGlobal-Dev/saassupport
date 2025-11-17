@@ -4434,6 +4434,11 @@ td.sb-offline:after {
   font-size: 12.8px;
   line-height: 30px;
   background: #fff;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
 }
 .sb-menu-wide_new ul li span {
   font-weight: 600;
@@ -6339,12 +6344,12 @@ td.sb-td-contact p {
   animation: sb-fade-animation 0.4s;
 }
 .sb-admin > main > div > .sb-top-bar {
-  height: 40px;
   margin: 0;
   padding: 15px;
   align-items: center;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   border-bottom: 1px solid rgb(212, 212, 212);
 }
 .sb-admin > main > div > .sb-top-bar h2 {
@@ -9737,6 +9742,7 @@ span.initials.avatar_name {
 }
 .sb-menu-wide.sb-menu-users.sb-menu-wide_new ul li:last-child {
   margin-left: 10px !important;
+  margin-right: 0 !important;
   background: #0069f0;
   color: #fff;
   border-radius: 40px;
@@ -14314,14 +14320,18 @@ i.fa-solid.fa-x.delete-attachment {
 @media (max-width: 1540px) {
   .sb-menu-wide_new ul {
     max-width: 372px;
-    overflow-x: scroll;
+    overflow-x: auto;
+    padding-bottom: 3px;
   }
   .sb-menu-wide_new ul::-webkit-scrollbar {
-    background: none;
+    background: #d5d5d5;
     height: 6px;
+    border-radius: 10px;
+    border: 1px solid rgb(179, 179, 179);
   }
   .sb-menu-wide_new ul::-webkit-scrollbar-thumb {
-    background: #d5d5d5;
+    background: #acacac;
+    border-radius: 10px;
   }
   .sb-menu-wide_new ul li {
     min-width: fit-content;
@@ -14945,6 +14955,10 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   }
   .sb-area-users .sb-menu-wide ul li {
     margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
   }
   .sb-setting .repeater-item > div label {
     margin: 0 0 15px 0;
@@ -15438,8 +15452,8 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     left: -14px;
   }
   .sb-menu-wide_new ul {
-    max-width: 242px;
-    overflow-x: scroll;
+    max-width: 250px;
+    overflow-x: auto;
     padding-right: 31px;
   }
   .sb-menu-wide_new ul li {

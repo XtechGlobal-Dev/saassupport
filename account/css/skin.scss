@@ -55,6 +55,12 @@ GLOBAL
     }
 }
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+}
+
 body {
     font-family: "Support Board Font", "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
     min-height: 0;
