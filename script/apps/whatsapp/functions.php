@@ -1016,9 +1016,13 @@ function sb_whatsapp_send_template_box() { ?>
                     let checkedCount = $(this).parent().parent().find('.user-checkbox:checked').length;
 
                     $(this).parent().parent().find('.user-checkbox').each(function () {
-                        if (!$(this).prop('checked') && checkedCount < maxSelection) {
-                            $(this).prop('checked', true);
-                            checkedCount++;
+                        if (!$(this).closest('.form-check').is(':hidden'))
+                        {
+                            console.log('checked');
+                            if (!$(this).prop('checked') && checkedCount < maxSelection) {
+                                $(this).prop('checked', true);
+                                checkedCount++;
+                            }
                         }
                     });
 
