@@ -2502,6 +2502,13 @@ function cloud_cron($backup = true) {
         if (in_array(date('d'), [1, 29])) {
             $now = $now_time + 86400;
             $user_memberships = db_get('SELECT id, membership_expiration, email, first_name, last_name FROM users WHERE membership <> "free" AND membership <> "0"', false);
+            
+            $log  = "Membership_expiration:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
+                " cloud_suspended_notifications_counter: ".cloud_suspended_notifications_counter($user_id).PHP_EOL.
+                "-------------------------".PHP_EOL;
+            //Save string to log, use FILE_APPEND to append.
+            file_put_contents('../cron_log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
+            
             for ($i = 0; $i < count($user_memberships); $i++) {
                 try {
                     if ($now > cloud_gmt_time($user_memberships[$i]['membership_expiration'])) {
@@ -2514,6 +2521,12 @@ function cloud_cron($backup = true) {
                             cloud_suspended_notifications_counter($user_id, true);
                         } else {
                             db_query('UPDATE users SET membership = "0", membership_expiration = "" WHERE id = ' . $user_id);
+
+                                $log  = "Membership_expiration:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
+                                    " cloud_suspended_notifications_counter: ".cloud_suspended_notifications_counter($user_id).PHP_EOL.
+                                    "-------------------------".PHP_EOL;
+                                //Save string to log, use FILE_APPEND to append.
+                                file_put_contents('../cron_log_2_'.date("j.n.Y").'.log', $log, FILE_APPEND);
                         }
                     }
                 } catch (Exception $e) {
