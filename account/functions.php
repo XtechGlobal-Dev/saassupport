@@ -2456,6 +2456,12 @@ function verify($email = false, $phone = false, $code_pairs = false) {
 }
 
 function cloud_cron($backup = true) {
+
+    $log  = "Cron Run at ".date('d-m-Y H:i:s').PHP_EOL;
+            //Save string to log, use FILE_APPEND to append.
+            file_put_contents('../cron_log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
+
+
     ignore_user_abort(true);
     set_time_limit(3540);
     $now_time = sb_gmt_now(0, true);
