@@ -2455,7 +2455,7 @@ function verify($email = false, $phone = false, $code_pairs = false) {
     return sb_encryption(json_encode([$code_prefix . $code, $email ? $email : $phone]));
 }
 
-function cloud_cron($backup = true) {
+function cloud_cron($backup = true) { 
 
     $log  = "Cron Run at ".date('d-m-Y H:i:s').PHP_EOL;
             //Save string to log, use FILE_APPEND to append.
