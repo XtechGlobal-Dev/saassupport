@@ -2504,7 +2504,7 @@ function cloud_cron($backup = true) {
             $user_memberships = db_get('SELECT id, membership_expiration, email, first_name, last_name FROM users WHERE membership <> "free" AND membership <> "0"', false);
             
             $log  = "Membership_expiration:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
-                " cloud_suspended_notifications_counter: ".cloud_suspended_notifications_counter($user_id).PHP_EOL.
+                " cloud_suspended_notifications_counter: ".
                 "-------------------------".PHP_EOL;
             //Save string to log, use FILE_APPEND to append.
             file_put_contents('../cron_log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
