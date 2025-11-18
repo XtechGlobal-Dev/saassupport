@@ -2746,16 +2746,16 @@ function update_ticket_priority($ticket_id = null, $priority = null)
     $result = sb_db_query($query);
 
     ///////////// Send email notification ////////////////////////////////
-    $user = sb_db_get("SELECT * FROM sb_users u inner join sb_tickets t on t.contact_id = u.id WHERE t.id = $ticket_id");
-    $user_id = $user['id'];
+    // $user = sb_db_get("SELECT * FROM sb_users u inner join sb_tickets t on t.contact_id = u.id WHERE t.id = $ticket_id");
+    // $user_id = $user['id'];
 		
-	 $conversation_source = sb_isset($conversation, 'source');
-    if (!empty($user['email']) && defined('SB_TICKETS')) {
-        $channel = sb_get_setting('tickets-email-notification');
-        if (($channel && ($channel == 'all' || (!$conversation_source && $channel == 'c') || $channel == $conversation_source || ($channel == 'em-tk' && in_array($conversation_source, ['tk', 'em'])))) && sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages WHERE conversation_id = "' . $conversation_id . '" LIMIT 1')['count'] == 1) {
-            sb_tickets_email($user, $message, $attachments, $conversation_id);
-        }
-    }
+	//  $conversation_source = sb_isset($conversation, 'source');
+    // if (!empty($user['email']) && defined('SB_TICKETS')) {
+    //     $channel = sb_get_setting('tickets-email-notification');
+    //     if (($channel && ($channel == 'all' || (!$conversation_source && $channel == 'c') || $channel == $conversation_source || ($channel == 'em-tk' && in_array($conversation_source, ['tk', 'em'])))) && sb_db_get('SELECT COUNT(*) AS `count` FROM sb_messages WHERE conversation_id = "' . $conversation_id . '" LIMIT 1')['count'] == 1) {
+    //         sb_tickets_email($user, $message, $attachments, $conversation_id);
+    //     }
+    // }
     ///////////// Send email notification ////////////////////////////////
 
     if ($result) {
