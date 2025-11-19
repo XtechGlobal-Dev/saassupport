@@ -6393,25 +6393,25 @@ td.sb-td-contact p {
   height: calc(100vh - 148px);
 }
 
-x .sb-search-dropdown {
+.sb-search-dropdown {
   min-width: 391px;
   position: relative;
   text-align: right;
 }
-x .sb-search-dropdown .sb-search-btn {
+.sb-search-dropdown .sb-search-btn {
   margin-left: auto;
 }
-x .sb-search-dropdown .sb-search-btn input {
+.sb-search-dropdown .sb-search-btn input {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   box-shadow: none;
   border: 1px solid #d5d5d5;
 }
-x .sb-search-dropdown .sb-search-btn input:focus {
+.sb-search-dropdown .sb-search-btn input:focus {
   box-shadow: none !important;
   border-color: #d5d5d5 !important;
 }
-x .sb-search-dropdown .sb-search-dropdown-items {
+.sb-search-dropdown .sb-search-dropdown-items {
   position: absolute;
   right: 30px;
   left: -1px;
@@ -6429,7 +6429,7 @@ x .sb-search-dropdown .sb-search-dropdown-items {
   display: none;
   z-index: 4;
 }
-x .sb-search-dropdown .sb-search-dropdown-items div {
+.sb-search-dropdown .sb-search-dropdown-items div {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -6439,14 +6439,14 @@ x .sb-search-dropdown .sb-search-dropdown-items div {
   letter-spacing: 0.3px;
   transition: all 0.4s;
 }
-x .sb-search-dropdown .sb-search-dropdown-items div:hover {
+.sb-search-dropdown .sb-search-dropdown-items div:hover {
   color: #155CFD;
 }
-x .sb-search-dropdown .sb-search-dropdown-items:empty {
+.sb-search-dropdown .sb-search-dropdown-items:empty {
   padding: 2px;
   margin-top: -2px;
 }
-x .sb-search-dropdown .sb-active + .sb-search-dropdown-items {
+.sb-search-dropdown .sb-active + .sb-search-dropdown-items {
   display: block;
   box-shadow: none;
   border-color: #d5d5d5;
