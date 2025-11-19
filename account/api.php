@@ -11,14 +11,23 @@
 
 define('SB_CLOUD_API', true);
 
-if (!isset($_GET['action'])) {
-    die();
+if (php_sapi_name() === 'cli') {
+    // From CLI
+    $action = $argv[1] ?? null;
+} else {
+    // From browser
+    $action = $_GET['action'] ?? null;
+}
+
+
+if (!$action) {
+    die("No action provided");
 }
 require_once('functions.php');
-if (in_array($_GET['action'], ['create-account', 'update-account', 'delete-account', 'update-account-membership', 'magic-link']) && sb_isset($_GET, 'key') !== SB_CLOUD_KEY) {
-    die(json_encode(sb_error('security-error', $_GET['action'], 'invalid-or-missing-cloud-key')));
+if (in_array($action, ['create-account', 'update-account', 'delete-account', 'update-account-membership', 'magic-link']) && sb_isset($_GET, 'key') !== SB_CLOUD_KEY) {
+    die(json_encode(sb_error('security-error', $action, 'invalid-or-missing-cloud-key')));
 }
-switch ($_GET['action']) {
+switch ($action) {
     case 'magic-link':
         die(sb_json_response(account_magic_link($_GET['email'])));
     case 'create-account':
