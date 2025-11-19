@@ -7455,7 +7455,7 @@
         const setChatbotHeight = () =>
         {
             const chatWindowHeight = parseInt($('.sb-scroll-area  > .sb-header').outerHeight(),10);
-            $('.wave-bg').css('margin-top',chatWindowHeight - 23 + 'px !important')
+            $('.wave-bg').css('margin-top',chatWindowHeight - 23 + 'px')
         }
 
         $('.sb-scroll-area').on('click','.sb-header .sb-icon-close, .sb-user-conversations li,.sb-btn-new-conversation',function()
