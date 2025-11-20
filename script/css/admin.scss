@@ -476,9 +476,9 @@ td.sb-offline:after {
         display: none;
       }
 
-      #tab-dialogflow {
-        /*display: none;*/
-      }
+      // #tab-dialogflow {
+      //   // /*display: none;*/
+      // }
     }
   }
 
@@ -1854,7 +1854,7 @@ textarea {
 .sb-save-articles.sb-btn,
 .sb-main main .sb-btn {
   background: #0069f0;
-  min-width: 88px;
+  // min-width: 88px;
 }
 
 .sb-popup.sb-replies .sb-replies-list ul {
@@ -5052,11 +5052,11 @@ body {
   }
 }
 
-.sb-area-ticket-detail {
-  .tc_bg {
-    max-height: calc(100vh - 117px) !important;
-  }
-}
+// .sb-area-ticket-detail {
+//   .tc_bg {
+//     max-height: calc(100vh - 117px) !important;
+//   }
+// }
 
 span.badge {
   background-color: #fce4ec6b !important;
@@ -6262,7 +6262,7 @@ span.initials.avatar_name {
         font-size: 20px;
         line-height: 45px;
         white-space: nowrap;
-        padding-left: 35px;
+        padding-left: 50px;
         max-width: 350px;
         overflow: hidden;
         white-space: nowrap;
@@ -6735,7 +6735,6 @@ span.initials.avatar_name {
 #open-ai-prompt {
   display: flex;
   align-items: center;
-
   > label {
     margin: 0 15px 5px 0;
     height: fit-content;
@@ -6791,13 +6790,13 @@ span.initials.avatar_name {
   }
 }
 
-@media (max-width: 1490px) {
-  .sb-type-multi-input > .input > div:not(.multi-input-textarea),
-  .sb-setting .sb-language-switcher-cnt,
-  .sb-select-checkbox > div {
-    display: block;
-  }
-}
+// @media (max-width: 1490px) {
+//   .sb-type-multi-input > .input > div:not(.multi-input-textarea),
+//   .sb-setting .sb-language-switcher-cnt,
+//   .sb-select-checkbox > div {
+//     display: block;
+//   }
+// }
 
 .sb-type-select-checkbox > .input,
 .multi-input-select-checkbox {
@@ -7024,6 +7023,7 @@ span.initials.avatar_name {
     outline: none;
     box-shadow: none;
     -webkit-appearance: none;
+    appearance: none;
     position: relative !important;
 
     &:checked:before {
@@ -7055,7 +7055,7 @@ span.initials.avatar_name {
     display: block;
     min-width: 160px;
     letter-spacing: 0.3px;
-    width: 46px;
+    // width: 46px;
     height: 23px;
 
     .slider {
@@ -7066,7 +7066,7 @@ span.initials.avatar_name {
     }
 
     &:empty {
-      display: none !important; 
+      display: none !important;
     }
 
     &.custom-switch {
@@ -7693,8 +7693,15 @@ ul.status-list.dropdown-menu {
 }
 
 @media (max-width: 575.98px) {
-  .sb-languages-box .sb-main { 
-      grid-template-columns: repeat(1, 1fr) !important; /* 1 columns by default */ 
+  .sb-languages-box .sb-main {
+    grid-template-columns: repeat(1, 1fr) !important; /* 1 columns by default */
+  }
+  .sb-type-multi-input > .input > div:not(.multi-input-textarea),
+  .sb-setting .sb-language-switcher-cnt,
+  .sb-select-checkbox > div,
+  #open-ai-prompt {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 .sb-timetable {
@@ -12160,6 +12167,7 @@ li.filter-tags {
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   overflow: hidden;
 }
 
@@ -13046,11 +13054,11 @@ main {
       margin: 0 0 15px 0;
     }
 
-    .repeater-item > div,
-    .repeater-item > div,
-    .input > div:not([data-type="textarea"]):not(.sb-repeater-add) {
-      display: block;
-    }
+    // .repeater-item > div,
+    // .repeater-item > div,
+    // .input > div:not([data-type="textarea"]):not(.sb-repeater-add) {
+    //   display: block;
+    // }
 
     .input > div:not([data-type="textarea"]):not(.sb-repeater-add) > label {
       margin: 0 30px 10px 0;
@@ -14132,9 +14140,9 @@ main {
     }
   }
 
-  .sb-setting > .input {
-    width: fit-content;
-  }
+  // .sb-setting > .input {
+  //   width: fit-content;
+  // }
 
   .sb-setting.sb-type-repeater > .input {
     width: 100%;
@@ -14855,9 +14863,9 @@ main {
     }
   }
 
-  .users-tab {
-    max-height: 52vh;
-  }
+  // .users-tab {
+  //   max-height: 52vh;
+  // }
 
   .sb-setting {
     .repeater-item {
@@ -15105,7 +15113,6 @@ select:focus {
 input[type="color"] {
   background-color: #00f;
 }
-// Ram Saini's CSS Style end >>
 
 .sb-profile-edit-box.sb-user-new {
   .sb-title,
@@ -15168,3 +15175,9 @@ input[type="color"] {
   height: 10px;
   width: 10px;
 }
+@media (max-width: 767.98px) {
+  .sb-lightbox.sb-dialog-box {
+    width: calc(100% - 50px) !important;
+  }
+}
+// Ram Saini's CSS Style end >>
