@@ -4496,9 +4496,6 @@ td.sb-offline:after {
 .settings_new .sb-scroll-area .setting_sidebar #tab-apps {
   display: none;
 }
-.settings_new .sb-scroll-area .setting_sidebar #tab-dialogflow {
-  /*display: none;*/
-}
 .settings_new .sb-content {
   height: calc(100vh - 138px);
 }
@@ -5634,7 +5631,6 @@ textarea {
 .sb-save-articles.sb-btn,
 .sb-main main .sb-btn {
   background: #0069f0;
-  min-width: 88px;
 }
 
 .sb-popup.sb-replies .sb-replies-list ul li {
@@ -8379,10 +8375,6 @@ body .daterangepicker td.active:hover {
   transition-delay: 0.2s;
 }
 
-.sb-area-ticket-detail .tc_bg {
-  max-height: calc(100vh - 117px) !important;
-}
-
 span.badge {
   background-color: rgba(252, 228, 236, 0.4196078431) !important;
   color: #000 !important;
@@ -9328,7 +9320,7 @@ span.initials.avatar_name {
   font-size: 20px;
   line-height: 45px;
   white-space: nowrap;
-  padding-left: 35px;
+  padding-left: 50px;
   max-width: 350px;
   overflow: hidden;
   white-space: nowrap;
@@ -9750,13 +9742,6 @@ span.initials.avatar_name {
   padding-inline: 14px;
 }
 
-@media (max-width: 1490px) {
-  .sb-type-multi-input > .input > div:not(.multi-input-textarea),
-  .sb-setting .sb-language-switcher-cnt,
-  .sb-select-checkbox > div {
-    display: block;
-  }
-}
 .sb-type-select-checkbox > .input,
 .multi-input-select-checkbox {
   position: relative;
@@ -9951,6 +9936,7 @@ span.initials.avatar_name {
   outline: none;
   box-shadow: none;
   -webkit-appearance: none;
+  appearance: none;
   position: relative !important;
 }
 .sb-setting input[type=checkbox]:checked:before {
@@ -9980,7 +9966,6 @@ span.initials.avatar_name {
   display: block;
   min-width: 160px;
   letter-spacing: 0.3px;
-  width: 46px;
   height: 23px;
 }
 .sb-setting label .slider::before {
@@ -10524,6 +10509,13 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 @media (max-width: 575.98px) {
   .sb-languages-box .sb-main {
     grid-template-columns: repeat(1, 1fr) !important; /* 1 columns by default */
+  }
+  .sb-type-multi-input > .input > div:not(.multi-input-textarea),
+  .sb-setting .sb-language-switcher-cnt,
+  .sb-select-checkbox > div,
+  #open-ai-prompt {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 .sb-timetable > div > div {
@@ -14275,6 +14267,7 @@ li.filter-tags {
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   overflow: hidden;
 }
 
@@ -14968,11 +14961,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-setting .repeater-item > div label {
     margin: 0 0 15px 0;
   }
-  .sb-setting .repeater-item > div,
-  .sb-setting .repeater-item > div,
-  .sb-setting .input > div:not([data-type=textarea]):not(.sb-repeater-add) {
-    display: block;
-  }
   .sb-setting .input > div:not([data-type=textarea]):not(.sb-repeater-add) > label {
     margin: 0 30px 10px 0;
   }
@@ -15652,9 +15640,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-reports .sb-top-bar {
     height: fit-content !important;
   }
-  .sb-setting > .input {
-    width: fit-content;
-  }
   .sb-setting.sb-type-repeater > .input {
     width: 100%;
   }
@@ -16104,9 +16089,6 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
   .sb-area-ticket-detail .tc_bg {
     padding-inline: 15px;
   }
-  .users-tab {
-    max-height: 52vh;
-  }
   .sb-setting .repeater-item textarea {
     min-width: fit-content;
   }
@@ -16339,6 +16321,12 @@ input[type=color] {
 .form-control[type=checkbox] {
   height: 10px;
   width: 10px;
+}
+
+@media (max-width: 767.98px) {
+  .sb-lightbox.sb-dialog-box {
+    width: calc(100% - 50px) !important;
+  }
 }
 
 /*# sourceMappingURL=admin.css.map */
