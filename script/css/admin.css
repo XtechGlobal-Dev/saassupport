@@ -9978,7 +9978,7 @@ span.initials.avatar_name {
   line-height: 23px;
   margin: 0;
   display: block;
-  min-width: 220px;
+  min-width: 160px;
   letter-spacing: 0.3px;
   width: 46px;
   height: 23px;
@@ -10511,7 +10511,7 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
 .sb-conditions > div,
 .sb-flow-conditions > div {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
   grid-gap: 15px;
 }
 .sb-conditions select,
@@ -10521,6 +10521,11 @@ ul.status-list.dropdown-menu::-webkit-scrollbar {
   min-width: 50px;
 }
 
+@media (max-width: 575.98px) {
+  .sb-languages-box .sb-main {
+    grid-template-columns: repeat(1, 1fr) !important; /* 1 columns by default */
+  }
+}
 .sb-timetable > div > div {
   display: flex;
   justify-content: space-between;

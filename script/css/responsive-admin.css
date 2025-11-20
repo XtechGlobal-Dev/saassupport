@@ -835,7 +835,6 @@ a.sb-btn.sb-icon[data-sb-tooltip="Send message"] i {
 
 */
 .sb-lightbox:not(.sb-loading):not(.sb-loading-global) {
-  width: auto;
   left: 0;
   right: 0;
   top: 0;
@@ -1378,7 +1377,7 @@ td.sb-offline:after {
 }
 
 .sb-languages-box .sb-main {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   max-height: none;
   height: calc(100% - 50px);
 }
