@@ -2788,7 +2788,8 @@ function sb_component_admin()
                 $ticketUrl = dirname(SB_URL) . "?area=tickets";
                 $inboxUrl = dirname(SB_URL) . "?area=conversations";
                 $onlineText = sb_("Online");
-                $backToTicketText = sb_("Back") . " " . sb_("to") . " " . sb_("Tickets");
+                // $backToTicketText = sb_("Back") . " " . sb_("to") . " " . sb_("Tickets");
+                $backToTicketText = sb_("Back");
                 $header =
                     '<header>
                             <div class="header-left" style="gap: 2px;">
@@ -4486,13 +4487,13 @@ function sb_component_admin()
                 </div>
                 <div class="sb-area-ticket-detail">
                     <?php echo $header; ?>
-                    <div class="tc_bg" style="max-height: calc(100vh - 18px);overflow-y: auto;">
+                    <div class="tc_bg">
                         <div class="tc_back">
                             <div class="container">
                                 <div class="row tablet-sizee">
                                     <div class="col-md-12 p-0">
-                                        <div class="row">
-                                            <div class="col-md-8 p-0 col-lg-9">
+                                        <div class="row gap-3 gap-lg-0">
+                                            <div class="col-lg-8 p-0 col-xxl-9">
                                                 <h2 class="title mb-0 d-flex align-items-center gap-1"># <span
                                                         class="tno">TR-51</span> /
                                                     <span class="tsubject d-flex align-items-center w-100">
@@ -4505,16 +4506,16 @@ function sb_component_admin()
                                                         </svg>
                                                         <input type="text" id="ticket-subject"
                                                             placeholder="Enter Ticket Subject" value=""
-                                                            style="border: 1px solid #d5d5d5; border-radius: 0; padding-inline: 10px; width: 100%;" />
+                                                            class="flex-fill form-control border" />
 
                                                     </span>
                                                 </h2>
                                             </div>
-                                            <div class="col-md-4 p-0 col-lg-3">
+                                            <div class="col-lg-4 p-0 col-xxl-3">
                                                 <div
-                                                    class="d-flex align-items-center justify-content-end gap-3 pl-5 mt-3 mt-md-0">
-                                                    <select class="form-select ticket-status-dropdown" id="ticket-status"
-                                                        style="width: 120px;">
+                                                    class="d-flex flex-wrap align-items-center justify-content-end gap-3 pl-5 mt-3 mt-md-0">
+                                                    <select class="flex-fill form-select ticket-status-dropdown" id="ticket-status"
+                                                        style="width: 80px;">
                                                         <?php foreach (
                                                             $statues
                                                             as $key =>
@@ -4538,7 +4539,7 @@ function sb_component_admin()
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 p-0 mt-3 d-flex align-items-center"
+                                            <div class="col-md-12 p-0 mt-lg-3 d-flex align-items-center"
                                                 id="view-ticket-attachments">
                                                 <i class="fas fa-paperclip fs-4 mr-2"></i>
                                                 <span class="label"><?php sb_e("Attachments"); ?> (<span
@@ -4584,7 +4585,7 @@ function sb_component_admin()
                                                                         <!-- Comments will be loaded here by JS -->
                                                                     </div>
 
-                                                                    <div class="d-flex align-items-center gap-2 mt-4">
+                                                                    <div class="d-flex flex-wrap align-items-center gap-2 mt-4">
                                                                         <input type="hidden" id="currentUserId" value="<?php echo sb_get_active_user()[
                                                                             "id"
                                                                         ] ??
