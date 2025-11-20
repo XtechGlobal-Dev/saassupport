@@ -487,6 +487,10 @@ function membership_get_active($cache = true) {
     } else {
         membership_delete_cache($cloud_user_id);
         super_insert_user_data('(' . $cloud_user_id . ', "active_membership_cache", "' . $json . '")');
+        $log  = "Membership_expiration3: active_membership_cache".$json."  now  ".date('d-m-Y H:i:s').PHP_EOL.
+                " cloud_suspended_notifications_counter: ".
+                "-------------------------".PHP_EOL;
+            //Save string to log, use FILE_APPEND to append.
     }
     return $membership;
 }
@@ -508,6 +512,10 @@ function membership_update($membership_id, $membership_period, $customer_id, $pa
     membership_add_reseller_sale($membership_id);
     $customer_id = db_escape($customer_id);
     $response = db_query('UPDATE users SET membership = "' . db_escape($membership_id) . '", membership_expiration = "' . membership_calculate_expiration($membership_period) . '"' . ($payment_id ? ', customer_id = "' . sb_db_escape($payment_id) . '"' : '') . ' WHERE id = "' . $customer_id . '"');
+    
+     $log  = "Membership_expiration4:".membership_calculate_expiration($membership_period)."  now  ".date('d-m-Y H:i:s').PHP_EOL.
+                                    ($payment_id ? ', customer_id = "' . sb_db_escape($payment_id) . '"' : '') . ' WHERE id = "' . $customer_id .PHP_EOL;
+    
     if ($referral) {
         $price = sb_isset(membership_get($membership_id), 'price');
         $commission = sb_isset(super_get_settings(), 'referral-commission');
@@ -523,6 +531,7 @@ function membership_update($membership_id, $membership_period, $customer_id, $pa
             super_insert_user_data('(' . $customer_id . ', "referred", "true")');
         }
     }
+    
     db_query('DELETE FROM users_data WHERE user_id = ' . $customer_id . ' AND (slug = "notifications_count" OR slug = "active_membership_cache" OR slug = "subscription_cancelation") LIMIT 3');
     return $response;
 }
@@ -2509,7 +2518,7 @@ function cloud_cron($backup = true) {
             $now = $now_time + 86400;
             $user_memberships = db_get('SELECT id, membership_expiration, email, first_name, last_name FROM users WHERE membership <> "free" AND membership <> "0"', false);
             
-            $log  = "Membership_expiration:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
+            $log  = "Membership_expiration1:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
                 " cloud_suspended_notifications_counter: ".
                 "-------------------------".PHP_EOL;
             //Save string to log, use FILE_APPEND to append.
@@ -2528,7 +2537,7 @@ function cloud_cron($backup = true) {
                         } else {
                             db_query('UPDATE users SET membership = "0", membership_expiration = "" WHERE id = ' . $user_id);
 
-                                $log  = "Membership_expiration:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
+                                $log  = "Membership_expiration2:".$user_memberships[$i]['membership_expiration']."  now  ".$now.PHP_EOL.
                                     " cloud_suspended_notifications_counter: ".cloud_suspended_notifications_counter($user_id).PHP_EOL.
                                     "-------------------------".PHP_EOL;
                                 //Save string to log, use FILE_APPEND to append.
