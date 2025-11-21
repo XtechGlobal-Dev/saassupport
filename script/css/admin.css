@@ -4893,6 +4893,8 @@ td.sb-offline:after {
   width: 36px;
   height: 36px;
   min-width: 36px;
+  object-fit: cover;
+  object-position: top;
 }
 .sb-profile > span {
   font-size: 16px;
@@ -16333,6 +16335,10 @@ input[type=color] {
   .sb-lightbox.sb-dialog-box {
     width: calc(100% - 50px) !important;
   }
+}
+.sb-list-items.sb-list-links > a > img {
+  height: 50px;
+  width: 50px;
 }
 
 /*# sourceMappingURL=admin.css.map */
