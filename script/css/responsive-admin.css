@@ -282,8 +282,10 @@ body {
 }
 .sb-lightbox .sb-top-bar .sb-profile img,
 .sb-admin > main > div > .sb-top-bar .sb-profile img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1/1;
+  min-width: 40px;
 }
 .sb-lightbox .sb-top-bar .sb-profile span,
 .sb-admin > main > div > .sb-top-bar .sb-profile span {
@@ -358,7 +360,7 @@ main > div .sb-top-bar .sb-menu-mobile > ul {
 */
 div ul.sb-menu li,
 .sb-select ul li {
-  font-size: 17px;
+  font-size: 14px;
   line-height: 27px;
   padding: 6px 25px 6px 15px;
 }

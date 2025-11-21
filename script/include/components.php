@@ -5189,7 +5189,7 @@ function sb_component_admin()
                         <div>
                             <a class="sb-edit sb-btn sb-icon" data-button="toggle" id="save-ticket-attachments"
                                 data-hide="sb-profile-area" data-show="sb-edit-area">
-                                <i class="sb-icon-sms"></i> Save Changes
+                                <i class="fa-solid fa-check mr-1"></i> Save Changes
                             </a>
                             <a class="sb-close sb-btn-icon sb-btn-red" data-button="toggle" data-hide="sb-profile-area"
                                 data-show="sb-table-area">
