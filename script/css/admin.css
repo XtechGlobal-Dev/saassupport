@@ -15828,10 +15828,12 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     right: 10px;
   }
   .sb-board .sb-admin-list .sb-top .sb-select ul {
-    top: 0px;
+    top: 0px !important;
     max-width: fit-content;
     min-width: 180px;
     height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
   }
   main .sb-area-users.sb-active {
     display: revert !important;

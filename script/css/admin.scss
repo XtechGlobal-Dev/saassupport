@@ -14436,10 +14436,12 @@ main {
 
         .sb-select {
           ul {
-            top: 0px;
+            top: 0px !important;
             max-width: fit-content;
             min-width: 180px;
             height: auto !important;
+            min-height: unset !important;
+            max-height: unset !important;
           }
         }
       }
