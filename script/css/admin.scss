@@ -7071,6 +7071,7 @@ span.initials.avatar_name {
 
     &.custom-switch {
       margin-right: 0 !important;
+      width: 40px !important;
     }
   }
 
@@ -7419,7 +7420,7 @@ span.initials.avatar_name {
 }
 
 .custom-switch input:checked + .slider:before {
-  transform: translateX(23px) !important;
+  transform: translateX(94%) !important;
   left: 1px;
 }
 
@@ -14435,7 +14436,10 @@ main {
 
         .sb-select {
           ul {
-            top: 124px;
+            top: 0px;
+            max-width: fit-content;
+            min-width: 180px;
+            height: auto !important;
           }
         }
       }

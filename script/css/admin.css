@@ -9977,6 +9977,7 @@ span.initials.avatar_name {
 }
 .sb-setting label.custom-switch {
   margin-right: 0 !important;
+  width: 40px !important;
 }
 .sb-setting input[type=number] {
   padding-right: 0;
@@ -10265,7 +10266,7 @@ span.initials.avatar_name {
 }
 
 .custom-switch input:checked + .slider:before {
-  transform: translateX(23px) !important;
+  transform: translateX(94%) !important;
   left: 1px;
 }
 
@@ -15827,7 +15828,10 @@ main .sb-area-users .sb-scroll-area .sb-table-users tbody tr td:nth-child(1) {
     right: 10px;
   }
   .sb-board .sb-admin-list .sb-top .sb-select ul {
-    top: 124px;
+    top: 0px;
+    max-width: fit-content;
+    min-width: 180px;
+    height: auto !important;
   }
   main .sb-area-users.sb-active {
     display: revert !important;
